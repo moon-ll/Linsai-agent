@@ -1,0 +1,24 @@
+{
+  "gaps": [
+    {
+      "claim": "content.md §2.3 第93行声称Yang [23]给出了R2全光学反演路径的实验精度基线（实部~0.1 rad、虚部~0.05 rad级别），但arXiv:2512.24553摘要实际为综述性描述，无具体精度数字",
+      "missing_evidence": "缺乏具体给出量子几何张量光学反演实验精度基线的文献，需实测精度数据或明确说明精度区间待核实的依据",
+      "search_keywords": [
+        "quantum geometry tensor optical inversion experimental precision",
+        "QGT reconstruction accuracy experimental baseline",
+        "Berry curvature reconstruction experimental uncertainty"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "content.md §2.3 第79行声称Sumaya-Martinez [24]为双色场CEP扫描下Ω/g参数估计提供了方法学依据，但该文实际处理L-G/B-G/H-G模式空间结构的Fisher信息，与双色场CEP扫描属不同物理量",
+      "missing_evidence": "缺乏Fisher信息用于双色场CEP扫描下量子几何参数估计的方法学文献，需量子光学参数估计中Fisher信息操作度量建立的具体引用",
+      "search_keywords": [
+        "Fisher information quantum optics parameter estimation",
+        "CEP scan quantum geometry parameter Fisher information",
+        "two-color field parameter estimation Fisher"
+      ],
+      "priority": "high"
+    }
+  ]
+}

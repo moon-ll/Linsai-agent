@@ -1,0 +1,17 @@
+{
+  "gaps": [
+    {
+      "claim": "Löhr[26]所报道的手性分子射流相关二向色性累积传播长度究竟为2.0 cm还是2.1 cm，以及该现象是否应统一表述为“二向色性”。",
+      "missing_evidence": "需要核对Löhr[26]原始论文全文或出版社正式版本，确认相关长度的准确数值、参数定义、测量或计算属性，并提供可定位的页码、公式或图表信息；必要时补充术语标准或权威综述以统一“二色性/二向色性”的规范用法。现有两章分别采用2 cm和2.1 cm，缺少能够直接裁决两处表述的原始出处证据。",
+      "search_keywords": [
+        "Löhr molecular beam dichroism 2.1 cm",
+        "Löhr chiral molecular beam 2 cm",
+        "Löhr molecular jet intersection geometry dichroism",
+        "circular dichroism molecular beam interaction length 2.1 cm",
+        "Löhr 2.1 cm 二向色性"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "full_review"
+}

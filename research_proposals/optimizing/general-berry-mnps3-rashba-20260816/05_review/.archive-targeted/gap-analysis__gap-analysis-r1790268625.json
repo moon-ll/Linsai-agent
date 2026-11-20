@@ -1,0 +1,52 @@
+{
+  "gaps": [
+    {
+      "claim": "Yarmohammadi 等关于 d-wave+Rashba+Floquet 调控的工作在 §2.4/§3.4 三处被引用作为支撑",
+      "missing_evidence": "[17] 真实文献为 Basnet 等 PRR 4:023256（2022）MPX₃ 化学掺杂工作（与 Floquet 无关），属文献功能错挂；需要找到 Yarmohammadi 关于 d-wave 自旋劈裂 + Rashba 自旋轨道耦合 + Floquet 光场调控的真正工作",
+      "search_keywords": [
+        "Yarmohammadi d-wave Rashba Floquet",
+        "Yarmohammadi MPX3 spin splitting",
+        "Yarmohammadi antiferromagnetic Floquet tuning",
+        "arXiv 2606.21281",
+        "Floquet control altermagnet spin splitting"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "等效区分度 √J < 1.81 退出阈值的定义式 J = tr(S_W⁻¹S_B) 在 §2.6/§2.8 引用但无计算式",
+      "missing_evidence": "缺少 J = tr(S_W⁻¹S_B)（Fisher 判别比）的原始定义文献与阈值依据；需要找到信号检测理论/Fisher 判别分析中 J 统计量的标准定义及其在高次谐波通道分离中的引用先例",
+      "search_keywords": [
+        "Fisher discriminant ratio signal detection theory",
+        "tr(S_W^-1 S_B) separability metric",
+        "Swets d prime separability J index",
+        "Bhattacharyya coefficient Gaussian classification",
+        "high harmonic channel separation metric"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "d-wave 双光子、g-wave 四光子、i-wave 六光子的多光子响应阶数对应关系",
+      "missing_evidence": "Ghorashi/Rappe [15] 关于不同对称阶（d-wave/g-wave/i-wave）与多光子过程阶数的层级关系虽在 §2.7 引用，但 §2.3 L23 段提前做了断言却未挂文献锚；需确认 [15] 是否确实建立了 d-wave ↔ 2-photon、g-wave ↔ 4-photon、i-wave ↔ 6-photon 的对应，并查找同领域其他独立工作",
+      "search_keywords": [
+        "Ghorashi Rappe altermagnet multiphoton",
+        "d-wave g-wave i-wave selection rule multiphoton order",
+        "spin group symmetry multiphoton selection rule",
+        "altermagnet harmonic generation selection rule photon order",
+        "Werner spin group HHG selection rule"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "2.4 L39 '泵浦-探测时域中的可分离性并不对称' 缺乏 [33] 实测支撑引用",
+      "missing_evidence": "[33] 提供跨体系量级参照，但 L39 段关于泵浦-探测时域可分离性非对称的判断未挂依据；需要找到支持该非对称性的实验或理论文献（双脉冲 HHG、泵浦-探测时窗不对称性）",
+      "search_keywords": [
+        "pump-probe HHG asymmetry",
+        "two-pulse high harmonic separation temporal window",
+        "time-resolved HHG channel asymmetry experiment",
+        "double-pulse HHG channel isolation"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

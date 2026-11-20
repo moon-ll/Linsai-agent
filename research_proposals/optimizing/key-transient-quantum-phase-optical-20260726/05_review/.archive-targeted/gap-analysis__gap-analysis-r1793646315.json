@@ -1,0 +1,37 @@
+{
+  "gaps": [
+    {
+      "claim": "§2.3 中 Lorenzo 具名证据句所支撑的分论点（四组证据之一，与 content L47 对应表述相关联）",
+      "missing_evidence": "该具名证据句缺 [23] 角标引用，是 rationale 中唯一裸引具名句；需补入 [23] 文献以建立\"具名作者+具体结果\"的论证链，并核对 content 章 L47 处对应引用的一致性",
+      "search_keywords": [
+        "Lorenzo ultrafast",
+        "transient topology optical probe",
+        "Lorenzo high harmonic generation topology"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.4 L113 国内现状段对国内单位/国内研究进展的具名陈述（单位有名无文、无任何 [N] 实引，与三家国际机构具名密度失衡）",
+      "missing_evidence": "需补充 1-2 项国内代表性工作的实引文献（国内团队在瞬态拓扑/超快 HHG 探测/拓扑材料光学表征方向的已发表工作），使国内现状论证有据可查",
+      "search_keywords": [
+        "国内 瞬态拓扑 超快探测",
+        "中国 high harmonic generation topological",
+        "transient Chern number ultrafast optics China",
+        "Weyl semimetal HHG 中国团队"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "L57/L69/L85/L91/L113 约 9 处\"尚未建立/尚未见/尚无答案\"类新颖性论断",
+      "missing_evidence": "新颖性否定式论断缺检索截止口径支撑，需以截至 2026-10 的文献检索（如 OpenAlex/Semantic Scholar/arXiv 检索记录）核实无对应已有工作，并在句面统一加\"据 2026-10 检索\"限定以坐实论断",
+      "search_keywords": [
+        "transient topological invariant all-optical inversion",
+        "time-resolved Chern number retrieval optics",
+        "transient Z2 invariant ultrafast probe",
+        "HHG inversion topological invariant"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

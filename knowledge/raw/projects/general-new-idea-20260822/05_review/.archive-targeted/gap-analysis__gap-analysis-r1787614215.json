@@ -1,0 +1,28 @@
+{
+  "gaps": [
+    {
+      "claim": "scheme.md L43 声明“该创新为首次建立……理论框架”（针对动量依赖自旋劈裂/交变磁体体系的HHG自旋动力学理论框架），为无限定断言",
+      "missing_evidence": "首次（空白）声明缺少系统的文献检索支撑：联网反查已发现未被引用的 Ly 2026（J. Phys. Condens. Matter，已发表）专门研究动量依赖自旋劈裂体系的高次谐波自旋动力学，直接削弱“首次”成立性；且该断言与 content L9“拟首次”限定口径不一致，需引用并划界已有相近工作（Ly 2026、Werner/Weber 交变磁体HHG理论等）后重述创新定位",
+      "search_keywords": [
+        "momentum-dependent spin splitting high harmonic generation",
+        "altermagnet high harmonic generation spin dynamics theory",
+        "spin-polarized HHG spin splitting dynamics",
+        "Ly 2026 J Phys Condens Matter high harmonic spin",
+        "非相对论自旋劈裂 高次谐波 理论框架"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "scheme.md 中依赖文献角标 [10][16][18][21] 支撑的论点（方法选择、信号提取、理论框架等处的引用）",
+      "missing_evidence": "文献 [10][16][18][21] 本轮未经联网核验（评审标注 action=verify）：其真实存在性、题录信息（作者/期刊/DOI）以及内容与正文引用处论点的匹配度均未确认，存在引用失效、张冠李戴或支撑强度不足的风险，需逐条联网核实并补换可验证文献",
+      "search_keywords": [
+        "altermagnet high harmonic generation theory Werner Weber",
+        "MnTe spin-polarized high harmonic generation experiment",
+        "tight-binding semiconductor Bloch equation strong field HHG",
+        "HHG spectroscopy experimental protocol solid state",
+        "g-wave order parameter detection ultrafast"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

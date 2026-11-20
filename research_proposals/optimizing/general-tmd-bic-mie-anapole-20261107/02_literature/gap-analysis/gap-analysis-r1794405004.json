@@ -1,0 +1,37 @@
+{
+  "gaps": [
+    {
+      "claim": "立项依据 §一.4¶5 引用文献[32]处标注为'浙江大学丁博阳等'的论断（该文实为 PRL 124, 063902 (2020)，J. Qin 为第一作者，B. Ding 为中间作者且非浙大独属单位）",
+      "missing_evidence": "对文献[32]原文的溯源核验：正确的作者列表与单位归属（Qin 等人，北京理工/浙大/北大等合作），以及确认该文确实支撑所引论点；属引用真实性核查而非补充新文献，需按真实作者重新署名",
+      "search_keywords": [
+        "10.1103/PhysRevLett.124.063902",
+        "Qin Chen Zhang Blaikie Ding Qiu 2020",
+        "Phys. Rev. Lett. 124, 063902 author list"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "立项依据 §一.1¶2 'Kumar 等人 [1] 2013 年测得单层 MoS₂ 的 χ⁽²⁾ 约为 10⁻⁷ m/V（约 100 pm/V）'中的括注换算",
+      "missing_evidence": "Kumar et al., 'Second harmonic microscopy of monolayer MoS₂', Phys. Rev. B 87, 161403(R) (2013) 的原始数值表述（原文为 'on the order of 10⁻⁷ m/V' 的数量级估计）及单位换算核验——10⁻⁷ m/V 实为 10⁵ pm/V，'约 100 pm/V' 括注错误，需删除括注或改引原文量级",
+      "search_keywords": [
+        "Kumar second harmonic microscopy monolayer MoS2",
+        "10.1103/PhysRevB.87.161403",
+        "MoS2 chi(2) second-order susceptibility order of magnitude"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "研究方案 §三.7(1)(3) 中'第一次''此前未被测量'的拟首次测量表述（与文献[8]存在冲突风险）",
+      "missing_evidence": "截至 2026-11 的系统检索证据：证明目标测量量（TMD 体系中 Mie anapole/准 BIC 的时域耦合模行为、界面与体相二阶非线性干涉分离、极化激元相干时间对转换效率的时域约束）此前未见实验报道，并澄清与文献[8]的重叠；需综述类 + 原始实验论文双重确认后方可保留'拟首次'措辞",
+      "search_keywords": [
+        "anapole transition metal dichalcogenide experimental observation",
+        "bound states in the continuum TMD nonlinear optics",
+        "Mie anapole MoS2 time-domain measurement",
+        "exciton polariton coherence time nonlinear conversion efficiency",
+        "interface bulk second-order nonlinearity interference 2D material"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "full_review"
+}

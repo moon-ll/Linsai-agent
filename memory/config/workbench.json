@@ -1,0 +1,7 @@
+{
+  "deep_research_enabled": true,
+  "daily_quota": 1,
+  "weekend_register": "topics",
+  "proactive_heartbeat": false,
+  "_说明": "v8 工作台配置：daily_quota 每日深研课题数；weekend_register 周末链注册模式（topics=新域 / legacy_proposals=回滚）；proactive_heartbeat 会话主动心跳（legacy）"
+}

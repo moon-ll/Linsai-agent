@@ -1,0 +1,30 @@
+{
+  "gaps": [
+    {
+      "claim": "参考文献中存在12条未被正文引用的经典文献[30]–[41]，说明正文某些理论根基和历史脉络论点缺少文献支撑或这些经典文献未被有效整合",
+      "missing_evidence": "正文中与量子几何、固体HHG理论、非线性光学基础、半导体布洛赫方程、量子光学压缩态等奠基性工作相关的论点，未能引用已有的经典文献进行支撑；需要将这些经典文献整合到正文相应论点处，或确认正文是否缺失对这些理论根基的引用",
+      "search_keywords": [
+        "quantum geometry Berry curvature foundational",
+        "solid-state high harmonic generation pioneering theory",
+        "semiconductor Bloch equation original derivation",
+        "bright squeezed vacuum nonlinear optics foundation",
+        "Aversa Sipe interband nonlinear susceptibility",
+        "Golde semiconductor HHG theory",
+        "quantum metric nonlinear optical response"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "跨章节内容重复（§2.2与§3.1量子态约化三层级、§2.3与§3.2三可辨识性指标、§2.5与§3.4 PINN损失函数），重复段落各自引用的文献可能不一致或缺失",
+      "missing_evidence": "量子态约化三层级框架、三可辨识性指标体系（条件数、Fisher信息、参数可辨识性）、PINN物理约束损失函数这三组内容在不同章节重复出现时，各自的文献引用支撑可能不完整或不一致，需要核查每个论点的首次引用是否提供了充分的理论出处",
+      "search_keywords": [
+        "quantum geometry tensor reduction tiers HHG",
+        "identifiability analysis nonlinear optics inversion",
+        "condition number Fisher information HHG parameter retrieval",
+        "PINN physics-informed loss harmonic generation",
+        "quantum metric Berry curvature reduction scheme"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

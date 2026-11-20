@@ -1,0 +1,16 @@
+{
+  "verdict": "major_revision",
+  "overall_comment": "引擎亲审通道在手册门补缺前晋级；手册未过开工就绪线（≥0.85 且 L≥3），按用户裁决统一退回继续爬坡。",
+  "issues": [
+    {
+      "section": "method_manual",
+      "severity": "critical",
+      "issue_type": "readiness",
+      "description": "方法手册未达开工就绪线",
+      "instruction": "按 r2 复评缺口清单逐条核销（order-parameter：溯源闭环/资源口径/判据一致；houston：反装口径遗留核销/要素⑤方案判据落地；其余课题按各自 r2 报告），达 L≥3 且 readiness/rigor ≥0.85 后方可在下轮决策包放行",
+      "action": "revise",
+      "target_passage": "03_method/method-manual.md"
+    }
+  ],
+  "retreated_at": "user-decision-20261104"
+}

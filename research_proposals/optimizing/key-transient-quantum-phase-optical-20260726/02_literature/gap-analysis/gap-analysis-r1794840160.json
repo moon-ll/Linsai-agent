@@ -1,0 +1,27 @@
+{
+  "gaps": [
+    {
+      "claim": "§2.2(a) 双光梳长稳句：双光梳方案可实现长程相位稳定的光场时序控制，支撑时序-信号-能区的实验路线",
+      "missing_evidence": "参考文献表 [24] 中 Kowalczyk 频梳条目为捆绑条目，但全篇正文零引用挂靠，即'双光梳长稳'这一技术论断缺少任何已发表文献的正文中具名支撑（引用-正文脱钩，dangling citation）",
+      "search_keywords": [
+        "Kowalczyk frequency comb",
+        "dual-comb phase stabilization attosecond",
+        "optical frequency comb long-term phase stability",
+        "dual-comb timing jitter control XUV"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§2.2(a)/难点 D2：ELI-ALPS 装置已实现 ±81 as 量级的阿秒脉冲时间控制，可作为本项目时序稳定性指标的现实对标基线",
+      "missing_evidence": "ELI-ALPS ±81 as 具名成果在正文零角标引用，该数值型对标论断缺少原始文献出处（评审建议挂 [33]），属于'具名装置+具体数值但无文献支撑'的引用缺口",
+      "search_keywords": [
+        "ELI-ALPS attosecond pulse 81 as",
+        "ELI-ALPS beamline timing stability attosecond",
+        "attosecond pulse duration control ELI-ALPS HR-1",
+        "ELI-ALPS GHHG comb seed stabilization"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

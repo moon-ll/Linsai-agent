@@ -1,0 +1,71 @@
+{
+  "gaps": [
+    {
+      "claim": "§1.0 起手应改为\"领域意义（HHG作为量子几何反演探针）→首项实验\"嵌入式叙事",
+      "missing_evidence": "缺乏固体HHG作为量子几何探针的领域综述/开篇实验（如Ghimire 2011 ZnO / Luu Wörner 2018 α-quartz Berry curvature）的嵌入式引用证据",
+      "search_keywords": [
+        "solid-state HHG quantum geometry probe",
+        "Ghimire 2011 ZnO high harmonic generation",
+        "Luu Wörner 2018 Berry curvature quartz HHG",
+        "first observation solid HHG Berry curvature"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.1 光场统计段6项连引（A做了X，B做了Y）需拆分",
+      "missing_evidence": "缺乏光场统计（相干态/BSV/压缩态）在HHG中应用的代表性实验与理论工作的嵌入式引用支撑",
+      "search_keywords": [
+        "bright squeezed vacuum HHG",
+        "squeezed light high harmonic generation",
+        "coherent state high harmonic",
+        "photon statistics HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.1 电子结构段9项连引需拆分，每项需\"为何引此\"过渡",
+      "missing_evidence": "缺乏电子结构（Berry曲率/量子度规/拓扑）与HHG反演相关的代表性理论+实验工作的嵌入式引用证据",
+      "search_keywords": [
+        "Berry curvature HHG inversion",
+        "quantum metric nonlinear optical response",
+        "topological insulator high harmonic generation",
+        "first-principles HHG Berry curvature"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.4 国外现状段7项连引需拆分",
+      "missing_evidence": "缺乏固体HHG量子几何反演方向的代表性国外课题组/系列工作的嵌入式引用支撑",
+      "search_keywords": [
+        "solid-state HHG quantum geometry international groups",
+        "Wörner group HHG Berry curvature",
+        "Ghimire group solid HHG",
+        "quantum metric HHG international"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.1 段7（跨边界空白）Faeyrman预印本相对经典SBE的增量价值需更明确",
+      "missing_evidence": "缺乏Faeyrman等预印本（实部0.1-0.3 rad相位解耦）相对经典半导体布洛赫方程（SBE）反演的精度提升具体证据",
+      "search_keywords": [
+        "Faeyrman HHG phase retrieval",
+        "semiconductor Bloch equation phase reconstruction",
+        "HHG dipole phase experimental separation",
+        "interband Berry phase measurement HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.1 段7（跨边界空白）需补充国内是否已有相关工作",
+      "missing_evidence": "缺乏国内课题组在HHG量子几何反演方向（特别是相位解耦、强场极限态）的代表性工作引用",
+      "search_keywords": [
+        "solid-state HHG China group",
+        "高次谐波 量子几何 反演 国内",
+        "强场 阿秒光谱 国内 实验组",
+        "attosecond Berry phase China"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "rationale"
+}

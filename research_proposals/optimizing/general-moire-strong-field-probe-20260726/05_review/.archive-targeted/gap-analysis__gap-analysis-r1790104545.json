@@ -1,0 +1,54 @@
+{
+  "gaps": [
+    {
+      "claim": "Σ-SBE 耦合界面弱关联基准 <6% vs <2% 跨章口径分裂",
+      "missing_evidence": "缺少 SBE 流程复现精度（<6%）与跨方法耦合界面误差传递（<2%）两类基准的量化参考文献",
+      "search_keywords": [
+        "semiconductor Bloch equation band structure benchmark error",
+        "tight-binding TDDFT HHG coupling interface accuracy benchmark"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Δ_Mott 锚点 1.76 eV（200 K 实验拟合 1.5–1.8 eV）的原始文献支撑",
+      "missing_evidence": "rationale 与 content 两处均无 TD-DFT 与 200 K 出处；scheme 已依据 Ikeda [12]（260 K tdDMFT→Δ_Mott≈1.5 eV；1.76 eV 为 σ 谱 CT 峰）修正",
+      "search_keywords": [
+        "Ikeda 1T-TaS2 DMFT Mott gap",
+        "1T-TaS2 optical conductivity CT peak 1.76 eV",
+        "TaS2 charge gap tdDMFT fitting"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "TBG 独立强度窗口标定协议",
+      "missing_evidence": "方案 §3.4 缺少 TBG 臂与 TMDC 臂解耦的独立实测标定/余量核算引用",
+      "search_keywords": [
+        "TBG magic angle high harmonic generation noise floor",
+        "twisted bilayer graphene HHG anisotropy benchmark",
+        "TBG HHG yield reference threshold"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "SnS2/SnS3/TaS3 等 isogap 非关联对照样品 HHG 参照",
+      "missing_evidence": "整篇需要在 BN 关联绝缘体作为对照的 solid HHG 基准存在性引用，可能缺失与 weak-coupling reference 对比的实操文献",
+      "search_keywords": [
+        "SnS2 high harmonic generation",
+        "isosgap non-correlated reference HHG solid-state",
+        "bandgap matched TMDC HHG comparison"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "MoS₂/WSe₂ type-II 异质结带对齐与 HHG 通道耦合精度的近期实操文献",
+      "missing_evidence": "整篇 content scheme 涉及异质结 type-II 对齐下的 HHG 通道解耦基准，但 arXiv 类材料最新进展缺乏直接引用",
+      "search_keywords": [
+        "MoS2 WSe2 type-II band alignment HHG channel",
+        "heterobilayer TMD HHG reference threshold 2 sigma",
+        "MoS2 WSe2 harmonic yield enhancement exciton"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "full_review"
+}

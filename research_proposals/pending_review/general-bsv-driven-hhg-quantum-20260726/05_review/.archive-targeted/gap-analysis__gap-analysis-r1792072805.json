@@ -1,0 +1,41 @@
+{
+  "gaps": [
+    {
+      "claim": "§1.4 L93 以具名方式引用 'Peer 2005' 与 'Brif 2010 控制理论综述' 作为量子最优控制领域的通行综述支撑",
+      "missing_evidence": "两篇综述在正文中具名出现但无任何 [N] 编号引用，且 references.md（37 条）中检索不到对应条目；属于孤儿引用（orphan citation），需在文献表中补入对应综述条目并加 [N] 编号，或将具名句改为泛指 '控制理论通行综述'",
+      "search_keywords": [
+        "Brif 2010 quantum control landscape review",
+        "Peer 2005 quantum optimal control review",
+        "quantum optimal control theory review",
+        "control landscape quantum computation",
+        "Rabitz Hsieh quantum control review"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.2.1 L17 综述段（406 字）连续堆砌 6 条编号引用 [24][23][5,6,16][17][8][7]，其中 [5,6,16] 三连引试图一次性覆盖多条不同结论",
+      "missing_evidence": "堆砌式连引未按 '一论断一引' 节奏分配支撑，缺少对 [5]、[6]、[16] 三篇文献各自具体结论/数据的逐篇核对；需在原文稿中重新比对各条文献实际论证点，将其改写为嵌入式具名引用（年份+作者+结论）",
+      "search_keywords": [
+        "solid high harmonic generation multiband review",
+        "high harmonic generation crystalline solids mechanism",
+        "multiband HHG solid-state review",
+        "Ghimire solid HHG review",
+        "band structure HHG solid review"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "开篇段定义 HHG 本质并交代谱区跨度，仅挂 [25] 一条总览性引用（'输出光子能量……宽广谱区[25]'）",
+      "missing_evidence": "锚点范本采用由远及近逐点挂引（早期奠基→经典理论→最新进展），而申请书开篇 1 条总览引密度明显不足，缺少 HHG 领域奠基性文献建立由远及近的引用脉络（如 Shore & Knight 1987 早期理论预言、Lewenstein 等 1993 三步模型、Ghimire 等 2011 固体 HHG 首例等）",
+      "search_keywords": [
+        "Shore Knight high harmonic generation 1987",
+        "Lewenstein HHG three-step model 1994",
+        "Ghimire 2011 solid HHG ZnO",
+        "high harmonic generation historical review",
+        "HHG foundational references ultraviolet soft X-ray"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "rationale"
+}

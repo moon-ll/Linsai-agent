@@ -1,0 +1,67 @@
+{
+  "gaps": [
+    {
+      "claim": "rationale §2.1 L17：Wu 等在 2-8 μm 波段的固态 HHG 经验标度",
+      "missing_evidence": "当前所引 [22] 实际为 Obreshkov & Apostolova 2025 年的纯理论论文（Appl. Phys. B 131:158），无 2-8 μm 经验标度实验数据；需找到 Wu 团队在 2-8 μm 中红外波段对固态 HHG 截止能量/标度律的实验报道。",
+      "search_keywords": [
+        "Wu solid high harmonic generation 2-8 μm scaling",
+        "中红外 2-8 微米 固态 高次谐波 截止能量 经验标度",
+        "solid HHG cutoff scaling mid-infrared experimental"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "rationale §2.1 L17：MgO HH12 弧形谱归因于 Floquet-Bloch 机制",
+      "missing_evidence": "当前所引 [23] 实际为硅与石英的偏振态分辨谱学工作（Nat. Commun. 10:1319, 2019），不含 MgO/Floquet-Bloch 弧形谱内容；需补挂真正报道 MgO 高次谐波弧形谱及其 Floquet-Bloch 机制解释的实验文献。",
+      "search_keywords": [
+        "MgO high harmonic generation arc-shaped spectrum Floquet-Bloch",
+        "氧化镁 高次谐波 弧形谱 弗洛凯布洛赫",
+        "MgO HHG band structure signature experiment"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "rationale §2.5：国内在固态高次谐波领域的实验与理论积累",
+      "missing_evidence": "§2.5 国内现状段实验支撑句 [7][9][11] 均为慕尼黑/美国团队工作，被用以支撑'国内积累'论据；[4][12] 仅有具名而无叙述铺陈。需补入国内单位主导的固态 HHG 实验装置、谱学观测、Kronig-Penney/MgO 多带建模（如中科院、北大、清华、兰大、华理等团队）2-3 段脉络性引用。",
+      "search_keywords": [
+        "中国科学院 固态高次谐波 固体 少周期",
+        "国内 高次谐波 晶体 ZnO MgO 实验",
+        "China solid HHG ZnO MgO Bloch multi-band simulation",
+        "兰大 华理 北大 中红外 固态HHG 实验装置"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "rationale §1：水窗波段推进 [9,13] 与生物纳米成像应用 [9]",
+      "missing_evidence": "[9] 实际为体相各向异性工作，未涉及水窗或生物成像；需替换为真正报道固态 HHG 推进至水窗（≥285 eV）以及固态 HHG 用于生物/纳米成像应用的具体文献。",
+      "search_keywords": [
+        "solid high harmonic generation water window 285 eV",
+        "固态高次谐波 水窗 应用",
+        "solid HHG bio-imaging nanoscale application",
+        "固体HHG 纳米成像 应用"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "rationale §1：固态 HHG 相变追踪应用 [12]",
+      "missing_evidence": "[12] 实际为 MoS2 偏振分辨工作，未涉及相变追踪；需补挂报道利用固态 HHG 谱学跟踪结构相变（如 VO2、晶格畸变、价电子相变）的实验文献。",
+      "search_keywords": [
+        "high harmonic generation phase transition tracking solid",
+        "高次谐波 相变 谱学 追踪 固体",
+        "solid HHG VO2 structural phase transition spectroscopy"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "references 总数：当前 29 篇，下限 30-40 篇",
+      "missing_evidence": "立项依据章节论证密度不足，需要补足 1-11 篇核心文献以满足 30-40 篇下限；优先补足国内脉络文献（与上面 Gap 3 部分重叠）、固态 HHG 应用层（与 Gap 4/5 重叠）、以及 MgO/ZnO 弧形谱/能带结构真身文献（与 Gap 1/2 重叠）。",
+      "search_keywords": [
+        "solid HHG review crystal band structure",
+        "高次谐波 固态 综述 凝聚态",
+        "Kronig-Penney potential MgO multi-band high harmonic"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

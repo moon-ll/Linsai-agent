@@ -1,0 +1,30 @@
+{
+  "gaps": [
+    {
+      "claim": "“缀饰态等价 Houston 态”这一概念性论断需要在正文首次出现时明确说明其理论来源及适用条件，而不能仅依赖参考文献条目中的附注。",
+      "missing_evidence": "缺少能够直接支撑该等价关系的原始论文或权威理论文献，包括强驱动周期体系中 Floquet 缀饰态与含时 Houston 态的构造方式、对应关系、等价条件及可能的规范依赖；同时需在正文明确指向现有文献[22]。",
+      "search_keywords": [
+        "dressed-state equivalence Houston states strong-field",
+        "Floquet dressed states time-dependent Houston states",
+        "Houston state dressed state equivalence periodically driven system",
+        "Floquet formalism Houston states attosecond solid",
+        "缀饰态 Houston 态 等价 强场"
+      ],
+      "priority": "low"
+    },
+    {
+      "claim": "“目前无同类手段可替代”以及“块体上暂无同类组合”所表达的方法学独特性，需要相对于现有体相敏感、阿秒时间分辨技术族进行文献对照。",
+      "missing_evidence": "缺少对竞争性方法的系统比较证据，包括块体敏感的时间分辨光电子能谱、阿秒瞬态吸收/反射、泵浦-探测谱学、XUV/电子谱动量成像等方法在穿透深度、时间分辨率和体相选择能力方面的局限；最好由综述性文献与代表性原始研究共同建立比较基线，从而支撑谨慎表述。",
+      "search_keywords": [
+        "bulk-sensitive attosecond time-resolved spectroscopy",
+        "attosecond photoelectron spectroscopy bulk penetration depth",
+        "attosecond transient absorption reflection solid bulk-sensitive",
+        "time-resolved photoelectron spectroscopy solid bulk versus surface",
+        "attosecond spectroscopy methods comparison review solid",
+        "XUV photoelectron momentum microscopy attosecond bulk sensitivity"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

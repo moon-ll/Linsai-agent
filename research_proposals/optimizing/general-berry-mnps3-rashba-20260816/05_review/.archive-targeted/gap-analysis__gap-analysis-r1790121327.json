@@ -1,0 +1,76 @@
+{
+  "gaps": [
+    {
+      "claim": "§1.1 P4 与 §1.2 P3 行内 10 处综述未挂角标（其中 4 项表内有对应条目却弃用），引用装置断裂",
+      "missing_evidence": "Werner、Yang-Liang、Ezawa、Luu-Wörner、Rani-Juraschek、Ogawa-Hayami、Misawa、Mizuno 等交变磁/自旋群理论原始论文的精确出处与年份，用于回填正文 [N] 编号",
+      "search_keywords": [
+        "Werner altermagnet high harmonic generation 2024",
+        "Yang Liang spin group symmetry altermagnet",
+        "Ezawa altermagnet spin group",
+        "Ogawa Hayami SPG multi-order altermagnet",
+        "Misawa g-wave altermagnet ARPES",
+        "Luu Worner 2018 Berry curvature HHG quartz",
+        "Mizuno spin group selection rule HHG",
+        "Rani-Juraschek nonlinear phonon altermagnet"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.4 P2 [29] Yinan Wang（现东京大学 IIS）不应置于'国内主导工作'段，需补国内 1–2 篇独立主导的滑动铁电/层间耦合工作",
+      "missing_evidence": "国内课题组（如北大、清华、中科院、南大、兰大等）在 h-BN/MnPS3/NiPS3 滑动铁电、层间耦合、畴壁动力学方向的代表性实验观测，用以替代失实归属",
+      "search_keywords": [
+        "bilayer h-BN sliding ferroelectric Chinese group",
+        "MnPS3 sliding ferroelectric 压电 同号反转 国内",
+        "NiPS3 共线性拉满补饰 国内 课题组",
+        "国内 滑动铁电 反射光谱",
+        "清华 北大 h-BN 中科院 sliding"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.2 P1/P2 Regmi/Ul Haqe/Krempaský 长句超 120 字，需拆句并保留 '装置+结果+对象' 三段式支撑",
+      "missing_evidence": "三句中超长叙述所依赖的实验/原文出处，便于拆句后各分句分别挂引文 [N]",
+      "search_keywords": [
+        "Regmi NiPS3 ARPES",
+        "Ul Haque NiPS3 Raman antiferromagnet",
+        "Krempaský Nature 2024 MnTe spin-resolved ARPES d-wave",
+        "Osumi PRB 109 115102 MnTe anisotropic spin splitting"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.2 P2/P3 Basnet/Werner 五连发枚举节奏缺'对项目意义'回收句，需补与 Berry 曲率反演/反常 Hall/动量分辨动力学的连接证据",
+      "missing_evidence": "Basnet 在 Cr-NiPS3 磁性测量、Werner 在交变磁 HHG 选择定则方向的代表性论文，以及它们与'强场探测反演 Berry 量/时间分辨'判据链的具体关联",
+      "search_keywords": [
+        "Basnet Cr-doped NiPS3 PRB 109 184405 magnetic",
+        "Werner PRB 110 235101 Rashba Zeeman altermagnet HHG",
+        "Werner altermagnet HHG selection rule 2026",
+        "Basnet Cr-NiPS3 charge-transfer insulator moment",
+        "交变磁 高次谐波 宇称选择定则 Werner"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.5 P5 [17] 0.01–0.3 MV/cm 场强与 0.1–1.0 MV/cm 驱动窗口低端失配，需补 500 kV/cm–1 MV/cm 段 TDDFT 基准与实测工作 [32]/[39]",
+      "missing_evidence": "MV/cm 量级下的 TDDFT 计算及实验场强基准（如 500 kV/cm、1 MV/cm THz 驱动铁电极化反转等），用于替换或限定 [17] 的范围",
+      "search_keywords": [
+        "MV/cm TDDFT high harmonic benchmark",
+        "500 kV/cm THz sliding ferroelectric NiPS3",
+        "1 MV/cm THz source 2D antiferromagnet",
+        "Rajpurohit coherent phonon THz amplitude kV/cm"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "文献表 46 条超上限 6 条；[34][41]-[44][46] 六条全文零角标需并档压缩或补引",
+      "missing_evidence": "这 6 条目前零引用的论文是否为本项目 §1 必要的支撑证据；如果并档压缩，需要找到它们主题并入的引用节点",
+      "search_keywords": [
+        "General berry MnPS3 Rashba literature consolidation",
+        "spin space group altermagnet substitution Krempasky",
+        "SOC 2D antiferromagnet benchmark substitution reference"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

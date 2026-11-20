@@ -1,0 +1,311 @@
+{
+  "at": "2026-11-19T06:05:00Z",
+  "rule": "规则A（worklist-and-prompt §三）：①已 pass 检查项数降序 ②机械缺口数降序 ③critical 级缺陷有者排后 ④同分按 created_at 早者优先——以课题 ID 内嵌原始立项日期作「历史沉淀」代理；末位同分以 A1 现有笔记数升序。2026-11-19T06:05 终版：16 包全部 6/6 全过（kickoff 清零，ready=16），剩余队列为空；本版以 live --check 为准",
+  "delivery_batch_top5": [],
+  "ranking_rows": [
+    {
+      "tid": "general-bsv-driven-hhg-quantum-20260726",
+      "stage": "ready",
+      "npass": 6,
+      "passed": [
+        "A1",
+        "A2",
+        "A3",
+        "A4",
+        "G1",
+        "G2"
+      ],
+      "failed": [],
+      "mech": 0,
+      "critical": [],
+      "created_at": "2026-11-16T15:43:38Z",
+      "iddate": "20260726",
+      "notes": 8
+    },
+    {
+      "tid": "key-transient-quantum-phase-optical-20260726",
+      "stage": "ready",
+      "npass": 6,
+      "passed": [
+        "A1",
+        "A2",
+        "A3",
+        "A4",
+        "G1",
+        "G2"
+      ],
+      "failed": [],
+      "mech": 0,
+      "critical": [],
+      "created_at": "2026-11-16T15:43:38Z",
+      "iddate": "20260726",
+      "notes": 8
+    },
+    {
+      "tid": "general-moire-strong-field-probe-20260726",
+      "stage": "ready",
+      "npass": 6,
+      "passed": [
+        "A1",
+        "A2",
+        "A3",
+        "A4",
+        "G1",
+        "G2"
+      ],
+      "failed": [],
+      "mech": 0,
+      "critical": [],
+      "created_at": "2026-11-16T15:43:38Z",
+      "iddate": "20260726",
+      "notes": 9
+    },
+    {
+      "tid": "general-order-parameter-ultrafast-readout-20260727",
+      "stage": "ready",
+      "npass": 6,
+      "passed": [
+        "A1",
+        "A2",
+        "A3",
+        "A4",
+        "G1",
+        "G2"
+      ],
+      "failed": [],
+      "mech": 0,
+      "critical": [],
+      "created_at": "2026-11-16T15:43:38Z",
+      "iddate": "20260727",
+      "notes": 8
+    },
+    {
+      "tid": "general-berry-mnps3-rashba-20260816",
+      "stage": "ready",
+      "npass": 6,
+      "passed": [
+        "A1",
+        "A2",
+        "A3",
+        "A4",
+        "G1",
+        "G2"
+      ],
+      "failed": [],
+      "mech": 0,
+      "critical": [],
+      "created_at": "2026-11-16T15:43:38Z",
+      "iddate": "20260816",
+      "notes": 10
+    },
+    {
+      "tid": "general-attosecond-streaking-20260822",
+      "stage": "ready",
+      "npass": 6,
+      "passed": [
+        "A1",
+        "A2",
+        "A3",
+        "A4",
+        "G1",
+        "G2"
+      ],
+      "failed": [],
+      "mech": 0,
+      "critical": [],
+      "created_at": "2026-11-16T15:43:38Z",
+      "iddate": "20260822",
+      "notes": 22
+    },
+    {
+      "tid": "general-ssh-weyl-20260920",
+      "stage": "ready",
+      "npass": 6,
+      "passed": [
+        "A1",
+        "A2",
+        "A3",
+        "A4",
+        "G1",
+        "G2"
+      ],
+      "failed": [],
+      "mech": 0,
+      "critical": [],
+      "created_at": "2026-11-16T15:43:38Z",
+      "iddate": "20260920",
+      "notes": 10
+    },
+    {
+      "tid": "general-houston-kronig-penney-landau-zener-20261004",
+      "stage": "ready",
+      "npass": 6,
+      "passed": [
+        "A1",
+        "A2",
+        "A3",
+        "A4",
+        "G1",
+        "G2"
+      ],
+      "failed": [],
+      "mech": 0,
+      "critical": [],
+      "created_at": "2026-11-16T15:43:38Z",
+      "iddate": "20261004",
+      "notes": 10
+    },
+    {
+      "tid": "general-chiral-hhg-20261101",
+      "stage": "ready",
+      "npass": 6,
+      "passed": [
+        "A1",
+        "A2",
+        "A3",
+        "A4",
+        "G1",
+        "G2"
+      ],
+      "failed": [],
+      "mech": 0,
+      "critical": [],
+      "created_at": "2026-11-16T15:43:38Z",
+      "iddate": "20261101",
+      "notes": 11
+    },
+    {
+      "tid": "general-phonon-hhg-20261101",
+      "stage": "ready",
+      "npass": 6,
+      "passed": [
+        "A1",
+        "A2",
+        "A3",
+        "A4",
+        "G1",
+        "G2"
+      ],
+      "failed": [],
+      "mech": 0,
+      "critical": [],
+      "created_at": "2026-11-16T15:43:38Z",
+      "iddate": "20261101",
+      "notes": 11
+    },
+    {
+      "tid": "general-berry-berry-20261107",
+      "stage": "ready",
+      "npass": 6,
+      "passed": [
+        "A1",
+        "A2",
+        "A3",
+        "A4",
+        "G1",
+        "G2"
+      ],
+      "failed": [],
+      "mech": 0,
+      "critical": [],
+      "created_at": "2026-11-16T15:43:38Z",
+      "iddate": "20261107",
+      "notes": 9
+    },
+    {
+      "tid": "general-floquet-20261107",
+      "stage": "ready",
+      "npass": 6,
+      "passed": [
+        "A1",
+        "A2",
+        "A3",
+        "A4",
+        "G1",
+        "G2"
+      ],
+      "failed": [],
+      "mech": 0,
+      "critical": [],
+      "created_at": "2026-11-16T15:43:38Z",
+      "iddate": "20261107",
+      "notes": 9
+    },
+    {
+      "tid": "general-tmd-bic-mie-anapole-20261107",
+      "stage": "ready",
+      "npass": 6,
+      "passed": [
+        "A1",
+        "A2",
+        "A3",
+        "A4",
+        "G1",
+        "G2"
+      ],
+      "failed": [],
+      "mech": 0,
+      "critical": [],
+      "created_at": "2026-11-16T15:43:38Z",
+      "iddate": "20261107",
+      "notes": 9
+    },
+    {
+      "tid": "general-t-tise2-2-2-2-cdw-20261108",
+      "stage": "ready",
+      "npass": 6,
+      "passed": [
+        "A1",
+        "A2",
+        "A3",
+        "A4",
+        "G1",
+        "G2"
+      ],
+      "failed": [],
+      "mech": 0,
+      "critical": [],
+      "created_at": "2026-11-16T15:43:38Z",
+      "iddate": "20261108",
+      "notes": 9
+    },
+    {
+      "tid": "general-keldysh-schottky-20261115",
+      "stage": "ready",
+      "npass": 6,
+      "passed": [
+        "A1",
+        "A2",
+        "A3",
+        "A4",
+        "G1",
+        "G2"
+      ],
+      "failed": [],
+      "mech": 0,
+      "critical": [],
+      "created_at": "2026-11-16T15:43:38Z",
+      "iddate": "20261115",
+      "notes": 9
+    },
+    {
+      "tid": "general-tdse-tddft-20261115",
+      "stage": "ready",
+      "npass": 6,
+      "passed": [
+        "A1",
+        "A2",
+        "A3",
+        "A4",
+        "G1",
+        "G2"
+      ],
+      "failed": [],
+      "mech": 0,
+      "critical": [],
+      "created_at": "2026-11-16T15:43:38Z",
+      "iddate": "20261115",
+      "notes": 9
+    }
+  ]
+}

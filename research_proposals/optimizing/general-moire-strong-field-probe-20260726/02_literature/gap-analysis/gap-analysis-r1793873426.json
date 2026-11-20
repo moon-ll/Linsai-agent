@@ -1,0 +1,38 @@
+{
+  "gaps": [
+    {
+      "claim": "以文献[28]为依据，将ZnO基线表述为“中段5–11阶”或“基线中的H5–H10阶”，并用该阶次范围支撑后续对比或模型标定。",
+      "missing_evidence": "缺少[28]原文关于可观测谐波阶次、标度拟合区间和椭偏分析区间的直接证据。现有评审信息显示，[28]图2的标度分析采用HO 9–21阶，图4的椭偏分析采用5–17阶，均不能直接支持“5–11阶”或“H5–H10阶”。需要核对原文图注、正文和实验条件，明确5–11与H5–H10分别对应何种物理量；若这是本项目为便于比较而重新截取的区间，应明确标为项目设定或重分析结果，并说明重分析方法和选取依据。",
+      "search_keywords": [
+        "Ghimire ZnO high harmonic generation HO 9-21 scaling",
+        "ZnO HHG ellipticity harmonic orders 5-17 Figure 4",
+        "ZnO solid-state high harmonic generation harmonic order scaling law",
+        "ZnO high-order harmonic spectrum 5-11 H5-H10"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "将ZnO高次谐波标度指数α≈2.5作为已有文献基线或与本项目模型直接比较的量化参数。",
+      "missing_evidence": "缺少给出α≈2.5的原始文献出处、拟合公式、拟合阶次区间、误差或置信区间。评审指出Ghimire原文未直接报告该拟合值，因此目前不能将其表述为“文献原值”。需要补充能够明确给出2.5的原始论文或补充资料；若该数值来自本项目对公开数据的重新拟合，应提供原始数据、拟合区间、回归方法及不确定度，并将其标注为本项目重分析结果而非文献直接结论。",
+      "search_keywords": [
+        "ZnO HHG scaling exponent alpha 2.5",
+        "ZnO high harmonic generation power-law exponent 2.5",
+        "Ghimire ZnO harmonic scaling exponent",
+        "solid-state ZnO high harmonic scaling law fit"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "声称Peterka实验测得的谐波光谱能量窗口为3.1–6.2 eV。",
+      "missing_evidence": "缺少与Peterka原始论文一致的能量范围和实验条件依据。原文摘要明确表述为“observe harmonic spectra in the ultraviolet spectral region 2.7–6.2 eV”，因此当前“3.1–6.2 eV”与原始文献不符。需要核对论文全文中的光谱图、阈值及实验参数，统一修正rationale.md、content.md和scheme.md中的四处表述，并区分文献原始测量窗口与项目后续分析窗口。",
+      "search_keywords": [
+        "\"observe harmonic spectra in the ultraviolet spectral region 2.7-6.2 eV\"",
+        "Peterka bulk ZnO high harmonic generation 2.7 6.2 eV",
+        "Peterka solid-state high harmonic generation ultraviolet spectrum",
+        "Peterka high harmonic generation ZnO spectrum figure"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "content"
+}

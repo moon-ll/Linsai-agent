@@ -1,0 +1,38 @@
+{
+  "gaps": [
+    {
+      "claim": "§3.2 中将半导体布洛赫方程(SBE)从ZnO→MoS₂→莫尔体系的迁移论证为'先例罗列'式，缺乏严格的'原理→结论'链式论证",
+      "missing_evidence": "缺少SBE适用于莫尔超晶格体系的理论依据文献——目前仅通过列举SBE在ZnO、MoS₂等常规晶体中的成功应用来推断其可迁移性，缺少SBE在莫尔周期势、超晶格能带结构下的适用性边界或理论验证文献",
+      "search_keywords": [
+        "semiconductor Bloch equation moiré superlattice validity",
+        "SBE interband coupling moiré heterostructure",
+        "semiconductor Bloch equation superlattice strong field",
+        "tight-binding Bloch equation twisted bilayer applicability",
+        "莫尔超晶格 半导体布洛赫方程 适用性"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3.4 中六项关键技术风险的'方案→原理→结论'链式论证部分缺失可行性分析的独立支撑",
+      "missing_evidence": "评审指出缺独立可行性分析子节，可行性论证分散嵌入各R子节及风险段。虽属结构性问题，但其中涉及TDDFT限定小原胞、光Floquet亚周期匹配等技术选择的可行性论证可能缺少直接的文献先例或定量对比支撑",
+      "search_keywords": [
+        "TDDFT small supercell strong field limit",
+        "Floquet engineering subcycle matching moiré",
+        "real-time TDDFT moiré supercell computational feasibility",
+        "Floquet expansion periodic field solid HHG validity range"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§3.2 理论方法三层降阶框架（TDDFT→紧束缚→SBE）的层次间降阶可靠性缺乏文献支撑",
+      "missing_evidence": "三层降阶框架从第一性原理到紧束缚再到SBE的逐层近似有效性，在莫尔体系背景下缺少跨层次基准对比文献，尤其是TDDFT与紧束缚模型在强场下的结果一致性验证",
+      "search_keywords": [
+        "TDDFT tight-binding comparison strong field solid",
+        "multiscale electronic structure HHG benchmark",
+        "ab initio to model Hamiltonian strong field",
+        "downscaling framework nonlinear optics moiré"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

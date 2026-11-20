@@ -1,0 +1,27 @@
+{
+  "gaps": [
+    {
+      "claim": "scheme.md L25、L85、L128 三处首次引用 Peschel、Shi & Thumm、White & Chang 的论述时未在章内首现处挂载引文编号，论点归属缺乏文内引文支撑（评审问题 4，对应参考文献表实有 [6][14][10]）",
+      "missing_evidence": "引文挂靠缺失：文献本身已收录于 references 实表，需在三处首现点补挂 [6][14][10]；属引文格式缺口，非需新增文献",
+      "search_keywords": [
+        "Peschel attosecond streaking",
+        "Shi Thumm streaking time delay",
+        "White Chang photoemission"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "创新点一宣称：角积分压制原理向常规靶材推广后，可将跨靶材可比性误差压制至 5% 以下、第一级残余偶极相位贡献小于 2%，且修正项适用区间覆盖 8%–50%（评审问题 3 及锚点对比节：该原理迄今仅由 Pabst 与 Dahlström 在相干里德伯态波包条件下给出纯理论论证）",
+      "missing_evidence": "跨靶材角积分条纹相位可比性的实验验证文献；残余偶极相位贡献的实测数据或理论边界估计；支撑 40%–50% 区间仍以 5% 误差阈值为合格判据的证据（现该区间已声明降级运行、不以 5% 为判据，终止判据宣称区间大于可判据区间）",
+      "search_keywords": [
+        "angular integration attosecond streaking",
+        "Pabst Dahlstrom streaking Rydberg",
+        "residual dipole phase attosecond",
+        "cross-target streaking comparison",
+        "attosecond streaking uncertainty budget"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "scheme"
+}

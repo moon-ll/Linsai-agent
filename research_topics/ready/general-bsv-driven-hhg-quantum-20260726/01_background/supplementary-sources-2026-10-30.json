@@ -1,0 +1,74 @@
+{
+  "proposal_id": "general-bsv-driven-hhg-quantum-20260726",
+  "cluster_id": "orphan-route-2026-10-30",
+  "clusters": [
+    "orphan-route-2026-10-30",
+    "cl_20261030_be0b3a"
+  ],
+  "entries": [
+    {
+      "source_id": "paper:2025-doi-10-1103-hph3-kzb2-quantum-path-control-in-high-order-harmonic-generation-via-s",
+      "title": "Quantum path control in high-order harmonic generation via squeezed light",
+      "summary": "提出用压缩光（squeezed light）作为驱动场，对高次谐波产生（HHG）中的长短量子路径实现主动选择与调控，将HHG的波形控制从经典光场扩展到非经典量子光场范畴。通过压缩光特有的量子涨落修饰电离与再复合动力学，路径得到'净化'后可产生短于1个原子单位时间（约24 as）的孤立阿秒脉冲。",
+      "path": "knowledge/raw/papers/2025-doi-10-1103-hph3-kzb2-quantum-path-control-in-high-order-harmonic-generation-via-s.md",
+      "added_via": "cluster:orphan-route-2026-10-30",
+      "added_at": "2026-10-30T16:42:10Z"
+    },
+    {
+      "source_id": "paper:2024-2409.15556-about-the-role-of-short-and-long-trajectories-on-the-quantum",
+      "title": "About the role of short and long trajectories on the quantum optical state after high-harmonic generation",
+      "summary": "该文研究了强场高次谐波产生（HHG）中电子短轨迹与长量子轨迹对发射光场量子态的不同作用，揭示两类轨迹贡献的量子光态及其非经典特征存在显著差异。这一结果为通过轨迹选择调控HHG量子光学性质、实现非经典光场制备提供了理论依据。",
+      "path": "knowledge/raw/papers/2024-2409.15556-about-the-role-of-short-and-long-trajectories-on-the-quantum.md",
+      "added_via": "cluster:orphan-route-2026-10-30",
+      "added_at": "2026-10-30T16:42:10Z"
+    },
+    {
+      "source_id": "paper:2026-260620372-attosecond-path-qubits-in-high-harmonic-gener",
+      "title": "Attosecond Path Qubits in High-Harmonic Generation: Classical Dephasing and Trace-Out Decoherence",
+      "summary": "该文提出高次谐波产生（HHG）中占主导的短程与长程电子轨迹可构成一个实验可操控的阿秒路径量子比特（两能级子系统）。作者进一步分析了该量子比特的两类退相干机制——经典退相与对轨迹信息的求迹退相干，为在阿秒时间尺度上实现量子相干操控提供了新途径。",
+      "path": "",
+      "added_via": "cluster:orphan-route-2026-10-30",
+      "added_at": "2026-10-30T16:42:10Z"
+    },
+    {
+      "source_id": "paper:2024-doi-10-1103-physrevresearch-6-033079-generation-of-squeezed-high-order-harmonics",
+      "title": "Generation of squeezed high-order harmonics",
+      "summary": "本文提出并验证利用压缩光（squeezed light）作为驱动场产生压缩高次谐波的方案，将量子光学中的压缩态从可见/近红外波段通过HHG非线性过程上转换至XUV波段，构筑了极紫外非经典光源的量子态工程平台。",
+      "path": "knowledge/raw/papers/2024-doi-10-1103-physrevresearch-6-033079-generation-of-squeezed-high-order-harmonics.md",
+      "added_via": "cluster:orphan-route-2026-10-30",
+      "added_at": "2026-10-30T16:42:10Z"
+    },
+    {
+      "source_id": "paper:2025-2507.15972-tunneling-driven-by-quantum-light-described-via-field-bohmia",
+      "title": "Tunneling driven by quantum light described via field Bohmian trajectories",
+      "summary": "该文提出用场Bohmian轨迹（field Bohmian trajectories）描述量子化光场的时间演化，将亮压缩真空等非经典量子光驱动的强场隧穿纳入统一的半经典隧穿理论框架。该理论自洽地建立了光场量子特性（量子涨落、压缩等）与隧穿电流之间的对应关系，为量子光调控隧穿电子动力学提供了理论工具。",
+      "path": "",
+      "added_via": "cluster:orphan-route-2026-10-30",
+      "added_at": "2026-10-30T16:42:10Z"
+    },
+    {
+      "source_id": "paper:2025-2510.26414-generation-and-detection-of-squeezed-states-via-a-synchronou",
+      "title": "Generation and detection of squeezed states via a synchronously pumped optical parametric oscillator",
+      "summary": "本文报道了一套93 MHz同步泵浦OPO脉冲压缩光源与探测方案：通过向腔内反向注入本征光（LO），一箭双雕地实现腔长锁定与自参考零拍探测，简化光路并抑制LO臂相位漂移。借助SLM对LO进行光谱整形优化模匹配后，测得-5.7 dB压缩输出。该光源为脉冲高次谐波等强场实验中的量子态工程（压缩态/相干态驱动）提供了稳定可复用的量子光平台。",
+      "path": "knowledge/raw/papers/2025-2510.26414-generation-and-detection-of-squeezed-states-via-a-synchronou.md",
+      "added_via": "cluster:cl_20261030_be0b3a",
+      "added_at": "2026-10-30T20:20:35Z"
+    },
+    {
+      "source_id": "paper:2026-2602.22806-experimental-investigation-of-the-effect-of-dispersion-on-sq",
+      "title": "Experimental investigation of the effect of dispersion on squeezing generation in a synchronously pumped optical parametric oscillator",
+      "summary": "首次在实验上定量分离并表征了腔色散对同步泵浦光学参量振荡器（SPOPO）中多模压缩生成的影响。通过改变腔精细度（即腔内往返/级联放大次数）与零拍探测局域振荡光（LO）带宽两个实验参量，测得压缩度与超模结构随之系统的变化。实验结果与含色散的理论模型定量吻合，为宽带频率梳压缩光的色散管理与腔设计提供了实验判据。",
+      "path": "knowledge/raw/papers/2026-2602.22806-experimental-investigation-of-the-effect-of-dispersion-on-sq.md",
+      "added_via": "cluster:cl_20261030_be0b3a",
+      "added_at": "2026-10-30T20:20:35Z"
+    },
+    {
+      "source_id": "paper:2024-2407.18826-effect-of-group-velocity-dispersion-on-the-generation-of-mul",
+      "title": "Effect of group-velocity dispersion on the generation of multimode pulsed squeezed light in a synchronously pumped optical parametric oscillator",
+      "summary": "本文在时域框架下完整分析了同步泵浦光学参量振荡器（SPOPO）中腔内群速度色散（GVD）对多模脉冲压缩光生成的影响，揭示GVD通过两条途径破坏压缩：使各超模中心频率偏离腔共振（频率失谐），并在超模之间引入线性耦合。二者共同导致可观测压缩度下降、压缩椭圆主轴旋转，从而阐明了SPOPO脉冲压缩的带宽限制机制，为宽带多模量子光源的色散管理设计提供了定量依据。",
+      "path": "knowledge/raw/papers/2024-2407.18826-effect-of-group-velocity-dispersion-on-the-generation-of-mul.md",
+      "added_via": "cluster:cl_20261030_be0b3a",
+      "added_at": "2026-10-30T20:20:35Z"
+    }
+  ]
+}

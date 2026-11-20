@@ -1,0 +1,58 @@
+{
+  "gaps": [
+    {
+      "claim": "content.md 零引用 Berry/TKNN/Corkum/Lewenstein/Ghimire/Lvovsky/Karniadakis 等 12 篇基础奠基文献（编号 [30]–[41]），核心概念（量子几何、Bloch 方程、HHG 机理）未溯源至基础文献，违反 citation_style 嵌入式论证相关性原则",
+      "missing_evidence": "references.md 含有这些基础文献但正文中零引用，包括：Berry 相变理论、TKNN 能带拓扑不变量、Corkum 原子 HHG 三步模型、Lewenstein 强场近似理论、Ghimire 2011 固体 HHG 首次实验观测、Lvovsky 量子光学表征方法、Karniadakis 非线性光学反问题等奠基性工作",
+      "search_keywords": [
+        "Berry phase topological invariant TKNN",
+        "Corkum high harmonic generation three-step model",
+        "Lewenstein strong field approximation HHG",
+        "Ghimire 2011 ZnO solid-state high harmonic generation first observation",
+        "Lvovsky quantum optics characterization",
+        "Karniadakis nonlinear optics inverse problem"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "f-sum rule 标度律 (1+0.5·U/W) 作为本项目核心物理约束，文中自承为'待验证假说'，未给出该线性标度的物理推导，且将验证推迟至 Year 3 Q1——违反 theory_applicability 与 implementation_path",
+      "missing_evidence": "缺少 f-sum rule 在强关联固体中修正形式的理论推导，或其他验证该线性标度律的文献依据；文献中常见的 (1+U/W)² 平方修正与本项目线性修正的物理动机不清晰",
+      "search_keywords": [
+        "f-sum rule high harmonic generation Hubbard U correction",
+        "sum rule bandwidth renormalization solid HHG",
+        "high harmonic generation strongly correlated material scaling",
+        "f-sum rule ZnO TiSe2 strong correlation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Khurelbaatar 等 [21] 的引用上下文'BSV 量子光场通过 Wigner 相空间方法严格表征'——该结果物理对象是原子 HHG，R1 物理对象是固体 HHG，引文相关性需要明确边界",
+      "missing_evidence": "缺少 Wigner 相空间方法在固体 HHG 中适用性的直接文献，或固体 HHG 量子光场表征的理论/实验依据",
+      "search_keywords": [
+        "Wigner phase space quantum light solid-state HHG",
+        "bright squeezed vacuum solid high harmonic generation characterization",
+        "quantum light high harmonic generation solid state theory"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§2.3 line 102 驱动波长 1.5 μm 中红外驱动 Bi₂Te₃ 的带隙匹配关系未给出文献支撑（Bi₂Te₃ 带隙约 0.15–0.3 eV，1.5 μm 对应 ~0.83 eV 光子能量）",
+      "missing_evidence": "缺少 1.5 μm 中红外驱动 Bi₂Te₃ HHG 的实验文献，或 Bi₂Te₃ 在该驱动波长下的带间吸收/谐波产生效率数据",
+      "search_keywords": [
+        "Bi2Te3 high harmonic generation mid-infrared 1.5 micron",
+        "Bi2Te3 attosecond spectroscopy strong field",
+        "topological insulator HHG solid state 1.5 micron drive"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§2.2 line 60 实验对接阶段判据 'BSV-HHG 在 Si 上耦合效率 ≥ 10⁻⁵ + g^(2)(0) > 1.5' 同时宣称两个存在原理约束的量但未给出兼容性边界，违反 uncertainty_constraint",
+      "missing_evidence": "缺少 BSV 耦合效率与 g2 量子度之间兼容性边界的理论分析或文献数据；缺少高耦合效率（≥10⁻⁵）同时保持高 g2(0)（>1.5）的实验可行性文献",
+      "search_keywords": [
+        "bright squeezed vacuum HHG coupling efficiency solid state",
+        "BSV high harmonic generation photon flux g2",
+        "squeezed light HHG quantum enhancement experimental feasibility"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

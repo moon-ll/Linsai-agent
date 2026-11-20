@@ -1,0 +1,93 @@
+{
+  "gaps": [
+    {
+      "claim": "TMDC 样品在强场下的损伤阈值约 10¹² W/cm²",
+      "missing_evidence": "缺少 TMDC（如 MoS₂、WSe₂）在中红外强场（1.3–4.5 μm）波段损伤阈值的具体实验文献支撑；当前仅给出量级数字，未引证原始数据来源",
+      "search_keywords": [
+        "TMDC damage threshold mid-infrared",
+        "MoS2 WSe2 ablation threshold strong field",
+        "transition metal dichalcogenide optical damage 10^12 W/cm2",
+        "2D material near-infrared damage threshold"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "椭偏、HHG、瞬态吸收（TA）三类观测分别对势函数 V(r) 不同物理分量敏感，构成联合编码",
+      "missing_evidence": "缺少多模态强场探测对势能面/电子结构不同分量敏感性的对比文献，需论证 HHG 能量域对跃迁偶极矩/电离通道、椭偏对相位/对称性、TA 对布居动力学的互补性证据",
+      "search_keywords": [
+        "high harmonic spectroscopy potential energy surface",
+        "strong-field ellipsometry molecular structure",
+        "transient absorption vs HHG complementarity",
+        "multimodal strong-field probing electronic structure"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "TDDFT 第一层标定控制偏差 < 5%、SBE 第二层迁移偏差 < 6%",
+      "missing_evidence": "缺少 TDDFT 与半导体 Bloch 方程（SBE）在强场响应计算中典型精度的基准文献，无法论证 5%/6% 阈值的可达性与同领域共识",
+      "search_keywords": [
+        "TDDFT accuracy benchmark strong field",
+        "semiconductor Bloch equation accuracy photoexcited",
+        "TDDFT vs SBE comparison accuracy",
+        "first-principles strong-field response precision"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "弱关联端基准偏差 < 2%（ZnO 体系闭合），中-强关联端误差预算 10–20%",
+      "missing_evidence": "缺少 ZnO 作为弱关联基准体系在 TDDFT/SBE 计算中 < 2% 偏差的已发表对照结果；缺少中-强关联体系（如 NiO、MnO、TM 氧化物）误差量级 10–20% 的同领域文献依据",
+      "search_keywords": [
+        "ZnO TDDFT benchmark accuracy",
+        "strongly correlated oxide TDDFT+U error",
+        "ZnO band structure calculation precision",
+        "DFT+DMFT accuracy transition metal oxide"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Floquet 方法对周期驱动强场问题的优势（§3.4 三条理由）",
+      "missing_evidence": "缺少 Floquet 理论相对直接含时演化（如 TDSE）在处理周期驱动、准能量结构、驱动场参数扫描方面的优势论证文献",
+      "search_keywords": [
+        "Floquet theorem periodic drive advantage",
+        "Floquet vs time-dependent Schrodinger equation",
+        "Floquet engineering 2D material",
+        "Floquet sidebands strong field"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "波长 1.3–4.5 μm 范围内电离阈值强度 I_c 按 λ⁻² 标度律漂移约 12 倍",
+      "missing_evidence": "缺少 I_c ∝ λ² 标度（Keldysh 隧穿电离）的原始理论引用及中红外波段的实验验证文献，使端点 11.98 倍反推缺乏理论锚定",
+      "search_keywords": [
+        "Keldysh ionization wavelength scaling",
+        "tunneling ionization lambda^2 scaling mid-infrared",
+        "I_c scaling law strong field",
+        "ADK theory wavelength dependence ionization"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Molinero 等 2024 年 Optica 提出的核时基准可作为强场探针的标定参照",
+      "missing_evidence": "已嵌入引用 [6]，但需补充该方法在 moiré/层状体系强场标定中的适用性论证，以及与本课题三统一约束（统一基底/统一口径/统一反演链）的对接文献",
+      "search_keywords": [
+        "Molinero 2024 Optica nuclear dynamics strong field",
+        "nuclear clock strong-field probe calibration",
+        "Optica 2024 strong field molecular reference",
+        "molecular clock attosecond calibration"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "三层（TDDFT/SBE/关联基准）误差预算协同闭环的可行性",
+      "missing_evidence": "缺少多层级多尺度误差传递/累加分析的文献支撑，以论证 5%+6%+20% 链式预算的理论合理性",
+      "search_keywords": [
+        "multiscale error propagation TDDFT SBE",
+        "uncertainty quantification multiscale electronic structure",
+        "error budget hierarchical first-principles",
+        "Bayesian calibration electronic structure"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "scheme"
+}

@@ -1,0 +1,57 @@
+{
+  "gaps": [
+    {
+      "claim": "Sodemann-Fu 2015 将 Berry 偶极与量子度规联系起来，并提出'Berry 偶极介导的度规贡献为副项通道'的主项/副项分层框架",
+      "missing_evidence": "原始论文 PRL 115, 216806 (2015) 仅提出 Berry curvature dipole 导致的时间反演不变二阶霍尔效应，无 quantum metric 内容；'主项/副项'分层叙述亦为该文所无。需要：①删去该虚构归属或重写为'预言 Berry 曲率偶极非线性霍尔效应'；②补充量子度规进入非线性输运的正确文献（2019 年后 Gao/Vignale 等度规偶极理论）；③将度规可观测性的实验起点改挂 Han[3] 并补具体标志性实验证据",
+      "search_keywords": [
+        "Berry curvature dipole nonlinear Hall",
+        "quantum metric dipole nonlinear transport",
+        "Gao Vignale quantum metric 2019",
+        "metric dipole second-order Hall effect"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Han 等 2024 年[3]在 Mn₃Sn/Pt 异质结中实测室温 g 介导的非线性霍尔响应，验证室温可用性",
+      "missing_evidence": "申请书写法属'人名+年份+[N]+体系+事件'同构，但缺少 Han[3] 原文的标志性实验事实（时间反演奇二阶霍尔特征、门控调控曲线、量化数值），仅以'验证室温可用性'评价性收尾；需补具体现象/手段以达锚点句式标准",
+      "search_keywords": [
+        "Mn3Sn Pt nonlinear Hall quantum metric",
+        "antiferromagnetic nonlinear Hall gate tuning",
+        "Han 2024 Mn3Sn time-reversal odd Hall"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.6 国内研究现状'三条主线'概括",
+      "missing_evidence": "整段零具体课题组/人名/文献，违反立项依据五层中'国内现状'实质要求；需补 2-3 个具名国内团队及其代表工作（涵盖非线性霍尔、量子度规输运、相关实验体系中的中国研究组）",
+      "search_keywords": [
+        "非线性霍尔效应 中国研究组",
+        "Mn3Sn 非线性输运 物理所",
+        "量子度规 实验 国内",
+        "非线性反常霍尔 中科院"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.1 第 4 段（L33）：'BSV 相对强度噪声 50–200%、高出经典光源 100–400 倍'",
+      "missing_evidence": "该倍数断言无文献支撑，违反 indicator_red_lines.indicator_measurable；需补引文（典型 BSV 强度噪声基准实验文献，如 Slusher 1985/1987 或近年 BSV 实验综述）或删除倍数只保留实测区间",
+      "search_keywords": [
+        "bright squeezed vacuum relative intensity noise",
+        "BSV intensity noise 50-200%",
+        "squeezed vacuum photon number distribution noise benchmark"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "正文以人名叙述的 Du/Lange/Uchida 等（references [20][21][22][23]）相关工作",
+      "missing_evidence": "references 30 条中仅 19 条被正文编号引用，[20][21][22][23] 零正文 [N] 引用但人名仍出现；需为具名叙述处补 [N] 编号引用或将未被引条目移出文献表，确保 21 处正文编号引用与 30 条文献表一致",
+      "search_keywords": [
+        "Du nonlinear Hall quantum metric",
+        "Lange quantum geometric nonlinear transport",
+        "Uchida spin Hall nonlinear response"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

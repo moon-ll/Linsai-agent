@@ -1,0 +1,87 @@
+{
+  "gaps": [
+    {
+      "claim": "MnTe 自旋劈裂数据：L21 述 Γ-K 约 0.1、Γ-M 可达 0.5 eV；L25 改述 0.3-0.8 eV 区间，需综合 [2]+[15] 实测结果明确 0.1–0.5 eV 分方向数据与 0.3-0.8 eV 整体综合区间",
+      "missing_evidence": "MnTe 沿不同 k 路径 (Γ-K、Γ-M) 自旋劈裂实测值的独立多组实验数据 (ARPES、磁光、自旋极化计算)，以及 0.3-0.8 eV 综合区间对应的多组独立来源",
+      "search_keywords": [
+        "MnTe spin-resolved ARPES d-wave",
+        "MnTe spin splitting k-path Γ-K Γ-M",
+        "Osumi PRB 109 115102 MnTe",
+        "MnTe anisotropic spin splitting experimental",
+        "MnTe altermagnet spin splitting magnitude"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Mizuno[12] 与 Haag[13] 自旋群选择规则与偏振-角度响应预言——三度逐字级重复 (L31/L33/L45)，需逐句以单一增量句承接，避免堆砌",
+      "missing_evidence": "Mizuno/Haag 框架在 MnTe 上对接 g 波节点面几何构型的具体对比：节点面取向 vs 偏振-角度响应的几何关系预言，以及未在 MnTe 实验中验证的缺口论证",
+      "search_keywords": [
+        "Mizuno altermagnet spin group selection rule",
+        "Haag altermagnet nonlinear optics prediction",
+        "MnTe g-wave nodal plane polarization angle",
+        "altermagnet selection rule MnTe experimental",
+        "spin group theory altermagnet prediction polarization"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Ly[26] 双份引用 (L33/L53)——两次叙述同一贡献",
+      "missing_evidence": "Ly 工作的核心物理预言与单一关键结论，以及与其他交变磁 HHG 理论框架 (Mizuno/Haag/Werner/Weber) 的差异化定位，避免重复引用同一论点",
+      "search_keywords": [
+        "Ly altermagnet high harmonic generation",
+        "Ly spin splitting altermagnet theoretical",
+        "Ly 2026 J Phys Condens Matter high harmonic",
+        "altermagnet HHG theory comparison Ly Mizuno Haag",
+        "i-wave altermagnet circular polarization Ly prediction"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "CrSb 劈裂数据群 [23][24][25] 约 250 字——需收敛为'多组独立测量 0.6–1.0 eV 交换尺度上限'，省出篇幅补国内现状实义内容",
+      "missing_evidence": "CrSb 多组独立自旋劈裂/交换尺度测量数据 (ARPES、磁光、量子振荡)，以及 0.6–1.0 eV 交换尺度上限的多源交叉验证",
+      "search_keywords": [
+        "CrSb spin splitting ARPES experimental",
+        "CrSb exchange splitting magnitude eV",
+        "CrSb de Haas-van Alphen g-wave",
+        "CrSb altermagnet exchange scale",
+        "CrSb spin-polarized ARPES multiple groups"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "国内现状实义内容缺失——§4 国内现状层仅罗列国外文献，省出 CrSb 数据群篇幅后需补中国组代表性工作",
+      "missing_evidence": "中国实验组在 MnTe/CrSb 交变磁自旋劈裂、高次谐波、阿秒/超快光学方向的代表性工作 (强场 HHG、阿秒脉冲、固体高次谐波、交变磁)",
+      "search_keywords": [
+        "固体高次谐波 中国 实验组",
+        "attosecond science Chinese research team",
+        "MnTe CrSb altermagnet spin splitting China",
+        "强场非线性光学 国内 代表性工作",
+        "固体高次谐波 交变磁 国内"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "背景性叙述与文献堆砌——全章编号引用 61 次（上限 47），需降为 ≤40 次，关键论断保留，整体背景降为整体引用",
+      "missing_evidence": "可作为整体引用支撑的综述性/总结性文献 (HHG 综述、交变磁综述、强场固体综述)，用以一次性引用替代多次单点引用",
+      "search_keywords": [
+        "high harmonic generation review solid-state",
+        "altermagnet review spin splitting 2025",
+        "strong-field ultrafast optics review",
+        "固体高次谐波 综述 2024 2025",
+        "altermagnet spintronics review RMP"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "[27] 二作错挂 (Lu H M vs Hu M)——arXiv:2405.14777 abs 页实锤，需全表替换",
+      "missing_evidence": "arXiv:2405.14777 作者链官方记录，确认 Li C, Hu M, Li Z 等 15 人完整顺序，避免张冠李戴",
+      "search_keywords": [
+        "arXiv 2405.14777 author list",
+        "Li Hu Li altermagnet high harmonic",
+        "altermagnet HHG author chain correction"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

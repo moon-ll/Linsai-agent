@@ -1,0 +1,16 @@
+{
+  "gaps": [
+    {
+      "claim": "立项依据整体篇幅与论证深度不足（4254字低于5000-8000字标准下限），国内外研究现状部分需要补充更多文献支撑以充实论证链",
+      "missing_evidence": "缺少足够数量的近期（2024-2026）文献来扩充§2国内外研究现状五个子节与§3国内研究现状的论证密度，特别是阿秒条纹相位检索算法改进、水窗阿秒脉冲表征技术、多电子/偶极相位校正方法以及国内阿秒计量实验团队的最新进展",
+      "search_keywords": [
+        "attosecond streaking phase retrieval algorithm 2025",
+        "FROGCRAB retrieval improvement recent",
+        "water window attosecond pulse characterization experiment 2025",
+        "attosecond metrology China experimental group",
+        "阿秒条纹测量 国内实验组 最新进展"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

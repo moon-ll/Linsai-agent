@@ -1,0 +1,157 @@
+{
+  "gaps": [
+    {
+      "claim": "增量贡献①「首次证明 CPL 辐照可在平衡共线磁体中诱导出此前仅见于非共线磁序的 p/f 波自旋劈裂，提出『Floquet 奇宇称磁体』设计原则」——被引为新范式、新机制的核心立论。",
+      "missing_evidence": "该论断与三篇核心对比文献直接冲突，且冲突未在任何上游材料中被处理：arXiv:2508.02542《Floquet odd-parity collinear magnets》(Zhu, Zhou, Wang, Wei, Ruan；PRL accepted, 2025-08-04 公开, 2026-02-25 更新)摘要原文已写明『using effective model analysis within Floquet-theory framework, we demonstrate that circularly polarized light irradiation of conventional antiferromagnetic lattices breaks a spin-preserving pseudo-time-reversal symmetry and induces both p- and f-wave magnets, realizing novel magnetic states dubbed Floquet odd-parity collinear magnets』，并已完成 MnPSe3 第一性原理验证。即『CPL 在共线 AFM 中诱导 p/f 波劈裂』与『Floquet 奇宇称磁体』命名两点均已被占。arXiv:2603.11483《Optically Driven Orbital Hall Transport in Floquet Odd-Parity Collinear Altermagnets with High Chern Numbers》(Tian, Zhao, Wang, Zhang, Kong, Gong; 2026-03-12)进一步在共线 AFM 多层体系给出 f 波 Floquet 奇宇称、QAHE C=±8 与轨道霍尔输运、平台 VSi2N4。arXiv:2605.19184《Floquet-Engineered Odd-Parity Altermagnetic Higher-Order Topology in a Two-Dimensional Antiferromagnet Cr...》(2026-05-18)把同一路线扩展到 Cr 基 2D AFM 的高阶拓扑。所需补充：①对这三篇的逐篇差异化拆解表（体系/机制/物理量/平台），说明本设想相对它们只剩何种增量（如平台改为 MnPS3、加入逆法拉第与纯 Floquet 贡献分离、统一电子-磁振子群论判据表）；②把『首次』全部改写为『据 2026-11-07 前对 arXiv cond-mat.mes-hall / cond-mat.mtrl-sci 的检索，尚未见…』并附检索式与截止日期；③若无法找到实质增量，须重新界定新意来源（如体系平台的实验可达性、磁振子与电子的统一判据，而非机制首创）。",
+      "search_keywords": [
+        "Floquet odd-parity collinear magnets",
+        "circularly polarized light p-wave f-wave altermagnet",
+        "Floquet engineering collinear antiferromagnet odd parity",
+        "spin-preserving pseudo-time-reversal symmetry breaking",
+        "optical control of magnetic spin splitting antiferromagnet",
+        "Floquet magnon topological phase transition"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "增量贡献②「基于自旋点群建立电子与磁振子奇宇称劈裂的统一对称性判据，证明 CPL 或环路电流破坏有效时间反演即可打开磁振子简并、激活 Berry 曲率——将奇宇称概念从电子能带首次推广为电子与磁振子共享的群论框架」。",
+      "missing_evidence": "『首次推广』不成立：arXiv:2605.31411《Odd-Parity Magnons》(Pu Zhang, Sun-Bo Xie, Junxi Yu, Yichen Liu, Cheng-Cheng Liu; 2026-05-29, 9+20 页)摘要原文写明『We provide a complete spin-point-group classification of odd-parity magnon splitting in two-dimensional collinear antiferromagnets by identifying the leading splitting types and their symmetry-allowed basis functions. This classification serves as a practical guide for searching for odd-parity magnons. We show that breaking effective time-reversal symmetry, for example by circularly polarized light or loop currents, can induce highly tunable p- and f-wave magnon splitting』——完整自旋点群分类 + CPL/环路电流破缺 + p/f 波磁振子劈裂三点全部已做。同文进一步给出『In bilayer systems, the dynamical modulation can drive a topological magnon phase transition, accompanied by chiral edge modes and an abrupt jump in the magnon thermal Hall conductivity』，即本设想的『热霍尔跳变作为拓扑磁振子相变标志』亦已被覆盖；并已在真实 vdW 反铁磁体上完成第一性原理验证。另需补：自旋点群分类的基础方法学文献（本子群表示理论），本子课题只需引用不需重建，但须在正文说明本设想相对该分类的增量是『同时覆盖电子与磁振子』还是『仅落在具体平台』。",
+      "search_keywords": [
+        "Odd-Parity Magnons spin point group classification",
+        "spin point group collinear antiferromagnet magnon splitting",
+        "magnonic thermal Hall conductivity jump topological transition bilayer antiferromagnet",
+        "loop current effective time-reversal breaking magnon",
+        "crystallographic spin point groups and their representations"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "增量贡献③「通过层锁定自旋极化-轨道纹理耦合预言光驱动轨道霍尔输运与高陈数 QAH 相——把 Floquet 奇宇称机制从自旋拓展到轨道自由度并实现陈数提升（区别于常规 ±1 陈数的 Floquet 工程）」。",
+      "missing_evidence": "该贡献被核心对比文献 arXiv:2603.11483 逐字覆盖：摘要原文『Floquet engineering can induce f-wave odd-parity altermagnetism in two-dimensional collinear antiferromagnetic multilayers via the coupling between circularly polarized light (CPL) and layer degrees of freedom. Furthermore, modifying the CPL induces nonequilibrium quantum anomalous Hall effect (QAHE) with tunable Chern numbers up to C=±8, arising from layer- and valley-dependent band inversions. The induced topological phase transitions provide an efficient means to manipulate the orbital Hall effect (OHE) by redistributing orbital angular momentum』——层自由度耦合、轨道霍尔、高陈数（±8，远超 ±1）三点均已实现，平台为 VSi2N4。此外 2508.02542 亦报道『light-induced antiferromagnetic Chern insulating states in the f-wave magnets』。本条『首次』必须删除或彻底改写；可行的增量只能落在：(a) 真实平台的可实验实现性对比（MnPS3 vs MnPSe3 vs VSi2N4 的带隙、磁振子频率、激光参数窗口）；(b) 高陈数来源机制的不同（层锁定自旋极化-轨道纹理 vs 层-谷依赖带反转）；(c) 与磁振子子系统的耦合闭环。",
+      "search_keywords": [
+        "optically driven orbital Hall transport Floquet odd-parity altermagnet",
+        "high Chern number quantum anomalous Hall altermagnet multilayer",
+        "layer-valley dependent band inversion Floquet",
+        "light-induced Chern insulator collinear antiferromagnet",
+        "orbital angular momentum redistribution orbital Hall effect antiferromagnet"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "技术路线步骤二(b)/(c) 与增量贡献③的落地平台选择：以单层/双层 MnPS3 作为磁振子与电子子系统的计算平台（『磁振子部分落地于单层/双层 MnPS3 真实平台』），并宣称该平台可承载 p/f 波磁振子劈裂与拓扑磁振子相变。",
+      "missing_evidence": "MnPS3 相关的磁振子/拓扑/热输运文献虽存在（arXiv:2503.11639《Large Thermal Hall Effect in MnPS3》、2410.03088《Exchange striction induced thermal Hall effect in van der Waals antiferromagnet MnPS3》、2209.10184《Temperature-Induced Magnonic Chern Insulator in Collinear Antiferromagnets》、1907.07636《Laser control of magnonic topological phases in antiferromagnets》、1902.04719 magnon transport in quasi-2D vdW AF），但尚未检索到任何文献直接证明 MnPS3 是适合承载『CPL 诱导 p/f 波奇宇称磁振子劈裂』或『光驱动拓扑磁振子相变』的平台——2508.02542 用的是 MnPSe3，2605.31411 只说『real van der Waals antiferromagnets』未点名 MnPS3，2603.11483 用的是 VSi2N4。需补充：①MnPS3 的磁各向异性、磁振子色散、DMI 是否存在（若 DMI 缺失需说明为何无 DMI 的共线体系仍可打开磁振子简并）；②MnPS3 带隙与其相对 CPL 光子能量的位置关系（决定是否落在高频非共振 Floquet 区间）；③与已报道 MnPS3 热霍尔实验结果的对比，确认『光致跳变』相对于已知温度致跳变如何区分。",
+      "search_keywords": [
+        "MnPS3 magnon dispersion anisotropy",
+        "MnPS3 antiferromagnet band gap first principles",
+        "MnPS3 thermal Hall effect magnetic order",
+        "van der Waals antiferromagnet magnon topological",
+        "MnPSe3 MnPS3 comparison spin gap"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "机制指纹「劈裂幅度对激光强度呈 Floquet 贝塞尔/高频标度，区别于逆法拉第机制的有效塞曼场线性标度」——用作区分纯 Floquet 调制与逆法拉第贡献的关键判据。",
+      "missing_evidence": "这是全案最具方法论分量、也最容易被质询的一条。检索表明：以 arXiv 摘要字段检索『Bessel + Floquet + high-frequency expansion』返回 0 命中，说明『Floquet 高频展开下光致自旋劈裂幅度呈贝塞尔函数依赖』在凝聚态强场文献中缺少可直接对口的支撑文献，正文若直接断言将无引用可挂。且『贝塞尔标度 vs 逆法拉第线性标度』的区分本身需要推导依据（逆法拉第有效场正比于光强、准静态；而 Floquet 有效项含频率与光强的高阶幂次/Bessel 因子），必须给出可比较的判据形式。需补充：①Floquet 高频展开（van Vleck）给出光致有效磁矩/自旋劈裂标度的解析形式与适用条件文献（如高频展开对带间跃迁、选择定则与 Floquet 谐波阶的依赖）；②逆法拉第效应等效场与光强的标度关系、以及其与 Floquet 项同时存在时的区分策略（含各自占比随频率/强度的变化）；③若检索仍无法找到贝塞尔标度的现成实验/理论支撑，正文须降级为『预言标度关系（可证伪）』而非『已知标度』。",
+      "search_keywords": [
+        "Floquet high-frequency expansion van Vleck effective Hamiltonian optical",
+        "Bessel function Floquet harmonics drive amplitude scaling",
+        "inverse Faraday effective field light intensity scaling magnetization",
+        "optical control magnetic moment high frequency regime circular polarization",
+        "Floquet spin splitting light frequency dependence"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "实验验证方案「用自旋分辨 ARPES/超快时间分辨光谱探测 p/f 波劈裂在 k 与 -k 处的符号反转特征」；以及「中子衍射/X 射线磁圆二色确认磁序保持共线」。",
+      "missing_evidence": "支撑文献严重不足。检索『time-resolved photoemission + altermagnet』返回 0 命中，说明目前没有『用超快光电子谱直接探测 Floquet 诱导 p/f 波奇宇称劈裂』的先例文献；『spin-resolved ARPES + spin splitting』命中的多为 d 波自旋分裂实验（arXiv:2402.04995《Observation of Giant Spin Splitting and d-wave Spin Texture in Room Temperature Altermagnet RuO2》、2405.12575《Three-dimensional mapping of the altermagnetic spin splitting in CrSb》、2512.00972《Observation of hidden altermagnetism in Cs1-δV2Te2O》），均非 p/f 波、更非光诱导。需补充：①上述 d 波自旋分裂 ARPES 实验文献，用以论证『ARPES 具备分辨 k 依赖自旋劈裂并读出符号反转的能力』这一方法学可行性（而非暗示已测过 p 波）；②探测动量空间符号反转所需的分辨率与对称性保护测量的方法学依据；③超快时间分辨谱（含 TR-ARPES / pump-probe 磁振子谱）在二维 AFM 中的既有实现，用于论证 k 与 -k 符号反转的时间分辨可行性；④X 射线磁圆二色/XMCD 在 AFM 体系中的磁序表征方法学文献；⑤需明确说明 p/f 波劈裂的实验判据是新方法学，本项目只提供理论预言与方案（dossier 边界界定已声明不做实际实验测量，正文须把这一点写清，避免读者误以为已有验证路径）。",
+      "search_keywords": [
+        "spin-resolved ARPES altermagnet spin splitting k-space",
+        "time-resolved photoemission antiferromagnet magnon",
+        "TR-ARPES pump probe magnetic dynamics 2D magnet",
+        "XMCD magnetic circular dichroism antiferromagnet magnetic order determination",
+        "nonequilibrium photoemission Floquet band engineering"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "增量贡献④「新可观测效应：预言 MnPS3 类体系的光致拓扑磁振子相变及热霍尔电导跳变信号，并给出区分逆法拉第与纯 Floquet 机制的标度关系——提供可直接实验检验的定量判据而非停留在理论分类」。",
+      "missing_evidence": "『热霍尔跳变作为拓扑磁振子相变标志』已在 arXiv:2605.31411 中被完整提出（『an abrupt jump in the magnon thermal Hall conductivity』，且同为双层体系、同为光致动力学调制），因此这一条的『新』只剩两点：(a) 平台换成 MnPS3；(b) 定量判据的具体形式。需补充：①磁振子热霍尔电导的定量表达式（Berry 曲率积分、界面磁振子热输运修正）与拓扑相变点处跳变幅值的理论预期来源文献；②把『热霍尔跳变』与已报道的温度驱动磁振子拓扑相变（如 2209.10184 的 Temperature-Induced Magnonic Chern Insulator、2512.18534 Weyl Magnons in MnTe2）在信号上区分开的判据文献——这是排除替代解释的必要对照；③『定量判据』必须给出可写进正文的数量级（跳变幅度依赖哪些可测量参数），否则该增量退化为表述差异。",
+      "search_keywords": [
+        "magnon thermal Hall conductivity Berry curvature integration topological magnon",
+        "topological magnon phase transition thermal Hall jump temperature driven",
+        "magnon thermal Hall antiferromagnet interface correction",
+        "Weyl magnons MnTe2 thermal Hall"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "「已有工作：静态非共线/手性磁体（如三角、Breathing Kagome 晶格）依赖内禀磁序产生奇宇称劈裂」——作为本设想的对比基线，隐含断言奇宇称劈裂此前仅见于非共线体系。",
+      "missing_evidence": "该对比基线的文献支撑单薄且部分失准。检索表明『非共线/手性磁体中的奇宇称劈裂』近两年已形成系列工作：arXiv:2609.25919《Time-reversal-odd Transport in Odd-Parity Magnets》、2606.30214《Rolling Two-Dimensional Collinear Magnets into Chiral Nanotubes with p-Wave Magnetism》、2606.14246《p-wave magnet and hedgehog-type Berry curvature in helimagnetic MnAu2》、2605.22294《Odd-Parity Chiral Magnons in Collinear Antiferromagnetic Multiferroics》、2604.18695《P-wave Orbital Magnetism》——其中 2606.30214 表明共线磁体经结构卷曲亦可获得 p 波磁性，进一步模糊了「共线 vs 非共线」的二分。需补充：①奇宇称磁性的综述或奠基性文献（含磁性点群分类方法），作为『奇宇称劈裂此前见于哪些体系』的可靠综述依据；②至少 3-5 篇非共线/手性体系奇宇称劈裂的代表性文献（含具体材料：三角/呼吸 Kagome、MnAu2、MnTe2 等）以支撑对比表；③明确界定本设想的真实边界——不是『非共线 vs 共线』，而是『静态内禀磁序机制 vs 光致动力学对称性破缺机制（可逆、可切换）』，这才是可辩护的差异点。",
+      "search_keywords": [
+        "odd-parity magnetism nonrelativistic spin splitting review",
+        "p-wave magnet helimagnet MnAu2 Berry curvature",
+        "kagome breathing lattice odd-parity spin splitting",
+        "magnetic point group classification spin splitting textures",
+        "collinear magnet chiral p-wave magnetism nanotube"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "「常规 Floquet 拓扑工程针对非磁或弱自旋轨道耦合体系」与『常规 ±1 陈数的 Floquet 工程』——用以说明本设想的对比优势。",
+      "missing_evidence": "该对比需要对 Floquet 拓扑工程的一般性背景文献做系统梳理，否则读者无法判断 ±1 是否真为「常规上限」。需补充：①Floquet 工程实现拓扑相的标准路线（光子辅助隧穿/带边重构、频带驱动狄拉克点等）与各自可达陈数的文献，用于确立基线；②已知高陈数 Floquet 体系的文献（不止 2603.11483 的 C=±8），确认『高陈数 Floquet』是否已被广泛报道——若已报道，则「区别于常规 ±1」的说法必须弱化为『区别于多数仅实现 ±1 的报道』；③Floquet 磁振子 Floquet 体系的既有工作（arXiv:1810.04677《Magnonic Floquet Quantum Spin Hall Insulator in Bilayer Collinear Antiferromagnets》、1810.04675《Photo-induced Floquet Weyl magnons in noncollinear antiferromagnets》、1907.07636《Laser control of magnonic topological phases in antiferromagnets》），这些说明光调控磁振子拓扑相并非空白，正文必须正面处理而非回避。",
+      "search_keywords": [
+        "Floquet engineering topological insulator photon-assisted tunneling",
+        "high Chern number Floquet band engineering",
+        "Floquet magnon topological insulator bilayer collinear antiferromagnet",
+        "photo-induced Floquet Weyl magnon noncollinear antiferromagnet",
+        "laser control magnonic topological phase antiferromagnet"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "「常规共线反铁磁体与交替磁体在 CPL 驱动的非平衡 Floquet 态中诱导奇宇称劈裂」这一前提——即共线 AF 体系在平衡态因有效时间反演对称性禁止奇宇称劈裂。",
+      "missing_evidence": "缺少支撑『共线体系为何禁止、破坏后为何允许』的对称性论证文献链。正文需挂：①磁性点群/自旋点群方法学基础文献（arXiv:2307.12784《The Crystallographic Spin Point Groups and their Representations》可作自旋点群表示理论依据）；②交替磁体的定义性文献与 d 波自旋分裂的实验/理论奠基（含 2402.04995 RuO2 d 波 ARPES 观测、2506.07447 strained d-wave altermagnet 的 Zeeman 型劈裂、2412.13763 d 波交替磁体输运理论、2402.04995 等），用以确立『偶宇称 d 波』这一共存范式，从而反衬『奇宇称 p/f 波』在共线体系中的特殊性；③共线 AFM 中自旋劈裂的对称性禁止定理类文献。缺此链，五层递进中的『脉络』层（奇宇称概念从非共线到共线的推演）将失去根基。",
+      "search_keywords": [
+        "crystallographic spin point groups representations",
+        "altermagnet d-wave spin splitting experimental observation RuO2",
+        "spin splitting symmetry collinear antiferromagnet forbidden",
+        "altermagnetic spin group transformation analysis",
+        "strained d-wave altermagnet Zeeman spin splitting"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "评审问题清单第 8 条 [medium] novelty_claim：dossier 增量贡献三处「首次」缺检索范围/截止日期支撑，要求正文改为「据目前检索…」并附范围与截止日期。",
+      "missing_evidence": "这是方法学形式要求，需在正文中落实为可核查的检索声明：①明确检索数据库（arXiv，分类清单 cond-mat.mes-hall / cond-mat.mtrl-sci / cond-mat.str-el / physics.optics）与检索时间截止日（本项目可取 2026-11-07 立项日，须在正文写明具体日期）；②列出核心检索式并给出命中结果概述；③所有「首次」句式改写为「据我们截至 2026-11-07 的 arXiv 检索，尚未见…报道」；④对三篇核心对比文献必须做正面对比而非回避——本轮检索已确认 2508.02542、2603.11483、2605.31411 三篇共同覆盖了 dossier 的三条增量贡献，正文若不作差异化拆解，评审在「严谨性—文献真实」与「创新性」两栏都会直接扣分。检索范围声明必须包含上述三篇及其余已定位的近邻工作（2605.19184、2605.22294、2604.18695、2609.25919、2606.30214、2606.14246），否则「据目前检索」的措辞会被判定为检索不充分。",
+      "search_keywords": [
+        "arXiv advanced search cond-mat.mes-hall 2026 odd-parity Floquet",
+        "novelty claim verification literature search date range",
+        "systematic search electronic structure antiferromagnet magnon 2026"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "评审问题清单第 4 条 [critical] module_missing（scheme.md）与步骤三「可实现性评估」：估算激光参数窗口（频率避开带隙/磁振子隙共振、强度低于损伤阈值），评估热效应与退相干对 Floquet 态寿命的限制。",
+      "missing_evidence": "可行性命中的支撑文献为零：需补充 ①二维 AFM 光致磁性操控的实验参数文献（arXiv:2204.10574《Controlling magnetism with light in a zero orbital angular momentum antiferromagnet》给出同类体系的光驱动实操范式）；②强场/超快激光在二维磁性材料中的损伤阈值与热效应量级文献；③Floquet 态的退相干与弛豫时间尺度文献（非平衡态寿命量级），用于给出可观测窗口论证；④磁振子共振频率与线宽的典型值文献（用于说明『频率避开磁振子隙共振』的实际约束范围）。无此四项，研究方案中激光参数窗口将退化为无依据的区间估计。",
+      "search_keywords": [
+        "optical control magnetism antiferromagnet light irradiation parameters",
+        "ultrafast laser damage threshold 2D magnetic material",
+        "Floquet state lifetime decoherence driven system",
+        "magnon resonance frequency linewidth antiferromagnet",
+        "non-equilibrium Floquet heating relaxation time scale"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "评审问题清单第 1 条 [critical] module_missing（rationale.md 全文）：立项依据 5000-8000 字、五层递进（大背景→脉络→挑战→国内现状→定位），并要求正文引用 30-40 篇连续编号文献。",
+      "missing_evidence": "当前 02_literature/reading-notes.md 实测为仅含表头的空表，00_research_idea.md 与 00_proposal-brief.md 的『现存研究空白』『创新点』『来源与可靠性』三节均为『（待填写）』——即全案尚无一条经核验的、带 DOI/arXiv ID 的引用条目进入文献台账。需补充：①为本轮已核验的约 20 篇核心文献建立带 arXiv ID、发表状态、核心结论、对应论点的阅读台账（写入 reading-notes.md），使 rationale 每句论断可回溯；②补齐『国内现状』层所需的国内团队工作文献（本子课题以中文基金书为语境，需要国内代表性课题组在共线反铁磁体/交替磁体/磁振子拓扑/光控磁性方向的成果作为脉络支撑，此部分本轮未检索，需补充）；③确认 30-40 篇的规模可达成——按五层递进拆分，每层需 6-8 篇，当前可核验文献池已足够支撑四层，缺口集中在『国内现状』层与『挑战层』的强场/超快实验方法学文献。",
+      "search_keywords": [
+        "中国 课题组 交替磁体 共线反铁磁体 研究进展",
+        "domestic group altermagnet collinear antiferromagnet research China",
+        "magnon topology thermal Hall van der Waals antiferromagnet review",
+        "ultrafast spectroscopy strong-field solid state magnetic dynamics review"
+      ],
+      "priority": "high"
+    }
+  ]
+}

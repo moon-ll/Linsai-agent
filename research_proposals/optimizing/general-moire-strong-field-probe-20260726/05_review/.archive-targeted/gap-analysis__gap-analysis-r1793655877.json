@@ -1,0 +1,30 @@
+{
+  "gaps": [
+    {
+      "claim": "国内多家单位已具备开展莫尔材料强场实验所需的工程化能力。",
+      "missing_evidence": "缺少能够直接证明相关国内平台具备莫尔样品制备、扭角标定与控制、器件加工或强场光学探测能力的同行评议论文、仪器技术报告及公开平台参数；一般性单位介绍或项目设想不足以支撑该论断。",
+      "search_keywords": [
+        "国内 莫尔超晶格 制备平台 扭角控制 精度",
+        "莫尔材料 强场光学 加工平台 中国",
+        "moiré superlattice fabrication platform China",
+        "twist-angle controlled moiré device fabrication high-field optics",
+        "国内 高次谐波 莫尔材料 实验平台"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "相关样品制备、角度扫描或实验测量方案能够达到±0.05°的精度。",
+      "missing_evidence": "缺少±0.05°指标的原始出处及误差依据，例如角度标定方法、样品旋转或拼接精度、仪器分辨率、系统漂移与重复性测试结果；应以方法论文、仪器说明书或平台测试报告为依据，并说明该指标对应的具体环节。",
+      "search_keywords": [
+        "0.05° 角度精度 莫尔 扭角标定",
+        "莫尔样品 角度拼接 精度 0.05度",
+        "twist angle determination accuracy 0.05 degree moiré",
+        "moiré domain stitching angle registration precision",
+        "angle-dependent high-harmonic measurement precision moiré",
+        "旋转平台 角度分辨力 0.05° 莫尔"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "full_review"
+}

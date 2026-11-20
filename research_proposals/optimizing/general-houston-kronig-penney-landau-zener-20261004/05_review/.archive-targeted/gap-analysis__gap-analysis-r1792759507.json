@@ -1,0 +1,69 @@
+{
+  "gaps": [
+    {
+      "claim": "缺陷增强子带隙谐波的工程化路径（截至2026年9月公开文献检索尚未见报道）",
+      "missing_evidence": "缺少针对掺杂/缺陷半导体中亚带隙（sub-bandgap）缺陷态参与的HHG报道的检索证据；需要确认现有文献中是否已报道缺陷态通道的HHG或三角甄别协议，以支撑优先权声明",
+      "search_keywords": [
+        "defect-mediated sub-bandgap harmonic generation doped semiconductor",
+        "impurity state high harmonic generation crystal",
+        "defect-enhanced HHG engineering",
+        "sub-bandgap HHG defect channel solid"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "反常谐波（<1 eV）与带间谐波在0.4–1.0 eV重叠段的区分判据（能区分离不成立）",
+      "missing_evidence": "缺少能区重叠段（0.4–1.0 eV）内区分反常HHG与带间HHG的独立文献判据，如退火可逆性、缺陷态密度标度、时间分辨谱演化等可分离物理量的实验或理论支撑",
+      "search_keywords": [
+        "below-bandgap anomalous harmonic generation discrimination",
+        "intrinsic versus extrinsic HHG energy separation",
+        "anomalous below-bandgap HHG fingerprint criterion",
+        "below-one-eV harmonic origin separation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "0.7倍谐波能量阈值判据",
+      "missing_evidence": "该阈值的定义式、材料依赖性与出处均未给出；需文献支撑反常谐波能量上界（<1 eV 或约0.7×相关谐波能量）在不同材料体系中的普适性",
+      "search_keywords": [
+        "harmonic energy threshold below bandgap anomalous emission",
+        "sub-bandgap harmonic cutoff energy criterion",
+        "0.7 times harmonic energy threshold definition",
+        "anomalous HHG spectral cutoff universal"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Lesko 2024 [21] 支撑『Floquet调制能带瞬态占据的光学读取方法学』",
+      "missing_evidence": "需核实并补充文献支撑：Floquet拓扑绝缘体在能带瞬态占据（population）情形下的光学读取/探测方法学，除Lesko 2024外是否有更直接的方法学文献（如Floquet泵浦kHz谱读取、非平衡态占据的相干光学探针）",
+      "search_keywords": [
+        "Floquet engineered band transient population optical readout",
+        "Floquet topological insulator ultrafast population probing",
+        "time-resolved optical readout Floquet quasienergy occupancy",
+        "non-equilibrium band population optical detection methodology"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "『[12]与[9]的共同结论：低于约1 eV压倒带间谐波』",
+      "missing_evidence": "citation_conflation——<1 eV压倒判据实际出自[9]，而[12]为偏振分解文献；需补充独立文献支撑反常谐波在低能区压倒带间贡献这一普适结论，或将[12]重新定位为仅支持共同贡献",
+      "search_keywords": [
+        "below-bandgap harmonic dominance over interband",
+        "polarization resolved harmonic generation interband versus intraband",
+        "low energy anomalous HHG interband comparison"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "references [11] 的内容与用途（WSe₂ 室温实测参照）",
+      "missing_evidence": "[11] 在正文零引用成为孤儿条目；需核实该文献是否确为WSe₂（或对应材料体系）室温条件下实测数据，用以支撑§2.2 T₂ 段的室温可测量性断言",
+      "search_keywords": [
+        "WSe2 room temperature measured optical constants",
+        "WSe2 room temperature second harmonic generation measurement",
+        "transition metal dichalcogenide room temperature experiment WS2 WSe2"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

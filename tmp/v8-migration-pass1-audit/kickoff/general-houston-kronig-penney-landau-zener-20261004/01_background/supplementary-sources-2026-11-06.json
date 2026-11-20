@@ -1,0 +1,170 @@
+{
+  "proposal_id": "general-houston-kronig-penney-landau-zener-20261004",
+  "cluster_id": "orphan-route-2026-11-06",
+  "clusters": [
+    "orphan-route-2026-11-06",
+    "cl_20261106_58e3d7"
+  ],
+  "entries": [
+    {
+      "source_id": "paper:2023-2310.17007-unambiguous-discrimination-of-high-harmonic-generation-mecha",
+      "title": "Unambiguous discrimination of high harmonic generation mechanisms in solids",
+      "summary": "该工作提出了规范不变的实空间Wannier态方法，实现了对固体高次谐波产生（HHG）中带内（intraband）与带间（interband）发射机制的清晰区分，为理解凝聚态体系中强场非线性动力学提供了普适诊断工具。",
+      "path": "knowledge/raw/papers/2023-2310.17007-unambiguous-discrimination-of-high-harmonic-generation-mecha.md",
+      "added_via": "cluster:orphan-route-2026-11-06",
+      "added_at": "2026-11-06T16:33:07Z"
+    },
+    {
+      "source_id": "paper:2025-2512.24496-adiabatic-approach-for-high-harmonic-generation-in-solids-in",
+      "title": "Adiabatic approach for high harmonic generation in solids induced by intense low-frequency pulses",
+      "summary": "本文提出了一种用于固体高次谐波产生（HHG）的绝热近似理论框架，可在强低频激光脉冲驱动下非微扰地处理激光与固体的相互作用。该绝热方法为长波长极限下固体 HHG 机制的解析研究和谐波谱特征分析提供了新的理论工具。",
+      "path": "",
+      "added_via": "cluster:orphan-route-2026-11-06",
+      "added_at": "2026-11-06T16:33:07Z"
+    },
+    {
+      "source_id": "paper:2026-2606.02238-sub-cycle-field-driven-dynamical-berry-phase-in-solids",
+      "title": "Sub-cycle field-driven dynamical Berry phase in solids",
+      "summary": "本文提出并研究了固体中由强场亚周期（阿秒尺度）驱动的动力学Berry相位，揭示强场驱动电子动力学中几何相位的瞬态演化机制。该相位可作为瞬态量子相位的直接探针，为阿秒时间分辨测量固体中的量子相位动力学提供了新的实验范式。",
+      "path": "",
+      "added_via": "cluster:orphan-route-2026-11-06",
+      "added_at": "2026-11-06T16:33:07Z"
+    },
+    {
+      "source_id": "paper:2021-2111.08669-introduction-to-theory-of-high-harmonic-generation-in-solids",
+      "title": "Introduction to theory of high-harmonic generation in solids: tutorial",
+      "summary": "本教程系统介绍了固体高次谐波产生（HHG）的理论建模框架，涵盖含时薛定谔方程与含时密度泛函方法以及倒空间与实空间的半经典再碰撞模型。文章重点阐述了构造平滑且布里渊区周期性结构规范（尤其在简并能带情形下）对贝里相位积累与反常电流描述的关键作用，并讨论了从微观电流计算到含光束传播效应的宏观HHG响应的过渡。",
+      "path": "",
+      "added_via": "cluster:orphan-route-2026-11-06",
+      "added_at": "2026-11-06T16:33:07Z"
+    },
+    {
+      "source_id": "paper:2502.20564",
+      "title": "Extreme Ultraviolet High-Harmonic Interferometry of Excitation-Induced Bandgap Dynamics in Solids",
+      "summary": "本文提出基于相位锁定极紫外（XUV）脉冲对的高次谐波干涉测量方法，用于探测固体中激发诱导的瞬态带隙动力学；通过非晶SiO2和晶体MgO实验，结合解析建模与半导体布洛赫方程模拟，揭示了瞬态带隙变化与谐波发射相位变化之间的关联，为超快电子动力学研究提供了新手段。",
+      "path": "",
+      "added_via": "cluster:orphan-route-2026-11-06",
+      "added_at": "2026-11-06T16:33:07Z"
+    },
+    {
+      "source_id": "paper:2024-2406.06020-effect-of-strain-on-the-band-gap-of-monolayer-mos2",
+      "title": "Effect of Strain on the Band Gap of Monolayer MoS2",
+      "summary": "本文用多层级第一性原理方法（PBE、HSE06杂化泛函、G0W0@PBE准粒子修正）系统计算了单层MoS2的带隙及其随双轴应变的演化，给出1.65/2.30/2.64 eV的层级化带隙基准与应变响应定量结果。核心发现是：自旋轨道耦合（SOC）对带隙影响很小；约10%双轴张应变下带隙闭合并发生半导体-金属转变，且在较小张应变下先经历直接-间接带隙转变。这为应变调控单层MoS2电子结构提供了跨理论层级的量化参考。",
+      "path": "knowledge/raw/papers/2024-2406.06020-effect-of-strain-on-the-band-gap-of-monolayer-mos2.md",
+      "added_via": "cluster:cl_20261106_58e3d7",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2607.04766",
+      "title": "Strain- and potential-controlled tunneling in monolayer MoS2",
+      "summary": "本文基于含内禀自旋-轨道耦合的有效巨Dirac哈密顿量，理论上研究了机械应变与外部静电势共同作用下单层MoS2中自旋与谷分辨的量子输运，发现应变诱导的谷依赖动量偏移可解除K/K'谷简并并显著改变输运特性。研究表明应变与静电势的协同作用能够高效调控透射电流的谷极化与自旋极化，具体表现为共振透射、法布里-珀罗干涉及电导的显著变化。",
+      "path": "",
+      "added_via": "cluster:cl_20261106_58e3d7",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2024-2403.14945-an-investigation-on-electronic-and-magnetic-properties-of-cr",
+      "title": "An investigation on electronic and magnetic properties of Cr substituted MoS monolayer and multilayers – Hybrid functional calculations",
+      "summary": "本文用HSE类混合泛函对Cr替代掺杂的MoS2单层与多层（1-4层及体相）进行第一性原理计算，研究其电子结构与磁性。核心定量结果为本征MoS2带隙的层数依赖序列：单层1.74 eV（K点直接带隙）、双层1.30 eV、三层1.10 eV、四层1.03 eV、体相0.89 eV（均为间接），确认了单层-多层的直接-间接带隙转变及带隙随层数收敛至体相值的行为。Cr替代Mo位引入局域3d磁性态，体系呈现稀磁半导体特征，其磁性与电子结构随层数和掺杂而演化。",
+      "path": "knowledge/raw/papers/2024-2403.14945-an-investigation-on-electronic-and-magnetic-properties-of-cr.md",
+      "added_via": "cluster:cl_20261106_58e3d7",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2026-2605.13637-layer-thickness-dependent-band-gap-of-mbe-grown-single-to-fe",
+      "title": "Layer thickness dependent band gap of MBE grown single- to few-layer MoS2",
+      "summary": "在Gr@Ir(111)衬底上用MBE实现1-5层MoS2的逐层可控外延，并以STM/STS逐层测定准粒子带隙，得到从单层2.36 eV到5层0.98 eV的强红移标尺。发现5层带隙（0.98 eV）反而低于体相值1.29 eV，且体相行为要到≥3层才显现，为少层极限下的能带演化提供了定量基准。",
+      "path": "knowledge/raw/papers/2026-2605.13637-layer-thickness-dependent-band-gap-of-mbe-grown-single-to-fe.md",
+      "added_via": "cluster:cl_20261106_58e3d7",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2025-2511.15178-wannier-based-analysis-of-the-direct-indirect-bandgap-transi",
+      "title": "Wannier based analysis of the direct-indirect bandgap transition by stacking MoS2 layers",
+      "summary": "构建了从单层到体相MoS2的Wannier紧束缚模型，定量重现带隙随堆叠层数的直接→间接转变（单层直接带隙1.72 eV，体相间接带隙0.958 eV）。通过对层间跃迁的逐轨道通道分解，发现除S原子pz-pz层间耦合外，pz-px与pz-py杂化跃迁对Γ-Q间接跃迁的形成同样不可忽视，仅保留pz-pz通道会遗漏重要的间接带隙收窄机制。由此给出了层堆叠诱导直接-间接带隙转变的原子轨道级微观图像。",
+      "path": "knowledge/raw/papers/2025-2511.15178-wannier-based-analysis-of-the-direct-indirect-bandgap-transi.md",
+      "added_via": "cluster:cl_20261106_58e3d7",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2026-2507.04115-modular-multiscale-approach-to-modelling-high-harm",
+      "title": "Modular multiscale approach to modelling high-harmonic generation in gases",
+      "summary": "本文提出一套模块化的多尺度计算流水线，将红外脉冲非线性传播（CUPRAD）、单原子微观响应的含时薛定谔方程（TDSE）求解与XUV衍射积分传播三个模块通过HDF5数据接口无缝耦合，实现了气体高次谐波产生（HHG）的端到端模拟。该方法在柱对称与线偏振条件下兼顾物理严谨性与计算可扩展性，为强场条件下相位匹配与宏观传播效应的研究提供了灵活框架。",
+      "path": "",
+      "added_via": "cluster:orphan-route-2026-11-06",
+      "added_at": "2026-11-06T19:21:06Z"
+    },
+    {
+      "source_id": "paper:2026-1112.3273-generation-of-isolated-white-light-attosecond-pulses-in-soli",
+      "title": "Generation of isolated white-light attosecond pulses in solids",
+      "summary": "提出利用固体高次谐波（solid-state HHG）在多种固体材料中直接产生覆盖可见–紫外波段的'白光'超连续谱、并合成孤立阿秒脉冲的理论方案。通过鞍点（量子轨迹）分析识别主导发射路径与门控条件，论证了无需级联气体 HHG 或额外白光产生环节，即可从固体一步获得孤立白光阿秒脉冲，为紧凑化、宽谱阿秒光源提供了新路线。",
+      "path": "knowledge/raw/papers/2026-1112.3273-generation-of-isolated-white-light-attosecond-pulses-in-soli.md",
+      "added_via": "cluster:orphan-route-2026-11-06",
+      "added_at": "2026-11-06T19:21:07Z"
+    },
+    {
+      "source_id": "paper:2025-2510.12443-self-attention-enabled-quantum-path-analysis-of-high-harmoni",
+      "title": "Self-attention enabled quantum path analysis of high-harmonic generation in solids",
+      "summary": "本文将自注意力（Transformer）神经网络引入固体高次谐波产生的量子路径分析，实现对带间极化与带内电流贡献的自动解耦。网络的注意力权重与'发射时刻—谐波阶次'的贡献分布直接对应，相当于一种可学习的时频量子路径分析，为固体HHG的轨迹层面归因与后续神经网络化的HHG参数分析提供了端到端工具。",
+      "path": "knowledge/raw/papers/2025-2510.12443-self-attention-enabled-quantum-path-analysis-of-high-harmoni.md",
+      "added_via": "cluster:orphan-route-2026-11-06",
+      "added_at": "2026-11-06T19:21:07Z"
+    },
+    {
+      "source_id": "paper:2024-2404.52774-enhancing-the-efficiency-of-high-order-harmonics-with-two-co",
+      "title": "Enhancing the efficiency of high-order harmonics with two-color non-collinear wave mixing in silica",
+      "summary": "在熔融石英（fused silica）体材料中演示了基频与其倍频非共线交叉的双色波混频高次谐波产生，XUV 波段混频谐波的转换效率超过了对应单色驱动的 HHG。借助横向（准）动量守恒，不同混频构成的谐波沿各自矢量合方向出射，在空间上把混频通道与单色通道分离，便于干净的效率对比与机制归属。该方案为紧凑型全固态相干 XUV 光源提供了新的效率提升路径。",
+      "path": "knowledge/raw/papers/2024-2404.52774-enhancing-the-efficiency-of-high-order-harmonics-with-two-co.md",
+      "added_via": "cluster:orphan-route-2026-11-06",
+      "added_at": "2026-11-06T19:21:07Z"
+    },
+    {
+      "source_id": "paper:2024-1809.06264-enhanced-high-order-harmonic-generation-in-donor-doped-band",
+      "title": "Enhanced high-order harmonic generation in donor-doped band-gap materials",
+      "summary": "TDDFT模拟表明，在带隙材料中引入施主（donor）掺杂可使高次谐波产生效率相对本征材料提升数个数量级，而受主（acceptor）掺杂无此增强。增强机制源于带隙内孤立杂质态主导的类原子三步模型：电子从杂质态隧穿电离、在导带带内加速、随后与局域杂质态复合辐射。该工作确立了掺杂作为调控固态HHG效率的外部自由度。",
+      "path": "knowledge/raw/papers/2024-1809.06264-enhanced-high-order-harmonic-generation-in-donor-doped-band.md",
+      "added_via": "cluster:orphan-route-2026-11-06",
+      "added_at": "2026-11-06T19:21:07Z"
+    },
+    {
+      "source_id": "paper:2025-s00340-025-08509-9-influence-of-non-uniform-distribution-of-doped-atoms-in-semi",
+      "title": "Influence of non-uniform distribution of doped atoms in semiconductors on high-order harmonic generation",
+      "summary": "本文用含时薛定谔方程（TDSE）在半导体带模型框架下研究了掺杂原子非均匀分布对强场高次谐波产生（HHG）的影响。主要发现：非均匀掺杂显著增强亚带隙谐波、抑制第二平台，并在低能区诱导出偶次谐波。这些效应被归结为非均匀掺杂势破坏晶格平移对称性、松弛动量选择定则的结果。",
+      "path": "knowledge/raw/papers/2025-s00340-025-08509-9-influence-of-non-uniform-distribution-of-doped-atoms-in-semi.md",
+      "added_via": "cluster:orphan-route-2026-11-06",
+      "added_at": "2026-11-06T23:00:32Z"
+    },
+    {
+      "source_id": "paper:2024-2409.11167-enhancing-the-efficiency-of-high-order-harmonics-with-two-co",
+      "title": "Enhancing the efficiency of high-order harmonics with two-color non-collinear wave mixing in silica",
+      "summary": "实验证明在熔融石英中用双色（基频+倍频）非共线波混频驱动固体高次谐波产生，可使混频通道谐波的转换效率超过等效单色驱动下的奇次谐波产率。非共线几何通过横向动量守恒选择混频阶数并将其在空间上与单色谐波分离，实现通道分辨的干净测量。该结果为面向XUV的全固态相干光源提供了一条波形工程层面的效率提升路径。",
+      "path": "knowledge/raw/papers/2024-2409.11167-enhancing-the-efficiency-of-high-order-harmonics-with-two-co.md",
+      "added_via": "cluster:orphan-route-2026-11-06",
+      "added_at": "2026-11-06T23:00:32Z"
+    },
+    {
+      "source_id": "paper:2024-2408.01499-enhanced-high-harmonic-efficiency-through-phonon-assisted-ph",
+      "title": "Enhanced high harmonic efficiency through phonon-assisted photodoping effect",
+      "summary": "利用含Ehrenfest电子-离子耦合动力学的全从头TDDFT证明：在hBN中先用中红外脉冲共振激发TO声子，可将其后强场驱动脉冲产生的固态高次谐波产率提升约20倍。机制是声子位移瞬态调制能带结构、显著增强强场诱导的载流子注入（'光掺杂'），注入载流子放大的带间极化电流使谐波辐射增强。这提供了一条全光学、可逆、不引入杂质散射的固态HHG增效路线。",
+      "path": "knowledge/raw/papers/2024-2408.01499-enhanced-high-harmonic-efficiency-through-phonon-assisted-ph.md",
+      "added_via": "cluster:orphan-route-2026-11-06",
+      "added_at": "2026-11-06T23:00:32Z"
+    },
+    {
+      "source_id": "paper:2018-1808.09288-a-gauge-invariant-formulation-of-interband-and-intraband-cur",
+      "title": "A gauge-invariant formulation of interband and intraband currents in solids",
+      "summary": "针对Földi提出的“带内/带间电流分解具有规范依赖性”的质疑，本文指出该问题源于能带投影算符未随规范幺正变换，而非分解本身不成立。通过正确变换投影算符（P_n → U P_n U†），给出规范不变的带内/带间电流定义，使各分量与总电流一样规范协变。进一步证明Houston态基组方法本质上等价于长度规范，从而在任意规范下可一致地计算并划分两类电流，为固态高次谐波中带内vs带间贡献之争提供了严格表述基础。",
+      "path": "knowledge/raw/papers/2018-1808.09288-a-gauge-invariant-formulation-of-interband-and-intraband-cur.md",
+      "added_via": "cluster:orphan-route-2026-11-06",
+      "added_at": "2026-11-06T23:00:32Z"
+    },
+    {
+      "source_id": "paper:2026-2609.20085-transient-high-harmonic-generation-from-solids-fro",
+      "title": "Transient High-Harmonic Generation from Solids: From Spectroscopy and Control to Programmable Emission",
+      "summary": "本章为综述性章节，梳理固体瞬态高次谐波（transient HHG）研究从谱学工具到可编程光源的发展脉络：固体HHG作为电子结构与凝聚态超快动力学的探针，可在飞秒乃至亚周期尺度读取载流子、声子与对称性演化。作者进一步总结了对谐波谱形、截止能量、偏振与时序的主动调控手段——既包括驱动场波形层面（双色场、椭偏度、载波包络相位）的操控，也包括通过光激发改变材料瞬态物态的切换，并展望以此实现'可编程'谐波发射，面向皮赫兹速率的光电子学应用。",
+      "path": "knowledge/raw/papers/2026-2609.20085-transient-high-harmonic-generation-from-solids-fro.md",
+      "added_via": "cluster:orphan-route-2026-11-06",
+      "added_at": "2026-11-06T23:00:32Z"
+    }
+  ]
+}

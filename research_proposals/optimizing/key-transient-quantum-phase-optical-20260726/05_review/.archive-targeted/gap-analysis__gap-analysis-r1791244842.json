@@ -1,0 +1,17 @@
+{
+  "gaps": [
+    {
+      "claim": "§4 D2 段关于\"同类长时阿秒泵浦-探测主动稳定方案的公开报道\"的可行性论证",
+      "missing_evidence": "该论点当前缺少 [N] 引用支撑；ELI-ALPS 作为佐证仅出现在 §7(e)，§4 自身未挂文献，导致可行性证据链断裂。需要补挂公开报道文献并就地嵌入引用 [N]，形成论证链",
+      "search_keywords": [
+        "ELI-ALPS attosecond pump-probe",
+        "attosecond transient absorption active stabilization",
+        "long-term attosecond beamline stabilization",
+        "attosecond pump-probe delay stability",
+        "high-repetition-rate attosecond active feedback stabilization"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "scheme"
+}

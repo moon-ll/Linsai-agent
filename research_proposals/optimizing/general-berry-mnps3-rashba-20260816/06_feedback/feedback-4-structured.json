@@ -1,0 +1,195 @@
+{
+  "verdict": "major_revision",
+  "overall_comment": "2026-09-16 人工裁决：转评审团深度修改（本课题第 4 例）。决策包预审 0/5 模块通过（reject_lean）；references 模块 R8 综合分 0.51（崩分），触发 P0 红线（[35] 作者署名虚构属 critical）+ critical 一致性违规（scheme.md 引用 [36]–[41] 共 6 个幽灵编号，references.md 列表未列）；R7 点名 6 项问题两轮仍未处置；累计 22 个高危未决问题；monitor 独立分 0.45。问题已超出单轮自动优化可消解范围，必须按评审团模式（多角色并行 + 校验闭环）深度返工。",
+  "issues": [
+    {
+      "section": "参考文献",
+      "severity": "critical",
+      "issue_type": "evidence",
+      "description": "references.md L71 [35] 作者署名虚构：原文将 arXiv:2508.16422 的真实作者写作'Horstmann J G, ... Sliding ferroelectric experimental group'，其中'Sliding ferroelectric experimental group'为伪词组（实验组名替换真名），真实作者链为 Horstmann J G, Emeis C, Caviezel A, Meier Q N, Lottermoser Th, Caruso F, Fiebig M（ETH Zurich）。该问题 R8 漏检，与 R5 Mu 元素符号同型虚构，属 P0 红线违规（杜撰引用元数据）。",
+      "instruction": "立即将 references.md L71 [35] 的作者链回滚到 arXiv:2508.16422 官方记录：'Horstmann J G, Emeis C, Caviezel A, Meier Q N, Lottermoser Th, Caruso F, Fiebig M. Coherent phonon control beyond amplitude saturation in a sliding ferroelectric. arXiv:2508.16422, 2025'。删去全部'Sliding ferroelectric experimental group'字样及其变体；调用 CrossRef API 或 arXiv abs 反查核对一次后落地，禁止凭记忆回写。",
+      "action": "rewrite",
+      "target_passage": "04_proposal/sections/references.md L71 [35]"
+    },
+    {
+      "section": "参考文献",
+      "severity": "critical",
+      "issue_type": "standard",
+      "description": "scheme.md 出现 6 个幽灵编号 [36]–[41]：正文已内联引用（Hamer/Coello-Fiallos/Peschel/Tancogné-Dejean×2/Winkler），但 references.md 列表仅到 [35]。编号一致性断裂，reviewer 复核查无对应文献将直接判不通过。",
+      "instruction": "在 references.md 末尾按 Hamer/Coello-Fiallos/Peschel/Tancogné-Dejean(2024)/Tancogné-Dejean(2025)/Winkler 顺序补录 [36]–[41]，每条作者链、标题、期刊/DOI、卷期页、年份全部由 CrossRef API 或期刊官方页当轮核实后再回写，不沿用记忆中的旧字段；同步校核 scheme.md L1886/1908/3519/3561/1174/4024 共 6 处内联编号与新增条目一一对应。",
+      "action": "add",
+      "target_passage": "04_proposal/sections/references.md 末段 + 04_proposal/sections/scheme.md L1886/1908/3519/3561/1174/4024"
+    },
+    {
+      "section": "参考文献",
+      "severity": "high",
+      "issue_type": "standard",
+      "description": "R7 点名 [11] L23 作者链 pos3 错位仍未改：原文写作 Ghimire N J 为第 3 位作者，R7 已点名实际为第 16 位末位作者，官方链前三位为 Regmi R B / Bhandari H / Thapa B / Hao Y et al.。两轮评审后该条仍未处置。",
+      "instruction": "将 references.md L23 [11] 的作者链改为'Regmi R B, Bhandari H, Thapa B, Hao Y, et al.'；按 CrossRef API 命中记录逐位回写，不保留旧字段；改后在 [11] 行末留核查日期与命中 DOI，便于评审复核。",
+      "action": "rewrite",
+      "target_passage": "04_proposal/sections/references.md L23 [11]"
+    },
+    {
+      "section": "参考文献",
+      "severity": "high",
+      "issue_type": "standard",
+      "description": "R7 点名 [23] L47'Súarez Morell E'姓拆分错位仍未改：官方链为 González / Brumme / Morell，姓名为复合姓'Suárez Morell'，应改写为'Morell E S'或完整保留'Suárez Morell E'以避免姓被错误拆分。",
+      "instruction": "在 references.md L47 [23] 中将'Suárez Morell E'统一为'Morell E S'（或完整保留'Suárez Morell E'并加连字符避免拆分），两种格式二选一并全文统一；按 DOI 命中记录确认作者官方拼写后回写。",
+      "action": "rewrite",
+      "target_passage": "04_proposal/sections/references.md L47 [23]"
+    },
+    {
+      "section": "参考文献",
+      "severity": "high",
+      "issue_type": "standard",
+      "description": "R7 点名 [33] L67 标题转写不忠实仍未改：原文写作'coupled to magnetic ordering'，DOI 官方标题实为'and magnetic correlations'。两轮评审后该条仍未处置。",
+      "instruction": "将 references.md L67 [33] 标题按 DOI 官方记录逐字更正为'and magnetic correlations'，不接受'coupled to magnetic ordering'的旧字段；改后用 DOI 反查一次确认标题字符串与官方完全一致（含冠词/介词/大小写）。",
+      "action": "rewrite",
+      "target_passage": "04_proposal/sections/references.md L67 [33]"
+    },
+    {
+      "section": "参考文献",
+      "severity": "high",
+      "issue_type": "standard",
+      "description": "R7 点名 [14] L29 可升级正式版仍未改：仍标 preprint，实际已正式发表于 Phys Rev B, 2026, 114: L111201，DOI: 10.1103/5rrq-5g1k。",
+      "instruction": "将 references.md L29 [14] 替换为'Phys Rev B, 2026, 114: L111201. DOI: 10.1103/5rrq-5g1k'，删去'(preprint)'标注；按 DOI 命中记录确认卷期页与年份后回写。",
+      "action": "rewrite",
+      "target_passage": "04_proposal/sections/references.md L29 [14]"
+    },
+    {
+      "section": "参考文献",
+      "severity": "medium",
+      "issue_type": "standard",
+      "description": "R7 点名 [1][2][34] 未引用仍未处置：三条文献均未被任何章节引用（rationale 从 [3] 起引），属死条目。",
+      "instruction": "在 rationale/content 对应论点处补引 [1][2][34]（每条至少 1 处），或删除并整体重排编号（保持编号连续、scheme.md 内联引用全部同步更新）；处置方案二选一并落地，避免再次出现 R7/R8 同类问题。",
+      "action": "verify",
+      "target_passage": "04_proposal/sections/references.md [1][2][34] + 引用位点全表"
+    },
+    {
+      "section": "参考文献",
+      "severity": "medium",
+      "issue_type": "standard",
+      "description": "R7 点名 [7] L15 人名格式不统一仍未改：'Rybak M'与前两位作者格式（姓 全缩写）不一致，全篇需要统一'姓 全缩写'或'姓 首字母'一种格式。",
+      "instruction": "在 references.md 全篇统一作者名为一种格式（建议与 [5] Krempaský J 风格一致的'姓 全缩写'）；[7] L15 改写后遍历全表确认每条作者链无混用。",
+      "action": "rewrite",
+      "target_passage": "04_proposal/sections/references.md 全表 + L15 [7]"
+    },
+    {
+      "section": "参考文献",
+      "severity": "medium",
+      "issue_type": "standard",
+      "description": "R7 点名 [12] L25 DOI 码制混杂仍未统一：10.1103/gly7-jzfl（APS 新式短码）与 10.1103/PhysRevLett.133.126801（传统式）并存，全文需要统一为期刊全称式或短码一种。",
+      "instruction": "在 references.md 全篇统一 DOI 码制（推荐传统期刊全称式）；[12] L25 改写后遍历全表确认每条 DOI 字段无混用。",
+      "action": "rewrite",
+      "target_passage": "04_proposal/sections/references.md 全表 + L25 [12]"
+    },
+    {
+      "section": "决策包预审",
+      "severity": "critical",
+      "issue_type": "feasibility",
+      "description": "决策包预审 reject_lean：0/5 模块通过。rationale/scheme/content/references/methodology 五模块全部未达到 lean 预审标准，提示存在跨章节一致性问题（编号、术语、引用密度、量化指标对齐）。",
+      "instruction": "将五模块并行提交评审团深度修改：(1) rationale → 重新对齐近 3 年文献占比与论点锚点；(2) scheme → 同步 scheme.md 与 references.md 编号一致性、清理幽灵编号；(3) content → 核验 i-wave C₄/C₆ 对称性链条与材料平台匹配；(4) references → 按本反馈 R7/R8 整改单逐条处置；(5) methodology → 检查方案→指标闭环是否齐全。逐模块输出独立报告后做跨章一致性核查。",
+      "action": "verify",
+      "target_passage": "04_proposal/sections/{rationale,scheme,content,references,methodology}.md"
+    },
+    {
+      "section": "全章节",
+      "severity": "critical",
+      "issue_type": "logic",
+      "description": "累计 22 个高危未决问题：跨章节累计的 high 级问题（含 i-wave C₄/C₆ 矛盾、指纹量排序矛盾、[17] 时间分辨问题、三方晶系平台对称性链条不通等 R1 遗留 + R3/R4/R5/R6/R7 累积未处置）总数已达 22 个，超出单轮自动优化可消解范围。",
+      "instruction": "建立高危未决问题清单（feedback-4-structured.json 已枚举 12 条 + 此前归档 critic-round-1~7 遗留 10 条），按 P0/P1/P2/P3 优先级排序：P0（critical/red line）→ P1（high，影响评审印象）→ P2（medium）→ P3（low/cosmetic）。逐条标注处置责任人（writer/researcher/critic/analyst）与目标产物；每条处置完毕后回写本文件的 status 字段，禁止口头声称'已处理'。",
+      "action": "verify",
+      "target_passage": "06_feedback/feedback-4-structured.json + 05_review/critic-round-{1..7}.md 累计遗留"
+    },
+    {
+      "section": "立项依据",
+      "severity": "high",
+      "issue_type": "logic",
+      "description": "（R1 遗留）content §2.3 i-wave 对称性自相矛盾：通行分类 i-wave = cos6θ（C₆），本课题自述'六光子过程'，却写'四次旋转对称（C₄）'。C₄/C₆ 矛盾未与引用 [16] 原文分类表对齐。",
+      "instruction": "在 content §2.3 全文统一为 i-wave = C₆（cos6θ）；如有 C₄ 论点必须给出独立文献支撑并单独标注；按 [16] 原文分类表逐项核对后落地，不接受'C₄/C₆ 兼容'的折中表述。",
+      "action": "rewrite",
+      "target_passage": "04_proposal/sections/content.md §2.3"
+    },
+    {
+      "section": "立项依据",
+      "severity": "high",
+      "issue_type": "logic",
+      "description": "（R1 遗留）content §2.3 指纹量首选前后矛盾：第 3 段称 A_helicity/S_ellipticity/θ'退化'，第 4 段又称前两者'敏感度最低…是首选量'。同一章节敏感度排序两套，互相打架。",
+      "instruction": "在 content §2.3 重写为一致的敏感度排序（推荐：i-wave 信号强度 > θ > A_helicity ≈ S_ellipticity，或引用文献给出实测排序）；全文（含 research content 与 scheme 关联段）只保留一套排序，禁止并列两套互相矛盾。",
+      "action": "rewrite",
+      "target_passage": "04_proposal/sections/content.md §2.3 第 3-4 段"
+    },
+    {
+      "section": "立项依据",
+      "severity": "high",
+      "issue_type": "evidence",
+      "description": "（R1 遗留）content §2.4 [17] Basnet 2024 为静态场诱导自旋极化测量，无 ps 时间分辨，原文却写'ps 量级'。",
+      "instruction": "在 content §2.4 核实 [17] Basnet 2024 原文是否含 ps 时间分辨（如不含，删'ps 量级'字样或换超快文献）；若换文献需在 references.md 同步新增条目并补全作者链/DOI；改后在 scheme.md 关联段同步更新。",
+      "action": "verify",
+      "target_passage": "04_proposal/sections/content.md §2.4 + references.md [17]"
+    },
+    {
+      "section": "研究方案",
+      "severity": "high",
+      "issue_type": "method",
+      "description": "（R1 遗留）scheme §3.1 三方晶系（R-3m/P-3m1）材料充当 i-wave（C₆）模型，对称性链条不通。三方晶系本征对称性非 C₆，与 i-wave cos6θ 的六重对称前提冲突。",
+      "instruction": "在 scheme §3.1 论证 C₆ 对称性的真实来源（材料堆垛/应变/界面重构等）或改选六方/Kagome 平台；如保留三方晶系必须独立论证其局域 C₆ 等效来源（如 ABC 堆垛顶视图投影呈 6 重），禁止笼统说'对称性兼容'。",
+      "action": "rewrite",
+      "target_passage": "04_proposal/sections/scheme.md §3.1"
+    },
+    {
+      "section": "全章节",
+      "severity": "medium",
+      "issue_type": "standard",
+      "description": "（R1 遗留）[21] 死条目处理；[24] 声子计算收敛基准错配；'Year 1/Year 2'改中文年度；补人才培养计划。",
+      "instruction": "在 references.md 处置 [21]（补引或删除并重编号）；在 scheme.md 校核 [24] 声子计算收敛基准（如 k-mesh、截断能）是否与该材料体系已发表文献一致；将 'Year 1/Year 2' 改为 '第 1 年/第 2 年' 或 '年度 1/年度 2'；在 research basis 章节补人才培养计划（博士后/研究生/本科生梯度）。",
+      "action": "verify",
+      "target_passage": "04_proposal/sections/{references,scheme,research-basis}.md"
+    },
+    {
+      "section": "立项依据",
+      "severity": "high",
+      "issue_type": "standard",
+      "description": "（R3 遗留）正文引用密度 97-101 次，远超范本目标 10-20 次。编号堆砌严重，论证链被引用编号稀释，违反'文献嵌入论证链，不单列堆砌'的范本要求。",
+      "instruction": "对正文引用做降噪处理：合并同类引用（如 [5,6,16]）、删除非关键论点的引用、关键论点保留 1-2 条最权威文献；目标正文引用总数降至 20-30 次（范本目标 10-20，留余量）；每个合并簇需保留作者+年份以便 reviewer 反查。",
+      "action": "rewrite",
+      "target_passage": "04_proposal/sections/{rationale,content,scheme}.md 全文"
+    },
+    {
+      "section": "参考文献",
+      "severity": "high",
+      "issue_type": "evidence",
+      "description": "references R8 崩分综合分 0.51（严谨性 0.40 / 完整性 0.62），远低于 ≥0.9 目标档位。评分依据：[35] 虚构署名（critical）+ [11][23][33][14] R7 未处置（high×4）+ 6 项幽灵编号（critical 一致性）+ 格式问题（medium×3）+ [1][2][34] 未引用。",
+      "instruction": "按 P1→P2→P3 优先级执行：(P1) [35] 改回 Horstmann J G + 补录 [36]–[41] 6 条幽灵编号；(P2) [11][23][33][14] 按本反馈单条整改；(P3) [1][2][34] 补引或删除并重编号、[7] 人名格式统一、[12] DOI 码制统一。处置完毕后由 critic 重新跑 references 专项评审，目标 ≥0.85。",
+      "action": "rewrite",
+      "target_passage": "04_proposal/sections/references.md 全表 + scheme.md 幽灵编号 6 处"
+    },
+    {
+      "section": "全章节",
+      "severity": "high",
+      "issue_type": "feasibility",
+      "description": "monitor 监控模块独立分 0.45（远低于 ≥0.9 目标）：监控维度（写作质量/规范/引用/可行性）独立评分不合格，提示 reviewer/reviewer 多维度均未达 lean 标准。",
+      "instruction": "启动 monitor 深度诊断：分维度（写作质量、规范、引用、可行性）输出独立评分与扣分依据；针对每个维度补做最小修复包（≤3 项关键改动）后再测；目标 monitor 分 ≥0.7（首阶段），≥0.85（验收阶段）。",
+      "action": "verify",
+      "target_passage": "06_feedback/calibration-*.md + monitor 输出"
+    },
+    {
+      "section": "流程",
+      "severity": "high",
+      "issue_type": "feasibility",
+      "description": "按评审团模式处理（第四例）：本课题第 4 次触发评审团深度修改模式，需启用多角色并行（writer/researcher/critic/analyst）+ 校验闭环（每模块独立报告 → 跨章一致性核查 → monitor 评分回归）。",
+      "instruction": "建立评审团工作看板：(1) writer 持本 feedback-4-structured.json 逐条整改并标注 status；(2) researcher 对每条 evidence 类问题调用 CrossRef/arXiv 当轮核实，回写真实元数据；(3) critic 对整改后产物重新评分；(4) analyst 做跨章一致性核查（编号、术语、量化指标、日期对齐）；每 24h 同步一次进度，禁止跳过校验闭环。",
+      "action": "verify",
+      "target_passage": "06_feedback/feedback-4-structured.json（当前文件）"
+    },
+    {
+      "section": "全章节",
+      "severity": "low",
+      "issue_type": "expression",
+      "description": "（模糊意见·保留原话）'22 个高危未决问题'中可能包含部分需经 critic/researcher 进一步澄清才能定位的问题（如涉及研究内容深水区判断或非常规计算方法适用性），暂无法在本轮精确拆分。",
+      "instruction": "在 critic 下一轮输出前不预设该 22 条全部由 writer 独立处置；遇到模糊项先标注为 'low' 并保留人工原话，由 reviewer 会议二次裁决后再进入整改清单；禁止擅自解读或扩张为可执行任务。",
+      "action": "verify",
+      "target_passage": "06_feedback/feedback-4-raw.md + 评审团会议纪要"
+    }
+  ]
+}

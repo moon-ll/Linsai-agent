@@ -1,0 +1,155 @@
+{
+  "gaps": [
+    {
+      "claim": "references.md L5 声明 [11]/[25]/[38] 三章均挂靠",
+      "missing_evidence": "[11] 和 [38] 缺少 scheme 章节挂靠，[25] 缺少 content 章节挂靠的实际验证引用位置",
+      "search_keywords": [
+        "altermagnet MnPS3 spin group symmetry scheme",
+        "Berry curvature fingerprint scheme HHG altermagnet",
+        "MnPS3 anti-ferromagnet high harmonic detection scheme"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "全章 61 处角标/65 次引用密度超上限 38%",
+      "missing_evidence": "缺少对同源成果合并后的精简引用证据链，需验证每条引用是否支撑独立论点",
+      "search_keywords": [
+        "Basnet MnPS3 Se substitution altermagnet",
+        "Ezawa altermagnet spin current readout",
+        "MnPS3 bulk spin orientation magnetic structure"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Ezawa 理论的 altermagnet 椭圆二向色性、自旋流读出、p 波电导率理论预言",
+      "missing_evidence": "缺少 Ezawa 等关于 d-wave/g-wave/i-wave altermagnet 分类与自旋分辨检测理论的原始论文及其后续实验验证",
+      "search_keywords": [
+        "Ezawa altermagnet classification d-wave g-wave i-wave",
+        "altermagnet spin current detection theory",
+        "collinear antiferromagnet spin splitting optical readout"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "9% Cr 取代在 NiPS₃ 中诱导场致自旋极化（饱和场 8 T、磁矩 0.24 μB/f.u.）",
+      "missing_evidence": "缺少 Basnet 等关于过渡金属取代 MPS₃ 体系的化学调控与磁电物性原始实验数据",
+      "search_keywords": [
+        "Basnet Cr doped NiPS3 magnetic property",
+        "transition metal substitution MPS3 antiferromagnet",
+        "NiPS3 chemical doping spin polarization field-induced"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Krempaský 等用软 X 射线与自旋分辨 ARPES 在 MnTe 体系首次实验观测交变磁性 Kramers 自旋简并解除",
+      "missing_evidence": "缺少 Krempaský MnTe 软 X 射线 ARPES 原始论文及后续自旋分辨 ARPES 验证实验",
+      "search_keywords": [
+        "Krempaský MnTe spin-resolved ARPES altermagnet",
+        "soft X-ray ARPES MnTe Kramers degeneracy",
+        "MnTe antiferromagnetic topological band spin splitting"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "交变磁体可作为谷电子学载体并能谷可分辨的实验证据",
+      "missing_evidence": "缺少 MnTe/RuO₂ 等候选 altermagnet 体系的角分辨光电子谱、磁光 Kerr、能谷霍尔效应实测数据",
+      "search_keywords": [
+        "altermagnet valley Hall effect experimental",
+        "MnTe magneto-optical Kerr altermagnet",
+        "RuO2 spin splitting ARPES altermagnet evidence"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "MnPS₃ 中子衍射磁结构与自旋取向（b 轴）数据",
+      "missing_evidence": "缺少 MnPS₃ 块体中子衍射确定磁基态与自旋易轴方向的原始文献",
+      "search_keywords": [
+        "MnPS3 neutron diffraction magnetic structure bulk",
+        "MnPS3 spin orientation b-axis antiferromagnet",
+        "MnPS3 Neel temperature magnetic ordering"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "局域电子态（缺陷/掺杂）对固体高次谐波的调制机理",
+      "missing_evidence": "缺少局域态在 HHG 强场响应中作为再散射中心或中间态的理论与实验研究",
+      "search_keywords": [
+        "localized electronic states HHG solids",
+        "defect states high harmonic generation solid",
+        "impurity states strong-field HHG modulation"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "过渡金属二硫族化合物能谷圆二色性与高次谐波谷选择定则",
+      "missing_evidence": "缺少 MoS₂/WSe₂ 等 TMD体系 HHG 谷选择激发与圆二色性的理论与实验验证",
+      "search_keywords": [
+        "valley circular dichroism HHG TMD MoS2 WSe2",
+        "valley-selective high harmonic generation 2D semiconductor",
+        "C3 symmetry breaking HHG selection rule TMD"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "nodal line（g=0）拓扑材料的高次谐波选择定则",
+      "missing_evidence": "缺少 nodal line 半金属（如 Co₂MnGa、ZrSiS 等）HHG 拓扑响应与选择定则研究",
+      "search_keywords": [
+        "topological nodal line HHG selection rules",
+        "nodal line semimetal high harmonic generation",
+        "g=0 nodal line HHG Berry curvature"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Vampa ZnO 固体高次谐波基准实验与 Berry曲率反演验证",
+      "missing_evidence": "缺少 Vampa 2015 Nature Physics 原文及 ZnO HHG 同代码基准数据用于交叉验证 Berry 曲率反演精度",
+      "search_keywords": [
+        "Vampa 2015 ZnO high harmonic generation Nature Physics",
+        "ZnO solid HHG Berry curvature benchmark",
+        "solid HHG quantum geometry inversion validation"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Bi₂Se₃/Bi₂Te₃ 拓扑绝缘体相干时间 T₂ 与去相位测量",
+      "missing_evidence": "缺少 Bi₂Se₃ 类拓扑绝缘体中退相干时间 T₂ 的实验测量数据（用于支撑 HHG 反演自旋-轨道耦合的精度）",
+      "search_keywords": [
+        "Bi2Se3 dephasing time T2 measurement",
+        "topological insulator coherence time ultrafast",
+        "Bi2Te3 spin-orbit coupling coherence time"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "MnBi₂Te₄ 偶数层反铁磁拓扑绝缘体自旋分辨观测与量子几何反演",
+      "missing_evidence": "缺少 MnBi₂Te₄ 反铁磁拓扑绝缘体量子几何量（Berry 曲率、量子度规）实验观测数据",
+      "search_keywords": [
+        "MnBi2Te4 even-layer antiferromagnetic topological insulator",
+        "MnBi2Te4 Berry curvature quantum metric measurement",
+        "antiferromagnetic topological insulator quantum geometry"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "de la Peña 2025 高次谐波量子度规反演方法学",
+      "missing_evidence": "缺少 de la Peña 等关于 HHG 反演量子度规（quantum metric）的原始方法论文献",
+      "search_keywords": [
+        "de la Pena 2025 quantum metric inversion HHG",
+        "high harmonic generation quantum metric retrieval",
+        "quantum geometry HHG inverse problem method"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Wang Nature 2023 Berry曲率偶极子非线性霍尔效应实验观测",
+      "missing_evidence": "缺少 Wang 等在反铁磁/PT 对称体系中非线性霍尔效应量子几何起源的原始实验论文",
+      "search_keywords": [
+        "Wang Nature 621 2023 nonlinear Hall Berry curvature dipole",
+        "nonlinear Hall effect quantum geometry antiferromagnet",
+        "PT-symmetric antiferromagnet Berry curvature dipole transport"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

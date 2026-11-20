@@ -1,0 +1,105 @@
+{
+  "gaps": [
+    {
+      "claim": "2011年Ghimire等人使用中红外激光驱动ZnO晶体首次实验观测到固体非微扰高次谐波产生",
+      "missing_evidence": "缺少Ghimire 2011原始论文（Phys. Rev. Lett. 107, 163602）的完整实验参数（场强、晶体取向、谐波阶次）和后续独立实验复现数据",
+      "search_keywords": [
+        "Ghimire 2011 ZnO high harmonic generation mid-infrared",
+        "solid-state HHG first observation ZnO crystal orientation",
+        "nonperturbative high harmonic generation condensed matter Ghimire"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "2024年Bai等人在Bi₂Se₃/BiTeI/GaSe中通过相位锁定双色场实现偶次谐波偏振态在庞加莱球上的全光控制",
+      "missing_evidence": "缺少Bai PRL 133, 243801 (2024)原文的庞加莱球扫描数据、偏振态覆盖范围、保真度指标",
+      "search_keywords": [
+        "Bai PRL 133 2438012024 Bi2Se3 second harmonic polarization Poincaré",
+        "phase-locked two-color field Weyl semimetal even harmonic polarization control",
+        "GaSe C3v even harmonic Poincaré sphere all-optical control"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "2026年Bai、Xu、Ma、Wang、Niu、Liu、Liu、Li等人在Bi₂Se₃、BiTeI、GaSe中相关工作（与[38]条目对应）",
+      "missing_evidence": "缺少Bai PRL 137, 116905 (2026)的具体内容（与[39]条目工作的差异、补充实验或理论进展）",
+      "search_keywords": [
+        "Bai PRL 137 116905 2026 topological insulator high harmonic",
+        "BiTeI Weyl high harmonic generation phase-locked two-color 2026",
+        "GaSe Weyl high harmonic polarization control Bai 2026"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Li等人倾斜Weyl锥体CPB Berry相调控工作（references [40]对应）",
+      "missing_evidence": "缺少Li倾斜Weyl锥CPB相关论文的Berry相调控HHG机制、与本项目倾斜Weyl半金属HHG方案的对标依据",
+      "search_keywords": [
+        "tilted Weyl cone circularly polarized high harmonic Berry phase",
+        "Li Weyl semimetal tilted cone HHG CPB",
+        "倾斜 Weyl锥 高次谐波 Berry 相 圆偏振"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Faeyrman等人MgO动态Berry相预印本工作（references [37]对应）",
+      "missing_evidence": "缺少Faeyrman MgO预印本的具体内容（动态Berry相的观测手段、对照静态Berry相的差异、与强场HHG的关联）",
+      "search_keywords": [
+        "Faeyrman MgO dynamical Berry phase preprint",
+        "MgO time-resolved Berry phase strong field",
+        "MgO crystal Berry curvature ultrafast measurement"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Su-Schrieffer-Heeger 1979与Haldane 1988作为SSH/Haldane模型起源文献",
+      "missing_evidence": "缺少SSH模型（Su-Schrieffer-Heeger 1979 Phys. Rev. Lett. 42, 1698）和Haldane模型（F. D. M. Haldane 1988 PRL 61, 2015）的原文参数与对当前拓扑极化子/拓扑HHG工作的延伸",
+      "search_keywords": [
+        "Su Schrieffer Heeger 1979 soliton polyacetylene",
+        "Haldane 1988 PRL 61 2015 honeycomb lattice",
+        "SSH model Haldane model origin topological"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Jessen等人ZnO基线HHG实验作为本项目对照基线",
+      "missing_evidence": "缺少Jessen ZnO HHG实验论文的谐波谱截止、椭偏依赖、对称性贡献分解具体数据",
+      "search_keywords": [
+        "Jessen ZnO high harmonic generation baseline",
+        "ZnO mid-infrared HHG ellipticity crystal orientation",
+        "ZnO crystal HHG interband intraband current Jessen"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "拓扑半金属（Bi₂Se₃、BiTeI、TaP、Cd₃As₂等）与倾斜Weyl半金属的电子结构与HHG响应",
+      "missing_evidence": "缺少倾斜Weyl半金属（TaP型）动量空间Berry曲率分布与HHG选择定量的最新理论/实验对照",
+      "search_keywords": [
+        "tilted Weyl semimetal Berry curvature HHG",
+        "TaP type-II Weyl high harmonic generation",
+        "nonlinear optical response tilted Weyl cone theory"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "气相HHG奠基性文献5条（references [31]–[35]对应）",
+      "missing_evidence": "缺少[Corkum 1993 three-step model] [Lewenstein 1994 SBE] [Paul2001 phase-matching] [Brabec 1997 three-step model精化]等气相奠基文献与本项目方法的对照锚点",
+      "search_keywords": [
+        "Corkum 1993 three-step model HHG",
+        "Lewenstein 1994 SBE HHG",
+        "气相高次谐波 三步模型 综述"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "动态Berry相从静态拓扑标志升级为强场可调的瞬时观测量的实验依据",
+      "missing_evidence": "缺少强场泵浦-探测或多周期驱动下Berry相时间演化的直接测量或第一性原理计算（除Faeyrman预印本外）",
+      "search_keywords": [
+        "dynamical Berry phase strong field pump probe",
+        "time-resolved Berry curvature ultrafast",
+        "strong field Berry phase measurement semiconductor"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "rationale"
+}

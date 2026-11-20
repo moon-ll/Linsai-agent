@@ -1,0 +1,194 @@
+{
+  "proposal_id": "key-transient-quantum-phase-optical-20260726",
+  "cluster_id": "orphan-route-2026-10-31",
+  "clusters": [
+    "orphan-route-2026-10-31",
+    "cl_20261030_58cf1f"
+  ],
+  "entries": [
+    {
+      "source_id": "paper:2022-s41467-021-26772-0-strong-field-coherent-control-of-isolated-attosecond-pulse-g",
+      "title": "Strong-field coherent control of isolated attosecond pulse generation",
+      "summary": "本文利用参数波形合成器对强场驱动光场进行子周期整形，实现对高次谐波产生（HHG）过程及由此产生的孤立阿秒脉冲的光谱-时域特性的相干控制，展示了通过定制亚周期电场波形来主动调控孤立阿秒脉冲生成的新路径。",
+      "path": "knowledge/raw/papers/2022-s41467-021-26772-0-strong-field-coherent-control-of-isolated-attosecond-pulse-g.md",
+      "added_via": "cluster:orphan-route-2026-10-31",
+      "added_at": "2026-10-31T02:21:00Z"
+    },
+    {
+      "source_id": "paper:2026-2607.17109-microscopic-origin-of-dephasing-in-solids-from-fir",
+      "title": "Microscopic Origin of Dephasing in Solids from First-Principles Electron-Phonon Interactions",
+      "summary": "该工作在实时TDDFT框架内通过时间域Williams-Lax方法从第一性原理纳入电子-声子相互作用，为固体中的有效退相干提供了微观起源：在金属中仅需单个无序构型即可涌现类Drude阻尼，而在介质中同一机制则产生干净的高次谐波谱。",
+      "path": "",
+      "added_via": "cluster:orphan-route-2026-10-31",
+      "added_at": "2026-10-31T02:21:00Z"
+    },
+    {
+      "source_id": "paper:2024-2403.19535-bright-coherent-ultrahigh-harmonics-in-the-kev-x-ray-regime-",
+      "title": "Bright Coherent Ultrahigh Harmonics in the keV X-Ray Regime from Mid-Infrared Femtosecond Lasers",
+      "summary": "该研究利用 3.9 μm 中红外飞秒激光脉冲在高气压氦气波导中实现相位匹配的高次谐波产生，将谐波阶数推至 5000 阶以上，首次在 keV X 射线波段获得明亮相干的超连续谱（覆盖从极紫外至 >1.6 keV）。这一突破为水窗成像、阿秒科学及超快 X 射线光谱等应用提供了紧凑的相干光源。",
+      "path": "",
+      "added_via": "cluster:orphan-route-2026-10-31",
+      "added_at": "2026-10-31T02:21:00Z"
+    },
+    {
+      "source_id": "paper:2026-2604.20084-6-2-gw-tabletop-attosecond-light-source",
+      "title": "6.2-GW tabletop attosecond light source",
+      "summary": "该工作将2.1 TW少周期双色场合成器与松聚焦几何相结合，实现宏观相位匹配和稳定CEP控制，在台式装置上产生了脉宽263 as、单脉冲能量1.64 µJ的孤立阿秒脉冲，峰值功率达6.2 GW，为迄今台式阿秒光源的最高纪录。",
+      "path": "",
+      "added_via": "cluster:orphan-route-2026-10-31",
+      "added_at": "2026-10-31T02:21:00Z"
+    },
+    {
+      "source_id": "paper:2026-2507.04550-compact-intense-attosecond-sources-driven-by-hollo",
+      "title": "Compact, intense attosecond sources driven by hollow Gaussian beams",
+      "summary": "该文通过实验与理论研究证明，用空心高斯光束（HGB）驱动高次谐波产生（HHG）可消除横向相位变化、抑制偶极相位引起的色差，使各阶次谐波以阶次无关的方式再聚焦为小焦斑并减小纵向展宽。由此获得环形发射、发散角随谐波阶次降低且强度提升可达三倍的紧凑强阿秒脉冲源。",
+      "path": "",
+      "added_via": "cluster:orphan-route-2026-10-31",
+      "added_at": "2026-10-31T02:21:00Z"
+    },
+    {
+      "source_id": "paper:2026-2605.30584-symmetry-resolved-second-harmonic-generation-in-quantum-and",
+      "title": "Symmetry-Resolved Second Harmonic Generation in Quantum and Functional Materials",
+      "summary": "该综述系统梳理了偏振分辨旋转各向异性二次谐波（RA-SHG）作为对称性分辨光学探针在量子材料中的应用框架。从SHG的多极辐射起源与二阶非线性极化率张量构建出发，建立其与晶体点群及磁点群的群论对应，用于识别序参量的对称性。综述覆盖极性材料、磁有序与隐藏电子序体系的应用，并提出将RA-SHG拓展至隐藏、纠缠与非平衡相探测的路线图。",
+      "path": "knowledge/raw/papers/2026-2605.30584-symmetry-resolved-second-harmonic-generation-in-quantum-and.md",
+      "added_via": "cluster:orphan-route-2026-10-31",
+      "added_at": "2026-10-31T06:01:41Z"
+    },
+    {
+      "source_id": "paper:2026-2605.03794-caustics-and-catastrophes-in-strong-field-physics-",
+      "title": "Caustics and catastrophes in strong-field physics -- Picard--Lefschetz theory as a universal approach to saddle-point methods in attosecond science",
+      "summary": "本文提出将 Picard-Lefschetz 理论作为强场物理中各类鞍点方法（如强场近似 SFA 中处理 HHG 的驻定相位/鞍点近似）的统一普适框架，通过将积分形变至复时间平面上的 Lefschetz 刺流形，系统性地解决了传统方法在焦散与突变点附近失效或发散的问题。由此为高次谐波产生等阿秒强场过程提供了数学上严格、普适且无奇点的半经典轨迹描述。",
+      "path": "",
+      "added_via": "cluster:orphan-route-2026-10-31",
+      "added_at": "2026-10-31T06:01:41Z"
+    },
+    {
+      "source_id": "paper:2024-PMC10881040-compact-realization-of-all-attosecond-pump-probe-spectroscop",
+      "title": "Compact realization of all-attosecond pump-probe spectroscopy",
+      "summary": "本文报道了一种紧凑型全阿秒泵浦-探测光谱装置的实现方案，基于 Ti:蓝宝石激光系统驱动的高次谐波产生（HHG）生成双色 XUV 脉冲对，实现了对阿秒时间尺度超快动力学的泵浦-探测测量。",
+      "path": "knowledge/raw/papers/2024-PMC10881040-compact-realization-of-all-attosecond-pump-probe-spectroscop.md",
+      "added_via": "cluster:orphan-route-2026-10-31",
+      "added_at": "2026-10-31T06:01:41Z"
+    },
+    {
+      "source_id": "paper:2024-2407.00974-strong-field-optical-hall-effect-in-2d-weyl-semimetal",
+      "title": "Strong Field Optical Hall Effect in 2D Weyl Semimetal",
+      "summary": "通过实时含时密度泛函理论（RT-TDDFT）研究双层 T'-WTe2 中的强场光学霍尔效应，揭示了 Bloch 电子几何相位与强场横向响应之间的相互作用机制，为二维外尔半金属中强场光场调控拓扑输运提供了理论依据。",
+      "path": "knowledge/raw/papers/2024-2407.00974-strong-field-optical-hall-effect-in-2d-weyl-semimetal.md",
+      "added_via": "cluster:orphan-route-2026-10-31",
+      "added_at": "2026-10-31T06:01:41Z"
+    },
+    {
+      "source_id": "paper:2026-2607.00285-x-ray-coherent-attosecond-pulse-pair-spectroscopy",
+      "title": "X-ray Coherent Attosecond Pulse Pair Spectroscopy",
+      "summary": "本文提出并演示了基于X射线自由电子激光的相干阿秒脉冲对光谱技术，利用相干阿秒脉冲对之间的相位关联突破传统SASE脉冲泵浦-探测方案受脉宽限制的数飞秒时间分辨率瓶颈。该方法使XFEL实验能够探测阿秒时间尺度上的超快电子动力学，为X射线波段的阿秒时间分辨测量提供了新途径。",
+      "path": "",
+      "added_via": "cluster:orphan-route-2026-10-31",
+      "added_at": "2026-10-31T06:01:41Z"
+    },
+    {
+      "source_id": "paper:2026-2609.37838-attosecond-correlation-interferometry",
+      "title": "Attosecond correlation interferometry",
+      "summary": "提出“阿秒关联干涉测量”（attosecond correlation interferometry）概念，将光学模式间关联的测量——从经典涨落到量子纠缠——推进到阿秒时间尺度，突破常规探测器时间分辨能力的瓶颈。通过阿秒精度的延迟扫描与干涉式探测直接重构模式间关联函数（互相干度/关联衬度），为量子光学与阿秒科学的交叉提供了新的表征范式。注：简报卡摘要被截断，以上基于标题与可见摘要片段提炼。",
+      "path": "knowledge/raw/papers/2026-2609.37838-attosecond-correlation-interferometry.md",
+      "added_via": "cluster:orphan-route-2026-10-31",
+      "added_at": "2026-10-31T09:41:06Z"
+    },
+    {
+      "source_id": "paper:2026-2607.12420-quantized-photocurrents-in-gapless-topological-matter",
+      "title": "Quantized Photocurrents in Gapless Topological Matter",
+      "summary": "在 Ni 掺杂手性 Weyl 半金属 Rh0.95Ni0.05Si 中实验实现了由 Berry 单极子主导的量子化圆偏振光生伏打效应（quantized CPGE）。利用两套手性相反、能量分离的 Weyl 节点所形成的'单节点光学窗口'，观测到标志性的 on-plateau-cutoff 频率响应特征。平台高度直接定量标定 Weyl 节点的磁荷（拓扑荷/手性 Chern 数），给出拓扑不变量的全光学读出方案。",
+      "path": "knowledge/raw/papers/2026-2607.12420-quantized-photocurrents-in-gapless-topological-matter.md",
+      "added_via": "cluster:orphan-route-2026-10-31",
+      "added_at": "2026-10-31T09:41:06Z"
+    },
+    {
+      "source_id": "paper:2021-2104.08372-real-time-reconstruction-of-intense-ultrafast-laser-pulses-u",
+      "title": "Real-time reconstruction of intense, ultrafast laser pulses using deep learning",
+      "summary": "提出一种基于深度学习的强超快激光脉冲在线（近实时）表征方法：让强脉冲通过Kerr介质产生自相位调制（SPM）展宽光谱，用预先训练的深度神经网络从单帧光谱直接回归脉冲的时间相位与峰值强度。相比传统迭代反演算法，重建速度提升到毫秒量级、可逐发/在线运行，且对实验中常见的中等光谱分辨率与噪声保持鲁棒，可作为强场实验的实时诊断与反馈工具。",
+      "path": "knowledge/raw/papers/2021-2104.08372-real-time-reconstruction-of-intense-ultrafast-laser-pulses-u.md",
+      "added_via": "cluster:orphan-route-2026-10-31",
+      "added_at": "2026-10-31T09:41:06Z"
+    },
+    {
+      "source_id": "paper:2026-260803955-a-table-top-few-femtosecond-broadband-extreme",
+      "title": "A table-top few-femtosecond broadband extreme-ultraviolet absorption spectrometer with cryogenic cooling",
+      "summary": "本文研制了一台桌面型低温超快宽带XUV吸收光谱束线（c-UBXAS），将22-73 eV宽带高次谐波光源与低至20 K的低温样品控制及自动图像配准相结合，实现亚50 meV能量分辨率与亚10飞秒仪器响应。该仪器可对量子材料开展温度依赖、时间分辨及元素特异性的平衡/非平衡态测量，并具备适合长时间超高灵敏度实验的稳定性。",
+      "path": "",
+      "added_via": "cluster:orphan-route-2026-10-31",
+      "added_at": "2026-10-31T09:41:06Z"
+    },
+    {
+      "source_id": "paper:2019-1910.04711-floquet-engineered-topological-flat-bands-in-irradiated-twis",
+      "title": "Floquet-Engineered Topological Flat Bands in Irradiated Twisted Bilayer Graphene",
+      "summary": "解析+数值证明圆偏振光可在魔角附近TBG中光学制备可调拓扑平带，平坦度与带隙随激光参量连续调节。",
+      "path": "knowledge/raw/papers/2019-1910.04711-floquet-engineered-topological-flat-bands-in-irradiated-twis.md",
+      "added_via": "cluster:orphan-route-2026-10-31",
+      "added_at": "2026-10-31T09:41:06Z"
+    },
+    {
+      "source_id": "paper:2405.00927",
+      "title": "High repetition rate ultrafast electron diffraction with direct electron detection",
+      "summary": "该文献研制了一种工作在30 kHz高重复频率、采用直接电子探测的新型超快电子衍射（UED）仪器，通过使用每脉冲仅1-140个电子的束流使系统远低于严重空间电荷效应区间，从而避免了传统UED中因大量电子（>>100电子/脉冲）导致的脉冲时间展宽与横向直径增大问题。作者进一步演示了对薄膜样品时间分辨信号的探测能力，为高信噪比超快结构动力学测量提供了新途径。",
+      "path": "",
+      "added_via": "cluster:cl_20261030_58cf1f",
+      "added_at": "2026-10-31T11:00:41Z"
+    },
+    {
+      "source_id": "paper:2020-2003.08341-ultrafast-formation-of-transient-2d-diamond-like-structure-i",
+      "title": "Ultrafast formation of transient 2D diamond-like structure in twisted bilayer graphene",
+      "summary": "利用 MeV 超快电子衍射技术，首次在泵浦-探测实验中观测到扭转双层石墨烯在光激发后皮秒时间尺度内形成瞬态类金刚石 sp³ 结构，揭示了强场作用下手征堆叠双层石墨烯向四面体配位结构的超快动力学演化路径。",
+      "path": "knowledge/raw/papers/2020-2003.08341-ultrafast-formation-of-transient-2d-diamond-like-structure-i.md",
+      "added_via": "cluster:cl_20261030_58cf1f",
+      "added_at": "2026-10-31T11:00:41Z"
+    },
+    {
+      "source_id": "paper:2026-2502.02540-shot-to-shot-acquisition-ultrafast-electron-diffra",
+      "title": "Shot-to-shot acquisition ultrafast electron diffraction",
+      "summary": "本文在20 kHz重复频率的超快电子衍射（UED）中实现了逐发（shot-to-shot）数据采集方法，通过锁相同步技术与直接电子探测器的结合，实现了亚皮秒时间分辨率并将信噪比提升了一个数量级。该工作显著提高了UED对强场驱动非平衡态动力学过程的高精度、高速率测量能力。",
+      "path": "",
+      "added_via": "cluster:cl_20261030_58cf1f",
+      "added_at": "2026-10-31T11:00:41Z"
+    },
+    {
+      "source_id": "paper:2026-2405.00927-high-repetition-rate-ultrafast-electron-diffractio",
+      "title": "High repetition rate ultrafast electron diffraction with direct electron detection",
+      "summary": "该工作报道了一台运行于30 kHz高重复频率并采用直接电子探测的超快电子衍射（UED）装置，在每脉冲仅含1–140个电子的低电荷条件下实现了亚184 fs的仪器响应函数，并可用于探测低至10⁻⁵的时间分辨衍射信号变化。该方案通过少电子脉冲结合高重复频率积累，有效规避了空间电荷展宽对时间分辨率的限制。",
+      "path": "",
+      "added_via": "cluster:cl_20261030_58cf1f",
+      "added_at": "2026-10-31T11:00:41Z"
+    },
+    {
+      "source_id": "paper:2026-2602.14875-probing-topological-floquet-states-in-graphene-with-ultrafas",
+      "title": "Probing topological Floquet states in graphene with ultrafast terahertz scanning tunneling microscopy",
+      "summary": "提出并论证太赫兹扫描隧道显微镜（THz-STM）可作为Floquet物理的实空间、能量分辨探针，把周期驱动下的瞬态物态测量从动量空间的宏观光学响应推进到原子尺度的局域谱学。理论结合演示表明该技术能在石墨烯纳米带中直接成像Floquet驱动诱导的拓扑边界态，为光致非平衡拓扑相提供局域、含时的直接证据。核心意义在于打通了'超快驱动—拓扑边界态—局域谱学探测'三者之间的实验通道。",
+      "path": "knowledge/raw/papers/2026-2602.14875-probing-topological-floquet-states-in-graphene-with-ultrafas.md",
+      "added_via": "cluster:orphan-route-2026-10-31",
+      "added_at": "2026-10-31T13:21:02Z"
+    },
+    {
+      "source_id": "paper:2026-2609.17500-visualizing-berry-curvature-in-a-floquet-chern-insulator",
+      "title": "Visualizing Berry curvature in a Floquet-Chern insulator",
+      "summary": "本文在Dirac系统中用圆偏振光驱动实现Floquet-Chern绝缘体，并首次对这种光致瞬态能带的Berry曲率进行直接的动量空间解析（'可视化'）。结果显示Berry曲率局域于光致隙边缘的Dirac点附近，其符号由驱动光螺旋度控制，从而把非平衡拓扑相的表征从输运推断推进到拓扑量的直接成像。",
+      "path": "knowledge/raw/papers/2026-2609.17500-visualizing-berry-curvature-in-a-floquet-chern-insulator.md",
+      "added_via": "cluster:orphan-route-2026-10-31",
+      "added_at": "2026-10-31T13:21:02Z"
+    },
+    {
+      "source_id": "paper:2026-2601.01030-terahertz-magneto-photocurrents-in-the-topological-insulator",
+      "title": "Terahertz magneto-photocurrents in the topological insulator Bi2Se3 probe its topological surface states",
+      "summary": "本文用飞秒激光激发结合太赫兹发射探测，测量拓扑绝缘体Bi2Se3薄膜中的太赫兹磁光电流，证明该超快光电流主要源于拓扑表面态（TSS）中自旋-电荷转换（自旋动量锁定导致的定向电荷输运）。通过In掺杂调控（(In,Bi)2Se3）作为化学开关：In含量超过约4%时体系跨越拓扑-平庸量子相变、TSS被淬灭，磁光电流骤降95%以上，从而把电流响应唯一归因于TSS。该工作提供了一种全光学、亚皮秒时间分辨、对拓扑表面态敏感的电流探测手段。",
+      "path": "knowledge/raw/papers/2026-2601.01030-terahertz-magneto-photocurrents-in-the-topological-insulator.md",
+      "added_via": "cluster:orphan-route-2026-10-31",
+      "added_at": "2026-10-31T13:21:02Z"
+    },
+    {
+      "source_id": "paper:2608.00153",
+      "title": "All-Optical Single-Shot Temporal Characterization of SASE FEL Pulses Using Double-Blind Holography",
+      "summary": "该工作提出一种基于双盲全息术的全光学单发测量方法，用于完整表征SASE X射线自由电子激光脉冲的时间特性。该方法克服了SASE随机过程固有的时间与频谱抖动问题，以较低的实验与计算代价实现逐发脉冲表征，从而支持采集数据的事后分类与高时间分辨成像应用。",
+      "path": "",
+      "added_via": "cluster:orphan-route-2026-10-31",
+      "added_at": "2026-10-31T13:21:02Z"
+    }
+  ]
+}

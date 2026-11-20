@@ -1,0 +1,29 @@
+{
+  "gaps": [
+    {
+      "claim": "非莫尔二维材料中的光 Floquet 工程已有可行性先例；Tyulnev 等的工作可作为相关光操控先例。",
+      "missing_evidence": "现有 [21] Tyulnev 等研究实际针对体相 MoS₂ 的涡旋光谷极化与全光操控，不能支撑“非莫尔二维体系的光 Floquet 工程”表述。需补充或改用明确在二维材料中通过光场实现 Floquet 能带或电子态工程的文献；可复用报告所指的 Zhou 等关于二维黑磷 Floquet 能带工程的工作，并将 Tyulnev 等限定为体相 MoS₂ 涡旋光谷极化先例。",
+      "search_keywords": [
+        "2D material light-driven Floquet engineering",
+        "Zhou black phosphorus Floquet band engineering",
+        "black phosphorus light-induced Floquet engineering",
+        "non-moiré two-dimensional material Floquet engineering",
+        "Tyulnev bulk MoS2 optical vortex valley polarization"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Cao 等 [11] 演示了相关光致调制现象。",
+      "missing_evidence": "现有 [11] 属于第一性原理理论研究，只能支撑“理论计算表明”或“理论预测了光致调制”，不能支撑实验意义上的“演示”。需核对 [11] 原文的研究类型和结论并按其证据属性改写；若要使用“实验演示”这一表述，则还需补充对应的实验研究。",
+      "search_keywords": [
+        "Cao first-principles light-induced modulation",
+        "Cao optical modulation first-principles moire",
+        "first-principles prediction of light-induced modulation",
+        "moire material light-induced modulation experiment",
+        "experimental optical modulation moire structure"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

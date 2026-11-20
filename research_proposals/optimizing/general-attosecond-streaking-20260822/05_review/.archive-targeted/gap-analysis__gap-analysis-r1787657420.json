@@ -1,0 +1,54 @@
+{
+  "gaps": [
+    {
+      "claim": "多通道电离模型中通道间相位干涉项的解析形式尚未在实验中得到检验",
+      "missing_evidence": "缺乏实验验证多通道电离通道间相位干涉项解析形式的直接文献；scheme §3.1 声称'首次在实验中检验通道间相位干涉项的解析形式'，需支撑该方法学首次的对比文献（现有文献仅在单/少通道情形验证）",
+      "search_keywords": [
+        "attosecond streaking multi-channel ionization phase retrieval",
+        "FROGCRAB channel interference experimental validation",
+        "multi-electron attosecond metrology dipole phase separation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "软X射线能区（284–400 eV）多通道电离光电子谱的实验数据库和理论截面数据不足",
+      "missing_evidence": "水窗能区多通道电离截面实验数据稀缺；references [18]–[31] 存在14条孤悬参考文献（正文未引用），提示实际引用的多通道电离截面数据可能仍不足",
+      "search_keywords": [
+        "water window attosecond streaking photoionization cross section",
+        "soft X-ray multi-channel ionization cross section experiment",
+        "284-400 eV atomic ionization cross section database"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "角积分光电子谱偶极相位与通道干涉效应的耦合机制尚不清晰",
+      "missing_evidence": "缺乏角积分信号中通道干涉效应修正的实验验证文献；scheme §2.1 以'角积分'规避多通道问题，但偶极相位与通道干涉的耦合尚无直接实验数据支撑",
+      "search_keywords": [
+        "angular-integrated attosecond streaking dipole phase correction",
+        "attosecond streaking channel interference angular integration",
+        "multi-channel ionization attosecond retrieval accuracy"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "FROGCRAB方法在多通道高能光电子情形下的失效边界尚未被系统标定",
+      "missing_evidence": "缺乏FROGCRAB方法在多通道、高动能（>300 eV）情形下误差的系统实验标定；评审原文标记为'通道重叠宽度>1 eV时须触发修正'，但修正方法的实验验证文献缺失",
+      "search_keywords": [
+        "FROGCRAB validity range multi-channel high energy",
+        "attosecond pulse retrieval accuracy high kinetic energy",
+        "FROGCRAB breakdown criterion soft X-ray attosecond"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "16通道TOF阵列能量分辨率1 eV @ 400 eV的实验验证",
+      "missing_evidence": "缺乏该能量分辨率在400 eV能区的独立实验验证文献；scheme §3.1 给出装置参数但无对应实验验证文献支撑",
+      "search_keywords": [
+        "time-of-flight electron spectrometer 1 eV resolution 400 eV",
+        "multi-channel TOF array attosecond spectroscopy energy resolution",
+        "high resolution electron spectrometer soft X-ray attosecond"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

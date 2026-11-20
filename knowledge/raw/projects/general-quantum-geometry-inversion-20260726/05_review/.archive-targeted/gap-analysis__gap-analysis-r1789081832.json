@@ -1,0 +1,103 @@
+{
+  "gaps": [
+    {
+      "claim": "强场-阿秒联合装置 vs 分立 OPCPA+阿秒条纹相机方案在 CDW 时序窗口精度上的方法学正面对照缺失",
+      "missing_evidence": "缺乏两种装置架构在亚周期时间分辨、CDW 相变窗口捕捉精度上的对比基准文献，无法支撑§1.1总方案的方法学选择论证",
+      "search_keywords": [
+        "attosecond pump-probe combined setup CDW",
+        "OPCPA streaking camera time resolution comparison",
+        "single attosecond setup vs split configuration strong-field",
+        "sub-cycle time resolution accuracy attosecond transient"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "PINN vs CNN 在高次谐波反演/量子度规反演中的已发表基线精度对比缺失",
+      "missing_evidence": "缺乏 PINN 与纯数据驱动 CNN 在 HHG 光谱反演/非线性光学逆问题上的基准精度对比论文，无法支撑§5.1 选 PINN 的方法学论证",
+      "search_keywords": [
+        "physics-informed neural network vs CNN harmonic generation inversion",
+        "PINN baseline comparison deep learning inverse optics",
+        "CNN vs PINN nonlinear spectroscopy retrieval accuracy",
+        "deep learning comparison high harmonic inverse problem"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Verma 2025 阶跃响应测量量子度规方案与 BSV-HHG 反演的解析关系未被现有文献建立",
+      "missing_evidence": "缺乏将 Verma-Queiroz 阶跃响应方案与量子光驱动 HHG 联合反演量子度规的解析理论或实验论文",
+      "search_keywords": [
+        "step response quantum metric measurement Verma Queiroz 2025",
+        "quantum metric retrieval squeezed light HHG",
+        "Fubini-Study metric step response solid state",
+        "Verma quantum metric measurement scheme"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Rasputnyi 2024 Mg:LiNbO₃/a-Si BSV 驱动 HHG 10²–10³ 倍产额增强 [7] 与 Berry/度规反演解析关系缺失",
+      "missing_evidence": "缺乏将 BSV 驱动固体 HHG 产额增强与 Berry 曲率/度规张量反演关联的理论或实验文献",
+      "search_keywords": [
+        "Rasputnyi BSV solid HHG 2024 Mg:LiNbO3 a-Si",
+        "squeezed light HHG Berry curvature inversion",
+        "BSV driven HHG quantum geometry retrieval",
+        "Rasputnyi bright squeezed vacuum nonlinear solid 2024"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§7.1 现有局限堆叠 5 个文献碎片化罗列，缺关键断裂定位句的支撑",
+      "missing_evidence": "缺乏对量子光-固体 HHG-量子几何反演三个方向交集中\"已有方案在何处具体断裂\"的综合性方法学综述",
+      "search_keywords": [
+        "quantum light solid-state HHG review challenges",
+        "quantum geometry retrieval inverse problem review",
+        "solid HHG squeezed light quantum metric overview",
+        "high harmonic generation quantum optics review limitations"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Sala 2026 Sb₂Te₃ 拓扑表面态非线性磁阻实测量子度规方案缺失完整文献信息",
+      "missing_evidence": "需要 Sala 等 2026 在 Sb₂Te₃ 拓扑表面态以非线性磁阻实测量子度规的完整论文（DOI、卷期、页码）以校准参考文献 [42] 与 scheme.md 中引用",
+      "search_keywords": [
+        "Sala 2026 Sb2Te3 topological surface nonlinear magnetoresistance quantum metric",
+        "nonlinear magnetoresistance quantum metric measurement topological insulator",
+        "Sala quantum metric topological surface state 2026"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "references.md [42] DOI 占位 '10.1103/8lhh-gq58'（PRR 正确 DOI 应为 10.1103/PhysRevResearch.7.043284）需要核验 Thorpe 2025 量子光学 HHG 论文",
+      "missing_evidence": "需要找到 PhysRevResearch.7.043284 对应的 Thorpe 等量子光学高次谐波论文（intraband/interband quantum optical HHG current framework），核实 DOI 与作者信息",
+      "search_keywords": [
+        "PhysRevResearch 7 043284 Thorpe quantum optics HHG",
+        "intraband interband quantum optical HHG current framework Thorpe",
+        "Thorpe Lewenstein quantum optics high harmonic generation 2025",
+        "10.1103/PhysRevResearch.7.043284"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "CDW 陈数物理表述与物理不符（§5.2），需核实 1T-TaS₂/TiSe₂ CDW 相变对陈数贡献的正确表述",
+      "missing_evidence": "缺乏 CDW 相变不直接贡献陈数、需明确 Berry 曲率积分路径的规范表述的支撑文献",
+      "search_keywords": [
+        "charge density wave Chern number Berry curvature integration",
+        "CDW topological invariant contribution solid state",
+        "TiSe2 CDW Chern number Berry curvature calculation",
+        "1T-TaS2 CDW topological response HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "强场-阿秒联合装置方案相比分立方案在实验可重复性/成本/精度上的量化优势缺失",
+      "missing_evidence": "缺乏对强场-阿秒联合装置相对分立 OPCPA+条纹相机方案在时间抖动、实验吞吐量、相位稳定性方面的量化对比文献",
+      "search_keywords": [
+        "attosecond combined setup phase stability jitter quantification",
+        "single beamline strong-field attosecond pump-probe precision",
+        "combined OPCPA attosecond beamline timing jitter as",
+        "attosecond beamline stability comparison single combined"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

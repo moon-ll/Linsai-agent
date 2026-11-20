@@ -1,0 +1,14 @@
+{
+  "proposal_id": "general-ssh-weyl-20260920",
+  "cluster_id": "orphan-route-2026-10-02",
+  "entries": [
+    {
+      "source_id": "paper:2025-2508.15631-high-harmonic-spectroscopy-from-lower-order-to-higher-order",
+      "title": "High Harmonic Spectroscopy from Lower-Order to Higher-Order Topological Insulators",
+      "summary": "本文提出利用高次谐波谱学区分低阶拓扑绝缘体（LOTI）与高阶拓扑绝缘体（HOTI），通过通道分辨的高次谐波产率定量分解体能带、边缘态与角态各自的谐波贡献。该工作表明HHG可作为拓扑相及高阶拓扑边界态的全光学、超快表征手段。",
+      "path": "",
+      "added_via": "cluster:orphan-route-2026-10-02",
+      "added_at": "2026-10-02T16:43:15Z"
+    }
+  ]
+}

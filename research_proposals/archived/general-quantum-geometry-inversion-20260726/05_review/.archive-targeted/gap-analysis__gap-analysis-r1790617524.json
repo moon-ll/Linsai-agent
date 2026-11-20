@@ -1,0 +1,71 @@
+{
+  "gaps": [
+    {
+      "claim": "Ilin 等关于 SSH 拓扑高次谐波产生（HHG）的量子光学签名工作被引用为理论/实验支撑",
+      "missing_evidence": "§2.2 L39–41 处 Ilin 具名论述缺少 [N] 锚点，且文献表中无对应条目；需补入文献条目并在正文加挂编号",
+      "search_keywords": [
+        "Ilin SSH HHG",
+        "topological high-harmonic generation quantum optical signature",
+        "arXiv 2604.20388",
+        "Su-Schrieffer-Heeger HHG photon statistics"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "de-la-Peña 等基于二次量子化的纠缠理论在 HHG/强场电离情境中的相关论述",
+      "missing_evidence": "§2.3 L69 等处 de-la-Peña 具名论述无 [N] 锚点且文献表零条目；需补入文献条目并在正文加挂编号",
+      "search_keywords": [
+        "de-la-Peña second quantization entanglement HHG",
+        "second quantization framework strong-field ionization",
+        "arXiv 2512.03987",
+        "entangled photon pair high-harmonic generation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "arXiv:2512.23538 关于量子轨迹模型/局域电子态效应的相关工作",
+      "missing_evidence": "§2.3 L83 处具名引用 arXiv:2512.23538 但无 [N] 锚点且文献表无对应条目；需补全文献条目（作者、标题、年份）并在正文挂编号",
+      "search_keywords": [
+        "arXiv 2512.23538",
+        "quantum trajectory model local electronic states HHG",
+        "scattering propagator high-harmonic generation",
+        "Feynman path integral HHG localization"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Baykusheva 等关于双色场/强场电离 HHG 的实验或理论工作",
+      "missing_evidence": "§2.3 L69 等处正文论述中 Baykusheva 缺少 [29] 锚点（文献条目已存在）；需在正文相关论述处加挂 [29]",
+      "search_keywords": [
+        "Baykusheva two-color HHG",
+        "Baykusheva strong-field ionization HHG",
+        "orthogonal two-color HHG bicircular",
+        "Baykusheva subcycle dynamics"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Rivera-Dean 等关于双色场 HHG/亚周期动力学的相关工作",
+      "missing_evidence": "§2.3 L119 处正文论述中 Rivera-Dean 缺少 [17] 锚点（文献条目已存在）；需在正文相关论述处加挂 [17]",
+      "search_keywords": [
+        "Rivera-Dean HHG",
+        "Rivera-Dean subcycle HHG two-color",
+        "bicircular HHG electron dynamics",
+        "Rivera-Dean strong-field photoelectron"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Rasputnyi 等（2024）在 Mg:LiNbO₃/a-Si 实验中确证 BSV 场统计非经典性（g^(2)(0)>1）可提升 4–7 次谐波产额 5–15 倍",
+      "missing_evidence": "锚点对比段落中出现该具名论述，需核对正文是否已正确挂 [N] 锚点并确认文献表条目完整（含期刊/卷期/DOI）",
+      "search_keywords": [
+        "Rasputnyi Mg LiNbO3 a-Si HHG",
+        "BSV bright squeezed vacuum g2 HHG enhancement",
+        "Rasputnyi 2024 squeezed light high harmonic",
+        "multimode squeezed vacuum nonlinear crystal HHG"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

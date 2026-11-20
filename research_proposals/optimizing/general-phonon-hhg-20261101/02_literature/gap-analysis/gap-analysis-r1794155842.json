@@ -1,0 +1,42 @@
+{
+  "gaps": [
+    {
+      "claim": "§1中关于晶格振动参与固体高次谐波生成、通道归因或关键物理机制的核心证据链，部分由预印本或 in press 文献 [15][16][26][29][39] 支撑，尚缺少正式、可稳定引用的同行评议证据。",
+      "missing_evidence": "需要逐条核实 [15][16][26][29][39] 的出版状态，明确其中哪三条直接承担 §1 的核心论断；优先补引已正式发表的期刊版、会议正式论文集版本或可核验的 arXiv 最终版本。若仍只有预印本，应将相应表述限定为初步证据，并为关键结论补充独立同行评议来源。此外，需核实 [39] 的正式题名、作者、DOI、卷、期、页码或文章编号及出版日期。",
+      "search_keywords": [
+        "solid-state high harmonic generation phonon final publication",
+        "lattice-driven high harmonic generation crystal published version",
+        "phonon-assisted high harmonic generation solids DOI",
+        "intraband interband contribution solid-state high harmonic generation",
+        "晶格振动 固体高次谐波 正式发表",
+        "[39] author title DOI volume issue pages"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "L73 对国内相关研究机构及其沿革的描述尚未转化为有文献支撑的科学进展判断，无法证明国内在该方向上的代表性成果、技术能力及相对差距。",
+      "missing_evidence": "需要用代表性原始研究论文替代机构名单式叙述，说明各机构在晶格参与的高次谐波、固体非线性光学、晶格动力学表征或超快调控方面的具体贡献；应核对并补引 [33][34][35][36]，同时区分已有系统成果、局部实验进展和仍待解决的问题，避免仅凭机构声誉推断科研水平。",
+      "search_keywords": [
+        "中国 固体高次谐波 晶格振动 研究进展",
+        "high harmonic generation in solids China lattice dynamics",
+        "phonon-mediated nonlinear optics crystal China",
+        "solid-state high harmonic spectroscopy ultrafast lattice",
+        "晶格非线性光学 固体高次谐波 原始论文"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "L65 所述“固体中的高次谐波现象于20世纪80年代末被发现”这一历史性论断，目前主要依赖 [1] 的2007年综述，缺少发现阶段的一手实验文献。",
+      "missing_evidence": "需要补充 Ferray 等人1988年在 Journal of Physics B 发表的原始实验论文，并视具体历史表述补充同时期其他独立发现文献；应核对原始论文实际报告的物理现象、晶体材料、谐波阶次和实验结论，避免用后出综述替代历史发现的直接证据。[1] 可继续保留用于综述性背景。",
+      "search_keywords": [
+        "Ferray 1988 J. Phys. B optical harmonic generation quartz",
+        "Ferray 1988 optical harmonic generation in quartz",
+        "1988 first observation high harmonic generation solid quartz",
+        "early solid-state high harmonic generation primary experiment",
+        "optical harmonic generation quartz 1988 J Phys B"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "rationale"
+}

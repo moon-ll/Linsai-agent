@@ -1,0 +1,117 @@
+{
+  "gaps": [
+    {
+      "claim": "研究内容必须逐条兑现 rationale §一.5 的“三点推进”：(1) 将 Q(ω)、吸收率 A(ω)、谐波辐射效率与 χ⁽²⁾ 极化张量放进同一时域耦合模框架，求解基频-谐波双共振的联合设计曲面；(2) 建立界面 χ⁽²⁾ 与体相 χ⁽²⁾ 的干涉分离协议；(3) 在强耦合区内同步测量二次谐波随时间演化并提取 η(t_coh)。content.md 目前 0 字节，这三点是评审第 3 轮段落级对抗的唯一抓手，且每条必须挂可复算的量化指标。",
+      "missing_evidence": "缺三条推进线各自的方法学出处与‘已有人做到哪一步’的对照文献，以便在研究内容章写明增量而非重做：(a) 时域耦合模理论（TCMT）用于非线性频率转换效率推导的方法学论文（Moharam 2003 仅为周期阵列线性 CMT 起点，非非线性 SHG 效率公式）；(b) 界面/体相 χ⁽²⁾ 干涉分离的既有方法学（干涉相位差拟合、角度-偏振分辨 SHG 反演）目前无综述级引用来源；(c) 强耦合区内 SHG 时域测量的实验方法学先例（时间分辨 SHG/泵浦-探测范式、超快泵浦参量）无出处支撑。需为每条推进线各配 1-2 篇‘方法学+最近对照’文献。",
+      "search_keywords": [
+        "temporal coupled mode theory nonlinear frequency conversion efficiency derivation",
+        "second harmonic generation metasurface temporal coupled mode theory absorptance Q factor",
+        "interface versus bulk second-order nonlinearity separation interference phase fitting",
+        "polarization- and angle-resolved second harmonic generation inversion of nonlinear susceptibility",
+        "time-resolved ultrafast second harmonic generation pump-probe solid state measurement methodology",
+        "Moharam coupled mode theory periodic arrays resonators nonlinear harmonic extension"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "能量流联合设计判据：‘把 Q 做到最高 ≠ 把二次谐波做到最高’，注入效率与辐射效率的最优点不重合，须写进同一联合优化问题。rationale 已引 Yang 等人 [8]（Small 22, e73516）实测 3R-MoS₂ 双共振超表面 Q≈65.2 @1010 nm、吸收率 46.2%、最大吸收率参数 α=0.052 与最大 SHG 参数 α=0.0405 不重合。",
+      "missing_evidence": "缺支撑该判据普适性与可推广性的独立文献群：目前仅单篇工作支撑‘单 Q 不足’，需补 (1) 临界耦合/吸收率-转换效率关系的经典出处（critical coupling 下 A 与耦合损耗平衡）；(2) 谐波侧辐射通道/提取效率受限的独立工作；(3) 频率转换效率-带宽-角度-数值孔径权衡的经典文献；(4) 双共振（基频+谐波同时满足）设计的既有工作，以界定本课题 ‘双共振联合设计’ 相对已有单结构数值扫描的增量。检索核验：arXiv 以 all:\"critical coupling\" AND all:\"second harmonic generation\" AND all:\"metasurface\" 返回 0 篇，需改用 critical coupling + nonlinear metasurface / harmonic radiation channel extraction 等更宽关键词。",
+      "search_keywords": [
+        "critical coupling absorptance conversion efficiency second harmonic nonlinear metasurface",
+        "harmonic radiation channel extraction efficiency tradeoff nonlinear metasurface design",
+        "frequency conversion efficiency bandwidth tradeoff nonlinear nanophotonics time-variant resonator",
+        "dual resonance fundamental and second harmonic simultaneous enhancement metasurface design",
+        "Q factor limit second harmonic generation beyond Q factor absorptance product",
+        "outcoupling efficiency second harmonic generation metasurface bottleneck"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "界面 χ⁽²⁾ 与体相 χ⁽²⁾ 从未被定量分离，须建立以层数扫描、堆垛序对照、角度-偏振分辨测量组合指纹区分两项贡献的协议，并产出 χ⁽²⁾(N, 堆垛序, θ) 标度律（rationale §一.3 第二个张力、§一.5 第二点推进）。",
+      "missing_evidence": "缺分离方法学的既有实现文献与可对照实验证据：(1) 多层体相 SHG 相干叠加与相干长度 l_c 标定方法文献；(2) 干涉相位差最小二乘/傅里叶拟合分离界面项与体相项的方法学先例；(3) 界面非线性/扭界面非线性工作的定量结论（可作界面项独立证据：arXiv:2006.13802 'Nonlinear twistoptics at symmetry-broken interfaces'、arXiv:2304.12312 'Non-linear optics at twist interfaces in h-BN/SiC heterostructures' 均为可用新线索）；(4) 堆垛序依赖的 χ⁽²⁾ 对照（Janus 异质双层、AA 堆垛相消 MoTe₂/WSe₂：arXiv:2605.21231）。需同时给出 ‘体相项随 N 相干叠加并在再吸收下饱和、界面项不饱和’ 的实验对照而非仅主张。",
+      "search_keywords": [
+        "interface versus bulk second-order nonlinearity separation thickness dependence van der Waals",
+        "coherence length calibration nonlinear optical phase matching multilayer second harmonic",
+        "nonlinear twistoptics at symmetry-broken interfaces second harmonic",
+        "non-linear optics at twist interfaces h-BN SiC heterostructures",
+        "destructive interference second harmonic generation AA stacked MoTe2 WSe2",
+        "Janus MoSSe MoS2 heterobilayer stacking order second harmonic",
+        "emergent second-harmonic generation van der Waals heterostructure bilayer MoS2 graphene"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "激子-极化激元相干时间对非线性转换的时域约束 η(t_coh) 尚未被测量（本课题核心新颖点）：Sortino 等人 [17] 测得强耦合极化激元相干时间约 110 fs、拉比振荡周期约 45 fs，但该工作未同步测量二次谐波时域行为。",
+      "missing_evidence": "缺‘相关但不同’的支撑文献群来证明可行性与空白，而非仅陈述无人做过：(1) 相干时间/退相干限制非线性转换效率的理论或实验文献（coherence-time-limited nonlinear conversion、dephasing-limited harmonic generation）；(2) 固体/超快时间分辨 SHG 测量方法学先例（泵浦-探测、瞬态 SHG、时间门控）；(3) 极化激元退相干与非线性响应的耦合文献；(4) 强耦合判据公式（Rabi 分裂 > 2(γph+γex)）与其超快泵浦/探测参量，以支撑时间分辨测量可行性。检索核验：arXiv 以 all:\"time-resolved\" AND all:\"second harmonic generation\" AND all:\"metasurface\" 返回 0 篇、all:\"coherence time\" AND all:\"nonlinear\" AND all:\"frequency conversion\" 仅 4 篇且全不相关——这是强空白信号，但正因如此必须引用方法学邻域文献以证明手段可行。",
+      "search_keywords": [
+        "coherence time limit nonlinear frequency conversion efficiency femtosecond dephasing",
+        "dephasing limited harmonic generation coherent control efficiency decay",
+        "ultrafast time-resolved second harmonic generation transient solid state pump probe",
+        "exciton polariton dephasing coherence time nonlinear conversion coupling",
+        "strong coupling criterion Rabi splitting exceeds linewidth metasurface ultrafast spectroscopy",
+        "Rabi oscillations exciton polariton van der Waals metasurface time-resolved spectroscopy"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "排除替代解释的判据体系（χ⁽³⁾ 级联、和频混叠、激子荧光背景、热效应、样品损伤）须在研究内容章写成可执行判别链：偏振选择定则、泵浦严格二次方律、时间门控与线宽区分、首脉冲时域测量、拉曼/PL 指纹对照。rationale §一.3 第四个张力与 §一.5 验证方案均依赖该判据，但各判据尚无方法学出处。",
+      "missing_evidence": "缺各判据的方法学出处文献：(1) χ⁽²⁾ SHG 与 χ⁽³⁾ 级联过程的偏振依赖差异（选择定则对照表）；(2) 泵浦二次幂律严格检验的判据与常见假象（饱和、自聚焦、吸收过热）；(3) 荧光谱线与 SHG 谱线的区分方法（时间门控、谱宽、偏振）；(4) TMD 超表面激光损伤阈值与拉曼/PL 指纹监控方法；(5) 3R 相 C₃v 对称性下二次谐波偏振选择定则的具体形式（用于与级联过程区分）——Seidt 等人 [6] 只给出了器件级偏振开关范式，未系统给出选择定则推导。",
+      "search_keywords": [
+        "distinguishing second harmonic generation from cascading third-order polarization selection rules",
+        "power dependence quadratic law second harmonic generation test saturation threshold artifacts",
+        "photoluminescence Raman fingerprint damage characterization TMD metasurface laser heating",
+        "time gated fluorescence background removal second harmonic spectroscopy",
+        "C3v symmetry second harmonic polarization selection rules TMDC tensor components"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "χ⁽²⁾ 随扭转角 θ 与堆垛序的标度律作为独立调控自由度的可行性论证（研究内容第二项分离协议的输出量之一，以及 WSe₂/扭转异质结作为外推检验）。",
+      "missing_evidence": "缺扭转角依赖 SHG 的定量实验文献以界定已有覆盖范围与本课题的区别：(1) TMDC 扭转双层 SHG 控制工作（PRB 105, 115420 (2022) 一类）；(2) 扭转载流子/层间耦合的光学探测（含 ACS Nano 2025 'Probing the twist-controlled interlayer coupling'）；(3) 特殊堆垛角（如 64°）SHG 增强与局域应变的工作；(4) WSe₂ 单层/多层/不同相的 SHG 层数与堆垛序数据。需给出这些工作的定量结论（增强倍数、依赖的堆垛角）以说明 θ 作为设计参数在何处已被探索、何处仍是空白。检索核验：arXiv 以 all:\"twist angle\" AND all:\"second harmonic generation\" AND all:\"transition metal dichalcogenide\" 返回 9 篇，含 arXiv:2605.21231、arXiv:2411.06156、arXiv:2111.10964，可用为线索源。",
+      "search_keywords": [
+        "second harmonic generation control twisted bilayers transition metal dichalcogenides polarization resolved",
+        "twist-controlled interlayer coupling probed by optical second-harmonic generation",
+        "enhancement of second-harmonic generation 64 degree stacked WSe2 WS2 heterobilayer local strain",
+        "WSe2 second harmonic generation layer number stacking phase metasurface",
+        "twist angle dependence nonlinear susceptibility 2D material second harmonic"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "三模协同（准 BIC 基频注入 + anapole 界面局域 + Mie/MLM 谐波辐射）与 χ⁽²⁾ 激子色散峰纳入同一耦合模描述的可行性——这是步骤一统一模型的理论基础，需要 Mie 多极矩晶格模式（BIC）与 anapole 态在统一耦合模语言下的描述文献。",
+      "missing_evidence": "缺三类模态的统一耦合模描述文献：(1) anapole 态用于非线性增强的独立物理支撑（非仅 SHG 结果，还需电偶极-环偶极相消干涉、非辐射性、界面局域机制），检索核验发现 arXiv:2609.37894 'Nonlinear Excitation of Ideal Anapoles' 是可用新线索；(2) Mie 多极矩/MLM 模式与 BIC 家族的统一耦合模描述（Multipole lattice mode、dual symmetry breaking 对应的多极矩选择定则）；(3) anapole 与准 BIC 在同一结构中并存或竞争关系的文献，用于论证三者协同的物理相容性而非简单并列。",
+      "search_keywords": [
+        "anapole state nonradiating electric dipole toroidal interference metasurface local field enhancement",
+        "nonlinear excitation of ideal anapoles",
+        "multipole lattice mode metasurface high Q resonance coupled mode theory nonlinear",
+        "multipole selection rules symmetry breaking bound state in the continuum metasurface",
+        "multifaceted anapole from physics to applications review",
+        "Mie resonance anapole coexistence metamolecule coherent interference"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "器件制备可行性：晶圆级 3R-MoS₂ 经原子级边缘图案化制备参数化超表面阵列（步骤二首环），以及 20–25 nm 超薄 3R-MoS₂ 原子级锐利边缘造准 BIC 的工艺先例（rationale [14]，相对单层 MoS₂ 增强约 1.33×10⁵ 倍、绝对效率 0.02%–0.08%）。",
+      "missing_evidence": "缺两类支撑：(1) 3R 相材料的晶圆级可控制备文献（wafer-scale CVD/MOCVD、3R 相选择性生长、相纯度与良率表征）——检索核验 all:\"wafer scale\" AND all:\"3R\" AND all:\"MoS2\" 返回 0 篇，需放宽为 wafer-scale MoS2 CVD / rhombohedral phase selective growth / 3R-MoS2 synthesis 等；(2) 原子级边缘图案化与高精度刻蚀/刻蚀终点控制方法文献（用于论证 ‘不对称度 α 可控、边缘锐利’ 这一设计自由度的工艺基础）。rationale [14] 只能支撑工艺可行性存在，不能支撑 ‘参数化阵列、可控 α’ 的可制造性。",
+      "search_keywords": [
+        "wafer-scale CVD growth rhombohedral 3R phase MoS2 synthesis phase purity",
+        "3R-MoS2 selective growth monolayer large area preparation",
+        "atomic layer etching precision nanofabrication 2D material metasurface edge atomic sharpness",
+        "atomically precise edges 3R-MoS2 metasurface nanofabrication process",
+        "MOCVD epitaxy wafer-scale transition metal dichalcogenide monolayer"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "研究内容章（content.md）作为承接章需以正文 [N] 形式承载文献依据，而当前 references.md 为 0 字节、rationale 尾部 38 条文献未迁入，编号无法反查；评审明确要求 ‘将 rationale 尾部 38 条文献迁入，编号连续并 [N] 反查’。",
+      "missing_evidence": "缺文献表侧的完整性与可溯源性证据：(1) 38 条文献的 DOI/arXiv ID + 作者 + 年份 + 期刊完整字段，其中已识别需补全或校正的条目至少包括 [8] Small 22, e73516 (2026)、[12] arXiv:2503.20161 预印本与其正式发表版关系、[17] arXiv:2510.03052 预印本、[21] ACS Photonics 13, 1047 (2026)、[28] Chin. Phys. B ‘已接收’ 无卷期页码；(2) 评审第 2 轮记录 rationale 正文 [N] 引用 65 次远超范本 10–17 次口径，需在文献表中补齐 ‘整体研读基础’ 一类非逐条编号引用以承载精简后的核心引用；(3) 需建立文献表编号与正文 [N] 的一一反查证据（可用编号出现次数与连续性校验脚本证明）。检索核验：arXiv 以 all:\"second harmonic generation\" AND all:\"MoS2\" AND all:\"metasurface\" 仅返回 3 篇（2606.26751、2410.11033、2011.08000），all:\"quasi-BIC\" AND all:\"second harmonic generation\" 返回 9 篇——文献量稀疏，38 条已属该子领域的高覆盖，需确保每条均为本领域核心工作而非填充。",
+      "search_keywords": [
+        "review second harmonic generation dielectric metasurface bound state in the continuum nonlinear nanophotonics 2024 2025",
+        "van der Waals nonlinear metasurface research progress review enhancement",
+        "exciton polariton metasurface review strong coupling TMDC",
+        "nonlinear optics in 2D materials review second harmonic 2025"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

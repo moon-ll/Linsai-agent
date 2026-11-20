@@ -1,0 +1,22 @@
+{
+  "proposal_id": "general-berry-mnps3-rashba-20260816",
+  "issues": 0,
+  "stages": {
+    "review_researcher": "ok(818s)",
+    "review_critic": "ok(336s)",
+    "review_reviewer": "ok(490s)",
+    "writer": "ok(1204s)",
+    "verify": "通过"
+  },
+  "params_injected": true,
+  "post_hooks": {
+    "draft_resync": true
+  },
+  "success": true,
+  "verdict": "通过",
+  "panel_cleared": true,
+  "panel_cycle_reset": true,
+  "auto_promote": "pending_review",
+  "dossier_generated": true,
+  "elapsed_s": 4282.1
+}

@@ -1,0 +1,51 @@
+{
+  "gaps": [
+    {
+      "claim": "行31技术路径综述中存在6处作者-编号错位（[39][44][47][48][53][67]），尤其Zhao等（带间极化亚周期观测）与Hu等（电荷迁移精密计时）共用[48]一号引两文",
+      "missing_evidence": "各作者对应的真实原始文献出处（作者、期刊、年份、arXiv/DOI），需以references.md为真值源逐条核对作者归属，并将[48]拆分为两篇独立文献",
+      "search_keywords": [
+        "subcycle interband polarization observation attosecond",
+        "charge migration attosecond precise timing",
+        "attosecond soft X-ray transient quantum phase detection",
+        "Floquet engineering high harmonic generation control",
+        "strong-field valley polarization manipulation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "内嵌表[40][42][43][52]与独立表[73]为R1/R2已证伪的文献条目仍原样留存，[73]的DOI未按R2从ad7c9f更正为ad889f",
+      "missing_evidence": "可替换已证伪条目的真实文献（含正确DOI）及各条目的可靠出处验证，替换后需回录检索池",
+      "search_keywords": [
+        "attosecond transient phase measurement experiment",
+        "all-optical quantum phase readout solid state",
+        "high harmonic generation spectroscopy phase retrieval",
+        "ultrafast Berry phase measurement experiment"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "行31与行49两段技术路径（强场谷极化操控、Floquet-HHG调控、阿秒软X射线瞬态量子相探测、带间极化亚周期观测、电荷迁移精密计时）为'作者+术语'式罗列，引用无论证功能",
+      "missing_evidence": "上述方向关键文献的实验方法与定量结果（时间分辨率、相位测量精度、调制深度等数值），用于各压缩至2-3项深写（方法+定量结果+对本项目写-读-反演闭环的启示）",
+      "search_keywords": [
+        "valley polarization strong field control quantitative result",
+        "Floquet HHG bandgap modulation depth",
+        "attosecond soft X-ray pump probe phase measurement",
+        "interband polarization subcycle dynamics semiconductor",
+        "charge migration attosecond clocking experiment"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "行53国内现状层仅1句，与key项目战略高度不匹配，需补充国内团队具体成果与差距分析",
+      "missing_evidence": "国内（中国）实验团队在固体高次谐波、阿秒科学、瞬态量子相测量方向的近期代表性成果（含定量指标）及与国际领先组的差距分析（约150-200字）",
+      "search_keywords": [
+        "solid-state high harmonic generation China group",
+        "attosecond science Chinese research team",
+        "固体高次谐波 中国 实验组",
+        "瞬态量子相 超快光学 国内",
+        "ultrafast Berry phase measurement China experimental"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

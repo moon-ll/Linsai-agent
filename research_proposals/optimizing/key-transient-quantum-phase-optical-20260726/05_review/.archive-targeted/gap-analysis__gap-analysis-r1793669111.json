@@ -1,0 +1,50 @@
+{
+  "gaps": [
+    {
+      "claim": "§2.3 L92 处 Watanabe 的具名论断（正文首提，角标缺失，[31] 迟至 L148 才出现）",
+      "missing_evidence": "具名论断未在首提句尾挂角标 [31]；需确认 [31]（arXiv SSH-Hubbard 相关论文）与该论断的对应关系并补挂引用（文献本身已存在于参考文献表，属引用链接缺失而非文献缺失）",
+      "search_keywords": [
+        "Watanabe SSH Hubbard high harmonic generation",
+        "SSH-Hubbard model ultrafast arXiv"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.3 L138/L140 处 Baykusheva 的具名论断",
+      "missing_evidence": "具名论断零角标，需补挂 [7]（Baykusheva PRB）；该文献已真实存在于参考文献表且归属正确，属角标缺失",
+      "search_keywords": [
+        "Baykusheva high harmonic generation PRB"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.3 L140 处 Zhang / Ono 的具名论断",
+      "missing_evidence": "具名论断零角标，需分别补挂 [11]（TaAs HHG 论文）与 [3]（Ono HHG 论文）；文献已真实存在且归属正确，属角标缺失",
+      "search_keywords": [
+        "TaAs high harmonic generation",
+        "Ono high harmonic generation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.3 L98 四处方法/结果罗列句（[37]/[38]/[36]/[35]，无具名主语的 'A做X[N]' 式尾注句群）",
+      "missing_evidence": "四条引用仅以编号尾注出现、无具名归因，无法让读者核验 '谁、何年、何体系、做了什么'；需逐条核实 [35]-[38] 的作者/年份/体系并改为具名嵌入引用",
+      "search_keywords": [
+        "high harmonic generation methods comparison",
+        "HHG ultrafast spectroscopy review"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§1 L36-38 处 '两个专项''原创探索计划' 等政策表述",
+      "missing_evidence": "政策句无出处、无文号、无 [N] 引用；需补充国家自然科学基金委官方指南/项目指南类文件（专项项目全名 + 指南文号），或改为泛称表述",
+      "search_keywords": [
+        "国家自然科学基金 专项项目 指南",
+        "国家自然科学基金 原创探索计划 项目指南",
+        "NSFC 优先发展领域 极端条件 物质科学"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

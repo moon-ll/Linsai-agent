@@ -1,0 +1,46 @@
+{
+  "gaps": [
+    {
+      "claim": "评审报告指出rationale引用了[5][10][15][16]四个编号，但这四个编号在references.md中不存在（ghost citations）",
+      "missing_evidence": "rationale中使用了[5][10][15][16]进行论证，但references.md中无对应文献条目",
+      "search_keywords": [],
+      "priority": "high"
+    },
+    {
+      "claim": "Cousin等人2017年Phys Rev X论文需要水窗能区attosecond streaking实验验证",
+      "missing_evidence": "该工作发表后学界对其方法在多通道电离场景下的适用性存在争议，需要后续研究验证",
+      "search_keywords": [
+        "Cousin attosecond streaking water window Phys Rev X 2017",
+        "attosecond streaking multi-channel ionization validation"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "FROGCRAB方法在多通道电离条件下的失效边界需要实验界定",
+      "missing_evidence": "现有理论预测了失效区域，但缺乏系统性实验数据确定临界条件",
+      "search_keywords": [
+        "FROGCRAB multi-channel ionization breakdown boundary experiment",
+        "attosecond pulse retrieval multi-electron validation"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "322 as水窗阿秒脉冲的测量结果需要独立实验复现",
+      "missing_evidence": "该纪录由Gaia vasileiadi等人实现，后续复现工作较少",
+      "search_keywords": [
+        "322 attosecond pulse water window replication",
+        "attosecond pulse generation water window verification"
+      ],
+      "priority": "low"
+    },
+    {
+      "claim": "dipolar phase抑制方法在角分辨电离中的普适性需要更多实验支撑",
+      "missing_evidence": "Pabst Dahlstrom的理论框架基于角积分假设，角分辨测量验证有限",
+      "search_keywords": [
+        "dipolar phase suppression attosecond angular resolution",
+        "attosecond streaking dipole phase correction angular"
+      ],
+      "priority": "low"
+    }
+  ]
+}

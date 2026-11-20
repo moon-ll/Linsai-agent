@@ -1,0 +1,57 @@
+{
+  "gaps": [
+    {
+      "claim": "多通道电离耦合的阿秒条纹信号模型（各电离通道同时/近同时电离、通道间干涉）是研究内容§2.2的核心建模对象，但全文仅4条引用，该模型缺乏 foundational 文献支撑",
+      "missing_evidence": "缺少多电子壳层/多电离通道条纹信号的实验观测或理论建模文献，以及通道耦合导致重构失效的定量证据",
+      "search_keywords": [
+        "multichannel ionization attosecond streaking signal model",
+        "multi-electron shell streaking interference",
+        "FROGCRAB multichannel ionization breakdown",
+        "ionization channel coupling attosecond metrology"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "极紫外（50–150 eV）、水窗（284–400 eV）、软X射线（400–543 eV）三个能区的电离截面结构决定条纹信号建模与重构（研究内容§2.4超长句所载核心论断）",
+      "missing_evidence": "缺少三能区原子/分子光电离截面数据库或实测结构特征文献的引用支撑",
+      "search_keywords": [
+        "photoionization cross section water window energy region",
+        "soft X-ray atomic ionization cross section database",
+        "EUV photoionization cross section attosecond spectroscopy",
+        "water window 284-400 eV cross section structure"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "水窗及更高能区阿秒条纹重构精度/保真度现状（立项依据与研究内容共同声称的两个耦合核心挑战）",
+      "missing_evidence": "缺少水窗阿秒脉冲重构代表性实验（如 Cousin PRX 2017、322 as 脉冲测量）及重构误差定量分析的近期文献",
+      "search_keywords": [
+        "water window attosecond pulse retrieval experiment",
+        "attosecond streaking retrieval fidelity error quantification",
+        "Cousin attosecond streaking water window Phys Rev X",
+        "water window attosecond pulse characterization 2025"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "偶极（电离）相位与脉冲相位在条纹信号中的解耦/扣除处理方法",
+      "missing_evidence": "缺少偶极跃迁相位影响条纹重构及其扣除或校准无关（calibration-free）重构策略的文献",
+      "search_keywords": [
+        "dipole phase attosecond streaking decoupling",
+        "atomic dipole phase correction photoionization reconstruction",
+        "calibration-free attosecond pulse phase retrieval"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "国内阿秒条纹/阿秒计量实验平台与研究基础（作为课题可行性支撑）",
+      "missing_evidence": "缺少国内实验组阿秒条纹测量、阿秒脉冲表征的代表性工作引用",
+      "search_keywords": [
+        "attosecond streaking China experimental group",
+        "阿秒条纹测量 国内实验组",
+        "attosecond metrology China recent progress"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

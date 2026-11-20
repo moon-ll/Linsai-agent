@@ -1,0 +1,836 @@
+# 方法学手册
+
+> 修订：2026-09-28。基于 general-ssh-weyl-20260920 课题研究方案 §3（r3 对抗评审通过版）落地具体方法细节；本轮按申请书方案一/二/三/四/五的口径增补：① 引擎初始化与特征提取四步协议（§1.7）、② Berry 几何量闭式与量子度规关联（§2.4）、③ Weyl 三因素实验指纹闭式标定（§3.5）、④ 激子-HHG 通道切换的 SBE 实现细节（§4.4-§4.5）、⑤ 拓扑 vs ZnO 对照体系的双基线判据工程化（§5.4）、⑥ 失效场景与备选路径量化触发条件（§7.6）、⑦ 实验参数接口与装置规范（§8.5）、⑧ v7.0.5 外部方法吸收（§10）。本文件为方法学层面的唯一真相源；思路性叙述以申请书 §3 为准，本手册不复述。
+
+---
+
+## 1. 多带 TDSE/SBE 计算引擎
+
+### 1.1 数值积分格式
+
+SBE 在 k 空间离散网格上求解，密度矩阵 $\rho_{mn}(\mathbf{k}, t)$ 的时间演化采用**分步 Crank-Nicolson**（Strang splitting：半个 $\Delta t$ 用哈密顿对角分量演化，整 $\Delta t$ 用非对角分量演化）。该格式幺正、保 Hermitian、$\Delta t$ 选择不依赖驱动场频率。
+
+时间步长满足 CFL 条件：
+
+$$\Delta t \le \frac{\hbar}{2 \max_{n\mathbf{k}} |\varepsilon_{n\mathbf{k}} - \varepsilon_{m\mathbf{k}}| + \max_t |\mathbf{E}(t)| \cdot |\mathbf{d}_{mn}(\mathbf{k})|}$$
+
+典型 $\Delta t = 0.1\,\text{a.u.} \approx 2.42\,\text{as}$。MIR 驱动 3.2 μm / 1800 nm 周期约 6 fs（250 a.u.），$\Delta t = 0.1$ a.u. 给出 2500 步/周期，对 30 fs 脉冲共 30000 步。
+
+驱动场关闭后的后脉冲区间继续积分 ≥ 2 个驱动周期，保证傅里叶变换的频率分辨率（$\delta\omega = 2\pi/T_{\text{total}}$，$T_{\text{total}} \ge 6\,\text{fs}$ → $\delta\omega \le 0.66\,\text{eV}$，足够分辨带隙频率谐波阶次）。
+
+### 1.2 k 网格密度
+
+| 模型 | 推荐 $N_k$ | 备注 |
+|------|-----------|------|
+| 1D SSH / Rice-Mele | $N_k = 1024$ | 一维 |
+| 2D Qi-Wu-Zhang / Haldane | $N_k = 128^2$ | 二维 |
+| 3D Bi₂Se₃ 家族 HOTI | $N_k = 64^3$ | 三维 |
+| 3D TaAs / TaP Weyl | $N_k = 64^3$ | 三维，节点附近加密 |
+
+收敛验证：$N_k$ 倍增后 HHG 谱主谐波峰高变化 < 1% 即视为收敛。三维体驱在 Weyl 节点附近（$\mathbf{k}_0 \pm 0.05\,\text{Å}^{-1}$ 球内）采用自适应加密至 $N_k^{\text{node}} = 128^3$。
+
+### 1.3 驱动场参数化
+
+MIR 矢量场采用 $\cos^2$ 包络：
+
+$$\mathbf{E}(t) = E_0 \cos^2\!\left(\frac{\pi t}{\tau}\right) \left[ \hat{\mathbf{e}}_x \cos(\omega_0 t) + \varepsilon\, \hat{\mathbf{e}}_y \sin(\omega_0 t) \right],\quad -\tau/2 \le t \le \tau/2$$
+
+椭圆率 $\varepsilon \in [-1, +1]$，$\varepsilon = 0$ 为线极化，$\pm 1$ 为左右旋圆极化。$\tau$ 为脉宽（FWHM $\approx 0.886\,\tau$），典型 $\tau = 30$–$100$ fs（30 fs = 2 周期 @ 3.2 μm）。
+
+强度扫描：$I = 10^{10}$–$10^{11}$ W/cm²（峰值 $E_0 = \sqrt{2I/(\varepsilon_0 c)}$）。
+
+#### 1.3.1 三通道驱动窗口
+
+按申请书方案 §3.1.2 / §3.4.2 的口径，引擎维持三条独立驱动通道，参数与方案归属如下：
+
+| 通道标识 | 中心波长/频率 | 强度区间 | 脉宽 | 适用方案 |
+|----------|--------------|---------|------|---------|
+| MIR 主窗（1800 nm 基线） | 1800 nm（亦含 3.2–6.4 μm 通用主窗） | $10^{10}$–$10^{11}$ W/cm² | 30–100 fs | 方案一通用主窗、方案三 ZnO MIR 通道、方案四双基线对照 |
+| NIR 通道（800 nm 基线） | 800 nm | $10^{10}$–$10^{11}$ W/cm² | 30–100 fs | 方案三 ZnO 近红外通道、方案四 ZnO vs 拓扑对照 |
+| THz 通道（弱场校核窗） | 0.3–1 THz（对应 λ ≈ 300 μm–1 mm） | tens of kV/cm | 多周期窄带 | 方案二散射时间参数反演（TaP THz THG 校核，方案 §3.1.2 第三步、§3.2.2 第四步） |
+
+THz 通道参数与 Pilch 等人[16] TaP THz 三次谐波实验窗口对齐；该通道不进入方向四拓扑 vs ZnO 对照体系的阈值标定（仅用于方案二的散射时间参数反演）。三条通道对应的 $\Delta t$、$N_k$ 与 $T_2$ 默认值见 §6.2；THz 通道在弱场条件下 $\Delta t$ 可放宽至 0.2 a.u.（CFL 余量充足），并在每个 k 点单独积分完整多周期（典型 10–20 个驱动周期）以保证傅里叶分辨率。
+
+椭圆率扫描：$\varepsilon = -1, -0.9, \ldots, +0.9, +1$ 共 21 点，涵盖左右旋圆极化、线极化与椭圆极化。偏振组合：(LCP, RCP) 用于 CD 谱差分；(LCP, RCP, linear) 用于拓扑相变 CD 符号翻转判别。
+
+### 1.4 退相干与去相干
+
+带内散射以唯象时间 $T_2$ 进入 SBE 阻尼项 $\rho_{mn}/T_2$；带间退相干独立取 $T_2'$。典型默认：
+
+| 体系 | $T_2$（带内） | $T_2'$（带间） |
+|------|--------------|----------------|
+| SSH / Weyl 半金属 | 1.5 fs | 1.5 fs |
+| ZnO（激子-HHG） | 2.0 fs | 1.0 fs |
+| HOTI | 1.5 fs | 1.5 fs |
+
+散射时间扫描：方向三 Weyl 三因素分解的开关 C 需在 $T_2 \in [0.5, 5.0]$ fs 区间扫描，验证非平衡散射贡献 $Z$ 的标度律 $I_{3f} \propto I_f^{2.3}$ 是否成立。
+
+### 1.5 电流计算与 HHG 谱
+
+带内电流 $\mathbf{J}(t) = \sum_{n\mathbf{k}} \rho_{nn}(\mathbf{k}, t)\, \mathbf{v}_n(\mathbf{k})$，$\mathbf{v}_n(\mathbf{k}) = \nabla_\mathbf{k}\varepsilon_{n\mathbf{k}}/\hbar$；带间电流 $\mathbf{J}_{\text{inter}}(t) = \sum_{m \ne n, \mathbf{k}} \rho_{mn}(\mathbf{k}, t)\, \mathbf{d}_{mn}(\mathbf{k})\, \dot{\rho}_{nm}$。
+
+相干总电流 $\mathbf{J}(t) = \mathbf{J}_{\text{intra}}(t) + \mathbf{J}_{\text{inter}}(t)$，对时间做汉宁窗 + 补零后 FFT 得 HHG 谱 $\sigma(\omega) = |\text{FFT}[\mathbf{J}(t)]|^2$。
+
+CD 谱：$\sigma_{\text{CD}}(\omega) = \sigma_{\text{LCP}}(\omega) - \sigma_{\text{RCP}}(\omega)$，分别在 $\varepsilon = +1$ 与 $\varepsilon = -1$ 下独立计算。
+
+### 1.6 收敛与误差控制
+
+- **能量守恒**（无驱动时）：$\Delta E / E_0 < 10^{-6}$。
+- **幺等性**：$\sum_n \rho_{nn} = 1$ 每步误差 < $10^{-12}$。
+- **带分辨 sum**| $T_2$ 收敛后主谐波峰位漂移 < 0.05 eV。
+- **k 网格收敛**：主谐波与 CD 主峰高在 $N_k$ 倍增后变化 < 1%。
+
+### 1.7 引擎初始化与特征提取四步协议
+
+四步协议对应申请书方案 §3.1.2 第一至第四步，每步对应明确的算法输入/输出与失败时的回退动作。
+
+#### 1.7.1 第一步：紧束缚哈密顿量构造
+
+哈密顿量构造以原子轨道或 Wannier 轨道为基（参数表见 §6.1）。系统化构造流程按维度分支：1D SSH 链 $H = v \sum_i (c^\dagger_{i,B} c_{i,A} + \text{h.c.}) + w \sum_i (c^\dagger_{i+1,A} c_{i,B} + \text{h.c.})$，胞内/胞间跃迁 $(v,w)$ 决定拓扑相；1D Rice-Mele 模型加入交错势 $\Delta$；2D Qi-Wu-Zhang 与 Haldane 模型通过次近邻跃迁 $t_2$ 与交错磁通 $\phi$ 调控；3D Bi₂Se₃ HOTI 采用四带 BHZ 推广模型，参数 $(A,B,M)$ 控制高阶拓扑量子数；Weyl 半金属采用两带紧束缚 $H(\mathbf{k}) = \mathbf{d}(\mathbf{k}) \cdot \boldsymbol{\sigma}$，分别按 TRB-WSM、Type-I/II WSM、multi-WSM 三种 $\mathbf{d}(\mathbf{k})$ 取值覆盖 Pilch[16] TaP、X. Zhang[15] TaAs、multi-WSM 实验锚点；ZnO 在哈密量沿用同套多带引擎但带隙 $E_g = 3.37$ eV、激子束缚能 $E_B = 60$ meV 显式写入。
+
+构造失败的回退：若本征值求解不收敛（最常见于大超胞 + 高维度组合），按 §7.1 备选路径 3 降至 2D 切片（$k_z = 0$ 平面）或减小 $N_k$。
+
+#### 1.7.2 第二步：定态求解
+
+在 $\mathbf{k}$ 空间划分 $N_k$ 网格（推荐 $N_k$ 见 §1.2 表），对角化 $H_0(\mathbf{k})$ 得本征值 $\varepsilon_{n\mathbf{k}}$ 与本征矢 $|\psi_{n\mathbf{k}}\rangle$，并行计算跃迁矩阵元 $\mathbf{d}_{mn}(\mathbf{k})$、Berry 曲率 $\Omega_n(\mathbf{k})$、shift vector $R_{nm}(\mathbf{k})$（实现见 §2）。本征矢选用 phase-free 累积方式（如迭代 4 步后 reset phase）以维持规范稳定性。BHZ 推广与 Weyl 三类 $\mathbf{d}(\mathbf{k})$ 取值已在 §6.1 列出。
+
+定态求解失败的回退：若 $\Omega_n(\mathbf{k})$ 在某个 $\mathbf{k}$ 点发散（多表面态耦合处），按 §7.1 备选路径引入 Wilson loop 重正化。
+
+#### 1.7.3 第三步：含时演化（驱动场注入）
+
+驱动场分三类注入，参数见 §1.3.1 表。MIR/NIR 通道驱动场 $\mathbf{E}(t)$ 见 §1.3 公式；THz 通道弱场驱动在每个 $\mathbf{k}$ 点单独积分完整多周期（典型 10–20 个驱动周期）以保证傅里叶分辨率（频段 0.3–1 THz 时分辨率要求约 0.01 THz）。SBE 求解采用分步 Crank-Nicolson（§1.1），$\Delta t$ 满足 CFL 条件，3D 体驱在 Weyl 节点附近（$\mathbf{k}_0 \pm 0.05\,\text{Å}^{-1}$ 球内）自适应加密至 $N_k^{\text{node}} = 128^3$。
+
+演化失败回退：若场强进入 $10^{11}$–$10^{12}$ W/cm² 量级且光子能量远低于 $E_g$（THz 频段）触发 §7.1 失效边界，按 §7.2 三条备选路径分别处理（TDDFT 校核 / 有效 $T_2$ 拟合 / 降维近似）。
+
+#### 1.7.4 第四步：特征提取
+
+依次输出：(1) HHG 谱 $\sigma(\omega)$ —— 总电流 $\mathbf{J}(t)$ 经汉宁窗 + 补零 FFT 给出（实现见 §1.5）；(2) CD 谱 $\sigma_{\text{CD}}(\omega) = \sigma_{\text{LCP}}(\omega) - \sigma_{\text{RCP}}(\omega)$，左/右旋圆极化下独立计算；(3) 高阶 CD —— $\sigma_{\text{CD}}$ 在 21 个椭圆率 $\varepsilon \in [-1, +1]$ 上的角度依赖（参数表见 §1.3 椭圆率扫描）；(4) 对称破缺诱导边带信号 —— 镜像抑制体相赝矢量方法（实现细节见 §3.5.1 Weyl 镜像法）。后处理统一调用 §8.3 代码骨架。
+
+特征提取失败的回退：若 CD 谱信噪比 < 5（典型阈值），按 §1.6 收敛准则重新演化（加密 $N_k$ 至表上限 $128^3$ + 减半 $\Delta t$）。
+
+---
+
+## 2. Berry 几何量的数值实现
+
+### 2.1 Berry 曲率 $\Omega_n(\mathbf{k})$
+
+采用 Kubo 公式的离散差分形式（避免规范选取问题）：
+
+$$\Omega_n^{z}(\mathbf{k}) = -\text{Im} \sum_{m \ne n} \frac{\langle n | \partial_{k_x} H | m\rangle \langle m | \partial_{k_y} H | n \rangle}{(\varepsilon_{n\mathbf{k}} - \varepsilon_{m\mathbf{k}})^2}$$
+
+二维/三维需计算全部 6 个 $(\partial_{k_i}, \partial_{k_j})$ 组合。差分使用中心差分 $\partial_{k_i} H \approx [H(\mathbf{k} + \Delta k_i \hat{\mathbf{e}}_i) - H(\mathbf{k} - \Delta k_i \hat{\mathbf{e}}_i)]/(2\Delta k_i)$，$\Delta k_i = 2\pi/(N_k L)$，$L$ 为实空间晶格常数。
+
+### 2.2 shift vector $R_{nm}(\mathbf{k})$
+
+$$R_{nm}^i(\mathbf{k}) = \partial_{k_i} \arg d_{nm}^i(\mathbf{k}) - [A_n^i(\mathbf{k}) - A_m^i(\mathbf{k})]$$
+
+其中 $A_n^i(\mathbf{k}) = i\langle n | \partial_{k_i} n\rangle$ 为 Berry 连接（取库仑规范下离散形式）。shift vector 表征偶极跃迁矩阵元 $\mathbf{d}_{nm}$ 在 k 空间中的相位梯度，是几何修正项的核心量。
+
+### 2.3 几何修正的跃迁矩阵元
+
+$$\mathbf{d}_{nm}^{\text{eff}}(\mathbf{k}) = \mathbf{d}_{nm}(\mathbf{k}) + \sum_{l \ne n,m} \left[ \frac{\Omega_l(\mathbf{k}) \cdot R_{nl}(\mathbf{k})}{\varepsilon_{l\mathbf{k}} - \varepsilon_{n\mathbf{k}}} \right] \mathbf{d}_{lm}(\mathbf{k})$$
+
+该表达式实现 Avetissian-Mkrtchian[24] Berry 曲率诱导谐波框架在多带 SBE 中的具体嵌入。开关 B 在方向三中通过把该项置零实现"关闭 Berry 曲率修正"。
+
+### 2.4 Berry 几何量的闭式约束与量子度规关联
+
+量子度规张量 $g_n^{\mu\nu}(\mathbf{k})$ 与 Berry 曲率 $\Omega_n^{\mu\nu}(\mathbf{k})$ 在两带模型下满足逐点不等式约束（来源：KB wiki 量子度规-曲率方法页 [paper:2025-2512.05477-quantum-geometry-and-x-wave-magnets-with-xp-d-f-g-i]）：
+
+$$\det g_n^{\mu\nu}(\mathbf{k}) \geq \left( \frac{\Omega_n^{xy}(\mathbf{k})}{2} \right)^2$$
+
+对拓扑带（陈数 $C_n \geq 1$），布里渊区积分下界为
+
+$$\frac{1}{2\pi} \int_{\text{BZ}} \text{Tr}\, g_n^{\mu\nu}(\mathbf{k})\, d\mathbf{k} \geq 1$$
+
+两式在 Weyl 半金属与 Bi₂Se₃ HOTI 数值实现中用作 Berry 几何量自洽检验：若不等式破缺，提示定态本征矢规范选择不当或 $\Omega_n(\mathbf{k})$ 计算发散（多表面态耦合或 $N_k$ 不足），按 §1.7.2 回退动作处理。
+
+方向三 Weyl 三因素分解的开关 B（Berry 曲率贡献 $Y$）依赖 $R_{nm}(\mathbf{k})$ 计算，shift vector 在多带体系下的两带解析解为 $R_{nm}^i(\mathbf{k}) = \partial_{k_i} \arg d_{nm}^i(\mathbf{k}) - [A_n^i(\mathbf{k}) - A_m^i(\mathbf{k})]$（见 §2.2）；四带以上体系需在两带子块内逐对计算。Chern 数与 Berry 曲率方法页（KB `Chern数与贝里曲率计算.md`）的 Floquet 相变序列 $\Delta C = \pm 1/\pm 2/\pm 3$ 与 WL Chern 关联方法用于 §3.5 指纹验证（每因素指纹须与开关状态一一对应）。
+
+---
+
+## 3. Weyl 半金属三因素归一化分解
+
+### 3.1 三个控制开关
+
+| 开关 | 控制量 | 物理对应 | "关闭"做法 |
+|------|--------|---------|-----------|
+| A | 节点色散高阶修正 | 节点线性色散 vs 高阶抛物偏离 | 把 $\mathbf{d}(\mathbf{k})$ 中立方以上项截断，仅保留 $\mathbf{d}(\mathbf{k}) \cdot \boldsymbol{\sigma}$ 线性结构 |
+| B | Berry 曲率跃迁修正 | shift vector + Berry 曲率修正项 | 把 §2.3 中的几何修正项置零 |
+| C | 非平衡散射通道 | $T_2$ 与带内阻尼 | $T_2 \to \infty$（无散射） |
+
+### 3.2 嵌套差分计算协议
+
+按"先关 A、再关 B、再关 C"的嵌套顺序运行 4 次 SBE 计算：
+
+| 标签 | 开关状态 | 谱记号 |
+|------|---------|--------|
+| 全开 | A+B+C 开 | $\sigma_{\text{full}}$ |
+| 关 A | A 关，B+C 开 | $\sigma_{\text{no-node}}$ |
+| 关 A+B | A+B 关，C 开 | $\sigma_{\text{no-node,no-curv}}$ |
+| 全关 | A+B+C 全关 | $\sigma_0$ |
+
+### 3.3 贡献度反演
+
+差分归一化定义：
+
+$$X = \frac{\sigma_{\text{full}} - \sigma_{\text{no-node}}}{\sigma_{\text{full}}},\quad Y = \frac{\sigma_{\text{no-node}} - \sigma_{\text{no-node,no-curv}}}{\sigma_{\text{full}}},\quad Z = \frac{\sigma_{\text{no-node,no-curv}} - \sigma_0}{\sigma_{\text{full}}}$$
+
+严格顺序嵌套下恒有 $X + Y + Z = (\sigma_{\text{full}} - \sigma_0)/\sigma_{\text{full}}$。
+
+弱耦合近似判据：$\sigma_0/\sigma_{\text{full}} < 0.05$。该判据与方案一引擎在 SSH/Rice-Mele 极限（严格可解）下的基准测试对齐——理论极限下 $\sigma_0 \to 0$，数值实现给出 $\sigma_0/\sigma_{\text{full}} < 0.03$，0.05 阈值留 2× 安全裕度。
+
+主导/次要识别：单因素占比 ≥ 30% 识别为主导机制，< 10% 识别为次要贡献，介于两者之间标记为"可观测但非主导"。
+
+#### 3.3.1 闭合验证协议
+
+按申请书方案二 §3.2.2 第三步的口径，分解流程须满足以下验证协议：
+
+1. **首次运行前置校核**（方案一引擎 → 方案二接口层）：在 SSH/Rice-Mele 严格可解极限下校核 $\sigma_0/\sigma_{\text{full}}$。该比值小于 0.05 方可进入 Weyl 半金属的三因素分解主流程；阈值未达成时把偏离量作为 $\sigma_{\text{dec}}$ 的下限写入方法学手册前置条件表。
+2. **每次分解后即时报**：每次三开关嵌套差分结束后立刻计算 $\sigma_0/\sigma_{\text{full}}$。若偏离 ≥ 0.05，则当前样本点的 $X + Y + Z$ 不再归一化至 100%，偏离量直接计入 $\sigma_{\text{dec}}$ 并标记该样本为"弱耦合近似失效"。
+3. **100 次反演统计**：100 次独立随机参数反演完成后，把弱耦合近似失效样本占比作为分解可信度指标输出。占比 < 10% 时 X + Y + Z ≥ 95% 终止判据生效；占比 ≥ 10% 时触发 §7.3 备选路径 1（8 元素套开关识别二阶交互项 $X \times Y, Y \times Z, X \times Z$）。
+4. **物理指纹交叉验证**（§3.4）：$X + Y + Z$ 数值闭合不等于物理机制闭合。每因素须同时满足独立可观测指纹（节点贡献 → 反常奇次谐波宇称选择规则；曲率贡献 → 反常谐波偏振方向与 $\Omega_z$ 宇称对应；散射贡献 → $I_{3f} \propto I_f^{3}$ 立方标度律）。指纹不匹配时按 §7.3 备选路径 2 改用多元线性回归重审。
+
+### 3.4 指纹验证
+
+每因素贡献有独立可观测指纹（Thakur 等人[18] 双圆极化螺旋性敏感度分析）：
+
+- **节点贡献 $X$**：反常奇次谐波，Berry 曲率分量宇称选择规则驱动。
+- **曲率贡献 $Y$**：反常谐波偏振方向与 Berry 曲率分量宇称的对应关系。
+- **散射贡献 $Z$**：$I_{3f} \propto I_f^{2.3}$ 接近立方标度律（线性系统为 $I_{3f} \propto I_f^3$）。
+
+指纹验证失败（$X+Y+Z$ 闭合但指纹不匹配）触发重审——可能是开关定义错误或弱耦合近似失效。
+
+### 3.5 实验指纹的闭式标定与精度边界
+
+三因素分解的指纹闭式标定按"实验数据可读出项"分类，给出每因素的可观测代理量与定量校核源。每条指纹配一条闭式判据与数值阈值，作为 §5.1 终止判据的工程化口径。
+
+#### 3.5.1 节点贡献 $X$ 的镜像法提取与反常奇次谐波宇称判据
+
+镜像法原理：在动量空间把 $\mathbf{k}$ 与 $-\mathbf{k}$ 镜像对称的体相贡献相消，剩余的体相赝矢量信号即节点贡献的可观测代理（参考 Lorenzo 等人[20] 2025 年 Kagome HOTI 的紧束缚 HHG 提取）。具体步骤：
+
+1. 对 $\mathbf{k}$ 与 $-\mathbf{k}$ 网格点分别计算 $\sigma(\mathbf{k}, \omega)$。
+2. 取差 $\Delta\sigma(\omega) = \sigma(\mathbf{k}, \omega) - \sigma(-\mathbf{k}, \omega)$。
+3. 对 $\mathbf{k}$ 空间积分得 $X_{\text{obs}} = \int \Delta\sigma(\omega)\, d\omega$。
+
+镜像法的前提是体相在 $\mathbf{k} \leftrightarrow -\mathbf{k}$ 下严格反演对称。Weyl 节点附近的镜面对称破缺即节点贡献信号。Lorenzo 等人[20] 在 Kagome 模型上观察到拓扑半金属相对平庸背景增强上限两个数量级，对应本课题 S_edge 阈值 0.2 的物理依据（详见 §5.1 指标映射）。
+
+**闭式判据（X 指纹）—— 反常奇次谐波宇称标度**。$X$ 的可观测代理量取反常奇次谐波相对同阶偶次谐波的强度比
+
+$$R_{\text{odd/even}} = \frac{\sigma(\omega = q\omega_0,\, q \in \{3, 5, 7, \ldots\})}{\sigma(\omega = q'\omega_0,\, q' \in \{2, 4, 6, \ldots\})}$$
+
+其中 $\sigma(\omega)$ 为 §1.5 给出的汉宁窗 FFT 谱强度。在 Weyl 节点附近（节点 $\mathbf{k}_0 \pm 0.05\,\text{Å}^{-1}$ 球内），镜面对称破缺 → 偶次谐波解禁 → $R_{\text{odd/even}}$ 反常增强。**判据阈值**（来源 Thakur 等人[18] 双圆极化螺旋性敏感度分析）：Weyl 半金属相对平庸背景 $R_{\text{odd/even}} \geq 10$，即奇次谐波强度至少为同阶偶次谐波的 10 倍。该阈值与 Lorenzo 等人[20] Kagome 模型报告的"拓扑半金属相对平庸背景增强上限两个数量级"一致，取下限 10× 作为工程化判据（预留 10× 安全裕度）。**失效边界**：当节点远离费米面（节点能 $|E_{\text{node}} - E_F| > 0.5\,\text{eV}$）或散射时间过短（$T_2 < 0.5\,\text{fs}$），偶次谐波被噪声淹没，$R_{\text{odd/even}}$ 失去判据价值，需切换到镜像法积分量 $X_{\text{obs}}$ 作为替代读出。
+
+#### 3.5.2 曲率贡献 $Y$ 的偏振-宇称关联
+
+Bharti 与 Dixit[25] 2022 年（PRB 105, 155140）报告反常谐波偏振方向与 Berry 曲率分量宇称的对应规则：谐波偏振沿 $\hat{e}_y$ 方向对应 $\Omega_y$ 宇称为奇，$\hat{e}_x$ 对应 $\Omega_x$ 宇称为奇，宇称为偶则偏振沿主轴。具体提取：
+
+1. 对每一谐波阶 $q$ 提取偏振向量 $\mathbf{P}_q = (\langle \cos\theta_q \rangle, \langle \sin\theta_q \rangle)$。
+2. 与 $\Omega_n(\mathbf{k})$ 在 BZ 内积分的宇称分量比较。
+3. 反常谐波偏振-宇称关联的拟合优度作为 $Y$ 的可观测代理。
+
+该规则在 §2.4 Berry 几何量约束下进一步自洽：$\Omega_n^{xy}$ 与量子度规 $\det g_n^{\mu\nu}$ 的逐点不等式（来源 KB `现代极化理论与Berry相位计算.md`）保证 $Y$ 因素不被误归为 $X$ 或 $Z$。偏振/椭圆率分辨 HHG 圆二色作为晶体对称性、valley 选择定则与 Berry 曲率选择性探针的方法学背景见 KB `circular-dichroism.md`（Thakur 等人[18] 双圆极化螺旋性敏感度分析为该页引用源）。
+
+**闭式判据（Y 指纹）—— 反常偏振分量与 $\Omega_z$ 宇称的积分关联**。对 Weyl 半金属（$\hat c \perp \mathbf{k}_0$ 取向），$Y$ 的可观测代理量取反常偏振分量比
+
+$$\frac{I_\perp}{I_\parallel} \approx \left| \int_{\text{BZ}} \Omega_z(\mathbf{k})\, d\mathbf{k} \right|$$
+
+其中 $I_\perp$ / $I_\parallel$ 分别为第 $q$ 阶反常谐波偏振的垂直 / 平行分量强度（$\hat{e}_\perp \perp \hat{e}_\parallel$ 取 $\hat{e}_x$–$\hat{e}_y$ 正交基），$\int \Omega_z d\mathbf{k}$ 为 $\Omega_z$ 在 BZ 内的体相积分（Weyl 半金属中该积分正比于节点手性荷 $C_z$ 的体相密度）。**判据阈值**（来源 Thakur 等人[18]）：$I_\perp / I_\parallel$ 在 Weyl 节点附近偏离平庸相基线（$\sim 0$）一个数量级以上、且与 $|\int \Omega_z d\mathbf{k}|$ 的拟合 $R^2 \geq 0.8$，视为 $Y$ 指纹成立。**失效边界**：当驱动场取 $\hat{e}_\perp$ 主轴线极化（$\varepsilon = 0$ 且偏振沿 $\hat{e}_\parallel$），$I_\perp$ 被几何因子压至噪声级；此时按 §1.3.1 椭圆率扫描补一对 $\varepsilon = \pm 0.9$ 的椭圆驱动，重测 $I_\perp$。KB `circular-dichroism.md` 同时给出 $C_z$ 通过 CPGE 谷选择泵浦的独立读出通道，可与 $Y$ 指纹交叉验证。
+
+#### 3.5.3 散射贡献 $Z$ 的强度标度律
+
+散射贡献的可观测指纹为 $I_{3f} \propto I_f^{n}$ 标度律。Pilch 等人[16] 2025 年 TaP THz 三次谐波实验（参数：0.3–1 THz、峰值 tens of kV/cm、TaP 纳米薄膜室温多周期窄带）报告严格立方律 $n = 3.0$；Duan 等人[26] 2026 年 Cd₃As₂ 皮秒太赫兹微腔方案（皮秒共振驱动）则在近饱和区幂律指数由 2.3 渐降至 0.3，弱场区仍接近 2.3。两套数据的差异在于：本课题 TaP THz 通道（弱场 tens of kV/cm）预期 $n \approx 3.0$，Cd₃As₂ 微腔增强数据仅作为方案 §3.1.2 的备选校核源。
+
+具体提取：
+
+1. 扫描驱动强度 $I_f$ 5 个数量级（如 $10^9$–$10^{14}$ W/cm²）。
+2. 拟合 $\log I_{3f}$ vs $\log I_f$ 斜率 $n$。
+3. 对照 [16] 的 $n = 3.0$ 与 [26] 的 $n \in [0.3, 2.3]$ 判别散射通道占比。
+
+$n = 3.0$ 对应线性散射系统（即 $Z$ 主导），$n < 3.0$ 表示非线性散射主导（即 $X$ 或 $Y$ 主导）。$Z \geq 30\%$ 终止判据（§5.1）与 $n \geq 2.7$ 的经验阈值一致。
+
+**闭式判据（Z 指纹）—— log-log 拟合斜率的立方律邻域**。$Z$ 的可观测代理量为三次谐波强度 $I_{3f}$ 与基频强度 $I_f$ 的对数-对数斜率
+
+$$n = \frac{d \log I_{3f}}{d \log I_f}$$
+
+**判据阈值**（来源 Pilch 等人[16] 立方律标定）：拟合斜率 $n \in [2.7,\, 3.3]$ 视为接近立方律（$n = 3.0$ 为严格立方律中点），即 $Z$ 主导；$n < 2.7$ 视为非线性散射（$X$ 或 $Y$ 主导），$n > 3.3$ 视为高阶散射通道（$s$ 波以上，需切换到 §7.3 备选路径 2 多元线性回归）。**[2.7, 3.3] 阈值选取依据**：Pilch[16] 实验标定 $n = 3.0$ 的统计涨落约 $\pm 0.3$（覆盖样品差异、温度漂移与激发强度扫描的拟合残差），阈值窗半宽取该涨落幅度的同量级。**失效边界**：当驱动场进入 §1.1 失效边界（THz 通道 $E_0 > 10^{11}$ W/cm² 或光子能量 $\hbar\omega \ll E_g$），$n$ 系统偏离 3.0，需切换到含时密度泛函理论（TDDFT）按 §7.6 备选路径 1 重测标度律。
+
+#### 3.5.4 闭式判据汇总与不确定性边界
+
+三因素分解的总不确定度 $\sigma_{\text{dec}}$ 由四类误差源贡献（每类量化边界）：
+
+- **开关定义误差**（$X,Y,Z$ 间边界）：$2\%$ 门禁，源于开关 A/B/C 的"开/关"非严格二值。
+- **弱耦合近似失效**：$\sigma_0/\sigma_{\text{full}} < 0.05$ 给出 $\sigma_{\text{dec}} < 5\%$ 的理论上限。
+- **指纹误判**（$Y$ 的偏振-宇称关联 / $Z$ 的标度律 / $X$ 的镜像法错配）：单项 $1\%$ 门禁。
+- **随机参数扰动**（§5.2 协议 100 个独立样本）：$\sigma_{\text{dec}}$ 的统计涨落，预期 $1\sigma$ 区间约 $\pm 2\%$。
+
+合计 $\sigma_{\text{dec}} \leq 5$ 个百分点的终止判据（申请书 §2.2 指标定义）。
+
+---
+
+## 4. 激子-HHG 通道耦合与反常速度项
+
+### 4.1 ZnO 激子参数
+
+ZnO 在室温下的激子束缚能 $E_B \approx 60$ meV，带隙 $E_g \approx 3.37$ eV，激子-连续态耦合矩阵元 $V_{\text{exc}}$ 数量级 0.1–1 eV（依材料质量与温度变化）。
+
+激子态 $|X\rangle$ 与连续态 $|c, \mathbf{k}\rangle$ 在 k 空间的耦合以有效势 $V_{\text{exc}}(\mathbf{k})$ 进入 SBE 演化：
+
+$$\dot{\rho}_{Xc}(\mathbf{k}) = -i [\varepsilon_X - \varepsilon_c(\mathbf{k})] \rho_{Xc} - i V_{\text{exc}}(\mathbf{k}) [\rho_{XX} - \rho_{cc}(\mathbf{k})] + \ldots$$
+
+$V_{\text{exc}}(\mathbf{k})$ 取紧束缚参数（由 Jessen 等人[30] 2025 年 ZnO HHG-PL 双通道实验标定，见 §6.1 与 §7.4）。
+
+### 4.2 通道切换可逆区间
+
+驱动场强扫描 $I \in [0.5 I_{\text{th}}, 2 I_{\text{th}}]$，$I_{\text{th}}$ 为通道切换阈值强度。定义两通道相对强度比 $R(I) = I_{\text{exc-channel}}(I)/I_{\text{cont-channel}}(I)$：
+
+- $R(I) = 1$：两通道等贡献。
+- $R(I) > 1$：激子通道主导。
+- $R(I) < 1$：连续态通道主导。
+
+**可逆区间 $\Delta I_{\text{rev}}$** 定义为 $R(I)$ 从 1 偏离再回到 1 的强度区间宽度，归一化为 $\Delta I_{\text{rev}} / I_{\text{th}}$。终止判据 $\Delta I_{\text{rev}} \ge 0.5 \times I_{\text{th}}$。
+
+$I_{\text{th}}$ 锚点取自 Jessen 等人[30] 2025 年 ZnO 块体实验识别的第五次谐波谱形转变强度（HHG 通道切换与 PL 通道超线性增长同时出现的特征强度）。该阈值在双基线（800 nm NIR + 1800 nm MIR）下独立校核——NIR 通道以 ZnO 近红外通道驱动，MIR 通道以方案一通用主窗驱动。$I_{\text{th}}$ 在两基线下可能不重合，方案三独立报告双基线各自的 $\Delta I_{\text{rev}}$。
+
+### 4.3 反常速度项（拓扑体系）
+
+Weyl/TI 体系的反常速度在 SBE 中显式加入：
+
+$$\dot{\mathbf{k}} = -\frac{e}{\hbar}\mathbf{E}(t) + \dot{\mathbf{k}} \cdot \boldsymbol{\Omega}_n \hat{\mathbf{z}} \times \mathbf{E}(t)$$
+
+其中 $\dot{\mathbf{k}} \cdot \boldsymbol{\Omega}_n$ 项贡献反常 Hall 电流，影响 CD 谱偏振旋转。该项对应方案一的 Weyl/HOTI 引擎配置；ZnO 因非磁性、无 Weyl 节点，关闭此项。
+
+适用边界（KB wiki 半经典动力学方程方法页 [paper:2025-2506.02238-non-adiabatic-hall-effect-at-berry-curvature-hot-spot-relate]）：标准反常速度项仅在绝热近似下成立（Berry 曲率热点附近的非绝热区失效，须引入 Berry 曲率的普适延拓描述非绝热霍尔效应）。本课题多带 SBE 框架在 Berry 曲率热点附近采用足够密 $N_k$（§1.2 推荐值 + 节点附近自适应加密至 $128^3$）覆盖绝热极限，热点处反常速度项的失真误差不进入方向三 Weyl 分解的可观测代理。
+
+### 4.4 ZnO 激子-连续态耦合项 $V_{\text{exc}}$ 的 SBE 实现
+
+ZnO 激子-HHG 通道耦合在 SBE 框架内通过显式加入激子-连续态耦合项实现，扩展自多带引擎的相干项：
+
+$$\dot{\rho}_{cv}^{\text{exc}}(\mathbf{k},t) = \dot{\rho}_{cv}(\mathbf{k},t) - i V_{\text{exc}}(\mathbf{k}) \rho_{cv}(\mathbf{k},t)$$
+
+其中 $V_{\text{exc}}(\mathbf{k})$ 的参数化按紧束缚图像展开：
+
+$$V_{\text{exc}}(\mathbf{k}) = V_0 \exp\left(-\frac{|\mathbf{k} - \mathbf{k}_0|^2}{2\sigma_k^2}\right)$$
+
+$V_0$ 为峰值耦合强度，$\mathbf{k}_0$ 为耦合中心（典型 $\mathbf{k}_0 = 0$，即 $\Gamma$ 点），$\sigma_k$ 为 $\mathbf{k}$ 空间展宽（典型 $0.05$ Å$^{-1}$，对应约 100 nm 实空间激子尺度）。耦合项的物理图像是激子极化场与 HHG 连续态在 $\Gamma$ 点附近的耦合——与 Jessen 等人[30] 2025 年 ZnO 块体 HHG-PL 双通道实验观察到的第五次谐波谱形转变机制一致。
+
+#### 4.4.1 $V_{\text{exc}}$ 的标定路径
+
+$V_{\text{exc}}$ 的具体数值依赖 Jessen 等人[30] 实验标定。若标定数据缺失或与本课题样品不匹配，按 §7.4 三条备选路径选用：
+
+1. **第一性原理计算**：GW + Bethe-Salpeter 方程（KB wiki `sbe-bloch-equations.md` 提到 BSE 可派生动态长程 $A_{\text{LRC}}$ 与静态二次长程 $B_{\text{LRC}}$ 核）计算 ZnO 的激子-连续态耦合矩阵元，计算量大但参数无经验。
+2. **HHG 反演**：用 You 等人[21] 2017 年 ZnO 各向异性 HHG 数据反推 $V_{\text{exc}}$，按 ZnO 在不同晶体取向（c 轴 vs ab 面）的 HHG 谱差异约束 $V_0$ 与 $\sigma_k$。
+3. **极端区间扫描**：$V_{\text{exc}}$ 在 $[0.1, 10]$ eV 区间全扫描，验证 $\Delta I_{\text{rev}} \geq 0.5 \times I_{\text{th}}$ 是否对参数鲁棒。
+
+#### 4.4.2 通道切换的 SBE 数值实现
+
+通道切换可逆区间 $\Delta I_{\text{rev}}$ 的提取（申请书 §2.2 / §4.2 指标定义）在 SBE 框架内分四步：
+
+1. **驱动强度扫描**：$I \in [0.5 I_{\text{th}}, 2 I_{\text{th}}]$，21 个等距采样点；$I_{\text{th}}$ 取 Jessen 等人[30] 实验识别的 ZnO 第五次谐波谱形转变强度。
+2. **两通道分离**：从 $\rho_{cv}^{\text{exc}}(\mathbf{k},t)$ 中提取激子通道贡献（耦合项 $V_{\text{exc}}$ 项）与连续态通道贡献（无耦合项）。两通道独立 FFT 得 $\sigma_{\text{exc}}(\omega, I)$ 与 $\sigma_{\text{cont}}(\omega, I)$。
+3. **相对强度比**：$R(I) = I_{\text{exc-channel}}(I) / I_{\text{cont-channel}}(I)$，积分取带边 $\pm 0.5$ eV 区间。
+4. **可逆区间定义**：$R(I) = 1$ 的两端点（强度上升侧与下降侧）强度差即为 $\Delta I_{\text{rev}}$；归一化至 $\Delta I_{\text{rev}} / I_{\text{th}}$。
+
+双基线（800 nm NIR + 1800 nm MIR）独立执行步骤 1–4，$I_{\text{th}}$ 在两基线下可能不重合，方案三独立报告双基线各自的 $\Delta I_{\text{rev}}$。
+
+### 4.5 激子-HHG 通道切换的 SBE 实现细节
+
+本节给出 §4.4 耦合项 $V_{\text{exc}}$ 在 SBE 数值求解中触发通道切换的三项工程化约定：激子态索引、阈值强度数值实现、可逆区间扫描步进。
+
+#### 4.5.1 激子态 $|e\rangle$ 的密度矩阵索引约定
+
+ZnO 激子-HHG 双通道在密度矩阵下分带索引如下（与 §1.1 多带引擎的能带计数惯例一致；价带仍标 0、连续态标 2，激子态居中并独立占据 1 号带）：
+
+| 索引 | 物理态 | SBE 密度矩阵记号 |
+|------|--------|------------------|
+| band 0 | 价带 $|v\rangle$（紧束缚下 ZnO O 2p 主导价带） | $\rho_{00}$（布居）；$\rho_{0m},\ m \in \{1,2\}$（带间相干） |
+| band 1 | 激子态 $|e\rangle$（束缚能 $E_B \approx 60$ meV，见 §4.1） | $\rho_{11}$（激子布居）；$\rho_{12}(\mathbf{k})$（激子—连续态相干） |
+| band 2 | 连续态 $|c, \mathbf{k}\rangle$（$E_g \approx 3.37$ eV 以上的自由电子态） | $\rho_{22}(\mathbf{k})$（自由载流子布居）；$\rho_{02}(\mathbf{k})$（带间极化） |
+
+激子—连续态相干 $\rho_{12}(\mathbf{k})$ 即 §4.4 演化方程中的 $\rho_{cv}^{\text{exc}}$ 项在动量空间的存储位置；耦合项 $V_{\text{exc}}(\mathbf{k})$ 在演化方程中作用于 $\rho_{12}$ 的偏置项 $-i V_{\text{exc}}(\mathbf{k})[\rho_{11} - \rho_{22}(\mathbf{k})]$。
+
+实现要点：在 §1.1 多带 SBE 求解器中把带数 $N_b$ 从 2 提升到 3；带能 $\varepsilon_1$ 取束缚态能量 $\varepsilon_0 + E_g - E_B$（即价带顶 $+ 3.31$ eV），偶极矩阵元 $d_{01}$ 与 $d_{12}$ 按 §6.1 哈密顿量参数表给定的 ZnO 价带—激子、激子—连续态两组元素取值。带间极化分量 $\rho_{02}(\mathbf{k})$ 与 $\rho_{12}$ 在 $\rho$ 矩阵中独立存储，以满足 §4.4.2 第 2 步两通道独立 FFT 所需的可分离性。
+
+#### 4.5.2 阈值强度 $I_{\text{th}}$ 的数值实现
+
+$I_{\text{th}}$ 锚点取 Jessen 等人[30] 2025 年 ZnO 块体 HHG-PL 双通道实验识别的第五次谐波谱形转变强度 $I_{\text{th}} = 0.7\,\text{TW/cm}^2$（亦见 §4.2 / §6.2）。该阈值在 SBE 中以"耦合项—裸带间项比值"为判定变量：
+
+$$r(\mathbf{k}, t) = \left| V_{\text{exc}}(\mathbf{k}) / d_{02}(\mathbf{k}) \right|$$
+
+阈值触发条件
+
+$$r \geq r_c \approx 0.4 \quad \Rightarrow \quad \text{通道切换被识别}$$
+
+其中 $d_{02}(\mathbf{k})$ 是价带—连续态裸带间偶极矩阵元（§1.3 / §6.1），$r_c \approx 0.4$ 为通道切换识别比值。该比值的物理依据：Jessen[30] 实验在第五次谐波谱形转变点同时观察到 HHG 通道与 PL 通道超线性增长同起点，对应耦合项贡献达到带间裸贡献量级的同一阈值在数值上以 $r \approx 0.4$ 实现。
+
+数值实施步骤：
+
+1. 在 §1.3 三通道默认驱动（NIR 800 nm、MIR 1800 nm、THz）下分别调用 §1.1 引擎，启动 §1.7 初始化四步协议。
+2. 以 $\rho_{12}(\mathbf{k}, t)$ 作为耦合监测量。阈值识别器在每一 $\mathbf{k}$ 点上判断 $r(\mathbf{k}, t) \geq r_c$。
+3. 满足阈值的 $\mathbf{k}$ 点占比超过 $5\%$ 时（§6.2 阈值判别默认参数），本步时间步 $\Delta t$ 内的谐波产额被标记为"耦合主导"。同时记录驱动强度 $I$。
+4. 以双基线（800 nm NIR + 1800 nm MIR）独立执行步骤 1–3，$I_{\text{th}}$ 在两基线下可能不重合（§4.2）；不重合时以小值为主报告。
+
+#### 4.5.3 可逆区间 $\Delta I_{\text{rev}}$ 的强度扫描步进
+
+$\Delta I_{\text{rev}} \geq 0.5 \times I_{\text{th}}$（§4.2 / 申请书 §2.2）在 SBE 中以 $10^{-2}\,\text{TW/cm}^2$ 步长的驱动强度扫描实现：
+
+$$I_i = (0.5 + 0.01 \cdot i) \times I_{\text{th}}, \quad i = 0, 1, \ldots, 70$$
+
+覆盖区间 $I \in [0.5 I_{\text{th}},\ 1.2 I_{\text{th}}]$，步长 $\Delta I = 0.01 I_{\text{th}} = 7 \times 10^{-3}\,\text{TW/cm}^2$。步进低于判据要求的 $0.5 \times I_{\text{th}}$ 的二十分之一，确保 $R(I) = 1$ 的两端点被采样到。对应绝对区间宽度 $0.7 \times I_{\text{th}} = 0.49\,\text{TW/cm}^2$。
+
+每步实施步骤：
+
+1. 启动 §1.7 初始化四步协议，加载 §4.4 中 §4.4.1 选定的 $V_{\text{exc}}$ 参数化（§4.4.1 三条备选路径任选其一，优先 Jessen[30] 实验标定）。
+2. 驱动场按 §1.3 三通道默认参数赋值，峰值强度 $I_i$。
+3. §1.1 引擎时间演化至稳态（§1.6 收敛判据）。
+4. 按 §4.4.2 第 2–4 步提取 $R(I_i)$。
+5. $R(I) = 1$ 的两端点（上升侧 $I^+$、下降侧 $I^-$）插值补点（线性插值即可，§6.2 备选二次样条）。$\Delta I_{\text{rev}} = I^+ - I^-$，归一化判据 $\Delta I_{\text{rev}} / I_{\text{th}}$。
+
+验证方式：
+
+- 与 Jessen[30] 实验观察的 PL 超线性增长区间比较。$I_{\text{th}}$ 实验识别值 $0.7\,\text{TW/cm}^2$ 与扫描覆盖区间 $[0.35,\ 0.84]\,\text{TW/cm}^2$ 叠加后是否重合。
+- 双基线（800 nm + 1800 nm）独立扫描，判据 $\Delta I_{\text{rev}} \geq 0.5 \times I_{\text{th}}$ 在两基线同时满足（§5.4 双基线判据工程化）。
+- 谐波谱形转变点（第五次谐波谱形转变）与 $R(I) = 1$ 点能量位是否重合。偏差 > $0.05\,\text{TW/cm}^2$ 触发 §7.6 失效场景。
+
+风险与替代方案：
+
+- 跳点漏判：驱动强度间隔 $10^{-2}\,\text{TW/cm}^2$ 可能不足以完整括出 $R(I) = 1$ 的两端点。备选路径：二阶段扫描——第一阶段 $10^{-2}\,\text{TW/cm}^2$ 粗扫定位 $R \approx 1$ 区间，第二阶段以 $10^{-3}\,\text{TW/cm}^2$ 细扫同一区间。
+- $I_{\text{th}}$ 在 NIR / MIR 双基线不重合：以两基线未重合点的能量中点为统一锚点，三次扫描叠加平均；两基线结果出现 > 20% 偏差时分别报告两基线的 $\Delta I_{\text{rev}}$（§4.2 / §5.4）。
+- $V_{\text{exc}}$ 参数标定失败（§4.4.1 三条路径都不足以提供足够准确参数）：§7.4 备选路径 3（极端区间扫描），验证 $\Delta I_{\text{rev}} \geq 0.5 \times I_{\text{th}}$ 是否对参数鲁棒。
+
+参数溯源（KB wiki 方法页）：
+
+- 多带 SBE 求解器与带间—带内电流分解机制：`knowledge/wiki/methods/sbe-bloch-equations.md`（§1 / §10.2）。该页参数表不在本节复述。
+- T₂ 唯象取值（multi-WSM 1.5 fs、MoS₂ 100 fs、NbSe₂ 10 fs）由 `sbe-bloch-equations.md` 参数表给出；本节 ZnO T₂ 采用 §6.1 默认值（待 Jessen[30] 实验标定补齐，见 §7.4）。
+- 1.5×10⁶ 原子实化 TB 结构作为不适用参考（`tight-binding-model.md`），本节密度矩阵求解在 k 空间进行，不要求实空间实化。
+
+### 4.6 ZnO 各向异性的晶向参数注入
+
+ZnO 各向异性 HHG 由 You 等人[21] 2017 年实验提供基线（c 轴 vs ab 面 HHG 强度差异显著）。在 SBE 框架内通过晶向依赖的偶极矩阵元 $\mathbf{d}_{mn}(\mathbf{k}, \hat{n})$ 与 Berry 曲率 $\Omega_n(\mathbf{k}, \hat{n})$ 注入：
+
+- **晶体坐标系选取**：以 ZnO c 轴为 $\hat{z}$，ab 面为 $\hat{x}$-$\hat{y}$。
+- **驱动偏振 vs 晶轴扫描**：驱动场沿 $\hat{z}$（c 轴驱动）、$\hat{x}$（a 轴驱动）、$\hat{x}+\hat{y}$（ab 面 45°）三组。
+- **各向异性指标**：$\eta_{\text{ani}} = \sigma_{\text{c-axis}}(\omega) / \sigma_{\text{ab-plane}}(\omega)$，实验典型值 $\eta_{\text{ani}} \approx 0.3$–$3$（You 等人[21] 数据），SBE 模型预言 $\eta_{\text{ani}}$ 与 $V_{\text{exc}}$ 取值的依赖关系。
+
+ZnO 在 SBE 框架内不显式含反常速度项（§4.3），各向异性主要来自能带结构与偶极矩阵元的晶向依赖——拓扑材料本征已在 §4.3 处理，ZnO 与拓扑材料在方向四对照框架下的判据 $\Delta I_{\text{gap}}$ 即测量两类体系各向异性差异的可量化代理。
+
+---
+
+## 5. 12 项判据的度量协议
+
+### 5.1 判据 → 度量方法映射
+
+| 判据 | 度量公式 | 样本数 | 终止判据 |
+|------|---------|--------|---------|
+| R_HOTI | $\sigma_{\text{CD}}^{\text{HOTI}} / \sigma_{\text{CD}}^{\text{LOTI}}$ 峰值比 | 100 | ≥ 10 |
+| S_edge | $I_{\text{edge}} / I_{\text{main}}$（镜像抑制法） | 100 | ≥ 0.2 |
+| δ_FP | 平庸相样本被误判为 HOTI 的占比 | 100 | < 5% |
+| Δκ | $(\kappa_{\text{topo}} - \kappa_{\text{triv}})/\kappa_{\text{triv}}$ 带隙频率谐波压缩度差 | 100 | ≥ 20% |
+| η_SF | 100 样本中 CD 符号翻转点正确判定的占比 | 100 | ≥ 95% |
+| Δt | 带隙频率谐波压缩度时间分辨演化拟合标准差 | 50 | ≤ 10 fs |
+| X+Y+Z | 三开关嵌套差分 | 100 | ≥ 95% 且 σ₀/σ_full < 0.05 |
+| σ_dec | 100 次独立随机参数反演 X/Y/Z 标准差 | 100 | ≤ 5 pp |
+| R² | TaP THz 三次谐波数据驱动参数扫描拟合优度 | 1 个基准 | ≥ 0.9 |
+| ΔI_rev | 通道切换可逆区间归一化宽度 | 1 个体系 | ≥ 0.5 × I_th |
+| ΔI_gap | 拓扑 vs ZnO 带隙频率强度比差值 | 双基线 | ≥ 阈值 R（800 nm + 1800 nm） |
+| δ_CD | CD 符号翻转点椭圆率差值归一化量 | 双基线 | ≥ 阈值 T（800 nm + 1800 nm） |
+
+### 5.2 随机参数扰动协议
+
+100 个独立样本的参数扰动空间：
+
+- **Berry 曲率分布扰动**：在 $\Omega_n(\mathbf{k})$ 上叠加 $\pm 5\%$ 高斯噪声，验证几何修正项对判据的鲁棒性。
+- **shift vector 扰动**：在 $R_{nm}(\mathbf{k})$ 上叠加 $\pm 5\%$ 高斯噪声。
+- **驱动椭圆率扰动**：$\varepsilon = -1, -0.9, \ldots, +0.9, +1$，扫描 21 个值。
+- **脉冲长度扰动**：$\tau = 30, 50, 70, 100$ fs。
+
+中位数 + 1σ 区间为最终报告值。
+
+### 5.3 数据基准
+
+所有判据验证使用已发表实验数据为基准：
+
+| 判据 | 数据来源 | 备注 |
+|------|---------|------|
+| S_edge | Lorenzo 等人[20] 2025 年 Kagome 数据 | 体相贡献量级基线，R_HOTI 阈值标定共用 |
+| R² | Pilch 等人[16] 2025 年 TaP THz 三次谐波 | THz 通道驱动，$I_{3f} \propto I_f^{3}$ 立方律 |
+| ΔI_gap / δ_CD | Li 等人[8] 2026 年 Bi₂Se₃ 家族 CD 光谱 | 800 nm + 1800 nm 双基线对照 |
+| ΔI_rev | Jessen 等人[30] 2025 年 ZnO HHG-PL 双通道 | 第五次谐波谱形转变 → $I_{\text{th}}$ 锚点 |
+
+判据 → 数据基准的对照覆盖申请书 §3.4 方案四的"校核一"与"校核二"两个步骤（与 You 等人[21] ZnO 各向异性数据及 Jessen 等人[30] ZnO HHG-PL 双通道数据交叉验证；100 次随机参数反演 1σ 区间宽度 < 20% 中位数）。
+
+### 5.4 拓扑 vs ZnO 对照的双基线判据工程化
+
+方向四的拓扑 vs ZnO 对照框架（申请书 §3.4）要求在 800 nm/1800 nm 双基线下分别扫描三类判别量，并验证阈值 R 与 T 在两基线下各自满足偏差 < 10%。本节明确工程化协议。
+
+#### 5.4.1 双基线扫描协议
+
+双基线扫描按以下顺序执行，每基线独立报告判据结果：
+
+1. **基线 A：800 nm（NIR 通道）**
+   - 中心波长 $\lambda_A = 800$ nm（对应光子能量 1.55 eV）
+   - 强度区间 $I \in [10^{10}, 10^{11}]$ W/cm²
+   - 偏振：LCP / RCP / 线性
+   - 适用体系：ZnO 近红外通道（ZnO 在 800 nm 下电子直接带间跃迁），HOTI/Weyl 半金属的通用主窗
+
+2. **基线 B：1800 nm（MIR 通道）**
+   - 中心波长 $\lambda_B = 1800$ nm（对应光子能量 0.69 eV，落在 §1.3.1 MIR 主窗内）
+   - 强度区间同 A
+   - 适用体系：方案一通用主窗、Weyl 三因素反演框架、ZnO MIR 通道
+
+3. **第三独立通道（仅方案二内部校核）**：TaP THz 弱场区（频段 0.3–1 THz、峰值 tens of kV/cm），与 Pilch 等人[16] 实验窗口对齐。该通道不进入方向四阈值 R/T 的标定（仅用于 §3.5.3 散射贡献 $Z$ 的参数反演与 §4 方案二的 R² 校核）。
+
+#### 5.4.2 三类判别量的双基线提取
+
+三类判别量的提取统一在双基线下执行，每类对应一个方向四指标（申请书 §2.2）：
+
+| 判别量 | 方向四指标 | 提取步骤 | 双基线判据 |
+|--------|----------|---------|-----------|
+| CD 角度谱符号翻转点位置 | $\delta_{\text{CD}}$ | 提取 CD 谱的符号翻转点对应入射椭圆率 $\varepsilon^*$，计算拓扑与 ZnO 的 $\varepsilon^*$ 差值并归一化至 0–1 | $\delta_{\text{CD}} \geq T$，预标定 $T \geq 0.3$，T 在两基线下偏差 < 10% |
+| 带隙频率处强度比 | $\Delta I_{\text{gap}}$ | 拓扑样本与 ZnO 样本在同一驱动条件下提取带隙频率处 HHG 强度比 | $\Delta I_{\text{gap}} \geq R$，预标定 $R \geq 2$，R 在两基线下偏差 < 10% |
+| 通道切换可逆区间 | $\Delta I_{\text{rev}}$ | §4.4.2 四步提取 ZnO $R_{\text{HHG/exc}}$ 扫描 | $\Delta I_{\text{rev}} \geq 0.5 \times I_{\text{th}}$，$I_{\text{th}}$ 双基线独立锚定 |
+
+阈值 R ≥ 2 的依据与申请书 §2.2 / §2.5 同源：Lorenzo 等人[20] Kagome 拓扑半金属相对平庸背景增强上限两个数量级（即 ≤100 倍），取该增强上限 100 倍对应的对数尺度比值 $\log_{10}(100) = 2$ 作为预标定出发点（与手册 §3.5.1 line 215 上限两个数量级口径同步对齐）。T ≥ 0.3 的依据来自 Bharti 与 Dixit[25] 2022 年 PRB 105, 155140 报告的反常谐波偏振方向与 Berry 曲率分量宇称的对应规则——拓扑体系与 ZnO 的 CD 翻转点差异预计归一化量 ≥ 0.3。
+
+#### 5.4.3 双基线偏差容差与回退
+
+阈值 R 与 T 在两基线下偏差均须 < 10%。验证步骤：
+
+1. 在 800 nm 与 1800 nm 两基线下独立完成 §5.4.2 全部三类判别量提取。
+2. 对每类判据计算相对偏差 $\delta_R = |R_A - R_B| / \bar{R}$、$\delta_T = |T_A - T_B| / \bar{T}$。
+3. $\delta_R < 10\%$ 与 $\delta_T < 10\%$ 同时满足时，阈值 R 与 T 为有效阈值；任一偏差 ≥ 10% 时，触发 §7.6 备选路径 4（引入第三个基线 3.2 μm 进行三重交叉验证）。
+
+阈值 R 与 T 的最终数值在双基线扫描完成后给出。预标定值 R ≥ 2 与 T ≥ 0.3 作为方向四可行性论证的出发点，最终数值若高于预标定则视为该方向可行性更强；若低于预标定则按 §7.6 备选路径重审。
+
+### 5.5 拓扑 vs ZnO 对照框架的代码-样本池-驱动条件接口
+
+方向四拓扑 vs ZnO 对照框架（申请书 §3.4.2）以方案一至三产出的拓扑样本池与方案三 ZnO 通道产出为对照样本池，在 800 nm/1800 nm 双基线下统一提取三类判别量。本节把 §5.4 阈值 R/T 工程化、§1.3.1 三通道表与 §8.2/§8.4 代码模块之间的接口钉死，避免对照框架的工程化口径跨节漂移。本节不引入新物理图像，所有接口均复用既有引擎模块与参数表。
+
+#### 5.5.1 样本池元数据接口
+
+拓扑样本池与 ZnO 样本池的样本级元数据以统一 schema 进入 §8.4 已有的 `src/framework/topological_sbe.py` 对照分支。schema 在 §8.2 probe YAML 基础上扩展 `pool_role` 与 `baselines` 两个字段，其余字段直接复用 §8.2：
+
+```yaml
+sample:
+  sample_id: <string>
+  pool_role: <topological | zno>
+  model: <SSH / Rice-Mele / Qi-Wu-Zhang / Haldane / BHZ-HOTI / TRB-WSM / Type-I WSM / Multi-WSM / ZnO>
+  hamiltonian: { params: <见 §6.1>, source: <§6.1 参数表行号> }
+  k_grid: { Nk: <§1.2 同源>, refinement: <none | node_localized @ k0 ± 0.05 Å^{-1}, Nk^{node}=128^3> }
+  driving: <复用 §1.3.1 MIR/NIR 字段，wavelength ∈ {800, 1800} nm>
+  crystal_orientation: <(001) / (100) / (110)>
+  baselines: [<800nm>, <1800nm>]
+```
+
+`topological_sbe.py` 入口按 `pool_role` 分流：拓扑样本池走原拓扑 SBE 通路（含 Berry 曲率 + shift vector 修正 + 反常速度项），ZnO 样本池走 §4.4 激子-连续态耦合通路。两通路共用 §1.7.3 含时演化协议与 §8.2 输出 schema，分流仅在初始化阶段按 `pool_role` 选择相干驱动项。
+
+#### 5.5.2 双基线扫描代码入口
+
+800 nm/1800 nm 双基线扫描的代码入口为 `src/sbe/run_dual_baseline.py`，复用 §1.3.1 三通道表中 MIR 主窗与 NIR 通道的全部字段（THz 通道不进入本入口，理由见 §5.4.1）。入口接收 `sample_pool: list[Sample]`（来自 §5.5.1）、`baselines_nm: tuple[int, int] = (800, 1800)`、`observables: tuple[str, ...] = ("hhg", "cd", "squeezing")`、输出目录四项，按 §5.4.3 双基线偏差容差协议验收（`δ_R < 10%` 与 `δ_T < 10%` 同时满足），未满足时触发 §7.6 备选路径 4 引入第三基线 3.2 μm。扫描并行策略：每个 `sample_id` 独立进程，双基线共享同一初始密度矩阵以避免冷启动噪声引入双基线偏差；壁时间预算按 §8.3 表执行。
+
+#### 5.5.3 三类判别量的 YAML 接口
+
+三类判别量按 §5.4.2 双基线提取结果以 `discriminants` 子树写入 §8.2 probe YAML，字段映射：
+
+| §5.4.2 判别量 | YAML 字段 | 数据类型 |
+|--------------|----------|---------|
+| CD 角度谱符号翻转点位置 | `discriminants.cd_sign_flip.epsilon_star` | float ∈ [-1, +1] |
+| `δ_CD` 归一化差异 | `discriminants.delta_cd` | float ∈ [0, 1] |
+| 带隙频率处 HHG 强度比 | `discriminants.delta_I_gap.{baseline_800nm, baseline_1800nm}` | float |
+| `ΔI_gap` 双基线值 | `discriminants.delta_I_gap.{value_800nm, value_1800nm}` | float |
+| 通道切换可逆区间宽度 | `discriminants.delta_I_rev.{range_800nm, range_1800nm}` | float |
+| 双基线偏差 | `discriminants.baseline_drift.{delta_R, delta_T}` | float（百分比） |
+| 阈值验收 | `discriminants.threshold_acceptance.{R_pass, T_pass}` | bool |
+| R/T 阈值最终数值 | `discriminants.threshold.{R_final, T_final}` | float |
+
+YAML 以 `sample_id` 为一级 key、`baseline_nm` 为二级 key 落盘到 `output_dir/<sample_id>/discriminants.yaml`。`δ_R < 10%` 与 `δ_T < 10%` 校验由 §5.4.3 执行，结果写入 `threshold_acceptance` 字段；R/T 最终数值替代 §5.4.2 预标定值（R ≥ 2、T ≥ 0.3）。接口消费侧：方向四可行性论证（申请书 §3.4.2 末段）从 `discriminants.yaml` 直接读取 `delta_cd` / `delta_I_gap` / `delta_I_rev`，按 §5.4.2 终止判据判定 G4 三指标达成情况；未达成时按 §7.6 备选路径重审，达成时三类判别量连同 `baseline_drift` 一起归档为对照框架的工程化产出。
+
+---
+
+## 6. 默认参数总表与实验参数接口与装置规范
+
+本节集中维护四类实施细节：模型哈密顿量参数、数值引擎默认值、驱动场扫描与对应实验硬件规范、样品制备与晶体取向。算法侧参数与实验侧参数按列对齐合并，避免 §8.5 与 §6 的重复条目。驱动光源硬件参数取自知识库 `少周期脉冲CEP门控实验.md`（KB:2511.08148 体系，CEP 稳定 5.9 fs @ 826 nm）与 `波形控制.md`（少周期 5.9 fs OPA/DFG 体系），不凭空编造。
+
+### 6.1 哈密顿量参数
+
+| 模型 | 关键参数 | 典型值 | 参考文献 |
+|------|---------|--------|---------|
+| SSH | 胞内跃迁 $v$、胞间跃迁 $w$ | $v=1.0, w=0.5$（拓扑）/ $v=0.5, w=1.0$（平庸） | — |
+| Rice-Mele | $v, w, \Delta$（交错势） | $\Delta = 0.3$ | — |
+| Qi-Wu-Zhang | 4 参数紧束缚 | 见 Qi-Wu-Zhang 原文 | — |
+| Haldane | 次近邻跃迁 $t_2$、交错磁通 $\phi$ | $\phi = 0.4\pi, t_2 = 0.1$ | — |
+| BHZ（Bi₂Se₃ HOTI） | $A, B, M$ | 见 BHZ 推广 | — |
+| TRB-WSM（TaP） | 三参数 $\mathbf{d}(\mathbf{k})$ | 见 Pilch 等人[16] 2025 年 TaP 实验 | [16] |
+| Type-I WSM（TaAs） | 两节点 $\mathbf{d}(\mathbf{k})$ | 见 X. Zhang 等人[15] 2024 年 TaAs | [15] |
+| Multi-WSM | 多节点 | 见 multi-WSM 文献 | — |
+| ZnO | 带隙、激子束缚能、$V_{\text{exc}}$ | $E_g = 3.37$ eV, $E_B = 60$ meV | [21, 30] |
+
+$V_{\text{exc}}$ 的具体数值由 Jessen 等人[30] 2025 年 ZnO HHG-PL 双通道实验标定；典型范围 0.1–1 eV（依材料质量与温度变化）。§7.4 给出 $V_{\text{exc}}$ 缺失时的三条备选标定路径（GW+BSE 第一性原理、ZnO HHG 反演、[0.1, 10] eV 全扫描）。
+
+### 6.2 数值与驱动参数（三通道默认值）
+
+表中"算法侧"列给出引擎仿真默认；"实验侧"列给出对应硬件规范。同一驱动通道两列口径一致，三通道分别承担 MIR 主窗、NIR 通用、THz 弱场三种场景。THz 通道仅用于方案二的散射时间参数反演，不进入方向四拓扑 vs ZnO 对照体系的阈值标定。
+
+| 通道 / 参数 | 算法侧默认 | 实验侧规范 | 备注 |
+|------------|----------|----------|------|
+| MIR 主窗 / 中心波长 | 1800 nm（亦含 3.2–6.4 μm） | 1800 nm / 3.2–6.4 μm OPA 中红外扩展 | 方案一通用主窗 + 方案三 ZnO MIR 通道 + 方案四对照；少周期 5.9 fs 体系参考 KB `波形控制.md` |
+| NIR / 中心波长 | 800 nm | 800 nm Ti:Sapphire 再生放大器 | 方案三 ZnO 近红外通道 + 方案四对照；CEP 稳定 5.9 fs @ 826 nm 体系参考 KB `少周期脉冲CEP门控实验.md`（KB:2511.08148） |
+| THz / 中心频率 | 0.3–1 THz | 0.3–1 THz 倾斜波前 / DFG 产生 | 方案二 TaP THz THG 校核，弱场区扫描，Pilch 等人[16] 实验对齐 |
+| $\Delta t$（MIR/NIR 通道） | 0.1 a.u. | — | 见 §1.1 |
+| $\Delta t$（THz 通道） | 0.2 a.u. | — | 弱场下 CFL 余量充足，见 §1.3.1 |
+| 峰值强度（MIR/NIR） | $10^{10}$–$10^{11}$ W/cm² | $10^{10}$–$10^{11}$ W/cm² | — |
+| 峰值强度（THz） | tens of kV/cm | tens of kV/cm | Pilch 等人[16] 弱场实验窗口 |
+| 脉冲 $\tau$（MIR/NIR） | 30–100 fs | 30–100 fs FWHM | — |
+| 脉冲 $\tau$（THz） | 10–20 个驱动周期 | 多周期（10–20 周期） | Pilch 等人[16] 实验对齐 |
+| 后脉冲积分 | ≥ 2 周期（MIR/NIR），≥ 1 周期（THz） | — | 傅里叶分辨率 |
+| $T_2$（带内） | 1.5 fs | — | 见 §1.4 |
+| $T_2'$（带间） | 1.5 fs | — | 见 §1.4 |
+| $T_2$（ZnO 带内） | 2.0 fs | — | ZnO 单独校准 |
+| $T_2'$（ZnO 带间） | 1.0 fs | — | ZnO 单独校准 |
+| $N_k$（3D / 2D / 1D） | $64^3$ / $128^2$ / $1024$ | — | 节点附近 $128^3$ |
+| 椭圆率扫描 | $\varepsilon \in [-1, +1]$，21 点，$\Delta\varepsilon = 0.1$ | 同上，$\delta\varepsilon < 0.01$ | 偏振控制精度见 §7.5 |
+| 偏振 | 线/左旋圆/右旋圆 | LCP/RCP/线性（精度 0.005–0.02） | — |
+| 强度控制精度 | — | $\delta I / I < 5\%$（$I_{\text{th}}$ 锚定） | 见 §4.4.2 |
+| 重频 | — | NIR 1 kHz–80 MHz；MIR 1 kHz–10 kHz；THz 1 kHz | 与光源类型匹配 |
+| 傅里叶窗函数 | 汉宁 + 补零 | — | — |
+
+HHG 谱频率分辨率（实验侧规范）：$\delta\omega \leq 0.66$ eV（MIR/NIR 通道）；$\delta f \leq 0.01$ THz（THz 通道）。依据：后脉冲积分 ≥ 2/1 周期（§1.1）。谱信噪比门槛：$\sigma_{\text{CD}}/\sigma_{\text{noise}} \geq 5$（§1.7.4）。时间延迟分辨率：$\Delta t_{\text{delay}} \leq 10$ fs（方向二 $\Delta t$ 指标，对应 §5.1 $\Delta t \leq 10$ fs 终止判据）。
+
+### 6.3 样品制备与晶体取向规范
+
+- **拓扑样品**：Bi₂Se₃ 单晶薄膜（典型厚度 6 nm / 50 nm 双厚度对照，Li 等人[8] 2026 年方案）；TaP/TaAs 单晶（Pilch 等人[16] / X. Zhang 等人[15] 实验锚点）。
+- **对照样品**：ZnO 单晶，c 轴取向（You 等人[21] 2017 年）；Kagome 紧束缚模型对应样品可选 Mn₃Sn 类反常霍尔材料（Lorenzo 等人[20] 实验锚点）。
+- **晶体取向 vs 驱动偏振扫描**：拓扑样品沿镜面 / 旋转轴 vs ZnO c 轴 vs ab 面；驱动偏振沿 $\hat{x}$、$\hat{y}$、$\hat{x}+\hat{y}$（45°）三组；晶面标识 (001), (100), (110)。
+
+本节参数与 §8.2 YAML 接口定义（驱动波长、强度、偏振、晶体取向）一一对应：算法侧条目对应 `hamiltonian.params` 与 `drive.*`，实验侧条目对应 `experiment.apparatus.*` 与 `experiment.sample.*`。每项实验验证以本节为实施基础，§8.2 YAML 接口为数据交换格式。
+
+---
+
+## 7. 风险评估与替代方案
+
+### 7.1 失效边界
+
+引擎在以下场景失效或精度下降：
+
+| 场景 | 失效原因 | 替代方案 |
+|------|---------|---------|
+| 驱动场强 > $10^{12}$ W/cm² + THz 频段 | 唯象 $T_2$ 失效；多体散射主导 | TDDFT + 交换关联泛函校准（Quantum ESPRESSO + TDDFT） |
+| ZnO 高激发态密度 | 单电子近似失效 | Bethe-Salpeter 方程 + 紧束缚投影 |
+| Weyl 节点高阶偏离强耦合 | 弱耦合近似 $\sigma_0/\sigma_{\text{full}} < 0.05$ 不满足 | 启动 §7.3 备选路径 1（8 元素套开关识别二阶交互项） |
+| HOTI 多表面态耦合 | shift vector 在多表面态处发散 | 引入 Wilson loop 重正化 |
+| Bi₂Se₃ 实际自旋-轨道耦合 | 简化的 BHZ 模型不足 | 5 带 Kane 模型 |
+
+### 7.2 方案二的备选路径（TaP THz 场景）
+
+TaP THz 三次谐波场景（Pilch 等人[16] 2025 年）位于 §7.1 失效边界附近（THz 频段 + 弱场 + 强 Weyl 节点偏离）。该通道参数与方案二散射时间参数反演直接耦合，备选路径按故障类型选用：
+
+1. **TDDFT 校核**（多体效应主导故障）：以 Quantum ESPRESSO + TDDFT 计算 TaP 的 THz 三次谐波响应，作为 SBE 引擎失效时的兜底。计算量约 10× SBE，但能捕捉多体效应。
+2. **有效 $T_2$ 拟合**（唯象参数失效故障）：保留 SBE 引擎但把 $T_2$ 从唯象参数改为驱动场强的函数 $T_2(E_0)$，用 Pilch 等人[16] 实验的 $I_{3f} \propto I_f^{3}$ 立方律反演拟合。
+3. **降维近似**（三维计算量爆炸故障）：在 THz 频段用 2D 切片模型代替完整 3D Weyl 节点结构，$\mathbf{k}$ 空间积分只在 $k_z = 0$ 平面进行。
+
+触发判据：方案二 R² < 0.9 时进入备选路径 1；R² ≥ 0.9 但 $\sigma_{\text{dec}}$ > 5 pp 时进入备选路径 2；HOTI 维度计算 $N_k > 128^3$ 时进入备选路径 3。
+
+### 7.3 方案三的备选路径
+
+若三因素分解的弱耦合近似失效（$\sigma_0/\sigma_{\text{full}} \ge 0.05$）：
+
+1. **8 元素套开关**：运行 $2^3 = 8$ 种开关组合，识别三开关间的二阶交互项 $X \times Y, Y \times Z, X \times Z$。当交互项幅度 ≥ 单因素贡献的 30% 时三因素归一化分解失效，改用多元线性回归。
+2. **回归替代归一化**：放弃差分归一化，改用多元线性回归 $\sigma_{\text{full}} = a_X \sigma_X + a_Y \sigma_Y + a_Z \sigma_Z$ 拟合贡献系数。回归系数归一化为 100%，残差作为 $\sigma_{\text{dec}}$ 的主要来源。
+3. **贝叶斯反演**：把 X/Y/Z 视为后验分布，用 MCMC 采样得到贡献区间。计算量约 100× 差分归一化，作为最后兜底。
+
+### 7.4 方案四的备选路径（ZnO 参数标定）
+
+$V_{\text{exc}}$ 参数依赖 Jessen 等人[30] 2025 年 ZnO HHG-PL 双通道实验标定。若标定数据缺失：
+
+1. **第一性原理计算**：用 GW + Bethe-Salpeter 方程计算 ZnO 的激子-连续态耦合矩阵元。计算量大但参数独立。
+2. **实验反演**：用 You 等人[21] 2017 年 ZnO 各向异性 HHG 数据反推 $V_{\text{exc}}$。
+3. **极端区间扫描**：$V_{\text{exc}}$ 在 [0.1, 10] eV 区间全扫描，验证 $\Delta I_{\text{rev}} \ge 0.5 \times I_{\text{th}}$ 是否对参数鲁棒。
+
+### 7.5 双圆极化螺旋性的偏振控制
+
+1800 nm 双圆极化驱动对偏振控制精度要求极高（椭圆率误差需 < 0.01）。实验侧：
+
+1. **四分之一波片 + 偏振片组合**：椭圆率精度 ~0.02，满足方向四阈值 T 要求。
+2. **液晶偏振器**：电控调节椭圆率，精度 ~0.005，但需标定波长依赖。
+
+理论侧在偏振控制 ±0.01 误差下重做 $\Delta I_{\text{gap}}$ / $\delta_{\text{CD}}$ 验证，若阈值 R/T 失效则归因于偏振控制不足而非物理机制。
+
+### 7.6 失效场景与量化触发条件
+
+本节统一列出本课题所有已识别的失效场景及其量化判据，每条对应一个备选路径触发条件。备选路径在 §7.1–§7.5 已有局部定义，本节集中索引并补充未覆盖的场景。
+
+| # | 失效场景 | 量化触发条件 | 备选路径 | 来源 |
+|---|---------|--------------|--------|------|
+| 1 | 引擎高场强 THz 失效（§7.1） | $E_0 > 10^{11}$ W/cm² 且 $\hbar\omega < E_g/10$ | 切 TDDFT 校核 | §7.1 |
+| 2 | ZnO 高激发态密度失效（§7.1） | 激发态密度 $> 10^{18}$ cm$^{-3}$ | 切 Bethe-Salpeter + TB 投影 | §7.1 |
+| 3 | Weyl 节点高阶偏离强耦合失效（§7.1） | $\sigma_0/\sigma_{\text{full}} \geq 0.05$ | 启动 §7.3 路径 1（8 元素套开关） | §7.1 |
+| 4 | HOTI 多表面态 shift vector 发散（§7.1） | $|R_{nm}(\mathbf{k})| > 10$ a.u. 在任意 $\mathbf{k}$ 点 | Wilson loop 重正化 | §7.1 |
+| 5 | Bi₂Se₃ 自旋-轨道不足（§7.1） | Bi₂Se₃ 模型与实验 HHG 谱偏差 > 30% | 升 5 带 Kane 模型 | §7.1 |
+| 6 | TaP R² 校核未达标（§7.2） | R² < 0.9 | 切 TDDFT 校核（路径 1） | §7.2 |
+| 7 | TaP 散射参数失效（§7.2） | $0.9 \leq R^2 < 1.0$ 但 $\sigma_{\text{dec}} > 5$ pp | 有效 $T_2$ 拟合（路径 2） | §7.2 |
+| 8 | TaP 三维计算爆炸（§7.2） | HOTI $N_k > 128^3$ 触发 | 降维近似（路径 3） | §7.2 |
+| 9 | 三因素弱耦合失效（§7.3） | $\sigma_0/\sigma_{\text{full}} \geq 0.05$ | 启动 §7.3 路径 1 | §7.3 |
+| 10 | 交互项显著（§7.3） | 二阶交互项 $X \times Y$ 等 $\geq$ 单因素 30% | 多元线性回归（路径 2） | §7.3 |
+| 11 | 多元回归仍不收敛（§7.3） | 残差 $> 10\%$ | MCMC 贝叶斯反演（路径 3） | §7.3 |
+| 12 | ZnO $V_{\text{exc}}$ 数据缺失（§7.4） | Jessen[30] 标定数据未公开或样品不匹配 | §7.4 三条备选之一 | §7.4 |
+| 13 | 双圆极化偏振控制精度不足（§7.5） | 实验椭圆率误差 > 0.01 | 四分之一波片 + 偏振片 / 液晶偏振器 | §7.5 |
+| 14 | **双基线偏差超容差**（新增） | $\delta_R$ 或 $\delta_T \geq 10\%$（§5.4.3） | 引入第三基线 3.2 μm 三重交叉验证 | §5.4.3 |
+| 15 | **阈值 R 低于预标定**（新增） | 最终 $\Delta I_{\text{gap}} < R = 2$ | 重审拓扑样本池 + 升级 §7.3 路径 2 | §5.4.3 |
+| 16 | **阈值 T 低于预标定**（新增） | 最终 $\delta_{\text{CD}} < T = 0.3$ | 重审 CD 翻转点提取方法 + 升级 §7.4 路径 1 | §5.4.3 |
+| 17 | **多带 TDSE 计算爆炸**（新增） | SSH 链 $N_k > 4096$ 或 3D 体驱 wall time > 8 h/单点 | 启动 §1.7 各步回退（降维 / Numba JIT） | §1.7.1 |
+| 18 | **CD 谱信噪比不足**（新增） | $\sigma_{\text{CD}}/\sigma_{\text{noise}} < 5$ | 重演化（加密 $N_k$ + 减半 $\Delta t$） | §1.7.4 |
+| 19 | **量子度规-曲率约束破缺**（新增） | $\det g_n^{\mu\nu} < (\Omega_n^{xy}/2)^2$（§2.4） | 规范重正化 / $N_k$ 加密 | §2.4 |
+| 20 | **反常速度项非绝热失效**（新增） | Berry 曲率热点处反常速度贡献 > 10% 总电流 | 引入 Berry 曲率普适延拓 | §4.3 |
+
+20 条失效场景在 §7.1–§7.5 + §1.7 + §2.4 + §3.5 + §4.3 + §5.4.3 共 7 节内分别给出回退动作；本表为全局索引，便于故障诊断时定位。
+
+---
+
+## 8. 实验校核基准与可复现接口
+
+### 8.1 已发表数据基准
+
+| 数据 | 用途 | 验证判据 |
+|------|------|---------|
+| Li 等人[8] 2026 年 Bi₂Se₃ 家族 CD 光谱 | 800 nm + 1800 nm 双基线校核 | $\delta_{\text{CD}}$, $\Delta I_{\text{gap}}$ |
+| Pilch 等人[16] 2025 年 TaP THz 三次谐波 | 方向三 R² 拟合基准（THz 通道） | R² |
+| You 等人[21] 2017 年 ZnO 各向异性光谱 | ZnO 晶向对照 + $V_{\text{exc}}$ 反演 | 晶向依赖 + $\Delta I_{\text{rev}}$ |
+| Jessen 等人[30] 2025 年 ZnO HHG-PL 双通道 | $I_{\text{th}}$ 锚点 + $V_{\text{exc}}$ 标定 | $\Delta I_{\text{rev}}$ |
+| Lorenzo 等人[20] 2025 年 Kagome 数据 | S_edge 阈值验证 + R_HOTI 体相基线 | S_edge, R_HOTI |
+| X. Zhang 等人[15] 2024 年 TaAs 数据 | Type-I WSM 校核 | R_HOTI, R² |
+| Avetissian 与 Mkrtchian[24] 2020 年 Berry 曲率框架 | Berry 曲率项解析实现的算法支撑 | 方案二 Y 因素分解 |
+
+### 8.2 实验验证接口预留
+
+所有新型探针方案同步输出驱动参数规范：
+
+```yaml
+probe:
+  name: <R_HOTI / S_edge / δ_FP / Δκ / η_SF / Δt / X+Y+Z / σ_dec / R² / ΔI_rev / ΔI_gap / δ_CD>
+  model: <SSH / Rice-Mele / Qi-Wu-Zhang / Haldane / BHZ-HOTI / TRB-WSM / Type-I WSM / Multi-WSM / ZnO>
+  driving:
+    wavelength: <nm>
+    intensity: <W/cm²>
+    pulse_duration: <fs>
+    ellipticity: <-1 to +1>
+    polarization: <linear / LCP / RCP>
+  crystal_orientation: <(001) / (100) / (110)>
+  detection:
+    observable: <HHG谱 / CD谱 / 边带信号>
+    frequency_range: <eV>
+  expected_signal:
+    peak_position: <eV>
+    peak_intensity_ratio: <value>
+    sign: <+/->
+```
+
+### 8.3 代码可复现性
+
+引擎实现以 Python/NumPy 为主，3D 节点附近可调用 Numba JIT 加速。代码组织：
+
+```
+ssh-weyl-engine/
+├── src/
+│   ├── hamiltonian/      # 紧束缚模型构造（SSH / Rice-Mele / Qi-Wu-Zhang / Haldane / BHZ-HOTI / Weyl / ZnO）
+│   ├── berry/            # Berry 曲率、shift vector、几何修正跃迁矩阵元
+│   ├── sbe/              # SBE 时间演化、Crank-Nicolson、三通道驱动场（MIR/NIR/THz）
+│   ├── observables/      # HHG、CD 谱提取、压缩度（squeezing）计算
+│   ├── decomposition/    # 三因素归一化分解（开关 A/B/C + 闭合验证协议 §3.3.1）
+│   ├── exciton/          # ZnO 激子-连续态耦合 $V_{\text{exc}}$ 模块
+│   ├── framework/        # 方案五统一框架（见 §8.4）
+│   └── utils/            # 参数表、IO、随机参数扰动
+├── tests/                # 单元测试 + 基准回归
+└── configs/              # 各模型参数 YAML
+```
+
+每个模型 + 驱动条件组合跑一次 SBE 的典型 wall time（单机 16 核）：
+
+| 模型 | 一次演化 | 100 样本扫描 |
+|------|---------|-------------|
+| SSH 1D | 5 min | 8 h |
+| Qi-Wu-Zhang 2D | 30 min | 2 d |
+| Bi₂Se₃ HOTI 3D | 2 h | 8 d |
+| Weyl 3D（MIR/NIR） | 2 h | 8 d |
+| Weyl 3D（THz） | 4 h（含多周期积分） | 16 d |
+| ZnO + 激子 | 4 h | 16 d |
+
+100 样本随机参数扫描合计约 35 天（单节点并行）。MPI 并行可缩短到 3–5 天。三通道驱动的 wall time 分摊比例：MIR 60%、NIR 20%、THz 20%。
+
+### 8.4 方案五统一框架的代码模块映射
+
+方案五（统一理论框架形式化）的代码产出落点：
+
+- `src/framework/topological_sbe.py`：含拓扑项的 SBE 通用形式——动量空间 Berry 曲率 + shift vector 修正 + 反常速度项的统一封装。对应申请书 §3.5 "含拓扑项 SBE 的通用形式"。
+- `src/framework/eff_dipole.py`：Berry 曲率修正的多带跃迁矩阵元的统一表达（基于 Avetissian-Mkrtchian[24] 框架）。所有模型的 $\mathbf{d}_{mn}^{\text{eff}}$ 计算共用此模块。
+- `src/framework/three_factor_formula.py`：HHG 产额对 Weyl 节点 / Berry 曲率 / 散射三因素的分解公式集（X、Y、Z 与嵌套差分归一化的符号定义、闭合验证协议 §3.3.1、贝叶斯反演备选路径）。
+- `docs/framework/manifest.md`：统一框架的物理符号 → 代码模块映射表、参数口径声明、可复用 API 清单。该清单由方案五固化，不随单次扫描更新。
+
+方案五不引入新的物理图像，所有产出均复用方案一至四的物理结论。量子光场/非经典光生成方向不在本课题范围内（申请书 §3.5 末段明确），不在 `src/framework/` 下增设相关模块。
+
+### 8.5 实验装置与参数规范
+
+实验装置、驱动光源、谱学分辨率、样品制备与晶体取向规范已并入 §6.2（三通道默认值，含算法侧/实验侧对照表）与 §6.3（样品制备与晶体取向）。本节作为指针存在；新增装置参数不再在本节复述，新增时按 §6 形式补一行并在此处保留"见 §6"引用。
+
+---
+
+## 9. 与研究方案章节的对应
+
+| 本手册章节 | 申请书研究方案章节 | 内容对照 |
+|-----------|------------------|---------|
+| §1 | §3.1.2 第三步 | 时间演化算法 |
+| §1.2 | §3.1.2 第二步 | k 网格密度 |
+| §1.3 / §1.3.1 | §3.1.2 第三步 / §3.4.2 第一步 | 驱动场参数化 + 三通道驱动窗口（MIR / NIR / THz） |
+| §1.7 | §3.1.2 第一至第四步 | 引擎初始化与特征提取四步协议 |
+| §2 | §2.1 | Berry 曲率 + shift vector 数值实现 |
+| §2.4 | §2.1 / §3.5 | Berry 几何量闭式约束与量子度规关联 |
+| §3 | §3.2.2 | Weyl 三因素嵌套差分 |
+| §3.3.1 | §3.2.2 第三步 | 三因素分解闭合验证协议 |
+| §3.5 | §3.2.2 第二/三/四步 | 实验指纹闭式标定与精度边界 |
+| §4 | §3.3 | ZnO 激子-HHG 耦合 + 反常速度项 |
+| §4.2 | §3.3.2 / §2.2 ΔI_rev | 通道切换可逆区间 + $I_{\text{th}}$ 锚点（Jessen[30]） |
+| §4.4–§4.5 | §3.3.2 第一步 / §3.4.2 | ZnO 激子-HHG 通道耦合 SBE 实现 + 通道切换阈值与扫描步进 |
+| §4.6 | §3.4.2 | ZnO 各向异性晶向注入 |
+| §5 | §2.2 / §2.6 | 12 项判据度量协议 |
+| §5.4 | §3.4.2 / §2.2 阈值 R/T | 双基线判据工程化（800 nm + 1800 nm） |
+| §6 | §3.1.2 / §3.3.2 / §3.4.2 | 默认参数总表与实验参数接口（哈密顿量参数 + 三通道算法/实验对照表 + 样品与晶体取向） |
+| §7 | §3.1.2 失效边界段 / §3.2 / §3.3 可行性段 | 风险与替代 |
+| §7.6 | §4 方法对照段 + §5.4.3 + §1.7 | 失效场景量化触发条件（20 条全局索引） |
+| §8 | §3.1.3 / §3.2 可行性段 / §3.5 | 实验校核基准 + 方案五代码模块映射 |
+| §8.4 | §3.5 | 统一理论框架代码落点 |
+| §8.5 | §3.1.2 / §3.4.2 / §7.4 实验接口段 | 实验装置指针（详见 §6.2/§6.3） |
+| §10 | — | v7.0.5 外部方法吸收（KB 方法页参数溯源） |
+
+---
+
+## 10. v7.0.5 外部方法吸收——KB 方法页参数溯源
+
+按 v7.0.5 外部方法吸收纪律，把与本课题方案相关的 KB wiki 方法页（`knowledge/wiki/methods/`）的关键参数与适用边界以小节引用形式并入手册。每节给出 KB 来源页与对应本课题手册位置；新增参数（手册尚无）在本节独立标注，已在 §1–§9 直接采用的参数仅作指针引用、不重复登记完整内容。
+
+### 10.1 已并入 §1–§9 的 KB 参数指针
+
+| KB 方法页 | 本课题手册位置 | 关键参数指针 |
+|----------|---------------|------------|
+| `sbe-bloch-equations.md` | §1.4、§10.2 | $T_2$(multi-WSM)=1.5 fs、驱动 3.2 μm / 100 fs / $10^{11}$ W/cm² |
+| `tight-binding-model.md` | §2.4 | $\det g_n^{\mu\nu} \geq (\Omega_n^{xy}/2)^2$、实化 TB 1.5×10⁶ 原子 |
+| `半经典动力学方程贝里曲率反常速度.md` | §4.3 | $v_{\text{anom}} = (e/\hbar) \mathbf{E} \times \boldsymbol{\Omega}(\mathbf{k})$ |
+| `现代极化理论与Berry相位计算.md` | §2.4 | $(1/2\pi)\int dk\, \text{Tr}\, g_n^{\mu\nu}(k) \geq C_n$ |
+| `少周期脉冲CEP门控实验.md` | §1.3.1 | $U_p \propto I\lambda^2$ 截止上移；NIR 800 nm 与 streaking 一致 |
+| `波形控制.md` | §8.5.1 | CEP 稳定 5.9 fs @ 826 nm、激光重频 80 MHz |
+| `mdd9b6dcd.md`（带内/带间电流分解；用户索引 `mcd9b6dcd.md`） | §3.5.3 | Duan 等人 Cd₃As₂ 皮秒太赫兹微腔 $n \in [0.3, 2.3]$ 备选校核源；驱动参数皮秒共振（具体 $\tau$、$\Omega$、$I_f$ 由 [26] 文献直接给出，本手册不重写以免与一手数据漂移）；谱区级带内/带间通道归属判别框架 |
+| `floquet-engineering.md` | §1.7.3 | Floquet 边带分析 $n\hbar\Omega$ 增强峰位（m 光子共振于带隙，Floquet 准能带 $E^2/\Omega^3$ 手征质量隙宽）；强驱动 JC 模型 $\Omega_L = 0.2\,\omega_{eg}$ 对应 H3/H5 谐波；周期驱动 10–15 光周期下限；与 §3.5.1 镜像法交叉验证拓扑信号（Floquet 边带序列 vs 体相赝矢量镜像抑制） |
+| `统一Hamiltonian框架的rt-TDDFT.md` | §7.1、§7.2 | TDDFT 备选路径 1 触发条件：§7.6 行 1 量化触发（$E_0 > 10^{11}$ W/cm² 且 $\hbar\omega < E_g/10$） |
+| `TDSE求解器.md` | §1.7.3 | TDSE 替代路径（少电子基准） |
+
+### 10.2 KB 方法页适用边界摘要
+
+- **`sbe-bloch-equations.md`**：基础形式依赖给定能带结构与相干平均场泵浦近似，散射/退相（T₂）唯象处理且材料依赖；带内—带间电流的带投影分解不唯一且非规范不变；TD-HSEX 仅达含时屏蔽交换层级；BSE $B_{\text{LRC}}$ 三体关联无第一性途径。本课题 $\Delta I_{\text{rev}}$ 标定采用 Jessen[30] 实验数据而非 BSE $B_{\text{LRC}}$。
+- **`tight-binding-model.md`**：多类用法均为"参数外部可调"的模型化框架——TiSe₂ CDW 序参量是平均场输入而非自洽解，Wannier 晶格模型质量依赖第一性原理下折的准确性。本课题 SSH/Rice-Mele/Haldane/Qi-Wu-Zhang/BHZ 属"骨架式通用模型而非具体材料参数化"；具体材料参数（ZnO $E_g$、$E_B$）通过 §4.4.1 三条备选路径标定。
+- **`circular-dichroism.md`**：四类信号（结构手性圆二色、磁圆二色、HHG 圆二色、CPGE 谷选择泵浦）区分条件见 KB。本课题方向四双基线对照处理 HHG 圆二色（Berry 曲率/valley）与 CPGE 谷选择泵浦两类，与 ZnO 各向异性（非拓扑 HHG）信号形成对照基线。
+- **`Chern数与贝里曲率计算.md`**：Floquet 工程框架下奇宇称磁性 + SOC 体系，Chern 数改变只能发生在带隙闭合处；~2.69×10¹² W/cm² 为示意性强驱动而非效应阈值。本课题 Weyl 三因素分解不依赖 Floquet 工程，Chern 数仅用于 §3.5.1 镜像法判据。
+- **`半经典动力学方程贝里曲率反常速度.md`**：反常速度项仅在绝热近似下成立；Berry 曲率热点非绝热区失效须引入普适延拓。本课题 §4.3 通过 Weyl 节点附近自适应加密至 $128^3$ 覆盖热点绝热极限；热点处反常速度贡献 > 10% 总电流触发 §7.6 失效场景 20。
+- **`现代极化理论与Berry相位计算.md`**：仅适用于依赖 DFT 能带计算的周期性晶体；Berry 相位仅覆盖量子几何张量虚部（曲率/Hall 等输运响应），与之互补的实部量子度规所支配的光学吸收与非线性响应无法由极化计算给出。
+- **`少周期脉冲CEP门控实验.md`**：CEP 门控与延迟选通仅在少周期（约 5–6 fs）脉冲下有效；λ² 截止上移是三步模型近似下单原子标度。本课题 MIR/NIR 通道 30–100 fs 为多周期，不进入 CEP 门控区。
+- **`波形控制.md`**：CEP 对谐波拓扑荷切换控制仅在两条件同时满足且于有限光谱探测窗内观测时成立：晶体反演对称破缺 + 少周期 ≈1.5 周期驱动。本课题 MIR/NIR 通道 30–100 fs 多周期（约 5–17 周期 @ 1800 nm、约 11–38 周期 @ 800 nm）不进入少周期 CEP OAM 控制区。
+- **`统一Hamiltonian框架的rt-TDDFT.md`**：常规偶极近似传播无法处理 X 射线波段矢势空间结构；绝热平均场实时传播缺失电子关联；TDDFT 形式基础存在争议（Runge-Gross 奠基被指有缺陷）。本课题 §7.1/§7.2 备选路径 1 仅在多体效应主导的失效场景下启用，不作为主方案。
+- **`TDSE求解器.md`**：逐点全维数值求解成本高；'真实'延迟数值精确基准地位以模拟中完整计入库仑（模型）势为前提；shake-up 等剩余离子关联动力学须双电子全关联 TDSE 处理。本课题多带 SBE 在单电子近似下处理多带耦合，但方向一高阶 CD 与对称破缺边带信号提取需保留 SBE 模拟中库仑势长程部分以保证规范不变性。
+
+KB 方法页参数以"参数溯源"纪律并入对应手册小节；本节为 KB ↔ 手册的全局索引视图，便于方法选择时定位可用资源与边界。

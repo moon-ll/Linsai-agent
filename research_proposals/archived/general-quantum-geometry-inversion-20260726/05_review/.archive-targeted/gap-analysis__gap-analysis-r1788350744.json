@@ -1,0 +1,64 @@
+{
+  "gaps": [
+    {
+      "claim": "BSV（明亮压缩真空）驱动固体高次谐波产生的物理机制具有实验可行性",
+      "missing_evidence": "缺乏 BSV 驱动固体 HHG 的实验观测报道；申请书以此为核心前提但未引用任何实验验证文献",
+      "search_keywords": [
+        "bright squeezed vacuum solid high harmonic generation experimental",
+        "squeezed light driven HHG solid state Nature Physics 2024",
+        "quantum light solid harmonic generation first observation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "PINN 损失函数中拉格朗日乘子 λ_i 的权重标定方法",
+      "missing_evidence": "申请书仅说明 λ_i 由贝叶斯优化标定，但缺乏具体算法流程或框架引用；augmented Lagrangian 方法在 PINN 中的最新进展（2025）未被引用",
+      "search_keywords": [
+        "physics-informed neural network augmented Lagrangian weight calibration",
+        "PINN Lagrange multiplier Bayesian optimization attosecond",
+        "hybrid Kolmogorov-Arnold network augmented Lagrangian PINN 2025"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "HHG 光谱学反演问题的训练代价（GPU 核时、网格规模）与可扩展性量化指标",
+      "missing_evidence": "申请书列出 Σ≈15000 网格、≈150 GPU·h 预算，但缺乏与现有 HHG 代理模型训练代价的横向对比；Fourier 神经算子等 HHG surrogate 模型的计算成本基准未见引用",
+      "search_keywords": [
+        "high harmonic generation surrogate model training cost GPU hours",
+        "Fourier neural operator HHG high-fidelity surrogate benchmark",
+        "physics-informed neural network HHG computational cost scaling"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Hubbard U 约束在神经网络损失函数中的硬约束实现方式（QC-PINN 框架）",
+      "missing_evidence": "申请书提出 L_U(Ω) 作为 Hubbard-U 约束损失项，但未说明如何保证 U(Ω) 物理区间的硬约束；QC-PINN 等将量子约束嵌入 PINN 架构的框架未被引用",
+      "search_keywords": [
+        "QC-PINN quantum constrained physics-informed neural network Hubbard U",
+        "physics-informed neural networks hard constraints nonlinear optics",
+        "Hubbard U neural network constraint implementation spectroscopy"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "BSV 驱动 HHG 的量子增强因子（QEF）框架的理论预言与实验测量",
+      "missing_evidence": "申请书核心性能指标（yield enhancement factor）依赖 BSV 的量子统计特性增强 HHG，但 Even Tzur/QEF 理论框架及 Khurelbaatar 等人的 BSV-HHG 理论与实验未被系统引用",
+      "search_keywords": [
+        "quantum enhancement factor high harmonic generation QEF",
+        "bright squeezed vacuum HHG quantum advantage factor theory",
+        "Khurelbaatar Rivera-Dean BSV HHG solid state"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "量子几何（Berry 曲率、Fubini-Study 度规）通过 HHG 光谱学反演的实验验证路线",
+      "missing_evidence": "申请书理论框架依赖量子几何与 HHG 的映射关系，但 Nature Communications (2018) 测量固体 Berry 曲率的实验方法未被引用；量子几何张量反演的具体实验可行性缺乏文献支撑",
+      "search_keywords": [
+        "Berry curvature measurement high harmonic spectroscopy Nature Communications",
+        "quantum geometry tensor HHG inversion experimental validation",
+        "high-harmonic generation from topological surface states Bi2Se3"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

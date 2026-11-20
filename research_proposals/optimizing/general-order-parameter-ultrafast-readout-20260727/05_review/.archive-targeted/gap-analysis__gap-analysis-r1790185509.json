@@ -1,0 +1,16 @@
+{
+  "gaps": [
+    {
+      "claim": "CrSb 共线反铁磁奈尔温度 TN = 733(4) K 由中子衍射实测确认",
+      "missing_evidence": "申请书 §一.4 L59 与 §2.3 L37 错挂 [27]（实为 Singh 手性磁振子论文）作为'中子衍射实测 733(4) K'的出处；缺少该温度的真正中子衍射来源（2511.16086：Hallas 等人 CrSb 极化中子衍射单晶实验，Phys. Rev. 85, 365 (1952) Snow 早期多晶中子衍射 [40]，或 2603.25820：WISH 单晶中子衍射，JANA2020 精修）",
+      "search_keywords": [
+        "CrSb polarized neutron diffraction Neel temperature 733 K",
+        "Snow 1952 CrSb antiferromagnetic neutron diffraction",
+        "CrSb WISH ISIS time-of-flight neutron diffraction 1.5 K JANA2020",
+        "Hallas CrSb compensated altermagnet polarized neutron diffraction"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "full_review"
+}

@@ -1,0 +1,358 @@
+{
+  "team_id": "linsai-research-team",
+  "name": "林赛研究管线团队",
+  "agents": {
+    "agent_001": {
+      "agent_id": "agent_001",
+      "name": "方向校准官",
+      "name_en": "Direction Calibrator",
+      "role": "direction_calibration",
+      "stage": 0,
+      "delegate_module": "research_profiler",
+      "hermes_profile": "linsai",
+      "description": "分析用户研究方向，校准管线目标与用户画像的对齐度",
+      "capabilities": [
+        "研究方向关键词提取",
+        "用户画像读取",
+        "方向对齐评估",
+        "TF-IDF分析"
+      ],
+      "icon": "🧭",
+      "status": "idle",
+      "tier": "core",
+      "performance": {
+        "tasks_completed": 0,
+        "tasks_failed": 0,
+        "success_rate": 1.0,
+        "avg_duration_s": 0.0,
+        "total_duration_s": 0.0,
+        "last_task_at": null,
+        "recent_tasks": []
+      },
+      "current_task": null,
+      "updated_at": "2026-07-30T03:00:25Z"
+    },
+    "agent_002": {
+      "agent_id": "agent_002",
+      "name": "文献调研员",
+      "name_en": "Literature Researcher",
+      "role": "literature_research",
+      "stage": 1,
+      "delegate_module": "external_fetcher",
+      "hermes_profile": "researcher",
+      "description": "多源文献检索、评分排序、全文下载与简报生成",
+      "capabilities": [
+        "arXiv检索",
+        "联网搜索",
+        "论文评分",
+        "简报生成",
+        "全文下载"
+      ],
+      "icon": "📚",
+      "status": "idle",
+      "tier": "core",
+      "performance": {
+        "tasks_completed": 0,
+        "tasks_failed": 0,
+        "success_rate": 1.0,
+        "avg_duration_s": 0.0,
+        "total_duration_s": 0.0,
+        "last_task_at": null,
+        "recent_tasks": []
+      },
+      "current_task": null,
+      "updated_at": "2026-07-30T03:00:25Z"
+    },
+    "agent_003": {
+      "agent_id": "agent_003",
+      "name": "课题凝练师",
+      "name_en": "Topic Refiner",
+      "role": "topic_refinement",
+      "stage": 2,
+      "delegate_module": "gap_analyzer",
+      "hermes_profile": "analyst",
+      "description": "知识库覆盖度扫描、研究缺口识别、课题生成与评分",
+      "capabilities": [
+        "覆盖度分析",
+        "缺口识别",
+        "课题生成",
+        "品味评分",
+        "课题演化"
+      ],
+      "icon": "🔬",
+      "status": "idle",
+      "tier": "core",
+      "performance": {
+        "tasks_completed": 0,
+        "tasks_failed": 0,
+        "success_rate": 1.0,
+        "avg_duration_s": 0.0,
+        "total_duration_s": 0.0,
+        "last_task_at": null,
+        "recent_tasks": []
+      },
+      "current_task": null,
+      "updated_at": "2026-07-30T03:00:25Z"
+    },
+    "agent_004": {
+      "agent_id": "agent_004",
+      "name": "问题架构师",
+      "name_en": "Question Architect",
+      "role": "question_construction",
+      "stage": 3,
+      "delegate_module": "question_architect",
+      "hermes_profile": "analyst",
+      "description": "五要素体系构建、科学问题分解与验证",
+      "capabilities": [
+        "五要素框架构建",
+        "问题分解",
+        "五维验证",
+        "证据链接"
+      ],
+      "icon": "🏗️",
+      "status": "idle",
+      "tier": "core",
+      "performance": {
+        "tasks_completed": 0,
+        "tasks_failed": 0,
+        "success_rate": 1.0,
+        "avg_duration_s": 0.0,
+        "total_duration_s": 0.0,
+        "last_task_at": null,
+        "recent_tasks": []
+      },
+      "current_task": null,
+      "updated_at": "2026-07-30T03:00:25Z"
+    },
+    "agent_005": {
+      "agent_id": "agent_005",
+      "name": "申请书撰写员",
+      "name_en": "Proposal Writer",
+      "role": "proposal_writing",
+      "stage": 4,
+      "delegate_module": "proposal_writer",
+      "hermes_profile": "writer",
+      "description": "NSFC格式申请书章节撰写、引文注入、风格调整",
+      "capabilities": [
+        "章节模板组装",
+        "引文占位符注入",
+        "品味风格调整",
+        "章节版本管理"
+      ],
+      "icon": "✍️",
+      "status": "idle",
+      "tier": "core",
+      "performance": {
+        "tasks_completed": 0,
+        "tasks_failed": 0,
+        "success_rate": 1.0,
+        "avg_duration_s": 0.0,
+        "total_duration_s": 0.0,
+        "last_task_at": null,
+        "recent_tasks": []
+      },
+      "current_task": null,
+      "updated_at": "2026-07-30T03:00:25Z"
+    },
+    "agent_006": {
+      "agent_id": "agent_006",
+      "name": "质量审查官",
+      "name_en": "Quality Inspector",
+      "role": "self_check_optimization",
+      "stage": 5,
+      "delegate_module": "proposal_inspector",
+      "hermes_profile": "reviewer",
+      "description": "六维自检、问题识别、优化策略生成与迭代追踪",
+      "capabilities": [
+        "六维检查",
+        "问题分级",
+        "策略生成",
+        "迭代追踪",
+        "引文验证"
+      ],
+      "icon": "🔍",
+      "status": "idle",
+      "tier": "core",
+      "performance": {
+        "tasks_completed": 0,
+        "tasks_failed": 0,
+        "success_rate": 1.0,
+        "avg_duration_s": 0.0,
+        "total_duration_s": 0.0,
+        "last_task_at": null,
+        "recent_tasks": []
+      },
+      "current_task": null,
+      "updated_at": "2026-07-30T03:00:25Z"
+    },
+    "agent_007": {
+      "agent_id": "agent_007",
+      "name": "品味顾问",
+      "name_en": "Taste Advisor",
+      "role": "taste_advisor",
+      "stage": null,
+      "delegate_module": "taste_engine",
+      "description": "五维学术品味建模、课题评分、写作风格调整",
+      "capabilities": [
+        "品味模型更新",
+        "相似度计算",
+        "舒适区分析",
+        "风格推荐"
+      ],
+      "icon": "🎯",
+      "status": "idle",
+      "tier": "support",
+      "performance": {
+        "tasks_completed": 0,
+        "tasks_failed": 0,
+        "success_rate": 1.0,
+        "avg_duration_s": 0.0,
+        "total_duration_s": 0.0,
+        "last_task_at": null,
+        "recent_tasks": []
+      },
+      "current_task": null,
+      "updated_at": "2026-07-30T03:00:25Z"
+    },
+    "agent_008": {
+      "agent_id": "agent_008",
+      "name": "血缘记录员",
+      "name_en": "Lineage Tracker",
+      "role": "lineage_tracker",
+      "stage": null,
+      "delegate_module": "lineage_tracker",
+      "description": "产物血缘关系维护、双向溯源、影响分析",
+      "capabilities": [
+        "血缘注册",
+        "上游溯源",
+        "下游溯源",
+        "影响分析",
+        "DOT导出"
+      ],
+      "icon": "🔗",
+      "status": "idle",
+      "tier": "support",
+      "performance": {
+        "tasks_completed": 0,
+        "tasks_failed": 0,
+        "success_rate": 1.0,
+        "avg_duration_s": 0.0,
+        "total_duration_s": 0.0,
+        "last_task_at": null,
+        "recent_tasks": []
+      },
+      "current_task": null,
+      "updated_at": "2026-07-30T03:00:25Z"
+    },
+    "agent_009": {
+      "agent_id": "agent_009",
+      "name": "产物管理员",
+      "name_en": "Artifact Manager",
+      "role": "artifact_manager",
+      "stage": null,
+      "delegate_module": "artifact_manager",
+      "description": "产物版本管理、生命周期状态机、diff与回滚",
+      "capabilities": [
+        "产物创建",
+        "版本锁定",
+        "产物作废",
+        "diff对比",
+        "版本回滚"
+      ],
+      "icon": "📦",
+      "status": "idle",
+      "tier": "support",
+      "performance": {
+        "tasks_completed": 0,
+        "tasks_failed": 0,
+        "success_rate": 1.0,
+        "avg_duration_s": 0.0,
+        "total_duration_s": 0.0,
+        "last_task_at": null,
+        "recent_tasks": []
+      },
+      "current_task": null,
+      "updated_at": "2026-07-30T03:00:25Z"
+    },
+    "agent_010": {
+      "agent_id": "agent_010",
+      "name": "引文管理员",
+      "name_en": "Citation Manager",
+      "role": "citation_manager",
+      "stage": null,
+      "delegate_module": "citation_manager",
+      "description": "参考文献库管理、NSFC格式化、引文扫描与验证",
+      "capabilities": [
+        "文献查重",
+        "引文扫描",
+        "格式化",
+        "BibTeX导出",
+        "引文验证"
+      ],
+      "icon": "📑",
+      "status": "idle",
+      "tier": "support",
+      "performance": {
+        "tasks_completed": 0,
+        "tasks_failed": 0,
+        "success_rate": 1.0,
+        "avg_duration_s": 0.0,
+        "total_duration_s": 0.0,
+        "last_task_at": null,
+        "recent_tasks": []
+      },
+      "current_task": null,
+      "updated_at": "2026-07-30T03:00:25Z"
+    },
+    "agent_011": {
+      "agent_id": "agent_011",
+      "name": "审稿模拟员",
+      "name_en": "Review Simulator",
+      "role": "review_simulator",
+      "stage": null,
+      "delegate_module": null,
+      "description": "模拟NSFC评审专家视角，提供评审意见预判",
+      "capabilities": [],
+      "icon": "👨‍⚖️",
+      "status": "offline",
+      "tier": "growth",
+      "performance": {
+        "tasks_completed": 0,
+        "tasks_failed": 0,
+        "success_rate": 1.0,
+        "avg_duration_s": 0.0,
+        "total_duration_s": 0.0,
+        "last_task_at": null,
+        "recent_tasks": []
+      },
+      "current_task": null,
+      "updated_at": "2026-07-30T03:00:25Z"
+    },
+    "agent_012": {
+      "agent_id": "agent_012",
+      "name": "实验方案设计师",
+      "name_en": "Experiment Designer",
+      "role": "experiment_designer",
+      "stage": null,
+      "delegate_module": null,
+      "description": "基于研究方案自动设计实验参数与光路配置",
+      "capabilities": [],
+      "icon": "⚙️",
+      "status": "offline",
+      "tier": "growth",
+      "performance": {
+        "tasks_completed": 0,
+        "tasks_failed": 0,
+        "success_rate": 1.0,
+        "avg_duration_s": 0.0,
+        "total_duration_s": 0.0,
+        "last_task_at": null,
+        "recent_tasks": []
+      },
+      "current_task": null,
+      "updated_at": "2026-07-30T03:00:25Z"
+    }
+  },
+  "created_at": "2026-07-30T03:00:25Z",
+  "last_updated": "2026-07-30T03:00:25Z"
+}

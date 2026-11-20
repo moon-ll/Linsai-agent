@@ -1,0 +1,18 @@
+{
+  "gaps": [
+    {
+      "claim": "XUV窗30–60 eV称覆盖Bi O₄,₅ ~26 eV与Se M₄,₅ ~55 eV两类原子边带能量",
+      "missing_evidence": "Bi的O边（4d→5p/εf，~26 eV）与Se的M边（3d→4p/εf，~55 eV）的精确实验测量值缺乏权威引用支撑；现有报告未注明所用边能数据来源，且数值与窗口边界存在矛盾",
+      "search_keywords": [
+        "bismuth O4,5 edge energy 4d photoabsorption",
+        "selenium M4,5 edge energy 3d photoabsorption",
+        "NIST X-ray transition database Bi Se",
+        "atomic Bi 4d 5p transition synchrotron",
+        "atomic Se 3d 4p transition synchrotron",
+        "Bi2Se3 XUV absorption near-edge"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "full_review"
+}

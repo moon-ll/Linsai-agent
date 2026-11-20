@@ -1,0 +1,65 @@
+{
+  "gaps": [
+    {
+      "claim": "三分方向（§2.2/§2.3/§2.4）的现状定位缺少'现有描述停在哪一步'的缺口句，导致他人工作逐篇复述后无文献支撑的缺口定位",
+      "missing_evidence": "每个分方向需要 1-2 篇直接表明该方向研究存在空白或未解决之处的文献，支撑从'文献复述'到'本项目拟做什么'之间的缺口论证",
+      "search_keywords": [
+        "solid high harmonic generation open questions",
+        "Houston basis Bloch equations limitations",
+        "anomalous current Berry curvature HHG review"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "总述段核心问题——带内、带间与反常（Berry 曲率反常电流）三条电流通道可在统一第一性原理多尺度框架内定量分解",
+      "missing_evidence": "缺直接支撑'Berry 曲率反常电流可从多通道高次谐波中分离/定量分解'的奠基性文献，机制主张目前压至 §2.2 第二小节且无充分引用锚定",
+      "search_keywords": [
+        "Berry curvature anomalous current high harmonic",
+        "anomalous photocurrent nonlinear optics topological",
+        "first-principles multichannel HHG decomposition"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "三层方法框架（实时含时密度泛函理论 / Houston 基半导体布洛赫方程 / 单向脉冲传播方程）作为统一多尺度框架的可行性",
+      "missing_evidence": "缺将 TDDFT、SBE-Houston 基、UPPE 三层方法贯通用于固态 HHG 的多尺度耦合文献或方法学综述，支撑框架内在一致性与分层合理性",
+      "search_keywords": [
+        "TDDFT semiconductor Bloch equations unidirectional pulse propagation",
+        "multiscale simulation solid-state HHG",
+        "Houston basis strong-field semiconductor"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Wu 等[22]'Γ 点布洛赫态缀饰激光态等价于 Houston 态'的等价性论断作为本项目理论工具的合法性来源",
+      "missing_evidence": "锚点对比指出主张收束滞后，建议补充 1-2 篇对该等价性给出严格证明或适用范围边界的文献，避免单一引用支撑关键理论工具",
+      "search_keywords": [
+        "Houston states equivalence dressed Bloch states",
+        "acceleration theorem strong field approximation validity",
+        "Volkov-Houston basis strong-field solids"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "分方向二（§2.3）δ 偏差中位数 <0.2 且占比 >70% 作为可检验目标所依赖的现有 δ 统计基线",
+      "missing_evidence": "缺报告现有理论-实验偏差统计分布（中位偏差量级、误差来源分析）的文献，以支撑指标设定的现实依据而非凭空给定",
+      "search_keywords": [
+        "HHG theory experiment comparison quantitative error",
+        "solid HHG spectral deviation DFT experiment",
+        "ab initio HHG benchmark validation"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "分方向三（§2.4）标度律研究（参照带宽三材料端点 3.2/1.8/13.6 eV）所选材料体系的代表性",
+      "missing_evidence": "缺支撑所选三种材料带宽端点覆盖标度律检验所需参数区间的文献（材料 HHG 谱已有数据或带宽-谐波阶次关系已有报道），使材料选择有文献依据",
+      "search_keywords": [
+        "HHG scaling law bandwidth solid materials",
+        "ZnO MgO HHG cutoff bandwidth dependence",
+        "material dependence high-order harmonic generation solids"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "content"
+}

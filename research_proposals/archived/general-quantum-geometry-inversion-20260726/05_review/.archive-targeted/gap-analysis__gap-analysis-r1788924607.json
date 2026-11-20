@@ -1,0 +1,36 @@
+{
+  "gaps": [
+    {
+      "claim": "Xiang等2024年提出自旋量子几何张量[45]的归属",
+      "missing_evidence": "arXiv:2406.02257的一作署名应为Longjun Xiang而非Xiao",
+      "search_keywords": [
+        "arXiv 2406.02257 spin quantum geometry tensor",
+        "Longjun Xiang spin QGT",
+        "Xiang Hao Jin Jian Wang spin Berry curvature"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "量子光×强关联联合检验在所考察检索范围内仍付诸阙如",
+      "missing_evidence": "需明确Lange等[20]在Mott绝缘体上做压缩光HHG属产额/机制层面、未涉及Ω/g几何量反演，区分理论机制工作与几何反演目标",
+      "search_keywords": [
+        "Lange Mott insulator compressed light HHG",
+        "compressed squeezed light strongly correlated high harmonic",
+        "quantum light Hubbard U harmonic generation",
+        "Mott insulator exciton squeezed HHG coupling"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "BSV条件signal态在HHG反演中的物理有效性",
+      "missing_evidence": "Rasputnyi型BSV实验端signal臂为热混态，与scheme §2.1真空投影条件态推导不自洽；缺乏实验端实际可实现的单模压缩真空态描述或breeding协议idler零差投影条件化的量化通量代价文献",
+      "search_keywords": [
+        "bright squeezed vacuum signal idler heralding protocol",
+        "BSV breeding conditional single-mode squeezed state",
+        "Rasputnyi BSV conditional measurement photon flux",
+        "squeezed vacuum mixed state thermal ensemble high harmonic"
+      ],
+      "priority": "high"
+    }
+  ]
+}

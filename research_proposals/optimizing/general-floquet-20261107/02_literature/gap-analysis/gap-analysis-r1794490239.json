@@ -1,0 +1,38 @@
+{
+  "gaps": [
+    {
+      "claim": "§1.5 L91『Yan 组…[10, 17]』——将光磁切换与奇宇称磁振子的理论工作归属于 Yan 组",
+      "missing_evidence": "作者-文献对应关系的核验证据：现有 [10] 为 Han 与 Li 的光磁切换工作、[17] 为 Pu Zhang 的奇宇称磁振子工作，Yan 系 [39] 一作。需检索 Yan 本人（一作或通讯作者）在光磁切换/奇宇称磁振子方向的代表作以正确归属，或按评审意见删去『Yan 组』改挂真实作者团队",
+      "search_keywords": [
+        "optomagnetic switching Yan first author",
+        "odd-parity magnons Yan corresponding author",
+        "光磁切换 理论 Yan",
+        "奇宇称磁振子 Yan"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.6 L105 IFE『在低频段增强』与 scheme §3.3『ω→0 趋零、ω≈0.6τ⁻¹ 处极大』两版冲突的 IFE 频率依赖表述",
+      "missing_evidence": "反铁磁体系（RuO₂ 类）逆法拉第效应（IFE）频率依赖/色散关系的定量文献，用于裁定两版冲突表述并给出有出处支撑的统一定量口径（极大值位置与低频渐近行为）",
+      "search_keywords": [
+        "inverse Faraday effect frequency dependence",
+        "inverse Faraday effect antiferromagnetic RuO2",
+        "IFE dispersion low-frequency asymptotic",
+        "Floquet inverse Faraday effect"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.5 L89『中山大学…与港科大浙大合作』的建制归属断言",
+      "missing_evidence": "可溯源的单位归属依据：相关论文的作者署名机构、课题组官方页面或项目合作公示，以支撑多单位合作断言；若检索不到则需弱化为『国内多个理论团队』",
+      "search_keywords": [
+        "Sun Yat-sen University optomagnetic switching affiliation",
+        "中山大学 光磁切换 课题组",
+        "HKUST Zhejiang University odd-parity magnon collaboration",
+        "奇宇称磁振子 署名单位 合作"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

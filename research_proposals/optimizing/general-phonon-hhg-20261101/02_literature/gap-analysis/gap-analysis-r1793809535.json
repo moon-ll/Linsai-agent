@@ -1,0 +1,20 @@
+{
+  "gaps": [
+    {
+      "claim": "“国内尚无系统工作”这一关于国内固体高次谐波研究现状的断言。",
+      "missing_evidence": "缺少对国内固体高次谐波研究的系统检索与可核验文献证据。需要补充2—3篇国内团队发表的代表性固体或晶体高次谐波论文，并明确作者、机构、年份、期刊及DOI；同时应将新增研究论文与现有综述性文献分层引用。该结论属于研究现状判断，不能仅靠列举少量论文证明“尚无”，还应说明检索数据库、检索式、时间范围和纳入标准；若检出实质性国内工作，应将原断言收窄为“国内针对局域电子态—晶格耦合及相位分辨机制的系统研究仍较缺乏”等更精确表述。",
+      "search_keywords": [
+        "国内 固体 高次谐波 晶体 研究",
+        "高次谐波发生 固体 中国 课题组",
+        "掺杂半导体 固体高次谐波",
+        "晶体 高次谐波 光谱 相位",
+        "solid-state high-order harmonic generation crystal",
+        "solid-state HHG doped semiconductor",
+        "crystal high-harmonic spectroscopy",
+        "high harmonic generation in solids China"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "scheme"
+}

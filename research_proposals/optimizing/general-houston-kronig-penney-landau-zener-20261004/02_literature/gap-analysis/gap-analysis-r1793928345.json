@@ -1,0 +1,29 @@
+{
+  "gaps": [
+    {
+      "claim": "将 ZnO 子带隙信号判定为与激子通道“绑定”，或把高次谐波发射与光致发光视为同一激子通道的表征。",
+      "missing_evidence": "缺少能够直接支持“绑定”或因果同源关系的原始实验文献。现有 Jessen 等人的原始研究（arXiv:2508.09364 及其见刊版本）给出的结论正相反：高次谐波蓝移主要对应电子—空穴等离子体折射率变化，光致发光红移主要对应载流子—载流子相互作用引起的带隙重整化，两者是可区分的互补探针。若要保留激子归属，需要补充分别测量高次谐波、光致发光、等离子体参数和激子参数的原始研究，并提供能够排除等离子体折射率及带隙重整化解释的判据；否则应按评审意见改为“子带隙信号归属须同时约束等离子体与激子两项判据”。",
+      "search_keywords": [
+        "Jessen ZnO high harmonic generation photoluminescence electron-hole plasma",
+        "arXiv 2508.09364",
+        "ZnO HHG blue shift PL red shift bandgap renormalization",
+        "ZnO exciton contribution high harmonic emission distinguish plasma",
+        "ZnO high harmonic generation excitonic plasma diagnostic"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "NbOI₂ 可产生 16 阶高次谐波，且谐波产额随驱动光强呈 I³ 标度。",
+      "missing_evidence": "缺少直接报告“16 阶谐波”和“强度三次方标度”的原始实验文献；现有句中既无角标，也未说明这两个定量结果是否来自同一研究。应为 16 阶输出上限和 I³ 强度依赖分别核验来源；若来自不同论文，应分别挂接相应引文，并优先引用包含样品结构、阶次判定、驱动强度扫描及拟合过程的原始论文，而非二手综述。",
+      "search_keywords": [
+        "NbOI2 16th-order high harmonic generation",
+        "NbOI2 I^3 scaling high harmonic generation",
+        "niobium oxyiodide high harmonic generation intensity scaling",
+        "NbOI₂ 16阶高次谐波 强度三次方标度",
+        "van der Waals ferroelectric NbOI2 high harmonic spectroscopy"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

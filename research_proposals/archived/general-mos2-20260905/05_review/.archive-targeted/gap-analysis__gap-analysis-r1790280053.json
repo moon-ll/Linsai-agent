@@ -1,0 +1,39 @@
+{
+  "gaps": [
+    {
+      "claim": "闭环CEP稳定度59 mrad rms对应装置时间分辨典型值70—90 as",
+      "missing_evidence": "缺少文献或预研数据支撑CEP稳定度59 mrad rms对应阿秒级时间分辨典型值70—90 as，需找CEP稳定度<60 mrad闭环实验与对应streaking/RABBITT时间分辨实测的基准文献，或sub-100 as CEP-gated HHG实测报告",
+      "search_keywords": [
+        "CEP stabilization sub-100 mrad attosecond streaking",
+        "carrier-envelope phase closed-loop attosecond pulse duration",
+        "59 mrad CEP stability HHG time resolution",
+        "CEP locked sub-100 as high harmonic generation",
+        "kHz CEP stabilization attosecond transient absorption"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "RMS残差>25%→18%→σ_Ω≤0.15归一化映射与点对点对齐换算",
+      "missing_evidence": "缺少HHG反演RMS残差百分比与角度参数σ_Ω归一化偏差之间的映射函数文献（如Tikhonov正则化残差归一化到Ω_max的标准做法）",
+      "search_keywords": [
+        "Tikhonov regularization residual normalization inversion",
+        "HHG retrieval RMS error normalized parameter",
+        "high harmonic inversion residual angular uncertainty mapping",
+        "solid HHG Berry curvature reconstruction error benchmark"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "2508.14774软X射线CEP到streaking路径100 mrad↔170 as换算基准",
+      "missing_evidence": "缺少2508.14774软X射线路径下CEP稳定度到阿秒streaking时间分辨的换算基准文献与软X射线阿秒脉冲典型CEP抖动实测",
+      "search_keywords": [
+        "soft X-ray attosecond streaking CEP stability",
+        "2508.14774 attosecond soft X-ray pulse characterization",
+        "water window attosecond CEP stabilization 100 mrad",
+        "soft X-ray streaking time resolution CEP jitter"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

@@ -1,0 +1,49 @@
+{
+  "gaps": [
+    {
+      "claim": "scheme.md L39 声称'国际上首次实现…'——未附文献支撑，无检索范围/截止日期",
+      "missing_evidence": "缺查新报告或国内外同类工作的系统性对比文献",
+      "search_keywords": [
+        "attosecond streaking water window first",
+        "Cousin attosecond streaking water window 2017 citation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "scheme.md L93 声称'首次系统建立…''填补…空白'——无文献支撑，无查新依据",
+      "missing_evidence": "缺国内外已有类似方法学的综述或对比文献",
+      "search_keywords": [
+        "attosecond streaking multi-channel ionization review",
+        "FROGCRAB multi-channel validation review"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "scheme.md L16 引用 [5]——该编号在 references.md 中不存在（ghost citation）",
+      "missing_evidence": "缺实有文献支撑此引用位置的观点",
+      "search_keywords": [
+        "attosecond streaking citation 5 missing",
+        "scheme.md reference 5 verification"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "scheme.md L16 正文称 'Tong等'（TDSE双通道耦合势项），但 references[16]= Liu Y等 'Fast phase retrieval Opt Express 2022'——署名与文献严重错位",
+      "missing_evidence": "缺 Tong 等 TDSE 双通道耦合的原始文献（可能为杜撰或误挂）",
+      "search_keywords": [
+        "Tong TDSE dual-channel coupling attosecond",
+        "two-channel TDSE attosecond streaking potential term"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "多通道电离谱分离验证协议——声称'分阶段验证''逐级确认'但未引用任何验证方法学文献",
+      "missing_evidence": "缺 sequential gating / multi-stage FROG-CRAB verification methodology 的具体文献支撑",
+      "search_keywords": [
+        "FROG-CRAB multi-stage verification methodology",
+        "attosecond pulse characterization validation protocol sequential gating"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

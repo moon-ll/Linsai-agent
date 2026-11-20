@@ -1,0 +1,46 @@
+{
+  "topics": {
+    "general-berry-dipole-hhg-probe-20261116": {
+      "title": "固体高次谐波中的贝里曲率偶极探测",
+      "stage": "questions",
+      "source": "manual",
+      "problem": "非中心对称固体中贝里曲率偶极对谐波圆二色性的贡献能否被分离测量",
+      "related": [],
+      "created_at": "2026-11-16T15:35:39Z",
+      "updated_at": "2026-11-16T15:35:39Z",
+      "stage_history": [
+        {
+          "stage": "questions",
+          "at": "2026-11-16T15:35:39Z",
+          "note": "注册（manual）"
+        }
+      ],
+      "novelty": {
+        "max_score": 0.0,
+        "competitor": ""
+      }
+    },
+    "general-berry-dipole-hhg-probe-20261116-02": {
+      "title": "固体高次谐波贝里曲率偶极探测",
+      "stage": "questions",
+      "source": "manual",
+      "problem": "",
+      "related": [],
+      "created_at": "2026-11-16T15:35:39Z",
+      "updated_at": "2026-11-16T15:35:39Z",
+      "stage_history": [
+        {
+          "stage": "questions",
+          "at": "2026-11-16T15:35:39Z",
+          "note": "注册（manual）"
+        }
+      ],
+      "novelty": {
+        "max_score": 0.3662,
+        "competitor": "固体高次谐波中的贝里曲率偶极探测 非中心对称固体中贝里曲率偶极对谐波圆二色性的贡献能否被分离测量"
+      }
+    }
+  },
+  "rejected": {},
+  "updated_at": "2026-11-16T15:35:39Z"
+}

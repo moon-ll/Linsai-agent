@@ -1,0 +1,38 @@
+{
+  "gaps": [
+    {
+      "claim": "Gao 等 Science 381:181 (2023) 实现了首个非线性霍尔效应的实验观测",
+      "missing_evidence": "未引用早约 3 个月的 Wang 等 Nature 621:487 (2023) 同类量子几何输运观测作为先导工作，导致'首个'声明与领域既有事实存在冲突",
+      "search_keywords": [
+        "nonlinear Hall effect quantum geometry",
+        "Berry curvature dipole transport experiment",
+        "Wang Nature 621 487 2023 nonlinear Hall",
+        "quantum geometry transport observation antiferromagnet"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Gao 等 Science 381:181 (2023) 涉及 PT 对称反铁磁 MnBi₂Te₄ 基异质结",
+      "missing_evidence": "原文器件结构为 MnBi₂Te₄（偶数层）与黑磷（black phosphorus）异质结，当前描述中'PT 对称反铁磁 MnBi₂Te₄ 基…异质结'与原文器件配置不符，需以原文校核引用描述，必要时补引支持 PT 对称属性或偶数层反铁磁拓扑性质的文献",
+      "search_keywords": [
+        "MnBi2Te4 even-layer antiferromagnetic topological insulator",
+        "MnBi2Te4 black phosphorus heterojunction",
+        "Gao Xiao Science 381 181 2023 quantum metric",
+        "PT-symmetric antiferromagnet heterojunction nonlinear Hall"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Sala[4] 以非线性磁阻实测量子度规",
+      "missing_evidence": "原文（Nat. Mater. 2026-05-22）方法为电场可调量子度规磁阻（electric-field tunable quantum metric magnetoresistance, QMMR），'非线性磁阻'措辞与原文测量机制不符，需核实原文并改述以确保引用描述精确支撑论点",
+      "search_keywords": [
+        "quantum metric magnetoresistance QMMR",
+        "Sala Nat Mater 2026 quantum geometry",
+        "electric-field tunable quantum metric measurement",
+        "band geometry probed by magnetoresistance"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

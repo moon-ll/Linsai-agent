@@ -1,0 +1,77 @@
+{
+  "verdict": "major_revision",
+  "overall_comment": "本轮为引用真实性专项修复轮。预审 reject_lean 检出 12 个未解决高危问题，5 个模块仅 references 通过。44 条参考文献中 12 条错配或虚构卷期页码，承重论证层 2 条关键文献无法证实存在，正文内联引用错配与未来编号残留；损伤阈值口径在 scheme 内自相矛盾（一处称已标定、一处称待标定）。本轮须按 P0 顺序先清零 citation 类 critical（fabrication / phantom / mismatch 全部解决 + 损伤阈值口径唯一），再推进表达质量修复（超长句拆分、rationale 综述段重构、双轨引用清理）。验收标准：下轮 critic 复审时 citation 类 critical 清零，references 校验分数与 critic 交叉审计结论一致方可再次提交。",
+  "issues": [
+    {
+      "section": "全文参考文献 / references.md",
+      "severity": "critical",
+      "issue_type": "evidence（证据问题）",
+      "description": "citation_fabrication：44 条参考文献中 12 条错配 + 虚构卷期页码。须逐条核对全部 44 条：作者、期刊/预印本号、卷期页码、年份与实际发表信息一致；无法核实的条目一律删除，宁缺毋滥。",
+      "instruction": "(1) 用 scholar / DOI / 期刊官网 / arXiv 逐条核对 44 条参考文献的作者列表、期刊名（含缩写一致性）、页码、年份、卷期号，对每条给出核验结果（通过/修改/删除）。(2) 12 条错配或虚构条目全部按核验结论处置：能改的改到正确信息、改不动的直接删除，原则为宁缺毋滥。(3) 同步检查正文 [N] 引用是否仍然指向被删除的条目，若指向已删除条目则同步替换为可核验的等价文献或删除该处引用。(4) 在 references.md 顶部加一栏『核验记录』，列出每条的核验日期、核验方式（DOI / arXiv / 期刊页面）、核验人。",
+      "action": "verify",
+      "target_passage": "references.md 全部 44 条 + 正文 [N] 指向映射"
+    },
+    {
+      "section": "立项依据 §2 / 承重论证段",
+      "severity": "critical",
+      "issue_type": "evidence（证据问题）",
+      "description": "phantom_reference：承重论证层 2 条关键文献无法证实存在。承重论证所依赖的每一条文献必须真实、可检索。",
+      "instruction": "(1) 定位立项依据中承重论证层的 2 条关键文献（被多次引用、承担主要结论支撑的文献）。(2) 对每条做穷尽性检索：Google Scholar / Web of Science / arXiv / Crossref / 期刊官网，关键词组合（作者+年份+期刊+关键词）。(4) 若确认不存在：删除该处引用，并将原论证改写为不依赖该文献的等价论证（基于可证实文献或基于物理推演）。(5) 若检索到真实但条目信息有误的版本：在 references.md 中修正为正确版本，并在核验记录中注明。",
+      "action": "verify",
+      "target_passage": "rationale.md 承重论证段（被多次引用、承载主要结论的 [N]）"
+    },
+    {
+      "section": "全文正文内联引用 + scheme.md",
+      "severity": "critical",
+      "issue_type": "standard（规范问题）",
+      "description": "citation_mismatch：清理正文内联引用错配、指向不存在编号的『未来编号』引用、scheme 中残留的旧引用标记。",
+      "instruction": "(1) 通读全文，列出所有出现的 [N] 编号，与 references.md 中实际存在的编号做差集：差集中指向不存在编号的『未来编号』或旧引用编号一律修正为 references.md 中真实存在的等价编号，或删除该处引用。(2) 检查 scheme.md 中是否残留旧版引用的痕迹（[CITE:xxx] 标记、临时编号、脚注式引用），全部清理，统一为 [N] 编号引用。(3) 正文与 scheme 之间、内文与图表题注之间的 [N] 编号口径必须一致，不允许一处用 [N] 另一处用脚注或 [CITE:xxx]。(4) 修正完成后做一次闭环核查：列出所有 [N] 出现位置、与 references.md 的反向引用计数（每条 references.md 至少被引用 1 次，否则移除）。",
+      "action": "rewrite",
+      "target_passage": "rationale.md / content.md / scheme.md 全部 [N] 与 [CITE:xxx] 出现位置"
+    },
+    {
+      "section": "研究方案 / scheme.md 损伤阈值相关段",
+      "severity": "critical",
+      "issue_type": "standard（规范问题）",
+      "description": "red_line：损伤阈值口径自相矛盾。scheme 一处称『0.8 V/Å 来自损伤阈值标定』（已标定），另一处称『启动后第 1 年内正式标定』（待标定）。",
+      "instruction": "(1) 在 scheme.md 中定位所有出现『0.8 V/Å』『损伤阈值』『标定』的段落，列出全部口径。(2) 统一为单一口径，二选一：A 方案：明确当前数值为文献估计值（注明出处文献 [N]），并写明『启动后第 1 年内对目标体系正式标定，标定方法为…，预期修正幅度≤X%』；B 方案：删除具体数值，仅写『驱动场强上限由损伤阈值决定，启动后第 1 年内对目标体系正式标定』。(3) 选定口径后，全文（rationale / content / scheme / risk）涉及损伤阈值的表述同步更新，确保四处口径一致。(4) 在 scheme.md 的风险段相应更新：若选 A 方案，风险段须补『文献估计值与实测阈值的偏差』作为已知风险。",
+      "action": "rewrite",
+      "target_passage": "scheme.md 中所有『0.8 V/Å』『损伤阈值』『标定』出现段"
+    },
+    {
+      "section": "全文正文（rationale / content / scheme / innovation）",
+      "severity": "high",
+      "issue_type": "expression（表达问题）",
+      "description": "超长句 15 处（>120 字/句），拆分为清晰短句。",
+      "instruction": "(1) 用脚本或人工逐句扫描全文，定位所有 >120 字的单句，登记编号。(2) 拆分原则：每句不超过 120 字；拆分后多数句子以动词或实义成分开头；保留 80–120 字技术性长句（多分号分句可保留），但每段不超过 2 句。(3) 拆分后做一次通读核查：句意是否完整断开、连接词是否自然、技术性并列成分（方法 A / 方法 B / 参数 α / 参数 β）是否保留在原句或被吸收到下一句。(4) 拆分记录归档到 06_feedback/long-sentence-fix-log.md（编号 / 原句字数 / 拆分后句数 / 拆分方式）。",
+      "action": "rewrite",
+      "target_passage": "rationale / content / scheme / innovation 中所有 >120 字句"
+    },
+    {
+      "section": "立项依据 §2 国内外研究现状 / rationale.md L33 前后",
+      "severity": "high",
+      "issue_type": "expression（表达问题）",
+      "description": "rationale L33 前后的 843 字堆砌段（8 连『某人等人』）重构为按论证脉络组织的综述。",
+      "instruction": "(1) 定位 rationale.md L33 前后 843 字堆砌段，确认 8 处『X 等人做了 Y，得到 Z』式并列。(2) 重构原则：按『从敏感性到归因性』或同等论证脉络组织，分 3–4 条论证主线，每条主线先点出该线的科学问题、再引用支撑文献、最后给出该线对序参量谱学的意义。(3) 删除单纯的事件罗列与『X 等人…得到…』的并列堆叠。(4) 每条文献引用后必须给出方法学价值判断（对本项目意味着什么、留下什么空白），不得只列事实。(5) 段内连接以内容驱动（『上述分析表明…』『该路径的瓶颈在于…』），模板连词（『在此基础上』『与此同时』『因此』）全文累计不超过 8 次，本段使用不超过 1 次。",
+      "action": "rewrite",
+      "target_passage": "rationale.md L33 前后 843 字综述段"
+    },
+    {
+      "section": "全文正文（rationale / content / scheme / innovation）",
+      "severity": "high",
+      "issue_type": "standard（规范问题）",
+      "description": "双轨引用清理：正文统一使用 [N] 编号引用，删除残留的 [CITE:xxx] 标记。",
+      "instruction": "(1) 通读全文，定位所有残留的 [CITE:xxx] 标记，列出出现位置。(2) 逐处替换为 references.md 中已存在的 [N] 编号（先在 references.md 中查证 [CITE:xxx] 对应的真实文献，加入 references.md，再用 [N] 替换）。(4) 替换后核查：scheme.md / rationale.md / content.md / innovation.md 四章是否全部统一为 [N] 编号引用，是否仍存在 [CITE:xxx] / 脚注 / Author(年份) 等异质引用形式。(5) 残留情况记入 06_feedback/cite-marker-audit.md（位置 / 原标记 / 替换后 [N] / 替换依据）。",
+      "action": "rewrite",
+      "target_passage": "rationale / content / scheme / innovation 中所有 [CITE:xxx] 出现位置"
+    }
+  ],
+  "suggestions": [
+    "本轮按 P0 顺序严格执行，citation 类 critical 清零前不得推进其他修饰性修改：先 1（fabrication）→ 2（phantom）→ 3（mismatch）→ 4（损伤阈值口径），再 5–7（表达质量）。",
+    "建议将 references.md 改造为带核验元数据的结构化文件：每条文献附『核验日期 / 核验方式（DOI / arXiv / 期刊页面）/ 核验人』三栏，便于 critic 复审时交叉审计。",
+    "建议建立『引用真实性自检 checklist』：(a) 每条 references.md 是否能在 DOI / arXiv / 期刊官网查到；(b) 正文 [N] 是否全部对应真实条目（无未来编号）；(c) scheme / rationale / content / innovation 四章引用格式是否统一为 [N]；(d) 关键论证结论是否每条都有可证实文献支撑。每轮评审前自动核查一次。",
+    "长句拆分与堆砌段重构建议同步执行：拆分后立即核查拆分处是否引入新的 AI 味（『该方法可以…』『从而实现…』『具有重要意义』），若有立即清除。",
+    "损伤阈值口径选定后，建议在 scheme.md 风险段同步新增一条『文献估计值与实测阈值的偏差』作为已知风险，注明偏差幅度上限与应对策略（缩窄扫描区间 / 备份方案切换）。",
+    "下轮 critic 复审时优先核查：(1) 12 条 fabrication 是否全部处置；(2) 2 条承重文献是否替换/论证改写到位；(3) 损伤阈值口径全文是否唯一；(4) references.md 核验分数与 critic 审计结论是否一致。四项通过方可再次提交验收。"
+  ]
+}

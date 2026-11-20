@@ -1,0 +1,41 @@
+{
+  "gaps": [
+    {
+      "claim": "“Greenwood 等人的工作在厘米尺度完成对映体甄别或厘米尺度相干累积。”",
+      "missing_evidence": "现有引文[25]仅能支持α-蒎烯与莰酮在分子射流交点几何中的对映体甄别，不能支持“厘米尺度”这一表述。若保留厘米尺度相干累积论断，需要核对[26]的原文、研究对象和结论，并将其明确标为空芯波导中的理论预言，同时确认其能够支撑所归属的具体论断；否则应删去“厘米尺度”，将表述收窄到[25]实际覆盖的分子射流交点实验。还应分别提供能够支撑“手性对映体甄别”和“厘米尺度相干累积”的原始文献，避免用一篇文献承担两个不同结论。",
+      "search_keywords": [
+        "Greenwood alpha-pinene camphor molecular jet crossing enantiomer discrimination",
+        "Greenwood hollow-core waveguide coherent accumulation centimeter scale",
+        "chiral harmonic generation hollow-core waveguide coherent buildup theory",
+        "α-蒎烯 莰酮 分子射流 交点 对映体 甄别",
+        "空芯波导 厘米尺度 相干累积 手性 谐波"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "“退相时间仅为几飞秒。”",
+      "missing_evidence": "当前引文[7]（Vampa 2015）未直接报告或支撑这一具体数值。需要核查原始文献arXiv:2609.20085，确认其是否明确给出“几飞秒”的退相时间、该数值对应的具体物理对象和测量或计算方法，并核对正式发表版本、作者、年份及页码。若原文不支持该表述，应删除、修正数值或改挂能够直接支持它的原始研究。",
+      "search_keywords": [
+        "arXiv:2609.20085",
+        "2609.20085 few-femtosecond decoherence time",
+        "few femtosecond decoherence time high harmonic generation semiconductor",
+        "strong-field decoherence time Bloch electron trajectory",
+        "Vampa 2015 decoherence time few femtoseconds"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "“退相实为轨迹过滤与系综平均的有效参数化，且无法仅凭谐波产额区分传播效应与退相效应。”",
+      "missing_evidence": "当前引文[7]不足以同时支撑方法学解释和可辨识性结论。需要核查arXiv:2410.04512是否明确说明相关退相时间的有效参数化性质、轨迹过滤和系综平均机制，并提供“仅凭产额不能区分传播与退相”的论证、数据或对照实验。还需确认[7]是否仅能支持其中部分内容，并据此拆分引文归属；如检索不到直接证据，应将该句改写为更有限的方法学判断，或补充原始方法论文及可辨识性研究。",
+      "search_keywords": [
+        "arXiv:2410.04512",
+        "2410.04512 trajectory filtering ensemble averaging decoherence",
+        "decoherence effective parameterization quantum trajectory harmonic yield",
+        "distinguish propagation and decoherence using harmonic yield alone",
+        "semiconductor high-harmonic emission decoherence ensemble average trajectory selection"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

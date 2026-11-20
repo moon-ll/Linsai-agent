@@ -1,0 +1,98 @@
+{
+  "round": 4,
+  "focus": "references.md (专项轮次)",
+  "predecessor_monitor_score": 0.68,
+  "predecessor_critic_score": 0.50,
+  "critic_score": 0.43,
+  "monitor_independent_score": 0.40,
+  "monitor_dim_scores": {
+    "innovation": null,
+    "feasibility": null,
+    "rigor": 0.30,
+    "completeness": 0.55
+  },
+  "rationale_dim_basis": "本轮聚焦参考文献章节，独立维度仅 rigor + completeness。innovation/feasibility 非本轮范畴，标 null。",
+  "writer_assessment": "【本轮修改属部分表面修改，未实质性回应 critic 关键问题】\n\nwriter 本轮做了三件事：(1) 把 references.md [4] Silva DOI 从 -0250-0 改成 -0129-0（卷期 266-270 也同步正确）——这是 critic 报告指出的真实修正（DOI 字段单点字符级修复）；(2) 把 references.md [11]-[24] 的 arXiv DOI 链接从 '10.48550/arXiv:{id}' 改为 '10.48550/arXiv.{id}'——纯字符格式调整，零实质；(3) 新增 8 条经典文献 [34]-[41]（Ghimire 2011、Runge-Gross 1984、Onida 2002、Lvovsky 2009、Breitenbach 1997、Thouless 1982、Provost-Vallee 1980、Karniadakis 2021）进入 references.md，并在 rationale.md 三处补嵌正文引用（[34][35][37]），以及在引用定位总览表声称这些条目对应到具体章节。\n\n【未修复的关键 critical 问题】critic 本轮报告明确指出 7 条 critical DOI 错位（[1] Vampa、[3] Liu-Fu-Kais、[4] Silva、[5] Ghalgaoui、[9] Verma、[10] Goswami、[12] Bauer），writer 仅对 [4] DOI 字段做了字符级替换，其余 6 条 ([1][3][5][9][10][12]) 在 references.md 原文一字未动：[1] Vampa 实指向 Tresini spliceosome、[3] Liu-Fu-Kais 实指向 Caputa Krylov complexity、[5] Ghalgaoui 实指向 Gorlach HHG-driven-by-quantum-light、[9] Verma 实指 step response 非 HHG、[10] Goswami 实指向 Wang bandit optimization、[12] Bauer arXiv:2604.13901 实一作 Cárdenas 非 Bauer。\n\n【更严重的'正文未解绑'问题】即便 [4] Silva DOI 字段已改为正确 DOI，但正文 (rationale §1.1/§1.2 第 17 行 + content §2.2 第 57 行 + scheme §2.6/§7.1 第 353 行) 仍写 'Silva 等 [4] 在 Sr₂CuO₃ 上建立了一维 Mott 绝缘体 HHG'——而真实 Silva 2018 Nat. Photon. 12, 266-270 标题是 'High-harmonic spectroscopy of ultrafast many-body dynamics in strongly correlated systems'，Sr₂CuO₃ HHG 实为 [13] Ikeda arXiv:2508.00296。References 与正文脱节——正文 [4] 处仍在'挂羊头卖狗肉'，引用的不是修正后的 Silva 论文，而是根本不存在的 Sr₂CuO₃ HHG 论文。这是 critic 报告中'半迁移态'的典型表现。\n\n[5] Ghalgaoui 情况更糟——references.md [5] 仍写 'Ghalgaoui A. et al. Nat. Phys. 19, 1020-1027 (2023) High-harmonic spectroscopy of solids driven by intense non-classical light DOI: 10.1038/s41567-023-02127-y'，但 Crossref 实测该 DOI 指向 Gorlach A. Nat. Phys. 19, 1689-1696 'High-harmonic generation driven by quantum light'。作者首字母、人数（1→7）、卷期（1020→1689）、标题主语（solids→quantum light）四件套全错，正文 rationale §1.1/§1.2、content §2.1/§2.2、scheme §2.6/§7.1 共 7 处继续引用 'Ghalgaoui 等 [5]'——错误传播未被拦截。\n\n【新加经典文献的引用挂靠失实】references.md 引用定位总览表声称：[36] Onida 2002 → rationale §1.2、[38] Breitenbach 1997 → rationale §1.2、[39] Thouless 1982 → rationale §1.1、[40] Provost-Vallee 1980 → rationale §1.1、[41] Karniadakis 2021 → content §2.5/scheme §3.4。实际 grep 验证：rationale.md 中 [36][38][39][40] 角标 0 处出现；[41] 在 rationale/content/scheme 三章均无角标。新增的 8 条经典文献中仅 [34][35][37] 在 rationale.md 三处有角标，其余 5 条 ([36][38][39][40][41]) 在 references.md 存在但正文未引用——又是'列表幽灵引用'，与 critic 报告第 8-10 条'未引用条目'问题同构。\n\n【不存在杜撰或僵化模板的迹象】新增的 [34]-[41] 条目内容均与实稿文献对应（Ghimire 2011 J. Mod. Phys. 60, 1336 等），无杜撰、无占位符。但 [34] Ghimire 条目注释 '原文 2011 年 12 月提交 arXiv:1112.4979，Nat. Phys. 正式发表 2011' 与申请书正文 '固体 HHG 作为本项目的研究范式，其实验可行性在 2011 年已由 Ghimire 等人在 ZnO 晶体中首次实验验证 [34]' 不矛盾——Ghimire 2011 Nat. Phys. Lett. 6, 138 是 HHG 固体里程碑，无张冠李戴；Onida 2002 Rev. Mod. Phys. 74, 601-659 是 TDDFT/BSE 标准综述，无错位。\n\n【占比评估】critic 报 7 条 critical 中 writer 仅实质修复 1 条（[4] DOI 字符）；11 条 medium/low 问题 writer 未响应任何一条；R3 已修复的 11 条预印本本轮仍维持正确（无倒退）；R3 误判修正（[13] Ikeda 标题匹配）保留。",
+  "critic_assessment": "【critic 评审准确、证据扎实、无重大遗漏】critic 本轮报告通过 Crossref/arXiv 实证反查了 12 条期刊 DOI + 11 条预印本 arXiv ID，给出 DOI 指向/卷期/标题/一作四件套错位清单，证据链可复现，符合 NSFC 标准的 rigor 0.60-0.69 区间定义。\n\n【critic 评分与报告内容一致】综合 0.43 = rigor 0.30 × 0.55 + completeness 0.55 × 0.45（按 general 类型权重 0.29/0.24 推断 rigor/completeness 权重等比），即 rigor 因 7 条 critical 主导降至 0.30，completeness 因 ghost citation + 未引用条目部分缓解维持 0.55。算术 (0.30+0.55)/2 = 0.425，与报告 0.43 一致。\n\n【critic 未遗漏的重大问题】(1) critic 正确识别本轮修改未触及核心 [1][3][5][9][10][12] 错位，R3 标注的 [2][6][26] 404/DOI 未实锤也未修复——这是本轮焦点问题，critic 给出完整 list；(2) critic 报告锚点对比 (§63-66) 给出 [3] Liu-Fu-Kais DOI 错位的具体对比文本，证据链完整；(3) critic 报告 R3→R4 修复进度评估（[13] Ikeda 误判修正保留，[14][15] 等 11 条预印本再验匹配）准确。\n\n【critic 报告中可能被忽略的细微问题】critic 未独立指出 writer 本轮做的表面修改（[4] DOI 字符级替换但正文未解绑，实质是'表面修复'的伪装），但这属于 writer 评估范畴，critic 报告从评审角度已充分识别 [4] Silva 仍有正文引用错位。\n\n【评分锚定是否过严】critic rigor=0.30 落在 NSFC rubric 0.60-0.69 区间下限之下，但 NSFC 标准对 rigor 0.60 档定义是'论证有明显缺陷，存在事实错误、指标矛盾、或关键论证环节缺失'——本申请书 7 条 critical DOI 错位 + 6 条未通过 Crossref 实锤的事实错误 + 多处正文与 references 脱节的事实已构成'论证有明显缺陷 + 关键论证环节缺失'，rigor 应在 0.50-0.60 区间。critic 给 0.30 略偏严，但考虑到本轮聚焦 references 专项且全部 7 条 critical 中 6 条未修复，0.30 合理反映'事实错误遍布'的极端情况。",
+  "writer_prohibitions": [
+    {
+      "level": "critical",
+      "code": "fabricated_or_misattributed_citation",
+      "evidence": "references.md [5] 仍写 'Ghalgaoui A. et al. Nat. Phys. 19, 1020-1027 (2023)'，Crossref 实测 DOI 10.1038/s41567-023-02127-y 指向 Gorlach A., Even Tzur M., Birk M., Krüger M., Rivera N., Cohen O. & Kaminer I. Nat. Phys. 19, 1689-1696 (2023) 'High-harmonic generation driven by quantum light'。作者首字母、人数（1→7）、卷期（1020→1689）、标题主语（solids→quantum light）四件套全错。该错位在 rationale §1.1 第 15/33 行、content §2.1 第 5 行、§2.2 第 57 行、scheme §2.6 第 77 行、§7.1 第 353 行共 7+ 处引用传播。",
+      "fix": "references.md [5] 改写为 'Gorlach A., Even Tzur M., Birk M., Krüger M., Rivera N., Cohen O. & Kaminer I. Nat. Phys. 19, 1689-1696 (2023). High-harmonic generation driven by quantum light. DOI: 10.1038/s41567-023-02127-y'；正文所有 [5] 角标处 'Ghalgaoui 等 [5]' 替换为 'Gorlach 等 [5]'；正文 'solids driven by intense non-classical light' 表述与 Gorlach 标题不一致处同步调整。"
+    },
+    {
+      "level": "critical",
+      "code": "fabricated_or_misattributed_citation",
+      "evidence": "正文 rationale §1.1 第 17 行 + content §2.2 第 57 行 + scheme §2.6 第 77 行/§7.1 第 353 行均写 'Silva 等 [4] 在 Sr₂CuO₃ 上建立了一维 Mott 绝缘体 HHG 的奠基性观察'，但 references.md [4] 已修正为 Silva R.E.F. et al. Nat. Photon. 12, 266-270 (2018) 'High-harmonic spectroscopy of ultrafast many-body dynamics in strongly correlated systems' DOI:10.1038/s41566-018-0129-0——该论文实为强关联系统 HHG 光谱方法学，非 Sr₂CuO₃ HHG 现象学奠基。Sr₂CuO₃ HHG 实为 [13] Ikeda arXiv:2508.00296。references.md 与正文脱节——正文挂 [4] 角标的实指内容与 references.md [4] 修正后的实际文献不一致。",
+      "fix": "正文所有 'Silva 等 [4] 在 Sr₂CuO₃ 上建立了一维 Mott 绝缘体 HHG 的奠基性观察' 替换为 'Ikeda 等 [13] 在 Sr₂CuO₃ 上首次报告 HHG 谐波红移现象'；scheme §7.1 第 355 行 'Verma 2024 [9] 的固体 HHG 量子几何反演框架仅适用于经典相干态驱动' 与 [4] 解耦——若 [9] 自身 DOI 错位未修，则该处不应作为论证基础。"
+    },
+    {
+      "level": "critical",
+      "code": "fabricated_or_misattributed_citation",
+      "evidence": "references.md [1] Vampa 2015 DOI 10.1038/nature14512 实指向 Tresini M. Nature 523, 53-58 (2015) 'core spliceosome'——与 Vampa HHG 完全无关；rationale §1.1 第 7 行 + content §2.5 第 5 行 + scheme §3.7.1 第 355 行均以 [1] Vampa 作为'HHG 链接气体与固体的开创性工作'的论据嵌入正文，但实稿 DOI 指向 spliceosome。",
+      "fix": "联网核实 Vampa G., McDonald C.R., Orlando G., Knorr P., Bruner B.D., Plaja L. 等 'Linking high harmonics from gases and solids' Nature 522, 462-464 (2015) 真实 DOI（疑为 10.1038/nature14517 或同期其他 Vampa 论文）；若联网核验失败，则删除 [1] 或替换为其他已核实 Vampa HHG 论文（如 Vampa PNAS 2015）。"
+    },
+    {
+      "level": "critical",
+      "code": "fabricated_or_misattributed_citation",
+      "evidence": "references.md [3] Liu-Fu-Kais 2022 DOI 10.1103/PhysRevResearch.4.013041 实指向 Caputa P., Magan J.M., Patramanis D. 'Geometry of Krylov complexity' Phys. Rev. Research 4, 013041 (2022)——与 Liu-Fu-Kais 'Quantum geometry of Berry curvature and quantum metric from HHG spectrum of solids' 完全无关。rationale §1.1 第 9 行 + content §2.2 第 59 行 + scheme §2.6 第 75 行/§7.1 第 359 行 均以 [3] 作为 ZnO 偏振预言的理论基础，但实稿 DOI 指向 Krylov complexity 论文。申请书上下文（ZnO 偏振响应、SBE 代码复现'Liu-Fu-Kais'）是虚构的论据。",
+      "fix": "联网核实 Liu J., Fu R. & Kais S. 'Quantum geometry of the Berry curvature and quantum metric tensor from the high harmonic spectrum of solids' 实稿 DOI（疑为 PRR 4, L022030 或 PRR 4, 022023 之类）；若联网核验失败则降级为'该理论框架的复现'，不直接挂 [3] 作为已复现依据。"
+    },
+    {
+      "level": "critical",
+      "code": "fabricated_or_misattributed_citation",
+      "evidence": "references.md [9] Verma 2024 arXiv:2406.17845 实标题 'Quantum Metric in Step Response'（Verma N. & Queiroz R., Columbia），与申请书 'Quantum metric tensor in HHG theory' 完全错位——非 HHG 主题。rationale §1.2 第 41 行 + content §2.1 第 5 行 + scheme §7.1 第 355 行均以 [9] Verma 作为 HHG 量子度规反演理论框架论据，但实稿为 step response 主题。",
+      "fix": "联网核实 Verma 量子度规 HHG 实稿 arXiv ID（疑为 2402.0xxxx 或 2501.xxxxx 序列），替换 [9]；若联网核验失败则删除 [9] 条目，所有正文 [9] 角标处改挂 [3] Liu-Fu-Kais 作为替代论据。"
+    },
+    {
+      "level": "critical",
+      "code": "fabricated_or_misattributed_citation",
+      "evidence": "references.md [10] Goswami 2024 DOI 10.1038/s41586-024-07021-y 实指向 Wang Y. et al. Nature 626, 1025-1033 (2024) 'Identifying general reaction conditions by bandit optimization'——与量子度规非线性霍尔响应无关。rationale §1.2 第 29 行 + content §2.1 第 5 行均以 [10] Goswami 作为 Mn₃Sn 量子度规非线性霍尔响应的论据，但实稿 DOI 指向 bandit optimization。",
+      "fix": "联网核实 Goswami Nature 626, 505-511 (2024) 真实 DOI（疑为 10.1038/s41586-024-07020-x 或同期其他编号），替换 [10] DOI；若联网核验失败则删除 [10] 条目，正文 [10] 角标处改挂 [18] Chowdhury-Narayan 2026 'Light-tunable quantum metric non-linear Hall response in Berry dipole semimetals' 作为替代论据。"
+    },
+    {
+      "level": "critical",
+      "code": "fabricated_or_misattributed_citation",
+      "evidence": "references.md [12] Bauer 2026 arXiv:2604.13901 实一作 Cárdenas A.（非 Bauer D.），申请书写 'Bauer D. et al.' 是署名错位。rationale §1.2 第 37 行 + content §2.3 第 5 行 + scheme §3.4/§7.1 均以 [12] Bauer 作为 MoS₂/NbSe₂ 电子-空穴动力学论据。",
+      "fix": "联网核实 arXiv:2604.13901 实稿作者列表，将 references.md [12] 改写为 'Cárdenas A., Jiménez-Galán Á. et al.'（Bauer D. 标注为通讯）；正文所有 'Bauer 等 [12]' 替换为 'Cárdenas 等 [12]'。"
+    },
+    {
+      "level": "high",
+      "code": "ghost_citation_unresolved",
+      "evidence": "新增 8 条经典文献 [34]-[41] 中仅 [34][35][37] 在 rationale.md 三处有正文角标，其余 5 条 ([36] Onida 2002、[38] Breitenbach 1997、[39] Thouless 1982、[40] Provost-Vallee 1980、[41] Karniadakis 2021) 在 references.md 存在但正文 0 处引用——references.md 引用定位总览表声称这些条目对应到 rationale §1.1/§1.2/content §2.5/scheme §3.4 是失实的（grep 验证）。",
+      "fix": "(a) 在 rationale.md §1.1 Berry 曲率 → 拓扑分类段补挂 [39] Thouless 1982 TKNN 不变量；(b) 在 rationale.md §1.1 量子度量张量定义段补挂 [40] Provost-Vallee 1980 + [31] Xiao 2010；(c) 在 rationale.md §1.2 压缩真空态实验基础段补挂 [38] Breitenbach 1997 量子态层析 + [36] Onida 2002 TDDFT/BSE 综述；(d) 在 content §2.5 + scheme §3.4 PINN 框架段补挂 [41] Karniadakis 2021 PINN 方法学综述。或选择：删除 references.md [36][38][39][40][41] 五条未引用条目。"
+    },
+    {
+      "level": "high",
+      "code": "uncited_references_remaining",
+      "evidence": "critic 报告第 9 条指出 references.md [1] Vampa、[2] Luu-Wörner、[10] Goswami、[14] Sala、[16] Lange 在正文 grep 三章均无引用——本轮 writer 未响应此问题：(a) [1] Vampa 实指向 spliceosome 论文，申请书不可能引用，逻辑上应在 DOI 修正后删除；(b) [2] Luu-Wörner 在 rationale §1.1 Berry 曲率 HHG 谱首次实现段应补挂；(c) [10] Goswami 实指向 bandit optimization，补挂前必须先修 DOI；(d) [14] Sala、[16] Lange 在 content §2.3 应补挂。",
+      "fix": "(a) [1] Vampa DOI 修正后若正文未用则删除；(b) rationale §1.1 补挂 [2] Luu-Wörner 2018 'Measurement of Berry curvature of solids through HHG'；(c) [10] Goswami DOI 修正后补挂至 rationale §1.2 量子度规非线性霍尔段；(d) content §2.3 拓扑绝缘体度规测量段补挂 [14] Sala 2025 + [16] Lange 2026。"
+    },
+    {
+      "level": "medium",
+      "code": "incomplete_preprint_status_verification",
+      "evidence": "references.md [11]-[24] 共 14 条预印本均带 '正式发表状态待 2026-Q4 联网核实' 标注，申请书提交前申请人无法核实 14 条预印本状态——这是 critic 第 15 条 medium 问题，writer 未响应。",
+      "fix": "对每条预印本至少明确'截至 2026-09 仍为 arXiv pre-print'的硬性截止日期声明，并在 R3' 后续迭代中持续跟踪。"
+    }
+  ],
+  "critic_prohibitions": [],
+  "writer_suggested_delta": 10,
+  "critic_suggested_delta": 0,
+  "collusion_risk": "none",
+  "collusion_risk_explanation": "未观察到 writer-critic 串通放水迹象。critic 本轮通过 Crossref/arXiv 实测反查锁定 7 条 critical 错位，证据扎实；writer 实际仅做 1 条 [4] DOI 字符级替换 + 5 条 arXiv 链接格式调整 + 8 条经典文献新增（其中 5 条未挂正文），其余 6 条 critical DOI 错位一字未动——'表面修改'而非'实质性放水'。若存在串通放水，writer 应在表面上完成 [4][5][1][3] 等多条重写以提升 critic 评分；实际未做，说明 writer 是能力/意愿问题而非串通。critic 给的 0.43 综合分在 monitor 视角下独立复算 ≈ 0.43，与 writer 修改前 monitor-round-2 的 0.68 显著下降，反映 writer 实际未做实质修复，monitor 与 critic 同步降低。",
+  "negative_feedback": true,
+  "negative_feedback_reason": "writer 本轮未实质性回应 critic 提出的 7 条 critical DOI 错位中的 6 条（[1][3][5][9][10][12]），仅做 [4] DOI 字段单点字符级替换 + 8 条经典文献新增（其中 5 条未挂正文）。本轮聚焦章节为 references.md 专项，critic 已提供 Crossref/arXiv 实测锚点（作者/卷期/标题/DOI 四件套反查），writer 应直接重写这 6 条并联动正文解绑——这是 references 专项轮次的'评审否决级'硬伤，触发负反馈 24h 自愈机制：下一轮 writer 必须强制联网核实 [1][3][5][9][10][12] 六条 DOI/作者后重写 references.md 条目 + 联动正文所有角标处逐节核验引用上下文是否仍对应原错位文献（若否则解绑并挂到正确文献）。同时新增的 [36][38][39][40][41] 五条经典文献须在 rationale/content/scheme 正文补挂角标，或选择删除。",
+  "overall_assessment": "【monitor 独立判断】critic 给的综合 0.43 合理。独立核验申请书 references.md 当前状态：(a) 12 条期刊 DOI 中仅 [4] 字符级修复（DOI 字段从 -0250-0 改为 -0129-0），其余 11 条 ([1][2][3][5][6][7][9][10][11][12][26]) 中 6 条存在严重错位指向无关论文（[1][3][5][9][10][12]），1 条 DOI 未实锤 ([6] Uzan 404)；(b) 8 条新增经典文献 [34]-[41] 中 5 条正文未引用；(c) 正文 rationale/content/scheme 共 7+ 处仍引用错位 [5] Ghalgaoui 与 [4] Silva 'Sr₂CuO₃ HHG'，与 references.md 修正后的 [4] Silva 真实标题不一致。\n\n本轮聚焦章节为 references.md 专项，rigor 应在 0.30-0.35 区间（7 条 critical DOI 错位中 6 条未修复 + 正文与 references 脱节——属'事实错误遍布 + 关键论证环节缺失'的极端情况）；completeness 在 0.55（41 条数量达标但 6 条未引用 + 5 条 ghost citation + 正文解绑不全）。独立综合分 (0.30+0.55)/2 = 0.425 → 取 0.40（rounding down 反映 5 条新 ghost citation 的负向新增）。\n\n【关键结论】writer 把'必要微调'做成了'表面修改 + 新增瑕疵'——critical DOI 错位未改一字，[4] 表面修复但正文未解绑（最危险的'半迁移态'），新增 8 条经典文献中 5 条未挂正文。这是 references 专项轮次的硬伤：critic 已给 Crossref 实测锚点，writer 应照单全收重写即可，本应无技术难度，但实际未做。建议下一轮：(a) writer 必做 [1][3][5][9][10][12] 六条重写 + 正文所有角标处逐节校验引用上下文（联网核实后批量改）；(b) 新增 [34]-[41] 五条经典文献在 rationale.md §1.1/§1.2 + content.md §2.5 段落补挂角标；(c) critic 在下一轮重点核验 writer 是否完成 6 条 critical 重写 + 正文解绑（grep 实证）；(d) monitor 下轮重新评估 rigor 是否回升至 0.50+。",
+  "next_round_focus": "(1) writer 强制联网核实 [1][3][5][9][10][12] 六条 DOI/作者后重写 references.md 条目；(2) 正文 rationale/content/scheme 三章所有相关角标处逐节核验引用上下文是否对应原错位文献，若是则解绑并挂到正确文献；(3) 新增 [34]-[41] 经典文献至少 5 条 [36][38][39][40][41] 在 rationale §1.1/§1.2 + content §2.5 补挂正文角标，或选择删除 references.md 中未引用的条目；(4) 引用定位总览表 L99-141 重新生成，所有条目必须经 grep 实锤定位",
+  "scoring_trace": {
+    "predecessor_monitor_score": 0.68,
+    "predecessor_critic_score": 0.50,
+    "writer_modified_score": 0.50,
+    "critic_score": 0.43,
+    "monitor_score": 0.40,
+    "delta_writer_to_monitor": -0.10,
+    "delta_predecessor_to_monitor": -0.28,
+    "interpretation": "monitor 比 critic 严 0.03 分（0.40 vs 0.43），比 predecessor monitor 严 0.28 分（0.40 vs 0.68）。分数持续下降反映 writer 实际未做实质性修复——[4] 字符级替换不构成实质修复（正文未解绑）；新增 8 条经典文献中 5 条未挂正文，加剧 ghost citation 问题。critic 给的 0.43 在 rigor 0.30 / completeness 0.55 口径下算术一致（(0.30+0.55)/2 = 0.425 ≈ 0.43），monitor 严在 ghost citation 净增量（5 条新增）这一 rigor/completeness 双重扣分项。"
+  }
+}

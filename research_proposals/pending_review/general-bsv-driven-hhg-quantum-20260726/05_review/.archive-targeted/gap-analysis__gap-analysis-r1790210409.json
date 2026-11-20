@@ -1,0 +1,45 @@
+{
+  "gaps": [
+    {
+      "claim": "§3.3 L33 Even Tzur 等 [2] 提出的任意量子光态驱动 HHG 量子态公式与 winding trail 模型作为方法学起点，且不能直接用于固体多带多体体系",
+      "missing_evidence": "需要验证 Even Tzur 等人的 winding trail 模型原文，及其在固体多带多体体系下的失效边界与改造方向",
+      "search_keywords": [
+        "Even Tzur quantum light HHG winding trail",
+        "quantum state HHG driving field solid state",
+        "winding trail HHG formalism arbitrary quantum light"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3.2 缺少 θ_sq 压缩相位角连续扫描的实现路径（SLM 调相位匹配改变 θ_sq）",
+      "missing_evidence": "缺少关于空间光调制器（SLM）实现 θ_sq 连续扫描或 BSV 压缩相位角调控的实验或方法文献",
+      "search_keywords": [
+        "SLM squeezed vacuum phase scan",
+        "spatial light modulator bright squeezed vacuum θ_sq",
+        "compression phase angle control BSV high harmonic"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§3.7 L79 创新点三自称'九类误差'但实际只列六类误差源，阈值绑定仅四类",
+      "missing_evidence": "需要补齐 BSV 驱动固体 HHG 反演中九类误差源的完整分类与对应阈值文献支撑",
+      "search_keywords": [
+        "BSV HHG error budget solid state",
+        "squeezed vacuum HHG uncertainty classification",
+        "quantum light HHG posterior error sources"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "L35 '$k_{\\rm max} \\ge 5 k_{\\rm BZ}$' 作为紧束缚描述多带结构条件，语义不匹配且无出处",
+      "missing_evidence": "需要 k_max ≥ 5 k_BZ 作为紧束缚基组收敛判据的文献来源，或多带结构拟合精度的等价表述",
+      "search_keywords": [
+        "tight-binding k-point convergence HHG",
+        "Brillouin zone sampling tight-binding convergence",
+        "plane wave cutoff tight-binding high harmonic"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "scheme"
+}

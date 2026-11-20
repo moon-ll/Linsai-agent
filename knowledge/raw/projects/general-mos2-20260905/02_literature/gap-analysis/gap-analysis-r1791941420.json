@@ -1,0 +1,50 @@
+{
+  "gaps": [
+    {
+      "claim": "Fan 等人做了'异质结能带的 TDDFT 计算'，用于支撑本项目对 MoS₂ 异质结能带结构的理论描述",
+      "missing_evidence": "当前引用的 Fan 等人[23]实为双圆偏振 HHG 产额轨迹分析，与异质结能带 TDDFT 计算无关。需要替换为一篇真正开展 MoS₂ 异质结（或扭转/范德华异质结）能带结构 TDDFT 计算的原始文献",
+      "search_keywords": [
+        "MoS2 heterostructure TDDFT band structure",
+        "twisted MoS2 bilayer TDDFT electronic structure",
+        "van der Waals heterostructure TDDFT calculation",
+        "transition metal dichalcogenide heterostructure first-principles TDDFT"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Ndabashimiye（稀有气体固态多平台谐波）、You（ZnO 椭圆依赖）、Kim（MoS₂ 椭圆依赖）等工作共同为'扭转角工程的选择定则拟合提供跨体系参照'",
+      "missing_evidence": "当前为 A-B-C 三连堆砌+泛化收尾，未在论证链中嵌入式引用。需要 1—2 篇与 MoS₂ 扭转角高次谐波选择定则直接相关的关键文献，能嵌入到'基线—协同—反演'数据链论证中作为具体锚点",
+      "search_keywords": [
+        "twist-angle high harmonic generation selection rule MoS2",
+        "moiré superlattice HHG selection rule",
+        "ellipticity-dependent HHG transition metal dichalcogenide",
+        "bicircular HHG selection rule 2D material",
+        "solid rare gas multiplateau HHG"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§2.3 M_z 公式对应 2D 轨道磁化的标准约定，量纲为 A（磁化电流）",
+      "missing_evidence": "公式未给出任何出处，'2D 轨道磁化'的系数约定与量纲换算缺乏原始文献依据。需要引用 2D 轨道磁化现代理论（modern theory of orbital magnetization）的标准文献以确认系数约定",
+      "search_keywords": [
+        "modern theory of orbital magnetization 2D",
+        "orbital magnetization formula 2D insulator",
+        "Chern number orbital magnetization formula",
+        " Resta 2D orbital magnetization",
+        "Thonhauser orbital magnetization formula"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "参考文献表（references.md L48/L77）中包含内部工作注记与管线语言（如'下轮须联动改写'），且与正文引用存在张冠李戴",
+      "missing_evidence": "当前 references.md 内部注记与正文引用不联动，导致文献真实性核验失败。需要对参考文献表进行全面清洗：删除所有内部工作注记/管线语言，并为被错误挂载的 Fan[23] 等条目重新匹配正确的原始出处",
+      "search_keywords": [
+        "Fan bicircular HHG trajectory analysis",
+        "双圆偏振 HHG 轨迹分析",
+        "high harmonic generation bicircular counter-rotating"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "content"
+}

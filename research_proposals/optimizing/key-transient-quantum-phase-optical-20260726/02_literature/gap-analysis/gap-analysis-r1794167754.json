@@ -1,0 +1,70 @@
+{
+  "gaps": [
+    {
+      "claim": "§2.3 L87：1T-TaS₂ 两步 CDW 转变的实时动力学",
+      "missing_evidence": "引用编号错绑——现挂 [21]（Neufeld 等泛函基准，与 CDW 动力学无关），需改挂 Kim 等 [31]（arXiv:2608.02456），并与 content.md L23 同一论断的引用对齐；属于残留旧绑定修正，需核验该文献真实存在且内容匹配",
+      "search_keywords": [
+        "1T-TaS2 charge density wave real-time dynamics",
+        "Kim time-resolved CDW transition 1T-TaS2",
+        "two-step charge density wave transition ultrafast"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "L43：Kowalczyk 具名论断（首句处具名但零角标）",
+      "missing_evidence": "具名作者论断未挂引用，需补挂 [41]（references.md 中已有该文献，仅需在正文正确位置绑定角标并核验内容对应）",
+      "search_keywords": [
+        "Kowalczyk high harmonic generation solids",
+        "Kowalczyk solid HHG first observation"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "L57：XUV 断层扫描（XUV tomography）相关论断具名零角标",
+      "missing_evidence": "具名技术论断未挂引用，需补挂 [42] 并核验文献与断层扫描论断对应",
+      "search_keywords": [
+        "XUV tomography solid state band structure",
+        "attosecond tomography high harmonic generation solids"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "L105：绕数快照（winding number snapshot）论断具名零角标",
+      "missing_evidence": "具名论断未挂引用，需补挂 [37] 并核验文献确为绕数快照相关工作",
+      "search_keywords": [
+        "winding number snapshot strong field solid",
+        "dynamical winding number ultrafast probe topology HHG"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "L107：Shah-Cangi 具名论断零角标",
+      "missing_evidence": "具名论断未挂引用，需补挂 [25] 并核验文献对应",
+      "search_keywords": [
+        "Shah Cangi strong field theory solids",
+        "semiconductor strong field approximation high harmonic"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "L107：Zhao C. / Zou X. 具名论断零角标",
+      "missing_evidence": "具名论断未挂引用，需补挂 [26] 并核验文献对应",
+      "search_keywords": [
+        "Zhao high harmonic generation solids",
+        "Zou solid HHG topological"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "L43：「圆偏振选择性由强场理论预言并获实验证实[7]」中的「获实验证实」",
+      "missing_evidence": "现有 [7] 为理论/综述文献，未承载实验证实内容；需补充圆偏振选择性/螺旋度依赖 HHG 的实验证实文献，或删去「获实验证实」表述",
+      "search_keywords": [
+        "circularly polarized high harmonic generation solids experiment",
+        "helicity dependent HHG solid state experimental",
+        "chiral selective high harmonic generation solid experiment"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

@@ -1,0 +1,39 @@
+{
+  "gaps": [
+    {
+      "claim": "核心判据 i→6 光子跃迁（多光子选择定则）支撑滑移坐标驱动的对称性解除方案（§1.2，挂 [12]）",
+      "missing_evidence": "该判据目前唯一文献来源为 2026 年 arXiv 预印本 [12]，缺同行评审的正式见刊版本或独立的实验/理论佐证文献；若预印本结论后续被修正或撤稿，立项依据的核心判据将失去支撑",
+      "search_keywords": [
+        "MnPS3 multiphonon excitation",
+        "six-photon absorption selection rule",
+        "altermagnet optical selection rules",
+        "i-wave symmetry breaking",
+        "滑移对称性 光子跃迁"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "SPG（自旋空间群）分类作为对称性分析的框架依据（§1.1，挂 [37]）",
+      "missing_evidence": "SPG 分类依据同为 2026 年 arXiv 预印本 [37]，缺已见刊的自旋空间群分类体系权威文献（如 Litvin/Opechowski 型磁群/自旋群系统著作或 2023-2025 年已发表的 SPG 分类论文）作为独立支撑",
+      "search_keywords": [
+        "spin space group classification",
+        "altermagnetic spin space group",
+        "magnetic layer group enumeration",
+        "spin group theory review"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "THz 窗口可行性论证：0.5 MV/cm 强场已在固态实验中实现（§1.5，挂 [26]，正文残留'按 arXiv v1 核实'待核注记）",
+      "missing_evidence": "[26] 的见刊状态未定稿核实，缺一条确认已正式发表的强 THz 场实验文献（明确报道 ≥0.5 MV/cm 量级场强并指明材料体系与测量手段），以替换或锚定预印本来源",
+      "search_keywords": [
+        "terahertz field 0.5 MV/cm experiment",
+        "intense THz pulse solid state",
+        "THz field strength antiferromagnet",
+        "terahertz magnetization control"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

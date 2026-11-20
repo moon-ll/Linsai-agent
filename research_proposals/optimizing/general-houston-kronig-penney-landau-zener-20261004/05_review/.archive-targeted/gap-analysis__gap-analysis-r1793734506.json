@@ -1,0 +1,46 @@
+{
+  "gaps": [
+    {
+      "claim": "扫描参数全域（13 波长×5 强度）仅抵达多光子-隧穿渡越区边界（γ_K 下限 1.62），未真正进入隧穿区；进入隧穿需约 5.23 TW/cm²（为设定上限 2.6 倍），需如实声明扫描范围并给出边界条件",
+      "missing_evidence": "Keldysh 参数作为多光子/隧穿区划分判据的原始理论文献，以及超快强场实验中 Keldysh 标度与 HHG/隧穿产额行为对应的实验证据（用于支撑 γ_K≈1 作为渡越区边界的物理口径）",
+      "search_keywords": [
+        "Keldysh parameter tunneling multiphoton regime",
+        "Keldysh 1965 ionization strong field",
+        "Keldysh scaling HHG transition region experiment"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§5(2)/§7 宣称通过 k 分辨手段观测 Landau-Zener 隧穿时序（k-resolved tunneling dynamics），但 §3.2 未给出任何实现路径（门控仅记录总产额/偏振包络）",
+      "missing_evidence": "强场固体动力学中动量分辨测量的方法学文献——如时间分辨角分辨光电子能谱（tr-ARPES）追踪带间跃迁、高次谐波谱的动量/取向分辨诊断、以及固体 Landau-Zener 隧穿的 k 空间时序观测先例",
+      "search_keywords": [
+        "time-resolved ARPES interband dynamics solid strong field",
+        "momentum-resolved high harmonic spectroscopy crystal",
+        "Landau-Zener tunneling k-resolved ultrafast observation",
+        "angle-resolved HHG crystal orientation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.4 T₂ 与 V_def 反向修正的收敛判据需可复算（建议：模拟与实验谱的对数偏差 δ=|lnY_exp−lnY_sim| 中位数 < 0.2 即锁定参数）",
+      "missing_evidence": "HHG 谱实验-模拟定量比对的方法学先例文献，特别是以谱形偏差/对数残差作为拟合优度或参数锁定判据的工作，以及固体 HHG 中 T₂（退相干时间）通过谱形拟合标定的已有做法",
+      "search_keywords": [
+        "HHG spectrum fitting dephasing time extraction",
+        "experimental simulated HHG spectral comparison metric",
+        "solid high harmonic dephasing time calibration"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§4.4 材料降级路径中'Bi₂Se₃ 替代 MoS₂''拓扑性由 Bi₂Te₃ 补充'涉及 Bi₂Se₃/Bi₂Te₃ 作为拓扑绝缘体表面态 HHG 载体的可行性",
+      "missing_evidence": "虽然评审定性为一致性（consistency）问题，但修复方案需保留'ZnO 极性轴 + Bi₂Se₃ 拓扑轴'的材料论证，故支撑拓扑材料强场响应（表面态 HHG、自旋-动量锁定对谐波的影响）的文献是修复该处论证所必需",
+      "search_keywords": [
+        "Bi2Se3 topological insulator high harmonic generation",
+        "surface state HHG spin-momentum locking",
+        "Bi2Te3 strong field topological surface state"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

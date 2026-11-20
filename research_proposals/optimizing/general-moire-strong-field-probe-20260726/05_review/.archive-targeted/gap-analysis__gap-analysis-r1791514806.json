@@ -1,0 +1,41 @@
+{
+  "gaps": [
+    {
+      "claim": "沿 Luu-Wörner 2018 路线，均匀体系的多维 HHG 观测反演已扩展到带隙、激子强度、自旋轨道耦合等内禀参数（§1.2 L29）",
+      "missing_evidence": "缺少支撑'HHG 反演带隙/激子强度/自旋轨道耦合'三类内禀参数的具体文献（仅 [14] Hu Shi-Qi 等 2024 PRL 涉及声子耦合，无法覆盖以上三种扩展）",
+      "search_keywords": [
+        "solid HHG band gap reconstruction",
+        "high harmonic generation exciton extraction",
+        "HHG spin-orbit coupling retrieval",
+        "high-harmonic spectroscopy intrinsic parameter inversion",
+        "solid HHG multi-dimensional observable inversion"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "references.md 中 [27]、[29]、[30] 三条文献在立项依据正文无任何引用（rationale 程序计数 52 次均未覆盖）",
+      "missing_evidence": "无法确认 [27] 文献的主题归属（[29][30] 已在 scheme §3.5 出现，迁移到 rationale 编号域即可）；[27] 需作者判定是否与莫尔-HHG 主线相关，必要时在 §1.2-§1.6 之间补入正文定位句或从 references.md 删除",
+      "search_keywords": [
+        "moiré superlattice high harmonic generation",
+        "twist angle HHG",
+        "moiré flat band Floquet engineering",
+        "twisted bilayer HHG probe",
+        "moiré correlation high harmonic"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.5 L77 主判据'HHG 跳变 > 20%'与 >50% 加强判据的具体阈值缺乏测量协议/归一化基线来源",
+      "missing_evidence": "需要 1-2 条明确给出 HHG 产额突变判据（threshold / enhancement factor）的测量协议、归一化基线与延迟扫描窗口定义的参考文献，并指向方案章相应协议编号",
+      "search_keywords": [
+        "HHG yield enhancement factor threshold",
+        "high harmonic generation normalization protocol",
+        "HHG time-delay scan window",
+        "HHG enhancement ratio baseline",
+        "high harmonic yield jump criterion"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

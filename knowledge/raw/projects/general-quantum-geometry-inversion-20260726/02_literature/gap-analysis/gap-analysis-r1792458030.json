@@ -1,0 +1,53 @@
+{
+  "gaps": [
+    {
+      "claim": "[12] r_opt≈1.6 机制错挂：原文由反压缩相位噪声给出且独立于模体积，申请书写反（§1.2 第1段 L27 与 §1.4 第2段 L57 两处整句替换）",
+      "missing_evidence": "需要反压缩相位噪声（anti-squeezing phase noise）独立决定最优聚焦比 r_opt≈1.6 的原始文献支撑；原文（arXiv:2605.21925）阐明归一化截止截距方差指数衰减、不依赖真空场绝对幅度与模体积；当前因果链（模体积→r_opt）与原文反相的两套原始推导/等价参考",
+      "search_keywords": [
+        "anti-squeezing phase noise high harmonic cutoff",
+        "sub-cycle pulse mode volume independence",
+        "squeezed light HHG normalized cutoff variance",
+        "phase noise quantum geometry metrology",
+        "arXiv squeezed vacuum HHG mode volume"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "content 红移判据 Δω/ω>2% 高于最强观测锚 1.7%（Sr₂CuO₃ 且 U/W 更高）；1T-TaS₂ 关联更弱、红移预期更小，裕度反向无论证",
+      "missing_evidence": "需要 Sr₂CuO₃ 强关联链 1.7% 红移的实测文献、U/W 与 redshift 标度律的实验或模型支撑、1T-TaS₂ 既有 HHG 测量数据、2% 阈值的信噪比/傅里叶分辨率检出限推导或下调至 1.5% 的实验依据",
+      "search_keywords": [
+        "Sr2CuO3 high harmonic redshift measurement",
+        "strong correlation U/W exciton high harmonic",
+        "1T-TaS2 high harmonic generation",
+        "Mott insulator HHG frequency shift",
+        "Fourier resolution harmonic frequency redshift detection limit",
+        "Hubbard U bandwidth high harmonic scaling"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Marques 条目补录未落地（references 全表 grep 零命中），参考文献表不完整",
+      "missing_evidence": "需要补录 Marques 相关原始条目，可能涵盖量子几何、多体相关、Hubbard 局域化或 HHG 理论建模方向；需确认条目作者、期刊、卷页、年份或在内容缺失时移除该指派",
+      "search_keywords": [
+        "Marques high harmonic quantum geometry",
+        "Marques many-body HHG theory",
+        "Marques Hubbard model high harmonic",
+        "Marques MoBUC HHG"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "首创性声明检索时间窗（2018-01 至 2026-07）被删，优先权声明缺截止日期锚",
+      "missing_evidence": "需要 2026 年 7 月前后的量子几何反演、量子几何计量、压缩光腔高谐波相关文献检索记录或数据库时间锚定（arXiv 提交时间、期刊出版时间等），明确无冲撞了三条首创性边界的实证",
+      "search_keywords": [
+        "quantum geometry inversion high harmonic 2026",
+        "quantum geometry metrology HHG first report",
+        "squeezed light HHG quantum geometry inversion",
+        "arXiv 2026 quantum geometry HHG inversion",
+        "CPL quantum geometry metrology first"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

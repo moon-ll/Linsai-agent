@@ -1,0 +1,72 @@
+{
+  "gaps": [
+    {
+      "claim": "Ghorashi 与 Rappe 关于 i-wave 交变磁体圆偏振高次谐波选择定则的理论（scheme L29 引 [15]，但文献表无 Ghorashi-Rappe 条目，分方案论证支柱失锚）",
+      "missing_evidence": "Ghorashi-Rappe 原始论文的完整条目（标题/期刊或 arXiv 编号/年份）及核心结论，用于补入文献表并支撑螺旋度交替指纹量的选择定则论证",
+      "search_keywords": [
+        "Ghorashi Rappe high harmonic generation altermagnet",
+        "i-wave altermagnet circular polarization harmonic selection rule",
+        "Ghorashi Rappe altermagnet nonlinear optics theory"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "双层 h-BN 可由 THz 场驱动滑移铁电极化翻转（scheme L19/L65 错锚为 [34]/[21]，真源应为 [10] Wang PRL 133:126801）",
+      "missing_evidence": "Wang PRL 133:126801（h-BN THz 滑移翻转）原文信息核验，同时确认 [34] Sheng 交磁-铁电堆叠理论与 [21] MOF 化学工程文献的真实主题，以论述主题为真值源完成全量重锚",
+      "search_keywords": [
+        "h-BN sliding ferroelectric THz switching",
+        "Wang PRL 133 126801",
+        "hexagonal boron nitride terahertz sliding ferroelectricity"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "滑移铁电翻转势垒为 16-40 meV（scheme 标 [11]、rationale 标 [34]/[14]，同一数值三个引用号）",
+      "missing_evidence": "16-40 meV 势垒的第一性原理计算（NEB/过渡态搜索）原始文献，作为唯一真源统一 scheme 与 rationale 两章的引用",
+      "search_keywords": [
+        "sliding ferroelectric switching barrier meV first principles",
+        "interlayer sliding energy barrier bilayer NEB calculation",
+        "滑移铁电 翻转势垒 meV 第一性原理"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Werner 交变磁体自旋劈裂高次谐波理论（scheme L51 错标 [16]，真源为 [15]）",
+      "missing_evidence": "Werner HHG 论文（疑似 arXiv:2408.08955）的完整引用信息与内容核验，支撑强场 HHG 分方案的论证支柱",
+      "search_keywords": [
+        "Werner altermagnet high harmonic generation spin splitting",
+        "arXiv 2408.08955 altermagnet HHG",
+        "Werner altermagnet HHG theory 2024"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Yarmohammadi 关于二维磁性材料非线性光学响应的工作（scheme L49 错标 [20]，真源为 [18]）",
+      "missing_evidence": "Yarmohammadi 原始文献的完整信息与主题核验，用于引用重锚",
+      "search_keywords": [
+        "Yarmohammadi nonlinear optical response 2D magnetic",
+        "Yarmohammadi high harmonic antiferromagnet"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Yang 与 Liang 的工作（scheme L65 错标 [17]，真源为 [14]，疑与滑移铁电势垒/翻转计算相关）",
+      "missing_evidence": "Yang & Liang 原始文献的完整信息与主题核验，用于引用重锚",
+      "search_keywords": [
+        "Yang Liang sliding ferroelectric bilayer",
+        "Yang Liang 2D ferroelectric switching barrier"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "HHG 探测（fs-亚 fs 时标）与滑移铁电翻转动力学时标差至少三个数量级、可时域分离（scheme L59 称'一个数量级以上'与 rationale L27/content L37 '至少三个数量级'跨章冲突，修复要求 L59 压缩为引用句）",
+      "missing_evidence": "滑移铁电翻转特征时标（ps-ns 级）的实验或理论文献，用于统一三处口径并落实为有引用支撑的陈述",
+      "search_keywords": [
+        "sliding ferroelectric switching timescale picosecond nanosecond",
+        "interlayer sliding dynamics ultrafast timescale",
+        "滑移铁电 翻换时标 超快"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

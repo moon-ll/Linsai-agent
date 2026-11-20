@@ -1,0 +1,31 @@
+{
+  "gaps": [
+    {
+      "claim": "立项依据 §1.7 末尾指引的参考文献 [29,30] 被用作方案章 SBE 框架从 ZnO/MgO → MoS₂ 单层 → 莫尔体系迁移的方法论锚点，方案章应有'研读基础文献'小节承接该论证",
+      "missing_evidence": "参考文献 [29,30] 与方案章方法学路径（SBE 框架增量开发、强度条件判定、椭偏读出）之间的方法论关联落空，未给出 [29,30] 在 SBE 数值实现、TDSE/TDDFT 基准对照、或 MoS₂ 单层 HHG 实验/理论先行验证上的具体贡献，导致方法链断裂",
+      "search_keywords": [
+        "semiconductor Bloch equations high harmonic generation solid",
+        "SBE TDSE benchmark solid HHG",
+        "MoS2 monolayer high harmonic generation",
+        "TDDFT high harmonic generation two-dimensional material",
+        "Molinero 2024 Optica TBG HHG",
+        "magic angle twisted bilayer graphene high harmonic"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "立项依据 §1.6 与研究内容 §2.5 中关于'强场探针-莫尔扭转角椭偏读出'体系'尚未见报道/尚无报道'的优先权主张",
+      "missing_evidence": "缺乏带明确检索截止日期的系统性文献检索证据支撑；NSFC general 面上项目要求以检索截止日（如'截至 2026-09 公开检索未见'）限定优先权声明，目前仅为无日期的断言，无法证明将 HHG 椭偏术与莫尔扭转角灵敏性结合的同类工作确未被报道",
+      "search_keywords": [
+        "moiré twist angle ellipsometry high harmonic",
+        "strong field probe moiré superlattice",
+        "TBG high harmonic generation angular dependence",
+        "莫尔 扭转角 高次谐波",
+        "莫尔 超快 强场 探测",
+        "tweezers moiré HHG polarization"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "full_review"
+}

@@ -1,0 +1,88 @@
+{
+  "gaps": [
+    {
+      "claim": "Cochran 等人和 Sørensen 等人关于 HHG 量子相干断层成像的工作年份存疑（content.md L37 写 2025 年，与预印本编号不符）",
+      "missing_evidence": "Cochran HHG quantum coherence tomography 和 Sørensen attosecond HHG order parameter reconstruction 两篇预印本的实际发表时间/预印本编号需要核实，rationale.md L43 采用模糊表述'2025—2026 年间'规避但未正面解决",
+      "search_keywords": [
+        "Cochran high harmonic quantum coherence tomography arXiv",
+        "Sørensen attosecond HHG order parameter reconstruction arXiv",
+        "Cochran HHG quantum coherence tomography 2025 2026"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Werner [24] 年份三版本并存（content.md '2024 年'、scheme.md '2026'、references.md '2026'），引用体系自相矛盾",
+      "missing_evidence": "Werner 交变磁性 HHG 理论工作的正确年份需核实，三个文档引用同一个编号却出现三个不同年份，说明编号体系有根本性错误",
+      "search_keywords": [
+        "Werner altermagnet high harmonic generation theory",
+        "Werner Šmejkal altermagnet HHG",
+        "Werner 2024 2026 altermagnet"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "rationale.md L5 将'序参量'教科书论述挂 [25][26]，评审者指出此处文献支撑有问题",
+      "missing_evidence": "[25][26] 对'序参量'基础概念的支撑不足或引用不当，需替换为领域内公认的标准参考文献（如 Landau 相变理论或固体物理学教科书级文献）",
+      "search_keywords": [
+        "order parameter Landau phase transition textbook",
+        "solid state order parameter theory standard reference",
+        "序参量 Landau 理论 教科书"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "CrSb 和 MnTe 材料参数（激光损伤阈值、磁相变温度、Néel 点等）在立项依据中引用不足",
+      "missing_evidence": "CrSb 损伤阈值、CrSb 磁相图、MnTe 损伤阈值、CrSb/MnTe 的异常 Hall 效应实验数据等材料特定参数缺乏文献支撑",
+      "search_keywords": [
+        "CrSb ultrafast laser damage threshold",
+        "CrSb magnetic phase diagram Néel temperature",
+        "MnTe femtosecond laser damage threshold",
+        "CrSb anomalous Hall effect experimental",
+        "MnTe reflectivity magnetic phase transition"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "核心判据（≥1% 偶次谐波差分、SNR>5）的物理论证有跳跃",
+      "missing_evidence": "1% 偶次谐波差分信号是否可被现有商用探测器分辨、SNR>5 在实际 HHG 实验条件下的可行性，需要实验文献或装置参数支撑",
+      "search_keywords": [
+        "solid-state HHG signal-to-noise ratio measurement",
+        "high harmonic generation noise floor detector",
+        "HHG shot noise photon count limit experimental",
+        "attosecond spectroscopy noise floor experimental"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "申请人前期工作零自引，methodology manual 未在立项依据中被引用作为前置基础",
+      "missing_evidence": "申请人关于 HHG 反演方法学的方法论文献（4 万字方法学手册）未被 rationale.md 引用，说明申请人对自身方法学积累的引用支撑缺失",
+      "search_keywords": [
+        "high harmonic generation inverse problem methodology",
+        "HHG attosecond spectroscopy reconstruction method",
+        "physics-informed neural network HHG"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "交变磁性（altermagnet）三种序参量的 HHG 可辨识性缺乏文献支撑",
+      "missing_evidence": "Werner/Šmejkal 理论上预测 altermagnet 有三种可区分的序参量，但实验上 HHG 能否同时辨识这三者、区分度如何，没有文献报道",
+      "search_keywords": [
+        "altermagnet three order parameters HHG distinguishability",
+        "altermagnet HHG orbital magnetic order simultaneous probe",
+        "Werner Šmejkal altermagnet prediction three order parameters"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "CrSb 等交变磁性材料在强场下的光致损伤阈值未建立文献基础",
+      "missing_evidence": "CrSb 近红外飞秒激光损伤阈值、CrSb 强场光致击穿阈值等关键实验参数缺失，影响可行性论证",
+      "search_keywords": [
+        "CrSb femtosecond laser damage threshold near-infrared",
+        "CrSb strong field ablation threshold",
+        "altermagnet ultrafast laser damage V per Angstrom",
+        "transition metal pnictide optical breakdown threshold"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "gaps": [
+    {
+      "claim": "§2.0 L41 等处引用 Li 等的研究成果（全文共三处提及 Li 等，仅 §2.3 L107 一处挂 [10] 角标）",
+      "missing_evidence": "Li 等工作在首现位置（L41）缺少引用标注，该论断在最初出现处无可溯源文献支撑；评审建议 L41 首现即挂 [10]，使测量范式类先例（与 Theidel[38]/Iglesias[13]/Prajapati[34] 同组）引用链完整",
+      "search_keywords": [
+        "Li high harmonic generation pump-probe 2D semiconductor",
+        "solid-state HHG monolayer measurement paradigm",
+        "Li et al. high-order harmonics transition metal dichalcogenide"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "单层（monolayer）样品 7-9 阶低阶高次谐波的信噪比与计数率可行性（可行性维度 0.82 中被列为个别难点，报告文本在此处截断）",
+      "missing_evidence": "单层/少层样品低阶 HHG 光子产额与计数率的定量公开数据，用于支撑探测时间指标的可达性论证；现有文献仅支撑测量范式先例（Li[10]/Theidel[38]/Iglesias[13]/Prajapati[34]），缺少数值级产额参照",
+      "search_keywords": [
+        "monolayer MoS2 high harmonic generation photon yield",
+        "2D material HHG count rate detection sensitivity",
+        "single-layer semiconductor low-order harmonics intensity"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

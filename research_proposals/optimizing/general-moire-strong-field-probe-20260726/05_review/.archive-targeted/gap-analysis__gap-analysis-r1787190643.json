@@ -1,0 +1,36 @@
+{
+  "gaps": [
+    {
+      "claim": "半导体布洛赫方程(SBE)对莫尔超晶格的适用性尚未被文献系统验证",
+      "missing_evidence": "缺乏SBE在莫尔超晶格强场条件下的有效性验证、适用范围边界、以及与严格紧束缚模型对比的文献",
+      "search_keywords": [
+        "semiconductor Bloch equation moiré superlattice validity",
+        "SBE interband coupling moiré heterostructure strong field",
+        "tight-binding Bloch equation twisted bilayer applicability comparison",
+        "莫尔超晶格 半导体布洛赫方程 适用性"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "高次谐波反演中的正则化参数选择缺乏方法论文献支撑",
+      "missing_evidence": "缺少Tikhonov正则化在HHG反演中的L-curve参数选择、多维反演正则化策略、以及非线性光学反问题正则化对比的文献",
+      "search_keywords": [
+        "L-curve Tikhonov regularization high harmonic inversion",
+        "regularization parameter selection nonlinear optics inversion HHG",
+        "ill-posed inversion regularization solid-state HHG",
+        "Tikhonov regularization optical inverse problem attosecond"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "content.md §2.1中关联绝缘态跃迁临界电流与莫尔扭转角关系的公式验证缺乏理论支撑",
+      "missing_evidence": "缺少I_c ∝ Δ_CI²关系的实验验证、以及关联绝缘态跃迁临界电流标度行为的理论和实验文献",
+      "search_keywords": [
+        "critical current moiré twist angle correlated insulator",
+        "I_c scaling correlated insulator twisted bilayer graphene",
+        " Mott insulator transition critical current scaling moire"
+      ],
+      "priority": "high"
+    }
+  ]
+}

@@ -1,0 +1,324 @@
+{
+  "proposal_id": "general-moire-strong-field-probe-20260726",
+  "cluster_id": "orphan-route-2026-11-06",
+  "clusters": [
+    "orphan-route-2026-11-06",
+    "cl_20261106_1a2f9c",
+    "cl_20261106_7a24eb",
+    "cl_20261106_fe9af3"
+  ],
+  "entries": [
+    {
+      "source_id": "paper:2023-2307.14693-high-harmonic-spectroscopy-of-strongly-bound-excitons-in-sol",
+      "title": "High-harmonic spectroscopy of strongly bound excitons in solids",
+      "summary": "本文通过实时从头算含时Hartree-Fock（TDHF）模拟证明，一维固体中的强束缚激子在超快强场激发下会在高次谐波产生（HHG）光谱中留下依赖于布居数的光谱特征、复合动力学及能级移动等可测量印记，从而可从HHG数据中反演激子布居与动力学。该工作为利用高次谐波谱学表征凝聚态体系中的激子特性提供了新途径。",
+      "path": "",
+      "added_via": "cluster:orphan-route-2026-11-06",
+      "added_at": "2026-11-06T16:33:07Z"
+    },
+    {
+      "source_id": "paper:2019-2603.21549-high-harmonic-generation-from-spin-polarised-defects-in-soli",
+      "title": "High-harmonic generation from spin-polarised defects in solids",
+      "summary": "通过含时密度泛函理论（TDDFT）计算证明，h-BN 中的自旋极化空位缺陷会显著改变固态高次谐波（HHG）的产额与偏振特性。由于缺陷引入的自旋极化带隙态对不同自旋通道的跃迁与隧穿动力学影响不同，自旋向上与向下通道的谐波响应出现明显分化。据此提出可利用 HHG 的产额与偏振信号对固体中的缺陷进行全光学成像与表征。",
+      "path": "knowledge/raw/papers/2019-2603.21549-high-harmonic-generation-from-spin-polarised-defects-in-soli.md",
+      "added_via": "cluster:orphan-route-2026-11-06",
+      "added_at": "2026-11-06T16:33:07Z"
+    },
+    {
+      "source_id": "paper:2022-2204.05290-enhanced-high-order-harmonics-through-periodicity-breaks-fro",
+      "title": "Enhanced high-order harmonics through periodicity breaks: from backscattering to impurity states",
+      "summary": "用含时密度泛函理论（TDDFT）研究一维固体链中周期性破缺（点缺陷）对高次谐波产生（HHG）的作用，发现缺陷可显著提升谐波产率并扩展截止能量。识别出两种本质不同的增强机制：缺陷位点对激光加速电子波包的背散射（恢复原子气体式'电离-加速-背散射-复合'图像），以及缺陷在带隙中引入的局域杂质态作为额外隧穿与复合通道。结果表明可通过可控引入周期破缺来设计更强的固体HHG光源。",
+      "path": "knowledge/raw/papers/2022-2204.05290-enhanced-high-order-harmonics-through-periodicity-breaks-fro.md",
+      "added_via": "cluster:orphan-route-2026-11-06",
+      "added_at": "2026-11-06T16:33:07Z"
+    },
+    {
+      "source_id": "paper:2024-2401.12929-unveiling-the-role-of-electron-phonon-scattering-in-dephasin",
+      "title": "Unveiling the Role of Electron-Phonon Scattering in Dephasing High-Order Harmonics in Solids",
+      "summary": "通过单层与体相 MoS2 波长依赖的高次谐波测量，结合 TDDFT 与含动量依赖电子-声子散射的半导体布洛赫方程（SBE）模拟，证明电子-声子散射是固体 HHG 退相干的主导机制，可取代常用的唯象退相干时间 T2。谐波产率随驱动波长的标度关系由散射率的动量（能量）依赖决定，据此提出从 HHG 谱全光提取声子/载流子散射率的方法。",
+      "path": "knowledge/raw/papers/2024-2401.12929-unveiling-the-role-of-electron-phonon-scattering-in-dephasin.md",
+      "added_via": "cluster:orphan-route-2026-11-06",
+      "added_at": "2026-11-06T16:33:07Z"
+    },
+    {
+      "source_id": "paper:2023-2303.10956-linking-high-harmonic-generation-and-strong-field-ionization",
+      "title": "Linking High-Harmonic Generation and Strong-Field Ionization in Bulk Crystals",
+      "summary": "在体单晶中同步测量角度依赖的非线性吸收与高次谐波产率，实验上确立了固体 HHG 与激光诱导强场电离之间的直接关联：二者的晶向各向异性彼此锁定，表明电离步主导谐波发射强度。半导体布洛赫方程（SBE）模拟与基于 Wannier 函数的实空间隧穿电离率计算联合复现实验结果，给出电离通过载流子注入、耗尽与失相调控带间谐波通道的定量图像。",
+      "path": "knowledge/raw/papers/2023-2303.10956-linking-high-harmonic-generation-and-strong-field-ionization.md",
+      "added_via": "cluster:orphan-route-2026-11-06",
+      "added_at": "2026-11-06T16:33:07Z"
+    },
+    {
+      "source_id": "paper:2024-2402.11824-moiré-optical-phonons-dancing-with-heavy-electrons-in-magic",
+      "title": "Moiré optical phonons dancing with heavy electrons in magic-angle twisted bilayer graphene",
+      "summary": "针对魔角扭曲双层石墨烯（MATBG）中与平带'重'电子强耦合的莫尔光学声子，提出一套投影理论，把复杂的全空间电子-声子耦合问题约化到平带子空间的可解低能模型。在平带 Wannier（分子轨道）基下构建扩展 Holstein 模型，定量刻画莫尔光学声子与平带电子的局域耦合形式、强度及其参数依赖。理论强调平带电子远慢于声子（声子能量远大于带宽），系统处于 Migdal 定理失效的反绝热区，需以极化子/非微扰图像理解 EPC 及其对关联与超导物理的含义。",
+      "path": "knowledge/raw/papers/2024-2402.11824-moiré-optical-phonons-dancing-with-heavy-electrons-in-magic.md",
+      "added_via": "cluster:cl_20261106_1a2f9c",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2023-2301.13742-ultrafast-umklapp-assisted-electron-phonon-cooling-in-magic",
+      "title": "Ultrafast Umklapp-assisted electron-phonon cooling in magic-angle twisted bilayer graphene",
+      "summary": "通过超快载流子弛豫测量，揭示魔角扭转双层石墨烯中Umklapp电子-声子散射主导的冷却机制，为莫尔超晶格材料中电子-声子耦合的微观动力学提供了独特探针。",
+      "path": "knowledge/raw/papers/2023-2301.13742-ultrafast-umklapp-assisted-electron-phonon-cooling-in-magic.md",
+      "added_via": "cluster:cl_20261106_1a2f9c",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2025-2502.14039-projected-and-solvable-topological-heavy-fermion-model-of-tw",
+      "title": "Projected and Solvable Topological Heavy Fermion Model of Twisted Bilayer Graphene",
+      "summary": "本文在投影极限下求解魔角扭转双层石墨烯（MATBG）的拓扑重费米子（THF）模型，证明当 f 轨道在位库仑作用 U1 远大于其特征能标 Δ(ω) 时，f 电子局域矩保持稳定、不发生退局域化。在该极限下模型严格可解，作者进一步给出关联自能的 Hubbard-I 近似解析形式。这为 MATBG 平带关联、局域矩物理及可能的有序相提供了可控且可解的有效模型框架。",
+      "path": "knowledge/raw/papers/2025-2502.14039-projected-and-solvable-topological-heavy-fermion-model-of-tw.md",
+      "added_via": "cluster:cl_20261106_1a2f9c",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2018-1802.00652-unconventional-superconductivity-in-magic-angle-graphene-sup",
+      "title": "Unconventional superconductivity in magic-angle graphene superlattices",
+      "summary": "首次在扭转角约1.1°的魔角扭转双层石墨烯（TBG）中观测到超导电性，临界温度最高达1.7 K，同时在平带半填充处发现关联绝缘态。其填充因子-温度相图呈现与铜氧化物高温超导极为相似的超导穹顶结构，暗示非常规配对机制。该工作开创了'扭转电子学'与莫尔超晶格强关联物理这一全新领域。",
+      "path": "knowledge/raw/papers/2018-1802.00652-unconventional-superconductivity-in-magic-angle-graphene-sup.md",
+      "added_via": "cluster:cl_20261106_1a2f9c",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2018-1802.00553-correlated-insulator-behaviour-at-half-filling-in-magic-angl",
+      "title": "Correlated Insulator Behaviour at Half-Filling in Magic Angle Graphene Superlattices",
+      "summary": "首次在扭转角约1.1°的魔角扭转双层石墨烯（TBG）中实验发现平带半填充（ν=±2，每个莫尔原胞2个载流子）处的类Mott关联绝缘态：纵向电阻在半填充处随降温急剧上升并打开能隙。这证明莫尔平带猝灭动能后库仑相互作用主导电子行为，确立TBG为栅压高度可调的Hubbard型关联平台。该工作直接奠定了随后魔角TBG超导的发现与莫尔关联物态研究的基础，也为用强场/非线性光学手段探测莫尔关联相提供了明确的目标体系。",
+      "path": "knowledge/raw/papers/2018-1802.00553-correlated-insulator-behaviour-at-half-filling-in-magic-angl.md",
+      "added_via": "cluster:cl_20261106_1a2f9c",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2026-2609.08104-tunable-topological-narrow-bands-in-twisted-bilayer-trilayer",
+      "title": "Tunable topological narrow bands in twisted bilayer-trilayer graphene",
+      "summary": "系统研究了扭转双层-三层石墨烯（tBTG）在四种堆叠构型下的低能能带结构与拓扑性质，发现可通过扭转角与堆叠方式调控的窄平带。在特定构型下出现孤立的高陈数（|C|>1）平坦能带，兼具平带性与非平庸拓扑，被视为实现分数陈绝缘体（FCI）的有希望平台。该工作将摩尔平带研究从魔角双层石墨烯推广至层数与堆叠自由度更丰富的多层体系。",
+      "path": "knowledge/raw/papers/2026-2609.08104-tunable-topological-narrow-bands-in-twisted-bilayer-trilayer.md",
+      "added_via": "cluster:cl_20261106_1a2f9c",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2024-2405.08959-tunable-moiré-materials-for-probing-berry-physics-and-topolo",
+      "title": "Tunable moiré materials for probing Berry physics and topology",
+      "summary": "本文是关于可调莫尔材料中Berry物理与拓扑调控的系统性综述（Wu, Kennes等，2024）。核心内容是梳理扭转TMD等莫尔超晶格中通过转角、垂直位移场、层间耦合等自由度对平带带宽、Berry曲率分布与能带拓扑（陈数）的工程化调控，及其支撑的关联拓扑态（分数陈绝缘体、量子反常霍尔效应、非常规超导等）。综述同时从第一性原理计算角度给出莫尔超胞中k点采样与收敛性的方法学指引，为在该平台做定量Berry曲率/拓扑不变量计算提供实用参考。",
+      "path": "knowledge/raw/papers/2024-2405.08959-tunable-moiré-materials-for-probing-berry-physics-and-topolo.md",
+      "added_via": "cluster:cl_20261106_1a2f9c",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2026-2607.25172-a-catalogue-of-topological-moiré-bands-in-twisted-semiconduc",
+      "title": "A Catalogue of Topological Moiré Bands in Twisted Semiconductors",
+      "summary": "本文为扭转半导体建立拓扑摩尔能带的系统性分类目录：基于连续介质摩尔模型，对一系列材料参数（有效质量、层间隧穿强度、自旋轨道耦合、同质/异质组合）与扭转角进行枚举，标记各摩尔微带的陈数与拓扑-平庸属性。核心产出一套可查询的材料依赖分类规则，指明哪些材料/扭转角窗口会出现非平庸陈带与摩尔平带，为平带关联物理与分数陈绝缘体研究提供材料选型指南。（注：题录卡无摘要与全文，以上基于题名、简报与领域共识推断。）",
+      "path": "knowledge/raw/papers/2026-2607.25172-a-catalogue-of-topological-moiré-bands-in-twisted-semiconduc.md",
+      "added_via": "cluster:cl_20261106_1a2f9c",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2025-2504.10189-topological-exciton-bands-and-many-body-exciton-phases-in-tr",
+      "title": "Topological exciton bands and many-body exciton phases in transition metal dichalcogenide trilayer heterostructures",
+      "summary": "提出 WX2/MX2/WX2 对称三层 TMD 异质结作为拓扑激子能带的普适平台：在 II 型能带对齐下电子局域于中间 MX2 层、空穴分布于两侧 WX2 层，形成上下两套近简并的层间激子。通过层间扭转角调控莫尔势的周期与强度，使激子微带反转并打开非零陈数的拓扑能隙，获得扭转角可开关的激子陈带。当拓扑激子带被莫尔势压平、相互作用主导时，预言分数填充下出现多体激子相（分数激子绝缘体、激子晶体等）。",
+      "path": "knowledge/raw/papers/2025-2504.10189-topological-exciton-bands-and-many-body-exciton-phases-in-tr.md",
+      "added_via": "cluster:cl_20261106_1a2f9c",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2025-2508.01584-twistronics-and-moiré-superlattice-physics-in-2d-transition",
+      "title": "Twistronics and moiré superlattice physics in 2D transition metal dichalcogenides",
+      "summary": "本文是2025年关于二维过渡金属硫族化合物（TMD）转角电子学与摩尔超晶格物理的综述，系统梳理了以C3旋转、σ_v/σ_h镜面等对称元素和±K谷结构为基础的对称性框架。综述总结了扭转同质/异质双层中由层间堆叠与扭转角调控的能带工程，以及摩尔平带衍生的莫特绝缘、广义Wigner晶体等关联电子态的最新进展。可作为摩尔能带设计与摩尔量子模拟方向的系统性参考。",
+      "path": "knowledge/raw/papers/2025-2508.01584-twistronics-and-moiré-superlattice-physics-in-2d-transition.md",
+      "added_via": "cluster:cl_20261106_1a2f9c",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2026-2608.08917-relaxation-driven-flat-bands-and-topology-in-moiré-transitio",
+      "title": "Relaxation-driven flat bands and topology in moiré transition metal dichalcogenide heterobilayers",
+      "summary": "在 WSe2/WS2 莫尔异质双层中证明晶格弛豫（原子重构）会产生赝磁场，使此前被认为拓扑平庸的莫尔平坦带获得 Chern 数 ±1。该弛豫驱动的拓扑不需要外磁场，与 TMD 固有的自旋-谷锁定结合，在单味（自旋/谷）极化下可实现量子反常霍尔态；同时弛豫压窄了带宽使相互作用占主导，使体系成为分数 Chern 绝缘体（FCI）的候选平台。这一结果确立了晶格重构本身可以作为莫尔 TMD 中拓扑能带的生成机制。",
+      "path": "knowledge/raw/papers/2026-2608.08917-relaxation-driven-flat-bands-and-topology-in-moiré-transitio.md",
+      "added_via": "cluster:cl_20261106_1a2f9c",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2024-2404.13455-adiabatic-approximation-and-aharonov-casher-bands-in-twisted",
+      "title": "Adiabatic Approximation and Aharonov-Casher Bands in Twisted Homobilayer TMDs",
+      "summary": "在扭转同质双层TMD（如tMoTe2/tWSe2）的摩尔连续模型中引入绝热（快慢变量分离）近似，将自旋-层锁定下的层赝自旋内态投影为标量摩尔能带，并解析地识别出一类由Aharonov-Casher几何相位主导的摩尔能带（AC能带）。证明该能带具有近乎理想的量子几何——贝里曲率近均匀、量子度规近似满足trace条件且陈数±1——从而为扭转同质双层TMD中实验观测到的分数陈绝缘体提供了清晰的解析物理图像与稳定性基础。",
+      "path": "knowledge/raw/papers/2024-2404.13455-adiabatic-approximation-and-aharonov-casher-bands-in-twisted.md",
+      "added_via": "cluster:cl_20261106_1a2f9c",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2024-2408.04136-berry-curvature-contribution-towards-1s-2p-interlayer-excito",
+      "title": "Berry curvature contribution towards 1s-2p interlayer exciton ultrafast transition within R-WSe2/MoSe2 heterobilayer",
+      "summary": "针对R型堆叠WSe2/MoSe2异质双层中的层间激子，本文计算了贝里曲率对1s-2p带内（激子内部）超快跃迁的贡献，预言贝里曲率以动量空间有效磁场形式解除2p+与2p-态简并，使1s-2p跃迁呈现几meV量级的双线劈裂。该劈裂强烈依赖扭转角并受堆叠对称性约束，为激子贝里曲率与层间几何提供了可在超快THz/中红外光谱中探测的光谱指纹。",
+      "path": "knowledge/raw/papers/2024-2408.04136-berry-curvature-contribution-towards-1s-2p-interlayer-excito.md",
+      "added_via": "cluster:cl_20261106_1a2f9c",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2021-2110.08095-second-harmonic-generation-control-in-twisted-bilayers-of-tr",
+      "title": "Second harmonic generation control in twisted bilayers of transition metal dichalcogenides",
+      "summary": "在MoS2/WSe2转角异质双层中结合理论与实验证明，SHG的幅度与偏振由层间扭转角和各层激子共振共同决定：通过选择合适的基频激光能量可选择性增强某一层的贡献，从而实现对SHG的增强/抑制并直接读出扭转角。在近0°堆叠附近观测到新的激子共振（强层间耦合/杂化激子），表明近对齐时扭转角调控能力受限，同时提供了层间耦合的光学指纹。",
+      "path": "knowledge/raw/papers/2021-2110.08095-second-harmonic-generation-control-in-twisted-bilayers-of-tr.md",
+      "added_via": "cluster:cl_20261106_1a2f9c",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2025-2411.18828-moiré-band-theory-for-m-valley-twisted-transition-metal-dich",
+      "title": "Moiré Band Theory for M-Valley Twisted Transition Metal Dichalcogenides",
+      "summary": "提出以 IVB 族 TMD（Zr/Hf/Sn 基 MX2）的扭转双层作为新型莫尔材料体系，并建立适用于 M 点谷的莫尔能带理论。核心新物理在于三个 C3 等价的 M 谷在小转角下折叠到同一莫尔动量，莫尔势驱动的谷间耦合使该体系本质上区别于传统 K/K' 谷莫尔 TMD。理论表明该平台兼具窄平带（强关联）与可调能带拓扑，可作为电场连续调节的量子模拟材料。",
+      "path": "knowledge/raw/papers/2025-2411.18828-moiré-band-theory-for-m-valley-twisted-transition-metal-dich.md",
+      "added_via": "cluster:cl_20261106_1a2f9c",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2026-2604.22343-dynamic-moiré-potentials-and-robust-wigner-crystallization-i",
+      "title": "Dynamic Moiré Potentials and Robust Wigner Crystallization in Large-Scale Twisted Transition Metal Dichalcogenides",
+      "summary": "本文构建了DeePMD机器学习分子动力学＋DeepH电子哈密顿深度学习＋DFT＋DMRG的集成工作流，首次在约3000原子的扭转双层TMD莫尔超胞上实现有限温度晶格动力学与电子结构的联合计算。核心发现是莫尔势阱并非静态：低频莫尔呼吸模持续重塑势阱形状与深度，使最低导带显著窄化并驱动电子强局域化。由此在存在热与晶格涨落的环境下形成鲁棒的Wigner晶体，将'动态莫尔势'确立为莫尔工程中区别于静态重构的新自由度。",
+      "path": "knowledge/raw/papers/2026-2604.22343-dynamic-moiré-potentials-and-robust-wigner-crystallization-i.md",
+      "added_via": "cluster:cl_20261106_1a2f9c",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2025-2510.11180-tuning-layer-orbital-hall-effect-via-spin-rotation-in-ferrom",
+      "title": "Tuning Layer Orbital Hall Effect via Spin Rotation in Ferromagnetic Transition Metal Dichalcogenides",
+      "summary": "在铁磁过渡金属硫族化合物（TMD）量子反常霍尔绝缘体中，基于第一性原理证明层轨道霍尔效应可由自旋极化（磁化）方向调控：Berry曲率的符号由自旋极化方向决定，旋转磁化即可翻转层间轨道霍尔响应的符号与大小。进一步证明AA与AB堆垛对应的层间对称性差异决定轨道角动量（OAM）的谷选择规则，由此提出堆垛工程与磁化取向双自由度联合调谐层OHE的方案。",
+      "path": "knowledge/raw/papers/2025-2510.11180-tuning-layer-orbital-hall-effect-via-spin-rotation-in-ferrom.md",
+      "added_via": "cluster:cl_20261106_1a2f9c",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2022-2210.00759-berry-curvature-spin-hall-effect-and-nonlinear-optical-respo",
+      "title": "Berry curvature, spin Hall effect, and nonlinear optical response in moiré transition metal dichalcogenide heterobilayers",
+      "summary": "本文指出小扭转角TMD莫尔异质双层中，高能远程能带积分掉后会产生一个量级可观的周期性赝磁场，以Peierls替换纳入连续莫尔模型后可显著重塑活性能带的谷分辨Berry曲率（形成Berry曲率通量束）。基于这一机制，作者预言了增强的自旋霍尔效应，并提出用位移电流（二阶非线性光学响应，体光伏效应）作为直接探测赝磁场与Berry曲率通量的实验手段。",
+      "path": "knowledge/raw/papers/2022-2210.00759-berry-curvature-spin-hall-effect-and-nonlinear-optical-respo.md",
+      "added_via": "cluster:cl_20261106_1a2f9c",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2026-2610.38251-charge-filling-dependent-valley-polarization-and-i",
+      "title": "Charge Filling-Dependent Valley Polarization and its Dynamics Driven by Correlated Interlayer Exciton States in WSe2/WS2 Heterobilayer",
+      "summary": "在 WSe2/WS2 莫尔异质双层中报道了层间激子谷极化随电荷填充的系统演化：谷极化度在特定填充因子处被显著调制（增强或猝灭），并可归因于莫尔势阱中形成的关联层间激子态。同时测得谷极化的时间动力学（弛豫寿命）随填充变化，表明激子间关联直接改变了谷退极化通道。该工作将谷自由度与莫尔关联物理联系起来，提供了用电荷填充调控谷极化的直接实验证据。（注：简报卡正文截断，以上基于标题与首段作领域级推断。）",
+      "path": "knowledge/raw/papers/2026-2610.38251-charge-filling-dependent-valley-polarization-and-i.md",
+      "added_via": "cluster:cl_20261106_1a2f9c",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2025-2510.21968-altermagnetism-kagome-flat-band-and-weyl-fermion-states-in-m",
+      "title": "Altermagnetism, Kagome Flat Band, and Weyl Fermion States in Magnetically Intercalated Transition Metal Dichalcogenides",
+      "summary": "本文用第一性原理系统筛选XY4Z8型磁性插层过渡金属硫族化合物（TMD），预测FeNb4S8、FeNb4Se8、CoTa4Se8为一类新的交变磁体（altermagnet）：零净磁矩却具有动量空间符号交错的自旋劈裂能带。同一结构中插层磁性原子构成kagome子晶格并贡献高态密度平带，自旋轨道耦合进一步在能带中产生Weyl节点，形成交变磁性、kagome平带与Weyl拓扑三合一共存的单一材料平台，为无杂散场自旋电子学与拓扑-关联耦合研究提供候选体系。",
+      "path": "knowledge/raw/papers/2025-2510.21968-altermagnetism-kagome-flat-band-and-weyl-fermion-states-in-m.md",
+      "added_via": "cluster:cl_20261106_1a2f9c",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2024-2408.08835-altermagnetism-in-the-layered-intercalated-transition-metal",
+      "title": "Altermagnetism in the layered intercalated transition metal dichalcogenide CoNb4Se8",
+      "summary": "首次在层状插层过渡金属二硫族化物 CoNb4Se8 中实验确认交变磁性（altermagnetism）。单晶中子衍射确定其在奈尔温度约 168 K 以下建立易轴 A 型反铁磁序（层内铁磁、层间反铁磁）。DFT 计算显示在零净磁矩条件下存在动量依赖、符号交变的自旋劈裂能带，构成交变磁性的判定性指纹，将该新兴物态拓展到可插层、可剥离的层状 TMD 平台。",
+      "path": "knowledge/raw/papers/2024-2408.08835-altermagnetism-in-the-layered-intercalated-transition-metal.md",
+      "added_via": "cluster:cl_20261106_1a2f9c",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2025-2508.12985-arpes-and-dft-study-of-co14tase2-as-a-layered-altermagnet",
+      "title": "ARPES and DFT study of Co1/4TaSe2 as a layered altermagnet",
+      "summary": "本文结合 ARPES 与 DFT 计算，确认 Co 插层过渡金属硫族化合物 Co1/4TaSe2 为具有较高奈尔温度的层状交错磁体：在零净磁矩的反铁磁序下仍呈现动量依赖的自旋劈裂能带。实验与理论逐峰对照为交错磁自旋劈裂峰的判据与提取提供了独立于对称性分析的基准。并通过跨越奈尔温度的测量，量化了相变温度以上交错磁自旋劈裂的可分辨程度，为在长程序消失后识别交错磁信号给出标定。",
+      "path": "knowledge/raw/papers/2025-2508.12985-arpes-and-dft-study-of-co14tase2-as-a-layered-altermagnet.md",
+      "added_via": "cluster:cl_20261106_1a2f9c",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2024-2401.09884-magic-distances-in-twisted-bilayer-graphene",
+      "title": "Magic distances in twisted bilayer graphene",
+      "summary": "提出转角双层石墨烯（TBG）中与“魔角”对偶的“魔距”（magic distance）概念：转角与层间距离通过 Bistritzer–MacDonald 连续模型的无量纲耦合参数相互等效，对任意堆垛角都存在一个使 Dirac 速度坍缩、平带形成的层间距离。据此建立 (θ, d) 等效类映射框架，把 magic 角（≈1.05°，上万原子超胞）的平带物理映射到计算可行的大角度、少原子超胞结构上。这使得 TDDFT 等第一性原理含时方法能够在大堆垛角结构上直接捕捉 magic 角电子动力学与光学响应（正式发表：npj 2D Mater. Appl. 9, 2025）。",
+      "path": "knowledge/raw/papers/2024-2401.09884-magic-distances-in-twisted-bilayer-graphene.md",
+      "added_via": "cluster:cl_20261106_7a24eb",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2026-2601.06778-charged-moiré-phonons-in-twisted-bilayer-graphene",
+      "title": "Charged moiré phonons in twisted bilayer graphene",
+      "summary": "本文理论上预测：掺杂的转角双层石墨烯（TBG）中，原本无极性的moiré声子会因电子填充而获得红外活性的动态偶极矩。核心结果是moiré相位子（层间滑移的声学模式）携带一个普适的有效电荷，其数值恰好等于每个moiré单胞中的电子数。这为用红外/太赫兹光谱直接读出moiré体系的电子填充与层间滑移响应提供了明确的光谱学判据。",
+      "path": "knowledge/raw/papers/2026-2601.06778-charged-moiré-phonons-in-twisted-bilayer-graphene.md",
+      "added_via": "cluster:cl_20261106_7a24eb",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2025-2503.22920-magneto-transport-of-pressure-induced-flatbands-in-large-ang",
+      "title": "Magneto transport of pressure induced flatbands in large angle twisted bilayer graphene",
+      "summary": "本文在大转角（≤6°）转角双层石墨烯中利用原位压力增大层间隧穿，恢复了通常只在魔角附近出现的类魔角平带。磁输运测量观测到清晰的 Hofstadter 分形谱与整数量子霍尔效应，证明平带的非平庸陈数拓扑在压力调控下保持并演化。结果表明压力可作为独立于精确转角控制的拓扑平带/关联物态调控手段，将摩尔平带物理拓展到摩尔周期更短的大转角区间。",
+      "path": "knowledge/raw/papers/2025-2503.22920-magneto-transport-of-pressure-induced-flatbands-in-large-ang.md",
+      "added_via": "cluster:cl_20261106_7a24eb",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2026-2609.38033-interlayer-dark-excitons-in-a-van-der-waals-hetero",
+      "title": "Interlayer dark excitons in a van der Waals heterostructure",
+      "summary": "本文聚焦 TMD 范德华异质双层中的层间暗激子：II 型能带对齐使电子与空穴分别束缚在相邻两层，形成的层间激子兼具超长寿命与大的面外永久偶极矩。通过光致发光（含变温/时间分辨）与电场调控辨认出能量最低的层间激子为动量间接的暗态，其复合需声子参与，这正是层间激子长寿命与长程输运的物理根源。这些特性使层间暗激子成为激子器件、偶极激子凝聚与量子多体物态的重要载体。",
+      "path": "knowledge/raw/papers/2026-2609.38033-interlayer-dark-excitons-in-a-van-der-waals-hetero.md",
+      "added_via": "cluster:cl_20261106_fe9af3",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2025-2502.16353-full-film-dry-transfer-of-mbe-grown-van-der-waals-materials",
+      "title": "Full-film dry transfer of MBE-grown van der Waals materials",
+      "summary": "提出一种聚合物辅助的全膜干法转移（PCL）方法，可将MBE外延生长的范德华薄膜（MoSe2/WSe2等TMD、拓扑绝缘体、二维磁体）以>90%的面积产率整体剥离并转移到目标衬底。其关键在于控制小剥离角进行脱附，抑制裂纹萌生与转角（twist-angle）偏差，实现接近确定性的大面积高质量异质结集成。该方法打通了MBE晶圆级外延与任意衬底/堆叠组合之间的工艺通道。",
+      "path": "knowledge/raw/papers/2025-2502.16353-full-film-dry-transfer-of-mbe-grown-van-der-waals-materials.md",
+      "added_via": "cluster:cl_20261106_fe9af3",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2026-2610.26715-proximity-transient-absorption-in-van-der-waals-heterostruct",
+      "title": "Proximity Transient Absorption in van der Waals Heterostructures",
+      "summary": "在石墨烯/hBN/WS2 范德华异质结构中演示『邻近瞬态吸收』（Proximity Transient Absorption, PTA）：光生载流子位于石墨烯层、被探测激子跃迁位于 WS2 层，石墨烯载流子通过跨层库仑屏蔽在空间分离的 WS2 激子共振处诱导强瞬态差分吸收信号。信号随 hBN 间隔层厚度系统性衰减、2 nm 内仍显著，直接证明瞬态光学信号可以源自与光激发完全分离的相邻层。该结果对 vdW/莫尔异质结构中泵浦-探测信号的归属判断与精度分析构成重要警示与参考基准。",
+      "path": "knowledge/raw/papers/2026-2610.26715-proximity-transient-absorption-in-van-der-waals-heterostruct.md",
+      "added_via": "cluster:cl_20261106_fe9af3",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2017-1705.10707-ab-initio-multi-scale-simulation-of-high-harmonic-generation",
+      "title": "Ab-initio multi-scale simulation of high-harmonic generation in solids",
+      "summary": "首次将第一性原理 TDDFT 计算的单胞级微观非线性电流与宏观麦克斯韦传播方程耦合，建立了固体高次谐波产生的多尺度从头算模拟框架。该工作证明实验测得的谐波谱是微观电子动力学与传播效应（色散、吸收、相位失配）共同作用的结果。通过厚度标度等分析，明确了仅凭微观响应无法直接对比实验谱，为固态 HHG 的定量建模确立了范式。",
+      "path": "knowledge/raw/papers/2017-1705.10707-ab-initio-multi-scale-simulation-of-high-harmonic-generation.md",
+      "added_via": "cluster:orphan-route-2026-11-06",
+      "added_at": "2026-11-06T19:21:07Z"
+    },
+    {
+      "source_id": "paper:2026-2608.24984-high-harmonic-fingerprints-of-sharp-spin-twists-in-a-chiral",
+      "title": "High-harmonic fingerprints of sharp spin twists in a chiral soliton lattice",
+      "summary": "理论证明光驱动的高次谐波产生（HHG）能够分辨手性孤子晶格中晶格尺度的尖锐自旋扭转结构，而非连续孤子轮廓，为实验探测拓扑磁孤子提供了全光学指纹。",
+      "path": "knowledge/raw/papers/2026-2608.24984-high-harmonic-fingerprints-of-sharp-spin-twists-in-a-chiral.md",
+      "added_via": "cluster:orphan-route-2026-11-06",
+      "added_at": "2026-11-06T19:21:07Z"
+    },
+    {
+      "source_id": "paper:2025-Tyulnev2025-high-harmonic-spectroscopy-reveals-anisotropy-of-the-charge",
+      "title": "High harmonic spectroscopy reveals anisotropy of the charge-density-wave phase transition in TiSe2",
+      "summary": "本文对1T-TiSe2开展了300 K至14 K连续变温的极化分辨高次谐波（HHG）谱学实验，发现仅在降温至T_CDW≈200 K以下时才出现一个各向异性的HHG分量，其出现与2×2×2电荷密度波（CDW）超晶格的形成直接对应。该各向异性分量的温度演化可跟踪CDW序参量，证明固态HHG可作为探测关联电子序及其对称性破缺的宏观光学探针。结果为长期争论的激子机制与电声耦合机制两种CDW形成图景提供了可判别性的光谱学证据。",
+      "path": "knowledge/raw/papers/2025-Tyulnev2025-high-harmonic-spectroscopy-reveals-anisotropy-of-the-charge.md",
+      "added_via": "cluster:orphan-route-2026-11-06",
+      "added_at": "2026-11-06T19:21:07Z"
+    },
+    {
+      "source_id": "paper:2025-2505.10813-attosecond-transient-absorption-spectroscopy-in-monolayer-he",
+      "title": "Attosecond transient absorption spectroscopy in monolayer hexagonal boron nitride",
+      "summary": "本文用含时密度泛函理论（TDDFT）结合时间依赖布洛赫动力学方程（TBDME）模型，模拟了单层六方氮化硼（hBN）的阿秒瞬态吸收谱（ATAS）。核心发现是Berry连接对瞬态吸收信号有可观测的塑造作用：它既通过带内反常速度项影响电子在k空间的子周期运动，又通过修正有效带间跃迁偶极矩改变XUV探测的吸收线型与调制。这为用阿秒吸收谱在二维材料中光学读出量子几何量提供了理论依据。",
+      "path": "knowledge/raw/papers/2025-2505.10813-attosecond-transient-absorption-spectroscopy-in-monolayer-he.md",
+      "added_via": "cluster:orphan-route-2026-11-06",
+      "added_at": "2026-11-06T19:21:07Z"
+    },
+    {
+      "source_id": "paper:2026-2507.06386-subcycle-phase-matching-effects-in-short-attosecon",
+      "title": "Subcycle phase matching effects in short attosecond pulse trains",
+      "summary": "该研究发现少周期激光脉冲的载波包络相位（CEP）变化会在氦原子激光辅助电离的光电子谱中引发强烈的意外振荡，且无法由单原子响应解释；作者通过三维高次谐波模拟证明，这些亚周期尺度效应源于传播过程中随时间变化的相位匹配以及阿秒脉冲串本身的时间啁啾。",
+      "path": "",
+      "added_via": "cluster:orphan-route-2026-11-06",
+      "added_at": "2026-11-06T19:21:07Z"
+    },
+    {
+      "source_id": "paper:2608.03955",
+      "title": "A table-top few-femtosecond broadband extreme-ultraviolet absorption spectrometer with cryogenic cooling",
+      "summary": "本文研制了一套桌面式低温超快宽带XUV吸收光谱（c-UBXAS）束线，将22-73 eV宽带高次谐波光源、20 K低温样品控制与自动图像配准相结合，实现亚50 meV能量分辨率与亚10 fs仪器响应函数，可对量子材料进行温度依赖、时间分辨及元素特异性的平衡/非平衡态测量。通过在范德华多铁材料NiI2上的基准实验，验证了该系统在长期超高灵敏度测量中的稳定性与性能。",
+      "path": "",
+      "added_via": "cluster:orphan-route-2026-11-06",
+      "added_at": "2026-11-06T23:00:32Z"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "gaps": [
+    {
+      "claim": "§2.1(a) L57 关于阈值起点已有“两项已发表工作”支撑的论述，其中 Faeyrman[11] 被表述为正式发表的依据。",
+      "missing_evidence": "[11]目前可核验的文献记录仅为 arXiv:2606.02238 预印本，缺少同行评议期刊论文、正式 DOI 或其他可确认其发表状态的记录，因而不足以支持“已发表工作”的表述。还需核验[11]原文是否确实提供了该阈值的实验或方法依据；[12]为 Nature 2024 论文，可保留，但应通过 DOI、题名及具体图表建立与阈值论点的对应关系。若[11]后续没有正式发表版本，应将表述改为“已公开报道的工作”，而非继续称“已发表工作”。",
+      "search_keywords": [
+        "arXiv:2606.02238",
+        "Faeyrman 2606.02238",
+        "Faeyrman peer-reviewed publication DOI",
+        "Faeyrman journal publication attosecond",
+        "Faeyrman transient absorption threshold"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.2(b) L91/L93 关于“全阿秒瞬态吸收”的两处相邻论述均由[14]作为文献依据。",
+      "missing_evidence": "缺少[14]与两处具体论断之间的原文级证据映射，例如其实际测量对象、覆盖的时间范围、分辨率及对应图表，因而尚不能仅凭重复挂引确认其同时支持两段表述。应核验[14]的书目信息、DOI 和具体图表位置；若两段确实使用同一证据，通常无需新增文献，只需合并挂靠并在其后使用指代式引用；若其中一段包含超出[14]原始结论的推广或外推，则还需补充相应的原始研究或权威综述。",
+      "search_keywords": [
+        "\"attosecond transient absorption\" DOI",
+        "\"attosecond transient absorption\" measurement range",
+        "\"attosecond transient absorption\" supplementary data",
+        "\"attosecond transient absorption\" spectroscopy original paper"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "scheme"
+}

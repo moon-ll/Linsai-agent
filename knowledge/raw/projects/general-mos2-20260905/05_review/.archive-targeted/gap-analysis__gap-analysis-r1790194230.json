@@ -1,0 +1,76 @@
+{
+  "gaps": [
+    {
+      "claim": "Patra张量激活规律五构型+0°堆叠点群辨析(D₃d/C₃v)作为群论锚点引用",
+      "missing_evidence": "缺少Patra Cocchi 2026年关于扭转MoS₂ SHG张量的DFT-Wannier原文细节，五构型对称性分类与C₃点群激活张量元的精确映射",
+      "search_keywords": [
+        "Patra Cocchi twisted MoS2 SHG DFT-Wannier",
+        "twisted homobilayer MoS2 C3 symmetry second harmonic generation",
+        "chi_xxx high harmonic tensor MoS2",
+        "MoS2 twisted bilayer D3d D3h point group"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "激子共振预激发对HHG偏振选择定则的调制机理(α_syn判据)",
+      "missing_evidence": "缺少MoS₂/WSe₂异质结中激子预激发态对HHG偏振依赖性调控的实验或理论定量数据",
+      "search_keywords": [
+        "exciton pre-excitation HHG polarization MoS2 WSe2",
+        "resonant exciton high harmonic generation transition metal dichalcogenide",
+        "A exciton B exciton HHG detuning anisotropy MoS2"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "扭转角对HHG偏振选择定则的定量映射 ε(ξ) 残差 R² ≥ 0.90",
+      "missing_evidence": "缺少扭转角与HHG偏振各向异性参数的系统标定基准数据(基线值与误差范围)",
+      "search_keywords": [
+        "twist angle HHG polarization anisotropy TMDC",
+        "moire superlattice HHG selection rule mapping",
+        "epsilon twist angle fitting benchmark MoS2"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "TBG作为非莫尔同质对照的零假设基线判据(α_syn > 0.15且超2σ)",
+      "missing_evidence": "缺少TBG高次谐波产率各向异性的实验基线值及统计不确定度数据",
+      "search_keywords": [
+        "twisted bilayer graphene HHG anisotropy baseline",
+        "TBG magic angle high harmonic generation yield",
+        "TBG HHG yield reference noise floor"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "α_syn判据定义中N_ex与N_tw两个分母项的纯机制基线",
+      "missing_evidence": "缺少HHG产率随激子失谐量和扭转角变化的独立基线测量数据,作为分母标准化依据",
+      "search_keywords": [
+        "HHG yield exciton detuning baseline MoS2 WSe2",
+        "HHG yield twist angle dependence homobilayer baseline",
+        "excitonic HHG enhancement reference measurement TMDC"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "r(ARPES基准)与σ_Ω(TDDFT基准)的双阈值同时满足判据",
+      "missing_evidence": "缺少ARPES测量的能带参数与TDDFT计算的量子几何量的基准误差数据,支撑双阈值独立报告机制",
+      "search_keywords": [
+        "ARPES band structure uncertainty benchmark MoS2 WSe2",
+        "TDDFT Berry curvature precision benchmark TMDC",
+        "ARPES vs TDDFT band structure accuracy comparison"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "扭转MoS₂莫尔周期随扭转角的标度关系(13.4°→~1.35 nm,30°→0.61 nm)",
+      "missing_evidence": "缺少扭转MoS₂同质双层莫尔周期作为扭转角函数的精确公式及实验验证值",
+      "search_keywords": [
+        "twisted bilayer MoS2 moire period twist angle formula",
+        "homobilayer MoS2 moire wavelength scaling",
+        "moire superlattice lattice constant formula TMDC"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "content"
+}

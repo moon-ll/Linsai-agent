@@ -1,0 +1,30 @@
+{
+  "proposal_id": "general-moire-strong-field-probe-20260726",
+  "cluster_id": "cl_20260816_a21e61",
+  "entries": [
+    {
+      "source_id": "paper:2026-2403.02188-strain-induced-valley-transport-in-crbr-_3-wse-_2-",
+      "title": "Strain-induced valley transport in CrBr₃/WSe₂/CrBr₃ van der Waals heterostructure",
+      "summary": "该工作通过第一性原理计算证明，压应变下的 CrBr₃/WSe₂/CrBr₃ 三层范德华异质结可实现约 100 meV 的巨型能谷劈裂，其物理机制是 CrBr₃ 铁磁能带与 WSe₂ 导带之间的自旋极化杂化；进一步地，该能谷极化可由垂直电场切换底部 CrBr₃ 双层的层间交换耦合（反铁磁'关'态/铁磁'开'态），实现电学可调的能谷输运开关。",
+      "path": "",
+      "added_via": "cluster:cl_20260816_a21e61",
+      "added_at": "2026-08-16T03:49:25Z"
+    },
+    {
+      "source_id": "paper:2403.02188",
+      "title": "Strain-induced valley transport in CrBr$_3$/WSe$_2$/CrBr$_3$ van der Waals heterostructure",
+      "summary": "本文提出了一种基于 CrBr₃ 封装 WSe₂ 的范德华异质结能谷电子学原型器件，通过对 WSe₂ 施加压应变实现约 100 meV 的空前谷劈裂，并可通过上下封装层的相对磁化方向进行调控。多尺度输运模拟表明，该器件可在约 0.3 V 的栅压范围内保持极化率超过 80% 的自旋-谷电流，为二维磁性材料与过渡金属硫族化物结合的高效谷电子器件提供了概念验证。",
+      "path": "",
+      "added_via": "cluster:cl_20260816_a21e61",
+      "added_at": "2026-08-16T03:49:25Z"
+    },
+    {
+      "source_id": "paper:2606.15666",
+      "title": "Van der waals engineering of valley polarization in WSe2 via kagome V2O3 monolayer heterostructure through magnetic proximity effect",
+      "summary": "该研究基于第一性原理计算，提出以二维铁磁氧化物 V2O3（kagome 结构单层）作为 WSe2 的磁近邻层构建范德华异质结，在零磁场下诱导出约 10.41 meV 的显著自发谷劈裂。该谷极化主要源于 V 3d 电子介导的强界面交换耦合与界面电荷再分布，为无需外磁场的能谷/自旋电子器件提供了一种氧化物驱动的谷电子学平台。",
+      "path": "",
+      "added_via": "cluster:cl_20260816_a21e61",
+      "added_at": "2026-08-16T03:49:25Z"
+    }
+  ]
+}

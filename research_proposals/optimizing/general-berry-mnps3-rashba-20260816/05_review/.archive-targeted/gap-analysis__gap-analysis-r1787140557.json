@@ -1,0 +1,86 @@
+{
+  "gaps": [
+    {
+      "claim": "课题声称i-wave HHG指纹新理论与Rajpurohit[21]/Ghorashi-Rappe[17]的既有工作存在边界模糊",
+      "missing_evidence": "需要明确区分本项目i-wave HHG理论与Rajpurohit[21]/Ghorashi-Rappe[17]工作的具体差异，5处'首次/尚未见'声明均失锚",
+      "search_keywords": [
+        "Rajpurohit HHG",
+        "Ghorashi-Rappe high harmonic generation",
+        "i-wave HHG theory",
+        "interband HHG fingerprint solid state",
+        "high harmonic generation spin Hall effect"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "RuO2体系中室温自旋劈裂观测（Lin等人[13]）与本项目MnPS3体系的关联性论证",
+      "missing_evidence": "需要建立RuO2自旋分辨ARPES结果与MnPS3范德华磁体强场非线性光学响应的直接理论联系",
+      "search_keywords": [
+        "RuO2 spin-splitting ARPES Lin",
+        "MnPS3 antiferromagnet high harmonic",
+        "room temperature spin Hall effect solid state",
+        "RuO2 MnPS3 comparison Berry curvature"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "THz频段光场调控（0.1-1.0 MV/cm）与h-BN文献2403.06531的4 MV/cm参数空间缩小10倍缺乏物理解释",
+      "missing_evidence": "需要文献支撑THz场强在0.1-1.0 MV/cm范围内可有效驱动MnPS3非线性响应，且与h-BN高场区物理图像自洽",
+      "search_keywords": [
+        "h-BN high harmonic THz field strength",
+        "MnPS3 THz nonlinear optics",
+        "low field high harmonic generation 2D material",
+        "van der Waals magnet THz response",
+        "THz field strength scaling solid HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "国内研究现状（华中科大、上海大、上海交大）具体工作与本课题研究对象的关联性论证",
+      "missing_evidence": "国内相关组的工作（文献[10]/[11]/[13]编号错配）需修正并补充与MnPS3 Rashba体系的直接关联",
+      "search_keywords": [
+        "华中科技大学 高次谐波",
+        "上海大学 强场光学",
+        "上海交通大学 超快光学 MnPS3",
+        "China high harmonic generation antiferromagnet",
+        "domestic 2D magnet HHG group"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "光致应力vs位移电流机制在MnPS3体系中的分工与竞争缺乏文献支撑",
+      "missing_evidence": "需要区分这两种物理机制在范德华磁体强场非线性响应中的主导条件的实验或理论依据",
+      "search_keywords": [
+        "photo-induced strain vs displacement current HHG",
+        "displacement current high harmonic generation semiconductor",
+        "deformation potential high harmonic solid state",
+        "interband intraband HHG mechanism competition"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "滑移铁电极化翻转的超快调控（光学场控）缺乏直接文献支撑",
+      "missing_evidence": "需要滑移铁电在fs-ps时间尺度被光学场驱动的实验或理论工作",
+      "search_keywords": [
+        "sliding ferroelectric ultrafast switching",
+        "interlayer sliding femtosecond control",
+        "optical field driven ferroelectric switching",
+        "sliding ferroelectricity laser induced",
+        "photoinduced ferroelectric domain switching"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "MnPS3二维极限下的Rashba自旋劈寄期待值及其强场光学探测量化可行性",
+      "missing_evidence": "需要MnPS3单层/少层的Rashba系数、能谷劈裂大小的文献数据",
+      "search_keywords": [
+        "MnPS3 Rashba splitting monolayer",
+        "MnPS3 valley spin splitting 2D limit",
+        "MnPS3 electronic structure ARPES",
+        "van der Waals antiferromagnet Rashba solid state",
+        "MnPS3 band structure spin-orbit"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

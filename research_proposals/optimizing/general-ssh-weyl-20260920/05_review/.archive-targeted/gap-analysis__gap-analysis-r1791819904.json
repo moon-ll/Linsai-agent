@@ -1,0 +1,38 @@
+{
+  "gaps": [
+    {
+      "claim": "§1 L11 声称'三类已发表实验数据'，首类挂 [8]（arXiv:2604.06051），但 refs 明标其为预印本",
+      "missing_evidence": "缺少已正式刊出的拓扑材料高次谐波实验基准数据，特别是 Bi₂Se₃ 等三维拓扑绝缘体高次谐波实验的同行评审版本",
+      "search_keywords": [
+        "Bi2Se3 high harmonic generation published",
+        "topological insulator HHG experiment peer-reviewed",
+        "3D topological insulator high harmonic spectroscopy Nature Physical Review",
+        "Bi2Se3 Bi2Te3 HHG experimental benchmark"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3.4.2、§2.2 等方案章中 [7][8][12][13][15][8][14][20] 预印本引用处未标注'（预印本）'属性，与 refs L3'正文各引用处均已标明该属性'声明不符",
+      "missing_evidence": "需要为这些预印本引用补充已刊出版本（如有），或确认其最新发表状态；同时需要核实是否有对应的正式发表文献可以替代",
+      "search_keywords": [
+        "arXiv preprint to journal version tracking",
+        "topological material HHG published version",
+        "topological high harmonic generation Physical Review Letters 2024 2025",
+        "Weyl semimetal HHG published experimental"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.2 L39 / §3.4.2 L171 中 R_HOTI 指标依赖'低阶拓扑相对照样本'，但未说明低阶相样本的生成协议（质量项/退火参数路径）",
+      "missing_evidence": "缺少关于如何在紧束缚模型中通过质量项调节或退火参数路径生成低阶拓扑相对照样本的方法学文献支撑",
+      "search_keywords": [
+        "tight-binding model topological phase generation mass term",
+        "higher-order topological insulator tight-binding protocol",
+        "annealing parameter topological phase transition tight-binding",
+        "Wilson mass inversion higher-order topological insulator model"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

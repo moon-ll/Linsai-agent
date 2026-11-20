@@ -1,0 +1,71 @@
+{
+  "gaps": [
+    {
+      "claim": "§3.3 末段关于 Xe 4d 巨共振、1.32 fs 时间分辨率、130 eV 截止区、CEP 稳定 Yb 激光等具体实验指标的论述（现挂 [40]，实应挂 [39]）",
+      "missing_evidence": "[40] 为 Xia 等 FROG 表征论文（不能支撑 Hasan 实验组的 streaking 测量结论），[39] PRL 136:163201 才是 Hasan 论文；需补充 Hasan 论文原文以核对各项指标的精确数值与测量条件，并核实 Xia 等 FROG 论文的实际内容范围",
+      "search_keywords": [
+        "Hasan attosecond streaking Xe 4d giant resonance",
+        "PRL 136 163001 attosecond",
+        "Xia FROG attosecond pulse characterization",
+        "Xe 4d photoionization streaking 2026"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3.3 末段「Auger 通道由隐性分量变为可测量的分量」属原作者 [39] 的结论性判断，转述时未注明出处与本项目限定",
+      "missing_evidence": "需要 Hasan 等[39] PRL 136:163201 原文中关于 Auger 通道从隐性变为可测量的直接原文表述，以及 streaking 实验中 Auger 通道解耦/测量的相关实验文献支撑",
+      "search_keywords": [
+        "attosecond streaking Auger channel measurement",
+        "Hasan Auger attosecond transient",
+        "attosecond streaking multi-channel electron",
+        "non-trivial Auger attosecond streaking"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3.3「Ardana-Lamas 等[38]的正式 Reply」中\"正式\"二字与[38] arXiv 预印本身份不符",
+      "missing_evidence": "需核实 Ardana-Lamas 等关于 attosecond streaking 相位反演争议的 Comment-Reply 系列文献的实际发表状态（是否已正式刊出及期刊出处），以及四作者署名的 Reply 与原 Comment 的对应关系",
+      "search_keywords": [
+        "Ardana-Lamas attosecond streaking Comment Reply",
+        "attosecond streaking phase retrieval controversy",
+        "Ardana-Lamas PRL Comment Reply 2025",
+        "streaking protocol debate Reply"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§2.1「Tarrant 等[21]……给出 shake-up 通道的相位记忆证据」中\"给出证据\"措辞过强，[21]† 实际为纯理论预印本",
+      "missing_evidence": "需要关于 shake-up 通道在 attosecond streaking 中保留相位记忆的实验观测文献（非纯理论预言），以及 Tarrant 等理论预印本的实际内容摘要，以区分\"理论预言\"与\"实验证据\"",
+      "search_keywords": [
+        "shake-up channel phase memory attosecond streaking experiment",
+        "Tarrant shake-up theory preprint arXiv",
+        "attosecond streaking shake-up correlation experimental",
+        "correlated shake-up streaking photoelectron"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§7 创新点三「经 WoS/arXiv/Scopus 检索，未见同时耦合偶极相位解耦与 shake-up/Auger 多通道反演的脉冲表征方案」的支撑句与核心论断不在同段",
+      "missing_evidence": "需要将检索声明的范围、截止日期、关键词组合、命中数与筛选逻辑在创新点三同段落呈现，并补挂与最相近前驱工作（如多通道反演、偶极相位校正相关）的对比引文以强化新颖性论证",
+      "search_keywords": [
+        "attosecond pulse characterization multi-channel inversion",
+        "dipole phase decoupling streaking",
+        "shake-up Auger simultaneous retrieval streaking",
+        "few-cycle pulse reconstruction multi-electron channel"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§1「三层定义/算法适用层/实验验证层/可行性论证层」的分档体系在 content.md 与 rationale.md 中均无对应分档名支撑，跨章断链",
+      "missing_evidence": "需补充或锁定项目组前期/相关工作中关于\"算法层—验证层—可行性层\"分档定义的原始文献或预印本（如本项目组已发表/在投的方法学论文），或在 content.md 中建立对应分档表并补引",
+      "search_keywords": [
+        "attosecond streaking methodology layered framework",
+        "streaking retrieval algorithm validation hierarchy",
+        "few-cycle pulse characterization validation tier",
+        "本课题组 attosecond methodology 前期工作"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "scheme"
+}

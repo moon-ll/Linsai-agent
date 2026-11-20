@@ -1,0 +1,138 @@
+{
+  "proposal_id": "general-phonon-hhg-20261101",
+  "cluster_id": "orphan-route-2026-11-06",
+  "clusters": [
+    "orphan-route-2026-11-06",
+    "cl_20261106_053ac2"
+  ],
+  "entries": [
+    {
+      "source_id": "paper:2024-2408.16926-crystal-symmetries-and-harmonic-generation-in-altermagnets",
+      "title": "Crystal symmetries and harmonic generation in altermagnets",
+      "summary": "该文系统分析交替磁体中晶体自旋对称性与非线性光学响应的关联，预言其高次谐波产生呈现由磁点群自旋对称性决定的各向异性特征。研究进一步指出了交替磁HHG信号最大化的特定晶体学类别，为全光学探测交替磁性提供了对称性判据。",
+      "path": "",
+      "added_via": "cluster:orphan-route-2026-11-06",
+      "added_at": "2026-11-06T16:33:07Z"
+    },
+    {
+      "source_id": "paper:2026-PhysRevLett.135.166902-observation-of-high-harmonic-generation-from-a-mott-insulati",
+      "title": "Observation of high harmonic generation from a Mott insulating cuprate",
+      "summary": "首次在Mott绝缘铜氧化物中实验观测到强场高次谐波产生，将固态HHG的研究对象从半导体/半金属拓展到以强关联为主的Mott体系。通过与含时Hubbard模型精确对角化模拟对照，从谐波谱中分离出多体关联（doublon-holon动力学与关联重整化）对发射强度与截止的调控作用。该工作确立了HHG作为关联电子态（Mott隙、超交换等）全光学探针的可行性。",
+      "path": "knowledge/raw/papers/2026-PhysRevLett.135.166902-observation-of-high-harmonic-generation-from-a-mott-insulati.md",
+      "added_via": "cluster:orphan-route-2026-11-06",
+      "added_at": "2026-11-06T16:33:07Z"
+    },
+    {
+      "source_id": "paper:2026-2610.19967-high-harmonic-generation-probes-quantum-nuclear-fl",
+      "title": "High-Harmonic Generation Probes Quantum Nuclear Fluctuations in Liquid Water",
+      "summary": "本文结合液态水（微射流）高次谐波实验与含核量子效应的理论模拟，证明水的高次谐波谱对质子零点涨落（核量子效应）高度敏感。通过 H2O/D2O 同位素对比发现，只有采用量子核（路径积分）采样配以逐构型实时 TDDFT 谱计算的模拟才能复现测得的谐波产额与同位素差异，经典核分子动力学则不能。由此确立了 HHG 作为一种对氢键液体中核量子涨落敏感的新型超快光谱探针。",
+      "path": "knowledge/raw/papers/2026-2610.19967-high-harmonic-generation-probes-quantum-nuclear-fl.md",
+      "added_via": "cluster:orphan-route-2026-11-06",
+      "added_at": "2026-11-06T16:33:07Z"
+    },
+    {
+      "source_id": "paper:2025-2503.19433-lights-symmetry-asymmetry-and-their-role-in-nonlinear-optics",
+      "title": "Light's symmetry, asymmetry, and their role in nonlinear optics and ultrafast phenomena",
+      "summary": "本文是关于光场对称性/非对称性与非线性光学及超快现象的视角性综述：系统梳理光的偏振、手性、空间结构、时间包络与载波相位等对称属性如何经由选择定则与守恒律（角动量、能量、宇称）支配谐波产生、光电流、二色性等非线性与超快响应。作者将'驱动体系动力学对称群'框架与光场工程统一起来：光与物质共有的对称性严格限定可观测量（允许的谐波阶次、偏振、OAM），而对称性破缺（倒反、时间反演、手性）则成为读取物质相与实现超快控制的手柄。文中据此给出面向实验的驱动场设计原则，如双圆/椭圆场高次谐波光谱学、结构光与手性场的对映敏感探测。",
+      "path": "knowledge/raw/papers/2025-2503.19433-lights-symmetry-asymmetry-and-their-role-in-nonlinear-optics.md",
+      "added_via": "cluster:orphan-route-2026-11-06",
+      "added_at": "2026-11-06T16:33:07Z"
+    },
+    {
+      "source_id": "paper:2023-2304.09459-probing-phonon-dynamics-and-electron-phonon-coupling-by-high",
+      "title": "Probing Phonon dynamics and Electron-Phonon Coupling by High Harmonic Generation in Solids",
+      "summary": "提出并以第一性原理实时TDDFT耦合埃伦费斯特电子-离子动力学证明：固体高次谐波谱中嵌有声子动力学与电子-声子耦合（EPC）的指纹——谐波强度以声子频率振荡，调制深度正比于参与该谐波通道的带-模式EPC强度。由此建立带分辨、模式分辨的全光EPC与相干声子读出方案，标志固态HHG从纯电子动力学探针扩展为晶格-电子耦合探针（后扩展发表于PRL 133, 156901 (2024)）。",
+      "path": "knowledge/raw/papers/2023-2304.09459-probing-phonon-dynamics-and-electron-phonon-coupling-by-high.md",
+      "added_via": "cluster:orphan-route-2026-11-06",
+      "added_at": "2026-11-06T16:33:07Z"
+    },
+    {
+      "source_id": "paper:2025-2512.08618-nonequilibrium-photocarrier-and-phonon-dynamics-from-first-p",
+      "title": "Nonequilibrium Photocarrier and Phonon Dynamics from First Principles: a Unified Wannier Framework",
+      "summary": "该工作在最大局域Wannier函数（MLWF）基组中构建了统一的第一性原理框架，同时描述半导体超快光激发后的载流子-载流子、载流子-声子、声子-声子散射以及光致相干原子运动。光-物质耦合由实时TDDFT处理，各类散射与非平衡演化在同一套Wannier哈密顿量与矩阵元下自洽衔接，实现从光激发、载流子热化/冷却到晶格相干响应的全链条模拟。该框架可直接用于二维半导体等体系的非平衡载流子/声子动力学预测与瞬态光谱解读。",
+      "path": "knowledge/raw/papers/2025-2512.08618-nonequilibrium-photocarrier-and-phonon-dynamics-from-first-p.md",
+      "added_via": "cluster:cl_20261106_053ac2",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2026-2608.16226-efficient-nonequilibrium-electron-dynamics-from-fi",
+      "title": "Efficient nonequilibrium electron dynamics from first-principles: leveraging Koopmans spectral functionals and Wannier localization",
+      "summary": "本文提出一种高效的第一性原理方法，将Koopmans合规谱泛函与Wannier局域化轨道相结合，用于模拟扩展体系在超越线性响应区（如强场驱动）下的非平衡电子动力学。该组合既修正了标准DFT的自相互作用误差以获得正确的谱性质（如能隙和电离能），又借助局域轨道显著降低计算成本，使大规模非线性超快电子动力学的模拟成为可能。",
+      "path": "knowledge/raw/papers/2026-2608.16226-efficient-nonequilibrium-electron-dynamics-from-fi.md",
+      "added_via": "cluster:cl_20261106_053ac2",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2026-2607.17265-first-principles-electron-phonon-scattering-in-real-time-tdd",
+      "title": "First-principles electron-phonon scattering in real-time TDDFT",
+      "summary": "提出耗散型实时 TDDFT 框架：在 Born-Markov 近似下由第一性原理电子-声子自能导出碰撞积分，加入约化单体密度矩阵的实时演化方程。该框架在同一模拟中同时保留电子量子相干传播（带间/带内极化）与声子介导的载流子散射和布居弛豫，为真实晶体中的退相位、弛豫及时间分辨光谱特征提供第一性原理模拟路径。关键意义在于把 SBE 类唯象 T2 参数落到材料微观 e-ph 耦合上，为强场/超快动力学模拟提供材料特定的耗散输入。",
+      "path": "knowledge/raw/papers/2026-2607.17265-first-principles-electron-phonon-scattering-in-real-time-tdd.md",
+      "added_via": "cluster:cl_20261106_053ac2",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2607.17109",
+      "title": "Microscopic Origin of Dephasing in Solids from First-Principles Electron-Phonon Interactions",
+      "summary": "该工作通过时域Williams-Lax框架将电声相互作用纳入实时TDDFT，从第一性原理揭示固体中有效退相干的微观起源：金属中单一无序构型即可产生类Drude阻尼，而介质中无需引入唯象超短退相干时间即可获得干净的高次谐波谱。进一步将超胞动力学映射至原胞密度矩阵表明，退相干主要由布居动力学（对角元）主导，而非非对角相干性的衰减。",
+      "path": "",
+      "added_via": "cluster:cl_20261106_053ac2",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2024-2505.01571-high-harmonic-generation-spectroscopy-for-all-optical-band-s",
+      "title": "High harmonic generation spectroscopy for all-optical band structure probing of high-pressure quantum states",
+      "summary": "该文以高压近200 K超导体H3S为原型，用含时密度泛函理论（TDDFT）模拟固态高次谐波（HHG）谱，证明HHG光谱学可作为全光学手段探测高压量子态的电子能带结构与电子-声子耦合信息。结果显示谐波谱对压力诱导的能带演化及与超导配对相关的晶格振动/畸变高度敏感，为金刚石对顶砧中难以实施传统电学与光电能谱测量的高压相提供了可行的光学表征路径。",
+      "path": "knowledge/raw/papers/2024-2505.01571-high-harmonic-generation-spectroscopy-for-all-optical-band-s.md",
+      "added_via": "cluster:orphan-route-2026-11-06",
+      "added_at": "2026-11-06T19:21:07Z"
+    },
+    {
+      "source_id": "paper:2026-2609.27742-order-dependent-modification-of-high-harmonic-gene",
+      "title": "Order-Dependent Modification of High-Harmonic Generation by Quantum Dissipation and Lamb Shift",
+      "summary": "在开放量子系统框架下重新审视多体环境对强场高次谐波的产生的影响：将环境耦合参数化为Lamb频移（能级的幺正重整化）与Lindblad型量子耗散，发现二者对谐波谱的修正并非传统图像中的均匀衰减/展宽，而是随谐波阶数选择性变化。这种阶数依赖的修正意味着谐波谱形状直接编码了热库耦合强度与谱密度信息，为利用HHG谱学反演体系的多体环境参数提供了新渠道。",
+      "path": "knowledge/raw/papers/2026-2609.27742-order-dependent-modification-of-high-harmonic-gene.md",
+      "added_via": "cluster:orphan-route-2026-11-06",
+      "added_at": "2026-11-06T19:21:07Z"
+    },
+    {
+      "source_id": "paper:2026-2608.18773-electron-correlation-enables-phase-coherent-one-at",
+      "title": "Electron Correlation Enables Phase-Coherent One-Attosecond Pulse Trains",
+      "summary": "该工作从理论上证明，双电子关联动力学可在高次谐波产生过程中保持各谐波的相位锁定，从而使宽谱分量的相干叠加得以合成相位相干的阿秒（~1 as）脉冲串。其核心贡献在于揭示电子关联并非阿秒波形合成的破坏因素，反而是维持谐波相位相干、实现超短波形的关键机制。",
+      "path": "knowledge/raw/papers/2026-2608.18773-electron-correlation-enables-phase-coherent-one-at.md",
+      "added_via": "cluster:orphan-route-2026-11-06",
+      "added_at": "2026-11-06T19:21:07Z"
+    },
+    {
+      "source_id": "paper:2025-2510.01826-ultrafast-giant-enhancement-of-second-harmonic-generation-in",
+      "title": "Ultrafast giant enhancement of second harmonic generation in a strongly correlated cobaltite",
+      "summary": "本文在强关联钴氧化物中利用飞秒泵浦-探测实验观测到二次谐波产生（SHG）的超快巨增强，揭示光激发可在关联电子体系中诱导瞬态对称性破缺与相位重构。该发现为通过光场超快调控强关联材料的非线性光学响应和设计瞬态量子相提供了新途径。",
+      "path": "knowledge/raw/papers/2025-2510.01826-ultrafast-giant-enhancement-of-second-harmonic-generation-in.md",
+      "added_via": "cluster:orphan-route-2026-11-06",
+      "added_at": "2026-11-06T19:21:07Z"
+    },
+    {
+      "source_id": "paper:2024-2407.08420-skin-effect-of-nonlinear-optical-responses-in-antiferromagne",
+      "title": "Skin Effect of Nonlinear Optical Responses in Antiferromagnets",
+      "summary": "本文以 CrI3 为代表的层状反铁磁体证明，体光伏效应（BPVE 位移电流）与二次谐波产生（SHG）等二阶非线性光学响应存在显著的表面趋肤效应：表层几层的贡献占主导，向体内逐层快速衰减。其根源在于反铁磁层堆垛使体内各层的二阶响应因（联合）反演对称性成对抵消，而表面截断留下未抵消的表层贡献。该结果表明非线性光学是对反铁磁序及表面/层内磁性的表面敏感探针，而非体响应探针。",
+      "path": "knowledge/raw/papers/2024-2407.08420-skin-effect-of-nonlinear-optical-responses-in-antiferromagne.md",
+      "added_via": "cluster:orphan-route-2026-11-06",
+      "added_at": "2026-11-06T19:21:07Z"
+    },
+    {
+      "source_id": "paper:2025-2510.26584-dynamical-control-of-coulomb-interactions-and-hubbard-bands",
+      "title": "Dynamical control of Coulomb interactions and Hubbard bands in monolayer 1T-TaS2",
+      "summary": "本文在单层1T-TaS₂中证明：星状David（Star-of-David）电荷密度波（CDW）的振幅同时调制Hubbard U与有效库仑屏蔽，即CDW序参量本身是关联强度的调控旋钮。通过第一性原理计算（cRPA降维到Hubbard模型），仅约3%的CDW振幅压缩即可使带宽反超库仑作用（W>U），驱动Mott绝缘体-金属转变而无需完全熔化CDW。这为通过相干声子（振幅模）实现皮秒内动态调控电子关联提供了定量依据。",
+      "path": "knowledge/raw/papers/2025-2510.26584-dynamical-control-of-coulomb-interactions-and-hubbard-bands.md",
+      "added_via": "cluster:orphan-route-2026-11-06",
+      "added_at": "2026-11-06T23:00:32Z"
+    },
+    {
+      "source_id": "paper:2026-2609.03519-non-resonant-impulsively-stimulated-raman-scattering-by-a-te",
+      "title": "Non-Resonant Impulsively Stimulated Raman Scattering by a Terahertz Field: a Case Study of 1T-TaS2",
+      "summary": "本文在1T-TaS2中利用强THz泵浦-光学探测与THz三次谐波（THG）实验，证明THz场可通过非共振双光子（Raman张量）机制实现 impulsively stimulated Raman scattering（ISRS），激发相干Raman声子。不同CDW相（commensurate/nearly-commensurate/incommensurate）下相干声子的频率与幅度呈现系统性演化，可作为CDW相的动力学指纹。THz驱动的ISRS避免了光泵浦的载流子共振激发干扰，为纯晶格非线性响应的相分辨测量提供了干净手段。",
+      "path": "knowledge/raw/papers/2026-2609.03519-non-resonant-impulsively-stimulated-raman-scattering-by-a-te.md",
+      "added_via": "cluster:orphan-route-2026-11-06",
+      "added_at": "2026-11-06T23:00:32Z"
+    }
+  ]
+}

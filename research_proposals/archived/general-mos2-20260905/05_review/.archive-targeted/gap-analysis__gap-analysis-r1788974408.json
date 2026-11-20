@@ -1,0 +1,17 @@
+{
+  "gaps": [
+    {
+      "claim": "content.md 全文 0 处 [N] 引用，6 条基线机制断言（TDDFT/多体累积/TBG 相干累积等）无文献支撑",
+      "missing_evidence": "缺少对 MoS₂/WSe₂ 异质结 HHG 基线机制（TDDFT 计算、多体累积效应、TBG 相干累积效应）的文献支撑，需补充 Peterka[25]/Heide[22]/Ma[33]/Lee[32] 等6—10 处关键论断的编号引用",
+      "search_keywords": [
+        "MoS2 WSe2 heterostructure high harmonic generation TDDFT",
+        "MoS2 monolayer HHG suppression mechanism Peterka APL Photonics 2023",
+        "twisted bilayer graphene high harmonic generation coherent superposition",
+        "many-body accumulation high harmonic generation 2D material",
+        "transition metal dichalcogenide HHG interband intraband",
+        "MoS2 HHG first observation coherent control"
+      ],
+      "priority": "high"
+    }
+  ]
+}

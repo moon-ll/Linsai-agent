@@ -1,0 +1,148 @@
+{
+  "gaps": [
+    {
+      "claim": "项目年度计划中'节点检查 / 中期评估 / 结题标准'的设计可参考 NSFC 重点项目中已有的项目治理与中期评估惯例，特别是阿秒科学 / 强场领域的代表性中期评估标准。",
+      "missing_evidence": "缺少 NSFC 重点项目中阿秒科学、强场超快光学或量子材料方向的代表性项目中期评估文件 / 论文，缺少文献证明可量化的中期评估硬指标（如 ≤100 as 时序稳定 / L1 全反演 10⁶ CPU·h）的可达性参考区间。",
+      "search_keywords": [
+        "NSFC key project mid-term evaluation attosecond ultrafast optics",
+        "attosecond timing stability benchmark 100 as",
+        "milestone-driven ultrafast spectroscopy project review",
+        "key project closure criteria quantum materials China"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "L1 全反演需 10⁶–10⁷ CPU·h 的算力预算在 4-5 年内可达，需要在天河 / 曙光超算按年度申请相应核时。",
+      "missing_evidence": "缺少同等级别算力（10⁶–10⁷ CPU·h）用于贝叶斯反演 / RT-TDDFT / AI 代理模型训练的成功先例文献；缺少天河 / 曙光超算针对阿秒科学 / 第一性原理 / 机器学习代理模型的年度机时申请数据与排队周期参考。",
+      "search_keywords": [
+        "Bayesian inversion high dimensional k-space computational cost",
+        "Tianhe Sugon supercomputer CPU hours ab initio ultrafast",
+        "RT-TDDFT scaling high harmonic generation thousands CPU cores",
+        "machine learning surrogate training scientific computing cost"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "D2 风险 ≤100 as 时序稳定可在项目周期内阶梯式达成（第 1 年 200 as → 第 2 年 150 as → 第 3 年 100 as）。",
+      "missing_evidence": "缺少已发表的阿秒条纹 / 阿秒瞬态吸收实验中 100-200 as 时序稳定性的代表性文献作为可达性参考；缺少 OPCPA 主动稳相 / 延时线 jitter 控制的工程级文献支撑阶梯式改进路径。",
+      "search_keywords": [
+        "attosecond streaking 100 as timing jitter stability",
+        "OPCPA delay stabilization active feedback sub-100-attosecond",
+        "attosecond transient absorption timing precision",
+        "few-cycle laser carrier-envelope phase stabilization review"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "D3 风险 RT-TDDFT 在强场强 + 阿秒时间分辨 + 拓扑体系下的收敛性可在 L0-L1 切换时给出可证伪的成功标准。",
+      "missing_evidence": "缺少 RT-TDDFT 描述强场驱动的拓扑材料（Bi₂Se₃ / MnBi₂Te₄ / Co₃Sn₂S₂）与高次谐波生成 / 瞬态 Berry 曲率响应收敛性的基准文献；缺少自适应网格 / 收敛加速 / 数值稳定性相关的工程文献。",
+      "search_keywords": [
+        "RT-TDDFT convergence topological insulator strong field",
+        "real-time TDDFT high harmonic generation convergence criterion",
+        "adaptive mesh strong-field TDDFT numerical stability",
+        "RT-TDDFT Berry curvature time-dependent magnetic materials"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "D5 风险磁性拓扑体系（MnBi₂Te₄ / Co₃Sn₂S₂）在强场写入下的'磁性副作用'可在年度计划中给出隔离 / 备份靶材的应对预案。",
+      "missing_evidence": "缺少磁性拓扑材料在强场驱动下磁性态被破坏 / 重排 / 退磁的实验与理论文献；缺少强场写入时的磁态诊断方法（如 MOKE / XMCD 时间分辨）的代表性文献来支撑'磁性副作用'具体应对路径。",
+      "search_keywords": [
+        "MnBi2Te4 ultrafast demagnetization strong field",
+        "Co3Sn2S2 magnetic Weyl semimetal light-induced",
+        "time-resolved MOKE magnetic topological insulator",
+        "magnetic side effect strong-field writing topological"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "D4 风险贝叶斯反演在高维 k 空间的算力可达性可通过分层代理模型 / 代理预训练得到缓解。",
+      "missing_evidence": "缺少贝叶斯反演用于第一性原理 / RT-TDDFT / HHG 谱反演的代表性文献作为算力预估依据；缺少分层代理模型（surrogate / emulator）在大规模反演问题上的成功先例。",
+      "search_keywords": [
+        "Bayesian inverse problem high dimensional k-space electronic structure",
+        "surrogate model emulator RT-TDDFT inversion",
+        "high harmonic spectroscopy Bayesian reconstruction",
+        "physics-informed neural network surrogate ab initio"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "D6 风险 AI 代理模型从仿真到实验的迁移 / 泛化性可在 L0 → L1 → L2 → L3 切换中通过迁移学习解决。",
+      "missing_evidence": "缺少物理学代理模型 sim-to-real 迁移 / 分布漂移校正 / 域适应的代表性文献；缺少 L0（解析 benchmark）→ L1（数值模型）→ L2（代理模型）→ L3（实验）的分层迁移已有范式的综述性文献。",
+      "search_keywords": [
+        "sim-to-real transfer learning physics surrogate model",
+        "domain adaptation machine learning experimental spectroscopy",
+        "distribution shift correction neural network quantum materials",
+        "physics-informed neural network experimental data transfer"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "创新点 4'绝热分区判据'可在第 1 年通过 α-T₃ 解析 benchmark 完成，作为后续强非绝热 / 磁性体系的方法学锚点。",
+      "missing_evidence": "缺少 α-T₃ 晶格（α-T₃ / dice lattice）作为拓扑 benchmark 体系的代表性文献；缺少基于 α-T₃ 的瞬时陈数 / Floquet 陈数 / 时间依赖 Berry 曲率的理论与计算文献作为判据验证参考。",
+      "search_keywords": [
+        "alpha-T3 dice lattice topological benchmark",
+        "alpha-T3 Floquet Chern number instantaneous",
+        "time-dependent Berry curvature alpha-T3",
+        "dice lattice strong-field high harmonic generation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "写-读-反演闭环范式的迭代周期（1-2 周 / 代表体系）以及 4-5 年内 3-5 个体系的全闭环验证具有可行性。",
+      "missing_evidence": "缺少已有实验 / 理论文献证明'单次完整闭环迭代 1-2 周 / 代表体系'的研究治理范式；缺少写-读-反演协同迭代节奏的代表性综述或方法论文献支撑。",
+      "search_keywords": [
+        "write-read-inversion closed-loop ultrafast quantum materials",
+        "iterative experimental-theoretical loop ultrafast spectroscopy",
+        "rapid iteration cycle strong-field pump probe theory",
+        "closed-loop ultrafast control quantum phase review"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "项目年度计划中的国际合作时间表（MIT-Reis / MPQ-Krausz / ELI-ALPS）可在第 2-4 年通过博士生互访 / 联合实验 / 联合发表形式落地。",
+      "missing_evidence": "缺少 Reis 组（MIT）、Krausz 组（MPQ）、ELI-ALPS 团队在固体高次谐波 / 阿秒拓扑 / 强场动力学方向的代表性论文作为合作具体形式与时间窗口的参考。",
+      "search_keywords": [
+        "Reis group MIT solid high harmonic generation",
+        "Krausz MPQ attosecond solid-state review",
+        "ELI-ALPS attosecond condensed matter collaboration",
+        "international collaboration timeline ultrafast topological"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "申请人过去 5 年在 Bi₂Se₃ HHG 实验上的数据可在第 1 年直接成为本项目 L0 nursery / benchmark。",
+      "missing_evidence": "缺少申请人 / 团队过去 5 年 Bi₂Se₃ HHG 实验的代表性论文（具体到实验参数、谐波阶次、自旋-轨道耦合效应、Berry 曲率响应等）作为 L0 nursery 可直接复用的依据。",
+      "search_keywords": [
+        "Bi2Se3 high harmonic generation spin-orbit",
+        "Bi2Se3 strong-field HHG Berry curvature",
+        "Bi2Se3 topological insulator high harmonic experiment",
+        "申请人 Bi2Se3 HHG"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "5 个靶材（Bi₂Se₃ / MnBi₂Te₄ / Co₃Sn₂S₂ / MoS₂ / 1T-TaS₂）在第 1-5 年的优先级排序与已发表的瞬态 / 强场 / 阿秒表征文献相对应。",
+      "missing_evidence": "缺少 5 个靶材各自的代表性静态 / 瞬态拓扑表征文献（Bi₂Se₃ Z₂ 拓扑 / MnBi₂Te₄ 轴子绝缘体 / Co₃Sn₂S₂ 磁性 Weyl / MoS₂ 能谷 / 1T-TaS₂ 电荷密度波），以支撑 4-5 年内靶材切换顺序的可行性论断。",
+      "search_keywords": [
+        "Bi2Se3 Z2 topological insulator review",
+        "MnBi2Te4 axion insulator ultrafast",
+        "Co3Sn2S2 magnetic Weyl semimetal review",
+        "MoS2 valleytronics ultrafast review",
+        "1T-TaS2 charge density wave ultrafast"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "（三）§1.3 五年计划表（绝热模式标定 → 强非绝热 → 磁性拓扑 → 关联相变 → 跨体系规律）的推进节律有理论与实验先例支撑。",
+      "missing_evidence": "缺少按'绝热 → 强非绝热 → 磁性拓扑 → 关联相变'递进顺序研究瞬态拓扑 / 量子相的代表文献综述；缺少跨体系规律（cross-system unifying principles）作为最终第 5 年目标的文献依据。",
+      "search_keywords": [
+        "adiabatic to non-adiabatic transition ultrafast quantum phase review",
+        "magnetic topological material ultrafast review",
+        "correlated phase transition ultrafast topology",
+        "cross-system unifying principle transient quantum phase"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

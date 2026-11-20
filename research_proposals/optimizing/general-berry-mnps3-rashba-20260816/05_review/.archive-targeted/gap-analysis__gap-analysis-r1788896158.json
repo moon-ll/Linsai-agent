@@ -1,0 +1,47 @@
+{
+  "gaps": [
+    {
+      "claim": "20处文献引用错位（[13]-[27]指向不存在的文献条目）",
+      "missing_evidence": "需要查证并补充原引用指向的Werner/Weber altermagnet HHG、Rajpurohit/Žlabovský i-wave HHG、Zhou PRL 2024 altermagnet MnTe、Haque altermagnet等论文的实际文献信息以替换错误编号",
+      "search_keywords": [
+        "Werner altermagnet high harmonic generation Physical Review B",
+        "Weber nonrelativistic spin splitting altermagnet",
+        "Rajpurohit i-wave high harmonic generation altermagnet",
+        "Zhou PRL 2024 MnTe altermagnet HHG",
+        "Haque altermagnet spin splitting Berry curvature 2024"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.3 L27 Rashba与Berry曲率贡献对HHG的相对权重缺乏文献支撑",
+      "missing_evidence": "缺少Rashba自旋轨道耦合与Berry曲率贡献在高次谐波中竞争/互补关系的理论或实验定量比较文献",
+      "search_keywords": [
+        "Rashba spin-orbit coupling Berry curvature high harmonic generation interference",
+        "Rashba vs Berry curvature HHG contribution comparison",
+        "spin-orbit coupling nonlinear optical response Berry curvature"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.3 i-wave对称性下A_helicity与S_ellipticity作为首选反演量的判据缺少文献证据",
+      "missing_evidence": "缺少证明helicity/ellipticity在i-wave对称性破缺系统中灵敏度最高的对比性文献",
+      "search_keywords": [
+        "i-wave altermagnet HHG circular polarization selection rule",
+        "altermagnet HHG helicity ellipticity fingerprint",
+        "Ghorashi Rappe altermagnet nonlinear optics theory"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§2.4 增强因子≥5倍与区分度d′≥3作为反演判据的依据缺乏文献支撑",
+      "missing_evidence": "缺少altermagnet HHG反演中区分度d′≥3、增强因子≥5倍的统计判据或贝叶斯鉴别文献",
+      "search_keywords": [
+        "altermagnet HHG inverse problem discrimination threshold",
+        "Fisher information HHG parameter retrieval",
+        "Bayesian inversion attosecond spectroscopy",
+        "d-prime statistical discrimination nonlinear optics"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

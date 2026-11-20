@@ -1,0 +1,86 @@
+{
+  "gaps": [
+    {
+      "claim": "rationale §1.3 段2末句将[27]挂在Ortmann与Landsman综述上，但scheme L127与文献表[27]为Kumar 2026四极激子——属同一编号两挂，需补真实的attosecond streaking综述文献并修正引用",
+      "missing_evidence": "缺少Ortmann与Landsman attosecond streaking综述的真实文献，或在30篇文献表中确认该条目的正确作者/年份/期刊",
+      "search_keywords": [
+        "Ortmann Landsman attosecond streaking review",
+        "attosecond streaking review strong-field review",
+        "Kumar 2026 quadrupole exciton arXiv",
+        "Kumar Chatterjee four-wave mixing exciton"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "rationale引用密度超标（35-47次为限，实测52次编号引用）",
+      "missing_evidence": "需要核查编号引用总数与段内分布，识别可合并或删除的引用",
+      "search_keywords": [
+        "high harmonic generation moiré superlattice citation review",
+        "solid HHG Berry curvature review 2024 2025",
+        "twisted bilayer HHG references"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "content体量超限（8472字 vs 4000-7000字）",
+      "missing_evidence": "无文献缺口，但需识别冗余段以精简文本",
+      "search_keywords": [
+        "moiré potential reconstruction HHG literature review",
+        "twisted bilayer TMD strong field probe references"
+      ],
+      "priority": "low"
+    },
+    {
+      "claim": "跨章指标口径不统一：rationale 75–360、content/scheme 88–352（主锚）+75–300（旁证）；需四章统一为88–352倍（1.76 eV 主锚），旁证75–300",
+      "missing_evidence": "缺少1.76 eV Mott gap主锚下88–352倍的原始文献来源（Ikeda TaS2 charge transfer峰），以及1.5 eV 75倍端点与1.8 eV 360倍端点的具体出处",
+      "search_keywords": [
+        "1T-TaS2 charge transfer peak 1.76 eV Ikeda",
+        "TaS2 Mott gap tdDMFT 260 K",
+        "1T-TaS2 optical conductivity CT peak",
+        "TaS2 correlated insulator HHG enhancement factor"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "术语分裂：激元/激子（exciton vs exciton-polariton）与\"密度密度\"损坏跨章不统一",
+      "missing_evidence": "缺乏该项目中\"谷极化激元型莫特绝缘态\"对应的标准术语确认（是exciton还是exciton-polariton）",
+      "search_keywords": [
+        "exciton Mott insulator moiré superlattice WS2 WSe2",
+        "valley polarized exciton Mott state terminology",
+        "interlayer exciton Mott insulator terminology",
+        "Lian 2024 Nat Phys WS2 WSe2 moiré exciton"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "冗余处置令未执行：content L77/L147/L151、scheme L99/L123/L125的程序3对点名句均残留",
+      "missing_evidence": "需要核查这些行号处的实际内容是否真为冗余表述",
+      "search_keywords": [
+        "Lian2024 moiré superlattice exciton Mott state",
+        "tensor network moiré correlated insulator",
+        "MPS matrix product state moiré Hubbard"
+      ],
+      "priority": "low"
+    },
+    {
+      "claim": "content§2.2主语自指：\"R1/R2/R3令牌自引约118处、跨章§指针70处\"——论证链但回声感强",
+      "missing_evidence": "无文献缺口，属写作风格问题",
+      "search_keywords": [
+        "HHG moiré probe review 2024 2025",
+        "solid high harmonic spectroscopy review Nat Phys"
+      ],
+      "priority": "low"
+    },
+    {
+      "claim": "rationale与content对同一对象术语分裂（激元vs激子），范本全篇一词到底",
+      "missing_evidence": "需要确认Lian 2024 Nat. Phys. WS₂/WSe₂ 莫尔超晶格谷极化激元的标准英文学术术语（interlayer exciton还是valley exciton）",
+      "search_keywords": [
+        "Lian 2024 Nat Phys moiré superlattice exciton",
+        "valley polarized exciton WS2 WSe2 moiré",
+        "interlayer exciton Mott insulator moiré heterostructure"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "full_review"
+}

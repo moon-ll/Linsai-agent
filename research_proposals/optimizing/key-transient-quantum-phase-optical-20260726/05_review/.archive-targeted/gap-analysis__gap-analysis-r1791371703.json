@@ -1,0 +1,37 @@
+{
+  "gaps": [
+    {
+      "claim": "Jacobsen THz-STM 实空间 Floquet-Bloch 态成像工作与 Cangi 机器学习含电子态效应量子轨迹模型在 scheme §2.3(a)、§4 D6、§5(3) 中的正确归属与支撑",
+      "missing_evidence": "确认 Jacobsen 等[41] (THz-STM Floquet-Bloch 态实空间成像) 的作者、期刊、年份、关键实验参数，以及 Shah & Cangi[39] (MLST 2026, 含局域态效应的量子轨迹费曼路径积分传播子) 的具体发表信息与可验证的引用",
+      "search_keywords": [
+        "Jacobsen THz-STM Floquet Bloch states imaging",
+        "terahertz scanning tunneling microscopy Floquet-Bloch real-space",
+        "Shah Cangi MLST 2026 quantum trajectory local states",
+        "Feynman path integral propagator localized states strong-field"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Zhao[19] HHG-Floquet 例证与 §7(e) 国际合作句脱嵌，越位需迁 §5(1) 或删除",
+      "missing_evidence": "缺少 Zhao[19] 所指 HHG-Floquet拓扑表面态相关实验论文的完整元数据（作者、期刊、年份、arXiv ID），以判断该例证与本课题 Y4/Floquet-Magnus 1/ω 收敛论证的契合度，决定迁入 §5(1) 或整体删除",
+      "search_keywords": [
+        "Zhao HHG Floquet topological surface state ARPES",
+        "Floquet engineering topological insulator high harmonic generation",
+        "Zhao topological Floquet band hybridization Physical Review"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Cangi 等量子轨迹模型含局域电子态效应的具体物理框架与可证伪判据",
+      "missing_evidence": "缺少 Shah & Cangi 模型中局域态/缺陷态对高次谐波产生修正的具体理论预测（局域-离域干涉项、阈值行为），用于支撑 §2.3(a) D6 分区判据与 §4 D6 备份方案的可行性",
+      "search_keywords": [
+        "localized states high harmonic generation theory",
+        "defect states strong-field solid HHG",
+        "impurity states HHG solid theoretical model",
+        "Cangi TDDFT strong-field localized states"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "scheme"
+}

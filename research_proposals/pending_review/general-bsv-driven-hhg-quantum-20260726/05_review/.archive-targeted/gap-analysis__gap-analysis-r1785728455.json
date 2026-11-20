@@ -1,0 +1,136 @@
+{
+  "gaps": [
+    {
+      "claim": "量子光场（BSV、纠缠光子对等）驱动 HHG 是量子光学与强场超快光学的前沿交叉方向",
+      "missing_evidence": "缺少 BSV/非经典光驱动 HHG（特别是固体 HHG）的代表性理论与实验文献；缺少证明该方向已进入主流强场超快光学议程的综述或会议报告",
+      "search_keywords": [
+        "bright squeezed vacuum high harmonic generation",
+        "nonclassical light driven HHG review",
+        "squeezed light high harmonic generation solid",
+        "quantum optics strong-field attosecond review 2024 2025"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "经典光 HHG 仅揭示非微扰电子动力学，无法触及光场统计与电子动力学的耦合",
+      "missing_evidence": "缺少经典光固体 HHG 中已展示的激子、多体修正、退相干、相关电子动力学的代表性文献；如不能引用具体工作则构成稻草人论证",
+      "search_keywords": [
+        "many-body effects solid high harmonic generation review",
+        "excitonic contribution high harmonic spectroscopy",
+        "correlation effects strong-field HHG solid",
+        "decoherence electron dynamics HHG solid"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "BSV-HHG 可作为物质量子态的非经典探针",
+      "missing_evidence": "缺少将压缩光/BSV 用于材料电子态探测（Berry 几何、能带、多体相）的工作；需要证明 BSV 探针相对经典探针具有可观测的量子优势",
+      "search_keywords": [
+        "squeezed light probe electronic structure",
+        "nonclassical probe quantum materials",
+        "quantum advantage spectroscopy squeezed light",
+        "squeezed light Berry curvature measurement"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "光场量子统计（g^(2)、噪声分布）会进入固体电子动力学并留下可测的量子指纹",
+      "missing_evidence": "缺少明确讨论 HHG 谐波光子统计（g^(2)(0)、强度-强度关联、相空间分布）的理论与实验文献；缺少 g^(2) 与电子关联/多体响应的对应关系证据",
+      "search_keywords": [
+        "photon statistics HHG g2 measurement",
+        "quantum fingerprint high harmonic generation",
+        "intensity-intensity correlation HHG",
+        "sub-Poissonian HHG photon statistics"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "半导体 Bloch 方程可被扩展为 SBE-Q 以处理量子光场驱动的多体响应",
+      "missing_evidence": "缺少将 SBE 在量子化光场下重写的原始文献或近期推导；缺少 SBE-Q 的数值实现与基准测试文献",
+      "search_keywords": [
+        "semiconductor Bloch equation quantized light field",
+        "SBE quantum optics extension",
+        "many-body HHG quantized driving field",
+        "quantum driving field SBE numerical"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "压缩真空态与纠缠光子对是同等可行的非经典驱动源",
+      "missing_evidence": "缺少 BSV 与纠缠双光子/单光子源在亮度、相干性、强度标度上的比较文献；纠缠光子对的 HHG 工作需单独区分",
+      "search_keywords": [
+        "entangled photon pair HHG",
+        "photon pair high harmonic generation solid",
+        "nonclassical light source comparison brightness",
+        "spontaneous parametric down conversion HHG"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "通过双光路干涉（参考光路）可在 BSV-HHG 中恢复相位与相干性",
+      "missing_evidence": "缺少 BSV HHG 中干涉测量/自外差/平衡零拍方案的具体实验或理论文献；缺少噪声光场下谐波相位测量的方法学文献",
+      "search_keywords": [
+        "homodyne detection HHG squeezing",
+        "self-referenced interferometry quantum HHG",
+        "local oscillator squeezed HHG phase retrieval",
+        "interferometric harmonic spectroscopy quantum light"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "通过 HHG 反演可从量子光谐波谱中提取物质量子态（Berry 几何、能带、多体参数）",
+      "missing_evidence": "缺少经典光 HHG 反演方法的代表性综述；缺少讨论量子光 HHG 反演问题病态性、唯一性、可行性的理论文献",
+      "search_keywords": [
+        "high harmonic spectroscopy inverse problem",
+        "harmonic spectrum band structure retrieval",
+        "Berry curvature reconstruction HHG",
+        "inverse problem HHG uniqueness reconstruction"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "本项目是 BSV 驱动固体 HHG 的「首次系统化研究」",
+      "missing_evidence": "缺少证明该方向至今尚无系统研究的 prior-art 文献综述；需明确列出已有哪些零散工作并指出本项目填补的具体空白",
+      "search_keywords": [
+        "BSV HHG solid state",
+        "squeezed vacuum high harmonic review",
+        "nonclassical light strong-field solids prior work",
+        "quantum light HHG experimental progress"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "项目「填补国内空白」",
+      "missing_evidence": "缺少国内 BSV/量子光驱动 HHG 方向的代表性团队与工作检索证据；需明确国内未开展此方向的具体依据",
+      "search_keywords": [
+        "国内 压缩光 高次谐波",
+        "中国 BSV 强场 超快",
+        "国内 量子光 阿秒",
+        "China attosecond quantum light research"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "通过参数调控（脉宽、波长、晶体取向、温度、激发强度）可优化 BSV-HHG 量子指纹信号",
+      "missing_evidence": "缺少 BSV 光源参数（亮度、压缩度、带宽）与固体 HHG 响应耦合的调控文献；缺少参数扫描的最优区间或理论预测",
+      "search_keywords": [
+        "squeezed light bandwidth control HHG",
+        "BSV parameter optimization nonlinear",
+        "squeezing degree HHG scaling",
+        "pulse duration squeezed light HHG"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "经典光场下固体 HHG 已能提供能带、几何和部分多体响应信息",
+      "missing_evidence": "缺少能带重构、Berry 几何测量、多体响应探测三类经典工作的代表性引用；缺少为对比 BSV-HHG 优势所必需的最新综述",
+      "search_keywords": [
+        "band structure reconstruction HHG review",
+        "geometric contribution HHG solid review 2024",
+        "many-body HHG signature review",
+        "solid HHG spectroscopy milestone review"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

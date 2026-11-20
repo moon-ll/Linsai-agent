@@ -1,0 +1,39 @@
+{
+  "gaps": [
+    {
+      "claim": "154 个自旋点群（SPG）的活动多极矩完整分类，以及 i-wave 交变磁体对应 7 个 PT 破缺 SPG 的 l=6 自旋电多极判据，为非共线反铁磁体中 i-wave 判定提供群论基准（rationale L7/L57）",
+      "missing_evidence": "缺少承载该分类内容的 Ogawa-Hayami 2026 新作 arXiv:2609.04883 的正式文献条目；此内容目前被错误挂靠在 [18]（JPSJ 94:063704，实为 g-wave 压磁效应论文）上，造成同一编号一号两实，需新增 2609.04883 条目并改挂，或将 L7 改述为 [18] 压磁实际内容",
+      "search_keywords": [
+        "Ogawa Hayami spin point group multipole classification arXiv 2609.04883",
+        "154 spin point groups active multipole complete classification",
+        "i-wave altermagnet l=6 spin electric multipole PT-broken spin point group",
+        "spin point group collinear altermagnet multipole classification 2026",
+        "JPSJ 94 063704 g-wave piezomagnetic spin point group"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Basnet 等在轻 Cr 取代的层状反铁磁体 NiPS₃ 中证实场致自旋极化（rationale L19）",
+      "missing_evidence": "缺少该成果的原始文献条目 Basnet PRB 109:184405 (2024)；现挂的 [17] 为非磁配体 S/Se 取代（PRR 2022）、[20] 为综述，均不承载 Cr 取代场致自旋极化结论，需补挂 PRB 2024 条目或改述为 [17][20] 实际结论",
+      "search_keywords": [
+        "Basnet NiPS3 chromium substitution field-induced spin polarization PRB 2024",
+        "NiPS3 Cr doping field induced magnetization Physical Review B 109 184405",
+        "Cr-substituted NiPS3 spin polarization neutron diffraction magnetometry",
+        "NiPS3 light chromium doping layered antiferromagnet spin polarization 2024"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Werner 等 [13] 中 SOC 引入后带间跃迁在五次以上谐波形成平台结构（rationale L21）",
+      "missing_evidence": "缺少对 Werner 原文谐波阶数的准确佐证——原文摘要及正文仅称 'additional higher energy peaks and plateau structures'（谐波以奇数次讨论），无'五次以上'阶数表述，需核对原文实际谐波平台所在的阶数范围，以删去夸大表述或改为准确转述",
+      "search_keywords": [
+        "Werner altermagnet high harmonic generation spin-orbit coupling plateau",
+        "Werner PRB 110 235101 altermagnet Rashba Zeeman harmonic",
+        "altermagnet HHG higher energy peaks plateau interband transition SOC",
+        "altermagnet high harmonic spectrum odd order plateau spin-orbit"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "rationale"
+}

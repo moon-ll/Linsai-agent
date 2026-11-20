@@ -1,0 +1,38 @@
+{
+  "gaps": [
+    {
+      "claim": "§2.2 L35 关于 Haldane 模型机制的表述：现文称复相位次近邻跃迁'实现反演对称破缺而保留平移对称，从而得到非零 Chern 数'，与所挂原始文献 [36]（Haldane 1988）实际结论相反",
+      "missing_evidence": "需要支撑修正后表述的原始文献：Haldane 1988 原文证明复相位次近邻跃迁（零净磁通、交错磁通）破缺时间反演对称而保留反演与平移对称；Semenoff 1984 质量项破缺反演对称但单独破缺只给出平庸带绝缘体。修正句'破缺时间反演对称而保留反演与平移对称'须逐句有源，作为 rigor 科学正确性的核验依据",
+      "search_keywords": [
+        "Haldane 1988 model time-reversal symmetry breaking",
+        "Semenoff mass inversion symmetry breaking",
+        "Chern insulator nonzero Chern number time-reversal breaking",
+        "staggered flux zero net flux Haldane model"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3 L77 'RhSi 阿秒手性'现象枚举项（五类现象中唯一无 [N] 挂靠者），以及 §2.3 L53 '手性晶格手性映射'表述，在 40 条实表中零对应（[29] 实为 CoSi）",
+      "missing_evidence": "两类补法二选一：① 补充 RhSi（或相关手性拓扑半金属）阿秒/高次谐波手性响应的真实文献入实表并挂 [N]；② 若实无 RhSi 文献，改为挂靠 [29] 并将表述统一为 CoSi 谐波圆二色，同时需支撑 §2.3 手性晶格→手性映射论断的出处（写作规范四.4 论断配出处）",
+      "search_keywords": [
+        "RhSi chiral high harmonic generation",
+        "CoSi harmonic circular dichroism",
+        "chiral topological semimetal attosecond chirality",
+        "high harmonic generation chiral crystal CoSi RhSi"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.3 L59 '实时 TDDFT 与时域 Williams-Lax 框架下布居动力学主导退相干'结论无具名作者、无 [N] 挂靠，且 scheme §2.1 已引其为 T₂ 建模边界前提",
+      "missing_evidence": "电子-电子散射导致布居动力学主导退相干的第一性原理文献（需具名作者+可挂 [N]），覆盖实时 TDDFT 退相干计算与时域 Williams-Lax 方法两条线；因该论断是 scheme §2.1 T₂ 建模的适用条件前提，属 red_line theory_applicability（适用条件须有源）",
+      "search_keywords": [
+        "real-time TDDFT decoherence electron-electron scattering",
+        "time-domain Williams-Lax method",
+        "first-principles dephasing T2 population dynamics",
+        "ultrafast dynamics decoherence TDDFT simulation"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "rationale"
+}

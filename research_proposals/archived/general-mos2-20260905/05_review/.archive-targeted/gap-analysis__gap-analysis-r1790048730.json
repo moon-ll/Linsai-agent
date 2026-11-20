@@ -1,0 +1,75 @@
+{
+  "gaps": [
+    {
+      "claim": "扭转角下同质 MoS₂ 双层点群为严格 C₃, 仅三重旋转轴无 σ_v 镜面",
+      "missing_evidence": "缺少对扭转同质 TMD 双层 σ_v/σ_d 镜面破缺导致偏移的群论推导文献, 1/θ 小角发散缺乏理论支持",
+      "search_keywords": [
+        "twisted homobilayer TMD C3 symmetry mirror plane",
+        "moire superlattice point group theory D3d D3h",
+        "twisted bilayer transition metal dichalcogenide group theory σ_v"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "偏移约 5—10° 为待验设计值",
+      "missing_evidence": "缺少扭转角偏移范围的实验测量基准文献(对比 SHG 标定、电子衍射等方法的精度)",
+      "search_keywords": [
+        "twist angle disorder moire heterostructure measurement",
+        "homobilayer MoS2 twist angle inhomogeneity experimental",
+        "moire superlattice twist angle statistics SHG calibration"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "ARPES 砧面衰减与独立 TDDFT 验证方法",
+      "missing_evidence": "缺少对'砧面衰减→独立 TDDFT 单独验证'这一方法的原始文献出处(R5#5 残留)",
+      "search_keywords": [
+        "anvil cell pressure ARPES transition metal dichalcogenide",
+        "independent TDDFT validation high harmonic generation",
+        "high pressure ARPES MoS2 decay"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "[31] 中 Δφ≈17° 与 φ₀=2.2° 构型依赖 (按 4.41° 配置)",
+      "missing_evidence": "[31] 原文 4.41° 构型具体参数需要核实作者链和具体数值来源",
+      "search_keywords": [
+        "4.41 degree twisted MoS2 SHG polarization",
+        "Patra Cocchi twisted homobilayer MoS2 DFT-Wannier chi_xxx",
+        "arXiv 2607.19937 author verification 4.41"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "1.5—3.5 eV 全光谱锁定的物理机制出处",
+      "missing_evidence": "缺少'1.5—3.5 eV 全光谱锁定'结论的原始文献, 现有 [31] 出处无法支撑该表述",
+      "search_keywords": [
+        "broadband spectral locking moire TMD",
+        "full spectrum harmonic selection rule twisted bilayer",
+        "spectral locking 1.5 3.5 eV moire superlattice"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "失谐判据口径: 0, ±50, ±100 meV 五点扫描",
+      "missing_evidence": "缺少五点失谐扫描判据的方法学先例(基态 vs 某单点 vs 五点扫描)",
+      "search_keywords": [
+        "exciton detuning five-point scan MoS2 high harmonic",
+        "resonant detuning scan ±50 ±100 meV HHG",
+        "exciton resonance linewidth MoS2 harmonic generation"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "外围文献条目 [2-7][15][22][39] 的引用密度超标",
+      "missing_evidence": "外围文献条目角标 44 次远超范本 10-17, 需筛选核心支撑文献, 减少外围罗列",
+      "search_keywords": [
+        "Peterka MoS2 HHG 0.62 eV APL Photonics",
+        "Lu Peixiang SHG twist angle calibration dry transfer",
+        "Liu MoS2 high harmonic generation first observation"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

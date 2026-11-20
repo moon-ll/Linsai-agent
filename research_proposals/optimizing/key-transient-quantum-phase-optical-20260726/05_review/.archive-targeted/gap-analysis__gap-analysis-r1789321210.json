@@ -1,0 +1,79 @@
+{
+  "gaps": [
+    {
+      "claim": "LDA/PBE 对 Bi₂Se₃ Berry 曲率 ~15% 偏差已证明（[31] Ilin arXiv 2604.20388 引用）",
+      "missing_evidence": "[31] Ilin (arXiv 2604.20388) 实际为 SSH 模型+光学腔 HHG 量子统计理论，不含 Bi₂Se₃/LDA/PBE/Berry 曲率偏差内容；缺少 Bi₂Se₃ 第一性原理 DFT 泛函（LDA/PBE/PBE+SOC/HSE/BEEF-vdW/SCAN）对 Berry 曲率计算偏差的对比数据集文献",
+      "search_keywords": [
+        "Bi2Se3 Berry curvature DFT functional comparison",
+        "topological insulator LDA PBE Berry curvature benchmark",
+        "DFT exchange correlation functional Berry curvature accuracy",
+        "Bi2Se3 anomalous Hall Berry curvature first-principles"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "分区判据阈值 2 + 转换区 1<x<2 的边界与 Bi₂Se₃ 低频实测落点 0.5–1.03 的自洽性",
+      "missing_evidence": "缺乏 Bi₂Se₃ 在 4–8 μm/1.6 eV 带隙下的 Keldysh 参数 ℏω/E_g 完整实验数据；缺少不同带隙材料 (E_g=0.3/0.6/0.9/1.6 eV) 在中红外驱动下的分区判据实测验证",
+      "search_keywords": [
+        "Keldysh parameter Bi2Se3 mid-infrared HHG",
+        "HHG regime transition threshold experimental validation",
+        "Bi2Se3 high harmonic generation wavelength dependence",
+        "solid HHG adiabatic nonadiabatic boundary experiment"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "8% 对照数据来源（清单7 11 个无角标挂点之一）",
+      "missing_evidence": "缺少固体 HHG 8% 误差/不确定度的对照基线文献；需明确 8% 来源是 Berry 曲率反演、谐波产率、还是相干重建精度",
+      "search_keywords": [
+        "solid-state HHG reconstruction error benchmark",
+        "Berry curvature inversion accuracy percent",
+        "high harmonic generation uncertainty quantification",
+        "attosecond spectroscopy precision baseline"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "ELI-ALPS 报道（清单7 11 个无角标挂点之一）",
+      "missing_evidence": "缺少 ELI-ALPS 阿秒光源装置性能参数与可申请机时的官方文献",
+      "search_keywords": [
+        "ELI-ALPS attosecond beamline performance",
+        "ELI-ALPS L1 ATAS HRR specifications",
+        "ELI-ALPS user call beamtime statistics"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "弱值/CNN 细节（[19]/[41] 配对文案，scheme L139 引用）",
+      "missing_evidence": "scheme 中提及 weak value/CNN 反演但 [19,41] 配对文案可疑；缺 weak measurement + 神经网络/CNN 在阿秒/固体 HHG 反演中的具体应用文献",
+      "search_keywords": [
+        "weak value amplification attosecond pulse retrieval",
+        "CNN neural network high harmonic reconstruction",
+        "machine learning HHG inversion accuracy",
+        "physics-informed neural network attosecond spectroscopy"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "2024 预研：团队 BEEF-vdW 与 LDA/PBE 对比数据集（critical#2 修复建议）",
+      "missing_evidence": "若改用自证数据需补强 BEEF-vdW 泛函在拓扑材料 Berry 曲率计算中的对比文献作为方法学依据",
+      "search_keywords": [
+        "BEEF-vdW functional Berry curvature topological insulator",
+        "BEEF-vdW DFT Bi2Se3 benchmark",
+        "Bayesian error estimation functional van der Waals surface science"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "[46] Kiselev 2026 引用（条目 2025 vs 正文 2026 年）",
+      "missing_evidence": "[46] Kiselev 出版年份与正文叙述存在出入，需核实 arXiv/期刊正式发表年份",
+      "search_keywords": [
+        "Kiselev attosecond 2025 2026",
+        "Kiselev strong field ionization HHG",
+        "Kiselev high harmonic transient phase"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "scheme"
+}

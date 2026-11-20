@@ -1,0 +1,80 @@
+{
+  "gaps": [
+    {
+      "claim": "「g 波 MnTe 中弱光注入下非平衡自旋密度与 HHG 偏振各向异性的差异」需进一步文献支撑",
+      "missing_evidence": "Haag 等关于 g 波 MnTe 超快自旋极化的原始文献（[13]）以及后续将该机制与 HHG 频谱关联的工作尚未充分引用；缺少将 Haag 非平衡自旋密度预测与本课题偏振指纹图样预测做明确区隔的对比文献",
+      "search_keywords": [
+        "Haag MnTe altermagnet ultrafast spin polarization",
+        "g-wave altermagnet transient spin polarization pump-probe",
+        "MnTe non-equilibrium spin polarization mid-infrared",
+        "altermagnet HHG polarization anisotropy MnTe"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "「0.3–0.8 eV 能带自旋劈裂区间」的双口径表述（[2] vs [2,15]合并）需文献校验",
+      "missing_evidence": "需要 [2] Šmejkal 综述、[15] 相关 altermagnet 自旋劈裂实验/理论文献，给出 MnTe/CrSb g 波劈裂能量的明确范围；缺少 d-wave/g-wave/i-wave 不同 altermagnet 体系自旋劈裂幅度的并列数据",
+      "search_keywords": [
+        "Šmejkal altermagnet spin splitting magnitude",
+        "MnTe CrSb spin splitting ARPES value eV",
+        "altermagnet d-wave g-wave i-wave band splitting",
+        "nonrelativistic spin splitting MnTe CrSb"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "「第2 与第 3 阶谐波强度比」作为对称性判据的物理依据需文献支撑",
+      "missing_evidence": "需要 altermagnet HHG 偶/奇次谐波选择规则与低阶谐波强度比测量实验，特别是 MnTe 第 2/3 阶强度比与对称性破缺关联的对照文献；缺少对称性判据在 HHG 频域的可观测指纹证据",
+      "search_keywords": [
+        "altermagnet even harmonic selection rule",
+        "MnTe 2nd 3rd harmonic intensity ratio symmetry",
+        "odd even harmonic ratio altermagnet MnTe",
+        "symmetry breaking HHG low-order fingerprint"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "「温区步长作为偏振指纹温度扫描方案」的物理依据与文献支撑",
+      "missing_evidence": "需要 altermagnet 相变温度（Néel温度）附近偏振 HHG 温度依赖实验，作为温区步长选择的依据；缺少 MnTe（Néel ~307 K）/ CrSb（Néel ~705 K）温度扫描 HHG 实验数据",
+      "search_keywords": [
+        "MnTe Neel temperature HHG temperature dependence",
+        "CrSb altermagnet HHG above below Neel",
+        "temperature dependent high harmonic altermagnet",
+        "polarization resolved HHG near magnetic phase transition"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "「群论初判流程」区分 d/g/i 波对称性的方法学支撑",
+      "missing_evidence": "需要 spin group theory 与 altermagnet 对称性分类（Šmejkal/González-Hernández 等）的判据表，特别是 g 波（nodal planes ≠ 0）与 d/i 波可观测量的差异性证据",
+      "search_keywords": [
+        "Šmejkal altermagnet spin group theory classification",
+        "g-wave d-wave i-wave altermagnet observable distinction",
+        "spin group symmetry criterion altermagnet",
+        "altermagnet nodal plane experimental verification"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "「研究内容 R1/R2/R3 三阶段」的命名引用需追溯原始文献定义",
+      "missing_evidence": "需要确认 R1/R2/R3 命名在原方案/相关文献中的首次定义位置，确保术语溯源一致性",
+      "search_keywords": [
+        "R1 R2 R3 altermagnet HHG inverse problem",
+        "three-stage validation framework attosecond",
+        "Bayesian hierarchical HHG spectroscopy stages"
+      ],
+      "priority": "low"
+    },
+    {
+      "claim": "「[15] 作者链第 7 位 Takahashi K/T 首字母勘误」的 CrossRef 校验链",
+      "missing_evidence": "需要通过 CrossRef/DOI 重新校验 [15] 完整作者列表，确认第 7 位作者首字母的正确拼写（T 而非 K）",
+      "search_keywords": [
+        "CrossRef DOI 15 MnTe altermagnet HHG authors",
+        "Takahashi MnTe nonlinear optics author list",
+        "altermagnet HHG first observation author chain"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "content"
+}

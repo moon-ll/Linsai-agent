@@ -1,0 +1,70 @@
+{
+  "gaps": [
+    {
+      "claim": "现有莫尔 HHG 理论 [6][8] 均无多体项（用以论证 R1 首个含多体修正的莫尔 HHG 正向模型的新颖性）",
+      "missing_evidence": "[6][8] 是否确实为单粒子/无关联修正的莫尔 HHG 理论依据，仅靠命题人自述而无第三方综述或对比文献背书；需要直接核对 [6][8] 的原始理论框架文献，确认其 SBE 或 TDSE 中是否真的不包含 Σ 类多体修正项",
+      "search_keywords": [
+        "moiré high harmonic generation theory single-particle",
+        "twisted bilayer graphene HHG semiconductor Bloch equations",
+        "strong-field approximation moiré superlattice",
+        "many-body correction high harmonic generation twisted",
+        "chiral HHG moiré theory review"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Zhou[17] = 近共振 Floquet 理论（泵浦 340–440 meV ≈ BP 带隙 3X meV），用于支撑假设 2 的物理图像",
+      "missing_evidence": "Zhou 2023（Nature 614, 75–80）原文摘要中是否使用 340–440 meV 泵浦、是否针对 BP（双层/扭转双层石墨烯）能隙做近共振 Floquet 展开；评审已做摘要外查但参数口径仍存疑，需全文核对 Methods/Supplementary 以确认泵浦能量、BP 带隙数值与适用范围",
+      "search_keywords": [
+        "Zhou 2023 Nature 614 75 bilayer graphene Floquet",
+        "near-resonant Floquet twisted bilayer graphene pump photon energy",
+        "BP bandgap 340 440 meV moiré pump",
+        "Floquet engineering bilayer graphene near-resonance"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "references.md 头部声明'全部 34 条'且'19 条占 55.9%'（实际仅列 30 条，应为 63.3%）",
+      "missing_evidence": "[31]–[34] 四条文献实体缺失，可能是与莫尔 HHG、多体 Σ 修正、TMD/扭转双层石墨烯强场实验等核心论点直接相关的关键引用；需补全条目或在头部改计数并重新核算占比",
+      "search_keywords": [
+        "moiré high harmonic generation experiment 2024 2025",
+        "many-body self-energy TDDFT strong-field HHG",
+        "twisted TMD bilayer strong-field probe review",
+        "GW BSE twisted bilayer graphene optical"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "通过 Σ 自能回授 SBE 界面把多体关联修正纳入强场莫尔 HHG 正向计算（R1 核心方法新颖性）",
+      "missing_evidence": "Σ→SBE 回授这一具体耦合界面的理论先例或方法学引用缺失；需查找强场 HHG 领域已有的 GW/BSE 自洽、TDOEF/TD-CI、或 Σ-embedding SBE 等类似耦合方案的奠基文献，以论证该技术路线的可行性而非纯自创",
+      "search_keywords": [
+        "self-energy feedback semiconductor Bloch equation HHG",
+        "GW embedding strong-field HHG many-body",
+        "TD-GW TD-BSE high harmonic generation",
+        "quasiparticle correction strong-field HHG theory"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "蒙特卡洛 30 次采样 95%CI 收敛于误差 5% 以内（用于三窗口不确定性传播统计效力论证）",
+      "missing_evidence": "30 次样本量、95% 置信水平、5% 相对误差三者间的统计依据未给出引用；需要给出标准 Monte Carlo 收敛判据文献（如 σ/√N、t 分布 CI 公式）以闭环论证样本量充分性",
+      "search_keywords": [
+        "Monte Carlo sample size confidence interval convergence",
+        "t-distribution 95% CI sample number formula",
+        "statistical power Monte Carlo convergence criterion"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "样品制备精度 ±0.05°（电子衍射标定）可将莫尔势自由参数减少约 2/3（C₃ + 平移对称性 + 扭转角硬约束）",
+      "missing_evidence": "扭转角 ±0.05° 标定精度的实验依据未引用；该精度对应的莫尔超晶格周期不确定性、自由参数缩减 2/3 的参数空间论证需有实验/方法学文献支撑",
+      "search_keywords": [
+        "twist angle calibration precision electron diffraction moiré",
+        "tetrahedral precision twisted bilayer ±0.05 degree",
+        "moiré superlattice parameter space reduction symmetry"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

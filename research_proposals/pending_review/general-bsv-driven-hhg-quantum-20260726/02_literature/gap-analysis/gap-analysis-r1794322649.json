@@ -1,0 +1,37 @@
+{
+  "gaps": [
+    {
+      "claim": "§3.3 L35/L47：光电流 AFM 测量成果句，及与 Tyulnev/Jabed 成果的具名对标——声称已有光电流原子力显微测量结果可对标",
+      "missing_evidence": "光电流 AFM（photo-current atomic force microscopy）在相关材料体系中的实验文献，具体为 Tyulnev、Jabed 具名作者的原始论文；references 实表中无对应条目，需补条目并挂角标",
+      "search_keywords": [
+        "Tyulnev photocurrent AFM",
+        "Jabed photocurrent atomic force microscopy",
+        "photocurrent AFM 2D materials",
+        "photo-assisted scanning probe photocurrent"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3.3 L45：β-Ga₂O₃（C2/m 中心对称空间群）中观察到偶次谐波 q=4–6 的定量窗口——体相偶极近似下偶次阶禁戒，需论证偶次谐波的物理来源",
+      "missing_evidence": "中心对称晶体中产生偶次高次谐波的机制文献，如量子涨落诱导的动力学对称性破缺（quantum fluctuation dynamical symmetry breaking）、Berry 曲率/偶极贡献导致偶次 HHG 的理论或实验证据；评审建议引 [22] 类文献注明偶次来源，或将窗口改为奇次 q=5–7",
+      "search_keywords": [
+        "even-order high harmonic generation centrosymmetric crystal",
+        "quantum fluctuation symmetry breaking even harmonics",
+        "beta-Ga2O3 high harmonic generation even order",
+        "Berry curvature even harmonics solid HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3.4 L87 与 §3.3 L33：Li 等 / Wu 等的具名成果句（零角标，[10]/[11] 实存于参考文献表但未挂载）",
+      "missing_evidence": "Li 等、Wu 等的原始论文条目本身已在 references 表中（编号 [10]/[11]），缺的是正文具名句与文献条目的对应挂接证据；需按具名内容核实 [10]/[11] 是否确为所引文献，句尾补挂角标",
+      "search_keywords": [
+        "Li et al. nonlinear optics moire",
+        "Wu et al. high harmonic 2D materials",
+        "moiré HHG experimental Li Wu"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "scheme"
+}

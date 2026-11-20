@@ -1,0 +1,30 @@
+{
+  "gaps": [
+    {
+      "claim": "D_B 的两个报告值 −8.99×10⁻³ 与 −0.0676 采用不同但可明确换算的归一化约定，并可据此确定统一的排序标定值。",
+      "missing_evidence": "需要引用权威的 Berry curvature dipole 定义及归一化方法，明确 Berry 曲率密度约定、动量空间积分测度、ħ/e 单位、是否包含自旋简并以及 (2π)⁻³ 因子；同时需要追溯两个数值各自对应的原始计算或一手来源，给出逐步换算式，避免仅凭文字说明统一口径。",
+      "search_keywords": [
+        "Berry curvature dipole definition normalization ħ/e",
+        "integrated Berry curvature dipole Fermi surface formula",
+        "Kubo formula Berry curvature dipole units spin degeneracy",
+        "semiclassical Berry curvature dipole momentum space normalization (2π)^-3",
+        "doped semiconductor Berry curvature dipole calculation"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "D_B＝−8.99×10⁻³ 以及 2.1×10⁴–4×10⁵ V/m 的增益阈值场窗是在所述杂质掺杂半导体和周期驱动条件下得到的、可由独立文献或方法记录复现的结果，而非仅依赖文献[14]。",
+      "missing_evidence": "需要补充独立的一手理论或实验文献，支持该类非平衡 Berry curvature dipole 与载流子增益机制的定量关系，并交叉核验 D_B 和阈值场窗；还应提供可复现的方法记录，列出 Hamiltonian、杂质势、载流子密度、温度、能带与有效质量、弛豫时间、Berry 曲率积分、谐波求解、增益定义及阈值判定方法，并说明其与文献[14]参数和归一化约定的对应关系。",
+      "search_keywords": [
+        "doped semiconductor nonequilibrium Berry curvature dipole optical gain threshold electric field",
+        "impurity-doped semiconductor Floquet-Bloch carrier distribution gain",
+        "Berry curvature dipole induced carrier gain high-field semiconductor",
+        "THz-driven high-field transport doped semiconductor optical gain",
+        "nonlinear Hall Berry curvature dipole crossover electric field",
+        "periodic driven semiconductor Berry curvature dipole threshold field"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "scheme"
+}

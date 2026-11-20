@@ -1,0 +1,30 @@
+{
+  "gaps": [
+    {
+      "claim": "Ma 等人 [23] 在 MnTe 单晶上以二次谐波晶体学各向异性独立观测到 d 波交错磁对称性特征",
+      "missing_evidence": "[23] PRB 111, 064311 (Ma et al. 2025) 实为动量分辨 SHG 理论方案，主例 RuO₂、MnTe 仅为推广适用性说明；论文摘要明示 'direct spectroscopic probe remains untapped'。需要补充 MnTe 单晶 SHG 实验观测的替代文献（如 Osumi ARPES、Lee MnTe 分裂 ARPES 实验、Tyulnev TiSe2、CrSb Reimers 实验等已发表实验观测）作为事实支撑",
+      "search_keywords": [
+        "MnTe second harmonic generation experimental observation",
+        "altermagnet SHG experiment MnTe",
+        "PRB 109 115102 Osumi MnTe ARPES",
+        "Tyulnev TiSe2 SHG experimental",
+        "CrSb altermagnet SHG experiment",
+        "MnTe momentum-resolved SHG measurement"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "时间分辨磁光与动量分辨 SHG 实验相互独立验证",
+      "missing_evidence": "动量分辨 SHG 在 MnTe 单晶上的实验复现尚无报道。需要补充：磁光实验 (RuO₂ magneto-optical Kerr 已验证) + MnTe 时间分辨磁光实验 + 动量分辨 SHG 理论方案 [23] 的三分支引文架构，确保时间分辨磁光与动量分辨 SHG 的引文性质表述准确（前者为实验，后者为理论）",
+      "search_keywords": [
+        "time-resolved magneto-optical Kerr altermagnet experiment",
+        "RuO2 magneto-optical Kerr measurement altermagnet",
+        "MnTe time-resolved magneto-optical experiment",
+        "momentum-resolved SHG altermagnet theoretical proposal",
+        "Pancharatnam-Berry tensor SHG altermagnet"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "content"
+}

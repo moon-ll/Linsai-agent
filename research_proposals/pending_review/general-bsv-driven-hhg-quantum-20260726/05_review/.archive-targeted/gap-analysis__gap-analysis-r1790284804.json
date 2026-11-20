@@ -1,0 +1,48 @@
+{
+  "gaps": [
+    {
+      "claim": "[39] 引用支撑：吴健团队 Nature 2026 BSV 钠原子首例实验 / 300 nJ / 7.1 μJ / 20 倍 / 5.14 eV / 4 件套探针衔接",
+      "missing_evidence": "需要核实 Nature 2026 吴健团队 BSV 钠原子首例实验的正式文献（arXiv 预印本或 DOI），确认作者、单位、实验参数（300 nJ/7.1 μJ/20 倍增益/5.14 eV）",
+      "search_keywords": [
+        "Wu Jian Nature 2026 bright squeezed vacuum sodium",
+        "BSV sodium first observation HHG Nature 2026",
+        "bright squeezed vacuum alkali atom Nature 2026 300 nJ",
+        "Wu Jian team squeezed light sodium HHG experiment"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "BSV 单脉冲光子数 2×10^13 量级支撑：申请书写 [3,4]（Spasibko/Iskhakov 2012），但实测数据应来自 Rasputnyi[1] Nature Physics 2024",
+      "missing_evidence": "需要 Rasputnyi et al. Nature Physics 2024 BSV 单脉冲光子数 2×10^13 的正式引用细节（DOI、arXiv 编号、具体参数）作为正确归属",
+      "search_keywords": [
+        "Rasputnyi Nature Physics 2024 bright squeezed vacuum 2e13 photons per pulse",
+        "BSV single pulse photon number 10^13 solid HHG driver",
+        "Rasputnyi Lu Peixiang squeezed vacuum HHG Nature Physics 2024"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Luu/Vampa/Murakami/Silva 四作者在 §1.1 段2 与 §1.2.1 重复复述",
+      "missing_evidence": "虽然是写作冗余问题，但需要确认四作者工作的最新引用是否准确：Luu & Wörner Berry curvature HHG 方法学、Vampa 半经典三步模型、Murakami Hubbard/Mott HHG、Silva 强关联 HHG 实验",
+      "search_keywords": [
+        "Luu Worner Berry curvature high harmonic spectroscopy quartz 2018",
+        "Vampa semi-classical three-step model solid HHG",
+        "Murakami Hubbard Mott high harmonic generation theory",
+        "Silva strongly correlated HHG many-body dynamics experiment"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "QEF 三维度形式定义（QEF_vis、QEF_yield^{q_ref}、QEF_yield^{Σ}）前置立项依据，与 §2.3 定义分离",
+      "missing_evidence": "需要 Quantum Enhancement Factor (QEF) 在 BSV 驱动 HHG 中的原始定义与基准文献来源（来自 Rasputnyi/Liang/Lu 或更早的 Lewis/Borrelli 等量子光场 HHG 理论），以便在 §2.3 中正确定义并以引用回填",
+      "search_keywords": [
+        "quantum enhancement factor QEF high harmonic generation BSV definition",
+        "QEF visibility yield squeezed vacuum HHG benchmark",
+        "Lewis Borrelli Pisanty quantum light HHG enhancement metric",
+        "Rasputnyi Liang Lu QEF bright squeezed vacuum HHG"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

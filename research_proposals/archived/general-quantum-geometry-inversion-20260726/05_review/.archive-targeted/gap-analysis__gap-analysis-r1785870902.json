@@ -1,0 +1,63 @@
+{
+  "gaps": [
+    {
+      "claim": "BSV-SBE（亮压缩真空驱动的半导体布洛赫方程）理论路径支撑主要依赖预印本，缺乏经同行评审的正式发表文献",
+      "missing_evidence": "13/29 条参考文献为预印本（占比45%），其中涉及 BSV 驱动 HHG、量子几何反演、强关联 HHG 等核心论断的11条预印本缺乏正式期刊版本支撑，若被撤稿或方法学修正将导致可行性叙事松动",
+      "search_keywords": [
+        "bright squeezed vacuum semiconductor Bloch equations peer-reviewed",
+        "quantum light driven high harmonic generation published journal",
+        "squeezed state nonlinear optics solid state journal article"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "固体高次谐波产生中的量子几何反演方法",
+      "missing_evidence": "量子几何反演方向（Liu-Fu-Kais/Uzan/Faeyrman 等引用）多为 2026 年预印本，缺乏该方向的奠基性正式发表文献支撑",
+      "search_keywords": [
+        "quantum geometry reconstruction high harmonic generation journal",
+        "Berry curvature inversion HHG published",
+        "quantum metric tensor nonlinear optics published review"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "强关联体系 HHG 理论基础",
+      "missing_evidence": "强关联 HHG 方向（Silva/Ikeda/Tyulnev/Bauer）部分为预印本，需要补充正式发表的强关联固体 HHG 理论与实验文献",
+      "search_keywords": [
+        "strongly correlated material high harmonic generation journal article",
+        "Mott insulator high harmonic generation experiment published",
+        "correlated electron HHG theory peer-reviewed"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "桌面阿秒光源实验平台支撑",
+      "missing_evidence": "现有 [26] Meng 6.2-GW 桌面阿秒光源文献与项目核心关联度低，需要替换为与量子几何反演 HHG 实验方案直接相关的光源与探测技术文献",
+      "search_keywords": [
+        "tabletop attosecond source high harmonic generation solid",
+        "mid-infrared strong field HHG solid state experiment",
+        "attosecond spectroscopy quantum material geometry probe"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "固体 HHG 综述文献支撑项目整体研究背景",
+      "missing_evidence": "[27] Ciappina 综述正式发表状态不明（同时标注 Adv. Phys. 2025 和 arXiv:2510.15207），需确认或替换为已正式发表的固体 HHG 综述",
+      "search_keywords": [
+        "solid-state high harmonic generation review published",
+        "nonlinear optics crystals review attosecond",
+        "high harmonic generation solids comprehensive review journal"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Vampa 2015 引用的作者归属准确性",
+      "missing_evidence": "[1] Vampa 2015 作者缩写为 et al. 但通讯作者与第一作者归属需核对，需核实原文确认引用准确性",
+      "search_keywords": [
+        "Vampa 2015 Nature solid high harmonic generation",
+        "Vampa 2015 high harmonic generation silicon ZnO authorship"
+      ],
+      "priority": "low"
+    }
+  ]
+}

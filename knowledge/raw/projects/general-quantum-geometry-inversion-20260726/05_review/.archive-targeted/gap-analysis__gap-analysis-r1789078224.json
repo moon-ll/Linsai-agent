@@ -1,0 +1,97 @@
+{
+  "gaps": [
+    {
+      "claim": "[42] Thorpe 2025 Phys. Rev. Research 7, 043284 应有 Lewenstein 模型量子光学推广并将带内/带间双通道 HHG 统一到同一电流框架的表述",
+      "missing_evidence": "需要核实该论文真实存在及其核心表述（Lewenstein 模型量子光学推广、双通道统一电流框架）是否与正文引用一致",
+      "search_keywords": [
+        "Thorpe Lewenstein quantum optics HHG",
+        "intraband interband quantum optical HHG current framework",
+        "PhysRevResearch 7 043284"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "[42] Thorpe 2025 PRR 真实 DOI 需 Crossref 验证（当前字符串 10.1103/8lhh-gq58 格式异常）",
+      "missing_evidence": "需要 Crossref 反查 PRR 7, 043284 真实 DOI 或确认该论文是否已正式发表",
+      "search_keywords": [
+        "10.1103/PhysRevResearch.7.043284",
+        "Thorpe 2025 high harmonic quantum optics",
+        "Phys Rev Research 7 043284 Thorpe"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "加性/乘性判定 R<1.2/1.2-2/≥2 三档阈值的统计标定依据",
+      "missing_evidence": "缺少该阈值的统计标定数据集来源（如 Si/ZnO 实验 SNR 拟合曲线或贝叶斯模型比较的精度曲线）",
+      "search_keywords": [
+        "additive multiplicative decomposition threshold HHG inversion",
+        "Bayesian model comparison harmonic generation retrieval",
+        "Si ZnO HHG signal-to-noise ratio calibration"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "TiSe₂ 相变点偏振各向异性突变归因于 CDW 序参量，需排除普通温度响应混淆",
+      "missing_evidence": "缺少同温度区无相变对照样品（如 2H-TaS₂）的偏振 HHG 数据，作为温度响应本底对照",
+      "search_keywords": [
+        "2H-TaS2 high harmonic generation",
+        "TaS2 CDW high harmonic polarization",
+        "non-CDW reference sample HHG anisotropy temperature"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "多色场方案下偶次谐波可能来自对称性破缺而非 Berry 曲率反演，需明确区分",
+      "missing_evidence": "缺少双色场 vs 单色场偶次谐波机制对比的标志性文献或方法学说明",
+      "search_keywords": [
+        "two-color field even harmonic generation symmetry breaking",
+        "monochromatic vs bichromatic HHG even order",
+        "Vampa Luu Worner bichromatic HHG Berry curvature separation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "[11][12][13][15][16][17][18][19][21][22][23] 等关键预印本应替换为已发表版本或补经典文献以降低 43.6% 预印本占比",
+      "missing_evidence": "需要为每个关键预印本条目找到对应的同行评议已发表版本（若存在）或补充该领域的经典奠基性文献",
+      "search_keywords": [
+        "semiconductor Bloch equation Vampa published version",
+        "quantum geometry HHG published journal version",
+        "Lewenstein strong field approximation published",
+        "Ghimire 2011 ZnO Nature Physics",
+        "Ghimire Reis solid HHG original"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "正文 [N] 引用密度过高（82 次 vs 范本 10-17 次），需将不直接支撑论证的文献移出正文",
+      "missing_evidence": "需要识别哪些嵌入式引用实际仅为背景知识（应入参考文献表），哪些是核心论断支撑（应保留正文 [N]），以便砍掉约 60% 密度",
+      "search_keywords": [
+        "quantum geometry HHG review foundational papers",
+        "solid-state HHG review Krausz Ghimire",
+        "Berry curvature nonlinear optics review"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "[42] 引用的'Lewenstein 模型量子光学表述 + 带内/带间双通道统一电流框架'表述需核实其真实出处",
+      "missing_evidence": "需要查找 Lewenstein 模型被推广到量子光学表述、双通道统一电流框架的实际作者与论文（可能非 Thorpe 2025）",
+      "search_keywords": [
+        "Lewenstein model quantum optics generalization",
+        "intraband interband unified current framework HHG",
+        "quantum optical Lewenstein model HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "首段 335 字仍含 3 条嵌入式引用+概念铺陈，密度略高于范本单句开门见山",
+      "missing_evidence": "缺少 Berry 1984 / Provost-Vallee 1980 引用的简洁开篇范式，或需替换为单一标志性引用开门见山",
+      "search_keywords": [
+        "Berry 1984 quantum geometric phase",
+        "Provost Vallee 1980 quantum metric",
+        "geometric quantum mechanics Berry phase original"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

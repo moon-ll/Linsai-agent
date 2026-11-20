@@ -1,0 +1,69 @@
+{
+  "gaps": [
+    {
+      "claim": "§5.3 L89 收敛性判据引用 Roy[arXiv:1909.11827] 作为后验收敛性指标",
+      "missing_evidence": "arXiv:1909.11827 实际作者为 Vehtari、Gelman、Simpson、Carpenter、Bürkner 五人（Bayesian Analysis 2021, 16(2):667–718），文中无 Roy，属真实文献编号搭配错误作者名的致命引文错。需更正为 Vehtari 等人并核验期刊版卷期页",
+      "search_keywords": [
+        "Vehtari rank-normalized split-Rhat convergence diagnostic",
+        "arXiv:1909.11827 Bayesian Analysis 2021 R-hat"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2 L17 关于方法/物理背景的 Mizuno 具名论述",
+      "missing_evidence": "正文出现 Mizuno 姓名但未挂 [18] 角标，需补挂 [18] 并确认该引文确为 Mizuno 相关工作的正确归属",
+      "search_keywords": [
+        "Mizuno high harmonic generation bicircular",
+        "Mizuno HHG solid-state review"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3 L57 关于产额段（HHG yield）的 Liu 具名论述",
+      "missing_evidence": "正文出现 Liu 姓名但未挂 [3] 角标，需补挂 [3] 并核验该引文对应产额/产额段论述",
+      "search_keywords": [
+        "Liu high harmonic yield semiconductor",
+        "Liu HHG yield scaling solid"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3 L63 关于对称性/磁点群初判的 Ghimire 具名论述",
+      "missing_evidence": "正文出现 Ghimire 姓名但未挂 [1] 角标，需补挂 [1] 并核验 Ghimire 关于 HHG 与对称性或固体 HHG 综述的具体出处",
+      "search_keywords": [
+        "Ghimire high harmonic generation solid-state",
+        "Ghimire HHG review Nature Physics"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§6.2 L121 关于年度计划/进度评估的 Haag 具名论述",
+      "missing_evidence": "正文出现 Haag 姓名但未挂 [17] 角标，需补挂 [17] 并核验 Haag 引文对应具体内容",
+      "search_keywords": [
+        "Haag high harmonic generation crystal",
+        "Haag HHG transition metal dichalcogenide"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§7 L133 关于年度计划的 Liu 具名论述",
+      "missing_evidence": "正文出现 Liu 姓名但未挂 [3] 角标，需补挂 [3] 并核验该引文对应年度/进度论述",
+      "search_keywords": [
+        "Liu HHG roadmap annual review",
+        "Liu high harmonic generation progress review"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3 L39 CD（圆二色性）副检验可行性论证",
+      "missing_evidence": "原挂 Vampa[32] 以气相-固体类比支撑 MoS₂ CD 副检验可行性，类比牵强；需替换为 Werner[16] 选择规则类工作及 MoS₂ 偏振通道标定类工作作为可行性依据",
+      "search_keywords": [
+        "Werner HHG selection rules solid-state symmetry",
+        "MoS2 polarization-resolved HHG channel circular dichroism",
+        "transition metal dichalcogenide valley polarization HHG calibration"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

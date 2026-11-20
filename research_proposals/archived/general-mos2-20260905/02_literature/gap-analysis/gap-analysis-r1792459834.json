@@ -1,0 +1,40 @@
+{
+  "gaps": [
+    {
+      "claim": "Chiu 等人关于 MoS2/WSe2 异质结价带偏移（VBO）与导带偏移（CBO）的实验测量结果被直接引用（L11），作为能带对齐型异质结 MoS2 体系光学响应的支撑依据",
+      "missing_evidence": "该引用目前缺少 XPS（X 射线光电子能谱）实测条件括注，包括光斑尺寸、能量分辨率、校准基准（C 1s / Au Fermi）等关键实验参数；评审明确指出需补充'(XPS 实测)'类条件标注，以避免被读作理论预言或二手转引",
+      "search_keywords": [
+        "Chiu valence band offset MoS2 WSe2 XPS",
+        "MoS2/WSe2 type-II band alignment XPS measurement",
+        "valence band offset transition metal dichalcogenide heterostructure photoemission",
+        "Chiu 2015 MoS2 WSe2 band offset"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.5 国内现状三支点（即国内在扭转角 MoS2 异质结、相关激发态动力学或高次谐波实验方面的代表性工作）当前仅以 [23][24][25] 单句带过，未呈现可检验的国内工作参数",
+      "missing_evidence": "三支点均缺一句可量化的国内研究细节（如转角精度、堆垛工艺、装置参数、谐波阶次、能量分辨率、测试温度等），使得国内现状层支撑密度显著低于国际段，违反五层递进结构对国内现状层的写作要求",
+      "search_keywords": [
+        "扭转双层 MoS2 国内 高次谐波",
+        "莫尔超晶格 过渡金属硫族化物 中科院",
+        "twist angle MoS2 bilayer China group HHG",
+        "国内 课题组 二维材料 高次谐波 实验",
+        "transition metal dichalcogenide moiré superlattice harmonic generation China"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Peterka 等人的相关实验被引用以说明 MoS2 体系在 0.27 TW/cm² 量级泵浦强度下的高次谐波产生行为（L9），并用于支撑本课题泵浦能量子窗口 1.4—2.1 eV 的选择合理性",
+      "missing_evidence": "Peterka 工作的驱动强度（TW/cm² 量级）与脉宽（fs 量级）条件未被标注，读者无法判断本项目 0.27 TW/cm²、<40 fs 量级参数与 Peterka 工作区间的可比性；同时其 NOPA 全调谐范围 1.4—2.1 eV 与本项目扫描执行窗口 1.46—1.91 eV 的关系（光源能力 vs 实际扫描区间）也未声明，存在被读作两套并存参数的风险",
+      "search_keywords": [
+        "Peterka high harmonic generation MoS2 pump intensity pulse duration",
+        "Peterka 2D material HHG driver fluence",
+        "MoS2 high harmonic pump energy scanning window",
+        "NOPA 1.4-2.1 eV high harmonic generation MoS2",
+        "noncollinear optical parametric amplifier HHG 2D material tuning range"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

@@ -1,0 +1,121 @@
+{
+  "gaps": [
+    {
+      "claim": "莫尔超晶格在动量空间折叠出极平坦的能带（及其与材料、扭转角、层间耦合、能带条件的依赖关系）",
+      "missing_evidence": "缺少对平带形成条件的定量文献支撑：哪些材料体系、扭转角范围、层间耦合强度下平带带宽确实压窄至 meV 量级；缺少 MAGIC-angle、Λ-point、Coulomb-engineered 平带等具体判据的引文",
+      "search_keywords": [
+        "magic angle twisted bilayer graphene flat band",
+        "moiré flat band bandwidth measurement",
+        "trilayer graphene flat band conditions",
+        "Coulomb engineered flat bands moiré",
+        "moiré bandwidth vs twist angle"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "HHG对能带结构、跃迁偶极矩、Bernard曲率及多体关联高度敏感，已被用于反演材料的能带几何、谷极化率、激子动力学等内禀物理量",
+      "missing_evidence": "缺少具体反演研究的引用，每个反演对象（能带几何/谷极化率/激子动力学）至少需要一个含观测量、模型假设和误差指标的代表性工作；缺少对“敏感但不可唯一反演”这一限界的已发表讨论",
+      "search_keywords": [
+        "high harmonic generation band structure inversion",
+        "HHG Berry curvature reconstruction",
+        "HHG exciton dynamics measurement",
+        "HHG valley polarization probe",
+        "all-optical reconstruction band structure HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "莫尔体系在强场/亚周期时间尺度上的响应未被现有HHG工作覆盖（莫尔HHG相对已有HHG的不可替代增量）",
+      "missing_evidence": "缺少对已有 moiré/扭转多层 graphene HHG 理论和实验文献的系统调研；缺少“现有HHG为何不能回答本项目两个科学问题”的对比文献（如 HHG in TBG 实验仅有零星报道以及其在多体关联处理上的局限）",
+      "search_keywords": [
+        "moiré superlattice high harmonic generation",
+        "twisted bilayer graphene HHG",
+        "twisted TMD high harmonic generation",
+        "moiré nonlinear optical response theory",
+        "HHG in correlated moiré systems"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "带间偶极矩、Bernard曲率、多体退相干、样品不均匀等对HHG信号的定量贡献",
+      "missing_evidence": "缺少将这些不同贡献在HHG信号中分离出来的定量文献；缺少关于样品不均匀性、激子屏蔽等效应对HHG反演唯一性影响的讨论",
+      "search_keywords": [
+        "interband dipole moment HHG contribution",
+        "Berry curvature HHG emission",
+        "many-body decoherence high harmonic generation",
+        "sample inhomogeneity effect HHG",
+        "excitonic effects HHG solids"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "本项目反演莫尔势/扭转角不是已有QGT（量子几何张量）反演的直接延伸，而是新的可辨识性问题",
+      "missing_evidence": "缺少对已有 QGT 强场/光学反演方法的系统引文（如 HHG/光学手段反演 QGT 的实验和理论工作）；缺少莫尔势/扭转角作为反演变量的独立可辨识性论证文献",
+      "search_keywords": [
+        "quantum geometric tensor optical reconstruction",
+        "QGT HHG measurement",
+        "band geometry retrieval HHG",
+        "twist angle retrieval strong field",
+        "moiré potential reconstruction optics"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "莫尔自由度（实空间大尺度、能带和关联能标小且可调）是否能在亚周期/强场响应中留下可独立辨识的指纹",
+      "missing_evidence": "缺少已有的阿秒/亚周期时间分辨 moiré 强场响应文献；缺少对莫尔大尺度周期在强场中如何映射到 HHG 谱特征的理论支持",
+      "search_keywords": [
+        "attosecond moiré dynamics",
+        "sub-cycle strong field response correlated materials",
+        "moiré ultrafast spectroscopy",
+        "twisted bilayer attosecond",
+        "real-space period high harmonic signature"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "莫尔强场响应理论基础（R1-R3 涉及的降阶建模、张量网络、HHG、ATAS、Floquet 各方向）",
+      "missing_evidence": "rationale.md 第13–15行所述莫尔强场响应理论现状段落，需要各子方向（降阶模型、低能有效哈密顿量、张量网络多体、Floquet莫尔工程、ATAS）代表性引文；缺少对每条路径“理论成熟度/适用尺度的可量化结论”的引文支撑",
+      "search_keywords": [
+        "moiré low-energy effective Hamiltonian",
+        "tensor network moiré correlated states",
+        "Floquet engineering moiré superlattice",
+        "attosecond transient absorption moiré",
+        "Bistritzer-MacDonald continuum model"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "莫尔势 HHG 指纹与扭转角、层间耦合、关联能标等内禀参数的多观测联合可辨识性",
+      "missing_evidence": "缺少关于联合多观测反演（harmonic spectra + transient absorption + polarization-resolved HHG 等）提升莫尔参数唯一可辨识性的方法学文献；缺少各观测对各参数的灵敏度分析引文",
+      "search_keywords": [
+        "joint inversion HHG transient absorption",
+        "polarization resolved HHG band structure",
+        "multi-observable reconstruction materials",
+        "sensitivity analysis band structure inversion"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "ATAS（阿秒瞬态吸收光谱）对扭转多层/莫尔体系的探测能力现状",
+      "missing_evidence": "缺少 ATAS 在 2D 莫尔材料中的现有应用文献；缺少 ATAS 与 HHG 在反演重叠信息时的相对灵敏度定量比较",
+      "search_keywords": [
+        "attosecond transient absorption spectroscopy TMD",
+        "ATAS 2D materials",
+        "ATAS twisted heterostructure",
+        "ATAS HHG complementarity"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Floquet 工程在莫尔超晶格中的已有理论与实验进展",
+      "missing_evidence": "缺少 Floquet 莫尔工程（如 light-induced flat band、时间驱动莫尔拓扑）的现有引文，特别是已实现或预测的实验可观测量",
+      "search_keywords": [
+        "Floquet moiré superlattice",
+        "light-induced flat band moiré",
+        "Floquet engineering twisted bilayer",
+        "periodically driven moiré topological"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "gaps": [
+    {
+      "claim": "rationale §1.1 中归于 Wang、Yu、Ciappina（2025）综述的具体学术论断",
+      "missing_evidence": "缺少该句的就近引文标注。报告表明同一文献已在 content §2.2 挂接为 [32]，因此原则上无需新增参考文献，但需核定 [32] 的书目信息确实对应 Wang/Yu/Ciappina 2025，并在 rationale 首现处补挂 [32]；若该句包含超出该综述覆盖范围的具体结论，还需补充相应的原始研究文献。",
+      "search_keywords": [
+        "Wang Yu Ciappina 2025 review",
+        "\"Wang\" \"Yu\" \"Ciappina\" 2025 strong-field review",
+        "solid-state high harmonic generation review 2025",
+        "莫尔异质结 高次谐波 强场 综述 2025"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "rationale §1.2 中关于 Molinero 等人的数值谱结果、谱学特征或数值结论的陈述",
+      "missing_evidence": "缺少与该数值谱陈述直接对应的原始文献及就近引文标注。应优先引用报告该数值谱结果的理论或数值原始论文，而不是仅引用二手综述；还需核对其研究对象、计算方法和结论是否确实支持申请书的表述。",
+      "search_keywords": [
+        "Molinero et al. numerical spectrum moire",
+        "Molinero numerical spectrum exciton twisted bilayer",
+        "Molinero numerical spectroscopy moire materials",
+        "Molinero 数值谱 莫尔 激子"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "scheme §3.4.2 原理层第三项中归于 Cao（2024）的物理原理或方法学论断",
+      "missing_evidence": "缺少该原理陈述的就近引文标注。报告表明同一 Cao 2024 文献已在其他章节对应为 [9]，因此应先核对 [9] 的作者、年份和题名，再在 scheme §3.4.2 该具名论述处补挂 [9]；若第三项还包含 [9] 未直接覆盖的推论，则需另补相应的方法学或原始研究文献。",
+      "search_keywords": [
+        "Cao 2024 strong-field principle spectroscopy",
+        "\"Cao\" 2024 high harmonic generation solid",
+        "Cao 2024 strong-field light-matter interaction",
+        "Cao 2024 强场调控 原理 椭偏 瞬态吸收"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "full_review"
+}

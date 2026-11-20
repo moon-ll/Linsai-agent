@@ -1,0 +1,38 @@
+{
+  "proposal_id": "general-moire-strong-field-probe-20260726",
+  "cluster_id": "cl_20260815_b51739",
+  "entries": [
+    {
+      "source_id": "paper:2026-2605.30224-heralded-ultrafast-generation-of-macroscopic-quantum-states",
+      "title": "Heralded ultrafast generation of macroscopic quantum states in matter with bright squeezed vacuum light",
+      "summary": "本文提出利用亮压缩真空（BSV）光驱动物质，并结合单次四元（quadrature）测量实现预示性（heralded）制备，从而在阿秒时间尺度上于物质中产生Dicke态等宏观量子态。该方法将非经典量子光与超快测量相结合，为按需、超快地制备宏观物质量子态提供了新途径。",
+      "path": "",
+      "added_via": "cluster:cl_20260815_b51739",
+      "added_at": "2026-10-17T16:45:19Z"
+    },
+    {
+      "source_id": "paper:2026-2604.12646-interferometrically-enhanced-asymmetry-in-strong-f",
+      "title": "Interferometrically Enhanced Asymmetry in Strong-field Ionization with Bright Squeezed Vacuum",
+      "summary": "本文提出将弱亮压缩真空（BSV）与强相干驱动场结合成双色线偏振构型，在强场电离中诱导出远超经典场效应（达数个数量级）的光电子动量分布不对称性。这种增强源于 BSV 的非经典量子特性与干涉效应的协同作用，为探测强场物理中的量子光场特征提供了新途径。",
+      "path": "",
+      "added_via": "cluster:cl_20260815_b51739",
+      "added_at": "2026-10-17T16:45:19Z"
+    },
+    {
+      "source_id": "paper:2604.12646",
+      "title": "Interferometrically Enhanced Asymmetry in Strong-field Ionization with Bright Squeezed Vacuum",
+      "summary": "该研究通过模拟证明，由强相干驱动场与弱明亮压缩真空（BSV）构成的双色线偏振场可利用量子光统计在隧穿步骤控制强场电离，使光电子动量分布的不对称性比同等强度经典场高出数个数量级。基于强场近似（SFA）的半经典分析揭示，这一增强独特地源于BSV的非经典统计导致的瞬时场幅涨落，其对隧穿电离几率产生强烈调制。",
+      "path": "",
+      "added_via": "cluster:cl_20260815_b51739",
+      "added_at": "2026-10-17T16:45:19Z"
+    },
+    {
+      "source_id": "paper:2026-2610.16077-quantum-tomography-of-bright-squeezed-vacuum-via-s",
+      "title": "Quantum tomography of bright squeezed vacuum via strong-field ionization",
+      "summary": "本文提出并演示以强场电离作为非线性量子探测器，对亮压缩真空（BSV）这类宏观多模量子光场进行量子层析：利用电离产额/光电子信号对场的高阶统计矩（高阶关联函数）的敏感性，重构 BSV 的光子数分布与模间量子关联，而无需传统零差探测。该工作把强场电离从“经典场波形探针”升级为“量子态探针”，在强场物理与宏观量子光学之间建立了直接的测量桥梁。",
+      "path": "knowledge/raw/papers/2026-2610.16077-quantum-tomography-of-bright-squeezed-vacuum-via-s.md",
+      "added_via": "cluster:cl_20260815_b51739",
+      "added_at": "2026-10-17T16:45:19Z"
+    }
+  ]
+}

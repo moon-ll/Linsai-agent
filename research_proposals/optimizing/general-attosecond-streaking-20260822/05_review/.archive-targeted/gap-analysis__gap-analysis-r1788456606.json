@@ -1,0 +1,36 @@
+{
+  "gaps": [
+    {
+      "claim": "[9] 在 §2.2 L11 一句带过无机制说明",
+      "missing_evidence": "缺少 [9] 引用文献的全文核查及其与多电子电离通道叠加机制的对应关系",
+      "search_keywords": [
+        "reference [9] attosecond streaking multi-electron",
+        "multi-electron ionization coupling mechanism HHG",
+        "interchannel coupling attosecond spectroscopy"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "[11] Peschel 双通道耦合 TDSE 模型与本项目 TDSE 模拟路线的直接对应关系",
+      "missing_evidence": "缺少 Peschel 双通道 TDSE 模拟的完整方法学描述与本项目正演模型的差异对比",
+      "search_keywords": [
+        "Peschel two-channel TDSE attosecond streaking",
+        "dual channel TDSE simulation multi-electron",
+        "channel coupling time-dependent Schrödinger equation",
+        "Peschel arXiv attosecond"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "[25] 角积分偶极相位抑制方案的兼容性预研支撑不足",
+      "missing_evidence": "缺少 [25] 文献的完整方法描述及其在多靶材（不只里德堡态）上的适用性证据",
+      "search_keywords": [
+        "reference [25] attosecond streaking dipole phase",
+        "angular integration multi-target validation",
+        "streaking dipole phase suppression non-Rydberg",
+        "rare gas noble gas dipole phase attosecond"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

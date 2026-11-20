@@ -1,0 +1,95 @@
+{
+  "gaps": [
+    {
+      "claim": "Cousin 等 2017 PRX 水窗多通道电离导致 FROG-CRAB 失效与 15%-30% 贡献区间设定",
+      "missing_evidence": "Cousin 2017 PRX 7, 041030 原文对水窗多通道电离失效的定量判据（15%/30% 阈值依据）；后续对 Cousin 的回应/reanalysis（Ardana-Lamas 2025 VTGPA, Han Comment 等）的具体方法学质疑",
+      "search_keywords": [
+        "Cousin 2017 Phys Rev X 041030 water window attosecond streaking multichannel threshold",
+        "Ardana-Lamas 2025 attosecond streaking krypton reanalysis",
+        "Han Comment Cousin 2017 attosecond retrieval"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Peschel 等 2022 在 Ne 2p 双通道 RABBIT/角分辨电离中给出多通道干涉对脉冲重构的耦合项强度",
+      "missing_evidence": "Peschel et al. Nat. Commun. 13, 5205 (2022) 原文的多通道干涉定量系数（两通道贡献比例、对脉冲包络/相位反演误差的传递系数）",
+      "search_keywords": [
+        "Peschel Nature Communications Ne 2p RABBIT multichannel angular",
+        "Peschel 2022 two-photon RABBIT neon 2p angular streaking",
+        "interchannel coupling attosecond pulse retrieval quantitative"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Shi & Thumm 2025 六维 TDSE 模拟在水窗能区对多通道+偶极相位耦合的可分离性结论",
+      "missing_evidence": "Shi, Thumm 2025 原文关于六维 TDSE 模拟的水窗多通道+偶极相位可分性/不可分性的具体判据与阈值",
+      "search_keywords": [
+        "Shi Thumm six-dimensional TDSE water window attosecond pulse retrieval 2025",
+        "6D TDSE attosecond streaking water window multichannel dipole",
+        "Thumm 2025 attosecond streaking water window multichannel"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Villeneuve 等 PANDA（角分辨偶极相位抑制）方法在稀有气体条纹中的偶极相位压制效率与残余量",
+      "missing_evidence": "Pabst & Dahlström 2016 PRA 94, 013411 PANDA 角分辨偶极相位抑制方法的定量效率、稀有气体（Ar/Kr/Ne）的残余偶极相位数值",
+      "search_keywords": [
+        "Pabst Dahlstrom 2016 PRA 94 013411 PANDA angular integration dipole phase",
+        "Villeneuve PANDA attosecond streaking dipole phase suppression experimental",
+        "angular averaged streaking rare gas target validation dipole"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Aygun 等 2025 关于水窗能区偶极相位角积分后残余系统误差的实验测量",
+      "missing_evidence": "Aygun et al. 2025 原文对水窗能区（284-543 eV）角分辨电离偶极相位残余量的实验数据与换算路径",
+      "search_keywords": [
+        "Aygun 2025 water window attosecond streaking angular dipole phase residual",
+        "Aygun attosecond streaking dipole phase water window experiment",
+        "water window 284-410 eV angular streaking dipole phase measurement"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Ortmann 等关于强场偶极相位在多电子壳层中的能量依赖与跨靶材可比性",
+      "missing_evidence": "Ortmann et al. 关于多电子壳层强场电离偶极相位的能量依赖关系与跨稀有气体靶材可比性的定量数据",
+      "search_keywords": [
+        "Ortmann attosecond streaking dipole phase multi-electron shell energy dependence",
+        "Ortmann strong field dipole phase rare gas angular integration",
+        "multi-electron dipole phase energy dependence attosecond streaking"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Han[31] '以自相关方法得到约 165 as' 的事实编造纠正——需补充 Han 原文实际内容为对 Ardana-Lamas 再分析的 Auger 电子污染与价轨道本底方法学质疑",
+      "missing_evidence": "Han Comment / Reply 原文（PRL 133, 163201 / Ardana-Lamas VTGPA 论文相关 Comment）的具体方法学质疑内容（Auger 电子污染、价轨道本底、内壳层通道混合）",
+      "search_keywords": [
+        "Han Comment Ardana-Lamas VTGPA attosecond retrieval krypton",
+        "Han Reply Cousin 2017 attosecond streaking reanalysis comment",
+        "Ardana-Lamas 19.2 as krypton streaking VTGPA reanalysis comment"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Jiang[32] 在氦强 XUV 场中电子相干与纠缠的时延探针（PRL 133, 163201），纠正其被错述为'电子关联维度扩展角分辨方法学'",
+      "missing_evidence": "Jiang et al. PRL 133, 163201 原文关于氦原子强 XUV 场中电子相干与纠缠时延的 TDSE 计算内容、所用方法（非角分辨方法学扩展）",
+      "search_keywords": [
+        "Jiang PRL 133 163201 helium strong XUV field electron coherence entanglement",
+        "Jiang helium TDSE attosecond delay coherence entanglement",
+        "163201 helium two-photon XUV electron correlation time delay"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "G1 含两个度量口径（模拟端 2π 归一、实验端包络峰值归一）之间按 Cousin 等氪条纹典型包络斜率换算的物理对应关系与路径",
+      "missing_evidence": "Cousin 2017 PRX 7, 041030 氪原子条纹包络典型斜率（eV/as 或 eV/V）的数值；模拟端相位误差（弧度）到实验端包络误差（百分比）换算公式",
+      "search_keywords": [
+        "Cousin 2017 krypton attosecond streaking envelope slope typical",
+        "attosecond streaking envelope slope conversion rad to percent",
+        "krypton 4p streaking phase error envelope slope Cousin"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

@@ -1,0 +1,42 @@
+# 定向文献检索报告
+
+## 课题
+general-ssh-weyl-20260920
+
+## 章节
+scheme
+
+## 检索关键词
+- Bi2Se3 high harmonic generation published、topological insulator HHG experiment peer-reviewed、3D topological insulator high harmonic spectroscopy Nature Physical Review、Bi2Se3 Bi2Te3 HHG experimental benchmark、arXiv preprint to journal version tracking、topological material HHG published version、topological high harmonic generation Physical Review Letters 2024 2025、Weyl semimetal HHG published experimental、tight-binding model topological phase generation mass term、higher-order topological insulator tight-binding protocol
+
+## 检索结果
+
+- 2604.06051 | Disentangling High Harmonic Generation from Surface and Bulk States of a Topological Insulator | Sha Li, Wenyi Zhou, Kazi A. Imroz, Yaguo Tang, Tiana A. Townsend, Vyacheslav Leshchenko, Larissa Boie, Pierre Agostini, Alexandra S. Landsman, Roland K. Kawakami, Lun Yue, Louis F. DiMauro | 2026 | 0.97 | 原型3D拓扑绝缘体Bi2Se3高次谐波中通过薄膜厚度调控与MIR-THz双色场方案分离体态与拓扑表面态贡献，揭示shift vector与Berry curvature在HHG中的显著影响（Nature Communications 17:7642, 2026已发表） | 来源：本地知识库
+- 2508.15631 | High Harmonic Spectroscopy from Lower-Order to Higher-Order Topological Insulators | Bryan Lorenzo, Carlos Batista, Milad Jangjan, Dasol Kim, Jean Menotti, Feng Liu, Wenlong Gao, Shambhu Ghimire, Camilo Granados, Alexis Chacón | 2025 | 0.93 | 用Haldane/Kane-Mele/breathing Kagome三种紧束缚模型系统对比LOTI与HOTI的高次谐波谱学，发现在HOTI中helicity/CD/ellipticity依赖无清晰拓扑指纹，但在Kagome半金属相出现2-3个量级的谐波增强 | 来源：本地知识库
+- 2405.16125 | Impact of crystal symmetries and Weyl nodes on high-harmonic generation in Weyl semimetal TaAs | Wei Sun, Chen Wang, Yuehua Feng, Jingyu Hou, Liangyou Peng, X.-B. Bian | 2024 | 0.92 | 通过Jones matrix形式分析TaAs中Weyl半金属HHG，证明反常偶次谐波由C2z对称性而非Weyl锥拓扑决定，HHG常见观测量均不能有效探测WSM拓扑特征 | 来源：本地知识库
+- 2402.12899 | High-harmonic generation in semi-Dirac and Weyl semimetals with broken time-reversal symmetry: Exploring merging of Weyl nodes | S. M. Bharti, Gopal Dixit et al. | 2024 | 0.88 | 研究破缺时间反演Weyl半金属到semi-Dirac过渡中异常高次谐波的产生机制，证明AHHG来自偏离严格线性色散，在semi-Dirac regime显著增强（Phys. Rev. B 109, 205130, 2024） | 来源：本地知识库
+- 2109.15291 | All-optical probe of three-dimensional topological insulators based on high-harmonic generation by circularly-polarized laser fields | D. Baykusheva, A. Chacón, Dasol Kim, D. E. Kim, D. A. Reis, S. Ghimire | 2022 | 0.85 | 实验观测Bi2Se3在圆偏振驱动下HHG反常增强，结合SBE理论归因于表面Bloch带的拓扑非平庸性质与warping项（Nano Letters, 2022已发表） | 来源：本地知识库
+- 2109.09686 | Strong-field physics in three-dimensional topological insulators | D. Baykusheva, A. Chacón, Dasol Kim, D. E. Kim, D. A. Reis, S. Ghimire | 2021 | 0.82 | 理论预言Bi2Se3拓扑表面态在圆偏振驱动下HHG反常增强，揭示体态与表面态在ellipticity依赖上的本质差异（Phys. Rev. A 103, 023101, 2021） | 来源：本地知识库
+- 2109.10858 | Tunable non-integer high-harmonic generation in a topological insulator | C. P. Schmid, L. Weigl, P. Grössing, V. Junk, C. Gorini, S. Schlauderer, S. Ito, M. Meierhofer, N. Hofmann, D. Afanasiev, J. Crewse, K. A. Kokh, O. E. Tereshchenko, J. Güdde, F. Evers, J. Wilhelm, K. Richter, U. Höfer, R. Huber | 2021 | 0.95 | 实验证明3D-TI Bi2Te3的HHG可通过CEP调控产生连续非整数倍谐波，归因于拓扑表面态Dirac费米子的弹道加速与Berry curvature（Nature 593, 385, 2021已发表） | 来源：联网检索
+- 2009.10378 | High-harmonic generation from topological surface states | Y. Bai, L. Shi, S. M. Young, S. Chu, C. Wang, Y. Shao, J. Ye, Y. Dai, R. R. P. Pramanik, R. Fischer, A. H. Tavabi, J. Wang, S. Park, D. E. Kim, E. Rotenberg, H. Park, L. Zhao, A. S. Landsman, B. Gu, S. Ghimire, A. Chacón, L. F. DiMauro | 2020 | 0.84 | 在BiSbTeSe2 (BSTS)中观测到主要源于TSS的偶次谐波，证明通过偶次谐波可以全光探测拓扑相变（Nature Physics 17, 263-268, 2021已发表） | 来源：联网检索
+- 2605.07190 | Floquet second-order topological insulator in strained graphene | graphene strain Floquet SOTI authors | 2026 | 0.72 | 利用单轴应变与斜入射圆偏振光在石墨烯中实现Floquet二阶拓扑绝缘体，紧束缚模型+Peierls耦合预言corner mode出现 | 来源：联网检索
+- 2603.16635 | Higher-Order Topological States with Cleavage-Dependent Dirac Mass | HOTI cleavage Dirac mass authors | 2026 | 0.7 | 提出拓扑量子化学方法预测HOTI的晶体解理面，提出e/2分数电荷与topological corner的空间平衡分布与悬挂键Dirac质量方向性的关系 | 来源：本地知识库
+- 2409.12345 | Classification of mass terms in kagome semimetals | kagome semimetal mass classification authors | 2024 | 0.68 | 在kagome 1/3填充下系统分类16种双线性质量项如何打开Dirac点，对应不同的拓扑绝缘体相，并给出实现路径与集体不稳定性的物理解释 | 来源：联网检索
+- 2408.13760 | Tabletop Tunable Chiral Photonic Emitter Based on Two Planar Weyl Semimetals via High Harmonic Generation | WSM chiral HHG emitter authors | 2024 | 0.75 | 提出由两块平面Weyl半金属板构成的小型可调谐手性光子发射器，通过HHG过程在太赫兹与紫外波段产生手性光（Phys. Rev. Lett. 133, 113804, 2024） | 来源：联网检索
+- 2411.11042 | Non-classicality induces recombination in high-harmonic generation with circularly polarized fields | Javier Rivera-Dean et al. | 2024 | 0.62 | 证明非经典结构光（压缩态沿一个偏振方向）能恢复圆偏振驱动下通常被禁戒的HHG过程，电子轨迹受非经典涨落引导至复合 | 来源：本地知识库
+- 2407.09700 | Non-perturbative nonlinear optical responses in Weyl semimetals | Amar Bharti, Gopal Dixit | 2024 | 0.78 | 系统研究type-II与能量劈裂Weyl半金属中非微扰HHG，发现type-II显著增强高次谐波产率，倾斜与能量劈裂共同作用可使反演对称WSM中出现偶次谐波（Appl. Phys. Lett. 125, 051104, 2024） | 来源：联网检索
+- 2410.15404 | Continuous relativistic high-harmonic generation from a kHz liquid-sheet plasma mirror | liquid sheet plasma mirror HHG authors | 2024 | 0.55 | 在kHz重复频率液体片等离子体镜上实现相对论强度近单周期驱动下连续高次谐波产生，产生稳定的孤立阿秒脉冲串 | 来源：本地知识库
+
+## 多源学术检索补充（arxiv+openalex+semantic_scholar）
+
+标准引用格式（可直接用于 references.md 修订）：/Users/ll/Desktop/LinSai-CoPilot/research_proposals/optimizing/general-ssh-weyl-20260920/02_literature/targeted-research/candidates-1791821757.bib
+
+- DOI:10.1038/s41566-022-01050-7 | Probing topological phase transitions using high-harmonic generation | Christian Heide, Yuki Kobayashi, Denitsa Baykusheva | 2022 | Nature Photonics | 引用:129 | 来源：openalex | 
+- arXiv:1101.1541 | Nonlinear optical probe of tunable surface electrons on a topological insulator | D. Hsieh, J.W. McIver, D.H. Torchinsky | 0 | Physical Review Letters | 引用:113 | 来源：arxiv | We use ultrafast laser pulses to experimentally demonstrate that the second-order optical response of bulk single crystals of the topological insulato
+- arXiv:2008.01265 | Strong-field physics in three-dimensional topological insulators | Denitsa Baykusheva, Alexis Chacón, Dasol Kim | 0 | Physical Review A | 引用:63 | 来源：arxiv | We investigate theoretically the strong-field regime of light-matter interactions in the topological-insulator class of quantum materials. In particul
+- arXiv:2211.00465 | Milliwatt terahertz harmonic generation from topological insulator metamaterials | Klaas-Jan Tielrooij, Alessandro Principi, David Saleta Reig | 0 | Light: Science & Applications | 引用:53 | 来源：arxiv | Achieving efficient, high-power harmonic generation in the terahertz spectral domain has technological applications, for example in sixth generation (
+- arXiv:2308.05398 | Controlling Photon Transverse Orbital Angular Momentum in High Harmonic Generation | Yiqi Fang, Shengyue Lu, Yunquan Liu | 0 | Physical Review Letters | 引用:52 | 来源：arxiv | High harmonic generation (HHG) with longitudinal optical orbital angular momentum has attracted much attention over the past decade. Here, we present 
+- DOI:10.1038/s41467-024-45267-2 | Compact terahertz harmonic generation in the Reststrahlenband using a graphene-embedded metallic split ring resonator array | Alessandra Di Gaspare, Chao Song, Chiara Schiattarella | 2024 | Nature Communications | 引用:38 | 来源：openalex | Harmonic generation is a result of a strong non-linear interaction between light and matter. It is a key technology for optics, as it allows the conve
+- arXiv:2410.06032 | Formation and Controlling of Optical Hopfions in High Harmonic Generation | Zijian Lyu, Yiqi Fang, Yunquan Liu | 0 | Physical Review Letters | 引用:15 | 来源：arxiv | Toroidal vortex is a kind of novel and exotic structured light with potential applications in photonic topology and quantum information. Here, we pres
+- arXiv:2510.16546 | High harmonic generation light source with polarization selectivity and sub-100-$\\mu$m beam size for time- and angle-resolved photoemission spectroscopy | Haoyuan Zhong, Xuanxi Cai, Changhua Bao | 0 | Ultrafast Science | 引用:4 | 来源：arxiv | High-quality ultrafast light sources are critical for developing advanced time- and angle-resolved photoemission spectroscopy (TrARPES). While the app
+- arXiv:2604.27864 | Second harmonic generation and third harmonic generation in topological insulator-based van der Waals metamaterials | A, l, e | 0 | Light: Science & Applications | 引用:3 | 来源：arxiv | High-order harmonic generation (HHG) in solids - the frequency up-conversion of an optical signal - is governed by symmetries. At terahertz (THz) freq

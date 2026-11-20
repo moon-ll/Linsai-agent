@@ -1,0 +1,133 @@
+{
+  "proposal_id": "general-ssh-weyl-20260920",
+  "cluster_id": "references-round8-recall-2026-10-30",
+  "description": "第 8 轮参考文献对抗评审（critic-round-8-references）指出的 18 条 DOI 条目未回录检索池。此文件回录其中仍保留于最终参考文献表的 14 条（原 18 条中的 [19] Rana、[32] Ferray、[34] Corkum-Krausz、[36] Haldane 已在本轮裁撤，不再保留于文献表）。",
+  "entries": [
+    {
+      "ref_number": 2,
+      "doi": "10.1103/PhysRevLett.113.073901",
+      "arxiv": null,
+      "title": "Theoretical analysis of high-order harmonic generation in solids,",
+      "bibliographic_entry": "G. Vampa, C. R. McDonald, G. Orlando, D. D. Klug, P. B. Corkum, and T. Brabec, \"Theoretical analysis of high-order harmonic generation in solids,\" Phys. Rev. Lett. 113, 073901 (2014); DOI: 10.1103/PhysRevLett.113.073901. 提出固体带间再碰撞图像并以半导体 Bloch 方程描述固体 HHG，把气相三步模型移植到凝聚态体系的理论奠基工作。",
+      "verification": "CrossRef 全量反查核真（题名相似度 0.94–1.00；刊名/卷/页/首作/年份五件套一致）",
+      "recorded_at": "2026-10-30T10:34:54Z"
+    },
+    {
+      "ref_number": 3,
+      "doi": "10.1103/PhysRevX.7.021017",
+      "arxiv": null,
+      "title": "Wannier-Bloch approach to localization in high-harmonics generation in solids,",
+      "bibliographic_entry": "E. N. Osika, A. Chacón, L. Ortmann, N. Suárez, J. A. Pérez-Hernández, B. Szafran, M. F. Ciappina, F. Sols, A. S. Landsman, and M. Lewenstein, \"Wannier-Bloch approach to localization in high-harmonics generation in solids,\" Phys. Rev. X 7, 021017 (2017); DOI: 10.1103/PhysRevX.7.021017. Wannier-Bloch 表象下的半经典轨迹模型，把固体 HHG 解读为局域化电子的强场动力学过程。",
+      "verification": "CrossRef 全量反查核真（题名相似度 0.94–1.00；刊名/卷/页/首作/年份五件套一致）",
+      "recorded_at": "2026-10-30T10:34:54Z"
+    },
+    {
+      "ref_number": 4,
+      "doi": "10.1038/s41467-018-03397-4",
+      "arxiv": null,
+      "title": "Measurement of the Berry curvature of solids using high-harmonic spectroscopy,",
+      "bibliographic_entry": "T. T. Luu and H. J. Wörner, \"Measurement of the Berry curvature of solids using high-harmonic spectroscopy,\" Nat. Commun. 9, 916 (2018); DOI: 10.1038/s41467-018-03397-4. 在 α-石英中以 HHG 圆二色性谱反演 Berry 曲率在动量空间的分布，确立 HHG 作为能带几何探针的可行性。",
+      "verification": "CrossRef 全量反查核真（题名相似度 0.94–1.00；刊名/卷/页/首作/年份五件套一致）",
+      "recorded_at": "2026-10-30T10:34:54Z"
+    },
+    {
+      "ref_number": 10,
+      "doi": "10.1103/PhysRevB.99.195428",
+      "arxiv": null,
+      "title": "High-harmonic generation in Su-Schrieffer-Heeger chains,",
+      "bibliographic_entry": "C. Jürß and D. Bauer, \"High-harmonic generation in Su-Schrieffer-Heeger chains,\" Phys. Rev. B 99, 195428 (2019); DOI: 10.1103/PhysRevB.99.195428. 在同一 SSH 模型上逐一比较体相与边界态对谐波谱的贡献，确认拓扑边界态是 HHG 的增强源。",
+      "verification": "CrossRef 全量反查核真（题名相似度 0.94–1.00；刊名/卷/页/首作/年份五件套一致）",
+      "recorded_at": "2026-10-30T10:34:54Z"
+    },
+    {
+      "ref_number": 20,
+      "doi": "10.1038/nphys3955",
+      "arxiv": null,
+      "title": "Anisotropic high-harmonic generation in bulk crystals,",
+      "bibliographic_entry": "Y. S. You, D. A. Reis, and S. Ghimire, \"Anisotropic high-harmonic generation in bulk crystals,\" Nat. Phys. 13, 345–349 (2017); DOI: 10.1038/nphys3955. ZnO 块体晶体中 HHG 对晶体取向的各向异性依赖，给出非拓扑体系对称性基线的 ZnO 侧数据。",
+      "verification": "CrossRef 全量反查核真（题名相似度 0.94–1.00；刊名/卷/页/首作/年份五件套一致）",
+      "recorded_at": "2026-10-30T10:34:54Z"
+    },
+    {
+      "ref_number": 24,
+      "doi": "10.1103/PhysRevB.105.155140",
+      "arxiv": null,
+      "title": "High-harmonic spectroscopy of light-driven nonlinear anisotropic anomalous Hall effect in a Weyl semimetal,",
+      "bibliographic_entry": "A. Bharti, M. S. Mrudul, and G. Dixit, \"High-harmonic spectroscopy of light-driven nonlinear anisotropic anomalous Hall effect in a Weyl semimetal,\" Phys. Rev. B 105, 155140 (2022); DOI: 10.1103/PhysRevB.105.155140. 反常谐波偏振方向与 Berry 曲率分量宇称的对应规则。",
+      "verification": "CrossRef 全量反查核真（题名相似度 0.94–1.00；刊名/卷/页/首作/年份五件套一致）",
+      "recorded_at": "2026-10-30T10:34:54Z"
+    },
+    {
+      "ref_number": 26,
+      "doi": "10.1103/PhysRevB.111.184314",
+      "arxiv": null,
+      "title": "Theoretical investigations of high harmonic generation in the Weyl semimetal WP₂,",
+      "bibliographic_entry": "X. Liu, L. Geng, X.-S. Kong, J. Zhang, Y.-K. Fang, and L.-Y. Peng, \"Theoretical investigations of high harmonic generation in the Weyl semimetal WP₂,\" Phys. Rev. B 111, 184314 (2025); DOI: 10.1103/PhysRevB.111.184314. 以半导体 Bloch 方程对 type-II Weyl 半金属 β-WP₂ 的 HHG 选择定则与椭圆依赖给出理论分析（国内工作），与 [27] 的实验数据构成理论-实验配对。",
+      "verification": "CrossRef 全量反查核真（题名相似度 0.94–1.00；刊名/卷/页/首作/年份五件套一致）",
+      "recorded_at": "2026-10-30T10:34:54Z"
+    },
+    {
+      "ref_number": 28,
+      "doi": "10.1016/j.commatsci.2026.114641",
+      "arxiv": "2507.09234",
+      "title": "Revealing material-dependent bicircular high-order harmonic yield in 2D semiconductors via real-space trajectories,",
+      "bibliographic_entry": "Q.-G. Fan, K. Lai, W.-h. Liu, Z. Wang, L.-W. Wang, and J.-W. Luo, \"Revealing material-dependent bicircular high-order harmonic yield in 2D semiconductors via real-space trajectories,\" Comput. Mater. Sci. 268, 114641 (2026); DOI: 10.1016/j.commatsci.2026.114641; arXiv:2507.09234 [physics.optics]. 以实空间轨迹模型对比 MoS₂ 与 hBN 在反向旋转双圆偏振脉冲下的 HHG 产额，MoS₂ 呈 1.5:1 与单色极限双峰、hBN 单调上升，差异源于 Bloch 反常速度与 Berry 曲率（国内工作）。",
+      "verification": "CrossRef 全量反查核真（题名相似度 0.94–1.00；刊名/卷/页/首作/年份五件套一致）",
+      "recorded_at": "2026-10-30T10:34:54Z"
+    },
+    {
+      "ref_number": 29,
+      "doi": "10.1103/b56l-hvgn",
+      "arxiv": "2508.09364",
+      "title": "Interplay between high-harmonic generation and photoluminescence in ZnO: Anisotropic spectral properties of harmonic emission and the role of excitons,",
+      "bibliographic_entry": "S. P. S. Jessen, M. Mero, M. J. J. Vrakking, R. M. Turtos, P. Balling, and P. Jürgens, \"Interplay between high-harmonic generation and photoluminescence in ZnO: Anisotropic spectral properties of harmonic emission and the role of excitons,\" Phys. Rev. B 112, 214311 (2025); DOI: 10.1103/b56l-hvgn; arXiv:2508.09364 [physics.optics]. 块体 ZnO 在短波红外强场激发下 HHG（奇次谐波、相干）与光致发光（非相干、近带边）双通道对比。第五次谐波在强度驱动下出现谱形转变、主导机制切换，该转变强度即正文 I_threshold 基准值。",
+      "verification": "CrossRef 全量反查核真（题名相似度 0.94–1.00；刊名/卷/页/首作/年份五件套一致）",
+      "recorded_at": "2026-10-30T10:34:54Z"
+    },
+    {
+      "ref_number": 30,
+      "doi": "10.1364/JOSAB.4.000595",
+      "arxiv": null,
+      "title": "Studies of multiphoton production of vacuum-ultraviolet radiation in the rare gases,",
+      "bibliographic_entry": "A. McPherson, G. Gibson, H. Jara, U. Johann, T. S. Luk, I. A. McIntyre, K. Boyer, and C. K. Rhodes, \"Studies of multiphoton production of vacuum-ultraviolet radiation in the rare gases,\" J. Opt. Soc. Am. B 4, 595–601 (1987); DOI: 10.1364/JOSAB.4.000595. 气相高次谐波产生的首次实验观测。",
+      "verification": "CrossRef 全量反查核真（题名相似度 0.94–1.00；刊名/卷/页/首作/年份五件套一致）",
+      "recorded_at": "2026-10-30T10:34:54Z"
+    },
+    {
+      "ref_number": 31,
+      "doi": "10.1103/PhysRevLett.77.1234",
+      "arxiv": null,
+      "title": "Attosecond pulse trains using high-order harmonics,",
+      "bibliographic_entry": "P. Antoine, A. L'Huillier, and M. Lewenstein, \"Attosecond pulse trains using high-order harmonics,\" Phys. Rev. Lett. 77, 1234–1237 (1996); DOI: 10.1103/PhysRevLett.77.1234. 阿秒脉冲串方案的原始理论工作，与气相高次谐波产生[30]共同界定阿秒时间分辨的技术路线。",
+      "verification": "CrossRef 全量反查核真（题名相似度 0.94–1.00；刊名/卷/页/首作/年份五件套一致）",
+      "recorded_at": "2026-10-30T10:34:54Z"
+    },
+    {
+      "ref_number": 32,
+      "doi": "10.1103/PhysRevLett.42.1698",
+      "arxiv": null,
+      "title": "Solitons in polyacetylene,",
+      "bibliographic_entry": "W. P. Su, J. R. Schrieffer, and A. J. Heeger, \"Solitons in polyacetylene,\" Phys. Rev. Lett. 42, 1698–1701 (1979); DOI: 10.1103/PhysRevLett.42.1698. SSH 紧束缚模型的起源文献，描述一维二聚链的二聚化基态与拓扑孤子激发，是 [9][10][11][12][14] 等 SSH-HHG 工作的模型基础。",
+      "verification": "CrossRef 全量反查核真（题名相似度 0.94–1.00；刊名/卷/页/首作/年份五件套一致）",
+      "recorded_at": "2026-10-30T10:34:54Z"
+    },
+    {
+      "ref_number": 34,
+      "doi": "10.1103/cpfx-c9h9",
+      "arxiv": null,
+      "title": "Chiral high-harmonic generation via subcycle symmetry engineering,",
+      "bibliographic_entry": "Y. Bai, H. Xu, Y. Ma, S. Wang, J. Niu, C. Liu, P. Liu, and R. Li, \"Chiral high-harmonic generation via subcycle symmetry engineering,\" Phys. Rev. Lett. 137, 116905 (2026); DOI: 10.1103/cpfx-c9h9. Bi₂Se₃、BiTeI、GaSe 等 C₃ᵥ 点群晶体中以相位锁定双色场操纵亚周期量子几何（含偶极子相位与带间 Berry 相位），实现偶次谐波偏振态在庞加莱球上的全光控制，揭示强场驱动电子态的量子几何对 HHG 偏振选择定则的编码。上海光机所、上海科技大学与张江实验室联合工作。",
+      "verification": "CrossRef 全量反查核真（题名相似度 0.94–1.00；刊名/卷/页/首作/年份五件套一致）",
+      "recorded_at": "2026-10-30T10:34:54Z"
+    },
+    {
+      "ref_number": 35,
+      "doi": "10.1103/PhysRevLett.133.243801",
+      "arxiv": null,
+      "title": "Probing Berry phase effect in topological surface states,",
+      "bibliographic_entry": "Y. Bai, Y. Jiang, W. Zheng, H. Xu, J. Chen, S. Wang, C. Liu, R. Li, and P. Liu, \"Probing Berry phase effect in topological surface states,\" Phys. Rev. Lett. 133, 243801 (2024); DOI: 10.1103/PhysRevLett.133.243801. Bi₂Se₃ 拓扑表面态（TSSs）电子-空穴准粒子在强场驱动下沿演化路径累积带间 Berry 相位，电子-空穴对量子路径被几何相位形变，偶次谐波振荡相位出现系统性移动，揭示 Berry 相位对谐波调制的可观测性；该效应可增强光场对强自旋-轨道耦合量子材料中电子自旋的调控。上海光机所、上海科技大学与张江实验室联合工作。",
+      "verification": "CrossRef 全量反查核真（题名相似度 0.94–1.00；刊名/卷/页/首作/年份五件套一致）",
+      "recorded_at": "2026-10-30T10:34:54Z"
+    }
+  ]
+}

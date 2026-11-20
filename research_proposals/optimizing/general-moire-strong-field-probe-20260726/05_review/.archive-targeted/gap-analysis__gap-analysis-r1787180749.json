@@ -1,0 +1,50 @@
+{
+  "gaps": [
+    {
+      "claim": "magic-angle TBG（强关联极限）耦合界面误差传递基准",
+      "missing_evidence": "§三.2 给出 ZnO 弱关联 <2% 与 1T-TaS₂ 中-强关联 10–20% 两个基准，但缺少 magic-angle TBG（强关联极限）的实测基准",
+      "search_keywords": [
+        "magic angle twisted bilayer graphene high harmonic generation",
+        "TBG HHG experimental yield",
+        "moire superlattice HHG strong correlation benchmark"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "TMDC 莫尔 HHG 产额 10-50 倍偏弱于体相 ZnO",
+      "missing_evidence": "该结论引用 Qiu 2024 Nat. Commun. 的计算结论，实验上尚未独立验证",
+      "search_keywords": [
+        "monolayer MoS2 high harmonic generation experimental yield",
+        "TMDC moire HHG vs bulk ZnO efficiency",
+        "Qiu 2024 moire high harmonic calculation experimental verification"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "光 Floquet 调控莫尔能带在 Moiré 体系中的实验可行性",
+      "missing_evidence": "Floquet 工程在非莫尔体系（黑磷、体相 MoS₂）已被 Zhou 2023 Nature、Tyulnev 2024 Nature 实验演示，但 Moiré 体系本身缺乏直接实验验证",
+      "search_keywords": [
+        "moire superlattice Floquet engineering experiment",
+        "twisted bilayer Floquet strong field",
+        "moire Floquet topological phase transition experimental"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "多观测联合反演方法在 Moiré-HHG 系统中的可迁移性",
+      "missing_evidence": "HHG 反演方法学（Hu-Meng PNAS 2024）在其他体系被验证，但针对 Moiré 体系不同对称性/关联强度的迁移性尚未被独立实验或理论工作论证",
+      "search_keywords": [
+        "Hu-Meng PNAS 2024 HHG inversion moire",
+        "multi-observable HHG inversion generalization",
+        "high harmonic spectroscopy parameter retrieval transferability"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "参考文献残留 1 处未填充占位符",
+      "missing_evidence": "references.md 中残留 1 处 [CITE:xxx] 占位符未替换为真实文献",
+      "search_keywords": [],
+      "priority": "low"
+    }
+  ]
+}

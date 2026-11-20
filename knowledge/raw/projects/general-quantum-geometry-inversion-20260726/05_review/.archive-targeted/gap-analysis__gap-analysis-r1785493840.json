@@ -1,0 +1,128 @@
+{
+  "gaps": [
+    {
+      "claim": "现有反演框架建立在经典光场、弱关联假设之上，'全部理论框架都需要新的扩展'",
+      "missing_evidence": "缺少对'经典光场+弱关联'框架的代表性综述/系统盘点，以及量子光场或强关联条件下反演关系失效的具体文献证据；需要区分'已尝试但失败'与'尚未被尝试'两类边界",
+      "search_keywords": [
+        "high harmonic generation inversion review",
+        "strong-field approximation validity limits",
+        "many-body effects HHG reconstruction",
+        "quantum light field HHG theory review",
+        "reconstruction of attosecond bursts review"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Luu 和 Wörner、随后 Liu、Fu 和 Kais 等工作使 HHG'从带间动力学探针升格为计量工具'",
+      "missing_evidence": "缺少支撑'升格为计量工具'这一评价的文献——需找到给出精度、量程、适用条件等计量学指标的原始论文或后续验证文献，而非仅做时间序列的叙述",
+      "search_keywords": [
+        "Luu Wörner HHG reconstruction",
+        "Liu Fu Kais HHG band structure",
+        "HHG metrology precision accuracy",
+        "attosecond metrology reconstruction accuracy"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "BSV 增强足以支撑 CDW 反演（由 Si 样品外推）",
+      "missing_evidence": "缺少 BSV 在非 Si 材料（特别是 CDW 材料）中的 HHG 实验或理论文献；需要证明 BSV 对信噪比的提升在不同电子结构体系中具有可迁移性，而非仅在 Si 上验证",
+      "search_keywords": [
+        "bright squeezed vacuum HHG",
+        "BSV driven high harmonic generation",
+        "squeezed light HHG experiment",
+        "non-classical light HHG material dependence",
+        "squeezed light strong-field ionization"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Q1（量子光场修正 Ω/g）与 Q2（PINN 反演）构成不可替代的科学问题链",
+      "missing_evidence": "缺少将'量子几何量 Ω/g'与'反演精度'直接建立函数依赖关系的文献；需要区分 Q1 是科学问题还是方法描述，并补 PINN 用于 HHG/反问题的同行工作以证明不可替代性",
+      "search_keywords": [
+        "quantum geometric tensor HHG",
+        "Berry connection high harmonic generation",
+        "quantum metric HHG",
+        "PINN inverse problem strong-field",
+        "physics-informed neural network HHG reconstruction"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "'首次/国内空白/系统工作'等首创性表述",
+      "missing_evidence": "缺少系统的可检索证据来支持首创性判断；需要 Web of Science、arXiv、CNKI 的系统检索结果与具体筛选策略，划定检索时间窗、关键词、排除/纳入标准",
+      "search_keywords": [
+        "quantum geometry HHG inversion",
+        "BSV HHG charge density wave",
+        "PINN attosecond reconstruction",
+        "quantum light HHG China",
+        "quantum geometric tensor strong-field"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "正文中多个精确数字（如特定增强倍数、反演精度阈值、Ω/g 修正幅度）",
+      "missing_evidence": "缺少数字的原始 metric 定义、测量条件、统计误差和材料适用范围；需要追溯到给出该数字的原始论文，并说明是否已跨材料验证",
+      "search_keywords": [
+        "HHG enhancement factor squeezed light",
+        "Ω/g quantum metric magnitude solid",
+        "PINN reconstruction error benchmark",
+        "BSV HHG signal-to-noise ratio measurement"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Houston 态、SBE（半导体布洛赫方程）与反演精度的直接串联",
+      "missing_evidence": "缺少 Houston 基底下反演误差的定量文献，以及 SBE 中量子几何修正的可测量效应文献；需要中间可验证量的理论与实验支撑",
+      "search_keywords": [
+        "Houston basis HHG",
+        "semiconductor Bloch equations quantum geometry",
+        "SBE Berry curvature HHG",
+        "interband intraband coherence reconstruction"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "光子数分布/算符场对 HHG 的影响可直接观测并用于反演",
+      "missing_evidence": "缺少 g^{(2)}、光子统计与 HHG 谱映射关系的实验与理论文献；需要证明光子数分布变化能被反问题唯一分辨",
+      "search_keywords": [
+        "photon statistics HHG g2",
+        "quantum optical signatures HHG",
+        "non-classical light HHG photon number",
+        "sub-Poissonian HHG spectroscopy"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "立项依据中'量子光场'与'强关联'分别打破的具体可观测通道",
+      "missing_evidence": "缺少按可观测通道（高次谐波谱、椭偏依赖、时频结构、互关联）分类的文献综述；当前叙述未区分两条路径各自的物理标志",
+      "search_keywords": [
+        "HHG ellipticity strong correlation",
+        "HHG time-frequency structure correlation",
+        "high harmonic spectrum Mott insulator",
+        "HHG two-photon correlations"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "CDW 体系的 HHG 与量子几何反演代表性工作",
+      "missing_evidence": "缺少 CDW 材料 HHG 的标志性实验与理论文献清单；需要建立 CDW→HHG→反演的工作链文献基础",
+      "search_keywords": [
+        "charge density wave HHG",
+        "CDW high harmonic generation",
+        "CDW order parameter HHG",
+        "transition metal dichalcogenide HHG CDW"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "参考文献列表中可能存在的预印本/占位符（[CITE:...]）",
+      "missing_evidence": "需对全部引用进行实际可获取性、发表状态、作者归属的核验；预印本需注明 arXiv 编号与是否已正式发表",
+      "search_keywords": [
+        "arXiv HHG quantum geometry",
+        "preprint verification HHG PINN",
+        "attosecond reconstruction citation accuracy"
+      ],
+      "priority": "low"
+    }
+  ]
+}

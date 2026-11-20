@@ -1,0 +1,22 @@
+{
+  "proposal_id": "general-quantum-geometry-inversion-20260726",
+  "cluster_id": "cl_20260815_1cfbe6",
+  "entries": [
+    {
+      "source_id": "paper:2026-260729372-near-single-cycle-pulse-generation-using-a-ca",
+      "title": "Near single-cycle pulse generation using a cascaded all-bulk multi-pass cell compression system",
+      "summary": "该工作实验演示了一种基于两个体材料多程盒的级联后压缩方案，将约1 μm波长、100 μJ、220 fs的激光脉冲压缩至亚两周期（近单周期）水平。该全固态体材料级联系统为高能量近单周期脉冲的产生提供了紧凑可靠的途径。",
+      "path": "",
+      "added_via": "cluster:cl_20260815_1cfbe6",
+      "added_at": "2026-08-22T05:40:16Z"
+    },
+    {
+      "source_id": "paper:2607.29372",
+      "title": "Near single-cycle pulse generation using a cascaded all-bulk multi-pass cell compression system",
+      "summary": "本文实验演示了一种基于两个块体多程池级联的后压缩方案，将1030 nm、220 fs、100 μJ的激光脉冲经顺序光谱展宽与压缩，先后获得50 fs和5.5 fs（约1.6个光学周期）的近单周期脉冲，并通过色散控制腔实现超宽带光谱与优异的时域/空域脉冲质量。该系统在第二级多程池中峰值功率超出熔石英自聚焦临界功率数百倍仍无显著空间-光谱畸变，为高能量近单周期驱动光源提供了全块体、紧凑的实用方案。",
+      "path": "",
+      "added_via": "cluster:cl_20260815_1cfbe6",
+      "added_at": "2026-08-22T05:40:16Z"
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+{
+  "gaps": [
+    {
+      "claim": "S_edge<0.2 边带阈值由 Lorenzo[38] Kagome 数据反演验证",
+      "missing_evidence": "缺少 [38] 原文对 S_edge 阈值/边带观测量的实际定义与 Kagome 数据反演证据",
+      "search_keywords": [
+        "Lorenzo Kagome solid high harmonic helicity",
+        "Kagome HHG channel-resolved yield sideband threshold",
+        "Lorenzo Batısta Jangjan Kim Menotti Liu Gao Ghimire Kagome 2024 2025"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Pilch TaP 实验 terahertz 第三谐波服从严格立方 I_f^3 幂律（与 content/rationale 一致）",
+      "missing_evidence": "缺少 arXiv:2508.16166 原文对 TaP THz 三次谐波严格立方幂律的显式表述与散射时间参数标定依据",
+      "search_keywords": [
+        "Pilch TaP terahertz third harmonic perturbative cubic",
+        "TaP Weyl semimetal THz nonlinear conductivity power law",
+        "2508.16166 TaP terahertz drive scattering time"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "TaP THz 驱动场强窗口（tens of kV/cm, <10^7 W/cm²）作为方案可行性校验基准",
+      "missing_evidence": "缺少 TaP THz 驱动场强、频率窗口与 MIR (3.2–6.4 μm) 强场区间可分离的实验/标定依据",
+      "search_keywords": [
+        "TaP terahertz field strength kV/cm experimental",
+        "Weyl semimetal THz third harmonic driving intensity",
+        "TaP Pilch THz perturbative regime calibration"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Bharti 圆极化 HHG 选择规则/奇偶选择律支撑方案二分方案",
+      "missing_evidence": "缺少 Bharti (PRB 105 155140 或近期) 关于圆极化 HHG 宇称选择规则原文与 [44] 对应引用",
+      "search_keywords": [
+        "Bharti Dixit PRB 105 155140 circular HHG selection rule",
+        "circularly polarized high harmonic parity selection rule",
+        "Bharti anomalous HHG selection rule Weyl"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "SSH 链高次谐波产额与拓扑相位的关联（v/w 比、拓扑不变量的 HHG 表征）",
+      "missing_evidence": "缺少 SSH 模型高次谐波、拓扑边态 HHG、Su-Schrieffer-Heeger 拓扑相 HHG 指纹的原始理论与实验文献",
+      "search_keywords": [
+        "SSH model high harmonic generation topological",
+        "Su-Schrieffer-Heeger HHG topological invariant",
+        "topological edge state high harmonic SSH"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Weyl 半金属高次谐波 Berry 曲率贡献与节点几何效应（Medic 节点几何分解）",
+      "missing_evidence": "缺少 Weyl node HHG、Berry curvature HHG circular dichroism、节点几何贡献分解 (Medic) 的原文支撑",
+      "search_keywords": [
+        "Weyl semimetal high harmonic Berry curvature",
+        "Weyl node HHG circular dichroism Medic",
+        "topological semimetal HHG node geometry"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Pilch 散射时间参数在 HHG 强度标定中的角色（方案二三因素分解之一）",
+      "missing_evidence": "缺少 Pilch 散射时间参数从 THz 三次谐波提取并外推到 MIR-HHG 标定的原文依据",
+      "search_keywords": [
+        "Pilch TaP scattering time terahertz extraction",
+        "TaP scattering time HHG intensity calibration",
+        "Weyl semimetal scattering time third harmonic"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Avetissian Berry 曲率修正项对 HHG 量子效率的贡献量级（方案二三因素分解之一）",
+      "missing_evidence": "缺少 Avetissian 关于 Berry 曲率修正 HHG 量子效率的原文与定量估算",
+      "search_keywords": [
+        "Avetissian Berry curvature high harmonic correction",
+        "Avetissian HHG quantum efficiency Berry",
+        "Avetissian relativistic HHG Berry curvature"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "ZnO/Sr2CuO3 等非拓扑半导体 HHG 产额基准用于对比 Weyl/SSH HHG 增强",
+      "missing_evidence": "缺少 ZnO、Sr2CuO3 等基准非拓扑半导体高次谐波产额与 cutoff 标定的同行认可数据",
+      "search_keywords": [
+        "ZnO high harmonic generation benchmark Ghimire",
+        "Sr2CuO3 one-dimensional Mott HHG benchmark",
+        "non-topological semiconductor HHG reference yield"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "量子度量/量子几何张量在 HHG 分解中的贡献（Bharti 量子度规 HHG 分解）",
+      "missing_evidence": "缺少量子度量张量、量子几何对 HHG 各阶贡献分解的最新理论文献",
+      "search_keywords": [
+        "quantum geometry tensor HHG decomposition",
+        "quantum metric high harmonic generation",
+        "Bharti quantum metric HHG anomalous"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "You[40]/Neufeld[25]/Li[27]/Hansen[28] 引用错挂（真身为 [39]/[23]/[25]/[26]）",
+      "missing_evidence": "缺少 [39] You、[23] Neufeld、[25] Li、[26] Hansen 的原文核实（首作 arXiv 反查）以重挂正文 12 处引用",
+      "search_keywords": [
+        "You arXiv 2024 2025 HHG topological",
+        "Neufeld high harmonic generation arXiv",
+        "Hansen high harmonic generation arXiv 2024 2025",
+        "Li HHG topological arXiv 2024 2025"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "scheme"
+}

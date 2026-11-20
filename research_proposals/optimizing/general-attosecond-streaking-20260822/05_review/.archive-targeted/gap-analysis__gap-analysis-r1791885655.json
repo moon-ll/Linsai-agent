@@ -1,0 +1,73 @@
+{
+  "gaps": [
+    {
+      "claim": "Cousin 等公开数据中氩气光电子动能跨越 100 eV 的拐点",
+      "missing_evidence": "需明确 Cousin 2017 PRX 全文中探测气为 Kr（3d 壳层光电子），Ar 仅作 HHG 驱动气体（约 100 eV 中心能量，用于多脉冲观察），无氩气光电子条纹迹",
+      "search_keywords": [
+        "Cousin 2017 PRX attosecond streaking water window krypton 3d",
+        "Cousin 2017 argon HHG driving 100 eV photon energy",
+        "PRX 2017 attosecond beamline Kr 3d photoelectron streaking trace"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Cousin 等[2]中水窗氖气光电子条纹迹",
+      "missing_evidence": "需查证 Cousin 2017 是否实际给出 Ne 探测气条纹数据，或 Ne 2s/2p 多通道相对论性 attosecond cross-correlation (rACE) 重构结果",
+      "search_keywords": [
+        "Cousin 2017 PRX attosecond streaking neon detection",
+        "neon 2s 2p attosecond streaking reconstruction",
+        "rACE rainbow attosecond cross-correlation neon"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "C K 边 284 eV 与 CH₄ C 1s 阈值 290.7 eV 区分",
+      "missing_evidence": "需权威文献明确 C K 边吸收边（284 eV）与气态 CH₄ C 1s 电离阈值（290.7 eV）数值与差异来源",
+      "search_keywords": [
+        "C K edge 284 eV absorption XAS",
+        "methane C 1s ionization threshold 290.7 eV",
+        "C 1s binding energy CH4 290.7 eV reference"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Kr 3d 贡献光电子动能 270–396 eV 区间",
+      "missing_evidence": "需 Cousin 2017 全文或同源文献明确给出 Kr 3d 探测气在 1850 nm 驱动下的光电子动能计算（含 409.7 eV 光子能量减束缚能）",
+      "search_keywords": [
+        "krypton 3d binding energy attosecond streaking",
+        "Cousin 2017 figure 6 Kr 3d kinetic energy range",
+        "Kr 3d photoelectron 1850 nm HHG probe kinetic energy"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Kr 3d 动能 190–316 eV 区间（L65 已有算式）",
+      "missing_evidence": "需独立核验：驱动光 270–396 eV 范围内（1850 nm HHG 中心 100 eV ± 半个带宽 96.7），Kr 3d 束缚能下末态动能是否准确（90–94 eV 束缚能假设）",
+      "search_keywords": [
+        "krypton 3d binding energy 90 94 eV",
+        "Kr 3d spin-orbit splitting 3d5/2 3d3/2",
+        "photoelectron kinetic energy Kr 3d 100 eV photon"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "[39] PRL 2026 刊版引用 [39]† 状态错配",
+      "missing_evidence": "需定位 PRL 2026 已刊版文献的完整书目（DOI、卷期、页码），确认与正文 † 预印本状态对齐",
+      "search_keywords": [
+        "Physical Review Letters 2026 attosecond streaking [paper title or keyword from refs]",
+        "PRL 2026 attosecond beamline publication DOI"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "[21] arXiv† 预印本条目",
+      "missing_evidence": "需确认 [21] 是否为预印本（arXiv-only），refs 表是否标注 † 与正文引用一致",
+      "search_keywords": [
+        "arXiv preprint attosecond 2024 2025 streaking reconstruction",
+        "arXiv attosecond pulse characterization recent"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

@@ -1,0 +1,104 @@
+{
+  "_doc": "跨章口径注册表：2026-10-16 评审团人工修订（M1）播种，canonical 为当前规范表述，stale_patterns 为禁用旧表述（writer/optimizer 生成前注入 prompt，命中即回退）",
+  "entries": [
+    {
+      "key": "nrel_temperature_TN",
+      "canonical": "MnTe 奈尔温度约 307–310 K（文献 [13] ARPES 实测 307 K，310 K 为设计取整值，样品实测以 SQUID ±2 K 为准）",
+      "stale_patterns": [
+        "MnTe 奈尔温度约 310 K（无 307 K 说明）"
+      ],
+      "note": "R1-05/R3-03：反演目标参数 T_N 不得无说明锚定 310 K；温度点阵（300–320 K 加密 5 K 步长）以 SQUID 实测值归属相区"
+    },
+    {
+      "key": "model_calibration_cut",
+      "canonical": "模型校核线：Γ–L 切的非高对称动量点（对齐 Osumi [13] ARPES 实测切向，避开 k_z=0 节点面）",
+      "stale_patterns": [
+        "Γ–M 高对称线（g 波节点面外的一般动量方向）",
+        "沿 Γ–M 高对称线"
+      ],
+      "note": "R1-01 major：Γ–M 躺在自设 k_z=0 节点面内，g 波劈裂为零，禁止用作劈裂幅值校核线；Osumi 0.8 eV 峰位实测在 Γ–L 切非高对称动量点"
+    },
+    {
+      "key": "calibration_point_count",
+      "canonical": "等间距采样动量点（具体点数由课题组核定后填入，量级待核）",
+      "stale_patterns": [
+        "若干动量点"
+      ],
+      "note": "R2-15：量化验收目标禁用不可检验的'若干'；点数不代拟，待课题组核定"
+    },
+    {
+      "key": "spin_measurement_naming",
+      "canonical": "自旋敏感的偏振分辨 HHG 测量（自旋信息由偏振通道测量经理论正演模型映射推断，映射唯一性以可区分判据为前提）",
+      "stale_patterns": [
+        "实现自旋分辨 HHG 测量",
+        "开展自旋分辨 HHG 测量"
+      ],
+      "note": "R1-04：装置无直接自旋探测通道，测量目标命名不得回退为'自旋分辨'；理论正演模型命名（'自旋分辨 HHG 正演'）不受此限"
+    },
+    {
+      "key": "yield_term",
+      "canonical": "产额计算（谐波产额）",
+      "stale_patterns": [
+        "产能计算"
+      ],
+      "note": "R2-02：'产能'为工业用语，谐波语境一律用'产额'"
+    },
+    {
+      "key": "matching_criteria_term",
+      "canonical": "匹配条件的双重判据",
+      "stale_patterns": [
+        "双联算"
+      ],
+      "note": "R2-03：生造词禁用"
+    },
+    {
+      "key": "rashba_texture_term",
+      "canonical": "Rashba 螺旋纹理（产生连续旋转式自旋分布）",
+      "stale_patterns": [
+        "Rashba 旋错"
+      ],
+      "note": "R2-13：'旋错'为液晶/晶体缺陷用语，Rashba 纹理是连续螺旋纹理；正文 4 处已统一"
+    },
+    {
+      "key": "miller_index_notation",
+      "canonical": "节点面沿晶轴 a、b 方向（即密勒指数 100 与 010）",
+      "stale_patterns": [
+        "节点面沿 [100]、[010]"
+      ],
+      "note": "R3-01：方括号裸写密勒指数会被引用校验误判为文献引用；正文禁用 [hkl] 裸写法（晶向符号 [1̄100] 带 U+0304 组合字符不受误判，保留）"
+    },
+    {
+      "key": "search_timestamp_ban",
+      "canonical": "正文以'据现有文献'式表述，不写检索时间戳",
+      "stale_patterns": [
+        "截至 2026 年 8 月（检索）",
+        "（检索截至 2026 年 8 月）",
+        "（截至 2026 年 8 月检索）",
+        "截至 2026 年 8 月仍无"
+      ],
+      "note": "R2-01：过程性内部检索时间戳 5 处已清零；references 表头编者注'截至 2026-08 文献检索'按 R2 裁定保留"
+    },
+    {
+      "key": "pump_probe_wording",
+      "canonical": "泵浦脉冲以微扰方式激发自旋进动、探测磁相变临界动力学（0.1–1 mJ/cm² 属微扰探测）",
+      "stale_patterns": [
+        "激发磁相变动力学"
+      ],
+      "note": "R1-07：泵浦能量密度远低于 HHG 驱动窗口，不得表述为'激发磁相变'；与目标 4'临界慢化'对齐"
+    },
+    {
+      "key": "three_photon_derivative_symbol",
+      "canonical": "d(3ℏω)/dλ ≈ 0.41 eV/μm（三光子总能量对波长的导数）",
+      "stale_patterns": [
+        "dE/dλ ≈ 0.41 eV/μm"
+      ],
+      "note": "R1-06：单光子导数仅约 0.14 eV/μm，符号须写明三光子总能量"
+    },
+    {
+      "key": "references_author_rule",
+      "canonical": "作者超过三人时列前三作者加 'et al.'（全表统一）",
+      "stale_patterns": [],
+      "note": "R2-21：表头已声明，15 条全列条目已截断；文献表 36 条（[27] 死条目已删，2026-10-16 重编号）"
+    }
+  ]
+}

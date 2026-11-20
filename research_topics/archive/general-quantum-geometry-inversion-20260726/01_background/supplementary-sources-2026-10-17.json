@@ -1,0 +1,54 @@
+{
+  "proposal_id": "general-quantum-geometry-inversion-20260726",
+  "cluster_id": "cl_20260815_c1f53c",
+  "entries": [
+    {
+      "source_id": "hermes_briefing:research_briefing_20260531.md",
+      "title": "强场超快光学与阿秒科学研究简报（20260531）：基于AI评分的文献筛选与核心论文深度解析",
+      "summary": "本简报采用AI评分（阈值≥3.0）从14篇强场超快光学/阿秒科学方向的arXiv文献中筛选并分析相关研究（多数因PDF解析错误仅作条目收录）。深度解析的核心论文（arXiv:2510.14404）由Twente/Utrecht团队合作，提出在扭曲双层屈曲蜂窝材料（锗烯/硅烯）中可利用电场诱导实现自旋-能谷锁定，为能谷电子学提供了纯电学调控的新机制。",
+      "path": "",
+      "added_via": "cluster:cl_20260815_c1f53c",
+      "added_at": "2026-10-17T23:01:47Z"
+    },
+    {
+      "source_id": "hermes_briefing:research_briefing_20260524.md",
+      "title": "强场超快光学与阿秒科学研究简报（7篇精选论文）",
+      "summary": "该简报汇总了7篇强场超快光学与阿秒科学领域最新论文，核心亮点是通过阿秒瞬态吸收光谱（ATAS）揭示π-SnS中载流子动力学从界面受限到Auger复合主导的转变（临界密度约1×10²⁰ cm⁻³）。其余工作涵盖拓扑绝缘体、Dirac材料、有机分子晶体及ZnO中的固体高次谐波机制，以及~500阿秒skyrmion光脉冲产生和压缩光量子路径调控等前沿方向。",
+      "path": "",
+      "added_via": "cluster:cl_20260815_c1f53c",
+      "added_at": "2026-10-17T23:01:47Z"
+    },
+    {
+      "source_id": "briefing:knowledge/wiki/reviews/briefing-2026-05-22.md",
+      "title": "强场超快光学与阿秒科学研究简报（2026-05-22）：固体高次谐波领域6篇新论文综述",
+      "summary": "本简报汇总了2025-2026年固体高次谐波生成及相关方向（二维材料、光波电子学、拓扑量子光学）的6篇新论文，核心亮点是通过层间扭转引入Pancharatnam-Berry相位以补偿波矢失配，实现扭转固体中任意阶谐波的相位匹配。简报同时指出固体HHG已从强场现象发展为探测量子几何与量子光学动力学的精密平台，并介绍了无三维前驱体的新型二维材料家族MoSi₂N₄。",
+      "path": "",
+      "added_via": "cluster:cl_20260815_c1f53c",
+      "added_at": "2026-10-17T23:01:47Z"
+    },
+    {
+      "source_id": "hermes_briefing:research_briefing_20260521.md",
+      "title": "强场超快光学与阿秒科学研究简报（2026-05-21）",
+      "summary": "该简报汇总了强场超快光学与阿秒科学领域17篇arXiv新论文，核心亮点包括用固体高次谐波（HHG）探测双层Td-WTe₂滑动铁电极化切换动力学、量子回波机制产生可调谐相干高次谐波、石墨烯HHG中的超快电子-声子耦合效应，以及能带拓扑与HHG效率间的量子光学关联等新物理。简报按子方向（固体HHG、拓扑HHG、阿秒光电子学、辐射源物理等）为每篇论文提炼一句话关键发现并给出相关性评分，为领域动态追踪提供一站式参考。",
+      "path": "",
+      "added_via": "cluster:cl_20260815_c1f53c",
+      "added_at": "2026-10-17T23:01:47Z"
+    },
+    {
+      "source_id": "briefing:knowledge/wiki/reviews/briefing-2026-05-31.md",
+      "title": "强场超快光学与阿秒科学每日简报（2026-05-31）",
+      "summary": "该简报通过AI评分（阈值≥3.0）从文献池中筛选出约5篇强场超快光学与阿秒科学方向的高相关论文，涵盖二维材料拍赫兹电子学、拓扑绝缘体（Bi₂Se₃）表面/体态高次谐波解耦及量子光学关联等前沿主题。由于多数文献存在PDF解析错误，实际完整分析仅基于3篇有效文本论文，为固态HHG与拓扑材料强场动力学研究提供了当日文献追踪。",
+      "path": "",
+      "added_via": "cluster:cl_20260815_c1f53c",
+      "added_at": "2026-10-17T23:01:47Z"
+    },
+    {
+      "source_id": "paper:2026-2608.21493-all-optical-control-of-interfacial-polarization-in-mos2wse2",
+      "title": "All-Optical Control of Interfacial Polarization in MoS2/WSe2 Heterobilayers via Strong-Field HHG",
+      "summary": "本文用实时含时密度泛函理论（RT-TDDFT）预言强超短脉冲可在MoS2/WSe2异质双层中诱导持久的面外界面极化，实现无电极的全光极化写入。高次谐波谱在从微扰到强场的区间内记录到界面极性转变，为极化状态提供了超快全光读出手段。晶格应变可将层间电荷转移放大约四倍，给出额外的外场调控自由度。",
+      "path": "knowledge/raw/papers/2026-2608.21493-all-optical-control-of-interfacial-polarization-in-mos2wse2.md",
+      "added_via": "cluster:cl_20260815_c1f53c",
+      "added_at": "2026-10-17T23:01:47Z"
+    }
+  ]
+}

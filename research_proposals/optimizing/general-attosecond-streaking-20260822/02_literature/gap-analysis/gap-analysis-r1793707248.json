@@ -1,0 +1,105 @@
+{
+  "gaps": [
+    {
+      "claim": "§2.2所指出的Ortmann[23]相关方法或事实主张，需要在研究内容正文中得到原始文献的直接支撑。",
+      "missing_evidence": "缺少Ortmann原始论文与该处具体论断之间的句级对应：需核实Ortmann文献是否实际支持所述模型假设、局域电子态处理方法或实验判据，并说明可迁移到本项目的条件。",
+      "search_keywords": [
+        "Ortmann attosecond streaking",
+        "Ortmann local electronic states high harmonic generation",
+        "Ortmann photoelectron spectroscopy time delay",
+        "Ortmann 原子局域态 飞秒条纹",
+        "Ortmann 高次谐波 局域电子态"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.4涉及Aygun所述失效机理的论断，需要由相关原始研究明确支持。",
+      "missing_evidence": "缺少Aygun文献对失效机理、适用体系和物理条件的直接证据，也缺少该机理与本项目研究对象及失效区判据之间的对应说明；rationale中未检出Aygun相关实文，不能仅靠编号引用建立支撑。",
+      "search_keywords": [
+        "Aygun strong-field ionization failure mechanism",
+        "Aygun multielectron continuum coupling R-matrix",
+        "Aygun attosecond photoelectron spectrum",
+        "Aygun strong field approximation breakdown",
+        "Aygun 强场电离 失效机理",
+        "Aygun 多电子连续态 耦合"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.1中由Villeneuve[15]具名陈述或引用的定量结论。",
+      "missing_evidence": "缺少句尾角标及原始文献与具体数值、实验现象或方法结论之间的一一对应证据；需确认相关数值确由Villeneuve论文直接报告，而非由其结果间接推导。",
+      "search_keywords": [
+        "Villeneuve attosecond streaking quantitative measurement",
+        "Villeneuve atomic photoelectron spectrum attosecond",
+        "Villeneuve ionization time reconstruction",
+        "Villeneuve 飞秒条纹 光电子谱",
+        "Villeneuve 阿秒条纹 定量"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.1中由Eckle[14]具名陈述或引用的定量结论。",
+      "missing_evidence": "缺少句尾角标及原始论文中相应定量结果、实验参数或方法结论的直接引证关系；需要核对正文所述数值是否与Eckle原始研究的实验对象和标定口径一致。",
+      "search_keywords": [
+        "Eckle attosecond streaking quantitative result",
+        "Eckle atomic ionization attosecond spectroscopy",
+        "Eckle photoelectron momentum time-of-flight",
+        "Eckle 飞秒条纹 光电子动量",
+        "Eckle 阿秒电离 时间延迟"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.1中由Hutcheson[10]具名陈述或引用的定量结论。",
+      "missing_evidence": "缺少句尾角标及Hutcheson原始文献中对应定量命题的直接支撑，尤其需确认其数据是否能够支持正文关于能谱、时间延迟、条纹或其他量化指标的表述。",
+      "search_keywords": [
+        "Hutcheson attosecond photoelectron spectroscopy",
+        "Hutcheson streaking spectrum quantitative",
+        "Hutcheson strong-field ionization time-resolved",
+        "Hutcheson photoelectron momentum distribution",
+        "Hutcheson 飞秒条纹 光电子能谱"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.1中由Kheifets[17]具名陈述或引用的定量结论。",
+      "missing_evidence": "缺少句尾角标及Kheifets原始论文与正文定量陈述的明确对应；需核实所引结果属于理论预测、实验测量还是综述转引，并标注其适用模型和参数范围。",
+      "search_keywords": [
+        "Kheifets attosecond photoelectron spectroscopy",
+        "Kheifets streaking quantitative result",
+        "Kheifets photoelectron angular distribution strong field",
+        "Kheifets time-dependent ionization dynamics",
+        "Kheifets 飞秒条纹 光电子 角分布"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.6提出“多电子连续耦合终态”这一术语，并拟用R-matrix外区单出射限制加以说明。",
+      "missing_evidence": "缺少权威文献对“多电子连续耦合终态”概念边界的界定，以及R-matrix方法在外区采用单出射假设、其适用范围和近似性质的直接依据；还需引用能够解释该术语为何不宜表述为“湮没式多电子终态”的资料。",
+      "search_keywords": [
+        "R-matrix multielectron continuum coupled states",
+        "R-matrix outer region single ejection approximation",
+        "R-matrix strong-field ionization many-electron continuum",
+        "multielectron continuum coupling photoionization",
+        "R-matrix 多电子连续耦合终态",
+        "R-matrix 外区 单出射 限制"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§2.4关于“距该关联阈220 eV”的数值表述需要建立在可靠的阈值来源和统一计算口径上。",
+      "missing_evidence": "缺少对65.4 eV关联阈值的原始文献或权威数据库引证，也缺少说明该阈值是理论计算值、实验观测值还是模型约定值；当前实算差值为218.6 eV，需用来源文献核定阈值的原子或离子体系、参考能级及精度，并据此统一为“约219 eV”或保留两位有效数字。",
+      "search_keywords": [
+        "\"65.4 eV\" ionization threshold",
+        "\"65.4 eV\" photoionization threshold",
+        "\"N=2\" \"65.4 eV\" threshold",
+        "multielectron continuum threshold 65.4 eV",
+        "R-matrix ionization threshold 65.4 eV",
+        "光电离 关联阈 65.4 eV",
+        "多电子连续态 阈值 65.4 eV"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

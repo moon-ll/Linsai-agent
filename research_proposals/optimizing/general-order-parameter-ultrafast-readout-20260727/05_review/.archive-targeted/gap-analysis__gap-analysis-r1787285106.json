@@ -1,0 +1,68 @@
+{
+  "gaps": [
+    {
+      "claim": "CrSb 在 0.8 V/Å 强场激发下的光学稳定性",
+      "missing_evidence": "损伤阈值仅自陈述，缺乏外部实验文献验证；需要 CrSb 在近红外飞秒激光照射下的损伤阈值数据",
+      "search_keywords": [
+        "CrSb ultrafast laser damage threshold",
+        "CrSb femtosecond laser damage",
+        "CrSb strong-field optical excitation stability",
+        "CrSb reflectivity intense laser field"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "费舍尔信息矩阵方法可有效约束 HHG 反演 7—9 维参数空间",
+      "missing_evidence": "缺乏费舍尔信息矩阵用于高次谐波光谱学参数可辨识性的具体研究；需要验证该方法在非线性光学反演问题中的适用性",
+      "search_keywords": [
+        "Fisher information matrix nonlinear optics inverse problem",
+        "parameter identifiability high harmonic generation",
+        "condition number attosecond spectroscopy reconstruction",
+        "HHG spectroscopy ill-posed inversion dimensionality"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "偏振—温度—磁场三重独立测量维度可提供充分约束输入",
+      "missing_evidence": "缺乏多维度测量对 HHG 反演问题参数约束效果的量化研究；需要实验验证三维独立约束对反演唯一性的提升作用",
+      "search_keywords": [
+        "HHG parameter space dimensionality reduction polarization temperature magnetic field",
+        "altermagnet order parameter HHG multi-parameter constraint",
+        "high harmonic spectroscopy parameter identifiability data dimension"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Cochran 量子相干断层成像与 Sørensen 阿秒序参量重建方法可联合用于 HHG 序参量反演",
+      "missing_evidence": "缺乏两种方法联合使用的先例；需验证各自对 7—9 维参数空间的适用性及联合约束效果",
+      "search_keywords": [
+        "Cochran quantum coherence tomography high harmonic generation",
+        "Sørensen attosecond order parameter reconstruction HHG",
+        "HHG quantum coherence tomography arXiv 2025",
+        "combined HHG order parameter retrieval validation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "在 Mandal 等人精密装置基础上增设低温、磁场与泵浦—探测模块的可行性",
+      "missing_evidence": "缺乏低温磁场环境下固体 HHG 实验平台搭建的成熟方案；需要相关技术可行性文献支撑",
+      "search_keywords": [
+        "solid-state HHG low temperature magnetic field setup",
+        "Mandal high harmonic generation precision apparatus",
+        "HHG magnetic field experimental platform cryogenic"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "altermagnet HHG 信号可探测性：CrSb 自旋极化谐波信号产额与探测灵敏度",
+      "missing_evidence": "缺乏 CrSb HHG 信号产额的具体实验数据；需要光子通量、噪声底等可探测性关键指标",
+      "search_keywords": [
+        "CrSb high harmonic generation photon flux",
+        "altermagnet HHG signal yield experimental",
+        "HHG shot noise floor measurement",
+        "solid-state HHG signal-to-noise ratio measurement"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

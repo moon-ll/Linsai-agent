@@ -1,0 +1,27 @@
+{
+  "gaps": [
+    {
+      "claim": "QGT 实部 ~0.1 rad、虚部 ~0.05 rad 的精度基线（§2.3 L65，归属于 arXiv:2512.24553 / Yang[2]）",
+      "missing_evidence": "Yang[2] 摘要与首节反查未见该数值；量子几何张量（QGT）分量以 rad 作为单位的物理合理性缺少文献支撑；需补能验证 QGT 实部/虚部数量级（~0.1、~0.05）及对应单位（rad）的可溯源出处，否则须删数值改定性表述",
+      "search_keywords": [
+        "quantum geometric tensor real imaginary component",
+        "Berry curvature rad unit convention",
+        "QGT quantum metric precision inversion baseline",
+        "arXiv 2512.24553 quantum geometry inversion"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "HMG-Schema 是 NEwwave 等三类标准扩展模块（manual §4.3 L524/L544），并以 NEwwave 读取器作为交付物验收依据",
+      "missing_evidence": "若保留 NEwwave 作为 HMG-Schema 的标准身份，须补 NEwwave 作为高次谐波数据/模式标准的可溯源文献（标准文档、官方仓库、引用论文）；当前申请书正文已声明'自建、不沿用'，手册源头与正文互斥，需文献裁定 NEwwave 的标准地位或同步修订手册",
+      "search_keywords": [
+        "NEwwave high harmonic generation data standard",
+        "NEwwave schema format HHG",
+        "HMG schema NEwwave extension module",
+        "high harmonic data exchange format standard"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "content"
+}

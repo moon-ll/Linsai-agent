@@ -1,0 +1,40 @@
+{
+  "gaps": [
+    {
+      "claim": "§三.7 L133 首例声明：'首例实验表征……截至目前未见同类实验报道'缺乏检索范围与截止日期支撑",
+      "missing_evidence": "缺少带明确口径（如 2026-09 以 arXiv/CrossRef 关键词检索）的系统文献检索证据，需确认国内外确无交变磁/反铁磁序参量经高次谐波实现超快光学读出的先行实验报道",
+      "search_keywords": [
+        "altermagnet high harmonic generation experimental observation",
+        "magnetic order parameter ultrafast optical readout experiment",
+        "antiferromagnet time-resolved high harmonic generation experiment",
+        "CrSb MnTe high harmonic generation experiment",
+        "harmonic probe magnetic order parameter altermagnet"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§三.3 L83 自旋翻转场量级估算 B_SF ≈ √(2B_E·B_K) 作为把关判据",
+      "missing_evidence": "交换场 B_E 与各向异性场 B_K 全文既无取值也无文献出处，量级估算无着落；需补文献量级结论（如 B_SF 预期 >7 T）或注明估算移至方法手册",
+      "search_keywords": [
+        "CrSb spin-flop field measurement",
+        "CrSb exchange field anisotropy field value",
+        "antiferromagnet spin-flop threshold field experiment",
+        "CrSb magnetocrystalline anisotropy field tesla",
+        "spin-flop field sqrt 2 exchange anisotropy antiferromagnet"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§三.2 L47 FIM 噪声 δ 仅有'区别于 σ'的定性区分，无预期量级与测量方法",
+      "missing_evidence": "缺少可类比固体 HHG 实验中零场谐波谱重复测量散点标准差（shot-to-shot 噪声水平）的文献量级基准，以及第 1 年装置标定该噪声的操作依据",
+      "search_keywords": [
+        "solid-state high harmonic generation shot-to-shot fluctuation",
+        "HHG measurement repeatability noise standard deviation",
+        "high harmonic spectrum noise floor repeated measurements",
+        "shot noise harmonic yield stability experiment"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

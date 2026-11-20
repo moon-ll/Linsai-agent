@@ -1,0 +1,105 @@
+{
+  "gaps": [
+    {
+      "claim": "QEF（量子增强因子）三维度指标体系的定义与三个子维度（增产比/相干保持度/光子统计保真）的方法学来源",
+      "missing_evidence": "缺少对QEF概念的明确定义文献来源，缺少与既有量子光驱动HHG论文（如Lemiski 2024、Boroumand 2025、Even Tzur 2024）中量子增强指标的对比依据",
+      "search_keywords": [
+        "quantum enhancement factor high harmonic generation definition",
+        "BSV driven HHG enhancement factor QEF",
+        "photon statistics preservation harmonic generation metric",
+        "Boroumand 2025 quantum engineering HHG framework"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "单层MoS₂作为Mott绝缘体的U/W比值在U/W~0.5附近（评审指出应为U/W≳1）",
+      "missing_evidence": "缺少单层MoS₂ Hubbard U/W值的准确实验/第一性原理引用，目前描述值与公认文献不符",
+      "search_keywords": [
+        "monolayer MoS2 Hubbard U/W ratio first-principles",
+        "MoS2 Mott insulator correlation strength experimental",
+        "MoS2 GW approximation U/W bandgap"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "莫尔关联绝缘相（如魔角石墨烯、莫尔MoS₂/WSe₂）的'室温可稳定存在'描述",
+      "missing_evidence": "缺少莫尔关联绝缘相在室温下稳定存在的实验证据，申请人本人在2.0.1使用'低温PL'测量，与室温表述矛盾，需引用具体实验",
+      "search_keywords": [
+        "moiré Mott insulator room temperature stability",
+        "magic angle graphene correlated insulator room temperature",
+        "moiré MoS2 WSe2 Hubbard temperature dependence experimental"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "BSV驱动HHG中增强倍数相对于经典相干光对照的实验基准",
+      "missing_evidence": "缺少BSV驱动HHG与经典相干光驱动HHG的对照实验文献，特别是固体体系中的QEF实测值",
+      "search_keywords": [
+        "bright squeezed vacuum HHG coherent state comparison experiment",
+        "BSV vs coherent state solid HHG enhancement",
+        "quantum advantage HHG experimental benchmark"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "BSV驱动固体HHG的莫尔体系（Mott绝缘相）增强因子QEF理论预测",
+      "missing_evidence": "缺少BSV驱动莫尔Mott绝缘体HHG的QEF理论预测文献，特别是g2光子统计与Hubbard U/W耦合的定量增强",
+      "search_keywords": [
+        "BSV driven moiré HHG enhancement theory",
+        "quantum light Mott insulator HHG prediction",
+        "nonclassical light correlated solid HHG yield"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "150 mrad相位分辨指标的物理意义与132 mrad实测性能的对齐依据",
+      "missing_evidence": "缺少HHG相位分辨指标（150 mrad vs 132 mrad）的实验依据或文献对标，跨章节目标与实际测量口径不一致",
+      "search_keywords": [
+        "high harmonic generation phase resolution 150 mrad experimental",
+        "HHG phase retrieval accuracy benchmark",
+        "attosecond pulse phase resolution measurement literature"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "量子Fisher信息在HHG光谱反演Berry曲率/量子度量协议中应用",
+      "missing_evidence": "缺少QFI应用于HHG反演量子几何量的理论与实验文献，特别是固体能带量子度量的QFI标定",
+      "search_keywords": [
+        "quantum Fisher information HHG spectroscopy",
+        "quantum metric Berry curvature HHG reconstruction",
+        "Fisher information attosecond spectroscopy solid"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "BSV光子统计（g2）在HHG非线性过程中的保持/演化行为",
+      "missing_evidence": "缺少BSV驱动HHG输出光场g2的演化测量文献，特别是量子关联是否在多光子级联过程中保持",
+      "search_keywords": [
+        "photon statistics preservation high harmonic generation",
+        "g2 evolution HHG nonlinear process",
+        "quantum correlations transfer harmonic generation"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "BSV源工程参数（压缩dB、重复频率、稳定性）的实验基线",
+      "missing_evidence": "缺少BSV源作为HHG驱动源的工程参数文献，缺少与超快激光同步、聚焦参数兼容性的实验依据",
+      "search_keywords": [
+        "bright squeezed vacuum source high harmonic driver",
+        "cavity enhanced BSV femtosecond pulse HHG",
+        "squeezed vacuum attosecond experiment parameters"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Plan B失效阈值的物理合理性依据",
+      "missing_evidence": "缺少Plan B触发判据（QEF<2、双光路干涉可见度<0.7等）的物理依据引文，各阈值需要有同行评审的实验/理论支撑",
+      "search_keywords": [
+        "quantum enhancement threshold experimental criterion",
+        "visibility threshold interference quantum light",
+        "Plan B fallback strong field spectroscopy criterion"
+      ],
+      "priority": "low"
+    }
+  ]
+}

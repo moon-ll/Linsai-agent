@@ -1,0 +1,150 @@
+{
+  "proposal_id": "general-mos2-20260905",
+  "cluster_id": "cl_20260905_3b988a",
+  "entries": [
+    {
+      "source_id": "paper:2025-2504.02567-high-harmonic-generation-in-monolayer-mos2-controlled-by-res",
+      "title": "High harmonic generation in monolayer MoS2 controlled by resonant and near-resonant pulses on ultrashort time scales",
+      "summary": "该工作实验研究了单层MoS2中的非微扰高次谐波产生（HHG），通过谐振与近谐振脉冲预激发，在超短时间尺度上实现了对紫外波段谐波发射的有效调控。研究揭示了激发光与MoS2激子/跃迁共振对固态HHG产率和超快动力学的操控机制，为二维材料中相干极紫外/紫外光源的主动控制提供了新途径。",
+      "path": "",
+      "added_via": "cluster:cl_20260905_3b988a",
+      "added_at": "2026-10-18T02:40:30Z"
+    },
+    {
+      "source_id": "paper:2020-2005.01718-high-order-nonlinear-optical-response-of-a-twisted-bilayer-g",
+      "title": "High-order nonlinear optical response of a twisted bilayer graphene",
+      "summary": "Tatsuhiko N. Ikeda 采用非微扰计算方法，证明扭转双层石墨烯在强激光驱动下存在单层及常规双层石墨烯均不具备的新型高次谐波产生通道，其物理机制归因于扭转结构引入的独特动力学对称性。",
+      "path": "knowledge/raw/papers/2020-2005.01718-high-order-nonlinear-optical-response-of-a-twisted-bilayer-g.md",
+      "added_via": "cluster:cl_20260905_3b988a",
+      "added_at": "2026-10-18T02:40:30Z"
+    },
+    {
+      "source_id": "paper:2022-2212.02354-high-harmonic-generation-from-artificially-stacked-2d-crysta",
+      "title": "High-harmonic generation from artificially stacked 2D crystals",
+      "summary": "通过人工堆叠二维晶体（扭转角工程）实现强场高次谐波产生，实验观测到相干的逐层累积效应，揭示堆叠构型对谐波强度与偏振的调控规律，为扭转ronics时代的强场非线性光学奠定实验基础。",
+      "path": "knowledge/raw/papers/2022-2212.02354-high-harmonic-generation-from-artificially-stacked-2d-crysta.md",
+      "added_via": "cluster:cl_20260905_3b988a",
+      "added_at": "2026-10-18T02:40:30Z"
+    },
+    {
+      "source_id": "paper:2024-2410.11541-dependence-of-high-harmonic-generation-in-twisted-bilayer-gr",
+      "title": "Dependence of high-harmonic generation in twisted bilayer graphene on laser pulse ellipticity",
+      "summary": "系统比较了AA堆垛、AB堆垛双层石墨烯与扭转双层石墨烯（TBG）在椭圆偏振强场驱动下的高次谐波生成（HHG），发现有限椭圆度反而可增强特定阶谐波（椭圆增强效应），并出现左/右旋椭圆光响应不对称的椭圆二向色性。二向色性在对称堆垛（AA/AB）中沿高对称取向被对称性禁戒，而在扭转结构中有限且大小与符号随扭转角变化，据此提出用HHG椭圆二向色性作为识别扭转角、堆垛构型与堆垛缺陷的光学指纹。",
+      "path": "knowledge/raw/papers/2024-2410.11541-dependence-of-high-harmonic-generation-in-twisted-bilayer-gr.md",
+      "added_via": "cluster:cl_20260905_3b988a",
+      "added_at": "2026-10-18T02:40:30Z"
+    },
+    {
+      "source_id": "paper:2021-2408.09364-high-order-harmonic-generation-from-twisted-bilayer-graphene",
+      "title": "High-order harmonic generation from twisted bilayer graphene driven by a midinfrared laser field",
+      "summary": "本文用长度规范半导体布洛赫方程（SBE）结合莫尔超晶格紧束缚能带，系统模拟了中红外强场驱动扭转双层石墨烯（tBLG）的高次谐波产生。核心发现是谐波产率与谱形对扭转角高度敏感：随扭转角减小、能带平带化（范霍夫奇点/魔角平带）显著增强谐波发射。结果表明 HHG 谱可作为读取 tBLG 莫尔能带结构的全光学强场探针。",
+      "path": "knowledge/raw/papers/2021-2408.09364-high-order-harmonic-generation-from-twisted-bilayer-graphene.md",
+      "added_via": "cluster:cl_20260905_3b988a",
+      "added_at": "2026-10-18T02:40:30Z"
+    },
+    {
+      "source_id": "paper:2024-2410.11542-dependence-of-high-harmonic-generation-in-twisted-bilayer-gr",
+      "title": "Dependence of high-harmonic generation in twisted bilayer graphene on laser pulse ellipticity",
+      "summary": "本文系统研究了AA、AB及扭曲双层石墨烯中高次谐波产生（HHG）对驱动激光椭圆率的依赖，发现不同堆垛构型表现出截然不同的椭圆率响应、谐波螺旋度与选择定则。结果表明椭圆率分辨的高次谐波谱学可作为非接触、超快识别双层石墨烯堆垛方式与堆垛缺陷（如局部扭转/错堆）的诊断工具。",
+      "path": "knowledge/raw/papers/2024-2410.11542-dependence-of-high-harmonic-generation-in-twisted-bilayer-gr.md",
+      "added_via": "cluster:cl_20260905_3b988a",
+      "added_at": "2026-10-18T02:40:30Z"
+    },
+    {
+      "source_id": "paper:2025-2510.16672-phase-matching-of-high-harmonic-generation-in-twisted-van-de",
+      "title": "Phase Matching of High Harmonic Generation in Twisted van der Waals Crystals",
+      "summary": "提出了扭曲范德华晶体中高次谐波相位匹配的普适理论：利用各层晶格面内取向对应的Pancharatnam-Berry（PB）几何相位（第q次谐波携带(q-1)θ的相位），通过设计层间扭转角使各层谐波相干相长，实现几何相位驱动的相位匹配。在扭转堆叠hBN中实验获得~4×10⁻⁵的五次谐波转换效率（固态纪录级），并实现纯圆偏振高次谐波发射。该工作将'扭转角'确立为固态HHG效率与偏振调控的新自由度。",
+      "path": "knowledge/raw/papers/2025-2510.16672-phase-matching-of-high-harmonic-generation-in-twisted-van-de.md",
+      "added_via": "cluster:cl_20260905_3b988a",
+      "added_at": "2026-10-18T02:40:30Z"
+    },
+    {
+      "source_id": "paper:2025-2508.16494-nonlinear-optical-spectroscopy-of-nodal-line-semimetals",
+      "title": "Nonlinear Optical Spectroscopy of Nodal-Line Semimetals",
+      "summary": "针对二维节线半金属 NbSi_xTe_2 建立了强场非线性光学（高次谐波）理论，发现其非点式滑移镜面对称性（镜面+分数平移）严格禁戒所有偶次谐波，且该选择定则不依赖于晶体取向。利用偏振依赖的谐波谱形与强度，进一步区分了间带与带内两种 HHG 机制各自的偏振指纹，提出节线半金属可作为对称性选择定则与机制甄别的非线性光谱平台。",
+      "path": "knowledge/raw/papers/2025-2508.16494-nonlinear-optical-spectroscopy-of-nodal-line-semimetals.md",
+      "added_via": "cluster:cl_20260905_3b988a",
+      "added_at": "2026-10-18T02:40:30Z"
+    },
+    {
+      "source_id": "paper:2026-2604.13901-contrasting-ultrafast-light-driven-electron-hole-interaction",
+      "title": "Contrasting ultrafast light-driven electron-hole interaction dynamics in monolayer MoS2 and metallic NbSe2",
+      "summary": "用含时Hartree屏蔽交换（TD-HSEX）项的多带密度矩阵方程（半导体布洛赫型框架），系统对比单层半导体MoS2与金属NbSe2中光驱动电子-空穴相互作用对强场高次谐波的影响。核心发现：MoS2中e-h相互作用强烈增强谐波产率并修改谐波相位与角分布，而NbSe2中产率增强较弱但相位变化显著，表明谐波相位是比产率更灵敏的关联/屏蔽探针；金属中强场带间载流子注入可用Keldysh隧穿率定性描述。",
+      "path": "knowledge/raw/papers/2026-2604.13901-contrasting-ultrafast-light-driven-electron-hole-interaction.md",
+      "added_via": "cluster:cl_20260905_3b988a",
+      "added_at": "2026-10-18T02:40:30Z"
+    },
+    {
+      "source_id": "paper:2024-110.115415-dependence-of-high-harmonic-generation-in-twisted-bilayer-gr",
+      "title": "Dependence of high-harmonic generation in twisted bilayer graphene",
+      "summary": "该文以扭转双层石墨烯（tBLG）为平台，系统研究驱动场椭圆率对高次谐波产率与谐波偏振态的调控，证明椭圆率是独立于扭角的一个外场'旋钮'。结合扭角依赖的紧束缚能带与半导体布洛赫方程模拟，揭示椭圆偏振驱动在莫尔各向异性能带下可维持乃至增强特定阶次的谐波效率，并重整发射谐波的偏振椭圆。结果为莫尔体系的强场相干调控和全光学读取扭角/对称性信息提供了可行方案。",
+      "path": "knowledge/raw/papers/2024-110.115415-dependence-of-high-harmonic-generation-in-twisted-bilayer-gr.md",
+      "added_via": "cluster:cl_20260905_3b988a",
+      "added_at": "2026-10-18T02:40:30Z"
+    },
+    {
+      "source_id": "paper:2026-2603.19875-influence-of-coulomb-correlations-on-high-harmonic-generatio",
+      "title": "Influence of Coulomb correlations on high harmonic generation in monolayer TMDCs",
+      "summary": "本文基于第一性原理实时含时密度泛函理论（TDDFT）系统研究库仑关联对单层MoS2等过渡金属硫族化合物（TMDC）高次谐波生成的定量影响：在离共振中红外驱动下，电子-空穴库仑关联使HHG强度相对独立粒子近似增强约两个数量级；在共振激发下，驱动场与激子共振强耦合，产生谱线被强烈展宽与重整的宽谱'修饰谐波'（dressed harmonics）。结果表明在二维弱屏蔽、强激子体系中，独立粒子图像与经典固态三步模型会严重失真，库仑关联是固态HHG建模的必要要素。",
+      "path": "knowledge/raw/papers/2026-2603.19875-influence-of-coulomb-correlations-on-high-harmonic-generatio.md",
+      "added_via": "cluster:cl_20260905_3b988a",
+      "added_at": "2026-10-18T02:40:30Z"
+    },
+    {
+      "source_id": "paper:2025-s10043-025-01020-8-tuning-high-harmonic-generation-via-interlayer-spacing-in-aa",
+      "title": "Tuning high-harmonic generation via interlayer spacing in AA-stacking bilayer MoS2",
+      "summary": "基于多带半导体布洛赫方程（SBE）系统研究AA堆叠双层MoS2中高次谐波随层间距的演化，发现层间距扩展会引发破坏性量子干涉并在谐谱中形成最小值。该工作确立了层间距作为一个独立的结构自由度，可用于主动调控固态HHG中多发射通道的量子干涉。",
+      "path": "knowledge/raw/papers/2025-s10043-025-01020-8-tuning-high-harmonic-generation-via-interlayer-spacing-in-aa.md",
+      "added_via": "cluster:cl_20260905_3b988a",
+      "added_at": "2026-10-18T02:40:30Z"
+    },
+    {
+      "source_id": "paper:2022-2109.04508-probing-electron-hole-coherence-in-strongly-driven-solids",
+      "title": "Probing Electron-Hole Coherence in Strongly-Driven Solids",
+      "summary": "在单层MoS2中用预泵浦光掺杂电子-空穴对，再以强中红外场驱动高次谐波，观测到谐波产率被系统性抑制且抑制幅度随谐波阶数升高而增强。结合含退相干的半导体Bloch方程模拟，将这一阶数依赖归因于电子-空穴对在驱动光周期内（亚周期尺度）的退相干及由此产生的Pauli阻塞效应。该工作确立了以HHG作为强驱动固体中电子-空穴相干性（退相干时间T2）探针的新范式。",
+      "path": "knowledge/raw/papers/2022-2109.04508-probing-electron-hole-coherence-in-strongly-driven-solids.md",
+      "added_via": "cluster:cl_20260905_3b988a",
+      "added_at": "2026-10-18T02:40:30Z"
+    },
+    {
+      "source_id": "paper:2025-2406.19770-quantum-interference-and-occupation-control-in-high-harmonic",
+      "title": "Quantum interference and occupation control in high harmonic generation from monolayer WS2",
+      "summary": "在单层WS2的中红外强场高次谐波实验中观测到随驱动场强增强的微扰—非微扰转变，并首次在该体系中呈现谐波峰分裂现象。峰分裂被归因于两类发射通道的量子干涉：局限于K/K'谷附近的载流子与被强场加速到横跨布里渊区大范围离域的载流子。通过调控载流子占据（相对布居）可主动控制干涉可见度与谐波谱形，为用HHG谱学读取子周期k空间载流子动力学提供了直接手段。",
+      "path": "knowledge/raw/papers/2025-2406.19770-quantum-interference-and-occupation-control-in-high-harmonic.md",
+      "added_via": "cluster:cl_20260905_3b988a",
+      "added_at": "2026-10-18T02:40:30Z"
+    },
+    {
+      "source_id": "paper:2024-2406.14320-many-body-enhancement-of-high-harmonic-generation-in-monolay",
+      "title": "Many-body enhancement of high-harmonic generation in monolayer MoS2",
+      "summary": "本文用基于非平衡格林函数的含时从头算GW（TD-aGW）方法自洽模拟单层MoS2的强场高次谐波产生，首次定量揭示电子-空穴相互作用（激子效应）与贝里曲率协同的多体增强机制。结果表明e-h吸引使贝里曲率驱动的垂直方向（垂直于驱动偏振的横向）谐波相对独立粒子近似增强可达数量级，而平行分量的多体修正小得多。该工作确立多体效应为二维材料HHG定量谱学与 Berry 几何性质强场探测中不可忽略的关键要素。",
+      "path": "knowledge/raw/papers/2024-2406.14320-many-body-enhancement-of-high-harmonic-generation-in-monolay.md",
+      "added_via": "cluster:cl_20260905_3b988a",
+      "added_at": "2026-10-18T02:40:30Z"
+    },
+    {
+      "source_id": "paper:2021-2107.09940-tunable-second-harmonic-generation-in-twisted-bilayer-graphe",
+      "title": "Tunable Second Harmonic Generation in Twisted Bilayer Graphene",
+      "summary": "首次实验观测到扭转双层石墨烯（tBLG）中随扭转角连续可调的二次谐波产生（SHG）：一般扭转角破坏层间反演对称性，使电偶极禁戒的 SHG 被激活。莫尔微带中的 van Hove 奇点随扭转角移动，当其与泵浦/倍频光子能量共振时 χ⁽²⁾ 显著增强，在 θ≈6° 处达到峰值 ~28×10⁻⁴ pm²/V。该工作确立了“转角”作为二维材料非线性光学响应的全新外场无关调控自由度。",
+      "path": "knowledge/raw/papers/2021-2107.09940-tunable-second-harmonic-generation-in-twisted-bilayer-graphe.md",
+      "added_via": "cluster:cl_20260905_3b988a",
+      "added_at": "2026-10-18T02:40:30Z"
+    },
+    {
+      "source_id": "paper:2021-2104.03311-high-order-harmonic-generation-from-twisted-bilayer-graphene",
+      "title": "High-order harmonic generation from twisted bilayer graphene driven by a midinfrared laser field",
+      "summary": "对扭转双层石墨烯（tBLG）建立含唯象去相干的紧束缚含时模型，模拟中红外强场驱动下的高次谐波产生，发现谐波效率随扭转角强烈变化，并在 ~10° 附近被显著抑制。提出将 HHG 的转角依赖谱作为指纹，全光重构层间跳跃衰减长度与去相干时间 T2 两个材料参数，为莫尔体系的非接触强场表征提供了理论方案。",
+      "path": "knowledge/raw/papers/2021-2104.03311-high-order-harmonic-generation-from-twisted-bilayer-graphene.md",
+      "added_via": "cluster:cl_20260905_3b988a",
+      "added_at": "2026-10-18T02:40:30Z"
+    },
+    {
+      "source_id": "paper:2020-2003.03201-high-order-nonlinear-optical-response-of-a-twisted-bilayer-g",
+      "title": "High-order nonlinear optical response of a twisted bilayer graphene",
+      "summary": "本文对扭转双层石墨烯（tBLG）的高阶非线性光学响应做了非微扰（密度矩阵+紧束缚）计算，发现在最小可公度扭转角 21.79° 下，高次谐波谱中出现单层与 AB 堆叠双层石墨烯均不存在的 (6m±2) 阶谐波（第 2、4、8、10…阶）。选择定则由扭转结构特有的动力学 C2y 对称性（C2y 旋转与半周期时间平移的复合操作）解析导出，表明扭转角是调控固体 HHG 频谱成分的对称性自由度。",
+      "path": "knowledge/raw/papers/2020-2003.03201-high-order-nonlinear-optical-response-of-a-twisted-bilayer-g.md",
+      "added_via": "cluster:cl_20260905_3b988a",
+      "added_at": "2026-10-18T02:40:30Z"
+    }
+  ]
+}

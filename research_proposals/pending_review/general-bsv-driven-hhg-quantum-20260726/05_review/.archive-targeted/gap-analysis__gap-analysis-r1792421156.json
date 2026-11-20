@@ -1,0 +1,51 @@
+{
+  "gaps": [
+    {
+      "claim": "§3.4 L61 声称脉冲 5 fs 延迟可实现\"亚光周期分辨\"且 1.5 μm 位移对应 150 mrad 锁相（800 nm, T=2.67 fs 时实际为 11.8 rad 与 150 mrad 相差约 80 倍）",
+      "missing_evidence": "缺少 BSV 驱动 HHG 中干涉仪双臂延迟分辨率与载波包络相位稳定性的实验文献支撑，特别是 800 nm 驱动下达到亚光周期（<2.67 fs）级干涉分辨的已发表数据，以及 mrad 级相位锁定精度的技术实现依据",
+      "search_keywords": [
+        "sub-cycle resolution high harmonic generation",
+        "interferometric stability HHG",
+        "carrier-envelope phase locking HHG",
+        "delay precision attosecond interferometry",
+        "fringe phase stability high harmonic"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3.2 L19 声称本方案峰值强度与 Rasputnyi 等报道值\"同量级\"（实际本方案 5×10^11 W/cm² 与文献 ~1.3×10^13 W/cm² 差约 25 倍）",
+      "missing_evidence": "缺少 Rasputnyi 等关于 TMDC 高次谐波产生实验峰值强度的精确数值及其标定方法的引用，也缺少其他 TMDC HHG 实验组（Ghimire、Schubert 等）峰值强度的横向对比数据来正确定位本方案强度档位",
+      "search_keywords": [
+        "Rasputnyi high harmonic TMDC peak intensity",
+        "transition metal dichalcogenide HHG intensity",
+        "Ghimire monolayer MoS2 HHG",
+        "Schubert TMDC high harmonic generation experimental",
+        "TMDC strong-field HHG damage threshold"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§3.4 L57 中 N_fringe 有效光子计数与 δ_V=√(2/N) 条纹反差不确定度公式缺乏加权定义",
+      "missing_evidence": "缺少高次谐光谱中条纹反差（fringe visibility）、有效光子计数（effective photon count）及其统计不确定度的标准文献定义，特别是涉及多通道加权（波长/能量/角度 bin）下的推广公式，以及 HHG 单帧计数下限的实验依据",
+      "search_keywords": [
+        "fringe visibility formula photon count uncertainty",
+        "two-source interferometry visibility statistics",
+        "HHG interference fringe visibility measurement",
+        "effective photon number weighted definition",
+        "shot-noise-limited fringe contrast HHG"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§3.5 L69/§3.6 L85 引用 [27]（PRA Letters）与 [18]（端点 75–360）作为上轮未尽事项未挂终核标记",
+      "missing_evidence": "缺少 [27] 在 Physical Review Letters/PRA 中的确切卷期页码核实，以及文献 [18] 第 75–360 端点数据来源的二级核验文献",
+      "search_keywords": [
+        "Physical Review Letters high harmonic generation BSV",
+        "TMDC HHG review 2024 spectral range",
+        "reference 18 high harmonic review endpoint 75 360"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "scheme"
+}

@@ -1,0 +1,34 @@
+{
+  "gaps": [
+    {
+      "claim": "莫尔关联态的栅压或光激发静态调控已有研究先例。",
+      "missing_evidence": "现有引文[14]Hu等关于声子耦合高次谐波的研究不能支撑该论点。需为“栅压调控”和“光激发调控”分别配置直接涉及莫尔关联态、谷赝自旋序或莫尔激子态调控的文献；可核验并改引[25]Xiong等2024年工作和[26]Wu等2025年工作，同时确保每项调控方式与对应文献实际内容一致。若两类先例并非均有直接证据，应收窄论断。",
+      "search_keywords": [
+        "moiré correlated states gate voltage tuning valley pseudospin order",
+        "moiré exciton electrostatic tuning valley polarization",
+        "photoinduced control moiré correlated states",
+        "Xiong 2024 tunable valley pseudospin order moiré",
+        "Wu 2025 moiré exciton valley polarization tuning",
+        "栅压调控 莫尔关联态 谷赝自旋序",
+        "光激发调控 莫尔激子 谷极化"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "截至2026年9月，利用周期场主动调控莫尔关联态或相关强场高次谐波过程尚无公开报道。",
+      "missing_evidence": "需要可复核的优先权检索记录，而不是仅增加“尚无报道”的措辞。检索应覆盖公开期刊和预印本，明确数据库、检索式、检索截止日期、纳入与排除标准，并区分周期场主动驱动与静态栅压、光激发、衬底效应及电子—声子耦合等相近工作。还应列出最接近的前置研究，并将结论表述为“在所检索范围内未见报道”，避免绝对化断言。",
+      "search_keywords": [
+        "periodic field active control moiré correlated states",
+        "Floquet engineering moiré correlated materials",
+        "AC electric field tuning moiré excitons",
+        "periodic driving valley pseudospin moiré",
+        "moiré material strong-field high-harmonic generation control",
+        "周期场主动调控莫尔关联态",
+        "莫尔材料 Floquet 谷赝自旋调控",
+        "莫尔材料 强场 高次谐波 主动调控"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "content"
+}

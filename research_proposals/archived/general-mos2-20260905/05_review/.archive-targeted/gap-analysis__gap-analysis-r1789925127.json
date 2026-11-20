@@ -1,0 +1,105 @@
+{
+  "gaps": [
+    {
+      "claim": "Lee 等人[20]对单层 MoS₂ 的 HHG 测量给出 A、B 激子能量差约 160 meV",
+      "missing_evidence": "缺少 Lee 等人关于单层 MoS₂ HHG 中 A/B 激子能量差约 160 meV 的实验测量原始文献",
+      "search_keywords": [
+        "Lee MoS2 high harmonic generation exciton A B",
+        "MoS2 monolayer HHG exciton resonance 160 meV",
+        "monolayer MoS2 high harmonic A exciton B exciton energy splitting"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Liu 等人[21]早期 MoS₂ HHG 实验与 Lee [20] 160 meV 能量窗口一致",
+      "missing_evidence": "缺少 Liu 等人对单层/少层 MoS₂ HHG 早期实验测量 A/B 激子响应的文献",
+      "search_keywords": [
+        "Liu MoS2 high harmonic generation early experiment",
+        "MoS2 few-layer HHG exciton resonant excitation visible",
+        "Liu monolayer TMD high harmonic generation exciton"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "1.88/2.04 eV±100 meV（624—698 nm）双脉冲分别激发 A、B 激子的实验依据",
+      "missing_evidence": "缺少 MoS₂ A激子（1.88 eV）、B 激子（2.04 eV）双脉冲独立激发 HHG 失谐控制的实验/理论文献",
+      "search_keywords": [
+        "MoS2 A exciton B exciton dual pulse HHG detuning",
+        "two-color visible pump MoS2 high harmonic exciton selectivity",
+        "MoS2 exciton selective excitation HHG 660 nm 608 nm"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Patra[31] 关于扭转 MoS₂ 同质双层 SHG C₃ 对称与几何锁定的实验/理论结果（被三次复用，需要首现全述与后文回指）",
+      "missing_evidence": "缺少 Patra 等人关于扭转同质双层 MoS₂ SHG 张量 χ_xxx 在 C₃ 点群下行为、几何锁相 φ_0 与扭转角依赖关系的完整文献",
+      "search_keywords": [
+        "Patra twisted homobilayer MoS2 second harmonic generation",
+        "Patra Cocchi MoS2 SHG C3 symmetry geometric locking",
+        "twisted bilayer MoS2 chi_xxx SHG tensor rotational anisotropy"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Molinero[32] 关于莫尔/扭转体系 HHG 计算的四次复用（需要首现全述后文回指）",
+      "missing_evidence": "缺少 Molinero 等人关于扭转/莫尔体系高次谐波产生计算（特别是 DMRG/连续模型能带结构与 HHG 频谱）的原始文献",
+      "search_keywords": [
+        "Molinero moire HHG calculation twisted bilayer",
+        "Molinero Mrudul moire high harmonic generation theory",
+        "continuum moire tight-binding HHG Molinero benchmark"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "[16] 已刊 APL Photonics 论文（扭转 MoS₂ HHG）与预印本 arXiv:2504.02567 的关系",
+      "missing_evidence": "缺少已发表于 APL Photonics 的扭转 MoS₂/WSe₂ HHG 实验文献与对应 arXiv 预印本版本对照",
+      "search_keywords": [
+        "APL Photonics twisted MoS2 high harmonic generation",
+        "Peterka MoS2 HHG APL Photonics 2023 2024",
+        "twisted bilayer MoS2 WSe2 HHG experiment APL"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "TBG 零假设判据三口径（α_syn>0.15、超 2σ 噪声底、检测下限以下）的实验依据",
+      "missing_evidence": "缺少 TBG/扭转双层 graphene 中 HHG 协同产率 α_syn 的实验测量基准值与噪声底（σ_Ω）的标定文献",
+      "search_keywords": [
+        "twisted bilayer graphene HHG cooperativity signal",
+        "TBG magic angle high harmonic generation experimental",
+        "twisted bilayer graphene HHG yield ratio baseline sigma noise"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Q1 检验对象需覆盖5—15 阶含偶阶，以偶阶存在性判别 D₃d（含 i 偶阶禁戒）vs C₃/C₃v 的选择定则依据",
+      "missing_evidence": "缺少 D₃d 点群（含反演对称）偶阶谐波禁戒 vs C₃/C₃v 点群偶阶允许的群论选择定则与实验验证文献",
+      "search_keywords": [
+        "D3d inversion symmetry even harmonic selection rule forbidden",
+        "MoS2 2H D3d even harmonic parity forbidden",
+        "C3 C3v point group even harmonic generation allowed"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "扭转 MoS₂/WSe₂ 异质结中破坏垂直二重轴与三面 σ_d（含 i）导致偶阶谐波解禁的群论依据",
+      "missing_evidence": "缺少扭转破坏二重轴 C₂ 与对角镜面 σ_d、保留/破坏反演 i 对谐波选择定则影响的群论推导与实验文献",
+      "search_keywords": [
+        "twisted bilayer broken C2 axis sigma_d mirror harmonic selection rule",
+        "twisted homobilayer TMD parity breaking even harmonic",
+        "C2 sigma_d inversion symmetry breaking HHG parity"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Mrudul 名字拼写统一（评审指出 Mrudel ≠ Mrudul）",
+      "missing_evidence": "缺少 Mrudul 等人关于扭转 TMD HHG 偏振依赖与 Berry 曲率反演的原始文献以确认正确作者名",
+      "search_keywords": [
+        "Mrudul twisted transition metal dichalcogenide high harmonic",
+        "Mrudul MoS2 WSe2 HHG polarization Berry curvature",
+        "Mrudul Kumar Gupta moire HHG theory"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

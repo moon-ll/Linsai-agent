@@ -1,0 +1,49 @@
+{
+  "gaps": [
+    {
+      "claim": "国内莫尔超晶格强场超快光学研究几乎空白",
+      "missing_evidence": "rationale.md §1.2 标题为'国内外研究现状'但实质内容几乎全是国外文献，国内研究仅提及1次（Zhou 2023），缺少国内实验组在莫尔超晶格强场非线性光学、阿秒科学方面的系统性研究现状",
+      "search_keywords": [
+        "moire superlattice strong field China",
+        "twisted bilayer ultrafast optics Chinese group",
+        "solid-state high harmonic generation China group",
+        "莫尔材料 强场 超快 中国",
+        "moire heterostructure nonlinear optics domestic"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "TDDFT与紧束缚模型在莫尔体系强场计算中的效率对比缺乏基准数据",
+      "missing_evidence": "申请书中声称采用RT-TDDFT降阶框架但未提供计算成本基准——莫尔超晶格大元胞RT-TDDFT的CPU hours scaling、计算可行性论证缺失；tight-binding Bloch方程在莫尔体系强场下的计算效率对比数据未引用",
+      "search_keywords": [
+        "twisted bilayer real-time TDDFT scaling",
+        "TBG TDDFT computational cost benchmark",
+        "moire superlattice multiscale electronic structure cost",
+        "TDDFT tight-binding comparison strong field solid"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "半导体布洛赫方程(SBE)对莫尔超晶格的适用性未经验证",
+      "missing_evidence": "申请书提出用SBE描述莫尔超晶格强场非线性响应，但SBE interband coupling在莫尔平带结构中的饱和强场极限、适用性边界条件无文献支撑；tight-binding Bloch方程与SBE在莫尔体系中的差异对比无参考文献",
+      "search_keywords": [
+        "semiconductor Bloch equation moire superlattice",
+        "SBE moire heterostructure validity",
+        "tight-binding Bloch equation twisted bilayer applicability",
+        "莫尔超晶格 半导体布洛赫方程 适用性"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "光场调控滑移铁电的超快切换时间尚无实验数据",
+      "missing_evidence": "申请书提出'光场调控层间滑移实现铁电极化超快翻转'，但interlayer sliding ferroelectric ultrafast dynamics的实验观测、femtosecond切换时间数据、以及光场直接驱动滑移的实验先例均缺失",
+      "search_keywords": [
+        "sliding ferroelectricity ultrafast laser switching time",
+        "interlayer sliding femtosecond dynamics",
+        "optical field control sliding ferroelectric bilayer",
+        "滑移铁电 超快 光场 调控"
+      ],
+      "priority": "high"
+    }
+  ]
+}

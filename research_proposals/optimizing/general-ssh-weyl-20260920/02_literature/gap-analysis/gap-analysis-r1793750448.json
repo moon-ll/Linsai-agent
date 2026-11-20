@@ -1,0 +1,27 @@
+{
+  "gaps": [
+    {
+      "claim": "content §2.5 L49：T≥0.3 的预标定阈值依据 Tornow[42] 的宇称规则给出",
+      "missing_evidence": "Tornow[42] 原文仅提供定性的正比关系，并无 0.3 这一数值的推导或实验依据；当前引用属于证据强度不足的过度支撑（违 no_exagg）。需补充：(1) Tornow 工作原文核实其定量范围；(2) 检索是否存在给出具体阈值/定量的宇称选择定则或对称性分析文献（含本体系即 SSH/Weyl 半金属类体系）；(3) 若确无量化文献，则降级为'量级预估'表述并以双基线扫描回填。",
+      "search_keywords": [
+        "Tornow parity selection rule high harmonic generation",
+        "parity symmetry HHG threshold selection rules solids",
+        "HHG symmetry-based scaling threshold Weyl semimetal",
+        "高次谐波 宇称 选择定则 阈值"
+      ],
+      "priority": "low"
+    },
+    {
+      "claim": "scheme §3.1.2 L149-151：THz 弱场校核窗沿用强场 T₂=1.5 fs，且该窗承担 R²≥0.9 的响应线性校核",
+      "missing_evidence": "所引 Klimmer[38] 在微扰区报告 T₂≈24 fs，与方案采用的 1.5 fs 相差约 16 倍，直接影响弱场校核（R²≥0.9）的可信度；缺少数值/实验文献支撑在 THz 弱场、低温线性响应区采用 1.5 fs 退相时间。需补充：(1) THz 频段或微扰区固体退相时间 T₂ 的实验/数值文献（典型量级）；(2) T₂ 对线性响应拟合优度影响的已有研究或本体系类似工作的 T₂ 选取依据；(3) 支撑'THz 窗 T₂ 按 5–25 fs 扫描'这一补救设计的文献先例（参数扫描敏感性分析惯例）。",
+      "search_keywords": [
+        "THz-driven solids dephasing time T2 linear response",
+        "Klimmer perturbative regime high harmonic T2 24 fs",
+        "terahertz spectroscopy decoherence time topological semimetal",
+        "dephasing time sensitivity HHG numerical simulation"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "full_review"
+}

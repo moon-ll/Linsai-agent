@@ -1,0 +1,91 @@
+{
+  "proposal_id": "general-floquet-20261107",
+  "cluster_id": "orphan-route-2026-11-15",
+  "clusters": [
+    "orphan-route-2026-11-15",
+    "cl_20261115_c9a84c",
+    "cl_20261115_cfd55a"
+  ],
+  "entries": [
+    {
+      "source_id": "paper:2022-2201.06243-low-frequency-divergence-of-circular-photomagnetic-effect-in",
+      "title": "Low-Frequency Divergence of Circular Photomagnetic Effect in Topological Semimetals",
+      "summary": "研究拓扑半金属中高赝自旋（j≥1，如pseudospin-1与Rarita-Schwinger-Weyl）费米子在圆偏振光下的圆光磁效应/逆法拉第效应（IFE），发现其轨道矩贡献在低频以ω^-1发散标度增长，与常规自旋1/2体系的有限饱和行为形成鲜明对比。发散的响应张量解析地关联能带Chern数，使光致磁化成为能带拓扑的直接光学探针。估算表明红外光驱动下诱导磁化可达约1 μB/nm³，显著高于常规材料中的IFE响应。",
+      "path": "knowledge/raw/papers/2022-2201.06243-low-frequency-divergence-of-circular-photomagnetic-effect-in.md",
+      "added_via": "cluster:orphan-route-2026-11-15",
+      "added_at": "2026-11-15T00:22:51Z"
+    },
+    {
+      "source_id": "paper:2026-2605.22294-odd-parity-chiral-magnons-in-collinear-antiferromagnetic-mul",
+      "title": "Odd-Parity Chiral Magnons in Collinear Antiferromagnetic Multiferroics",
+      "summary": "提出在共线反铁磁多铁体中，亚晶格内的 Dzyaloshinskii-Moriya 相互作用（DMI）等效产生反手性（antichiral）Haldane 通量，使自旋守恒的磁振子能带获得奇宇称手性劈裂（p 波、f 波直至无节点形式）。通过磁群对称性分析给出了哪些共线反铁磁多铁体系统能支持该奇宇称手性磁振子的分类判据。进一步证明铁电软模与 DMI 的耦合提供了电场调控手性带劈裂幅度/符号以及手性磁振子输运的外场旋钮。",
+      "path": "knowledge/raw/papers/2026-2605.22294-odd-parity-chiral-magnons-in-collinear-antiferromagnetic-mul.md",
+      "added_via": "cluster:cl_20261115_c9a84c",
+      "added_at": "2026-11-15T03:47:03Z"
+    },
+    {
+      "source_id": "paper:2026-2601.16052-electric-switchable-chiral-magnons-in-pt-symmetric-antiferro",
+      "title": "Electric-Switchable Chiral Magnons in PT-Symmetric Antiferromagnets",
+      "summary": "通过磁群论对称性分析系统识别出一类整体 PT 对称、但磁性亚晶格具有隐藏偶极的反铁磁绝缘体，外电场可与隐藏偶极耦合破坏磁振子亚晶格对称性，产生巨手性劈裂。在 Cr₂CCl₂/Cr₂CBr₂ 中，0.2 V/Å 电场下手性劈裂达 20 meV，相当于 200 T 外磁场的塞曼效应，由此实现磁振子自旋流的可逆、非易失纯电学开关，为反铁磁磁振子器件提供了电控手性自由度。",
+      "path": "knowledge/raw/papers/2026-2601.16052-electric-switchable-chiral-magnons-in-pt-symmetric-antiferro.md",
+      "added_via": "cluster:cl_20261115_c9a84c",
+      "added_at": "2026-11-15T03:47:03Z"
+    },
+    {
+      "source_id": "paper:2026-2606.05837-odd-parity-magnons-in-the-haldane-hubbard-model-from-topolog",
+      "title": "Odd-parity magnons in the Haldane-Hubbard model from topological exciton condensation",
+      "summary": "在半满Haldane-Hubbard模型中，作者证明具有奇宇称（f波）内禀结构的拓扑激子发生凝聚，驱动体系从拓扑带绝缘体进入共线Néel反铁磁态，从而把该体系中磁序的微观起源归结为拓扑激子凝聚。在该Néel态上，自旋激发表现为奇宇称磁振子，其两支能带以f波角依赖方式劈裂，直接映射凝聚序参量的对称性。进一步发现电子体能隙的闭合与磁振子能带的拓扑转变一一对应，建立了电子拓扑与磁振子拓扑之间的定量联系。",
+      "path": "knowledge/raw/papers/2026-2606.05837-odd-parity-magnons-in-the-haldane-hubbard-model-from-topolog.md",
+      "added_via": "cluster:cl_20261115_c9a84c",
+      "added_at": "2026-11-15T03:47:03Z"
+    },
+    {
+      "source_id": "paper:2026-2603.05415-odd-parity-wave-magnons-and-nonrelativistic-thermal-edelstei",
+      "title": "Odd-Parity-Wave Magnons and Nonrelativistic Thermal Edelstein Effect",
+      "summary": "在非共线奇宇称磁体（含交替磁类对称性）中预言磁振子能带携带奇宇称（p波/f波）的动量空间自旋织构，其来源是非共线磁序对自旋旋转对称性的破缺而非自旋轨道耦合。基于该自旋织构提出非相对论磁振子热Edelstein效应：温度梯度使磁振子布居在动量空间发生反对称偏移，各态自旋矩不再成对抵消，从而线性于温度梯度地诱导非平衡磁化。该效应幅度由交换能标设定，预期显著超过依赖自旋轨道耦合的传统（相对论）Edelstein响应。",
+      "path": "knowledge/raw/papers/2026-2603.05415-odd-parity-wave-magnons-and-nonrelativistic-thermal-edelstei.md",
+      "added_via": "cluster:cl_20261115_c9a84c",
+      "added_at": "2026-11-15T03:47:03Z"
+    },
+    {
+      "source_id": "paper:2026-2609.24182-ferroelectric-switching-of-odd-parity-magnon-spin-splitting",
+      "title": "Ferroelectric switching of odd-parity magnon spin splitting",
+      "summary": "本文在多铁BiFeO3中给出了奇宇称磁振子自旋劈裂可被铁电极化在室温下确定性切换的输运证据：电场翻转极化使磁振子自旋劈裂（自旋-动量锁定）反号，从而反转非互易磁振子自旋流的方向。基于该电控手性磁振子流，作者在无外磁场条件下确定性翻转了相邻垂直铁磁体，并演示了以铁电极化与磁化为双输入的XNOR存内逻辑。",
+      "path": "knowledge/raw/papers/2026-2609.24182-ferroelectric-switching-of-odd-parity-magnon-spin-splitting.md",
+      "added_via": "cluster:cl_20261115_c9a84c",
+      "added_at": "2026-11-15T03:47:03Z"
+    },
+    {
+      "source_id": "paper:2026-2606.23806-nonrelativistic-spin-orbit-coupling-effects-in-odd-parity-co",
+      "title": "Nonrelativistic Spin-Orbit-Coupling Effects in Odd-Parity Coplanar Magnets",
+      "summary": "本文提出在奇宇称（反演破缺）共面磁体中，共面磁有序与晶格对称性的协同可在完全无需原子自旋轨道耦合的条件下产生非相对论性自旋轨道耦合效应，实现Rashba、Weyl与Dresselhaus三种典型自旋劈裂。该劈裂能标由交换相互作用而非相对论SOC决定，且其类型与强度可通过磁化/尼尔矢量取向加以切换，为弱SOC反铁磁与交变磁体中自旋流及超快自旋动力学的非相对论调控提供了新通道。",
+      "path": "knowledge/raw/papers/2026-2606.23806-nonrelativistic-spin-orbit-coupling-effects-in-odd-parity-co.md",
+      "added_via": "cluster:cl_20261115_c9a84c",
+      "added_at": "2026-11-15T03:47:03Z"
+    },
+    {
+      "source_id": "paper:2026-2607.27335-parity-selective-spin-splitting-in-coplanar-antiferromagnets",
+      "title": "Parity-selective spin splitting in coplanar antiferromagnets via bichromatic driving",
+      "summary": "提出双频 (ω–nω) Floquet 驱动可在共面反铁磁体中动态绕过平衡态宇称对称性对自旋劈裂的禁戒，在原本受保护而自旋简并的能带（特定宇称的高对称点/线）诱导非零自旋劈裂。谐波阶数的奇偶选择性与两色场相对相位构成'宇称选择性'的调控旋钮，生成平衡态不允许的非对称自旋纹理，为反铁磁自旋电子学提供全光学、可逆的对称性工程方案。",
+      "path": "knowledge/raw/papers/2026-2607.27335-parity-selective-spin-splitting-in-coplanar-antiferromagnets.md",
+      "added_via": "cluster:cl_20261115_cfd55a",
+      "added_at": "2026-11-15T03:47:03Z"
+    },
+    {
+      "source_id": "paper:2026-2609.01844-symmetry-selective-nonrelativistic-spin-splitting-in-antifer",
+      "title": "Symmetry-selective nonrelativistic spin splitting in antiferromagnets driven by coherent phonons",
+      "summary": "基于第一性原理计算证明，层状反铁磁体MnPS3中THz相干声子可动态诱导非相对论（不依赖自旋轨道耦合）自旋劈裂，且劈裂的对称性形态（s波或d波）由被驱动声子模式的不可约表示决定。通过THz泵浦光偏振沿红外活性模式选择定则实现声子模式选择性激发，从而对自旋劈裂的波形态做超快、可逆的开关与切换，提出了一种不依赖SOC的动态自旋纹理调控方案。",
+      "path": "knowledge/raw/papers/2026-2609.01844-symmetry-selective-nonrelativistic-spin-splitting-in-antifer.md",
+      "added_via": "cluster:cl_20261115_cfd55a",
+      "added_at": "2026-11-15T03:47:03Z"
+    },
+    {
+      "source_id": "paper:2026-2601.03358-light-induced-even-parity-unidirectionally-polarized-spin-sp",
+      "title": "Light-Induced Even-Parity Unidirectionally Polarized Spin Splitting in Coplanar Antiferromagnets",
+      "summary": "本文证明沿 z 入射的圆偏振光可动态解除共面反铁磁中联合反对称性 C̄2z∥T 对自旋简并的保护，从而在保持空间反演的体系中诱导出奇宇称（Rashba 型）磁体所缺失的偶宇称对应体——d 波自旋劈裂织构，其自旋极化沿固定轴单向排列（非缠绕式），符号与大小由光子螺旋度、场强与频率在飞秒尺度上可调且不改变静态磁序。在此基础上提出泵浦-探测时间分辨自旋分辨 ARPES 光电流（螺旋度依赖的非对称性）探测方案，为超快写入与读出瞬态自旋织构提供了途径。",
+      "path": "knowledge/raw/papers/2026-2601.03358-light-induced-even-parity-unidirectionally-polarized-spin-sp.md",
+      "added_via": "cluster:cl_20261115_cfd55a",
+      "added_at": "2026-11-15T03:47:03Z"
+    }
+  ]
+}

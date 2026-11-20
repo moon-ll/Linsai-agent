@@ -1,0 +1,32 @@
+{
+  "alerts": {
+    "panel_request_new:general-ssh-weyl-20260920:r4": {
+      "last_sent": "2026-11-16T00:01:13Z",
+      "message": "评审团请求：general-ssh-weyl-20260920 r4（0.84）已转评审团队列——主平台带：连续4轮评分在0.70-0.85 且每轮|Δ|<2%（当前0.84），自动循环边际收益趋零，转评审团深度修改。请在 CoPilot 会话发起亲审（panel_review --status 查看）"
+    },
+    "stuck:general-attosecond-streaking-20260822:general-attosecond-streaking-20260822-r4-method_manual-writer": {
+      "last_sent": "2026-11-16T02:01:43Z",
+      "message": "课题 general-attosecond-streaking-2 的 writer stuck（attempts=3）: 阶段2全部动作失败: revise:M1：TDSE 双通道耦合数值模拟（§关键参数与口径沿革、§分阶段模拟执行计划）,revise:M3：角积分位置灵敏探测器测量 → 两套实验平台分工与硬件配置,revise:M6：双变量误差依赖图谱标定 "
+    },
+    "digested_job:general-attosecond-streaking-20260822:general-attosecond-streaking-20260822-r4-method_manual-writer": {
+      "last_sent": "2026-11-16T04:01:03Z",
+      "message": "[已消化] 课题 general-attosecond-streaking-2 的 writer 失败已过冷却，retry 重置（repair_attempt 2/3），已重置 pending 待微调度器重派"
+    },
+    "stuck:general-chiral-hhg-20261101:general-chiral-hhg-20261101-r3-references-critic": {
+      "last_sent": "2026-11-16T04:01:03Z",
+      "message": "课题 general-chiral-hhg-20261101 的 critic stuck（attempts=3）: 超时(1500s)"
+    },
+    "stalled:general-berry-mnps3-rashba-20260816:": {
+      "last_sent": "2026-11-16T05:02:14Z",
+      "message": "课题 general-berry-mnps3-rashba-20260816 真停滞 153h（blocked，周末豁免 96h，净工时口径），5/26 job 完成，21 个 pending 未执行。建议：上游 failed job 阻塞：[]；可手动 promote 或修复上游失败（attempts 未用尽时等自动重试）"
+    },
+    "stuck:general-floquet-20261107:general-floquet-20261107-r3-scheme-critic": {
+      "last_sent": "2026-11-16T13:01:07Z",
+      "message": "课题 general-floquet-20261107 的 critic stuck（attempts=3）: 超时(1500s)"
+    },
+    "panel_request_new:general-berry-berry-20261107:r3": {
+      "last_sent": "2026-11-16T13:01:07Z",
+      "message": "评审团请求：general-berry-berry-20261107 r3（0.75）已转评审团队列——v7.1.8 r3 完成触发评审团（不依赖分数窗口）：已完成3轮自动优化（当前0.75），按用户目标'产出研究人员可执行的课题'转入评审团深度修改。请在 CoPilot 会话发起亲审（panel_review --status 查看）"
+    }
+  }
+}

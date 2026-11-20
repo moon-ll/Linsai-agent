@@ -1,0 +1,308 @@
+{
+ "s16_hanggi": [
+  {
+   "id": "cond-mat/0601260v1",
+   "title": "Controlling Nonlinear Stochastic Resonance by Harmonic Mixing",
+   "authors": [
+    "Gerhard Schmid",
+    "Peter Hanggi"
+   ],
+   "published": "2006"
+  },
+  {
+   "id": "quant-ph/9809088v1",
+   "title": "Floquet-Markov description of the parametrically driven, dissipative harmonic quantum oscillator",
+   "authors": [
+    "Sigmund Kohler",
+    "Thomas Dittrich",
+    "Peter Hänggi"
+   ],
+   "published": "1998"
+  },
+  {
+   "id": "0904.0356v3",
+   "title": "Shuttling heat across 1D homogenous nonlinear lattices with a Brownian heat motor",
+   "authors": [
+    "Nianbei Li",
+    "Fei Zhan",
+    "Peter Hanggi",
+    "Baowen Li"
+   ],
+   "published": "2009"
+  },
+  {
+   "id": "1612.09209v1",
+   "title": "Enhancing energy harvesting by coupling monostable oscillators",
+   "authors": [
+    "J. I. Pena Rossello",
+    "H. S. Wio",
+    "R. R. Deza",
+    "P. Hanggi"
+   ],
+   "published": "2016"
+  },
+  {
+   "id": "0909.3381v1",
+   "title": "Molecular wires acting as quantum heat ratchets",
+   "authors": [
+    "Fei Zhan",
+    "Nianbei Li",
+    "Sigmund Kohler",
+    "Peter Hänggi"
+   ],
+   "published": "2009"
+  },
+  {
+   "id": "1901.10439v1",
+   "title": "Tunable mass separation via negative mobility",
+   "authors": [
+    "Aleksandra Słapik",
+    "Jerzy Łuczka",
+    "Peter Hänggi",
+    "Jakub Spiechowicz"
+   ],
+   "published": "2019"
+  },
+  {
+   "id": "1710.10209v3",
+   "title": "Quantum Brownian motion under generalized position measurements: A converse Zeno scenario",
+   "authors": [
+    "L. Magazzù",
+    "P. Talkner",
+    "P. Hänggi"
+   ],
+   "published": "2017"
+  },
+  {
+   "id": "1203.6207v2",
+   "title": "Generalized Gibbs state with modified Redfield solution: Exact agreement up to second order",
+   "authors": [
+    "Juzar Thingna",
+    "Jian-Sheng Wang",
+    "Peter Hänggi"
+   ],
+   "published": "2012"
+  }
+ ],
+ "s16_evenorder": [],
+ "s21_nutting": [],
+ "s23_klemke2": [
+  {
+   "id": "1805.10453v1",
+   "title": "Polarization-state-resolved high-harmonic spectroscopy of solids",
+   "authors": [
+    "Nicolai Klemke",
+    "Nicolas Tancogne-Dejean",
+    "Giulio M. Rossi",
+    "Yudong Yang",
+    "Roland E. Mainz",
+    "Giuseppe Di Sciacca",
+    "Angel Rubio",
+    "Franz X. Kärtner",
+    "Oliver D. Mücke"
+   ],
+   "published": "2018"
+  },
+  {
+   "id": "2007.03944v1",
+   "title": "The role of intraband dynamics in the generation of circularly polarized high harmonics from solids",
+   "authors": [
+    "Nicolai Klemke",
+    "Nicolas Tancogne-Dejean",
+    "Angel Rubio",
+    "Franz X. Kärtner",
+    "Oliver D. Mücke"
+   ],
+   "published": "2020"
+  }
+ ],
+ "c12_bcd": [],
+ "c12_bcd_cr": [
+  {
+   "doi": "10.1021/acs.jpcc.6c01491.s001",
+   "title": "Substrate- and Growth-Dependent Second Harmonic Generation in Monolayer MoS2",
+   "first": "?",
+   "nauth": 0,
+   "container": "",
+   "vol": null,
+   "page": null,
+   "year": null
+  },
+  {
+   "doi": "10.1021/acsphotonics.6b00530.s001",
+   "title": "Impact of Selenium Doping on Resonant Second-Harmonic Generation in Monolayer MoS2",
+   "first": "?",
+   "nauth": 0,
+   "container": "",
+   "vol": null,
+   "page": null,
+   "year": null
+  },
+  {
+   "doi": "10.1021/acsnano.5c11386.s001",
+   "title": "Determining the Dipole Orientation of Second Harmonic Generation in 3R-MoS2 for Enhanced Nonlin",
+   "first": "?",
+   "nauth": 0,
+   "container": "",
+   "vol": null,
+   "page": null,
+   "year": null
+  }
+ ],
+ "c24_wu": [
+  {
+   "doi": "10.1103/physreva.94.063403",
+   "title": "Multilevel perspective on high-order harmonic generation in solids",
+   "first": "Wu",
+   "nauth": 4,
+   "container": "Physical Review A",
+   "vol": "94",
+   "page": "063403",
+   "year": 2016
+  },
+  {
+   "doi": "10.1103/physreva.91.043839",
+   "title": "High-harmonic generation from Bloch electrons in solids",
+   "first": "Wu",
+   "nauth": 5,
+   "container": "Physical Review A",
+   "vol": "91",
+   "page": "043839",
+   "year": 2015
+  },
+  {
+   "doi": "10.1103/physreva.93.043815",
+   "title": "Semiclassical-wave-function perspective on high-harmonic generation",
+   "first": "Mauger",
+   "nauth": 5,
+   "container": "Physical Review A",
+   "vol": "93",
+   "page": "043815",
+   "year": 2016
+  }
+ ],
+ "c26_ws": [
+  {
+   "doi": "10.1103/physrev.181.1364",
+   "title": "Stark Ladder in Solids? A Reply",
+   "first": "Wannier",
+   "nauth": 1,
+   "container": "Physical Review",
+   "vol": "181",
+   "page": "1364-1365",
+   "year": 1969
+  },
+  {
+   "doi": "10.1515/9783112498248-025",
+   "title": "Stark Effect of Wannier-Mott Excitons Due to Disorder",
+   "first": "Majerníková",
+   "nauth": 1,
+   "container": "May 1",
+   "vol": null,
+   "page": "251-258",
+   "year": 1974
+  },
+  {
+   "doi": "10.1016/0038-1098(74)91353-2",
+   "title": "Theory of stark ladders in the optical absorption of solids",
+   "first": "Rauh",
+   "nauth": 2,
+   "container": "Solid State Communications",
+   "vol": "15",
+   "page": "1239-1241",
+   "year": 1974
+  }
+ ],
+ "d20_nphys": {
+  "doi": "10.1038/s41567-024-02659-x",
+  "title": "High-harmonic generation by a bright squeezed vacuum",
+  "first": "Rasputnyi",
+  "nauth": 9,
+  "container": "Nature Physics",
+  "vol": "20",
+  "page": "1960-1965",
+  "year": 2024
+ },
+ "d15_cpc": {
+  "doi": "10.1016/j.cpc.2025.109958",
+  "title": "Semiconductor Bloch equations in Wannier gauge with well-behaved dephasing",
+  "first": "Thümmler",
+  "nauth": 5,
+  "container": "Computer Physics Communications",
+  "vol": "320",
+  "page": "109958",
+  "year": 2026
+ },
+ "d22_apb": {
+  "doi": "10.1007/s00340-025-08506-y",
+  "title": "High-harmonic generation in zinc oxide subjected to intense mid-infrared femtosecond laser pulse",
+  "first": "Obreshkov",
+  "nauth": 2,
+  "container": "Applied Physics B",
+  "vol": "131",
+  "page": "158",
+  "year": 2025
+ },
+ "d04_real": {
+  "doi": "10.1038/s41567-020-01052-8",
+  "title": "High-harmonic generation from topological surface states",
+  "first": "Bai",
+  "nauth": 9,
+  "container": "Nature Physics",
+  "vol": "17",
+  "page": "311-315",
+  "year": 2020
+ },
+ "d27_real": {
+  "doi": "10.1021/acs.nanolett.1c02145",
+  "title": "All-Optical Probe of Three-Dimensional Topological Insulators Based on High-Harmonic Generation by C",
+  "first": "Baykusheva",
+  "nauth": 12,
+  "container": "Nano Letters",
+  "vol": "21",
+  "page": "8970-8978",
+  "year": 2021
+ },
+ "d31_real": {
+  "doi": "10.1103/physreva.101.053411",
+  "title": "Structure gauges and laser gauges for the semiconductor Bloch equations in high-order harmonic gener",
+  "first": "Yue",
+  "nauth": 2,
+  "container": "Physical Review A",
+  "vol": "101",
+  "page": "053411",
+  "year": 2020
+ },
+ "d13_hu": [
+  {
+   "doi": "10.1021/acs.nanolett.5c03386.s001",
+   "title": "Conducting Domain Walls in van der Waals Ferroelectric NbOI2",
+   "first": "?",
+   "nauth": 0,
+   "container": "",
+   "vol": null,
+   "page": null,
+   "year": null
+  },
+  {
+   "doi": "10.1021/acsami.3c18018.s001",
+   "title": "Ambient Degradation Anisotropy and Mechanism of van der Waals Ferroelectric NbOI2",
+   "first": "?",
+   "nauth": 0,
+   "container": "",
+   "vol": null,
+   "page": null,
+   "year": null
+  },
+  {
+   "doi": "10.1021/acs.nanolett.6c02170.s001",
+   "title": "Air-Stable Bright Entangled Photon-Pair Source from Graphene-Encapsulated van der Waals Ferroel",
+   "first": "?",
+   "nauth": 0,
+   "container": "",
+   "vol": null,
+   "page": null,
+   "year": null
+  }
+ ]
+}

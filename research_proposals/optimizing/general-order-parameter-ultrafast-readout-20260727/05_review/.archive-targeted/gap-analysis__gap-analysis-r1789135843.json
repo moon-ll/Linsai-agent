@@ -1,0 +1,55 @@
+{
+  "gaps": [
+    {
+      "claim": "Long et al. de Haas-van Alphen 41.5T 测量判定 CrSb 为 g-wave 金属 altermagnet",
+      "missing_evidence": "缺少 Long CrSb dHvA 41.5T g-wave 对称性判定的原始文献引用条目（参考文献表中无 Long 2024/2025 dHvA CrSb 条目）",
+      "search_keywords": [
+        "Long CrSb de Haas-van Alphen 41.5T g-wave",
+        "CrSb dHvA bulk g-wave altermagnet",
+        "CrSb Fermi surface quantum oscillation g-wave symmetry"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Woodgate doublon local moment (DLM) 模型适用边界：高温区 HHG 信号消失",
+      "missing_evidence": "缺少 Woodgate DLM 原始文献条目，且该论断支撑着'可用温度窗口须预留'的设计约束",
+      "search_keywords": [
+        "Woodgate doublon local moment model",
+        "DLM doublon local moment Mott insulator Hubbard",
+        "Woodgate doublon moment Hubbard model"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "CrSb 序参量波型分类：d-wave 分裂幅度 vs g-wave (𝒴₄⁻³) 对称性判定",
+      "missing_evidence": "缺少 CrSb 序参量 d-wave/g-wave 对称性分类的综述与 ARPES 实验判定文献",
+      "search_keywords": [
+        "CrSb altermagnet d-wave g-wave symmetry",
+        "CrSb spin splitting symmetry classification",
+        "CrSb spin-resolved ARPES d-wave g-wave"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "CrSb 量子振荡约束动量几何（g-wave 序参量）",
+      "missing_evidence": "缺少 CrSb 量子振荡约束动量几何对称性的实验文献支撑",
+      "search_keywords": [
+        "CrSb quantum oscillation bulk altermagnet",
+        "CrSb Fermi surface de Haas-van Alphen",
+        "CrSb g-wave order parameter quantum oscillation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "DLM 适用温度边界（HHG 可用温度窗口须预留）的定量依据",
+      "missing_evidence": "缺少 DLM 模型适用温度上限的定量文献支撑",
+      "search_keywords": [
+        "doublon local moment high temperature boundary",
+        "DLM model temperature limit Mott insulator",
+        "Woodgate DLM applicable temperature range"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

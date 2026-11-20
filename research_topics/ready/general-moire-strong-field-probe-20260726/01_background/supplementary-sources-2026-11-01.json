@@ -1,0 +1,82 @@
+{
+  "proposal_id": "general-moire-strong-field-probe-20260726",
+  "cluster_id": "cl_20261029_895409",
+  "clusters": [
+    "cl_20261029_895409",
+    "cl_20261029_fb5c31"
+  ],
+  "entries": [
+    {
+      "source_id": "paper:2026-2609.02340-room-temperature-local-strain-control-of-moiré-excitons-in-m",
+      "title": "Room-temperature local strain control of moiré excitons in MoS2/WSe2 heterobilayers",
+      "summary": "本文报道在近0°/60°扭转的MoS2/WSe2异质双层中，利用AFM针尖诱导的局域应变在室温下激活并主动调控moiré俘获的层间激子（IXs）。~8 nm周期的moiré超晶格形成势阱将IXs空间局域化，抑制室温热退局域，而针尖应变通过形变势连续调谐IX跃迁能量，将其发射波长推至第二通信窗口（~1.3 μm）中心。该工作实现了纳米尺度的可逆激子调控，为室温可调谐量子激子器件（如单光子源/通信波段量子光源）奠定基础。",
+      "path": "knowledge/raw/papers/2026-2609.02340-room-temperature-local-strain-control-of-moiré-excitons-in-m.md",
+      "added_via": "cluster:cl_20261029_895409",
+      "added_at": "2026-11-01T02:40:45Z"
+    },
+    {
+      "source_id": "paper:2025-2511.03301-contactless-modulation-of-intralayer-and-interlayer-excitons",
+      "title": "Contactless Modulation of Intralayer and Interlayer Excitons in MoS2/WSe2 heterostructures with Acoustoelectric Fields",
+      "summary": "本文在MoS2/WSe2范德华异质结上利用声表面波（SAW）伴随的声电场，实现了层内激子与层间激子的非接触、动态调制。关键在于两种动量间接层间激子IX_K-Γ与IX_K-K（约120 meV动量谷间劈裂）对声电场呈现差异化响应，从而实现对电信波段O带与S带发射的独立调控。该方案无需栅极或金属电极接触即可驱动激子能量与强度的周期性调制，为可编程电信波段量子光源与vdW异质结激子调控提供了新途径。",
+      "path": "knowledge/raw/papers/2025-2511.03301-contactless-modulation-of-intralayer-and-interlayer-excitons.md",
+      "added_via": "cluster:cl_20261029_895409",
+      "added_at": "2026-11-01T02:40:45Z"
+    },
+    {
+      "source_id": "paper:2025-2504.03267-on-chip-integrated-light-sources-with-mos2wse2-moiré-superla",
+      "title": "On-chip integrated light sources with MoS2/WSe2 moiré superlattices at telecom wavelengths",
+      "summary": "实验演示MoS2/WSe2莫尔超晶格在电信O波段（1260–1360 nm）实现发光，强度超过该波段的代表性二维发光体MoTe2单层，突破了二维材料本征发光难以覆盖电信波段的瓶颈。作者进一步将莫尔发光体与片上波导集成，制成波导耦合的芯片级电信波段光源。该工作的意义在于把莫尔超晶格的能带/激子调控能力转化为片上光增益材料与集成光源的新技术路线。",
+      "path": "knowledge/raw/papers/2025-2504.03267-on-chip-integrated-light-sources-with-mos2wse2-moiré-superla.md",
+      "added_via": "cluster:cl_20261029_895409",
+      "added_at": "2026-11-01T02:40:45Z"
+    },
+    {
+      "source_id": "paper:2026-2609.38033-interlayer-dark-excitons-in-a-van-der-waals-hetero",
+      "title": "Interlayer dark excitons in a van der Waals heterostructure",
+      "summary": "本文在过渡金属硫族化合物（TMD）范德华异质结中报道并表征了层间暗激子：电子与空穴因II型能带对齐分居相邻两层，且因自旋-谷选择定则或动量失配而不与光直接耦合。通过低温光谱手段（借助声子辅助复合通道等）分辨出暗层间激子的能量位置与亮暗劈裂，证明其具有远超亮态的寿命与长程输运能力。结果为长寿命激子器件以及基于偶极激子的量子多体相（如激子凝聚）提供了关键的态选择与表征依据。",
+      "path": "knowledge/raw/papers/2026-2609.38033-interlayer-dark-excitons-in-a-van-der-waals-hetero.md",
+      "added_via": "cluster:cl_20261029_895409",
+      "added_at": "2026-11-01T02:40:45Z"
+    },
+    {
+      "source_id": "paper:2025-2501.08138-two-dimensional-transition-metal-dichalcogenides-based-bilay",
+      "title": "Two-dimensional transition-metal dichalcogenides-based bilayer heterojunctions for efficient solar cells and photocatalytic applications",
+      "summary": "本文用 DFT 结合 G0W0-BSE 系统计算了系列二维 TMD 双层范德华异质结的准粒子电子结构与光学性质，评估其在太阳能电池与光催化方面的应用潜力。核心发现是 MoSe2/WS2 在 G0W0 准粒子水平下带边对齐由半局域 DFT 预测的 II 型翻转为 I 型，说明 TMD 异质结的带对齐结论对准粒子修正是定性敏感的、DFT 水平的筛选不可靠。工作为 TMD 异质结光电器件候选体系提供了带边对齐与含激子效应光吸收的基准数据。",
+      "path": "knowledge/raw/papers/2025-2501.08138-two-dimensional-transition-metal-dichalcogenides-based-bilay.md",
+      "added_via": "cluster:cl_20261029_fb5c31",
+      "added_at": "2026-11-01T02:40:45Z"
+    },
+    {
+      "source_id": "paper:2025-2505.17261-advancing-excited-state-properties-of-two-dimensional-materi",
+      "title": "Advancing excited-state properties of two-dimensional materials using a dielectric-dependent hybrid functional",
+      "summary": "本文发展并应用TD-SE-DD-RSH方法（实时含时薛定谔方程+介电依赖距离分离杂化泛函）计算二维材料的光学激发态性质。对MoS2第一激子峰给出2.01 eV，与BSE@G0W0的2.03 eV高度一致，激子结合能精度达到多体微扰理论（MBPT）水平。该工作以远低于GW/BSE的计算代价获得激子级精度的光学响应，为大面积及复杂二维体系（如摩尔超晶格）的激发态计算提供了高效方案。",
+      "path": "knowledge/raw/papers/2025-2505.17261-advancing-excited-state-properties-of-two-dimensional-materi.md",
+      "added_via": "cluster:cl_20261029_fb5c31",
+      "added_at": "2026-11-01T02:40:45Z"
+    },
+    {
+      "source_id": "paper:2025-2504.01684-an-anisotropic-functional-for-two-dimensional-material-syste",
+      "title": "An anisotropic functional for two-dimensional material systems",
+      "summary": "该文提出一种面向二维材料体系的各向异性屏蔽交换（anisotropic screened-exchange）泛函，针对面内与面外方向屏蔽性质的根本差异分别处理交换作用，从而克服半局域泛函在二维极限下带隙严重低估的问题。所得到的准粒子带隙显著改善，并满足广义Koopmans定理（能量对分数电荷占据的线性条件），表明自相互作用/离域化误差被系统性消除。该泛函由此为GW准粒子计算和TDDFT光学（含强场非线性）模拟提供了一个一致且可靠的电子结构起点。",
+      "path": "knowledge/raw/papers/2025-2504.01684-an-anisotropic-functional-for-two-dimensional-material-syste.md",
+      "added_via": "cluster:cl_20261029_fb5c31",
+      "added_at": "2026-11-01T02:40:45Z"
+    },
+    {
+      "source_id": "paper:2024-2405.00643-electronic-and-optical-excitations-in-van-der-waals-material",
+      "title": "Electronic and Optical Excitations in van der Waals Materials from a Non-Empirical Wannier-Localized Optimally-Tuned Screened Range-Separated Hybrid Functional",
+      "summary": "提出WOT-SRSH泛函：一种基于Wannier局域化、无经验参数的优化调谐屏蔽程分离杂化（screened range-separated hybrid）泛函，专为范德华材料设计。在MoS2、黑磷（bP）和hBN上验证，其线性响应TDDFT光学谱与GW-BSE参考谱线形基本一致，峰位精度达0.1-0.2 eV。该泛函同时给出准确的准粒子带隙与激子结构，可作为MBPT计算的低成本优良起点。",
+      "path": "knowledge/raw/papers/2024-2405.00643-electronic-and-optical-excitations-in-van-der-waals-material.md",
+      "added_via": "cluster:cl_20261029_fb5c31",
+      "added_at": "2026-11-01T02:40:45Z"
+    },
+    {
+      "source_id": "paper:2024-2409.04904-a-meta-generalized-gradient-approximation-based-time-depende",
+      "title": "A meta-generalized gradient approximation-based time-dependent and dielectric function dependent method for optical properties of solid materials",
+      "summary": "提出 metaGGA-mBSE-f 方法：以 metaGGA 泛函结合介电函数依赖的 DDH 混合泛函提供接近准粒子精度的基态能带起点，再用 mBSE-f 核在 TDDFT 线性响应框架内修正电子-空穴相互作用，计算固体光学性质。在 Si、金刚石、SiC、MgO、hBN、MoS2 等代表性半导体/绝缘体上系统 benchmark，吸收谱的激子峰位与谱形精度接近 GW-BSE，而计算成本显著更低，可用于高通量光学性质预测。",
+      "path": "knowledge/raw/papers/2024-2409.04904-a-meta-generalized-gradient-approximation-based-time-depende.md",
+      "added_via": "cluster:cl_20261029_fb5c31",
+      "added_at": "2026-11-01T02:40:45Z"
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "gaps": [
+    {
+      "claim": "水窗能区（284–410 eV）碳K边附近光电离截面的多通道贡献可达总量的30%以上",
+      "missing_evidence": "缺乏直接引用说明水窗能区多通道贡献比例达到30%的具体实验或理论数据，Cousin[2]的工作主要说明误差阈值而非多通道贡献的绝对比例",
+      "search_keywords": [
+        "water window multi-channel ionization fraction 30%",
+        "carbon K-edge multi-channel photoionization contribution percentage",
+        "284-410 eV photoionization cross section multi-channel"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "极紫外能区光电离截面主要由最外层价电子贡献，多通道效应可忽略",
+      "missing_evidence": "缺乏文献具体说明极紫外能区（50-150 eV）多通道效应可忽略的定量依据，需要能区对比数据支撑",
+      "search_keywords": [
+        "EUV 50-150 eV photoionization single channel valence electron",
+        "extreme ultraviolet single-channel ionization atomic",
+        "soft X-ray multi-channel vs single-channel threshold energy"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "软X射线能区（410–543 eV）光电子动能在350 eV以上，与原子实相互作用的散射相位行为与低能区存在本质差异",
+      "missing_evidence": "缺乏文献具体论证高光电子动能（>350 eV）散射相位行为的本质差异，需要原子散射相位能量依赖的理论或实验依据",
+      "search_keywords": [
+        "high kinetic energy photoelectron scattering phase atomic core",
+        "soft X-ray photoelectron scattering phase energy dependence",
+        "350 eV photoelectron scattering相位行为"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "R2角积分可将偶极相位贡献压制至小于2%",
+      "missing_evidence": "缺乏文献具体给出角积分对偶极相位的压制效率达到2%的理论预估或实验测量值，Pabst[3]的原始论文验证条件与常规阿秒脉冲表征场景存在兼容性问题",
+      "search_keywords": [
+        "angular integration dipole phase suppression efficiency 2%",
+        "angular-averaged attosecond streaking dipole phase",
+        "dipole phase suppression angular averaging percentage"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "角积分方案在光电子动能大于100 eV时偶极相位压制效率下降",
+      "missing_evidence": "缺乏文献具体给出100 eV动能阈值及偶极相位压制效率随光电子动能变化的定量关系",
+      "search_keywords": [
+        "photoelectron kinetic energy 100 eV dipole phase angular integration",
+        "dipole phase suppression energy dependence attosecond",
+        "angular integration dipole phase efficiency vs electron energy"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "R3双变量误差依赖图谱的横纵轴变量设置（光子能量区间、通道重叠度）具有领域公认性",
+      "missing_evidence": "缺乏文献说明双变量误差图谱方法在跨能区阿秒脉冲标定中的标准化使用，通道重叠度作为误差双变量之一的合理性需论证",
+      "search_keywords": [
+        "bivariate error map attosecond pulse calibration",
+        "channel overlap percentage error attosecond characterization",
+        "attosecond pulse reconstruction error vs photon energy"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "多电离通道靶材（N₂、CH₄）的通道重叠度对应大于15%场景的合理性",
+      "missing_evidence": "缺乏文献具体给出N₂、CH₄等靶材在特定能区的通道重叠度数据，支撑其作为多通道场景测试靶材的代表性",
+      "search_keywords": [
+        "N2 CH4 multi-channel ionization overlap percentage",
+        "nitrogen methane photoionization channel overlap cross section",
+        "polyatomic molecule multi-channel ionization fraction"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

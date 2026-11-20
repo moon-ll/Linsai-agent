@@ -1,0 +1,29 @@
+{
+  "gaps": [
+    {
+      "claim": "§2.1所采用的BSV驱动HHG实验信号匹配容差具有明确、可追溯的方法学依据。",
+      "missing_evidence": "缺少对匹配指标、容差阈值确定方法及适用条件的文献锚点；当前仅给出容差数值，未说明其来自实验误差统计、标准方法学手册还是既有研究。需补充数据配准或光谱匹配容差的原始方法文献，并说明噪声、分辨率、样本波动等因素如何决定本项目阈值。",
+      "search_keywords": [
+        "broadband squeezed vacuum high harmonic generation spectral matching",
+        "BSV-driven HHG signal matching tolerance",
+        "nonclassical light driven high harmonic generation spectral fidelity",
+        "high harmonic generation spectral alignment uncertainty tolerance",
+        "ultrafast spectroscopy matching tolerance calibration"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§2.2提出的k分解能够构成具有明确物理含义且可检验的诊断量。",
+      "missing_evidence": "缺少k分解的定义来源、理论推导依据及同类物理体系中的应用文献；现有表述未将分解对象、动量或晶格矢量基准、可观测量和数据处理流程对应到具体方法实体。需补充动量或倒空间分解方法的原始文献，以及其在固体高次谐波、Bloch/Floquet动力学、量子轨迹模型或局域电子态诊断中的应用先例。",
+      "search_keywords": [
+        "k-space decomposition solid-state high harmonic generation",
+        "reciprocal-space decomposition Bloch high harmonic generation",
+        "Floquet momentum decomposition high harmonic generation",
+        "momentum-resolved HHG crystalline solids",
+        "quantum trajectory model k decomposition nonlinear optics"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

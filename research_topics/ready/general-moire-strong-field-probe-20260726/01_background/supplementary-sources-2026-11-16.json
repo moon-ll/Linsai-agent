@@ -1,0 +1,94 @@
+{
+  "proposal_id": "general-moire-strong-field-probe-20260726",
+  "cluster_id": "references-backfill-r3-20261116",
+  "purpose": "参考文献表 11-16 轮次零池记录条目的回录核验（critic-round-3-references medium 项）；条目经 CrossRef 与 arXiv Atom API 双源实核（题名/作者链/期刊/卷期页/年份），核验留痕见 05_review/references-notes.md 第十一节；另补录 [17] Xiong 2024（其 DOI 形态此前零命中池，题名骨架命中 lit-gap-1794231309.md 与 candidates-1794231311.bib，DOI 形态经 CrossRef 与 arXiv 双源实核后回录）",
+  "entries": [
+    {
+      "n": 21,
+      "source_id": "crossref:10.1021/acs.nanolett.5c06042",
+      "title": "Precise Twist Angle Determination in Twisted WSe2 via Optical Moire Phonons",
+      "authors": [
+        "Bathen N.-L.",
+        "Deilmann T.",
+        "Senkic A.",
+        "Lambers H.",
+        "Dana R.",
+        "Watanabe K.",
+        "Taniguchi T.",
+        "Ross F. M.",
+        "Klein J.",
+        "Wurstbauer U."
+      ],
+      "journal": "Nano Letters 26(11), 3745-3751 (2026)",
+      "doi": "10.1021/acs.nanolett.5c06042",
+      "arxiv": "2512.02615",
+      "cited_as": "[21]",
+      "added_via": "cluster:references-backfill-r3-20261116",
+      "verified": "crossref+arxiv",
+      "added_at": "2026-11-16T06:40:00Z",
+      "verification_note": "CrossRef 记录：Nano Letters, vol 26, issue 11, pages 3745-3751, published 2026-03-25，作者总数 10（前三位 Bathen/Deilmann/Senkic 与条目著录一致）；arXiv 2512.02615 abs 页作者链 10 人（Nicolai-Leonid Bathen, Thorsten Deilmann, Ana Senkic, Hendrik Lambers, Rami Dana, Kenji Watanabe, Takashi Taniguchi, Frances M. Ross, Julian Klein, Ursula Wurstbauer），journal_ref/doi 字段为空，与条目以刊版著录并附 arXiv 的体例一致。"
+    },
+    {
+      "n": 39,
+      "source_id": "arxiv:2604.11984",
+      "title": "High-harmonic generation in systems with chiral Bloch states: application to rhombohedral graphene",
+      "authors": [
+        "de Almeida J. O.",
+        "Kort-Kamp W. J. M.",
+        "Scheurer M. S."
+      ],
+      "journal": "arXiv preprint (2026)",
+      "arxiv": "2604.11984",
+      "cited_as": "[39]",
+      "added_via": "cluster:references-backfill-r3-20261116",
+      "verified": "arxiv",
+      "added_at": "2026-11-16T06:40:00Z",
+      "verification_note": "arXiv Atom API 实核：题名与作者链逐字一致，提交日期 2026-04-13，journal_ref/doi 字段为空，纯预印本。选入依据：立项依据 §1.2 离散结构自由度在 HHG 谱中留有可读指纹的对照先例（主导谐波阶数 l = 2n ± 1 随层数线性标度、圆二色性随层数变号）。"
+    },
+    {
+      "n": 40,
+      "source_id": "arxiv:2609.20085",
+      "title": "Transient High-Harmonic Generation from Solids: From Spectroscopy and Control to Programmable Emission",
+      "authors": [
+        "van Essen P. J.",
+        "Ham T.",
+        "Nie Z.",
+        "Kraus P. M."
+      ],
+      "journal": "arXiv preprint (2026)",
+      "arxiv": "2609.20085",
+      "cited_as": "[40]",
+      "added_via": "cluster:references-backfill-r3-20261116",
+      "verified": "arxiv",
+      "added_at": "2026-11-16T06:40:00Z",
+      "verification_note": "arXiv Atom API 实核：题名与作者链逐字一致，提交日期 2026-09-17，journal_ref/doi 字段为空，纯预印本。选入依据：立项依据 §1.1 多维测量必要性的评述级支撑（谐波产额/相位/偏振对多微观参量同时响应，需多维测量与微观理论比对），支撑三类观测量联合反演的设计。"
+    },
+    {
+      "n": 17,
+      "source_id": "crossref:10.1038/s41467-024-48725-z",
+      "title": "Tunable exciton valley-pseudospin orders in moire superlattices",
+      "authors": [
+        "Xiong R.",
+        "Brantly S. L.",
+        "Su K.",
+        "Nie J. H.",
+        "Zhang Z.",
+        "Banerjee R.",
+        "Ruddick H.",
+        "Watanabe K.",
+        "Taniguchi T.",
+        "Tongay S.",
+        "Xu C.",
+        "Jin C."
+      ],
+      "journal": "Nature Communications 15(1), 4254 (2024)",
+      "doi": "10.1038/s41467-024-48725-z",
+      "arxiv": "2404.18931",
+      "cited_as": "[17]",
+      "added_via": "cluster:references-backfill-r3-20261116",
+      "verified": "crossref+arxiv",
+      "added_at": "2026-11-16T07:05:00Z",
+      "verification_note": "CrossRef 记录：Nature Communications，vol 15，issue 1，article 4254，published 2024-05-18，作者总数 12（前三位 Xiong/Brantly/Su 与条目著录一致），题名 'Tunable exciton valley-pseudospin orders in moire superlattices'；arXiv 2404.18931 预印本题名为 'Tunable exciton valley-pseudospin orders in moire Bose-Hubbard model'，与刊出题名不同，按'预印本与刊出题名不同者以刊出为准'规则，条目以刊出题名著录；arXiv abs 页 journal_ref = Nat. Commun. 15, 4254 (2024)、doi = 10.1038/s41467-024-48725-z，与条目刊版著录逐字一致。"
+    }
+  ]
+}

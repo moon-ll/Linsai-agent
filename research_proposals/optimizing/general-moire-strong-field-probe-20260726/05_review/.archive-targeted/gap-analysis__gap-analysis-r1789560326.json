@@ -1,0 +1,82 @@
+{
+  "gaps": [
+    {
+      "claim": "张量网络方法学作为莫尔多体修正方法的技术可行性",
+      "missing_evidence": "缺少张量网络方法应用于莫尔超晶格多体计算的方法学锚点文献（特别是面向莫尔flat band关联态的近期进展）",
+      "search_keywords": [
+        "tensor network moire superlattice correlated states",
+        "matrix product state moire flat band",
+        "DMRG moire Hubbard model20242025",
+        "tensor network twisted bilayer strong correlation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "连续莫尔紧束缚模型与半导体Bloch方程（SBE）耦合的方法学可行性",
+      "missing_evidence": "缺少连续莫尔紧束缚模型与SBE结合用于莫尔HHG动力学的代表性方法学文献，特别是从单层TMDC扩展到莫尔尺度的最新计算方法学进展",
+      "search_keywords": [
+        "continuum moire tight-binding HHG",
+        "semiconductor Bloch equation moire superlattice",
+        "moire band dynamics SBE calculation",
+        "tight-binding moire high harmonic generation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "莫尔HHG中flat band带宽阈值Δα的可分辨性判据",
+      "missing_evidence": "缺少flat band带宽阈值如何影响HHG信号（Δα>0.2作为可分辨判据）的理论与实验文献支撑",
+      "search_keywords": [
+        "flat band bandwidth HHG signal",
+        "moire flat band width high harmonic spectroscopy",
+        "bandwidth threshold correlated insulator HHG",
+        "flat band narrowness HHG detection"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "关联绝缘态I_c(λ)∝λ²行为作为可证伪假设依据",
+      "missing_evidence": "缺少光场诱导关联绝缘态I_c随驱动场强呈二次标度的实验或理论文献",
+      "search_keywords": [
+        "light-induced correlated insulator scaling",
+        "photoinduced superconductor critical current field dependence",
+        "Mott insulator critical current optical driving",
+        "Floquet engineered correlated state scaling"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "太赫兹/中红外场抑制TA信号>50%与HHG跳变>20%联合判据",
+      "missing_evidence": "缺少THz场诱导瞬态吸收抑制幅度>50%与HHG阶次跳变>20%的实验观测数据作为可行性背书",
+      "search_keywords": [
+        "THz transient absorption suppression percentage",
+        "mid-infrared HHG order jump threshold",
+        "strong field HHG discontinuity threshold",
+        "TA suppression ratio strong field pump"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Keldysh参数γ≈0.7作为绝热-非绝热边界的合理性",
+      "missing_evidence": "缺少Keldysh参数临界值划分HHG绝热/非绝热机制的基准文献，特别是固体HHG体系下的γ阈值标定",
+      "search_keywords": [
+        "Keldysh parameter adiabatic HHG solid",
+        "gamma parameter nonadiabatic strong field solid",
+        "Keldysh parameter threshold solid HHG",
+        "adiabatic-nonadiabatic crossover HHG"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "HHG作为莫尔超晶格扭转角±0.02°精度反演方法的可行性",
+      "missing_evidence": "缺少HHG反演扭转角精度达到±0.02°量级的实验或理论误差传播文献",
+      "search_keywords": [
+        "HHG twist angle retrieval precision",
+        "high harmonic moire twist angle inversion accuracy",
+        "moire twist angle precision spectroscopy",
+        "HHG metrology twist angle"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

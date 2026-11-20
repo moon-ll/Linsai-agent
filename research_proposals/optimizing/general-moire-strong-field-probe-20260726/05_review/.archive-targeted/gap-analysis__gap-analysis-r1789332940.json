@@ -1,0 +1,91 @@
+{
+  "gaps": [
+    {
+      "claim": "Luu & Wörner 2018 Nat. Commun. 以 HHG 偏振反演 α-石英 Berry 曲率（[13]条目三处挂点）",
+      "missing_evidence": "需要确认 Luu & Wörner Nat. Commun. 9, 916 (2018)论文的实际内容（α-quartz Berry curvature 偏振反演、HHG 实验方法、QGT 反演框架），以确保正文重写准确",
+      "search_keywords": [
+        "Luu Worner 2018 Nat Commun Berry curvature quartz HHG",
+        "measurement of Berry curvature in solids using high harmonic generation",
+        "Nat Commun9 916 HHG polarization Berry curvature"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "莫尔超晶格量子几何（Berry曲率/量子度规）的 HHG 反演可行性（内容章节核心论点）",
+      "missing_evidence": "缺少莫尔体系（TBG/tMoS₂/tWSe₂）量子几何张量 HHG 反演的实验/理论先例，包括反演精度、椭偏依赖、莫尔势重建分辨率",
+      "search_keywords": [
+        "moire superlattice Berry curvature HHG inversion",
+        "quantum metric tensor high harmonic moire",
+        "moire potential reconstruction high harmonic",
+        "TBG HHG quantum geometry tensor retrieval"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "扭转角 ±0.05° 反演精度与电衍 ±0.05° 制备精度同值导致指标去区分化（需补 HHG 原位无损 vs 电衍 ex-situ 有损的差异化论证）",
+      "missing_evidence": "缺少 HHG 反演扭转角的精度与电衍/e-beam 标定精度的对比数据，特别是 HHG 原位测量是否优于 ex-situ 表征",
+      "search_keywords": [
+        "twist angle measurement precision moire superlattice",
+        "HHG in-situ vs electron diffraction twist angle accuracy",
+        "moire heterostructure twist angle metrology comparison"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "I_c 临界电流（莫尔相关绝缘态）三档强度推导及1:2:4 比例关系",
+      "missing_evidence": "缺少 TBG/tMDC 莫尔相关绝缘态在光场下临界电流/光致熔化强度的实验或理论推导，包括 Nikola 2021 Nature、Shan 2021 Nature 的 ac-Stark 熔化公式",
+      "search_keywords": [
+        "ac-Stark effect correlated insulator melting critical intensity",
+        "Nikola 2021 Nature Floquet modulation intensity gap scaling",
+        "twisted bilayer graphene correlated insulator light-induced melting",
+        "I_c scaling correlated insulator moire"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "HHG 反演莫尔势 RMS 误差的合成数据收敛序列（仅 HHG 30%→+椭偏 18%→+TA<12%）",
+      "missing_evidence": "缺少上述三步正则化反演（仅 HHG 谱/加入椭偏/加入瞬态吸收）的合成数据基准或公开文献支撑",
+      "search_keywords": [
+        "Tikhonov regularization HHG inversion moire",
+        "transient absorption HHG joint inversion",
+        "ellipsometry HHG moire potential reconstruction regularization",
+        "ill-posed inversion regularization solid-state HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "莫尔超晶格 SBE/紧束缚多体计算的可扩展性（Molinero、Mrudul 紧束缚 HHG 框架）",
+      "missing_evidence": "需要核实 Molinero 2024 Optica（TBG HHG Wannier紧束缚）、Mrudul 2024（扭转双层 HHG 紧束缚）以及 Tyulnev/Zhou（莫尔 HHG Floquet调控）四组工作的具体内容、年份和结论",
+      "search_keywords": [
+        "Molinero 2024 Optica twisted bilayer graphene HHG",
+        "Mrudul 2024 twisted bilayer high harmonic tight-binding",
+        "Tyulnev moire HHG Floquet",
+        "Zhou moire high harmonic generation calculation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "莫尔超晶格 HHG 强场实验装置的强度窗口与损伤裕量（Y4 闭环校准实验目标）",
+      "missing_evidence": "缺少 TBG/tMDC 莫尔样品在飞秒强场（10¹²-10¹³ W/cm²）下的损伤阈值与 HHG 工作强度窗口的实验数据",
+      "search_keywords": [
+        "twisted bilayer graphene femtosecond laser damage threshold",
+        "2D material strong field ablation threshold moire",
+        "graphene high harmonic intensity window10^12 W/cm2",
+        "transition metal dichalcogenide moire HHG damage margin"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "莫尔 HHG 反演量子度规张量 QGT 的核心文献（QGT 反演框架的开创性工作）",
+      "missing_evidence": "需要核实 Bauer-Hansen 早期 QGT 反演工作与 Luu-Wörner 2018 后续工作的精确引用关系，确保引用链条正确",
+      "search_keywords": [
+        "quantum geometry tensor optical inversion experimental",
+        "Bauer Hansen quantum geometry HHG",
+        "Luu Worner quantum metric HHG",
+        "QGT reconstruction high harmonic"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

@@ -1,0 +1,85 @@
+{
+  "gaps": [
+    {
+      "claim": "§2.4 中'QEF_yield^(q_ref) 在 U/W ≫ 1 体系理论上限约 1.5–2.0'的量化预测",
+      "missing_evidence": "缺乏 Mott/Hubbard 强关联体系中量子光 BSV vs 经典相干光 HHG 产额比的直接量化理论预测；Murakami 等 [PRL 121, 057405 (2018)] Floquet 平均场理论未明确给出 QEF_yield 的数值上限与置信区间",
+      "search_keywords": [
+        "Mott insulator HHG quantum light yield enhancement",
+        "strongly correlated HHG BSV enhancement factor",
+        "Hubbard U/W HHG photon statistics sensitivity",
+        "Floquet Mott insulator HHG quantum enhanced yield",
+        "BSV driven HHG correlated Mott theoretical prediction"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.2 中'BSV 高阶光子数关联使多光子跃迁概率显著高于泊松分布驱动情形，从而在亚带隙单光子能量下仍能驱动带间 HHG'的物理机制",
+      "missing_evidence": "缺乏 BSV 高阶 photon-number 关联（g⁽²⁾(0) ≫ 1 的超聚束）增强多光子电离/跃迁过程的直接实验或理论证据；Rasputnyi 等 [arXiv:2403.15337] 仅验证可行性，未给出多光子过程中 photon statistics 增强机制",
+      "search_keywords": [
+        "BSV multiphoton transition enhanced probability",
+        "bright squeezed vacuum multiphoton ionization enhancement",
+        "photon bunching g2 multiphoton absorption enhancement",
+        "nonclassical light multiphoton cross section photon statistics",
+        "high-order photon correlation multiphoton process HHG"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§2.2 中'Iglesias 等 [arXiv:2402.07850] 报道的 TMDC 在 7–9 阶谐波上与非微扰多带模型一致'所引文献",
+      "missing_evidence": "Iglesias arXiv:2402.07850 在 references.md 未登记（正文已引用但参考文献缺条）；此外需核实该预印本截至 2026-08-06 是否已正式发表并确定正确引用版本",
+      "search_keywords": [
+        "arXiv 2402.07850 published peer-reviewed",
+        "Iglesias TMDC multiphoton HHG published",
+        "nonperturbative HHG transition metal dichalcogenide published",
+        "TMDC HHG 7 9 harmonic order multiphoton coupling"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§2.3 中'SBE-Q 模型关键收敛性诊断指标（N_b ≥ 4 带、k 网格 64×64 与 128×128 输出 QEF_yield 偏差 < 3%、T_dep > 100 fs 内多体激发饱和）'的可执行 metric",
+      "missing_evidence": "缺乏固体多带 SBE / TDDFT-HHG 数值计算中能带数、k 网格密度、衰减时间阈值的同行基准文献；Plan B 提到的'截断库仑势 + Floquet 平均场方案（Murakami 2018 范式）'的收敛性 metric 也需具体文献支撑",
+      "search_keywords": [
+        "solid HHG semiconductor Bloch equation convergence benchmark",
+        "TDDFT HHG convergence band number k-point",
+        "truncated Coulomb potential Floquet Hubbard HHG convergence",
+        "real-time TDDFT multi-band solid HHG numerical convergence",
+        "Floquet time-dependent Mott convergence criterion"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§2.5 中'实际可达 V_classical ≈ 0.9 ± 0.05，受 BSV 多模结构与经典光单模结构的相干长度失配限制'的精度基线",
+      "missing_evidence": "缺乏 BSV 多模相干长度特性的定量数据（相干长度、相干时间随泵浦功率/压缩度的依赖）；双光路 Mach-Zehnder 干涉构型在固体 HHG 实验中可达干涉可见度精度的同行基线也缺失",
+      "search_keywords": [
+        "bright squeezed vacuum coherence length multimode measurement",
+        "BSV temporal coherence multimode structure",
+        "Mach-Zehnder interference visibility HHG solid-state",
+        "two-arm interferometer HHG fringe visibility precision",
+        "BSV coherence time squeezing parameter dependence"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§2.5 中'Li 2021 (PRL 126, 137403) 双色钨针尖光电子发射量子干涉可见度与本项目双光路 BSV-经典光 HHG 干涉可见度在数学形式上同构'的范式等价性",
+      "missing_evidence": "缺乏双色场（ω+2ω）量子干涉可见度在 HHG 通道与光电子发射通道之间数学同构性的同行验证文献，或将双色场干涉统一化的综述性文献支撑",
+      "search_keywords": [
+        "bichromatic omega 2omega quantum interference HHG analogy",
+        "two-color photoelectron quantum interference HHG comparison",
+        "quantum interference bichromatic visibility unified framework",
+        "bi-circular field quantum interference visibility HHG photoemission"
+      ],
+      "priority": "low"
+    },
+    {
+      "claim": "§2.6 中'三维 (r, θ_sq, g⁽²⁾(0)) mapping 插值方案基于张量积三次样条，k-折交叉验证（k=5）误差 < 5%'的精度承诺",
+      "missing_evidence": "缺乏三维物理参数反演（量子光态参数 mapping）中张量积三次样条插值精度 + k=5 交叉验证误差 < 5% 的方法学同行基线或已发表应用案例",
+      "search_keywords": [
+        "tensor product cubic spline interpolation 3D quantum parameter",
+        "k-fold cross validation high-dimensional physical mapping",
+        "experimental design tensor spline surrogate quantum spectroscopy",
+        "Bayesian inverse high-dimensional HHG parameter mapping"
+      ],
+      "priority": "low"
+    }
+  ]
+}

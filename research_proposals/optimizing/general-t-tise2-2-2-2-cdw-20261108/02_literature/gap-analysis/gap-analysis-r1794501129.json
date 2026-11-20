@@ -1,0 +1,63 @@
+{
+  "gaps": [
+    {
+      "claim": "立项依据整体缺失（rationale.md 为 0 字节）：大背景与领域脉络两层完全无文献支撑，CDW（电荷密度波）领域意义、1T-TaSe2 体系的研究价值无法建立",
+      "missing_evidence": "CDW 物理与准二维过渡金属硫族化合物方向的奠基性论文与权威综述，用于铺设领域脉络并逐级收窄到核心挑战；需嵌入式引用而非罗列",
+      "search_keywords": [
+        "charge density wave review",
+        "1T-TaSe2",
+        "transition metal dichalcogenide CDW",
+        "excitonic insulator TaSe2",
+        "charge density wave fundamentals"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "核心挑战与科学问题收束层缺失：四模时窗拼接跨九个数量级、缺陷单变量判别等拟议创新点在立项层面无前沿文献对照，无法论证缺口所在",
+      "missing_evidence": "近期（近 5 年）超快调控 CDW 动力学的代表性实验与理论工作，特别是与多时间尺度窗口、缺陷工程调控 CDW 相关的论文，用于支撑'现有研究不足'的论证",
+      "search_keywords": [
+        "ultrafast dynamics charge density wave",
+        "femtosecond pump probe CDW",
+        "defect engineering charge density wave",
+        "multi-timescale ultrafast spectroscopy",
+        "CDW transition ultrafast control"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "国内现状层缺失：立项依据五层结构中的'国内现状'无任何国内研究组工作引用，无法体现国内研究基础与本项目定位",
+      "missing_evidence": "国内团队（中科院、高校等）在 1T-TaSe2/CDW 超快动力学、时间分辨能谱方向的近期论文",
+      "search_keywords": [
+        "charge density wave ultrafast China",
+        "time-resolved photoemission CDW Chinese groups",
+        "1T-TaSe2 ARPES Shanghai",
+        "TaSe2 ultrafast dynamics domestic"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "content.md（20 处）与 scheme.md（21 处）共 41 处 [N] 角标全部悬空，references.md 为 0 字节：已具名引用的 Dharmasani[1]、Orio、Novko[2]、Oh[3] 等 [1]-[9] 均无对应文献条目，引用真实性与可溯源性未经验证",
+      "missing_evidence": "建立 30-40 篇连续编号参考文献表，逐条核实被引文献真实存在（作者/年份/期刊/DOI 三源对照），特别是 Novko、Oh 等关于 CDW 第一性原理与激子机制的理论文献",
+      "search_keywords": [
+        "Dharmasani 1T-TaSe2 ultrafast",
+        "Novko charge density wave ab initio",
+        "Oh excitonic insulator TaSe2 theory",
+        "time-resolved ARPES charge density wave",
+        "Kogar excitonic condensation TaSe2"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "scheme.md 中技术路线各环节的引用悬空：四模时窗拼接、缺陷单变量判别等方案的难点应对与先例论述无有效文献落点",
+      "missing_evidence": "多时间分辨技术（fs 泵浦探测、TR-XRD、TR-ARPES、THz 驱动）联用与方案可行性的方法学代表作，补入编号文献表以承接 scheme 章 21 处角标",
+      "search_keywords": [
+        "time-resolved x-ray diffraction CDW",
+        "terahertz driven charge density wave",
+        "time-resolved ARPES 1T-TaSe2",
+        "ultrafast electron diffraction CDW transition"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

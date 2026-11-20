@@ -1,0 +1,124 @@
+{
+  "gaps": [
+    {
+      "claim": "莫尔超晶格作为强场量子调控/高次谐波探针平台的物理可行性",
+      "missing_evidence": "缺乏2023-2026年莫尔超晶格（TBG/双层/三层石墨烯、过渡金属硫族莫尔异质结）在强场高次谐波领域的标志性实验与理论工作",
+      "search_keywords": [
+        "moiré superlattice high harmonic generation",
+        "twisted bilayer graphene HHG strong field",
+        "moiré heterostructure nonlinear optics ultrafast"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "TBG TDDFT 计算规模 >10⁸ 核时 / 2×10⁴ 核时的分解依据",
+      "missing_evidence": "缺乏Molinero Optica 2024或同等规模的TBG/莫尔TDDFT核时基准文献作为计算可行性外推依据",
+      "search_keywords": [
+        "TBG TDDFT computational cost benchmark",
+        "twisted bilayer real-time TDDFT scaling",
+        "moiré superlattice TDDFT nucleon hours"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "莫尔/二维材料在 8×10¹⁰–3.2×10¹¹ W/cm² 近红外强场下的损伤阈值（I_c）",
+      "missing_evidence": "缺乏Kozák或同等实验给出的二维异质结/莫尔超晶格在800 nm飞秒强场下的损伤阈值数据",
+      "search_keywords": [
+        "2D material femtosecond damage threshold",
+        "twisted bilayer laser-induced damage threshold",
+        "Kozák high harmonic damage threshold 2D"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": ">20% HHG 调制深度阈值（Nikola 30% 基准）作为主动调控有效性判据",
+      "missing_evidence": "缺乏Nikola等关于二维/莫尔材料HHG调制深度阈值与可观测性的原始实验工作",
+      "search_keywords": [
+        "HHG modulation depth threshold 2D material",
+        "Nikola moiré high harmonic switching",
+        "HHG yield enhancement twisted bilayer"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Δα > 0.2 椭偏斜率作为HHG反演能带/对称性有效性的判据",
+      "missing_evidence": "缺乏Mrudul等关于HHG椭偏/偏振斜率作为量子几何/能带反演指标的原始理论与实验文献",
+      "search_keywords": [
+        "Mrudul HHG ellipsometry band structure",
+        "high harmonic generation polarization slope inversion",
+        "HHG anisotropy Berry curvature reconstruction"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "<15% RMS 联合反演精度作为多观测（tr-ARPES+HHG+tr-XY）联合反演可行性的基准",
+      "missing_evidence": "缺乏多观测联合反演方法的精度基准与先验文献",
+      "search_keywords": [
+        "multi-observable inversion HHG transient absorption",
+        "joint reconstruction band structure HHG ARPES",
+        "Bayesian inversion HHG spectroscopy accuracy"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "±0.05° 角分辨精度作为强场反演可行性的实验依据",
+      "missing_evidence": "缺乏高次谐波角度分辨测量精度与晶格对称性判定的实验基准文献",
+      "search_keywords": [
+        "HHG angular resolution precision symmetry",
+        "high harmonic spectroscopy angular accuracy benchmark"
+      ],
+      "priority": "low"
+    },
+    {
+      "claim": "国内莫尔超晶格强场/超快/高次谐波领域的研究布局与同行工作",
+      "missing_evidence": "§1.3 已删除「国内布局」子节，但作为NSFC立项依据应包含国内同行工作对比；缺乏国内莫尔强场研究的代表性文献",
+      "search_keywords": [
+        "莫尔超晶格 强场 超快 中国",
+        "twisted bilayer 高次谐波 国内",
+        "moiré 高次谐波 中国组 固体HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Floquet 工程在莫尔超晶格主动调控中的理论基础与先驱工作",
+      "missing_evidence": "缺乏Floquet工程在莫尔/扭转双层中的理论与实验先驱工作（如Floquet拓扑、Floquet反常Hall、光场诱导能带重整化）",
+      "search_keywords": [
+        "Floquet engineering moiré superlattice",
+        "twisted bilayer Floquet topological",
+        "light-induced anomalous Hall moiré"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "莫尔材料中量子几何（Berry曲率/量子度量/Fubini-Study度规）对HHG的影响",
+      "missing_evidence": "缺乏Berry曲率/量子度量在莫尔HHG中作用的实验或理论证据作为反演探针的物理基础",
+      "search_keywords": [
+        "Berry curvature moiré HHG",
+        "quantum geometry moiré nonlinear optics",
+        "Fubini-Study metric high harmonic generation"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Molinero Optica 2024 / Tyulnev 2024 / Bauer-Hansen 2018 / Hu-Meng 2024 等国际同行引用的真实性与时效性",
+      "missing_evidence": "§1.2 用作国际差异化锚点的上述四篇文献需验证其在莫尔强场HHG中的具体贡献并核实年份与作者",
+      "search_keywords": [
+        "Molinero 2024 TBG high harmonic Optica",
+        "Tyulnev 2024 moiré high harmonic generation",
+        "Bauer Hansen 2018 moiré HHG",
+        "Hu Meng 2024 twisted bilayer nonlinear optics"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "莫尔超晶格能带可调性（扭转角/堆叠/栅压）作为主动调控变量的实验支撑",
+      "missing_evidence": "缺乏扭转角/堆叠序/栅压对莫尔能带调控的实验证据作为本项目主动调控方案的物理基础",
+      "search_keywords": [
+        "twist angle tunable band structure moiré",
+        "moiré superlattice electrostatic gating",
+        "stack order dependent electronic structure moiré"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "gaps": [
+    {
+      "claim": "§一.2 国内研究现状段（仅 217 字）：国内同行在 1T-TiSe₂ CDW 平衡态表征与光致相变方向的工作掌握单薄，前人局限的国内侧论证不足",
+      "missing_evidence": "国内研究组关于 TiSe₂ 电荷密度波平衡态物性（输运、比热、衍射）及超快动力学表征的代表性文献，用于补足 150-250 字平衡态证据链（评审建议优先复用已引 [14-16,2]，但需核实其中国内工作占比，不足则补新文献）",
+      "search_keywords": [
+        "1T-TiSe2 charge density wave transport",
+        "TiSe2 CDW transition resistivity anomaly",
+        "TiSe2 ultrafast dynamics transient absorption",
+        "电荷密度波 超快 瞬态吸收 国内研究"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§一.1/§一.2 应用侧论证各仅 1 句：CDW 超快调控在器件与应用层面的前景论述缺乏文献支撑",
+      "missing_evidence": "CDW 材料（如 1T-TaS₂/TiSe₂ 类量子材料）在超快开关、太赫兹响应、存储/类脑器件等应用方向的综述或代表作，用于扩展应用侧论证至 2-3 句有据表述",
+      "search_keywords": [
+        "charge density wave device applications",
+        "ultrafast CDW switching memory",
+        "1T-TaS2 neuromorphic device",
+        "photoinduced phase transition applications terahertz"
+      ],
+      "priority": "low"
+    },
+    {
+      "claim": "§一.1 第2段『涨落在光激发后约 700 fs 恢复[2]』：表述与源文不精确，源文 [2]（Fragkos、Orio 等，时间分辨极紫外动量显微）实际观测的是涨落区『部分熔化』后约 700 fs 恢复，正文缺该限定",
+      "missing_evidence": "非新增文献缺口——需按 [2] 源文摘要核对并补『部分熔化』限定词；若正文意在主张整体熔化后恢复，则必须另检索支撑整体熔化的文献，否则按评审意见修正表述即可",
+      "search_keywords": [
+        "time-resolved EUV momentum microscopy TiSe2",
+        "Fragkos Orio TiSe2 CDW fluctuation melting",
+        "TiSe2 partial melting fluctuation recovery 700 fs"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§一.4 中子散射相关表述（EuTe₄/TiSe₂ 满足中子实验体量、CDW 表征需中子探针的论证）：参考文献 [49] 全稿零角标，该论点当前悬空无引用支撑",
+      "missing_evidence": "将 [49] 挂载至该中子句；若 [49] 主题不符，需补充 EuTe₄ 或 TiSe₂ CDW 的中子衍射/非弹性中子散射实验文献",
+      "search_keywords": [
+        "EuTe4 neutron scattering",
+        "TiSe2 CDW neutron diffraction",
+        "inelastic neutron scattering charge density wave"
+      ],
+      "priority": "low"
+    },
+    {
+      "claim": "full_review 口径表 T* 行（T*≈165 K）：标注落点为 rationale §一.2，但该章对 T*/165 K 零命中；若选择在 §一.2 补 T* 句，则该温度特征点需文献角标支撑",
+      "missing_evidence": "TiSe₂ CDW 相变温度 T*≈165 K 的权威测量文献（比热、电阻、磁化率或衍射证据），供补充的 T* 句挂角标（另一备选方案改标 content 2.4 则无需新文献）",
+      "search_keywords": [
+        "TiSe2 charge density wave transition temperature 165 K",
+        "TiSe2 specific heat CDW anomaly",
+        "TiSe2 electron-hole condensation transition"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "rationale"
+}

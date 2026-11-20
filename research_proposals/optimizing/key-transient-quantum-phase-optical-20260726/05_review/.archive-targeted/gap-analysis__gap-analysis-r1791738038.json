@@ -1,0 +1,41 @@
+{
+  "gaps": [
+    {
+      "claim": "WS₂ 第一性原理模拟 +2% 拉伸应变下 Berry 曲率积分由 18.24 增至 26.86 Å⁻²、垂直偏振谐波分量近翻倍，并可推广至'谷极化翻转亚周期级控制'与'瞬态拓扑量全链路耦合'",
+      "missing_evidence": "原文（Zhao 等[21]，J. Phys. D, 2026, 59: 215104）摘要级证据仅覆盖谐波产额、偏振、谱形三量控制，不含 valley 极化翻转的亚周期动态结论；'瞬态拓扑量全链路耦合'亦超出该论文静态模拟口径。需要检索独立的实验或理论文献支持：(a) 谷极化亚周期光场控制；(b) 谐波光谱对瞬态 Berry 曲率/拓扑相变的全链路映射",
+      "search_keywords": [
+        "sub-cycle valley polarization control WS2",
+        "attosecond control of valley degree of freedom",
+        "harmonic spectroscopy Berry curvature reconstruction",
+        "high harmonic generation transient topology",
+        "strain-engineered Berry curvature transition metal dichalcogenide"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "L39、L43 处 '相继报道/多点报道' 的成果族（含量子 Fisher 信息、极化超织构等弱关联项）需挂靠具体编号以利核查",
+      "missing_evidence": "两处各罗列 3+ 项成果但无 [N] 锚点。具体需要补：(a) 阿秒/瞬态拓扑相变指纹识别的高次谐波光谱证据；(b) 量子 Fisher 信息用于拓扑序参量/瞬态拓扑相探测的文献；(c) 极化超织构（polarization super-texture）与高次谐波/拓扑材料关联的文献；(d) 多体/多轨道 HHG 中拓扑响应相关报道",
+      "search_keywords": [
+        "quantum Fisher information topological phase detection",
+        "polarization super-texture high harmonic generation",
+        "attosecond spectroscopy topological phase transition fingerprint",
+        "HHG topological order parameter probe",
+        "multi-orbital high harmonic generation topology"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "'写-读时序协同至今空白'（L51）",
+      "missing_evidence": "缺少支撑该空白声明的检索范围、检索时间、检索数据库说明。应补充：(a) 写脉冲与阿秒读出脉冲相对时序（time-delay write-read）协同控制 HHG/拓扑探测的相关工作清单；(b) 检索库（Web of Science/Scopus/arXiv）与截止日期；(c) 在 attosecond transient absorption、tr-ARPES、HHG pump-probe 等已有实验中已实现写-读时序但未与拓扑读出联用的佐证文献",
+      "search_keywords": [
+        "attosecond write-read pump-probe HHG",
+        "sub-cycle delay control topological probe",
+        "transient absorption XUV time-delay topology",
+        "tr-ARPES sub-cycle control Berry curvature",
+        "coherent control HHG topology time delay"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

@@ -1,0 +1,15 @@
+{
+  "gaps": [
+    {
+      "claim": "参考文献[18]所支撑的具体论点尚无法通过完整书目信息稳定核验。",
+      "missing_evidence": "缺少该文献的正式卷号、期号和页码；已知 DOI 为 10.1103/1vc6-c7rs，需通过出版社页面或 Crossref 元数据补全并核对。",
+      "search_keywords": [
+        "10.1103/1vc6-c7rs",
+        "\"10.1103/1vc6-c7rs\" volume issue pages",
+        "Crossref 10.1103/1vc6-c7rs"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

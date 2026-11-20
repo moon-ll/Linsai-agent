@@ -1,0 +1,82 @@
+{
+  "gaps": [
+    {
+      "claim": "国内二维材料/莫尔超晶格强场高次谐波代表性实验工作（2023-2026）",
+      "missing_evidence": "rationale §2 缺'国内研究现状'层；近3年国内二维HHG/莫尔实验组代表性文献不足（约5/38）",
+      "search_keywords": [
+        "二维材料 高次谐波 中国 实验组",
+        "moiré superlattice HHG Chinese group",
+        "solid-state HHG 2D material China",
+        "扭转双层 高次谐波 国内",
+        "TMDC high harmonic generation domestic China"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Peterka 2023 MoS₂ HHG抑制机制（APL Photonics 8, 106102）的独立文献支撑",
+      "missing_evidence": "rationale §1.1/§2.2 将 Peterka 抑制与 Liu 2025 增强双工作同挂[23]，归属错误；需Peterka独立条目",
+      "search_keywords": [
+        "Peterka APL Photonics 2023 MoS2 high harmonic",
+        "10.1063/5.0158995",
+        "MoS2 HHG suppression mechanism",
+        "MoS2 monolayer high harmonic generation suppression",
+        "Peterka coherent superposition MoS2"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Liu 2025 MoS₂ HHG增强机制（arXiv:2504.02567）独立文献支撑",
+      "missing_evidence": "与Peterka同挂[23]错误归属；需独立成条并正文分指",
+      "search_keywords": [
+        "arXiv 2504.02567 MoS2 HHG",
+        "Liu MoS2 high harmonic enhancement 2025",
+        "MoS2 DUV harmonic generation enhancement",
+        "transition metal dichalcogenide HHG resonant enhancement"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "[24] PNAS 117, 29922 真实文献条目（疑似缺失/错引）",
+      "missing_evidence": "Crossref/arXiv反查无此文；需重新核实MoS₂ HHG相关PNAS文献",
+      "search_keywords": [
+        "MoS2 high harmonic PNAS",
+        "PNAS 117 MoS2 nonlinear optics",
+        "MoS2 monolayer ultrafast PNAS",
+        "transition metal dichalcogenide PNAS HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Heide 2023 Nanophotonics 12 (TMD HHG) 真实文献支撑",
+      "missing_evidence": "[25] 真身为 Heide, Nanophotonics 12 (2023)；需独立引用条目",
+      "search_keywords": [
+        "Heide Nanophotonics 2023 MoS2 HHG",
+        "Heide TMDC high harmonic generation",
+        "Heide monolayer MoS2 nonlinear optics",
+        "Nanophotonics 12 TMDC harmonic"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "[26] 卷号12非11（MoS₂ HHG文献）真实信息",
+      "missing_evidence": "卷号错误11→12，需重新核实并修正",
+      "search_keywords": [
+        "MoS2 high harmonic generation12 volume",
+        "MoS2 HHG journal volume 12",
+        "monolayer MoS2 harmonic 2024 journal"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Lee 2024 Nat. Commun. 15, 6228 真实文献支撑",
+      "missing_evidence": "rationale §2.2/scheme §2均错写为3638；需统一为6228并全量反查",
+      "search_keywords": [
+        "Lee 2024 Nature Communications MoS2",
+        "Nat Commun 15 6228 MoS2",
+        "Lee MoS2 HHG 2024 Nature Communications",
+        "MoS2 harmonic generation Lee Nature Commun"
+      ],
+      "priority": "high"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+# 定向文献检索报告
+
+## 课题
+general-attosecond-streaking-20260822
+
+## 检索关键词
+- attosecond streaking experimental setup design、streaking spectroscopy delay scan electron spectrometer、attosecond pulse retrieval algorithm implementation、FROGCRAB retrieval experimental scheme、attosecond pulse retrieval methods comparison、rACE neural network attosecond pulse reconstruction、FROGCRAB phase retrieval performance benchmark、attosecond metrology retrieval algorithm review、water window attosecond pulse retrieval fidelity、attosecond pulse reconstruction error benchmark
+
+## 检索结果
+
+- 2511.08764 | Ultrafast Pulse Retrieval from Partial FROG Traces Using Implicit Diffusion Models | Abhimanyu Borthakur, Jack Eden Hirschman, Sergio Carbajo | 2025 | 0.9 | 用隐式扩散模型从严重欠采样的 FROG 谱图中重构超短脉冲，在稀疏延迟扫描条件下优于 PCGP 等迭代算法，直接面向 FROGCRAB 类相位重构的性能基准问题，适用于在线表征场景。 | 来源：联网检索
+- 2501.08966 | Reconstructing Time-of-Flight Detector Values of Angular Streaking Using Machine Learning | David Meier, Wolfram Helml, Thorsten Otto, Bernhard Sick, Jens Viefhaus, Gregor Hartmann | 2025 | 0.85 | 机器学习方法对角条纹实验 16 通道飞行时间电子谱仪进行去噪并重建最多 3 个失效探测器输出，仿真训练、在线可用——直接覆盖条纹光谱学电子谱仪数据重构链条。 | 来源：联网检索
+- 2504.08448 | Active stabilization for ultralong acquisitions in an attosecond pump-probe beamline | Tamás Csizmadia, Lénárd Gulyás Oldal, Barnabás Gilicze, Dániel Sándor Kiss, Tamás Bartyik, Katalin Varjú, Subhendu Kahaly, Balázs Major | 2025 | 0.84 | 高平均功率激光驱动的阿秒 XUV-IR 泵浦探测双干涉仪设计，快速反馈实现 ±81 as 亚光周期延迟稳定并维持数天，是阿秒条纹/泵浦探测实验装置延迟扫描稳定性的直接工程参考。 | 来源：联网检索
+- 2603.27477 | A Dual-Sideband Attosecond Interferometry Setup | Muhammad Jahanzeb, Marvin Schmoll, Paul Weizel, Simon Majoni, Ronak Narendra Shah, Mario Niebuhr, Cristian Manzoni, Giuseppe Sansone | 2026 | 0.82 | 双边带 RABBITT 阿秒干涉实验装置：CEP 稳定 800 nm 驱动 XUV 光源 + 1200 nm NOPA 探针，光谱分辨干涉信号主动延迟稳定实现 45 as RMS 定时精度，用于阿秒光电离延迟测量。 | 来源：联网检索
+- 2409.15601 | Autocorrelation Measurement of Attosecond Pulses Based on Two-Photon Double Ionization | Fei Li, Kun Zhao, Bing-Bing Wang, Xin-Kui He, Zhi-Yi Wei | 2024 | 0.75 | 理论上论证基于双光子双电离的自相关测量表征阿秒脉冲：干涉自相关曲线 FWHM 满足 τe=1.77τ+15 as 标度关系，可解码脉冲中心频率与宽度，为条纹/FROGCRAB 之外的表征方法比较提供新选项。 | 来源：联网检索
+- 2601.10898 | U-Net-based surrogate modeling for attosecond X-ray free-electron lasers | Yufei Wei, Bingyang Yan, Chenzhi Xu, Jiawei Yan, Haixiao Deng | 2026 | 0.72 | U-Net 神经网络代理模型从加速器设置直接预测阿秒 XFEL 纵向相空间二维分布，支撑自啁啾方案阿秒 X 射线脉冲的快速诊断与控制——神经网络阿秒脉冲表征的近期实例。 | 来源：联网检索
+- 2506.07445 | Circular RABBITT goes under threshold | Vladislav V. Serov, Jia-Bao Ji, Meng Han, Kiyoshi Ueda, Hans Jakob Wörner, Anatoli S. Kheifets | 2025 | 0.68 | 提出圆偏振阈下 RABBITT（cuRABBITT）：结合圆偏振阿秒脉冲与彩虹宽带光谱分析直接提取双光子电离幅值与相对相位，TDSE+Green 函数验证 He/Ar 共振与 Xe Cooper 极小，扩展 Fano 倾向规则至阈下区域。 | 来源：联网检索
+- 2604.23441 | Disentangling the Effect of Ionic Coupling and Multiple Interfering Terms in Attosecond Molecular Interferometry | Ioannis Makos, Jakub Benda, David Busto, Benjamin Steiner, Barbara Merzuk, Serguei Patchkovskii, Van-Hung Hoang, Uwe Thumm, Zdeněk Mašín, Giuseppe Sansone | 2026 | 0.65 | 揭示 RABBITT 类阿秒干涉测量中 NIR 脉冲对母离子电子结构的耦合作用及多干涉项会系统污染重构的光电离延迟，明确标准原子模型在分子体系的适用边界——阿秒计量学反演误差来源分析。 | 来源：联网检索
+- 2512.19965 | Time-domain measurement of Auger electron dynamics in xenon atoms after giant resonant photoionization | Mahmudul Hasan, Jingsong Gao, Hao Liang, Yiming Yuan, Zach Eisenhutt, Ming-Shian Tsai, Ming-Chang Chen, Hans Jakob Wörner, Artem Rudenko, Meng Han | 2025 | 0.62 | 用 170 eV 阿秒软 X 射线脉冲对 Xe/Kr 巨共振光电离后的 Auger-Meitner 衰减进行时域电子谱测量，CEP 锁定 NIR 探针实现 streaking 类时间分辨，突破此前未锁相测量的时间分辨率限制。 | 来源：联网检索
+- 2607.10397 | On the measurability of Wigner time delays at shape resonances in photodetachment of polyatomic anions | Jan Dvořák, Jakub Benda, Thomas N. Rescigno, Cynthia S. Trevisan, Robert R. Lucchese, C. William McCurdy | 2026 | 0.6 | 理论分析 streaking 与 RABBIT 测量中长程库仑相互作用对低能 Wigner 延迟特征的掩盖，指出多原子阴离子光剥离无库仑长程尾、可测量至 1 fs 量级时间延迟——界定条纹类测量方案的系统性极限。 | 来源：联网检索

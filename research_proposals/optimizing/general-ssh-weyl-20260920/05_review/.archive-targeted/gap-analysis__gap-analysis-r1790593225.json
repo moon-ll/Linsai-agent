@@ -1,0 +1,57 @@
+{
+  "gaps": [
+    {
+      "claim": "TaP Weyl 半金属在 THz 多周期窄带脉冲驱动下获得 2–3 个数量级的三次谐波增强（[16]）",
+      "missing_evidence": "[16] Pilch et al. (arXiv:2508.16166 v2 / ACS 同刊版) 仅报道扰动性立方功率律 I_{3f}∝I_f^3 及偏振依赖关系，未给出任何 orders of magnitude 增强数据；缺失独立的实验或理论文献支撑 TaP 体系 THG 增强倍数",
+      "search_keywords": [
+        "TaP THz third harmonic generation enhancement",
+        "Weyl semimetal TaP nonlinear optical response",
+        "TaP THG orders of magnitude",
+        "Pilch 2025 TaP terahertz"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Kagome 拓扑半金属相对平庸相实现 2–3 个数量级（100–1000 倍）的 HHG 增强（[20]），并以此推导 R≥2 阈值",
+      "missing_evidence": "[20] arXiv:2508.15631 v2 摘要原文为 'up to two orders of magnitude'，即上限 100 倍而非 100–1000 倍；缺失将增强倍数上限从 100 提升至 ≥1000 的独立证据，亦无支持 R≥2 作为下界（而非上界）阈值的文献",
+      "search_keywords": [
+        "Kagome topological semimetal high harmonic generation enhancement",
+        "nontrivial phase HHG orders of magnitude",
+        "Kagome HHG three orders enhancement",
+        "topological phase HHG enhancement factor"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "固体中高次谐波产生相比原子气体增强约'数个数量级'（[9]）",
+      "missing_evidence": "[9] Ghimire et al. 实际报道 ZnO 晶体非微扰高次谐波增强最高达 14 个数量级（PRL 120, 177401），'数个数量级'为矮化表述；缺少对不同固体体系（Dirac、Weyl、Kagome、MnBi2Te4 等）HHG 增强倍数的横向对比文献以校准表述尺度",
+      "search_keywords": [
+        "Ghimire ZnO high harmonic generation 14 orders magnitude",
+        "solid state HHG nonperturbative enhancement scaling",
+        "Dirac Weyl semimetal HHG enhancement comparison"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "三个独立锚点（Cd₃As₂ Dirac 微腔三个数量级 / TaP Weyl 2–3 个数量级 / Kagome 2–3 个数量级）可作为拓扑材料 THG 增强的量级基准",
+      "missing_evidence": "三锚点中 [26] Cd₃As₂ 微腔增强与 [20] Kagome 的上界描述自洽，但 [16] TaP 的量级归属为虚假陈述；缺失能同时支撑三个数量级一致性区间的拓扑材料 THG 实验综述或元分析文献，使量级基准链重新可证",
+      "search_keywords": [
+        "topological semimetal third harmonic generation review",
+        "Weyl Dirac Kagome THG enhancement benchmark",
+        "topological material nonlinear optics enhancement comparison"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "方向四阈值 R = log10(增强倍数) ≥ 2 对应至少 100 倍增强下界，可作为拓扑相判据",
+      "missing_evidence": "R≥2 取下界的物理前提是实验上能稳定观测 ≥100 倍增强；现有 [20] 上界恰好 100 倍，使阈值方向翻转；缺失独立文献报道在多种拓扑体系上稳定重现 ≥100 倍 THG 增强的实验统计或理论下限分析",
+      "search_keywords": [
+        "topological HHG enhancement reproducibility",
+        "minimum enhancement threshold topological phase detection",
+        "logarithmic enhancement ratio topological order parameter"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

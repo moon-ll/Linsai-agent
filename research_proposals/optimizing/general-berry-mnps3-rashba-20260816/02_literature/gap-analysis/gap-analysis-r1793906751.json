@@ -1,0 +1,27 @@
+{
+  "gaps": [
+    {
+      "claim": "\"10 类非平凡自旋 Laue 群\"的分类计数（§1.1 L7）",
+      "missing_evidence": "支撑该计数的权威分类文献：原文 [1] 摘要仅确认 d/g/i 三个子族，未给出\"10 类非平凡自旋 LaTe 群\"的总数论断。需要引自旋空间群/自旋 Laue 群完整分类的原始论文（含分类图/表，能逐类枚举到 10 类），或对计数做降级改写（如\"非平凡自旋 Laue 群分类表\"）",
+      "search_keywords": [
+        "spin Laue group classification",
+        "spin space group altermagnet classification",
+        "nontrivial spin Laue groups enumeration",
+        "altermagnetic spin group theory"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "\"Li 等 [32] 南京大学团队主导\"的机构归属论断（§1.4 L53）",
+      "missing_evidence": "支撑作者-机构归属的文献证据：需核实 [32] 原文的作者单位是否确为南京大学（Nanjing University）且 Li 为团队主导，摘要/署名页层面的佐证缺失。若无法核实，应删除归属句仅保留成果引用",
+      "search_keywords": [
+        "Li Nanjing University",
+        "author affiliation verification",
+        "MnPS3 spin texture first-principles",
+        "Rashba altermagnet DFT Nanjing"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "rationale"
+}

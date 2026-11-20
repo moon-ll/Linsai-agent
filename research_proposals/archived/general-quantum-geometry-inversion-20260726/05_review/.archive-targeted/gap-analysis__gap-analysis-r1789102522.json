@@ -1,0 +1,40 @@
+{
+  "gaps": [
+    {
+      "claim": "R_{Ω,g}的Fisher信息比定义源自方法学根源(为什么选三个互相独立的可辨识性指标:归一化有符号内积、Fisher信息矩阵条件数、后验相关系数)",
+      "missing_evidence": "Sumaya-Martinez 2025[24]在L117单行被提及,缺乏对三个可辨识性指标的方法学依据、互证关系、以及Fisher信息比作为反演误差量化标准的系统性理论支撑文献",
+      "search_keywords": [
+        "Fisher information matrix identifiability nonlinear optics inversion",
+        "Sumaya-Martinez 2025 Fisher information",
+        "normalized inner product parameter identifiability high harmonic",
+        "posterior correlation coefficient Bayesian inversion spectroscopy"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "1T-TaS₂ Mott-CDW谐波红移多体分量区分:Mott(各向同性) vs CDW(各向异性)两相区偏振依赖可作为可区分信号",
+      "missing_evidence": "缺乏1T-TaS₂在公度IC-CDW态(≤180K)与近公度NC-CDW态(180-350K)两温区HHG偏振各向异性对比的实验/理论文献,以及Mott局域化与CDW序参量对HHG偏振响应不同贡献的可区分性证据",
+      "search_keywords": [
+        "1T-TaS2 high harmonic generation polarization anisotropy",
+        "Mott CDW order parameter HHG polarization dependence",
+        "1T-TaS2 commensurate nearly-commensurate CDW transition 180K",
+        "TaS2 ultrafast spectroscopy CDW symmetry breaking",
+        "Mott insulator isotropic high harmonic response"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "TiSe₂相变点变温设计的对照组:同结构非CDW的2H-TaS₂(>200K顺电相)全温偏振各向异性曲线作为温度本底扣除基准",
+      "missing_evidence": "缺乏2H-TaS₂(无CDW相变,作为同结构对照)在全温区HHG偏振各向异性数据,以及高温顺电相(>200K)外推基线方法的文献支撑",
+      "search_keywords": [
+        "2H-TaS2 high harmonic generation polarization anisotropy",
+        "2H-TaS2 normal state vs 1T-TaS2 CDW comparison",
+        "TiSe2 high harmonic generation temperature dependence polarization",
+        "transition metal dichalcogenide HHG background subtraction control",
+        "2H-TaS2 HHG paraelectric phase baseline"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "scheme"
+}

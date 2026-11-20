@@ -1,0 +1,136 @@
+{
+  "gaps": [
+    {
+      "claim": "moiré超晶格中HHG产生与强场量子调控的实验可行性",
+      "missing_evidence": "缺少moiré超晶格（扭转/同质结）中观测高次谐波产生或强场响应的实验/理论文献，需建立本课题物理可行性基础",
+      "search_keywords": [
+        "moiré superlattice high harmonic generation",
+        "twisted bilayer high harmonic generation",
+        "moiré strong field HHG experiment",
+        "heterostructure high harmonic generation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "扭转角精度±0.05°的实验实现",
+      "missing_evidence": "缺少在moiré系统中实现±0.05°扭转角精度（即0.05°公差）的制备/表征方法文献",
+      "search_keywords": [
+        "moiré twist angle precision control",
+        "twisted bilayer precise angle ±0.05 degree",
+        "cryogenic stacking angle accuracy",
+        "moiré homostructure angle calibration"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "HHG调控中相对提升>20%或误差<15%的精度基准",
+      "missing_evidence": "缺少已有HHG调控工作中关于调控深度（>20%）与精度（<15%）的可比文献数据，用于论证本课题精度指标的合理性",
+      "search_keywords": [
+        "high harmonic generation modulation depth",
+        "HHG all-optical control precision",
+        "strong field HHG switching efficiency",
+        "light-induced HHG enhancement"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "三段式降阶方法（ab initio → 半导体Bloch方程 → 少体模型）",
+      "missing_evidence": "缺少三段式跨尺度降级方法在固体HHG领域的代表性文献，需论证多尺度降阶方法的已验证性",
+      "search_keywords": [
+        "multi-scale HHG simulation solid",
+        "ab initio semiconductor Bloch equation few-body",
+        "hierarchical HHG theory moiré",
+        "tight-binding HHG semiconductor Bloch equation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "多观测联合反演（HHG + tr-ARPES + STS）方法",
+      "missing_evidence": "缺少将HHG光谱、时间分辨ARPES（tr-ARPES）与扫描隧道谱（STS）数据联合用于反演moiré能带/Berry曲率/量子度规的方法学文献",
+      "search_keywords": [
+        "joint spectroscopy reconstruction Berry curvature",
+        "tr-ARPES HHG combined probe band structure",
+        "multi-probe inverse problem moiré band",
+        "STS HHG quantum metric reconstruction"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "光Floquet调控moiré电子态的实验/理论先例",
+      "missing_evidence": "缺少Floquet工程或光场驱动主动调控moiré能带/拓扑性质的代表性文献，用以支撑项目特色3的物理可行性",
+      "search_keywords": [
+        "Floquet engineering moiré band structure",
+        "light-induced topological phase twisted bilayer",
+        "Floquet moiré Hubbard",
+        "photonic Floquet control moiré"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "C₃对称性硬约束在1–3°小扭转角moiré中的合法性",
+      "missing_evidence": "缺少在1–3°扭转角范围内C₃对称性保持或破缺的论证文献，决定少体模型对称性选取的物理合法性",
+      "search_keywords": [
+        "C3 symmetry twisted bilayer graphene",
+        "moiré C3 breaking small angle",
+        "1-3 degree twist angle symmetry",
+        "lattice relaxation moiré symmetry"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Δα >0.2的物理量差分（似指Berry曲率/量子度量差）定义与可比标准",
+      "missing_evidence": "缺少已在文献中报告的、可作为Δα >0.2阈值参考的Berry曲率差分或类似量子几何量差值的实验/理论数据",
+      "search_keywords": [
+        "Berry curvature difference measured value",
+        "quantum metric reconstruction precision",
+        "nonlinear Berry curvature comparison",
+        "Berry curvature magnitude twisted bilayer"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "强场探针对强关联/Haldane等非平庸moiré相的灵敏度",
+      "missing_evidence": "缺少HHG作为强场探针对关联绝缘态/Chern绝缘态/对称性破缺等非平庸moiré相的分辨能力文献",
+      "search_keywords": [
+        "HHG probe correlated insulator moiré",
+        "high harmonic correlated phase sensitivity",
+        "HHG Chern insulator detection",
+        "HHG symmetry breaking moiré probe"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "计算资源~2×10⁴核时完成>10⁸核时量级任务的可行性",
+      "missing_evidence": "缺少moiré多体HHG计算的算力benchmark文献，需论证计算量估算的合理性",
+      "search_keywords": [
+        "moiré TBG numerical cost HHG",
+        "twisted bilayer GW calculation cost",
+        "many-body moiré simulation benchmark",
+        "first principles moiré HHG compute"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "moiré HHG近期（近1–2年）突破与本课题差异化定位",
+      "missing_evidence": "缺少2024–2026年间moiré超晶格强场/非线性光学方向的最新进展综述或代表性论文",
+      "search_keywords": [
+        "moiré nonlinear optics 2025",
+        "moiré HHG 2024 2025 2026",
+        "twisted bilayer attosecond 2025",
+        "moiré strong field recent progress"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "扭转角连续调控（电场/应力/光学）方法",
+      "missing_evidence": "缺少连续可调扭转角（而非离散样品切换）的实验方法文献，支撑\"主动调控\"部分",
+      "search_keywords": [
+        "continuously tunable moiré twist angle",
+        "in situ twist angle control",
+        "electrostatic moiré tuning",
+        "mechanical moiré strain twist control"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

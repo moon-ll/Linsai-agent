@@ -1,0 +1,52 @@
+{
+  "gaps": [
+    {
+      "claim": "国内尚无 BSV 驱动固体高次谐波产生相关工作（'国内首个/国内空白'作为立项依据中的创新点论据，rationale §1.1 末句）",
+      "missing_evidence": "缺乏系统文献检索证据支撑此空白声明；且 references [31] Wang 2025（华中科大）已存在国内同类工作，逻辑自相矛盾；需提供检索范围/时间窗/关键词/数据库的元数据，并澄清本项目与 Wang 2025 工作的本质区别（如波段/材料体系/可观测量维度）",
+      "search_keywords": [
+        "bright squeezed vacuum solid HHG China review",
+        "Wang 2025 quantum light high harmonic generation HUST",
+        "华中科大 squeezed vacuum HHG group",
+        "国内 BSV 强场 高次谐波 课题组",
+        "squeezed light driven HHG China 2024 2025"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "使用 QSHHG（Quantum-State High Harmonic Generation）缩写概括量子光驱动 HHG 这一研究方向（rationale §1.1）",
+      "missing_evidence": "H-9.4 已加注但未消解'自创术语冒充既有概念'质疑；需引用奠定该术语合法性的原始文献（Even Tzur 2024 Phys Rev Research、Li Pan/Hommelhoff 2021 PRL、Pisanty 等综述）以确立 QSHHG 概念谱系；或承认该术语为本项目自命名并改用既有术语（如 nonclassical-light-driven HHG）",
+      "search_keywords": [
+        "quantum state high harmonic generation definition",
+        "Even Tzur 2024 squeezed HHG Phys Rev Research",
+        "Li Pan Hommelhoff 2021 PRL quantum HHG",
+        "Pisanty nonclassical HHG review",
+        "QSHHG nomenclature origin quantum light HHG"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Bi₂Te₃ 几何响应（Berry 曲率 HHG）作为'已成熟能力'列入几何分辨对照体系（rationale §1.1 段 1）",
+      "missing_evidence": "rationale §1.1 段 1 将 Bi₂Te₃ 列为几何响应'已成熟能力'，但 §1.2.1 已自承 Bi₂Te₃ NIR 不构成几何分辨物理匹配——前后自相矛盾；需引用 Bi₂Te₃ 拓扑表面态 HHG 代表性实验（Schneider 2019/Heide 2022 等）以明确其能力边界（动量分辨 vs 能谷分辨 vs Berry 曲率直接读出），并澄清'已成熟'与'不匹配'的语义层级",
+      "search_keywords": [
+        "Bi2Te3 topological surface state HHG Berry curvature experiment",
+        "Schneider 2019 Bi2Te3 high harmonic generation Nature",
+        "Heide 2022 topological insulator HHG helicity",
+        "Bi2Te3 NIR band gap HHG momentum resolution",
+        "3D topological insulator HHG Berry curvature direct read out"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "团队 BSV 源从 5×10¹² photons/s 升级到 10¹³ photons/s 路径成熟（rationale §1.2.2 段 1）",
+      "missing_evidence": "升级路径仅给出数值目标，未引用同类 BSV 源 scaling 的工程文献作为可行性外部支撑；需引用 Spasibko/Slobodtchouk/Iskhakov 等关于 BSV 光子通量 scaling 因子（腔增强/晶体长度/聚焦参数）的代表性数据，作为团队升级方案的工程基线",
+      "search_keywords": [
+        "Spasibko BSV photon flux scaling cavity enhanced",
+        "Iskhakov superbunched BSV 10^13 photons",
+        "BSV source engineering scaling factor crystal length",
+        "squeezed vacuum source high repetition rate MHz upgrade",
+        "Slobodtchouk BSV spatial mode scaling"
+      ],
+      "priority": "low"
+    }
+  ]
+}

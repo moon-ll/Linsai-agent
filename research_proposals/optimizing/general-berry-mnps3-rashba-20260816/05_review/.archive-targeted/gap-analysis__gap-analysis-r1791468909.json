@@ -1,0 +1,66 @@
+{
+  "gaps": [
+    {
+      "claim": "altermagnet 破缺时间反演对称性下 Ω(k) 的宇称行为需按平台磁点群逐一给出（i-wave 交变磁劈裂体系中 T 已破缺，Ω(k)=Ω(−k) 与 Ω(−k)=−Ω(k) 哪种成立取决于 PT 等附加对称）",
+      "missing_evidence": "缺少针对 MnPS3 等 altermagnet 中 Ω(k) 宇称性的点群分析文献（i-wave / g-wave 各平台的具体对称群推导与 Berry 曲率奇偶判定）",
+      "search_keywords": [
+        "altermagnet magnetic point group Berry curvature parity",
+        "i-wave altermagnet time-reversal breaking Berry curvature",
+        "MnPS3 magnetic symmetry Berry curvature parity analysis",
+        "spin group symmetry Berry curvature odd even function"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "高斯极限下 D_sep≥0.80 判别准则的统计理论基础及在含噪谱学数据中的适用边界",
+      "missing_evidence": "缺少 Bhattacharyya 系数 / Fisher 判别在噪声谱学指纹分离中的标准文献支撑，以及 D_sep 阈值 0.80 的统计含义来源",
+      "search_keywords": [
+        "Bhattacharyya coefficient separability measure spectroscopy",
+        "Fisher discriminant D_sep threshold classification noise",
+        "Gaussian limit separability criterion spectral fingerprint"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "[41] 明确指出 HHG 框架可扩展至 g-wave / i-wave altermagnet 的原文声明",
+      "missing_evidence": "缺少直接引用 [41] 中关于该方法可推广至 g-wave / i-wave 平台的原始表述文献证据（已反查 arXiv 全文确认含此声明，需检索同类扩展文献以加强支撑）",
+      "search_keywords": [
+        "high harmonic generation g-wave i-wave altermagnet extension",
+        "HHG altermagnet spin group classification extension review",
+        "d-wave g-wave i-wave altermagnet HHG fingerprint"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "基于 d′≥2.1 / 分类准确率 ≥90% 的判别阈值在 HHG 谱学分离实验中的统计依据与典型双样本等方差判别最优准确率约 93% 的来源",
+      "missing_evidence": "缺少 d-prime 判别准则在光谱指纹分离领域的基准文献，以及 d′=2.09 → 准确率约 93% 的统计对应关系出处",
+      "search_keywords": [
+        "d-prime discrimination threshold spectroscopy benchmark",
+        "signal detection theory d-prime classification accuracy ROC",
+        "HHG spectrum discrimination statistical criterion"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "可融合多判据（d′≥2.1 + D_sep≥0.80 + 谱峰增强≥5 倍）实现 80% 验证率的方法学先例",
+      "missing_evidence": "缺少多判据融合验证策略在 HHG 谱学或类似光谱指纹分离中的方法论文献支撑",
+      "search_keywords": [
+        "multi-criteria fusion verification spectroscopy classification",
+        "ensemble discriminant threshold validation HHG",
+        "fingerprint classification multi-metric fusion accuracy"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "MnPS3 等反铁磁 / altermagnet 平台中 fs-ps 时域内层间滑移模式与 Floquet 缀饰实现自旋-能谷态超快切换的物理可行性",
+      "missing_evidence": "缺少 Floquet 工程在 altermagnet / 反铁磁体中实现自旋-能谷态超快相干调控的实验或理论先例文献（除 [1] 之外）",
+      "search_keywords": [
+        "Floquet engineering altermagnet ultrafast spin-valley switching",
+        "antiferromagnetic Floquet state coherent control fs-ps",
+        "MnPS3 ultrafast light-induced spin state switching Floquet"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "content"
+}

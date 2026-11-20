@@ -1,0 +1,23 @@
+{
+  "gaps": [
+    {
+      "claim": "§3.6 L129：Prajapati 具名论断「RNiO₃ 在 THz 驱动下跨越相变时谐波产额比约两个数量级」（作为风险/可行性论证中的跨相变产额量级锚点）",
+      "missing_evidence": "缺少真实可溯的文献条目：现行 references 实表 41 条逐条姓氏扫描零 Prajapati，该具名引用为虚指，「约两个数量级」的量级断言失去可溯载体。需补入 1 条 RNiO₃（或同类镍酸盐）THz 谐波跨金属-绝缘体相变产额变化的实验/理论文献并挂角标；若检索不到，则删具名改为「镍酸盐 THz 谐波跨相变已有报道」的泛述。",
+      "search_keywords": [
+        "RNiO3 terahertz high harmonics",
+        "nickelate metal-insulator transition THz nonlinear response",
+        "Prajapati RNiO3 harmonic generation",
+        "perovskite nickelate pump-probe Mott transition yield",
+        "Mott insulator terahertz harmonics phase transition orders of magnitude"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3.3 L33/L51、§3.4 L91、§3.5 L111/L113、§3.7 L139：Wu / Iglesias / Gothelf / Even Tzur / Jiang 与 Dorfman / Rasputnyi / 北京大学 / Murakami / Boroumand 共十组具名对标关键论断",
+      "missing_evidence": "无需新增文献——现行 references 实表均已有对应条目（[9][11][15][2][14][1][35][5][10]），属角标缺失而非无源。缺口类型为引用标注缺失：需补挂角标；特别注意 Wu 句系 R2 修复后文献重编号回退（R2 所挂 [11] 现行已改指 Iglesias，Wu 应挂 [9]），避免补错号引入新悬空。",
+      "search_keywords": [],
+      "priority": "low"
+    }
+  ],
+  "section": "scheme"
+}

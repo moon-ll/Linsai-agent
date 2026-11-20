@@ -1,0 +1,64 @@
+{
+  "proposal_id": "2026_NSFG_strongfield_ultrafast",
+  "current_stage": 0,
+  "status": "idle",
+  "stages": {
+    "0": {
+      "name": "方向校准",
+      "profile": "pipeline-runner",
+      "status": "pending",
+      "dispatched_at": null,
+      "completed_at": null,
+      "output_preview": "",
+      "error": ""
+    },
+    "1": {
+      "name": "文献调研",
+      "profile": "researcher",
+      "status": "pending",
+      "dispatched_at": null,
+      "completed_at": null,
+      "output_preview": "",
+      "error": ""
+    },
+    "2": {
+      "name": "缺口分析",
+      "profile": "analyst",
+      "status": "pending",
+      "dispatched_at": null,
+      "completed_at": null,
+      "output_preview": "",
+      "error": ""
+    },
+    "3": {
+      "name": "科学问题",
+      "profile": "analyst",
+      "status": "pending",
+      "dispatched_at": null,
+      "completed_at": null,
+      "output_preview": "",
+      "error": ""
+    },
+    "4": {
+      "name": "申请书撰写",
+      "profile": "writer",
+      "status": "pending",
+      "dispatched_at": null,
+      "completed_at": null,
+      "output_preview": "",
+      "error": ""
+    },
+    "5": {
+      "name": "质量自检",
+      "profile": "reviewer",
+      "status": "pending",
+      "dispatched_at": null,
+      "completed_at": null,
+      "output_preview": "",
+      "error": ""
+    }
+  },
+  "history": [],
+  "created_at": "2026-07-27T05:40:52Z",
+  "updated_at": "2026-07-27T05:40:52Z"
+}

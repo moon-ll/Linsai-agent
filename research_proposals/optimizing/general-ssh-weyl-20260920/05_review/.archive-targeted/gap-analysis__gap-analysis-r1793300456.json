@@ -1,0 +1,39 @@
+{
+  "gaps": [
+    {
+      "claim": "L55：[37] 的工作\"在 Weyl 节点动力学维度与 [27] 的 β-WP₂ 理论互为参照\"",
+      "missing_evidence": "[37] 实为 MgO 宽带隙绝缘体（带隙 7.8 eV，无 Weyl 节点）的动态 Berry 相研究，不能作为 Weyl 节点动力学的理论参照。需二选一：要么将该处改为方法维度（强场 Berry 相位动力学）的参照表述，要么补充一篇真正在 Weyl 半金属节点动力学维度与 β-WP₂ 理论可对照的文献（如 Weyl 节点附近强场动力学/Berry 曲率反演相关理论工作）",
+      "search_keywords": [
+        "Weyl semimetal strong field dynamics",
+        "Weyl node Berry curvature inversion",
+        "nonlinear optical response Weyl semimetal theory",
+        "high harmonic generation topological semimetal"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "L75：\"SSH 边界态诱导带隙谐波压缩\"（指标 Δκ 的母概念）",
+      "missing_evidence": "该概念为全章首现但无文献锚点——§2.2 引 Bauer[9] 时只建立了\"带隙下方增强 14 个数量级\"，未建立\"谐波阶次/阶次范围压缩\"这一论断。需补充 SSH 模型边界态 HHG 中关于带隙下方增强伴随谐波谱压缩（harmonic order compression / cutoff compression below the gap）的原始文献或综述支撑",
+      "search_keywords": [
+        "SSH model high harmonic generation",
+        "boundary state HHG enhancement",
+        "harmonic order compression below band gap",
+        "topological edge state nonlinear optics",
+        "Bauer Hansen SSH HHG probe"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "L47：裸膜幂律指数 2.3 被括注为\"（近微扰）\"",
+      "missing_evidence": "微扰区三次谐波幂律指数应为 3，实测 2.3 已显著偏离，定性标注缺乏依据。需补充幂律指数标定微扰/非微扰 regimes 的参考标准文献（固体 HHG 中谐波产率随场强幂律标定的实验或理论基准），以支撑\"介于立方律与近饱和之间\"的修正表述",
+      "search_keywords": [
+        "high harmonic generation power law scaling",
+        "perturbative nonperturbative regime HHG",
+        "harmonic yield field strength exponent solid",
+        "third harmonic generation scaling law"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "rationale"
+}

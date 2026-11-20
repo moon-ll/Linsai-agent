@@ -1,0 +1,92 @@
+{
+  "gaps": [
+    {
+      "claim": "i-wave自旋劈裂在圆偏振HHG中的螺旋度交替模式、椭圆度响应斜率、偏振旋转角三项指纹尚无系统理论推导",
+      "missing_evidence": "Ghorashi-Rappe理论工作建立了'自旋劈裂对称性→角谐波最低允许阶数'关系，但未给出i-wave在圆偏振HHG中三项特征的系统推导；评审报告指出content.md§2.3 L29自称为'两个特征'但§2.6和scheme.md§3.3列出三项或五项，存在自相矛盾",
+      "search_keywords": [
+        "i-wave altermagnet circular polarization high harmonic generation",
+        "Ghorashi Rappe HHG altermagnet symmetry selection rule",
+        "spin-splitting HHG helicity alternating fingerprint theory",
+        "altermagnet HHG ellipticity response theoretical derivation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "i-wave HHG指纹理论在Rashba/Berry强背景下的失效边界未明示",
+      "missing_evidence": "scheme.md§3.5已识别'i-wave指纹在Rashba背景干扰下的可辨识性'风险，但content.md§2.3未给出在Rashba/Berry贡献超过阈值时A_helicity与S_ellipticity的退化边界",
+      "search_keywords": [
+        "Rashba spin-orbit coupling Berry curvature high harmonic interference",
+        "altermagnet HHG spin-splitting background signal-to-noise",
+        "quantum geometry HHG multiple contributions distinguishability",
+        "HHG fingerprint symmetry broken by Rashba background"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Floquet缀饰增强弱交变磁贡献的条件尚需理论预言支撑",
+      "missing_evidence": "Yarmohammadi等工作证明Floquet驱动可诱导非平衡态响应，但具体在何种Floquet参数（驱动频率、强度、缀饰阶数）下弱交变磁信号能选择性增强至实验可探测水平，同时保持对Rashba/Berry响应的分辨能力，尚未被系统论证",
+      "search_keywords": [
+        "Floquet dressing altermagnet high harmonic enhancement",
+        "weak altermagnet signal Floquet coherence amplification",
+        "Floquet engineering Rashba Berry curvature separation",
+        "Yarmohammadi Floquet altermagnet non-equilibrium"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "层间滑移作为独立动力学变量引入强场超快物理框架的理论基础薄弱",
+      "missing_evidence": "现有文献仅建立滑移势垒的静态DFT数据和THz脉冲驱动层间剪切声子的实验可行性，但尚无理论方案回答强激光场通过何种物理机制驱动层间滑移——光应力机制与位移电流机制的竞争关系在强场（MV/cm量级）下的非线性区间缺乏文献支撑",
+      "search_keywords": [
+        "interlayer sliding coherent ultrafast laser driving theory",
+        "optomechanical coupling interlayer shear mode fs",
+        "photo-induced stress vs displacement current layer sliding",
+        "coherent lattice dynamics strong field interlayer breathing"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "亚100 fs时间分辨率的实验可达性论证缺失",
+      "missing_evidence": "评审报告指出scheme.md§3.5已指出亚100 fs时间分辨率对光路稳定性要求极高（<10 fs抖动），但content.md反复以'亚100 fs'为前提未提降级路径对分离度≥80%的影响",
+      "search_keywords": [
+        "sub-100-fs pump probe time resolution experimental achievement",
+        "attosecond pump probe timing jitter stability requirement",
+        "high harmonic generation temporal resolution limit",
+        "ultrafast optics 100 fs resolution experimental feasibility"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Monte Carlo信噪比模拟方法的来源或合理性论证缺失",
+      "missing_evidence": "content.md§2.5目标二和§2.6关键问题二使用'Monte Carlo模拟中加入10%高斯噪声后的分类准确率≥3σ'，但未说明该模拟方法的出处或与实验条件的对应关系",
+      "search_keywords": [
+        "Monte Carlo simulation high harmonic spectroscopy noise",
+        "HHG signal-to-noise ratio Monte Carlo method",
+        "Berry curvature high harmonic Monte Carlo classification",
+        "altermagnet HHG fingerprint Monte Carlo validation"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "content.md §2.3 L27和§2.4 L39'尚未'声明需配合检索范围说明",
+      "missing_evidence": "两处'尚未'表述需配合'检索范围：Web of Science、arXiv、APS/IOP期刊数据库，截止2026-08'（rationale.md L63已声明）才能作为合规的优先权表述，content.md自身未交叉引用该检索范围",
+      "search_keywords": [
+        "i-wave altermagnet circular polarization HHG literature review",
+        "Rashba Berry altermagnet HHG spectroscopic fingerprint state-of-the-art",
+        "检索范围截止日期支撑 尚未见报道",
+        "Web of Science arXiv HHG altermagnet截止2026"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "双层类h-BN铁电体中亚ps量级层间滑移动力学实验文献需要更新",
+      "missing_evidence": "content.md L19引用Zhang等人2025年泵浦-探针实验[2503.21782]证明相干驱动在fs-ps量级可实现，但该文献在rationale.md和references.md中归属不一致（评审报告指出[2503.21782]在rationale.md L19提及但应新增或核实），需确认为正式引用条目",
+      "search_keywords": [
+        "Zhang pump probe bilayer h-BN ferroelectric interlayer sliding",
+        "sub-picosecond interlayer shear mode coherent driving",
+        "2D ferroelectric sliding dynamics pump probe experiment",
+        "ultrafast sliding ferroelectricity fs-ps timescale"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

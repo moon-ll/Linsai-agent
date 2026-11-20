@@ -1,0 +1,94 @@
+{
+  "gaps": [
+    {
+      "claim": "假设2将靶标B在约5×10⁹–10¹¹ W/cm²强场区间内出现饱和拐点作为可证伪判据，并以δW_flat约为2–8 meV作为相应表征量。",
+      "missing_evidence": "缺少饱和拐点的定量定义、实验或拟合判据，以及强场强度与δW_flat之间换算关系的可追溯依据。需要补充掺杂半导体或TMDC中强场HHG饱和行为的原始实验和量子轨迹研究，并结合本项目预实验、激光强度标定及方案节的可复现实验协议，说明该数值区间的来源与适用边界。",
+      "search_keywords": [
+        "doped semiconductor high harmonic generation saturation threshold",
+        "solid-state HHG saturation knee intensity",
+        "TMDC high harmonic generation saturation phase matching",
+        "quantum trajectory HHG saturation semiconductor",
+        "laser intensity ponderomotive energy conversion meV"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "正文以Ghimire的既有研究或重分析结果作为相关HHG信号物理解读和研究对照的依据。",
+      "missing_evidence": "正文虽出现Ghimire署名，但缺少可追溯角标；文献表中的疑似对应条目[4]尚未与具体论断建立证据链。需要核对[4]是否为支持该句的原始论文，补充[4]角标，并确认其样品体系、谱学指标和分析结论确实能够外推至本项目的TMDC或TBG研究。",
+      "search_keywords": [
+        "Ghimire high harmonic generation solids original paper",
+        "Ghimire semiconductor HHG spectral analysis",
+        "Ghimire bulk crystal high harmonic generation",
+        "solid-state high harmonic generation Ghimire"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "正文以Peterka研究所述的“窗口”作为谱学分析范围或结果判定的参照。",
+      "missing_evidence": "缺少正文角标以及对该窗口定义、适用条件和来源的说明。需要核对疑似对应条目[28]，补充[28]角标，并引用其中直接定义该窗口的原始段落或公式；若[28]不适用于本项目的异质结体系，还需补充可进行条件迁移的实验依据。",
+      "search_keywords": [
+        "Peterka optical harmonics in solids",
+        "Peterka solid-state HHG spectral window",
+        "Peterka high harmonic generation window criterion",
+        "Peterka HHG solids emission window"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "正文归于Zhou的既有结果被用作强场模型选择、局域电子态效应或HHG机制判断的依据。",
+      "missing_evidence": "缺少正文角标，尚未形成从原始论文到具体机制结论的证据链。需要核对疑似对应条目[31]，补充[31]角标，并明确所引用结果究竟是实验观测、半导体量子轨迹计算还是一般性综述；如涉及模型迁移，还应补充其势模型、局域态假设和强度区间与本项目的一致性依据。",
+      "search_keywords": [
+        "Zhou high harmonic generation semiconductor quantum trajectory",
+        "Zhou local electronic states strong-field HHG",
+        "Zhou solid-state high harmonic generation theoretical model",
+        "Zhou doped semiconductor strong-field optics"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "正文归于Tyulnev的既有结果被用作莫尔或TBG体系中Floquet调控可行性、适用边界及创新差异的判断依据。",
+      "missing_evidence": "缺少正文角标，且需确认所引工作是否真正覆盖Floquet调控、莫尔超晶格或强 Floquet 光谱，而不能仅凭作者或主题相近进行关联引用。需要核对疑似对应条目[44]并补充[44]角标，同时给出其Floquet频率、驱动场、莫尔材料和可观测指标与本项目的直接对应关系。",
+      "search_keywords": [
+        "Tyulnev Floquet engineering moire materials",
+        "Tyulnev twisted bilayer graphene strong-field Floquet",
+        "Tyulnev nonlinear light-matter moire superlattice",
+        "Tyulnev Floquet spectroscopy twisted moire"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "正文以Xiong 2024的研究说明栅压或光激发对相关莫尔体系的静态调控先例，并据此界定本项目的创新边界。",
+      "missing_evidence": "缺少正文角标，现有叙述尚不能由读者直接追溯到具体原始研究。需要核验疑似对应条目[19]，补充[19]角标，并逐项确认Xiong 2024是否确实实施了栅压调控、光激发调控及其所采用的样品、调控范围和观测量，避免把不同体系或不同调控手段合并为同一先例。",
+      "search_keywords": [
+        "Xiong 2024 moire material gate voltage control",
+        "Xiong 2024 twisted bilayer graphene electrostatic tuning",
+        "Xiong 2024 optical excitation moire control",
+        "Xiong 2024 moire strong-field spectroscopy"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "正文以Wu 2025的研究作为光激发或Floquet调控莫尔体系的相关先例，并用于说明本项目与既有工作的差异。",
+      "missing_evidence": "缺少正文角标和逐项证据对应关系。需要核验疑似对应条目[20]，补充[20]角标，并确认该文献中的样品体系、激发方式、Floquet参数、调控目标和测量信号是否支持正文论断；若其仅实现静态调控而未实现闭环Floquet调控，应明确区分。",
+      "search_keywords": [
+        "Wu 2025 moire material optical excitation control",
+        "Wu 2025 twisted bilayer graphene Floquet control",
+        "Wu 2025 moire strong-field spectroscopy",
+        "Wu 2025 Floquet engineering 2D material"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "正文三处使用“Mrudul等”指代文献[30]所对应的研究。",
+      "missing_evidence": "此处并非缺少新的研究文献，而是缺少正文作者称谓与[30]原始出版记录的一致性核验。应查询原始论文的完整作者列表和正式引文形式；若[30]确为单作者文献，应统一为“Mrudul”，并保留[30]角标。",
+      "search_keywords": [
+        "Mrudul high harmonic generation original publication",
+        "\"Mrudul\" solid-state high harmonic generation",
+        "\"Mrudul\" MoS2 high harmonic generation DOI",
+        "Mrudul publication record HHG"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

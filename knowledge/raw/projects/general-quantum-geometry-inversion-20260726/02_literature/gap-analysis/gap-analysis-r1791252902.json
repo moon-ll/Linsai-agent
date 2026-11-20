@@ -1,0 +1,28 @@
+{
+  "gaps": [
+    {
+      "claim": "§7.3 相图主区温度范围 T = 50–300 K",
+      "missing_evidence": "50–80 K 段的实测数据来源/文献锚点缺失；实测窗口仅覆盖 80–300 K，50–80 K 区间的 CDW 相图边界、序参量或输运特征无引用支撑",
+      "search_keywords": [
+        "CDW phase diagram 50K",
+        "charge density wave low temperature TaS2",
+        "低温电荷密度波相图 50K-80K",
+        "ultralow temperature CDW order parameter",
+        "1T-TaS2 phase boundary below 80K"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§4.1 低温工程段：定位公差 ±5 μm 对应焦平面功率密度约 2% 的换算结论",
+      "missing_evidence": "该 2% 数值既无换算公式可复现（纵向估算仅 ~0.003%，横向 5–11%，两方向几何均不收敛到 2%），也无文献锚点；缺少 BBO 焦平面公差-功率密度对应关系的实验或理论参考",
+      "search_keywords": [
+        "BBO crystal focal plane positioning tolerance power density",
+        "nonlinear crystal alignment tolerance focal power",
+        "BBO type-II focal spot power tolerance",
+        "second harmonic generation alignment tolerance"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

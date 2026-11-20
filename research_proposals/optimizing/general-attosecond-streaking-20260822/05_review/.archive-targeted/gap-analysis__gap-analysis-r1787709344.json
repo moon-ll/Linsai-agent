@@ -1,0 +1,92 @@
+{
+  "gaps": [
+    {
+      "claim": "本课题定义软X射线能区为409.7–543 eV，543 eV上限的物理依据未说明",
+      "missing_evidence": "缺乏543 eV作为N K边电离阈上能区上限的物理依据或实验数据支撑，应有电离截面数据或散射相位行为变化的文献依据",
+      "search_keywords": [
+        "N K-edge ionization threshold",
+        "soft X-ray 543 eV photoionization",
+        "nitrogen K-edge 409.7 eV above threshold",
+        "soft X-ray attosecond spectroscopy energy range"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "角积分对偶极相位压制效率随光电子动能增加而下降，其函数形式尚无量化实验标定",
+      "missing_evidence": "缺乏角积分方案中光电子动能依赖性的量化实验数据；Pabst-Dahlström的原始验证依赖量子拍条件，常规靶材上的函数形式未标定",
+      "search_keywords": [
+        "angular integration dipole phase suppression kinetic energy dependence",
+        "attosecond streaking dipole phase energy dependence",
+        "Pabst Dahlstrom angular integration efficiency electron energy",
+        "dipole phase angular averaging attosecond"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "rACE方法在单通道假设下获得24 as绝对延迟确定度，当多通道贡献超过10%时解析拟合系统性偏离",
+      "missing_evidence": "缺乏rACE方法在多通道场景（>10%）下误差增长的直接实验验证或理论推导",
+      "search_keywords": [
+        "rACE attosecond streaking multi-channel limitation",
+        "absolute delay calibration attosecond multi-channel breakdown",
+        "Inzani rACE analytical fitting multi-channel",
+        "attosecond pulse retrieval multi-channel error propagation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "水窗能区多通道贡献15%时重构误差开始偏离、30%时误差超过20%的失效阈值",
+      "missing_evidence": "缺乏这两个阈值（15%和30%）的原始实验数据或理论计算文献支撑，Cousin 2017和Peschel 2022的数值与实验结果未直接引用具体数值",
+      "search_keywords": [
+        "Cousin 2017 water window streaking multi-channel 15% 30% error threshold",
+        "FROG-CRAB multi-channel breakdown threshold percentage",
+        "attosecond streaking reconstruction error multi-channel ionization",
+        "Peschel multi-channel ionization reconstruction error quantitative"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "CNN方法在训练分布外的通道干涉模式下泛化能力存疑，水窗能区特定参数区间训练数据稀缺",
+      "missing_evidence": "缺乏CNN方法在多通道水窗能区泛化能力不足的直接实验证据或分析文献",
+      "search_keywords": [
+        "attosecond streaking neural network generalization multi-channel",
+        "CNN attosecond pulse retrieval out-of-distribution",
+        "neural network FROG-CRAB water window limitation",
+        "deep learning attosecond metrology generalization failure"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "水窗能区多通道电离截面数据主要依赖公开测量，国内实验平台缺乏充分验证",
+      "missing_evidence": "缺乏国内多通道电离截面数据的实验测量或验证的文献支撑",
+      "search_keywords": [
+        "water window multi-channel ionization cross section China",
+        "multi-channel streaking reconstruction China experimental",
+        "国内 水窗 阿秒 条纹 多通道 验证",
+        "carbon K-edge nitrogen K-edge ionization cross section measurement China"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "软X射线能区（409.7–543 eV）光电子与原子实相互作用的散射相位行为与低能区存在本质差异",
+      "missing_evidence": "缺乏软X射线能区散射相位行为差异的直接实验观测或理论计算文献支撑",
+      "search_keywords": [
+        "soft X-ray attosecond streaking scattering phase",
+        "high energy photoelectron scattering phase attosecond",
+        "scattering phase behavior 400 eV 500 eV attosecond",
+        "dipole phase soft X-ray energy dependence attosecond spectroscopy"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "角积分方案在常规靶材（氩气、氪气）上的普适性尚未得到充分实验验证",
+      "missing_evidence": "缺乏角积分方案在无相干波包制备条件下对常规靶材的系统性实验验证数据",
+      "search_keywords": [
+        "angular integration attosecond streaking argon krypton",
+        "Pabst Dahlstrom angular integration conventional target validation",
+        "attosecond streaking dipole phase suppression rare gas",
+        "angular averaging attosecond pulse reconstruction argon neon"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

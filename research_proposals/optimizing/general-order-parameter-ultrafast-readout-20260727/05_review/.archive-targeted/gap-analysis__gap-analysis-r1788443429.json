@@ -1,0 +1,85 @@
+{
+  "gaps": [
+    {
+      "claim": "§2.1 总述段缺独立机制句：多带SBE含SOC正演模型生成合成谱，通过Fisher矩阵条件数判别参数空间可分辨方向",
+      "missing_evidence": "缺少多带半导体布洛赫方程(SBE)含自旋轨道耦合(SOC)作为固体HHG正演模型的核心文献支撑，特别是Fisher信息矩阵条件数在HHG参数可辨识性分析中的应用",
+      "search_keywords": [
+        "multiband semiconductor Bloch equation spin-orbit coupling HHG forward model",
+        "Fisher information matrix condition number high harmonic generation identifiability",
+        "SBE interband intraband SOC altermagnet high harmonic"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.4 L37-L53 F_ij公式+κ阈值表+贝叶斯公式+雅可比非奇异性论证（即使改写为方法学概述，仍需文献证明判据选择）",
+      "missing_evidence": "缺少Fisher信息矩阵条件数κ作为反演可辨识性判据、以及贝叶斯后验标准差作为归因判据在阿秒/高次谐波光谱反演中的先例文献",
+      "search_keywords": [
+        "Fisher information matrix parameter identifiability attosecond spectroscopy",
+        "Bayesian inversion high harmonic spectroscopy posterior",
+        "Jacobian condition number nonlinear optics inverse problem",
+        "regularization ill-posed inverse problem HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.4 L53 CEP/OAM辅助验证维度不在核心反演模型内（改写后需文献说明这两个变量的独立验证作用）",
+      "missing_evidence": "缺少载波包络相位(CEP)和轨道角动量(OAM)作为高次谐波独立验证维度的实验或理论文献",
+      "search_keywords": [
+        "carrier-envelope phase HHG verification",
+        "orbital angular momentum high harmonic generation probe",
+        "CEP OAM attosecond pulse characterization"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§2.5（一）量化优势：条件数κ与后验标准差双判据使归因可量化输出（需文献证明此为创新点）",
+      "missing_evidence": "缺少现有HHG反演文献未采用Fisher矩阵+贝叶斯双判据进行归因可量化输出的对比证据",
+      "search_keywords": [
+        "Fisher matrix Bayesian high harmonic inversion dual criterion",
+        "attosecond spectroscopy reconstruction quantitative attribution",
+        "altermagnet HHG inverse problem identifiability literature gap"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.5（二）现有altermagnet HHG文献未给出反演可辨识性分析（需文献确认现状）",
+      "missing_evidence": "缺少关于altermagnet HHG领域(Werner/Weber/Fuchs/McCarter等)反演可辨识性分析的综述或专题文献，确认该方法学空白",
+      "search_keywords": [
+        "altermagnet high harmonic generation review 2024 2025",
+        "inverse problem identifiability altermagnet HHG",
+        "order parameter reconstruction magnetic HHG methodology"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.6 L73 X射线衍射或磁输运独立表征作为反演输出交叉约束（改写后需文献支撑交叉验证策略）",
+      "missing_evidence": "缺少HHG反演结果与同步辐射X射线衍射/磁输运测量进行交叉验证的先例文献",
+      "search_keywords": [
+        "high harmonic generation cross-validation X-ray diffraction",
+        "HHG spectroscopy magnetic transport cross-check",
+        "synchrotron complementary altermagnet characterization"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§2 全文章节补G1/G2/G3三条编号化目标+Q1/Q2关键科学问题集中陈述（需文献支撑科学问题的新颖性）",
+      "missing_evidence": "缺少证明altermagnet序参量（自旋/轨道/磁）超快读出与可辨识性分析在国内外文献中尚未系统解决的支撑",
+      "search_keywords": [
+        "altermagnet spin orbital order parameter readout ultrafast",
+        "HHG order parameter identification altermagnet pioneering",
+        "attosecond spectroscopy magnetic order reconstruction novel"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "L69反射率变化>5%作为损伤判据（改写后需文献说明该阈值合理）",
+      "missing_evidence": "缺少固体材料在强场下反射率变化作为损伤/相变判据的标准阈值文献，特别是5%阈值的实验依据",
+      "search_keywords": [
+        "reflectivity change damage threshold femtosecond laser solid",
+        "strong-field ablation criterion optical reflectivity 5%",
+        "intense laser damage in-situ reflectivity monitoring"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

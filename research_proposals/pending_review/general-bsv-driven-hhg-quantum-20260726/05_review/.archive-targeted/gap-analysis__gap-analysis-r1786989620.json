@@ -1,0 +1,38 @@
+{
+  "gaps": [
+    {
+      "claim": "3处关键嵌入式引用与论点错配（C-1/C-2/C-3）：正文关键论点所引文献不能支撑论断内容，涉及固体HHG首次实验观测、量子光驱动HHG理论框架、量子增强因子QEF定义等核心史实",
+      "missing_evidence": "与各关键论点真正匹配的原始文献：固体HHG首例实验的准确出处、量子光/明亮压缩真空驱动HHG的理论预测原始论文、量子增强因子QEF框架的首次提出文献",
+      "search_keywords": [
+        "Ghimire 2011 ZnO solid-state high harmonic generation first observation",
+        "Golde semiconductor high harmonic generation Bloch equation theory",
+        "Even Tzur quantum enhancement factor high harmonic generation",
+        "bright squeezed vacuum driven high harmonic generation theory",
+        "quantum light strong field nonlinear response prediction"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "国内现状论述以检索统计段（L17）代替实质性文献综述，缺少国内固体HHG与量子光非线性光学方向代表性工作的具体文献支撑",
+      "missing_evidence": "国内课题组在固体高次谐波、强场非线性光学、量子光驱动非线性响应方向的已发表代表性论文",
+      "search_keywords": [
+        "solid-state high harmonic generation China group",
+        "quantum light nonlinear optics Chinese experimental group",
+        "squeezed light strong field experiment China",
+        "高次谐波 量子光 国内 实验组"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "L5背景段7个编号引用密度过高且存在堆砌倾向，关键背景论断（量子光调控非线性过程的优势与可行性）缺乏逐点对应的深入支撑文献",
+      "missing_evidence": "支撑量子光调控非线性光学各具体论断（光子统计调控、噪声抑制、增强非线性信号）的分点原始研究文献，用于替换高密度堆砌引用",
+      "search_keywords": [
+        "photon statistics control nonlinear optical process",
+        "squeezed light enhancement nonlinear signal",
+        "quantum noise suppression nonlinear optics experiment",
+        "sub-shot-noise nonlinear spectroscopy"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

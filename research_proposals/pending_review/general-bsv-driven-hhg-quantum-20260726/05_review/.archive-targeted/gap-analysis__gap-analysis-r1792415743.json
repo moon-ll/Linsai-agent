@@ -1,0 +1,71 @@
+{
+  "gaps": [
+    {
+      "claim": "126 meV（激子结合能）与 285 K（工作温度阈值）的定量估计及可行性判定",
+      "missing_evidence": "分方向二末段仅含 T₂ 筛选与唯象退相干复核，未给出 126 meV/285 K 的具体估计依据与物理判定逻辑；该具体数值链需要 ZnO/TMDC 激子结合能实验测量或可靠理论计算的文献支撑，以证明在 BSV-HHG 探针条件下第二年反推阈值的物理可达性",
+      "search_keywords": [
+        "exciton binding energy ZnO",
+        "TMDC exciton binding energy measurement",
+        "室温激子稳定性 high harmonic generation",
+        "室温高次谐波 激子阈值"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "BSV 在压缩度 r→0 极限下退化为'相干态'（g⁽²⁾→1、r→0）的物理表述",
+      "missing_evidence": "现行表述 r→0 极限对应真空态而非相干态；修正后的物理陈述需要 squeezed light 统计特性的经典文献锚（如 Walls & Milburn 式综述或 Schleich 教材），并辅以 g⁽²⁾(0)=2-1/cosh(2r)→1 的标准推导引用，以闭合反推理论的边界条件",
+      "search_keywords": [
+        "squeezed vacuum state coherent state limit",
+        "g2 function squeezed light review",
+        "Walls Milburn quantum optics squeezed state",
+        "Schleich quantum optics phase space"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Gothelf 等[30]在 ZnO 单带模型上 33 阶谐波辨析的'依据有三'三重论据",
+      "missing_evidence": "三段重复均围绕 [30] 单一来源，缺少来自其他独立小组（如 Plaja、Yabana、Ghimire 等）对 ZnO/宽禁带半导体 HHG 33 阶谐波特性的实验或理论复核文献；缺少将 33 阶作为'反常增强'基准的统计性文献支撑",
+      "search_keywords": [
+        "ZnO high harmonic generation 33rd order",
+        "wide bandgap semiconductor HHG anomalous enhancement",
+        "Plaja high harmonic solids",
+        "Ghimire ZnO harmonic generation"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "BSV-HHG 在固体中的首例实验[1]与本项目 SBE-Q 多带量子化之间的创新增量定位",
+      "missing_evidence": "创新性评估明确指出'BSV-HHG 已有[1]首例实验，属强增量非全新范式'；但文献仅引[1]一处，缺少对[1]后续延伸工作（如 BSV 驱动 ZnO/TMDC HHG 的其他实验组、压缩度扫描、统计指纹提取）的系统梳理，导致'强增量'边界划界证据不充分",
+      "search_keywords": [
+        "bright squeezed vacuum HHG experiment follow-up",
+        "BSV driven solid HHG 2024 2025",
+        "squeezed light high harmonic generation solid",
+        "non-classical light HHG solid state"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "SBE-Q 多带量子化框架相对气体三步模型[2]与单带/紧束缚模型[30]的边界区隔",
+      "missing_evidence": "创新段提及与[2][30]逐项划界，但仅以[2]与[30]两个对比对象，无法覆盖近年基于 TD-DFT、TDSE 实空间传播、含局域态密度模型的固体 HHG 理论分支；缺少这些并行框架的代表文献，使区隔仅在'老模型 vs 新框架'轴上成立，未能展现全谱对比",
+      "search_keywords": [
+        "TDDFT high harmonic generation semiconductor",
+        "TDSE real-space propagation solid HHG",
+        "local density of states HHG model",
+        "many-body HHG solid theory review"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "第二年 SBE-Q 反推阈值与 QEF/Q_F 可辨识性指标的协议约束",
+      "missing_evidence": "QEF/Q_F 仅有计算式与协议定义，但作为区分 BSV HHG 与经典 HHG 的关键判据，其灵敏度阈值、噪声容限及与已有实验数据的对照基线缺少引用文献；Issue 7 指出指标自指涉（'落入第二年反推阈值可比量级'），说明缺乏前置文献锚来打破循环",
+      "search_keywords": [
+        "squeezed light state tomography fingerprint metric",
+        "quantum state fingerprint HHG distinguishability",
+        "QEF quantum Fisher information HHG",
+        "non-classicality witness high harmonic"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "content"
+}

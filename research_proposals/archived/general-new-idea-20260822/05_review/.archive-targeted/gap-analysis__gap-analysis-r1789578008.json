@@ -1,0 +1,95 @@
+{
+  "gaps": [
+    {
+      "claim": "g 波交变磁体 α-MnTe 的自旋劈裂峰值的实验基准值（Krempaský 等人 MnTe ARPES 数据图 3 基准偏差 ≤ 10%）",
+      "missing_evidence": "缺乏 Krempaský MnTe spin-resolved ARPES d-wave band splitting 数值的精确引用与具体数据点",
+      "search_keywords": [
+        "Krempaský MnTe spin-resolved ARPES d-wave",
+        "α-MnTe spin splitting magnitude eV Γ-K Γ-M",
+        "Osumi PRB 109 115102 MnTe anisotropic spin splitting"
+      ]
+    },
+    {
+      "claim": "MnTe 高次谐波产生中 g 波节点面几何构型与谐波偏振各向异性图样的定量映射关系",
+      "missing_evidence": "缺乏 g 波 altermagnet HHG 偏振各向异性的实验观测与理论预测文献",
+      "search_keywords": [
+        "g-wave altermagnet high harmonic generation polarization",
+        "altermagnet HHG polarization anisotropy MnTe",
+        "MnTe harmonic generation symmetry selection rule"
+      ]
+    },
+    {
+      "claim": "Werner/Haag/Mizuno/Ly 既有框架与本项目增量差异",
+      "missing_evidence": "缺乏 Haag MnTe altermagnet ultrafast spin polarization 与 g-wave HHG 的对照基准",
+      "search_keywords": [
+        "Haag MnTe altermagnet ultrafast spin polarization",
+        "g-wave altermagnet transient spin polarization pump-probe",
+        "altermagnet nonlinear optics prediction Haag"
+      ]
+    },
+    {
+      "claim": "MnTe 顺磁相与反铁磁相谐波对比的双重标定可行性（1.5 倍 SQUID 先验宽度 ±3 K 的精度判据）",
+      "missing_evidence": "缺乏 MnTe 顺磁相 HHG 与反铁磁相 HHG 的对照实验数据",
+      "search_keywords": [
+        "MnTe paramagnetic phase high harmonic generation",
+        "antiferromagnetic HHG Néel temperature contrast",
+        "MnTe T_N high harmonic spectrum"
+      ]
+    },
+    {
+      "claim": "贝叶斯反演后验标准差 > 先验宽度 50% 与 1.5 倍两口径的换算对应关系",
+      "missing_evidence": "缺乏贝叶斯反演后验分布宽度与先验宽度比值的标准判据文献",
+      "search_keywords": [
+        "Bayesian inversion posterior prior width ratio criterion",
+        "Fisher information posterior uncertainty inversion",
+        "Tikhonov regularization identifiability threshold"
+      ]
+    },
+    {
+      "claim": "自旋/偏振通道分离测量方案（双波长切换实现3:1 信噪比）",
+      "missing_evidence": "缺乏双波长切换用于自旋-偏振通道分离测量的实验实现文献",
+      "search_keywords": [
+        "dual wavelength switching spin polarization channel separation",
+        "bichromatic HHG spin channel separation",
+        "polarimetry spin channel HHG"
+      ]
+    },
+    {
+      "claim": "频谱-磁结构参数反演的定量映射（自旋进动频区 0.3-3 THz、时间分辨 ≤100 fs）",
+      "missing_evidence": "缺乏 HHG 频谱反演反铁磁自旋进动参数的实验/理论文献",
+      "search_keywords": [
+        "HHG spectrum inverse antiferromagnetic spin precession",
+        "antiferromagnetic dynamics THz high harmonic probe",
+        "time-resolved HHG magnetic order parameter retrieval"
+      ]
+    },
+    {
+      "claim": "R1 在 0.4-0.6 过渡区一阶 SOC 修正的可行性验证判据",
+      "missing_evidence": "缺乏一阶 SOC 修正在该过渡区可行性的定量验证判据文献",
+      "search_keywords": [
+        "first-order SOC correction transition regime HHG",
+        "weak SOC perturbation altermagnet HHG validity",
+        "SOC perturbation theory MnTe regime"
+      ]
+    },
+    {
+      "claim": "α-MnTe 偶次谐波与奇次谐波强度比的对称性选择规则",
+      "missing_evidence": "缺乏 MnTe 偶/奇次谐波强度比的实验测量与选择规则推导文献",
+      "search_keywords": [
+        "MnTe even odd harmonic intensity ratio symmetry",
+        "altermagnet even harmonic selection rule",
+        "MnTe second third harmonic intensity"
+      ]
+    },
+    {
+      "claim": "CrSb/MnTe 等 g-wave altermagnet 非相对论自旋劈裂实验值（ARPES eV 量级）",
+      "missing_evidence": "缺乏 CrSb g-wave spin splitting ARPES 实验值与 MnTe d-wave 对照数据",
+      "search_keywords": [
+        "CrSb g-wave altermagnet spin splitting ARPES",
+        "nonrelativistic spin splitting MnTe CrSb experimental value",
+        "Šmejkal altermagnet spin splitting magnitude"
+      ]
+    }
+  ],
+  "section": "content"
+}

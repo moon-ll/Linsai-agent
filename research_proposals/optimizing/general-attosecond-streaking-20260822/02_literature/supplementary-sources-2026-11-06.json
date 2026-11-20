@@ -1,0 +1,98 @@
+{
+  "proposal_id": "general-attosecond-streaking-20260822",
+  "cluster_id": "orphan-route-2026-11-06",
+  "clusters": [
+    "orphan-route-2026-11-06",
+    "cl_20261106_6f855f"
+  ],
+  "entries": [
+    {
+      "source_id": "paper:2026-2610.26901-symmetry-and-quantum-interference-in-the-attosecon",
+      "title": "Symmetry and Quantum Interference in the Attosecond Domain",
+      "summary": "本文是一篇基于作者自身工作的综述，系统梳理了阿秒时间尺度上对称性与量子干涉的相互作用，核心实验/理论载体是单电子与双电子光电子动量分布。文章的核心论点是：靶与光场的对称性决定动量分布的角向结构和选择定则，而多条电离通道之间的相干叠加（干涉条纹、不对称度）编码了阿秒相位、散射相位与电子关联信息，使动量空间可观测量可被反演为结构、时延与关联动力学的探针。",
+      "path": "knowledge/raw/papers/2026-2610.26901-symmetry-and-quantum-interference-in-the-attosecon.md",
+      "added_via": "cluster:orphan-route-2026-11-06",
+      "added_at": "2026-11-06T16:33:07Z"
+    },
+    {
+      "source_id": "paper:2025-2503.09459-attosecond-photoionization-delays-of-xenon-4d-subshell",
+      "title": "Attosecond Photoionization Delays of Xenon 4d Subshell",
+      "summary": "本文基于多通道R矩阵理论并结合阿秒条纹与RABBITT两种复原方案，系统计算了氙4d支壳层巨共振区（延伸至水窗附近光子能量）的光电离时间延迟。核心发现是4d电离通道与连续区共振（形状共振）的耦合对Wigner-like延迟产生剧烈调制，且不同退简并通道（4d5/2/4d3/2）与分波给出显著不同的延迟曲线。该工作为水窗能量区多通道时间延迟的实验测量提供了可直接对照的理论基准。",
+      "path": "knowledge/raw/papers/2025-2503.09459-attosecond-photoionization-delays-of-xenon-4d-subshell.md",
+      "added_via": "cluster:cl_20261106_6f855f",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2014-1401.2878-time-delays-for-attosecond-streaking-in-photoionization-of-n",
+      "title": "Time delays for attosecond streaking in photoionization of neon",
+      "summary": "本文将氖原子光电离的总阿秒条纹时间延迟分解为本征Eisenbud-Wigner-Smith延迟（由B样条R矩阵方法计算多电子偶极矩阵元得到）与激光场诱导时间偏移（通过单/双活性电子含时薛定谔方程模拟得到）两个可加和分量进行全量子理论计算，发现2s与2p光电子发射的相对延迟约为实验值（21±5 as）的一半，并指出该差异可能源于实验中未分辨的shake-up伴线贡献。",
+      "path": "",
+      "added_via": "cluster:cl_20261106_6f855f",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2024-2403.13650-theory-of-attosecond-time-delays-in-multiphoton-multichannel",
+      "title": "Theory of Attosecond Time Delays in Multiphoton Multichannel Ionization",
+      "summary": "建立了多光子多通道电离中阿秒时间延迟的统一理论框架，将 RABBITT/侧带实验测得的延迟分解为通道分辨的 Eisenbud-Wigner-Smith 延迟、连续态-连续态库仑延迟（τ_cc）以及红外耦合矩阵元引入的附加原子相位（τ_A）等可分离成分。给出了多通道贡献的复振幅相干加权公式，指出总延迟是各通道复双光子矩阵元相干和的相位能量导数，而非通道延迟的简单非相干平均。系统讨论了通道权重、自电离共振与干涉效应对时间延迟提取精度的影响，为阿秒条纹与 RABBITT 实验的延迟标定和误差界定提供直接理论依据。",
+      "path": "knowledge/raw/papers/2024-2403.13650-theory-of-attosecond-time-delays-in-multiphoton-multichannel.md",
+      "added_via": "cluster:cl_20261106_6f855f",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2025-2505.04837-photoionization-time-delays-probe-electron-correlations",
+      "title": "Photoionization time delays probe electron correlations",
+      "summary": "用高谱分辨的阿秒干涉（RABBITT 类）技术测量氩 3s 光电离通道在 Cooper 最小附近的阿秒时间延迟，解决了该体系实验与理论长期不符的争议。理论与实验联合分析表明，独立粒子（单活跃电子）图像在此能区失效，通道间电子耦合（interchannel coupling，3s–3p 关联）才是 Cooper 最小附近相位与延迟结构的物理根源。该工作确立了用光电离时间延迟作为电子关联直接探针的范式。",
+      "path": "knowledge/raw/papers/2025-2505.04837-photoionization-time-delays-probe-electron-correlations.md",
+      "added_via": "cluster:cl_20261106_6f855f",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2010-1010.2800-delay-in-atomic-photoionization",
+      "title": "Delay in atomic photoionization",
+      "summary": "本文通过求解含时薛定谔方程（TDSE）并结合含交换的随机相位近似（RPAE），理论计算了氖原子 2s 与 2p 亚壳层光电离之间的时间延迟，发现电子关联与弹性散射相移仅贡献约 10 as，不足以解释实验测得的 21±5 as。作者据此指出剩余延迟很可能源于实验中的红外条纹场诱导的额外相移，而非 XUV 脉冲单独作用的结果。",
+      "path": "",
+      "added_via": "cluster:cl_20261106_6f855f",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2011-1102.1461-time-resolved-photoemission-by-attosecond-streaking-extracti",
+      "title": "Time-resolved photoemission by attosecond streaking: extraction of time information",
+      "summary": "该文证明阿秒条纹技术可从Eisenbud-Wigner-Smith（EWS）时间延迟矩阵中提取光电发射过程的阿秒级时间信息，并揭示He⁺中类氢2s与2p态光发射之间存在超过20阿秒的延迟。研究表明出射通道（电子与剩余离子库仑场及红外条纹场的相互作用）可由经典动力学精确描述，而依赖初态与角动量的入射通道畸变则需完整求解含时薛定谔方程（TDSE），对两通道修正后条纹相位即可敏感反映阿秒尺度的时间延迟。",
+      "path": "",
+      "added_via": "cluster:cl_20261106_6f855f",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2024-2407.14160-angular-momentum-dependence-in-multiphoton-ionization-and-at",
+      "title": "Angular momentum dependence in multiphoton ionization and attosecond time delays",
+      "summary": "本文将从头 R-matrix 计算与阿秒双光子干涉实验相结合，系统证明多光子电离中的时间延迟对光电子角动量（分波 l 及磁量子数 m）有显著依赖，而非仅由长程库仑相互作用统一决定。理论分析与实验验证表明，基于库仑相 σ_l 能量导数的渐近近似在比原先预期更宽的能量范围内仍能定量再现不同分波间的延迟差。这一结果把分波分辨的时间延迟确立为探测靶结构（短程势、共振、Cooper 极小等）的灵敏工具。",
+      "path": "knowledge/raw/papers/2024-2407.14160-angular-momentum-dependence-in-multiphoton-ionization-and-at.md",
+      "added_via": "cluster:cl_20261106_6f855f",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2020-2005.12654-angle-resolved-time-delays-for-shake-up-ionization-of-helium",
+      "title": "Angle-resolved time delays for shake-up ionization of helium",
+      "summary": "本文对氦的 shake-up 电离通道（He+ 留在激发态 n≥2）给出角分辨的光电离时间延迟的从头算研究，证明在 RABBITT 型双光子测量中，角分辨延迟因出射光电子与高极化率束缚离子电子在 IR 探测场中的偶极耦合而被显著放大（可达数百阿秒量级、远超沿偏振方向的延迟）。同时验证了时间延迟可加性规则——双光子延迟 = 单光子 Wigner（EWS）延迟 + 连续态-连续态延迟——在逐角度、逐 shake-up 通道的分解下依然成立，为角分辨阿秒测量的解读提供了普适框架。",
+      "path": "knowledge/raw/papers/2020-2005.12654-angle-resolved-time-delays-for-shake-up-ionization-of-helium.md",
+      "added_via": "cluster:cl_20261106_6f855f",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2013-1302.4495-time-delay-in-valence-shell-photoionization-of-noble-gas-ato",
+      "title": "Time delay in valence shell photoionization of noble gas atoms",
+      "summary": "本文采用含交换的非相对论随机相近似（RPAE）系统计算了Ne、Ar、Kr、Xe价壳层光电离的Wigner时间延迟，覆盖从电离阈值至200 eV的光子能量范围，揭示了时间延迟随能量的符号反转与幅度变化，尤其在Ar的3s Cooper极小附近凸显了电子关联的关键作用。结果表明标准RPAE关联修正仍不足以解释实验观测，暗示还需计入库仑-激光耦合及子壳层动力学等未解决的贡献。",
+      "path": "",
+      "added_via": "cluster:cl_20261106_6f855f",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2024-2409.03622-photoelectronresidual-ion-entanglement-in-streaked-shake-up",
+      "title": "Photoelectron–residual-ion entanglement in streaked shake-up ionization of helium",
+      "summary": "对氦原子在XUV-IR双色场中的阿秒条纹过程进行含时薛定谔方程层面的从头计算，将出射光电子按残余He+离子态（n=1直接电离、n=2/3 shake-up）分解，构建通道分辨的条纹光谱。结果表明，多电子关联使shake-up通道在电离时刻累积附加光电子相位，产生与直接电离通道不同的、通道依赖的条纹延迟（阿秒量级），并伴随光电子-残余离子纠缠。该工作直接量化了多通道电离对阿秒条纹测量所提取时间延迟的系统影响，为条纹相位的解读提供了修正基准。",
+      "path": "knowledge/raw/papers/2024-2409.03622-photoelectronresidual-ion-entanglement-in-streaked-shake-up.md",
+      "added_via": "cluster:cl_20261106_6f855f",
+      "added_at": "2026-11-06T16:55:48Z"
+    }
+  ]
+}

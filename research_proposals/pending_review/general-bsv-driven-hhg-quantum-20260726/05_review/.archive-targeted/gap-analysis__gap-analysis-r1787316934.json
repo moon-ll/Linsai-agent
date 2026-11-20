@@ -1,0 +1,71 @@
+{
+  "gaps": [
+    {
+      "claim": "本课题是国际上首次实现 BSV（明亮压缩真空）驱动固体高次谐波产生的量子探针实验（优先权声明）",
+      "missing_evidence": "评审指出优先权声明无检索支撑——缺乏对近期预印本与期刊文献的系统检索证据，无法排除已有 BSV/量子光驱动固体 HHG 的实验或理论工作（如 Khurelbaatar、Rivera-Dean 等预印本线索）",
+      "search_keywords": [
+        "bright squeezed vacuum high harmonic generation experiment",
+        "BSV driven HHG solid state",
+        "quantum light solid harmonic generation first observation",
+        "squeezed light HHG experimental",
+        "Khurelbaatar Rivera-Dean quantum light HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "QEF（量子增强因子）≥1.5 可作为验收指标且具有明确物理依据",
+      "missing_evidence": "缺少 QEF 框架的原始定义与理论预言值文献支撑，1.5 阈值的来源（理论计算还是经验估计）无引用，跨章口径分裂需以统一文献口径修复",
+      "search_keywords": [
+        "quantum enhancement factor HHG QEF framework",
+        "Even Tzur quantum photon HHG enhancement",
+        "photon statistics nonlinear optical yield enhancement",
+        "quantum advantage factor nonlinear optics"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "驱动光峰值强度（隐含 ~10^14 W/cm²）作用于单层/二维样品不会造成损伤，实验强度窗口可行",
+      "missing_evidence": "缺乏单层二维材料在近红外飞秒强场下的损伤/烧蚀阈值实验数据，未引用任何样品损伤边界文献来论证强度窗口与损伤阈值的分离",
+      "search_keywords": [
+        "monolayer MoS2 femtosecond laser damage threshold",
+        "2D material strong field ablation threshold W/cm2",
+        "TMDC ultrafast laser damage near-infrared",
+        "ultrathin crystal laser-induced breakdown threshold"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "V_classical（经典参考场）与 BSV 对比的归一化口径（等光子数/等峰值场强）有文献先例",
+      "missing_evidence": "缺少相干态与压缩真空驱动非线性过程对比方法学的引用文献，V_classical 的定义口径在三章间分裂且无统一文献出处",
+      "search_keywords": [
+        "coherent state versus squeezed vacuum nonlinear comparison",
+        "BSV classical light nonlinear optics benchmark",
+        "equal photon number normalization nonlinear response",
+        "classical quantum light driven harmonic comparison"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "NOPA 产生的 BSV 光源参数（每脉冲光子数、g2、压缩参数 r）可按方案要求标定",
+      "missing_evidence": "缺少 BSV 绝对光子数定标与零延迟 g2 表征的实验方法文献，方案中源参数阈值（r、光子数）无出处支撑",
+      "search_keywords": [
+        "bright squeezed vacuum photon number calibration NOPA",
+        "g2 zero-delay BSV characterization",
+        "squeezing parameter threshold parametric downconversion",
+        "bright squeezed vacuum generation characterization"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "光子计数探测链路可实现高次谐波光谱的量子统计（g2）测量",
+      "missing_evidence": "缺少单光子分辨谐波探测在 XUV/深紫外波段的可行性与噪声底线文献，端到端量子 HHG 光谱链路无引用",
+      "search_keywords": [
+        "photon-counting HHG spectroscopy g2",
+        "single photon resolution harmonic spectrum XUV",
+        "quantum statistics measurement high harmonic generation",
+        "photon counting extreme ultraviolet detector"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

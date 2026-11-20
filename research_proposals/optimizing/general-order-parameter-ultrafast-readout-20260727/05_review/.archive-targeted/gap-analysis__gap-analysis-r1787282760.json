@@ -1,0 +1,78 @@
+{
+  "gaps": [
+    {
+      "claim": "CrSb在近红外飞秒激光下的损伤阈值0.8 V/Å",
+      "missing_evidence": "无实验测量数据；references.md §5为自陈，缺同行实验文献支撑",
+      "search_keywords": [
+        "CrSb femtosecond laser damage threshold",
+        "CrSb strong-field optical excitation stability",
+        "CrSb near-infrared pump probe damage threshold",
+        "transition metal pnictide ultrafast laser damage"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "1%信号阈值作为CrSb HHG磁信号可辨识判据",
+      "missing_evidence": "无实验测量数据支撑该阈值数值",
+      "search_keywords": [
+        "altermagnet HHG signal-to-noise ratio",
+        "solid-state HHG magnetic field detection limit",
+        "CrSb spin-polarized high harmonic experimental",
+        "HHG shot noise floor measurement"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "CrSb HHG产出（photon flux）满足1%信号阈值测量要求",
+      "missing_evidence": "无CrSb HHG实际光子通量实验数据",
+      "search_keywords": [
+        "CrSb high harmonic generation photon flux",
+        "altermagnet HHG signal yield experimental",
+        "solid-state HHG photon flux measurement"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Fisher信息矩阵条件数用于HHG参数可辨识性判据",
+      "missing_evidence": "无针对altermagnet HHG三参量（极化/温度/磁场）反演的Fisher信息矩阵数值分析",
+      "search_keywords": [
+        "Fisher information matrix nonlinear optics",
+        "condition number attosecond spectroscopy reconstruction",
+        "parameter identifiability high harmonic generation",
+        "HHG spectroscopy ill-posed inversion dimensionality"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "贝叶斯后验概率用于HHG光谱参数反演的可辨识性验证",
+      "missing_evidence": "无将贝叶斯方法应用于solid-state HHG反演的实验验证文献",
+      "search_keywords": [
+        "Bayesian inversion HHG spectroscopy",
+        "posterior probability nonlinear optics inverse problem",
+        "solid-state HHG parameter retrieval experimental validation"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Cochran量子相干断层+Serensen阿秒时域反演组合方法可对三种序参量（极化/温度/磁场）实现可辨识测量",
+      "missing_evidence": "组合方法针对三参量可辨识性的对比验证研究缺失；两种方法各自适用条件和区分边界未充分论证",
+      "search_keywords": [
+        "Cochran quantum coherence tomography high harmonic",
+        "Sørensen attosecond order parameter reconstruction HHG",
+        "quantum coherence tomography combined attosecond retrieval",
+        "HHG order parameter reconstruction methods comparison"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "MnTe备选体系可实现与CrSb相同的三参量可辨识性判据切换",
+      "missing_evidence": "MnTe HHG三参量可辨识性未经验证；缺MnTe与CrSb对比的实验数据",
+      "search_keywords": [
+        "MnTe altermagnet HHG experimental",
+        "Fuchs MnTe spin-polarized high harmonic generation",
+        "MnTe ultrafast magneto-optics HHG"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

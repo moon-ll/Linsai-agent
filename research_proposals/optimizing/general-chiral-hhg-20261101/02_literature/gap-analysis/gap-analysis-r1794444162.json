@@ -1,0 +1,26 @@
+{
+  "gaps": [
+    {
+      "claim": "参考文献总体构成（46 条中预印本 25 条占 54%）超过领域检查阈 30%，预印本占比过高削弱立项依据证据链的同行评审可信度",
+      "missing_evidence": "需补充已正式发表于同行评审期刊的同类文献（如 Phys. Rev. Lett.、Optica、Nature Photonics、PNAS 上关于手性高次谐波/圆二色谱的正式发表版本），将关键论据的预印本来源替换或双挂为期刊正式版，把预印本占比压回 30% 以内",
+      "search_keywords": [
+        "chiral high harmonic generation journal published",
+        "circular dichroism high-order harmonic generation PRL",
+        "epoxypropane bicircular HHG peer-reviewed",
+        "helical ultrafast spectroscopy harmonic CD journal article"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "L7 处手性高次谐波圆二色强度量级 10⁻⁶-10⁻³ 的论断（目前挂 PNAS 单点实测文 [39]）",
+      "missing_evidence": "该量级属于领域共识性定量范围，更适合由综述文献承载或实测+综述双挂，以避免单点实测文支撑范围性论断的挂靠失配；需检索系统综述该量级的权威 review",
+      "search_keywords": [
+        "high harmonic circular dichroism magnitude review",
+        "chiral HHG CD signal strength 10^-6 10^-3 review article",
+        "bicircular high harmonic spectroscopy review Wörner"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "rationale"
+}

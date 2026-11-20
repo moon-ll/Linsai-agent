@@ -1,0 +1,54 @@
+{
+  "proposal_id": "general-quantum-geometry-inversion-20260726",
+  "cluster_id": "cl_20260829_2314ae",
+  "entries": [
+    {
+      "source_id": "paper:2021-2101.03635-ultrafast-and-strong-field-physics-in-graphene-like-crystals",
+      "title": "Ultrafast and Strong-Field Physics in Graphene-Like Crystals: Bloch Band Topology and High-Harmonic Generation",
+      "summary": "该工作建立了石墨烯类二维晶体在超快强激光场下高次谐波产生（HHG）的理论框架（基于含时密度矩阵/半导体Bloch方程），系统揭示了Bloch能带拓扑（Berry曲率、量子度规及带隙/亚晶格破缺）对谐波强度、偏振与相位的调控机制。核心贡献在于提出固体HHG可作为非接触超快探针，直接读取能带拓扑信息（如拓扑不变量与谷自由度），架起了强场非线性光学与拓扑量子材料之间的桥梁。",
+      "path": "",
+      "added_via": "cluster:cl_20260829_2314ae",
+      "added_at": "2026-10-03T09:41:23Z"
+    },
+    {
+      "source_id": "paper:2021-2103.04967-light-matter-coupling-and-quantum-geometry-in-moiré-material",
+      "title": "Light-matter coupling and quantum geometry in moiré materials",
+      "summary": "该工作建立了莫尔材料中光-物质耦合强度与量子几何量（Berry曲率、量子度规）之间的定量关系，揭示了量子几何在决定偶极矩阵元中的核心作用，并以此为基础提出了Floquet调控莫尔平带色散的通用理论框架。",
+      "path": "knowledge/raw/papers/2021-2103.04967-light-matter-coupling-and-quantum-geometry-in-moiré-material.md",
+      "added_via": "cluster:cl_20260829_2314ae",
+      "added_at": "2026-10-03T09:41:23Z"
+    },
+    {
+      "source_id": "paper:2025-2507.15853-optimized-fabrication-procedure-for-high-quality-graphene-ba",
+      "title": "Optimized Fabrication Procedure for High-Quality Graphene-based Moiré Superlattice Devices",
+      "summary": "本文系统优化了石墨烯莫尔超晶格器件的制备工艺，通过精确控制扭转角实现高均匀性样品，显著提升了器件质量与可重复性，为强场超快实验提供了高质量的样品基础。",
+      "path": "knowledge/raw/papers/2025-2507.15853-optimized-fabrication-procedure-for-high-quality-graphene-ba.md",
+      "added_via": "cluster:cl_20260829_2314ae",
+      "added_at": "2026-10-03T09:41:23Z"
+    },
+    {
+      "source_id": "paper:2022-2207.02830-enhancement-of-high-harmonic-generation-in-bulk-floquet-syst",
+      "title": "Enhancement of High Harmonic Generation in Bulk Floquet Systems",
+      "summary": "提出双场方案：在产生高次谐波的线偏振强探针之外，叠加一束频率低于带隙的辅助周期驱动（Floquet驱动），理论证明其形成的Floquet准能带可将体材料谐波产率提升约两个数量级。通过半导体Bloch方程数值解并结合Floquet边带分析，把增强归结为边带-带隙共振与动态局域化两类可控机制，建立了Floquet工程与固态HHG主动调控之间的直接联系。",
+      "path": "knowledge/raw/papers/2022-2207.02830-enhancement-of-high-harmonic-generation-in-bulk-floquet-syst.md",
+      "added_via": "cluster:cl_20260829_2314ae",
+      "added_at": "2026-10-03T09:41:23Z"
+    },
+    {
+      "source_id": "paper:2025-2501.06885-the-impact-of-intraband-carrier-dynamics-on-the-optical-prop",
+      "title": "The impact of intraband carrier dynamics on the optical properties of two-dimensional materials: I. General theory",
+      "summary": "建立了一个普适理论框架：在跟随带内加速运动的共动参考系中求解半导体Bloch方程（SBE），从而系统刻画二维材料中带内载流子动力学对光学性质的影响。该框架统一处理了带内运动对带间极化（跃迁能量与偶极矩阵元沿k轨迹的取样）的修正以及带内电流对发射场的贡献，可给出从线性极化率到高次谐波谱的完整响应。作为系列工作的第一部分（General theory），为后续具体二维材料的应用计算奠定方法论基础。",
+      "path": "knowledge/raw/papers/2025-2501.06885-the-impact-of-intraband-carrier-dynamics-on-the-optical-prop.md",
+      "added_via": "cluster:cl_20260829_2314ae",
+      "added_at": "2026-10-03T09:41:23Z"
+    },
+    {
+      "source_id": "paper:2025-2511.05112-unexpected-increase-of-intensity-dependent-excitonic-second",
+      "title": "Unexpected increase of intensity-dependent excitonic second- and third-harmonic generation induced by static electric fields",
+      "summary": "本文用含激子库仑相互作用的半导体Bloch方程（密度矩阵）方法，数值求解MoS2同质双层中激子型二次与三次谐波产生（SHG/THG）随驱动光强的完整演化。核心发现是：外加静态电场不仅按预期通过破坏层反演对称性激活SHG，还在强驱动区间反常地增强强度依赖的SHG与THG产率，超出了微扰非线性光学的幂律预期。该结果为用直流电场作为外加调控自由度操纵二维半导体激子非线性光学响应提供了明确的理论预言。",
+      "path": "knowledge/raw/papers/2025-2511.05112-unexpected-increase-of-intensity-dependent-excitonic-second.md",
+      "added_via": "cluster:cl_20260829_2314ae",
+      "added_at": "2026-10-03T09:41:23Z"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "proposal_id": "general-houston-kronig-penney-landau-zener-20261004",
+  "cluster_id": "orphan-route-2026-10-09",
+  "entries": [
+    {
+      "source_id": "paper:2025-2512.15370-orientation-dependent-high-harmonic-generation-in-zno",
+      "title": "Orientation-dependent high harmonic generation in ZnO",
+      "summary": "本文系统研究ZnO中高次谐波产率与谐波偏振对激光偏振相对晶轴取向的依赖，展示谐波产率、截止位置与辐射偏振随方位角的强各向异性调制及其随谐波阶次与场强的演化。通过将总谐波电流分解为带间与带内分量并结合跃迁偶极矩阵元的对称性分析，把取向各向异性归因于能带色散、有效质量与带间跃迁偶极随晶轴夹角的结构性变化。结果为利用固态HHG作为晶体取向与对称性探针、以及在各向异性晶体中通过偏振/波形调控谐波输出提供了定量基准。",
+      "path": "knowledge/raw/papers/2025-2512.15370-orientation-dependent-high-harmonic-generation-in-zno.md",
+      "added_via": "cluster:orphan-route-2026-10-09",
+      "added_at": "2026-10-09T16:45:01Z"
+    }
+  ]
+}

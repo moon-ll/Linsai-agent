@@ -1,0 +1,75 @@
+{
+  "_doc": "key-transient-quantum-phase-optical-20260726/04_proposal 跨章口径播种表（评审团第三轮，2026-10-16 报告 / 2026-10-18 执行）。消费方：optimize/executor/monitor prompt 注入与后续轮次 writer 对照；stale_patterns 命中即视为回退。",
+  "entries": [
+    {
+      "key": "peak_intensity_field_conversion",
+      "canonical": "I = ½cε₀E₀²；E₀ = 0.1–0.5 V/Å ↔ I ≈ 10¹¹–3.3×10¹² W/cm²；E₀ = 0.5 V/Å ↔ I ≈ 3.3×10¹² W/cm²（不是 10¹⁴）；Bi₂Se₃ 示例 d_cv≈5 Å·e、E₀≈0.5 V/Å → ℏΩ_R≈2.5 eV，对应 ℏΩ_R/E_g≈8，属带隙完全闭合的极端对照点，非写入档（ℏΩ_R/E_g 1–3）内取值",
+      "stale_patterns": [
+        "峰值强度达到 5×10¹³–10¹⁴ W/cm²",
+        "5×10¹³–10¹⁴ W/cm² 对应 E₀≈0.19–0.27 V/Å",
+        "0.5 V/Å 对应 3.3×10¹⁴ W/cm²"
+      ],
+      "note": "R1-01 修复（2026-10-16）。R1 报告给出的换算锚（0.19–0.27 V/Å、3.3×10¹⁴ W/cm²）经 I=½cε₀E₀² 独立复算存在 10² 量级偏差（原子单位锚点：1 a.u. 场 51.4 V/Å ↔ 3.51×10¹⁶ W/cm²），故按正确换算链统一；与 scheme §2.1(b) 三档设定交叉验证（拓扑写入档 E₀≈0.06–0.18 V/Å ↔ 5×10¹¹–4×10¹² W/cm²）自洽。"
+    },
+    {
+      "key": "berry_curvature_integral_unit",
+      "canonical": "布里渊区积分 ∫_BZ Ω_n d²k = 2πC_n 为无量纲量，全章统一以无量纲积分值记录（WS₂ 应变数据记为 18.24→26.86，增 47%）；Ω(k) 本身量纲为长度²（Å²）；典型拓扑材料 BZ 面积量级为个位数 Å⁻²（Bi₂Se₃ ≈ 2.7 Å⁻²）",
+      "stale_patterns": [
+        "以 nm⁻² 为统一记录单位",
+        "从 18.24 增至 26.86 Å⁻²",
+        "第一布里渊区积分量级为数 nm⁻²",
+        "第一布里渊区面积一般量级为数 nm⁻²"
+      ],
+      "note": "R1-02 修复（2026-10-16）：nm⁻²/Å⁻² 跨节 100 倍口径差消除，§0 表、§0 表后段、§2.2 末段、§2.3 第四级段四处同步。18.24/26.86 未见于 [21] 公开摘要（R1-05），正文已标注'取自原文正文、摘要仅证实定性结论'。"
+    },
+    {
+      "key": "ref_zhao_18_vs_21_attribution",
+      "canonical": "[17] = Zhao C. 等，MgO Floquet-Bloch 态 HHG 实验（arXiv:2507.03791，预印本，refs 条目带 †）；[18] = Zhao Z. 等，WS₂ 应变-Berry 曲率-谐波垂直分量第一性原理模拟（J. Phys. D, 2026, 59: 215104）。WS₂ 语境一律引 [18]（记 Zhao Z. 等[18]），MgO 语境一律引 [17]（记 Zhao C. 等[17]）",
+      "stale_patterns": [
+        "Zhao 等[18]于 2026 年正式发表的 WS₂",
+        "†Zhao 等[18]在 WS₂",
+        "WS₂ 模拟（J. Phys. D, 2026, 59: 215104）[18]",
+        "MgO Floquet-Bloch 实验[21]"
+      ],
+      "note": "R3-01 critical 修复（2026-10-16）：rationale §2.2 末段、§2.3 第四级段、§3 问题三共 3 处 WS₂ 语境由 [18] 改引 [21]，删除正文内嵌刊名卷页；MgO 语境 [18]（rationale §2.2 两处、scheme §5(1) 一处）按 R3-05 保持并统一 Zhao C./Zhao Z. 命名区分。2026-11-11 主会话收尾同步（panel-findings 附注 A 落账）：verify 报告（11-04）所记 [19]/[22] 在其后 r4 重写中再位移，已按当前磁盘文本重核——refs [17]=arXiv:2507.03791（Zhao C.，†）、[18]=J. Phys. D 59:215104（Zhao Z.）；正文实测 MgO 语境 2 处（content/rationale 各 1，均记 Zhao C. 等[17]）、WS₂ 语境 1 处（rationale，记 Zhao Z. 等[18]）；scheme [25] 为 Zhao C. 与 Zou X. 自注意力量子路径分析（arXiv:2510.12443），非同条目无重复；stale_patterns 四条所禁错误表述形态仍成立，未动。"
+    },
+    {
+      "key": "chi3_graphene_attribution_ata_baseline",
+      "canonical": "χ⁽³⁾~10⁻⁹ m²/V² 系 [9] 原文中石墨烯 Dirac 载流子的对比数值（较典型半导体异质结大近七个量级），非 (In,Bi)₂Se₃/Bi₂Se₃ 体系实测值；[9] 中'场增强最高约两个数量级'指谐振环相对裸膜，非体态场增强；ATA 标度反演的起点取团队 2024 年 Bi₂Se₃ 阿秒瞬态吸收预研 SNR ≈ 105±18（rationale §5 数据链），SHG 转换效率 3.5×10⁻⁵ 未获原文正文证实、不再引用",
+      "stale_patterns": [
+        "体态场增强约 10²",
+        "三阶极化率 χ⁽³⁾ 达约 10⁻⁹ m²/V²（作为 TI 实测值）",
+        "借其物理量级（χ⁽³⁾ ≈ 10⁻⁹ m²/V² 与 SHG 转换效率 ≈ 3.5×10⁻⁵）作 ATA 标度反演的起点"
+      ],
+      "note": "R1-04 修复（2026-10-16）：rationale §2.1 Di Gaspare 段归属改标、content §2.3 ATA 标度起点改挂团队预研数据链。"
+    },
+    {
+      "key": "deltac_threshold_sigma_framing",
+      "canonical": "工程阈值 0.20 位于合成不确定度 1.29σ（保守，σ=0.155）至 1.74σ（去偏，σ=0.115）处，对应正态覆盖概率约 90–96%；停止档 0.50 对应 3.2σ–4.3σ，正态覆盖概率几近 100%",
+      "stale_patterns": [
+        "该零点假设对应 1.29σ，单侧功效约 90%",
+        "对应 1.74σ，单侧功效约 96%",
+        "停止档对应 3.2σ（保守）–4.3σ（去偏），统计功效几近 100%"
+      ],
+      "note": "R1-07 修复（2026-10-16）：检验方向与统计功效定义混用改为覆盖概率口径，rationale §3 问题三两处同步。"
+    },
+    {
+      "key": "inst_wipm_full_name",
+      "canonical": "中国科学院武汉物理与数学研究所",
+      "stale_patterns": [
+        "中国科学院武汉精密物理与数学研究所"
+      ],
+      "note": "R2-10 修复（2026-10-16）。"
+    },
+    {
+      "key": "refs_doi_status_5_23_34",
+      "canonical": "[5] Ciappina（Adv. Phys. 2025, 74(1-4): 1-9, DOI 10.1080/00018732.2025.2598130）、[23] Lorenzo（PRB 2026, 114(8): 084307, DOI 10.1103/7zjc-4b4r）、[34] Kiselev（PRL 2026, 137(10): 106903, DOI 10.1103/lwpl-brrr）三条刊版元数据经 Crossref API 解析属实，保留刊版条目；arXiv:2510.15207 的 'Submitted to Adv. Phys.' comment 为投稿期陈旧标记（该文 2025-10-16 收稿、2025-11-26 录用、2025-12-04 在线刊出）",
+      "stale_patterns": [
+        "[5] 降级为 arXiv:2510.15207 预印本条目",
+        "[23] 降级为 arXiv:2508.15631 预印本条目",
+        "[23] PRB 刊出信息不可核实"
+      ],
+      "note": "R3-02/R3-03 改判驳回（2026-10-18 Crossref 复核）：api.crossref.org/works/10.1080/00018732.2025.2598130（作者/卷期页/出版史全对）、/works/10.1103/7zjc-4b4r（PRB 114(8)，2026-08-24，Lorenzo/Batista/Jangjan/…/Ghimire，与题录吻合，R1 报告亦反查命中）、/works/10.1103/lwpl-brrr（PRL 137(10)，2026-09-04，preprint 关联 arXiv:2510.12990）。R3 所据 doi.org 解析失败为 handle 系统滞后，非元数据不实。"
+    }
+  ]
+}

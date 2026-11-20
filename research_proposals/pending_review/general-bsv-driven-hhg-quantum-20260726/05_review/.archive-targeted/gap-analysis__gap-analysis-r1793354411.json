@@ -1,0 +1,20 @@
+{
+  "gaps": [
+    {
+      "claim": "“文献[32]先例性地验证了固体双光路量子费舍尔信息（Q_F）测量路径的可行性”这一表述超出了文献证据范围；气体阿秒层析只能提供量子态层析的方法学参照，不能直接证明固体HHG场景下双光路Q_F测量的可行性。",
+      "missing_evidence": "需要核验[32]的原始论文、研究对象和结论边界，并补充以下证据之一：一是BSV或其他量子光驱动固体HHG中利用双束或多光路干涉提取Q_F的直接先例；二是高次谐波或阿秒物理中多参数量子态重建、相干性估计及QFI反演的原始方法学文献，同时说明其向固体双光路方案迁移时所需的额外假设和差异。若不存在固体双光路Q_F的直接文献，应将[32]限定为“量子态层析测量的间接先例”，不得表述为对该具体路径可行性的先例性验证。",
+      "search_keywords": [
+        "solid-state high harmonic generation quantum Fisher information",
+        "bright squeezed vacuum driven solid HHG",
+        "quantum-light-driven solid high harmonic generation",
+        "dual-beam interferometric quantum metrology QFI",
+        "high-harmonic generation quantum state tomography",
+        "attosecond tomography quantum Fisher information",
+        "multi-parameter phase retrieval high harmonic generation",
+        "solid HHG coherent control visibility interferometry"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "content"
+}

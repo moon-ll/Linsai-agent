@@ -1,0 +1,86 @@
+{
+  "gaps": [
+    {
+      "claim": "§2.1 第三条理论路线：Wannier-Bloch 轨迹方法在 HHG 中引入 Berry 连接与跃迁矩阵元的动量依赖，并据此给出能带结构对谐波发射的调制机制",
+      "missing_evidence": "缺少具名作者与编号嵌入（申请书仅以\"相关工作\"占位）；需补 2 篇代表性文献分别支撑\"Berry 连接/规范依赖\"与\"跃迁矩阵元动量依赖 → 能带调制\"两条具体机制",
+      "search_keywords": [
+        "Wannier-Bloch trajectory high harmonic generation",
+        "Berry connection gauge dependence HHG",
+        "transition dipole momentum dependence solid HHG",
+        "band structure modulation high harmonic emission",
+        "intraband HHG Berry curvature"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.1 第四条理论路线（§2.1 L29 仍为\"相关工作\"无名占位）",
+      "missing_evidence": "与第三条同性质的具名文献缺失；该条路线侧重何种具体物理图像（半导体 Bloch 方程 SBE / TDSE / TDDFT 数值）未明示，需配齐作者+[N]",
+      "search_keywords": [
+        "semiconductor Bloch equation HHG",
+        "TDDFT high harmonic generation solid",
+        "two-band model intraband HHG",
+        "anharmonic lattice HHG theory"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.1 L23 'ZnO 与 MgO 实验验证[1, 9]' —— 区分理论标度律与实验各向异性验证",
+      "missing_evidence": "[9] Vampa PRB 91, 064302 为理论工作（SBE 框架），被错用作 MgO 实验验证；MgO 各向异性 HHG 实验实为 You 等人 Nat. Phys. 13, 345；需补足/替换为 You[5] 并补一条近期独立验证以支撑分工叙述",
+      "search_keywords": [
+        "MgO high harmonic generation anisotropy You",
+        "Nat Phys 13 345 MgO HHG",
+        "ZnO crystal HHG experimental anisotropy",
+        "crystal symmetry HHG experiment"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.2 L33 'Kim 等人[40]' 关于 WS₂ 谷占据控制的论断",
+      "missing_evidence": "[40] 实际指向 Han arXiv:2508.14774（阿秒脉冲源），与 WS₂ 谷占据无对应；正确的 WS₂ 谷占据控制属 [39] Kim Nat. Commun. 16, 9825；需核实并补充 WS₂/MoS₂ 谷极化与谐波关联的近期文献（1-2 篇）以加强谷占据-谐波产率因果链",
+      "search_keywords": [
+        "WS2 valley polarization high harmonic",
+        "MoS2 valley HHG control",
+        "Kim Nat Commun 16 9825",
+        "circularly polarized HHG transition metal dichalcogenide",
+        "valley-selective HHG TMD"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.4 L63/L65/L77/L79 关于阿秒瞬态吸收/反射探测 HHG 信号的实验指认（涉及 Luu & Wörner、Hu、Zhong）",
+      "missing_evidence": "四处编号与条目作者错位：Luu & Wörner 应为 [35]、Hu 应为 [26]、Zhong 应为 [24]；需在核实正确条目基础上，补充 1-2 篇孤立双脉冲非共线瞬态吸收在固体 HHG 中的代表性实验文献，以填补 §2.4 探测方法段引用密度",
+      "search_keywords": [
+        "attosecond transient absorption solid HHG",
+        "Luu Woerner attosecond solid",
+        "isolated attosecond pulse transient absorption",
+        "noncollinear attosecond probe high harmonic",
+        "Hu PNAS attosecond solid"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§2.2 L35 'TDDFT … 给出 ε 莫尔调制幅度具体数值' —— ε 莫尔调制幅度的预估量级",
+      "missing_evidence": "立项依据章未给出 TDDFT 预估区间，方案章具体小节号亦悬置；需补 1-2 篇关于扭转 TMD 双层介电/极化莫尔调制幅度的计算或实验文献，给出 0.05-0.2 量级的物理依据或替代数值",
+      "search_keywords": [
+        "TDDFT twisted bilayer MoS2 dielectric constant",
+        "Moiré potential amplitude twisted TMD",
+        "dielectric screening twisted homobilayer",
+        "Moiré modulation permittivity MoS2 WSe2",
+        "epsilon Moiré twist angle TMD"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "references.md 中 [8] 缺号跳号（序列 1-7, 9-41）",
+      "missing_evidence": "疑两套编号体系误合并，[8] 原条目内容未知；需查证原文引用的文献池中遗漏的那一篇原始工作（与 HHG/扭转莫尔/瞬态吸收主脉络之一相关），并补齐后全文 [N] 同步迁移",
+      "search_keywords": [
+        "high harmonic generation 2018 2019 milestone",
+        "solid HHG seminal experiment",
+        "twisted bilayer HHG first observation",
+        "transition metal dichalcogenide HHG first"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

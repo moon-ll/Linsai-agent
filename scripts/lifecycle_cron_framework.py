@@ -1,0 +1,84 @@
+#!/usr/bin/env python3
+"""生命周期 cron 小型化与自修复框架（v6.7.5）。
+
+本文件保留为向后兼容的薄包装，实际实现已迁移到 lifecycle/ 包。
+"""
+
+from __future__ import annotations
+
+from lifecycle.controller import LifecycleCronController, get_controller
+from lifecycle.constants import (
+    DEFAULT_ORCHESTRATE_SCHEDULE,
+    DEFAULT_REPAIR_SCHEDULE,
+    DEFAULT_WEEKEND_INPUT_SCHEDULE,
+    DEFAULT_WEEKEND_OUTPUT_SCHEDULE,
+    DEFAULT_WEEKEND_REFLECTION_SCHEDULE,
+    DEFAULT_WORKER_INTERVAL,
+    HERMES_PROFILE,
+    HERMES_SCRIPTS_DIR,
+    JOB_STATUS_DONE,
+    JOB_STATUS_FAILED,
+    JOB_STATUS_PENDING,
+    JOB_STATUS_RUNNING,
+    MAX_JOB_ATTEMPTS,
+    STALE_RUNNING_SECONDS,
+    STEP_CRITIC,
+    STEP_MONITOR,
+    STEP_RESEARCHER,
+    STEP_WRITER,
+    WEEKEND_JOB_INPUT,
+    WEEKEND_JOB_OUTPUT,
+    WEEKEND_JOB_REFLECTION,
+    WEEKEND_JOBS,
+    WEEKEND_JOBS_PATH,
+)
+from lifecycle.utils import (
+    _ensure_hermes_scripts_dir,
+    _get_jobs,
+    _is_stale,
+    _is_weekend,
+    _job_by_id,
+    _load_weekend_jobs,
+    _make_job_id,
+    _save_jobs,
+    _save_weekend_jobs,
+    _write_wrapper_script,
+)
+
+__all__ = [
+    "LifecycleCronController",
+    "get_controller",
+    "DEFAULT_ORCHESTRATE_SCHEDULE",
+    "DEFAULT_REPAIR_SCHEDULE",
+    "DEFAULT_WEEKEND_INPUT_SCHEDULE",
+    "DEFAULT_WEEKEND_OUTPUT_SCHEDULE",
+    "DEFAULT_WEEKEND_REFLECTION_SCHEDULE",
+    "DEFAULT_WORKER_INTERVAL",
+    "HERMES_PROFILE",
+    "HERMES_SCRIPTS_DIR",
+    "JOB_STATUS_DONE",
+    "JOB_STATUS_FAILED",
+    "JOB_STATUS_PENDING",
+    "JOB_STATUS_RUNNING",
+    "MAX_JOB_ATTEMPTS",
+    "STALE_RUNNING_SECONDS",
+    "STEP_CRITIC",
+    "STEP_MONITOR",
+    "STEP_RESEARCHER",
+    "STEP_WRITER",
+    "WEEKEND_JOB_INPUT",
+    "WEEKEND_JOB_OUTPUT",
+    "WEEKEND_JOB_REFLECTION",
+    "WEEKEND_JOBS",
+    "WEEKEND_JOBS_PATH",
+    "_ensure_hermes_scripts_dir",
+    "_get_jobs",
+    "_is_stale",
+    "_is_weekend",
+    "_job_by_id",
+    "_load_weekend_jobs",
+    "_make_job_id",
+    "_save_jobs",
+    "_save_weekend_jobs",
+    "_write_wrapper_script",
+]

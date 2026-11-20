@@ -1,0 +1,47 @@
+{
+  "gaps": [
+    {
+      "claim": "课题组已建立中红外强场HHG谱学平台与THz泵浦-探测装置",
+      "missing_evidence": "课题组预研描述未量化，缺乏具体性能指标（探测谐波阶数、光谱分辨率eV、时间分辨率fs）及已发表论文支撑",
+      "search_keywords": [
+        "MnPS3 high harmonic generation experimental",
+        "MnPS3 ultrafast spectroscopy THz pump probe",
+        "MnPS3 attosecond science experimental platform",
+        "MnPS3 strong field nonlinear optics experimental"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "56处数字引用全部悬空",
+      "missing_evidence": "references.md文件为0字节，所有正文引用无对应文献实体，包括跨章一号多用和跳号5/6/7/22问题",
+      "search_keywords": [
+        "MnPS3 electronic structure band structure",
+        "MnPS3 Rashba spin splitting ARPES",
+        "sliding ferroelectricity MnPS3 experimental",
+        "Berry curvature high harmonic generation",
+        "Rashba nonlinear optics second harmonic"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "content章节5处arXiv裸引未标注完整信息",
+      "missing_evidence": "content章节引用arXiv预印本时未提供完整 citation info（作者、年份、期刊替代），需补充正式发表文献或完善arXiv引用格式",
+      "search_keywords": [
+        "MnPS3 monolayer antiferromagnet experimental",
+        "sliding ferroelectricity 2D material experimental",
+        "Rashba bilayer heterostructure experiment"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "层间滑移驱动HHG的创新点需与Ghorashi-Rappe等工作明确边界",
+      "missing_evidence": "评审指出三轴创新中创新点二与Ghorashi-Rappe工作的边界未讲清，需补充对比文献说明本项目与已有工作的实质性差异",
+      "search_keywords": [
+        "Ghorashi Rappe high harmonic generation theory",
+        "interlayer sliding high harmonic generation",
+        "sliding ferroelectricity harmonic generation theory"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

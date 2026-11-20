@@ -1,0 +1,38 @@
+{
+  "gaps": [
+    {
+      "claim": "RABBITT 物理缺陷：1.6 μm 缀饰边带 (n±2)×0.388 eV 与相邻谐波自身简并（本谱含偶阶），0.5 TW/cm² 强驱动兼任缀饰场超微扰条件数个量级",
+      "missing_evidence": "缺少 Rainbow RABBITT/attosecond streaking 单路径方法在 MoS2 扭转异质结高次谐波实验中的可行性验证，以及 RABBITT 缀饰场10¹¹ W/cm² 阈值下边带隔离条件的基准文献",
+      "search_keywords": [
+        "Rainbow RABBITT solid HHG",
+        "attosecond streaking single-path transition metal dichalcogenide",
+        "RABBITT dressing field perturbative threshold",
+        "two-photon coupling HHG sideband overlap"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "剥离测试 RMS>25%→Tikhonov ~18%→协同 σ_Ω≤0.15 的量化路径（18%→15% 缺口未释）",
+      "missing_evidence": "缺少 TDDFT 全局偏差上限（≈15%）在扭转 MoS2 HHG 反演中的基准数据，以及 Tikhonov 正则化将 RMS 误差从 18% 压至 15% 的可量化收敛证据",
+      "search_keywords": [
+        "Tikhonov regularization MoS2 HHG inversion",
+        "TDDFT global deviation twisted MoS2",
+        "Tikhonov residual convergence high harmonic spectroscopy",
+        "Bayesian posterior HHG Berry curvature error benchmark"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Patra 与 Cocchi [31] 的 Fig.4 计算（21.8° 构型，φ₀=10.9°=θ_tw/2）显示 1.5—3.5 eV 内 φ₀(ω) 保持锁定",
+      "missing_evidence": "缺少 Patra 与 Cocchi 关于扭转 MoS2 SHG/HHG 群论计算的具体数值（φ₀=θ_tw/2 在 1.5—3.5 eV 锁定）的原始论文与图注出处",
+      "search_keywords": [
+        "Patra Cocchi twisted MoS2 SHG DFT-Wannier",
+        "twisted homobilayer MoS2 phase locking polarization",
+        "second harmonic generation twist angle 21.8 degree MoS2",
+        "SHG phi_0 omega MoS2 homobilayer calculation"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "scheme"
+}

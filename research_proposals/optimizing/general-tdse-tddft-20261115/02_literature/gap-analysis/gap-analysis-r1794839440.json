@@ -1,0 +1,69 @@
+{
+  "gaps": [
+    {
+      "claim": "立项依据章节需要以领域意义开篇并逐层收窄到核心科学问题（五层递进结构）",
+      "missing_evidence": "rationale.md 为 0 字节空文件，完全缺乏领域综述文献：包括强场物理领域意义、TDSE/TDDFT 方法发展脉络、以及从领域到具体挑战的收窄论证文献（如范本中 Ghimire 等人 ZnO 非微扰高次谐波类嵌入式引文）",
+      "search_keywords": [
+        "strong-field physics review",
+        "high harmonic generation nonperturbative",
+        "laser-matter interaction ultrafast review",
+        "attosecond science roadmap"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "TDSE/TDDFT 数值求解的计算瓶颈需要文献量化支撑",
+      "missing_evidence": "缺少证明 TDSE/TDDFT 全量子动力学模拟计算代价高昂、需要代理模型加速的文献（计算时间标度、网格规模、实时TDDFT在大体系中的计算瓶颈数据）",
+      "search_keywords": [
+        "time-dependent Schrödinger equation computational cost",
+        "real-time TDDFT large-scale computational bottleneck",
+        "grid-based TDSE simulation scaling",
+        "TDDFT computationally expensive strong field"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "机器学习代理模型加速量子动力学模拟的有效性需要文献支撑",
+      "missing_evidence": "缺少机器学习/神经网络代理模型替代或加速 TDSE/TDDFT 及类似量子动力学计算的已发表工作（neural network surrogate、ML interatomic potential 用于实时动力学）",
+      "search_keywords": [
+        "machine learning surrogate quantum dynamics",
+        "neural network acceleration TDSE",
+        "machine learning TDDFT emulator",
+        "deep learning solver Schrödinger equation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "光电子谱可解释反演的科学意义与现状需要文献综述",
+      "missing_evidence": "缺少光电子能谱/全息成像反演方法（如 QTomography、机器学习相位恢复）及其解释性局限的文献，用于论证可解释反演的必要性",
+      "search_keywords": [
+        "photoelectron holography inversion",
+        "photoelectron spectrum retrieval machine learning",
+        "quantum tomography photoionization",
+        "phase retrieval strong-field ionization"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "研究设想（00_research_idea.md）中的创新点表述需承接为申请书论证并配文献定位",
+      "missing_evidence": "缺少与现有 TDSE/TDDFT 加速及谱学反演方法对比的定位性文献，以证明相对现有工作的创新差距（[V]/[P]/[D] 判据对应的领域基线文献）",
+      "search_keywords": [
+        "state of the art TDSE acceleration GPU",
+        "ML potential strong-field dynamics baseline",
+        "existing photoelectron inversion methods comparison"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "引用密度与嵌入式引用格式规范（如\"某人等人[N]在期刊上报道了X\"）需落实为真实文献列表",
+      "missing_evidence": "references 模块同为 0 字节，全部引文（预计立项依据需较高引用密度，每段嵌入引用）尚未检索与核实，存在文献真实性风险（严谨性清单第③项\"文献真实\"无载体）",
+      "search_keywords": [
+        "TDSE strong field benchmark papers",
+        "TDDFT intense laser review",
+        "machine learning physics surrogate review"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "rationale"
+}

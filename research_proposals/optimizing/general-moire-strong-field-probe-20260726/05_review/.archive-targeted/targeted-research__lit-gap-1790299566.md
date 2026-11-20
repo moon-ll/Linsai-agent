@@ -1,0 +1,36 @@
+# 定向文献检索报告
+
+## 课题
+general-moire-strong-field-probe-20260726
+
+## 章节
+scheme
+
+## 检索关键词
+- 2D material layer polarizability esu、Moiré superlattice potential depth experiment、Pockels effect2D semiconductor Stark、transition metal dichalcogenide polarizability first principles、moiré potential amplitude twisted bilayer TMDC、mid-infrared ionization threshold TMDC、solid HHG intensity scaling wavelength、Keldysh ionization wavelength dependence solid、Ghimire MoS2 HHG intensity 1.3 um、lambda^2 scaling HHG threshold semiconductor
+
+## 检索结果
+
+- 2510.09548 | Mapping the moiré potential in multi-layer rhombohedral graphene | Eric Seewald, Sanat Ghosh, Nishchhal Verma, John Cenker, Yinan Dong, Birui Yang, Amit Basu, Takashi Taniguchi, Kenji Watanabe, Mandar M. Deshmukh, Dmitri N. Basov, Raquel Queiroz, Cory Dean, Abhay N. Pasupathy | 2025 | 0.95 | 利用STM/STS首次直接可视化菱形石墨烯/hBN莫尔超晶格的莫尔势，需要在连续模型中引入一个与底层符号相反、幅值约为底层莫尔强度30%的顶层莫尔势才能复现谱学特征。 | 来源：联网检索
+- 2410.22277 | Imaging the Sub-Moiré Potential Landscape using an Atomic Single Electron Transistor | Dahlia R. Klein, Uri Zondiner, Amit Keren, John Birkbeck, Alon Inbar, Jiewen Xiao, Mariia Sidorova, Mohammed M. Al Ezzi, Liangtao Peng, Kenji Watanabe, Takashi Taniguchi, Shaffique Adam, Shahal Ilani | 2024 | 0.95 | 基于量子扭曲显微镜(QTM)的原子单电子晶体管首次直接成像石墨烯/hBN范德华异质结莫尔势，测得振幅约60 mV呈近C6对称性，且幅值约为理论预测两倍，揭示现有理论不完备。 | 来源：联网检索
+- 2512.16431 | Moiré-modulated Γ valley in twisted bilayer and twisted double-bilayer MoTe2 | Wanying Chen, Hongyun Zhang, Jinxi Lu, Yu Gu, Qiyun Xu, Fei Wang, Xuanxi Cai, Jiansong Li, Jiayong Xiao, Rui Chen, Kenji Watanabe, Takashi Taniguchi, Jose Avila, Pavel Dudin, Matthew D. Watson, Pu Yu, Shengwei Jiang, Wenhui Duan, Tingxin Li, Chong Wang, Shuyun Zhou | 2025 | 0.92 | ARPES实验在临界扭曲角附近的扭转MoTe2中直接可视化莫尔调控的Γ谷电子结构，pz带呈现系统性的扭曲角依赖分裂，归因于层间界面起伏的莫尔调制。 | 来源：联网检索
+- 2502.11452 | Photoinduced twist and untwist of moiré superlattices in TMDC heterobilayers | C. J. R. Duncan, A. C. Johnson, I. Maity, A. Rubio, M. Gordon, A. C. Bartnik, M. Kaemingk, W. H. Li, M. B. Andorf, C. A. Pennington, I. V. Bazarov, M. W. Tate, D. A. Muller, J. Thom-Levy, S. M. Gruner, A. M. Lindenberg, F. Liu, J. M. Maxson | 2025 | 0.9 | 利用超快电子衍射在2°与57°扭转WSe2/MoSe2异质结中观测到飞秒光激发驱动的莫尔超晶格相干扭转-反扭转运动，局部扭转角调制达0.6°，由超快电荷转移驱动的亚THz莫尔声子。 | 来源：本地知识库
+- 2604.22343 | Dynamic Moiré Potentials and Robust Wigner Crystallization in Large-Scale Twisted Transition Metal Dichalcogenides | Machine-learning workflow: DeePMD + DeepH + DFT + DMRG collaboration | 2026 | 0.88 | 集成机器学习分子动力学与DeepH哈密顿预测+DFT+DMRG工作流在含3000原子的扭转双层TMD莫尔超胞中发现低频呼吸模动态重塑莫尔势阱、窄化最低导带并促成强局域化电子态及鲁棒Wigner晶体。 | 来源：联网检索
+- 2402.12795 | Symmetry-breaking-induced giant Stark effect in 2D Janus materials | Jiang-Yu Lu, Wu-Yu Chen, Lei Li, Tao Huang, Hui Wan, Zi-Xuan Yang, Gui-Fang Huang, Wangyu Hu, Wei-Qing Huang | 2024 | 0.82 | DFT计算表明2D Janus IV-V族单层Sn2SbAs在±0.30 V/Å电场下展现线性巨型Stark效应，带隙变化达134 meV（30倍于SnSb），源于Janus结构CBM/VBM空间分离。 | 来源：联网检索
+- 2307.12880 | Harmonic to anharmonic tuning of moiré potential leading to unconventional Stark effect and giant dipolar repulsion in WS2/WSe2 heterobilayer | Multiple authors (Nat Commun 2023) | 2023 | 0.8 | 实验展示59°扭转WS2/WSe2异质结激子莫尔势（深度约150 meV）通过栅压与光激发从谐振到非谐振的动态调控，导致反常Stark位移与巨大偶极排斥。 | 来源：联网检索
+- 2008.07696 | Deep moiré potentials in twisted transition metal dichalcogenide bilayers | Multiple authors (Nature Physics 2021) | 2021 | 0.75 | STM测量扭转WSe2/MoSe2 H堆叠中莫尔势在价带可达300 meV、导带150 meV，比单纯层间耦合理论估计高一个量级，在约13 nm莫尔周期处达到最大，与结构起伏相关。 | 来源：联网检索
+
+## 多源学术检索补充（arxiv+openalex+semantic_scholar）
+
+标准引用格式（可直接用于 references.md 修订）：/Users/ll/Desktop/LinSai-CoPilot/research_proposals/optimizing/general-moire-strong-field-probe-20260726/02_literature/targeted-research/candidates-1790299567.bib
+
+- arXiv:2311.04217 | Fractional quantum anomalous Hall effects in rhombohedral multilayer graphene in the moir\\'eless limit and in Coulomb imprinted superlattice | Boran Zhou, Hui Yang, Ya-Hui Zhang | 0 | Physical Review Letters | 引用:87 | 来源：arxiv | The standard theoretical framework for fractional quantum anomalous Hall effect (FQAH) assumes an isolated flat Chern band in the single particle leve
+- DOI:10.1016/j.mattod.2021.09.021 | Mid-infrared photonics and optoelectronics in 2D materials | Lianhe H. Li, Xuechao Yu, Xiaonan Hu | 2021 | Materials Today | 引用:74 | 来源：openalex | With intriguing properties that are different from the conventional bulk materials, two-dimensional (2D) materials have attracted numerous and widespr
+- arXiv:2011.03933 | Universal superlattice potential for 2D materials from twisted interface inside h-BN substrate | Pei Zhao, Chengxin Xiao, Wang Yao | 0 | npj 2D Materials and Applications | 引用:68 | 来源：arxiv | Lateral superlattices in 2D materials are emerging as a powerful platform for exploring novel quantum phenomena, which can be realized through the pro
+- arXiv:2307.16563 | Two-Dimensional Moir\\'e Polaronic Electron Crystals | Eric A. Arsenault, Yiliu Li, Birui Yang | 0 | Physical Review Letters | 引用:18 | 来源：arxiv | Two-dimensional moir\\'e materials have emerged as the most versatile platforms for realizing quantum phases of electrons. Here, we explore the stabil
+- arXiv:2407.20905 | Confined Trions and Mott-Wigner States in a Purely Electrostatic Moir\\'e Potential | Natasha Kiper, Haydn S. Adlong, Arthur Christianen | 0 | Physical Review X | 引用:16 | 来源：arxiv | Moir\\'e heterostructures consisting of transition metal dichalcogenide (TMD) hetero- and homobilayers have emerged as a promising material platform t
+- arXiv:2405.10079 | Emergence of moir\\'e superlattice potential in graphene by twisted-hBN layers | Tianyu Zhang, Chengxin Xiao, Hongxia Xue | 0 | None | 引用:3 | 来源：arxiv | Moir\\'e superlattices formed in stacks of two or more 2D crystals with similar lattice structures have recently become excellent platforms to reveal 
+- arXiv:2306.07841 | Electrostatic moir\\'e potential from twisted-hBN layers | Dong Seob Kim, Roy C. Dominguez, Rigo Mayorga-Luna | 0 | None | 引用:3 | 来源：arxiv | Moir\\'e superlattices formed by vertically stacking van der Waals layers host a rich variety of correlated electronic phases and function as novel ph
+- arXiv:2501.00313 | Two-dimensional moir\\'{e} phonon polaritons | Hao Shi, Chu Li, Ding Pan | 0 | Nano letters (Print) | 引用:1 | 来源：arxiv | Phonon polaritons (PhPs) are hybrid light-matter modes. We investigate them in two-dimensional (2D) materials with twisted moir\\'{e} structures, reve
+- arXiv:2211.02482 | Elastic properties of moir\\'e lattices in epitaxial two-dimensional materials | Alexandre Artaud, Nicolas Rougemaille, Sergio Vlaic | 0 | Physical review B | 引用:0 | 来源：arxiv | Unlike conventional two-dimensional (2D) semiconductor superlattices, moir\\'{e} patterns in 2D materials are flexible and their electronic, magnetic,
+- arXiv:2604.25598 | Observation and Control of Moir\'e-Tailored Topological Dirac States | R, ., G | 0 | None | 引用:0 | 来源：arxiv | Moir\'e heterostructures provide a powerful framework for tailoring electronic band structures via controlled long-range periodic superlattice potenti

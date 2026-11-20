@@ -1,0 +1,82 @@
+{
+  "gaps": [
+    {
+      "claim": "§3.1 谱学环节固定 800 nm 驱动 7–13 阶谐波（10.8–20.2 eV）与 [17] 实验基线可比",
+      "missing_evidence": "缺乏 BSV/量子光驱动固体 HHG 在 800 nm 中心波长产生 7–13 阶谐波（10.8–20.2 eV）能量区间的实验文献支撑，特别是与经典光驱动对比的量子增强证据",
+      "search_keywords": [
+        "BSV driven HHG solid 800nm experiment",
+        "quantum light solid harmonic generation 7-13 orders",
+        "squeezed light HHG photon energy range",
+        "quantum enhanced HHG near infrared solid state",
+        "bright squeezed vacuum high harmonic 1.55 eV photon energy"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3.1 '任一环节缺失→探针主张沦为不可证伪断言'五段递进论证（光源/样品/谱学/理论/反演）",
+      "missing_evidence": "缺少 BSV 驱动固体 HHG 全链条（量子光源制备→固态样品谐波产生→光子计数能谱采集→多带理论计算→神经网/PINN 反演）的端到端实验先例文献，需引用分环节已有实验/理论工作证明链条可闭合",
+      "search_keywords": [
+        "end-to-end quantum HHG spectroscopy pipeline",
+        "BSV HHG solid state multi-band theory experiment",
+        "photon counting harmonic spectroscopy reconstruction",
+        "quantum light driven attosecond spectroscopy complete chain"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3.2 SLM 硬件参数（空间光调制器用于脉冲整形/相位补偿）的设定",
+      "missing_evidence": "SLM 参数设定偏具体化（像素/分辨率/刷新率等），缺乏文献给出阿秒/强场实验中 SLM 的典型规格范围与可行性边界",
+      "search_keywords": [
+        "spatial light modulator attosecond pulse shaping specification",
+        "SLM phase mask strong field HHG experiment",
+        "liquid crystal SLM waveform control attosecond",
+        "SLM damage threshold ultrafast high harmonic"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§3.1 反演环节采用物理信息神经网络/深度学习从谐波谱反演能带/贝里曲率",
+      "missing_evidence": "缺少 PINN 或神经网络反演 HHG 谱到能带结构/贝里曲率/跃迁偶极矩的具体文献支撑，特别是 BSV 驱动下低光子数谱的反演可行性",
+      "search_keywords": [
+        "physics-informed neural network HHG band structure inversion",
+        "deep learning high harmonic spectrum retrieval Berry curvature",
+        "neural network HHG inverse problem low photon count",
+        "PINN attosecond spectroscopy reconstruction solid state"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3.3 风险表 Plan B（如改用经典强光+多脉冲序列、或切换至 1.55 μm NOPA 不同中心波长）",
+      "missing_evidence": "缺乏 BSV HHG 实验失败/降级时的替代方案文献支撑：经典光 HHG 多脉冲相干控制、波长相近但不同中心波长的 NOPA 量子光驱动等",
+      "search_keywords": [
+        "coherent control multi-pulse HHG classical light",
+        "NOPA different center wavelength quantum HHG",
+        "degraded squeezing HHG classical comparison backup",
+        "BSV HHG failure mode alternative driving scheme"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§3.6 降级机制与可证伪边界（量子增强因子 Q_F 阈值、谐波产率阈值、谱学反演误差阈值）",
+      "missing_evidence": "缺少量子增强因子 Q_F、BSV 驱动 HHG 产率/可见度、PINN 反演误差等指标的定量文献基线，无法定义哪些数值以下算'降级'",
+      "search_keywords": [
+        "quantum enhancement factor Q_F HHG definition benchmark",
+        "BSV HHG yield visibility quantitative threshold",
+        "HHG spectroscopy reconstruction error metric baseline",
+        "falsifiable criterion quantum advantage strong field nonlinear"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3.1 样品环节（固体 HHG 的能谷材料/过渡金属硫族化合物选择）与 §2.2/§2.7 跨章口径一致性",
+      "missing_evidence": "scheme §3.1 样品选择（如 TMDC/能谷材料）需与 content §2.2/§2.7 物理口径对齐，缺少特定材料体系 BSV 驱动 HHG 实验可行性的文献（材料带隙 vs 7–13 阶谐波能量窗口的匹配验证）",
+      "search_keywords": [
+        "TMDC valley material HHG 7-13 harmonics feasibility",
+        "transition metal dichalcogenide bandgap harmonic photon energy match",
+        "solid state HHG material selection 800nm driver",
+        "2D material high harmonic generation bandgap criterion"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

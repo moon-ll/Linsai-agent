@@ -1,0 +1,421 @@
+{
+  "quarantined_at": "2026-11-15T15:09:26Z",
+  "reason": "v7.3.85 人名页噪音治理：83 张人名页 83/83 为噪音（裸姓氏/组指代/空壳），且作为 kb_linker 词表泵出全库假边",
+  "pages": [
+    {
+      "file": "Aversa.md",
+      "title": "Aversa",
+      "created": "2026-10-31T06:11:58Z"
+    },
+    {
+      "file": "Baykusheva.md",
+      "title": "Baykusheva",
+      "created": "2026-10-31T06:11:56Z"
+    },
+    {
+      "file": "Berry.md",
+      "title": "Berry",
+      "created": "2026-10-31T06:11:52Z"
+    },
+    {
+      "file": "Breitenbach.md",
+      "title": "Breitenbach",
+      "created": "2026-10-31T06:11:57Z"
+    },
+    {
+      "file": "Chiu.md",
+      "title": "Chiu",
+      "created": "2026-10-31T06:19:01Z"
+    },
+    {
+      "file": "Chowdhury.md",
+      "title": "Chowdhury",
+      "created": "2026-10-31T06:11:54Z"
+    },
+    {
+      "file": "Ciappina.md",
+      "title": "Ciappina",
+      "created": "2026-10-31T06:11:51Z"
+    },
+    {
+      "file": "Cocchi.md",
+      "title": "Cocchi",
+      "created": "2026-10-31T06:19:01Z"
+    },
+    {
+      "file": "Corkum.md",
+      "title": "Corkum",
+      "created": "2026-06-17T12:40:33Z"
+    },
+    {
+      "file": "Ding.md",
+      "title": "Ding",
+      "created": "2026-11-14T06:30:08Z"
+    },
+    {
+      "file": "Du.md",
+      "title": "Du",
+      "created": "2026-10-31T06:11:56Z"
+    },
+    {
+      "file": "Echarri.md",
+      "title": "Echarri",
+      "created": "2026-11-07T06:04:48Z"
+    },
+    {
+      "file": "Ernotte.md",
+      "title": "Ernotte",
+      "created": "2026-10-31T06:19:02Z"
+    },
+    {
+      "file": "Faria_来源仅以_Faria_组_出现.md",
+      "title": "Faria（来源仅以“Faria 组”出现）",
+      "created": "2026-10-24T06:02:09Z"
+    },
+    {
+      "file": "Frolov_研究组.md",
+      "title": "Frolov（研究组）",
+      "created": "2026-10-31T06:03:05Z"
+    },
+    {
+      "file": "Fu.md",
+      "title": "Fu",
+      "created": "2026-10-31T06:11:52Z"
+    },
+    {
+      "file": "Gao.md",
+      "title": "Gao",
+      "created": "2026-10-31T06:11:53Z"
+    },
+    {
+      "file": "Ghimire-Reis.md",
+      "title": "Ghimire-Reis",
+      "created": "2026-06-17T12:40:33Z"
+    },
+    {
+      "file": "Ghimire.md",
+      "title": "Ghimire",
+      "created": "2026-10-31T06:19:00Z"
+    },
+    {
+      "file": "Ghimire_等人.md",
+      "title": "Ghimire 等人",
+      "created": "2026-10-31T06:17:29Z"
+    },
+    {
+      "file": "Gorlach.md",
+      "title": "Gorlach",
+      "created": "2026-10-31T06:11:55Z"
+    },
+    {
+      "file": "Gothelf.md",
+      "title": "Gothelf",
+      "created": "2026-10-31T06:11:57Z"
+    },
+    {
+      "file": "Haag.md",
+      "title": "Haag",
+      "created": "2026-11-07T06:23:02Z"
+    },
+    {
+      "file": "Haag_等人.md",
+      "title": "Haag 等人",
+      "created": "2026-10-31T06:17:30Z"
+    },
+    {
+      "file": "Han.md",
+      "title": "Han",
+      "created": "2026-10-31T06:11:53Z"
+    },
+    {
+      "file": "Heide.md",
+      "title": "Heide",
+      "created": "2026-10-31T06:19:01Z"
+    },
+    {
+      "file": "Holder.md",
+      "title": "Holder",
+      "created": "2026-10-31T06:11:54Z"
+    },
+    {
+      "file": "Ikeda.md",
+      "title": "Ikeda",
+      "created": "2026-10-31T06:11:56Z"
+    },
+    {
+      "file": "Jabed.md",
+      "title": "Jabed",
+      "created": "2026-10-31T06:11:57Z"
+    },
+    {
+      "file": "Jiang.md",
+      "title": "Jiang",
+      "created": "2026-10-31T06:11:54Z"
+    },
+    {
+      "file": "Khurelbaatar.md",
+      "title": "Khurelbaatar",
+      "created": "2026-10-31T06:11:57Z"
+    },
+    {
+      "file": "Kivshar_研究组.md",
+      "title": "Kivshar（研究组）",
+      "created": "2026-10-31T06:03:05Z"
+    },
+    {
+      "file": "Krausz.md",
+      "title": "Krausz",
+      "created": "2026-06-17T12:40:33Z"
+    },
+    {
+      "file": "Krempaský.md",
+      "title": "Krempaský",
+      "created": "2026-11-07T06:23:01Z"
+    },
+    {
+      "file": "Krempaský_等人.md",
+      "title": "Krempaský 等人",
+      "created": "2026-10-31T06:17:30Z"
+    },
+    {
+      "file": "LHuillier.md",
+      "title": "LHuillier",
+      "created": "2026-06-17T12:40:33Z"
+    },
+    {
+      "file": "Lange.md",
+      "title": "Lange",
+      "created": "2026-10-31T06:11:55Z"
+    },
+    {
+      "file": "Lee.md",
+      "title": "Lee",
+      "created": "2026-11-14T06:30:11Z"
+    },
+    {
+      "file": "Lewenstein.md",
+      "title": "Lewenstein",
+      "created": "2026-10-31T06:11:58Z"
+    },
+    {
+      "file": "Liu.md",
+      "title": "Liu",
+      "created": "2026-11-14T06:30:15Z"
+    },
+    {
+      "file": "Long.md",
+      "title": "Long",
+      "created": "2026-11-07T06:23:02Z"
+    },
+    {
+      "file": "Long_等人.md",
+      "title": "Long 等人",
+      "created": "2026-10-31T06:17:30Z"
+    },
+    {
+      "file": "Luu.md",
+      "title": "Luu",
+      "created": "2026-10-31T06:19:00Z"
+    },
+    {
+      "file": "Luu_香港大学_HKU.md",
+      "title": "Luu（香港大学 HKU）",
+      "created": "2026-09-26T06:01:24Z"
+    },
+    {
+      "file": "Lvovsky.md",
+      "title": "Lvovsky",
+      "created": "2026-10-31T06:11:57Z"
+    },
+    {
+      "file": "Min-Latka.md",
+      "title": "Min-Latka",
+      "created": "2026-11-14T06:30:16Z"
+    },
+    {
+      "file": "Mizuno.md",
+      "title": "Mizuno",
+      "created": "2026-10-31T06:17:31Z"
+    },
+    {
+      "file": "Narayan.md",
+      "title": "Narayan",
+      "created": "2026-10-31T06:11:54Z"
+    },
+    {
+      "file": "Ndabashimiye.md",
+      "title": "Ndabashimiye",
+      "created": "2026-10-31T06:19:00Z"
+    },
+    {
+      "file": "Osumi.md",
+      "title": "Osumi",
+      "created": "2026-11-07T06:23:02Z"
+    },
+    {
+      "file": "Patra.md",
+      "title": "Patra",
+      "created": "2026-10-31T06:19:01Z"
+    },
+    {
+      "file": "Peterka.md",
+      "title": "Peterka",
+      "created": "2026-10-31T06:19:01Z"
+    },
+    {
+      "file": "Polman.md",
+      "title": "Polman",
+      "created": "2026-11-07T06:04:48Z"
+    },
+    {
+      "file": "Provost.md",
+      "title": "Provost",
+      "created": "2026-10-31T06:11:52Z"
+    },
+    {
+      "file": "Queiroz.md",
+      "title": "Queiroz",
+      "created": "2026-10-31T06:11:53Z"
+    },
+    {
+      "file": "Rashid_G__G______Ghimire.md",
+      "title": "Rashid G. G. (?) Ghimire",
+      "created": "2026-10-31T06:11:51Z"
+    },
+    {
+      "file": "Rasputnyi.md",
+      "title": "Rasputnyi",
+      "created": "2026-10-31T06:11:55Z"
+    },
+    {
+      "file": "Reimers.md",
+      "title": "Reimers",
+      "created": "2026-11-14T06:30:09Z"
+    },
+    {
+      "file": "Sala.md",
+      "title": "Sala",
+      "created": "2026-10-31T06:11:53Z"
+    },
+    {
+      "file": "Sansone.md",
+      "title": "Sansone",
+      "created": "2026-11-14T06:14:20Z"
+    },
+    {
+      "file": "Schubert.md",
+      "title": "Schubert",
+      "created": "2026-10-31T06:19:00Z"
+    },
+    {
+      "file": "Silva.md",
+      "title": "Silva",
+      "created": "2026-10-31T06:11:55Z"
+    },
+    {
+      "file": "Sipe.md",
+      "title": "Sipe",
+      "created": "2026-10-31T06:11:58Z"
+    },
+    {
+      "file": "Sodemann.md",
+      "title": "Sodemann",
+      "created": "2026-10-31T06:11:52Z"
+    },
+    {
+      "file": "Stammer.md",
+      "title": "Stammer",
+      "created": "2026-10-31T06:11:55Z"
+    },
+    {
+      "file": "Tyulnev.md",
+      "title": "Tyulnev",
+      "created": "2026-10-31T06:11:56Z"
+    },
+    {
+      "file": "Uchida.md",
+      "title": "Uchida",
+      "created": "2026-10-31T06:11:56Z"
+    },
+    {
+      "file": "Vallée.md",
+      "title": "Vallée",
+      "created": "2026-10-31T06:11:52Z"
+    },
+    {
+      "file": "Vampa.md",
+      "title": "Vampa",
+      "created": "2026-10-31T06:19:01Z"
+    },
+    {
+      "file": "Vampa_等.md",
+      "title": "Vampa 等",
+      "created": "2026-10-31T06:17:30Z"
+    },
+    {
+      "file": "Verma.md",
+      "title": "Verma",
+      "created": "2026-10-31T06:11:53Z"
+    },
+    {
+      "file": "Wang.md",
+      "title": "Wang",
+      "created": "2026-10-31T06:11:53Z"
+    },
+    {
+      "file": "Woerner_ETH.md",
+      "title": "Woerner（ETH）",
+      "created": "2026-09-26T06:01:24Z"
+    },
+    {
+      "file": "Yan.md",
+      "title": "Yan",
+      "created": "2026-10-31T06:11:54Z"
+    },
+    {
+      "file": "Yang.md",
+      "title": "Yang",
+      "created": "2026-11-14T06:30:10Z"
+    },
+    {
+      "file": "Yoshikawa.md",
+      "title": "Yoshikawa",
+      "created": "2026-10-31T06:19:02Z"
+    },
+    {
+      "file": "Yoshikawa_等人.md",
+      "title": "Yoshikawa 等人",
+      "created": "2026-10-31T06:17:31Z"
+    },
+    {
+      "file": "Šmejkal.md",
+      "title": "Šmejkal",
+      "created": "2026-11-07T06:23:01Z"
+    },
+    {
+      "file": "Šmejkal_等人.md",
+      "title": "Šmejkal 等人",
+      "created": "2026-10-31T06:17:30Z"
+    },
+    {
+      "file": "刘运全.md",
+      "title": "刘运全",
+      "created": "2026-10-17T06:05:49Z"
+    },
+    {
+      "file": "北大HHG团队.md",
+      "title": "北大HHG团队",
+      "created": "2026-06-17T12:40:33Z"
+    },
+    {
+      "file": "未具名作者团队.md",
+      "title": "（未具名作者团队）",
+      "created": "2026-11-07T06:04:48Z"
+    },
+    {
+      "file": "陆瑞芬.md",
+      "title": "陆瑞芬",
+      "created": "2026-08-29T06:00:40Z"
+    }
+  ]
+}

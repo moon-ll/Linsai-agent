@@ -1,0 +1,88 @@
+{
+  "gaps": [
+    {
+      "claim": "国内从事拓扑/强场HHG相关研究的代表性团队（华中科技大学、上海光机所、精密测量院、北大彭良友等）的具体贡献与近期文献支撑",
+      "missing_evidence": "缺少彭良友团队、华中科技大学、上海光机所、精密测量院等国内团队在固体HHG/拓扑HHG方向的代表性论文引用，且L5遗留内部文件名括注",
+      "search_keywords": [
+        "Peng Liangyou Peking University high harmonic generation solid",
+        "彭良友 固体高次谐波",
+        "华中科技大学 高次谐波 拓扑",
+        "上海光机所 高次谐波 强场",
+        "精密测量院 高次谐波 固体"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "SSH模型/Haldane模型与高次谐波产生中边界态/拓扑相谐波增强14个数量级的实验来源（Bauer与Hansen 2018 PRL）",
+      "missing_evidence": "[9] Bauer Hansen 2018 PRL 'SSH拓扑相在带隙下方谐波产额增强14个数量级' 的真实文献需核实具体页码/作者顺序",
+      "search_keywords": [
+        "Bauer Hansen 2018 Physical Review Letters SSH harmonic",
+        "SSH model high harmonic generation 14 orders",
+        "Haldane model high harmonic enhancement"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Cd3As2 Weyl半金属中三次谐波三个数量级增强、五次谐波两个数量级增强的实测量化数据（Duan等人[26]微腔实验）",
+      "missing_evidence": "缺少数C同章同[26]指标双口径（三个数量级 vs 两个量级），需补Duan Cd3As2微腔三次/五次谐波增强倍数具体测量文献",
+      "search_keywords": [
+        "Duan Cd3As2 microcavity third harmonic three orders",
+        "Cd3As2 Weyl semimetal harmonic generation enhancement",
+        "Cd3As2 third harmonic five orders magnitude"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "拓扑边界态HHG探针的雏形概念与后续发展脉络",
+      "missing_evidence": "缺少从Bauer Hansen 2018雏形到后续Jia/Zheng等人[7][8]系统化研究的发展时间线文献",
+      "search_keywords": [
+        "topological edge state high harmonic generation",
+        "Jia topological HHG",
+        "Zheng Lu Pisanty boundary state HHG probe"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Weyl半金属/SSH体系中HHG选择规则与Berry曲率反转的最近期理论框架",
+      "missing_evidence": "缺少[12][13][17][18][38]七篇预印本的真实身份核实（2608.22136, 2602.16454等），需补充正式发表版本及Berry曲率HHG反转综述",
+      "search_keywords": [
+        "Berry curvature harmonic selection rule Weyl",
+        "Weyl semimetal HHG reversal circular dichroism",
+        "Lorenzo 2025 HHG Weyl semimetal",
+        "Ciappina Advances Physics HHG topological review"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Kagome超导体中HHG增强两个数量级的实验来源",
+      "missing_evidence": "缺少Kagome超导体（CsV3Sb5/KV3Sb5等）HHG产额增强的具体实验文献引用以支撑L47/L72两个量级基准",
+      "search_keywords": [
+        "Kagome superconductor CsV3Sb5 high harmonic generation",
+        "Kagome HHG enhancement two orders",
+        "KV3Sb5 high harmonic generation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "L51彭良友团队（北京大学）的固体高次谐波光谱学奠基性贡献",
+      "missing_evidence": "L19与L51两版译名不一致（彭亮佑/杜多维奇 vs 彭良友），需统一核实Peng Liangyou团队代表性HHG论文",
+      "search_keywords": [
+        "Liangyou Peng Peking University solid HHG",
+        "Peng Lyiangyou Vampa ZnO harmonic",
+        "北大彭良友 强场 高次谐波"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "α-quartz/MgO等非磁性晶体中Berry曲率HHG反转与圆二色性实验（Luu Wörner 2018 Nat Commun体系）",
+      "missing_evidence": "缺少Luu Wörner 2018 Nat Commun α-quartz Berry曲率HHG的具体引用与后续MgO反转工作",
+      "search_keywords": [
+        "Luu Wörner 2018 Nature Communications quartz Berry",
+        "MgO Berry curvature HHG inversion",
+        "alpha-quartz high harmonic circular dichroism"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}
