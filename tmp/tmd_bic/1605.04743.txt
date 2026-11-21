@@ -1,0 +1,971 @@
+Room-temperature exciton-polaritons with two-dimensional WS2
+L. C. Flatten,1, ∗Z. He,1 D. M. Coles,1, 2 A. A. P. Trichet,1
+A. W. Powell,1 R. A. Taylor,2 J. H. Warner,1 and J. M. Smith1
+1Department of Materials, University of Oxford, Parks Road, Oxford OX1 3PH, United Kingdom
+2Clarendon Laboratory, Department of Physics, University of Oxford, OX1 3PU, United Kingdom
+(Dated: October 1, 2018)
+Two-dimensional transition metal dichalcogenides exhibit strong optical transitions with signiﬁ-
+cant potential for optoelectronic devices. In particular they are suited for cavity quantum electrody-
+namics in which strong coupling leads to polariton formation as a root to realisation of inversionless
+lasing, polariton condensation and superﬂuidity. Demonstrations of such strongly correlated phe-
+nomena to date have often relied on cryogenic temperatures, high excitation densities and were
+frequently impaired by strong material disorder.
+At room-temperature, experiments approach-
+ing the strong coupling regime with transition metal dichalcogenides have been reported, but well
+resolved exciton-polaritons have yet to be achieved.
+Here we report a study of monolayer WS2
+coupled to an open Fabry-Perot cavity at room-temperature, in which polariton eigenstates are un-
+ambiguously displayed. In-situ tunability of the cavity length results in a maximal Rabi splitting of
+ℏΩRabi = 70 meV, exceeding the exciton linewidth. Our data are well described by a transfer matrix
+model appropriate for the large linewidth regime. This work provides a platform towards observ-
+ing strongly correlated polariton phenomena in compact photonic devices for ambient temperature
+applications.
+Transition metal dichalcogenides (TMDCs) have re-
+ceived increased attention due to the ability to produce
+large, atomically ﬂat monolayer domains with intrigu-
+ing optical properties [1–6]. Their large exciton-binding
+energy leads to stable exciton formation at room tem-
+perature, narrow absorption peaks and high photolumi-
+nescence quantum yields [7–11]. Recently it has become
+possible to grow atomically thin single-crystal domains
+of WS2 by chemical vapour deposition (CVD) [2]. WS2,
+like MoSe2 and WSe2 transits from being an indirect
+bandgap material in bulk to having a direct bandgap as
+a monolayer. Owing to this direct bandgap WS2 inter-
+acts strongly with light: even though it is a single atomic
+layer with a thickness of 0.8 nm absorbance values of 0.1
+and strong photoluminescence (PL) can be observed (see
+Fig. 1c) [8]. The valley polarisation degree of freedom
+[12] and a ﬁnite Berry curvature [13] make the material
+suitable for spinoptronics. In particular the large exci-
+ton binding energy of ≈0.7 eV makes monolayer WS2
+suitable for room temperature applications [7], enabling
+polariton formation at such high temperatures.
+Incorporated into a microcavity with suﬃciently small
+mode volume the two-dimensionally conﬁned exciton
+couples to the photonic modes resulting in the forma-
+tion of new eigenstates of the system, the polariton
+states, that consist of an admixture of the uncoupled
+states. Polaritons retain the characteristics of their con-
+stituent parts e.g. they have a degree of delocalization
+gained from the photon, while retaining a mass (typi-
+cally ∼10−4 that of the free electron mass [14]) and a
+ﬁnite scattering cross section inherited from the exciton,
+which gives rise to non-linear eﬀects [15–18] and strongly
+correlated phenomena [14, 19–21].
+∗lucas.ﬂatten@materials.ox.ac.uk
+In this Letter we present the ﬁrst study in which WS2
+is introduced experimentally to an open microcavity to
+take advantage of its extraordinary optical properties
+for exciton-polariton formation. We make use of a cav-
+ity setup which enables in-situ tunability of the cou-
+pling strength between the optical mode and WS2 ex-
+citons. Strong coupling between a photonic mode and
+MoS2 has been reported in a monolithic microcavity [22],
+but suﬀered from poorly resolved spectral features with
+splittings below the exciton linewidth. At low temper-
+atures progress with transversely conﬁned microcavities
+have been made [23, 24], allowing polariton formation
+in MoSe2. The approach we present here entails unam-
+biguous room temperature polariton formation with a
+Rabi splitting of ℏΩRabi = 70 meV, exceeding the exci-
+ton linewidth and allowing in-situ variability of the cou-
+pling strength.
+We extend the theoretical description
+of classical polariton formation to the room-temperature
+large linewidth regime, for which we found corrections to
+current theory [25]. Furthermore we investigate the po-
+lariton distribution as a function of cavity detuning and
+coupling strength. Our ﬁndings establish a platform to-
+wards integrated polariton devices at room temperature
+suitable for spinoptronics and strongly correlated phe-
+nomena.
+RESULTS
+The CVD grown WS2 ﬂakes have lateral dimensions
+exceeding 100 µm (Fig. 1a), which are transfered with a
+PMMA transfer layer onto a low-index terminated dis-
+tributed Bragg reﬂector (DBR). The opposite side of the
+microcavity is formed by a small silver mirror (Fig. 1b),
+which has a lower reﬂectivity than the DBR resulting in
+a cavity ﬁnesse of F ≈50. By placing the silver mir-
+arXiv:1605.04743v2  [cond-mat.mes-hall]  30 Aug 2016
+
+2
+FIG. 1. WS2 in an open microcavity. a) SEM micrograph of a triangular monolayer WS2 ﬂake transferred onto a DBR
+mirror. b) Elevated silica plinth with a silver coating forming one side of the microcavity. c) Absorbance (black, dashed) and
+photoluminescence (colour) spectra after oﬀ-resonant, continuous wave excitation (λexc = 473 nm) of marked region in a. d)
+Schematics of cavity setup: The left side consists of a DBR with 10 pairs of SiO2/TiO2 with single WS2 ﬂakes transferred to
+the low refractive-index terminated surface. The cavity is formed by positioning a silver mirror opposite the DBR.
+ror opposite a region of the DBR holding WS2 (Fig. 1d)
+and varying the cavity length with a Piezo microactu-
+ator, stable cavity modes interacting strongly with the
+WS2 can be obtained (see Methods).
+Fig. 2a shows successively acquired transmission spec-
+tra for diﬀerent cavity lengths tracking the mode with
+longitudinal mode number q = 3. The cavity length is
+decreased from left to right from 260 nm to 130 nm which
+leads to a linear response in cavity mode energy mov-
+ing from 1.85 eV to 2.15 eV. The exciton energy of the
+monolayer WS2 stays constant at 2.01 eV (white lines in
+Fig.
+2a).
+These two states are the uncoupled photon
+and exciton states, which couple in our system and show
+a typical avoided level crossing, forming the upper (UP)
+and lower polariton (LP) branch (coloured and dashed
+lines). Fig. 2b shows the calculated transmission spec-
+tra obtained with a transfer matrix method (TMM). The
+strongly coupled system can be described by the Hamil-
+tonian
+H = Ecavb†b + Eexcx†x + V (b†x + c.c.)
+(1)
+where Ecav and Eexc correspond to the energy levels of
+cavity mode and exciton which are coupled by the in-
+teraction potential V =
+ΩRabi
+2
+.
+b†, b and x†, x are the
+respective creation and annihilation operators. The sys-
+tem can be reduced to:
+HInt
+
+α
+β
+
+=
+
+Ecav
+ΩRabi
+2
+ΩRabi
+2
+Eexc
+ 
+α
+β
+
+= E
+
+α
+β
+
+(2)
+The eigenstates of the equation represent superpositions
+of the bare states, photonic mode and exciton, which are
+called polaritons.
+The coeﬃcients α2 and β2 quantify
+the contribution of photonic and excitonic part respec-
+tively, and are plotted in Fig. 2c. As the cavity mode
+is tuned through the exciton energy the lower (upper)
+polariton branch switches from photon- (exciton)-like to
+exciton- (photon)-like. Fig. 2d contains a vertical slice
+through the data presented in Fig. 2a at the crossing
+point of exciton and photon energy. The Rabi splitting
+is evaluated to ℏΩRabi = (70 ± 2) meV from a ﬁt to the
+data using two Lorentzian lineshapes. The splitting is
+fully resolved, since the individual linewidths of upper
+and lower polariton branch are (55±7) and (34±5) meV
+respectively, smaller than ℏΩRabi. Note that the cavity
+mode linewidth increases from ≈30 meV to ≈60 meV
+across the energy window presented in Fig. 2 even with-
+out the presence of an absorber due to the edge of the
+stop-band of the DBR which is centered around 1.95 eV
+(λ = 637 nm). The agreement between TMM data and
+the experimentally obtained spectra is excellent.
+The open-access design of the microcavity allows for
+opening the cavity freely, which gives access to diﬀer-
+ent longitudinal mode numbers q.
+For increasing cav-
+ity length (increasing q) the coupling strength between
+cavity mode and the WS2 monolayer decreases. Fig. 3
+presents data obtained by evaluating the polariton dis-
+persion for the ﬁrst ten accessible longitudinal mode
+numbers (q = 3, ..., 12). The two polariton branches are
+described by two Lorentzian peaks, whose peak positions
+are ﬁtted with the dispersion obtained analytically from
+diagonalisation of Eq. 2. The Rabi splitting ℏΩRabi is ob-
+tained as one parameter of this ﬁt and plotted as symbols
+in Fig. 3. The inset in Fig. 3 displays the transmission
+
+3
+FIG. 2. Polariton dispersion at room temperature. a) Transmission spectra as the cavity length is swept, showing
+typical polariton dispersion. The white continuous lines show the energy of the unperturbed cavity mode (triangles) and the
+exciton (stars). The energy of the coupled system, the two polariton branches are shown with the coloured, dashed lines. b)
+Transmission spectra as cavity length is swept obtained by transfer matrix modelling. The dispersion lines from a) are overlaid.
+c) Photonic and excitonic fractions of upper (UP) and lower (LP) polariton branch. d) Transmission spectrum at maximal
+photon-exciton mixing revealing a Rabi Splitting of ΩRabi = 70 meV.
+spectra at the crossing point for the diﬀerent longitudinal
+mode indices. The dashed line shows the analytic solu-
+tion for the Rabi splitting derived by solving Maxwell’s
+equations for the speciﬁc cavity geometry. Thus:
+ℏΩ(L) =2ℏ
+r
+V 2 −1
+4(γx −γp)2)
+(3)
+γp =1 −
+√
+R
+√
+R
+c
+2ncLeﬀ
+V 2 =1 +
+√
+R
+√
+R
+kdWc
+2n2cLeﬀ
++ kdW
+2nc
+(γp + γx) +
+ kdϵBc
+2Ln2c
+√
+R
+2
+(4)
+Here R is the mirror reﬂectivity (in our case RSilver ≪
+RDBR, so that we can set R = RSilver), Leff = L+LDBR
+(L is the geometric cavity length, LDBR is the eﬀective
+length of the DBR [26]), γp, γx are the cavity and exciton
+half-widths (HWHM), c the speed of light, nc the refrac-
+tive index within the cavity, d the width of the monolayer
+(d = 0.8 nm), k = Eexc
+ℏc , ϵB the dielectric background and
+W is a parameter proportional to the oscillator strength
+of the WS2 monolayer. We derive these expressions in
+the supplementary material. ϵB and W can be directly
+obtained from the dielectric function of monolayer WS2
+[27], thus the system has no free parameter. For the ﬁt
+to the data presented in Fig. 3 it is suﬃcient to measure
+the absorbance of the ﬂake, which shows slight spatial
+variations for our sample, and obtain W in this way (see
+Fig. 3). Note that Eq. 4 has been published before for
+quantum wells without the second and the third term in
+the expression for V 2 [25, 26]. The ﬁrst correction term
+is small for γp +γx ≪
+2c
+ncL, but for room temperature po-
+lariton applications it becomes sizable. In our case it cor-
+rects the value for V 2 by 7% for L = 1 µm and by 25% for
+L = 4 µm. The second correction term can be neglected
+if kddϵBc
+4Ln2c
+≪W, which in our system is only the case for
+cavity lengths exceeding L ≈2.5 µm where it contributes
+less than 10% (see Suppl. Information for a detailed dis-
+cussion). Interestingly the change in cavity length and
+the subsequent modulation of the Rabi splitting has stark
+consequences for polariton dynamics. When performing
+an optical transmission experiment polariton states are
+probed by coupling to the photonic component, which
+leads to the typical changes in intensity across a branch.
+
+4
+FIG. 3. Varying the Rabi splitting. Rabi Splitting for diﬀerent longitudinal cavity modes (q = 3, ..., 12). Symbols show
+experimentally obtained values for three diﬀerent positions on the WS2 ﬂake with corresponding uncertainty. The dashed line
+corresponds to the analytic expression shown in Eq. 3, derived in the Suppl. Materials. The inset depicts transmission spectra
+for the diﬀerent longitudinal mode indices stacked vertically for better visualisation.
+A diﬀerent way to populate exciton-polariton states is
+to optically pump the excitons non-resonantly, causing
+scattering and direct radiative pumping. Figs. 4a-c dis-
+play white lamp transmission data for higher q values
+q = 4, 7 and 10, showing a decreasing degree of coupling.
+The overlaid lines depict the uncoupled (white, continu-
+ous) and coupled (colour, dashed) dispersions as before
+(comp. Fig. 2). For the datasets presented in Figs. 4d-f
+the cavity length is scanned in the same way as for the
+transmission datasets, but here the sample is excited with
+a λ = 473 nm continuous wave laser. The resulting spec-
+tra show that only the central region of the lower polari-
+ton branch is populated. In particular the intensity and
+shape of the emission along the branch varies for diﬀerent
+longitudinal mode numbers for the same laser irradiation.
+It is thus a function of the Rabi splitting. Note that the
+modulation of the incident laser power due to the change
+in cavity length is negligible, as the pump wavelength is
+far below the stopband of the mirror through which the
+monolayer is excited. Fig. 4g shows the polariton pop-
+ulation for q = 4, 7, 10, 13 and 16 as a function of the
+energy diﬀerence ∆E between polariton branch and ex-
+citon energy (∆E = Eexc−ELP). It is obtained by ﬁtting
+a Lorentzian lineshape to the PL data presented in Figs.
+4d-f and scaling the obtained amplitudes by the inverse
+of the square of the photonic fraction α for the respective
+polariton branch. In general the lower polariton branch
+is populated slowly while its energy approaches the exci-
+ton energy from below. The population reaches a max-
+imum between 15 meV < ∆E < 30 meV and decreases
+rapidly for ∆E →0. The absolute polariton population
+number is not the same for diﬀerent longitudinal cavity
+modes and decreases for a smaller Rabi splitting. In fact
+Fig. 4h shows the maximum polariton population as a
+function of the associated Rabi splitting, revealing a lin-
+ear dependence. This trend could be explained by the
+scattering rate from exciton reservoir to polariton state,
+which is approximately proportional to the energy diﬀer-
+ence between the two states [28] and governs the polari-
+ton population in the steady state. The upper polariton
+branch stays unpopulated for all cases.
+DISCUSSION
+The oﬀ-resonant pump leads to excitation high in the
+conduction band of the WS2 monolayer which is followed
+by a rapid thermalisation, creating an exciton bath which
+then populates the lower polariton branch [29, 30]. Two
+known pathways for populating processes are the direct
+radiative decay channel, whose rate is proportional to
+the photonic coeﬃcient α of the LPB and the phonon-
+assisted scattering of excitons into the LPB which is pro-
+portional to the excitonic coeﬃcient β [31]. On the other
+hand there are multiple relaxation pathways for polari-
+tons: the direct radiative decay proportional to α domi-
+nating for large ∆E, exciton-electron scattering propor-
+tional to β [32] and exciton-exciton annihilation [33] pro-
+portional to β2. The processes proportional to powers of
+β result in the fast decay of polaritons for small ∆E. The
+quantitative description of this system bears potential for
+
+5
+FIG. 4. Polariton population with oﬀ-resonant pump. Transmission (a-c) and PL (d-f) spectra as cavity length is swept,
+traversing diﬀerent longitudinal modes (q = 4, 7, 10). For PL measurements the sample is excited oﬀ-resonantly with a (λexc =
+473 nm) continuous-wave laser. The lines show the dispersion of the uncoupled (white) and coupled system (colour) as in Fig.
+1. g) Polariton population as obtained from Lorentzian lineshape ﬁts to the PL data for q = 4, 7, 10, 13 and 16. h) Maximal
+polariton population as a function of the Rabi splitting ℏΩ. Dashed line shows a linear dependence to guide the eye.
+further studies.
+In conclusion we have demonstrated strong coupling
+between photonic cavity modes and excitons in two-
+dimensional atomically-thin WS2 at room temperature.
+The coherent exchange of energy between those two con-
+stituents results in the formation of exciton-polaritons
+with a vacuum Rabi splitting of 70 ± 3 meV. Monolay-
+ers of WS2 represent a promising candidate for polariton
+based devices due to their large exciton binding energies
+allowing for room temperature operation and very large
+oscillator strengths. We demonstate in situ control over
+the coupling strength and derive an analytic expression
+describing the length dependence. By studying the PL of
+the device we observe that the coupling strength directly
+inﬂuences the population dynamics.
+Strongly coupled devices of the type described here
+could provide a route towards observing strongly cor-
+related phenomena at room temperature. In particular
+properties such as the valley polarisation degree of free-
+dom [12] and a ﬁnite Berry curvature [13] render devices
+based on TMDCs attractive for spinoptronics and quan-
+tum computation.
+METHODS
+Sample preparation
+The open microcavity consists of two opposing ﬂat
+mirrors, a large dielectric DBR with 10 pairs of SiO2,
+TiO2 with central wavelength of λ = 637 nm and a
+smaller silver mirror with a thickness of 50 nm, deposited
+via thermal evaporation (Fig. 1). The WS2 ﬂakes are
+transferred onto the dielectric mirror stack, which has a
+low refractive-index terminated conﬁguration to provide
+an anti-node of the electric ﬁeld at the mirror surface
+and thus optimal coupling to the monolayer. Note that
+this condition rules out the recently described Tamm-
+plasmonic coupling, as it requires a high refractive-index
+termination before the metallic layer [34]. This transfer
+process is facilitated by coating the as-grown WS2 ﬂakes
+on SiO2 with a helper layer of PMMA. After etching away
+the substrate, the ﬂoating PMMA ﬁlm was transfered
+manually onto the DBR and baked at 150◦for 15 min.
+The remaining PMMA was then dissolved by placing the
+sample in an acetone bath for 10 min. After non-resonant
+excitation with a λ = 473 nm laser the WS2 ﬂakes show
+
+6
+strong neutral exciton emission at 2.01 eV with little, spa-
+tially varying contribution from the charged exciton state
+at 1.98 eV (see Fig. 1 c), which we attribute to a non-
+uniform excess electron background [7]. The small silver
+mirror is mounted on a three-dimensional piezo actuated
+stage, which makes positioning of the silver mirror rel-
+ative to the WS2 ﬂake possible and allows for electrical
+control of the cavity length.
+Optical measurements
+By positioning the silver plinth over a region of the
+DBR mirror which holds monolayer WS2 and reducing
+the distance between the two mirrors below ≈5 µm, sta-
+ble cavity modes interacting strongly with the WS2 exci-
+tons will appear in a transmission experiment. The light
+is focused onto an Andor combined spectrometer/CCD
+for analysis.
+The setup allows for oﬀ-resonant optical
+excitation below the stop-band of the DBR with a con-
+tinuous wave laser with wavelength λ = 473 nm at power
+densities around ρexc = 1500 W
+cm2 .
+ACKNOWLEDGEMENTS
+We thank Radka Chakalova at the Begbroke Science
+Park for helping with the thermal evaporation and dic-
+ing of the mirrors. L.F. and A.T. acknowledge funding
+from the Leverhulme Trust.
+D.C. acknowledges fund-
+ing from the Oxford Martin School and EPSRC grant
+EP/K032518/1.
+AUTHOR CONTRIBUTIONS
+Z.H. grew the WS2 and transferred the ﬂakes onto the
+mirror. L.F. prepared all other parts of the setup and
+conducted the experiments.
+L.F., D.C. and J.S. con-
+ceived the idea and prepared the manuscript. L.F., A.P.,
+A.T. and J.S. worked on the analytical description. R.T.,
+J.W. and J.S. oversaw the experiments and revised the
+manuscript.
+ADDITIONAL INFORMATION
+This
+paper
+is
+accompanied
+by
+supple-
+mentary
+information.
+Additionally
+the
+data
+presented
+in
+this
+work
+is
+available
+at
+https://ora.ox.ac.uk:443/objects/uuid:d3f0b229-df66-
+4895-ba1e-0d9ef9a07ec9. During the publication process,
+the authors became aware of a related study by Wang
+et al.
+[35],
+demonstrating exciton-polaritons with
+monolayer WS2 incorporated into a monolithic metallic
+cavity.
+The authors declare no competing ﬁnancial
+interests.
+[1] H.
+R.
+Guti´errez,
+N.
+Perea-L´opez,
+A.
+L.
+El´ıas,
+A. Berkdemir, B. Wang, R. Lv, F. L´opez-Ur´ıas, V. H.
+Crespi,
+H.
+Terrones,
+and
+M.
+Terrones,
+“Extraordi-
+nary Room-Temperature Photoluminescence in Triangu-
+lar WS2 Monolayers,” Nano Letters, vol. 13, pp. 3447–
+3454, Aug. 2013.
+[2] Y. Rong, Y. Fan, A. Leen Koh, A. W. Robertson, K. He,
+S. Wang, H. Tan, R. Sinclair, and J. H. Warner, “Control-
+ling sulphur precursor addition for large single crystal do-
+mains of WS2,” Nanoscale, vol. 6, pp. 12096–12103, Sept.
+2014.
+[3] J.-H. Jiang and S. John, “Photonic Architectures for Equi-
+librium High-Temperature Bose-Einstein Condensation in
+Dichalcogenide Monolayers,” Scientiﬁc Reports, vol. 4,
+p. 7432, Dec. 2014.
+[4] B. Chen, X. Zhang, K. Wu, H. Wang, J. Wang, and
+J. Chen, “Q-switched ﬁber laser based on transition metal
+dichalcogenides MoS2, MoSe2, WS2, and WSe2,” Optics
+Express, vol. 23, p. 26723, Oct. 2015.
+[5] M. I. Vasilevskiy, D. G. Santiago-P´erez, C. Trallero-
+Giner, N. M. R. Peres, and A. Kavokin, “Exciton po-
+laritons in two-dimensional dichalcogenide layers placed
+in a planar microcavity: Tunable interaction between two
+Bose-Einstein condensates,” Physical Review B, vol. 92,
+p. 245435, Dec. 2015.
+[6] J. Lu, H. Liu, E. S. Tok, and C.-H. Sow, “Interac-
+tions between lasers and two-dimensional transition metal
+dichalcogenides,” Chemical Society Reviews, Feb. 2016.
+[7] B. Zhu, X. Chen, and X. Cui, “Exciton Binding Energy of
+Monolayer WS2,” Scientiﬁc Reports, vol. 5, p. 9218, Mar.
+2015.
+[8] W. Zhao, Z. Ghorannevis, L. Chu, M. Toh, C. Kloc, P.-H.
+Tan, and G. Eda, “Evolution of Electronic Structure in
+Atomically Thin Sheets of WS2 and WSe2,” ACS Nano,
+vol. 7, pp. 791–797, Jan. 2013.
+[9] X. Xu, W. Yao, D. Xiao, and T. F. Heinz, “Spin and
+pseudospins in layered transition metal dichalcogenides,”
+Nature Physics, vol. 10, pp. 343–350, May 2014.
+[10] T. Scrace, Y. Tsai, B. Barman, L. Schweidenback,
+A. Petrou, G. Kioseoglou, I. Ozﬁdan, M. Korkusinski, and
+P. Hawrylak, “Magnetoluminescence and valley polarized
+state of a two-dimensional electron gas in WS2 monolay-
+ers,” Nature Nanotechnology, vol. 10, pp. 603–607, July
+2015.
+[11] M. Amani, D.-H. Lien, D. Kiriya, J. Xiao, A. Azcatl,
+J. Noh, S. R. Madhvapathy, R. Addou, S. Kc, M. Dubey,
+K. Cho, R. M. Wallace, S.-C. Lee, J.-H. He, J. W.
+Ager, X. Zhang, E. Yablonovitch, and A. Javey, “Near-
+unity photoluminescence quantum yield in MoS2,” Sci-
+ence, vol. 350, pp. 1065–1068, Nov. 2015.
+[12] H. Yu, X. Cui, X. Xu, and W. Yao, “Valley excitons
+in two-dimensional semiconductors,” National Science Re-
+view, vol. 2, pp. 57–70, Mar. 2015.
+
+7
+[13] A. Srivastava and A. Imamo˘glu, “Signatures of Bloch-
+Band Geometry on Excitons: Nonhydrogenic Spectra in
+Transition-Metal Dichalcogenides,” Physical Review Let-
+ters, vol. 115, p. 166802, Oct. 2015.
+[14] J. Kasprzak, M. Richard, S. Kundermann, A. Baas,
+P. Jeambrun, J. M. J. Keeling, F. M. Marchetti, M. H. Szy-
+maska, R. Andr, J. L. Staehli, V. Savona, P. B. Littlewood,
+B. Deveaud, and L. S. Dang, “Bose-Einstein condensation
+of exciton polaritons,” Nature, vol. 443, pp. 409–414, Sept.
+2006.
+[15] L. S. Dang, D. Heger, R. Andr´e, F. Bœuf, and R. Romes-
+tain,
+“Stimulation of Polariton Photoluminescence in
+Semiconductor Microcavity,”
+Physical Review Letters,
+vol. 81, pp. 3920–3923, Nov. 1998.
+[16] P. Senellart and J. Bloch, “Nonlinear Emission of Micro-
+cavity Polaritons in the Low Density Regime,” Physical
+Review Letters, vol. 82, pp. 1233–1236, Feb. 1999.
+[17] P. Bhattacharya, T. Frost, S. Deshpande, M. Z. Baten,
+A. Hazari, and A. Das, “Room Temperature Electri-
+cally Injected Polariton Laser,” Physical Review Letters,
+vol. 112, p. 236802, June 2014.
+[18] C. Schneider, A. Rahimi-Iman, N. Y. Kim, J. Fis-
+cher, I. G. Savenko, M. Amthor, M. Lermer, A. Wolf,
+L. Worschech, V. D. Kulakovskii, I. A. Shelykh, M. Kamp,
+S. Reitzenstein, A. Forchel, Y. Yamamoto, and S. H¨oﬂing,
+“An electrically pumped polariton laser,” Nature, vol. 497,
+pp. 348–352, May 2013.
+[19] A. Amo, J. Lefr`ere, S. Pigeon, C. Adrados, C. Ciuti,
+I. Carusotto, R. Houdr, E. Giacobino, and A. Bramati,
+“Superﬂuidity of polaritons in semiconductor microcavi-
+ties,” Nature Physics, vol. 5, pp. 805–810, Nov. 2009.
+[20] T. Byrnes, N. Y. Kim, and Y. Yamamoto, “Exciton-
+polariton condensates,” Nature Physics, vol. 10, pp. 803–
+813, Nov. 2014.
+[21] J. D. Plumhof, T. Stferle, L. Mai, U. Scherf, and R. F.
+Mahrt, “Room-temperature Bose-Einstein condensation
+of cavity exciton-polaritons in a polymer,” Nature Ma-
+terials, vol. 13, pp. 247–252, Mar. 2014.
+[22] X. Liu, T. Galfsky, Z. Sun, F. Xia, E.-c. Lin, Y.-H. Lee,
+S. K´ena-Cohen, and V. M. Menon, “Strong light-matter
+coupling in two-dimensional atomic crystals,” Nature Pho-
+tonics, vol. 9, pp. 30–34, Jan. 2015.
+[23] S. Schwarz, S. Duﬀerwiel, P. M. Walker, F. Withers,
+A. A. P. Trichet, M. Sich, F. Li, E. A. Chekhovich, D. N.
+Borisenko, N. N. Kolesnikov, K. S. Novoselov, M. S. Skol-
+nick, J. M. Smith, D. N. Krizhanovskii, and A. I. Tar-
+takovskii, “Two-Dimensional Metal-Chalcogenide Films in
+Tunable Optical Microcavities,” Nano Letters, vol. 14,
+pp. 7003–7008, Dec. 2014.
+[24] S. Duﬀerwiel, S. Schwarz, F. Withers, A. a. P. Trichet,
+F. Li, M. Sich, O. Del Pozo-Zamudio, C. Clark, A. Nal-
+itov, D. D. Solnyshkov, G. Malpuech, K. S. Novoselov,
+J. M. Smith, M. S. Skolnick, D. N. Krizhanovskii, and
+A. I. Tartakovskii, “Exciton-polaritons in van der Waals
+heterostructures embedded in tunable microcavities,” Na-
+ture Communications, vol. 6, p. 8579, Oct. 2015.
+[25] V. Savona, L. C. Andreani, P. Schwendimann, and
+A. Quattropani, “Quantum well excitons in semiconduc-
+tor microcavities: Uniﬁed treatment of weak and strong
+coupling regimes,” Solid State Communications, vol. 93,
+pp. 733–739, Mar. 1995.
+[26] A. Kavokin, J. J. Baumberg, G. Malpuech, and F. P.
+Laussy, Microcavities. Oxford ; New York: OUP Oxford,
+revised ed. edition ed., Apr. 2011.
+[27] Y. Li, A. Chernikov, X. Zhang, A. Rigosi, H. M. Hill,
+A. M. van der Zande, D. A. Chenet, E.-M. Shih, J. Hone,
+and T. F. Heinz, “Measurement of the optical dielectric
+function of monolayer transition-metal dichalcogenides:
+MoS2, MoSe2,WS2 and WSe2,” Physical Review B, vol. 90,
+p. 205422, Nov. 2014.
+[28] P. Michetti, L. Mazza, and G. C. L. Rocca, “Strongly
+Coupled Organic Microcavities,” in Organic Nanopho-
+tonics (Y. S. Zhao, ed.), Nano-Optics and Nanophoton-
+ics, pp. 39–68, Springer Berlin Heidelberg, 2015.
+DOI:
+10.1007/978-3-662-45082-6 2.
+[29] D. M. Coles, P. Michetti, C. Clark, W. C. Tsoi, A. M.
+Adawi, J.-S. Kim, and D. G. Lidzey, “Vibrationally As-
+sisted Polariton-Relaxation Processes in Strongly Coupled
+Organic-Semiconductor Microcavities,” Advanced Func-
+tional Materials, vol. 21, pp. 3691–3696, Oct. 2011.
+[30] D. M. Coles, N. Somaschi, P. Michetti, C. Clark, P. G.
+Lagoudakis, P. G. Savvidis, and D. G. Lidzey, “Polariton-
+mediated energy transfer between organic dyes in a
+strongly coupled optical microcavity,” Nature Materials,
+vol. 13, pp. 712–719, July 2014.
+[31] P. Michetti and G. C. La Rocca, “Exciton-phonon scat-
+tering and photoexcitation dynamics in J-aggregate mi-
+crocavities,” Physical Review B, vol. 79, p. 035325, Jan.
+2009.
+[32] M. Sidler, P. Back, O. Cotlet, A. Srivastava, T. Fink,
+M. Kroner, E. Demler, and A. Imamo˘glu, “Fermi polaron-
+polaritons in charge-tunable atomically thin semiconduc-
+tors,” arXiv:1603.09215 [cond-mat], Mar. 2016.
+arXiv:
+1603.09215.
+[33] L. Yuan and L. Huang, “Exciton dynamics and anni-
+hilation in WS2 2D semiconductors,” Nanoscale, vol. 7,
+pp. 7402–7408, Apr. 2015.
+[34] N. Lundt, S. Klembt, E. Cherotchenko, O. Iﬀ, A. V. Nal-
+itov, M. Klaas, S. Betzold, C. P. Dietrich, A. V. Kavokin,
+S. H¨oﬂing, and C. Schneider, “Room temperature Tamm-
+Plasmon Exciton-Polaritons with a WSe2 monolayer,”
+arXiv:1604.03916 [cond-mat, physics:physics], Apr. 2016.
+arXiv: 1604.03916.
+[35] S. Wang, S. Li, T. Chervy, A. Shalabney, S. Azzini,
+E. Orgiu, J. A. Hutchison, C. Genet, P. Samor, and T. W.
+Ebbesen, “Coherent Coupling of WS2 Monolayers with
+Metallic Photonic Nanostructures at Room Temperature,”
+Nano Letters, vol. 16, pp. 4368–4374, July 2016.
+
+1
+Supplemental Materials: Room-temperature exciton-polaritons with two-dimensional
+WS2
+Appendix A: Details of experimental setup
+The DBR mirror consists of 10 pairs of SiO2, TiO2 with refractive indices 1.45 and 2.05 respectively and the
+stopband is centered around λ = 637 nm.
+The small mirror is produced by removing large areas of a ﬂat silica
+substrate with a dicer to create a 200 × 300 µm2 plinth made semi-reﬂective by thermally evaporating a 50 nm thick
+silver layer with a reﬂectivity of R = 95%. It is mounted on a three-dimensional piezo-actuated stage, which makes
+electronic positioning of the silver mirror relative to the WS2 ﬂake possible. To initialise the cavity white light from a
+light emitting diode is shone through the mirrors while reducing the separation. With the help of Fabry-Perot fringes
+visible for small mirror separations (L < 20 µm) the substrates are made parallel within 150 µrad. Optical access
+to the sample is given by a standard ×10 objective lens and the collected light is focused on an Andor combined
+spectrograph/CCD with a 300 grooves/mm grating. For the photoluminescence experiment the sample is excited
+with a PicoQuant D-C-470 laser with λ = 473 nm at power densities around ρexc = 1500 W
+cm2 .
+Appendix B: Derivation of analytic expression for Rabi splitting
+1.
+Transfer matrices
+Maxwell’s equation in a spatially homogeneous medium with refractive index n reduce to
+∇2⃗E + k2n2⃗E = 0
+(S1)
+with the vacuum wavenumber k = 2π
+λ . In particular we get ∂2
+zE = −k2n2E for the ﬁeld amplitude in z-direction. A
+general form of the solution for waves in this direction is
+E(z) = A+einkz + A−e−inkz
+(S2)
+A+ and A−are the amplitudes of forward and backward travelling waves. For the transition from a medium with
+refractive index n1 to one with n2 we can deﬁne the amplitude reﬂection and transmission coeﬃcients:
+r = A−
+1
+A+
+1
+&
+t = A+
+2
+A+
+1
+(S3)
+To solve the boundary conditions for multiple interfaces it is convenient to deﬁne a transfer matrix T, which propagates
+the wave across a homogeneous layer. The analytic form of such a matrix can be obtained after chosing a convenient
+basis set. One possibility is to deﬁne the vector [S1]
+Φ(z) =
+
+E(z)
+1
+ik∂zE(z)
+
+(S4)
+A matrix that enforces the propagation through a layer with refractive index n and thickness a, TaΦ|z=0 = Φ|z=a has
+the form
+Ta =
+
+cos(nka)
+i
+n sin(nka)
+in sin(nka)
+cos(nka)
+
+(S5)
+2.
+Application to dispersive medium in planar cavity
+We reduce the problem of ﬁnding the resonant modes in the cavity to ﬁnding the amplitude reﬂection coeﬃcient r
+as deﬁned in Fig. S1. Having found r we can compute the cavity dispersion by solving (kc = nck)
+ cos(kcL)
+i
+nc sin(kcL)
+inc sin(kcL)
+cos(kcL)
+ 
+1 + r1
+nc(r1 −1)
+
+= A
+
+1 + r
+nc(1 −r)
+
+(S6)
+
+2
+FIG. S1. A thin dispersive medium inside a planar microcavity. Schematics of planar cavity with mirror separation
+L + d and refractive index nc for the cavity medium and nw for the thin dispersive medium. The arrows give the amplitudes
+of forwards and backwards propagating waves as introduced in the text.
+The choice of coeﬃcients for the vectors on each side of the cavity ensures the correct reﬂection conditions, i.e.
+attenuation and phase jump. Eliminating A we obtain
+r1rei2kcL = 1
+(S7)
+For ideal dielectric mirrors we would have r1 = r = 1 and thus the well known Fabry-Perot resonance condition
+kcL = πq emerges, q being an integer. Now the problem is reduced to ﬁnding r. Taking the right side of the sketch
+in Fig. S1 we can start with (kw = nwk)
+
+cos(kwd)
+i
+nw sin(kwd)
+inw sin(kwd)
+cos(kwd)
+ 
+1 + r
+nc(1 −r)
+
+= A
+
+1 + r2
+nw(1 −r2)
+
+(S8)
+Eliminating A and solving for r we get:
+r = nc −nw + ei2kwd(nc + nw)r2
+nc + nw + ei2kwd(nc −nw)r2
+(S9)
+This expression is further reducible if we assume a certain form for r2. A suitable choice would be the reﬂection
+coeﬃcient for a distributed Bragg reﬂector rDBR or metallic mirror rMet (derived in [S1]):
+rDBR =
+√
+Rei(k−kDBR) LDBR
+nw
+&
+rMet = nw −nm
+nw + nm
+(S10)
+Here R is the mirror reﬂectivity, LDBR =
+nanbλDBR
+2(nb−na) is the eﬀective length of the DBR, with λDBR the central
+wavelength, kDBR =
+2π
+λDBR and nm the complex refractive index of the metal.
+If we assume a perfect dielectric
+reﬂector (r2 = 1) we obtain:
+r = nc cos(kwd) + inw sin(kwd)
+nc cos(kwd) −inw sin(kwd)
+(S11)
+Substituting this expression into Eq. S7, assuming a thin layer (|kwd| << 1) and setting r1 = 1 we obtain:
+nc sin(kcL) + nwkwd cos(kcL) = 0
+(S12)
+Evaluating this expression close to the cavity mode resonance (cos(kcL) ≈1, sin(kcL) ≈nc(k −kp)L, with kp being
+the wavenumber on resonance) we get to the succinct expression:
+n2
+c(k −kp)L + n2
+wkd = 0
+(S13)
+Now we want to substitute in nw, the complex refractive index of the dispersive thin layer, and ﬁnd the dispersion
+of the resonant modes. The dielectric function of a system of Lorentz oscillators as derived from solving the optical
+Bloch equations can be written as [S2]
+ε(k) = εB −
+W
+c(k −kx) + iγx
+(S14)
+
+3
+where W is proportional to the oscillator strength of the material, kx is the wavenumber of the oscillator resonance
+and γx is the oscillator HWHM linewidth. The relation between W and microscopic material parameters is derived
+in [S3] and reads
+W = Nµ2
+3ε0ℏV
+(S15)
+with N
+V the number of oscillators per volume and µ the transition dipole moment for a single oscillator. From now on
+we set ℏ= c = 1. Putting nw =
+p
+ε(k) into Eq. S13 we obtain:
+n2
+c(k −kp + iγp)L +
+
+εB −
+W
+k −kx + iγx
+
+kd = 0
+(S16)
+At this stage we have included a term iγp for the ﬁnite linewidth of the cavity mode. Of course this is artiﬁcal at
+this point and we will derive γp in terms of the reﬂectivity R of the mirrors later. We assume that k varies little over
+the extent of the thin dispersive layer, in other words the factor kd is constant (kd = kdd). We can then solve the
+equation for k and ﬁnd by neglecting higher orders in d:
+k1,2 = 1
+2 (kp + kx −i(γp + γx)) ±
+s
+Wkdd
+Ln2c
++ 1
+4(kp −kx + i(γx −γp))2)
+(S17)
+If the radicand is positive, these are the solutions for the two polariton branches. Commonly one sets V 2 = W kdd
+Ln2c ,
+evaluates the system on resonance (kp = kx) and compares the terms of the radicand. Then 2V < |γx −γp| marks the
+weak coupling regime, in which no mode splitting occurs and 2V > |γx −γp| falls into the strong coupling regime with
+ﬁnite normal mode splitting. Note that the Rabi splitting Ω= 2
+q
+V 2 −1
+4(γx −γp)2) only follows V if the linewidths
+can be neglected in the radicand. As well note that a system given by two coupled, damped oscillators as:
+(k −kp + iγp)(k −kx + iγx) = V 2
+(S18)
+has solutions of the form Eq. S17 with V as given above.
+Now the question is, what shape the artiﬁcially introduced cavity linewidth γp has in terms of the mirror reﬂectivity.
+To this end we set r1 =
+√
+R and follow the above procedure again. We ﬁnd lengthy solutions for k1,2 in which we can
+identify
+γp = 1 −
+√
+R
+√
+R
+1
+2ncL
+V 2 = kddW
+4n2cL
+ 
+3 +
+√
+R
+√
+R
++ 2Lncγx
+!
++
+ kddϵB
+2Ln2c
+√
+R
+2
+= 1 +
+√
+R
+√
+R
+kddW
+2n2cL + kddW
+2nc
+(γp + γx) +
+ kddϵB
+2Ln2c
+√
+R
+2
+(S19)
+In this we have neglected terms of higher order in d, except for one term proportional to ϵ2
+B, and assumed kddϵB ≪nc.
+Comparing these solutions with expressions found by Savona et al. [S4]
+γpSav = 1 −
+√
+R
+√
+R
+1
+ncL
+&
+V 2
+Sav = 1 +
+√
+R
+√
+R
+Γ0
+ncL
+(S20)
+we identify a few diﬀerences. Here Γ0 is proportional to the oscillator strength of the quantum well. γp matches the
+published one, the diﬀerence in the denominator stems from the diﬀerent cavity geometry. The published form of
+V 2 lacks the two last terms in our truncated solution [S1, S4]. The ﬁrst correction term kddW
+2nc (γp + γx)is small for
+small linewidths γp + γx ≪
+2c
+ncL, but for room temperature polariton applications it becomes sizable. In our case it
+corrects the value for V 2 by 7% for L = 1 µm and by 25% for L = 4 µm. The second term
+
+kddϵB
+2Ln2
+c
+√
+R
+2
+is small for
+large cavity lengths and low refractive indices of the thin dispersive medium, i.e. for kddϵ2
+B
+4Ln2c ≪W. In our case, where
+ϵB = 21 is large [S5], it adds about 28% for L = 1 µm and 7% for L = 4 µm to the value of V 2 (see Fig. S2 inset).
+
+4
+Fig. S2 shows the diﬀerence of these expressions. The black dashed line shows Ω∝
+1
+√
+L, the blue continuous line
+depicts the analytic solution without truncation of terms in higher order of d, the red dashed line corresponds to our
+truncated solutions from Eq. S19 and the yellow dashed line shows the solution from Savona et al. [S4] (Eq. S20).
+Parameters are chosen as for the ﬁt to our data. In particular we chose W = 21γx = 588 meV. We have included the
+experimental data from one position from the main text to demonstrate the diﬀerence in slope and magnitude to the
+solution given by Eq. S20. Note that our model predicts a larger coupling for small cavity lengths, in particular we
+estimate a Rabi splitting of ≈180 meV for a L = λ
+2 = 310 nm cavity.
+FIG. S2. Rabi splitting Ωas obtained by diﬀerent analytical expressions. The black dashed line shows Ω∝
+1
+√
+L,
+the blue continuous line depicts the analytic solution without truncation of terms in higher order of d, the red dashed line
+corresponds to our truncated solutions from Eq. S19, the yellow dashed line shows the solution from Savona et al. [S4] (Eq.
+S20). The green dots are experimental values as presented in the main text. Parameters have the numeric value: ϵB = 20,
+γx = 28 meV, R = 0.95, kx = 2 eV, kp = 2 eV, d = 0.8 nm, nc = 1, W = 21γx (see [S5] for choice of ϵB & W).
+
+5
+Appendix C: Equivalence between phenomenological Hamiltonian and TMM approach for description of
+polariton dispersion
+In this work we have used two diﬀerent descriptions for the strongly coupled system of a cavity mode and the
+monolayer of WS2. Here we show the equivalence between both descriptions.
+In the main text we have limited our description to a single cavity mode with energy Ec and a single exciton state
+Ex, coupled by a phenomenologically introduced interaction with strength ℏΩRabi
+2
+. The system given by Eq. (1) is
+solved by using the Hopﬁeld transformation resulting in mixed cavity-exciton states with lower and upper polariton
+operators. Eq. (2) describes the same system in a basis representation, here in the basis of cavity mode |α⟩and
+exciton state |β⟩. The eigenvalues of this matrix are given by:
+E1,2 = 1
+2(Ecav + Eexc) + 1
+2
+q
+(Ecav −Eexc)2 + Ω2
+Rabi
+(S21)
+which is equivalent to Eq. S17 when neglecting the linewidths of both systems. Indeed the relation ΩRabi = 2V
+is motivated by this equivalence. We thus see, that both the phenomenological Hamiltonian in Eq. (1) and the
+TMM approach, which is based on classical electromagnetism and a simple oscillator model, results in the same
+dispersion. Other parameters, such as the polariton linewidths, are only explained by the classical model. For a more
+extensive description of strongly coupled systems we point the reader to the literature: Kavokin and coworkers give
+a comprehensive review of polariton formation within the framework of three diﬀerent formalisms: the classical, the
+semiclassical and the full quantum description [S1]. Savona et. al. have described the polariton formation in quantum
+well microcavities with both a semiclassical TMM approach and a quantum theoretical approach [S4]. Equations from
+both approaches (Eq. (7) and (10) in Ref. [S4]) give the same result which we have found in Eq. S18. While Savona
+et al. start oﬀby supposing quantised radiation modes in their Hamiltonian Eq. (8) in Ref. [S4], a more rigorous
+derivation entailing quantisation of both the photon ﬁeld and the exciton state is given by Gerace et al. [S6].
+[S1] A. Kavokin, J. J. Baumberg, G. Malpuech, and F. P. Laussy, Microcavities. Oxford ; New York: OUP Oxford, revised ed.
+edition ed., Apr. 2011.
+[S2] G. Khitrova, H. M. Gibbs, F. Jahnke, M. Kira, and S. W. Koch, “Nonlinear optics of normal-mode-coupling semiconductor
+microcavities,” Reviews of Modern Physics, vol. 71, pp. 1591–1639, Oct. 1999.
+[S3] R. Loudon, The Quantum Theory of Light. Also available as: Hardback laminated boards | eBook, third ed., Sept. 2000.
+[S4] V. Savona, L. C. Andreani, P. Schwendimann, and A. Quattropani, “Quantum well excitons in semiconductor microcavities:
+Uniﬁed treatment of weak and strong coupling regimes,” Solid State Communications, vol. 93, pp. 733–739, Mar. 1995.
+[S5] Y. Li, A. Chernikov, X. Zhang, A. Rigosi, H. M. Hill, A. M. van der Zande, D. A. Chenet, E.-M. Shih, J. Hone, and T. F.
+Heinz, “Measurement of the optical dielectric function of monolayer transition-metal dichalcogenides: MoS2, MoSe2,WS2
+and WSe2,” Physical Review B, vol. 90, p. 205422, Nov. 2014.
+[S6] D. Gerace and L. C. Andreani, “Quantum theory of exciton-photon coupling in photonic crystal slabs with embedded
+quantum wells,” Physical Review B, vol. 75, p. 235325, June 2007.

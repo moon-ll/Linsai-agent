@@ -1,0 +1,75 @@
+{
+  "gaps": [
+    {
+      "claim": "国内强场超快/阿秒/瞬态量子相方向的系统性综述（理论/实验/方法）",
+      "missing_evidence": "缺国内代表性课题组与代表性装置平台的嵌入引用：理论（TDDFT/SBE 课题组层级代表成果）、实验（中红外强场+阿秒装置代表平台）、方法（相位检索布局）三块均无[N]支撑",
+      "search_keywords": [
+        "固体高次谐波 中国 实验组",
+        "阿秒科学 国内 代表性工作",
+        "瞬态量子相 超快光学 国内",
+        "solid-state high harmonic generation China group",
+        "attosecond science Chinese research team"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Wang 等 2013 年拓扑绝缘体表面 Floquet-Bloch 态观测、Rudner 与 Lindner 综述、McIver 2020 石墨烯光致反常霍尔效应（§2.2 三连分号句）",
+      "missing_evidence": "三句均为编号罗列堆砌，缺乏嵌入式论证；需补充每条'于何体系用何手段发现何效应'的具体支撑文献",
+      "search_keywords": [
+        "Wang Floquet-Bloch topological insulator surface 2013",
+        "Rudner Lindner Floquet topological phase review",
+        "McIver graphene light-induced anomalous Hall effect 2020",
+        "Floquet sideband topological surface state",
+        "photoinduced Hall effect graphene Dirac"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.3 Batistas/Sufyan/Mokhtari/Hu/Ilin 等五连分号句的机制证据与量子光学约束",
+      "missing_evidence": "缺乏按'机制证据→量子光学约束→解相干干扰'三组的嵌入式引用，每组物理关联需具体文献支撑",
+      "search_keywords": [
+        "transient quantum phase decoherence mechanism",
+        "quantum optical constraint transient phase",
+        "attosecond quantum phase control experimental",
+        "Floquet dephasing solid HHG",
+        "subcycle decoherence measurement"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "强场固体的超快相位检索已有方法学布局[34]",
+      "missing_evidence": "§2.4 概念句句尾挂编号、无作者无动作无载体；缺方法学布局的具体代表团队/装置/算法引用",
+      "search_keywords": [
+        "ultrafast phase retrieval solid high harmonic method",
+        "attosecond transient absorption spectroscopy phase retrieval",
+        "CEP scan phase reconstruction method",
+        "transient absorption phase extraction",
+        "attosecond pulse phase measurement scheme"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "国内现状代表性工作的系统性综述（key 项目类型核心要求，权重 0.27）",
+      "missing_evidence": "rationale §2.4 国内现状仅 80 字一段，无代表性工作与[N]支撑；缺理论/实验/方法三块国内团队层面的嵌入引用",
+      "search_keywords": [
+        "国内 强场超快 代表性 课题组",
+        "中红外 阿秒 装置 国内",
+        "瞬态相位 检索 国内",
+        "TDDFT semiconductor Bloch equation China group",
+        "attosecond transient absorption spectroscopy Chinese group"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Cousin 等 2017 PRX 322 as 水窗阿秒脉冲实验（参考文献[5]）",
+      "missing_evidence": "评审提到参考文献 [41] Chacón PRB 102 134115 圆二色拓扑为全表唯一零引用条目，但未识别水窗 322 as 实验的具体引用支撑是否充分",
+      "search_keywords": [
+        "Cousin attosecond streaking water window 322 as Phys Rev X 2017",
+        "water window attosecond pulse reconstruction experimental",
+        "322 attosecond pulse water window measurement"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "rationale"
+}

@@ -1,0 +1,518 @@
+# 对抗评审报告（第 6 轮 · 研究内容段落级深审）
+
+## 元信息
+- 申请书：altermagnet HHG 序参量可辨识性研究（面上项目）
+- 项目类型：general（面上项目）
+- 审查日期：2026-08-21
+- profile：critic（NSFC 红队）
+- 本轮聚焦章节：（二）研究内容（content.md 全文 71 行、7618 字、6 子节）
+- 辅助范围：rationale.md（L31—L33 / L49 / L59 / L73 关键交叉引用）、references.md（L113—L139 §5/§6 编号表）、scheme.md（L13/L19/L35/L37 参数空间一致性）
+- 事实核实：本轮所有事实判断均基于当前文件实际读取（content.md 全文逐段扫描 + 跨章 [N] 编号反查 + LaTeX 公式字面字符读取），未依赖记忆
+
+---
+
+## 1. 综合评分
+
+0.73 / 1.00（按 general 项目类型 4 维度加权评分；评分依据见 §3）
+
+| 维度       | 权重 | 得分 | 主要依据 |
+|------------|------|------|---------|
+| 创新性     | 0.30 | 0.85 | R1/R2/R3 单向递进结构 + 费舍尔信息矩阵条件数与贝叶斯后验双判据 + MnTe 备选切换判据三重方法学增量 |
+| 可行性     | 0.25 | 0.78 | 主体系 CrSb、对照体系 TiSe₂、可辨识性判据三层均有先例文献支撑；但 content.md 未给预研数据，CrSb 1% 信号阈值依据仅以"差分信号须大于背景漂移的典型标准差"陈述，未给数值 |
+| 严谨性     | 0.25 | 0.55 | **核心降档因子**：① 跨章 [N] 编号 critical 错配（content.md L21/L55 用 [68] 标 Rost，但 references.md [68] = Weber；content.md L55 用 [65] 标 Fuchs 但 references.md [64] = Fuchs）— 3 处 critical 错配叠加；② content.md 内 LaTeX 公式双反斜杠错误（`\\frac` / `\\sigma` / `\\kappa` 等）属格式错位，渲染失败；③ κ 表达形式跨章不一致（content.md LaTeX `\kappa < 10^2` vs rationale.md / scheme.md Unicode `κ < 10²`）属 `consistency_check` 红线；④ §2.4 L33 与 L41 同一论证重复出现（"三类参数物理独立性"两次） |
+| 表达质量   | 0.20 | 0.74 | 去 AI 化彻底：0 处"在此基础上/此外/与此同时/基于此/然而"、0 处"为…提供…"模板、3 处超长句（其中 1 处为 LaTeX 公式正文长度不可拆）；但 §2.5 用（一）（二）（三）三段列表结构近似条目式 + §2.4 L33/L41 重复论证 + 关键 R3 论证密度偏高（2525 字 / 40 句，avg 62.7 字/句），单章负担过重——锚点对比结论"基本接近" → 表达质量上限 0.79 |
+| **综合评分** | 1.00 | **0.74** | 0.85×0.30 + 0.78×0.25 + 0.55×0.25 + 0.74×0.20 = 0.255 + 0.195 + 0.1375 + 0.148 = 0.7355 ≈ 0.74；按 v6.9.25 锚点结论=基本接近 → 综合 ≤ 0.89 内 |
+
+**评分依据摘要**：本轮聚焦 content.md 段落级深审，发现 4 项 critical [N] 编号错配（content.md L21/L23/L55 共 3 处 + 跨章与 references.md 冲突 4 处）+ 1 项 critical LaTeX 公式双反斜杠格式错误（L37 公式 + L39/L45/L57/L67 κ 表达式）——属评审红线级 P0 问题；按 `scoring_rubric.dimensions.rigor.0.60-0.69` 档位（"论证有明显缺陷，存在事实错误、指标矛盾、或关键论证环节缺失"），严谨性降至 0.55。综合 0.74 未达 general 项目 min_overall_score 0.85 输出标准。
+
+---
+
+## 2. 执行清单对照
+
+逐条对照 prompt 中执行清单（0—8 共 9 项），每项给出"通过/不通过"判断：
+
+### 0. 模块完整性检查
+- **基本通过**。sections/ 下含 rationale.md（81 行）/ content.md（71 行）/ scheme.md（114 行）/ references.md（186 行），构成完整三段式（立项依据 + 研究内容 + 研究方案）+ 参考文献。聚焦章节 content.md 含 §2.1 总框架 + §2.2/2.3/2.4 三方向（R1/R2/R3）+ §2.5 特色创新 + §2.6 年度计划，共 6 节，结构完整。属 P3 建议（content.md 未含"关键科学问题"独立小节，与 section_standards.content 的"研究内容含总述段+2-3个分方向+研究目标+关键科学问题"中"关键科学问题"略偏离——但关键科学问题在 rationale.md §3 已凝练，本章以回引方式承接，结构合理）。
+
+### 1. 读取申请书 + 质量标准
+- **通过**。已读取 content.md 全文 71 行（7618 字）+ nsfc-standards.json 完整字段（含 reference_materials.style_benchmark / reference_materials.benchmark_anchors / general_principles.writing_style_rules / general_principles.anti_ai_patterns / general_principles.indicator_red_lines / general_principles.scoring_rubric / section_standards.content / project_types.general 全字段）+ rationale.md 全文 + scheme.md 全文 + references.md 全文。
+
+### 2. 逐条对照执行清单
+- **通过**。本节即为对照结果。
+
+### 3. 锚点对比
+- **通过**。详见 §6 锚点对比段（含 3 处结构化引用 + 差距分析 + 末尾"锚点对比结论：基本接近"明确行）。
+
+### 4. 程序化 AI 检测结果纳入
+- **通过**。详见 §5 写作风格评估段（关联词：因此 1 / 同时 2 / 然而 0 / 在此基础上 0 / 此外 0 / 与此同时 0 / 基于此 0；冗余修饰词：系统 1 / 关键 1；超长句 3 句均承担实质论证；为...提供... 模板 1 处）。
+
+### 5. 按项目类型红队评审
+- **通过**。详见 §4 分段级深审 + §7 问题清单（共 9 个问题：critical 3 / high 3 / medium 2 / low 1）。
+
+### 6. 重点检查写作风格（叙事违规标记）
+- **通过**。content.md 主体为连贯叙述式：§2.1—§2.4 用 R1→R2→R3 递进结构组织论证，§2.5 三个创新点用"现有局限→本项目方案→量化优势→定位收束"四步闭环；无"A 做了 X，B 做了 Y，C 做了 Z"式文献堆砌。唯一例外：§2.6 年度研究计划按"第 1 年 / 第 2 年 / 第 3 年 / 第 4 年"顺序罗列——属范本允许的平行结构（NSFC 模板要求 4 年分年度安排）。
+
+### 7. 每个问题标注 rubric 条款 + 可执行修改建议
+- **通过**。§7 问题清单每条均含 rubric 条款编号（如 `scoring_rubric.dimensions.rigor.<0.6` / `scoring_rubric.dimensions.expression`）+ `general_principles.indicator_red_lines.consistency_check` + 具体段落行号定位 + 可执行 action（rewrite / verify / research / recalculate）。
+
+### 8. 按严重度分级（critical/high/medium/low）
+- **通过**。§7 共 9 个问题，分布为 critical 3 / high 3 / medium 2 / low 1。
+
+---
+
+## 3. 评分依据（按 general 项目 4 维度）
+
+### 3.1 创新性（0.85）
+档位依据：`scoring_rubric.dimensions.innovation.0.80-0.89`——"选题有明确创新点，在已有方向上提出新视角/新方法/新机制，与前人有清晰区隔"。
+- content.md 把可证伪判据拆成三个层次（§2.1 L5：方法学对照 / 信号探测 / 唯一归因），对应 §2.2 R1 / §2.3 R2 / §2.4 R3 的单向递进——这是与现有 HHG 文献群（Fuchs 2025 [64]、Rost 2025 [67]、Cheng 2026 [31]）清晰区隔的方法学增量。
+- 费舍尔信息矩阵条件数 κ + 贝叶斯后验分布 p(θ|D) ∝ p(D|θ)p(θ) + No-Go 判据的三联工具是 R3 的方法学核心，对接 Cochran [62] 唯一性 + Sørensen [63] 非唯一性 + Murakami [16] 多通道混合三层方法学锚点。
+- MnTe 备选切换判据（差分 < 1% 或反射率 > 5%）提供 Yes-Go / No-Go 双重判定，区分于现有工作"信号存在性"展示的单线目标。
+- §2.5（一）（二）（三）三段创新点对应"现有局限→本项目方案→量化优势→定位收束"四步闭环（如第（二）点：现有工作的"信号展示"局限 → 多带 SBE + FIM + 贝叶斯 + No-Go 四工具 → κ<10² / 50% 后验宽度 / No-Go 触发条件定量边界 → 与 Cochran [62] / Sørensen [63] 对接的"何时归属、何时报告 No-Go"分叉规则）。
+
+### 3.2 可行性（0.78）
+档位依据：`scoring_rubric.dimensions.feasibility.0.70-0.79`——"基本可行但存在风险点，部分关键技术缺少预研验证，需补充可行性论证"。
+- 主体系 CrSb 有 [67] Rost 实验先例支撑（content.md L21）；对照体系 TiSe₂ 有 [11] Tyulnev + [12] Zhang 双重证据链（L13、L15）；可辨识性判据有 [62] Cochran + [63] Sørensen 方法学支撑（L43）。
+- **风险点**：① content.md L25 给出 CrSb 信号判据"≥ 1% / SNR > 5"，但 1% 阈值依据仅以"差分信号须大于 CrSb 在本装置参数下背景漂移的典型标准差"陈述，未给"典型标准差"的实验测量值；② content.md §2.6 L65 给出"样品在 0.8 V/Å 附近反射率变化 > 5%"判据，但 0.8 V/Å 损伤阈值仅由 references.md §5 自陈"本项目前期预研测量结果"，未在 content.md 中独立支撑；③ R3 的 SBE 正演模型在 CrSb 上的可重复性未做独立验证（只在 TiSe₂ 上做方法学标定），存在迁移风险。
+
+### 3.3 严谨性（0.55）
+档位依据：`scoring_rubric.dimensions.rigor.0.60-0.69`——"论证有明显缺陷，存在事实错误、指标矛盾、或关键论证环节缺失"（按 v6.9.25 评分纪律，content.md 存在 3 项 [N] 编号 critical 错配 + 1 项 LaTeX 公式 critical 格式错误 + 1 项跨章 κ 表达一致性红线违反——3 项 critical 任一即触发严谨性 0.60-0.69 区间下沿，再加 1 项 consistency_check 红线，正触发"论证有明显缺陷"档位，硬扣至 0.55）。
+- **核心降档因子 1**：跨章 [N] 编号 critical 错配（content.md 内 3 处 + 与 references.md 跨章 3 处冲突）。
+  - content.md L21 "Rost 等人 [68]" — 应为 [67]（references.md L137 [67] = Rost）
+  - content.md L23 "McCarter 等人 [66] 与 Horstmann 等人 [67]" — 应为 [65] McCarter / [66] Horstmann
+  - content.md L55 "Fuchs 等人 [65]" — 应为 [64]（references.md L131 [64] = Fuchs）；"Rost 等人 [68]" — 应为 [67]
+  - 累计正文 [N] 与 references.md 编号冲突 5 处（同一论文被指 2 个不同 [N]，或 2 个不同论文被同一 [N] 标定），属评审红线级编号溯源失败。
+- **核心降档因子 2**：content.md 内 LaTeX 公式双反斜杠格式错误（L37 `$$F_{ij} = \\frac{...}$$` + L39/L45/L57/L67 中 `$\\sigma$`、`$\\kappa$`、`$\\theta$` 等）。
+  - LaTeX 渲染器将 `\\frac` 视为换行符而非法定命令 `\frac`，导致 F_{ij} 公式无法编译；L39 的 `$\\sigma$` 应为 `$\sigma$`、`$\\kappa$` 应为 `$\kappa$`，同理所有 \\ 均应改为 \。
+  - 影响：审稿人若将公式复制到 LaTeX 环境测试，将得到编译错误；申请书的方法学定量核心（F_{ij} 矩阵元素定义、κ 阈值判断、贝叶斯后验公式）以无效形式提交——属 [critical] formula_compile_error 红线。
+- **核心降档因子 3**：κ 表达形式跨章不一致（`consistency_check` 红线违反）。
+  - rationale.md L65、L77 用 Unicode 上标：`κ < 10²`、`κ > 10⁴`
+  - scheme.md L5、L13、L35、L41、L83、L93、L95、L103、L107 用 Unicode 上标：`κ < 10²`、`κ > 10⁴`
+  - content.md L39、L45、L57、L67 用 LaTeX `\kappa < 10^2`、`\kappa > 10^4`（且带 `$$` 公式环境）
+  - 同一物理量（条件数 κ 阈值）在三个章节用三种表达形式——属 `general_principles.indicator_red_lines.consistency_check` 红线（"同一指标在不同章节出现时数值与表述口径必须一致"）。
+- **次级降档因子 4**：content.md §2.4 L33 与 L41 同一论证重复。
+  - L33："偏振参数通过选择定则改变不同跃迁通道权重但不改变带间能隙；温度参数改变费米-Dirac 分布与晶格膨胀但不改变 SOC 强度；外磁场参数直接耦合磁矩其哈密顿项与 SOC 项对易而非耦合——这三条构成参数空间正交化的物理基础"
+  - L41："偏振参数通过选择定则改变不同跃迁通道的权重，但不改变能带本征能量；温度参数改变费米-Dirac 分布与晶格膨胀，但不改变 SOC 强度；外磁场参数直接耦合磁矩，其哈密顿量项与 SOC 项对易而非耦合。这三条构成参数空间正交化的物理基础"
+  - 两段论证 L33 在介绍三类参数定义时附带给出"非奇异性物理保证"，L41 在介绍雅可比矩阵满秩时再次给出同一论证——属 [medium] content_redundancy + 部分"非循环论证"自陈与第一次给出时的论证链割裂。
+
+### 3.4 表达质量（0.74）
+档位依据：`scoring_rubric.dimensions.expression.0.70-0.79`——"表达一般，有一定比例的模板套话或 AI 痕迹，部分段落逻辑松散"（按 v6.9.25 评分纪律锚点对比结论=基本接近 → 表达质量上限 0.79，本轮按 R3 论证密度偏高 + §2.4 L33/L41 重复论证 + §2.5 段落首空格的格式瑕疵 + 1 处"为...提供..."模板叠加，下调至 0.74）。
+- 0 处"在此基础上/此外/与此同时/基于此/然而"、0 处"具有决定性意义/迈向新的高度"、0 处"本项目拟/本项目将" 句首滥用——去 AI 化彻底，未触发 0.6-0.7 扣档红线。
+- 1 处"为...提供..."模板（L59 "为光学手段捕获对称性敏感信号的可行性"）——未达 15 次系统扣档阈值，不触发红线。
+- 3 处超长句（>120 字）：L5（135 字）/ L37（247 字 LaTeX 公式不可拆）/ L39（126 字）——其中 2 处为公式表达段落实质承担论证载荷，非空洞概括，符合范本允许的 12-28% 超长句密度。
+- §2.5 用"（一）科学问题层面 / （二）方法学层面 / （三）对照体系层面"三段列举——属范本要求的并列结构，但段首与编号之间有空格（"（一）科学问题层面的可证伪定位。 "）影响视觉对齐，属 [low] format_artifact。
+- §2.4 单章 2525 字 / 40 句，avg 62.7 字/句——略高于范本 avg 56 字/句，单章负担过重；其中 L33—L47 是 R3 论证核心，承载 F_{ij} 矩阵定义、贝叶斯反演公式、No-Go 触发条件等多重负载**但**未分段——属内容分布不均。
+
+---
+
+## 4. 分段级深审（content.md §2.1—§2.6）
+
+### §2.1 主问题的三重可证伪口径与研究内容框架（L1—L9）
+
+**作者声称**：
+- 可证伪判据分三层：方法学对照（TiSe₂ 复现）/ 信号探测（CrSb ≥ 1% + SNR > 5）/ 唯一归因（FIM κ + 贝叶斯后验）
+- R1 → R2 → R3 单向递进：R1 复现未通过的，不进入 R2；R2 信号未达阈值的，转而界定边界或触发 MnTe 备选；只有 R2 给出信号且信号进入 R3，才触发唯一归因分析或 No-Go 边界
+- 与立项依据一致，不承诺覆盖超导涨落、激子凝聚、多序共存等其他序参量类型
+
+**已被前几轮 fix**：
+- ✅ 三层判据均给量化数值：TiSe₂ ≤ 10% / CrSb ≥ 1% SNR > 5 / κ < 10² + σ_post < 50%
+- ✅ R1→R2→R3 单向递进规则明确：每一环节不通过即停止
+- ✅ MnTe 备选切换判据具体：差分 < 1% 或反射率 > 5%
+
+**本轮新增问题**：
+- [low] L5 "在费舍尔信息矩阵条件数 κ 与贝叶斯后验标准差的双重判据下"——κ 符号在正文混用 Unicode `κ`（L5）和 LaTeX `$\kappa$`（L39、L45、L57、L67），属 `consistency_check` 红线。
+
+### §2.2 研究内容 R1：TiSe₂ CDW 对照体系上的方法学标定（L11—L17）
+
+**作者声称**：
+- R1 把"HHG 偏振指纹"作为标定尺，先在有实验 + 理论双源证据的 TiSe₂ 上跑通正演—反演流程
+- 自建装置参数：低温 4—300 K、外磁场 0—7 T、pump-probe 抖动 < 50 fs
+- 复现判据：[11] Tyulnev + [12] Zhang 双源数据偏振不对称方向重合、幅度偏差 ≤ 10%（基于 Tyulnev ±8% 实验不确定度 + 2% 工程余量）
+- 205 K 附近温度扫描加密到 0.5 K 步长
+- R1 产物不是新物理，而是把"复现能力"这一方法学资本转移到 R2、R3
+- R1 的逻辑功能：把"对序参量相关对称性敏感"与"对序参量大小的直接度量"明确区分
+
+**已被前几轮 fix**：
+- ✅ 双源证据链（[11] Tyulnev 实验 + [12] Zhang 理论）作为对照体系方法学标定的判据基础
+- ✅ 复现判据物理依据量化：Tyulnev ±8% + 2% 工程余量 = ≤ 10%
+- ✅ R1 的方法学资本转移逻辑明示：复现能力转移至 R2、R3
+
+**本轮新增问题**：
+- [high] **L13 "自建装置（低温 4—300 K、外磁场 0—7 T、pump-probe 抖动 < 50 fs）"** —— 这是**研究方案细节**（装置技术参数），按 `content_boundaries` 应归 scheme.md 而非 content.md。属 [high] boundary_violation。
+- [medium] L17 "R1 还承担一项贯穿全局的逻辑功能：把'对序参量相关对称性敏感'与'对序参量大小的直接度量'明确区分"——"贯穿全局"措辞略有修辞色彩，但实为具体逻辑功能表述，可接受。
+
+### §2.3 研究内容 R2：CrSb 主体系上的磁场反转差分探测与候选信号捕获（L19—L27）
+
+**作者声称**：
+- Néel 温度约 720 K 远高于可达温区，温度跨相变差分不可用
+- Rost 等人 [68] 在块体 CrSb 中观测到自旋分辨 HHG 材料特异指纹
+- Cheng 等人 2026 年 [31] 给出 CrSb 中光场亚周期尺度磁序调控的间接证据
+- 候选信号：Werner [24] 两极限预言（SOC 可忽略 → 偶次谐波依赖外磁场方向；SOC 充分强 → 高能峰/平台/圆二色性/自旋流谐波）；CrSb 中 Sb SOC 100—200 meV 落在中间区
+- Leeb [58a] + McCarter [66] + Horstmann [67] + Qiu [58b] 给出候选信号机制补充理论参照
+- 信号判据：偶次谐波或圆二色性相对强度 ≥ 1%、SNR > 5
+- 触发 MnTe 备选：实测 < 1% / 样品反射率变化 > 5% / 磁场切换驻留不稳定
+- R2 探测的信号仅"必要非充分"，唯一归因留给 R3
+
+**已被前几轮 fix**：
+- ✅ 信号判据具体化：≥ 1% + SNR > 5 + 反射率 5% 损伤阈值
+- ✅ SOC 连续过渡区明示：CrSb 100—200 meV 不在二元极限
+- ✅ "必要非充分"定位：R2 信号仅必要条件，唯一归因 R3
+
+**本轮新增问题**：
+- [critical] **L21 "Rost 等人 [68]" 编号错配**——应改为 [67]（references.md L137 [67] = Rost，L139 [68] = Weber）。属 `scoring_rubric.dimensions.rigor` 之"编号一致性" + `indicator_red_lines.consistency_check`。
+- [critical] **L23 "McCarter 等人 [66] 与 Horstmann 等人 [67]" 编号错配**——按正文 McCarter 与 Horstmann 的位置，应为 [65] McCarter + [66] Horstmann（references.md L133 [65] = McCarter，L135 [66] = Horstmann，[67] = Rost）。属同源 critical。
+- [medium] L23 "——这是关键的认识：SOC 的中间值不能简单地以'有无'二元处理，而须在连续参数空间中定位 CrSb 的实际位置"——"关键"系 anti_ai 红线列出的冗余修饰词之一，但全文仅出现 1 次（"关键" 计数 1），未触发系统扣档红线，属 [low] 修饰残留。
+
+### §2.4 研究内容 R3：序参量可辨识性分析与替代解释排除（L29—L49）
+
+**作者声称**：
+- R3 是方法学核心，连接 R1、R2 的分析枢纽
+- 参数空间分三类：能带参数（带内有效质量、带间跃迁偶极矩幅度、带内退相干时间）/ 序参量参数（d 波自旋分裂幅度 + Néel 矢量方向）/ SOC 参数（耦合强度因子 + 晶体场修正）——共 7—9 个子参数
+- 偏振—温度—磁场三重独立测量维度作为约束输入
+- FIM 矩阵元素定义：F_{ij} = (1/σ²) Σₖ ∂Sₖ(θ)/∂θᵢ · ∂Sₖ(θ)/∂θⱼ
+- 条件数 κ(F) 判据：κ < 10² 可辨识 / 10² < κ < 10⁴ 边缘 / κ > 10⁴ No-Go
+- 唯一性条件：Cochran [62] + Sørensen [63] + Murakami [16]
+- 贝叶斯反演：p(θ|D) ∝ p(D|θ) p(θ)，先验高斯分布、宽度 = 文献不确定度的 3 倍
+- 替代解释：能带各向异性效应（带边重整化、激子效应）在偏振变化下产生可区分谐波谱特征，与 altermagnet 自旋分裂效应在温度依赖性上存在差异
+- 变量设计：三类物理量相互独立（驱动参数 / 样品外参 / 时间变量）；CEP 与 OAM 不纳入核心反演模型
+
+**已被前几轮 fix**：
+- ✅ 条件数 κ 三档区间明确（< 10² / 10²—10⁴ / > 10⁴）
+- ✅ 贝叶斯后验判据：σ_post < σ_prior × 50% 单峰收敛 → 参数被有效约束
+- ✅ 替代解释排除的物理依据：能带背景在低温饱和、磁序响应在外磁场 Zeeman 劈裂
+- ✅ CEP/OAM 排除：Granados [35] 证明二者耦合，不能作独立约束
+
+**本轮新增问题**：
+- [critical] **L37 LaTeX 公式双反斜杠错误** ——"$$F_{ij} = \\frac{1}{\\sigma^2} \\sum_k \\frac{\\partial S_k(\\theta)}{\\partial \\theta_i} \\frac{\\partial S_k(\\theta)}{\\partial \\theta_j}$$"——`\\frac` 在 LaTeX 中是换行符而非法定命令 `\frac`，整条公式无法编译；`\\sigma` 同理。申请书的核心方法学定量公式（F_{ij} 矩阵定义）以无效形式提交。属 [critical] formula_compile_error。
+- [critical] **L39/L45/L57/L67 LaTeX 公式双反斜杠错误** —— `$\\sigma$` `$\\kappa$` `$\\theta$` 等均应为 `$\sigma$` `$\kappa$` `$\theta$`——所有 LaTeX 公式中的 `\\` 单字符命令实际是字面双反斜杠，无法渲染。属同源 critical。
+- [high] **κ 表达形式跨章不一致** —— content.md L39、L45、L57、L67 用 LaTeX `\kappa < 10^2` / `\kappa > 10^4`；rationale.md L65、L77 与 scheme.md L5、L13、L35、L41、L83、L93、L95、L103、L107 用 Unicode `κ < 10²` / `κ > 10⁴`。属 `indicator_red_lines.consistency_check` 红线。
+- [high] **L33 与 L41 同一论证重复** —— 两段均给出"偏振参数...不改变带间能隙 / 温度参数...不改变 SOC / 外磁场参数直接耦合磁矩与 SOC 对易"三条；"这三条构成参数空间正交化的物理基础"完全相同。属 [high] content_redundancy（论证层面）。
+- [medium] L33 与 L41 表述细微差异：L33 用"带间能隙"、L41 用"能带本征能量"——同一物理量（band eigenvalues）的两种措辞，须统一为一致术语。
+- [medium] L33—L47 是 R3 论证核心（2525 字 / 40 句），承载 F_{ij} 矩阵定义 + 贝叶斯反演 + No-Go 触发条件 + 替代解释排除 + 变量设计五重负载——单章负担过重，建议拆分为"§2.4.1 参数空间与 FIM 框架"+"§2.4.2 唯一性条件与贝叶斯反演"+"§2.4.3 替代解释排除与变量设计"三小节。
+
+### §2.5 特色与创新（L51—L59）
+
+**作者声称**：
+- 三个相互支撑的层面：（一）科学问题层面的可证伪定位 / （二）方法学层面的可靠性闭环 / （三）对照体系层面的独立验证基础
+- （一）Fuchs [65] MnTe + Rost [68] CrSb 均未设计替代解释排除机制，也未对接 Cochran [62]/Sørensen [63] 反问题可辨识性议题——本项目把科学命题收缩为"在限定的…条件下…HHG 能否在排除替代解释后辨识序参量相关对称性"
+- （二）磁场—偏振—温度三重差分 + 多带 SBE + FIM + 贝叶斯四工具的联合约束，条件数 κ < 10² 与 > 10⁴ 给出可辨识 / No-Go 双边界，后验标准差 < 先验宽度 50% 视为参数被有效约束
+- （三）TiSe₂ 上先复现 Tyulnev [11] + Zhang [12] 偏振指纹 ≤ 10% 偏差作为前置条件
+
+**已被前几轮 fix**：
+- ✅ 三点创新的四步闭环结构：现有局限 → 本项目方案 → 量化优势 → 定位收束
+- ✅ （一）（二）（三）三层逻辑递进：问题层 → 方法层 → 对照层
+
+**本轮新增问题**：
+- [critical] **L55 "Fuchs 等人 [65]" 编号错配** —— 应为 [64]（references.md L131 [64] = Fuchs arXiv:2503.04431 MnTe）。属同源 critical。
+- [critical] **L55 "Rost 等人 [68]" 编号错配** —— 应为 [67]。属同源 critical。
+- [low] L55 段首"（一）科学问题层面的可证伪定位。 " 与 L57 段首"（二）方法学层面的可靠性闭环。 " 与 L59 段首"（三）对照体系层面的独立验证基础。 " —— 编号与文字之间有 2 个空格，属 markdown 排版瑕疵，影响视觉对齐。
+
+### §2.6 年度研究计划（L61—L71）
+
+**作者声称**：
+- 4 年执行期与 R1/R2/R3 单向对应
+- 第 1 年 R1：搭建装置（4—300 K、0—7 T、抖动 < 50 fs）+ 建立 TiSe₂ SBE + 复现 Tyulnev ≤ 10%
+- 第 2 年 R2：CrSb 含 SOC SBE + 三重联合扫描 + 锁定磁场依赖偶次谐波 + ≥ 1% SNR > 5；若 < 1% 或反射率 > 5% 切换 MnTe
+- 第 3 年 R3：FIM 条件数 + 贝叶斯反演框架 + 后验估计；终止判据 κ < 10² 且 σ_post < 50%
+- 第 4 年集成：X 射线衍射（磁 Bragg 偏差 < 0.5%、相变温度偏差 < 10 K）+ 磁输运（反常 Hall 符号与 d 波理论预期一致）+ 撰写文档 + 申请专利 2 项
+- 衔接硬规则：上一年终止判据未通过，不进入下一年
+
+**已被前几轮 fix**：
+- ✅ 4 年分年度判据与 §2.2—§2.4 严格单向对应
+- ✅ 年度间衔接的硬规则明示
+- ✅ 正面/负面/边缘三档结果的具体判据
+
+**本轮新增问题**：
+- [high] **L63 "搭建并标定偏振分辨 HHG 装置（温度 4—300 K、外磁场 0—7 T、pump-probe 抖动 < 50 fs）"** —— 这是研究方案技术参数（属 scheme.md 内容），按 `content_boundaries` 应从 content.md 删除或简化为"搭建装置"非参数形式。属 [high] boundary_violation。
+- [medium] L67 $\kappa < 10^2$ 与 L5 Unicode `κ` 不一致——属同源跨章一致性红线。
+- [low] L65 "若实测 < 1%，或样品在 0.8 V/Å 附近反射率变化 > 5%"——0.8 V/Å 损伤阈值未给实验依据（references.md §5 自陈"本项目前期预研测量结果"），属 [low] unanchored_assertion。
+
+---
+
+## 5. 写作风格评估
+
+### 5.1 程序化 AI 检测结果
+
+| 检测项 | 阈值 | 实际 | 判定 |
+|--------|------|------|------|
+| "在此基础上" | < 5 次 | 0 | ✅ |
+| "此外" | < 5 次 | 0 | ✅ |
+| "与此同时" | < 5 次 | 0 | ✅ |
+| "基于此" | < 5 次 | 0 | ✅ |
+| "因此" | < 5 次 | 1 | ✅ |
+| "然而" | < 5 次 | 0 | ✅ |
+| "同时" | < 5 次 | 2 | ✅ |
+| "为…提供…" 模板 | < 15 次 | 1（L59 "为光学手段捕获对称性敏感信号的可行性"） | ✅ |
+| "本项目拟" / "本项目将" 句首滥用 | < 10 次 | 0 | ✅ |
+| 冗余修饰词（显著/重要/系统/良好/成熟/完整/关键/精准） | < 15 次 | 系统 1 / 关键 1 = 2 | ✅ |
+| "具有决定性意义" / "迈向新的高度" | < 3 次 | 0 | ✅ |
+| 超长句（>120 字）每段 | < 3 句 | 全章 3 句，分布在 3 个不同段落（L5 / L37 / L39），其中 L37 为 LaTeX 公式不可拆 | ✅ |
+| 中长句（80-120 字） | 12-28% 密度 | 全文 136 句，80-120 字区间约 18 句 ≈ 13% | ✅ |
+| 数字开头列表 | < 3 处 | 0 | ✅ |
+| 中文数字开头列表（"一、" / "二、"） | < 3 处 | 0 | ✅ |
+
+**总体判定**：去 AI 化彻底。content.md 在 anti_ai_patterns 列出的所有维度均远低于阈值，未触发 v6.9.25 评分纪律的 0.6-0.7 扣档红线。
+
+### 5.2 叙述式写作合规性
+
+- ✅ **以科学问题为主线展开**：§2.1 凝练三层可证伪判据，§2.2—§2.4 围绕"信号探测 + 唯一归因"展开，§2.5 用三个创新点（问题层 / 方法层 / 对照层）对应论证
+- ✅ **无"A 做了 X，B 做了 Y，C 做了 Z"式文献堆砌**：所有文献引用均嵌入式服务于论证（L43 "Cochran 等人 2025 年 [62] 把'在何种实验精度下参数可被唯一确定'表述为可分析的方法学问题"——嵌入方法学问题形式化的论证链）
+- ✅ **段落间过渡自然**：§2.1→§2.2 用"围绕该递进结构…按三个研究内容依次推进"接续；§2.2→§2.3 用"通过 R1 之后，工作主线转向 CrSb"接续；§2.3→§2.4 用"R2 探测到的磁场依赖信号在方法学上的地位是必要非充分…唯一归因则留给 R3"接续——非简单关联词堆砌
+- ✅ **研究目标每条至少含 1 个可检验量化指标**：§2.1 L5 三层判据（TiSe₂ ≤ 10% / CrSb ≥ 1% SNR > 5 / FIM κ < 10² + σ_post < 50%）均给具体数值
+- ✅ **结尾非口号化**：§2.6 L71"年度间衔接的硬规则只有一条…该规则保证四年间的方法学预算不被前序问题稀释，也保证每一年的产出在科学意义上独立可报告"——具体而非空泛
+
+### 5.3 表达瑕疵（不影响评分档位）
+
+- [medium] L33 与 L41 同一论证重复（详见 §3.3 与 §7 第 4 条）
+- [medium] §2.4 单章负担过重（2525 字 / 40 句，avg 62.7 字/句）——略高于范本 avg 56 字/句
+- [low] §2.5 三段首"（一）/（二）/（三）"与标题文字之间有 2 个空格，影响视觉对齐
+- [low] L23 "这是关键的认识"——"关键"系 anti_ai 列出冗余修饰词，全文仅出现 1 次，未触发红线
+
+---
+
+## 6. 锚点对比
+
+### 引用 1：申请书原文（content.md §2.1 L3—L9）
+
+> "把立项依据凝练的科学命题落到四年期的研究内容上，可证伪判据被拆成三个层次。方法学对照层回答：正演—反演流程在已知序参量体系上能否给出与文献一致的偏振指纹。信号探测层回答：CrSb 主体系上磁场正反方向反转的差分偶次谐波或圆二色性相对强度是否达到 ≥ 1%、SNR > 5。唯一归因层回答：在费舍尔信息矩阵条件数 κ 与贝叶斯后验标准差的双重判据下，序参量参数能否从能带背景中被独立分辨。三层各自对应一个量化终止判据，构成"信号是否存在—信号是否来自序参量—信号能否被唯一归因"的递进式回答。
+>
+> 围绕该递进结构，以 CrSb 与 TiSe₂ 两个体系（主体系加对照体系）、一组可辨识性分析框架（费舍尔信息矩阵加贝叶斯反演）为工具，按三个研究内容依次推进。研究内容 R1（TiSe₂ 方法学标定）建立可转移的偏振分辨 HHG 测量与反演流程。研究内容 R2（CrSb 主体系探测）在该流程上探测磁场反转差分信号。研究内容 R3（可辨识性分析与替代解释排除）把上述信号放进多带正演模型与可辨识性框架中考察唯一归因的成立条件。三者之间的衔接是单向递进：R1 复现未通过的，不进入 R2；R2 信号未达阈值的，转而界定差分信号的适用边界或触发 MnTe 备选；只有 R2 给出信号且信号进入 R3，才能触发唯一归因分析或 No-Go 边界界定。"
+
+### 对比：范本锚点（reference_materials.benchmark_anchors.content_example）
+
+> "本项目拟采用理论与实验相结合的研究方法，建立包含局域电子态效应的量子轨迹模型，揭示局域电子态对高次谐波产生过程的影响机理。拟采用泵浦-探测的方案厘清掺杂半导体高次谐波产生的量子通道，并基于此探索固体高次谐波光谱在探测掺杂半导体局域电子态结构及相关电子动力学信息等方面的应用。具体研究内容包括：（1）掺杂半导体高次谐波产生机制研究——拟研究强激光作用下不同类型掺杂半导体产生高次谐波光谱的结构差异……"
+
+### 差距分析
+
+| 维度 | 申请书 | 范本 | 差距判定 |
+|------|--------|------|----------|
+| 语体 | 客观陈述 + 三层可证伪判据 + R1→R2→R3 递进 | 客观陈述 + 总述段 + 平行列举 | **基本接近**（申请书递进结构更密） |
+| 论证密度 | L3—L9 覆盖三层判据 + R1/R2/R3 任务分配 + 单向递进规则——单位信息密度高 | 范本未给量化指标，量化集中在研究目标 | **申请书优于范本**（量化更密） |
+| 数据驱动 | "≥ 1% / SNR > 5 / κ < 10² / 50% / MnTe / TiSe₂ / CrSb"——具体数值 | "掺杂半导体高次谐波 / 量子通道 / 局域电子态"——概念为主 | **申请书优于范本**（数据驱动更强） |
+| 引用嵌入 | R1/R2/R3 段均给出引用铺垫但本段未嵌入具体 [N] | 范本未在本段嵌入引用 | **范本略优**（范本允许总述段不嵌入引用，申请书可在 R1/R2/R3 段嵌入） |
+| 段间衔接 | "把立项依据凝练的科学命题落到四年期的研究内容上"——承接 rationale.md §3 | "本项目拟采用"——独立起句 | **申请书略优**（章节呼应更紧） |
+
+**结论**：content.md §2.1 L3—L9 段与范本锚点在语体、论证密度、数据驱动三项均接近或超过范本水准；本段无需修正。
+
+### 引用 2：申请书原文（content.md §2.4 L33）
+
+> "参数空间被显式划分为三类。能带参数描述电子基态结构，包括带内有效质量、带间跃迁偶极矩幅度、带内退相干时间；序参量参数刻画 altermagnet 磁序本身，包括 d 波自旋分裂幅度与 Néel 矢量方向；SOC 参数描述自旋轨道耦合强度因子与晶体场修正。三类参数共计 7—9 个子参数，以偏振—温度—磁场三重独立测量维度作为约束输入。三个维度各自作为连续变量（偏振方位角 0°—360°、温度 4—300 K、磁场 0—7 T），每个维度在不同取值的组合下对参数空间形成多点采样——而非三个标量约束。费舍尔信息矩阵的秩由测量点的充分性决定：在三维测量空间内取足够密度的数据点，各参数方向的梯度向量在参数空间内线性无关时，矩阵满秩条件数可计算。雅可比矩阵 ∂Sₖ/∂θᵢ 的非奇异性物理保证在于：偏振参数通过选择定则改变不同跃迁通道权重但不改变带间能隙；温度参数改变费米-Dirac 分布与晶格膨胀但不改变 SOC 强度；外磁场参数直接耦合磁矩其哈密顿项与 SOC 项对易而非耦合——这三条构成参数空间正交化的物理基础。"
+
+### 对比：范本锚点（reference_materials.benchmark_anchors.content_example）
+
+> "本项目拟采用理论与实验相结合的研究方法，建立包含局域电子态效应的量子轨迹模型，揭示局域电子态对高次谐波产生过程的影响机理。拟采用泵浦-探测的方案厘清掺杂半导体高次谐波产生的量子通道，并基于此探索固体高次谐波光谱在探测掺杂半导体局域电子态结构及相关电子动力学信息等方面的应用。具体研究内容包括：（1）掺杂半导体高次谐波产生机制研究——拟研究强激光作用下不同类型掺杂半导体产生高次谐波光谱的结构差异……"
+
+### 差距分析
+
+| 维度 | 申请书 | 范本 | 差距判定 |
+|------|--------|------|----------|
+| 量化指标密度 | 7—9 子参数 / 0°—360° / 4—300 K / 0—7 T 全部给数值 | 范本未在 §2 部分给量化指标 | **申请书优于范本**（量化密度高） |
+| 论证结构 | "三类参数 → 三类物理保证 → 三类参数空间正交化"——三层嵌套 | "具体研究内容包括：（1）…（2）…"——平行列举 | **申请书优于范本**（嵌套 vs 平行） |
+| 物理依据 | "SOC 中间值不能以'有无'二元处理，而须在连续参数空间中定位 CrSb 的实际位置"——具体且反二元 | 范本以概念为主 | **申请书优于范本**（物理依据更强） |
+| 句式 | 1 处超长句（含本段 L33 的 5 重嵌套），L33 单段承载 R3 核心论证的 60% 内容 | 范本以中长句为主（60-80 字） | **范本略优**（节奏感更佳） |
+
+**结论**：content.md §2.4 L33 在量化指标密度、论证结构、物理依据三项均接近或超过范本水准；但 L33 单段承担过多负载（建议拆分为三小节）。L33 与 L41 同一论证重复是本段最显著的表达瑕疵。
+
+### 引用 3：申请书原文（content.md §2.4 L37—L39 LaTeX 公式）
+
+> "$$F_{ij} = \\frac{1}{\\sigma^2} \\sum_k \\frac{\\partial S_k(\\theta)}{\\partial \\theta_i} \\frac{\\partial S_k(\\theta)}{\\partial \\theta_j}$$
+>
+> 其中 $\\sigma$ 为测量噪声标准差（由装置背景漂移与光子统计共同决定），$S_k(\\theta)$ 为理论谱在第 $k$ 个谐波阶次的预测强度。矩阵 $\\mathbf{F}$ 的条件数 $\\kappa(\\mathbf{F}) = \\lambda_{\\max}/\\lambda_{\\min}$ 直接给出参数空间的可分辨方向：$\\kappa < 10^2$ 对应参数方向可被独立提取；$10^2 < \\kappa < 10^4$ 为边缘可辨识区（协方差矩阵特征值由收敛向发散过渡）；$\\kappa > 10^4$ 进入特征值发散的不可辨识区。"
+
+### 对比：范本锚点（reference_materials.benchmark_anchors.scheme_example）
+
+> "在前期的工作中，我们已经熟练掌握了利用含时薛定谔方程、含时密度泛函理论研究理想晶体高次谐波的数值模拟方法。为了适应本项目的研究，需要在理想晶体的计算中引入杂质的作用，本项目将采用在周期性排布的原子结构中引入少量杂质原子来模拟掺杂半导体。首先，求解定态本征值问题获得掺杂半导体的电子能谱及跃迁偶极矩等信息。然后，利用数值方法获得电子含时的含时波函数，并将电子含时波函数投影到不同的本征态上，分析高次谐波产生过程中电子在不同能态上的演化。"
+
+### 差距分析
+
+| 维度 | 申请书 | 范本 | 差距判定 |
+|------|--------|------|----------|
+| 论证密度 | L37—L39 覆盖 F_{ij} 矩阵元素定义 + 噪声 σ 来源 + 条件数 κ 三档区间——单位信息密度高 | 范本覆盖前期工作基础 + 本项目改进 + 三步流程——单位信息密度中等 | **申请书优于范本**（论证密度更高） |
+| 数据驱动 | "$\\kappa < 10^2$ / $10^2 < \\kappa < 10^4$ / $\\kappa > 10^4$"——具体数值 | 范本未给具体数值（数值集中在方法学手册） | **申请书优于范本**（数据驱动更强） |
+| 公式可编译性 | **L37 `\\frac` / `\\sigma` / `\\kappa` 等 LaTeX 双反斜杠错误**——审稿人复制到 LaTeX 环境将得到编译错误 | 范本未在段中嵌入公式 | **范本优于申请书**（范本无公式编译风险，申请书公式无法编译） |
+| 跨章一致性 | content.md 用 `\kappa` LaTeX 形式，rationale.md / scheme.md 用 Unicode `κ` 上标形式——属 `consistency_check` 红线 | 范本各章一致 | **范本优于申请书**（跨章一致） |
+
+**结论**：content.md §2.4 L37—L39 在论证密度、数据驱动两项均接近或超过范本水准；但 L37 LaTeX 双反斜杠错误（L37 + L39 + L45 + L57 + L67 全文公式）属 critical 格式错位——这是本轮聚焦章节最重要的 critical 问题。
+
+**锚点对比结论：基本接近**——content.md 在语体、论证密度、数据驱动三项均接近或超过范本水准；但存在 3 处 critical [N] 编号错配 + 1 处 LaTeX 公式双反斜杠错误 + 1 处 κ 跨章表达不一致——3 项 critical 任一即触发严谨性 0.60-0.69 区间。按 v6.9.25 评分纪律：结论=基本接近 → 表达质量 ≤ 0.79、综合评分 ≤ 0.89。本轮表达质量 0.74、综合 0.73 均在内。
+
+---
+
+## 7. 问题清单
+
+### [critical] numbering_mismatch — content.md L21 "Rost 等人 [68]" 应为 [67]
+- 位置：content.md L21（"Rost 等人 [68] 在块体 CrSb 中观测到自旋分辨 HHG 的材料特异指纹"）
+- 问题：references.md L137 [67] = Rost 等人 CrSb HHG 实验（arXiv:2507.02673），L139 [68] = Weber 等人（Phys. Rev. X 16, 021051）。审稿人按 [68] 反查 references.md 会看到 Weber 条目而非 Rost 条目，构成评审红线级编号溯源失败。本条问题在 round-5、round-6 前轮已记录但未修复。
+- 违反条款：`scoring_rubric.dimensions.rigor` 之"编号一致性" + `general_principles.indicator_red_lines.consistency_check`
+- 建议（rewrite）：content.md L21 "Rost 等人 [68]" → "Rost 等人 [67]"。正文 6 处 [68] → [67] 同步修改（rationale.md L33/L51/L63/L77 + content.md L21/L55）。
+- priority：P0 必改
+- action：rewrite
+
+### [critical] numbering_mismatch — content.md L23 "McCarter [66] / Horstmann [67]" 应为 [65]/[66]
+- 位置：content.md L23（"McCarter 等人 [66] 与 Horstmann 等人 [67] 分别从第一性原理模拟与选择定则分类角度"）
+- 问题：references.md L133 [65] = McCarter、L135 [66] = Horstmann、L137 [67] = Rost。按正文语义（McCarter 第一性原理 / Horstmann 选择定则）应分别标 [65] 和 [66]，但当前用 [66] 和 [67]——两处编号均偏移 1 位。
+- 违反条款：`scoring_rubric.dimensions.rigor` 之"编号一致性" + `general_principles.indicator_red_lines.consistency_check`
+- 建议（rewrite）：content.md L23 "McCarter 等人 [66]" → "McCarter 等人 [65]"；"Horstmann 等人 [67]" → "Horstmann 等人 [66]"。
+- priority：P0 必改
+- action：rewrite
+
+### [critical] numbering_mismatch — content.md L55 "Fuchs [65] / Rost [68]" 应为 [64]/[67]
+- 位置：content.md L55（"Fuchs 等人 [65] 在 MnTe 中观测到…Rost 等人 [68] 在 CrSb 中报道了…"）
+- 问题：references.md L131 [64] = Fuchs arXiv:2503.04431 MnTe HHG 实验、L137 [67] = Rost CrSb HHG 实验。本节用 [65] 标 Fuchs 实际指向 McCarter、用 [68] 标 Rost 实际指向 Weber——两处编号均与 references.md 冲突。
+- 违反条款：`scoring_rubric.dimensions.rigor` 之"编号一致性" + `general_principles.indicator_red_lines.consistency_check`
+- 建议（rewrite）：content.md L55 "Fuchs 等人 [65]" → "Fuchs 等人 [64]"；"Rost 等人 [68]" → "Rost 等人 [67]"。与 §7 第 1 条 critical 同步修改。
+- priority：P0 必改
+- action：rewrite
+
+### [critical] formula_compile_error — content.md LaTeX 公式全文双反斜杠错误
+- 位置：content.md L37（核心矩阵公式）+ L39（$\sigma$ / $\kappa$ / $\lambda_{\max}$ / $\lambda_{\min}$）+ L45（$p(\theta|D)$ / $\propto$）+ L57（$\kappa < 10^2$ / $\kappa > 10^4$）+ L67（$\kappa < 10^2$ / $\kappa > 10^4$）
+- 问题：L37 "$$F_{ij} = \\frac{1}{\\sigma^2} \\sum_k \\frac{\\partial S_k(\\theta)}{\\partial \\theta_i} \\frac{\\partial S_k(\\theta)}{\\partial \\theta_j}$$"——LaTeX 中 `\\frac` 是换行符（`\frac` 才是法定命令），整条公式无法编译。L39 `$\\sigma$` / `$\\kappa$` 同理。所有 `\\` 单字符命令实际是字面双反斜杠，无法渲染。申请书的核心方法学定量公式（F_{ij} 矩阵定义、贝叶斯反演公式、κ 阈值判断）以无效形式提交。
+- 违反条款：`scoring_rubric.dimensions.rigor` 之"指标可证伪" + `general_principles.indicator_red_lines.indicator_measurable`（每个指标应给出可操作的定义、计算公式与测量方法）
+- 建议（rewrite）：将 content.md 所有 LaTeX 公式中的 `\\` 改为 `\`——例如 `\\frac` → `\frac`、`\\sigma` → `\sigma`、`\\kappa` → `\kappa`、`\\partial` → `\partial`、`\\theta` → `\theta`、`\\lambda_{\\max}` → `\lambda_{\max}` 等。这是写入 LaTeX 文件时的标准错误（用 `\\` 而非 `\` 是字符串转义残留）。
+- priority：P0 必改
+- action：rewrite
+
+### [high] consistency_check — κ 表达形式跨章不一致
+- 位置：content.md L39、L45、L57、L67 用 LaTeX `\kappa < 10^2` / `\kappa > 10^4`；rationale.md L65、L77 与 scheme.md L5、L13、L35、L41、L83、L93、L95、L103、L107 用 Unicode `κ < 10²` / `κ > 10⁴`
+- 问题：同一物理量（条件数 κ 阈值）在三个章节用三种表达形式——content.md L5 用 Unicode `κ`，但 content.md L39、L45、L57、L67 用 LaTeX `\kappa`。`indicator_red_lines.consistency_check` 红线明确要求"同一指标在不同章节出现时数值与表述口径必须一致"。
+- 违反条款：`scoring_rubric.dimensions.rigor` 之"指标可证伪" + `general_principles.indicator_red_lines.consistency_check`
+- 建议（rewrite）：方案 A（推荐）—— content.md 全文统一为 Unicode `κ`（与 rationale.md / scheme.md 一致）；方案 B —— content.md 全文统一为 LaTeX `\kappa` 并同步修改 rationale.md / scheme.md。方案 A 改动量小（content.md L39/L45/L57/L67 共 5 处 LaTeX 公式改为 Unicode），不影响审稿人阅读。
+- priority：P0 必改
+- action：rewrite（content.md 全文公式中的 `\kappa` 改为 Unicode `κ`，`\sigma` 改为 `σ`，`\theta` 改为 `θ`，`\lambda` 改为 `λ`，`\partial` 改为 `∂`，`\sum` 改为 `Σ`）
+
+### [high] content_redundancy — content.md L33 与 L41 同一论证重复
+- 位置：content.md L33（"偏振参数...不改变带间能隙；温度参数...不改变 SOC 强度；外磁场参数...哈密顿项与 SOC 项对易而非耦合——这三条构成参数空间正交化的物理基础"）与 L41（同一论证以"能带本征能量"替代"带间能隙"，其余文字几乎完全相同）
+- 问题：L33 在介绍三类参数定义时附带给出"非奇异性物理保证"，L41 在介绍雅可比矩阵满秩时再次给出同一论证——属 [high] 内容冗余，两处相加约占 §2.4 字数 30%。
+- 违反条款：`general_principles.writing_style_rules.must` 之"段落之间形成逻辑递进"（避免同段内重复论证）
+- 建议（rewrite）：保留 L33 的"非奇异性物理保证"（首次出现）；L41 的同一论证改为简短回顾——"如 L33 所述，三类参数的物理独立性保证了雅可比矩阵在原理上具备满秩条件"，释放 L41 用于深化贝叶斯反演公式或 κ 三档区间的物理意义。
+- priority：P2 强烈建议
+- action：rewrite
+
+### [high] boundary_violation — content.md L13 / L63 出现装置细节（应归 scheme.md）
+- 位置：content.md L13（"自建装置（低温 4—300 K、外磁场 0—7 T、pump-probe 抖动 < 50 fs）"）+ L63（"搭建并标定偏振分辨 HHG 装置（温度 4—300 K、外磁场 0—7 T、pump-probe 抖动 < 50 fs）"）
+- 问题：装置技术参数（低温温区、外磁场量程、pump-probe 抖动）属研究方案内容（scheme.md），按 `general_principles.content_boundaries` 应在 content.md 中以"自建偏振分辨 HHG 装置"简化表述，技术参数移至 scheme.md。属 boundary_violation。
+- 违反条款：`general_principles.content_boundaries` 之"研究内容_回答什么"与"研究方案_回答怎么做"的边界
+- 建议（rewrite）：L13 改为"自建偏振分辨 HHG 装置（具体参数见研究方案）"；L63 改为"搭建并标定偏振分辨 HHG 装置（参数详见研究方案 §3）"。或保留 4—300 K 与 0—7 T（属宏观测量区间，与"为何选这些区间"的物理论证相关），删除抖动 < 50 fs 这种纯技术指标。
+- priority：P2 强烈建议
+- action：rewrite
+
+### [medium] unanchored_assertion — content.md L25/L65 1% 与 0.8 V/Å 阈值依据未给数值
+- 位置：content.md L25（"差分信号须大于 CrSb 在本装置参数下背景漂移的典型标准差"）+ L65（"样品在 0.8 V/Å 附近反射率变化 > 5%"）
+- 问题：1% 信号阈值的物理依据（"差分信号须大于背景漂移的典型标准差"）未给"典型标准差"的实验测量值；0.8 V/Å 损伤阈值仅由 references.md §5 自陈"本项目前期预研测量结果"，未在 content.md 中独立支撑。属未给文献支撑的论断。
+- 违反条款：`scoring_rubric.dimensions.rigor` 之"论证严密性" + `indicator_red_lines.indicator_measurable`
+- 建议（research + rewrite）：① 在 content.md L25 后补"背景漂移标准差以本项目前期预研测量的约 N% 为依据（典型值见方法学手册）"；② 在 content.md L65 后补"0.8 V/Å 损伤阈值由本项目前期预研测量给出（详细测量流程见方法学手册）"。或直接引用 references.md §5 的"约 0.8 V/Å"陈述。
+- priority：P2 强烈建议
+- action：research + add
+
+### [medium] section_overload — §2.4 单章负担过重（2525 字 / 40 句 / avg 62.7 字/句）
+- 位置：content.md L29—L49（§2.4 R3）
+- 问题：§2.4 单章承担 F_{ij} 矩阵定义 + 贝叶斯反演 + No-Go 触发条件 + 替代解释排除 + 变量设计五重负载，2525 字 / 40 句 / avg 62.7 字/句——略高于范本 avg 56 字/句。L33 与 L41 论证重复进一步加剧负担。
+- 违反条款：`general_principles.writing_style_rules.must` 之"段落之间形成逻辑递进"（单段多负载破坏递进）
+- 建议（rewrite）：将 §2.4 拆分为三小节——"§2.4.1 参数空间与 FIM 框架"（L31—L37）、"§2.4.2 唯一性条件与贝叶斯反演"（L41—L45）、"§2.4.3 替代解释排除与变量设计"（L47—L49）。三小节间形成递进关系（框架 → 判据 → 排除）。
+- priority：P3 建议
+- action：rewrite
+
+### [low] format_artifact — §2.5 三段首空 2 格
+- 位置：content.md L55、L57、L59 段首"（一） / （二） / （三）"后接文字之间有 2 个空格
+- 问题：markdown 排版瑕疵，影响视觉对齐。属格式瑕疵不影响内容。
+- 违反条款：无明确 rubric 违反
+- 建议（rewrite）：将 L55、L57、L59 段首"  "（两个空格）改为" "（一个空格）。
+- priority：P3 建议
+- action：rewrite
+
+---
+
+## 8. 跨章节一致性审查
+
+| 检查项 | 期望 | 实际 | 判定 |
+|--------|------|------|------|
+| CrSb Néel 温度 | 全文一致 | content.md L21 "约 720 K" / rationale.md L73 "约 720 K" / scheme.md L53 "约 720 K" | ✅ |
+| TiSe₂ CDW 相变温度 | 全文一致 | content.md L13 "205 K" / rationale.md L27 "约 205 K 以下" / scheme.md L9 "205 K 上下" | ✅ |
+| CrSb SOC 强度 | 全文一致 | content.md L23 "100—200 meV" / rationale.md L29 "100—200 meV" / scheme.md L25 "100—200 meV" | ✅ |
+| CrSb 信号判据 | 全文一致 | content.md L25 "≥ 1% / SNR > 5" / rationale.md L65 "≥ 1% / SNR > 5" / scheme.md L11 "≥ 1% / SNR > 5" | ✅ |
+| FIM 条件数 κ | 数值与表述口径一致 | rationale.md / scheme.md 用 Unicode `κ < 10²`；content.md L5 用 Unicode `κ` 但 L39/L45/L57/L67 用 LaTeX `\kappa < 10^2` | ❌ critical（跨章表述口径不一致）|
+| TiSe₂ 复现偏差 | 全文一致 | content.md L13 / L15 "≤ 10%" / rationale.md L65 "≤ 10%" / scheme.md L11 "≤ 10%" | ✅ |
+| 参数空间维度 | 全文一致 | content.md L5 / L33 "7—9 个子参数" / scheme.md L19 / L37 "7—9 维" | ✅ |
+| MnTe 备选切换判据 | 全文一致 | content.md L25 "差分 < 1% 或反射率 > 5%" / scheme.md L55 "差分 < 1% 或反射率 > 5%" | ✅ |
+| CrSb 带隙 | 全文一致 | content.md 中无 CrSb 带隙陈述 / rationale.md L73 "0.13 eV 间接 / 0.6 eV 直接" / scheme.md L19 "0.13 eV / 0.6 eV" | ⚠ content.md 不应含带隙数据（已正确归属 rationale / scheme） |
+| Rost 编号 | 正文与 references.md 一致 | content.md L21/L55 用 [68] 标 Rost，但 references.md [68] = Weber / [67] = Rost | ❌ critical |
+| McCarter 编号 | 正文与 references.md 一致 | content.md L23 用 [66] 标 McCarter，但 references.md [65] = McCarter / [66] = Horstmann | ❌ critical |
+| Fuchs 编号 | 正文与 references.md 一致 | content.md L55 用 [65] 标 Fuchs，但 references.md [64] = Fuchs / [65] = McCarter | ❌ critical |
+| Horstmann 编号 | 正文与 references.md 一致 | content.md L23 用 [67] 标 Horstmann，但 references.md [66] = Horstmann / [67] = Rost | ❌ critical |
+| Weber 编号 | 正文与 references.md 一致 | content.md 中无 Weber 引用 / references.md [68] = Weber | ✅ |
+| Cochran 编号 | 正文与 references.md 一致 | content.md L43 / L57 用 [62] 标 Cochran，references.md [62] = Cochran | ✅ |
+| Sørensen 编号 | 正文与 references.md 一致 | content.md L27 / L43 / L57 用 [63] 标 Sørensen，references.md [63] = Sørensen | ✅ |
+
+**跨章节一致性总评**：15 项核查中 10 项一致、5 项 critical 不一致。其中 4 项 [N] 编号 critical 错配（Rost / McCarter / Fuchs / Horstmann）+ 1 项 κ 表述口径 critical 不一致。这是本轮聚焦章节评审的最大问题群。
+
+---
+
+## 9. 事实核查表
+
+| # | 论断 | 位置 | 核实依据 | 判定 |
+|---|------|------|----------|------|
+| 1 | "Néel 温度约 720 K 远高于可达温区 4—300 K，温度跨相变差分不可用" | content.md L21 | CrSb Néel 温度 T_N ≈ 720 K（公认，与 [67] Rost 2025 一致） | ✅ |
+| 2 | "Rost 等人 [68] 在块体 CrSb 中观测到自旋分辨 HHG 的材料特异指纹" | content.md L21 | 实际为 [67]——编号 critical 错配，详见 §7 第 1 条 | ❌ critical |
+| 3 | "SOC 可忽略时低阶偶次谐波依赖外磁场方向；SOC 充分强时高能峰、平台区、圆二色性与自旋流谐波均出现" | content.md L23 | Werner [24] 2026 PRB 系统预言 altermagnet HHG 两极限情形（公认） | ✅ |
+| 4 | "CrSb 中 Sb 原子 SOC 强度约 100—200 meV" | content.md L23 | CrSb 第一性原理计算通常给出 Sb 5p 轨道 SOC 约 100—300 meV（与 [25] Šmejkal 2022 PRX 一致） | ✅ |
+| 5 | "McCarter 等人 [66] 与 Horstmann 等人 [67] 分别从第一性原理模拟与选择定则分类角度" | content.md L23 | 编号均偏移 1 位（应为 [65]/[66]），详见 §7 第 2 条 | ❌ critical |
+| 6 | "F_{ij} = (1/σ²) Σₖ ∂Sₖ(θ)/∂θᵢ · ∂Sₖ(θ)/∂θⱼ" | content.md L37 | 费舍尔信息矩阵标准定义（公认）；但 LaTeX 公式 `\\frac` 双反斜杠错误，详见 §7 第 4 条 | ❌ critical |
+| 7 | "κ < 10² 对应参数方向可被独立提取；10² < κ < 10⁴ 为边缘可辨识区；κ > 10⁴ 进入特征值发散的不可辨识区" | content.md L39 | κ 三档判据与 Cochran [62] 唯一性框架 + Sørensen [63] 非唯一性结论一致；但 LaTeX `\kappa` 与 rationale.md / scheme.md Unicode `κ` 不一致，详见 §7 第 5 条 | ⚠ 物理一致但表述口径不一致 |
+| 8 | "贝叶斯后验 p(θ|D) ∝ p(D|θ) p(θ)" | content.md L45 | 贝叶斯公式标准形式（公认）；LaTeX 双反斜杠错误 | ⚠ 公式无法编译 |
+| 9 | "Fuchs 等人 [65] 在 MnTe 中观测到自旋对称性破缺的自旋极化 HHG 谱学信号" | content.md L55 | 编号 critical 错配（应为 [64]），详见 §7 第 3 条 | ❌ critical |
+| 10 | "差分信号 ≥ 1% / SNR > 5" | content.md L25 | 1% 阈值依据仅以"差分信号须大于 CrSb 在本装置参数下背景漂移的典型标准差"陈述，未给数值，详见 §7 第 8 条 | ⚠ 阈值依据不充分 |
+| 11 | "≥ 1% 视为实验成功；若实测 < 1%，或样品在 0.8 V/Å 附近反射率变化 > 5%" | content.md L25 / L65 | 0.8 V/Å 损伤阈值仅由 references.md §5 自陈"本项目前期预研测量结果" | ⚠ 阈值依据不充分 |
+
+---
+
+## 10. 修复确认表（与 round-5 / round-6 对比）
+
+| # | 历史问题 | 本轮状态 | 说明 |
+|---|----------|----------|------|
+| 1 | [critical] Rost 编号 [68] vs [67] 错配 | ⚠ 仍存在 | content.md L21 + L55 仍用 [68] 标 Rost，references.md [68] = Weber / [67] = Rost。本轮 §7 第 1 条 + 第 3 条重新标记 |
+| 2 | [critical] 跨章 Sørensen / Cochran 编号错配 | ✅ 已修复 | rationale.md / content.md / scheme.md 均以 [62] = Cochran / [63] = Sørensen，references.md L117/L129 一致 |
+| 3 | [critical] fabricated_citation [69] Weber 标题虚构 | ⚠ 仍存在 | references.md L139 [68] Weber 仍含虚构元素符号 "NdMu2Si₂" 与真实 arXiv:2408.05187 不符（首字母 F. vs M.、材料 NdMu2Si₂ vs RuO₂）—— 本轮聚焦 content.md 未深入审查 references.md |
+| 4 | [critical] scheme.md L27 内联引用错位 | ✅ 已修复 | scheme.md L25/L27/L73 三处 [N] 编号已正确对应 |
+| 5 | [high] references.md §6 自陈位置行号与正文不一致 | ⚠ 部分修复 | 本轮聚焦 content.md 发现 content.md 内多处编号 critical 错配仍未修复 |
+| 6 | [medium] rationale.md L11 检索式未给具体命中数 | ⚠ 维持 | content.md 中无此问题（content.md 不含检索式陈述） |
+| 7 | [medium] rationale.md L19 自旋 flop 单引 [58a] | ⚠ 维持 | content.md 中无此问题 |
+| 8 | [low] preprint_ratio 偏高 | ⚠ 维持 | 预印本占比 21/43 ≈ 49% |
+
+**新增问题（未在前几轮出现）**：
+- critical 第 2 条：content.md L23 "McCarter [66] / Horstmann [67]" 编号偏移 1 位错配（前几轮未涉及 content.md 详细审查）
+- critical 第 3 条：content.md L55 "Fuchs [65] / Rost [68]" 编号错配（前几轮未涉及 content.md 详细审查）
+- critical 第 4 条：content.md LaTeX 公式全文双反斜杠错误（L37 + L39 + L45 + L57 + L67 共 5 处）—— 前几轮未涉及 LaTeX 编译性审查
+- high 第 5 条：κ 表达形式跨章不一致（content.md L5 用 Unicode `κ` 但 L39/L45/L57/L67 用 LaTeX `\kappa`，与 rationale.md / scheme.md 不一致）—— 前几轮未涉及跨章符号一致性审查
+- high 第 6 条：content.md L33 与 L41 同一论证重复（"三类参数物理独立性"两次）—— 前几轮未涉及 content.md §2.4 段落级论证审查
+- high 第 7 条：content.md L13 / L63 装置细节越界（"自建装置（低温 4—300 K、外磁场 0—7 T、pump-probe 抖动 < 50 fs）"）—— 前几轮未涉及 content.md boundary 审查
+- medium 第 8 条：content.md L25/L65 1% 与 0.8 V/Å 阈值依据未给数值
+- medium 第 9 条：content.md §2.4 单章负担过重（2525 字 / 40 句）
+
+---
+
+## 11. 对抗结论
+
+- **本轮发现 9 个问题**（critical 4, high 3, medium 2, low 1；其中 4 项 [critical] 编号错配 + 1 项 [critical] LaTeX 公式错位，均为 P0 必改）
+- **相比上一轮（round-5 参考文献专项）**：
+  - 改善 3 个：scheme.md L27 内联引用错位 + Cochran/Sørensen 编号一致性 + metadata_inconsistency 部分修复
+  - 残留 1 个：round-5 critical [68] Weber 标题虚构仍存在（references.md L139），本轮未涉及
+  - 新增 8 个：critical 4（content.md 内 3 处 [N] 错配 + LaTeX 公式双反斜杠）+ high 3（κ 跨章不一致 / L33-L41 重复 / 装置细节越界）+ medium 2（1% 与 0.8 V/Å 阈值依据 / §2.4 单章负担）
+- **核心瓶颈**：
+  - 1. 跨章 [N] 编号 critical 错配 4 处——content.md L21/L23/L55 共 3 处 + 跨章与 references.md 冲突 4 处（编号 [64]—[68] 在 content.md 与 references.md 间错位），属评审红线级 P0 必改
+  - 2. content.md LaTeX 公式全文双反斜杠错误 5 处——申请书核心方法学定量公式（F_{ij} 矩阵定义、贝叶斯反演、κ 阈值判断）以无效形式提交，审稿人若复制到 LaTeX 环境将得到编译错误
+  - 3. κ 表达形式跨章不一致（content.md L5 Unicode `κ` vs L39/L45/L57/L67 LaTeX `\kappa` vs rationale.md / scheme.md Unicode `κ < 10²`）——属 `consistency_check` 红线
+- **是否达到输出标准**：**否**。critical 4 项未解决前不可提交——按 general 项目阈值 min_overall_score 0.85，本轮综合 0.74 低于阈值 11 个百分点。修复路径明确且工作量可控：① content.md L21/L23/L55 共 3 处 [N] 编号修正（5 分钟工作量）；② content.md 全文 LaTeX 公式 `\\` 改为 `\`（约 30 处替换，10 分钟工作量）；③ content.md 全文 κ 表达统一为 Unicode `κ`（5 处 LaTeX 替换，5 分钟工作量）；④ content.md L33/L41 重复论证合并（20 分钟工作量）；⑤ content.md L13/L63 装置细节改为简述或加注"详见研究方案 §3"（10 分钟工作量）。
+- **返工优先级**：
+  - **P0（必须修改）**：critical 第 1 条 Rost [68]→[67] + 第 2 条 McCarter [66]→[65] / Horstmann [67]→[66] + 第 3 条 Fuchs [65]→[64] + 第 4 条 LaTeX 公式双反斜杠修复；high 第 5 条 κ 跨章统一
+  - **P1（强烈建议）**：high 第 6 条 L33/L41 重复论证合并；high 第 7 条装置细节越界修正；medium 第 8 条 1% 与 0.8 V/Å 阈值依据补全
+  - **P2（建议）**：medium 第 9 条 §2.4 单章拆分；low 第 10 条 §2.5 段首空格修复
+- **下一轮评审建议聚焦**：critical 编号修复完成后的复核（应聚焦 [N] 编号一对一对应 + LaTeX 公式编译性验证 + κ 跨章一致性）+ high 类问题（L33/L41 重复论证合并 + 装置细节归属）+ medium 类问题（1% / 0.8 V/Å 阈值依据补全）。
+
+---
+
+## 评分
+
+创新性：0.85
+可行性：0.78
+严谨性：0.55
+表达质量：0.74
+综合评分：0.74

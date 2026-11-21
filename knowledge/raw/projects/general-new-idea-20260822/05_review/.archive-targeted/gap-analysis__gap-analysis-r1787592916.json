@@ -1,0 +1,50 @@
+{
+  "gaps": [
+    {
+      "claim": "研究内容章节（研究内容/科学目标/关键问题）为0字节空文件，核心研究方向——固态高次谐波探测g波序参量与自旋劈裂——完全没有文献支撑基础",
+      "missing_evidence": "缺少支撑研究内容设计的奠基性文献：g波超导/非常规配对序参量与高次谐波光谱响应的理论关系推导，以及相应的实验探测先例",
+      "search_keywords": [
+        "g-wave superconductivity order parameter",
+        "g-wave pairing symmetry detection",
+        "unconventional superconductor high harmonic generation",
+        "g-wave spin splitting harmonic spectroscopy",
+        "g-wave ultrafast dynamics probe"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "立项依据已引用altermagnetism理论（Šmejkal）与ARPES实验（Krempaský）等27条临时文献，但研究内容层面需要altermagnet HHG具体探测方案与可行性的文献支撑",
+      "missing_evidence": "缺少altermagnet材料（CrSb/MnTe等）高次谐波产生与磁序参量读出的理论计算和实验数据，无法论证探测方案的可行性",
+      "search_keywords": [
+        "altermagnet high harmonic generation theory experiment",
+        "CrSb MnTe spin-polarized high harmonic",
+        "magnetic order parameter HHG readout",
+        "spin-resolved high harmonic generation solid state",
+        "altermagnet nonlinear optical response"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "关键科学问题需要界定超快时间尺度下序参量（磁性/超导）读出的可测量判据，并与已有超快测量手段对照",
+      "missing_evidence": "缺少超快泵浦探测测量磁性或超导序参量的方法学文献（时间分辨ARPES、太赫兹光谱、瞬态反射率等）作为判据与对照论证",
+      "search_keywords": [
+        "ultrafast dynamics unconventional superconductivity pump-probe",
+        "time-resolved magnetic order femtosecond readout",
+        "terahertz spectroscopy superconducting gap dynamics",
+        "ultrafast ARPES order parameter measurement"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "研究内容将依托的固态HHG实验平台与探测机制需要近期方法学文献支撑（立项依据检索到的2601.14526、2602.22736、2510.27089等需向研究内容层面的方案设计延伸）",
+      "missing_evidence": "缺少固态HHG作为量子材料探测手段的最新方法学文献（探测灵敏度、谐波光谱反演、实验参数窗口），支撑研究内容中实验方案的具体设计",
+      "search_keywords": [
+        "solid-state high harmonic generation spectroscopy probe",
+        "HHG spectroscopy quantum materials method",
+        "high harmonic inversion parameter retrieval solid",
+        "mid-infrared strong field semiconductor harmonic probe"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

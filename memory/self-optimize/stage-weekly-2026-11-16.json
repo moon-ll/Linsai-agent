@@ -1,0 +1,95 @@
+{
+  "generated_at": "2026-11-16T07:00:31Z",
+  "window": {
+    "cur_start": "2026-11-09T07:00:31Z",
+    "prev_start": "2026-11-02T07:00:31Z"
+  },
+  "stages": [
+    {
+      "step": "llm_router:glm",
+      "cur_total": 535,
+      "prev_total": 826,
+      "cur_failure_rate": 21.1,
+      "prev_failure_rate": 23.8,
+      "cur_p50_s": 20.9,
+      "prev_p50_s": 28.7,
+      "regressions": []
+    },
+    {
+      "step": "llm_router:minimax",
+      "cur_total": 412,
+      "prev_total": 416,
+      "cur_failure_rate": 68.4,
+      "prev_failure_rate": 63.9,
+      "cur_p50_s": 0.0,
+      "prev_p50_s": 0.0,
+      "regressions": []
+    },
+    {
+      "step": "hermes_agent:researcher",
+      "cur_total": 218,
+      "prev_total": 228,
+      "cur_failure_rate": 35.3,
+      "prev_failure_rate": 36.0,
+      "cur_p50_s": 298.8,
+      "prev_p50_s": 229.2,
+      "regressions": []
+    },
+    {
+      "step": "llm_router:kimi",
+      "cur_total": 179,
+      "prev_total": 191,
+      "cur_failure_rate": 26.8,
+      "prev_failure_rate": 25.1,
+      "cur_p50_s": 39.2,
+      "prev_p50_s": 38.6,
+      "regressions": []
+    },
+    {
+      "step": "llm_router:glm-fallback",
+      "cur_total": 87,
+      "prev_total": 17,
+      "cur_failure_rate": 98.9,
+      "prev_failure_rate": 100.0,
+      "cur_p50_s": 0.0,
+      "prev_p50_s": 0.0,
+      "regressions": []
+    },
+    {
+      "step": "llm_router:claude",
+      "cur_total": 48,
+      "prev_total": 25,
+      "cur_failure_rate": 91.7,
+      "prev_failure_rate": 100.0,
+      "cur_p50_s": 0.0,
+      "prev_p50_s": 0.0,
+      "regressions": []
+    },
+    {
+      "step": "llm_router:minimax-fallback",
+      "cur_total": 42,
+      "prev_total": 28,
+      "cur_failure_rate": 83.3,
+      "prev_failure_rate": 82.1,
+      "cur_p50_s": 0.0,
+      "prev_p50_s": 0.0,
+      "regressions": []
+    },
+    {
+      "step": "llm_router:(all-failed)",
+      "cur_total": 12,
+      "prev_total": 9,
+      "cur_failure_rate": 100.0,
+      "prev_failure_rate": 100.0,
+      "cur_p50_s": 242.0,
+      "prev_p50_s": 962.2,
+      "regressions": []
+    }
+  ],
+  "regressions": [],
+  "summary": {
+    "stages_compared": 8,
+    "regression_count": 0,
+    "note": "规则：R1 失败率 ≥+5pp（样本≥5）；R2 p50 ≥+50%（上周 p50≥60s）；窗口样本 <3 的低频阶段不比对"
+  }
+}

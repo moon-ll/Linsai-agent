@@ -1,0 +1,84 @@
+{
+  "gaps": [
+    {
+      "claim": "软X射线能区（409.7–543 eV）多通道光电离贡献显著（~30%），导致FROG-CRAB重构失效",
+      "missing_evidence": "缺乏该能区多通道光电离贡献百分比的实验测量数据；[34]为虚构引文，需用真实文献替换",
+      "search_keywords": [
+        "water window multi-channel ionization fraction percentage",
+        "284-410 eV photoionization cross section multi-channel carbon K-edge experimental data",
+        "soft X-ray attosecond streaking multi-channel breakdown experimental",
+        "Cousin PRX 2017 water window multi-channel 30% error"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "FROG-CRAB在软X射线水窗能区（284–410 eV）多通道电离条件下失效边界为~15-30%误差",
+      "missing_evidence": "缺乏FROG-CRAB多通道失效边界（15%/30%阈值）的原始实验数据或系统测量文献",
+      "search_keywords": [
+        "FROG-CRAB validity boundary multi-channel water window",
+        "FROGCRAB multi-channel ionization failure threshold 15 percent 30 percent",
+        "attosecond pulse reconstruction multi-channel error boundary experimental"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "角积分方法可在单通道近似下有效抑制偶极相位，实现阿秒条纹精确重构",
+      "missing_evidence": "缺乏角积分对偶极相位抑制效率与电子动能关系的系统实验验证数据（Ar/Kr靶材在100 eV以上能区的具体抑制效率数值）",
+      "search_keywords": [
+        "angular integration dipole phase suppression efficiency kinetic energy",
+        "Pabst Dahlstrom angular integration attosecond streaking argon krypton",
+        "attosecond streaking dipole phase suppression vs electron energy experimental data"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "国防科大、上海光机所等国内单位已公开报道软X射线阿秒脉冲产生与条纹诊断技术，可直接对接本项目",
+      "missing_evidence": "国内单位在软X射线阿秒产生/条纹诊断领域的具体已发表成果无引用支撑；同段落内指代存在矛盾",
+      "search_keywords": [
+        "国防科大 上海光机所 软X射线 阿秒脉冲",
+        "Chinese attosecond streaking soft X-ray experimental group",
+        "国内 阿秒条纹 软X射线 实验组 已发表工作"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "软X射线能区（409.7–543 eV）氮K边光电离阈值（409.7 eV）实验测量的具体文献依据",
+      "missing_evidence": "N 1s电离阈值409.7 eV的具体实验文献未标注；缺乏该能区光电离截面的实验标定数据",
+      "search_keywords": [
+        "N 1s ionization energy 409.7 eV reference value",
+        "nitrogen K-edge photoionization cross section experimental 409.7 eV",
+        "soft X-ray photoionization cross section nitrogen K-edge experimental data"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "FROG-CRAB中心动量近似（CMA）在超宽带软X射线条件下的精度下降问题",
+      "missing_evidence": "缺乏CMA近似失效的定量边界条件文献（如中心动量近似误差与光谱带宽关系的实验标定）",
+      "search_keywords": [
+        "FROG-CRAB central momentum approximation validity bandwidth",
+        "CMA failure boundary attosecond pulse characterization soft X-ray",
+        "attosecond streaking retrieval algorithm bandwidth limitation experimental"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "16通道TOF探测器角分辨能力与偶极相位角积分验证的可行性",
+      "missing_evidence": "缺乏16通道TOF探测器角积分构型的实验验证文献；探测器均匀性标定数据未引用",
+      "search_keywords": [
+        "16 channel TOF angular resolution attosecond streak camera",
+        "time-of-flight detector angular integration attosecond spectroscopy experimental validation",
+        "TOF array detector uniformity calibration attosecond spectrometry"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "[29]引用页码信息（R7残留错误）；[19][20]归属国内合作单位错误",
+      "missing_evidence": "需核验并修正[29]的正确页码；[19][20]若非上海光机所工作需重新正确归属",
+      "search_keywords": [
+        "reference page number correction attosecond streaking",
+        "上海光机所 attosecond streaking published work verification"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

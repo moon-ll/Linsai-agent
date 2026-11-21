@@ -1,0 +1,43 @@
+{
+  "gaps": [
+    {
+      "claim": "L31「最早实测先例」优先权主张——需指明光致量子相/瞬态拓扑调控的最早实验实测先例，且「据目前检索」限定语未覆盖该句",
+      "missing_evidence": "光致反常霍尔效应/光驱动量子相变的最早实验实测文献（McIver类）。现行 references 实表无光致反常霍尔条目，违反 novelty_claim_cautious 原则；该缺口已跨 R2-R3 两轮未处置，下轮不补挂将升格 red-line",
+      "search_keywords": [
+        "light-induced anomalous Hall effect",
+        "McIver Nature Physics 2020",
+        "photoinduced quantum phase transition experiment",
+        "light-driven Hall effect solid state",
+        "Floquet state experimental observation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "L23 引用 refs[21] Kim 文的论点，正文表述「于2026年」",
+      "missing_evidence": "引用出版状态标注——Kim 文系 arXiv 预印本（†标记仅存在于 refs 侧），正文句内需加「预印本」限定语；或检索该文正式发表/同行评审版本以替换引用属性",
+      "search_keywords": [
+        "Kim arXiv preprint 2026",
+        "Kim peer-reviewed published version",
+        "期刊正式发表版 Kim"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "MgO 双实验归属论断（[11] Berry相 / [19] Floquet特征），L31/L89 与 rationale L47/L61 跨章四处出现易混读",
+      "missing_evidence": "归属区隔性文献限定——L89 需补半句「非谐波谱Floquet实验」区隔两类 MgO 实验（谐波谱 Berry 相实验 vs 非谐波谱 Floquet 特征实验），避免读者将双实验混为一谈",
+      "search_keywords": [
+        "MgO high harmonic generation Berry phase",
+        "MgO Floquet characteristic experiment non-harmonic",
+        "solid state Floquet spectroscopy MgO"
+      ],
+      "priority": "low"
+    },
+    {
+      "claim": "参考文献表头注「与正文角标一一对应」的完整性承诺",
+      "missing_evidence": "refs[1][2][37] 为孤儿条目（零正文角标）——需在其实际支撑的论点处（如 rationale 章节）补挂角标，或从文献表删除孤儿条目以恢复一一对应",
+      "search_keywords": [],
+      "priority": "low"
+    }
+  ],
+  "section": "content"
+}

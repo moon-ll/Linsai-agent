@@ -1,0 +1,103 @@
+{
+  "gaps": [
+    {
+      "claim": "§3.4.1 脉冲偏置场标度测量方案：脉冲宽度选在「远短于晶格热弛豫时间而长于载流子散射时间」的区间，用于把热电子效应与几何响应在时间上分开",
+      "missing_evidence": "全稿未引用任何给出脉冲宽度/载流子散射时间/晶格热弛豫时间数量级的实验文献。方案中「脉冲宽度选在远短于晶格热弛豫时间而长于载流子散射时间」这一时序判据目前是无出处的经验断言，缺少可复算的参数锚点。已核实存在的候选支撑：arXiv:2604.06083（黑磷超快非线性霍尔效应，动量分辨光电子谱+从头算给出激发载流子动力学与诱导场微观图像，信号持续 >300 fs）、arXiv:2507.10309（单层 WTe2 非线性输运引起的电光 Kerr 效应）。需补：脉冲宽度取值区间（ps/fs 量级）、载流子散射时间与晶格热弛豫时间的典型数值、上述两篇中可直接引用的时间尺度数据。",
+      "search_keywords": [
+        "ultrafast nonlinear Hall effect femtosecond pulse black phosphorus",
+        "hot electron relaxation time lattice heating separation femtosecond",
+        "nonlinear Hall effect time-resolved carrier dynamics momentum-resolved photoemission",
+        "electro-optic Kerr effect nonlinear transport monolayer WTe2"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3.4.1 偏置场窗口与抽运波长：偏置场与波矢沿三方晶轴对齐时阈值 2.1×10⁴ V/m、正交时 1.41×10⁵ V/m、增至 2×10⁵ 与 4×10⁵ V/m 的增益频带演化，以及对应的碲共振可激光频段",
+      "missing_evidence": "scheme 中只给出 Eslami 等人对碲的阈值场强数值（2.1×10⁴–4×10⁵ V/m），但未引用支撑「哪些偏置场窗口在实验上可实现且不破坏器件」的文献，也未给出本项目自身 WTe₂/TaIrTe₄/TI 表面态平台的对应偏置场窗口与抽运波长。需补：Eslami 原文的偏置场-增益频带对照表（arXiv:2508.18677 已核实为该工作的 arXiv 版，标题 Berry Curvature Dipole-Induced Chiral Terahertz Gain and Lasing Threshold in Bulk Tellurium），以及碲 CPGE 实验报道中实际使用的激光波长与偏压（arXiv:2309.06404 二维碲可调 CPGE/光伏效应、arXiv:2308.12741 体相碲光电流、arXiv:2504.00413 近红外下块体晶态碲偏振依赖光电流）作为「可实现参数窗口」的类比基线。",
+      "search_keywords": [
+        "Berry curvature dipole chiral terahertz gain lasing threshold bulk tellurium",
+        "circular photogalvanic effect tellurium experiment laser wavelength",
+        "photocurrents in bulk tellurium",
+        "polarization-dependent photocurrent crystalline tellurium chip"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3.4.3 器件实现与验证：WTe₂、TaIrTe₄、拓扑绝缘体表面态三类平台的样品制备、门控方式与取向控制，使三重判据中的对称性判据（随晶体取向变化、随螺旋度反转反号）可被执行",
+      "missing_evidence": "方案对器件制备与取向控制零参数、零文献。缺少支撑「二维或块体器件可实现取向可控的 Berry 曲率偶极张量分量测量」与「拓扑绝缘体表面态可构造 Berry 曲率集中的费米面区域」的实验先例文献。已核实候选：arXiv:2411.09161（KTaO3 二维电子气三种表面取向的非线性霍尔取向依赖测量，是取向判据的直接先例）、arXiv:2603.24019（1H-NbX2 层选择性近邻对称性破缺产生异常/非线性霍尔响应，是门控+对称性破缺器件实现的先例）。样品制备（WTe₂ 剥离/封装、TaIrTe₄ 块体切割、Bi2Se3 表面态器件）本身也需要引用方法学出处。",
+      "search_keywords": [
+        "nonlinear Hall effect crystal orientation dependence KTaO3 two-dimensional electron gas",
+        "WTe2 device fabrication exfoliated gate-dielectric nonlinear Hall",
+        "TaIrTe4 bulk crystal nonlinear planar Hall measurement",
+        "topological insulator surface state device Fermi surface Berry curvature concentrated"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3.1/§3.2.1 弛豫时间近似路线的适用场强上界与失效边界（承诺自 rationale §1.2「弛豫时间路线适用条件在方案中明确界定」），以 ε = k_E/k_BC 作为强弱场判据",
+      "missing_evidence": "方案给出了 ε 判据本身，但未引用文献界定弛豫时间路线在何种场强/电子温度区间开始失效。缺少支撑「恒定弛豫时间近似在强场区失效、须以非平衡稳态格林函数替代」的定量边界文献。已核实候选：arXiv:2411.16675（Sur 等人，完全非平衡霍尔响应，明确指出 k_E ≳ k_BC 后 FNE 响应不再由 Berry 曲率偶极控制）、arXiv:2607.01519（Geng 等人，非平衡稳态格林函数框架，明确陈述恒定弛豫时间估计与 BCD 计算在非微扰区不可靠，并给出与弛豫时间路线的方法分工）。需补：把 ε 的失效阈值与这两篇的自能/弛豫时间处理对应起来，给出可引用的适用上界表述。",
+      "search_keywords": [
+        "fully nonequilibrium Hall response Berry curvature relaxation time crossover",
+        "nonperturbative nonlinear Hall effect nonequilibrium steady state Green function relaxation time breakdown",
+        "strong field nonlinear transport relaxation time validity criterion",
+        "electron-phonon self-energy dynamical mean-field nonequilibrium Hall"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3.4.2 螺旋度分辨横向光电流与太赫兹发射测量：光路以可调相位板与线偏振片组合实现抽运光螺旋度与相位可控切换，器件表面斜入射几何同时提供沿晶轴偏置场分量与沿晶面传播波矢",
+      "missing_evidence": "测量配置的关键物理前提——螺旋度反转时场致通道与光致通道的变换行为不同从而干涉项在差频通道出现——缺少直接的实验先例文献支撑。§3.5.3 列举的先例（WTe₂/Cd₃As₂ 门控 BCD、KTaO3 取向依赖、光致拓扑相变电学分辨、碲非线性声子）均不涉及螺旋度分辨的光电流+太赫兹联合测量。需补：螺旋度分辨光电流测量先例、缺陷型螺旋度依赖太赫兹发射先例（arXiv:2310.09989，PtTe2 薄膜缺陷诱导螺旋度依赖太赫兹发射）、以及用于分离光致/场致横向电流的二维太赫兹傅里叶分析（已有 Fujimoto 等人 GaAs 工作，但需补该测量技术在 WTe₂/TI 类二维体系上的适用先例）。",
+      "search_keywords": [
+        "helicity-dependent terahertz emission defect induced Dirac semimetal",
+        "helicity-resolved photocurrent circular photogalvanic measurement",
+        "two-dimensional terahertz Fourier analysis light-induced inverse spin Hall",
+        "photogalvanic effect helicity reversal symmetry selection rule experiment"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3.5.3 「光致拓扑相变的纯电学分辨在 Floquet Weyl 体系中已实现[29]」——引用 arXiv:2603.27514 作为已实现的实验先例",
+      "missing_evidence": "该文为 arXiv 预印本（已核实：arXiv:2603.27514，2026-03-29 提交，标题 Anomalous Hall Conductivity as an Effective Means of Tracking the Floquet Weyl Nodes in Quasi-One-Dimensional β-Bi₄I₄），其摘要为「we propose that the anomalous Hall effect ... can be used to track Floquet Weyl nodes」「using first-principles calculations and symmetry analysis」，属理论预言而非实验实现。方案与 rationale §1.4 均以「已实现」措辞挂靠该预印本，与预印本核实纪律冲突，且现有参考文献中另有多条预印本（[27] arXiv:2411.18843、[32] arXiv:2411.09161、[41] arXiv:2607.01519、[42] arXiv:2607.10012、[19] arXiv:2505.07189、[17] 对应 arXiv:2508.18677）均未标注发表状态与检索截至日期。需补：每条预印本引用的状态注记、检索截至日期、以及区分「理论计算预言」与「实验已实现」的对照证据；若需引用真实 Floquet 光致拓扑相变实验，应另找实验论文而非计算论文。",
+      "search_keywords": [
+        "Floquet Weyl semimetal experimental observation anomalous Hall circular polarization",
+        "light-induced topological phase transition experiment time-resolved",
+        "arxiv2603.27514 published journal status"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3.3.2 末段量纲自洽论证 σ_Axy = (e²/h)(3D/2)(j/C)，以及 §3.3.2/content §2.3 中「碲的 Berry 曲率偶极张量分量 D_B = −8.99×10⁻³（ħ/e 约定，无量纲），载流子浓度 0.784×10¹⁶ cm⁻³」作为标定点",
+      "missing_evidence": "式中的 j、C 未定义，第三方无法复算；且 D_B/D 符号在 scheme §3.3.2 与 rationale §1.2 存在两版混用。缺的是明确给出 Berry 曲率偶极张量定义式（含 (2π)⁻³ 归一约定）与 σ_Axy 完整表达式的文献出处，以及把 Eslami 的 D = −8.99×10⁻³ 无量纲约定与本项目 D_B 记号对齐的原始定义来源。需补：Berry 曲率偶极张量的规范定义文献（Sodemann & Fu 量子非线性霍尔效应的耦合系数定义、Zhang 等人 Berry 曲率多极矩的标度对应关系），以及可引用的 Wannier/Berry 曲率积分方法学文献（arXiv:2303.10129，Berry 型量的协变导数及其在非线性输运中的应用，可直接支撑积分表达式与量纲）。另需核查 Eslami 论文中 D 的原始定义与单位约定，避免二手转述失真。",
+      "search_keywords": [
+        "quantum nonlinear Hall effect Berry curvature dipole definition coupling coefficient",
+        "Berry curvature dipole tensor units normalization first moment",
+        "covariant derivatives Berry-type quantities nonlinear transport",
+        "Berry curvature multipole scaling exponent transverse current"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§3.4.3 与 content §2.4 的完成判据容差：标度交叉位置偏差 20%、Berry 曲率偶极谱过零点偏差 15%",
+      "missing_evidence": "两个容差数值在全稿中无任何文献或实验分辨能力依据的支撑，仅以「标度指数由幂律拟合给出，其转折位置在指数由 2 降至 1 的过渡带内只能定位到约两成的区间」一句主观断言给出 20%，而 15% 更无出处。需补：标度指数幂律拟合的实验不确定度先例文献（给出幂律拟合的置信区间与转折点定位精度），以及 Berry 曲率偶极谱/费米能依赖测量的能量分辨能力先例（如门控可调 BCD 极化率实验 Cd₃As₂ [15]、WTe₂ 电场调控 BCD [14] 中的门压步长与 BCD 谱过零点的实验不确定度）。",
+      "search_keywords": [
+        "power law fit exponent uncertainty nonlinear Hall scaling crossover experiment",
+        "gate-tunable Berry curvature dipole polarizability Dirac semimetal Cd3As2",
+        "electric field control Berry curvature dipole WTe2 experiment accuracy",
+        "threshold bias field determination uncertainty systematic error"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§3.5.1 增量主张「把强场非平衡分布、光致几何重整、准静态 BCD 增益三者置于同一响应函数并保留干涉项」，以及 §3.5.3 「这些先例覆盖了本方案所需的每一类测量能力」",
+      "missing_evidence": "创新性边界的文献支撑不完整：现有引用（[7] Sur、[18] Murotani、[17] Eslami）分属三个独立框架，缺「已有工作未做联合处理」这一否证性证据的检索记录作为显式支撑；亦缺最近邻的协同/级联工作被纳入比较（arXiv:2607.10012 第四阶级联光电响应、arXiv:2610.16659 静态扰动与 Floquet 场协同产生拓扑性质，该文已核实为「静态+Floquet 协同」的最近邻工作，其协同意图与本项目「偏置场+光场+非平衡分布三者协同」高度相关，应在 §3.5.1 显式区隔而非仅在 rationale 提及）。另外缺少对「螺旋度/偏振与相干干涉」类近邻工作的检索否定记录（如 arXiv:2603.24019 层选择性近邻对称性破缺产生非线性霍尔响应，涉及近邻诱导的干涉/混合通道）。",
+      "search_keywords": [
+        "cooperation static perturbation Floquet field type-II semi-Dirac semimetal",
+        "cascaded circular photogalvanic nonlinear Hall fourth-order optoelectronic",
+        "light-induced and field-induced Berry curvature simultaneous unified framework",
+        "interference between field-induced and light-induced Berry curvature nonlinear Hall"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

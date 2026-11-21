@@ -1,0 +1,38 @@
+{
+  "gaps": [
+    {
+      "claim": "§1.2 文献综述段（P5-P10）需按理论/分类/材料/拓扑/磁振子五个具体缺口各锚一段，引用降为段内证据并带数值锚定",
+      "missing_evidence": "覆盖五个缺口维度的代表性文献，每篇需含体系+年份+关键数值（能隙/劈裂幅度/临界光强等），替换当前'作者+内容'连续平推、无数值锚定的 5-7 篇连引长段",
+      "search_keywords": [
+        "Floquet engineering antiferromagnet review",
+        "light-induced Dzyaloshinskii-Moriya interaction antiferromagnet",
+        "chiral edge magnon circularly polarized laser",
+        "Floquet magnon topology classification",
+        "AB'-CrI3 Floquet spin splitting"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.6 P3 末句'标度形式不同这一点本身即构成判据'——区分逆法拉第通道与纯 Floquet 通道的可检验实验判据",
+      "missing_evidence": "利用光强/频率幂次标度区分准静态逆法拉第通道与光子缀饰 Floquet 通道的实验或理论先例文献（如泵浦-探测双对数斜率测量），将未落地断言改为有先例支撑的可检验表述",
+      "search_keywords": [
+        "inverse Faraday versus Floquet channel distinction",
+        "pump-probe scaling spin splitting power law",
+        "light-induced effective field versus photon dressing",
+        "nonperturbative spin dynamics intensity frequency scaling"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.3/§1.6 统一后的逆法拉第通道光强标度表述（M ∝ E² ∝ I，与 scheme §3.2 二次口径一致）",
+      "missing_evidence": "逆法拉第效应感应磁化/自旋劈裂随光强标度律的权威出处文献，用于锚定统一后的'随光强二次增长'表述并支撑跨章一致性核对的数值链",
+      "search_keywords": [
+        "inverse Faraday effect magnetization proportional intensity",
+        "optically induced magnetization quadratic electric field",
+        "inverse Faraday antiferromagnetic spin splitting experiment"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

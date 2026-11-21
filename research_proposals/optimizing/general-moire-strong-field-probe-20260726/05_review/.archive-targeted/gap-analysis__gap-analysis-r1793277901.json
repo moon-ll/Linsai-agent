@@ -1,0 +1,49 @@
+{
+  "gaps": [
+    {
+      "claim": "Zhou 等于 2023 年报道了黑磷体系中的 Floquet 能带工程。",
+      "missing_evidence": "该论点目前误挂至 Shan 等的 [17] 和 Amato 等的 [18]，两篇文献不能支撑黑磷 Floquet 能带工程结论。应改挂 Zhou 等发表于 Nature 2023, 614, 75 的论文，即现有参考文献 [19]，并复核 [17]、[18] 在其他位置的原有支撑对象。",
+      "search_keywords": [
+        "Zhou 2023 Nature 614 75 black phosphorus Floquet band engineering",
+        "black phosphorus Floquet engineering Nature 2023",
+        "黑磷 Floquet 能带工程 Zhou"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Tyulnev 等于 2024 年报道了体相 MoS₂ 中涡旋光的谷极化操控。",
+      "missing_evidence": "该论点目前误挂至 [17]、[18]，缺少与所述研究对象和结论直接对应的来源。应改挂 Tyulnev 等发表于 Nature 2024, 628, 746 的论文，即现有参考文献 [20]。",
+      "search_keywords": [
+        "Tyulnev 2024 Nature 628 746 bulk MoS2 vortex light valley polarization",
+        "bulk MoS2 vortex light valley polarization Nature 2024",
+        "体相 MoS2 涡旋光 谷极化 Tyulnev"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.2.2 关于联合反演结果具有可量化统计效力和可报告置信区间的主张。",
+      "missing_evidence": "缺少统计效力、样本量与置信区间之间关系的明确依据，也未落地 95% 置信区间半宽 σ/√N、所需样本量及功效阈值的推导或方法学文献。需补充统计推断方法依据，或引用多观测量联合反演中不确定度传播、置信区间和样本量设计的先例；仅以“方案章集中交代”作为指针不足以形成支撑。",
+      "search_keywords": [
+        "sample size confidence interval standard error sigma sqrt N statistical power",
+        "confidence interval half-width sigma over square root of N sample size",
+        "multi-observable inverse retrieval uncertainty propagation confidence interval",
+        "high harmonic spectroscopy joint inversion sample size uncertainty",
+        "多观测量联合反演 置信区间 样本量 统计效力"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.2.3 中强场高次谐波标度指数基线 α≈2.5、拟合不确定度 ±0.05，以及相应谱窗选择具有可靠依据。",
+      "missing_evidence": "缺少支撑 α≈2.5 基线及其 ±0.05 不确定度的原始文献或数据来源，也缺少说明该指数对拟合谱窗敏感性的依据。应核对并引用 [31]，或由 [31] 的公开数据重新拟合并引至 [27] 复核谱窗；如引用自行拟合结果，还需同时给出原始数据来源和拟合方法文献。",
+      "search_keywords": [
+        "strong-field high harmonic generation scaling law alpha 2.5",
+        "HHG cutoff scaling exponent 2.5 field dependence",
+        "high harmonic scaling exponent spectral window uncertainty",
+        "phase matching cutoff scaling law experimental HHG",
+        "强场高次谐波 标度指数 2.5 谱窗 不确定度"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

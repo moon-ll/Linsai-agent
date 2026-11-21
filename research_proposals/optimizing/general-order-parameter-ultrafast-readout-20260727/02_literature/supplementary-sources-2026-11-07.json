@@ -1,0 +1,17 @@
+{
+  "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
+  "cluster_id": "orphan-route-2026-11-07",
+  "clusters": [
+    "orphan-route-2026-11-07"
+  ],
+  "entries": [
+    {
+      "source_id": "paper:2024-2402.11449-nonlinear-harmonic-spectra-in-bilayer-van-der-waals-antiferr",
+      "title": "Nonlinear harmonic spectra in bilayer van der Waals antiferromagnets CrX3",
+      "summary": "本文以双层范德华反铁磁半导体 CrX3（X=Cl, Br, I）为对象，系统计算其波长依赖的非线性谐波谱（二次与三次谐波），通过数百次含时动力学模拟逐一定位对谐波有主要贡献的全部偶极允许跃迁。借助动量矩阵元分析，将带边以上高度纠缠的共振峰逐一指认为价带至三个不同导带区域的跃迁，证明非线性谐波谱可作为区分该类材料电子结构的可行光谱手段。",
+      "path": "knowledge/raw/papers/2024-2402.11449-nonlinear-harmonic-spectra-in-bilayer-van-der-waals-antiferr.md",
+      "added_via": "cluster:orphan-route-2026-11-07",
+      "added_at": "2026-11-07T02:41:04Z"
+    }
+  ]
+}

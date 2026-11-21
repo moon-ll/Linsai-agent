@@ -1,0 +1,36 @@
+{
+  "gaps": [
+    {
+      "claim": "rationale.md §4 声称'填补这一国际空白'（瞬态量子相的全光读写），但无任何文献支撑证明该方向确为国际空白",
+      "missing_evidence": "缺乏系统性文献检索证据，无法确认全球范围内是否已有团队实现瞬态量子相的全光读写或类似工作；优先权声明需用文献佐证而非空断",
+      "search_keywords": [
+        "all-optical quantum phase readout solid state",
+        "transient quantum phase attosecond measurement",
+        "subcycle quantum phase optical control",
+        "ultrafast Berry phase measurement experiment",
+        "瞬态量子相 全光读写 国际",
+        "ultrafast quantum phase retrieval solid state state-of-the-art"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "full_review.md 自检数据多处与实际不符（引用次数、参考文献条数等指标自报值与实测值不一致），整体一致性审查的可信度存疑",
+      "missing_evidence": "缺乏对全文实际文献覆盖范围的准确统计与核验，无法确认是否有重要文献遗漏或误引",
+      "search_keywords": [
+        "solid-state high harmonic generation quantum phase review",
+        "attosecond science Chinese research team review",
+        "transient quantum phase ultrafast optics review survey"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "rationale.md 内联参考文献列表（50条）与 references.md（41条）存在双重列表冲突，[40][41]在两套列表中指向完全不同的论文",
+      "missing_evidence": "缺失统一的参考文献校验，部分引用文献无法溯源验证其存在性和准确性，需要核实被遗漏的9条文献是否为关键支撑",
+      "search_keywords": [
+        "transient quantum phase optical read write key reference",
+        "solid state HHG quantum geometry foundational paper"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "proposal_id": "general-houston-kronig-penney-landau-zener-20261004",
+  "issues": 18,
+  "stages": {
+    "review_researcher": "ok(905s)",
+    "review_critic": "ok(816s)",
+    "review_reviewer": "ok(888s)",
+    "writer": "ok(1045s)",
+    "verify": "通过"
+  },
+  "params_injected": true,
+  "post_hooks": {
+    "draft_resync": true,
+    "params_conflicts": 8,
+    "long_sentences": "2→2"
+  },
+  "success": true,
+  "verdict": "通过",
+  "panel_cleared": true,
+  "panel_cycle_reset": true,
+  "auto_promote": "skipped_unresolved_critical",
+  "auto_promote_reason": "存在未解决 high/critical 问题，留在 optimizing 继续改",
+  "elapsed_s": 4320.3
+}

@@ -1,0 +1,75 @@
+{
+  "gaps": [
+    {
+      "claim": "R1 量子态约化层级选择中，三种可切换描述框架（原子/能带/多体）接口的可行性未被文献充分支撑",
+      "missing_evidence": "缺乏固体HHG中量子态约化层级（原子极限 vs 能带描述）适用边界的对比研究，也无具体可切换接口实现方案",
+      "search_keywords": [
+        "semiconductor Bloch equation atomic limit HHG validity",
+        "solid state HHG band theory vs atomistic model",
+        "high harmonic generation multi-scale coupling interface"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Khurelbaatar等[21]的BSV量子表征结果（原子HHG）可推广至固体HHG的边界未明确",
+      "missing_evidence": "Khurelbaatar等的结果物理对象是原子HHG，R1物理对象是固体HHG；原子体系Wigner相空间表征方法在固体中的类比可行性缺乏文献支撑",
+      "search_keywords": [
+        "bright squeezed vacuum HHG solid state",
+        "Wigner phase space quantum light characterization solid",
+        "quantum light high harmonic generation solid state theory"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "f-sum rule标度律 (1+0.5·U/W) 的线性标度形式缺乏物理推导",
+      "missing_evidence": "未给出该线性标度的物理推导；仅陈述用Year 3实测数据校准等于将核心物理约束的成立性推迟至Year 3，需理论文献支撑该标度律的合理性",
+      "search_keywords": [
+        "f-sum rule high harmonic generation Hubbard U",
+        "high harmonic sum rule strongly correlated",
+        "solid state HHG bandwidth renormalization scaling"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "R2三指标Go判据（< 0.3 / < 10 / < 0.3）是联合达标还是任一达标未明确",
+      "missing_evidence": "R2主问题提到三指标联合使用以避免偶然性，但Go判据数值是联合约束还是单独约束缺乏文献支撑",
+      "search_keywords": [
+        "Fisher information HHG parameter retrieval joint constraint",
+        "multi-indicator high harmonic spectroscopy identifiability",
+        "condition number nonlinear optics inverse problem combined"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "BSV-HHG实验对接判据中耦合效率≥10⁻⁵与g²(0)>1.5的兼容性边界未给出",
+      "missing_evidence": "BSV强度（影响耦合效率）与g²(0)量子度（压缩度）之间存在原理约束tradeoff，两者同时达标的兼容性边界缺乏文献支撑",
+      "search_keywords": [
+        "bright squeezed vacuum coupling efficiency photon number",
+        "squeezed light g2 intensity trade-off parametric amplifier",
+        "BSV HHG coupling threshold quantum light"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "1.5 μm中红外驱动Bi₂Te₃的HHG实验基础未充分引用",
+      "missing_evidence": "R2中Bi₂Te₃作为中红外HHG物理对象的选择依据（带隙~0.3 eV对应~4 μm，但驱动光为1.5 μm）缺乏直接的文献支撑，需Bi₂Te₃中红外HHG实验数据",
+      "search_keywords": [
+        "Bi2Te3 high harmonic generation mid-infrared 1.5 micron",
+        "topological insulator HHG 1.5 micrometer driving",
+        "Bi2Te3 strong field nonlinear optics mid-IR"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "content.md整章未引用[30]-[41]等基础奠基文献（Berry/TKNN/Corkum/Lewenstein/Ghimire/Lvovsky/Karniadakis），核心概念未溯源",
+      "missing_evidence": "[30]-[41]含Berry/TKNN/Corkum/Lewenstein/Ghimire/Lvovsky/Karniadakis等基础奠基文献，研究内容中量子几何、高次谐波产生的核心概念未被溯源至这些基础文献",
+      "search_keywords": [
+        "Berry curvature nonlinear optics review",
+        "Corkum HHG three step model semiconductor",
+        "Ghimire solid state high harmonic generation first",
+        "Lewenstein model high harmonic generation"
+      ],
+      "priority": "high"
+    }
+  ]
+}

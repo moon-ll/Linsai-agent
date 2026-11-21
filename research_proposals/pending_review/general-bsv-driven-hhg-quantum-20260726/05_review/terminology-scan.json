@@ -1,0 +1,324 @@
+{
+  "checked": true,
+  "at": "2026-11-07T04:05:56Z",
+  "proposal": "general-bsv-driven-hhg-quantum-20260726",
+  "sections_scanned": [
+    "content",
+    "full_review",
+    "method_manual",
+    "rationale",
+    "scheme"
+  ],
+  "cjk_variant_pairs": [
+    {
+      "a": "强关联",
+      "b": "多体关联",
+      "freq_a": 51,
+      "freq_b": 18,
+      "sections_a": [
+        "content",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "光子数",
+      "b": "光子统计",
+      "freq_a": 42,
+      "freq_b": 18,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "类关联",
+      "b": "多体关联",
+      "freq_a": 19,
+      "freq_b": 18,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "多体态",
+      "b": "多体关联",
+      "freq_a": 19,
+      "freq_b": 18,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "量子光",
+      "b": "量子指纹",
+      "freq_a": 62,
+      "freq_b": 17,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "强关联",
+      "b": "三类关联",
+      "freq_a": 51,
+      "freq_b": 17,
+      "sections_a": [
+        "content",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "体关联",
+      "b": "三类关联",
+      "freq_a": 18,
+      "freq_b": 17,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "多体关联",
+      "b": "三类关联",
+      "freq_a": 18,
+      "freq_b": 17,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "多体关联",
+      "b": "非关联",
+      "freq_a": 18,
+      "freq_b": 17,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "关联强度",
+      "b": "关联梯",
+      "freq_a": 17,
+      "freq_b": 17,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "三类关联",
+      "b": "非关联",
+      "freq_a": 17,
+      "freq_b": 17,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "经典光",
+      "b": "子光",
+      "freq_a": 90,
+      "freq_b": 64,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    }
+  ],
+  "token_variant_groups": [
+    {
+      "group_key": "Q_F",
+      "variants": [
+        {
+          "form": "Q_F",
+          "count": 107
+        },
+        {
+          "form": "Q_F^",
+          "count": 2
+        }
+      ],
+      "sections": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "group_key": "R_F",
+      "variants": [
+        {
+          "form": "R_F",
+          "count": 16
+        },
+        {
+          "form": "R_{F",
+          "count": 2
+        }
+      ],
+      "sections": [
+        "method_manual"
+      ]
+    },
+    {
+      "group_key": "N_q",
+      "variants": [
+        {
+          "form": "N_q",
+          "count": 10
+        },
+        {
+          "form": "N_{q",
+          "count": 2
+        }
+      ],
+      "sections": [
+        "method_manual",
+        "scheme"
+      ]
+    },
+    {
+      "group_key": "rho_s",
+      "variants": [
+        {
+          "form": "rho_s",
+          "count": 3
+        },
+        {
+          "form": "rho_s^",
+          "count": 3
+        }
+      ],
+      "sections": [
+        "method_manual"
+      ]
+    }
+  ],
+  "summary": {
+    "cjk_pair_candidates": 447,
+    "token_variant_groups": 4,
+    "note": "候选报告不改文：处置归 writer/critic 契约；数值口径归 params_registry"
+  }
+}

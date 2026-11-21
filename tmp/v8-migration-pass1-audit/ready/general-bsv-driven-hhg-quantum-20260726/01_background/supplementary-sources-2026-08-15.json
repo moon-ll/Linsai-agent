@@ -1,0 +1,14 @@
+{
+  "proposal_id": "general-bsv-driven-hhg-quantum-20260726",
+  "cluster_id": "cl_20260815_e0f052",
+  "entries": [
+    {
+      "source_id": "hermes_briefing:research_briefing_20260513.md",
+      "title": "Solid-State High-Order Harmonic Generation: Emerging Frontiers in Ultrafast and Quantum Light Science",
+      "summary": "本文系统综述了固体高次谐波产生（HHG）作为超快与量子光科学研究平台的新兴前沿，涵盖纳米结构与等离激元-半导体混合实验平台及多能带理论模型所揭示的贝里相位效应、拓扑效应与非经典光产生机制。其核心贡献在于阐明了阿秒尺度的相位控制与量子相干调控策略，为发展光谱可调谐的量子工程光源和相干控制方案提供了新见解。",
+      "path": "/Users/ll/Desktop/hermes_workspace/knowledge_base/AI_wiki/briefings/research_briefing_20260513.md",
+      "added_via": "cluster:cl_20260815_e0f052",
+      "added_at": "2026-08-15T17:49:01Z"
+    }
+  ]
+}

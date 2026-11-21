@@ -1,0 +1,74 @@
+{
+  "proposal_id": "general-t-tise2-2-2-2-cdw-20261108",
+  "cluster_id": "cl_20261108_23b9f9",
+  "clusters": [
+    "cl_20261108_23b9f9",
+    "cl_20261113_7d3b58"
+  ],
+  "entries": [
+    {
+      "source_id": "paper:2025-2509.15358-long-lived-dynamics-of-the-charge-density-wave-in-tise2-obse",
+      "title": "Long-lived dynamics of the charge density wave in TiSe2 observed by time-resolved neutron diffraction",
+      "summary": "本文利用激光泵浦-时间分辨弹性中子散射直接观测 1T-TiSe2 中 2×2×2 周期性晶格畸变（PLD）型电荷密度波在光致扰动后的非平衡恢复动力学，将探测时窗拓展到光学超快手段难以覆盖的长时标。核心发现是短程关联与长程有序的演化显著不对称：局域 CDW 关联在扰动后可较快存留/恢复，而长程相干序的重建缓慢且寿命极长。这为 CDW 序参量幅度与相位（畴）动力学的解耦以及长时程有序恢复瓶颈提供了直接的晶格衍射证据。",
+      "path": "knowledge/raw/papers/2025-2509.15358-long-lived-dynamics-of-the-charge-density-wave-in-tise2-obse.md",
+      "added_via": "cluster:cl_20261108_23b9f9",
+      "added_at": "2026-11-13T16:44:47Z"
+    },
+    {
+      "source_id": "paper:2025-2507.12430-electron-phonon-dominated-charge-density-wave-fluctuations-i",
+      "title": "Electron-phonon-dominated charge-density-wave fluctuations in TiSe2 accessed by ultrafast nonequilibrium dynamics",
+      "summary": "本文利用时间分辨极紫外（EUV）动量显微术（HHG极紫外探针的泵浦-探测角分辨光电子能谱），在跨越T_CDW的温度区间系统追踪1T-TiSe2中电荷密度波（CDW）的非平衡动力学，同步监测背折叠能带强度（序参量代理量）、CDW能隙恢复及相干幅度模式振荡。发现相干幅度模式在T_CDW以上持续存在，表明正常态存在显著的CDW涨落区；结合幅度模式频率/寿命及序参量退有序-恢复行为随温度与泵浦流量的标度关系，论证这些涨落由电声相互作用主导而非激子（电子-空穴配对）机制。结果为TiSe2 CDW起源的长期争论提供了非平衡动力学证据，支持晶格不稳定（Jahn-Teller型）图像。",
+      "path": "knowledge/raw/papers/2025-2507.12430-electron-phonon-dominated-charge-density-wave-fluctuations-i.md",
+      "added_via": "cluster:cl_20261108_23b9f9",
+      "added_at": "2026-11-13T16:44:47Z"
+    },
+    {
+      "source_id": "paper:2025-2509.16493-dynamics-of-a-jointly-commensurate-moiré-charge-density-wave",
+      "title": "Dynamics of a jointly commensurate moiré charge density wave",
+      "summary": "本文对EuTe4中由两支正交非公度CDW通过联合公度条件形成的大周期莫尔电荷密度波开展光致动力学研究，联合使用时间分辨X射线衍射（tr-XRD）、超快电子衍射（UED）与时间分辨ARPES（tr-ARPES）三种模态，分别从卫星布拉格峰强度、峰位、峰宽和电子能隙演化中读出CDW序参量的幅度、相位/周期性与关联长度。结果表明幅度塌缩-恢复与相位（莫尔周期漂移）及关联长度动力学发生在明显不同的时间尺度上，实现了序参量各自由度超快动力学的解耦测量。",
+      "path": "knowledge/raw/papers/2025-2509.16493-dynamics-of-a-jointly-commensurate-moiré-charge-density-wave.md",
+      "added_via": "cluster:cl_20261108_23b9f9",
+      "added_at": "2026-11-13T16:44:47Z"
+    },
+    {
+      "source_id": "paper:2025-2512.12564-tracking-the-catastrophic-collapse-of-hybrid-exciton-phonon",
+      "title": "Tracking the Catastrophic Collapse of Hybrid Exciton-Phonon Order in a Quantum Material",
+      "summary": "本文利用飞秒泵浦-探测超快实验实时追踪量子材料 1T-TiSe2 中杂化激子-声子序的崩塌动力学，首次在时域上分离出该复合序参量的两个分量：光激发后电子（激子）分量在飞秒尺度内灾难性塌缩，而周期性晶格畸变（PLD）分量在电子序消失后仍持续存在。这一结果揭示出电子序与晶格序之间存在显著的时间尺度解耦，为长期争议的 TiSe2 电荷密度波（CDW）究竟源于激子绝缘体不稳定性还是声子/晶格驱动提供了关键实验判据。",
+      "path": "knowledge/raw/papers/2025-2512.12564-tracking-the-catastrophic-collapse-of-hybrid-exciton-phonon.md",
+      "added_via": "cluster:cl_20261108_23b9f9",
+      "added_at": "2026-11-13T16:44:47Z"
+    },
+    {
+      "source_id": "paper:2021-2106.09774-unconventional-hysteretic-transition-in-a-charge-density-wav",
+      "title": "Unconventional hysteretic transition in a charge density wave",
+      "summary": "本文在准二维范德华材料 EuTe4 中报道了一种非常规热滞回转变：通过输运、光电子能谱、衍射与 X 射线吸收四探针联用，观测到宽度超过 400 K 的滞回环（晶体固体中的纪录），且该转变完全发生在非公度电荷密度波（CDW）相内部——转变前后 CDW 调制周期不变。作者将机制归结为不同层间 CDW 相对相位（堆垛组态）的切换，这是准二维体系特有的自由度，在纯二维或强耦合三维体系中均不存在。该发现挑战了密度波体系亚稳态的既有理论认识，拓展了对破缺对称态中滞回转变的理解边界。",
+      "path": "knowledge/raw/papers/2021-2106.09774-unconventional-hysteretic-transition-in-a-charge-density-wav.md",
+      "added_via": "cluster:cl_20261113_7d3b58",
+      "added_at": "2026-11-13T20:40:27Z"
+    },
+    {
+      "source_id": "paper:2026-2602.09855-multiple-layer-selective-polar-charge-density-waves-in-eute4",
+      "title": "Multiple Layer-Selective Polar Charge Density Waves in EuTe4",
+      "summary": "本文通过第一性原理计算理论预言范德华材料 EuTe₄ 中存在多个层选择性极性电荷密度波（CDW）态：CDW 序被约束在特定层上择优形成，且各极性构型具有不同电极化方向。这些近简并的多稳态及其间的势垒共同解释了实验观测到的巨热滞回行为，并给出了电/光场实现非易失态开关的微观图像。",
+      "path": "knowledge/raw/papers/2026-2602.09855-multiple-layer-selective-polar-charge-density-waves-in-eute4.md",
+      "added_via": "cluster:cl_20261113_7d3b58",
+      "added_at": "2026-11-13T20:40:27Z"
+    },
+    {
+      "source_id": "paper:2026-2606.17326-emergent-antiphase-stacking-in-a-transient-charge-density-wa",
+      "title": "Emergent Antiphase Stacking in a Transient Charge Density Wave",
+      "summary": "本文利用 MeV 超快电子衍射对 LaTe3 进行泵浦-探测实验，在光致瞬态电荷密度波（CDW）中观测到平衡相图上不存在的反相堆叠（antiphase stacking）新有序态：相邻 CDW 调制层之间的序参量相位在光激发后发生 π 移位，形成仅稳定存在于非平衡窗口内的隐藏堆积构型。该工作首次在实空间衍射层面直接成像了瞬态 CDW 的堆叠相位自由度，证明超快光激发可以选择性稳定平衡态无法抵达的序参量流形，为瞬态新序的寻址、读出与操控提供了范式。",
+      "path": "knowledge/raw/papers/2026-2606.17326-emergent-antiphase-stacking-in-a-transient-charge-density-wa.md",
+      "added_via": "cluster:cl_20261113_7d3b58",
+      "added_at": "2026-11-13T20:40:27Z"
+    },
+    {
+      "source_id": "paper:2025-2508.06464-observation-of-momentum-dependent-charge-density-wave-gap-in",
+      "title": "Observation of momentum dependent charge density wave gap in EuTe4",
+      "summary": "该文结合第一性原理 DFT 计算与 ARPES，对层状稀土硫族化合物 EuTe4 的 CDW 电子结构进行了动量分辨的完整表征。ARPES 在费米面处观测到 CDW 能隙，且其动量依赖显著：沿 Γ-Y 高对称方向最大、沿 Γ-X 最小，直接反映了费米面嵌套诱导 CDW 序的各向异性；同时在更低结合能处观测到杂化诱导的能隙特征。辅以低温变磁场比热测量（奈尔温度 T_N ≈ 6.9 K 附近）构建了磁相图，为 CDW 序与 Eu 4f 磁性的相互作用提供了实验线索。",
+      "path": "knowledge/raw/papers/2025-2508.06464-observation-of-momentum-dependent-charge-density-wave-gap-in.md",
+      "added_via": "cluster:cl_20261113_7d3b58",
+      "added_at": "2026-11-13T20:40:27Z"
+    }
+  ]
+}

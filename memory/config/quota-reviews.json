@@ -1,0 +1,18 @@
+{
+  "items": [
+    {
+      "id": "quota_review_1109",
+      "title": "11-09 配额复核：候选簇 ≥10 且方向过滤生效 → NEW_WEEKLY_QUOTA 2→3",
+      "criteria": [
+        "① 当周候选簇 ≥10",
+        "② 方向过滤（CHANGELOG v7.3.22 裁决 1）已上线并生效"
+      ],
+      "decided_basis": "CHANGELOG v7.3.22 裁决 3：配额维持 2，11-09 复核时才考虑提至 3，须同时满足上述两项；v7.3.21 决定 1 同款重评门",
+      "due_date": "2026-11-09T00:00:00Z",
+      "status": "done",
+      "notes": "复核通过，两判据均满足：① 当周候选簇 27≥10（clusters.json 实数：11-06 批 21 簇 + 11-07/08 轮 6 簇；v7.3.57 更正口径按 member_source_ids 对象字段计）；② 方向过滤已上线并生效——v7.3.22 裁决 1 代码在位（clusters.py core_theme_members，测试 test_cluster_paper_identity 42/42 含降级分支），生产侧 r124-r127：28 簇已落盘 cross_domain 标记与 direction_hit_ratio，2 个 new 路由（11-06 berry 霍尔 / 11-08 CDW 序参量）均经过滤闸执行、零故障；降级（supplementary_pool）分支尚无生产触发案例，属保险未触发，机制本身在效。变更：input_jobs.py NEW_WEEKLY_QUOTA=2→3，CHANGELOG v7.3.76。",
+      "decided_at": "2026-11-09T00:20:00Z",
+      "outcome": "NEW_WEEKLY_QUOTA 2→3 已生效（input_jobs.py，v7.3.76）"
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+{
+  "gaps": [
+    {
+      "claim": "§3.2 BSV 光源作为核心实验装置的技术可行性论证需要同类装置的工程参数支撑",
+      "missing_evidence": "缺少 Bright Squeezed Vacuum 实验装置的成熟度、压缩参数（dB）、重复频率、稳定性等可量化工程指标的同行评议文献",
+      "search_keywords": [
+        "bright squeezed vacuum source engineering parameters",
+        "BSV source squeezed dB repetition rate stability",
+        "cavity-enhanced BSV generation experiment",
+        "squeezed vacuum HHG driver feasibility"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3.3 风险评估中 Plan B 的可行性需要替代方案的文献先例支撑",
+      "missing_evidence": "缺少 BSV 驱动 HHG 实验失败时 Plan B 替代方案（如弱相干态驱动 HHG、经典光固体 HHG 标定）的可行性实验数据",
+      "search_keywords": [
+        "coherent state driven solid HHG benchmark",
+        "Plan B attosecond spectroscopy alternative technique",
+        "classical light solid-state HHG calibration",
+        "weak coherent state high harmonic generation comparison"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3.1 总体技术路线中「多体态探针」概念需要最近的实验验证文献支撑",
+      "missing_evidence": "缺少 BSV 驱动 HHG 作为强关联多体态探针的近 1-2 年同行评议实验验证（特别是 Mott 绝缘体、Hubbard 模型系统）",
+      "search_keywords": [
+        "BSV HHG strongly correlated system probe",
+        "quantum light driven HHG Mott insulator experimental",
+        "squeezed light multi-body spectroscopy peer-reviewed 2024 2025",
+        "BSV many-body probe high harmonic publication"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3.2 固体 HHG 平台（含 Mott 绝缘体）的可行性需要材料体系工艺成熟度证据",
+      "missing_evidence": "缺少 Mott 绝缘体、过渡金属氧化物等强关联体系在 BSV 强场下的损伤阈值、相变稳定性等关键工艺参数文献",
+      "search_keywords": [
+        "Mott insulator strong field damage threshold",
+        "transition metal oxide high harmonic stability",
+        "correlated insulator HHG sample preparation",
+        "NiO 1T-TaS2 high harmonic generation experimental"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§3.2 双光路干涉技术作为 HHG 信号读出手段需要 2024-2026 年最新实验文献",
+      "missing_evidence": "缺少 BSV-HHG 双光路干涉相位提取（如 homodyne/干涉自相关）的近 2 年同行评议进展",
+      "search_keywords": [
+        "dual-path interferometry HHG phase retrieval 2024",
+        "homodyne detection squeezed light high harmonic",
+        "self-referencing BSV HHG interferometry",
+        "bi-circular HHG phase measurement recent"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§3.5 创新点「量子 Fisher 信息反演」的方法学新颖性需要 Fisher 信息在 HHG/光谱反演的同行评议先例",
+      "missing_evidence": "缺少量子 Fisher 信息在强场 HHG 反演光谱学、相位检索中应用的方法论基准文献",
+      "search_keywords": [
+        "quantum Fisher information spectroscopy HHG",
+        "Fisher information attosecond pulse retrieval",
+        "quantum Cramér-Rao bound harmonic spectroscopy",
+        "Fisher information inverse problem attosecond"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§3.4 关键交付时间表中 4 年期阶段性产出（论文/专利）数量论证需要 NSFC 一般项目产出基准支撑",
+      "missing_evidence": "缺少 NSFC 面上项目 4 年期产出（SCI 论文数、专利数）的成功案例统计基准",
+      "search_keywords": [
+        "NSFC general project publication benchmark",
+        "面上项目产出论文数统计",
+        "NSFC 4-year grant deliverables statistics",
+        "typical publication output NSFC general program"
+      ],
+      "priority": "low"
+    },
+    {
+      "claim": "§3.6 预期研究成果中量子光源升级指标（如压缩度提升量级）需要理论极限文献支撑",
+      "missing_evidence": "缺少 BSV-HHG 压缩度提升（如 dB 级别）对反演精度增益的定量理论预测",
+      "search_keywords": [
+        "squeezing enhancement HHG theoretical prediction dB",
+        "BSV squeezing parameter yield improvement",
+        "squeezing bandwidth solid-state HHG gain factor",
+        "BSV quantum advantage metric HHG"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

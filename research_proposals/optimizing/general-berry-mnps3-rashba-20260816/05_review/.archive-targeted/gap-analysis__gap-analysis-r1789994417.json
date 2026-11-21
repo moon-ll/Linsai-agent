@@ -1,0 +1,104 @@
+{
+  "gaps": [
+    {
+      "claim": "Werner等[13]在交变磁金属中建立HHG理论",
+      "missing_evidence": "缺少Werner交变磁体HHG理论原文细节（机制表述、关键方程、适用体系范围）",
+      "search_keywords": [
+        "Werner altermagnet high harmonic generation theory",
+        "交变磁 HHG 理论 Werner"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Yang与Liang[12]理论预言",
+      "missing_evidence": "缺少Yang与Liang关于自旋群/反常霍尔/或HHG预言的论文原文细节",
+      "search_keywords": [
+        "Yang Liang altermagnet prediction spin group",
+        "Yang Liang 理论预言 交变磁"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Ghorashi与Rappe[15]系统比较",
+      "missing_evidence": "缺少Ghorashi与Rappe关于自旋分裂比较研究的原文（对比维度、结论）",
+      "search_keywords": [
+        "Ghorashi Rappe altermagnet spin splitting comparison",
+        "Ghorashi Rappe symmetry spin splitting"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Ezawa[14]和Ezawa[19]分别给出…",
+      "missing_evidence": "缺少Ezawa关于自旋群对称性与反常霍尔效应的两篇论文原文细节",
+      "search_keywords": [
+        "Ezawa spin group symmetry anomalous Hall",
+        "Ezawa altermagnet theory2024 2025"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Ogawa与Hayami[18]预言",
+      "missing_evidence": "缺少Ogawa与Hayami关于i-wave/g-wave交变磁自旋分裂的预言原文",
+      "search_keywords": [
+        "Ogawa Hayami i-wave altermagnet prediction",
+        "Ogawa Hayami g-wave spin splitting"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "覆盖100余种体系、数据库[22]",
+      "missing_evidence": "[22]Springer原文仅给出反平行堆叠普适判据与三例计算，无100余种体系/数据库表述，证据强度不足",
+      "search_keywords": [
+        "Springer antiparallel stacking 2D antiferromagnet database",
+        "2D antiferromagnet 100 systems stacking classification"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "[16][20][21][24]标'第一作者机构含国内单位'",
+      "missing_evidence": "归属核实缺失：Basnet现隶属美国机构（Morgan State/Arkansas），原文标国内单位无据",
+      "search_keywords": [
+        "Basnet Cr-doped NiPS3 affiliation Morgan State Arkansas",
+        "Basnet 机构 ORCID RSC"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "NiCl₂滑移势垒对应'≥4光子'",
+      "missing_evidence": "缺少各体系势垒与THz光子能量匹配实测数据，需分体系复算（NiCl₂应为2-4光子）",
+      "search_keywords": [
+        "NiCl2 VSe2 CrSe2 interlayer sliding barrier DFT meV",
+        "THz photon energy sliding ferroelectric barrier overcome"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "τ₁ 数百fs vs τ₂ 数ps 量级差'2-4个数量级'",
+      "missing_evidence": "缺自洽时间常数描述，应统一τ₁ 1-9 ps / τ₂ 1-4 ns 比值110-4000",
+      "search_keywords": [
+        "MnPS3 NiPS3 magnetic order relaxation time ps ns",
+        "antiferromagnetic dynamics time constant two-exponential"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "500 kV/cm位于0.1-1.0 MV/cm设计窗口'低端'",
+      "missing_evidence": "缺少设计窗口0.1-1.0 MV/cm的设定依据",
+      "search_keywords": [
+        "THz source 1 MV/cm field strength solid HHG",
+        "terahertz strong field antiferromagnet driving window"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "[7]2025-11预印本支撑平台二核心构型",
+      "missing_evidence": "缺少[7]预印本关于MnPS3滑移铁电光栅或Rashba自旋分裂的原文",
+      "search_keywords": [
+        "MnPS3 sliding ferroelectric Rashba 2025 preprint arXiv",
+        "MnPS3 antiferromagnet ferroelectric domain 2025"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

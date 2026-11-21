@@ -1,0 +1,59 @@
+{
+  "gaps": [
+    {
+      "claim": "PINN（物理信息神经网络）用于HHG光谱反演方法在研究内容中论证薄弱，缺乏方法论基础文献支撑",
+      "missing_evidence": "缺少PINN在非线性光学光谱反演或HHG相位反演中应用的已有工作引用，无法证明该方法在本课题中的可行性和先进性",
+      "search_keywords": [
+        "physics-informed neural network nonlinear optics inversion",
+        "PINN harmonic generation phase retrieval",
+        "neural network high harmonic spectroscopy reconstruction",
+        "physics-informed deep learning optical inverse problem"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "将Even Tzur框架从原子体系形式化方法拓展到固体多带语境的理论可行性缺乏文献支撑",
+      "missing_evidence": "缺少Even Tzur原始框架的引用文献，以及固体多带HHG量子增强因子（QEF）理论推导的先驱性工作或类比研究的支撑",
+      "search_keywords": [
+        "Even Tzur quantum enhancement factor HHG",
+        "quantum enhancement factor high harmonic generation framework",
+        "solid-state multi-band HHG quantum advantage theory",
+        "nonlinear quantum optics framework atom to solid extension"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "BSV-HHG反演结果与瞬态吸收、PL、tr-ARPES等独立测量对比的交叉验证方法缺乏已有研究先例",
+      "missing_evidence": "缺少将HHG光谱反演结果与其他超快探测手段（瞬态吸收/光致发光/时间分辨角分辨光电子能谱）进行交叉验证的已有研究文献",
+      "search_keywords": [
+        "HHG spectroscopy cross-validation transient absorption",
+        "high harmonic generation time-resolved ARPES comparison",
+        "attosecond spectroscopy multi-technique benchmarking",
+        "HHG inversion vs optical pump-probe validation solid state"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "非简并PDC（=2）与简并PDC（=3+1/N）双配置对BSV量子增强的差异化贡献缺乏文献依据",
+      "missing_evidence": "缺少不同PDC配置（非简并vs简并）下BSV量子特性（光子统计、压缩度）对HHG产额影响的理论或实验对比研究",
+      "search_keywords": [
+        "non-degenerate PDC bright squeezed vacuum photon statistics",
+        "degenerate vs non-degenerate parametric down-conversion squeezing",
+        "PDC configuration quantum light nonlinear optics comparison",
+        "bright squeezed vacuum squeezing parameter HHG yield"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "三类对照体系的QEF效应量统计显著性与95%置信区间的实验设计依据不足",
+      "missing_evidence": "缺少BSV驱动HHG量子增强效应在固体中已有实验测量（即使是初步或间接证据）的文献支撑，影响效应量预期和统计设计的合理性",
+      "search_keywords": [
+        "bright squeezed vacuum driven high harmonic generation experiment",
+        "quantum light solid HHG enhancement measurement",
+        "squeezed light nonlinear optics enhancement factor experiment",
+        "BSV strong field photon statistics harmonic yield"
+      ],
+      "priority": "high"
+    }
+  ]
+}

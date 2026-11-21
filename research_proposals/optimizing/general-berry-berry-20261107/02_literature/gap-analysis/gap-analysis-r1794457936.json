@@ -1,0 +1,46 @@
+{
+  "gaps": [
+    {
+      "claim": "光场把拓扑 Anderson 绝缘体推入量子反常霍尔态（1.2 P4，现挂 [8] Sato, PRB 99, 214302）",
+      "missing_evidence": "[8] 的实际结论为弱场区 Dirac 带光生载流子布居不对称、强场区由拓扑非平庸 Floquet-Bloch 带布居失衡与较小 Berry 曲率反常速度共同给出，并不包含'拓扑 Anderson 绝缘体'（无序局域化机制）或'推入量子反常霍尔态'；需检索真正报道光场/无序协同驱动拓扑 Anderson 绝缘体进入量子反常霍尔态（或等价 Floquet 调控无序拓扑相变）的文献替换或新增引用，否则按 [8] 摘要改写论点",
+      "search_keywords": [
+        "Floquet topological Anderson insulator",
+        "light-induced quantum anomalous Hall transition",
+        "irradiated disordered topological insulator",
+        "photon-driven topological phase transition Anderson"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Sharma 与 Singh 的级联响应预言（1.4 P6，具名论断）",
+      "missing_evidence": "具名'级联响应预言'论断零角标，且文献表 40 条无 Sharma、Singh 对应条目，属无源具名引用；需定位 Sharma 与 Singh 关于级联响应（cascaded/cascade response）预言的原始论文，补入 references.md 并挂 [N]，或删去具名改为一般化陈述",
+      "search_keywords": [
+        "Sharma cascaded response prediction",
+        "Singh cascade response nonlinear",
+        "cascaded response theory named authors"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Murotani 等人完成对立项依据各线的'2025 年决定性整合'（1.2 P7，[15]）",
+      "missing_evidence": "正文称 2025 年，但 [15] 条目为 Phys. Rev. B 113 (2026)，正文年份与文献出处不符；需核实该工作的正式发表年份与卷期（区分 2025 预印本与 2026 正式发表），统一正文表述与文献表口径",
+      "search_keywords": [
+        "Murotani Phys. Rev. B 113 2026",
+        "Murotani topological arXiv 2025",
+        "Murotani review integration"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "CuPb₉(PO₄)₆O 体系'给出了调控路径'（1.2 P6，[13]）",
+      "missing_evidence": "[13] 系第一性原理计算预言而非实验证实，且该体系伴随超导性争议，正文未加限定构成过度声明；需补明确标注'first-principles prediction'的出处依据（或新增一篇明示理论预言性质的文献），并在正文加'第一性原理计算预言'限定语",
+      "search_keywords": [
+        "CuPb9(PO4)6O first-principles prediction",
+        "copper apatite electronic structure DFT calculation",
+        "LK-99-related first-principles electronic structure"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

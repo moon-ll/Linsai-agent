@@ -1,0 +1,149 @@
+{
+  "sessions": [
+    {
+      "at": "2026-10-30T15:46:12Z",
+      "benchmark_gate": true,
+      "worklist_added": 1
+    },
+    {
+      "at": "2026-10-31T08:40:34Z",
+      "benchmark_gate": true,
+      "worklist_added": 1
+    },
+    {
+      "at": "2026-11-01T08:40:41Z",
+      "benchmark_gate": true,
+      "worklist_added": 2
+    },
+    {
+      "at": "2026-11-02T08:40:39Z",
+      "benchmark_gate": true,
+      "worklist_added": 0
+    },
+    {
+      "at": "2026-11-03T08:40:40Z",
+      "benchmark_gate": false,
+      "worklist_added": 0
+    },
+    {
+      "at": "2026-11-03T15:21:44Z",
+      "benchmark_gate": false,
+      "worklist_added": 0
+    },
+    {
+      "at": "2026-11-04T08:40:47Z",
+      "benchmark_gate": false,
+      "worklist_added": 0
+    },
+    {
+      "at": "2026-11-04T08:41:54Z",
+      "benchmark_gate": true,
+      "worklist_added": 0
+    },
+    {
+      "at": "2026-11-06T08:40:28Z",
+      "benchmark_gate": true,
+      "worklist_added": 0
+    },
+    {
+      "at": "2026-11-07T08:40:31Z",
+      "benchmark_gate": true,
+      "worklist_added": 0
+    },
+    {
+      "at": "2026-11-08T08:40:32Z",
+      "benchmark_gate": true,
+      "worklist_added": 2
+    },
+    {
+      "at": "2026-11-09T08:40:33Z",
+      "benchmark_gate": true,
+      "worklist_added": 0
+    },
+    {
+      "at": "2026-11-10T08:40:37Z",
+      "benchmark_gate": true,
+      "worklist_added": 0
+    },
+    {
+      "at": "2026-11-11T08:40:46Z",
+      "benchmark_gate": true,
+      "worklist_added": 0
+    },
+    {
+      "at": "2026-11-12T08:40:35Z",
+      "benchmark_gate": true,
+      "worklist_added": 0
+    },
+    {
+      "at": "2026-11-13T08:40:36Z",
+      "benchmark_gate": true,
+      "worklist_added": 0
+    },
+    {
+      "at": "2026-11-14T08:40:37Z",
+      "benchmark_gate": true,
+      "worklist_added": 0
+    },
+    {
+      "at": "2026-11-15T08:40:33Z",
+      "benchmark_gate": true,
+      "worklist_added": 0
+    },
+    {
+      "at": "2026-11-16T08:40:45Z",
+      "benchmark_gate": true,
+      "worklist_added": 1
+    },
+    {
+      "at": "2026-11-17T08:42:39Z",
+      "benchmark_gate": true
+    },
+    {
+      "at": "2026-11-17T15:33:05Z",
+      "benchmark_gate": true
+    },
+    {
+      "at": "2026-11-18T08:40:39Z",
+      "benchmark_gate": false
+    },
+    {
+      "at": "2026-11-18T08:41:20Z",
+      "benchmark_gate": false
+    },
+    {
+      "at": "2026-11-18T08:42:15Z",
+      "benchmark_gate": true
+    },
+    {
+      "at": "2026-11-19T08:40:40Z",
+      "benchmark_gate": true
+    },
+    {
+      "at": "2026-11-20T08:40:36Z",
+      "benchmark_gate": true
+    },
+    {
+      "at": "2026-11-21T08:40:47Z",
+      "benchmark_gate": true
+    }
+  ],
+  "pilots": [
+    {
+      "source": "call_health",
+      "action": "显示单位修复",
+      "at": "2026-10-31T08:42:43Z",
+      "status": "adopted",
+      "note": "确定性代码修复，无需课题试点"
+    },
+    {
+      "source": "test",
+      "action": "gate",
+      "round_start": 1,
+      "status": "rolled_back",
+      "at": "2026-11-01T12:05:45Z",
+      "reason": "基准门转红，自动回滚试点"
+    }
+  ],
+  "updated_at": "2026-11-16T08:40:45Z"
+}

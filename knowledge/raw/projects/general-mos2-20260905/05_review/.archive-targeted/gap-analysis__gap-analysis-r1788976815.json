@@ -1,0 +1,74 @@
+{
+  "gaps": [
+    {
+      "claim": "Cárdenas 2026 关于多体修正（无 [N] 编号）的关键论据",
+      "missing_evidence": "缺少 Cárdenas 2026 在 MoS2/TMDC HHG 中多体修正（GW/BSE/激子效应）的论文条目和编号",
+      "search_keywords": [
+        "Cardenas 2026 MoS2 many-body HHG",
+        "Cardenas exciton high harmonic MoS2",
+        "many-body correction TMDC high harmonic generation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Lee 2024 多体修正论据（scheme L23）",
+      "missing_evidence": "缺少 Lee 2024 在 HHG 多体修正/激子贡献方向的论文条目和编号",
+      "search_keywords": [
+        "Lee 2024 many-body high harmonic generation",
+        "Lee 2024 excitonic HHG MoS2",
+        "Lee 2024 electron-hole correlation HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "实验层终止判据锚定'Liu 等人 2025 年实验'（幽灵文献）",
+      "missing_evidence": "Liu 2025 关于 MoS2/TMDC HHG 实验终止/关断判据的文献不存在，需替换为已读文献 [25] Peterka 2023 或补充真实文献",
+      "search_keywords": [
+        "MoS2 HHG termination criterion experiment 2025",
+        "Liu MoS2 high harmonic cutoff experiment",
+        "TMDC HHG experimental termination"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "[33] Ma 2025 第五谐波转换效率 4×10⁻⁵ vs 官方 ~1.5×10⁻⁵ 数据失真",
+      "missing_evidence": "需核对 Ma 2025 hBN 扭转堆叠 HHG 第五谐波转换效率的官方实验值并修正引用",
+      "search_keywords": [
+        "Ma 2025 hBN twisted stacking HHG fifth harmonic efficiency",
+        "hBN moire fifth harmonic conversion efficiency",
+        "Ma 2025 arXiv HHG hBN"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Osika 等人 [27] 实为 Nebgen 2026 DAC 高压实验，张冠李戴",
+      "missing_evidence": "[27] 应替换为 Nebgen 2026 DAC 实验的真实引用，或改用 [20] Osika 与 [21] Li 并列引用",
+      "search_keywords": [
+        "Nebgen 2026 DAC high pressure MoS2",
+        "Osika high harmonic generation",
+        "Li high harmonic generation MoS2"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "140 fs（[37]）验证 <200 as 多体动力学时间尺度论据错配",
+      "missing_evidence": "需替换为真正的阿秒/亚周期时间尺度分辨率实验文献，或删除该例证",
+      "search_keywords": [
+        "sub-200 attosecond many-body dynamics MoS2",
+        "attosecond time resolution MoS2 HHG",
+        "140 fs 200 as correlation HHG"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "α_syn≥0.15 须测至 15 阶谐波（与 content 章 5—15 阶统一）",
+      "missing_evidence": "需补 MoS2/TMDC 产生 15 阶以上谐波的实验观测文献支撑",
+      "search_keywords": [
+        "MoS2 high harmonic order 15 experimental",
+        "TMDC HHG up to 15th order observation",
+        "solid-state HHG high order MoS2 measurement"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "gaps": [
+    {
+      "claim": "正文叙述与文献条目存在2处系统性语义错位（\"某人等人[N]\"式人名引用未指向该作者的条目），关键论点与文献的对应关系不成立",
+      "missing_evidence": "错位引用簇涉及论点的正确原始文献核实信息（作者、标题、arXiv/DOI编号），尤其是交变磁性HHG理论预言（Werner/Weber）与MnTe自旋极化HHG实验（Fuchs）等人名密集引用簇的作者-论文对应关系",
+      "search_keywords": [
+        "Werner altermagnet high harmonic generation theory",
+        "Weber nonrelativistic spin splitting altermagnet",
+        "Fuchs MnTe spin-polarized high harmonic generation experiment",
+        "Schüle altermagnet nonlinear optics"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "申请书中\"该方向尚无文献/研究空白\"的声明未界定检索范围（数据库、关键词、时间窗），空白声明缺乏系统检索证据支撑",
+      "missing_evidence": "带明确范围的系统检索结果，证实g波序参量超快探测、自旋分辨/动量依赖自旋劈裂HHG读出等方向确实无先行文献，使空白声明可验证",
+      "search_keywords": [
+        "g-wave superconductor order parameter ultrafast detection",
+        "g-wave pairing symmetry nonlinear optical probe",
+        "spin-resolved high harmonic generation altermagnet experiment",
+        "momentum-dependent spin splitting high harmonic generation"
+      ],
+      "priority": "high"
+    }
+  ]
+}

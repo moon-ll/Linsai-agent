@@ -1,0 +1,19 @@
+{
+  "gaps": [
+    {
+      "claim": "方案第L89/L91行内联引用 Vehtari、Poteshman、Osabutey 三篇工作，分别用于支撑贝叶斯模型选择/交叉验证、期权隐含波动率反演、以及辅助统计甄别等方法学链条",
+      "missing_evidence": "三处引用均以 [arXiv:ID] 内联角标形式出现，绕过了全文统一的 [N] 编号体例，且未进入 references.md 参考文献表，导致：① 与正文中已采用的具名嵌入格式（如 Osumi[13]、Usanov[14]）体例不一致；② 读者无法从 references.md 追溯作者全名、题名、期刊/会议、年份、页码、DOI/URL 等完整书目信息；③ R2 轮检查已验证 [7][13][14][16][17][18][20] 均入表，但此三条 arXiv 引用作为新增引用未受同等核验，存在引用合规性盲区",
+      "search_keywords": [
+        "Vehtari PSIS-LOO arXiv",
+        "Vehtari Gelman Bayesian workflow arXiv",
+        "Poteshman implied volatility arXiv",
+        "Osabutey arXiv preprint",
+        "arXiv ID to BibTeX lookup",
+        "Bayesian cross-validation methodology",
+        "option pricing implied volatility estimation"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

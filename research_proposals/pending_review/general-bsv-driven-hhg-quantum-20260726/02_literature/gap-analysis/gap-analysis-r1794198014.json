@@ -1,0 +1,46 @@
+{
+  "gaps": [
+    {
+      "claim": "固态强场高次谐波截止能应依据带隙和峰值 Rabi 频率表述为线性标度关系，并区分 ac Zener 与半金属化两种截止机制；现有“E_B + 1.6ℏΩ_r^6”及“载波/载流子频率”的写法不能作为可复算判据。",
+      "missing_evidence": "需要直接引用 PRL 116, 016601 中的原始截止律公式或对应图表，明确 E_g、Ω_R,0、Ω_I,0 的定义、1.6 与 3.6 两个系数的物理分支及线性标度结论。报告正文与论证段对第二式究竟采用 Ω_I,0 还是 Ω_R,0 的记法不一致，还需以原文核准具体下标，并补齐 [29] 的完整书目信息。",
+      "search_keywords": [
+        "PRL 116.016601 1.6 3.6 hbar Omega cutoff law",
+        "ac Zener semimetalization cutoff energy peak Rabi frequency",
+        "solid-state high-harmonic generation E_g 1.6 3.6 Rabi frequency"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "文献 [29] 讨论的是 diabatic，即“非绝热／非绝热化”动力学机制，而不是所谓“二极管机制”。",
+      "missing_evidence": "需要由 [29] 的英文标题、摘要或正文原句直接支撑术语对应关系，并据此统一中文译法；同时应核验该机制与文中截止律的关联是否确实来自同一来源。",
+      "search_keywords": [
+        "PRL 116.016601 Diabatic mechanism high harmonic generation",
+        "\"Diabatic\" cutoff law 1.6 3.6 Rabi frequency",
+        "非绝热 diabatic 固态高次谐波 截止律"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "“Li 等在钨针尖场……”所陈述的钨针尖局域场实验事实及其对方案可行性或观测量的支撑。",
+      "missing_evidence": "该具名陈述句末缺少直接角标。需核验参考文献 [10] 是否为支持该具体实验事实的原始研究，并确保引用紧邻对应陈述；若 [10] 仅提供间接背景，还需补充钨针尖场强调控、局域场增强及相应高次谐波实验的原始文献。",
+      "search_keywords": [
+        "Li tungsten tip electric field high harmonic generation",
+        "tungsten needle tip strong-field HHG experiment",
+        "钨针尖 局域电场 高次谐波 Li"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "κ-Br 可依托既有测量文献作为本项目 HHG 方案的对照或标定体系，并能与钨针尖场测量形成可对接的比较。",
+      "missing_evidence": "目前仅提名 κ-Br 和引用 [43]，缺少文献层面的测量对象、方法、谱段、偏振与场强条件、定量观测量及误差水平说明。需要从 [43] 所属研究或补充文献中提取可直接复用的测量流程和可比指标，并说明其在当前方案中承担的是独立 HHG 谱学对照、场强标定还是替代观测支路。",
+      "search_keywords": [
+        "κ-Br HHG measurement spectroscopy",
+        "KBr third-order nonlinear susceptibility electric-field measurement",
+        "potassium bromide strong-field high-harmonic generation",
+        "KBr 非线性测量 场强标定 高次谐波"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

@@ -1,0 +1,75 @@
+{
+  "gaps": [
+    {
+      "claim": "TBG零假设判据残留两口径：L31'非零α_syn→结论失效' vs L43'检测下限以下'，异于L45/L47'>0.15且超2σ'；同条件两种结论动词",
+      "missing_evidence": "缺乏TBG/Twisted Bilayer Graphene作为零假设参考样本的谐波各向异性实验阈值与噪声水平定量的统一判据文献",
+      "search_keywords": [
+        "twisted bilayer graphene HHG anisotropy baseline",
+        "TBG magic angle harmonic generation noise floor",
+        "MoS2 WSe2 homobilayer HHG reference threshold 2 sigma"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "R1'电子结构描述/TDDFT电子结构'作R3输入，R1产出清单无此项，递进链断点",
+      "missing_evidence": "缺少TDDFT电子结构作为高次谐波反演输入的衔接机制理论文献，特别是从电子结构（带隙、态密度）到谐波产额的耦合通道",
+      "search_keywords": [
+        "TDDFT electronic structure HHG input MoS2",
+        "density functional theory HHG band structure coupling",
+        "MoS2 WSe2 band alignment HHG channel"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "'可分离（的）实验指纹'句尾簇6现——'独立判据/专属信号'等变体支撑材料不足",
+      "missing_evidence": "缺乏高次谐波探测中'独立判据/专属信号'在TMD异质结中的方法学定义与有效性验证文献",
+      "search_keywords": [
+        "independent probe high harmonic generation TMD",
+        "exclusive signature HHG MoS2 WSe2",
+        "decoupled channel fingerprint attosecond spectroscopy"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "ΔN定义双写且指针互指循环（L17↔L63'见§2.1'↔'见§2.4'），ΔN_ex/ΔN_tw符号体系源头文献缺失",
+      "missing_evidence": "缺乏扭转MoS₂/WSe₂体系中谐波产额相对变化ΔN、激子贡献ΔN_ex、扭转角贡献ΔN_tw的可测量化定义原始文献依据",
+      "search_keywords": [
+        "MoS2 WSe2 harmonic yield enhancement delta N exciton",
+        "twist angle contribution HHG MoS2",
+        "high harmonic enhancement factor exciton TMD"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "rationale L7/L11'可见与近红外脉冲分别激发'半迁移；content已改'两束可见脉冲'，rationale 1.78—2.14 eV可见波段物理依据缺失",
+      "missing_evidence": "缺乏1.78—2.14 eV双可见脉冲共振激发MoS2 A/B激子（1.88/2.04 eV）选择性驱动高次谐波的实验文献",
+      "search_keywords": [
+        "MoS2 A B exciton dual pulse HHG visible",
+        "selective exciton excitation high harmonic TMD",
+        "two-color visible pump MoS2 660 nm 608 nm HHG"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§2.1 L21失谐五点点位（0、±50、±100 meV）实验参数渗入内容章",
+      "missing_evidence": "缺乏失谐五点扫描（0、±50、±100 meV）针对MoS2/WSe2谐波反演的方法学原始依据与精度验证文献",
+      "search_keywords": [
+        "detuning scan five point HHG MoS2",
+        "50 meV detuning exciton HHG TMD",
+        "resonance detuning high harmonic spectroscopy"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "η(N)需1—4层异质结样品，方案未列层数系列预算；层数依赖累积效率测量的标定文献缺失",
+      "missing_evidence": "缺乏MoS2/WSe2 1—4层层数依赖谐波累积效率η(N)的实验标定文献与饱和层数数据",
+      "search_keywords": [
+        "MoS2 few-layer HHG efficiency saturation",
+        "layer number dependence high harmonic generation TMD",
+        "bilayer trilayer quadlayer HHG yield cumulative"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

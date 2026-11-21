@@ -1,0 +1,85 @@
+{
+  "gaps": [
+    {
+      "claim": "arXiv:2504.02567 v1 与 APL Photonics 2023 (10.1063/5.0158995) 的关系：前者为后者作者自存档而非独立预印本，需核实时间线避免倒挂引用",
+      "missing_evidence": "缺少对 Peterka 等人 MoS2 HHG 工作（APL Photonics 2023 / arXiv:2504.02567）的官方元数据引用关系确认，以及该实验报道的谐波抑制幅度数据（0—10%）的直接出处",
+      "search_keywords": [
+        "Peterka MoS2 HHG exciton suppression APL Photonics 2023",
+        "arXiv:2504.02567 author manuscript self-archive timeline",
+        "10.1063/5.0158995 monolayer MoS2 high harmonic generation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "固体 HHG streaking 已有实验先例（§4 引用）",
+      "missing_evidence": "缺少固体 HHG streaking 实验先例的正确引用，原挂[18] Nebgen 实为 fs 压腔实验（100 fs 分辨），应改为[15] Freudenstein 等人的阿秒分辨固体 HHG 关联实验",
+      "search_keywords": [
+        "Freudenstein attosecond clocking Bloch electrons Nature 2022",
+        "solid HHG streaking experimental precedent attosecond resolution",
+        "attosecond clocking many-body correlations quantum materials"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "扭转 MoS2 异质双层 ('扭转进一步破坏水平镜面与垂直二重轴') 的对称性分析",
+      "missing_evidence": "缺少对扭转 MoS2 双层点群对称性的明确引用 (D3h/D3d/C3v/C3 各对应不同 AA/AB/3R 堆垛)，rationale §2.3 已改 '破坏垂直二重轴与三面 σ_d'，scheme 需对照口径并补引文",
+      "search_keywords": [
+        "twisted bilayer MoS2 point group C3 C3v D3d",
+        "twisted homobilayer MoS2 symmetry breaking stacking",
+        "Patra Cocchi twisted MoS2 DFT-Wannier SHG symmetry"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "魔角 MoS2 莫尔周期 '约数十纳米 (δ²≪θ² 项主导, L≈a/θ)' 的修正量化",
+      "missing_evidence": "缺少 δ 主导 (a/δ≈8.2 nm 上限) vs θ 主导 (L≈a/θ) 的明确公式文献支撑，需引用扭转 TMD 莫尔周期公认公式 L = a/√(δ² + θ²)",
+      "search_keywords": [
+        "moire period formula twisted bilayer transition metal dichalcogenide",
+        "L = a/sqrt(delta^2 + theta^2) moire wavelength TMD",
+        "twisted homobilayer TMD moire lattice constant"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "CEP '典型值约 100 mrad' 的技术现状依据 (3.2 μm 中红外 OPA)",
+      "missing_evidence": "缺少 3 μm 中红外 CEP 稳定 OPA/OPCPA 系统的典型性能数据引文，特别是知识库已验证 kHz 级 sub-1.5-cycle 为 380 mrad rms 的对比基准",
+      "search_keywords": [
+        "carrier-envelope phase stabilization mid-IR OPA 3 micron",
+        "CEP-stable 3 micrometer few-cycle OPCPA typical jitter mrad",
+        "passively stabilized CEP mid-infrared parametric amplifier"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Patra 与 Cocchi[31] 在扭转 MoS2 双层 '验证' 4.41° 样本 (实验 vs 计算混淆)",
+      "missing_evidence": "[31] 实为群论+DFT-Wannier 计算预测工作 ('Symmetry-Based Design Rules for Second-Harmonic Generation in Stacked and Twisted MoS2 Bilayers', arXiv:2607.19937) ，而非实验验证；需区分计算预测与实验报道，并补充真正实验观测扭转 MoS2 HHG 的文献",
+      "search_keywords": [
+        "Patra Cocchi twisted MoS2 SHG calculation first-principles",
+        "experimental high harmonic generation twisted bilayer MoS2",
+        "twisted homobilayer TMD HHG experimental measurement"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "R 型 0° 与 H 型 0° 各 3 个独立样品的需求与可行性 (scheme §3.1 与 rationale §2/§7/content Q1 一致性)",
+      "missing_evidence": "缺少扭转 MoS2 同质双层 R 型 (3R, C3v) 与 H 型 (2H, D3d) 0° 附近精确堆垛控制的实验先例与样品制备可行性文献",
+      "search_keywords": [
+        "3R stacking MoS2 homobilayer CVD growth",
+        "2H stacking MoS2 bilayer twisted 0 degree preparation",
+        "R-type H-type MoS2 stacking synthesis"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Tancogne-Dejean 等人 [10] 的 TDDFT 路线在 '大带隙半导体' 中给出从头算 HHG 产额与角分布 (method anchor 引用)",
+      "missing_evidence": "缺少 Tancogne-Dejean TDDFT HHG 工作在 GaAs/Si 等典型半导体上产额与角分布 benchmark 的精确文献定位",
+      "search_keywords": [
+        "Tancogne-Dejean TDDFT high harmonic generation GaAs benchmark",
+        "ab initio high harmonic generation semiconductor Tancogne-Dejean PRL 2017",
+        "real-time TDDFT HHG yield angular distribution"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

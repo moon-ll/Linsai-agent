@@ -1,0 +1,27 @@
+{
+  "gaps": [
+    {
+      "claim": "在涡旋OAM驱动的HHG方案中，偶次阶谐波可以在场，因此可作为偶阶判据的物理载体（scheme §三.1 偶阶判据依赖偶次阶在场）",
+      "missing_evidence": "支撑「偶次阶谐波在涡旋/气体HHG中可以在场」的物理前提文献——对称性破缺条件下偶次谐波产生的机制与实验观测（如分子取向破缺、双色场、螺旋相位缺陷、非共线几何等导致偶次阶出现的理论与实验工作），以论证方案所选几何与激光构型下偶阶确实可观测，判据方成立",
+      "search_keywords": [
+        "even-order harmonics vortex beams",
+        "OAM HHG symmetry breaking",
+        "even harmonic generation molecular alignment",
+        "twisted light high harmonic parity"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "奇/二阶谐含量比 3:1 可作为破缺窗口的判别特征/判据（content §二.1 与 scheme §三.8 全链统一的依据）",
+      "missing_evidence": "支撑「3:1」这一具体含量比数值合理性的文献或理论依据——OAM选择定则下各阶谐波相对产额/强度的理论预测或实验测量，使该比值作为定量判据时有据可依而非任意门限",
+      "search_keywords": [
+        "OAM selection rules harmonic intensity ratio",
+        "high harmonic yield scaling order",
+        "vortex HHG harmonic amplitude ratio",
+        "orbital angular momentum harmonic efficiency"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "full_review"
+}

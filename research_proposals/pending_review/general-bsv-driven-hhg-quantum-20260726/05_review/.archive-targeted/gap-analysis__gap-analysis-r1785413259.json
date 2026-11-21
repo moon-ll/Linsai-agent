@@ -1,0 +1,92 @@
+{
+  "gaps": [
+    {
+      "claim": "BSV驱动固体高次谐波（HHG）的量子路径可控性是该项目的核心创新点，需要完整的文献基线来支撑立论与边界界定，但申请书references模块完全缺失（critical）",
+      "missing_evidence": "缺少独立的参考文献模块；需要补齐 BSV/谷选择HHG、固体HHG量子路径控制、反演协议、强场阿秒物理四个方向的引用基线（不少于30篇核心文献 + 10篇2024-2026最新进展）",
+      "search_keywords": [
+        "solid high harmonic generation review",
+        "valley-selected HHG transition metal dichalcogenide",
+        "quantum path control HHG solid",
+        "attosecond solid HHG review 2024 2025"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "预期成果声明的'首例'边界（first demonstration of BSV-driven quantum path selection）需要同期文献对比来界定新颖性级别，否则评审无法判断声称的真伪",
+      "missing_evidence": "缺少针对 BSV驱动量子路径选择 的最新综述和竞争性工作清单（截至2025-2026），用以明确'首例'的适用域、对比实验、理论预言和已知先驱工作",
+      "search_keywords": [
+        "Berry curvature HHG",
+        "quantum path selection HHG valley",
+        "selective excitation HHG TMDC",
+        "BSV driven HHG first observation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "预期成果中的反演协议（inverse protocol）、QEF（量子路径分辨）、Q_F（场量子化）方法被声称为原创性，但其相对已有方法（attoclock、streaking、重构算法）的增量需文献对比来量化",
+      "missing_evidence": "缺少 attoclock、attosecond streaking、谐波谱反演、强场近似重构 等方法学的最新对比文献（2020-2026），用以量化'原创增量'和'方法边界'",
+      "search_keywords": [
+        "attoclock attosecond review",
+        "attosecond streaking reconstruction",
+        "high harmonic spectrum inversion",
+        "strong-field approximation inversion"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "BSV驱动HHG的'可推广性'声明需要适用域文献支撑：哪些材料/对称性/能带结构适用？哪些不适用的反例已被报告？",
+      "missing_evidence": "缺少拓扑材料、过渡金属二硫化物、Dirac/Weyl半金属HHG 等不同体系的应用案例与边界文献，以支撑'可推广'的适用域声明",
+      "search_keywords": [
+        "topological material HHG",
+        "Dirac semimetal HHG",
+        "Weyl semimetal HHG harmonic",
+        "transition metal dichalcogenide HHG MoS2 WS2"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "条件性Mott体系被写入必达三类协议（成果矩阵），但其作为'必达'承诺需要强关联体系HHG的可行性文献支撑",
+      "missing_evidence": "缺少Mott绝缘体HHG、强关联体系高次谐波、Hubbard模型HHG的实验/理论文献，以判断'必达'承诺的现实性与最低门槛",
+      "search_keywords": [
+        "Mott insulator HHG",
+        "strongly correlated HHG Hubbard",
+        "Mott transition high harmonic",
+        "correlation driven harmonic generation"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "预期成果中'科学认识'类命题（量子路径选择机制、反演协议有效性）的验证性需要测量/解释方法的文献支撑",
+      "missing_evidence": "缺少阿秒尺度时间分辨、能带/谷分辨测量、光谱相位恢复的实验方法文献，以确保'新科学认识'可被实验证伪/证实",
+      "search_keywords": [
+        "attosecond time resolved spectroscopy",
+        "band resolved HHG measurement",
+        "harmonic spectral phase retrieval",
+        "HHG electron dynamics reconstruction"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "预期成果中'数据/代码开放'路径需要遵循HHG领域已有的数据共享规范与先例",
+      "missing_evidence": "缺少HHG/阿秒科学领域数据共享（Zenodo、Figshare、FAIR）、源代码开放（GitHub）的现有规范与代表性实践文献，以确定本项目开放边界与最低标准",
+      "search_keywords": [
+        "attosecond science FAIR data",
+        "HHG data sharing Zenodo",
+        "ultrafast spectroscopy data repository",
+        "open source strong-field simulation"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "预期成果中人才培养目标（博士生/研究生）需要领域内培养规模、成长路径、合作培养先例的支撑材料",
+      "missing_evidence": "缺少HHG/阿秒科学领域博士培养规模、典型成长路径、联合培养先例的文献与统计资料，用于支撑人才培养承诺的现实性",
+      "search_keywords": [
+        "attosecond science PhD training",
+        "ultrafast optics education",
+        "strong-field physics graduate training",
+        "阿秒科学人才培养"
+      ],
+      "priority": "low"
+    }
+  ]
+}

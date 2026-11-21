@@ -1,0 +1,54 @@
+{
+  "gaps": [
+    {
+      "claim": "content §2.1 L19 'K-K′ 直接带隙 ≈1.7 eV' 与 scheme §2.1(a) '1.6 eV'、full_review 表 1.6 eV 之间的带隙数值矛盾",
+      "missing_evidence": "缺少 MoS₂ 体带隙（K-K′ 直接带隙）的权威实验测量值或公认参考值，以确定全篇统一口径（1.6 eV 抑或 1.7 eV）",
+      "search_keywords": [
+        "MoS2 K-K direct bandgap experimental value",
+        "MoS2 monolayer bandgap 1.6 1.7 eV",
+        "MoS2 photoluminescence exciton bandgap"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "content §2.2 L33 '[14]' 引用 Lorenzo 应挂 [29]（总表 [14]=Uzan-Narovlansky 带间 Berry 相位）",
+      "missing_evidence": "缺少 Lorenzo 关于阿秒瞬态吸收或瞬态相位工作的原始引用以与 [29] 匹配，或需核实 [14] Uzan-Narovlansky 工作的具体内容以确认是否误挂",
+      "search_keywords": [
+        "Lorenzo attosecond transient absorption solid",
+        "Uzan-Narovlansky interband Berry phase HHG",
+        "attosecond transient phase measurement Lorenzo"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "content §2.2 L45 '[16]' 错挂 Stammer 弱测量（总表 [16]=Shirley 1965）",
+      "missing_evidence": "缺少 Stammer 弱测量阿秒干涉工作与 Shirley1965 Floquet 形式理论的对应关系确认，需核实正文是否应用 Stammer 弱测量框架并新增总表条目，或改挂 [16]=Shirley 1965 关联引用",
+      "search_keywords": [
+        "Stammer weak measurement attosecond interferometry",
+        "Shirley 1965 Floquet formalism time-dependent",
+        "weak value attosecond phase measurement"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "content §2.2 L47 '[17]' 错挂 Stammer 量子干涉（总表 [17]=Kitagawa 2010）",
+      "missing_evidence": "缺少 Kitagawa 2010 瞬态 Chern 数定义工作的确认，以及 Stammer 量子干涉工作是否独立于弱测量的引用需求",
+      "search_keywords": [
+        "Kitagawa 2010 transient Chern number",
+        "Stammer quantum interference HHG photon statistics",
+        "transient topological invariant definition"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "误差预算（σ_rand ≈ 0.055、ΔC_total ≤ 0.155）在 rationale §3、content §2.3、scheme §2.3(b) 三章全量复述形成跨章冗余",
+      "missing_evidence": "虽然属于写作冗余而非文献缺口，但需核对 σ_rand 各分项（0.05/0.02/0.01）的物理来源文献支撑是否完备（HHG 强度涨落、椭偏测量精度、相位漂移噪声）",
+      "search_keywords": [
+        "high harmonic generation intensity fluctuation error budget",
+        "attosecond spectroscopy noise floor photon counting",
+        "solid-state HHG ellipticity measurement precision"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

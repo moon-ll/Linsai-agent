@@ -1,0 +1,39 @@
+{
+  "gaps": [
+    {
+      "claim": "原子SOC与带内有效SOC两口径差异——CrSb/MnTe实测0.7-0.9 eV劈裂源自原子SOC贡献，主模型(零阶无SOC紧束缚)需要明确仅适用于带内有效SOC口径0.4-0.6区间",
+      "missing_evidence": "缺少CrSb/MnTe中带内有效SOC(自旋劈裂中可由紧束缚零阶+一阶微扰处理的部分)与原子SOC贡献的分解实验或理论数据,以及带内SOC0.4-0.6比值对应材料的紧束缚模型适用性论证",
+      "search_keywords": [
+        "CrSb effective spin-orbit coupling tight-binding",
+        "MnTe spin splitting first-principles band decomposition",
+        "atomic vs effective SOC altermagnet decomposition",
+        "intraband spin-orbit coupling tight-binding validity",
+        "altermagnet SOC ratio band-resolved DFT"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "rationale L51-L55五段连排CrSb/MnTe等材料的自旋劈裂值(0.93/1.0/0.6 eV)缺乏梯度对比性论述,需补充各材料劈裂值随晶体对称性/自旋组态变化的系统对比文献",
+      "missing_evidence": "缺少CrSb/MnTe/RuO2等交变磁体自旋劈裂能量的系统综述或梯度对比数据,以及不同d-wave/g-wave/i-wave对称性下劈裂大小的递进关系文献",
+      "search_keywords": [
+        "altermagnet spin splitting comparison RuO2 MnTe CrSb",
+        "d-wave g-wave i-wave spin splitting magnitude",
+        "交变磁体 自旋劈裂 系统综述",
+        "altermagnet spin splitting systematic review Šmejkal",
+        "nonrelativistic spin splitting material survey"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "SOC/劈裂比0.7-0.9落入SOC主导区,主模型(零阶无SOC紧束缚)在原子SOC口径下合法性受限,需强场外推校验文献支撑",
+      "missing_evidence": "缺少强场极限下SOC对HHG过程影响的理论框架文献,以及当原子SOC主导时高次谐波对自旋纹理响应的外推校验依据",
+      "search_keywords": [
+        "strong-field HHG spin-orbit coupling theory",
+        "tight-binding HHG SOC strong field limit",
+        "altermagnet HHG beyond perturbation SOC regime",
+        "Houston basis spin-orbit coupling HHG"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

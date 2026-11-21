@@ -1,0 +1,4 @@
+{
+  "gaps": [],
+  "note": "agent 未返回标准 JSON gaps 格式，视为无文献缺口。原文前200字: {\"gaps\": [{\"claim\": \"§2.4 R3 唯一性判据 κ<10²/10⁴ 在 content.md 中完全缺失，而 scheme.md 反复出现，导致跨章节失锚\", \"missing_evidence\": \"缺乏 condition number κ 作为 HHG 反演问题唯一性/可辨识性阈值的文献支撑；无 κ 数值范围（10²/10⁴）与反演稳定性关联的证据\", \"search_"
+}

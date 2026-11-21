@@ -1,0 +1,38 @@
+{
+  "gaps": [
+    {
+      "claim": "以 T≥0.3 作为区分或判定拓扑态的阈值，并主张 CD 信号在翻转点能够读出局域 Berry 曲率及相应宇称规则。",
+      "missing_evidence": "scheme 将该阈值依据标为 [23]，而 content §2.5 将同一依据标为 [42]，存在引文冲突。需回查 [42] 原文，确认其是否同时支持 T≥0.3 阈值、CD 与局域 Berry 曲率的对应关系以及翻转点的宇称判读规则；应将 §2.2 统一引至 [42]，[23] 仅保留在 §3.2.1 的适用语境中。若 [42] 未明确给出 0.3 阈值，还需补充给出该数值判据的原始研究或独立数值验证文献。",
+      "search_keywords": [
+        "circular dichroism threshold T=0.3 Chern number local Berry curvature",
+        "CD local Berry curvature readout topological transition",
+        "circular dichroism flip point parity rule",
+        "局域 Berry 曲率 圆偏振二色性 翻转点 宇称规则"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.1 给出的两式半导体布洛赫方程足以描述研究方案中的反常速度、能带演化和相干衰减。",
+      "missing_evidence": "现有方程缺少带内加速项 iF·∇k 和布居退相项 −ρ_nn/T1，因此不能直接支撑反常速度来源及退相动力学。需补充标准含时半导体布洛赫方程或 Keldysh 方程的权威文献，明确带间相位、偶极跃迁、带内加速和 T1 退相四项的完整形式、符号约定及适用假设；同时补充数值稳定性和 CFL 条件文献，说明时间步长与空间网格的约束关系，并据此论证 Δt=0.1 a.u. 或弱 THz 通道所用步长的合理性。",
+      "search_keywords": [
+        "time-dependent semiconductor Bloch equation intraband acceleration i F grad k",
+        "semiconductor Bloch equation T1 dephasing rho_nn",
+        "Keldysh semiconductor Bloch equation Berry current intraband acceleration",
+        "semiconductor Bloch equation CFL stability condition time step"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "10^11–10^12 W/cm² 被设为模型的基本适用边界，同时 THz 弱场通道采用“数十 kV/cm”、Δt=0.2 a.u. 和 T2∈[0.5,5] fs 的处理方案。",
+      "missing_evidence": "需补充能够支撑分通道适用域的文献，明确 THz 弱场、泵浦主窗及强场失效区之间的场强或强度边界，并说明 THz 条件下是否必须保留带内加速项。现有适用边界与 THz 工况之间存在数量级冲突，相关文献还需为 Δt=0.2 a.u.、T2∈[0.5,5] fs 的数值取值提供物理或方法依据；若这些数值仅来自内部方法手册，则应补充外部方法文献进行交叉验证，而不能将其表述为已得到物理文献验证的适用边界。",
+      "search_keywords": [
+        "THz weak-field semiconductor Bloch equation validity kV/cm",
+        "terahertz-driven semiconductor intraband acceleration field threshold",
+        "semiconductor Bloch equation THz dephasing T2 femtosecond",
+        "semiconductor strong-field regime 10^11 10^12 W/cm2"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

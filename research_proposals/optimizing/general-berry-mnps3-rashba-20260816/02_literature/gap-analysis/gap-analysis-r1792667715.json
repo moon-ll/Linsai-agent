@@ -1,0 +1,92 @@
+{
+  "gaps": [
+    {
+      "claim": "§2.6 问题一分支二的可证伪条件使用 γ=(π/2)|E₀Ω|/(ħα²) 作为绝热/非绝热判据",
+      "missing_evidence": "缺少自洽的 Landau-Zeman 型绝热参数标准形式出处（γ=Δ²/(4ħ·dε/dt)）作为引用支撑，也缺少该判据在固态强场/二维磁性体系中的适用条件与已发表应用文献（如 Floquet 绝热性判据、Landau-Zener 隧穿率在强场电子动力学中的应用）",
+      "search_keywords": [
+        "Landau-Zener adiabaticity parameter strong field solids",
+        "Floquet adiabaticity criterion Landau Zener tunneling condensed matter",
+        "Landau-Zener transition rate formula gap derivative",
+        "绝热 Landau Zeman 判据 强场 固体"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "references.md参考文献表标注 [18] 为 \"Sheng 势垒\"，但正文中 [17]=Sheng、[18]=González，且 [18] 在三章中零实引",
+      "missing_evidence": "缺少对 Sheng 等势垒普查文献与 González 相关文献的实体确认依据（canonical 表回写所需的原始出处：论文标题、期刊、年份、DOI/arXiv ID），也缺少 [18] 可支撑的具体论点或其应当被删除的判定依据",
+      "search_keywords": [
+        "Sheng energy barrier altermagnet spin flip",
+        "Gonzalez altermagnet spin splitting review",
+        "magnetic anisotropy barrier ultrafast magnetization switching altermagnet",
+        "spin flip barrier altermagnet first-principles"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.6 问题一的可证伪判据须建立在 E(u) 势能面 u=0 处曲率 α 的可靠计算之上",
+      "missing_evidence": "缺少对 E(u) 势能面曲率、二阶导数计算的可靠文献方法学支撑（如双坐标 Wannier 插值、能带二阶导/有效质量提取、Berry曲率对曲率的贡献修正），以及 α 参数对 Ueff、交换劈裂取值敏感性的文献证据",
+      "search_keywords": [
+        "Wannier interpolation band curvature effective mass two-dimensional magnet",
+        "second derivative band dispersion curvature extraction tight binding",
+        "energy versus angle potential surface altermagnet spin flip barrier",
+        "Hubbard U sensitivity band curvature magnetic anisotropy"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.5 目标一使用 E_thr 区间边界、权重 30% 主导区间、W_c 轨迹差平方范数占比作为量化验收指标",
+      "missing_evidence": "缺少支撑这些判据阈值的文献依据：HHG 阈值能量/截止能量与带宽对应关系的标准引用（cutoff rule）、轨迹判据中高贡献权重集中度阈值的先例报道（如量子轨迹 HHG 主导电子族识别、多轨迹贡献排序标准）",
+      "search_keywords": [
+        "high harmonic generation cutoff rule solid state bandwidth",
+        "dominant electron trajectory HHG interband intrabound contribution",
+        "trajectory classification high harmonic generation recollision dominance",
+        "quantum trajectory analysis HHG emission time window selection"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "创新点二提出 i-wave 劈裂（l=3）在圆偏振 HHG 中的磁点群理论，并构建含五个指纹量的定量指纹表",
+      "missing_evidence": "缺少 C₆=C₃⊗C₂ 与 i-wave l=3 磁点群表述的理论出处文献（磁点群分类学、coplanar rotation 复合操作），以及各指纹量对 Rashba 背景敏感度排序的既有理论/实验对照文献",
+      "search_keywords": [
+        "magnetic point group classification coplanar rotation",
+        "magnetic space group operation C3 tensor C2 sixth order",
+        "Rashba spin splitting angular momentum dependence altermagnet",
+        "circular dichroism harmonic spectroscopy Berry curvature solid"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "目标二以 d′≥2.1/准确率≥90% 作为圆偏振 HHG 自旋态判别的量化指标",
+      "missing_evidence": "缺少支撑圆偏振 HHG 作为自旋/磁有序读出通道的文献证据（圆偏振高次谐波的选择定则、自旋分辨 HHG 实验先例），以及判别准确率指标先例报道",
+      "search_keywords": [
+        "circularly polarized high harmonic generation spin resolved",
+        "circular dichroism harmonic generation magnetic order detection",
+        "inverse Faraday effect ultrafast magnetization probe",
+        "helicity resolved high harmonic emission ferromagnetic"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "目标三以 D_sep≥0.80/增强≥5 作为时域分离（切换动力学与磁序动力学）的验收指标",
+      "missing_evidence": "缺少强场电子-磁耦合响应时间与磁序弛豫时间尺度分离的实验/理论文献支撑（fs 电子温度 vs ps 磁矩恢复），以及强场磁化动力学中电荷-自旋解耦时域证据的先例报道",
+      "search_keywords": [
+        "electron spin decoupling timescale femtosecond picosecond magnetic dynamics",
+        "ultrafast demagnetization timescale separation charge spin",
+        "terahertz field induced magnetization dynamics 2D magnet",
+        "time resolved magneto optical Kerr dynamics recovery time"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "content.md 全文 [N] 角标密度 48 次超出本章标准上限（35–47）",
+      "missing_evidence": "缺少可合并/替换的高重复引用素材，用于在不降低论证强度前提下压缩角标数量——即需为被合并的多处同源引用找到更集中、更权威的单一来源",
+      "search_keywords": [
+        "altermagnet review spin splitting mechanism",
+        "Floquet engineering magnetism review",
+        "attosecond charge-to-spin dynamics review"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "content"
+}

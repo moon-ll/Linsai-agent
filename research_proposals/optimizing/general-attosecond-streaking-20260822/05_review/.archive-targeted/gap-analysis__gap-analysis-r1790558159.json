@@ -1,0 +1,64 @@
+{
+  "gaps": [
+    {
+      "claim": "[2] 引用中脉宽'322 as'与截止能量'390 eV'两处数值与 PRX 原文不符（原文分别为约 332 as 与 up to 350 eV）",
+      "missing_evidence": "[2] 对应 PRX 原文中的准确脉宽（~332 as）与光子能量截止（up to 350 eV）数值，需回核原摘要/正文以更正两处数值并维持引用一致性",
+      "search_keywords": [
+        "Goulielmakis single isolated attosecond pulse 332 as",
+        "attosecond pulse 350 eV cutoff PRX",
+        "isolated attosecond pulse duration Phys Rev X"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "'后续多次测量均以条纹（streaking）测量为探针'用于概括 Klünder[16] 等工作",
+      "missing_evidence": "Klünder et al. [16] 摘要明确为 RABBIT（干涉式）测量而非条纹测量，需引用其原文对 RABBIT 谱系的判定，并补充条纹与 RABBIT 两类探针的代表性文献以避免口径失实",
+      "search_keywords": [
+        "Klünder RABBIT attosecond photoionization delay",
+        "RABBIT reconstruction attosecond pulse train",
+        "attosecond streaking vs RABBIT measurement"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "[34] 被引用为'系统比较多架构检索精度'的比较研究",
+      "missing_evidence": "[34] 实际为矩阵等价特征提取框架论文，并非多架构检索精度比较研究；需替换为真正覆盖多架构（如 CNN/Transformer/GNN）检索精度对比的文献，或据 [34] 真实贡献重写论断",
+      "search_keywords": [
+        "neural architecture comparison retrieval accuracy benchmark",
+        "CNN Transformer retrieval systematic comparison",
+        "deep learning architecture survey information retrieval accuracy"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "国内阿秒光源已建成并面向用户开放（§3.1 L69）",
+      "missing_evidence": "国内阿秒光源建成时间、所在机构/团队、性能参数与正式发表/发布的引文支撑（当前无任何文献锚定）",
+      "search_keywords": [
+        "国内 阿秒光源 建成 开放",
+        "China attosecond light source facility commissioning",
+        "中科院 上海光机 阿秒装置"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "国内阿秒测量关键参数（光子通量/转换效率/脉冲能量）较早期提升若干量级（§3.1 L75）",
+      "missing_evidence": "国内阿秒装置近年参数提升的具体量级、对比基准与对应参考文献，当前陈述无量值亦无引文",
+      "search_keywords": [
+        "阿秒 光子通量 提升 国内",
+        "high harmonic conversion efficiency China improvement",
+        "attosecond pulse energy scaling China"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "国内具备 TOF/VMTS 阵列（飞行时间谱仪或速度成像）作为阿秒测量端（§3.1 L79）",
+      "missing_evidence": "国内 TOF 阵列的具体团队、通道数/能量分辨率、相关论文出处，当前无引文且与文献表尾检索范围不一致",
+      "search_keywords": [
+        "国内 TOF 飞行时间谱仪 阿秒",
+        "velocity map imaging attosecond China",
+        "TOF array streaking measurement Chinese group"
+      ]
+    }
+  ],
+  "section": "rationale"
+}

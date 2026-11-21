@@ -1,0 +1,28 @@
+{
+  "gaps": [
+    {
+      "claim": "R1 中半导体布洛赫方程（SBE）框架在莫尔超晶格体系中仍然可靠",
+      "missing_evidence": "缺乏 SBE 在莫尔超晶格/扭转多层体系中适用性边界、有效性验证或与紧束缚/TDDFT 多体方法对比的文献支撑",
+      "search_keywords": [
+        "semiconductor Bloch equation moiré superlattice",
+        "SBE moiré heterostructure validity",
+        "tight-binding Bloch equation twisted bilayer",
+        "莫尔超晶格 半导体布洛赫方程 适用性",
+        "SBE interband moiré strong field"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "R2 中三层正则化方案能保证莫尔体系 HHG 反演稳定性",
+      "missing_evidence": "缺少三层正则化（Tikhonov/L2/谱范数等）在高次谐波反演中的数学稳定性证明或数值验证文献，特别是对 TMDC 多解性问题的正则化收敛性证据",
+      "search_keywords": [
+        "Tikhonov regularization HHG inversion",
+        "multi-layer regularization nonlinear optics",
+        "L-curve criterion high harmonic retrieval",
+        "ill-posed inversion regularization HHG",
+        "TMDC HHG inversion multi-solution regularization"
+      ],
+      "priority": "high"
+    }
+  ]
+}

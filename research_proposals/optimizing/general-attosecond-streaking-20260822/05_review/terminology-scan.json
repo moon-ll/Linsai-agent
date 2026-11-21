@@ -1,0 +1,263 @@
+{
+  "checked": true,
+  "at": "2026-11-07T04:05:56Z",
+  "proposal": "general-attosecond-streaking-20260822",
+  "sections_scanned": [
+    "content",
+    "full_review",
+    "method_manual",
+    "rationale",
+    "scheme"
+  ],
+  "cjk_variant_pairs": [
+    {
+      "a": "多通道贡献",
+      "b": "多通道修",
+      "freq_a": 60,
+      "freq_b": 35,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "多通道贡",
+      "b": "多通道修正",
+      "freq_a": 65,
+      "freq_b": 32,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "多通道贡献",
+      "b": "多通道修正",
+      "freq_a": 60,
+      "freq_b": 32,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "解析修正",
+      "b": "多通道修正",
+      "freq_a": 43,
+      "freq_b": 32,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "多通道修正",
+      "b": "二级修正",
+      "freq_a": 32,
+      "freq_b": 29,
+      "sections_a": [
+        "content",
+        "full_review",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "method_manual",
+        "scheme"
+      ]
+    },
+    {
+      "a": "极相位解耦",
+      "b": "二级解耦",
+      "freq_a": 31,
+      "freq_b": 27,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "偶极相位",
+      "b": "通道间相位",
+      "freq_a": 135,
+      "freq_b": 20,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "通道贡献",
+      "b": "通道间相位",
+      "freq_a": 64,
+      "freq_b": 20,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "通道极限",
+      "b": "通道间相位",
+      "freq_a": 32,
+      "freq_b": 20,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "通道修正",
+      "b": "通道间相位",
+      "freq_a": 32,
+      "freq_b": 20,
+      "sections_a": [
+        "content",
+        "full_review",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "通道重叠",
+      "b": "通道间相位",
+      "freq_a": 24,
+      "freq_b": 20,
+      "sections_a": [
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "通道干涉",
+      "b": "通道间相位",
+      "freq_a": 21,
+      "freq_b": 20,
+      "sections_a": [
+        "content",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    }
+  ],
+  "token_variant_groups": [
+    {
+      "group_key": "cm_2",
+      "variants": [
+        {
+          "form": "cm^2",
+          "count": 2
+        },
+        {
+          "form": "cm²",
+          "count": 38
+        }
+      ],
+      "sections": [
+        "full_review",
+        "method_manual",
+        "scheme"
+      ]
+    }
+  ],
+  "summary": {
+    "cjk_pair_candidates": 384,
+    "token_variant_groups": 1,
+    "note": "候选报告不改文：处置归 writer/critic 契约；数值口径归 params_registry"
+  }
+}

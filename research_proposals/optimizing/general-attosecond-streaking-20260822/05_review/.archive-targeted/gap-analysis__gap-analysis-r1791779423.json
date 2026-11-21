@@ -1,0 +1,45 @@
+{
+  "gaps": [
+    {
+      "claim": "氖内壳层 2s 贡献在 50-150 eV 能区的比例：rationale 称「5% 量级以下」vs content/scheme 称「8%–15%」，两口径并存",
+      "missing_evidence": "缺少关于氖 2s 与 2p 通道在 50-150 eV 光子能量区间相对贡献的实验测量或多通道 streaking 反演数据，以判定 XUV 高段内壳层贡献的真实区间",
+      "search_keywords": [
+        "neon 2s 2p branching ratio high energy",
+        "neon inner-shell contribution attosecond streaking",
+        "multi-channel photoionization neon 50-150 eV"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "rACE 单通道假设的多通道贡献上界 8%–15% 的阈值依据",
+      "missing_evidence": "rACE 方法论文献本身是否给出多通道贡献阈值的明文表述；Cousin 等公开实验数据是否能支撑该上界尚需可追溯引用",
+      "search_keywords": [
+        "rACE rainbow attosecond cross correlation multi-channel",
+        "Cousin attosecond streaking water window neon",
+        "single channel assumption attosecond reconstruction validity"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "100 eV 动能线换算端点：氩 115.76/116-150 eV vs N2 115.6 eV 双版残留（streaking 标定能窗设计）",
+      "missing_evidence": "缺少 argon 与 N2 在 100 eV 动能对应光子能量端点的标准参考值，及三章统一的实验标定惯例",
+      "search_keywords": [
+        "argon N2 photoionization 100 eV kinetic energy photon",
+        "streaking calibration kinetic energy photon energy conversion",
+        "rare gas streaking kinetic-to-photon energy endpoint"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "K2 失效边界判定条件「N K 边（409.7 eV 或 50% 贡献）」的双条件依据",
+      "missing_evidence": "缺少 N K-edge（≈409.7 eV）对 N2 内壳层电离阈值贡献率与多通道分解失效阈值的实验或理论文献支撑",
+      "search_keywords": [
+        "N K edge nitrogen photoionization 409.7 eV",
+        "N2 inner shell contribution attosecond streaking breakdown",
+        "nitrogen K-edge multi-channel streaking limit"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

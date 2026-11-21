@@ -1,0 +1,40 @@
+{
+  "gaps": [
+    {
+      "claim": " scheme.md 中引用 [15][16][29][30] 四条文献的 7 处论断（分布于 L107/L165/L179/L303/L339 等），以正式发表论文体例被引用，但这四条实为预印本，与已标\"（预印本）\"的 [4][5][9][12] 体例不一致，削弱了引用可信度与可追溯性",
+      "missing_evidence": "需核查这四条预印本是否已有同行评议的正式发表版本（期刊名、卷号、DOI）；若已发表，应更新引用并替换为正式版本；若仍未发表，需补标\"（预印本）\"并评估这些论断是否有已发表的替代文献可支撑",
+      "search_keywords": [
+        "arXiv preprint published version tracking",
+        "Google Scholar citation lookup by title",
+        "topological material high harmonic generation published",
+        "Weyl semimetal HHG journal version",
+        "SSH model ultrafast dynamics peer reviewed"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.1 L65 关于 THz 驱动通道\"数十 kV/cm 对应 3.3×10⁶–1.3×10⁷ W/cm²、比中红外通道低两个数量级\"的场强—光强换算标注（原括号注 10⁹–10¹⁰ W/cm² 被 SI 复算证误），以及该换算与所引实验文献 [13] 报道场强的自洽性",
+      "missing_evidence": "需要实验文献支撑 THz 光源的典型峰值场强范围（约 50–100 kV/cm 乃至更高）及对应的强度标定，以核验换算式 I = ½cε₀E² 的数值落点，并确认\"低两个数量级\"的相对比较成立；应直接核对文献 [13] 原文报道的场强/强度数值",
+      "search_keywords": [
+        "terahertz peak electric field kV/cm tabletop source",
+        "THz field strength intensity conversion",
+        "strong terahertz pulses semiconductors experiment",
+        "ZnO high harmonic generation terahertz driving field",
+        "HHG mid-infrared versus terahertz intensity scaling"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§2.3 定标协议中 G1 判据与\"800 样本 Wilson 单侧 95% 置信下界\"的统计方法（问题 2/3 涉及 G1 可信区间归属与互补式 G1 = 1 − δ_FP 的适用条件限定）",
+      "missing_evidence": "G1/δ_FP 等二元判据的置信区间估计目前仅由内部 §2.3 协议给出，缺少方法学文献支撑二项比例 Wilson 置信区间在小样本/不平衡误判率下的适用性与保守性论证，需补一篇统计学方法引用以支撑判据的严谨性",
+      "search_keywords": [
+        "Wilson score interval binomial proportion",
+        "one-sided confidence lower bound sensitivity specificity",
+        "G score complementarity false positive false negative imbalance",
+        "sample size determination diagnostic threshold statistics"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "scheme"
+}

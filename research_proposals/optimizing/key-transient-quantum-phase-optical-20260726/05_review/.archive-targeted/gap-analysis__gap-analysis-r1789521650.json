@@ -1,0 +1,35 @@
+{
+  "gaps": [
+    {
+      "claim": "Floquet 理论预言周期驱动可重构能带结构、产生光子 Floquet 拓扑相[17,18]（rationale L27）",
+      "missing_evidence": "[17] 悬挂，references.md 中不存在对应条目；[18] Kitagawa 2010 PRB 已存在，需补 [17] 对应的 Floquet 拓扑相理论奠基文献",
+      "search_keywords": [
+        "Floquet topological insulator semiconductor quantum wells",
+        "Lindner Refael Galitski2011 Nature Physics Floquet topological insulator",
+        "Floquet band structure engineering periodic drive topological phase"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "带间极化的亚周期观测与电荷迁移精密计时[23,24,26,27]已在 2024–2026 年间实现（rationale L33）",
+      "missing_evidence": "[23,24,26,27] 4 个编号全部悬挂，references.md 中无对应条目；该论点需要4 篇独立的 2024–2026 年 attosecond 亚周期带间极化/电荷迁移实验文献",
+      "search_keywords": [
+        "sub-cycle interband polarization attosecond solid crystal 20242025 2026",
+        "attosecond charge migration timing crystal solid 2024 2025",
+        "attosecond transient absorption interband coherence solid experiment"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Floquet 工程在固体中的实验验证[19, 41]（scheme L195，§5 创新点）",
+      "missing_evidence": "[41] 悬挂，references.md 中无对应条目；[19] Wang 2013 Science Bi2Se3 已存在，需补 [41] 对应的 Floquet 拓扑相固体实验验证文献（Wang 之后的后续工作）",
+      "search_keywords": [
+        "Floquet-Bloch states topological insulator experimental verification Bi2Se3 SnTe",
+        "light-induced Floquet topological state time-resolved ARPES",
+        "Floquet topological insulator solid state experiment after 2013"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "full_review"
+}

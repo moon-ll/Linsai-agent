@@ -1,0 +1,64 @@
+{
+  "proposal_id": "nsfc-2026-hhg",
+  "current_stage": 0,
+  "status": "idle",
+  "stages": {
+    "0": {
+      "name": "方向校准",
+      "profile": "pipeline-runner",
+      "status": "completed",
+      "dispatched_at": "2026-07-26T06:17:03Z",
+      "completed_at": "2026-07-26T06:18:38Z",
+      "output_preview": "Phase 0 方向校准完成。\n\n产物：/Users/ll/Desktop/LinSai-CoPilot/research_proposals/nsfc-2026-hhg/01_direction/direction-calibration.md（7381 字节，已写入）\n\n执行摘要：\n\n1. 数据读取\n   - memory/research-profile.json（TF-IDF 关键词存在 frontmatter 污染，已识别并改用 sources.profile 物理基线）\n   - memory/user-profile.json（research_field 14 项 + 中红外供应链断裂约束）\n   - knowledge/wiki/ 50 页（核心 mature：固体高次谐波、MOC-HHG、T1 量子几何 16KB 立项依据、拓扑绝缘体、BSV-HHG）\n   - 00_imported/deliverables/candidate_directions.md（历史 4 个候选，已收敛）\n\n2. 校准出 5 个核心关键词\n   固体 HHG ＞ 量子几何 ＞ 阿秒亚周",
+      "error": ""
+    },
+    "1": {
+      "name": "文献调研",
+      "profile": "researcher",
+      "status": "completed",
+      "dispatched_at": "2026-07-26T06:20:31Z",
+      "completed_at": "2026-07-26T06:25:26Z",
+      "output_preview": "文献调研完成。报告已写入：\n\n`/Users/ll/Desktop/LinSai-CoPilot/research_proposals/nsfc-2026-hhg/02_literature/literature-report.md`\n\n**调研摘要**：\n\n- 检索关键词：固体HHG / 量子几何Berry曲率 / BSV量子光HHG / Floquet拓扑瞬态 / 另类磁体HHG\n- 去重后约20篇论文，覆盖A/B/C三档\n- A档（≥3.2分）核心必读：BSV实验Nature Physics 2024（3.9分）、量子几何输运几何通道arXiv 2607.20702（3.75分）、另类磁体HHG自旋流arXiv 2606.31573（3.7分）\n\n**三大关键发现**：\n1. **BSV HHG实验**（Nature Physics 2024）：首次宏观量子态光驱动固体HHG，突破经典光强窗口，直接支撑备选2并缓解主攻的中红外瓶颈\n2. **量子几何非线性输运**（arXiv 2607.20702）：为Berry曲率/量子度规反演提供理论工具，Tony Low团队出品\n3. **",
+      "error": ""
+    },
+    "2": {
+      "name": "缺口分析",
+      "profile": "analyst",
+      "status": "completed",
+      "dispatched_at": "2026-07-26T06:27:46Z",
+      "completed_at": "2026-07-26T06:30:35Z",
+      "output_preview": "✅ 缺口分析报告已写入：`research_proposals/nsfc-2026-hhg/02_topic/gap-report.md`\n\n---\n\n**报告摘要：8 个缺口，3 类（理论/实验/方法/数据）**\n\n### 第一梯队（申请书核心差异化）\n| 缺口 | 类型 | 核心价值 |\n|------|------|---------|\n| **gap_001** 量子光 HHG × 量子几何反演 | 理论 | 支撑\"备选 2\"（BSV），国内空白 |\n| **gap_003** 多体关联拓扑 HHG 指纹库 + ML 反演 | 方法 | 材料体系差异化，避开体相半导体红海 |\n\n### 第二梯队（主攻方向深化）\n| 缺口 | 类型 | 核心价值 |\n|------|------|---------|\n| **gap_005** 量子度规 g(k) 直接反演 | 理论 | 独立于 Berry 曲率的几何量，申请书原创性 |\n| **gap_007** Altermagnet HHG 自旋流 | 实验 | 2026 年最新方向，时间窗口价值极高 |\n| **gap_008** 双色",
+      "error": ""
+    },
+    "3": {
+      "name": "科学问题",
+      "profile": "analyst",
+      "status": "completed",
+      "dispatched_at": "2026-07-26T06:31:44Z",
+      "completed_at": "2026-07-26T06:33:03Z",
+      "output_preview": "科学问题框架已写入：\n`/Users/ll/Desktop/LinSai-CoPilot/research_proposals/nsfc-2026-hhg/03_question/question-framework.md`\n\n---\n\n**构建概要**：\n\n选取**gap_001**（优先级 1.0）和**gap_003**（优先级 0.95）作为两个核心科学问题：\n\n| 科学问题 | 来源 | 五要素覆盖 |\n|---------|------|-----------|\n| **Q1**：量子光（BSV）驱动 HHG 的量子几何反演框架 | gap_001 | 立项依据 + 科学问题 + 研究内容 + 研究方案 + 特色创新 |\n| **Q2**：多体关联拓扑材料的 HHG 指纹库 + 物理约束神经网络反演 | gap_003 | 立项依据 + 科学问题 + 研究内容 + 研究方案 + 特色创新 |\n\n每个要素：\n- **主问题 × 1**\n- **子问题 × 2**\n\n核心假设：\n- **Q1**：BSV 光子数涨落（g⁽²⁾(0) ≠ 1）会在 HHG 谱中引入可辨识的量子修正",
+      "error": ""
+    },
+    "4": {
+      "name": "申请书撰写",
+      "profile": "writer",
+      "status": "completed",
+      "dispatched_at": "2026-07-26T06:43:57Z",
+      "completed_at": "2026-07-26T06:46:41Z",
+      "output_preview": "NSFC 申请书草稿已生成：\n\n**文件路径**：`/Users/ll/Desktop/LinSai-CoPilot/research_proposals/nsfc-2026-hhg/04_proposal/proposal-draft.md`\n\n**内容概要**（约 29,800 字）：\n\n| 章节 | 核心内容 |\n|------|---------|\n| **一、立项依据** | 四节：① HHG 量子几何反演背景；② 国内外现状（理论/量子光/强关联材料三个维度）；③ Q1+Q2 核心科学问题与差异化策略；④ 研究总体框架 |\n| **二、研究内容** | Q1.1（BSV-SBE 理论）+ Q1.2（Ω/g 偏振关系）；Q2.1（5 类材料 HHG 基准数据集）+ Q2.2（PINN 反演框架），共 4 个子内容 |\n| **三、研究方案** | 理论→数值→实验三阶段；双色场解耦方案；PINN 三重约束损失函数；关键技术路线与风险表 |\n| **四、特色与创新** | 4 个创新点：BSV-HHG 理论框架（首创）/ 量子度规直接反演（首创）/ 多体关联 HHG 指纹图谱（",
+      "error": ""
+    },
+    "5": {
+      "name": "质量自检",
+      "profile": "reviewer",
+      "status": "completed",
+      "dispatched_at": "2026-07-26T06:48:59Z",
+      "completed_at": "2026-07-26T06:51:43Z",
+      "output_preview": "评审报告已生成：`/Users/ll/Desktop/LinSai-CoPilot/research_proposals/nsfc-2026-hhg/05_review/review-report.md`\n\n---\n\n**核心发现摘要**：\n\n| 严重程度 | 问题 | 位置 |\n|----------|------|------|\n| [high] | Q1/Q2 逻辑关联缺失 | §1.3 / §2.1–2.2 |\n| [high] | BSV 效率提升的物理机制（经典 vs 量子）未区分 | §1.2.2 |\n| [high] | DFT/DMFT 合作依赖缺乏具体说明 | §2.2.2 / §3.2.1 |\n| [high] | BSV-HHG 耦合效率关键技术指标无分阶段验证路径 | §3.1.1 |\n| [high] | altermagnet spin-LED 探测方案可行性存疑 | §3.2.2 |\n| [medium] | [CITE:wörner_2018_ncomms] 与 [CITE:luu_wörner_2018_ncomms] 重复引用同一文献 | 参考文献",
+      "error": ""
+    }
+  },
+  "history": [],
+  "created_at": "2026-07-26T05:53:06Z",
+  "updated_at": "2026-07-26T06:52:00Z"
+}

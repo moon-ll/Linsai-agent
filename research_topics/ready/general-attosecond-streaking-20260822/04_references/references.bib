@@ -1,0 +1,249 @@
+% 阿秒条纹技术：从超短脉冲表征到量子相位测量
+% 课题: general-attosecond-streaking-20260822
+% 产出: B1 背景调研（researcher profile）→ 04_references/references.bib
+% 生成日期: 2026-11-18
+% 每条末行 source: <KB页名|raw/papers路径|检索池>  —— A4 溯源要求
+%
+% 引用键与 01_background/literature-map.md 中的 [ref:N] 顺序一一对应：
+%   ref:1..ref:16  ↔  itatani2002attosecond ... rajendran2026breakdown
+%
+% 元数据核验: arXiv API（export.arxiv.org/api/query）+ CrossRef REST（api.crossref.org/works/{DOI}）
+%   实测日期 2026-11-18；DOI 条目以 CrossRef 实测值为准。
+%
+% 声明: 本文件不含凭记忆补写的条目。凡标注「待核验」者，不得在报告正文中承重引用。
+%   已知 KB 缺陷（详见 literature-map.md §0.2）：KB 记为 arXiv:2403.05073 的 rainbow retrieval
+%   实为 cs.CR 论文；KB 记为 arXiv:2405.06275 的 Ji & Wörner RABBIT 不确定度实为 cs.CL 论文。
+%   二者本文件均按实测 DOI 著录。
+
+@article{itani2002attosecond,
+  title     = {Attosecond Streak Camera},
+  author    = {Itatani, J. and Qu{\'e}r{\'e}, F. and Yudin, G. L. and others},
+  journal   = {Physical Review Letters},
+  year      = {2002},
+  volume    = {88},
+  number    = {17},
+  pages     = {173903},
+  doi       = {10.1103/PhysRevLett.88.173903},
+  url       = {https://doi.org/10.1103/PhysRevLett.88.173903},
+  note      = {条目对应文献地图 [ref:1]。条纹相机的理论原点：光电子末态动量 p(t_r)=p_0-A(t_r) 按发射时刻调制，IR 条纹场即超快快门。},
+  source: 检索池 references-source.md 条目[20]
+}
+
+@article{mairesse2005frequency,
+  title     = {Frequency-resolved optical gating for complete reconstruction of attosecond bursts},
+  author    = {Mairesse, Y. and Qu{\'e}r{\'e}, F.},
+  journal   = {Physical Review A},
+  year      = {2005},
+  volume    = {71},
+  number    = {1},
+  pages     = {011401},
+  doi       = {10.1103/PhysRevA.71.011401},
+  url       = {https://doi.org/10.1103/PhysRevA.71.011401},
+  note      = {条目对应文献地图 [ref:2]。FROG-CRAB 原始文献，中心动量近似(CMA)假设的源头，是本课题要修正的对象本体。},
+  source: 检索池 references-source.md 条目[5]
+}
+
+@article{yakovlev2010attosecond,
+  title     = {Attosecond Streaking Enables the Measurement of Quantum Phase},
+  author    = {Yakovlev, V. S. and Gagnon, J. and Karpowicz, N. and Krausz, F.},
+  journal   = {Physical Review Letters},
+  year      = {2010},
+  volume    = {105},
+  number    = {7},
+  pages     = {073001},
+  doi       = {10.1103/PhysRevLett.105.073001},
+  eprint    = {1006.1827},
+  archivePrefix = {arXiv},
+  url       = {https://arxiv.org/abs/1006.1827},
+  note      = {条目对应文献地图 [ref:3]。核心结论：FROG 检索出的脉冲为光电子时域波包 chi(t) 而非 XUV 包络；中心动量近似在 D(p_0)=0 的 Cooper 极小处完全失效（模拟设置：Ar 3s Cooper 极小 42.5 eV，p_0=1.77 a.u.，XUV FWHM=150 as，条纹 750 nm/5 fs/矢势 0.1 a.u.）。},
+  source: KB页 wiki/papers/2010-1006_1827-attosecond-streaking-enables-the-measurement-of-quantum-phas.md | raw/papers/2010-1006.1827-attosecond-streaking-enables-the-measurement-of-quantum-phas.md | 检索池 references-source.md 条目[32]
+}
+
+@article{schultze2010delay,
+  title     = {Delay in Photoemission},
+  author    = {Schultze, M. and Fie{\ss}, M. and Karpowicz, N. and Gagnon, J. and others},
+  journal   = {Science},
+  year      = {2010},
+  volume    = {328},
+  number    = {5986},
+  pages     = {1658--1662},
+  doi       = {10.1126/science.1189401},
+  url       = {https://doi.org/10.1126/science.1189401},
+  note      = {条目对应文献地图 [ref:4]。Ne 价壳 2s/2p 相对光发射延迟 21 +/- 5 as，确立偶极相位的系统性量级。},
+  source: 检索池 references-source.md 条目[4] | KB页 wiki/method-topics/阿秒计量方法体系.md 案例1
+}
+
+@article{pabst2016eliminating,
+  title     = {Eliminating the dipole phase in attosecond pulse characterization using Rydberg wave packets},
+  author    = {Pabst, S. and Dahlstr{\"o}m, J. M.},
+  journal   = {Physical Review A},
+  year      = {2016},
+  volume    = {94},
+  number    = {1},
+  pages     = {013411},
+  doi       = {10.1103/PhysRevA.94.013411},
+  eprint    = {1602.08144},
+  archivePrefix = {arXiv},
+  url       = {https://arxiv.org/abs/1602.08144},
+  note      = {条目对应文献地图 [ref:5]。核心结论：球对称母离子 + 角度积分消除偶极相位；N>2 能级波包给出 C(N,2) 个拍频满足 phi(j1,j3)=phi(j1,j2)+phi(j2,j3) 自洽约束。关键数值：孤立脉冲 w_0=74 eV / FWHM 7.4 eV / Fourier 极限 247 as；K 4p-5p 能级差 1.36 eV；RPAE 角积分关联诱导群延迟斜率约 -0.052 as/eV（70-80 eV）对方向谱 0.12 as/eV；Ne Fano 角积分关联延迟 <= +/-3 as 对方向谱可达 -30 as。},
+  source: KB页 wiki/papers/2016-1602_08144-attosecond-pulse-characterization-with-coherent-rydberg-wave.md | raw/papers/2016-1602.08144-attosecond-pulse-characterization-with-coherent-rydberg-wave.md | 检索池 references-source.md 条目[3]
+}
+
+@article{cousin2017attosecond,
+  title     = {Attosecond Streaking in the Water Window: A New Regime of Attosecond Pulse Characterization},
+  author    = {Cousin, S. L. and Di Palo, N. and Buades, B. and Teichmann, S. M. and Reduzzi, M. and Devetta, M. and Kheifets, A. and Sansone, G. and Biegert, J.},
+  journal   = {Physical Review X},
+  year      = {2017},
+  volume    = {7},
+  number    = {4},
+  pages     = {041030},
+  doi       = {10.1103/PhysRevX.7.041030},
+  eprint    = {1710.02208},
+  archivePrefix = {arXiv},
+  url       = {https://arxiv.org/abs/1710.02208},
+  note      = {条目对应文献地图 [ref:6]。核心结论：水窗区首次条纹测量，孤立脉冲宽度上限 322 as；带宽 100 eV + 条纹场 10^11 W/cm^2 时 FROGCRAB 与 LSGPA 均失效，提升至 10^12 W/cm^2 后均成功；>200 eV 的 attochirp 补偿用传统材料方案不可行。装置：1850 nm sub-2-cycle CEP 稳定，HHG 4.3x10^14 W/cm^2 3 bar Ne，SXR 通量 5.6x10^5 photons/s，条纹场 3.2x10^11 W/cm^2，ToF E/dE=50，采集 10 h。},
+  source: KB页 wiki/papers/2017-1710_02208-attosecond-streaking-in-the-water-window-a-new-regime-of-att.md | raw/papers/2017-1710.02208-attosecond-streaking-in-the-water-window-a-new-regime-of-att.md | 检索池 references-source.md 条目[2]
+}
+
+@article{peschel2022attosecond,
+  title     = {Attosecond dynamics of multi-channel single photon ionization},
+  author    = {Peschel, J. and Busto, D. and Plach, M. and others},
+  journal   = {Nature Communications},
+  year      = {2022},
+  volume    = {13},
+  number    = {1},
+  pages     = {5205},
+  doi       = {10.1038/s41467-022-32780-5},
+  url       = {https://doi.org/10.1038/s41467-022-32780-5},
+  note      = {条目对应文献地图 [ref:7]。用双光子干涉测量 Ne 外层光电离中不同角动量通道的相位与幅值，揭示通道间干涉效应——为多通道修正项提供可观测对象。},
+  source: KB页 raw/papers/2022-s41467-022-32780-5-attosecond-dynamics-of-multi-channel-single-photon-ionizatio.md | 检索池 references-source.md 条目[6]
+}
+
+@article{shi2024photoelectron,
+  title     = {Photoelectron--residual-ion interaction in angle-resolved streaked shake-up ionization of helium},
+  author    = {Shi, H. and Thumm, U.},
+  journal   = {Physical Review A},
+  year      = {2025},
+  volume    = {111},
+  number    = {1},
+  pages     = {013119},
+  doi       = {10.1103/PhysRevA.111.013119},
+  eprint    = {2409.03622},
+  archivePrefix = {arXiv},
+  primaryClass = {physics.atom-ph},
+  url       = {https://arxiv.org/abs/2409.03622},
+  note      = {条目对应文献地图 [ref:8]。全维双电子 TDSE 量化多通道与剩余离子纠缠：偶极选择规则 direct 1 通道、n=2 shake-up 5 通道、n=3 13 通道（一般 2n(n-1)+1）；DLC 项 1/cos(theta) 角依赖，shake-up 延迟符号在 theta 约 40 度反转。},
+  source: KB页 wiki/papers/2024-2409_03622-photoelectronresidual-ion-entanglement-in-streaked-shake-up.md | raw/papers/2024-2409.03622-photoelectronresidual-ion-entanglement-in-streaked-shake-up.md | 检索池 references-source.md 条目[14]
+}
+
+@article{ortmann2024understanding,
+  title     = {Understanding attosecond streaking},
+  author    = {Ortmann, L. and Landsman, A. S.},
+  journal   = {Reports on Progress in Physics},
+  year      = {2024},
+  volume    = {87},
+  number    = {8},
+  pages     = {086401},
+  doi       = {10.1088/1361-6633/ad6278},
+  url       = {https://doi.org/10.1088/1361-6633/ad6278},
+  note      = {条目对应文献地图 [ref:9]。综述/教程：系统阐述 Coulomb-laser-coupling(CLC) 项在阿秒条纹中的物理起源，明确其为结构性贡献而非数值噪声或高阶修正，并界定纯电离延迟与 CLC 贡献可干净分离与分解失效的条件边界。KB 该页为摘要级蒸馏，未给出具体数值阈值。},
+  source: KB页 wiki/papers/2024-ad6278-understanding-attosecond-streaking.md | 检索池 references-source.md 条目[18]
+}
+
+@article{kheifets2026rainbow,
+  title     = {Rainbow retrieval of atomic time delays in attosecond streaking},
+  author    = {Kheifets, A. and Serov, V. and Vismarra, F. and W{\"o}rner, H. J.},
+  journal   = {Physical Review A},
+  year      = {2026},
+  volume    = {113},
+  number    = {4},
+  pages     = {043103},
+  doi       = {10.1103/9jcm-8gd8},
+  url       = {https://doi.org/10.1103/9jcm-8gd8},
+  note      = {条目对应文献地图 [ref:10]。以单次宽带条纹轨迹连续反演电离相位与时延 tau(E)，替代逐能点拟合；在 He 1s(Coulomb 相)、Ar 3p(Cooper 极小)、Xe 4d(巨型形状共振) 三种基准靶上验证。元数据于 2026-11-18 经 CrossRef API 实测（题名/期刊/卷期/文章号/作者全部一致）。注意：KB 记为 arXiv:2403.05073 的编号有误（实为 cs.CR 论文），本条不得标注 arXiv 号。},
+  source: KB页 wiki/papers/2026-9jcm-8gd8-rainbow-retrieval-of-atomic-time-delays-in-attosecond-streak.md | raw/papers/2026-2403.05073-rainbow-retrieval-of-atomic-time-delays-in-attosecond-streak.md | 检索池 references-source.md 条目[13]
+}
+
+@misc{gao2026hidden,
+  title     = {Hidden Perturbative Structure in Attosecond Streaking},
+  author    = {Gao, Jingsong and Hasan, Mahmudul and Eisenhutt, Zach and Serov, Vladislav and Liang, Hao and Han, Meng and Kheifets, Anatoli},
+  year      = {2026},
+  eprint    = {2610.24891},
+  archivePrefix = {arXiv},
+  primaryClass = {physics.atom-ph},
+  url       = {https://arxiv.org/abs/2610.24891},
+  note      = {条目对应文献地图 [ref:11]，arXiv 预印本（v1 2026-10-17，v2 2026-10-22，8 pages/4 figures；arXiv API 实测无 DOI/jref）。通过反演奇筛选分离 P1+P3 Legendre 分量，其复系数给出有效 s/d 双光子振幅比；reff(E)=[6A1/A3-4]/5。数值：实验 E=30-58 eV（2 eV bin）、121 延迟、360 角行。},
+  source: KB页 wiki/papers/2026-2610_24891-hidden-perturbative-structure-in-attosecond-streak.md | raw/papers/2026-2610.24891-hidden-perturbative-structure-in-attosecond-streak.md | 检索池 references-source.md 条目[34]
+}
+
+@misc{xia2026complex,
+  title     = {Complex-gate all-optical frequency-resolved optical gating for ultrabroadband isolated attosecond pulse characterization},
+  author    = {Xia, Minshuang and Nishimiya, Kaito and Dong, Dianhong and Fu, Yuxi and Takahashi, Eiji J.},
+  year      = {2026},
+  eprint    = {2608.30516},
+  archivePrefix = {arXiv},
+  primaryClass = {physics.optics},
+  url       = {https://arxiv.org/abs/2608.30516},
+  note      = {条目对应文献地图 [ref:12]，arXiv 预印本（提交 2026-08-31，11 pages/4 figures；arXiv API 实测无 DOI/jref）。证明弱微扰场在 HHG 中同时引起相位与振幅调制，故需复值门函数；2.26 um sub-cycle 驱动，表征 100-180 eV 氩中孤立脉冲，重建时长约 300 as 并给出谱相位。},
+  source: KB页 raw/papers/2026-2608.30516-complex-gate-all-optical-frequency-resolved-optica.md | 检索池 references-source.md 条目[26]
+}
+
+@misc{leung2025universal,
+  title     = {Universal in-line waveform characterization using arbitrary non-linear responses},
+  author    = {Leung, Chung Sum and Wiese, Joss and Brupbacher, Katherine and W{\"o}rner, Hans Jakob},
+  year      = {2025},
+  eprint    = {2511.04436},
+  archivePrefix = {arXiv},
+  primaryClass = {physics.optics},
+  url       = {https://arxiv.org/abs/2511.04436},
+  note      = {条目对应文献地图 [ref:13]，arXiv 预印本（提交 2025-11-06，13 pages/8 figures；arXiv API 实测无 DOI/jref）。相对产额测量 + 任意非线性响应 + 开源重建算法族 CRIME/lazyCRIME，标准工作站数分钟达阿秒精度，可与 ATAS 实验非侵入同步表征。},
+  source: arXiv API 实测（export.arxiv.org id_list=2511.04436，2026-11-18）
+}
+
+@article{ji2025quantitative,
+  title     = {Quantitative uncertainty analysis of extracting attosecond delays from spectrally overlapping RABBIT experiments},
+  author    = {Ji, Jia-Bao and W{\"o}rner, Hans Jakob},
+  journal   = {Journal of Physics B: Atomic, Molecular and Optical Physics},
+  year      = {2025},
+  volume    = {58},
+  pages     = {135601},
+  doi       = {10.1088/1361-6455/adea62},
+  url       = {https://doi.org/10.1088/1361-6455/adea62},
+  note      = {条目对应文献地图 [ref:14]。推导相位提取方差与能谱重叠程度的解析关系，并证明 global-fit 与 complex-fit 在最小二乘意义下严格等价。元数据于 2026-11-18 经 CrossRef API 实测（题名/期刊/卷/页/日期/作者一致）。注意：KB 记为 arXiv:2405.06275 的编号有误（实为 cs.CL 论文），本条不得标注 arXiv 号。},
+  source: KB页 wiki/papers/2025-2405_06275-quantitative-uncertainty-analysis-of-extracting-attosecond-d.md | raw/papers/2025-2405.06275-quantitative-uncertainty-analysis-of-extracting-attosecond-d.md | 检索池 references-source.md 条目[7]
+}
+
+@misc{wang2024covariance,
+  title     = {Covariance Analysis of Impulsive Streaking},
+  author    = {Wang, Jun and Guo, Zhaoheng and Isele, Erik and Bucksbaum, Philip H. and Marinelli, Agostino and Cryan, James P. and Driver, Taran},
+  year      = {2024},
+  eprint    = {2411.01729},
+  archivePrefix = {arXiv},
+  primaryClass = {physics.data-an},
+  url       = {https://arxiv.org/abs/2411.01729},
+  note      = {条目对应文献地图 [ref:15]（arXiv v1 2024-11-04，v2 2024-12-20，22 pages/13 figures；arXiv API 实测无 DOI/jref）。脉冲式条纹区中 MD 位移建立 dressing-free 与 dressed MD 的紧连接，由此产生跨不同 MD 形状共有的普适协方差结构，可据以检索时间信息。},
+  source: KB页 wiki/papers/2024-2411_01729-covariance-analysis-of-impulsive-streaking.md | raw/papers/2024-2411.01729-covariance-analysis-of-impulsive-streaking.md | 检索池 references-source.md 条目[18]
+}
+
+@misc{rajendran2026breakdown,
+  title     = {Breakdown of the isotropic asymptotic approximation in two-colour photoionisation},
+  author    = {Rajendran, Sooraj and Benito de Lama, Miguel and Maroju, Praveen Kumar and Di Fraia, Michele and Plekan, Oksana and Busto, David and Makos, Ioannis and Schmoll, Marvin and Giannessi, Luca and Allaria, Enrico and Rebernik Ribi{\v c}, Primo{\v z} and De Ninno, Giovanni and Demidovich, Alexander and Danailov, Miltcho and Zangrando, Marco and Schafer, Kenneth J. and Squibb, Richard J. and Feifel, Raimund and Csizmadia, Tam{\'a}s and Frassetto, Fabio and Poletto, Luca and Prince, Kevin C. and Mauritsson, Johan and Callegari, Carlo and Feist, Johannes and Palacios, Alicia and Sansone, Giuseppe},
+  year      = {2026},
+  eprint    = {2603.15293},
+  archivePrefix = {arXiv},
+  primaryClass = {physics.atom-ph},
+  url       = {https://arxiv.org/abs/2603.15293},
+  note      = {条目对应文献地图 [ref:16]，arXiv 预印本（提交 2026-03-16，v1；arXiv API 实测无 DOI/jref）。实测各向同性渐近近似破缺：观测到数十毫弧度（数阿秒量级）偏离，13-15 eV 光电子动能区即可分辨 1-2 as 量级偏离，全维模拟归因于离心势项为主导。},
+  source: KB页 raw/papers/2026-2603.15293-breakdown-of-the-isotropic-asymptotic-approximation-in-two-c.md（该条目尚无 wiki 蒸馏页） | 检索池 references-source.md 条目[43]
+}
+
+% ---------------------------------------------------------------------------
+% 待核验条目（不得在报告正文承重引用；留档以备后续核验）
+% ---------------------------------------------------------------------------
+@misc{kasmi2023evaluating,
+  title     = {Evaluating the accuracy of attosecond streaking time-delay measurements},
+  author    = {Kasmi and others},
+  year      = {2023},
+  note      = {待核验：既有检索池著录为 Kasmi et al. 2023，但 2026-11-18 本轮未取得可核验的 arXiv ID 或 CrossRef DOI。知识库对应页 wiki/papers/2023-2312_14174-evaluating-the-accuracy-of-attosecond-streaking-time-delay-m.md 正文实为超导约瑟夫森结论文（Pedersen et al., Physica C 2014），元数据与正文冲突且 KB 页内已显式标注该冲突。核验前不得引用。},
+  source: 检索池 references-source.md（待核验） | KB页 wiki/papers/2023-2312_14174-evaluating-the-accuracy-of-attosecond-streaking-time-delay-m.md（正文与元数据冲突）
+}

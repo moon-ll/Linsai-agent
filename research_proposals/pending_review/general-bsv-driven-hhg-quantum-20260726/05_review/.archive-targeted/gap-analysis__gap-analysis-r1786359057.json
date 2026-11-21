@@ -1,0 +1,37 @@
+{
+  "gaps": [
+    {
+      "claim": "Even Tzur 2024 提出量子光驱动 HHG 的 winding trail 模型，content.md §2.3 第 38 行标注其发表于 Phys. Rev. Research 6, 023064 (2024)",
+      "missing_evidence": "arXiv:2311.11257 的实际发表期刊、卷期号、年份未确认；content.md 与 rationale.md 跨章同步错误引用该论文，需要通过 CrossRef / Web of Science / 期刊主页核实 Phys. Rev. Research 6, 023064 (2024) 的真实作者与内容",
+      "search_keywords": [
+        "Even Tzur 2024 squeezed high-order harmonics Phys Rev Research publication",
+        "arXiv 2311.11257 journal acceptance status",
+        "Phys Rev Research 6 023064 2024 quantum light harmonic",
+        "winding trail model nonclassical HHG author verification"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Boroumand 等 [arXiv:2505.22536] 提出量子边带 HHG（Quantum Sideband HHG, QSHHG）度量框架，被 content.md §2.8 创新点引用",
+      "missing_evidence": "arXiv:2505.22536 原文中是否使用 QSHHG / Quantum Sideband HHG 缩写与术语未确认；rationale.md 已加 hedge 声明 QSHHG 是本项目自创简称，但 content.md §2.8 未同步，两章口径冲突；需在 Boroumand 原文及其后续修订中确认术语归属",
+      "search_keywords": [
+        "Boroumand quantum engineering high harmonic generation 2025",
+        "arXiv 2505.22536 quantum sideband HHG QSHHG definition",
+        "Lewis-Swan Pisanty quantum harmonic generation framework nomenclature",
+        "quantum state HHG QSHHG acronym origin literature"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Silva #7 参考文献存在张冠李戴，content.md 与 references.md 跨章同步引用错误（作者/期刊/年份至少一项错配）",
+      "missing_evidence": "第 7 条文献的真实作者、期刊名、年份、卷期号未在报告中给出，需逐字段对照原文（CrossRef DOI 反查、arXiv 全文比对、Web of Science 引文匹配）纠正跨章引用",
+      "search_keywords": [
+        "Silva high harmonic generation solid state reference author",
+        "Silva HHG review citation CrossRef verification",
+        "arXiv Silva attosecond spectroscopy reference lookup",
+        "DOI verification tool CrossRef API Silva HHG"
+      ],
+      "priority": "high"
+    }
+  ]
+}

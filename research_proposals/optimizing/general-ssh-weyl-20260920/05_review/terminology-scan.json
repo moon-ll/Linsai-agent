@@ -1,0 +1,382 @@
+{
+  "checked": true,
+  "at": "2026-11-07T04:05:58Z",
+  "proposal": "general-ssh-weyl-20260920",
+  "sections_scanned": [
+    "content",
+    "full_review",
+    "method_manual",
+    "rationale",
+    "scheme"
+  ],
+  "cjk_variant_pairs": [
+    {
+      "a": "非拓扑",
+      "b": "高阶拓扑",
+      "freq_a": 37,
+      "freq_b": 36,
+      "sections_a": [
+        "content",
+        "full_review",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "三次谐波",
+      "b": "偶次谐波",
+      "freq_a": 23,
+      "freq_b": 20,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "拓扑相",
+      "b": "拓扑量子",
+      "freq_a": 68,
+      "freq_b": 18,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "曲率分",
+      "b": "曲率贡献",
+      "freq_a": 24,
+      "freq_b": 18,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "射贡献",
+      "b": "曲率贡献",
+      "freq_a": 19,
+      "freq_b": 18,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "散射贡献",
+      "b": "率贡献",
+      "freq_a": 18,
+      "freq_b": 18,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "散射贡献",
+      "b": "曲率贡献",
+      "freq_a": 18,
+      "freq_b": 18,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "曲率贡",
+      "b": "曲率分布",
+      "freq_a": 18,
+      "freq_b": 18,
+      "sections_a": [
+        "content",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "曲率贡献",
+      "b": "曲率分布",
+      "freq_a": 18,
+      "freq_b": 18,
+      "sections_a": [
+        "content",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "拓扑量",
+      "b": "拓扑相变",
+      "freq_a": 24,
+      "freq_b": 17,
+      "sections_a": [
+        "content",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "拓扑量子",
+      "b": "拓扑相变",
+      "freq_a": 18,
+      "freq_b": 17,
+      "sections_a": [
+        "content",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "拓扑量子",
+      "b": "拓扑绝",
+      "freq_a": 18,
+      "freq_b": 17,
+      "sections_a": [
+        "content",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    }
+  ],
+  "token_variant_groups": [
+    {
+      "group_key": "T_2",
+      "variants": [
+        {
+          "form": "T_2",
+          "count": 49
+        },
+        {
+          "form": "T₂",
+          "count": 9
+        }
+      ],
+      "sections": [
+        "full_review",
+        "method_manual",
+        "scheme"
+      ]
+    },
+    {
+      "group_key": "N_k",
+      "variants": [
+        {
+          "form": "N_k",
+          "count": 35
+        },
+        {
+          "form": "N_k^",
+          "count": 3
+        }
+      ],
+      "sections": [
+        "method_manual",
+        "scheme"
+      ]
+    },
+    {
+      "group_key": "R_2",
+      "variants": [
+        {
+          "form": "R^2",
+          "count": 8
+        },
+        {
+          "form": "R²",
+          "count": 26
+        }
+      ],
+      "sections": [
+        "content",
+        "full_review",
+        "method_manual",
+        "scheme"
+      ]
+    },
+    {
+      "group_key": "I_f",
+      "variants": [
+        {
+          "form": "I_f",
+          "count": 5
+        },
+        {
+          "form": "I_f^",
+          "count": 12
+        }
+      ],
+      "sections": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "group_key": "Omega_n",
+      "variants": [
+        {
+          "form": "Omega_n",
+          "count": 4
+        },
+        {
+          "form": "Omega_n^",
+          "count": 6
+        }
+      ],
+      "sections": [
+        "method_manual",
+        "scheme"
+      ]
+    },
+    {
+      "group_key": "T_1",
+      "variants": [
+        {
+          "form": "T_1",
+          "count": 2
+        },
+        {
+          "form": "T₁",
+          "count": 2
+        }
+      ],
+      "sections": [
+        "full_review",
+        "scheme"
+      ]
+    },
+    {
+      "group_key": "sum_n",
+      "variants": [
+        {
+          "form": "sum_n",
+          "count": 2
+        },
+        {
+          "form": "sum_{n",
+          "count": 2
+        }
+      ],
+      "sections": [
+        "method_manual",
+        "scheme"
+      ]
+    },
+    {
+      "group_key": "log_10",
+      "variants": [
+        {
+          "form": "log_{10",
+          "count": 2
+        },
+        {
+          "form": "log₁₀",
+          "count": 2
+        }
+      ],
+      "sections": [
+        "full_review",
+        "method_manual",
+        "scheme"
+      ]
+    }
+  ],
+  "summary": {
+    "cjk_pair_candidates": 400,
+    "token_variant_groups": 8,
+    "note": "候选报告不改文：处置归 writer/critic 契约；数值口径归 params_registry"
+  }
+}

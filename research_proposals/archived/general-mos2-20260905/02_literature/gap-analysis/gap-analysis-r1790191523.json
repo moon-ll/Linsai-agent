@@ -1,0 +1,55 @@
+{
+  "gaps": [
+    {
+      "claim": "扭转双层MoS₂点群对称性从D₃d到C₃的破缺及表征维度从3×3升至3×3×N的高阶张量推广",
+      "missing_evidence": "需要Patra与Cocchi[29]扭转MoS₂双层χ_xxx分量与φ₀=θ_tw/2相位锁定的原始论文全文及其与HHG选择定则的关联推导",
+      "search_keywords": [
+        "Patra Cocchi twisted MoS2 SHG DFT-Wannier",
+        "twisted homobilayer MoS2 C3 symmetry second harmonic generation",
+        "chi_xxx high harmonic tensor MoS2"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "扭转hBN中几何相位实现第五谐波转换效率约4×10⁻⁵（PRL 135, 166902）作为点群映射的解析基线",
+      "missing_evidence": "缺少Ma等人在扭转hBN中几何相位诱导谐波转换效率的原始实验数据与数值",
+      "search_keywords": [
+        "Ma twisted hBN fifth harmonic generation PRL 135 166902",
+        "twisted bilayer hBN geometric phase high harmonic efficiency",
+        "hBN moire superlattice harmonic conversion efficiency"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Ikeda[16]与Ma等人在扭转双层石墨烯/hBN中预言并验证新谐波通道",
+      "missing_evidence": "需要Ikeda在扭转双层石墨烯/hBN中新谐波通道的原始理论与实验验证文献细节",
+      "search_keywords": [
+        "Ikeda twisted bilayer graphene hBN harmonic channel prediction",
+        "twisted bilayer graphene new harmonic generation",
+        "hBN moire high harmonic selection rule"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "扭转进一步破坏垂直二重轴与三面σ_d镜面（及反演中心i）的点群分析",
+      "missing_evidence": "缺少D₃d点群在扭转双层MoS₂中保留/破缺条件的群论推导，特别是层间势差对反演中心i的影响",
+      "search_keywords": [
+        "D3d point group twisted bilayer MoS2 symmetry breaking",
+        "interlayer potential inversion symmetry TMD homobilayer",
+        "sigma_d mirror plane twisted MoS2 group theory"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "莫尔势空间调制带间跃迁矩阵元及Fourier偏移的物理图像",
+      "missing_evidence": "需要扭转双层MoS₂中带间跃迁矩阵元随扭转角变化的理论计算与Fourier展开文献",
+      "search_keywords": [
+        "moire superlattice transition dipole moment MoS2",
+        "Fourier expansion moire potential transition matrix element",
+        "twisted homobilayer MoS2 interband coupling angle dependence"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

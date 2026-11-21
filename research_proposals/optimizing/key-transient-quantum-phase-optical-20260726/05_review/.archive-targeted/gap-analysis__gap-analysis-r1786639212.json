@@ -1,0 +1,37 @@
+{
+  "gaps": [
+    {
+      "claim": "AI/机器学习方法可用于HHG参数反演并具备跨材料体系泛化能力",
+      "missing_evidence": "评审在可行性维度将D6（AI泛化性）列为风险点，表明提案中AI反演方法的泛化性能缺乏充分的文献支撑，缺少同类方法在其他材料/条件下泛化成功或失败的可比证据",
+      "search_keywords": [
+        "machine learning nonlinear optics inverse problem generalization",
+        "neural network HHG parameter retrieval cross-material robustness",
+        "physics-informed neural network optical inversion domain transfer",
+        "AI-driven attosecond spectroscopy inversion generalization failure"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "TDDFT计算瞬态量子相位需要10^6至10^7 CPU小时的算力，该规模在同类研究中可行",
+      "missing_evidence": "评审在可行性维度将L1算力（10^6-10^7 CPU·h）列为风险点，缺少同类规模TDDFT/RT-TDDFT计算的算力基准文献或已发表的可比性成本报告",
+      "search_keywords": [
+        "real-time TDDFT computational cost benchmark CPU hours",
+        "RT-TDDFT strong field simulation core-hour scaling",
+        "TDDFT attosecond dynamics large-scale computation benchmark",
+        "real-time TDDFT superlattice computational feasibility cost"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "测量范式扩展（从稳态到瞬态量子相位的HHG探测）具有创新性且与已有工作有清晰区隔",
+      "missing_evidence": "评审在创新性维度指出§5(1)测量范式扩展论证因表达问题（162字超长句）导致创新锐度受损，但隐含问题是对已有测量范式与所提瞬态扩展之间的区别和优越性缺乏足够文献对照论证",
+      "search_keywords": [
+        "transient quantum phase attosecond measurement paradigm",
+        "ultrafast quantum phase retrieval solid state state-of-the-art",
+        "floquet engineering solid state strong field measurement review",
+        "subcycle quantum phase dynamics ultrafast detection review"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

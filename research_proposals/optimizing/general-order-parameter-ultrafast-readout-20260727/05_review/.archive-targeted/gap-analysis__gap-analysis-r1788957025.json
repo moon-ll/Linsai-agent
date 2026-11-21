@@ -1,0 +1,80 @@
+{
+  "gaps": [
+    {
+      "claim": "CrSb 的交变磁性波型应为 g 波而非 d 波，序参量先验劈裂幅度取 0.4—1.2 eV",
+      "missing_evidence": "缺少 CrSb 波型（g-wave bulk-type altermagnetism）、自旋劈裂幅度 ~1.0 eV、奈尔温度 705 K 的一手实验/理论文献支撑，content 全章仍写 d 波，需补充可直接引用的对称性与劈裂幅度来源",
+      "search_keywords": [
+        "CrSb g-wave altermagnetism",
+        "CrSb spin splitting ARPES eV",
+        "CrSb bulk-type altermagnet Neel temperature 705 K",
+        "CrSb altermagnet symmetry classification"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Ma 等在 MnTe 中观测到的对称性特征（content L45/L71 转述为 d 波）",
+      "missing_evidence": "缺少 MnTe 波型归属的权威核实文献：2026 年 ARPES 综述（arXiv:2602.13590）将 MnTe 归入 g-wave 类，与 content 转述的 d 波冲突，需要 MnTe 自旋分辨 ARPES 原文与综述对照证据",
+      "search_keywords": [
+        "MnTe altermagnet spin-resolved ARPES symmetry",
+        "MnTe d-wave versus g-wave altermagnetism",
+        "altermagnet ARPES review 2026 symmetry classification",
+        "MnTe spin splitting magnitude experiment"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "差分幅度 ≥1% 且 SNR>5 可作为序参量读出的可检验判据，需给出背景单谱 SNR 换算依据",
+      "missing_evidence": "缺少固体 HHG 实验中背景噪声水平、单谱信噪比与差分信号可探测下限的实测数据，无法把 1% 差分幅度与 SNR>5 的换算关系落到文献依据上",
+      "search_keywords": [
+        "solid-state HHG signal-to-noise ratio measurement",
+        "high harmonic spectrum shot noise floor photon counting",
+        "HHG differential signal detection limit percent",
+        "altermagnet HHG magnetic contrast measurement sensitivity"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "费舍尔信息矩阵条件数 κ<10² 与贝叶斯后验收缩 <先验50% 构成两条独立可辨识性判据；仅当 Fisher 线性化失效（多峰/非线性）时后验判据独立提供信息",
+      "missing_evidence": "缺少支撑 Fisher 线性化失效条件、条件数阈值选取与贝叶斯后验独立判据必要性的方法学文献（非线性/多峰后验下 Fisher 近似失效的论证）",
+      "search_keywords": [
+        "Fisher information linearization breakdown nonlinear inverse problem",
+        "condition number threshold parameter identifiability",
+        "Bayesian posterior versus Fisher information multimodal",
+        "identifiability analysis nonlinear optics parameter retrieval"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "多体激发在 HHG 谱中产生可区分的谱平台，构成多通道混合的方法学警示（Murakami 等 [12]）",
+      "missing_evidence": "该论证目前仅依赖单一 Hubbard 梯模型工作，缺少在真实交变磁体/多带体系中多通道混合对序参量反演影响的独立佐证文献",
+      "search_keywords": [
+        "multi-band contribution high harmonic spectrum plateau",
+        "many-body excitation HHG spectral signature",
+        "channel mixing high harmonic spectroscopy inversion",
+        "correlated material HHG plateau discrimination"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "OAM（轨道角动量）驱动下的谐波守恒律可作为对称性读出的补充通道（content L65 罗列 ZnO、GaSe、MgO、Si、WSe₂）",
+      "missing_evidence": "缺少一条统一的 OAM 守恒律表述的权威文献，用于替代五材料数据枚举",
+      "search_keywords": [
+        "orbital angular momentum conservation high harmonic generation solids",
+        "OAM HHG selection rule topological charge",
+        "structured light high harmonic generation solid state"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "第4年验收：独立表征与 HHG 反演结果在 ±0.5% 偏差内一致",
+      "missing_evidence": "缺少独立表征手段（如中子衍射/反常霍尔/自旋分辨 ARPES）测定序参量（分裂幅度或临界温度）精度水平的文献，用以论证 ±0.5% 偏差指标的可达性与量纲定义",
+      "search_keywords": [
+        "altermagnet order parameter independent characterization precision",
+        "neutron diffraction magnetic order parameter accuracy",
+        "anomalous Hall altermagnet order parameter calibration",
+        "Neel temperature determination uncertainty CrSb"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

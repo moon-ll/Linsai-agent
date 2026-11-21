@@ -1,0 +1,20 @@
+
+## 周末输入补充（2026-09-18 · cl_20260815_282c86）
+
+### 拟开展研究内容
+- paper:2026-2606.31358-ultrafast-magnetization-induced-by-linearly-polari
+- paper:2606.31358
+- paper:1804.07159
+
+### 创新点
+- 如何在实验上直接探测飞秒时间尺度上线性偏振脉冲诱导的瞬态磁化信号（如时间分辨磁光克尔/法拉第测量）？
+- 脉冲撤除后自旋极化与磁序的退相干及弛豫寿命如何，能否实现可逆、稳定的磁序超快'开-关'？
+- 带边载流子激发与光致交换不稳定性之间的微观定量机制尚需怎样的多体或超出TDDFT的理论描述？
+- 超快爱因斯坦–德哈斯效应中自旋-轨道-晶格角动量传递与光致磁化产生过程之间的内在关联是什么？
+- 面向拍赫兹磁信息处理的应用，如何评估候选材料在室温工作、强场损伤阈值、可逆性与器件集成方面的可行性？
+
+### 来源
+- [weekend_cluster] Ultrafast magnetization induced by linearly polarized pulses is widespread in nonmagnetic semiconductors
+- [weekend_cluster] Ultrafast magnetization induced by linearly polarized pulses is widespread in nonmagnetic semiconductors
+- [weekend_cluster] The ultrafast Einstein–de Haas effect
+

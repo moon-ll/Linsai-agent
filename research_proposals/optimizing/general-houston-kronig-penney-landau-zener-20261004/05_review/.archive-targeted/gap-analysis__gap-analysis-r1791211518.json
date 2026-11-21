@@ -1,0 +1,109 @@
+{
+  "gaps": [
+    {
+      "claim": "局域电子态对高次谐波产生（HHG）过程的影响机理——核心命题需文献确认是否已有相关报道",
+      "missing_evidence": "缺少关于'局域电子态/缺陷态/掺杂态调制固体HHG'的已发表理论与实验文献，以判定本项目是填补空白还是增量工作",
+      "search_keywords": [
+        "localized electronic states high harmonic generation",
+        "defect states HHG solids",
+        "dopant modulation high-order harmonic generation",
+        "impurity states strong-field solid"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "掺杂半导体高次谐波光谱的结构差异及产生机制",
+      "missing_evidence": "缺少关于掺杂半导体（如MoS2、WSe2等TMDC）HHG光谱的实验与理论研究文献，特别是不同掺杂类型（替代/间隙/表面）对谐波谱的差异化影响",
+      "search_keywords": [
+        "doped semiconductor high harmonic generation",
+        "MoS2 high harmonic generation",
+        "transition metal dichalcogenide HHG doping",
+        " TMDC high-order harmonics doping effect"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "HHG中标度律（scaling law）与选择规则（selection rule）的可检验判据",
+      "missing_evidence": "缺少固体HHG标度律与选择规则的代表性文献，以建立'横向偏振指纹、半定量一致、消融符号一致'三类判据的合法性依据",
+      "search_keywords": [
+        "high harmonic generation scaling law solids",
+        "HHG selection rules semiconductors",
+        "polarization-resolved HHG fingerprint",
+        "solid-state HHG selection rule"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "量子轨迹模型纳入局域电子态效应的方法学基础",
+      "missing_evidence": "缺少将局域电子态嵌入量子轨迹/强场近似的已有理论文献，以证明该模型路线在前人工作中有据可循",
+      "search_keywords": [
+        "quantum trajectory model HHG solids",
+        "semiclassical trajectory strong-field semiconductor",
+        "localized states tight-binding strong-field model",
+        "quantum trajectory doped crystal HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "理论与实验定量对比的可达成精度——产额偏差≤1量级、相关系数>0.8",
+      "missing_evidence": "缺少文献佐证'产径偏差一个量级以内、相关系数>0.8'在同类固体HHG理论-实验对比中已被实现或被公认为可达标准",
+      "search_keywords": [
+        "theoretical experimental HHG comparison benchmark",
+        "HHG yield quantitative agreement theory experiment",
+        "spectral correlation coefficient HHG simulation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Kronig-Penney势与Landau-Zener跃迁在强场周期势体系中的处理",
+      "missing_evidence": "缺少将Kronig-Penney周期势模型与Landau-Zener跃迁结合用于强场/高次谐波问题的代表性文献",
+      "search_keywords": [
+        "Kronig-Penney model strong-field",
+        "Landau-Zener transition periodic potential",
+        "interband transition strong-field semiconductor HHG",
+        "Landau-Zener interband HHG"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "MoS2等TMDC的电子能带结构与强场响应",
+      "missing_evidence": "缺少MoS2等材料在强激光下能带结构计算（特别是含局域态修正）的代表性工作",
+      "search_keywords": [
+        "MoS2 band structure strong-field",
+        "TMDC electronic structure HHG",
+        "MoS2 tight-binding high harmonic",
+        "density functional theory MoS2 strong-field response"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "rationale.md正文中20个[N]引用条目所对应的原始文献",
+      "missing_evidence": "references.md为0字节，全部20个内文引用指针悬空，需逐条落实作者-年份-期刊-卷页/DOI",
+      "search_keywords": [
+        "待补全：依据rationale.md正文逐条追溯上下文关键词（如MoS2高次谐波、固体HHG选择规则、掺杂半导体强场、Landau-Zener隧穿等）"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "高次谐波产生中'横向偏振指纹'作为局域态诊断的可比性依据",
+      "missing_evidence": "缺少将'横向偏振分量'用作HHG谱局域态/对称性诊断指标的代表性文献",
+      "search_keywords": [
+        "perpendicular polarization HHG component",
+        "transverse polarization harmonic dipole",
+        "polarization fingerprint localized states HHG"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "消融实验（ablation）符号一致性作为理论-实验对照判据的前例",
+      "missing_evidence": "缺少以'消融符号一致'（ablation sign consistency）作为理论预测可检验指标的同类工作",
+      "search_keywords": [
+        "ablation signature HHG theoretical prediction",
+        "sign consistency theory experiment HHG",
+        "destructive interference HHG signature"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

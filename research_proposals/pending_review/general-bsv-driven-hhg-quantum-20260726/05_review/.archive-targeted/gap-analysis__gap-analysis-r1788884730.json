@@ -1,0 +1,74 @@
+{
+  "gaps": [
+    {
+      "claim": "§3.3 L15 莫尔周期公式 λ=a/2sin(θ/2) 在 4°–6° 扭角给出 3.0–4.5 nm 而非 5–10 nm",
+      "missing_evidence": "缺莫尔超晶格几何周期公式的原始推导文献及 TMDC 晶格常数 a（~0.33 nm）的实验依据",
+      "search_keywords": [
+        "moire superlattice lattice constant TMDC",
+        "moire period formula a/sin(theta/2)",
+        "twisted bilayer MoS2 period nm"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3.2 L9 单层 TMDC HHG 阈值 ~10¹¹ W/cm²（参考文献[6]）与 5 μm 口径下 10⁸ 光子驱动的强度预算不匹配",
+      "missing_evidence": "缺单层 TMDC HHG 实验阈值 10¹¹ W/cm² 的原始参考文献、紧聚焦（≤2 μm）下的强度预算标定",
+      "search_keywords": [
+        "monolayer TMDC HHG threshold intensity",
+        "MoS2 high harmonic generation threshold W/cm2",
+        "tight focusing 2 micron high harmonic intensity"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3.3 L15 9 T 磁场调控 κ-Br Mott 相变的量级可行性（文献多用 κ-Cl 需更高场）",
+      "missing_evidence": "缺 9 T 磁场致 Mott 转变的实验依据，包括 κ-Br 与 κ-Cl 的对比、磁场致相边界的具体移动量",
+      "search_keywords": [
+        "9 Tesla magnetic field Mott transition organic",
+        "kappa-(BEDT-TTF)2Cu[N(CN)2]Br magnetic field",
+        "kappa-Cl kappa-Br Mott critical field comparison"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3.6 L45/L47 与 content §2.8 创新点一/二存在内容重复，需要差异化方案视角的引证支撑",
+      "missing_evidence": "缺支撑联合标定协议（Liouville 主方法 + HHG 时域干涉反演）的最近文献，区别于现有 [9][14] 的具体方法学突破",
+      "search_keywords": [
+        "Liouville master equation high harmonic generation",
+        "joint calibration HHG quantum light protocol",
+        "time-domain interferometric HHG inversion recent"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "references.md [17] DOI 10.1103/ydjj-xxcl 乱码，需反查 ADS 2026PhRvB.113d5118P 真实条目与页码 L041107",
+      "missing_evidence": "缺参考文献[17]的真实 DOI（应为 10.1103/PhysRevB.113.xxxxx）和正确的页码 L041107 是否对应 L041107-L041107 格式",
+      "search_keywords": [
+        "PhysRevB.113 2026 high harmonic Mott insulator",
+        "Phys Rev B 113 041107 high harmonic organic",
+        "PhysRevB 113 d5118 high harmonic"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3.3 L15/L17 强关联支驱动波长/强度（THz 先例 [17]）与 VUV–EUV 探测端参数全未定义",
+      "missing_evidence": "缺强关联体系（κ-ET、Mott 绝缘体）驱动场参数与高次谐波探测方案的实验先例文献",
+      "search_keywords": [
+        "THz driven Mott insulator high harmonic",
+        "kappa-ET high harmonic generation THz",
+        "strongly correlated HHG VUV EUV detection"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§3.4 工程参数 150 mrad、1 kHz、5 fs 与目标可见度/信噪比的定量因果链缺失",
+      "missing_evidence": "缺这些参数选择与量子增强因子（QEF）可见度/信噪比之间的定量论证文献，包括 BSV 压缩参数 r 与 HHG 信噪比的标定",
+      "search_keywords": [
+        "BSV squeezing parameter high harmonic signal-to-noise",
+        "QEF quantum enhancement factor visibility",
+        "few-cycle 5 fs mid-infrared high harmonic contrast"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

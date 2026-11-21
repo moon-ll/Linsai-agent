@@ -1,0 +1,122 @@
+{
+  "quarantined_at": "2026-11-15T16:05:10Z",
+  "reason": "v7.3.85 后续巡检：深读摘要句子/公式碎片命名概念页空壳隔离（正文<300字），实质页留改待重命名/重写",
+  "pages": [
+    {
+      "file": "固体_HHG_的三重探测优势_亚周期_对称性敏感_体相.md",
+      "body_chars": 135
+    },
+    {
+      "file": "CEP门控__Carrier-envelope_phase_gating.md",
+      "body_chars": 104
+    },
+    {
+      "file": "堆叠序_磁各向异性能_易轴方向级联开关_Janus_YIBr_反铁磁双层.md",
+      "body_chars": 112
+    },
+    {
+      "file": "固体_HHG_的三重属性_体相___亚周期___对称性敏感.md",
+      "body_chars": 105
+    },
+    {
+      "file": "电场可开关层间磁序与反常能谷霍尔效应_Janus_VSSe_双层.md",
+      "body_chars": 120
+    },
+    {
+      "file": "CrSb_g_波序参量的三维体分辨结构_实球谐函数_𝒴₄_³.md",
+      "body_chars": 124
+    },
+    {
+      "file": "能谷极化放大_valley_polarization_amplification.md",
+      "body_chars": 246
+    },
+    {
+      "file": "d_波___g_波自旋劈裂与波型分类.md",
+      "body_chars": 138
+    },
+    {
+      "file": "峰值强度双口径并存_I_peak___4E__πw²τ__与_I₀___2E__πw²τ.md",
+      "body_chars": 254
+    },
+    {
+      "file": "经典三步模型截止定律_E_cut___I_p___3_17U_p.md",
+      "body_chars": 74
+    },
+    {
+      "file": "相对论等离子体镜面__Relativistic_plasma_mirrors.md",
+      "body_chars": 96
+    },
+    {
+      "file": "相对论性等离子体镜面__Relativistic_plasma_mirror.md",
+      "body_chars": 114
+    },
+    {
+      "file": "强场超快__Strong-field_Ultrafast.md",
+      "body_chars": 36
+    },
+    {
+      "file": "固体高次谐波__Solid_high-order_harmonics.md",
+      "body_chars": 86
+    },
+    {
+      "file": "HHG_截止阶次标度律_N_c____E_g___U_p__ℏω_drive.md",
+      "body_chars": 151
+    },
+    {
+      "file": "Valley-resolved_HHG_探测_Dirac_锥外的对称性破缺.md",
+      "body_chars": 154
+    },
+    {
+      "file": "匹配条件_劈裂幅度___三光子能量___间接带隙.md",
+      "body_chars": 136
+    },
+    {
+      "file": "激子共振___莫尔势协同机制_势场_极化耦合图像.md",
+      "body_chars": 221
+    },
+    {
+      "file": "Jacutingaite_中的_Floquet_自旋-能谷选择性输运.md",
+      "body_chars": 102
+    },
+    {
+      "file": "相对论等离子体镜面_relativistic_plasma_mirror.md",
+      "body_chars": 112
+    },
+    {
+      "file": "高次谐波产生__High_Harmonic_Generation__HHG.md",
+      "body_chars": 89
+    },
+    {
+      "file": "PINEM_从探测机制升级为自由电子波函数定量合成工具.md",
+      "body_chars": 95
+    },
+    {
+      "file": "压缩光HHG归一化截止方差关系_ΔH²_r__ΔH²_SQL___e__-2r.md",
+      "body_chars": 142
+    },
+    {
+      "file": "创新点_由_SHG_选择定则向高阶_HHG_张量推广.md",
+      "body_chars": 85
+    },
+    {
+      "file": "Photoelectron_interferometry_with_spectrally_shaped_polychromatic_infrared_pulses.md",
+      "body_chars": 298
+    },
+    {
+      "file": "创新点_在同一测量链中连接协同效应与_Berry_曲率反演.md",
+      "body_chars": 115
+    },
+    {
+      "file": "MnTe_波型归属分歧_g_波体态_vs_Rashba_表面态.md",
+      "body_chars": 227
+    },
+    {
+      "file": "光波电子学__Lightwave_electronics.md",
+      "body_chars": 231
+    },
+    {
+      "file": "固体_HHG_双通道机制_带间极化___带内电流.md",
+      "body_chars": 93
+    }
+  ]
+}

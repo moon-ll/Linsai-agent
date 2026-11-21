@@ -1,0 +1,29 @@
+{
+  "gaps": [
+    {
+      "claim": "§2.4/§2.5 中以 2018 年综述[6]（Ren 等 J. Opt. 2018）支撑\"国内当前……量级提升\"这一现时论断",
+      "missing_evidence": "综述发表年份（2018）与\"当前/现状\"语义时域错配，缺少 2022–2026 年间具体可挂名的国内阿秒条纹测量或阿秒动力学方面的工作（如中科院物理所、上海光机所、清华大学、华中科技大学等单位）以承担现时论断的举证",
+      "search_keywords": [
+        "attosecond streaking China 2023 2024 2025",
+        "阿秒条纹 国内 进展 量级",
+        "attosecond metrology domestic group recent",
+        "Chinese attosecond physics group Si Li Lu",
+        "阿秒动力学 中国 提升 时间分辨"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§1/§2.3 中对 Keldysh 1965 强场电离理论框架与 Corkum 三步模型的具名论断",
+      "missing_evidence": "文献表（references）缺少 Keldysh 1965 原文条目与 Corkum & Krausz 1993/1994 三步模型原文条目，当前正文仅以\"强场电离理论框架\"语义提及未挂 [N] 编号，存在 R3-问题 8 同类复发",
+      "search_keywords": [
+        "Keldysh 1965 ionization in alternating field Soviet Physics JETP",
+        "Keldysh strong field approximation original paper",
+        "Corkum three-step model 1993 Physical Review Letters plasma perspective",
+        "Corkum Krausz attosecond physics 2007 Nature",
+        "Keldysh 参数 强场近似 原始文献"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

@@ -1,0 +1,57 @@
+{
+  "gaps": [
+    {
+      "claim": "§1.3 末段「Lian 等 2024 年与 Xiong 等 2023 年……WSe₂/WS₂ 关联绝缘态的相变研究」需由真实文献支撑；现挂 [22,27]（refs 实表为 Chang Lee 多体 GW 计算与 Rafizadeh 邻近 TA 瞬态吸收），编号指向与文字内容完全不符",
+      "missing_evidence": "缺少与 Lian（Science 380, 860, refs [19]）和 Xiong（refs [24]）原始实验论文对应的正确引用编号支撑；需核实 Lian 2024 / Xiong 2023 关于 WSe₂/WS₂ 关联绝缘态（correlation-driven insulator）相变与能带重整化的原始文献，并同步修正 rationale 与 content 中的旧编号族 [22,23,27]",
+      "search_keywords": [
+        "Lian Science 380 860 WSe2 correlated insulator",
+        "Xiong WS2 correlation-driven insulator phase transition 2023",
+        "tmdc correlated insulator ultrafast spectroscopy phase transition",
+        "WSe2 WS2 Mott insulator optical spectroscopy"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.3 Hu 等关于「声子-电子耦合对 MoS₂ 单层 HHG 通道的调制」的论述在 §1.2 与 §1.3 重复出现",
+      "missing_evidence": "§1.3 整句复述 §1.2 已引用的同一篇文献 [21]，需在 §1.3 补挂指向后续拓展性证据的独立文献（如声子-电子耦合/晶格热效应调控 HHG 的补充工作），否则重复论述缺乏新增文献支撑",
+      "search_keywords": [
+        "Hu phonon electron coupling MoS2 monolayer high harmonic generation",
+        "electron-phonon coupling HHG modulation 2D materials",
+        "lattice distortion effect solid-state high harmonic generation",
+        "moire phonon coupling high harmonic generation"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§1.5 靶标 A 中两处指向「执行协议」的指针落点",
+      "missing_evidence": "scheme 全文无「执行协议」命名锚，实际锚名为「双通道协议/取舍规则」（§3.4.1），指针悬空；需在 §3.4.1 明确命名该小节标题/锚点（双通道协议与取舍规则），使立项依据的判据定义引用可被机械校验",
+      "search_keywords": [
+        "双通道协议 取舍规则 研究方案",
+        "两通道对照实验 取舍判据 判据定义"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§1.2 Ikeda 等 2025 年 Sr₂CuO₃ 强场谐波红移（>6 MV/cm、各阶频率自 MIR 奇数倍红移、实时 DMFT 归因于复合辐射相位改变、刚带体系可忽略）这一强场关联电子体系机制的引用支撑",
+      "missing_evidence": "需核实并补全该工作的原始文献引用（Ikeda 等 2025 年关于 Sr₂CuO₃/类似关联绝缘体强场 HHG 与实时 DMFT 的论文），并确认其载流子产生阈值、各阶红移规律与机制归因表述与所引文献一致；缺少可交叉验证的独立理论/实验对照（如关联体系强场 HHG 的 DMFT vs UHF 对照）",
+      "search_keywords": [
+        "Ikeda Sr2CuO3 high harmonic generation real-time DMFT",
+        "strongly correlated insulator solid-state HHG redshift",
+        "dmft high harmonic generation cuprate charge dynamics",
+        "Molinero SBE high harmonic generation tight binding"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§1.2 「在 TMDC 体系内，Hu 等……独立证据」段落论证密度不足（单句 78 字成段）",
+      "missing_evidence": "该段仅有一处引用支撑独立证据链，缺少可并列的多篇文献（其他 TMDC/范德华体系声子、电子-声子耦合对 HHG 影响的工作）以支撑「独立证据」表述",
+      "search_keywords": [
+        "transition metal dichalcogenide high harmonic generation phonon",
+        "WSe2 WS2 high harmonic generation 2024 2025",
+        "independent evidence electron phonon HHG 2D materials"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "rationale"
+}

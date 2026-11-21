@@ -1,0 +1,56 @@
+{
+  "gaps": [
+    {
+      "claim": "研究方案总体技术路线与 R1/R2/R3 分方案需要方法学文献支撑（scheme.md 为 0 字节，总体方案、技术路线、分方案全部缺失）",
+      "missing_evidence": "缺乏 HHG 自旋分辨/序参量读出实验方案设计与方法学的可引用文献，导致技术路线无可行性依据",
+      "search_keywords": [
+        "altermagnet high harmonic generation experimental scheme",
+        "spin-resolved high harmonic generation setup design",
+        "g-wave order parameter detection method",
+        "HHG spectroscopy experimental protocol solid state"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "R1 判据需给出适用条件（评审引用 content §2.2 例句『R1 还需给出该判据的适用条件…』）",
+      "missing_evidence": "缺少界定判据适用边界的理论文献：半导体布洛赫方程/强场近似在固体 HHG 中的有效性范围、Keldysh 参数适用区间",
+      "search_keywords": [
+        "semiconductor Bloch equation strong field validity",
+        "Keldysh parameter solid-state HHG regime",
+        "strong field approximation validity condition solid",
+        "g-wave pairing symmetry criterion"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "MnTe 单晶实验分方案的可行性需要文献支撑（评审引用 content §2.1 例句『其次，在 MnTe 单晶…』）",
+      "missing_evidence": "缺少 MnTe/CrSb 类交变磁体自旋极化 HHG 实验产额、驱动场强窗口与飞秒激光损伤阈值的实测数据",
+      "search_keywords": [
+        "MnTe spin-polarized high harmonic generation",
+        "CrSb altermagnet high harmonic experiment",
+        "altermagnet femtosecond laser damage threshold",
+        "spin-resolved HHG yield altermagnet"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "特色与创新部分（四步闭环）需要与现有方法对标的文献以凸显创新性",
+      "missing_evidence": "缺少现有 HHG 序参量重建与闭环读出方法的对比文献，无法论证四步闭环相对已有范式的增量创新",
+      "search_keywords": [
+        "HHG order parameter reconstruction method",
+        "quantum coherence tomography high harmonic generation",
+        "closed-loop ultrafast optical control HHG"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "独立参考文献文件未建立（references.md 为 0 字节，rationale.md 内嵌 [1]–[25+] 条目未迁移）",
+      "missing_evidence": "核心引文条目（如 [1] Šmejkal、[2] Krempaský）需迁移至独立文献文件并核验完整信息，scheme 部分引用体系无从建立",
+      "search_keywords": [
+        "Šmejkal altermagnet spin splitting prediction",
+        "Krempaský altermagnet ARPES experiment"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

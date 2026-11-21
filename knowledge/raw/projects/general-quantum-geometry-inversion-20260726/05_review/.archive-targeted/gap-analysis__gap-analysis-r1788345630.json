@@ -1,0 +1,4 @@
+{
+  "gaps": [],
+  "note": "agent 未返回标准 JSON gaps 格式，视为无文献缺口。原文前200字: {\"gaps\": [{\"claim\": \"Year 1决策节点\"非绝热驱动的强场区间\"失效边界未量化，仅定性表述无数值判据\", \"missing_evidence\": \"缺乏非绝热强场区间的量化定义作为失效边界，需要具体Keldysh参数或类似物理量给出数值阈值\", \"search_keywords\": [\"Keldysh parameter non-adiabatic strong field "
+}

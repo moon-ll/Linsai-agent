@@ -1,0 +1,84 @@
+{
+  "gaps": [
+    {
+      "claim": "rationale §1.3 L47「Q1 在 R1–R2 阶段验证加性/乘性区分」与 content §2.1 L19「Q1 由 R1 与 R3' 共同回答」需统一为 R1+R3' 口径",
+      "missing_evidence": "缺少对 Q1 加性/乘性区分判据（CDW 收缩比 R³'CDW≥2）验证阶段的物理载体文献支撑——需要确认该判据只能在 BSV 驱动（R3'）而非 ZnO 同域闭环（R2）下完成的实验/理论依据",
+      "search_keywords": [
+        "additive multiplicative decomposition high harmonic generation",
+        "BSV driven HHG solid state R3' phase verification",
+        "Mott CDW order parameter HHG contraction ratio"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "scheme §2.3 L67「§一第 1.5 节预研基础部分」虚指锚点（已删内容）与 §2.2 L51「详 §2.1 R1 子任务」章节编号体系不存在",
+      "missing_evidence": "scheme 章内部锚点指代需要真实可追溯的研究方案文献支撑，特别是 R1 子任务（ZnO 同域闭环 BSV HHG 反演）的成熟方法论参考",
+      "search_keywords": [
+        "ZnO high harmonic generation inversion closed loop",
+        "BSV driven HHG inverse problem R1 methodology",
+        "semiconductor Bloch equation quantum light source"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "scheme L117/139/445/447 vs rationale L91、content L87跨章 Aversa-Sipe 归属年份 1994/1995 混用（正确年份 1995，PRB 52, 14636）",
+      "missing_evidence": "缺少 Aversa-Sipe 1995 PRB 52, 14636 论文作为固体 HHG interband nonlinear susceptibility 基础理论的核心引用，以及其与早期 Lewenstein strong-field approximation 的关系文献",
+      "search_keywords": [
+        "Aversa Sipe 1995 PRB 52 14636 interband nonlinear susceptibility",
+        "Aversa Sipe semiconductor high harmonic generation theory",
+        "Ghimire 2011 ZnO solid HHG original reference"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "全文 170 处 [N] 编号引用密度为范本上限 8.5 倍（rationale 60/content 38/scheme 72），需削减为关键论断处保留",
+      "missing_evidence": "需要在削减编号引用密度后补充整体研读型综述文献作为非编号的背景支撑，特别是量子几何+强场非线性+量子光驱动三维交汇的权威综述",
+      "search_keywords": [
+        "quantum geometry nonlinear optical response review 2024 2025",
+        "solid state high harmonic generation review comprehensive",
+        "strong field ultrafast optics review recent progress"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "rationale §1.7 L95 vs content §2.5 L145「R4 三档误差指标 15%/25%、20%/30%」跨章复述及 content 内部重复",
+      "missing_evidence": "缺少 R4 阶段判据三档（15%/25%、20%/30%）物理合理性的方法论文献支撑——即 NN-based/PINN-based HHG 反演的误差分档统计基准论文",
+      "search_keywords": [
+        "neural network HHG inversion error benchmark",
+        "PINN high harmonic generation reconstruction accuracy",
+        "Bayesian inversion attosecond spectroscopy error tier"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "rationale L89/L93/L41 vs scheme L87/L171、content L7「失败出口三句组（截止提升<15% 转向 / 收缩比<1.2 转向 / BSV 加性乘性问句）」跨章复述",
+      "missing_evidence": "缺少对失败判据阈值（<15% 截止提升、<1.2 收缩比）的同类实验/反演研究文献作为参照基准",
+      "search_keywords": [
+        "high harmonic generation inversion failure threshold benchmark",
+        "quantum light HHG enhancement factor experimental statistics",
+        "CDW order parameter HHG contraction ratio comparison"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "scheme L71、L341「Khurelbaatar/Luu 段首残留孤立'|'管道符」格式硬伤",
+      "missing_evidence": "Khurelbaatar 与 Luu原始论文的准确题名/年份/DOI 需要核实以便正确引用",
+      "search_keywords": [
+        "Khurelbaatar BSV quantum light high harmonic generation preprint",
+        "Luu Worner 2018 Nat Commun Berry curvature quartz HHG"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "content 8220 字、scheme 11623 字均超参考上限（与冗余复述直接相关）",
+      "missing_evidence": "scheme 章超过 11623 字的体量中，需要识别可被综述文献一段引述替代的实证细节段落",
+      "search_keywords": [
+        "solid state HHG quantum geometry tensor review",
+        "BSV squeezed light driven HHG review comprehensive",
+        "semiconductor Bloch equation strong field review"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "full_review"
+}

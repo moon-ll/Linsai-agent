@@ -1,0 +1,25 @@
+{
+  "proposal_id": "general-chiral-hhg-20261101",
+  "cluster_id": "orphan-route-2026-11-07",
+  "clusters": [
+    "orphan-route-2026-11-07"
+  ],
+  "entries": [
+    {
+      "source_id": "paper:2026-2609.12947-direct-asymmetric-photochemistry-with-synthetic-chiral-light",
+      "title": "Direct Asymmetric Photochemistry with Synthetic Chiral Light",
+      "summary": "本文报道合成手性光（synthetic chiral light）在光学域的首次实验实现：由多束激光合成三维手性电场，驱动手性分子的强场电离与碎裂，测得的碎裂信号同时依赖分子手性与光场的手性几何。实验证明在纯电偶极相互作用层面即可实现手性分辨，且手性响应可比传统手性光学（依赖磁偶极/电四极小量）增强数个量级。该结果为不对称（对映选择性）光化学与超快手性分析开辟了新路径。",
+      "path": "knowledge/raw/papers/2026-2609.12947-direct-asymmetric-photochemistry-with-synthetic-chiral-light.md",
+      "added_via": "cluster:orphan-route-2026-11-07",
+      "added_at": "2026-11-07T16:45:07Z"
+    },
+    {
+      "source_id": "paper:2026-2606.13402-ultrafast-chiral-sensing-with-an-ultraviolet-vector-beam",
+      "title": "Ultrafast chiral sensing with an ultraviolet vector beam",
+      "summary": "提出用椭圆偏振的红外矢量光束驱动随机取向手性分子产生高次谐波，所辐射的紫外矢量光束的强度剖面携带分子手性信息。该方案仅需单光束、直接从谐波远场强度分布读取信号，即可实现对映体的空间分辨甄别，为超快手性探测提供了无需参考场或双束干涉构型的途径。",
+      "path": "knowledge/raw/papers/2026-2606.13402-ultrafast-chiral-sensing-with-an-ultraviolet-vector-beam.md",
+      "added_via": "cluster:orphan-route-2026-11-07",
+      "added_at": "2026-11-07T16:45:07Z"
+    }
+  ]
+}

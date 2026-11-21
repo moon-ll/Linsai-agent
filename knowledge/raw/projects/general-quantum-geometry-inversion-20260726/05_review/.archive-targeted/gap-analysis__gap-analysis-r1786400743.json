@@ -1,0 +1,14 @@
+{
+  "gaps": [
+    {
+      "claim": "Aversa-Sipe固体HHG再碰撞模型的文献引用一致性",
+      "missing_evidence": "Aversa-Sipe文献年份在§2.2 line 107（1993）与§2.3 line 51、scheme.md line 157、references.md line 32（1994）之间出现跨章节口径不一致——P0指标红线项（同年/同作者被引文献年份偏差），需核实正确出版年份并统一全文档引用",
+      "search_keywords": [
+        "Aversa Sipe 1993 HHG recollision model",
+        "Aversa Sipe 1994 semiconductor harmonic generation",
+        "Aversa Sipe Phys Rev Lett citation year verification"
+      ],
+      "priority": "high"
+    }
+  ]
+}

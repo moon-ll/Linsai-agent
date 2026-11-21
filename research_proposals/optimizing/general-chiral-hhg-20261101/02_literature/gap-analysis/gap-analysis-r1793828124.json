@@ -1,0 +1,67 @@
+{
+  "gaps": [
+    {
+      "claim": "scheme L21 与 content L17 中同一文献[25]（Kovalenko 等，z 切石英 62 通路自由空间准相位匹配二倍频，效率 0.027%、M²=1.1）的输出功率：一处记为 1 μJ，另一处记为 1 μW，相差千倍，需以文献实值复算裁决并全稿统一口径",
+      "missing_evidence": "原始文献中二倍频输出能量的实测值（μJ 还是 μW 量级），以效率×泵浦能量复算验证，并据此裁定全稿唯一正确数值",
+      "search_keywords": [
+        "Kovalenko",
+        "z-cut quartz second harmonic generation",
+        "free-space quasi-phase matching 62 pathways",
+        "0.027% conversion efficiency"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§4 L39 泵浦'选定模式与频率在标定层结束时确定'——判据挂在待定参数上不可复算，需给出候选振动模与频率区间作为先验约束",
+      "missing_evidence": "目标材料（二维 Te / 螺旋 MoS₂ 等手性体系）红外/Raman 活性振动模的具名文献支撑，含各模式频率、对称性与活性来源",
+      "search_keywords": [
+        "tellurium Raman active modes frequency",
+        "MoS2 infrared active phonon modes",
+        "chiral crystal vibrational modes",
+        "quartz THz phonon mode 128 cm-1"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§5 L55 判据阈'百分之几分辨水平'源出[22]（分子电离语境），与 §1 L7 的'3×噪声底'并立，需核实[22]原始语境并确认 HHG 信号检测的适用判据",
+      "missing_evidence": "文献[22]的原始研究语境（分子电离 vs 固体 HHG）核实，以及谐波信号可分辨性/信噪比判据（如 3σ 或 3×噪声底）在本领域实验中的具名先例",
+      "search_keywords": [
+        "high harmonic generation detection limit signal to noise",
+        "3 sigma detection criterion spectroscopy",
+        "molecular ionization percent-level discrimination",
+        "solid HHG signal resolution noise floor"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§4 L49 '二阶方案给出稳态的角动量流证据'——无具名先例、无[N]角标",
+      "missing_evidence": "二阶非线性过程中角动量流（angular momentum flux/current）稳态表征的具名文献，含实验或理论证据，需挂[NN]角标支撑该断言",
+      "search_keywords": [
+        "angular momentum flux nonlinear optics",
+        "optical angular momentum current steady state",
+        "chiral second harmonic generation angular momentum",
+        "photonic angular momentum transfer measurement"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "scheme L65 '成熟参照'论断无出处（执行清单2指认）",
+      "missing_evidence": "被援引为'成熟参照'的方法/技术路线的具名出处文献，需补挂[N]角标并写入 references.md",
+      "search_keywords": [
+        "established reference protocol high harmonic spectroscopy",
+        "benchmark method chiral HHG"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "清单10 严谨性核查②指出'一处断言无源'（与问题7可能独立存在的另一处无出处断言）",
+      "missing_evidence": "全稿 scheme 章节中所有物理断言的角标溯源核对，定位该无源断言并补充对应文献",
+      "search_keywords": [
+        "traceability audit scheme assertions",
+        "unsupported claim citation audit"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "scheme"
+}

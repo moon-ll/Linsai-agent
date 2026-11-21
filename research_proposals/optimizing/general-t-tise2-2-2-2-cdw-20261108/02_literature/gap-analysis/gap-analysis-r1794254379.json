@@ -1,0 +1,110 @@
+{
+  "gaps": [
+    {
+      "claim": "研究内容总述段核心立论：「幅度-相位-关联长度解耦是 CDW 光致动力学的共性特征」（dossier 背景知识簇综合；问题1 [critical]：content.md 0 字节，总述段问题+路线+机制+产出四层全缺）",
+      "missing_evidence": "该共性特征的直接前驱实验文献：EuTe4/稀土四碲化物联合公度 CDW 中幅度塌缩-恢复、相位漂移、关联长度演化发生在不同时间尺度的解耦测量，以及 1T-TiSe2 光致 CDW 动力学代表作。现有 candidates bib（10 篇）全部为 VO2/K0.3MoO3/TaSe2/TaS2 等其他体系，无一篇 TiSe2 或 EuTe4，总述段立论无引用可挂",
+      "search_keywords": [
+        "EuTe4 charge density wave ultrafast",
+        "rare earth tetratelluride CDW dynamics",
+        "CDW amplitude phase mode decoupling",
+        "1T-TiSe2 photoinduced CDW dynamics",
+        "CDW order parameter decomposition ultrafast"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "分方向「四模联合泵浦-探测将 CDW 序参量探测时窗从飞秒拓展至微秒」：超快电子衍射与 XUV 动量显微/超快 ARPES 覆盖 fs-ps，时间分辨 X 射线衍射覆盖 ps-ns，时间分辨中子衍射覆盖 ns-μs（dossier 步骤一；问题1：分方向载体全缺）",
+      "missing_evidence": "各探针在 CDW/量子材料上的代表性应用文献，特别是时间分辨中子衍射测 ns-μs 非平衡结构序的先例（现有文献池 0 篇中子工作）、超快电子衍射测 CDW 超晶格峰与相干声子、trARPES/XUV 动量显微测 CDW 电子结构动力学；用于论证单一探针时窗不足、四模互补的研究内容设计依据",
+      "search_keywords": [
+        "ultrafast electron diffraction charge density wave superlattice",
+        "time-resolved X-ray diffraction CDW recovery",
+        "time-resolved neutron diffraction nonequilibrium",
+        "trARPES charge density wave dynamics",
+        "multimodal ultrafast probes time window stitching"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "分方向「三通道解耦与定量建模」的测量方法学：由超晶格峰强度与相干振荡提取幅度通道、峰宽与漫散射线形提取关联长度通道、峰位漂移与畴壁散射特征提取相位/畴通道（dossier 步骤二；问题1：分方向载体全缺）",
+      "missing_evidence": "时间分辨漫散射/峰宽测量关联长度演化的方法学文献、CDW 幅度模式与相位模式分离测量的实验先例、布拉格峰位瞬移与畴壁散射跟踪相位通道的文献；缺此则三通道解耦的具体测量方案无文献锚点",
+      "search_keywords": [
+        "time-resolved diffuse scattering correlation length",
+        "superlattice peak width dynamics CDW",
+        "amplitude mode phase mode separation CDW",
+        "domain wall scattering CDW diffraction",
+        "coherent amplitude mode oscillation CDW"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "研究目标量化指标需文献基准：每条目标须含 1 个可检验量化指标（幅度通道 ps 级快指数恢复并伴随相干振荡、关联长度 ns-μs 慢幂律粗化、相位通道中等时标漂移；问题1/清单2：研究目标 0 条）",
+      "missing_evidence": "各通道时间常数的实验文献基准：CDW 幅度塌缩-恢复的 ps 级测量、长程序重建/长寿命瞬态的 ns-μs 时标测量、畴粗化幂律指数 n 的文献值；缺此则量化指标无预期量级依据，无法设定可检验阈值",
+      "search_keywords": [
+        "CDW melting recovery time constant",
+        "long-lived hidden state charge density wave nanosecond",
+        "photoinduced CDW recovery microsecond",
+        "domain coarsening power law exponent phase transition",
+        "superlattice peak intensity relaxation timescale"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "「用幅度-相位分离弛豫的含时金兹堡-朗道（TDGL）模型叠加畴粗化标度（L~t^n）全局拟合三通道弛豫曲线」（dossier 步骤二理论建模内容；问题1/问题3 载体全缺）",
+      "missing_evidence": "CDW/结构相变体系的 TDGL 建模与相序动力学（phase-ordering kinetics）理论文献：光致相变后畴生长/粗化的理论与数值工作、序参量多自由度分离弛豫的模型先例",
+      "search_keywords": [
+        "time-dependent Ginzburg-Landau charge density wave",
+        "phase ordering kinetics domain growth",
+        "coarsening dynamics photoinduced phase transition",
+        "Ginzburg-Landau order parameter relaxation CDW"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "「结合通量标度、声子模式选择性激发与 DFT 声子谱/电声耦合常数对比，定量分解电声与激子各自对超晶格响应的贡献」（dossier 步骤二机制分解内容；T_CDW 以上涨落区标度行为支持电声主导是 TiSe2 起源之争的动力学判据）",
+      "missing_evidence": "用超快动力学判别 TiSe2 激子/电声机制的实验与理论文献：T_CDW 以上 CDW 涨落与相干幅度模式持续存在及其标度行为、通量标度分析方法、DFPT 电声耦合计算与声子软化实验数据；缺此则机制分解研究内容无对照基线",
+      "search_keywords": [
+        "TiSe2 excitonic electron-phonon mechanism ultrafast",
+        "CDW fluctuations above transition temperature",
+        "mode-selective phonon excitation charge order",
+        "fluence scaling photoinduced phase transition",
+        "electron-phonon coupling calculation TiSe2 soft mode"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "「通过离子辐照/退火系统改变缺陷密度（以残余电阻率标定），判别长程序重建是随缺陷密度变化的钉扎瓶颈还是遵循粗化幂律的畴壁/生长拓扑约束瓶颈」（dossier 步骤三瓶颈判别内容）",
+      "missing_evidence": "缺陷/无序对 CDW 相变与动力学影响的定量研究文献：离子/电子辐照调控量子材料序、缺陷钉扎 CDW、退火恢复与残余电阻率-缺陷密度标定的先例",
+      "search_keywords": [
+        "ion irradiation charge density wave",
+        "defect pinning charge density wave",
+        "disorder charge density wave transition",
+        "residual resistivity defect density irradiation"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "验证性研究内容的判据支撑：德拜-沃勒因子晶格温度监测排除热伪影、布拉格峰损失强度等量转移至漫散射的积分强度守恒检验、相位通道与声子粒子数（超快 ARPES 电子-声子散射率）解耦交叉验证（dossier 验证方案四判据+替代解释排除）",
+      "missing_evidence": "超快衍射热伪影排除与晶格温度测量的方法学文献（德拜-沃勒因子分析）、积分强度守恒/漫散射强度转移分析的方法文献、超快 ARPES 提取电子-声子散射率以监测非相干声子布局的文献；缺此则替代解释排除方案无方法学出处",
+      "search_keywords": [
+        "Debye-Waller factor ultrafast diffraction lattice temperature",
+        "integrated intensity conservation diffuse scattering",
+        "thermal artifact ultrafast pump probe diffraction",
+        "electron-phonon scattering rate time-resolved ARPES"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "references.md 为 0 字节、正文 [N] 引用 0 次（问题4 [critical]；问题8：bib 更新后引用基线未定）：评审要求以 02_literature 新 candidates bib 为源建 30-40 篇连续编号文献表",
+      "missing_evidence": "30-40 篇与正文嵌入式具名引用一一对应的文献池：现有 candidates bib 仅 10 篇且体系错配（无 TiSe2/EuTe4、无中子衍射/漫散射类），需按配额补齐——领域综述 3-5、TiSe2 机制与涨落 8-10、EuTe4/稀土四碲化物 5-8、多模态探针方法学 8-10、TDGL/相序动力学 3-5、缺陷/辐照 2-3；检索前先与本地去重基线 dedup_ids.json（6667 ID）比对",
+      "search_keywords": [
+        "charge density wave ultrafast dynamics review",
+        "1T-TiSe2 charge density wave mechanism",
+        "EuTe4 rare earth tetratelluride",
+        "ultrafast diffraction quantum materials review",
+        "Ginzburg-Landau phase ordering theory"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "content"
+}

@@ -1,0 +1,33 @@
+---
+title: "CrSb"
+type: "concepts"
+created: "2026-10-24T20:02:39Z"
+updated: "2026-11-07T10:57:50Z"
+tags: ["concept", "backfill"]
+related: ["交变磁体", "交变磁性（Altermagnetism）", "交变磁性（altermagnetism）", "自旋劈裂"]
+source_raw: ""
+growth_stage: "seedling"
+confidence: 0.5
+aliases: ["CrSb"]
+---
+
+# CrSb（锑化铬）
+
+## 定义定位
+
+CrSb（锑化铬）是一种二元过渡金属—磷族（Ⅴ族）化合物，基态为 NiAs 型六角结构（B8₁，空间群 P6₃/mmc），呈现 A 型反铁磁序，奈尔温度高达约 705 K。自 2022 年交变磁性（altermagnetism）概念确立以来，CrSb 因其巨能带自旋劈裂（费米能级附近可达约 1 eV、呈 d 波对称性）成为最具代表性的实验验证交变磁体之一。此外，其闪锌矿亚稳相被预言为高居里温度半金属铁磁体，长期活跃于自旋电子学材料研究。在本知识库中，CrSb 主要以“零净磁矩下的交换型自旋劈裂参照体系”与“芯能级多重度/光电衍射表征的目标材料”身份出现。
+
+## 物理内涵/技术原理
+
+CrSb 的核心物理在于**晶体对称性与反铁磁序协同产生的时间反演破缺、但宏观磁化补偿的磁态**：
+
+1. **磁结构**：Cr 磁矩（约 3 μB）在 (001) 基面内铁磁排列、沿 c 轴逐层反
+
+<!-- linsai-wikilinks -->
+## 关联概念
+
+- [[交变磁体]]
+- [[交变磁性（Altermagnetism）]]
+- [[交变磁性（altermagnetism）]]
+- [[自旋劈裂]]
+<!-- /linsai-wikilinks -->

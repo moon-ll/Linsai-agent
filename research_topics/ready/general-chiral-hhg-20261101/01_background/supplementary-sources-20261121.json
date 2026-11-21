@@ -1,0 +1,11 @@
+{
+  "entries": [
+    {
+      "source_id": "paper:2026-2609.12944-topologically-protected-chiral-sensing-using-synth",
+      "title": "Topologically protected chiral sensing using Synthetic Chiral Light",
+      "summary": "提出利用合成手性光在双色（ω–2ω）激光场中形成具有三维偏振手性的光场，实现对手性分子超快、超灵敏的全光探测。该方案突破传统手性光谱依赖弱电偶极磁偶极修正的限制，诱导对映体选择性响应在强场极限下不因强度涨落与传播效应而退化，表现出拓扑稳健的手性甄别能力。",
+      "path": "knowledge/raw/papers/2026-2609.12944-topologically-protected-chiral-sensing-using-synth.md"
+    }
+  ],
+  "updated_at": "2026-11-21T11:34:41Z"
+}

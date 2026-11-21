@@ -1,0 +1,76 @@
+{
+  "gaps": [
+    {
+      "claim": "BSV/量子光驱动固体HHG的量子增强效应已被'证实/验证'（立项依据rat L17将预印本理论工作写成已验证结论，与content/references口径对立）",
+      "missing_evidence": "缺少实验验证类文献——目前支撑仅为理论预印本（Khurelbaatar、Rivera-Dean、Even Tzur量子增强因子理论），需检索是否存在量子光驱动固体高次谐波或量子增强因子的实验观测工作，以校准'证实'表述或改为'理论预言'",
+      "search_keywords": [
+        "bright squeezed vacuum high harmonic generation experiment",
+        "quantum light driven solid HHG experimental observation",
+        "squeezed light nonlinear optics enhancement measurement",
+        "photon-counting HHG spectroscopy g2 experiment",
+        "quantum enhancement factor nonlinear optics experimental"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "实验峰值强度可在材料损伤阈值以下获得可观测的HHG/QEF信号（峰值强度—损伤裕度论证三章全缺）",
+      "missing_evidence": "缺少目标固体样品的飞秒激光损伤阈值实验数据，以及损伤阈值与固体HHG可观测阈值之间强度窗口的文献论证",
+      "search_keywords": [
+        "monolayer MoS2 femtosecond laser damage threshold",
+        "2D material strong field ablation threshold intensity",
+        "solid-state HHG intensity window damage margin",
+        "TMDC femtosecond damage threshold W/cm2",
+        "ZnO high harmonic generation laser intensity limit"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "QEF≥1.5 是可达且合理的核心验收指标（三章中该阈值分别被写成已达标/预期值/目标值，口径分裂）",
+      "missing_evidence": "缺少量子增强因子理论预测数值或实验基准文献，用以论证1.5这一阈值的可达性、量级合理性与出处",
+      "search_keywords": [
+        "quantum enhancement factor HHG QEF prediction magnitude",
+        "Even Tzur quantum photon HHG enhancement factor",
+        "quantum advantage nonlinear optics enhancement benchmark",
+        "squeezed light harmonic yield enhancement factor theory",
+        "BSV classical light nonlinear conversion enhancement ratio"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "研究方案中的 9 T 磁体配置具有必要物理动因（H-11：无物理动机即写入方案）",
+      "missing_evidence": "缺少说明该磁感应强度与所研究物理量（塞曼劈裂量级、磁光HHG响应、自旋相关效应调控）相匹配的文献依据",
+      "search_keywords": [
+        "magnetic field high harmonic generation solid",
+        "magneto-optical HHG Zeeman splitting tesla",
+        "strong magnetic field attosecond spectroscopy",
+        "HHG magnetic field dependence experiment",
+        "Zeeman splitting ultrafast spectroscopy magnetic field magnitude"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "QEF 随光子统计/压缩参数呈单调变化（单调性判据：一章预设成立、两章拒设，判据本身无文献基础）",
+      "missing_evidence": "缺少QEF对g2或压缩参数r单调依赖关系的理论计算或实验测量文献，用以论证单调性判据的成立条件与适用范围",
+      "search_keywords": [
+        "quantum enhancement factor squeezing parameter dependence",
+        "g2 photon statistics nonlinear yield scaling",
+        "bright squeezed vacuum parametric gain tunable g2",
+        "BSV photon statistics control nonlinear optics",
+        "squeezing parameter r threshold quantum enhancement"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "引用[28]所标注支撑的论点（归属错挂：[28]原文不含申请书所引论点）",
+      "missing_evidence": "需检索实际包含该论点的原始文献以修正归属——依据课题内容推断错挂点集中于量子光HHG理论与BSV表征方向（Khurelbaatar/Rivera-Dean/Even Tzur三源辨识）",
+      "search_keywords": [
+        "Khurelbaatar quantum light HHG preprint",
+        "Rivera-Dean quantum HHG solid state",
+        "Even Tzur quantum enhancement factor HHG original",
+        "quantum enhancement factor framework original derivation",
+        "BSV driven high harmonic generation theory first proposal"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

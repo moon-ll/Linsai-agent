@@ -1,0 +1,2800 @@
+1 
+ 
+Ultralow Threshold 
+Polariton Condensat
+e in a Monolayer 
+Semiconductor Microcavity at Room
+ 
+Jiaxin Zhao
+1,#, Rui Su
+1,#, Antonio Fieramosca
+1, 
+Weijie Zhao
+1, Wei Du
+1, Xue Liu
+1, Carole Diederichs 
+2,3, 
+Daniele Sanvitto
+4, Timothy C. H. Liew
+1,2, Qihua Xiong
+1,2
+,5,
+*  
+1Division of Physics and Applied Physics, School of Phys
+Technological University, Singapore 637371
+ 
+2MajuLab, International Joint Research Unit UMI 3654, C
+‘Azur, Sorbonne 
+Université, National University of Singapore, Nanyang Tec
+ 
+3Laboratoire Pierre Aigrain, Deғ
+partement de physique de l‘ENS, Ecole 
+Normale S
+upeғ
+rieure, PSL 
+Research University, Universiteғ
+ Paris Diderot, Sorbonne Paris Citeғ
+, Sorbonne Universiteғ
+s, UPMC Univ. 
+Paris 06, CNRS, 75005 Paris, France
+ 
+4CNR NANOTEC Institute of Nanotechnology, via Monteroni, 
+ 
+5State Key Labo
+ratory of Low
+-Dimensional Quantum Physics and Department
+University, Beijing, China
+ 
+ 
+ 
+#These authors contributed equally to this work.
+ 
+*To whom 
+correspond
+ence 
+should be addressed
+. Email: 
+qihua@ntu.edu.sg
+ 
+ 
+ 
+ 
+ 
+
+2 
+ 
+Abstract
+ 
+Atomically
+ thin
+ transition
+-metal 
+dichalcogenides
+ (TMDs)
+ possess 
+valley
+-dependent 
+functionalities that are usually available only 
+at crogenic temperatures
+, constrained by var
+valley depolarization scatterings
+. The formation
+ of exciton polaritons
+ (EP
+s) by
+ coherently 
+superimposing excitons
+ and microcavity photons potentially har
+-polarized 
+polariton
+-polariton interactions for novel valleytronic
+Robust EPs have been
+demonstrated at room temperature
+ in 
+TMDs
+ microcavity
+, h
+owever
+, 
+the 
+coherent 
+polariton
+ lasing 
+and condensat
+ion
+ remain elusive
+. Here
+in
+, we demonstrate
+ for
+ the
+ first
+ time
+ the
+ realization
+ of
+ 
+EP condensation
+ in
+ a TMD
+ microcavity
+ at
+ room
+ temperature.
+ The
+ continuous
+-wave
+ pumped
+ EP 
+condensation
+ and
+ lasing
+ with
+ ultralow
+ threshold
+s (~0
+.5
+ nW) is
+ evidenced
+ by
+ the
+ macroscopic
+ 
+occupation
+ of
+ the
+ ground
+ state,
+ that
+ undergoes
+ a nonlinear
+ increase
+ of
+ the
+ emission
+ and
+ a 
+continuous
+ blueshift
+, a build
+-up
+ of
+ spatial
+ coherence,
+ and
+ a detuning
+-controlled
+ thr
+eshold
+. Our
+ 
+work
+ presents
+ a critically
+ important
+ step
+ towards
+ exploiting
+ nonlinear
+ polariton
+œpolariton
+ 
+interactions
+ and
+ polaritonic
+ devices
+ with
+ valley
+ fun
+ctionality
+ at
+ room
+ temperature
+. 
+ 
+ 
+ 
+ 
+
+3 
+ 
+Material excitations, giving rise to electron
+-hole bound states called e
+xcitons
+, and photon
+s 
+confined to 
+extremely 
+small volumes 
+in
+ optical microcavit
+ies
+, 
+can give rise 
+to new bosonic 
+qu
+asi
+-particles 
+called polaritons
+ once in the
+ strong coupling regime
+1. 
+Owing to the 
+advantages 
+of 
+the 
+light
+-mass
+ of 
+photons and strong nonlinearities of excito
+, 
+polaritons
+ can 
+condense
+, via 
+stimulated scattering
+2-4, to a single quantum state
+ even
+ at 
+room
+ temperature
+5. This 
+bri
+ng
+s 
+quantum 
+physical 
+phenomena to a macroscopic scale and crea
+s great opportunities
+ for 
+developing novel all
+-optical devices
+, for 
+instance, 
+low threshold polariton 
+laser
+s6-8, 
+switches and 
+modulators
+4,9
+, polariton lattices
+10
+-13 and networks
+14,15
+ that exploit the great polar
+. 
+Particularly
+, p
+olariton
+ condensates or, equivalently, polariton
+ laser
+s, are
+ very interesting dev
+since they are
+ exempt from the
+ requirement 
+of
+ electronic population inversio
+, 
+and 
+thus exhibit 
+ultra
+low 
+threshold 
+lasing
+. Although p
+olariton condensation 
+has 
+been 
+mainly 
+observed at 
+cryogenic temperature
+s in CdTe
+2 and Ga
+As
+16 microcavity systems
+, 
+substantial progresses
+ have 
+led to 
+room
+-temperature 
+operation
+ based o
+n various 
+inorganic
+5,17
+-19 and organic materials
+20
+-25. 
+The materials that can realize robust polaritonic p
+relatively simple semiconductor fabrication technol
+applications
+26. 
+ 
+Recently, 
+two
+-dimension
+al
+ group
+-VI
+ TMDs
+ with direct bandgap
+s and large oscillator 
+strengths
+ 
+emerge
+d as 
+promising
+ candidates for
+ various 
+applications in 
+novel 
+photonics, 
+optoelectronics
+ 
+and 
+valleyt
+ron
+ic 
+devices
+27. Due to the 
+reduced dimensionality
+ and low dielectric scre
+in 
+TMDs monolayer
+, the
+ir
+ electron
+-hole interactions are 
+extremely 
+strong
+ with 
+substantial 
+exciton 
+binding energies on the order of several hundred me
+28. In addition, owing to crys
+inversion 
+symmetry
+ breaking
+ and strong spin
+-orbit
+ coupling
+ in the monolayer TMDs
+, the excitons 
+at the 
+nonequivalent 
+K and 
+K‘ 
+valleys 
+can be coherently and selectively cr
+opportunities to explore quantum control of valle
+27,29
+-33. 
+When 
+TMDs
+ are 
+integrated with optical cavities
+, such as 
+planar microcavities
+34, photonic crystal
+s35 and 
+plasmonic
+ nanocavitie
+s36, robust 
+polariton
+s have been 
+realized 
+even 
+at room temperature
+Furthermore
+, the
+ spin
+-valley locking of 
+polariton
+s pave
+s the way towards 
+breakthrough
+s in 
+optically manipulating electronic charge
+ and spin degrees of fre
+edom
+ at 
+room te
+mperature
+. 
+Indeed, in contrast with respect to the bare excito
+, that undergoes a fast in
+
+4 
+ 
+scattering which limits the observation of valley d
+exciton
+-polaritons show a persisting valley polarizatio
+radiative decay before valley depo
+larization
+30,31
+. However,
+ constrained by 
+the 
+limited material
+gain volume
+, short 
+microcavity
+ lifetime
+s, high
+ photonic
+ losses
+, and
+ broad exciton linewi
+, 
+the realization
+ of 
+collective quantum effects, such as conden
+ remains 
+elusive
+. These nonlinear 
+phenomena 
+are
+ major 
+milestones 
+towards 
+the 
+exploitation
+ of
+ 
+functional 
+polaritonic devices
+ with valley 
+degrees of fre
+edom
+ at room temperature
+ in TMDs
+. 
+In 
+this work, we
+ report 
+for the first time the long
+-sought 
+polariton 
+condensa
+tion
+ based 
+on the hybrid 
+structure of monolayer
+ 
+WS2 in a
+ Fabry
+-Perot
+ microcavity. 
+We observe
+ the
+ characteristic spli
+, 
+indicating
+ the 
+strong 
+coupling
+ regime
+ between 
+neutral 
+exciton
+s and cavity photons, wit
+Rabi 
+splitting of 
+~37
+ meV
+ at room temperature
+. 
+The
+ continuous wave
+ pumped
+ polariton lasing 
+behavior 
+with 
+an
+ ultralow threshold
+ is unambiguously 
+demonstrated
+, along with a conti
+blueshift beyond threshold, a spatial coherence and
+. 
+ 
+To achieve strong 
+coupling between excitons and photons
+, we incorporate 
+an
+ exfoliated
+ 
+monolayer WS
+2 into an all
+-dielectric planar 
+microcavity.
+ The 
+planar Fabry
+-Perot 
+microcavity
+ with 
+two 
+dielectric
+ distributed
+-Bragg
+-reflector (DBR) 
+mirrors 
+used in this work is 
+schematically
+ shown 
+in 
+Figure
+ 1a. 
+The bottom and top DBR 
+mirrors present
+ a 
+near
+-unit
+y high reflectivity 
+(~
+99
+.99
+%) 
+in the stop band
+ (see Methods and extended data 
+Fig
+ure 
+S1). We use 
+the
+ mechanical 
+exfoliation method to 
+obtain
+ high
+-quality monolayer flakes from bulk c
+, which 
+are
+ then 
+transferred 
+on
+to 
+the 
+bottom 
+DBR with 
+a 
+silicon dioxide 
+(SiO
+2)
+ spacer.
+ The 
+optical
+ image of the 
+monolayer area is shown in the 
+supplementary information 
+Figure 
+S2.
+ Steady
+-state absorption 
+and photoluminescence
+ measurements 
+are 
+used to confirm
+ the 
+thickness and
+ quality of the 
+exfoliated monolayer WS
+2, shown in 
+Figure
+ 1b
+. A strong
+ A exciton
+ peak is observed
+, which is 
+related to the direct
+ optical
+ transition 
+at the 
+K/K‘ 
+point in the Brillouin z
+28. The 
+photoluminescence
+ spectrum 
+reveals emissions from
+ neutral 
+A exciton
+s and negatively 
+charged 
+excitons (
+trion
+s)
+ with 
+full width
+s at half maximum
+ (FWHM)
+ at 
+room temperature
+ of 
+27
+ 
+and 
+53
+ meV, respectively
+. 
+We utilize 
+two 
+SiO
+2 spac
+er 
+layers 
+to form a sandwich
+ structure around 
+the monolayer WS
+2 and t
+he thickness of 
+the 
+SiO
+2 spacer 
+layer is controlled to 
+microcavity resonance around the 
+neutral A 
+exciton peak 
+at
+ normal incidence. 
+To ensure the 
+
+5 
+ 
+strongest light
+-matter interaction, the monolayer sample is p
+oned in the middle of t
+microcavity to coincide with the field maximum of 
+ A white
+-light reflectivi
+measurement of the empty cavity
+ is
+ presented in 
+supplementary information 
+Fig
+ure 
+S3, 
+showing a 
+FWHM
+ of ~
+0.95
+ meV and thus 
+in
+dicating 
+a quality factor 
+of
+ ~2100
+. After 
+embedding
+ 
+the monolayer
+ into the planar cavity
+, the ground
+-state emission of WS
+2 microcavity shifts
+~1.9
+65
+ eV with 
+a FWHM
+ of 
+~2.9
+ meV
+. 
+ 
+The 
+realization
+ of 
+the 
+strong coupling 
+between exciton
+s and cavity mode
+s in our 
+TMD
+ 
+microcavity is confirmed by angle
+-resolved reflectivity measurements
+ at room temperature
+. As 
+show
+n in 
+Figure
+ 2a, 
+we observe 
+the anti
+-crossing dispersion of 
+the 
+lower
+-polariton branch (
+LPB
+) 
+and 
+upper
+-polariton branch (
+UPB
+) as a function of the incident angle
+. 
+When the angle 
+increases, the energy of LPB 
+increases towards the exciton energy a
+large angles. In contrast, the dispersion of 
+the 
+UPB vanishes at small incident 
+emission 
+angles. 
+Th
+ese
+ two polariton 
+modes exhibit
+ a clear 
+anti
+-crossing
+ feature
+ with a Rabi splitting 
+meV
+, 
+indicated by the black arrow in 
+Figure
+ 2a. The Rabi splitting is large
+the 
+FWHMs of the cavity mode and exciton resonance, 
+confirming 
+that 
+the system is well 
+situated 
+in the strong coupling regime.
+ Furthermore, w
+e fit
+ the 
+polariton
+ dispersion
+s by 
+using a coupled 
+oscillator model
+ (more details 
+about
+ the model are shown in the 
+methods section
+)
+4,35
+, and the 
+calculated polariton dispersion
+s (dashed blue curves)
+ are in good agreement w
+experimental
+ data
+ shown in 
+Figure
+ 2a
+. Here we approximate
+ly consider
+ the 
+dispersion of 
+the 
+cavity mode
+ as a parabola
+-like function, which is supported by 
+reflectivity measurement
+bare cavity (
+supplementary information 
+Fig
+ure 
+S3).
+ The 
+parabolic
+ dispersion
+ of 
+the 
+cavity mode
+ 
+and flat 
+band of 
+exciton
+s (E
+ex
+ = 2.010 eV) are shown as gray and re
+s, 
+respectively.
+ From the fitting of 
+optical measurement 
+data, we extract a negative
+ 
+ - 
+ - 34 
+ph
+ex
+E
+E
+meV
+D =
+=
+ , where 
+phE
+  
+and
+ exE
+  
+are 
+the
+ cavity mode energy and e
+energy
+, respectively. 
+ 
+ 
+To investigate the 
+effect of 
+polariton population, the 
+TMD 
+microcavity 
+is
+ non
+-resonantly pumped 
+by a 
+532
+ nm 
+continuous
+-wave
+ (CW) laser
+ at room temperature.
+ As 
+schematically 
+illustrated 
+in 
+
+6 
+ 
+Figure
+ 1b (
+inset
+), 
+the 
+scattering
+ channels between
+ polaritons
+ and the 
+exciton reservoir
+, and/or 
+the scattering among 
+polaritons
+ further relax 
+the majority 
+of carriers 
+to 
+the 
+ground state of 
+the 
+LPB. Under sufficient
+ polariton density, 
+polariton 
+lasing
+ is triggered by 
+stimulated polarit
+-
+polariton scattering, leading to a 
+macroscopic 
+occupation of the polariton 
+ground state
+ as shown 
+in 
+Figure
+ 2b
+. The inset 
+in
+ Figure
+ 2b 
+displays 
+the 
+angular distribution of the 
+spectrally integra
+polariton emission above the threshold
+ where polaritons massively occupy 
+.  
+The 
+photoluminescence
+ spectrum at a pump power
+ of
+ ~70
+ nW (
+far 
+above threshold) is 
+fitted with a 
+narrow 
+Lorentzian peak 
+(~1 meV) 
+and 
+a 
+broad 
+background 
+emission
+, which 
+corresponds to the polariton ground
+-state emission and non
+-condensed background emi
+from the LPB
+ respectively
+, as shown in
+ Figure
+ 2c. In 
+the inset of 
+Figure
+ 2c, t
+he 
+power
+-dependent 
+intensity of the 
+narrow
+ ground
+-state
+ polariton
+ emission extracted
+ from
+ the fitted 
+photoluminescence
+ spectra, shows
+ a typical lasing behavior. A 
+nonlinear 
+—kink
+“ 
+that occurs 
+around the lasing threshold 
+(~0.
+5 nW, corresponding to ~
+ 0.
+06 W/cm
+2) 
+in the 
+input
+-output
+ curve 
+is a strong signature of the
+ polariton
+ condensation
+ at 
+roo
+m temperature
+. Compared with 
+photonic laser
+s based on TMDs
+37,38
+, 
+the threshold of 
+our 
+work 
+is 
+much
+ smaller tha
+n th
+at
+ 
+reported
+ in
+ vertical
+-cavity surface
+-emitting lasers
+ (5 nW
+, ~ 
+0.44 W/cm
+2) based on monolaye
+WS2 at room temperature
+39, monolayer WSe
+2 lasing (27 nW
+, ~ 
+1 W/cm
+2) based on photoni
+crystal
+s at low temperatures
+37, and
+ monolayer WS
+2 (5
+-8 MW/cm
+2) lasing 
+in 
+a 
+micro
+-disk 
+resonator at 10 K
+38. 
+But what really distinguish our work 
+from 
+those previously mentio
+that the
+ observed lasing behavior 
+occurs while the system is
+ in 
+the 
+strong coupling regime
+, and 
+the stimulated scattering, leading to condensation
+ extremely low 
+threshold
+7 of this phenomenon
+. Moreover, t
+he 
+observed 
+threshold
+ is 
+several orders of
+magnitude lower than
+ th
+at
+ one 
+reported 
+in
+ continuous
+-wave pumped
+ polariton lasers base
+III
+-V GaAs
+16 or II
+-VI CdTe
+2 quantu
+m well cavities 
+operated at 5
+-10 K
+ (see Methods and 
+extended data Table 1 and 2). 
+Compared to bulk material, the
+ stronger 
+electron
+-hole
+ interaction 
+in the monolayer sample can
+ lead to a large binding energy and inc
+27,28
+. 
+Due to the 
+exceptional exciton
+ oscillator 
+strength in
+ TMD monolayer
+, a lower threshold 
+smaller
+ emission linewidth of the laser characteristics
+expected
+40. It is 
+noteworthy
+ that a 
+relatively high Q factor of the 
+Fabry
+-Perot 
+microcavity
+ and 
+the
+ quality of the monolay
+ 
+crucial to achieve lasing in the strong coupling re
+an 
+effect that wasn
+‘t observed in othe
+
+7 
+ 
+monolayer microcavities
+ fabricated
+ by
+ plasma enhanced chemical vapor dep
+ 
+It is important to note that the thres
+hold behavior will be further presen
+-space 
+measurement
+s on microcavities with different detuning
+ in the following text
+. 
+ 
+ 
+To further verify 
+the
+ low threshold
+ lasing behavior, we study the line
+of the 
+polariton lasing peak 
+as
+ a function of
+ the pump 
+power
+ (Figure
+ 2d). Linewidth narrowing 
+observed as the optical pump power exceeds the las
+We extract t
+he FWHM of 
+the 
+polariton ground state mode 
+from
+ Lorentzian fitting
+s. 
+High
+-resolution 
+PL
+ spectra 
+in the
+ 
+spontaneous emission (0.
+3 nW) and lasing regime (
+2 
+nW) are presented in
+ the inset of
+ Figure
+ 
+2d 
+for comparison
+. The 
+FWHM of the emission in the spontaneous e
+1.3
+ 
+meV, while it 
+decreases
+ to ~
+1 meV when the 
+pump
+ intensity
+ is 
+beyond the 
+threshold.
+ 
+The power
+-
+dependent
+ linewidth narrowing
+ behavior 
+matches well with 
+the 
+intensity evolution
+ in the 
+input
+-
+output
+ curve
+ (Figure
+ 2d), 
+which further 
+confirm
+s the 
+observation of polariton con
+lasing in our monolayer
+ TMD
+ microcavity
+ system.
+  
+ 
+To further exclude the possibility of 
+photonic lasing
+, we conducted temperature
+-dependent 
+experiment shown in 
+supplementary information 
+Fig
+ure S
+4. 
+Strong coupling between 
+exciton and cavity mode can be observed from room 
+with 
+the cavity mode itself, which displays
+ nearly
+ no temperature
+-dependence, the ground 
+polariton emission exhibits a clear 
+continuo
+us 
+blue shift as the temperatu
+(supplementary information Figure S
+4d
+), resulted from the blueshifting e
+ The lasing 
+behavior was also observed in another monolayer WS
+2 microcavity
+ device
+ (supplementary 
+information 
+Fig
+ure 
+S4 
+and 
+S5), in which a
+t power below the threshold
+, the 
+emis
+si
+on
+ spectrum
+ 
+is dominated by a broad background emission, while
+peak appears at the ground state energy, 
+i.e
+., when the system crosses the th
+This indicate
+s the high 
+reproducibility 
+of the 
+polariton 
+condensation phenomenon
+ in our devices
+. 
+Furthermore, 
+part of the 
+unsuppressed 
+background visible above threshold
+the 
+spontaneous emission
+ signal that is propagating 
+far
+ away
+ from the excitation spot,
+as 
+can be 
+see
+n also
+ in
+ the discussions in the 
+supplementary information 
+Figure
+ S6. 
+ 
+
+8 
+ 
+The
+ buildup of phase 
+coherence is 
+another
+ defining
+ signature
+ of polariton lasing. 
+In the low
+-
+excit
+ati
+on 
+density regime, polaritons are expected to hav
+it
+ed by 
+the
+ir
+ thermal de Broglie 
+wavelength
+ (
+2
+2
+= 2
+/
+B
+mk T
+l
+p
+). For WS
+2 polaritons, the therm
+Broglie wavelength below the threshold is around 0.
+mm.
+ 
+When 
+the excitation is 
+above the 
+threshold, long
+-range correlations, up to the size of the po
+are
+ expected in 
+the condensed phase
+2. We 
+went further to 
+check the spatial coherence by
+measurements. 
+To probe the emergence of spatial coherence,
+of the polariton lasing 
+was
+ captured by 
+a Michelson interferometer
+18. We replace the mirr
+one of the arms by a retroreflector to invert the 
+-symmetric way. Thus, 
+fringe contrast 
+is a measure of the phase coherence between 
+points localized
+ at 
+r
+ and 
+-r 
+from the center of polariton lasing emission
+2,18,22
+. 
+The 
+image of the 
+real space emission 
+polariton and 
+the
+ inverted 
+one 
+are shown in Fig
+ure
+ 2e 
+and
+ 2f, respectively. 
+Correlations 
+measured for the high
+-density regime are displayed in 
+Figure
+ 2g. 
+The interference fring
+identified over 
+an
+ emission area
+ of
+ ~ 3 
+mm
+, which is around 
+8 times 
+the
+ thermal de Broglie
+wavelength. This unambiguously suggests the emerge
+a spatially extended
+ phase 
+coherence
+ associated to 
+polariton 
+lasing
+. 
+ 
+Attributing 
+to the 
+half
+-matter counterpart 
+carried by the exciton
+, 
+the repulsive intera
+between 
+exciton
+-polariton
+ creates a blueshift of the LPB
+ beyond
+ the lasing threshold
+suffi
+ciently high particle density,
+ as
+ illustrated
+ by tracking the 
+energy
+ position of the ground
+as a function of the pumping power, as reported in 
+Figure
+ 3. 
+The 
+measurement is carried
+ 
+by monit
+oring the system 
+in real space 
+and 
+a 
+power sweep 
+with multiple 
+spectra is
+ shown in 
+Fig
+ure
+ 3a. The 
+energy 
+position is extracted by using a 
+Lorentzian
+ fit of the profile
+s and 
+show a 
+clear
+ and increasing
+ blueshift
+ as pump power is increased
+, as 
+reported
+ in Fig
+ure
+ 3b. 
+The 
+polariton blueshift trend represents
+ a crucial evidence of polariton las
+samples. Note that the same behavior was found 
+supplementary information 
+Figure 
+S7.
+ 
+ 
+Finally, to further corroborate the observation of 
+have 
+compared the
+ 
+
+9 
+ 
+power dependence of three microcavities possessing 
+ values
+: 
+-66 meV,
+ -83 
+meV and 
+-98 meV, respectively. 
+The reflectivity measurements of the 
+ showing 
+a reproducible high Q factor ~2,000, and the corres
+ding
+ exciton polariton disper
+ under 
+strong coupling regime
+, are shown in 
+supplementary information 
+Figure 
+S8. The three sample
+are measured under the same excitation 
+conditions 
+(pump power ~ 100 nW)
+, collecting the 
+emission in momentum space (See Methods)
+, and the different polariton 
+ are 
+displayed 
+in 
+Figure
+ 4a, 
+4b, 
+4c, respectively. Qualitatively, a simi
+distribution is observed, where the ground state is
+background associated 
+to spontaneous emission, visible along th
+B. 
+A quantitative anal
+is obtained 
+by 
+extracting the intensity profiles (integrate
+from the momentum 
+space maps as a function of the pump power. We co
+: the 
+minimum of the dispersion (
+ߠൌͲל, 
+blue
+ vertical line in 
+Figure
+ 4a,
+ 4b,
+ 4c) and 
+the 
+uncondensed 
+polariton
+ (ߠ്
+Ͳל, 
+gray
+ vertical line in 
+Figure
+ 4a,
+ 4b,
+ 4c)
+. 
+By using a
+ gaussian fit of the p
+s, 
+we evaluated
+ the 
+total
+ intensity 
+for the ground state 
+(background)
+, which is
+ shown in 
+Figure
+ 4d, 
+4e
+, 
+4f
+, in black (gray) 
+filled squares
+, 
+respectively
+. Below
+ the
+ threshold both signals gr
+, 
+while
+ as the system cross
+es
+ the 
+threshold the background remains
+ linear 
+and
+ the ground state 
+signal starts to grow with a 
+much larger 
+slope
+, showing 
+a clear kink 
+in the input
+-output plot
+. The 
+visibility of the discontinuity in the input
+-output plot is clearly evident for
+while, as the detuning decreases th
+e system starts to behave as a thre
+(See 
+more information at
+ supplementary information 
+Figure
+ S9). Furthermore, as
+ expected, a
+s 
+the excitonic fraction increases the lasing thresho
+50
+ nW (around 
+4.4 W/cm
+2) at 
+-98 meV detuning (
+Figure
+ 4f) 
+until ~3 nW
+ (around 0.27 W/cm
+2) 
+at
+ -66 meV 
+detuning
+ (Figure
+ 4d
+ and its inset
+). An overall 
+threshold dependence as a fun
+detuning is presented in 
+supplementary information 
+Figure
+ S10
+, including the data s
+Figure 2 for 
+first
+ device with
+ an
+ even smaller detuning
+. Th
+is
+ observed trend represent
+s a further 
+confirmation that 
+polariton 
+condensation
+ is observed in our planar microc
+ Finally, it is
+noteworthy that under a CW resonant excitation of t
+shown in 
+the 
+extended data of 
+supplementary information 
+Figure 
+S1
+1, the polariton emission shows pro
+of freedom at room temperature. In addition to the p
+provided
+ in this paper
+, our samples could allow the realization o
+ 
+
+10
+ 
+ 
+condensate
+. 
+ 
+In summary, 
+we have demonstrated
+ the first 
+room
+-temperature polariton 
+condensat
+ion
+ in 
+a TMD 
+based microcavity
+. 
+Angle
+-resolved reflectivity spectra show
+ the
+ clear anti
+-crossing behavior
+between
+ UPB and LBP
+ at room temperature
+ with 
+a 
+large Rabi splitting
+ of
+ ~37 meV
+. The
+ 
+polariton
+ lasing behavior is unambiguous
+ly
+ evidenced
+ by an
+ exciton fraction dependen
+ultralow 
+threshold
+, 
+linewidth narrowing
+, power dependent blueshift 
+and 
+build up of spatial
+ coherence 
+length. The ultralow threshold of TMD polariton las
+much 
+lower than 
+any photonic lasin
+in
+ TMD 
+materials
+, as well as
+ many 
+other
+ polariton laser
+s, at room temperature,
+ using 
+conventional
+ inor
+ganic or organic semiconductor
+s as
+ gain media
+. The realization of 
+ultralow
+ 
+threshold sources 
+with TMDs 
+at room temperature 
+shows
+ great promise for 
+practical
+ 
+valleytronic
+ application
+s in
+ the
+ strong coupling regime, such as
+ polariton superfluidit
+optical 
+spin 
+switches
+, and polarization bistabilities
+ with valley degree of freedom
+. Furthermore, o
+ur 
+finding
+s also 
+stimulate future studies towards the
+ realization of room
+-temperature
+ electrically 
+pumped polariton lasing in van der Waals 
+heterostructure
+ devices.
+ 
+ 
+
+1
+ 
+ 
+Methods
+ 
+Experimental structure:
+ The monolayer TMD microcavity in our e
+consists 
+of a 
+ex
+/2
+l
+ cavity layer sandwiched between two DBR
+s. 
+The bottom DBR 
+was
+ composed of 
+silicon 
+dioxide 
+(SiO
+2, n=1.478) spacer with
+ 12.5
+ alternating pairs of t
+itanium 
+dioxide
+ (TiO
+2, n=
+2.498) 
+and 
+SiO
+2 on the commercial wafer. 
+The high
+-impurity source materials were u
+DBR by an e
+-beam evaporator (Cello, Ohmiker
+-50B). We used WS
+2 crystals (from HQ
+Graphene
+) for mechanical 
+exfoliation
+ and 
+the monolayer samples were 
+transferred 
+on bottom 
+DBR
+ through a dry polymer micro
+-transfer process. For instance, 
+in a typical process 
+we used 
+a blue tape for repeated exfoliation of a piece of 
+a PDMS layer (
+PF-X4, Gel
+-Pack
+). The blue tape was removed and the 
+2 was 
+left 
+behind
+ on a PDMS layer. The WS
+2/ PDMS film was put onto a 
+bottom 
+cavity
+ then the PDMS 
+was removed, leaving monolayer WS
+2 on bottom 
+cavity
+. All measurements were im
+under ambient conditions at room temperature. The m
+WS2 sample was deposited 
+SiO
+2 and the top 
+DBR
+ which was composed of 
+8.5 alternating pairs of 
+TiO
+2 and 
+SiO
+2. 
+ 
+Optical characterization:
+ The steady
+-state absorption spectra 
+of the monolayer WS
+2 on 
+PDMS 
+were
+ measured by using a micro
+-spectrophotometer
+ at room temperature.
+ Angle 
+resolved reflectivity and PL spectra were measured
+-built setup with the 
+imaging configuration. A h
+igh numerical aperture 
+100þ
+ microscope objective (NA=0
+used in our angle resolved measurement, which cove
+s an angular range of 
+o
+± 58.3
+ . The 
+emission from 
+the 
+microcavity was collected through the na
+spectrometer (
+Horiba iHR550
+) and finally onto the 2D 
+charge
+-coupled device
+ (CCD) array
+ 
+(Horiba, Symphony II)
+. The captures of the CCD array show the a
+for both reflectivity and PL. 
+For the angle resolved PL measurements,
+ower was
+ 20 
+mW
+, far beyond the ultralow threshold. 
+The s
+teady
+-state PL of the monolayer WS
+2 and power 
+dependen
+t real space emission
+ measurement w
+ere
+ conducted in a confocal 
+spectrometer 
+(Horiba Evolution 800) by using a continuous
+-wave laser (532 nm). A 
+high magnification (
+10
+ì) 
+microscope objective with a numerical aperture of 0
+real space 
+PL measurements.
+ 
+The power dependence measurements reported in 
+Figure
+ 4 were 
+collected
+ by using 
+a 
+modified 
+
+12
+ 
+ 
+inverted 
+microscope 
+(Nikon Ti
+-u) 
+equipped with a 40X microscope objec
+) 
+and a tube lens 
+with a focal length of
+ 20
+ cm. The detected signal, taken fro
+the microscope, is directed in
+to a spectrometer 
+(Horiba iHR550) coupled to a
+ CCD
+ (Horiba, 
+Symphony II),
+ in which
+, the 
+Fourier
+ plane
+ is 
+projected
+ by using 
+three additional lenses
+long 
+the detection line
+ the real plane of the sample is reconstruct
+ a square spatial sele
+(~2.5 x 2.5
+ ȝm2) is 
+placed
+ around the excitation spot 
+to cut part of the backgrou
+, so 
+that 
+we observe the exciton polariton dispersion and c
+power densities as shown in Figure 4.
+ 
+ 
+Coupled
+ harmonic oscillator model:
+ The polariton dispersion can be fi
+ a coupled 
+oscillator model:                   
+ 
+൬ܧ௘௫௖െ݅ߛ௘௫௖݃݃
+ܧ௖௔௩
+ሺߠሻെ݅ߛ௖௔௩
+൰ቀߙ
+ߚቁൌܧቀߙ
+ߚቁ 
+Here the cavity mode can be determined as
+ 
+2
+( )
+/ 1 (sin( ) /
+)
+=
+-
+cav
+ph
+ef
+E
+E
+n
+q
+q
+. 
+phE
+ is the 
+photon energy 
+(at zero angle) 
+and 
+efn
+ is the effective refractive inde
+excE
+ is the exciton 
+energy,
+ 
+excg and
+ 
+cavg are the half
+-widths of the uncouple
+d exciton and planar micr
+resonances, respectively.
+ 
+,
+UPB LPB
+E
+ are the eigenvalues corresponding t
+and lower polariton modes.
+aand
+bare the 
+amplitudes of the 
+eigenvectors
+, w
+hile
+g
+is 
+exciton
+-
+photon 
+coupling strength. In the strong coupling regime
+,
+UPB LPB
+E
+is
+ given by:
+ 
+ܧ௎௉஻
+ǡ௅௉஻ൌͳ
+ʹሾܧ௘௫௖൅ܧ௖௔௩െ݅ሺߛ௖௔௩൅ߛ௘௫௖
+ሻሿേඨ݃ଶ൅ͳ
+Ͷሾܧ௘௫௖െܧ௖௔௩൅݅ሺߛ௖௔௩െߛ௘௫௖
+ሻሿ
+ଶ 
+where
+2
+2
+2
+(
+) / 4
+W
+=
+-
+-
+Rabi
+cav
+exc
+g
+g
+g
+ is the Rabi splitting at detu
+ 
+(
+0
+exc
+cav
+E
+E
+D =
+-
+=
+). 
+A non
+-vanishing Rabi splitting requires
+ 
+/ 2
+cav
+exc
+g
+g
+g
+>
+-
+; 
+Furthermore, 
+in the strong coupling regime, the two resonances c
+i.e., 
+the Rabi splitting
+larger than the sum of the half linewidths of the m
+ 
+Rabi
+cav
+exc
+g
+g
+W
+>
++ . 
+ 
+ 
+ 
+
+13
+ 
+ 
+Acknowledgments
+ 
+Q.X. 
+and T.L. 
+gratefully acknowledge the support from 
+the 
+Singapore Ministry of Edu
+the 
+AcRF Tier 3 Programme 
+—Geometrical Quantum Materials
+“ 
+(MOE2018
+-T3
+-1-002)
+. Q.X. 
+acknowledge
+s the
+ Singapore Ministry of Education
+ Tier 2 project (MOE2017
+-T2
+-1-040), and 
+the 
+Singapore National Research Foundation via 
+the 
+NRF
+-ANR project (NRF2017
+-NRF
+-
+ANR005 2D
+-Chiral) 
+and 
+the 
+Compe
+titive Research Programme 
+—Integrated On
+-Chip Planar 
+Coherent Light Sources
+“ 
+(CRP21
+-2018
+-0092)
+. T.L. gratefully acknowledge
+s the support from 
+the 
+Singapore Ministry of Education via 
+AcRF
+ Tier 2 project (MOE2018
+-T2
+-02
+-068)
+. 
+ 
+Author contributions: 
+ 
+Q.X.
+, 
+J.Z
+, 
+and 
+R.S
+. conceived the ideas and designed the expe
+monolayer
+ microcavity
+ samples. J.Z.
+, R.S. 
+and A.F. 
+carried out the optical s
+measurements. 
+J. Z
+., R.S., A.F., D.S.,
+ T.L.
+ and C.D. 
+analyzed the data. 
+J.Z
+., 
+R.S., A.F.,
+ T.L. 
+and 
+Q.X. wrote the manuscript with inputs from all auth
+ 
+ 
+Competing interests:
+ The authors declare that they have no co
+materials availability: All data needed to evaluate
+the paper and/or the Supplementary Materials. Addit
+requested from the authors.
+ 
+ 
+ 
+
+14
+ 
+ 
+Reference
+ 
+1 
+Weisbuch, C., Nishioka, M., Ishikawa, A. & Arakawa, Y. Observation of the 
+coupled exciton
+- photon mode spliting in a semiconductor quantum 
+microcavity. 
+Physical Review Leters
+ 69
+, 314 (192).
+ 
+2 
+K asprzak, J.
+ et al.
+ Bose̢
+Einstein condensation of exciton polaritons. 
+Nature
+ 43
+, 409 (206).
+ 
+3 
+Balili, R., Hartwel, V., Snoke, D., Pfeifer, L. & West, K. Bose
+- Einstein 
+condensation of microcavity polaritons in a trap. 
+Science
+ 316
+, 107
+- 1010 
+(207).
+ 
+4 
+Den
+g, H., Haug, H. & Yamamoto, Y. Exciton
+- polariton bose
+- einstein 
+condensation. 
+Reviews of Modern Physics
+ 82
+, 1489 (2010).
+ 
+5 
+Christopoulos, S.
+ et al.
+ Rom
+- Temperature Polariton Lasing in Semiconductor 
+Microcavities. 
+Physical Review Leters
+ 98
+, 126405 (207).
+ 
+6 
+Imamog lu, A., Ram, R. J., Pau, S. & Yamamoto, Y. Nonequilibrium 
+condensates and lasers without inversion: Exciton
+- polariton lasers. 
+Physical Review A
+ 53
+, 4250
+- 4253 (196).
+ 
+7 
+Deng, H., Weihs, G., Snoke, D., Bloch, J. & Yamamoto, Y. Polariton lasing 
+vs. p
+hoton lasing in a semiconductor microcavity. 
+Procedings of the 
+National Academy of Sciences
+ 10
+, 15318
+- 15323 (203).
+ 
+8 
+Fraser, M. D., HКfling, S. & Yamamoto, Y. Physic
+exciton̢
+polariton lasers. 
+Nature materials
+ 15
+, 1049 (2016).
+ 
+9 
+Amo,
+ A.
+ et al.
+ Exciton̢
+polariton spin switches. 
+Nature Photonics
+ 4 , 361 
+(2010).
+ 
+10
+ 
+Lai, C.
+ et al.
+ Coherent zero
+- state and œ
+- state in an exciton̢
+polariton 
+condensate aray. 
+Nature
+ 450
+, 529
+- 532 (207).
+ 
+1
+ 
+Jacqmin, T.
+ et al.
+ Direct observation of Dirac cones and a flatband in a 
+honeycomb latice for polaritons. 
+Physical review leters
+ 12
+, 16402 
+(2014).
+ 
+12
+ 
+Baboux, F.
+ et al.
+ Bosonic condensation and disorder
+- induced localization in 
+a flat band. 
+Physical review leters
+ 16
+, 06
+6402 (2016).
+ 
+13
+ 
+Su, R.
+ et al.
+ Observation of exciton polariton condensation in a perovskite 
+latice at rom temperature. 
+Nature Physics
+ 16
+, 301
+- 306 (2020).
+ 
+14
+ 
+Amo, A.
+ et al.
+ Colective fluid dynamics of a polariton condensate in a 
+semiconductor microcavity
+. 
+Nature
+ 457
+, 291
+- 295 (209).
+ 
+15
+ 
+Berlof, N. G.
+ et al.
+ Realizing the clasical XY Hamiltonian in polariton 
+simulators. 
+Nature materials
+ 16
+, 120
+- 126 (2017).
+ 
+16
+ 
+Bajoni, D.
+ et al.
+ Polariton Laser Using Single Micropilar GaAs
+- GaAlAs 
+Semiconductor Cavities. 
+Physical Review Leters
+ 10
+, 047401 (208).
+ 
+17
+ 
+Xie, W.
+ et al.
+ Rom
+- Temperature Polariton Parametric Scatering Driven by a 
+One
+- Dimensional Polariton Condensate. 
+Physical Review Leters
+ 108
+, 16401 
+(2012).
+ 
+18
+ 
+Su, R.
+ et al.
+ Rom
+- temperature polariton lasing in al
+- inorganic perovskite 
+nanoplatelets. 
+Nano Leters
+ 17
+, 3982
+- 398 (2017).
+ 
+19
+ 
+Su, R.
+ et al.
+ Rom temperature long
+- range coherent exciton polariton 
+
+15
+ 
+ 
+condensate flow in lead halide perovskites. 
+Science advances
+ 4 , eau024
+4 
+(2018).
+ 
+20
+ 
+Lanty, G., Brehier, A., Parashkov, R., Lauret, J.
+- S. & Deleporte, E. Strong 
+exciton̢
+photon coupling at rom temperature in microcavities containing 
+two
+- dimensional layered perovskite compounds. 
+New Journal of Physics
+ 10
+, 
+06507 (208).
+ 
+21
+ 
+Kena
+ Cohen, S. & Forest, S. Rom
+- temperature polariton lasing in an 
+organic single
+- crystal microcavity. 
+Nature Photonics
+ 4 , 371 (2010).
+ 
+2
+ 
+Daskalakis, K., Maier, S., Muray, R. & Kena Cohen, S. Nonlinear 
+interactions in an organic polariton condensate. 
+Nature
+ Materials
+ 13
+, 271 
+(2014).
+ 
+23
+ 
+Lerario, G.
+ et al.
+ Rom
+- temperature superfluidity in a polariton 
+condensate. 
+Nature Physics
+ 13
+, 837 (2017).
+ 
+24
+ 
+Wang, J.
+ et al.
+ Rom temperature coherently coupled exciton̢
+polaritons in 
+two
+- dimensional organic̢
+inorganic perovsk
+ite. 
+ACS nano
+ 12
+, 8382
+- 8389 
+(2018).
+ 
+25
+ 
+Fieramosca, A.
+ et al.
+ Two
+- dimensional hybrid perovskites sustaining strong 
+polariton interactions at rom temperature. 
+Science advances
+ 5 , eav967 
+(2019).
+ 
+26
+ 
+Sanvitto, D. & Käna
+- Cohen, S. The road towards polaritonic
+ devices. 
+Nature 
+materials
+ 15
+, 1061
+- 1073 (2016).
+ 
+27
+ 
+Xu, X., Yao, W., Xiao, D. & Heinz, T. F. Spin and pseudospins in layered 
+transition metal dichalcogenides. 
+Nature Physics
+ 10
+, 343 (2014).
+ 
+28
+ 
+Chernikov, A.
+ et al.
+ Exciton binding energy and nonhydrogenic Rydberg 
+series in monolayer WS
+2 . 
+Physical Review Leters
+ 13
+, 076802 (2014).
+ 
+29
+ 
+Zeng, H., Dai, J., Yao, W., Xiao, D. & Cui, X. Valey polarization in MoS
+2 
+monolayers by optical pumping. 
+Nature Nanotechnology
+ 7 , 490
+ (2012).
+ 
+30
+ 
+Chen, Y.
+- J., Cain, J. D., Stanev, T. K., Dravid, V. P. & Stern, N. P. 
+Valey
+- polarized exciton̢
+polaritons in a monolayer semiconductor. 
+Nature 
+Photonics
+ 1
+, 431 (2017).
+ 
+31
+ 
+Sun, Z.
+ et al.
+ Optical control of rom
+- temperature valey polaritons. 
+Na
+ture Photonics
+ 1
+, 491 (2017).
+ 
+32
+ 
+Qiu, L., Chakraborty, C., Dhara, S. & Vamivakas, A. Rom
+- temperature valey 
+coherence in a polaritonic system. 
+Nature comunications
+ 10
+, 1513 (2019).
+ 
+3
+ 
+Lundt, N.
+ et al.
+ Optical valey Hal efect for highly valey
+- coheren
+t 
+exciton
+- polaritons in an atomicaly thin semiconductor. 
+Nature 
+Nanotechnology
+ 14
+, 70
+- 75 (2019).
+ 
+34
+ 
+Liu, X.
+ et al.
+ Strong light̢
+mater coupling in two
+- dimensional atomic 
+crystals. 
+Nature Photonics
+ 9 , 30 (2015).
+ 
+35
+ 
+Zhang, L., Gogna, R., Burg, W., Tutuc, 
+E. & Deng, H. Photonic
+- crystal 
+exciton
+- polaritons in monolayer semiconductors. 
+Nature Comunications
+ 9 , 
+713 (2018).
+ 
+36
+ 
+Cuadra, J.
+ et al.
+ Observation of tunable charged exciton polaritons in 
+hybrid monolayer WS
+2 plasmonic nanoantena system. 
+Nano Leters
+ 18
+, 17
+-
+
+16
+ 
+ 
+1785 (2018).
+ 
+37
+ 
+Wu, S.
+ et al.
+ Monolayer semiconductor nanocavity lasers with ultralow 
+thresholds. 
+Nature
+ 520
+, 69 (2015).
+ 
+38
+ 
+Ye, Y.
+ et al.
+ Monolayer excitonic laser. 
+Nature Photonics
+ 9 , 73 (2015).
+ 
+39
+ 
+Shang, J.
+ et al.
+ Rom
+- temperature 2D semiconducto
+r activated vertical
+-
+cavity surface
+- emiting lasers. 
+Nature comunications
+ 8 , 543 (2017).
+ 
+40
+ 
+Arakawa, Y. & Yariv, A. Quantum wel lasers
+-
+Gain, spectra, dynamics. 
+IE 
+journal of quantum electronics
+ 2
+, 187
+- 189 (1986).
+ 
+ 
+ 
+ 
+ 
+ 
+
+17
+ 
+ 
+Figures and Captions
+ 
+ 
+ 
+Fig
+ure
+ 1 | Sample structure and monolayer characterizatio
+ a,
+ Schematic 
+diagram 
+of the 
+microcavity structure. Th
+is
+ structure consists of 
+12
+.5 periods of a bottom dist
+(SiO
+2/TiO
+2) and 
+8.5 periods of a top DBR. The cavity layer s
+quantum well 
+structure with the monolayer WS
+2 flake as active material and the S
+2 layers are used as
+spacer. 
+b,
+ monolayer characterization at room temperature
+ption
+ spectrum (blue 
+curve
+) of the monolayer WS
+2 on PDMS (polydimethylsiloxane), showin
+around 2.02 eV for the A exciton. The
+ photoluminescence
+ spectrum (red 
+curve
+) of the 
+monolayer WS
+2 on bottom DBR, showing two emission peaks at
+A 
+exciton 
+with FWHM
+ of ~27
+ meV and 1.974 eV (for trion).
+ The
+ ground
+-state
+ polariton emission (p
+curve
+) of the monolayer WS
+2 microcavity, showing an emission peak a
+68 eV with a 
+FWHM 
+of ~
+2.9
+ meV
+ at room temperature.
+ The ins
+et
+ shows the s
+chematics of principles fo
+ 
+lasing.
+ 
+ 
+ 
+UPB
+LPB
+Emision (a.u.)
+Energy (eV)
+Absorption (a.u.)
+Polariton
+emision
+b
+1.8
+1.9
+2.0
+2.1
+2.2
+2.3
+295 K
+
+18
+ 
+ 
+ 
+Figure 
+2 | 
+Observation of WS
+2 microcavity 
+polariton 
+lasing at 
+RT. 
+a, Angle
+-resolved 
+reflectivity 
+map
+ measured 
+by 
+using a white light source. The dashed
+curves
+ 
+show the theoretical
+ly
+ fitt
+ed
+ dispersions of the 
+UPB and LPB
+ with 
+a 
+Rabi splitting
+ of 
+~ 37 meV. 
+The dashed red and 
+yellow
+ lines show the uncoupled exciton and th
+bare 
+cavity mode, 
+which are obtained from a coupled harmonic oscillat
+l. 
+b, Angle
+-resolved 
+photoluminescence
+ map
+ above threshold. A sharp and intense pea
+is 
+visible
+ in the ground 
+state
+, corresponding to the lowest momentum state (
+inset
+).
+ c, 
+Real 
+space 
+photoluminescence
+ 
+spectrum with pump power 
+of
+ ~ 70
+ nW. The circles show the measured da
+a fitting result to the 
+non
+-condensate 
+polariton background emission, and 
+to the 
+ground
+-state polariton emission of 
+WS2 cavity emission. The 
+ground
+-state 
+polariton 
+emission as a function of the 
+pump power
+ (input
+-output 
+curve) 
+is shown in the 
+inset
+. 
+d, 
+Linewidth as a function of the 
+pump power
+. Dashed red line is a guide to 
+narrowing of the lasing mode is observed as the 
+system
+ crosses the 
+lasing threshold
+ (the 
+yellow 
+colored 
+area)
+. High
+-resolution 
+photoluminescence
+ spectra at 
+very lo
+w pump power 
+(below the threshold)
+ and 
+high pump power (above the threshold)
+ are shown in the inset
+. The 
+FWHM 
+of the 
+polariton emission 
+is reduced from
+ ~ 1.3 meV to 
+~ 1 meV
+. e,
+ f Real space 
+photoluminescence
+ image measured above threshold from 
+the two
+ arm
+s of 
+a Michelson 
+interferometer
+ where a
+ retroreflector 
+is used 
+to flip the image in a centrosy
+g, 
+0.8
+Pump power (nW)
+FWHM(meV)
+1
+10
+1.2
+1.6
+d
+1.965
+1.970
+1.965
+1.970
+ Intensity (a.u.)
+Energy (eV)
+1.3 meV
+1 meV
+0.3 nW
+2.0 nW
+Data
+Polariton emision
+Background emision
+Energy (eV)
+P L intensity (a.u.)
+1.95
+1.98
+2.01
+2.04
+2.07
+c
+1
+10
+1
+10
+Pump power (nW)
+Integrated intensity (a.u.)
+10
+Max
+Min
+e
+f
+g
+0.0
+20
+40
+-20
+-40
+1.95
+2.0
+2.05
+2.10
+ș (degre)
+Energy (eV)
+
+
+

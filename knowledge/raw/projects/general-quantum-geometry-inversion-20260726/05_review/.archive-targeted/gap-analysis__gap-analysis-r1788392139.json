@@ -1,0 +1,36 @@
+{
+  "gaps": [
+    {
+      "claim": "10% 谐波红移 × 灵敏度系数 0.5 × 误差传播系数 ~6 = 30% 量级 Ω(k) 反演误差——三个乘子均无文献支撑",
+      "missing_evidence": "灵敏度矩阵与误差传播系数的物理定义与量纲来源不明，无文献给出该具体计算过程",
+      "search_keywords": [
+        "sensitivity matrix high harmonic inversion error propagation",
+        "Berry curvature reconstruction error harmonic redshift",
+        "quantum geometry tensor inversion uncertainty propagation",
+        "HHG spectroscopy parameter retrieval condition number"
+      ],
+      "priority": "critical"
+    },
+    {
+      "claim": "r ≤ 1.5（BSV 压缩参数）的物理定义模糊且阈值 1.5 来源不明",
+      "missing_evidence": "r 的物理含义未明确定义（squeezing parameter / photon-number compression factor / dB），1.5 阈值的实验或理论依据缺失",
+      "search_keywords": [
+        "bright squeezed vacuum squeezing parameter r definition",
+        "BSV compression parameter threshold OPCPA experiment",
+        "squeezed vacuum photon statistics r parameter dB",
+        "quantum light parametric amplifier squeezing factor typical range"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "rationale L83 与 scheme L141 对 Bi₂Te₃ 物理描述口径完整度不同——rationale 仅给光子能量 0.83 eV + 体相带隙 ~0.15 eV，未显式给出差值 0.68 eV",
+      "missing_evidence": "申请书内部跨章描述不一致，Bi₂Te₃ 表面态与体相带隙能量差值 0.68 eV 缺直接文献支撑",
+      "search_keywords": [
+        "Bi2Te3 surface state bulk bandgap energy difference 0.68 eV",
+        "Bi2Te3 topological insulator surface state binding energy",
+        "Bi2Te3 0.83 eV photon energy surface state transition"
+      ],
+      "priority": "high"
+    }
+  ]
+}

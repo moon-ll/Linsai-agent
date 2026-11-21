@@ -1,0 +1,61 @@
+{
+  "gaps": [
+    {
+      "claim": "Shi与Thumm关于六维TDSE的工作在rationale §2.2中点名但未挂引文",
+      "missing_evidence": "缺少Shi和Thumm六维TDSE水窗阿秒脉冲重构的原始文献引用",
+      "search_keywords": [
+        "Shi Thumm six-dimensional TDSE water window attosecond pulse retrieval",
+        "Thumm six-dimensional time-dependent Schrödinger equation streaking"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "[20][21]在references.md中声称有挂点但三章正文均无引用",
+      "missing_evidence": "缺少[20][21]在rationale.md中的实际引用位置（声称挂点但零引用），需补入正文论证或调整references声明",
+      "search_keywords": [
+        "attosecond pulse characterization reference 20",
+        "attosecond streaking reference 21 review"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3.1国内团队积累小节末段混入Gao[30]/Biegert[31]/Han[32]国际进展",
+      "missing_evidence": "Gao/Biegert/Han三位国际团队的阿秒相关工作原始文献支撑需明确（目前被误置于国内小节）",
+      "search_keywords": [
+        "Gao attosecond streaking",
+        "Biegert attosecond pulse characterization",
+        "Han attosecond high harmonic generation"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§3.1'80 as反演[9]'数值未对照原文核验",
+      "missing_evidence": "缺少对[9]原始论文中反演得到的80 as脉冲时长的原文数据核验",
+      "search_keywords": [
+        "rACE attosecond pulse reconstruction 80 as",
+        "Inzani neural network attosecond retrieval pulse duration"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§2.4'rACE优于24 as'数值未对照原文核验",
+      "missing_evidence": "缺少rACE神经网络重构阿秒脉冲时长精度的原文数据支撑",
+      "search_keywords": [
+        "rACE attosecond 24 as retrieval accuracy",
+        "neural network attosecond pulse reconstruction precision"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "国内已建成覆盖水窗能区的高次谐波光源（附注提示）",
+      "missing_evidence": "缺少国内团队在水窗能区（284-543 eV）高次谐波光源建设的代表性文献支撑",
+      "search_keywords": [
+        "water window high harmonic generation China",
+        "中国 水窗 高次谐波",
+        "国内 水窗能区 阿秒光源"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

@@ -1,0 +1,27 @@
+{
+  "gaps": [
+    {
+      "claim": "以 7×10^14 W/cm²、1850 nm 激光驱动 HHG 时，截止能量能够覆盖水窗低段至高段的全区间。",
+      "missing_evidence": "现有定量支撑存在参数与结果错配：报告指出 531 eV 实由 5×10^14 W/cm² 推得，而按 7×10^14 W/cm² 代入 HHG 截止公式应约为 733 eV；同时缺少可核验的截止公式权威来源及水窗能区边界文献。需要引用经典 HHG 截止关系和可靠的水窗边界来源，并基于同一组激光参数重新核算覆盖范围。",
+      "search_keywords": [
+        "high harmonic generation cutoff law Up 9.33 10^-14 intensity wavelength squared",
+        "HHG cutoff energy 24.6 eV 3.17 Up",
+        "solid-state HHG 1850 nm 7 × 10^14 W cm^-2 cutoff energy",
+        "water window 284 543 eV review"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Li 等的实验测量结果与 Shi 和 Thumm 的理论计算共同构成该部分论述的实验—理论对照。",
+      "missing_evidence": "当前合并标注“[15,16]”导致来源与论断对应关系不清。需要核对并分别引用 Li 等的原始实验论文[16]以及 Shi 与 Thumm 的理论计算论文[15]，明确哪些结论来自实验、哪些来自计算，并确认两条文献均实际支持所陈述的具体结果。",
+      "search_keywords": [
+        "Li high harmonic generation attosecond streaking 1850 nm water window",
+        "Li solid-state HHG experimental measurement attosecond",
+        "Shi Thumm high harmonic generation theoretical calculation",
+        "Shi Thumm solid-state HHG ZnO theory"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "rationale"
+}

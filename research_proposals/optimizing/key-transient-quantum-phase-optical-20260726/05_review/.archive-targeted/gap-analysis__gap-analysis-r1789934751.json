@@ -1,0 +1,113 @@
+{
+  "gaps": [
+    {
+      "claim": "L91「DFT层级近期系统评估」引用arXiv:2604.08155（虚构文献，实为Yang《Dual Approaches to Stochastic Control via SPDEs》）",
+      "missing_evidence": "缺少一篇真实存在的、关于200种XC泛函（含LDA/PBE/ALDA/hybrid/GW等）在强场HHG中系统性基准对比的文献",
+      "search_keywords": [
+        "exchange-correlation functional benchmark high harmonic generation",
+        "LDA PBE ALDA hybrid functional HHG comparison",
+        "XC functional sensitivity solid-state HHG",
+        "DFT functional benchmark ultrafast HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "L91「LDA/PBE 已知系统偏差」结论与arXiv:2602.22578（Watanabe）实际结论反转",
+      "missing_evidence": "需要一篇结论为「KS-多体Berry相位/量子度规确实偏离」的文献，或证明泛函选择显著影响强场响应的实证文献",
+      "search_keywords": [
+        "Watanabe quantum geometry KS many-body discrepancy",
+        "KS DFT deviation many-body Berry phase",
+        "TDDFT exchange-correlation functional Berry curvature strong field",
+        "quantum metric DFT functional dependence"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "L87「Ilin[31]对密度泛函近似敏感的机制说明」归因过度",
+      "missing_evidence": "缺少Ilin关于电流-电流关联编码量子几何、提供独立约束通道的实际内容定位；或用一篇真正讨论电流-电流关联与量子几何的文献替换",
+      "search_keywords": [
+        "Ilin current-current correlation HHG quantum geometry",
+        "current-current correlation nonlinear optical response Berry",
+        "many-body current density HHG independent constraint",
+        "Ilin high harmonic spectroscopy density functional"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "[15] Chassot SnTe Floquet零引用悬空",
+      "missing_evidence": "缺少SnTe在Floquet驱动下拓扑态调控的具体引用语境（§2.2需要一处[N]支撑）",
+      "search_keywords": [
+        "SnTe Floquet topological state engineering",
+        "Chassot SnTe light-induced topology",
+        "SnTe Floquet-Bloch band structure HHG"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "[16] Merboldt 石墨烯 Floquet零引用悬空",
+      "missing_evidence": "缺少石墨烯Floquet工程的具体引用语境（§2.2需要一处[N]支撑）",
+      "search_keywords": [
+        "Merboldt graphene Floquet engineering",
+        "graphene light-induced Floquet state time-resolved",
+        "graphene Floquet topological ultrafast"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "L45六作者一线串联「四组证据」段的递进论证",
+      "missing_evidence": "需要按「指纹-退相干-独立约束-谱学验证」四类递进组织文献，每类至少1篇核心文献支撑",
+      "search_keywords": [
+        "HHG fingerprint quantum geometry coherence signature",
+        "HHG dephasing many-body decoherence",
+        "HHG independent constraint channel quantum geometry",
+        "high harmonic spectroscopy verification Berry curvature"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "「全光写读反演闭环」涉及的多体拓扑不变量控制-反演能力对比",
+      "missing_evidence": "需要近年（2024-2026）报道的全光写入-反演多体拓扑不变量的代表性工作，以及与申请人方法的对照文献",
+      "search_keywords": [
+        "all-optical writing topological invariant many-body",
+        "light-induced topological order ultrafast HHG read",
+        "many-body topological invariant retrieval HHG 2024 2025 2026",
+        "non-equilibrium topological state HHG spectroscopy"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "94 as噪声预算中「商用f-2f稳定方案约120 as、压至≤80 as升级路径」",
+      "missing_evidence": "缺少对应当前商用f-2f锁定抖动≈120 as的实测数据来源（≥2024年）和升级到≤80 as的可行路径文献",
+      "search_keywords": [
+        "f-2f interferometer carrier-envelope phase locking jitter 2024",
+        "CEP stabilization 80 attosecond commercial laser",
+        "f-to-2f locking jitter measurement ultrafast laser",
+        "low noise CEP stabilization commercial oscillator"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "强场HHG中TDDFT交换关联泛函ALDA失效的阈值与定量基准",
+      "missing_evidence": "缺少强场极限下ALDA/LDA/PBE/HSE等泛函定量偏差与失效阈值的最新系统评估",
+      "search_keywords": [
+        "TDDFT ALDA breakdown strong field limit HHG",
+        "adiabatic LDA approximation failure high harmonic",
+        "TDDFT exchange-correlation nonadiabatic strong field",
+        "ALDA HSE hybrid HHG quantitative error benchmark"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "「去偏后≈0.115」噪声预算对应的实验验证文献",
+      "missing_evidence": "缺少≈100 as噪声水平下HHG反演Berry相位/量子度规的实验精度基准",
+      "search_keywords": [
+        "Bayesian inversion high harmonic Berry curvature uncertainty",
+        "Fisher information HHG quantum geometry retrieval",
+        "HHG inverse problem posterior variance experimental",
+        "Berry curvature retrieval precision attosecond noise"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

@@ -1,0 +1,70 @@
+{
+  "gaps": [
+    {
+      "claim": "本课题量子几何反演框架与现有量子光HHG预印本工作（[21] Khurelbaatar / [22] Rivera-Dean 等）的差异性论述偏弱",
+      "missing_evidence": "缺少与量子光驱动HHG已有预印本工作（Khurelbaatar BSV-HHG、Rivera-Dean 量子HHG理论）在方法学、参数空间、实验体系上的对比性文献分析",
+      "search_keywords": [
+        "Khurelbaatar quantum light HHG preprint",
+        "Rivera-Dean quantum HHG solid state",
+        "BSV driven HHG comparison classical",
+        "quantum enhancement factor HHG QEF framework"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "r ≤ 1.5 BSV条件在scheme.md R3/R4中提出，但跨章节指代脱节（rationale.md 0次，content.md 0次，scheme.md 1次）",
+      "missing_evidence": "缺少亮压缩真空态（BSV）压缩参数r取值范围、g(2)零延迟表征方法、NOPA标定流程在HHG实验中的标准文献支撑",
+      "search_keywords": [
+        "bright squeezed vacuum squeezing parameter r threshold",
+        "BSV photon number calibration NOPA",
+        "g2 zero-delay BSV characterization",
+        "squeezed light photon statistics HHG experiment"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3.4 R4 f-sum rule 与 Chern 约束显式拆分需进一步论述",
+      "missing_evidence": "缺少关于f-sum rule 求和规则约束（∫Ωd²k=2πC 拓扑积分）与Berry曲率求和在HHG反演中可分离性的理论/实验文献",
+      "search_keywords": [
+        "f-sum rule high harmonic constraint",
+        "Chern number HHG spectroscopy Berry curvature integral",
+        "topological invariant solid state HHG Berry",
+        "quantum geometry tensor experimental retrieval HHG"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "拓扑绝缘体材料选择（Bi₂Te₃=12次/Sb₂Te₃=4次 vs rationale.md残留Bi₂Se₃类命名2处）需统一论证",
+      "missing_evidence": "缺少Bi₂Te₃、Sb₂Te₃、Bi₂Se₃等拓扑绝缘体在强场HHG中表面态量子几何贡献的对比实验数据，特别是窄带隙/自旋轨道耦合强度对HHG产率的影响",
+      "search_keywords": [
+        "Bi2Te3 high harmonic generation nonlinear optics",
+        "topological insulator HHG surface state quantum geometry",
+        "Bi2Se3 vs Bi2Te3 band structure optical property",
+        "Sb2Te3 strong field nonlinear response"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "R1 ZnO复现metric口径跨章节不统一（scheme.md使用'偏振响应'7次 vs content.md '偏振旋转角'2次 + rationale.md '偏振旋转角'2次）",
+      "missing_evidence": "缺少ZnO晶体HHG偏振依赖性度量的标准化实验metric定义文献，特别是'偏振旋转角'与'偏振响应'作为可观测量的差异",
+      "search_keywords": [
+        "ZnO high harmonic generation polarization rotation angle",
+        "circular dichroism HHG ZnO helicity",
+        "polarization dependent HHG metric definition",
+        "ZnO crystal orientation harmonic yield"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "1.5 μm驱动波长在rationale.md未明示（0次），但content.md（3次）+ scheme.md（1次）已显式使用",
+      "missing_evidence": "缺少1.5 μm中红外驱动波长下固体HHG相对于800 nm Ti:sapphire的实验优势、阈值降低、多带耦合等文献支撑",
+      "search_keywords": [
+        "1.5 μm driving HHG solid state mid-infrared",
+        "1550 nm fiber laser high harmonic generation",
+        "mid-IR driving wavelength solid HHG advantage",
+        "1.5 μm multiphoton interband coupling solid"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

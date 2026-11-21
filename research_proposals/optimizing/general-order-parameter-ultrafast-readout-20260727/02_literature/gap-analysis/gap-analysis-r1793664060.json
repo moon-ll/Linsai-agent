@@ -1,0 +1,28 @@
+{
+  "gaps": [
+    {
+      "claim": "§一.2 波型争议句（L35）：'中子衍射磁群 g-wave 判定 [20]'——磁群形式化判定归属错误",
+      "missing_evidence": "需修正引用归属：[20]（Singh 等）实际为 MnTe 中子散射手性磁振子 g 波观测证据，磁群形式化判定应归 Mineev [31]；需两类文献并置支撑——中子散射实验观测证据 + 磁群理论分析，建议改为'中子散射手性磁振子 g 波证据 [20] 与磁群分析 [31]'",
+      "search_keywords": [
+        "MnTe chiral magnon neutron scattering",
+        "g-wave triplon MnTe",
+        "magnetic group symmetry analysis Mineev",
+        "collinear antiferromagnet magnon chirality"
+      ],
+      "priority": "low"
+    },
+    {
+      "claim": "可行性评估中 MnTe 备选方案的调制幅度参数（CDW/自旋调制幅度留待 SBE 扫描，无量级预估）",
+      "missing_evidence": "MnTe 备选路线缺少 CDW 或磁序调制幅度的量级文献支撑，导致可行性论证中关键参数无法给出预估区间；需补充 MnTe 晶格/磁结构调制幅度的实验测定（衍射强度、结构精修）或理论估算文献，为主备选切换判据提供量级锚点",
+      "search_keywords": [
+        "MnTe CDW amplitude diffraction",
+        "MnTe lattice distortion magnitude",
+        "MnTe ARPES band structure",
+        "MnTe magnetic structure refinement",
+        "charge density wave order parameter magnitude"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

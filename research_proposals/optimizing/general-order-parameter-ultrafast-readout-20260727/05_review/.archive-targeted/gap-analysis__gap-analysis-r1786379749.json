@@ -1,0 +1,82 @@
+{
+  "gaps": [
+    {
+      "claim": "altermagnet 固体 HHG 序参量信号预测（核心信号预言 Werner [24]）",
+      "missing_evidence": "Werner [24] 为预印本，未经过同行评审。若发表时结论变动，立项依据整章科学论证地基松动。需找到已发表的同行评审文献给出等价或互补的 altermagnet HHG 信号预测（自旋群对称性破缺 → HHG 通道选择定则）",
+      "search_keywords": [
+        "altermagnet high harmonic generation peer-reviewed",
+        "altermagnet HHG signal prediction published",
+        "spin symmetry breaking HHG Phys Rev Lett 2025 2026",
+        "Werner altermagnet HHG journal version DOI"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "altermagnet 超快动力学可行性证据（样品可行性间接证据 Cheng [31]）",
+      "missing_evidence": "Cheng [31] 为预印本，未经过同行评审。需找到已发表的同行评审工作支撑 altermagnet 材料的超快磁有序调控可行性，作为本项目样品选型和实验设计的可行性基础",
+      "search_keywords": [
+        "altermagnet ultrafast dynamics published peer-reviewed",
+        "MnTe CrSb pump-probe experimental published",
+        "altermagnet spin dynamics Nature Physics 2025 2026",
+        "ultrafast control altermagnet Optica PRL"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "HHG 指纹对序参量的非唯一性（立项依据 §3 核心科学问题：看到指纹 ≠ 确定序参量）",
+      "missing_evidence": "缺少 HHG 光谱反演序参量存在非唯一性/不适定性的系统文献支撑。需补：①逆问题理论分析（不适定性/病态性数学证明）；②HHG 反演唯一性论证或反例；③不同序参量产生相似 HHG 指纹的实证案例；④Fisher 信息矩阵/贝叶斯反演在 HHG 唯一性论证中的应用文献",
+      "search_keywords": [
+        "HHG inverse problem uniqueness non-uniqueness",
+        "high harmonic spectroscopy order parameter reconstruction",
+        "ill-posed inverse problem attosecond spectroscopy",
+        "Fisher information HHG inversion",
+        "Bayesian reconstruction HHG band structure"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "国内 altermagnet 强场超快研究现状（立项依据国内现状部分）",
+      "missing_evidence": "缺少对中国课题组在 altermagnet + 强场超快 + 高次谐波交叉方向工作的系统文献调研。需补全国内组（HUST、USTC、PKU 等）在 altermagnet 探测、HHG 磁有序响应方向的具体文献",
+      "search_keywords": [
+        "中国 altermagnet 高次谐波",
+        "国内 交错磁体 强场超快",
+        "China altermagnet HHG ultrafast group",
+        "HUST USTC PKU altermagnet high harmonic",
+        "国内 HHG 磁有序 课题组"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "TiSe₂ 作为 HHG 序参量方法学标定体系的可行性（§1.5）",
+      "missing_evidence": "缺少 TiSe₂ CDW HHG 谱学的已发表实验/理论工作，用以支撑将其作为方法学标定体系的口径（CDW 序参量与 HHG 谱特征对应关系）",
+      "search_keywords": [
+        "TiSe2 high harmonic generation CDW order parameter",
+        "TiSe2 charge density wave HHG spectroscopy",
+        "TiSe2 CDW ultrafast HHG published",
+        "transition metal dichalcogenide CDW HHG"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "CrSb 作为 altermagnet 主体系的 HHG 适用性",
+      "missing_evidence": "缺少 CrSb（Néel 720 K）的 HHG 响应专项文献，特别是 altermagnet 自旋群对称性破缺在 HHG 谱中的特征体现，作为主体系选型的支撑",
+      "search_keywords": [
+        "CrSb altermagnet high harmonic generation",
+        "CrSb Néel 720K spin splitting HHG",
+        "CrSb altermagnet nonlinear optical response",
+        "CrSb spin group symmetry HHG channel"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "申请者前期预研工作对当前课题的支撑（rationale 自引预研工作缺失）",
+      "missing_evidence": "rationale.md 缺少申请者本人前期在 altermagnet HHG / 序参量超快读出方向的预研工作自引，无法建立研究基础连续性论证",
+      "search_keywords": [
+        "申请人前期工作 altermagnet HHG",
+        "PI preliminary altermagnet high harmonic",
+        "申请人 已发表 序参量 超快读出"
+      ],
+      "priority": "low"
+    }
+  ]
+}

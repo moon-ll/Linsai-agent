@@ -1,0 +1,19 @@
+{
+  "gaps": [
+    {
+      "claim": "立项依据第11段中由Shi[18]、Tarrant[20]和Li[19]分别支撑的具体研究进展缺少年份锚点，读者无法仅据正文快速核验作者、成果及文献之间的对应关系。",
+      "missing_evidence": "需要补查并核实这三项工作的原始文献，至少补齐作者、年份、题名、期刊、卷期或文章号、DOI等书目信息；同时应确认每篇原始文献确实直接支撑段11中与其对应的具体论断，而非仅与研究方向相关。还需利用Crossref、出版社页面或Web of Science/Scopus记录交叉核对，避免同名作者误配。",
+      "search_keywords": [
+        "\"Shi\" attosecond streaking DOI",
+        "\"Tarrant\" attosecond streaking DOI",
+        "\"Li\" attosecond streaking DOI",
+        "\"Shi\" attosecond \"electron wave packet\"",
+        "\"Tarrant\" attosecond photoemission",
+        "\"Li\" attosecond transient absorption",
+        "\"Shi\" \"Tarrant\" \"Li\" attosecond spectroscopy"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "rationale"
+}

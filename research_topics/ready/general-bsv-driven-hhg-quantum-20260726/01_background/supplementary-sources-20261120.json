@@ -1,0 +1,29 @@
+{
+  "entries": [
+    {
+      "source_id": "paper:2026-2611.07764-bringing-dark-states-to-light-after-frustrated-tun",
+      "title": "Bringing Dark States to Light after Frustrated Tunneling Ionization",
+      "summary": "本文报道气体高次谐波产生中受挫隧穿电离之后暗态的XUV激发与探测研究。工作超越了传统亚激光周期的半经典三步模型图像，揭示了多周期演化和暗态在其中扮演的角色。通过XUV光谱诊断，将隧穿后无法直接辐射跃迁的暗态'带到光明'。",
+      "path": "knowledge/raw/papers/2026-2611.07764-bringing-dark-states-to-light-after-frustrated-tun.md"
+    },
+    {
+      "source_id": "paper:2026-2609.06480-quantum-optics-of-harmonic-generation-in-the-stron",
+      "title": "Quantum Optics of harmonic generation in the strongly driven Jaynes-Cummings-type system",
+      "summary": "本文将Jaynes-Cummings模型推广至强驱动 regime，研究腔量子电动力学与强场/阿秒物理的交叉界面。作者证明强驱动JC系统中的多光子共振可用于产生谐波（高阶边带），揭示谐波产生过程的量子光学特性。该工作为谐波产生提供了全量子（而非半经典）的处理框架，可刻画光场量子统计对非线性辐射的影响。",
+      "path": "knowledge/raw/papers/2026-2609.06480-quantum-optics-of-harmonic-generation-in-the-stron.md"
+    },
+    {
+      "source_id": "paper:2026-2609.25753-photon-statistics-control-of-strong-field-rydberg-",
+      "title": "Photon-Statistics Control of Strong-Field Rydberg-State Excitation",
+      "summary": "本文提出利用光的量子统计特性作为强场里德堡态激发的新调控维度。通过将量子光学相空间表述与含时薛定谔方程（TDSE）计算耦合，研究了非经典光场（如压缩态/亚泊松统计等）驱动的束缚态形成动力学。结果显示光子统计可以显著改变强场里德堡激发的产率与分布，为强场束缚态形成提供了超越经典相干场的控制自由度。",
+      "path": "knowledge/raw/papers/2026-2609.25753-photon-statistics-control-of-strong-field-rydberg-.md"
+    },
+    {
+      "source_id": "paper:2026-2608.15859-anomalous-radiation-pressure-in-strong-field-ioniz",
+      "title": "Anomalous radiation pressure in strong-field ionization driven by quantum light",
+      "summary": "本文研究了亮压缩真空（bright squeezed vacuum, BSV）这类量子光场驱动的强场电离，发现平均纵向光电子动量随平均入射强度 I 呈 I^{2/3} 的反常标度，而非经典光场下的线性标度。这一反常辐射压行为源于 BSV 光子统计（强度涨落分布）对强场电离非线性的重加权，说明量子光的统计性质可实质性地改变强场电子动力学。",
+      "path": "knowledge/raw/papers/2026-2608.15859-anomalous-radiation-pressure-in-strong-field-ioniz.md"
+    }
+  ],
+  "updated_at": "2026-11-20T21:34:24Z"
+}

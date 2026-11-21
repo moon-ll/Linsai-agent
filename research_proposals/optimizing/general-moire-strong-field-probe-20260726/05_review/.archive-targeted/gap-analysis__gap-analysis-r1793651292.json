@@ -1,0 +1,36 @@
+{
+  "gaps": [
+    {
+      "claim": "§2.2.3 L91 靶标 B 基线段整体'落在 Peterka H5–H10 窗口之内'（基线取 5–11 阶，H11 越出实测窗）",
+      "missing_evidence": "Peterka 等人实测 HHG 谱的原始文献，明确其实际观测的谐波阶次窗口（H5–H10），以界定可测范围与外推端",
+      "search_keywords": [
+        "Peterka high harmonic generation",
+        "harmonic order window H5 H10",
+        "high-order harmonic spectroscopy measurement"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.2.1 L43 '首个含多体修正'的莫尔 HHG 理论（支撑表述'现有莫尔 HHG 理论[6,8]均无多体项'漏引同类文献 [7]，且需'据 2026 年 9 月检索'限定）",
+      "missing_evidence": "现有莫尔超晶格/石墨烯体系 HHG 理论文献的系统性核查证据，证明既有工作均不含多体关联修正项，支持'首个'新颖性主张",
+      "search_keywords": [
+        "moiré HHG theory",
+        "high harmonic generation twisted bilayer graphene",
+        "many-body correlation HHG",
+        "TDDFT SBE moiré superlattice"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "跨章口径表 Peterka 条编号不一致（canonical 表写 [22]，现行 refs 编号为 [28]，[22]=Lian）",
+      "missing_evidence": "Peterka 与 Lian 两篇文献在参考文献表中的正确编号与条目对应关系，防止后续评审轮次误判引用",
+      "search_keywords": [
+        "Peterka HHG reference",
+        "Lian high harmonic paper",
+        "reference numbering verification"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "content"
+}

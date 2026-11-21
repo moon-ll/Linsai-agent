@@ -1,0 +1,38 @@
+{
+  "gaps": [
+    {
+      "claim": "立项依据章节及全文中关于文献检索数据库组合的声明（用以追溯论证基础的来源完整性）",
+      "missing_evidence": "R2-Issue3 残留：正文两处检索库表述不一致（WoS/arXiv/IOPscience/CNKI vs WoS/arXiv/IEEE/Scopus/CrossRef），需要统一指向同一权威检索清单作为可引用依据，并在正文两处声明中改为对该清单的指引",
+      "search_keywords": [
+        "systematic literature review methodology",
+        "Web of Science Scopus arXiv database selection",
+        "attosecond streaking bibliometric search",
+        "PRISMA literature search database"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "国内某研究组'所建立的 TOF 阵列位置灵敏探测方案'这一装置归属表述",
+      "missing_evidence": "L77 当前归给文献 [17]，但 [17] 主题被核实为库仑聚焦，未必包含 TOF 阵列位置灵敏探测装置的建立内容；需要核实 [17] 原文是否真含装置建立，若否则替换为真正描述位置灵敏 TOF 阵列或动量成像探测构型的同行文献",
+      "search_keywords": [
+        "position-sensitive TOF array photoelectron",
+        "momentum imaging TOF attosecond streaking",
+        "库仑聚焦 飞行时间 探测器",
+        "velocity map imaging TOF detector attosecond"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "量子拍与角积分在阿秒条纹/光电离延迟中的物理机制——特别是'角积分消除偶极相位'与'里德堡波包引入的量子拍频'两类技术要素",
+      "missing_evidence": "L45/L47/L61/L83 四处出现量子拍/角积分表述但作为'未经验证信息点'扩散重复，缺乏直接引用；需在首现处（§2.4）补全支撑文献（候选 Pabst & Dahlström PRA 2016 已核实涵盖'里德堡波包+角积分消除偶极相位'两要素），其余三处改为定位性概括句以避免重复无引用断言",
+      "search_keywords": [
+        "Pabst Dahlström 2016 angular integration dipole",
+        "Rydberg wave packet quantum beat streaking",
+        "angular integration removes dipole phase",
+        "quantum beat attosecond photoionization delay"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

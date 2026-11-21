@@ -1,0 +1,17 @@
+{
+  "gaps": [
+    {
+      "claim": "“偏振取向存在约 30° 偏移”这一具体数值判断由郑文洋等[47]支撑。",
+      "missing_evidence": "缺少能够直接证明“约 30°”这一数值的原始文献锚点。现有[47]仅涉及 h-BN 的取向依赖高次谐波产生，未确认其明确给出 30° 偏移；还需核实该文是否讨论同一偏振参数、偏移角度的参照方向及适用的谐波阶次，并定位到原文句子、图或数据表。",
+      "search_keywords": [
+        "h-BN high harmonic generation polarization dependence 30 degree",
+        "hexagonal boron nitride HHG polarization orientation 30° offset",
+        "solid-state high harmonic generation h-BN polarization angle shift",
+        "郑文洋 h-BN 高次谐波 偏振取向 30°",
+        "h-BN 偏振依赖 高次谐波 光学轴 角度偏移"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "scheme"
+}

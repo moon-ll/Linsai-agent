@@ -1,0 +1,66 @@
+{
+  "gaps": [
+    {
+      "claim": "rationale §一.4 中刘跃等[26]所引数据「取向角从3层的8°增至6层的32%」中角度与百分数单位存在对撞",
+      "missing_evidence": "缺少 ACS Nano 19, 31882 (2025) 原文中的实测角度值与对应物理量（是否为取向角数值、单位是否为度/百分数）的直接核对证据",
+      "search_keywords": [
+        "ACS Nano 19 31882 2025 MoS2 twist angle layer number",
+        "刘跃 MoS2 twist angle3 layers 8 degrees 6 layers 32 degrees",
+        "ACS Nano 2025 twisted MoS2 photoluminescence polarization angle"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "references.md 为 0 字节，42 条参考文献仅存于 rationale 尾表，且 [12][17][27] 等条目未标注预印本状态",
+      "missing_evidence": "缺少独立参考文献载体文件，以及各预印本条目的 arXiv 编号、版本状态（preprint / accepted / published）、DOI 与期刊卷页的可追溯标注",
+      "search_keywords": [
+        "arXiv preprint to journal publication DOI2025 transition metal dichalcogenide anapole",
+        "MoS2 nonlinear optics second harmonic generation arXiv 2505.00396 published",
+        "arXiv 2503.20161 coupled mode theory published journal version"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "方案章需逐判据给出 11 项 indicator_red_lines 的测量协议与变量扫描映射（变量取值范围、扫描点密度、器件设计、测量序列四处承诺落点）",
+      "missing_evidence": "缺少支撑方案可执行性的方法学文献：TMDC 扭转角/层数依赖的 SHG 强度标度关系、周期性纳米阵列 anapole 共振的耦合模理论、偏振分辨与泵浦-探测测量协议的实验依据",
+      "search_keywords": [
+        "twisted TMDC second harmonic generation layer dependence scaling",
+        "anapole resonance periodic array coupled mode theory",
+        "nonlinear optical metasurface polarization resolved SHG measurement protocol",
+        "twist angle dependent nonlinear optical enhancement MoS2"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "评审指出需确认3R相与2H相在非线性响应上的差异前提（3R 任意层数不恢复反演对称，2H 镜像堆垛限制偶数层）",
+      "missing_evidence": "缺少直接测量 2H/3R 多层 TMDC 二阶非线性极化率（层数依赖、χ(2) 大小与符号）的实验或理论文献证据",
+      "search_keywords": [
+        "2H 3R MoS2 second harmonic generation layer dependent chi2",
+        "even odd layer MoS2 mirror symmetry inversion nonlinear susceptibility",
+        "noncentrosymmetric 3R TMDC bulk chi2 measurement"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "research scheme 章需为「关键难点与替代方案」提供依据，其中可能涉及 anapole/BIC 与传统 plasmonic 谐振在增强因子与工作带宽上的取舍",
+      "missing_evidence": "缺少 anapole 与传统电偶极/四极 plasmonic 模式在辐射抑制、场增强倍数、带宽、角度容限方面的定量对比文献",
+      "search_keywords": [
+        "anapole versus electric dipole plasmon resonance radiation suppression comparison",
+        "bound state in continuum multipolar resonance field enhancement factor",
+        "plasmonic anapole mode experimental demonstration angular tolerance"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "需支撑内容涉及的高次非线性增强（数量级）与强场/超快表征手段（如泵浦-探测、电子/原子分辨）的可行性论证",
+      "missing_evidence": "缺少 TMDC 中非线性极化率随泵浦强度标度、超快载流子动力学时间尺度对非线性响应影响的实验文献",
+      "search_keywords": [
+        "MoS2 ultrafast carrier dynamics time scale nonlinear response pump probe",
+        "third harmonic generation TMDC intensity dependence strong field",
+        "coherent control second harmonic generation TMDC polarization"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

@@ -1,0 +1,37 @@
+{
+  "gaps": [
+    {
+      "claim": "TaS₂赝能隙与E_W参数自称'与方案同一定义'但方案全文无出现，指针悬挂",
+      "missing_evidence": "缺乏TaS₂赝能隙实验测量值与Wannier轨道衰减能量E_W的明确定义和文献锚定",
+      "search_keywords": [
+        "1T-TaS2 pseudogap experimental value",
+        "Wannier orbital decay energy TaS2",
+        "TaS2 charge density wave gap measurement",
+        "1T-TaS2 electronic structure Wannier"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "AI泛化误差≤1.5倍代表体系误差的设计值缺乏文献锚点",
+      "missing_evidence": "缺少高次谐波反演或类似逆问题中泛化误差相对于训练集误差比值的文献基准",
+      "search_keywords": [
+        "HHG inversion generalization error bound",
+        "neural network inverse problem error ratio",
+        "physics-informed neural network generalization factor",
+        "solid HHG retrieval uncertainty benchmark"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Watanabe[38]引用用途未定性（历史P0半修复残留）",
+      "missing_evidence": "Watanabe文献真实主题未核实，需确认其是否与Berry curvature或量子几何相关",
+      "search_keywords": [
+        "Watanabe Berry curvature quantum geometry",
+        "Watanabe nonlinear optical response",
+        "Watanabe high harmonic generation quantum metric"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

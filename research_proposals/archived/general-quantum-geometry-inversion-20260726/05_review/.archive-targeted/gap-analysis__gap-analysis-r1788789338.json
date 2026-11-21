@@ -1,0 +1,52 @@
+{
+  "gaps": [
+    {
+      "claim": "[10] DOI 10.1038/s41586-024-07021-y 实指 Wang 'bandit optimization' Nature 626:1025，与条目题名'Mn₃Sn 量子度规非线性霍尔'不符",
+      "missing_evidence": "需要一篇可验证的Mn₃Sn量子度规/量子几何非线性霍尔效应实验或理论文献作为替代",
+      "search_keywords": [
+        "Mn3Sn quantum metric nonlinear Hall effect",
+        "Mn3Sn anomalous Hall topological",
+        "quantum geometry nonlinear Hall kagome"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "[13] 条目标题'…sub-cycle evolution of the Mott transition…'与 arXiv 真实标题'High-harmonic generation during ultrafast melting of a Mott insulating state'（一作 Ryohei Ikeda）不符",
+      "missing_evidence": "需要Ikeda等Mott绝缘体超快熔化中高次谐波产生的原始文献支撑",
+      "search_keywords": [
+        "Ikeda Mott insulator high harmonic generation ultrafast melting",
+        "HHG Mott transition subcycle strong field"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "rationale L13 '与 [7] 报告的光子数口径自洽'换算基线数值未给出",
+      "missing_evidence": "需要[7]原始文献中报告的具体BSV光子数校准数值或绝对光子数口径",
+      "search_keywords": [
+        "BSV photon number per pulse calibration NOPA",
+        "bright squeezed vacuum absolute photon number",
+        "BSV g2 photon statistics measurement"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "rationale L15 'Tyulnev 等 [8]……追踪了'以完成时陈述预印本结论（待2026-Q4核实）",
+      "missing_evidence": "需要Tyulnev等TiSe₂高次谐波极化不对称性相关正式发表或确认版本的预印本文献",
+      "search_keywords": [
+        "Tyulnev TiSe2 high harmonic polarization asymmetry",
+        "TiSe2 HHG polarization resolved experiment"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "rationale L5 [31] Xiao-Chang-Niu RMP 82 系 Berry 相/曲率综述，非'量子度量张量框架'（度规件应归 [40]）",
+      "missing_evidence": "需要量子度量张量(quantum metric tensor)独立奠基文献支撑，而非混引Berry曲率综述",
+      "search_keywords": [
+        "quantum metric tensor Provost Vallee formalism",
+        "Fubini-Study metric band geometry",
+        "quantum geometric tensor definition"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

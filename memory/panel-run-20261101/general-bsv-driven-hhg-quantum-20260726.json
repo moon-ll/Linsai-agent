@@ -1,0 +1,22 @@
+{
+  "proposal_id": "general-bsv-driven-hhg-quantum-20260726",
+  "issues": 2,
+  "stages": {
+    "review_researcher": "ok(752s)",
+    "review_critic": "ok(502s)",
+    "review_reviewer": "ok(339s)",
+    "writer": "ok(1556s)",
+    "verify": "通过"
+  },
+  "params_injected": true,
+  "post_hooks": {
+    "long_sentences": "6→0"
+  },
+  "success": true,
+  "verdict": "通过",
+  "panel_cleared": true,
+  "panel_cycle_reset": true,
+  "auto_promote": "skipped_unresolved_critical",
+  "auto_promote_reason": "存在未解决 high/critical 问题，留在 optimizing 继续改",
+  "elapsed_s": 3897.9
+}

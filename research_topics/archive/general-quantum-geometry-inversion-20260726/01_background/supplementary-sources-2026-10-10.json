@@ -1,0 +1,70 @@
+{
+  "proposal_id": "general-quantum-geometry-inversion-20260726",
+  "cluster_id": "cl_20260822_b27d48",
+  "entries": [
+    {
+      "source_id": "paper:2016-1612.08528-phase-matching-effects-in-high-harmonic-generation-at-the-na",
+      "title": "Phase matching effects in high harmonic generation at the nanometer scale",
+      "summary": "本文通过全量子第一性原理模拟证明，在充氩气的领结型金属纳米天线中，即便传播距离仅为纳米/亚波长量级，高次谐波产生（HHG）中的相位匹配效应依然显著——这源于 HHG 的非微扰本质使等离激元增强场的强度梯度在谐波相位中引入空间变化。这一纳米尺度相位失配机制可用于调控谐波产率、实现阿秒脉冲隔离以及抑制载波包络相移，突破了传统上认为相位匹配仅在宏观尺度重要的认知。",
+      "path": "",
+      "added_via": "cluster:cl_20260822_b27d48",
+      "added_at": "2026-10-10T21:01:02Z"
+    },
+    {
+      "source_id": "paper:2024-2404.01325-phase-matching-of-high-harmonic-generation-in-the-soft-and-h",
+      "title": "Phase matching of high harmonic generation in the soft and hard X-ray regions of the spectrum",
+      "summary": "本文从理论与实验上证明，利用长相互作用长度、高压且弱电离的气体介质，可实现软X射线乃至硬X射线波段（超过330 eV）高次谐波产生（HHG）的完全相位匹配，其主导机制是中性原子色散与等离子体色散的相互平衡抵消。研究表明，提升最佳气压与降低介质再吸收带来的宏观增益可补偿单原子谐波产额随光子能量升高而下降的损失，为台式相干X射线光源开辟了途径。",
+      "path": "",
+      "added_via": "cluster:cl_20260822_b27d48",
+      "added_at": "2026-10-10T21:01:02Z"
+    },
+    {
+      "source_id": "paper:2507.06386",
+      "title": "Subcycle phase matching effects in short attosecond pulse trains",
+      "summary": "本文通过控制少周期飞秒驱动激光的载波包络相位（CEP）产生短阿秒脉冲串，并利用双色激光辅助光电离对其进行表征，观察到光电子能谱随 CEP 呈现强烈且出乎意料的变化。这些变化被归因于亚周期时间尺度上的相位匹配效应，为阿秒脉冲的时域与谱域调控提供了新途径。",
+      "path": "",
+      "added_via": "cluster:cl_20260822_b27d48",
+      "added_at": "2026-10-10T21:01:02Z"
+    },
+    {
+      "source_id": "paper:2023-oe-31-20-32488-generation-of-high-order-harmonics-and-attosecond-pulses-in",
+      "title": "Generation of high-order harmonics and attosecond pulses in the water window via nonlinear propagation of a few-cycle laser pulse",
+      "summary": "本文通过包含克尔自聚焦与等离子体散焦的非线性传播数值模拟，研究 1.7 μm 少周期 CEP 稳定脉冲在半无限气室中驱动水窗高次谐波的过程，证明传播效应可显著增强水窗谐波产额。同时利用少周期脉冲的振幅门控，在传播重塑后的驱动场下直接获得水窗孤立阿秒脉冲，为水窗阿秒光源提供了理论设计方案。",
+      "path": "knowledge/raw/papers/2023-oe-31-20-32488-generation-of-high-order-harmonics-and-attosecond-pulses-in.md",
+      "added_via": "cluster:cl_20260822_b27d48",
+      "added_at": "2026-10-10T21:01:02Z"
+    },
+    {
+      "source_id": "paper:2024-2407.05964-ultrafast-energy-dispersive-soft-x-ray-diffraction-in-the-wa",
+      "title": "Ultrafast energy-dispersive soft-x-ray diffraction in the water window with a laser-driven source",
+      "summary": "在10 kHz重频、2.1 μm中红外OPCPA驱动气体HHG的桌面源上，演示了覆盖全水窗（284–531 eV）的飞秒时间分辨软X射线衍射。采用能量色散探测几何，单次曝光同时记录整个水窗能段的衍射信息，免除单色仪逐能点扫描。该工作把通常依赖同步辐射/FEL的水窗元素选择性衍射能力扩展到实验室桌面激光源。",
+      "path": "knowledge/raw/papers/2024-2407.05964-ultrafast-energy-dispersive-soft-x-ray-diffraction-in-the-wa.md",
+      "added_via": "cluster:cl_20260822_b27d48",
+      "added_at": "2026-10-10T21:01:02Z"
+    },
+    {
+      "source_id": "paper:2025-2510.09496-engineering-high-order-harmonic-generation-through-gas-confi",
+      "title": "Engineering High-Order Harmonic Generation through Gas Confinement at Sub-Millimeter Lengths",
+      "summary": "本文证明将气体相互作用区约束至亚毫米长度后，仅用常规多周期30 fs驱动脉冲即可将高次谐波截止能量推至200 eV以上。该结果直接挑战了'少周期脉冲是延伸HHG截止能量必要条件'的传统判据，表明高能截止的可观测性主要由几何约束下的相位匹配与吸收竞争决定，而非驱动脉冲宽度本身。这为水窗/软X射线谐波源提供了以宏观几何（长度、压强、约束方式）替代极端脉冲压缩的工程化路线。",
+      "path": "knowledge/raw/papers/2025-2510.09496-engineering-high-order-harmonic-generation-through-gas-confi.md",
+      "added_via": "cluster:cl_20260822_b27d48",
+      "added_at": "2026-10-10T21:01:02Z"
+    },
+    {
+      "source_id": "paper:2020-1910.03236-water-window-soft-x-ray-source-enabled-by-a-25-w-few-cycle-2",
+      "title": "Water window soft x-ray source enabled by a 25 W few-cycle 2.2 µm OPCPA at 100 kHz",
+      "summary": "报道了当时平均功率与重复频率最高的中红外少周期OPCPA驱动器（中心波长2.2 µm、100 kHz、25 W、约250 µJ、约16.5 fs即~2.3个光周期），并用其驱动惰性气体高次谐波，首次将水窗软X射线源提升至100 kHz高重复频率。实验覆盖280–620 eV光子能量（贯穿碳K边至氧K边以上的水窗区域），以高占空比带来前所未有的水窗平均光子通量，证明了'中红外波长扩展 + 高重复频率'技术路线对水窗应用（X射线吸收谱、相干成像等）的可扩展性。",
+      "path": "knowledge/raw/papers/2020-1910.03236-water-window-soft-x-ray-source-enabled-by-a-25-w-few-cycle-2.md",
+      "added_via": "cluster:cl_20260822_b27d48",
+      "added_at": "2026-10-10T21:01:02Z"
+    },
+    {
+      "source_id": "paper:2020-2203.15136-high-efficiency-ultrafast-water-window-harmonic-generation-f",
+      "title": "High efficiency ultrafast water-window harmonic generation for single-shot soft X-ray spectroscopy",
+      "summary": "实验演示了TW级中红外飞秒激光驱动的水窗高次谐波产生：单发光子能量覆盖水窗区（约284–543 eV）的相干软X射线，谐波脉冲能量达nJ量级，转换效率比此前水窗HHG报道提高约两个数量级。如此高的单发光子通量首次使水窗软X射线吸收光谱的单次激光脉冲（single-shot）测量成为可能，并在碳K吸收边附近得到验证。该工作确立了“中红外驱动＋宏观相位匹配优化”作为实验室水窗相干光源的高效技术路线。",
+      "path": "knowledge/raw/papers/2020-2203.15136-high-efficiency-ultrafast-water-window-harmonic-generation-f.md",
+      "added_via": "cluster:cl_20260822_b27d48",
+      "added_at": "2026-10-10T21:01:02Z"
+    }
+  ]
+}

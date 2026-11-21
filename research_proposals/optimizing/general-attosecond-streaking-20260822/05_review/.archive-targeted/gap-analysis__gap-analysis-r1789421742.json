@@ -1,0 +1,53 @@
+{
+  "gaps": [
+    {
+      "claim": "水窗能区（284–409.7 eV）多通道贡献超过约15%/30%时重构误差偏离测量不确定性/升至20%以上，定量观测归因于Cousin等人2017年",
+      "missing_evidence": "需要真实出处支撑多通道电离占比15%/30%与重构误差20%的阈值关系；Cousin PRX 2017全文无此阈值表述，Peschel NatComm 13:5205为Ne 2p RABBIT实验不涉及水窗条纹；需要找原始文献或确认该阈值为本方案设计值",
+      "search_keywords": [
+        "Cousin 2017 Phys Rev X 7 041030 water window attosecond streaking",
+        "attosecond streaking multi-channel ionization reconstruction error threshold",
+        "water window attosecond pulse retrieval multichannel breakdown",
+        "Peschel Nature Communications neon 2p RABBIT",
+        "multi-channel ionization contribution percentage attosecond retrieval"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Pabst & Dahlström 2016 PANDA理论提案已通过量子拍实验验证角积分对偶极相位的压制效应",
+      "missing_evidence": "Pabst PRA 94.013411为纯理论提案（'We propose'），Dahlström 2018 tutorial亦归类理论；content §2.3与scheme §3.2把它虚构成已完成的实验验证；需要查找是否有后续实验工作真正实施了角积分方案并报告验证结果",
+      "search_keywords": [
+        "Pabst Dahlstrom 2016 PANDA angular integration attosecond streaking",
+        "angular integration dipole phase suppression attosecond streaking experimental verification",
+        "Peschel Ne 2p angular streaking experiment",
+        "attosecond streaking dipole phase decoupling experiment",
+        "angular averaged streaking rare gas target validation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Villeneuve [15]证实角分布平均保证宽带重建稳健",
+      "missing_evidence": "Villeneuve引文被过度引申为'证实角分布平均保证宽带重建稳健'；需要查证Villeneuve原始文献实际结论，或降格为'角分辨数据信息量旁证'并补真实依据",
+      "search_keywords": [
+        "Villeneuve attosecond streaking angular distribution",
+        "Villeneuve broadband attosecond pulse reconstruction",
+        "attosecond streaking angular integration bandwidth robustness",
+        "Villeneuve water window attosecond metrology",
+        "broadband attosecond pulse characterization angular averaging"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Peschel[7]截面曲线、重叠宽度映射作为K1科学问题对应",
+      "missing_evidence": "Peschel NatComm 13:5205为Ne 2p角分辨RABBIT实验数据，不含水窗通道重叠宽度映射；需要找真实的水窗能区光致电离截面数据或多通道重叠宽度实验测量",
+      "search_keywords": [
+        "water window photoionization cross section 284-410 eV",
+        "multi-channel ionization overlap width eV measurement",
+        "soft X-ray atomic ionization cross section database",
+        "carbon K-edge nitrogen K-edge photoionization cross section",
+        "water window attosecond streaking channel overlap experimental"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "content"
+}

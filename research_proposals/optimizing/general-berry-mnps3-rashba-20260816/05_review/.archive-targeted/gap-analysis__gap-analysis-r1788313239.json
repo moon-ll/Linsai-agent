@@ -1,0 +1,170 @@
+{
+  "gaps": [
+    {
+      "claim": "FeCuP2S6 等铁电-反铁磁耦合（FEAFM）材料的存在与磁电耦合性质（rationale L13）",
+      "missing_evidence": "该段沿用 R2 已删伪文献，现挂 [10] 实为滑移极化光开关论文，需真实 FEAFM/多功能材料文献重锚或删句",
+      "search_keywords": [
+        "FEAFM ferroelectric antiferromagnetic material",
+        "multiferroic van der Waals magnet",
+        "CuInP2S6 ferroelectric antiferromagnet coupling",
+        "FeCuP2S6 multiferroic"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Ruiz-Tijerina 等人证明 21.79° 扭转可破坏 Fe2CoGaTe2 的 PT 联合对称性但保留层间反铁磁耦合（rationale L21）",
+      "missing_evidence": "[17] Crossref 反查解析到无关论文（磁各向异性工程），需核实 Ruiz-Tijerina 扭转磁双层论文真实出处，并确认 Fe2CoGaTe2 体系本身是否真实存在",
+      "search_keywords": [
+        "Ruiz-Tijerina twisted bilayer magnet",
+        "twisted magnetic bilayer PT symmetry interlayer antiferromagnetic",
+        "twisted angle moire magnet antiferromagnetic coupling",
+        "Fe2CoGaTe2 twisted bilayer"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "国内在固体高次谐波产生方面已有重要进展（rationale L45）",
+      "missing_evidence": "空引用槽无文献，需中国研究组固体 HHG 实验/理论代表性工作回填",
+      "search_keywords": [
+        "solid-state high harmonic generation China group",
+        "固体高次谐波 中国 实验组",
+        "bulk crystal high harmonic generation Chinese team"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "国内在反铁磁超快动力学方面已有重要进展（rationale L45）",
+      "missing_evidence": "空引用槽无文献，需国内反铁磁超快自旋动力学代表性工作回填",
+      "search_keywords": [
+        "antiferromagnet ultrafast spin dynamics China",
+        "反铁磁 超快动力学 国内 实验组",
+        "antiferromagnetic spin manipulation femtosecond Chinese team"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "国内在强场 Floquet 谷操控方面已有重要进展（rationale L45）",
+      "missing_evidence": "[23] Crossref 实测解析到稀土超导论文，需国内强场 Floquet/能谷操控真实文献回填",
+      "search_keywords": [
+        "Floquet valleytronics strong field China",
+        "能谷电子学 Floquet 超快 调控",
+        "valley manipulation Floquet engineering 2D semiconductor"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "光应力与位移电流两机制对非线性响应的贡献论证",
+      "missing_evidence": "[31][33] 为不存在的文献条目（幽灵引用），两机制论证悬空，需重录光应力/位移电流真实文献并同步 scheme §3.2",
+      "search_keywords": [
+        "shift current nonlinear photovoltaic 2D material",
+        "shift current ferroelectric second harmonic",
+        "photostriction ultrafast dynamics",
+        "photostriction nonlinear optical response"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "电子自由度飞秒动力学与磁序皮秒-纳秒动力学的时标分离（三元耦合论证地基，rationale L35）",
+      "missing_evidence": "'如上节所析'指向不存在的论证，§1.2 末缺电子 fs 与磁序 ps-ns 时标对比论证 2-3 句及文献支撑",
+      "search_keywords": [
+        "ultrafast demagnetization timescale femtosecond picosecond",
+        "antiferromagnet spin dynamics nanosecond timescale",
+        "electron spin dynamics timescale separation magnetism",
+        "spin-lattice relaxation antiferromagnetic dynamics"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "该研究方向在国内尚属空白（rationale L47）",
+      "missing_evidence": "无国内检索支撑，违反 novelty_claim_cautious 条款，需 CNKI/WoS 国内文献检索证据以改写为有据表述",
+      "search_keywords": [
+        "MnPS3 high harmonic generation nonlinear optics",
+        "交变磁体 非线性光学 中国",
+        "Rashba spin splitting harmonic spectroscopy",
+        "sliding ferroelectric ultrafast optics China"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Werner 交变磁体高次谐波理论（正文 [19]，真身在文献表 [15]）",
+      "missing_evidence": "文献表重写后编号系统性错位，需按论述主题核实 Werner altermagnet HHG 论文真实 DOI 重录",
+      "search_keywords": [
+        "Werner altermagnet high harmonic generation",
+        "altermagnet spin splitting nonlinear optics theory",
+        "Werner altermagnet HHG arXiv 2408.08955"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Yarmohammadi 强场 Floquet 谷操控工作（正文 [22]，真身在文献表 [18]）",
+      "missing_evidence": "编号系统性错位，需 Yarmohammadi Floquet 谷操控论文真实题录重录",
+      "search_keywords": [
+        "Yarmohammadi Floquet valley engineering",
+        "Yarmohammadi moire exciton valley",
+        "Floquet valley manipulation strong field 2D material"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "VSe2 掺杂调控磁性/电子结构（正文 [14]，真身在文献表 [12]）",
+      "missing_evidence": "编号系统性错位，需 VSe2 掺杂论文真实题录重录",
+      "search_keywords": [
+        "VSe2 doping magnetism 2D",
+        "vanadium diselenide doping electronic structure",
+        "VSe2 magnetic order tuning"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Sheng 相关工作（正文 Sheng[11]，真身在文献表 [34]）",
+      "missing_evidence": "编号系统性错位，需按论述主题（交变磁体/二维磁性/非线性光学方向）定位 Sheng 论文真实出处并重锚",
+      "search_keywords": [
+        "Sheng altermagnet theory",
+        "Sheng antiferromagnet two-dimensional magnetism",
+        "Sheng nonlinear optics magnetism"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Basnet NiPS3 场致自旋极化（文献表 [17] 真身候选）",
+      "missing_evidence": "需核实 Basnet NiPS3 场致自旋极化论文准确 DOI（候选 10.1103/PhysRevB.109.184405）及完整题录",
+      "search_keywords": [
+        "Basnet NiPS3 field-induced spin polarization",
+        "NiPS3 spin polarization electric field",
+        "PhysRevB 109 184405 Basnet"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "文献表 23 条含 DOI 条目中 18 条崩坏（7 条 404、11 条解析到无关论文），立项依据全章 42 处引用需以论述主题为真值源整体重锚",
+      "missing_evidence": "需课题核心主题（交变磁体 HHG、MnPS3 磁性、Rashba Berry 曲率、滑移铁电、Floquet 谷操控）的一批真实可验证文献用于整体重建文献表",
+      "search_keywords": [
+        "altermagnet high harmonic generation theory experiment",
+        "MnPS3 antiferromagnetic monolayer electronic structure",
+        "Rashba spin orbit Berry curvature nonlinear optics",
+        "sliding ferroelectricity interlayer 2D material"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Rajpurohit 高次谐波论文准确题录（[24]/[30] 同文重录，第三作者拼写 Rajpurohit/Rajpurkar 不一）",
+      "missing_evidence": "同文重复条目且作者拼写不一致，需该论文准确作者列表与 DOI，删重并统一拼写",
+      "search_keywords": [
+        "Rajpurohit high harmonic generation",
+        "Rajpurohit Ghorashi-Rappe harmonic altermagnet",
+        "Rajpurohit i-wave spin Hall harmonic generation"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "滑移二维方晶格 16-40 meV 滑移势垒数据",
+      "missing_evidence": "数值现挂 [11]（实为扭曲摩尔陈绝缘体论文）出处未核实，需 2D 方晶格滑移能垒 DFT 计算文献及逐体系数据来源，重锚 [34]",
+      "search_keywords": [
+        "sliding energy barrier square lattice DFT",
+        "interlayer sliding barrier meV ferroelectric bilayer",
+        "sliding ferroelectric switching barrier calculation 2D"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

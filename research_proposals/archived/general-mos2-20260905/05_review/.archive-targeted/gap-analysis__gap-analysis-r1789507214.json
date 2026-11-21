@@ -1,0 +1,112 @@
+{
+  "gaps": [
+    {
+      "claim": "TDDFT、TDSE 和多体相干模型对层间电子结构、激子动力学、层数累积的可行性",
+      "missing_evidence": "缺少前期工作中TDDFT/TDSE/多体模型在固体HHG模拟中成功应用的具体文献支撑（能带/电流/Berry曲率响应）",
+      "search_keywords": [
+        "TDDFT solid high harmonic generation band structure",
+        "TDSE solid HHG exciton dynamics",
+        "many-body coherent model HHG Berry curvature",
+        "solid-state HHG simulation benchmark"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "实验参数选择：驱动波长 3.2 μm、场强 0.5 TW/cm²、激子能量 1.88/2.04 eV、椭圆度失谐五点、±0.3° 精度",
+      "missing_evidence": "缺少这些参数选择的文献先例和锚定依据（无[N]引用）",
+      "search_keywords": [
+        "mid-infrared 3.2 micron MoS2 high harmonic generation",
+        "MoS2 A exciton B exciton pump energy 1.88 2.04 eV",
+        "ellipticity dependence HHG TMD",
+        "TW/cm2 mid-IR driver solid HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "扭转MoS2双层C3对称下χ_xxx出现且φ₀=θ_tw/2的结论（Patra[31] SHG结果向高阶推广）",
+      "missing_evidence": "缺少Patra等关于扭转MoS2 SHG的文献引用及将SHG二阶结论向高次谐波推广的理论支撑",
+      "search_keywords": [
+        "Patra twisted MoS2 SHG second harmonic generation",
+        "twisted bilayer MoS2 chi_xxx C3 symmetry",
+        "twist angle second harmonic generation MoS2",
+        "Patra arXiv twisted TMD SHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "MoS2层数依赖的能带/激子/电子结构描述（DAC高压TDDFT对比）",
+      "missing_evidence": "缺少DAC高压区MoS2的ARPES/TDDFT对比文献，或需删除该句并替换为层数依赖的常压研究锚点",
+      "search_keywords": [
+        "MoS2 layer number dependent band structure ARPES",
+        "few-layer MoS2 exciton energy thickness dependence",
+        "MoS2 monolayer bilayer trilayer high harmonic",
+        "MoS2 layer number HHG experiment"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "RABBITT/条纹相位重构路径用于反演相位测量",
+      "missing_evidence": "缺少固体RABBITT或attosecond streaking在MoS2等TMD材料中相位测量的实验先例",
+      "search_keywords": [
+        "solid-state RABBITT TMD transition metal dichalcogenide",
+        "attosecond streaking solid MoS2",
+        "phase retrieval HHG solid inversion",
+        "attosecond transient absorption MoS2"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "H型0°扭转MoS2双层点群归属（D3d含反演 vs D3h无反演）",
+      "missing_evidence": "缺少H型堆垛扭转MoS2双层点群对称性的群论分析及参考文献",
+      "search_keywords": [
+        "twisted bilayer MoS2 H stacking point group symmetry",
+        "D3d D3h MoS2 homobilayer group theory",
+        "twist angle MoS2 moire symmetry group analysis",
+        "AA stacking MoS2 space group"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "streaking测载流子峰值时间Δt≤100 as的可行性",
+      "missing_evidence": "缺少attosecond streaking在固体价带中测量瞬态载流子动力学的实验先例文献",
+      "search_keywords": [
+        "attosecond streaking solid valence band carrier dynamics",
+        "solid-state attosecond transient absorption 100 as",
+        "attosecond time resolution carrier dynamics 2D material",
+        "streaking MoS2 WSe2 carrier dynamics"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "扭转双层MoS2高次谐波产生中的C3对称性选择规则与偏振依赖",
+      "missing_evidence": "缺少扭转双层TMD高次谐波偏振/对称性选择规则的实验或理论文献",
+      "search_keywords": [
+        "twisted bilayer MoS2 high harmonic generation selection rule",
+        "C3 symmetry HHG polarization twisted homobilayer TMD",
+        "moire superlattice harmonic generation symmetry",
+        "twist angle high harmonic MoS2 WSe2"
+      ]
+    },
+    {
+      "claim": "TDDFT/点群/双基准反演方法的精度与可行性（r≥0.85、σ_Ω≤0.15）",
+      "missing_evidence": "缺少反演算法精度、置信度、不确定性量化的基准测试文献",
+      "search_keywords": [
+        "inverse problem high harmonic retrieval uncertainty quantification",
+        "Tikhonov regularization HHG inversion error",
+        "Fisher information quantum geometry inversion",
+        "Bayesian inversion HHG spectrum reconstruction"
+      ]
+    },
+    {
+      "claim": "MoS2中高次谐波阶数范围5-15阶的实验先例与可行性",
+      "missing_evidence": "缺少MoS2中高次谐波阶数范围的实验观测文献",
+      "search_keywords": [
+        "MoS2 high harmonic order experimental observation",
+        "few-layer MoS2 harmonic spectrum range",
+        "solid HHG MoS2 mid-infrared",
+        "monolayer MoS2 nonlinear optical harmonic"
+      ]
+    }
+  ],
+  "section": "scheme"
+}

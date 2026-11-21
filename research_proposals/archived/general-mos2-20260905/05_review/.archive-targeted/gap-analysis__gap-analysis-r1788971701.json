@@ -1,0 +1,4 @@
+{
+  "gaps": [],
+  "note": "agent 未返回标准 JSON gaps 格式，视为无文献缺口。原文前200字: {\"gaps\": [{\"claim\": \"L127 文献 [25] Heide 2023 高次谐波工作被作为 PB 相位提出源\", \"missing_evidence\": \"需核实该论文中是否真正提出 polarization-dependent Berry phase 或类似概念，以支撑\"提出 PB 相位\"描述\", \"search_keywords\": [\"Heide Nanophotonics"
+}

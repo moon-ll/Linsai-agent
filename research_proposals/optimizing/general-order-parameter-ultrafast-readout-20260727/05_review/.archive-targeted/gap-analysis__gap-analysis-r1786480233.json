@@ -1,0 +1,81 @@
+{
+  "gaps": [
+    {
+      "claim": "研究内容二声称观测到随磁场反转切换的谐波信号以信噪比 SNR>5 为量化判据",
+      "missing_evidence": "缺乏固体HHG测量中信噪比定义公式、噪声来源分解（散粒噪声/热噪声/激光涨落）的文献支撑，以及SNR>5作为信号判定阈值的方法学依据",
+      "search_keywords": [
+        "solid-state HHG signal-to-noise ratio definition",
+        "high harmonic generation noise source shot noise",
+        "circular dichroism HHG detection sensitivity limit",
+        "HHG measurement noise floor magnetic field"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "研究内容三提出用费舍尔信息矩阵评估参数空间条件数以判断可辨识性",
+      "missing_evidence": "仅有概念陈述，缺少Fisher信息矩阵应用于非线性光学/HHG逆问题参数可辨识性分析的文献先例",
+      "search_keywords": [
+        "Fisher information matrix nonlinear optics inverse problem",
+        "parameter identifiability high harmonic generation",
+        "Fisher information attosecond spectroscopy reconstruction",
+        "condition number optical parameter inversion HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "研究内容三提出用贝叶斯反演给出参数后验分布而非点估计",
+      "missing_evidence": "缺少贝叶斯方法在HHG光谱学或固体非线性光学参数估计中的具体应用文献",
+      "search_keywords": [
+        "Bayesian inversion HHG spectroscopy",
+        "Bayesian parameter estimation nonlinear optics",
+        "posterior distribution high harmonic generation",
+        "Bayesian inference ultrafast spectroscopy"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "通过磁场正反方向差分信号可提取与磁序直接相关而与能带背景无关的谐波成分",
+      "missing_evidence": "评审指出此论断过强——缺乏证明差分方法能有效分离磁序贡献与能带各向异性/跃迁矩阵元贡献的文献支撑",
+      "search_keywords": [
+        "band structure background HHG separation magnetic",
+        "altermagnet band anisotropy harmonic contribution",
+        "magnetic order differential HHG signal isolation",
+        "transition matrix element field dependence HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "研究内容三建立包含自旋轨道耦合的多带正演模型用于altermagnet HHG",
+      "missing_evidence": "缺少半导体布洛赫方程或含时密度泛函理论专门用于altermagnet材料HHG模拟的文献",
+      "search_keywords": [
+        "semiconductor Bloch equation altermagnet HHG",
+        "TDDFT altermagnet nonlinear optics",
+        "spin-orbit coupling multi-band HHG simulation",
+        "altermagnet high harmonic generation theory calculation"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Cochran 2025与Sørensen 2025分别被引用6次作为唯一性条件分析框架的核心支撑",
+      "missing_evidence": "严重依赖两个来源，缺少更广泛的HHG逆问题可辨识性/非唯一性文献，需要补充其他理论工作以形成文献基座",
+      "search_keywords": [
+        "optical inverse problem identifiability theorem",
+        "uniqueness condition HHG reconstruction theory",
+        "No-Go theorem nonlinear optics parameter inversion",
+        "non-uniqueness attosecond spectroscopy inversion"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "创新点第三层以TiSe2 CDW对照体系提供独立方法学验证基础",
+      "missing_evidence": "评审指出此对照体系退化为方法论修辞缺少量化优势——需要对照体系相比直接测量的定量改进数据支撑",
+      "search_keywords": [
+        "TiSe2 CDW HHG calibration benchmark method",
+        "control system validation HHG spectroscopy",
+        "cross-validation HHG known unknown system",
+        "calibration transfer HHG method quantification"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

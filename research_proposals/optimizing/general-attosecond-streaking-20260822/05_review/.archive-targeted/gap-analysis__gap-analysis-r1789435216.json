@@ -1,0 +1,82 @@
+{
+  "gaps": [
+    {
+      "claim": "15%/30% 多通道电离贡献阈值作为水窗能区 FROG-CRAB 失效判据",
+      "missing_evidence": "缺少独立文献直接给出多通道贡献占比超过 15% 或 30% 时 FROG-CRAB/attosecond streaking 反演误差的定量边界；现有 [7] Cousin PRX 2017 与 Peschel 2022 仅给出定性警告与 Ne 2p RABBIT 案例",
+      "search_keywords": [
+        "attosecond streaking multichannel ionization 15% 30% threshold",
+        "FROG-CRAB breakdown multi-channel water window",
+        "Cousin 2017 PRX 041030 multichannel error",
+        "attosecond pulse retrieval interchannel coupling quantitative"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Ardana-Lamas [31] 在水窗能区以双氦方案获 19.2 as 孤立阿秒脉冲",
+      "missing_evidence": "[31] 实际为对 Cousin 2017 PRX 氪条纹数据的再分析，原始实验为氪 PRX'17 184 eV，并非水窗能区氦实验；需要确认 [31] 论文真实内容并获取正确的实验条件描述",
+      "search_keywords": [
+        "Ardana-Lamas 19.2 as krypton streaking reanalysis",
+        "2017 krypton PRX attosecond pulse reanalysis",
+        "water window attosecond pulse helium dual-gas",
+        "Ardana-Lamas 2025 attosecond retrieval"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "[3] 方案是量子拍实验的原始验证",
+      "missing_evidence": "[3] 实际为纯理论方案（多通道 TDSE/量子轨道干涉理论预测），并非实验验证；需要 [3] 原文摘要/章节确认其性质",
+      "search_keywords": [
+        "multichannel TDSE attosecond streaking theoretical prediction",
+        "quantum path interference attosecond theory original",
+        "Peschel attosecond streaking theory scheme",
+        "two-channel TDSE attosecond pulse retrieval theoretical"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "[15] 证实角分布平均保留带宽重建稳健",
+      "missing_evidence": "[15] 原文为脉冲链+IR 全息选择 m=0 f 波，与\"角分布平均\"无关；需核实 [15] Pabst/Dahlström 实际结论是角动量分量全息选择而非平均稳健性",
+      "search_keywords": [
+        "Pabst Dahlstrom 2016 angular streaking dipole phase suppression",
+        "PANDA angular integration attosecond streaking",
+        "angular momentum component holographic selection m=0 f-wave",
+        "attosecond streaking angular averaging rare gas target"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "水窗能区自定义止于 409.7 eV（C K-N K 边）的边界依据",
+      "missing_evidence": "缺乏对水窗定义边界的同行评审标准引用（通行定义至 O K 边 543 eV）；需要水窗标准定义与 C K/N K 边能量的权威参考",
+      "search_keywords": [
+        "water window definition C K-edge N K-edge 284 409 eV",
+        "soft X-ray water window boundary C K N K O K edge",
+        "X-ray absorption water window standard definition",
+        "carbon K-edge 284 eV nitrogen K-edge 410 eV"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "多通道 TDSE 模拟与角分布平均在 FROG-CRAB 失效区的修正能力",
+      "missing_evidence": "缺少多通道 TDSE（含 interchannel coupling）作为修正方案的 benchmark；需要多通道 TDSE 反演误差与单通道近似精度的对比数据",
+      "search_keywords": [
+        "multichannel TDSE attosecond streaking correction",
+        "interchannel coupling attosecond pulse retrieval",
+        "two-channel TDSE streaking inversion benchmark",
+        "multichannel photoionization attosecond reconstruction accuracy"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "最短孤立阿秒脉冲纪录的最新进展（Gao 25 as、Ardana-Lamas 19.2 as）",
+      "missing_evidence": "需要核实 Gao 2025 Yb 平台 25 as 脉冲与 Ardana-Lamas [31] 19.2 as 孤立脉冲的原始论文，确认驱动激光参数、中心能量、谱宽及脉冲测量方法",
+      "search_keywords": [
+        "Gao 2025 Yb laser 25 attosecond isolated pulse",
+        "Ardana-Lamas 2025 isolated attosecond pulse krypton",
+        "isolated attosecond pulse record 2025 2026",
+        "water window isolated attosecond pulse characterization 2025"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "content"
+}

@@ -1,0 +1,40 @@
+# 定向文献检索报告
+
+## 课题
+general-order-parameter-ultrafast-readout-20260727
+
+## 章节
+content
+
+## 检索关键词
+- Granados CEP OAM coupling high harmonic generation、vortex light orbital angular momentum transfer high harmonic generation、high harmonic generation OAM transfer crystal symmetry、noncollinear high harmonic generation interaction range symmetry、high harmonic generation strong spin-orbit coupling orbital angular momentum、Zhang order parameter ultrafast readout high harmonic generation、Zhang magnetic order parameter optical readout、Zhang high harmonic generation magnetic-order detection、Zhang MnTe high harmonic spectroscopy、申请书参考文献[2] Zhang
+
+## 检索结果
+
+- 2601.12743 | Twisting harmonics: Transfer of orbital angular momentum in solid-state high-harmonic generation | Debobrata Rajak, Bikash Kumar Das, Rajaram Shrestha, Balint Kiss, Eric Cormier, Carmelo Rosales-Guzman, Stephan Fritzsche, Qiwen Zhan, Wenlong Gao, Camilo Granados | 2026 | 0.93 | 实验证明固态高次谐波中驱动光涡旋的轨道角动量(OAM)可相干守恒转移至发射谐波，且该守恒独立于晶体对称性、电子相互作用范围与强自旋轨道耦合，为OAM分辨的固态HHG作为角动量转移与拓扑材料表征框架奠定基础。 | 来源：本地知识库
+- 2607.23652 | Carrier-Envelope Phase Control of Orbital Angular Momentum in Solid-State High-Harmonic Generation | Camilo Granados, Rajaram Shrestha, Bikash Kumar Das, Debobrata Rajak, Eric Cormier, Balint Kiss, Carmelo Rosales-Guzman, Wenlong Gao | 2026 | 0.92 | 在3.2微米近1.5周期涡旋光驱动ZnO晶体时，谐波拓扑荷变得强烈依赖载波包络相位(CEP)，仅在反演对称性破缺且谐波发射CEP敏感时出现相邻整数值间跳变，源于CEP控制的光谱权重在重叠阶次间重分配。 | 来源：本地知识库
+- 2606.31573 | High-harmonic spin-current signatures of altermagnetic spin-group symmetry | Koki Mizuno | 2026 | 0.9 | 将自旋点群对称性推广到动力学，导出电荷与自旋电流高次谐波产生选择定则；对角线偏振或单螺旋圆偏振驱动可区分铁磁、反铁磁与交变磁(spin point group)三相，自旋流谐波作为自旋群对称性的动力学探针。 | 来源：本地知识库
+- 2602.09738 | High-Harmonic Spin and Charge Pumping in Altermagnets | Ousmane Ly | 2026 | 0.88 | 报告交变磁系统在进动磁序驱动下出现强非线性自旋流与电荷流泵浦，模拟给出数百阶谐波发射，幅度远超光驱动方案；交变磁无需额外自旋轨道耦合即可本征支持高次谐波自旋泵浦。 | 来源：本地知识库
+- 2608.13548 | All-optical switching of nonlinear structured light in crystal-engineered van der Waals materials | Paolo Valisa, Marc Richstaetter, Bianca Sanfilippo, Benedikt Ursprung, Zhi Hao Peng, Victoria Quiros-Cordero, Francesco Gucci, Xiaoyang Zhu, P. James Schuck, Giulio Cerullo, Luca Carletti, Chiara Trovatello | 2026 | 0.78 | 在人工设计的菱方堆垛(3R)MoS2范德华晶体中利用局部晶向空间调控向二次谐波场印入非线性几何相位，实现46 nm超薄平台上的二次谐波涡旋光束(l=±1)全光开关，指向集成化非线性结构光与磁性/手性材料探测。 | 来源：联网检索
+- 2502.00849 | Nonclassical dynamics of Neel vector and magnetization accompanied by THz and high-harmonic radiation from ultrafast-light-driven NiO antiferromagnet insulator | Federico Garcia-Gaitan, Adrian E. Feiguin, Branislav K. Nikolic | 2025 | 0.86 | 用精确非平衡多体方法研究超快光驱动反铁磁绝缘体NiO，发现奈尔矢量只改变长度而不旋转的非经典动力学，且在能隙以上泵浦时产生整数次高次谐波以及异常非整数谐波，磁偶极与电荷流共同贡献辐射。 | 来源：本地知识库
+- 2407.07752 | High harmonic generation in altermagnets | Philipp Werner, Markus Lysne, Yuta Murakami | 2024 | 0.85 | 研究含与不含自旋轨道耦合的交变磁金属中高次谐波：交变磁性体现在带内低次谐波的磁场依赖性上，纯交变磁或SOC体系无圆二色性，但交变磁加SOC则出现圆二色性，并分析其自旋流高次谐波谱。 | 来源：本地知识库
+- 2503.14982 | High Harmonic Generation with Orbital Angular Momentum Beams: Beyond-dipole Corrections | Esra Ilke Albar, Valeriia P. Kosheleva, Heiko Appel, Angel Rubio, Franco P. Bonafe | 2025 | 0.8 | 采用完整最小耦合方法处理涡旋光束HHG的偶极近似之外修正，发现OAM影响包含磁与四极效应，涡旋驱动下非线性偶极动力学不再局限于偏振或传播方向，在正交方向也产生分量并增强偶极外修正。 | 来源：联网检索
+- 2412.01716 | Extreme-ultraviolet spatiotemporal vortices via high harmonic generation | Rodrigo Martin-Hernandez, Guan Gui, Luis Plaja, Henry K. Kapteyn, Margaret M. Murnane, Chen-Ting Liao, Miguel A. Porras, Carlos Hernandez-Garcia | 2024 | 0.79 | 理论与实验演示由近红外时空光学涡旋驱动的极紫外时空/空间光谱涡旋产生，其高拓扑荷涡在近场与远场为共轭时空对，携带横向OAM，可用于探测磁性材料、手性介质与纳米结构的电子动力学。 | 来源：本地知识库
+- 2404.05830 | Spin high-harmonic generation through terahertz laser-driven phonons | Negin Moharrami Allafi, Michael H. Kolodrubetz, Marin Bukov, Vadim Oganesyan, Mohsen Yarmohammadi | 2024 | 0.75 | 理论上研究太赫兹激光驱动自旋-声子耦合在耗散二聚化自旋-1/2链中产生稳态自旋高次谐波，通过磁声子机制间接驱动自旋，发现驱动频率远低于自旋带时谐波阶次最高，并给出相应实验方案。 | 来源：本地知识库
+- 2407.20707 | Circularly polarized high harmonic beams carrying self-torque or time-dependent orbital angular momentum | Alba de las Heras, Julio San Roman, Javier Serrano, Luis Plaja, Carlos Hernandez-Garcia | 2024 | 0.72 | 理论推导角动量守恒选择定则并提出两种驱动方案，实现携带自扭矩(时变OAM)的极紫外谐波光束从线偏振到圆偏振的调控，为磁性材料与手性分子的二色性/手性应用开辟道路。 | 来源：联网检索
+- 2402.00783 | Element-specific and high-bandwidth ferromagnetic resonance spectroscopy with a coherent, extreme ultraviolet (EUV) source | Michael Tanksalvala, Anthony Kos, Jacob Wisser, Scott Diddams, Hans T. Nembach, Justin M. Shaw | 2024 | 0.7 | 用桌面级超快HHG源在极紫外波段实现62 GHz连续带宽、1.1 ps抖动同步的元素选择性铁磁共振谱学，可在不透明衬底上反射式测量磁态与自旋输运动力学，为高阶磁态读出提供实验平台。 | 来源：联网检索
+- 2203.07310 | Noncollinear antiferromagnetic textures driven high harmonic generation from magnetic dynamics in the absence of spin-orbit coupling | Ousmane Ly | 2022 | 0.66 | 通过磁共振激发铁磁/反铁磁序进动，在拓扑反铁磁纹理下产生高阶载流子泵浦谐波且增强数个量级，过程仅由s-d交换耦合与磁驱动动力学参数决定，无需相对论性自旋轨道相互作用。 | 来源：联网检索
+- 2605.25128 | Harmonic Hierarchy of Altermagnetic Spin Splitting from Symmetry-Adapted Wavefunctions | Yixuan Che, Peibo Xu, Haifeng Lv, Xiaojun Wu, Jinlong Yang | 2026 | 0.62 | 提出二维方格交变磁的对称性适配波函数框架，证明动量空间自旋劈裂的谐波结构源自晶体场选择的电子波函数几何：相同轨道扇区保持传统反铁磁简并，线性与二次波函数分别产生d波与g波交变磁各向异性。 | 来源：本地知识库
+
+## 多源学术检索补充（arxiv+openalex+semantic_scholar）
+
+标准引用格式（可直接用于 references.md 修订）：/Users/ll/Desktop/LinSai-CoPilot/research_proposals/optimizing/general-order-parameter-ultrafast-readout-20260727/02_literature/targeted-research/candidates-1792702105.bib
+
+- arXiv:1507.00635 | Attosecond XUV vortices from high-order harmonic generation | C. Hernández-García, A. Picón, J. San Román | 0 | Physical Review Letters | 引用:172 | 来源：arxiv | We present a theoretical study of high-order harmonic generation (HHG) and propagation driven by an infrared field carrying orbital angular momentum (
+- arXiv:1611.03203 | High orbital angular momentum harmonic generation | J. Vieira, R.M.G.M. Trines, E.P. Alves | 0 | Physical Review Letters | 引用:65 | 来源：arxiv | We identify and explore a high orbital angular momentum (OAM) harmonics generation and amplification mechanism that manipulates the OAM independently 
+- arXiv:2308.05398 | Controlling Photon Transverse Orbital Angular Momentum in High Harmonic Generation | Yiqi Fang, Shengyue Lu, Yunquan Liu | 0 | Physical Review Letters | 引用:52 | 来源：arxiv | High harmonic generation (HHG) with longitudinal optical orbital angular momentum has attracted much attention over the past decade. Here, we present 
+- arXiv:2410.06032 | Formation and Controlling of Optical Hopfions in High Harmonic Generation | Zijian Lyu, Yiqi Fang, Yunquan Liu | 0 | Physical Review Letters | 引用:15 | 来源：arxiv | Toroidal vortex is a kind of novel and exotic structured light with potential applications in photonic topology and quantum information. Here, we pres
+- arXiv:1309.7726 | Feasibility study on optical vortex generation at Shanghai deep ultraviolet free-electron laser | Haixiao Deng | 0 | arXiv: Accelerator Physics | 引用:2 | 来源：arxiv | Coherent light with orbital angular momentum (OAM) is of great interest, and more recently, OAM light generation by coupling a relativistic electron b
+- arXiv:1812.10255 | Spin-to-Orbital Conversion of Angular Momentum in Harmonic Generation Driven by Intense Circularly Polarized Beam | Shasha Li, Xiaomei Zhang, Weifeng Gong | 0 | arXiv: Plasma Physics | 引用:0 | 来源：arxiv | A new physical mechanism to achieve spin-to-orbital angular momentum conversion based on the interaction of an intense circularly polarized (CP) laser
+- arXiv:2311.13907 | Efficient generation of intense spatial and spatiotemporal vortex harmonics using plasma mirrors | Yipeng Wu, Zan Nie, Fei Li | 0 | International Conference on Plasma Science | 引用:0 | 来源：arxiv | Intense spatial or spatiotemporal vortex pulses from the extreme ultraviolet to soft X-ray spectral windows are expected to provide new degrees of fre
+- arXiv:2108.13190 | Spin to orbital angular momentum transfer in nonlinear wave mixing | B. Pinheiro da Silva, W. T. Buono, L. J. Pereira | 0 | Frontiers in Optics + Laser Science 2022 (FIO, LS) | 引用:0 | 来源：arxiv | We demonstrate the spin to orbital angular momentum transfer in the nonlinear mixing of structured light beams. A vector vortex is coupled to a circul

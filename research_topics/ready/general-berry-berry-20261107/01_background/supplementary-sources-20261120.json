@@ -1,0 +1,41 @@
+{
+  "entries": [
+    {
+      "source_id": "paper:2023-2301.02248-optical-control-of-slow-topological-electrons-in-moiré-syste",
+      "title": "Optical Control of Slow Topological Electrons in Moiré Systems",
+      "summary": "理论提出利用太赫兹连续圆偏振光驱动魔角石墨烯，诱导Floquet平带慢电子态；通过筛选与声子浴的耦合，可实现对该拓扑电子态的稳态光学调控。",
+      "path": "knowledge/raw/papers/2023-2301.02248-optical-control-of-slow-topological-electrons-in-moiré-syste.md"
+    },
+    {
+      "source_id": "paper:2026-2607.08315-magnetic-control-of-goos-hänchen-shifts-and-group-",
+      "title": "Magnetic control of Goos-Hänchen shifts and group delay time in monolayer WSe2",
+      "summary": "本文通过求解单层WSe₂低能有效哈密顿量，研究了外加磁场及磁势垒对类狄拉克载流子隧穿行为中Goos-Hänchen（GH）位移与群延迟时间（GDT）的调控作用。结果表明磁场可作为一种有效手段对WSe₂中谷依赖的束流空间和时间输运特性进行可调控制，为能谷电子学器件设计提供了理论依据。",
+      "path": ""
+    },
+    {
+      "source_id": "paper:2024-2411.18843-laser-controlled-nonlinear-hall-effect-in-tellurium-solids-v",
+      "title": "Laser-Controlled Nonlinear Hall Effect in Tellurium Solids via Nonlinear Phononics",
+      "summary": "通过第一性原理计算与晶格/电子动力学模拟证明，强太赫兹激光可共振激发碲中多个红外活性声子，并经非线性声子学（非简谐声子耦合）诱导瞬态晶格畸变。该瞬态结构变化动态调制碲的电子结构（能带、贝里曲率分布）及由此产生的非线性霍尔信号，实现对拓扑性质的太赫兹光控开关式调控。",
+      "path": "knowledge/raw/papers/2024-2411.18843-laser-controlled-nonlinear-hall-effect-in-tellurium-solids-v.md"
+    },
+    {
+      "source_id": "paper:2026-2610.05620-terahertz-nanoscopy-of-quantum-geometric-photovoltaics-in-bi",
+      "title": "Terahertz nanoscopy of quantum-geometric photovoltaics in bilayer graphene",
+      "summary": "本文发展了低温偏振敏感的太赫兹散射式近场纳米显微技术，在双层石墨烯中实现了体光伏效应（BPVE）的纳米尺度直接成像。通过偏振对称性判据、低温环境与近场空间定位，将本征量子几何光伏响应（位移/注入电流）与光热电伪影系统性解耦。结果为贝里曲率/贝里连接驱动的二阶非线性光电响应在二维材料中的存在提供了直接的空间分辨证据。",
+      "path": "knowledge/raw/papers/2026-2610.05620-terahertz-nanoscopy-of-quantum-geometric-photovoltaics-in-bi.md"
+    },
+    {
+      "source_id": "paper:2025-2507.08035-quantum-theory-of-nonlinear-electromagnetic-response",
+      "title": "Quantum theory of nonlinear electromagnetic response",
+      "summary": "建立对电场与磁场非线性响应的统一量子理论框架，把非线性光学（纯E阶）、非线性磁电（E-B混合阶）与非线性磁响应（纯B阶）纳入同一微扰论体系，系统给出任意 E^m B^n 阶混合外场下电流与磁化的响应张量公式。响应系数可用布洛赫带上的贝里几何量（贝里曲率、量子度规、轨道磁矩等）与多点关联函数规范不变地表出，并配合磁性点群对称性确定各阶张量的非零结构。该框架为磁场调控的非线性输运/光学效应以及手性、磁性材料中的非线性响应提供了普适理论与计算基础。",
+      "path": "knowledge/raw/papers/2025-2507.08035-quantum-theory-of-nonlinear-electromagnetic-response.md"
+    },
+    {
+      "source_id": "paper:2026-2603.24551-interlayer-coupling-and-floquetdriven-topological-phases-in",
+      "title": "Interlayer Coupling and FloquetDriven Topological Phases in Bilayer Haldane Lattices",
+      "summary": "本文研究AB堆叠双层Haldane晶格在离共振圆偏振光驱动下的Floquet拓扑相变，证明层间耦合与驱动光螺旋度协同可将体系陈数在C=0,±1,±2之间可控切换，覆盖Dirac、半Dirac与高陈数绝缘体多种相。机制上，层间耦合诱导螺旋度依赖、谷选择性的能带反转，并系统性重塑谷分辨的Berry曲率分布；在半Dirac极限（Dirac锥合并）下，容纳非平庸拓扑相的参数空间发生坍缩。结果确立了层间耦合作为Floquet拓扑工程中独立且关键的调控自由度。",
+      "path": "knowledge/raw/papers/2026-2603.24551-interlayer-coupling-and-floquetdriven-topological-phases-in.md"
+    }
+  ],
+  "updated_at": "2026-11-20T21:34:24Z"
+}

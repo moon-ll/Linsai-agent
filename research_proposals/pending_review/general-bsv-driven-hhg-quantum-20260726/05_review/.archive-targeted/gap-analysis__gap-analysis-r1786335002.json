@@ -1,0 +1,114 @@
+{
+  "gaps": [
+    {
+      "claim": "量子光驱动高次谐波产生（QSHHG）能够利用非经典光场的光子统计或量子涨落提高对固体多体关联的探测灵敏度",
+      "missing_evidence": "缺少已发表理论或实验文献证明非经典光场、压缩光/明亮压缩真空驱动HHG可相对于经典相干光提高固体多体关联探测灵敏度，并明确这种增强不是仅由场强、带宽或脉冲形状差异造成",
+      "search_keywords": [
+        "nonclassical light driven high harmonic generation solid state",
+        "quantum light high harmonic generation condensed matter",
+        "bright squeezed vacuum solid-state HHG",
+        "squeezed light high harmonic spectroscopy many-body correlations"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "BSV驱动HHG可以产生可量化的额外灵敏度，并以量子增强因子（QEF）或Fisher信息提高作为评价标准",
+      "missing_evidence": "缺少文献对量子光驱动HHG中的quantum enhancement factor、Fisher information、参数估计灵敏度或后验方差下降进行明确定义和实验/理论验证；目前QEF≥1.5似乎是项目自定阈值，需说明其与既有研究或可实现测量精度的关系",
+      "search_keywords": [
+        "quantum enhancement factor high harmonic generation",
+        "Fisher information quantum light nonlinear spectroscopy",
+        "quantum metrology high harmonic spectroscopy",
+        "squeezed light parameter estimation nonlinear spectroscopy"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Berry曲率和量子度规可以通过高次谐波光谱反演，并且反演结果具有足够的可辨识性",
+      "missing_evidence": "缺少直接证明HHG谱强、相位、偏振或椭偏等可观测量能够分别约束Berry曲率与量子度规的理论推导、数值反演和误差/唯一性分析；尤其需要文献讨论该反问题的参数退化、噪声敏感性和可辨识条件",
+      "search_keywords": [
+        "high harmonic spectroscopy Berry curvature reconstruction",
+        "high harmonic generation quantum metric measurement",
+        "quantum geometry inversion HHG",
+        "Berry curvature quantum metric identifiability nonlinear spectroscopy"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "经典光驱动固体HHG主要反映单粒子或平均场响应，而量子光驱动HHG能够对多体关联和量子涨落提供新的定量信息",
+      "missing_evidence": "缺少文献系统比较经典光与非经典光驱动HHG对单粒子响应、多体关联、电子涨落和光子统计信息的可观测差异；需要避免将经典光HHG已经能够探测的多体效应与量子光场可能增加的灵敏度混为一谈",
+      "search_keywords": [
+        "classical versus quantum light high harmonic generation",
+        "quantum fluctuations high harmonic spectroscopy solids",
+        "many-body correlations quantum light HHG",
+        "photon statistics high harmonic generation condensed matter"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "现有量子高次谐波研究主要集中于气体原子或单束双色场，而本项目采用双光路Mach-Zehnder方案并聚焦固体体系具有明确实验新颖性",
+      "missing_evidence": "缺少对Even Tzur等关于压缩光/量子高次谐波工作的准确书目信息、发表状态和实验体系的核验，也缺少Boroumand等2025年工作的正式文献来源及其与本项目在光路结构、驱动光场、靶体系和观测量上的逐项差异比较",
+      "search_keywords": [
+        "Even Tzur squeezed high harmonic generation publication",
+        "arXiv:2311.11257 squeezed high harmonic generation",
+        "Boroumand 2025 quantum engineering high harmonic generation",
+        "Mach-Zehnder quantum high harmonic generation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "已有研究已经建立量子光驱动HHG或量子态高次谐波产生的理论框架，可作为本项目方案的直接基础",
+      "missing_evidence": "缺少可核验的同行评议论文支持QSHHG/quantum harmonic generation的概念定义、量子态演化、输出光子统计和驱动场量子化处理；若主要依赖预印本，需要补充正式发表版本或明确预印本状态及其证据边界",
+      "search_keywords": [
+        "quantum state high harmonic generation theory",
+        "quantized-field high harmonic generation",
+        "quantum harmonic generation photon statistics",
+        "quantum light high harmonic generation theory published"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "非经典光场的多光子统计特性能够增强固体中的多光子跃迁、HHG产额或对强关联参数的响应",
+      "missing_evidence": "缺少针对固体HHG的理论或实验文献，定量建立压缩度、二阶相关函数g2、光子聚束/超聚束与多光子跃迁概率、谐波产额或Hubbard U/W敏感度之间的关系；不能仅以气体原子或一般多光子吸收结果替代固体HHG证据",
+      "search_keywords": [
+        "bright squeezed vacuum multiphoton transition enhancement solid",
+        "g2 multiphoton absorption condensed matter",
+        "nonclassical light multiphoton processes solid-state HHG",
+        "Hubbard U/W quantum light high harmonic generation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "固体HHG可用于区分弱关联TMDC、莫尔超晶格和Mott绝缘体等不同关联体系",
+      "missing_evidence": "缺少实验或理论研究比较不同关联强度、带宽和相互作用参数体系中的HHG谱形、截止能量、谱权重转移、相位或偏振响应，并证明这些观测量能够区分关联机制而非仅反映带隙、有效质量或样品取向差异",
+      "search_keywords": [
+        "high harmonic generation correlated materials TMDC Mott insulator",
+        "HHG spectral weight transfer Mott insulator",
+        "moiré correlated materials high harmonic generation",
+        "Hubbard interaction dependence solid-state HHG"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "驱动光场波长和材料带隙/能带结构匹配是实现目标HHG能区及量子增强探测的关键条件",
+      "missing_evidence": "缺少文献给出不同驱动波长、场强和带隙条件下固体HHG截止能量、跃迁通道和产额的系统标度关系，尤其需要支持所选BSV驱动波段与候选材料带隙、带宽和损伤阈值之间的匹配",
+      "search_keywords": [
+        "solid-state HHG wavelength bandgap scaling",
+        "long-wavelength driven high harmonic generation solids",
+        "HHG cutoff energy band gap effective mass",
+        "quantum light driven solid HHG wavelength"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "瞬态吸收、光致发光和tr-ARPES可以作为HHG反演多体参数的独立验证手段",
+      "missing_evidence": "缺少文献证明这些独立表征与HHG反演所得Berry曲率、量子度规、关联参数或非平衡态参数之间的可比观测量、时间分辨率和定量对应关系；需要引用多模态联合表征或交叉验证的先例",
+      "search_keywords": [
+        "high harmonic spectroscopy transient absorption cross validation",
+        "HHG tr-ARPES correlated materials",
+        "multimodal ultrafast spectroscopy inverse problem solids",
+        "high harmonic generation Berry curvature ARPES validation"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

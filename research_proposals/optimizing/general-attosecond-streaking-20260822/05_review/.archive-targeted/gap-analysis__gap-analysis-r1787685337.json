@@ -1,0 +1,64 @@
+{
+  "gaps": [
+    {
+      "claim": "R1修正算法能将水窗能区多通道电离场景下脉冲重构误差从大于20%降至小于5%——缺乏直接实验验证文献",
+      "missing_evidence": "content.md引用Cousin等人[2]建立20%误差基准，但未提供修正算法可将误差降至<5%的直接实验或模拟验证文献；现有文献多建立误差上界，缺乏系统性修正方案的效果验证",
+      "search_keywords": [
+        "FROG-CRAB multi-channel correction experimental validation",
+        "attosecond pulse reconstruction error reduction multi-channel",
+        "water window attosecond streaking accuracy improvement"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "角积分方案在常规靶材（氩气、氪气）上可将偶极相位压制至<2%——缺乏直接实验数据",
+      "missing_evidence": "Pabst & Dahlström[3]的理论在相干里德堡态激发条件下验证，推广至常规靶材（氩气、氪气）的角积分方案缺乏直接实验数据；[25] Villeneuve 2017实为相干电子波包成像，非角积分偶极相位压制的直接证据",
+      "search_keywords": [
+        "angular-integrated attosecond streaking dipole phase suppression argon krypton",
+        "attosecond pulse characterization rare gas target angular average",
+        "dipole phase angular integration regular target material validation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "R1和R2组合存在'单向递进逻辑'（R1终止判据未达成不进入R2）——缺乏先R1后R2顺序必要性的理论或实验支撑",
+      "missing_evidence": "content.md声称R1未达成则不进入R2，但缺乏文献证明两个修正模块之间存在不可交换的依赖关系；交替使用R1和R2修正项的可能性未被讨论",
+      "search_keywords": [
+        "multi-channel FROG-CRAB correction order sequence dependency",
+        "attosecond pulse reconstruction sequential correction algorithm",
+        "R1 R2 correction module coupling effect attosecond"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "CNN作为R2备选路径的适用性——缺乏CNN用于多通道修正场景的专门文献",
+      "missing_evidence": "R2提及'若角积分方案在常规靶材上失效，CNN智能检索可作为备选路径'，但现有CNN文献[15]（2019）和[13]（2026）均非针对多通道偶极相位修正场景；CNN在通道干涉条件下的检索能力缺乏验证",
+      "search_keywords": [
+        "CNN attosecond streaking multi-channel correction",
+        "neural network dipole phase retrieval attosecond spectroscopy",
+        "machine learning attosecond pulse reconstruction irregular target"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "R3跨能区标定中软X射线能区（409.7-543 eV）光电子与原子实散射相位行为的差异化特征——缺乏直接文献支撑",
+      "missing_evidence": "content.md断言软X射线能区'光电子与原子实相互作用的散射相位行为与低能区存在本质差异'，但未引用支撑该断言的专项文献；各能区多通道截面数据来源不明确",
+      "search_keywords": [
+        "soft X-ray attosecond streaking photoelectron scattering phase",
+        "high kinetic energy photoelectron scattering phase atomic core",
+        "attosecond spectroscopy 400-550 eV multi-channel ionization"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Kuzkova等人[28]在MgO中观察到轨道依赖偶极相位结构可推广至角积分方案——缺乏固体体系角积分系统性验证",
+      "missing_evidence": "R2引用MgO中偶极相位研究[28]作为固体体系推广的依据，但MgO结果能否代表角积分在固体体系的一般性尚不明确；缺乏固体材料（vs气体靶材）角积分方案的系统性理论和实验对比",
+      "search_keywords": [
+        "solid-state attosecond spectroscopy dipole phase angular integration",
+        "MgO attosecond high-harmonic dipole phase orbital dependence",
+        "attosecond angular integration solid target material validation"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

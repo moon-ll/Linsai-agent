@@ -1,0 +1,38 @@
+{
+  "gaps": [
+    {
+      "claim": "§2.1 里程碑表承诺的考核指标（±0.05°扭转角分辨率、效率预测偏差<5%、误差<15%、HHG调制跳变>20%）缺乏物理依据",
+      "missing_evidence": "缺少文献支撑这些精度/分辨率指标在莫尔超晶格样品制备和HHG光谱测量中是可实现的——表格中以条目形式呈现，未在叙述段中引用文献论证这些数值的物理可达性",
+      "search_keywords": [
+        "moiré twist angle fabrication precision control",
+        "twisted bilayer stacking angle accuracy reproducibility",
+        "HHG spectroscopy quantitative measurement sensitivity",
+        "high harmonic generation modulation depth detectability threshold",
+        "moiré sample preparation yield rate statistical"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.4 Y1年度计划中'样品对接瓶颈节点'的时间安排未论证",
+      "missing_evidence": "缺少文献说明莫尔异质结制备与表征的典型周期、良率和瓶颈环节，无法判断Y1时间节点是否合理",
+      "search_keywords": [
+        "moiré heterostructure fabrication timeline",
+        "twisted bilayer transfer technique yield rate",
+        "moiré sample characterization turnaround time",
+        "2D material heterostructure assembly bottleneck"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§2.2 R3靶标A段引用Lian 2024(Nat Phys)、Xu 2024(Nat Commun)、Nikola 2021三篇文献以'A做了X，B做了Y，本项目据此Z'三段式堆砌，未深入论证靶标选择的充分性",
+      "missing_evidence": "缺少对这些文献与本项目靶标选择之间逻辑联系的深入分析——即为何选择这些特定靶标（而非其他莫尔体系），以及现有文献已达到的HHG探测灵敏度对本项目靶标可行性意味着什么",
+      "search_keywords": [
+        "Lian 2024 moiré high harmonic generation",
+        "moiré superlattice HHG target system selection",
+        "twisted bilayer nonlinear optical response comparison",
+        "moiré HHG sensitivity benchmark different materials"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

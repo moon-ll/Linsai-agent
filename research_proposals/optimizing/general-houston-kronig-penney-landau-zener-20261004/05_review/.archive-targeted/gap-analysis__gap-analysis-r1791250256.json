@@ -1,0 +1,82 @@
+{
+  "gaps": [
+    {
+      "claim": "Houston基矢+多带TDDFT实时演化用于四象限材料高次谐波计算的具体步骤、收敛性、可重复性论证",
+      "missing_evidence": "缺少Houston basis方法在半导体内实采算HHG的标准流程文献，以及TDDFT在强场多带动力学下的数值精度/收敛性基准文献",
+      "search_keywords": [
+        "Houston basis semiconductor Bloch equation TDDFT",
+        "multi-band strong-field dynamics solid HHG convergence",
+        "time-dependent density functional theory high harmonic generation solid benchmark",
+        "Kronig-Penney potential band structure strong field"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "四象限材料（crystal/Moiré/topological/magnetic）统一通道分解与标度律的可行性论证",
+      "missing_evidence": "缺少针对crystal/Moiré/topological/magnetic四类体系HHG标度律的系统性综述或统一框架文献，以及在统一框架下三通道分解(interband/intraband/anomalous)与Berry curvature角色的对照基准",
+      "search_keywords": [
+        "scaling law high harmonic generation solids",
+        "interband intraband anomalous harmonic channel solids review",
+        "Berry curvature anomalous harmonic generation",
+        "Moiré superlattice high harmonic generation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "TDDFT实时电流耦合单向脉冲传播/FDTD方程的可行性（自洽包含色散、吸收、相位匹配）",
+      "missing_evidence": "缺少TDDFT-current与宏观FDTD/单向脉冲传播方程耦合的成功先例，特别是高次谐波传播层面的自洽耦合文献",
+      "search_keywords": [
+        "TDDFT coupled Maxwell propagation HHG solid",
+        "unidirectional pulse propagation equation TDDFT self-consistent",
+        "FDTD high harmonic generation solid self-consistent propagation",
+        "phase matching high harmonic generation solid-state mid-infrared"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Kronig-Penney势+Landau-Zener跃迁作为可解析测试平台的可行性（替代完整TDDFT）",
+      "missing_evidence": "缺少Kronig-Penney势模拟强场多带动力学的现有工作，以及Landau-Zener跃迁率在固体HHG场景的实验/理论验证文献",
+      "search_keywords": [
+        "Kronig-Penney potential strong field dynamics",
+        "Landau-Zener transition high harmonic generation solid",
+        "analytical solvable model solid HHG two-band",
+        "non-perturbative HHG toy model semiconductor"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "缺陷/掺杂态对四象限材料HHG通道竞争的调控（content §2.2第二层扫描参数0.8–3.2 μm、0.1–2 TW/cm²的物理基础）",
+      "missing_evidence": "缺少缺陷态/掺杂如何调制固体HHG通道竞争的实验和理论文献，特别是波长/强度依赖的系统性数据",
+      "search_keywords": [
+        "defect states high harmonic generation solids",
+        "dopant modulation high-order harmonic generation",
+        "impurity states strong-field solid HHG",
+        "mid-infrared driver HHG scaling0.8-3.2 micron"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "TDDFT方案相对于半经验方法(semiconductor Bloch equations, Houston等)的精度/成本对比与可行性",
+      "missing_evidence": "缺少TDDFT vs semiconductor Bloch equations vs Houston basis在固体HHG计算中的精度-成本基准对比文献",
+      "search_keywords": [
+        "semiconductor Bloch equations TDDFT comparison HHG",
+        "Houston basis vs TDDFT solid-state HHG benchmark",
+        "first-principles TDDFT strong field accuracy solid",
+        "computational cost solid HHG ab initio methods"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "方案关键难点的降级路径/替代方案的可行性（计算资源、收敛失败、物理失真等风险点）",
+      "missing_evidence": "缺少TDDFT强场计算在大型体系(>几十原子)或长传播距离下的已知难点文献，以及学界普遍采用的替代/降级方案",
+      "search_keywords": [
+        "TDDFT scaling large supercell strong field limitations",
+        "solid HHG simulation alternative semiclassical model",
+        "real-time TDDFT convergence problem strong field",
+        "downsampling reduced model solid-state HHG"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

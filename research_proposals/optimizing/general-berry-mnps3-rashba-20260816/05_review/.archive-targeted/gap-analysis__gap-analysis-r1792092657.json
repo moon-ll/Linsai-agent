@@ -1,0 +1,77 @@
+{
+  "gaps": [
+    {
+      "claim": "电极化翻转导致非相对论自旋劈裂（被错挂至 [24] Rani-Juraschek，需替换为 Mavani 等 PRB 2025 [20]）",
+      "missing_evidence": "Mavani 等关于电极化（polar inversion / electric polarization switch）驱动非相对论性自旋劈裂的原始论文（Phys. Rev. B, 2025），需补全文档号/DOI 与具体数值证据",
+      "search_keywords": [
+        "Mavani polarization reversal spin splitting",
+        "Mavani PRB 2025 non-relativistic spin splitting",
+        "ferroelectric control spin splitting without SOC",
+        "Mavani Phys Rev B 2025"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Misawa 等相关实验/理论结论（被错挂至 [43] Basnet，需替换为 [39]）",
+      "missing_evidence": "Misawa 等在 rationale L29 处的具体工作内容及发表信息未在评审中给出，需根据上下文（L29 位置推断涉及 MnTe/反常霍尔/交变磁或非线性响应）核实并补充正确文献",
+      "search_keywords": [
+        "Misawa MnTe",
+        "Misawa altermagnet nonlinear",
+        "Misawa anomalous Hall",
+        "Misawa spin splitting MnTe"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Wang 等关于滑移极化（shift current）ps 时间尺度验证的实验依据（被错挂至 [9] Regmi，需替换为 [7]）",
+      "missing_evidence": "Wang 等关于 shift current 在皮秒时标下完成极化翻转/验证的实验文献，需与 rationale L17 同源对齐的具体文章",
+      "search_keywords": [
+        "Wang shift current picosecond",
+        "shift current polarization switching ps",
+        "Wang bulk photovoltaic ps timescale",
+        "Wang time-resolved shift current"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "154 个空间群活动多极分类的源文献（被错挂至 Ogawa [15] 压磁文，需替换为 [42]）",
+      "missing_evidence": "关于 230/154 空间群下电磁多极（electric/magnetic multipole）分类与活动性判定的原始系统性文献，通常为高通量对称性分类工作",
+      "search_keywords": [
+        "154 space group multipole classification",
+        "magnetic multipole high-throughput symmetry",
+        "electric multipole space group active",
+        "multipole classification 230 space groups"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Misawa 等工作的正确归属（导致 [39] 当前零挂靠成为 orphan）",
+      "missing_evidence": "在修正 Misawa 错挂后，[39] 需在 rationale/正文中至少一处正确挂靠，需确认 Misawa 原文所在位置与论证语境",
+      "search_keywords": [
+        "Misawa nonlinear optics",
+        "Misawa second harmonic generation MnTe",
+        "Misawa altermagnet optics"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Mavani 等工作的正确归属（导致 [20] 当前零挂靠成为 orphan）",
+      "missing_evidence": "在修正 Mavani 错挂后，[20] 需在 rationale 三处（替换 [24] 后）正确落位，论证密度需与原文数据（100 meV/0.5 eV 分层）对应",
+      "search_keywords": [
+        "Mavani polarization driven spin splitting magnitude",
+        "Mavani PRB 2025 meV scale splitting"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "rationale 全章引用密度超标（62 处超 35-47 上限），需合并同源成果如 [14,17,43] 等以压至 ≤47",
+      "missing_evidence": "同源成果（多重相关文献）需通过合并引用（单括号多编号）压缩条目数，本质是引用组织而非新文献缺失",
+      "search_keywords": [
+        "MnTe altermagnet spin splitting review",
+        "Rashba altermagnet superlattice reference"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "full_review"
+}

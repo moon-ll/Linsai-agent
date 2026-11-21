@@ -1,0 +1,66 @@
+{
+  "gaps": [
+    {
+      "claim": "[33] 单平台单篇 NiPS₃ 数据外推为\"二维范德华反铁磁体系的普适特征\"，需补充跨体系实验支撑",
+      "missing_evidence": "缺少多个二维范德华反铁磁体系（CrPS₄、FePS₃、MnPS₃、CoPS₃ 等）的磁序响应时间常数实验数据，用于验证普适性而非单一体系外推",
+      "search_keywords": [
+        "2D van der Waals antiferromagnet demagnetization timescale",
+        "FePS3 CoPS3 magnetic order relaxation time ps",
+        "CrPS4 antiferromagnetic ultrafast time constant",
+        "MnPS3 NiPS3 FePS3 THz demagnetization comparison"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "目标二（2.5）缺少\"分类准确率\"指标，需要补充定义与基准",
+      "missing_evidence": "缺少磁点群 HHG 指纹分类准确率的量化基准文献（典型分类器在 HHG 数据集上的精度报告）",
+      "search_keywords": [
+        "high harmonic generation magnetic point group classification accuracy",
+        "spin group classification machine learning HHG benchmark",
+        "HHG fingerprint classification precision recall"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "等效区分度 √J 与 d-prime 的换算关系缺乏理论定义",
+      "missing_evidence": "缺少 √J 度量与经典信号检测理论 d-prime 度量之间的解析换算公式来源文献",
+      "search_keywords": [
+        "d-prime separability metric signal detection theory",
+        "J prime detection index harmonic generation",
+        "signal detection theory HHG channel separation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "三档势垒量级锚点缺泛函计算基准文献",
+      "missing_evidence": "缺少 MnPS₃ 与同族二维磁性体（NiCl₂、VSe₂、CrSe₂ 等）层间滑移势垒的 DFT 泛函依赖性系统研究",
+      "search_keywords": [
+        "MnPS3 interlayer sliding barrier DFT functional",
+        "NiCl2 VSe2 CrSe2 stacking energy first-principles",
+        "bilayer van der Waals magnet sliding potential energy surface"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Horstmann [35] 单段功能不明，需补背景或归并",
+      "missing_evidence": "缺少 Horstmann 滑动铁电时序机制工作与本项目 R1 论证链路的接口文献（即后续引用与拓展研究）",
+      "search_keywords": [
+        "Horstmann sliding ferroelectric switching mechanism",
+        "interlayer sliding polarization reversal theory",
+        "bilayer h-BN sliding ferroelectric dynamics"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Wang 等 PRL 133, 126801 (2024) 双层 h-BN 模型体系时空尺度需补充佐证",
+      "missing_evidence": "缺少 h-BN 双层滑动铁电极化反转的皮秒尺度实验直接测量文献，验证外推可行性",
+      "search_keywords": [
+        "bilayer h-BN ferroelectric switching timescale experiment",
+        "PRL 133 126801 bilayer hexagonal boron nitride polarization reversal",
+        "interlayer sliding polarization picosecond measurement"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "content"
+}

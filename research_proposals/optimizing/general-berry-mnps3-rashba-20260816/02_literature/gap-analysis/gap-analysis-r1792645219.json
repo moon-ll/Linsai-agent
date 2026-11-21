@@ -1,0 +1,76 @@
+{
+  "gaps": [
+    {
+      "claim": "§1.2 L21 与 §1.4 L47 关于层状插层过渡金属二硫化物 CoNb4Se8 中 altermagnetism 与 A 型反铁磁序在 168 K 以下共存、橡树岭主导的定量引述",
+      "missing_evidence": "Regmi 等关于 CoNb4Se8 中 altermagnetism 与 A 型反铁磁序在 168 K 以下共存的原始文献条目在 46→40 压减中被删除，正文两处仍作具名定量声明但现存 40 条参考文献无对应实体（citation_orphan）。需恢复该文献条目并重编号，或改挂现存文献",
+      "search_keywords": [
+        "CoNb4Se8 altermagnetism A-type antiferromagnetism 168 K",
+        "Regmi CoNb4Se8 altermagnet Oak Ridge",
+        "layered intercalated transition metal dichalcogenide altermagnet antiferromagnetism coexistence"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.5 L61 与 L67 关于 Sato 综述中某一论断的两次具名引述",
+      "missing_evidence": "Sato 综述条目 [30] 在全章零挂靠，两处具名引述均无角标支撑。需在两处补 [30] 并核实 [30] 条目实体与所述论断匹配",
+      "search_keywords": [
+        "Sato review altermagnet",
+        "altermagnetism review Sato",
+        "altermagnet spin splitting review"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.5 L59 关于 Wrzos 提出的非线性响应谱（NRSS）两类分类体系的具名引述",
+      "missing_evidence": "Wrzos 的 NRSS 两类分类属具名理论主张，句末零角标。需补 [5] 并核实 [5] 条目确为 Wrzos NRSS 分类原始文献",
+      "search_keywords": [
+        "Wrzos nonlinear response spectrum NRSS classification",
+        "nonlinear response spectrum sum frequency generation spectroscopy classification"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.5 L67 关于 THz 驱动条件下 MnPS3 类磁性二维材料强场响应可行边界的判断",
+      "missing_evidence": "[26] 与 [24] 均为纯 arXiv 预印本（经 arXiv API 复查未见正式刊出），构成 preprint_dependency。可行性边界的核心支撑缺乏同行评议文献兜底",
+      "search_keywords": [
+        "THz-driven strong field response 2D magnetic semiconductor",
+        "terahertz field induced dynamics layered magnetoresistive semiconductor",
+        "MnPS3 THz ultrafast carrier dynamics",
+        "terahertz pump magnetic2D material high harmonic"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.3 L33 关于 MnPS3 中 Rashba 自旋轨道耦合劈裂量级与 i-wave 配对对称性归属的理论定性论断",
+      "missing_evidence": "[26] 为预印本支撑该体系的 Rashba 耦合强度与对称性判断，需补充已刊同行评议的 MnPS3 自旋轨道耦合/自旋劈裂第一性原理或实验文献（含 ARPES、计算）作为独立支撑",
+      "search_keywords": [
+        "MnPS3 Rashba spin orbit coupling first principles",
+        "MnPS3 spin splitting ARPES experiment",
+        "MnPS3 superconducting pairing symmetry Rashba",
+        "layered MPS3 spin orbit coupling strength calculation"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§1.5 L61 关于 Floquet 近似适用窗口与强场驱动 i-wave HHG 定量指纹反演可行性的边界判断",
+      "missing_evidence": "[24] 预印本支撑 Floquet 窗口下限，缺乏已刊文献对少周期/亚周期 Floquet 适用条件的独立论证。需补充已发表的 Floquet 近似适用性判据文献",
+      "search_keywords": [
+        "Floquet approximation validity few-cycle strong field",
+        "Floquet regime boundary attosecond driving",
+        "Floquet analysis valid pulse duration condition solid state"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§1.4 中交变磁性与常规反铁磁体在自旋分裂机制上的理论区分论断（i-wave 与 g-wave 配对对称性归属）",
+      "missing_evidence": "四连\"由X主导\"归属排比段落的理论主张需配套 i-wave 配对对称性判据的原始文献，当前论述中该理论归属缺少明确角标实体",
+      "search_keywords": [
+        "i-wave pairing symmetry altermagnet",
+        "g-wave odd parity pairing mechanism iron pnictide",
+        "altermagnet d-wave g-wave superconducting pairing origin"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

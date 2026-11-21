@@ -1,0 +1,29 @@
+{
+  "gaps": [
+    {
+      "claim": "“两项涡旋光高次谐波工作互为补充”，以及“驱动场轨道角动量向谐波相干转移，并且该过程与晶体对称性、相互作用范围及强自旋—轨道耦合无关”这两项机制性结论。",
+      "missing_evidence": "现有参考文献[28]仅能支持CEP—OAM耦合，不能同时证明存在两项互补工作，也不能支撑OAM相干转移及其对晶体对称性、相互作用范围和强SOC的不依赖性。需要补充第二篇原始研究，明确证明OAM向HHG的相干转移及其相关控制条件，并由作者与年份说明其和[28]的互补关系；若第二篇文献不能覆盖全部结论，应为不同子结论分别配置出处。",
+      "search_keywords": [
+        "Granados CEP OAM coupling high harmonic generation",
+        "vortex light orbital angular momentum transfer high harmonic generation",
+        "high harmonic generation OAM transfer crystal symmetry",
+        "noncollinear high harmonic generation interaction range symmetry",
+        "high harmonic generation strong spin-orbit coupling orbital angular momentum"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§二.2和§二.5中两处“Zhang等人”所承载的具体研究结论。",
+      "missing_evidence": "已有参考文献[2]，但正文两处均未标注[2]，导致论断与文献入口断开。需要先核验参考文献[2]的研究对象、主要结论和适用条件确实覆盖这两处陈述，再在两处补加[2]角标；只有当[2]不能支持相应论断时，才需要另补原始研究。",
+      "search_keywords": [
+        "Zhang order parameter ultrafast readout high harmonic generation",
+        "Zhang magnetic order parameter optical readout",
+        "Zhang high harmonic generation magnetic-order detection",
+        "Zhang MnTe high harmonic spectroscopy",
+        "申请书参考文献[2] Zhang"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

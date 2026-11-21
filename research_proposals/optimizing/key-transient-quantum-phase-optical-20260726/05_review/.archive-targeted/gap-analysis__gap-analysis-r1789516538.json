@@ -1,0 +1,23 @@
+{
+  "gaps": [
+    {
+      "claim": "Di Gaspare 等 2025 年在 (In_xBi_{1-x})_2Se_3/Bi_2Se_3 范德华超材料中实验区分体态（中心相，仅奇次）与拓扑表面态（对称破缺，奇次+偶次）的非线性贡献",
+      "missing_evidence": "缺少 Di Gaspare 等 2025 年关于 (In_xBi_{1-x})_2Se_3/Bi_2Se_3 范德华异质结中高次谐波区分体态与拓扑表面态贡献的原始论文",
+      "search_keywords": [
+        "Di Gaspare InBiSe3 Bi2Se3 high harmonic topological surface state",
+        "van der Waals topological insulator nonlinear optical harmonic",
+        "(InxBi1-x)2Se3 Bi2Se3 second harmonic generation even odd"
+      ]
+    },
+    {
+      "claim": "Zhao 等在 WS2给出定量映射——+2% 拉伸应变使 K 谷 Berry 曲率积分从 18.24 增至 26.86 Å^-2（增 47%），垂直偏振谐波分量近乎翻倍",
+      "missing_evidence": "缺少 Zhao 等关于 WS2 应变调控 Berry 曲率与高次谐波各向异性定量关系的原始论文",
+      "search_keywords": [
+        "Zhao WS2 strain Berry curvature high harmonic generation",
+        "tensile strain K valley Berry curvature WS2 harmonic",
+        "strain engineering transition metal dichalcogenide harmonic anisotropy"
+      ]
+    }
+  ],
+  "section": "content"
+}

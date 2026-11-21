@@ -1,0 +1,206 @@
+{
+  "meta": {
+    "proposal_id": "general-bsv-driven-hhg-quantum-20260726",
+    "focus_section": "参考文献（references.md）",
+    "review_round": 7,
+    "review_date": "2026-07-30",
+    "analysis_date": "2026-07-31",
+    "evidence_source": "05_review/critic-round-7.md",
+    "filter_rule": "仅提取评审报告中与文献/引文/引用支撑直接相关的问题；忽略纯结构占位符（如创新点/计划书模块缺失）问题。",
+    "total_review_issues": 22,
+    "literature_gaps_extracted": 15,
+    "note": "第 7 轮评审聚焦章节为 references.md；评分 0.55，rigor 0.42，completeness 0.40。延续上轮 r1785425647 的 7 条并针对第 7 轮评审口径新增 8 条。",
+    "review_score_baseline": 0.55,
+    "rigor_score": 0.42,
+    "completeness_score": 0.40,
+    "scope": "仅提取评审报告中与文献/引文/引用支撑直接相关的问题；忽略纯结构占位符（如创新点/计划书模块缺失）问题。",
+    "compared_to": "上一轮 gap-analysis-r1785425647（12 条）；本轮针对第 7 轮评审口径更新并扩充。"
+  },
+  "gaps": [
+    {
+      "claim": "参考文献模块整体缺失：sections/references.md 仍为 0 字（仅占位符'待 writer 补齐'），违反 NSFC 面上项目正文体例与 20 分钟评审可核查性要求",
+      "missing_evidence": "完整的、按 11 大类组织的引文列表（共 40–60 条），每条含：作者全名（首 3 人 + et al.）、题名、期刊缩写、卷(vol)、期(issue)、起止页码/文章号、年份、DOI；arXiv 预印本须同时附 arXiv 永久链接与状态标注（preprint / peer-reviewed）。NSFC 格式要求顺序编码制，与 §6.6 编号 [1]–[30] 共用同一体系。",
+      "search_keywords": [
+        "GB/T 7714-2015 顺序编码制 示例",
+        "NSFC 面上项目 参考文献 格式",
+        "Elsevier numbered reference style",
+        "DOI lookup by title CrossRef",
+        "arXiv → DOI 关联 Semantic Scholar"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "三种引文格式并存导致跨章节引文一致性无法保证：作者—年份片段（如 Rasputnyi 2024、Even Tzur 2024）+ §6.6 局部编号 [n] + arXiv 孤号（如 arXiv:2405.11859）混用，违反引用规范",
+      "missing_evidence": "① 选定一种规范格式（GB/T 7714-2015 顺序编码制为 NSFC 面上项目惯例）的统一声明；② 在 references.md 中建立'内嵌引证 ↔ §6.6 编号 ↔ 完整书目'三向对应表；③ 跨章节（§1.2、§2.1–§2.6、§3.1–§3.2）所有引文统一为 [n] 编号形式，删除作者—年份片段与孤立 arXiv 编号。",
+      "search_keywords": [
+        "GB/T 7714-2015 example 期刊",
+        "NSFC 顺序编码制 Vancouver style",
+        "Elsevier numbered vs author-year reference",
+        "cross-chapter citation consistency check tools"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.2 立项依据中约 12 处'作者—年份片段'内嵌引证（Rasputnyi 2024、Even Tzur 2024、Iskhakov 2012、Spasibko 2012、Szilard 2012、Silva 2018、Murakami 2018、Wu/Schafer/Gaarde 2016、Raab 2024、Li 2022、Rivera-Dean 2023、Peschel 2022、Wu 2024 等）缺乏完整书目元数据，评审人无法独立核查",
+      "missing_evidence": "上述 13 处引证每条对应的完整出版元数据：① 期刊全名与缩写；② 卷(vol)、期(issue)、起始页—终止页；③ DOI；④ 同行评审状态标识。已确认部分文献已有正式发表版本（Iskhakov 2012 → Opt. Lett. 37, 1919；Spasibko 2012 → Opt. Express 20, 7507；Wu/Schafer/Gaarde 2016 → Phys. Rev. A 94, 063403；Silva 2018 → Nat. Photon. 12, 266；Murakami 2018 → PRL 121, 057405；Peschel 2022 → Phys. Rev. B 106, L081408），应将 arXiv 号与正式版并列。",
+      "search_keywords": [
+        "Iskhakov 2012 bright squeezed vacuum Opt. Lett. 37 1919",
+        "Spasibko 2012 bright squeezed vacuum Opt. Express 20 7507",
+        "Szilard 2012 spontaneous parametric down conversion HHG",
+        "Silva 2018 Bi2Se3 HHG Nat. Photon. 12 266",
+        "Murakami 2018 Mott insulator HHG PRL 121 057405",
+        "Peschel 2022 tight-binding HHG Phys. Rev. B 106 L081408"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "关键方法学引文（Raab 2024、Li 2022、Rivera-Dean 2023、Peschel 2022）仅给出 arXiv 编号而无正式期刊版本，'可行性论证'所依赖的方法学成熟度无法被评审人独立核查",
+      "missing_evidence": "逐条核查上述四篇的正式发表状态：① Raab et al. 2024 须查 Opt. Express 32, 16284 是否为正式版（书稿中已出现该卷期号，须验证 arXiv:2405.11859 与 Opt. Express 卷期号的一致性）；② Li et al. 2022 须查 PRL 129, 173001 正式版（书稿已给出卷期，须验证 DOI 10.1103/PhysRevLett.129.173001）；③ Rivera-Dean et al. 2023 (arXiv:2309.14435) 须查 PRL / PRA 正式发表版本；④ Peschel et al. 2022 已确认 Phys. Rev. B 106, L081408 正式版，须在引用条目中并列。若 Raab 2024 / Rivera-Dean 2023 仅 arXiv，应替换为已发表的同类方法学奠基论文作为核心支撑。",
+      "search_keywords": [
+        "Raab 2024 bichromatic HHG Opt. Express 32 16284 published",
+        "Li 2022 quantum interference PRL 129 173001 tungsten tip",
+        "Rivera-Dean 2023 Bloch formalism attosecond PRL published",
+        "Peschel 2022 real-space tight-binding HHG PRB 106 L081408 DOI",
+        "Stammer Pisanty HHG phase recovery PRL published"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "outcome §6.6 引文体系 [1]–[30] 中编号 [1]–[8] 全部为 arXiv 编号（其中 [2]–[5]、[11]、[15] 共 6 条为 2026 年最新预印本），形式上属'未经同行评审引用'，对 NSFC 评审权威性构成系统性风险",
+      "missing_evidence": "对 6 条 2026 年预印本（Lyu 2026, Stammer 2026, Awad 2026, Zou 2026, Lange 2026, Borrego Varillas 2026）：① 逐条在 arXiv 检索核实标题/作者/摘要/链接可访问性（§6.6 已声明完成，但需 §7 参考文献模块同步核验）；② 为每条预印本寻找相同论点的已发表同行评审文献作为'主支撑 + 预印本'的替代方案；③ 显式标注'preprint, as of 2026-07-30, not peer-reviewed'状态。Borrego Varillas Roadmap 须查 J. Phys. B 阿秒科学专刊的最终卷期（书稿标注'待核卷期'）。",
+      "search_keywords": [
+        "Stammer Rivera-Dean attosecond quantum light 2026 peer review status",
+        "Lange Madsen topological insulator HHG 2026 published",
+        "Borrego Varillas roadmap attosecond science J. Phys. B 2026 issue",
+        "Zou bichromatic HHG quantum path interference 2026 published",
+        "Awad Bloch trajectory harmonics interferometer 2026 published"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "项目声明'量子光 HHG 作为系统性范式'，但 §6.6 全部 25 条具名引证 + §1.2 嵌入的 12 处引证合计仅约 25–30 条外部引证，对一个'量子光—强场—凝聚态'三交叉的范式承诺而言引文密度严重不足（面上项目评审共识：系统性范式承诺需 40–60 条引文覆盖）",
+      "missing_evidence": "需将引文总量扩至 40–60 条（§6.6 作者行动清单已明确），覆盖以下十大类：① 强场 HHG 经典理论与实验（Ghimire 2011、Schubert 2014、Luu 2015 等奠基工作）；② BSV/参量下转换与压缩光物理（Boyd、Scully–Zubairy 教材级引用）；③ 量子光—物质相互作用的理论发展（Lemieux 2024 等近期 review）；④ BSV 驱动 HHG 同方向工作（Rasputnyi 2024 + 同组后续工作 + Turchetti 早期气体原子工作）；⑤ 固体 HHG 多体模型（Pisanty、Silva、Murakami、Jensen、Peschel 群组）；⑥ TMDC HHG 体系（Liu 2017、Iglesias 2024、Wu 2024 莫尔）；⑦ 拓扑 HHG（Silva 2018、Sufyan-Neufeld 2026、Lange 2026）；⑧ Mott HHG（Murakami 2018、Prajapati 2024）；⑨ 反演方法学（Faeyrman 2024 Berry 相、Stammer 2026 量子光推广）；⑩ 量子光/BSV HHG 综述与路线图（Borrego Varillas 2026 + 至少 1 篇独立高水平 review）。",
+      "search_keywords": [
+        "Ghimire 2011 ZnO solid HHG observation PRL",
+        "Boyd Scully Zubairy quantum optics textbook squeezed",
+        "Turchetti squeezed light HHG gas atom early work",
+        "Lemieux quantum light matter interaction review 2024",
+        "Iglesias 2024 TMDC HHG multi-band nonperturbative",
+        "Wu 2024 moire superlattice HHG twisted bilayer arXiv:2311.16655",
+        "Schubert Luu 2014 2015 solid HHG microscopic",
+        "review quantum light strong-field 2024 2025 2026"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.2.3'前人局限性'论证（前人仅在气体原子或对相干态 BSV-HHG 做演示，本项目首次将 BSV 作为固体多体态量子探针）缺乏系统编年文献支撑，违反'立项依据是否充分（前人局限性是否讲清楚）'的评审标准",
+      "missing_evidence": "一份'前人 HHG—量子光交叉研究'的编年综述：按 时间（2010–2026） / 量子光源类别（纠缠双光子 / 压缩真空 / 压缩相干光 / BSV） / 体系（气体原子 / 简单分子 / 固体） / 量子探针指标 四维度分类的对比矩阵，覆盖至少 20–30 篇代表性工作（含 Turchetti、Hacker、Even Tzur 2024、Rasputnyi 2024、Lyu 2026、Stammer 2026、Quesada 2022、Bruder 2024、Tsaturyan 2024 等可能的相关工作）。",
+      "search_keywords": [
+        "Turchetti squeezed light HHG gas attosecond",
+        "Hacker quantum light HHG experimental",
+        "Quesanda strong field quantum optics 2022",
+        "Bruder squeezed light spectroscopy review",
+        "nonclassical light high harmonic generation review 2020-2026",
+        "quantum light attosecond science review perspective"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "'首例'边界声明与 Rasputnyi 2024 (arXiv:2403.15337) 的差异未被独立文献证据兜底——除 Rasputnyi 2024 外，本方向其他独立工作（尤其是理论预言 / 早期气体原子体系 / 同组后续工作）未被系统对照，'原创增量'主张易被评审质疑",
+      "missing_evidence": "① Rasputnyi 2024 同组（Birk / Cohen / Kaminer / Krüger / Chekhova / Tani / Seletskiy）在 2024–2026 期间的后续工作（被引/扩展 BSV-HHG 体系）；② Turchetti 等早期 BSV-HHG 气体原子工作（如有）；③ Even Tzur / Gorlach 2024 之外的同方向理论预言；④ 国际其他团队（以色列 Technion、慕尼黑 MPQ、加拿大 NRC、英国 Imperial 等）在 BSV-HHG / 量子光—强场交叉领域的并行工作。须形成'前人工作 ↔ 本项目原创增量'的对照表，明确'单层 TMDC + 室温莫尔 + 三维参数响应图谱'三层增量的唯一性。",
+      "search_keywords": [
+        "Birk Cohen Kaminer Krüger BSV HHG 2025 2026 follow-up",
+        "Turchetti 2024 2025 BSV HHG gas atom",
+        "Gorlach Kaminer quantum light HHG 2024 2025",
+        "BSV high harmonic generation 2025 2026 other groups",
+        "Chekhova BSV HHG post-Rasputnyi"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "创新点 2 引用 Boroumand 2025 (Roadmap on Attosecond Science) 与 Li 2019 作为 QEF 双指标定义的支撑，但 Boroumand 2025 在 §1.4、§2.8、outcome §6.3 三处重复出现且无完整出版信息；Li 2019 给出 arXiv:1908.07283 但未确认是否即 PRL 正式版，创新论点支撑强度无法独立核实",
+      "missing_evidence": "① Borrego Varillas 'Roadmap on Attosecond Science' 在 J. Phys. B / J. Phys. Photonics / J. Opt. 等期刊的正式版本（出版年、卷期、DOI，2026 已确认 arXiv:2604.15085）；② Li 2019 须明确作者全名、期刊全名、卷期页码、DOI，确认是否即'Li et al., Phys. Rev. Lett. xxx (2019)'或类似工作——若 arXiv:1908.07283 无正式版，应替换为已发表的同类量子增强测量奠基文献（如 Tafuri 2010、Tóth 2010 等量子计量学经典）。",
+      "search_keywords": [
+        "Roadmap on Attosecond Science published 2026 J. Phys. B volume",
+        "Borrego Varillas Roadmap attosecond J. Phys. B issue 2026",
+        "Li 2019 HHG quantum enhancement published version",
+        "arXiv:1908.07283 published journal",
+        "QEF quantum enhancement factor HHG literature",
+        "Tafuri Toth quantum metrology precision measurement foundation"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "跨章节同一文献出现但格式不一致（如 Iskhakov 2012、Raab 2024、Wu/Schafer/Gaarde 2016 在 §1.2、§2.1、§3.1 多处出现但作者列表、卷期页码、arXiv 链接详略不一），导致评审人按编号检索时可能命中不一致条目",
+      "missing_evidence": "在 references.md 中为每条文献维护'单一权威条目'：作者全名 + 期刊缩写 + 卷(期) + 起止页码 + 年份 + DOI（必选）；arXiv 号（若存在预印本，选填）；首次引用时给出完整条目，后续引用自动同步。所有跨章节引文通过编号 [n] 引用同一条目，禁止任何'作者—年份片段 + 局部卷期'的二次简化。",
+      "search_keywords": [
+        "LaTeX bibliography management BibTeX unified entry",
+        "Zotero reference deduplication cross-chapter",
+        "Mendeley NSFC reference consistency check"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Peschel 2022 / Raab 2024 等关键方法学引文若仅有 arXiv 版本，评审人会质疑其作为'方法学成熟度证据'的有效性；建议为每条方法学引文准备 1–2 篇已发表的同类方法学替代文献作为兜底",
+      "missing_evidence": "替代性已发表方法学文献清单：① SFA / Lewenstein 量子轨道方法——Lewenstein 1994 PRA 49, 2117（已确认）+ Pisanty 2019 PRL 122, 013203（已被引用的 Pisanty HHG 相位经典）；② Bloch 形式化——Wu/Schafer/Gaarde 2016 PRA 94, 063403（已确认）+ Floss 2018 / Hansen 2017 同期 Bloch 方法学；③ 双光路量子干涉——Li 2022 PRL 129, 173001（待核正式版）+ 经典 HOM 干涉文献；④ 实空间紧束缚 SBE——Peschel 2022 PRB 106, L081408（已确认）+ Plaja/Roso 早期半导体 SBE 工作。",
+      "search_keywords": [
+        "Pisanty 2019 PRL 122 013203 HHG phase",
+        "Floss 2018 Bloch HHG semiconductor",
+        "Hansen 2017 high harmonic generation semiconductor multi-band",
+        "Plaja Roso semiconductor HHG Bloch",
+        "Hong-Ou-Mandel quantum interference review"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "BSV 制备与表征部分引用 Szilard 2012、Iskhakov 2012、Spasibko 2012 等作为'BSV 实验技术基础'，但这些工作的现代改进版本（2020–2026 期间的 BSV 制备、量子层析、sub-shot-noise 灵敏度等）未被覆盖，技术现状论述可能滞后 5–10 年",
+      "missing_evidence": "BSV 表征/制备领域 2020–2026 同行评审文献 ≥ 5–8 篇，覆盖：① 量子态层析新方法（CV state tomography, homodyne detection 进展）；② sub-shot-noise 灵敏度极限的现代测量；③ BSV-photon-HHG 接口的最新实验设计；④ 大模体积高压缩度 BSV 实验进展。",
+      "search_keywords": [
+        "squeezed light generation review 2022..2026",
+        "bright squeezed vacuum CV quantum tomography 2023 2024",
+        "sub shot noise spectroscopy modern HHG 2024",
+        "Agafonov Schori modern bright squeezed vacuum",
+        "spontaneous parametric down conversion squeezed 2024 2025 review",
+        "Chekhova group BSV 2024 2025 2026"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "莫尔超晶格 BSV-HHG 的可行性论证（§3.3 风险表 4 引用 Wu 2024 作为扭转双层 MoS₂ 室温 BSV-HHG 范式）缺少对扭转角、相位相干长度、关联绝缘相 HHG 已有同行评审实验的直接文献支撑（仅 arXiv:2311.16655 一条）",
+      "missing_evidence": "扭转双层 / 三层 TMDC HHG 实验的同行评审文献清单：① Cao 2018 Nature / Wang 2020 Nature 莫尔超晶格关联绝缘相（基底物理）须引；② Wu et al. 2024 的正式期刊版（若 arXiv:2311.16655 已发表须查 Nat. Phys. / PRL / Sci. Adv. 等）；③ 其他 TMDC 莫尔 HHG 工作的同行评审版本（Park 2024、Hafez 2024 等可能候选）。",
+      "search_keywords": [
+        "Wu 2024 moire twisted bilayer MoS2 HHG published version",
+        "Cao 2018 Nature moire insulator correlated",
+        "Park 2024 twisted TMDC HHG Nat. Phys.",
+        "Hafez 2024 moire HHG PRL published",
+        "correlated insulator HHG experimental 2023 2024 2025"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "对于'BSV 驱动 HHG 探针'这一全新范式，缺少一篇独立的高水平综述（review / perspective / roadmap）作为'范式合理性'的二级支撑文献，影响评审专家对该方向的接受度（仅 Borrego Varillas 2026 Roadmap 一篇，且仍为预印本状态）",
+      "missing_evidence": "Nature Photonics / Physics Reports / Rev. Mod. Phys. / J. Phys. B 综述、perspective 或 roadmap 候选清单（2023–2026 期间）：① 非经典光与强场物理交叉领域综述；② 量子光学—阿秒科学接口综述；③ BSV/压缩光在超快科学中的应用综述；④ 量子计量学（quantum metrology）与强场物理交叉综述。需 ≥ 2–3 篇同行评审综述。",
+      "search_keywords": [
+        "non-classical light strong field perspective review",
+        "quantum optics meets attosecond science review",
+        "squeezed light ultrafast science review 2024 2025",
+        "Physics Reports HHG quantum light 2024 2025",
+        "Nature Photonics strong field quantum review 2024",
+        "Reviews of Modern Physics attosecond 2020 2021 2022 2023"
+      ],
+      "priority": "low"
+    },
+    {
+      "claim": "[10] Goh 2015 单发 HHG 涨落论文的正式期刊发表版本待核（书稿 §6.8 标注'预印本 2015；正式期刊发表版本待核'），作为 §6.2 (3) QF/QEF 协议中'每类核心样品 ≥10⁴ 脉冲统计'的方法学参照，须有正式版或明确替代",
+      "missing_evidence": "① Goh S. J. et al. 2015 须在 Web of Science / Scopus 检索正式发表期刊（*Opt. Express* / *Phys. Rev. ST Accel. Beams* / *Phys. Rev. Accel. Beams* 候选）；② 若仅有 arXiv 版本，须替换为已发表的 HHG 单发涨落/shot-noise 经典文献（如 Heyl 2018、Jansen 2016、Mancuso 2016 等同期同行评审工作）。",
+      "search_keywords": [
+        "Goh 2015 single-shot waveguided HHG published Opt. Express",
+        "Goh 2015 single-shot waveguided HHG Phys. Rev. ST Accel. Beams",
+        "Heyl 2018 HHG shot-to-shot fluctuations PRL",
+        "Jansen 2016 HHG sub-cycle statistical",
+        "Mancuso 2016 HHG single-shot statistical PRL"
+      ],
+      "priority": "low"
+    }
+  ]
+}

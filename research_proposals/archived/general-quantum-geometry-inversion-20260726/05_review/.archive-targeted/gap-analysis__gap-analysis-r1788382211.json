@@ -1,0 +1,57 @@
+{
+  "gaps": [
+    {
+      "claim": "BSV-SBE框架的适用条件（r≤1.5、U/W≲1.0、HHG谐波阶次n≤11）",
+      "missing_evidence": "缺乏支撑该适用条件具体数值的原始文献或系统验证研究；需引用SBE强场极限理论工作或BSV-HHG系统基准测试论文",
+      "search_keywords": [
+        "semiconductor Bloch equation strong field validity limit",
+        "BSV SBE interband coupling saturation condition",
+        "bright squeezed vacuum HHG parameter regime benchmark",
+        "SBE breakdown criterion high harmonic generation"
+      ],
+      "priority": "critical"
+    },
+    {
+      "claim": "量子光驱动HHG相比经典光在几何反演方面的独特优势",
+      "missing_evidence": "缺少量子光HHG用于量子几何反演的直接方法论文；现有文献多集中于量子增强效应观测，缺乏系统性的几何信息提取方案",
+      "search_keywords": [
+        "quantum light high harmonic generation quantum geometry",
+        "bright squeezed vacuum Berry curvature HHG",
+        "quantum state driven harmonic spectroscopy geometry",
+        "HHG quantum light parameter estimation Fisher information"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "BSV光源RIN噪声特性（100-400×基准）与g(2)(0)参数（1.5-3）对HHG量子增强的影响",
+      "missing_evidence": "缺乏RIN噪声与量子增强定量关系的系统实验/理论工作；需BSV光场噪声特性标定论文支撑RIN数值",
+      "search_keywords": [
+        "bright squeezed vacuum relative intensity noise characterization",
+        "BSV RIN parametric amplifier measurement",
+        "squeezed light noise figure HHG enhancement",
+        "quantum light photon statistics harmonic generation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Lvovsky 2009量子态层析论文作为光场量子态表征基础文献的引用关联",
+      "missing_evidence": "需确认该引用是否与立项依据中量子光表征需求直接对应；如对应量子态层析方法在BSV表征中的应用，需补充该应用场景的连接文献",
+      "search_keywords": [
+        "quantum state tomography bright squeezed vacuum characterization",
+        "homodyne tomography squeezed light experimental",
+        "Lvovsky quantum tomography application BSV"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Breitenbach 1997压缩光产生论文与本课题BSV光源路线的历史脉络关联",
+      "missing_evidence": "1997年工作为压缩光基础产生，而非BSV直接关联；立项依据需更近期的参量下转换BSV产生文献（如Khurelbaatar 2025或Rivera-Dean 2025）建立直接历史脉络",
+      "search_keywords": [
+        "bright squeezed vacuum parametric down conversion 2010s 2020s",
+        "noncollinear OPA bright squeezed vacuum generation",
+        "BSV high gain parametric amplification solid HHG"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "gaps": [
+    {
+      "claim": "TDDFT 80–100 Ry 平面波截断的参数选择",
+      "missing_evidence": "[23] npj 2D Mater Appl 2025 全文未含截断能参数（历史未复核溯源），需补引含 80–100 Ry 截断能的同类 2D 磁性材料 TDDFT/DFT 计算文献",
+      "search_keywords": [
+        "TDDFT plane wave cutoff 80 Ry 2D antiferromagnet",
+        "MnPS3 NiPS3 DFT cutoff energy Ry",
+        "2D magnetic material ab initio plane wave cutoff"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "scheme"
+}

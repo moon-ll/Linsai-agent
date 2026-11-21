@@ -1,0 +1,395 @@
+{
+  "proposal_id": "general-quantum-geometry-inversion-20260726",
+  "cluster_id": "cl_20260815_48c66e",
+  "clusters": [
+    "cl_20260815_48c66e",
+    "cl_20260829_2314ae",
+    "cl_20260815_51db8c"
+  ],
+  "entries": [
+    {
+      "source_id": "paper:2024-2404.06086-probing-berry-phase-effect-in-topological-surface-states",
+      "title": "Probing Berry phase effect in topological surface states",
+      "summary": "该工作通过强场驱动拓扑绝缘体表面态的非线性光学响应（高次谐波）实验探测了Dirac型拓扑表面态电子所积累的Berry相位，证明这一量子几何相位可被编码并读取于光学谐波谱中。由此为全光、无接触地读取固体中的瞬态量子相位提供了直接实验方法。",
+      "path": "",
+      "added_via": "cluster:cl_20260815_48c66e",
+      "added_at": "2026-10-30T16:41:33Z"
+    },
+    {
+      "source_id": "paper:2026-2604.06051-disentangling-high-harmonic-generation-from-surfac",
+      "title": "Disentangling High Harmonic Generation from Surface and Bulk States of a Topological Insulator",
+      "summary": "该研究证明通过调控Bi₂Se₃拓扑绝缘体薄膜厚度可选择性分离高次谐波产生（HHG）中表面态与体态的贡献：超薄（6 nm）薄膜能增强源自拓扑表面态的HHG信号，从而实现两类态贡献的有效解耦。该方法为利用固态HHG作为探针研究拓扑表面态的超快动力学提供了新途径。",
+      "path": "",
+      "added_via": "cluster:cl_20260815_48c66e",
+      "added_at": "2026-10-30T16:41:33Z"
+    },
+    {
+      "source_id": "paper:2604.06051",
+      "title": "Disentangling High Harmonic Generation from Surface and Bulk States of a Topological Insulator",
+      "summary": "该工作在原型三维拓扑绝缘体 Bi2Se3 中实验研究高次谐波产生（HHG），证明体态与拓扑表面态对谐波发射的贡献可以被区分与调控。这为利用强场超快光谱选择性探测拓扑表面态独特电荷自旋动力学、实现表面/体态电子结构解耦测量提供了新途径。",
+      "path": "",
+      "added_via": "cluster:cl_20260815_48c66e",
+      "added_at": "2026-10-30T16:41:33Z"
+    },
+    {
+      "source_id": "briefing:knowledge/wiki/reviews/briefing-2026-05-24.md",
+      "title": "每日简报 2026-05-24：强场超快光学与阿秒科学研究简报",
+      "summary": "本简报汇总了7篇固体高次谐波（HHG）与强场超快光学领域最新论文，核心进展包括：ATAS揭示载流子动力学从界面受限向Auger主导转变（临界密度约1×10²⁰ cm⁻³）、Bi₂Se₃厚度可调控表面态/体态HHG贡献、Berry曲率与量子几何主导Dirac材料HHG，并拓展至有机分子晶体、ZnO取向依赖HHG及阿秒光斯格明子脉冲等新体系与新现象。",
+      "path": "",
+      "added_via": "cluster:cl_20260815_48c66e",
+      "added_at": "2026-10-30T16:41:33Z"
+    },
+    {
+      "source_id": "paper:2018-1807.01616-circular-dichroism-in-high-order-harmonic-generation-heraldi",
+      "title": "Circular dichroism in high-order harmonic generation: Heralding topological phases and transitions in Chern insulators",
+      "summary": "该文以Haldane模型为原型，理论上研究圆偏振中红外强场驱动下Chern绝缘体的高次谐波产生（HHG），提出HHG圆二色性（co-rotating与counter-rotating谐波强度的不对称）可作为拓扑相变的全光学指纹。核心发现：在拓扑平庸相中，CD随谐波阶数在正负间振荡；而在拓扑非平庸（Chern数非零）相中，CD在co-rotating平台谐波处呈现明显的平台结构，跨越拓扑相变时CD特征发生定性改变，从而以全光学方式指认拓扑相及其转变。",
+      "path": "knowledge/raw/papers/2018-1807.01616-circular-dichroism-in-high-order-harmonic-generation-heraldi.md",
+      "added_via": "cluster:cl_20260815_48c66e",
+      "added_at": "2026-10-30T16:41:33Z"
+    },
+    {
+      "source_id": "paper:2023-2303.17300-are-there-universal-signatures-of-topological-phases-in-high",
+      "title": "Are there universal signatures of topological phases in high harmonic generation? Probably not",
+      "summary": "对Kane-Mele拓扑绝缘体原型体系开展全从头算实时TDDFT强场模拟，在保持带隙完全一致的受控条件下对比平庸相与拓扑相的高次谐波产生（HHG）。系统检验了此前文献提出的四类拓扑签名——圆二色性、谐波螺旋度/椭圆度（含反常谐波选择定则）、带间-带内时间延迟——发现没有任何一个能在不同驱动与体系参数下唯一区分拓扑与平庸相。结论：HHG对能带结构与局域对称性的微观细节极为敏感，但不存在普适的'免校准'拓扑光学签名，相关实验解释需高度谨慎。",
+      "path": "knowledge/raw/papers/2023-2303.17300-are-there-universal-signatures-of-topological-phases-in-high.md",
+      "added_via": "cluster:cl_20260815_48c66e",
+      "added_at": "2026-10-30T16:41:33Z"
+    },
+    {
+      "source_id": "paper:2024-2401.01100-topological-high-harmonic-spectroscopy",
+      "title": "Topological high-harmonic spectroscopy",
+      "summary": "提出并系统论证'拓扑高次谐波光谱学'：在相对论性（狄拉克/Haldane 型蜂窝晶格）固体中，通过强场下能带动力学的数值求解，展示高次谐波谱如何编码能带的非平庸拓扑。论文给出了区分平庸相与拓扑相（不同陈数）的可观测判据，包括谐波产率、发射偏振以及垂直于激光场的反常（霍尔型）谐波分量，并检验这些指纹对激光参数的稳健性，为拓扑材料的全光学超快表征奠定基础。",
+      "path": "knowledge/raw/papers/2024-2401.01100-topological-high-harmonic-spectroscopy.md",
+      "added_via": "cluster:cl_20260815_48c66e",
+      "added_at": "2026-10-30T16:41:33Z"
+    },
+    {
+      "source_id": "paper:2018-1711.05783-high-harmonic-generation-in-solids-with-and-without-topologi",
+      "title": "High-harmonic generation in solids with and without topological edge states",
+      "summary": "利用一维含时密度泛函理论（TDDFT）对比研究了含与不含拓扑边界态的绝缘链中的高次谐波产生，发现拓扑相在次带隙区域的谐波产率比平庸相高出至多约14个数量级。机制上，体带间跃迁对次带隙谐波的贡献在布里渊区积分中几乎完全相消，而涉及中隙拓扑边态的跃迁不受此相消约束，从而产生极强的次带隙发射。该结果确立了次带隙谐波谱作为拓扑边界态全光学（超快）指纹的诊断方案。",
+      "path": "knowledge/raw/papers/2018-1711.05783-high-harmonic-generation-in-solids-with-and-without-topologi.md",
+      "added_via": "cluster:cl_20260815_48c66e",
+      "added_at": "2026-10-30T16:41:33Z"
+    },
+    {
+      "source_id": "paper:2024-2503.18092-probing-berry-phase-effect-in-topological-surface-states",
+      "title": "Probing Berry Phase Effect in Topological Surface States",
+      "summary": "该工作用双色场（ω+2ω）高次谐波光谱学在拓扑绝缘体表面态中直接探测Berry相位：强场驱动的电子-空穴准粒子沿k空间演化路径积累几何相位，表现为偶次谐波随双色相对相位振荡曲线的显著相移。这一相移与狄拉克锥固有的π Berry相位对应，为全光学、全光学域读取拓扑不变量提供了实验范式。",
+      "path": "knowledge/raw/papers/2024-2503.18092-probing-berry-phase-effect-in-topological-surface-states.md",
+      "added_via": "cluster:cl_20260815_48c66e",
+      "added_at": "2026-10-30T16:41:33Z"
+    },
+    {
+      "source_id": "paper:2026-aea1b4-high-harmonic-generation-in-topological-materials-a-comprehe",
+      "title": "High-harmonic generation in topological materials: a comprehensive review",
+      "summary": "本文系统综述了拓扑材料（拓扑绝缘体、外尔/Chern半金属、SSH型晶格等）中高次谐波产生的研究进展，梳理了表面Dirac态、Weyl节点及非平庸贝里结构对谐波产率、偏振与螺旋性依赖的调控。综述的核心批判性结论是：圆二色性（CD）与椭圆率依赖等常被称为'拓扑特征'的观测量大多属于拓扑敏感（topology-sensitive）而非拓扑特异（topology-specific），可由对称性破缺、多带干涉等平凡机制产生。文章进而给出通过表面/体相分离、拓扑相变跟踪及与同对称性拓扑平凡对照体系的严格比较来甄别真实拓扑印记的判据与路线图。",
+      "path": "knowledge/raw/papers/2026-aea1b4-high-harmonic-generation-in-topological-materials-a-comprehe.md",
+      "added_via": "cluster:cl_20260815_48c66e",
+      "added_at": "2026-10-30T16:41:33Z"
+    },
+    {
+      "source_id": "paper:2025-1nbk-9khj-topological-surface-states-dominated-second-harmonic-generat",
+      "title": "Topological surface states dominated second harmonic generation in the bulk insulating topological insulator BiSbTe1.25Se1.75",
+      "summary": "在体绝缘拓扑绝缘体 BiSbTe1.25Se1.75 中证明二次谐波产生（SHG）由拓扑表面态（TSS）主导：体相中心对称且体自由载流子被压制，表面破缺反演对称的二阶响应成为主通道。发现圆偏振激发可显著增强 SHG，该增强源自圆偏振光在 TSS 上诱导的时间反演对称性破缺贡献 Δχ(2)。借助螺旋度分辨与时间分辨测量提取 Δχ(2) 及其时间演化，将 SHG 发展为无接触探测拓扑表面态超快动力学的光学工具。",
+      "path": "knowledge/raw/papers/2025-1nbk-9khj-topological-surface-states-dominated-second-harmonic-generat.md",
+      "added_via": "cluster:cl_20260815_48c66e",
+      "added_at": "2026-10-30T16:41:33Z"
+    },
+    {
+      "source_id": "paper:2025-111.085107-circular-dichroism-of-the-dipole-transition-in-nanosized-top",
+      "title": "Circular dichroism of the dipole transition in nanosized topological insulators",
+      "summary": "在纳米尺寸（有限尺度）拓扑绝缘体中，理论上证明分立能级间偶极跃迁的圆二色性（CD）直接编码能带陈数的符号。在线偏振强场驱动下，该CD进一步映射为发射高次谐波的椭圆率，其旋向随陈数反号而翻转，构成拓扑不变量的全光学读出方案。作者并提出该物理可在磁约束陷阱（冷原子人工规范场小体系）中实验实现。",
+      "path": "knowledge/raw/papers/2025-111.085107-circular-dichroism-of-the-dipole-transition-in-nanosized-top.md",
+      "added_via": "cluster:cl_20260815_48c66e",
+      "added_at": "2026-10-30T16:41:33Z"
+    },
+    {
+      "source_id": "paper:2024-109.043102-angle-dependent-high-order-harmonic-generation-in-a-topologi",
+      "title": "Angle-dependent high-order harmonic generation in a topological insulator",
+      "summary": "本文系统研究拓扑绝缘体中高次谐波产率随强场线偏振角的变化，发现先前文献提出、并被建议用作拓扑不变量光学探针的角度依赖谐波差分信号实际上严格消失。该负结果表明此差分信号并非可靠的拓扑读出量，提示任何'固态HHG读拓扑'方案都必须先通过与晶体对称性解耦的非零性检验。",
+      "path": "knowledge/raw/papers/2024-109.043102-angle-dependent-high-order-harmonic-generation-in-a-topologi.md",
+      "added_via": "cluster:cl_20260815_48c66e",
+      "added_at": "2026-10-30T16:41:33Z"
+    },
+    {
+      "source_id": "paper:2020-2009.10378-high-harmonic-generation-from-topological-surface-states",
+      "title": "High-harmonic generation from topological surface states",
+      "summary": "在拓扑绝缘体 BiSbTeSe2（BSTS）中首次观测到主要由拓扑表面态（TSS）贡献的高次谐波：体相中心对称只给出奇次谐波，而自旋-动量锁定的表面狄拉克锥产生显著的偶次谐波。通过与拓扑平庸对照样品的对比，偶次谐波仅在拓扑相中出现，从而建立了以偶次谐波为指纹的全光探测拓扑相变的方法。理论含时模拟（基于 massive Dirac 表面哈密顿量的半导体布洛赫方程）确认偶次谐波由带内自旋织构非线性电流主导。",
+      "path": "knowledge/raw/papers/2020-2009.10378-high-harmonic-generation-from-topological-surface-states.md",
+      "added_via": "cluster:cl_20260815_48c66e",
+      "added_at": "2026-10-30T16:41:33Z"
+    },
+    {
+      "source_id": "paper:2021-2109.10858-tunable-non-integer-high-harmonic-generation-in-a-topologica",
+      "title": "Tunable non-integer high-harmonic generation in a topological insulator",
+      "summary": "实验首次在三维拓扑绝缘体 Bi2Te3 中实现了随载波包络相位（CEP）连续可调的非整数倍高次谐波发射（Nature 593, 385, 2021）。谐波谱、CEP 依赖与圆偏振螺旋度依赖共同表明，拓扑表面态 Dirac 费米子的亚周期弹道加速是主导机制，而六角翘曲导致的 Berry 曲率通过反常速度贡献横向电流。结合含从头算 Berry 曲率的半经典模拟，实验定量区分了表面态与体相贡献，建立了'波形可控强场驱动 + 拓扑带面几何'的谐波产生新范式。",
+      "path": "knowledge/raw/papers/2021-2109.10858-tunable-non-integer-high-harmonic-generation-in-a-topologica.md",
+      "added_via": "cluster:cl_20260815_48c66e",
+      "added_at": "2026-10-30T16:41:33Z"
+    },
+    {
+      "source_id": "paper:2026-2610.28046-attosecond-quantum-optical-spectroscopy-of-topolog",
+      "title": "Attosecond Quantum Optical Spectroscopy of Topological Materials",
+      "summary": "本文提出并论证一种'阿秒量子光学光谱学'方案：将拓扑材料高次谐波产生（HHG）的观测从经典强度谱扩展到谐波场的量子光学关联量。核心结论是传统谱学观测量（产率、截止、偏振等）依赖具体能带细节、不构成能带拓扑的普适签名，而量子光学层面的观测（谐波光子统计/关联等）能够提供跨材料共性的拓扑判据。由此把HHG对量子材料的超快探测能力与拓扑不变量的直接读出联系起来。（注：简报卡摘要截断，以上按标题与首句方向重构。）",
+      "path": "knowledge/raw/papers/2026-2610.28046-attosecond-quantum-optical-spectroscopy-of-topolog.md",
+      "added_via": "cluster:cl_20260815_48c66e",
+      "added_at": "2026-10-30T16:41:33Z"
+    },
+    {
+      "source_id": "paper:2020-2007.13434-intense-laser-driven-electron-dynamics-and-high-harmonic-gen",
+      "title": "Intense-laser driven electron dynamics and high-harmonic generation in solids including topological effects",
+      "summary": "在紧束缚近似下，对任意维度、含两格点单胞（两带）的晶体建立了强激光驱动单电子动力学与HHG的解析理论：将含时薛定谔方程在动量表中化为各k点的二能级系统并给出解析解，电子速度期望值被显式分解为群速度、反常速度（Berry曲率项）与带间相干项。拓扑信息经由Berry联络/Zak相位完整进入电流与谐波发射，并以SSH链为例展示平庸相与拓扑相在HHG谱中可分辨的差异。",
+      "path": "knowledge/raw/papers/2020-2007.13434-intense-laser-driven-electron-dynamics-and-high-harmonic-gen.md",
+      "added_via": "cluster:cl_20260815_48c66e",
+      "added_at": "2026-10-30T19:01:14Z"
+    },
+    {
+      "source_id": "paper:2021-2101.03635-ultrafast-and-strong-field-physics-in-graphene-like-crystals",
+      "title": "Ultrafast and Strong-Field Physics in Graphene-Like Crystals: Bloch Band Topology and High-Harmonic Generation",
+      "summary": "该工作建立了石墨烯类二维晶体在超快强激光场下高次谐波产生（HHG）的理论框架（基于含时密度矩阵/半导体Bloch方程），系统揭示了Bloch能带拓扑（Berry曲率、量子度规及带隙/亚晶格破缺）对谐波强度、偏振与相位的调控机制。核心贡献在于提出固体HHG可作为非接触超快探针，直接读取能带拓扑信息（如拓扑不变量与谷自由度），架起了强场非线性光学与拓扑量子材料之间的桥梁。",
+      "path": "",
+      "added_via": "cluster:cl_20260829_2314ae",
+      "added_at": "2026-10-30T19:01:14Z"
+    },
+    {
+      "source_id": "paper:2021-2103.04967-light-matter-coupling-and-quantum-geometry-in-moiré-material",
+      "title": "Light-matter coupling and quantum geometry in moiré materials",
+      "summary": "该工作建立了莫尔材料中光-物质耦合强度与量子几何量（Berry曲率、量子度规）之间的定量关系，揭示了量子几何在决定偶极矩阵元中的核心作用，并以此为基础提出了Floquet调控莫尔平带色散的通用理论框架。",
+      "path": "knowledge/raw/papers/2021-2103.04967-light-matter-coupling-and-quantum-geometry-in-moiré-material.md",
+      "added_via": "cluster:cl_20260829_2314ae",
+      "added_at": "2026-10-30T19:01:14Z"
+    },
+    {
+      "source_id": "paper:2025-2507.15853-optimized-fabrication-procedure-for-high-quality-graphene-ba",
+      "title": "Optimized Fabrication Procedure for High-Quality Graphene-based Moiré Superlattice Devices",
+      "summary": "本文系统优化了石墨烯莫尔超晶格器件的制备工艺，通过精确控制扭转角实现高均匀性样品，显著提升了器件质量与可重复性，为强场超快实验提供了高质量的样品基础。",
+      "path": "knowledge/raw/papers/2025-2507.15853-optimized-fabrication-procedure-for-high-quality-graphene-ba.md",
+      "added_via": "cluster:cl_20260829_2314ae",
+      "added_at": "2026-10-30T19:01:14Z"
+    },
+    {
+      "source_id": "paper:2022-2207.02830-enhancement-of-high-harmonic-generation-in-bulk-floquet-syst",
+      "title": "Enhancement of High Harmonic Generation in Bulk Floquet Systems",
+      "summary": "提出双场方案：在产生高次谐波的线偏振强探针之外，叠加一束频率低于带隙的辅助周期驱动（Floquet驱动），理论证明其形成的Floquet准能带可将体材料谐波产率提升约两个数量级。通过半导体Bloch方程数值解并结合Floquet边带分析，把增强归结为边带-带隙共振与动态局域化两类可控机制，建立了Floquet工程与固态HHG主动调控之间的直接联系。",
+      "path": "knowledge/raw/papers/2022-2207.02830-enhancement-of-high-harmonic-generation-in-bulk-floquet-syst.md",
+      "added_via": "cluster:cl_20260829_2314ae",
+      "added_at": "2026-10-30T19:01:14Z"
+    },
+    {
+      "source_id": "paper:2025-2501.06885-the-impact-of-intraband-carrier-dynamics-on-the-optical-prop",
+      "title": "The impact of intraband carrier dynamics on the optical properties of two-dimensional materials: I. General theory",
+      "summary": "建立了一个普适理论框架：在跟随带内加速运动的共动参考系中求解半导体Bloch方程（SBE），从而系统刻画二维材料中带内载流子动力学对光学性质的影响。该框架统一处理了带内运动对带间极化（跃迁能量与偶极矩阵元沿k轨迹的取样）的修正以及带内电流对发射场的贡献，可给出从线性极化率到高次谐波谱的完整响应。作为系列工作的第一部分（General theory），为后续具体二维材料的应用计算奠定方法论基础。",
+      "path": "knowledge/raw/papers/2025-2501.06885-the-impact-of-intraband-carrier-dynamics-on-the-optical-prop.md",
+      "added_via": "cluster:cl_20260829_2314ae",
+      "added_at": "2026-10-30T19:01:14Z"
+    },
+    {
+      "source_id": "paper:2025-2511.05112-unexpected-increase-of-intensity-dependent-excitonic-second",
+      "title": "Unexpected increase of intensity-dependent excitonic second- and third-harmonic generation induced by static electric fields",
+      "summary": "本文用含激子库仑相互作用的半导体Bloch方程（密度矩阵）方法，数值求解MoS2同质双层中激子型二次与三次谐波产生（SHG/THG）随驱动光强的完整演化。核心发现是：外加静态电场不仅按预期通过破坏层反演对称性激活SHG，还在强驱动区间反常地增强强度依赖的SHG与THG产率，超出了微扰非线性光学的幂律预期。该结果为用直流电场作为外加调控自由度操纵二维半导体激子非线性光学响应提供了明确的理论预言。",
+      "path": "knowledge/raw/papers/2025-2511.05112-unexpected-increase-of-intensity-dependent-excitonic-second.md",
+      "added_via": "cluster:cl_20260829_2314ae",
+      "added_at": "2026-10-30T19:01:14Z"
+    },
+    {
+      "source_id": "paper:2024-2407.16350-many-body-enhancement-of-high-harmonic-generation-in-monolay",
+      "title": "Many-body enhancement of high-harmonic generation in monolayer MoS2",
+      "summary": "发展了基于实时非平衡格林函数（Keldysh形式）的含时从头算GW（TD-aGW）方法，首次在第一性原理框架内将电子-空穴相互作用（激子效应）自洽纳入固体强场高次谐波模拟。应用于单层MoS2发现：多体效应显著增强谐波产率，且电子-空穴吸引与Berry曲率反常速度协同导致垂直于层面方向的偶次谐波出现非单调增强。结果表明TDDFT局域近似会系统性低估甚至定性错过这类激子增强的HHG特征，为二维材料强场响应提供了新的定量基准。",
+      "path": "knowledge/raw/papers/2024-2407.16350-many-body-enhancement-of-high-harmonic-generation-in-monolay.md",
+      "added_via": "cluster:cl_20260829_2314ae",
+      "added_at": "2026-10-30T19:01:14Z"
+    },
+    {
+      "source_id": "paper:2019-1905.08016-high-order-harmonic-generation-in-gapped-bilayer-graphene",
+      "title": "High-order harmonic generation in gapped bilayer graphene",
+      "summary": "在Liouville–von Neumann（密度矩阵）方程框架内建立了有带隙双层石墨烯高次谐波产生的微观量子理论，非微扰地处理强THz/远红外驱动场下的带间-带内耦合动力学。结果表明，带隙可调的双层石墨烯在THz和远红外波段可作为有效的谐波介质，谐波谱对带隙、场强与频率之比呈现系统性的参数依赖。",
+      "path": "knowledge/raw/papers/2019-1905.08016-high-order-harmonic-generation-in-gapped-bilayer-graphene.md",
+      "added_via": "cluster:cl_20260829_2314ae",
+      "added_at": "2026-10-30T19:01:14Z"
+    },
+    {
+      "source_id": "paper:2018-1805.12370-high-harmonic-generation-with-circularly-polarized-fields-in",
+      "title": "High harmonic generation with circularly polarized fields in solid: a quantum trajectory perspective",
+      "summary": "针对圆偏振场驱动的固体高次谐波（HHG），发展了倒易空间量子轨迹（RST）方法，将半导体布洛赫方程描述的电子-空穴动力学分解为可追踪的k空间轨迹，从而给出圆偏振固体HHG的微观图像。发现HHG呈现双平台结构且两平台对激光椭偏度的依赖相反：源于带内电流的下平台随椭偏度增强，源于带间复合的上平台则被圆偏振抑制。在此基础上提出四步模型（电子-空穴对产生→倒空间加速→能量获取→复合发射），定量再现了谐波谱及其椭偏度依赖。",
+      "path": "knowledge/raw/papers/2018-1805.12370-high-harmonic-generation-with-circularly-polarized-fields-in.md",
+      "added_via": "cluster:cl_20260829_2314ae",
+      "added_at": "2026-10-30T19:01:14Z"
+    },
+    {
+      "source_id": "paper:2023-2306.10001-high-harmonic-generation-in-solids-particle-and-wave-perspec",
+      "title": "High harmonic generation in solids: particle and wave perspectives",
+      "summary": "这篇 Rep. Prog. Phys. 综述系统对比了固体高次谐波（HHG）的两种物理图像：从原子HHG移植而来的粒子性'三步再碰撞'图像，以及作者提出的波动性惠更斯-菲涅耳（Huygens-Fresnel）图像——后者把带间极化视为连续分布的次波源，谐波谱由各(k,t)源相干叠加与量子轨迹干涉决定。综述用波动图像解释了固体HHG中再碰撞模型遇到的困难（弱椭圆度依赖、退相干敏感、波包展宽等），并统一梳理了带内/带间电流分解、布洛赫振荡、动力学对称性与能带全光学重构等核心议题。整体上是理解固体强场谐波机制的一篇权威框架性文献。",
+      "path": "knowledge/raw/papers/2023-2306.10001-high-harmonic-generation-in-solids-particle-and-wave-perspec.md",
+      "added_via": "cluster:cl_20260829_2314ae",
+      "added_at": "2026-10-30T19:01:14Z"
+    },
+    {
+      "source_id": "paper:2024-2406.14946-probing-topological-phase-transitions-in-aubry-andre-harper",
+      "title": "Probing topological phase transitions in Aubry-Andre-Harper model via high-harmonic generation",
+      "summary": "本文在 Aubry-André-Harper（AAH）准周期链模型中施加强激光驱动产生高次谐波，发现由调制相位 φ 控制的拓扑平庸—非平庸相变可由 HHG 谱直接读出：非平庸相的谐波产额显著高于平庸相。这一产额增强与拓扑不变量（绕数）随 φ 的切换一一对应，表明 HHG 可作为无需带结构重构的全光学拓扑相检测工具。",
+      "path": "knowledge/raw/papers/2024-2406.14946-probing-topological-phase-transitions-in-aubry-andre-harper.md",
+      "added_via": "cluster:cl_20260829_2314ae",
+      "added_at": "2026-10-30T19:01:14Z"
+    },
+    {
+      "source_id": "paper:2021-2112.01745-high-harmonic-spectroscopy-of-light-driven-nonlinear-anisotr",
+      "title": "High-harmonic spectroscopy of light-driven nonlinear anisotropic anomalous Hall effect in solids",
+      "summary": "提出并论证用强场线偏振光驱动固体时垂直于驱动偏振方向的偶次横向谐波，作为光驱动非线性各向异性反常霍尔效应的全光学光谱探针。横向偶次谐波的强度与偏振随抽运偏振相对晶轴取向的旋转而变化，直接编码k空间Berry曲率的分布、符号与各向异性，从而把微扰区的非线性反常霍尔（Berry曲率偶极）框架推广到强场高次谐波区。这为非接触、超快地读取磁性/拓扑固体的Berry曲率与反常霍尔响应提供了谐波光谱学方案。",
+      "path": "knowledge/raw/papers/2021-2112.01745-high-harmonic-spectroscopy-of-light-driven-nonlinear-anisotr.md",
+      "added_via": "cluster:cl_20260829_2314ae",
+      "added_at": "2026-10-30T19:01:14Z"
+    },
+    {
+      "source_id": "paper:2025-2504.17335-high-order-harmonic-generation-and-its-ellipticity-in-gapped",
+      "title": "High-order harmonic generation and its ellipticity in gapped graphene",
+      "summary": "在带隙石墨烯（亚晶格错列势打开能隙的紧束缚模型）中用密度矩阵方法（半导体布洛赫方程型）同时计算了高次谐波谱与谐波椭圆度，建立了带隙、场参量与谐波偏振特性的系统关联。通过半经典电子-空穴再碰撞轨迹分析，证明特定谐波阶的增强源自短/长轨迹在能量-时间映射上的合并点，即焦散效应（Airy型增强），而非通常的多轨迹相干。进一步利用谐波椭圆度对轨迹权重（因而对退相干）的高敏感性，从理论-实验对比中提取了电子-空穴相干时间T2。",
+      "path": "knowledge/raw/papers/2025-2504.17335-high-order-harmonic-generation-and-its-ellipticity-in-gapped.md",
+      "added_via": "cluster:cl_20260829_2314ae",
+      "added_at": "2026-10-30T19:01:14Z"
+    },
+    {
+      "source_id": "paper:2024-2307.14090-observation-of-interband-berry-phase-in-laser-driven-crystal",
+      "title": "Observation of interband Berry phase in laser-driven crystals",
+      "summary": "首次在实验上观测并重构了强激光驱动晶体（α-石英）高次谐波中携带的带间Berry相位，证明固体HHG直接编码布里渊区中的能带几何信息。利用强场在亚周期尺度构建的天然干涉仪（多条量子轨迹的相干干涉）结合谐波偏振全表征（两正交分量的振幅与相位），实验提取了沿激光驱动k(t)路径累积的几何相位。结果与含时第一性原理/半导体Bloch方程理论定量吻合，确立了HHG作为能带Berry联络/曲率的全光、超快探针。",
+      "path": "knowledge/raw/papers/2024-2307.14090-observation-of-interband-berry-phase-in-laser-driven-crystal.md",
+      "added_via": "cluster:cl_20260829_2314ae",
+      "added_at": "2026-10-30T19:01:14Z"
+    },
+    {
+      "source_id": "paper:2025-2510.22064-semiconductor-wannier-equations-a-real-time-real-space-appro",
+      "title": "Semiconductor Wannier equations: a real-time, real-space approach to the nonlinear optical response in crystals",
+      "summary": "该文提出并系统推导了'半导体万尼尔方程'（Semiconductor Wannier Equations）：以Wannier基单粒子密度矩阵为核心变量、在实空间实时演化晶体非线性光学响应的框架，是k空间半导体布洛赫方程（SBE）的实空间对偶形式。基本变量为格点分辨的带间极化（'键'相干）与带内布居，通过位置算符的Wannier矩阵元统一处理带间偶极激发与带内加速/位移动力学。该表述天然兼容空间非均匀光场、有限尺寸、无序及moiré等大实空间周期体系，并在模型晶体上再现与k空间SBE/Houston方法等价的高次谐波谱与非线性电流。",
+      "path": "knowledge/raw/papers/2025-2510.22064-semiconductor-wannier-equations-a-real-time-real-space-appro.md",
+      "added_via": "cluster:cl_20260829_2314ae",
+      "added_at": "2026-10-30T19:01:14Z"
+    },
+    {
+      "source_id": "paper:2025-2507.03791-floquet-engineering-unveiled-by-high-harmonic-generation",
+      "title": "Floquet-engineering unveiled by high-harmonic generation",
+      "summary": "在MgO中实验观测到固态高次谐波谱中源于Floquet-Bloch态非绝热耦合的弧形共振特征，以全光学方式直接揭示了强场驱动下的Floquet能带工程。弧形结构随驱动参数演化，追踪光致能带杂化（缀饰能带回避交叉）的变化，表明体系处于Floquet参数F>1的深非绝热强杂化区。该工作确立了HHG光谱作为Floquet-Bloch缀饰能带结构的原位探针，为光致物态调控提供了直接表征手段。",
+      "path": "knowledge/raw/papers/2025-2507.03791-floquet-engineering-unveiled-by-high-harmonic-generation.md",
+      "added_via": "cluster:cl_20260829_2314ae",
+      "added_at": "2026-10-30T19:01:14Z"
+    },
+    {
+      "source_id": "paper:2015-1506.06567-extreme-ultraviolet-high-harmonic-spectroscopy-of-solids",
+      "title": "Extreme ultraviolet high-harmonic spectroscopy of solids",
+      "summary": "首次在固体（α-石英 SiO₂ 薄膜，透射构型）中观测到延伸至极紫外 ~40 eV 的相干高次谐波（multipetahertz 量级），将固体 HHG 从近红外推向 EUV 波段。谐波被归属为导带电子在强场驱动的带内非线性电流（布洛赫振荡）辐射，其截止能量随驱动场幅近线性增长，区别于气体 HHG 的 Up∝λ²I 标度。基于谐波谱对能带色散傅里叶分量的编码，实现了导带结构（价带之上数十 eV）的全光学重构，开辟了固体高次谐波能带谱学这一方向。",
+      "path": "knowledge/raw/papers/2015-1506.06567-extreme-ultraviolet-high-harmonic-spectroscopy-of-solids.md",
+      "added_via": "cluster:cl_20260829_2314ae",
+      "added_at": "2026-10-30T19:01:14Z"
+    },
+    {
+      "source_id": "paper:2018-1804.07565-measurement-of-the-berry-curvature-of-solids-using-high-harm",
+      "title": "Measurement of the Berry curvature of solids using high-harmonic spectroscopy",
+      "summary": "首次通过测量 α-石英（α-quartz）中 EUV 固态高次谐波的完整偏振态（椭偏率与偏振旋转角随晶体取向的变化），结合反常速度理论，直接从 HHG 谱反演出第一导带沿激光驱动 k 轨迹的 Berry 曲率大小与符号。该工作确立了偏振分辨高次谐波光谱作为一种全光学、亚周期时间分辨的能带量子几何探针，发表于 Nat. Commun. 9, 916 (2018)。",
+      "path": "knowledge/raw/papers/2018-1804.07565-measurement-of-the-berry-curvature-of-solids-using-high-harm.md",
+      "added_via": "cluster:cl_20260829_2314ae",
+      "added_at": "2026-10-30T19:01:14Z"
+    },
+    {
+      "source_id": "paper:2024-s41524-024-01399-z-enhanced-high-harmonic-efficiency-through-phonon-assisted-ph",
+      "title": "Enhanced high harmonic efficiency through phonon-assisted photodoping effect",
+      "summary": "本文用实时TDDFT耦合经典核运动（Ehrenfest动力学）研究hBN中光学声子对强场高次谐波产生的调制，发现声子驱动的光致载流子掺杂（photodoping）可使HHG产额提升约20倍。核心结论是谐波效率与光激发载流子密度之间存在普适标度律，说明载流子密度（而非声子振幅本身）是控制固体HHG效率的关键自由度。这为通过相干声子或前置泵浦调控载流子密度来增强固体高次谐波效率提供了第一性原理依据。",
+      "path": "knowledge/raw/papers/2024-s41524-024-01399-z-enhanced-high-harmonic-efficiency-through-phonon-assisted-ph.md",
+      "added_via": "cluster:cl_20260829_2314ae",
+      "added_at": "2026-10-30T19:01:14Z"
+    },
+    {
+      "source_id": "paper:2020-2005.14293-high-harmonic-generation-in-spin-orbit-coupled-systems",
+      "title": "High-harmonic generation in spin-orbit coupled systems",
+      "summary": "在Rashba与线性Dresselhaus自旋轨道耦合的二维电子气（含交换场磁化）模型中，用群论/动力学对称性方法系统推导了强场圆偏振驱动下HHG的阶次与发射螺旋度选择规则，并以实时密度矩阵（半导体Bloch方程）传播数值验证。核心发现：偶次谐波的出现与螺旋度通道图样由磁化方向（面内/面外）与SOC类型（Rashba vs Dresselhaus）共同决定，左/右圆偏振驱动呈强二色性，且谐波产额对SOC强度敏感。据此提出螺旋度-磁化分辨的HHG可作为自旋轨道耦合强度与磁序的全光学超快探针。",
+      "path": "knowledge/raw/papers/2020-2005.14293-high-harmonic-generation-in-spin-orbit-coupled-systems.md",
+      "added_via": "cluster:cl_20260829_2314ae",
+      "added_at": "2026-10-30T19:01:14Z"
+    },
+    {
+      "source_id": "paper:2024-2405.17673-ultrafast-high-harmonic-spectroscopy-of-solids",
+      "title": "Ultrafast high-harmonic spectroscopy of solids",
+      "summary": "本文是发表在 Nature Physics 的综述，系统总结了固体高次谐波光谱（HHG spectroscopy of solids）作为阿秒时间分辨探针的最新进展：利用强场驱动下晶体与低维材料发射的高次谐波，可实现全光能带重构、晶体与拓扑性质（Berry曲率、拓扑边缘态）诊断，并延伸至多体关联与非平衡相变的超快探测。文章梳理了从体相晶体到二维材料的代表性实验与理论框架，并展望了HHG作为复杂材料量子动力学历谱工具的发展方向。",
+      "path": "knowledge/raw/papers/2024-2405.17673-ultrafast-high-harmonic-spectroscopy-of-solids.md",
+      "added_via": "cluster:cl_20260829_2314ae",
+      "added_at": "2026-10-30T19:01:14Z"
+    },
+    {
+      "source_id": "paper:2026-2610.15251-valley-resolved-high-harmonics-probe-symmetry-brea",
+      "title": "Valley-resolved high harmonics probe symmetry breaking beyond the Dirac cone",
+      "summary": "本文提出并论证：石墨烯低能电子由突现旋转不变的狄拉克方程描述，而蜂窝晶格信息仅通过高阶对称破缺修正（首项为三角翘曲等动量高阶项）进入电子动力学。通过对高次谐波进行谷（K/K'）分辨，并利用其对驱动场偏振相对晶格取向的依赖，可以在纯狄拉克锥图像完全失效之处直接读出这些超越狄拉克锥的晶格对称破缺修正。谷分辨谐波由此成为一种对晶格尺度对称性敏感的强场光谱'指纹'探针。",
+      "path": "knowledge/raw/papers/2026-2610.15251-valley-resolved-high-harmonics-probe-symmetry-brea.md",
+      "added_via": "cluster:cl_20260829_2314ae",
+      "added_at": "2026-10-30T19:01:14Z"
+    },
+    {
+      "source_id": "paper:2018-1807.02525-floquet-theoretical-formulation-and-analysis-of-high-harmoni",
+      "title": "Floquet-Theoretical Formulation and Analysis of High-Harmonic Generation in Solids",
+      "summary": "从Floquet本征态出发，推导了单色激光场突然开启瞬间固体电流高次谐波分量的解析表达式，建立了固体HHG的Floquet理论框架。以一维交错势链（SSH型双带模型）为例解析证明：HHG谱中存在带内（非线性Bloch振荡）与带间（Landau-Zener隧穿-复合）两个起源不同的平台。给出定量标度律：两平台宽度均正比于场振幅，分别反比于激光频率的一次方（带内）与平方（带间）。",
+      "path": "knowledge/raw/papers/2018-1807.02525-floquet-theoretical-formulation-and-analysis-of-high-harmoni.md",
+      "added_via": "cluster:cl_20260829_2314ae",
+      "added_at": "2026-10-30T19:01:14Z"
+    },
+    {
+      "source_id": "paper:2021-2111.10986-high-harmonic-generation-in-monolayer-and-bilayer-of-transit",
+      "title": "High Harmonic Generation in Monolayer and Bilayer of Transition Metal Dichalcogenide",
+      "summary": "本文基于紧束缚模型求解强场布洛赫动力学，系统对比了 MoS2 单层与双层在 2/3.8/5.0 μm 中红外驱动下的高次谐波谱。核心结论是谐波发射中编码了能谷信息与 Berry 曲率：单层因反演对称破缺而具有谷选择性与反常速度贡献，双层（2H 堆叠）恢复反演后这些特征被显著改变，层间耦合与驱动波长共同决定谱形与截止阶数。该工作为用 HHG 读取层状 TMD 的层数依赖量子几何信息提供了理论基准。",
+      "path": "knowledge/raw/papers/2021-2111.10986-high-harmonic-generation-in-monolayer-and-bilayer-of-transit.md",
+      "added_via": "cluster:cl_20260829_2314ae",
+      "added_at": "2026-10-30T19:01:14Z"
+    },
+    {
+      "source_id": "paper:2022-2211.06244-formation-of-the-solid-state-high-order-harmonic-generation",
+      "title": "Formation of the solid-state high-order harmonic generation plateau through destructive interference",
+      "summary": "本文证明固体高次谐波（HHG）平台的截止并非由材料最大带隙直接设定，而是由布里渊区内不同初始晶向动量 k0 处电子发射的相消干涉形成，截止能量低于最大带隙且依赖激光强度。基于 SSH（二聚化紧束缚）链模型的动量空间 TDSE 计算与 k0 分解的谐波发射分析给出该机制及强度依赖的截止标定。",
+      "path": "knowledge/raw/papers/2022-2211.06244-formation-of-the-solid-state-high-order-harmonic-generation.md",
+      "added_via": "cluster:cl_20260829_2314ae",
+      "added_at": "2026-10-30T19:01:14Z"
+    },
+    {
+      "source_id": "paper:2026-260727847-even-harmonic-generation-through-nonequilibri",
+      "title": "Even-harmonic generation through nonequilibrium steady-state symmetry breaking",
+      "summary": "该研究表明，无需改变系统固有的反演对称结构，仅通过将其驱动至非平衡稳态即可实现对称性破缺，从而使原本受选择定则限制、只能产生奇次谐波的反演对称系统产生偶次高次谐波。",
+      "path": "",
+      "added_via": "cluster:cl_20260815_51db8c",
+      "added_at": "2026-10-30T19:01:14Z"
+    },
+    {
+      "source_id": "paper:2024-2405.16125-impact-of-crystal-symmetries-and-weyl-nodes-on-high-harmonic",
+      "title": "Impact of crystal symmetries and Weyl nodes on high-harmonic generation in Weyl semimetal TaAs",
+      "summary": "该文献发展了Jones矩阵理论框架，系统分析了Weyl半金属TaAs中晶体对称性与Weyl节点对高次谐波产生（HHG）的影响，揭示了拓扑能带结构在谐波发射中的关键作用。该框架为拓扑材料中的高次谐波选择定则提供了普适性理论依据。",
+      "path": "",
+      "added_via": "cluster:cl_20260815_51db8c",
+      "added_at": "2026-10-30T19:01:14Z"
+    },
+    {
+      "source_id": "paper:2024-2412.13311-non-perturbative-nonlinear-optical-responses-in-weyl-semimet",
+      "title": "Non-perturbative nonlinear optical responses in Weyl semimetals",
+      "summary": "系统研究了type-I与type-II Weyl半金属在倾斜、Weyl点能量分裂、能隙等非理想条件下的非微扰非线性光学响应（高次谐波产生，HHG）。发现type-II锥的过倾斜显著增强高次谐波产额，能量分裂对产额具有调制作用。进一步证明倾斜与能隙共同破缺反演对称性，从而解锁原本被选择定则禁戒的偶次谐波，为用HHG谱学读取Weyl半金属的电子结构参数提供了途径。",
+      "path": "knowledge/raw/papers/2024-2412.13311-non-perturbative-nonlinear-optical-responses-in-weyl-semimet.md",
+      "added_via": "cluster:cl_20260815_51db8c",
+      "added_at": "2026-10-30T19:01:14Z"
+    },
+    {
+      "source_id": "paper:2024-2407.09700-non-perturbative-nonlinear-optical-responses-in-weyl-semimet",
+      "title": "Non-perturbative nonlinear optical responses in Weyl semimetals",
+      "summary": "系统研究了type-II（倾斜）与能量劈裂Weyl半金属中的非微扰高次谐波产生（HHG），发现type-II倾斜显著增强高次谐波产率，且倾斜方向相对激光偏振是关键调控参数。进一步证明在反演对称的Weyl半金属中，倾斜与Weyl节点能量劈裂共同作用可打破选择定则、涌现偶次谐波，为用固态HHG读出对称性并设计拓扑相干光源提供了途径（Appl. Phys. Lett. 125, 051104, 2024）。",
+      "path": "knowledge/raw/papers/2024-2407.09700-non-perturbative-nonlinear-optical-responses-in-weyl-semimet.md",
+      "added_via": "cluster:cl_20260815_51db8c",
+      "added_at": "2026-10-30T19:01:14Z"
+    },
+    {
+      "source_id": "paper:2022-2205.06616-high-order-harmonic-generations-in-tilted-weyl-semimetals",
+      "title": "High-order harmonic generations in tilted Weyl semimetals",
+      "summary": "通过求解含时狄拉克方程（TDDE）在最小倾斜外尔锥模型上系统比较 type-I 与 type-II 外尔半金属在强激光场下的高次谐波产生。发现 type-II 锥过倾斜形成的双曲开放电子/空穴口袋带来极强的带内非线性电流，产生大幅直流（DC）分量和显著增强的偶次谐波，其根源是倾斜项（赝自旋空间单位矩阵）破坏了单锥的电子-空穴/反演对称。进一步表明倾斜破坏旋转对称导致圆偏振驱动下的谐波选择定则破缺，提出偶次谐波强度与 DC 分量可作为区分 type-I/type-II 外尔锥的强场光谱指纹。",
+      "path": "knowledge/raw/papers/2022-2205.06616-high-order-harmonic-generations-in-tilted-weyl-semimetals.md",
+      "added_via": "cluster:cl_20260815_51db8c",
+      "added_at": "2026-10-30T19:01:14Z"
+    },
+    {
+      "source_id": "paper:2026-2607.01519-nonperturbative-nonlinear-hall-effect-in-nonequilibrium-stea",
+      "title": "Nonperturbative Nonlinear Hall Effect in Nonequilibrium Steady States",
+      "summary": "本文发展了一套基于非平衡定态格林函数（Keldysh 形式）的非微扰非线性霍尔（NLH）响应计算方法，将外加电场按所有阶自洽处理，而非微扰展开。该方法适用于强场区以及 Berry 曲率热点附近的带间跃迁与深度非平衡分布，恰是传统 Berry 曲率偶极（BCD）+ 常数弛豫时间半经典图像失效的区域。结果为强场下拓扑材料（如 Weyl 型体系）的非线性输运提供了超越半经典近似的定量框架。",
+      "path": "knowledge/raw/papers/2026-2607.01519-nonperturbative-nonlinear-hall-effect-in-nonequilibrium-stea.md",
+      "added_via": "cluster:cl_20260815_51db8c",
+      "added_at": "2026-10-30T19:01:14Z"
+    }
+  ]
+}

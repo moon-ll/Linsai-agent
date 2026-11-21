@@ -1,0 +1,110 @@
+{
+  "gaps": [
+    {
+      "claim": "15%/30%/20% 失效阈值被冠名 Cousin[2]，原文无此数据",
+      "missing_evidence": "Peschel 多通道 TDSE 数值模拟给出的通道重叠度对条纹重构误差的定量关系（15%/30% 阈值）原文支撑",
+      "search_keywords": [
+        "Peschel two-channel TDSE attosecond streaking",
+        "multi-channel ionization streaking reconstruction error percentage",
+        "interchannel coupling attosecond retrieval threshold",
+        "Peschel arXiv multi-channel ionization retrieval"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Tarrant[21] 系纯理论预言（arXiv:2503.21976 预印本），被冠'实验证据'",
+      "missing_evidence": "Tarrant 2025 论文原文确认其 preprint 属性与 'We predict' 表述，作为多通道解耦理论的预印本归属证据",
+      "search_keywords": [
+        "Tarrant arXiv 2503.21976 multi-channel streaking prediction",
+        "Tarrant attosecond streaking dipole phase decoupling theory",
+        "2503.21976 preprint attosecond retrieval"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Cousin PRX 2017 water window streaking 仅作为多壳层重叠定性警示的支撑",
+      "missing_evidence": "Cousin PRX 7.041030 原文对水窗能区多壳层迹线重叠的定性陈述与首次水窗条纹测量文献位置",
+      "search_keywords": [
+        "Cousin PRX 7 041030 water window attosecond streaking",
+        "Cousin 2017 attosecond streaking first measurement multichannel",
+        "water window attosecond pulse streaking experiment overlap"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Shi-Thumm 六维 TDSE 氦原子 shake-up 通道耦合描述的文献支撑",
+      "missing_evidence": "Shi 与 Thumm 关于氦原子 shake-up 通道（残离子 n=2/n=3 激发态）与 IR 探测场耦合的原文细节",
+      "search_keywords": [
+        "Shi Thumm six-dimensional TDSE helium shake-up",
+        "helium shake-up channel IR streaking coupling",
+        "Shi Thumm helium attosecond streaking multidimensional"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Pabst Dahlström 角积分偶极相位抑制效率的文献出处",
+      "missing_evidence": "Pabst 与 Dahlström 关于角平均偶极相位抑制效率的原文论证（用于 §2.1 偶极相位抑制策略支撑）",
+      "search_keywords": [
+        "Pabst Dahlstrom angular integration dipole phase suppression",
+        "angular integrated streaking dipole phase rare gas",
+        "attosecond streaking angular averaging dipole phase efficiency"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "R2 二级解耦策略与 R3 跨能区系统标定的可行性文献支撑",
+      "missing_evidence": "关于条纹相机能区标定、修正模块边界条件与失效条件的实验/理论先例文献",
+      "search_keywords": [
+        "attosecond streaking calibration water window EUV boundary",
+        "streaking camera cross-energy systematic calibration",
+        "multi-shell correction module validity condition streaking",
+        "attosecond streaking correction module energy range"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "content 与 rationale 之间约 280 字逐字重复（Shi-Thumm 段、Pabst 段、二级解耦策略句）需指回立项依据",
+      "missing_evidence": "需确认 rationale 章中已承载的引用支撑（Shi-Thumm[19]、Pabst-Dahlström 等）的精确位置以便 content 章回引",
+      "search_keywords": [
+        "Shi Thumm helium TDSE streaking",
+        "Pabst Dahlstrom dipole phase suppression angular integration",
+        "multi-channel attosecond streaking decoupling strategy"
+      ],
+      "priority": "low"
+    },
+    {
+      "claim": "图谱自变量取值（中点能量 100/346.85/476.35 eV）的物理来源与靶材选择依据",
+      "missing_evidence": "中点能量 100 eV（EUV/水窗交界）、346.85 eV、476.35 eV（碳/氮 K-edge）的实验/理论先例支撑",
+      "search_keywords": [
+        "water window attosecond pulse photon energy 284 410 eV",
+        "carbon K-edge 284 eV attosecond spectroscopy",
+        "nitrogen K-edge 409.7 eV photoionization threshold",
+        "EUV water window attosecond source mid-point energy"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "偶极相位 0.3 rad 偏差阈值与包络 5% 偏差阈值的可比较先例",
+      "missing_evidence": "阿秒条纹重构中偶极相位残差与包络幅值偏差的可接受阈值的同行先例文献",
+      "search_keywords": [
+        "attosecond streaking reconstruction residual threshold dipole phase",
+        "streaking retrieval accuracy benchmark phase envelope",
+        "FROG-CRAB retrieval error dipole phase envelope percentage",
+        "attosecond pulse reconstruction precision benchmark"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "G3 跨能区系统标定与 K1 两级建模路径的研究方案细节支撑",
+      "missing_evidence": "两级建模（多通道 → 偶极相位修正）的分级策略与跨能区标定实验方案的同行先例",
+      "search_keywords": [
+        "multi-level correction attosecond streaking strategy",
+        "two-stage retrieval attosecond pulse multi-channel dipole phase",
+        "cross-energy attosecond streaking calibration scheme",
+        "staged correction module streaking retrieval benchmark"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

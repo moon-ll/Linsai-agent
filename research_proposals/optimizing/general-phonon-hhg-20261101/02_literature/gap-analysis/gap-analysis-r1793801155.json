@@ -1,0 +1,71 @@
+{
+  "gaps": [
+    {
+      "claim": "首次建立三维系统映射（草稿·创新点第 1 条）",
+      "missing_evidence": "检索证据支撑\"首次\"宣称的系统综述/检索式文献记录，以及同期相近工作的反证；需改写为\"据目前检索尚未见系统工作\"并注明检索范围（数据库、时间窗、关键词）",
+      "search_keywords": [
+        "phonon-driven high harmonic generation review",
+        "coherent phonon strong field nonlinear optics",
+        "mid-infrared HHG ZnO Ghimire",
+        "lattice dynamics ultrafast nonlinear spectroscopy"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "立项依据整体缺少年份+人名+[N] 锚定式奠基文献引用（锚点示例：2011 Ghimire 等中红外驱动 ZnO 非微扰 HHG）",
+      "missing_evidence": "Ghimire 2011 等本领域必引奠基工作的正式文献条目及正文嵌入式 [N] 引用；当前全文 [N] 引用 0 次、参考文献 0 篇（标准 30-40 篇、引用 35-47 次）",
+      "search_keywords": [
+        "Ghimime 2011 ZnO mid-infrared high harmonics",
+        "non-perturbative HHG solid-state coherent phonon",
+        "high-order harmonic generation solids review 2020",
+        "phonon-driven harmonics polar materials"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "草稿\"来源\"节仅 6 条内部 wiki 链接，无外部学术文献支撑材料矩阵（ZnO / MoS₂ / 1T-TaS₂）与\"极性×层状×关联\"定位",
+      "missing_evidence": "覆盖三类材料体系的代表性实验与理论文献：极性半导体（ZnO 型）、层状材料（MoS₂ 型）、关联电子体系（1T-TaS₂ 型）的 HHG 或晶格驱动非线性光学工作",
+      "search_keywords": [
+        "HHG ZnO polar semiconductor ultrafast",
+        "high harmonic generation MoS2 layered material",
+        "1T-TaS2 charge density wave strong field nonlinear",
+        "lattice modulated HHG van der Waals",
+        "correlated electron system coherent phonon spectroscopy"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "泵浦-探测光学定标相干声子位移幅度 Q(t)、频率与退相干时间的可行性表述",
+      "missing_evidence": "THz / 共振红外 / 冲击拉曼泵浦-探测测量相干声子振幅、频率、退相干时间的已验证实验方法学文献支撑",
+      "search_keywords": [
+        "pump-probe coherent phonon amplitude dephasing",
+        "terahertz pump-probe phonon ZnO",
+        "impulsive stimulated Raman scattering coherent phonons",
+        "resonant infrared phonon excitation ultrafast detection"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "论证密度差距：申请书缺乏按领域意义分层收窄的文献递进式论证（大背景→脉络→核心挑战→国内现状→定位五层）",
+      "missing_evidence": "各递进层所需的支撑文献簇：HHG 作为超快探测手段的领域综述（大背景）、固体态 HHG 发展脉络、晶格自由度可编程调控的国内研究现状与工作定位的对比文献",
+      "search_keywords": [
+        "high harmonic spectroscopy ultrafast probe review",
+        "solid state high harmonic generation timeline",
+        "phonon as control knob nonlinear optics programmable",
+        "国内 高次谐波 固体 声子 超快 研究现状"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "草稿五步技术路线第 5 步\"偏差≤30% 记一致\"的判据式 |X_inv−X_ref|/X_ref 与阶次窗口",
+      "missing_evidence": "反演量与参考量一致性判定的既有定量判据/基准方法文献（HHG 谱反演晶格动力学的验证范式），用于定义偏差基准与适用阶次范围",
+      "search_keywords": [
+        "HHG spectral inversion phonon benchmark validation",
+        "high harmonic spectroscopy quantitative criterion inversion",
+        "lattice dynamics inversion ultrafast harmonic spectra"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

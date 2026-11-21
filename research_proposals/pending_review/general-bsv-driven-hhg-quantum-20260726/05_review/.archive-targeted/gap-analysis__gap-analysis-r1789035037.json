@@ -1,0 +1,94 @@
+{
+  "gaps": [
+    {
+      "claim": "Rasputnyi等2024年首次观测到BSV驱动固体HHG，峰值强度TW/cm²、单脉冲2×10¹³",
+      "missing_evidence": "需要Rasputnyi 2024 LN/a-Si BSV-HHG原论文，确认实验参数（峰值强度、光子数、g²）",
+      "search_keywords": [
+        "Rasputnyi bright squeezed vacuum solid HHG 2024",
+        "BSV driven high harmonic LN a-Si experiment",
+        "squeezed light high harmonic generation solid state first observation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Even Tzur等[2]量子增强因子理论预言",
+      "missing_evidence": "需要Even Tzur QEF理论原始文献，核实理论框架的物理假设与适用边界",
+      "search_keywords": [
+        "Even Tzur quantum enhancement factor HHG",
+        "quantum light high harmonic theory framework",
+        "QEF visibility squeezed light nonlinear optics"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Gothelf等[30]ZnO单带模型HHG计算",
+      "missing_evidence": "需要Gothelf ZnO单带HHG理论论文，核实单带近似假设与多带多体修正的差距",
+      "search_keywords": [
+        "Gothelf ZnO single band HHG model",
+        "solid HHG semiconductor one-band calculation",
+        "ZnO high harmonic generation single band approximation"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Wang等[33]弱场BSV-HHG预言",
+      "missing_evidence": "需要Wang弱场BSV-HHG理论论文，核实预言条件（弱场 vs强场）与本项目强场语境的适用性",
+      "search_keywords": [
+        "Wang BSV high harmonic weak field theory",
+        "squeezed light nonlinear optics weak field prediction",
+        "quantum light perturbative harmonic generation"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "QEFvis测量双光路Mach-Zehnder实验方案",
+      "missing_evidence": "需要BSV HHG中Mach-Zehnder双光路测量QEFvis的实验先例（原子体系或固体体系）",
+      "search_keywords": [
+        "Mach-Zehnder interferometer squeezed light HHG",
+        "QEF visibility measurement quantum light nonlinear",
+        "two-path interferometer high harmonic squeezed"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "κ-盐Mott绝缘体9T磁场调控HHG",
+      "missing_evidence": "需要κ-盐(BEDT-TTF)₂Cu[N(CN)₂]Br的9T磁场相图与Mott相变关联HHG实验/理论证据",
+      "search_keywords": [
+        "kappa-BEDT-TTF Mott insulator high harmonic magnetic field",
+        "9 Tesla Mott transition HHG organic",
+        "kappa-Cl kappa-Br critical field high harmonic generation"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "U/W强关联判据应用于BSV-HHG",
+      "missing_evidence": "需要Hubbard U与带宽W比值作为强关联判据的原始文献，及在HHG语境下的U/W临界值标定",
+      "search_keywords": [
+        "Hubbard U bandwidth ratio strong correlation criterion",
+        "U/W strongly correlated material threshold",
+        "DFT+U strongly correlated regime classification"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "BSV g²→1退化为相干态时QF回归Vclassical≈1的自洽性",
+      "missing_evidence": "需要BSV驱动HHG中量子-经典对应原理的理论或实验验证文献",
+      "search_keywords": [
+        "BSV coherent state classical limit HHG",
+        "quantum to classical transition high harmonic generation",
+        "g2 unity classical visibility squeezed light nonlinear"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "BSV产生单脉冲光子数约2×10¹³、NOPA参数校准",
+      "missing_evidence": "需要NOPA产生BSV的典型光子数、g²值、压缩参数r的实验标定文献",
+      "search_keywords": [
+        "NOPA bright squeezed vacuum photon number calibration",
+        "BSV squeezing parameter g2 measurement typical",
+        "noncollinear optical parametric amplifier squeezed light characterization"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

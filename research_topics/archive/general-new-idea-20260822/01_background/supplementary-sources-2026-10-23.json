@@ -1,0 +1,14 @@
+{
+  "proposal_id": "general-new-idea-20260822",
+  "cluster_id": "orphan-route-2026-10-23",
+  "entries": [
+    {
+      "source_id": "paper:2026-2605.27543-atomic-scale-observation-of-symmetry-breaking-in-altermagnet",
+      "title": "Atomic-Scale Observation of Symmetry Breaking in Altermagnetic MnTe",
+      "summary": "该工作利用原子分辨STEM成像与电子磁手性二色性（EMCD）技术，首次在原子尺度直接观测到交错磁体MnTe中d波与s波反铁磁分量及普遍存在的反转对称破缺畸变，并证实其与铁电特征的共存。这为固态高次谐波产生中偶次谐波出现所需的对称破缺条件提供了关键的原子尺度实验证据。",
+      "path": "",
+      "added_via": "cluster:orphan-route-2026-10-23",
+      "added_at": "2026-10-23T16:44:49Z"
+    }
+  ]
+}

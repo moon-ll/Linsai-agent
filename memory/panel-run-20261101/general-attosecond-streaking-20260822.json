@@ -1,0 +1,23 @@
+{
+  "proposal_id": "general-attosecond-streaking-20260822",
+  "issues": 0,
+  "stages": {
+    "review_researcher": "ok(800s)",
+    "review_critic": "ok(398s)",
+    "review_reviewer": "ok(464s)",
+    "writer": "ok(1783s)",
+    "verify": "通过"
+  },
+  "params_injected": true,
+  "post_hooks": {
+    "draft_resync": true,
+    "params_conflicts": 7
+  },
+  "success": true,
+  "verdict": "通过",
+  "panel_cleared": true,
+  "panel_cycle_reset": true,
+  "auto_promote": "pending_review",
+  "dossier_generated": true,
+  "elapsed_s": 4609.2
+}

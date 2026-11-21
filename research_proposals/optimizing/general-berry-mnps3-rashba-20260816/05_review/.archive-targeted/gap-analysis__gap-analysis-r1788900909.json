@@ -1,0 +1,13 @@
+{
+  "gaps": [
+    {
+      "claim": "rationale §1.2 L23 Gabriele [26] 判据（θ 的群论约束源于二重旋转破缺与 Berry 曲率非零）需要非复述的二手引用支撑",
+      "missing_evidence": "缺乏 Gabriele 等关于 i-wave altermagnet 对称性破缺与 Berry 曲率联系的原始论文全文，以及对该判据的后续引用与实验验证文献",
+      "search_keywords": [
+        "Gabriele altermagnet symmetry criterion",
+        "i-wave altermagnet d-wave symmetry breaking Berry curvature",
+        "Gabriele altermagnet spin group theory"
+      ]
+    }
+  ]
+}

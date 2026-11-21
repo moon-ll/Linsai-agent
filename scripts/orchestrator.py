@@ -1,0 +1,490 @@
+#!/usr/bin/env python3
+"""orchestrator.py — 林赛总控核心（v6.7）
+
+四大能力统一入口：
+1. compute_dashboard() — 跨 profile 仪表盘
+2. analyze_failures() — 失败模式分析
+3. suggest_strategies() — 调度策略建议
+4. monitor_pipeline() — Pipeline 状态机监控
+
+用法:
+    from orchestrator import compute_dashboard
+    result = compute_dashboard(window_hours=24)
+    print(result['profiles']['writer']['status'])
+"""
+
+from __future__ import annotations
+
+import json
+import re
+from collections import defaultdict
+from datetime import datetime, timedelta, timezone
+from pathlib import Path
+from typing import Any, Dict, List, Optional
+
+from common import now_utc, load_json
+from paths import PROJECT_ROOT, MEMORY_DIR, RESEARCH_PROPOSALS_DIR
+
+# 子模块导入
+from profile_health import compute_profile_health
+from failure_analyzer import analyze_failures
+from strategy_optimizer import suggest_strategies
+
+
+# ============================================================
+# 1. 跨 profile 仪表盘（4 区合一）
+# ============================================================
+
+def compute_dashboard(window_hours: int = 24) -> Dict[str, Any]:
+    """总仪表盘 = profile 健康度 + 失败分析 + 策略建议 + 链路质量 + 一致性检查。"""
+    return {
+        "profiles": compute_profile_health(window_hours=window_hours),
+        "failures": analyze_failures(window_hours=window_hours),
+        "strategies": suggest_strategies(window_hours=max(window_hours, 168)),
+        "pipeline_quality": monitor_pipeline(),
+        "lifecycle_consistency": check_lifecycle_consistency(),
+        "computed_at": now_utc(),
+    }
+
+
+# ============================================================
+# 2. Pipeline 状态机监控
+# ============================================================
+
+def _score_artifact(file_path: Path) -> Dict[str, Any]:
+    """评估单个产物的质量。
+
+    评分维度：
+    - 存在性（0/1）
+    - 大小（0/1, ≥2000 字节 = 1）
+    - 章节完整度（0/1）
+    - 引用占位符数量（0/1, ≥10 = 1）
+    """
+    if not file_path.exists():
+        return {"exists": False, "size": 0, "score": 0.0, "issues": ["文件不存在"]}
+
+    size = file_path.stat().st_size
+    score = 0.0
+    issues: List[str] = []
+
+    if size >= 2000:
+        score += 0.4
+    elif size >= 500:
+        score += 0.2
+    else:
+        issues.append(f"文件过小（{size} 字节）")
+
+    if size > 100:
+        try:
+            content = file_path.read_text(encoding="utf-8")
+            # 章节完整度：## 一、立项依据 / ## 二、研究内容 / ## 三、研究方案
+            sections = re.findall(r"##\s+[一二三四五六七八九十]+[、\.]", content)
+            if len(sections) >= 3:
+                score += 0.3
+            else:
+                issues.append(f"章节不完整（仅 {len(sections)} 个）")
+            # 引用占位符
+            cites = re.findall(r"\[CITE:[\w\-]+\]", content)
+            if len(cites) >= 10:
+                score += 0.3
+            elif len(cites) > 0:
+                score += 0.1
+                issues.append(f"引用占位符较少（{len(cites)} 个）")
+            else:
+                issues.append("无引用占位符")
+        except Exception:
+            issues.append("文件读取失败")
+
+    return {
+        "exists": True,
+        "size": size,
+        "score": round(score, 3),
+        "issues": issues,
+    }
+
+
+def monitor_pipeline(proposal_id: Optional[str] = None) -> Dict[str, Any]:
+    """监控 pipeline-runner 的产物质量。
+
+    6 阶段产物：
+    - 01_direction/direction-calibration.md
+    - 02_literature/literature-report.md
+    - 02_topic/gap-report.md
+    - 03_question/question-framework.md
+    - 04_proposal/proposal-draft.md
+    - 05_review/review-report.md
+
+    Args:
+        proposal_id: 指定 proposal，为 None 则扫描所有
+
+    Returns:
+        {
+          'proposals': [
+            {proposal_id, stages: [{stage, quality, issues}], overall_quality, growth_actions},
+            ...
+          ]
+        }
+    """
+    out: Dict[str, Any] = {"proposals": [], "growth_actions_total": 0, "computed_at": now_utc()}
+
+    if proposal_id:
+        candidates = [proposal_id]
+    else:
+        # 扫描所有 proposal 目录
+        candidates = []
+        if RESEARCH_PROPOSALS_DIR.exists():
+            for stage_dir in RESEARCH_PROPOSALS_DIR.iterdir():
+                if stage_dir.is_dir() and not stage_dir.name.startswith("_") and not stage_dir.name.startswith("."):
+                    for prop_dir in stage_dir.iterdir():
+                        if prop_dir.is_dir():
+                            candidates.append(prop_dir.name)
+
+    stage_paths = [
+        ("01_direction", "方向校准", "01_direction/direction-calibration.md"),
+        ("02_literature", "文献调研", "02_literature/literature-report.md"),
+        ("02_topic", "缺口分析", "02_topic/gap-report.md"),
+        ("03_question", "科学问题", "03_question/question-framework.md"),
+        ("04_proposal", "申请书", "04_proposal/proposal-draft.md"),
+        ("05_review", "自检报告", "05_review/review-report.md"),
+    ]
+
+    for pid in candidates:
+        # 找到 prop_dir
+        prop_dir = None
+        for stage_dir in ["pending_review", "optimizing", "drafts", "archived"]:
+            d = RESEARCH_PROPOSALS_DIR / stage_dir / pid
+            if d.exists():
+                prop_dir = d
+                break
+        if not prop_dir:
+            continue
+
+        stages: List[Dict[str, Any]] = []
+        growth_actions: List[Dict[str, Any]] = []
+        for stage_key, stage_label, rel_path in stage_paths:
+            f = prop_dir / rel_path
+            quality = _score_artifact(f)
+            entry = {
+                "stage": stage_key,
+                "label": stage_label,
+                "path": str(f.relative_to(PROJECT_ROOT)),
+                **quality,
+            }
+            stages.append(entry)
+            if quality["score"] > 0 and quality["score"] < 0.6 and quality["issues"]:
+                growth_actions.append({
+                    "stage": stage_key,
+                    "label": stage_label,
+                    "action": "auto_retry",
+                    "reason": f"质量 {quality['score']} < 0.6，issues: {', '.join(quality['issues'][:2])}",
+                })
+
+        overall = sum(s["score"] for s in stages) / max(1, len(stages))
+        out["proposals"].append({
+            "proposal_id": pid,
+            "stages": stages,
+            "overall_quality": round(overall, 3),
+            "growth_actions": growth_actions,
+        })
+        out["growth_actions_total"] += len(growth_actions)
+
+    return out
+
+
+# ============================================================
+# 3. 生命周期一致性检查（v6.7.1）
+# ============================================================
+
+LIFECYCLE_PATH = RESEARCH_PROPOSALS_DIR / "_lifecycle.json"
+
+
+def _extract_score_from_text(text: str) -> Optional[float]:
+    """从 critic 报告文本中简单提取综合评分（不依赖 proposal_lifecycle）。"""
+    patterns = [
+        r"综合评分[：:]\s*(0\.\d+)",
+        r"综合分[：:]?\s*(0\.\d+)",
+        r"overall[\s_]*score[：:\s]+(0\.\d+)",
+        r"score[：:]\s*(0\.\d+)",
+        r"评分[：:]\s*(0\.\d+)",
+        r"(0\.\d+)\s*/\s*1(?:\.0+)?\b",
+    ]
+    for pat in patterns:
+        m = re.search(pat, text, re.IGNORECASE)
+        if m:
+            return float(m.group(1))
+    return None
+
+
+def _extract_round_numbers(critic_files: List[Path]) -> List[int]:
+    """从 critic 文件名中提取轮次编号并排序。"""
+    rounds: List[int] = []
+    for f in critic_files:
+        m = re.search(r"critic-round-(\d+)\.md$", f.name)
+        if m:
+            rounds.append(int(m.group(1)))
+    return sorted(rounds)
+
+
+def check_lifecycle_consistency() -> Dict[str, Any]:
+    """检查 _lifecycle.json 与实际 critic 报告产物是否一致。
+
+    v6.7.2 增强：
+    - 检测轮次编号不连续（如 [1,3] 缺 2）
+    - 检测异常大轮次编号（如 99）
+    - 检测 _lifecycle.json 未记录的孤儿 proposal 目录
+
+    Returns:
+        {
+          'checked_at': ISO,
+          'inconsistencies': [
+            {proposal_id, type, detail, lifecycle_rounds, actual_files}
+          ],
+          'summary': {total, inconsistent_count, orphan_dirs}
+        }
+    """
+    inconsistencies: List[Dict[str, Any]] = []
+    if not LIFECYCLE_PATH.exists():
+        return {"checked_at": now_utc(), "inconsistencies": [], "summary": {"total": 0, "orphan_dirs": []}}
+
+    lifecycle = load_json(LIFECYCLE_PATH, default={"proposals": {}})
+    proposals = lifecycle.get("proposals", {})
+
+    # 收集磁盘上所有 proposal 目录（含四阶段子目录 + research_proposals/ 根目录下的孤儿目录）
+    disk_proposal_dirs: Dict[str, Path] = {}
+    if RESEARCH_PROPOSALS_DIR.exists():
+        # 1. 四阶段目录
+        for stage_dir in RESEARCH_PROPOSALS_DIR.iterdir():
+            if (
+                stage_dir.is_dir()
+                and not stage_dir.name.startswith("_")
+                and not stage_dir.name.startswith(".")
+                and stage_dir.name in ["drafts", "optimizing", "pending_review", "archived"]
+            ):
+                for prop_dir in stage_dir.iterdir():
+                    if prop_dir.is_dir():
+                        disk_proposal_dirs[prop_dir.name] = prop_dir
+        # 2. 根目录下非阶段目录的 proposal 目录（如早期遗留的 2026_NSFG_strongfield_ultrafast）
+        for prop_dir in RESEARCH_PROPOSALS_DIR.iterdir():
+            if (
+                prop_dir.is_dir()
+                and not prop_dir.name.startswith("_")
+                and not prop_dir.name.startswith(".")
+                and prop_dir.name not in ["drafts", "optimizing", "pending_review", "archived", ".config"]
+            ):
+                disk_proposal_dirs[prop_dir.name] = prop_dir
+
+    for pid, state in proposals.items():
+        prop_dir = None
+        for stage in ["optimizing", "pending_review", "drafts", "archived"]:
+            d = RESEARCH_PROPOSALS_DIR / stage / pid
+            if d.exists():
+                prop_dir = d
+                break
+        if not prop_dir:
+            inconsistencies.append({
+                "proposal_id": pid,
+                "type": "missing_dir",
+                "detail": "_lifecycle.json 中存在但目录不存在",
+            })
+            continue
+
+        disk_proposal_dirs.pop(pid, None)  # 已注册，移除孤儿标记
+
+        review_dir = prop_dir / "05_review"
+        critic_files = sorted(review_dir.glob("critic-round-*.md")) if review_dir.exists() else []
+        actual_rounds = len(critic_files)
+        lifecycle_rounds = state.get("optimization_rounds", 0)
+
+        if actual_rounds != lifecycle_rounds:
+            inconsistencies.append({
+                "proposal_id": pid,
+                "type": "round_mismatch",
+                "detail": f"_lifecycle.json 记录 {lifecycle_rounds} 轮，实际有 {actual_rounds} 份 critic 报告",
+                "lifecycle_rounds": lifecycle_rounds,
+                "actual_files": [f.name for f in critic_files],
+            })
+
+        round_nums = _extract_round_numbers(critic_files)
+        if round_nums:
+            # 检测不连续
+            expected = list(range(min(round_nums), max(round_nums) + 1))
+            missing = [r for r in expected if r not in round_nums]
+            if missing:
+                inconsistencies.append({
+                    "proposal_id": pid,
+                    "type": "round_gap",
+                    "detail": f"critic 报告轮次不连续，缺失 {missing}",
+                    "round_nums": round_nums,
+                    "missing": missing,
+                })
+            # 检测异常大编号：最大编号显著大于实际数量，或任意编号超过 50
+            if max(round_nums) > 50 or max(round_nums) > actual_rounds + 5:
+                inconsistencies.append({
+                    "proposal_id": pid,
+                    "type": "round_outlier",
+                    "detail": f"critic 报告存在异常轮次编号 {max(round_nums)}（实际仅 {actual_rounds} 份报告）",
+                    "round_nums": round_nums,
+                })
+
+        # 检查 score_history 中 score 为 0 但实际报告有非零评分
+        score_history = state.get("score_history", [])
+        zero_score_rounds = [h["round"] for h in score_history if h.get("score", 0) == 0]
+        if zero_score_rounds and critic_files:
+            for f in critic_files:
+                try:
+                    text = f.read_text(encoding="utf-8")
+                    score = _extract_score_from_text(text)
+                except Exception:
+                    score = None
+                if score and score > 0:
+                    inconsistencies.append({
+                        "proposal_id": pid,
+                        "type": "score_lost",
+                        "detail": f"critic 报告 {f.name} 评分 {score}，但 _lifecycle.json 中存在 score=0 的记录",
+                        "file": f.name,
+                        "file_score": score,
+                    })
+                    break
+
+    # 孤儿目录：存在但未在 _lifecycle.json 中注册
+    orphan_dirs = []
+    for pid, prop_dir in disk_proposal_dirs.items():
+        # 忽略 .DS_Store 等隐藏文件所在的空目录判断
+        orphan_dirs.append({
+            "proposal_id": pid,
+            "path": str(prop_dir.relative_to(PROJECT_ROOT)),
+            "detail": "磁盘存在但该 proposal 未在 _lifecycle.json 中注册",
+        })
+
+    return {
+        "checked_at": now_utc(),
+        "inconsistencies": inconsistencies,
+        "orphan_dirs": orphan_dirs,
+        "summary": {
+            "total": len(proposals),
+            "inconsistent_count": len(inconsistencies),
+            "orphan_count": len(orphan_dirs),
+        },
+    }
+
+
+# ============================================================
+# 4. 应用策略（人工确认后调用）
+# ============================================================
+
+TUNING_LOG_PATH = MEMORY_DIR / "tuning-log.json"
+
+
+def apply_strategies(
+    new_strategies: Dict[str, Any],
+    confirmed_by: str = "human",
+) -> Dict[str, Any]:
+    """应用新策略（运行时 monkey patch + 持久化记录）。
+
+    Args:
+        new_strategies: {stagger_seconds, max_rounds, ...}
+        confirmed_by: 确认人
+
+    Returns:
+        {applied, log_entry}
+    """
+    import proposal_lifecycle as pl
+
+    # 记录前值
+    old = {
+        "stagger_seconds": pl.DEFAULT_STAGGER_SECONDS,
+        "max_rounds": pl.DEFAULT_MAX_ROUNDS,
+        "score_threshold": pl.DEFAULT_SCORE_THRESHOLD,
+        "no_improvement_limit": pl.DEFAULT_NO_IMPROVEMENT_LIMIT,
+    }
+
+    # 应用（monkey patch）
+    applied: Dict[str, Any] = {}
+    if "stagger_seconds" in new_strategies:
+        pl.DEFAULT_STAGGER_SECONDS = int(new_strategies["stagger_seconds"])
+        applied["stagger_seconds"] = pl.DEFAULT_STAGGER_SECONDS
+    if "max_rounds" in new_strategies:
+        pl.DEFAULT_MAX_ROUNDS = int(new_strategies["max_rounds"])
+        applied["max_rounds"] = pl.DEFAULT_MAX_ROUNDS
+    if "score_threshold" in new_strategies:
+        pl.DEFAULT_SCORE_THRESHOLD = float(new_strategies["score_threshold"])
+        applied["score_threshold"] = pl.DEFAULT_SCORE_THRESHOLD
+    if "no_improvement_limit" in new_strategies:
+        pl.DEFAULT_NO_IMPROVEMENT_LIMIT = int(new_strategies["no_improvement_limit"])
+        applied["no_improvement_limit"] = pl.DEFAULT_NO_IMPROVEMENT_LIMIT
+
+    # 记录到 tuning-log.json
+    log_entry = {
+        "at": now_utc(),
+        "confirmed_by": confirmed_by,
+        "old": old,
+        "new": applied,
+    }
+    history = []
+    if TUNING_LOG_PATH.exists():
+        try:
+            history = load_json(TUNING_LOG_PATH)
+        except Exception:
+            pass
+    if not isinstance(history, list):
+        history = []
+    history.append(log_entry)
+    # 只保留最近 50 条
+    history = history[-50:]
+
+    from common import save_json
+    TUNING_LOG_PATH.parent.mkdir(parents=True, exist_ok=True)
+    save_json(TUNING_LOG_PATH, history)
+
+    return {
+        "applied": applied,
+        "log_entry": log_entry,
+    }
+
+
+# ============================================================
+# 自检
+# ============================================================
+
+def _self_check() -> None:
+    print("=== orchestrator._self_check ===")
+    print("--- compute_dashboard ---")
+    d = compute_dashboard(window_hours=24)
+    assert "profiles" in d and "failures" in d and "strategies" in d and "pipeline_quality" in d
+    print(f"  profiles: {len(d['profiles']['profiles'])} 个")
+    print(f"  failures patterns: {len(d['failures']['patterns'])} 个")
+    print(f"  strategies reasons: {len(d['strategies']['reasons'])} 条")
+    print(f"  pipeline proposals: {len(d['pipeline_quality']['proposals'])} 个")
+    print()
+    print("--- monitor_pipeline ---")
+    mp = monitor_pipeline()
+    assert "proposals" in mp
+    print(f"  监控 {len(mp['proposals'])} 个 proposal")
+    for p in mp["proposals"][:2]:
+        print(f"  - {p['proposal_id'][:40]}: overall={p['overall_quality']}, actions={len(p['growth_actions'])}")
+    print()
+    print("--- apply_strategies ---")
+    r = apply_strategies({"stagger_seconds": 120}, confirmed_by="self_check")
+    assert r["applied"]["stagger_seconds"] == 120
+    print(f"  applied: {r['applied']}")
+    # 还原
+    import proposal_lifecycle as pl
+    pl.DEFAULT_STAGGER_SECONDS = 90
+
+    print("--- check_lifecycle_consistency ---")
+    lc = check_lifecycle_consistency()
+    assert "inconsistencies" in lc and "summary" in lc
+    print(f"  total={lc['summary']['total']}, inconsistent={lc['summary']['inconsistent_count']}, orphans={lc['summary'].get('orphan_count', 0)}")
+    print("=== 通过 ===")
+
+
+if __name__ == "__main__":
+    import sys
+    if len(sys.argv) > 1 and sys.argv[1] == "--self-check":
+        _self_check()
+    elif len(sys.argv) > 1 and sys.argv[1] == "--dashboard":
+        d = compute_dashboard()
+        print(json.dumps(d, ensure_ascii=False, indent=2)[:5000])
+    else:
+        d = compute_dashboard()
+        print(json.dumps(d, ensure_ascii=False, indent=2)[:3000])

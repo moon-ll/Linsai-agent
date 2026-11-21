@@ -1,0 +1,121 @@
+% references.bib（v8 批量回填·candidates-only）——课题: general-tdse-tddft-20261115
+% 生成: 2026-11-18T15:50:18Z by scripts/topic_references_backfill.py（零 LLM 机械合并）
+% 说明: references-source.md 无编号条目，本文件由 bib-candidates 去重生成；
+% 每条末行 source 溯源到候选文件；needs_review = 溯源字段缺失待核验，未编造。
+
+@article{liu20161,
+  title = {High-harmonic generation from an atomically thin semiconductor},
+  author = {Hanzhe Liu and Yilei Li and Yong Sing You and Shambhu Ghimire and Tony F. Heinz and David A. Reis},
+  journal = {Nature Physics},
+  year = {2016},
+  doi = {10.1038/nphys3946},
+  source: bib-candidates-1794840252.bib(liu20161)
+}
+
+@article{lhuillier19912,
+  title = {Theoretical aspects of intense field harmonic generation},
+  author = {Anne L’Huillier and Kenneth J. Schäfer and K. C. Kulander},
+  journal = {Journal of Physics B Atomic Molecular and Optical Physics},
+  year = {1991},
+  doi = {10.1088/0953-4075/24/15/004},
+  source: bib-candidates-1794840252.bib(lhuillier19912)
+}
+
+@article{kovalev20193,
+  title = {Non-perturbative high-harmonic generation in the three-dimensional Dirac semimetal Cd$_3$As$_2$},
+  author = {Sergey Kovalev and Renato M. A. Dantas and Semyon Germanskiy and Jan-Christoph Deinert and Bertram Green and Igor Ilyakov and Nilesh Awari and Min Chen and Mohammed Bawatna and Jiwei Ling and Faxian Xiu and Paul H. M. van Loosdrecht and Piotr Surówka and Takashi Oka and Zhe Wang},
+  journal = {Nature Communications},
+  year = {2019},
+  eprint = {1911.01476},
+  source: bib-candidates-1794840252.bib(kovalev20193)
+}
+
+@article{dimitrovski20174,
+  title = {High-order harmonic generation from gapped graphene: Perturbative response and transition to nonperturbative regime},
+  author = {Darko Dimitrovski and Lars Bojer Madsen and Thomas Garm Pedersen},
+  journal = {Physical review. B./Physical review. B},
+  year = {2017},
+  doi = {10.1103/physrevb.95.035405},
+  eprint = {1612.05037},
+  source: bib-candidates-1794840252.bib(dimitrovski20174)
+}
+
+@article{strelkov20135,
+  title = {High-order harmonic generation and Fano resonances},
+  author = {V. V. Strelkov and M. A. Khokhlova and N. Yu. Shubin},
+  journal = {Physical Review A},
+  year = {2013},
+  eprint = {1307.5241},
+  source: bib-candidates-1794840252.bib(strelkov20135)
+}
+
+@article{almalki20186,
+  title = {High harmonic generation tomography of impurities in solids: conceptual analysis},
+  author = {S. Almalki and A. Parks and G. Bart and P. B. Corkum and T. Brabec and C. R. McDonald},
+  journal = {Physical review B},
+  year = {2018},
+  eprint = {1805.03806},
+  source: bib-candidates-1794840252.bib(almalki20186)
+}
+
+@article{suárez20177,
+  title = {High-order harmonic generation in atomic and molecular systems},
+  author = {Noslen Suárez and Alexis Chacón and Jose A. Pérez-Hernández and Jens Biegert and Maciej Lewenstein and Marcelo F. Ciappina},
+  journal = {Physical Review A},
+  year = {2017},
+  eprint = {1701.05021},
+  source: bib-candidates-1794840252.bib(suárez20177)
+}
+
+@article{faisal20078,
+  title = {Interplay of polarization geometry and rotational dynamics in high harmonic generation from coherently rotating linear molecule},
+  author = {F.H.M. Faisal and A. Abdurrouf},
+  journal = {Physical Review Letters},
+  year = {2007},
+  eprint = {0707.2184},
+  source: bib-candidates-1794840252.bib(faisal20078)
+}
+
+@article{chen20199,
+  title = {Strong-field nonlinear optical properties of monolayer black phosphorus},
+  author = {Zi-Yu Chen and Rui Qin},
+  journal = {Nanoscale},
+  year = {2019},
+  eprint = {1903.06489},
+  source: bib-candidates-1794840252.bib(chen20199)
+}
+
+@article{chappuis201810,
+  title = {High harmonic generation in an active grating},
+  author = {C. Chappuis and D. Bresteau and T. Auguste and O. Gobert and T. Ruchon},
+  journal = {Physical Review A},
+  year = {2018},
+  eprint = {1811.04725},
+  source: bib-candidates-1794840252.bib(chappuis201810)
+}
+
+% ---- ML 方法层补强（2026-11-22 机动轮①：本题包主张"ML 代理加速/可解释反演"，原 bib 全为 HHG 物理、缺 ML 方法证据层；KB 检索→逐页核实→带源补录）----
+
+@article{EnergyEmbeddedPINN2025arXiv2405p24194,
+  title  = {Energy-embedded neural solvers for one-dimensional quantum systems},
+  author = {{KB 蒸馏页题录}},
+  year   = {2025},
+  note   = {arXiv:2405.24194；把能量作为显式约束嵌入 PINN 损失求解一维定态薛定谔方程，覆盖无限深势阱/谐振子/Woods-Saxon/双势阱并同给基态与激发态；守恒量作归纳偏置的思路可向 TDSE 迁移（作用量/相位嵌入约束激光-物质演化）——代理加速的架构先例},
+  source : knowledge/wiki/papers/2025-2405_24194-energy-embedded-neural-solvers-for-one-dimensional-quantum-s.md
+}
+
+@article{PINN1DSchrodinger2025arXiv2504p05367,
+  title  = {Physics-informed neural networks for one-dimensional quantum eigenproblems},
+  author = {Sarkar, Soumyadip},
+  year   = {2025},
+  note   = {arXiv:2504.05367；PINN 套一维薛定谔本征问题（无限深/有限深方势阱基准），嵌入 Dirichlet 边界与归一化约束、把本征值 E 作为可训练参数；与"给定光谱约束薛定谔方程反演势形"同一数学范式——本题包"光电子谱可解释反演"的方法论同构参照},
+  source : knowledge/wiki/papers/2025-2504_05367-physics-informed-neural-networks-for-one-dimensional-quantum.md
+}
+
+@article{QGANInverseDesign2025arXiv2507p18132,
+  title  = {Inverse design using physics-informed quantum GANs for tailored nanostructures},
+  author = {{KB 蒸馏页题录}},
+  year   = {2025},
+  note   = {arXiv:2507.18132；PINN + 量子经典混合 GAN 宣称把逆设计训练样本需求降低 99.5%，直击"设计→仿真→重设计"迭代成本瓶颈；页面保留对量子 ML 炒作的警惕——可借用的核心是"少数据逆设计"框架而非量子性本身；用于光电子谱反演的数据效率评估基线},
+  source : knowledge/wiki/papers/2025-2507_18132-inverse-design-using-physics-informed-quantum-gans-for-tailo.md
+}

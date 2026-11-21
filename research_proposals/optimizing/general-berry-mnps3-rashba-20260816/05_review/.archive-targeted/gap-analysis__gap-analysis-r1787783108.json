@@ -1,0 +1,60 @@
+{
+  "gaps": [
+    {
+      "claim": "MnPS3作为兼具反铁磁长程序与Rashba自旋劈裂的非中心对称平台，其电子结构与磁性已有充分实验表征，可作为强场非线性光学研究的材料基础",
+      "missing_evidence": "MnPS3本体的高次谐波产生、强场非线性光学或超快泵浦探测实验数据几乎空白，缺少最接近的实验证据或可比类材料（如MnPSe3、NiPS3）的强场响应数据",
+      "search_keywords": [
+        "MnPS3 high harmonic generation experimental",
+        "MnPS3 strong field nonlinear optics",
+        "MnPS3 ultrafast pump probe spectroscopy",
+        "transition metal phosphorus trichalcogenide harmonic generation",
+        "NiPS3 MnPSe3 nonlinear optics ultrafast"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "交变磁性（altermagnet）动量依赖自旋劈裂可在高次谐波光谱中留下可辨识指纹，构成磁性序参量的读出通道",
+      "missing_evidence": "缺少交变磁体HHG理论代表作（Werner/Weber等）与MnTe自旋极化高次谐波实验的完整锚点引用链",
+      "search_keywords": [
+        "altermagnet high harmonic generation theory",
+        "Werner Weber altermagnet spin splitting HHG",
+        "MnTe spin-polarized high harmonic generation experiment",
+        "nonrelativistic spin splitting nonlinear optical response"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Berry曲率与量子度规等量子几何量对固体高次谐波和非线性光学响应有可观测贡献，可通过圆二色性等通道实现光谱读出",
+      "missing_evidence": "缺少量子几何张量与HHG/非线性光学响应关系的代表性理论与实验验证文献作为基准锚点",
+      "search_keywords": [
+        "Berry curvature high harmonic spectroscopy",
+        "quantum metric nonlinear optical response",
+        "quantum geometry harmonic generation solid",
+        "circular dichroism HHG Berry curvature experiment"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "滑移铁电性可实现层间滑移模式的电场/光场超快调控，为强场驱动下的对称性调控提供途径",
+      "missing_evidence": "缺少滑移铁电翻转阈值电场、超快切换时标及强场光调控的定量数据支撑",
+      "search_keywords": [
+        "sliding ferroelectricity ultrafast dynamics",
+        "interlayer sliding femtosecond switching time",
+        "sliding ferroelectric switching threshold electric field",
+        "2D ferroelectric strong field optical control"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Rashba自旋-轨道耦合带来的背景非线性信号可与磁性/拓扑信号在谐波通道中分离，需明确其指纹与量级",
+      "missing_evidence": "缺少Rashba劈裂带结构对高次谐波/非线性光学响应贡献的理论计算与实验对照文献",
+      "search_keywords": [
+        "Rashba spin splitting nonlinear optics",
+        "spin-orbit coupling high harmonic generation",
+        "Rashba band second harmonic generation",
+        "helical spin texture harmonic spectroscopy"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

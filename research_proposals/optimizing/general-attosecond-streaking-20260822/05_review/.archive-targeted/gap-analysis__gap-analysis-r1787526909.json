@@ -1,0 +1,64 @@
+{
+  "gaps": [
+    {
+      "claim": "参考文献条目真实性存疑：[1]上游标注Nature Physics 2010（arXiv:1006.1827）与正文条目Nature 466:739-743口径冲突，[2]作者名含乱码'混改'，[12][13]卷期页码异常（252a/ae3474），[4]-[8]作者姓氏小写不规范",
+      "missing_evidence": "缺乏经DOI/arXiv逐条反查确认的准确书目信息：[1]'条纹重构量子谱相位'的真实出处（Mauritsson Nature Physics 2010还是Goulielmakis Nature 466 2010）、[2]2017年Science水窗条纹论文的完整作者列表、[12]rACE论文的正确期刊卷期页码、[13]Chin Phys B文章编号ae3474对应论文",
+      "search_keywords": [
+        "arXiv 1006.1827 attosecond streaking quantum phase",
+        "Mauritsson attosecond streaking Nature Physics 2010",
+        "Goulielmakis Nature 466 739 attosecond 2010",
+        "attosecond streaking water window Science 2017 355",
+        "inzani rACE attosecond pulse retrieval neural network"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "参考文献总量不足：正文仅16条编号引用处于范本下限，references.md为0字节未落盘，需补足至30-40篇且近3年（2023-2026）文献占比不低于30%",
+      "missing_evidence": "缺少约15-25篇近年（2023-2026）阿秒条纹检索算法、多通道电离修正、水窗/软X射线阿秒表征方向的补充文献，用于支撑研究内容章写作时的论证密度",
+      "search_keywords": [
+        "attosecond streaking retrieval algorithm 2024 2025",
+        "multi-channel ionization attosecond metrology recent",
+        "water window attosecond pulse characterization 2025",
+        "attosecond pulse reconstruction neural network 2024",
+        "阿秒条纹 脉冲重构 最新进展"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "国内现状两处论断'国内尚无系统性研究报道/尚属空白'缺乏检索范围与截止日期支撑",
+      "missing_evidence": "缺乏对国内阿秒条纹/阿秒脉冲表征研究团队公开文献的系统检索证据（证实空白成立或找到已有国内工作），以及可引用的国内进展综述",
+      "search_keywords": [
+        "attosecond streaking China experimental group",
+        "attosecond pulse characterization Chinese team",
+        "阿秒条纹 阿秒脉冲表征 国内 实验组",
+        "water window attosecond measurement China",
+        "attosecond metrology China review"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "'<5%重构精度'可检验判据未分解到分方向、分能区（极紫外/水窗/软X射线），误差定义与比对基准无文献依据，多通道贡献30%极端场景下是否适用未论证",
+      "missing_evidence": "缺少各能区已有阿秒脉冲重构精度的文献基准值，以及重构误差定义方法（与TDSE模拟真值比对、不同算法互比）的文献先例",
+      "search_keywords": [
+        "attosecond pulse retrieval error definition benchmark",
+        "FROGCRAB reconstruction accuracy ground truth simulation",
+        "water window attosecond pulse characterization fidelity",
+        "extreme ultraviolet isolated attosecond pulse retrieval accuracy",
+        "soft X-ray attosecond pulse measurement precision"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "研究内容章（待写入）的方法选择论断需引用嵌入论证链而非集中在引言：角积分方案对应偶极相位抑制、解析修正对应替代检索算法、跨能区比对方案",
+      "missing_evidence": "缺少方法选择处的对比文献：角积分探测抑制偶极相位的量化证据（'压制至<2%'预估的理论依据）、Volkov变换/PROOF/CNN等替代检索算法的精度对比、里德堡量子拍方案与常规阿秒表征场景的兼容性检验",
+      "search_keywords": [
+        "angular integration dipole phase suppression photoelectron spectra",
+        "VTG-FROG Volkov transform projection attosecond retrieval",
+        "PROOF phase retrieval omega oscillation filtering attosecond",
+        "rACE inzani convolutional neural network attosecond pulse retrieval",
+        "Rydberg wavepacket quantum beat attosecond characterization"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

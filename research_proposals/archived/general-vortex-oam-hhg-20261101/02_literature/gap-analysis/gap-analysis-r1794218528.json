@@ -1,0 +1,30 @@
+{
+  "gaps": [
+    {
+      "claim": "截至2026年11月，尚无第三方开展过本申请书所述的连续扫描研究。",
+      "missing_evidence": "缺少可复核的否定性文献检索证据。需要说明检索数据库、检索截止日期、检索式、同义词与近义表述、纳入和排除标准，并列出与该主张最接近的既有工作及其与本项目连续扫描方案的区别；仅列举若干代表性文献不能证明不存在第三方工作。",
+      "search_keywords": [
+        "\"continuous scan\" vortex \"high harmonic generation\"",
+        "\"continuous scanning\" OAM HHG",
+        "\"intensity scan\" \"high-harmonic emission\" vortex",
+        "\"orbital angular momentum\" \"high harmonic generation\" scan",
+        "\"continuous sweep\" vortex HHG",
+        "涡旋高次谐波 连续扫描",
+        "轨道角动量 高次谐波 强度扫描"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Rajak等人报道的劈裂值为513(10) meV。",
+      "missing_evidence": "文献笔记池中缺少该数值与原始论文的溯源。需要回核arXiv:2601.12743，确认原文是否确实给出513(10) meV，并补充其物理定义、测量或推导条件、误差口径及页码、图号或公式位置，同时建立该文与申请书论点的对应关系；若原文不支持该数值，应删除或改用有明确出处且定义一致的结果。",
+      "search_keywords": [
+        "arXiv:2601.12743",
+        "Rajak \"513(10) meV\"",
+        "\"513 meV\" splitting high harmonic generation",
+        "Rajak vortex HHG splitting energy"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

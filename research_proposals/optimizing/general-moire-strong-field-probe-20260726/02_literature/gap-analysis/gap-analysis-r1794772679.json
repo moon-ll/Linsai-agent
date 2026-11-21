@@ -1,0 +1,28 @@
+{
+  "gaps": [
+    {
+      "claim": "§3.5 L307：相对最接近先例 Ikeda 等 2025 年的区隔论证（驱动机制光 Floquet 而非电脉冲热熔、输出带误差棒的莫尔势与扭转角而非二元判断、调控平带关联绝缘态而非一般 Mott 母体），以及'读出-改写一体'新范式的首创性声明",
+      "missing_evidence": "核心创新区隔所依赖的最接近先例仅为 arXiv 预印本 [11]，缺乏经同行评审的正式发表版本及后续跟进文献佐证区隔仍然成立；另缺少强场/Floquet 调控莫尔平带的已有先例综述或对比文献，以支撑'新范式'表述（评审仅确认区隔写得具体，未确认区隔对象本身的文献完备性）",
+      "search_keywords": [
+        "ultrafast optical control moiré superlattice twist angle",
+        "strong-field Floquet engineering flat band moiré",
+        "time-resolved moiré potential reconstruction arXiv Ikeda",
+        "coherent lightwave control correlated insulator transition",
+        "twist-angle mapping ultrafast electron diffraction probe"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§3.4：选择光 Floquet 调控相对电/磁调控的优势论证（'为什么选'的可行性依据）",
+      "missing_evidence": "缺少电场/磁场/光驱动三种手段在莫尔体系平带调控能力上的系统对比文献（如磁场调控魔角石墨烯平带的能标对比、电场位移场调控的局限综述），目前仅有方案内部论证而无外部文献定量支撑",
+      "search_keywords": [
+        "displacement field tuning moiré flat band limit",
+        "magnetic field flux moiré bandwidth tuning",
+        "Floquet band engineering semiconducting transition metal dichalcogenide",
+        "comparison electric magnetic optical control twisted bilayer graphene"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "scheme"
+}

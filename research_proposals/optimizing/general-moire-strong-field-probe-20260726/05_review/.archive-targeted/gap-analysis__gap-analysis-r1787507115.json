@@ -1,0 +1,41 @@
+{
+  "gaps": [
+    {
+      "claim": "莫尔超晶格强场/超快光学方向的国内研究现状梳理（立项依据五层递进中国内现状层）",
+      "missing_evidence": "国内现状层薄弱：§1.2 仅 L43 一段（北京大学 Ma 2025 相位匹配），无国内研究现状的系统文献综述，需补充中国团队在莫尔材料、转角双层体系、强场超快光学、固体高次谐波与非线性光学方向的代表性工作",
+      "search_keywords": [
+        "moire superlattice strong field China",
+        "twisted bilayer ultrafast optics Chinese group",
+        "solid-state high harmonic generation China group",
+        "莫尔材料 强场 超快 国内 实验组",
+        "moire heterostructure nonlinear optics domestic Chinese research",
+        "twisted bilayer graphene high harmonic Chinese team"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "references.md 中残留占位符条目对应的真实文献缺失（C3/H6 系统性治理问题）",
+      "missing_evidence": "参考文献文件存在残留占位符，部分引用无真实可验证文献支撑，需检索莫尔强场/超快领域真实论文替换占位符并核实每条引用的题录信息",
+      "search_keywords": [
+        "moire superlattice high harmonic generation",
+        "twisted bilayer graphene strong field nonlinear optics",
+        "moiré exciton ultrafast dynamics",
+        "Floquet engineering moire material optical",
+        "correlated insulator twisted bilayer optical response"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "全稿实际引用数（81 处）与 references.md 自述引用数（156 处）严重不符（C4）",
+      "missing_evidence": "引用计数失实暗示大量正文论点可能缺少应有引用支撑，需核查立项依据中被引与未引论点，为无引用的关键论断（如莫尔强场探针可行性、关联绝缘态光学调控、计算方法适用性）补充文献锚点",
+      "search_keywords": [
+        "moiré flat band optical probe",
+        "twisted bilayer TDDFT strong field simulation",
+        "semiconductor Bloch equation moire superlattice validity",
+        "attosecond transient absorption 2D material",
+        "moiré superlattice optical control experiment"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

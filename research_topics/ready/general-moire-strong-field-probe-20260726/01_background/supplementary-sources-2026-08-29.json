@@ -1,0 +1,22 @@
+{
+  "proposal_id": "general-moire-strong-field-probe-20260726",
+  "cluster_id": "cl_20260815_dfe92b",
+  "entries": [
+    {
+      "source_id": "paper:2026-2608.09455-cost-effective-real-time-tddft-for-twisted-heterostructures",
+      "title": "Cost-Effective Real-Time TDDFT for Twisted Heterostructures via Adaptive Subspace Embedding",
+      "summary": "该文提出将实时含时密度泛函理论与自适应子空间紧束缚嵌入相结合的方法，以低成本模拟扭转异质结中的激发态动力学。在扭转双层石墨烯超胞的测试中，该方法相比全 rt-TDDFT 计算实现了超过10倍的核心小时数缩减。",
+      "path": "",
+      "added_via": "cluster:cl_20260815_dfe92b",
+      "added_at": "2026-08-29T01:11:11Z"
+    },
+    {
+      "source_id": "paper:2026-2608.09201-scaling-real-time-tddft-to-twisted-bilayer-graphene-core-hou",
+      "title": "Scaling Real-Time TDDFT to Twisted Bilayer Graphene: Core-Hour Benchmarks and Hybrid Tight-Binding Acceleration",
+      "summary": "该文在共度与非共度扭转双层石墨烯超胞上，对实时含时密度泛函理论及其与紧束缚模型的杂化加速方案进行了核心小时级基准测试，系统报告了计算代价随体系尺寸、扭转角和基组的标度规律。在此基础上提出了一种面向摩尔尺度电子动力学的多尺度嵌入方案，使 rt-TDDFT 得以扩展至摩尔超晶格体系。",
+      "path": "",
+      "added_via": "cluster:cl_20260815_dfe92b",
+      "added_at": "2026-08-29T01:11:11Z"
+    }
+  ]
+}

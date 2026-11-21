@@ -1,0 +1,177 @@
+{
+  "proposal_id": "general-ssh-weyl-20260920",
+  "cluster_id": "cl_20261106_30a370",
+  "clusters": [
+    "cl_20261106_30a370"
+  ],
+  "entries": [
+    {
+      "source_id": "paper:2025-2512.05477-quantum-geometry-and-x-wave-magnets-with-xp-d-f-g-i",
+      "title": "Quantum geometry and X-wave magnets with X=p, d, f, g, i",
+      "summary": "本综述系统梳理了X波磁体——d/g/i波交变磁体与p/f波磁体——的量子几何理论，将Berry曲率（管输运）与量子度规（管光学响应）统一用于刻画其自旋劈裂能带的几何性质。核心结果是一组闭式解析公式：反常霍尔电导、磁光克尔/法拉第效应与磁圆二色均表示为量子几何量的动量空间积分，并按自旋劈裂的角动量类型X给出对称性选择定则。由此建立“磁对称性—量子几何—输运/磁光响应”的可查映射，为判别与光学读出新型磁体提供定量工具。",
+      "path": "knowledge/raw/papers/2025-2512.05477-quantum-geometry-and-x-wave-magnets-with-xp-d-f-g-i.md",
+      "added_via": "cluster:cl_20261106_30a370",
+      "added_at": "2026-11-15T00:20:27Z"
+    },
+    {
+      "source_id": "paper:2024-2409.13408-quantum-geometry-in-condensed-matter",
+      "title": "Quantum geometry in condensed matter",
+      "summary": "该综述系统梳理了量子几何张量（对称的量子度量 + 反对称的Berry曲率）在凝聚态线性与非线性响应中的统一角色，指出不仅Berry曲率偶极，量子度量偶极同样驱动二阶非线性输运（如非线性霍尔效应）。文章将非线性光学响应（位移电流、圆光伏效应、注入电流等）与能带拓扑效应纳入同一几何框架，为用电学和光学可观测量提取能带量子几何提供了系统性理论地图。",
+      "path": "knowledge/raw/papers/2024-2409.13408-quantum-geometry-in-condensed-matter.md",
+      "added_via": "cluster:cl_20261106_30a370",
+      "added_at": "2026-11-15T00:20:27Z"
+    },
+    {
+      "source_id": "paper:2026-2609.38102-spatially-dispersive-photogalvanic-effects-as-a-probe-of-qua",
+      "title": "Spatially dispersive photogalvanic effects as a probe of quantum geometric tensor",
+      "summary": "本文证明引入光的空间色散（有限波矢 q）会改写光电流效应的选择定则：q 作为极矢参与对称性分析，使中心对称晶体中偶极阶禁戒的二阶光电流得以开启。以单层 T'-MoTe2 铁电（反演破缺）相变为平台，通过对比相变两侧的响应通道，将量子度规与 Berry 曲率（即量子几何张量的对称与反对称部分）对光电流的贡献分开。由此提出一种无需非中心对称晶体即可用光学手段读取完整量子几何张量的探针方案。",
+      "path": "knowledge/raw/papers/2026-2609.38102-spatially-dispersive-photogalvanic-effects-as-a-probe-of-qua.md",
+      "added_via": "cluster:cl_20261106_30a370",
+      "added_at": "2026-11-15T00:20:27Z"
+    },
+    {
+      "source_id": "paper:2026-2607.21882-orbital-embedding-and-the-physical-definition-of-quantum-geo",
+      "title": "Orbital Embedding and the Physical Definition of Quantum Geometry",
+      "summary": "本文指出布洛赫态量子几何张量（QGT）的常规计算结果依赖单胞内轨道嵌入（实空间位置）惯例，缺乏物理唯一性。作者提出在协变导数中纳入完整位置算符（含轨道间位置矩阵元）的'物理QGT'定义，使其规范协变并直接对应真实空间波包与可观测量。以SSH模型解析证明：常规∂_k投影导数公式在键序致隙（bond-order gap）系统中于leading order即失效，而物理QGT在任意嵌入惯例下给出一致结果。",
+      "path": "knowledge/raw/papers/2026-2607.21882-orbital-embedding-and-the-physical-definition-of-quantum-geo.md",
+      "added_via": "cluster:cl_20261106_30a370",
+      "added_at": "2026-11-15T00:20:27Z"
+    },
+    {
+      "source_id": "paper:2025-2512.24553-from-berry-curvature-to-quantum-metric-a-new-era-of-quantum",
+      "title": "From Berry curvature to quantum metric: a new era of quantum geometry metrology for Bloch electrons in solids",
+      "summary": "本文系统综述了固体布洛赫带量子几何张量（QGT）实验重构这一新兴方向：测量对象从以反常霍尔为代表的贝里曲率，拓展到长期难以直接探测的量子度量张量。重点解读在kagome金属CoSn平带上联合圆二色ARPES（CD-ARPES）与自旋分辨ARPES同时重建量子度量张量和贝里曲率的标杆实验，确立了'量子几何计量学'的方法学范式，并横向比较了输运、光谱与光电子能谱等各类几何探针的适用范围与局限。",
+      "path": "knowledge/raw/papers/2025-2512.24553-from-berry-curvature-to-quantum-metric-a-new-era-of-quantum.md",
+      "added_via": "cluster:cl_20261106_30a370",
+      "added_at": "2026-11-15T00:20:27Z"
+    },
+    {
+      "source_id": "paper:2025-2509.17043-direct-measurement-of-the-quantum-geometric-tensor-in-pseudo",
+      "title": "Direct measurement of the quantum geometric tensor in pseudo-Hermitian systems",
+      "summary": "提出两种量子模拟方案，可完整提取赝厄米系统中量子几何张量（QGT）的所有分量，包括实部量子度规与虚部贝里曲率。方案利用非绝热演化制备的两个时间演化态作为探针态，在其上测量能量涨落算符与广义力算符，从而绕开非厄米体系中左/右本征态不重合带来的双正交态层析困难。结果为在真实量子平台上直接刻画非厄米拓扑能带的量子几何提供了可操作的测量协议。",
+      "path": "knowledge/raw/papers/2025-2509.17043-direct-measurement-of-the-quantum-geometric-tensor-in-pseudo.md",
+      "added_via": "cluster:cl_20261106_30a370",
+      "added_at": "2026-11-15T00:20:27Z"
+    },
+    {
+      "source_id": "paper:2026-2601.13963-direct-probing-the-quantum-geometric-tensor-for-bosonic-coll",
+      "title": "Direct probing the quantum geometric tensor for bosonic collective excitations",
+      "summary": "证明动力学结构因子 S(q,ω) 完整编码玻色子集体激发能带的量子几何张量（QGT）：带分辨谱权重的对称（实）部分给出量子度规、反对称（虚）部分给出Berry曲率。由此把常规非弹性散射/谱学测量升级为玻色能带（磁振子、声子、极化激元等）量子几何的直接探针，无需对波函数做层析重构。该结果给出玻色侧的求和规则式读出方案，与费米体系中基于输运或强场谱学的QGT探测形成互补。",
+      "path": "knowledge/raw/papers/2026-2601.13963-direct-probing-the-quantum-geometric-tensor-for-bosonic-coll.md",
+      "added_via": "cluster:cl_20261106_30a370",
+      "added_at": "2026-11-15T00:20:27Z"
+    },
+    {
+      "source_id": "paper:2026-2503.17163-quantum-geometric-tensors-from-sub-bundle-geometry",
+      "title": "Quantum geometric tensors from sub-bundle geometry",
+      "summary": "在厄米向量丛微分几何框架下给出了量子几何张量（QGT）的普适定义：将物理态空间视为高维环境丛的子丛，QGT 由子丛投影几何自然导出，除标准的 Berry 项外还包含来自环境丛曲率的附加贡献。作者把该框架应用到弯曲时空中 Dirac 场的半经典（Foldy-Wouthuysen）处理，得到引力背景下波包的广义量子度规与 Berry 曲率。整体上为量子几何、拓扑物理与引力半经典动力学提供了统一的几何语言。",
+      "path": "knowledge/raw/papers/2026-2503.17163-quantum-geometric-tensors-from-sub-bundle-geometry.md",
+      "added_via": "cluster:cl_20261106_30a370",
+      "added_at": "2026-11-15T00:20:27Z"
+    },
+    {
+      "source_id": "paper:2025-2505.16999-nonlinear-thermal-and-thermoelectric-transport-from-quantum",
+      "title": "Nonlinear thermal and thermoelectric transport from quantum geometry",
+      "summary": "本文建立了由量子几何张量——Berry 曲率偶极（BCD）与量子度量偶极（QMD）——驱动的非线性热电与热输运响应的理论框架，将量子几何非线性输运从纯电学响应（非线性霍尔类）推广到温度梯度驱动通道。核心结果是证明温度梯度可作为二阶量子几何探针，给出可通过热电/热输运测量提取量子度量偶极的可观测方案，弥补量子度规难以电学探测的空缺。并指出过渡金属硫族化合物（TMD）与拓扑半金属是最有希望的实验候选体系。",
+      "path": "knowledge/raw/papers/2025-2505.16999-nonlinear-thermal-and-thermoelectric-transport-from-quantum.md",
+      "added_via": "cluster:cl_20261106_30a370",
+      "added_at": "2026-11-15T00:20:27Z"
+    },
+    {
+      "source_id": "paper:2025-2507.01824-correlation-driven-quantum-geometry-effects-in-a-kondo-syste",
+      "title": "Correlation-driven quantum geometry effects in a Kondo system",
+      "summary": "在反铁磁Kondo晶格材料FeTe中实验观测到由Kondo关联杂化驱动的量子度规四极矩三阶非线性输运，证明强关联（而不仅是能带拓扑）可作为量子几何响应的来源与放大器，确立'关联驱动量子几何'新范式。结合对称性分析、散射时间标度与理论建模，分离出量子度规四极矩对三阶电导的确定贡献，为通过关联自由度调控量子几何量开辟了材料与测量平台。",
+      "path": "knowledge/raw/papers/2025-2507.01824-correlation-driven-quantum-geometry-effects-in-a-kondo-syste.md",
+      "added_via": "cluster:cl_20261106_30a370",
+      "added_at": "2026-11-15T00:20:27Z"
+    },
+    {
+      "source_id": "paper:2026-2607.28491-drumhead-surface-states-of-rhombohedral-graphite-with-near-i",
+      "title": "Drumhead Surface States of Rhombohedral Graphite with Near Ideal Quantum Geometry Condition",
+      "summary": "本文用第一性原理证明菱形（ABC堆叠）石墨的鼓膜表面态具有近乎理想的量子几何：Berry曲率与量子度规之比|Ω|/TrG在K点中心约0.96、内环处严格为1，几乎饱和单带不等式。这表明由体结线拓扑保护的表面平带可在真实材料中实现'理想'量子几何，为平带关联物理（平带超导、分数化等）提供了材料层面的量子几何依据。",
+      "path": "knowledge/raw/papers/2026-2607.28491-drumhead-surface-states-of-rhombohedral-graphite-with-near-i.md",
+      "added_via": "cluster:cl_20261106_30a370",
+      "added_at": "2026-11-15T00:20:27Z"
+    },
+    {
+      "source_id": "paper:2024-2410.14213-quantum-geometric-tensor-in-systems-with-fractional-band-dis",
+      "title": "Quantum geometric tensor in systems with fractional band dispersion",
+      "summary": "本文将Grünwald-Letnikov分数阶导数引入紧束缚模型，系统计算了具有分数色散能带的量子几何张量（量子度规与Berry曲率的联合刻画）。核心发现是Berry曲率在布里渊区内四个远离原点的对称位置出现类Dirac-delta尖峰，且这些曲率集中点与Berry单极子（简并点奇异源）在动量空间中相互分离。结果表明分数化色散可定性地重塑能带的量子几何结构，为拓扑与几何性质的色散工程提供了新自由度。",
+      "path": "knowledge/raw/papers/2024-2410.14213-quantum-geometric-tensor-in-systems-with-fractional-band-dis.md",
+      "added_via": "cluster:cl_20261106_30a370",
+      "added_at": "2026-11-15T00:20:27Z"
+    },
+    {
+      "source_id": "paper:2025-2510.24239-identifying-geometric-third-order-nonlinear-transport-in-dis",
+      "title": "Identifying geometric third-order nonlinear transport in disordered materials",
+      "summary": "在无序材料中建立三阶非线性输运几何贡献的识别框架：将三阶电导分解为量子度规四极矩、贝里曲率四极矩与混合爱因斯坦项（量子联络与度规的混合缩并）三类几何源项。推导各几何项随散射时间 τ 的不同幂次标度行为，从而给出把几何贡献与常规色散型（Drude 类）贡献分离的实验判据。为在真实无序量子材料中用电学手段探测量子几何张量的高阶多重极矩提供了可操作的指纹。",
+      "path": "knowledge/raw/papers/2025-2510.24239-identifying-geometric-third-order-nonlinear-transport-in-dis.md",
+      "added_via": "cluster:cl_20261106_30a370",
+      "added_at": "2026-11-15T00:20:27Z"
+    },
+    {
+      "source_id": "paper:2025-2508.18152-optical-signatures-of-band-flatness-and-anisotropic-quantum",
+      "title": "Optical Signatures of Band Flatness and Anisotropic Quantum Geometry in Magic-Angle Twisted Bilayer Graphene",
+      "summary": "本文证明魔角扭曲双层石墨烯（MATBG）的线性光学电导率携带其平带量子几何的指纹：利用量子度规的trace-determinant不等式（Tr g ≥ 2√det g）对带间光学权重设置几何约束，光学谱可作为能带平坦度与量子几何各向异性的定量诊断工具。进一步指出Berry曲率在带内的正定/负定性是趋近理想平带极限（各向同性Fubini-Study度规、不等式饱和）的关键条件，从而把'光学可测量—量子几何—平带拓扑品质'三者串联起来。",
+      "path": "knowledge/raw/papers/2025-2508.18152-optical-signatures-of-band-flatness-and-anisotropic-quantum.md",
+      "added_via": "cluster:cl_20261106_30a370",
+      "added_at": "2026-11-15T00:20:27Z"
+    },
+    {
+      "source_id": "paper:2024-2311.01219-scaling-law-for-time-reversal-odd-nonlinear-transport",
+      "title": "Scaling Law for Time-Reversal-Odd Nonlinear Transport",
+      "summary": "本文为时间反演奇的非线性输运建立了统一的标度律，将 Drude、Bernard 曲率偶极、量子度量偶极、侧跳（side-jump）与斜散射（skew-scattering）等所有贡献按散射时间 τ 的幂次进行系统分类，明确了不同机制在 τ→0 和 τ→∞ 极限下的相对权重与可分离性。",
+      "path": "knowledge/raw/papers/2024-2311.01219-scaling-law-for-time-reversal-odd-nonlinear-transport.md",
+      "added_via": "cluster:cl_20261106_30a370",
+      "added_at": "2026-11-15T00:20:27Z"
+    },
+    {
+      "source_id": "paper:2025-2511.13114-orthogonal-attosecond-control-of-solid-state-harmonics-by-op",
+      "title": "Orthogonal Attosecond Control of Solid-State Harmonics by Optical Waveforms and Quantum Geometry Engineering",
+      "summary": "该文提出对固态高次谐波实施“正交”阿秒控制的框架：光学波形自由度（如双色场相位延迟、CEP）在亚周期尺度调控带内电流通道，而量子几何量（贝里联络/曲率/量子度规）通过能带设计主导带间极化通道，两者近似解耦。由此实现带内与带间谐波贡献的分离、独立操控与阿秒时间表征，为区分固态HHG两类微观起源提供了可工程化的双旋钮方案。",
+      "path": "knowledge/raw/papers/2025-2511.13114-orthogonal-attosecond-control-of-solid-state-harmonics-by-op.md",
+      "added_via": "cluster:cl_20261106_30a370",
+      "added_at": "2026-11-15T00:20:27Z"
+    },
+    {
+      "source_id": "paper:2026-2610.22500-quantum-interference-correction-to-conductivity-in",
+      "title": "Quantum-interference correction to conductivity in disordered electronic bands with non-uniform quantum geometry",
+      "summary": "本文在具有非均匀量子几何（贝里曲率与量子度规随动量显著变化）的无序二维电子体系中，推广了弱局域化的量子干涉修正理论。核心结果是：能带几何通过贝里联络的相位积累与波函数交叠（量子度规）双重进入时间反演路径干涉与无序散射顶角，从而修正库珀农（Cooperon）结构并给出超越常规对数发散项的几何依赖电导修正。修正的大小与符号由量子几何张量在布里渊区的非均匀分布决定，为用输运测量直接读出能带量子几何信息提供了理论通道。",
+      "path": "knowledge/raw/papers/2026-2610.22500-quantum-interference-correction-to-conductivity-in.md",
+      "added_via": "cluster:cl_20261106_30a370",
+      "added_at": "2026-11-15T00:20:27Z"
+    },
+    {
+      "source_id": "paper:2025-2503.06160-quantum-response-theory-and-momentum-space-gravity",
+      "title": "Quantum response theory and momentum-space gravity",
+      "summary": "本文将动量空间引力图景（把量子度规视为动量空间中的度规张量、Berry曲率视为相应的曲率/规范结构）与量子响应理论统一，建立用动量空间几何对象系统表达线性及非线性响应系数的框架。核心创新是引入三态量子几何张量——对传统两态量子几何张量（QGT）的推广，显式编码三条能带之间的协变耦合信息——从而补全非线性响应（如二阶输运与光学响应）的几何分类，使两态几何无法区分的响应通道获得独立的几何不变量标识。",
+      "path": "knowledge/raw/papers/2025-2503.06160-quantum-response-theory-and-momentum-space-gravity.md",
+      "added_via": "cluster:cl_20261106_30a370",
+      "added_at": "2026-11-15T00:20:27Z"
+    },
+    {
+      "source_id": "paper:2025-2509.11765-non-hermitian-quantum-geometric-tensor-and-nonlinear-electri",
+      "title": "Non-Hermitian quantum geometric tensor and nonlinear electrical response",
+      "summary": "本文将量子几何张量推广到非厄米能带体系，证明具有线隙（line gap）的非厄米系统其二阶（非线性）电响应由非厄米量子几何张量（双正交形式下的复贝里曲率与复量子度规）支配。核心发现是复量子度规的偶极矩贡献一种与散射（弛豫时间）无关的内禀非线性电导，这在厄米体系中通常被弛豫掩盖。结果给出非厄米性直接进入非线性输运几何描述的普适框架，并在非厄米强度趋于零时回归厄米极限。",
+      "path": "knowledge/raw/papers/2025-2509.11765-non-hermitian-quantum-geometric-tensor-and-nonlinear-electri.md",
+      "added_via": "cluster:cl_20261106_30a370",
+      "added_at": "2026-11-15T00:20:27Z"
+    },
+    {
+      "source_id": "paper:2026-2608.18720-linear-and-nonlinear-optical-responses-in-the-chiral-multifo",
+      "title": "Linear and nonlinear optical responses in the chiral multifold semimetal BeAu: A quantum-geometric perspective",
+      "summary": "本文从量子几何视角系统研究手性多重半金属 BeAu 的线性光学电导与二阶直流光电流响应，阐明多带拓扑（多重费米子节点）如何通过贝里曲率与量子度规在这些光学响应中留下可观测印记。线性光学电导与带间跃迁的量子度规（跃迁矩阵元）直接关联，而二阶直流光电流（位移/注入型）则由位移矢量、贝里曲率偶极与量子度规偶极等几何量主导，并在多重节点能量附近被显著增强。该工作将 BeAu 确立为用线性与非线性光谱实验读出量子几何与手性拓扑的候选材料平台。",
+      "path": "knowledge/raw/papers/2026-2608.18720-linear-and-nonlinear-optical-responses-in-the-chiral-multifo.md",
+      "added_via": "cluster:cl_20261106_30a370",
+      "added_at": "2026-11-15T00:20:27Z"
+    },
+    {
+      "source_id": "paper:2025-2504.10447-quantum-geometry-from-the-moyal-product-quantum-kinetic-equa",
+      "title": "Quantum geometry from the Moyal product: quantum kinetic equation and non-linear response",
+      "summary": "本文以Groenewold–Moyal相空间（星积）乘积表述多带密度矩阵的量子动能方程，并通过逐阶幺正（Schrieffer–Wolff型）变换实现完全带对角化，使贝里联络、贝里曲率与量子度规等量子几何量以协变结构系统进入输运方程。在此框架下，作者超越半经典波包极限推导了非线性（高阶）光学/输移响应的一般表达式，明确分离出超出半经典的量子几何修正项，为从非线性响应中定量读取能带量子几何提供了系统的理论工具。",
+      "path": "knowledge/raw/papers/2025-2504.10447-quantum-geometry-from-the-moyal-product-quantum-kinetic-equa.md",
+      "added_via": "cluster:cl_20261106_30a370",
+      "added_at": "2026-11-15T00:20:27Z"
+    }
+  ]
+}

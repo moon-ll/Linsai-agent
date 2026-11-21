@@ -1,0 +1,71 @@
+{
+  "gaps": [
+    {
+      "claim": "§3.2.3 末段：正式文献编号需待 R1 阶段核实后补引",
+      "missing_evidence": "该段关于多体关联修正方法（如张量网络/DMRG）的具体引用尚未确定，需要可引用的正式文献或预印本编号",
+      "search_keywords": [
+        "tensor network moire superlattice DMRG high harmonic generation",
+        "matrix product state twisted bilayer Hubbard",
+        "continuum moire tight-binding HHG 2024 2025",
+        "arXiv tensor network moire Hubbard DMRG benchmark"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3.4.1：HHG 跳变 > 20% 阈值的文献类比支撑",
+      "missing_evidence": "缺乏高阶边带或谐波信号跳变阈值的定量参考（如 Liu/Sun 2022 高阶边带 8-20% 类比的具体数据）",
+      "search_keywords": [
+        "high-order sideband jump threshold ultrafast",
+        "harmonic signal threshold transition criterion Liu Sun 2022",
+        "HHG jump amplitude threshold correlated phase transition",
+        "sideband amplitude jump percent phase transition MoS2"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3.4.1：非莫尔 Mott 体系 Δ_CI（电荷/能隙）单点证据（Ikeda [12]、Asp 莫特绝缘态等）",
+      "missing_evidence": "缺少非莫尔 1T-TaS2/NiPS3 等 Mott 体系中 Δ_CI 数值的具体出处，使 0.5-2 eV 区间可追溯",
+      "search_keywords": [
+        "Ikeda 1T-TaS2 charge gap Hubbard U",
+        "Asp NiPS3 Mott insulator gap",
+        "1T-TaS2 correlated insulator gap value experimental",
+        "Mott insulator charge gap ARPES meV scale"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§3.3.2：Lian [19] 报告 Δ_CI=5-10 meV vs §3.4.1 用 5-20 meV 区间——10-20 meV 上端外推依据",
+      "missing_evidence": "5-10 meV 由 Lian [19] 实测，但 10-20 meV 上端取值需要相邻体系（如 1T-TaS2/NbSe2/CDW 材料）的外推证据",
+      "search_keywords": [
+        "Lian twisted bilayer MoS2 charge gap 5 meV",
+        "1T-TaS2 CDW gap 10-20 meV",
+        "twisted bilayer TMD charge gap evolution moire period",
+        "Hubbard U charge gap bilayer TMD adjacent"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§3.4.2：蒙特卡洛 50 次采样 1σ < 1 个百分点的基线 σ 经验值（< 5%）",
+      "missing_evidence": "缺少类似反演问题中蒙特卡洛采样 σ 的经验标度文献依据（如 CL 标度推得的 σ 基线值）",
+      "search_keywords": [
+        "Monte Carlo sampling inverse problem confidence interval benchmark",
+        "Bayesian inversion posterior standard deviation baseline",
+        "CL confidence level sigma sampling 50 trials",
+        "Tikhonov regularization posterior uncertainty Monte Carlo"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§3.2.2 末尾：连续莫尔 SBE → 张量网络关联修正的过渡句",
+      "missing_evidence": "缺少莫尔尺度 SBE 求解后为何需要张量网络修正的物理动机文献（强关联/平坦带修正的必要性证据）",
+      "search_keywords": [
+        "moire flat band SBE failure correlated",
+        "semiconductor Bloch equation moire strong correlation limit",
+        "tensor network correction flat band Hubbard moire",
+        "many-body correction moire HHG literature"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "scheme"
+}

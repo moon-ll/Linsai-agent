@@ -1,0 +1,59 @@
+{
+  "gaps": [
+    {
+      "claim": "§3 Chen数误差 ΔC≤0.2 在 §3 与 §4 闭环阈值的口径定义（绝对误差/相对误差）及对应的实验信号 SNR 可行性校验",
+      "missing_evidence": "需要[63] Ono 2024-09 PRB 实验调制幅度数据作为基线，用于推算反演精度目标 ΔC≤0.2 所需的光谱 SNR；缺乏不同反演方法（最大似然、贝叶斯、Tikhonov正则化）在 HHG 谱上达到 ΔC=0.2 精度的实验文献",
+      "search_keywords": [
+        "Ono 2024 PRB Berry curvature high harmonic reconstruction accuracy",
+        "Chen number inversion precision attosecond spectroscopy",
+        "high harmonic generation Berry curvature signal to noise ratio",
+        "topological invariant reconstruction error attosecond"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.3 检索范围与排除标准——[38] 2026 Roadmap 是否将'瞬态拓扑相干表征与反演'列为旗舰方向",
+      "missing_evidence": "缺少 [38] 2026 Roadmap 全文以核对内容是否涵盖本课题方向；需明确 PRX/PRA/PRB/Nat Phys/Nat Photon 2024-2026 '瞬态拓扑相+高次谐波+反演'组合的检索式与纳入排除标准",
+      "search_keywords": [
+        "attosecond science 2026 roadmap transient topology",
+        "high harmonic generation roadmap 2026",
+        "ultrafast topology detection review 2024 2025 2026",
+        "transient topological phase harmonic generation arXiv 2024"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.1 §2.2 §3 三个拓扑相定义框架（Floquet-Bloch Wilson 圈[33]、时间平均 Berry 曲率[32]、含时 Berry 相）的适用条件与失效边界",
+      "missing_evidence": "缺少三个框架失效阈值的对照数据：脉冲周期数、Ω_R/E_g 比（Floquet/Rabi频率与带隙比）、准能级展宽与带隙比在不同材料/驱动场下的临界值",
+      "search_keywords": [
+        "Floquet-Bloch Wilson loop validity regime breakdown",
+        "time-averaged Berry curvature nonadiabatic limit",
+        "time-dependent Berry phase definition adiabatic strong field",
+        "dynamical topological invariant breakdown criterion"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1 '阿秒科学与极端非线性光学'重点专项及其'阿秒瞬态拓扑相变探测'方向的存在性",
+      "missing_evidence": "缺少该重点专项的官方指南文件、基金委公告或公开链接以证实'阿秒瞬态拓扑相变探测'作为指南方向",
+      "search_keywords": [
+        "阿秒科学与极端非线性光学 重点专项 指南",
+        "attosecond science extreme nonlinear optics key project NSFC",
+        "国家重点研发计划 阿秒 拓扑 2024 2025",
+        "阿秒瞬态拓扑相变 基金"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§2.3-§2.4 国际三家代表性机构瓶颈'无写-读-反演闭环'的事实陈述",
+      "missing_evidence": "需明确[5]/[9]/[14]等国际代表性机构近期工作是否仅覆盖写、读或反演单一环节、缺乏闭环的对照文献（2024-2026）",
+      "search_keywords": [
+        "transient topology write read closed loop attosecond 2024 2025",
+        "Floquet engineering writing readout 2024 review",
+        "strong field topological phase control attosecond retrieval 2025",
+        "国际 阿秒 拓扑 写 读 反演 闭环 综述"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

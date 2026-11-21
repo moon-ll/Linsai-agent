@@ -1,0 +1,204 @@
+{
+  "environment": {
+    "status": "✓",
+    "python": "3.9.6",
+    "disk_free_gb": 311.3,
+    "missing_dirs": []
+  },
+  "credentials": {
+    "status": "✓",
+    "providers": {
+      "MINIMAX_API_KEY": {
+        "present": true,
+        "masked": "sk-c...mGDU"
+      },
+      "GLM_API_KEY": {
+        "present": true,
+        "masked": "1883...H7Qm"
+      }
+    }
+  },
+  "lifecycle": {
+    "status": "⚠",
+    "state_counts": {
+      "drafts": 0,
+      "optimizing": 3,
+      "pending_review": 2,
+      "archived": 0
+    },
+    "alerts": [
+      {
+        "level": "info",
+        "type": "pending_review",
+        "message": "2 个 proposal 等待人工核验",
+        "proposals": [
+          {
+            "id": "general-moire-strong-field-probe-20260726",
+            "score": 0.0,
+            "rounds": 7
+          },
+          {
+            "id": "general-bsv-driven-hhg-quantum-20260726",
+            "score": 0.65,
+            "rounds": 6
+          }
+        ]
+      },
+      {
+        "level": "error",
+        "type": "negative_feedback",
+        "message": "general-quantum-geometry-inversion-20260726 触发负反馈告警，需人工介入后清除",
+        "proposal_id": "general-quantum-geometry-inversion-20260726",
+        "reasons": [
+          "writer/critic 本地分数连续 3 轮双降"
+        ],
+        "local_writer_score": 95.1,
+        "local_critic_score": 75.38
+      },
+      {
+        "level": "error",
+        "type": "negative_feedback",
+        "message": "key-transient-quantum-phase-optical-20260726 触发负反馈告警，需人工介入后清除",
+        "proposal_id": "key-transient-quantum-phase-optical-20260726",
+        "reasons": [
+          "monitor 独立分数连续 3 轮下降"
+        ],
+        "local_writer_score": 90.6,
+        "local_critic_score": 100.7
+      },
+      {
+        "level": "error",
+        "type": "negative_feedback",
+        "message": "general-order-parameter-ultrafast-readout-20260727 触发负反馈告警，需人工介入后清除",
+        "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
+        "reasons": [
+          "monitor 独立分数连续 3 轮下降"
+        ],
+        "local_writer_score": 93.2,
+        "local_critic_score": 75.72000000000001
+      }
+    ],
+    "artifacts": [
+      {
+        "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
+        "missing_stages": [],
+        "complete": true
+      },
+      {
+        "proposal_id": "general-quantum-geometry-inversion-20260726",
+        "missing_stages": [],
+        "complete": true
+      },
+      {
+        "proposal_id": "key-transient-quantum-phase-optical-20260726",
+        "missing_stages": [],
+        "complete": true
+      }
+    ],
+    "incomplete_count": 0
+  },
+  "profiles": {
+    "status": "✓",
+    "profiles": {
+      "linsai": {
+        "status": "working",
+        "success_rate_24h": null,
+        "dispatch_count_24h": 0,
+        "avg_duration_s": 0,
+        "recent_error": "",
+        "suggestion": ""
+      },
+      "pipeline-runner": {
+        "status": "working",
+        "success_rate_24h": null,
+        "dispatch_count_24h": 0,
+        "avg_duration_s": 0,
+        "recent_error": "",
+        "suggestion": ""
+      },
+      "researcher": {
+        "status": "idle",
+        "success_rate_24h": null,
+        "dispatch_count_24h": 0,
+        "avg_duration_s": 0,
+        "recent_error": "",
+        "suggestion": ""
+      },
+      "analyst": {
+        "status": "idle",
+        "success_rate_24h": null,
+        "dispatch_count_24h": 0,
+        "avg_duration_s": 0,
+        "recent_error": "",
+        "suggestion": ""
+      },
+      "writer": {
+        "status": "idle",
+        "success_rate_24h": null,
+        "dispatch_count_24h": 0,
+        "avg_duration_s": 0,
+        "recent_error": "",
+        "suggestion": ""
+      },
+      "critic": {
+        "status": "idle",
+        "success_rate_24h": null,
+        "dispatch_count_24h": 0,
+        "avg_duration_s": 0,
+        "recent_error": "",
+        "suggestion": ""
+      },
+      "reviewer": {
+        "status": "idle",
+        "success_rate_24h": null,
+        "dispatch_count_24h": 0,
+        "avg_duration_s": 0,
+        "recent_error": "",
+        "suggestion": ""
+      }
+    },
+    "blocked": [],
+    "offline": [],
+    "computed_at": "2026-07-31T03:14:04Z"
+  },
+  "kb": {
+    "status": "✓",
+    "composite_health": 0.789,
+    "components": {
+      "connectivity": 0.7799999999999999,
+      "category_coverage": 0.81,
+      "alias_hit_rate": 0.56,
+      "orphan_rate": 0.0
+    },
+    "summary": {
+      "raw_count": 208,
+      "wiki_count": 121,
+      "graph_nodes": 72,
+      "graph_edges": 238,
+      "graph_orphans": 0,
+      "week_new": 0,
+      "pending_distill": 208
+    }
+  },
+  "failures": {
+    "status": "✓",
+    "total_errors": 0,
+    "total_warnings": 119,
+    "top_pattern": "file-missing",
+    "patterns": [
+      {
+        "id": "file-missing",
+        "label": "文件缺失",
+        "category": "数据缺失",
+        "occurrences": 108,
+        "sample_errors": [
+          "[2026-07-31 09:37:25] [WARNING] [linsai.proposal_lifecycle] [general-test-hhg-20260101] 进入 optimizing 后初始化失败: [Errno 2] No such file or directory: '/var/folders/ky/29bynnbj7ss_4bkwbhm8rlnw0000gn/T/linsai_test_3tpktq8b/research_proposals/optimizing/general-test-hhg-20260101/04_proposal/sections/rationale.md'",
+          "[2026-07-31 09:37:25] [WARNING] [linsai.proposal_lifecycle] [general-test-hhg-20260102] 进入 optimizing 后初始化失败: [Errno 2] No such file or directory: '/var/folders/ky/29bynnbj7ss_4bkwbhm8rlnw0000gn/T/linsai_test_3tpktq8b/research_proposals/optimizing/general-test-hhg-20260102/04_proposal/sections/rationale.md'",
+          "[2026-07-31 09:37:25] [WARNING] [linsai.proposal_lifecycle] [general-test-hhg-20260103] 进入 optimizing 后初始化失败: [Errno 2] No such file or directory: '/var/folders/ky/29bynnbj7ss_4bkwbhm8rlnw0000gn/T/linsai_test_3tpktq8b/research_proposals/optimizing/general-test-hhg-20260103/04_proposal/sections/rationale.md'"
+        ],
+        "suggested_prompt_change": "派活前自动 mkdir -p 目标目录；writer 优化前确认 proposal-draft.md 存在",
+        "expected_impact": "减少因目录未创建导致的失败"
+      }
+    ]
+  }
+}

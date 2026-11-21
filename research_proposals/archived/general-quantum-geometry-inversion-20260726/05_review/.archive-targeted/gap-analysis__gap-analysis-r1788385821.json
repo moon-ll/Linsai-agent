@@ -1,0 +1,34 @@
+{
+  "gaps": [
+    {
+      "claim": "增强拉格朗日法（augmented Lagrangian）收敛速度快于自洽迭代，可用于半导体布洛赫方程（SBE）约束优化",
+      "missing_evidence": "缺乏augmented Lagrangian与自洽迭代在固体HHG或多带SBE中收敛速度/效率的直接对比研究",
+      "search_keywords": [
+        "augmented Lagrangian semiconductor Bloch equations convergence",
+        "augmented Lagrangian vs self-consistent loop high harmonic generation",
+        "constraint optimization SBE deep learning"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "量子光驱动HHG理论可从原子体系推广至固体体系（压缩真空→固体高次谐波）",
+      "missing_evidence": "缺少原子→固体量子光HHG理论扩展的系统性对比或综述文献",
+      "search_keywords": [
+        "squeezed light high harmonic generation atomic to solid-state theory",
+        "quantum light HHG theory extension atom to solid",
+        "bright squeezed vacuum solid state HHG theoretical framework"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "物理信息神经网络（PINN）优于传统正则化方法（如Tikhonov），用于HHG光谱反演",
+      "missing_evidence": "缺少PINN与传统正则化方法在HHG反演问题上的系统性Benchmark对比",
+      "search_keywords": [
+        "PINN vs Tikhonov regularization high harmonic spectroscopy inverse",
+        "physics-informed neural network nonlinear optics inversion benchmark",
+        "PINN regularization comparison attosecond spectroscopy"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

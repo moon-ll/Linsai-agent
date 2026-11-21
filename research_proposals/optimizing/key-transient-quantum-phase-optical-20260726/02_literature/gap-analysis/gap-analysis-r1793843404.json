@@ -1,0 +1,18 @@
+{
+  "gaps": [
+    {
+      "claim": "§2.2(b)中25 as档SNR“约5.5”及其依据的“0.014×5”误差合成结果，需要有可追溯的文献或计算依据，并解释其与6.5–8.7 SNR阈值链的对应关系。",
+      "missing_evidence": "缺少0.014单通道噪声或相对幅度不确定度的数据来源、5通道误差合成规则、25 as时间窗口与SNR计算之间的方法依据。建议补充ATA/XUV阿秒瞬态吸收实验的一手文献，涵盖仪器噪声模型、时序抖动与时间分辨率、SNR定义及误差预算；若0.014属于项目内部假设或预算参数，则需明确标注并给出可复算公式、参数表和计算过程，外部文献用于支撑噪声模型及误差传播方法的适用性。",
+      "search_keywords": [
+        "attosecond transient absorption SNR noise model",
+        "XUV attosecond transient absorption timing jitter",
+        "25 as temporal resolution SNR",
+        "attosecond spectroscopy error budget uncertainty propagation",
+        "多通道误差线性合成 SNR 保守估计",
+        "ATA 噪声模型 时间窗口 信噪比"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

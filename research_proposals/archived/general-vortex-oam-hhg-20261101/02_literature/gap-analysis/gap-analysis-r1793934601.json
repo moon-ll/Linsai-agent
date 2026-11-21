@@ -1,0 +1,45 @@
+{
+  "gaps": [
+    {
+      "claim": "references.md 全文 0 字节，参考文献章节整体缺失，rationale/content 成稿中的引用及 scheme 章待写内容均无文献清单支撑",
+      "missing_evidence": "完整参考文献清单（需经检索池三源对照：lit-gap/candidates.bib/reading-notes 誊写核验），覆盖已有成稿章节的全部引用条目",
+      "search_keywords": [
+        "vortex OAM high harmonic generation",
+        "orbital angular momentum HHG",
+        "references validation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "scheme.md 0 字节，研究方案章无载体，'为何选 astigmatic 变换而非其他方法测拓扑荷'等方法选择论证无从评估、无文献支撑",
+      "missing_evidence": "拓扑荷测量与 OAM 模式诊断的方法学文献（astigmatic 模式变换、亮瓣计数判据、替代测量方案对比），用于支撑方法选择论证",
+      "search_keywords": [
+        "astigmatic transformation OAM measurement",
+        "topological charge detection",
+        "vortex beam mode diagnostics"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "八条量化指标（χ²<5.99、束腰 65/40/25/15 μm、η≥0.1、N*≤20%）无'方案→指标'实现路径，各门限值的文献出处缺失",
+      "missing_evidence": "各判定门限与性能指标的文献依据（涡旋 HHG 转换效率标度、CEP 调控 OAM 谐波产额、探测信噪比判据等），用于在方案章为每条指标标注可溯源出处",
+      "search_keywords": [
+        "vortex HHG conversion efficiency",
+        "CEP-controlled OAM harmonics",
+        "high harmonic yield scaling",
+        "HHG detection signal-to-noise criteria"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "参数与机制表述的引用溯源待核验（评审报告末尾 verification 项，载体 rationale §1.x，原文截断）：KB briefing 所载 Rajak 组参数组与 Granados CEP 切换（l_q=5↔6）目前仅有 KB 简报转述，未见原始论文引用",
+      "missing_evidence": "Rajak 组涡旋 HHG 参数组与 Granados 等人 CEP 切换 OAM 拓扑荷（l_q=5↔6）的原始论文出处，以便在正文中直接引用而非经 KB 简报二手转述",
+      "search_keywords": [
+        "Rajak vortex high harmonic generation",
+        "Granados CEP switching orbital angular momentum"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

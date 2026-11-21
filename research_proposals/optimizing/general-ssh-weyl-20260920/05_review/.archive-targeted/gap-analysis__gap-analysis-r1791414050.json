@@ -1,0 +1,51 @@
+{
+  "gaps": [
+    {
+      "claim": "Luu 与 Wörner[4]于 2018 年首次以 HHG 反演 MgO 的 Berry 曲率分布",
+      "missing_evidence": "[4] 实测样品为 α-quartz（α-石英），非 MgO；需修正样品归属，并核查是否存在独立的 HHG 反演 MgO Berry 曲率的文献，若无则删除 MgO 提法",
+      "search_keywords": [
+        "Luu Wörner 2018 Nat Commun Berry curvature α-quartz",
+        "HHG Berry curvature inversion MgO",
+        "high harmonic generation Berry curvature MgO retrieve",
+        "α-quartz Berry curvature HHG polarization"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "精密测量院、华中科技大学、上海光机所等团队围绕高次谐波/拓扑探测开展了持续工作",
+      "missing_evidence": "三家机构均无代表性成果（文献、方向指标、数值结果）支撑，属于机构名罗列；需为每家补充至少一项可引成果（发表论文/技术指标/方向综述）",
+      "search_keywords": [
+        "华中科技大学 高次谐波 拓扑",
+        "精密测量院 高次谐波 固体",
+        "上海光机所 高次谐波 强场",
+        "Huazhong University Science Technology solid HHG",
+        "Shanghai Institute Optics Fine Mechanics HHG topological",
+        "National Institute Metrology HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "对接 TaP 太赫兹三次谐波数据的精度（rationale §2.4 L53）",
+      "missing_evidence": "\"精度\"缺量级定义；需检索 TaP 太赫兹三次谐波已有实验的谱形残差/信噪比/拟合误差等具体指标，以给出可比拟的目标值",
+      "search_keywords": [
+        "TaP terahertz third harmonic generation precision",
+        "TaP Weyl semimetal THG spectral residual",
+        "TaP nonlinear THz response Weyl",
+        "Weyl semimetal TaP terahertz harmonic spectroscopy accuracy"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "多个非关键论断处的嵌入式编号引用密度过高（L5 [31-34]、L41 [26] 等），需压缩为整体研读式引用",
+      "missing_evidence": "需检索可作为\"整体研读式综述/代表性工作集合\"引用的 2-3 篇权威文献，以替代原密集编号引用，使引用总数从 60 次压缩至约 40 次以内",
+      "search_keywords": [
+        "high harmonic generation review solid topological material",
+        "solid HHG review topological insulator Weyl",
+        "高次谐波 固体 拓扑 综述",
+        "nonperturbative HHG crystals review"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

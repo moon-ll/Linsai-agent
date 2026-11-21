@@ -1,0 +1,23 @@
+# 定向文献检索报告
+
+## 课题
+general-berry-mnps3-rashba-20260816
+
+## 章节
+rationale
+
+## 检索关键词
+- 
+
+## 检索结果
+
+- 2609.01844 | Symmetry-selective nonrelativistic spin splitting in antiferromagnets driven by coherent phonons | Sangeeta Rajpurohit, Mohsen Yarmohammadi, Sheikh Rubaiat Ul Haque, Tony F. Heinz, Aaron M. Lindenberg, Tadashi Ogitsu | 2026 | 0.95 | First-principles calculations on MnPS3 show that coherent Γ-point infrared-active phonons can dynamically induce s-wave or d-wave nonrelativistic spin splitting modes, controllable via light polarization, providing a route to dynamically engineer altermagnetic phases in collinear AFMs. | 来源：本地知识库
+- 2511.22209 | Symmetry-Breaking Phenomena in MnPS3/TMDC Heterostructures: Non-relativistic Spin Splitting, Altermagnetism and Spin-Valley Effects | Kamil Wrzos, Magdalena Birowska, Milosz Rybak | 2025 | 0.92 | First-principles study of MnPS3/TMDC heterostructures reveals that stacking configuration controls emergence of altermagnetic-like band crossings or symmetry-breaking NRSS, with tunable conduction-valley splitting by MnPS3 spin orientation. | 来源：本地知识库
+- 2510.00605 | Terahertz field-induced giant symmetry modulations in a van der Waals antiferromagnet | Multiple authors (Stanford/SLAC collaboration) | 2025 | 0.93 | Time-resolved SHG on MnPS3 under strong THz excitation reveals long-lived giant oscillations via coherent phonons involving percent-level atomic displacements, with evidence for an antiferromagnetic-to-ferrimagnetic transition driven by field-induced charge rearrangement. | 来源：本地知识库
+- 2603.10186 | Engineering photomagnetism in collinear van der Waals antiferromagnets | Radovskaia et al. (Radboud University) | 2026 | 0.88 | Demonstrates that 10% Ni substitution in MnPS3 enhances coherent photomagnetism by over an order of magnitude while preserving the Néel ground state, with Ni2+ 3A1g multiplet as the most efficient magnon driver due to its localized nature and orbital angular momentum. | 来源：联网检索
+- 2510.20237 | Electric field induced Berry curvature dipole and non-linear anomalous Hall effects in higher-wave symmetric unconventional magnets | Multiple authors | 2025 | 0.85 | Theoretical framework showing that dc electric fields can induce non-zero Berry curvature dipole via quantum metric coupling in higher-wave symmetric magnets including altermagnets, enabling second-order anomalous Hall response and second-harmonic generation. | 来源：本地知识库
+- 2601.22019 | Intrinsic Nonlinear Gyrotropic Magnetic Effect Governed by Spin-Rotation Quantum Geometry | Neelanjan Chakraborti, Snehasish Nandy, Sudeep Kumar Ghosh | 2026 | 0.83 | Microscopic quantum-kinetic framework deriving second-order gyrotropic magnetic currents controlled by Zeeman and spin-rotation quantum geometric tensors, identifying spin-rotation quantum metric as a fundamental geometric quantity unique to the nonlinear regime. | 来源：联网检索
+- 2304.02619 | Scaling Laws of Magnetically Driven High-order Harmonic Generation in Spin-Orbit Coupled Systems | Multiple authors | 2023 | 0.78 | Time-dependent quantum transport simulations reveal that magnetically driven HHG in Rashba spin-orbit coupled systems exhibits a distinct ω^-1 scaling law for harmonic cutoff, contrasting with optically driven HHG. | 来源：本地知识库
+- 2506.01861 | Proximity-induced Rashba spin-orbit interaction in BaMnO3|KTaO3 heterostructure for antiferromagnetic spintronics | Multiple authors | 2025 | 0.75 | First-principles design of BaMnO3|KTaO3 heterostructure demonstrating proximity-induced strong Rashba SOC from KTaO3 Ta-5d states to the robust antiferromagnetic BaMnO3 Mn-3d states, addressing the challenge of combining antiferromagnetism with Rashba interaction. | 来源：联网检索
+- 2606.31867 | Giant perpendicular Edelstein polarization in 2D compensated magnets via bichromatic Floquet driving | Multiple authors (including Yarmohammadi) | 2026 | 0.8 | Theoretical demonstration that bichromatic Floquet driving overcomes the C2z symmetry constraint to unlock perpendicular Edelstein polarizations in 2D uniaxial magnets with Rashba spin-orbit coupling, enabling all-optical control of spin polarization. | 来源：本地知识库
+- 2607.04754 | Observation of Non-linear Hall Effect in Polycrystalline Magnetic Multilayers | Multiple authors | 2026 | 0.72 | Room-temperature second-harmonic transverse voltage in sputtered magnetic multilayers scaling quadratically with drive current, dominated by intrinsic Berry curvature dipole mechanism from cryogenic to 300 K. | 来源：联网检索

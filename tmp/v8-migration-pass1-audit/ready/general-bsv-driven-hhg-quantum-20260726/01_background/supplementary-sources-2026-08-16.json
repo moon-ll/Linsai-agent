@@ -1,0 +1,54 @@
+{
+  "proposal_id": "general-bsv-driven-hhg-quantum-20260726",
+  "cluster_id": "cl_20260816_77e7d6",
+  "entries": [
+    {
+      "source_id": "paper:2025-2509.20876-quantum-path-control-in-high-order-harmonic-generation-via-s",
+      "title": "Quantum Path Control in High-Order Harmonic Generation via Squeezed Lights",
+      "summary": "该文提出利用非经典量子光源调控高次谐波产生中的量子路径：振幅压缩光与相位压缩光可分别选择性抑制长路径和短量子路径。通过这种量子路径筛选机制，在谐波平台区实现了单一阿秒脉冲的纯净发射，为量子光驱动阿秒物理提供了新方案。",
+      "path": "",
+      "added_via": "cluster:cl_20260816_77e7d6",
+      "added_at": "2026-08-16T03:49:25Z"
+    },
+    {
+      "source_id": "paper:2023-2311.11257-generation-of-squeezed-high-order-harmonics",
+      "title": "Generation of squeezed high-order harmonics",
+      "summary": "该文推导了任意量子光驱动下高次谐波量子态的一般公式，发现适度挤压的泵浦可将挤压量子特性传递至谐波，使其光子统计从挤压热态演化为复杂量子态。这一结果为XUV波段挤压超短脉冲的产生及量子频率转换开辟了新途径。",
+      "path": "",
+      "added_via": "cluster:cl_20260816_77e7d6",
+      "added_at": "2026-08-16T03:49:25Z"
+    },
+    {
+      "source_id": "paper:2026-2410.15503-energy-conservation-in-quantum-optical-high-harmon",
+      "title": "Energy conservation in quantum optical high harmonic generation",
+      "summary": "本文为高次谐波产生（HHG）建立了量子光学理论框架，通过定义“能量守恒子空间”在驱动场与谐波模式之间形式化地强制光子数守恒。该框架自然导出具有非经典边缘分布的纠缠光子态，弥补了以往 HHG 量子描述中能量守恒未被严格处理的长期空缺。",
+      "path": "",
+      "added_via": "cluster:cl_20260816_77e7d6",
+      "added_at": "2026-08-16T03:49:25Z"
+    },
+    {
+      "source_id": "paper:2026-2604.12838-2d-quantum-path-interference-in-high-harmonic-gene",
+      "title": "2D quantum-path interference in high-harmonic generation driven by highly-bichromatic fields",
+      "summary": "该文献实验观测到由正交偏振的高度双色场（两种正交偏振色光强度相当）驱动高次谐波产生（HHG）时出现的一种新型二维量子路径干涉（2D-QPI）。这一发现将传统一维量子路径干涉扩展到二维维度，为通过偏振调控强场实现对谐波发射路径的相干控制提供了新途径。",
+      "path": "",
+      "added_via": "cluster:cl_20260816_77e7d6",
+      "added_at": "2026-08-16T03:49:25Z"
+    },
+    {
+      "source_id": "paper:2012-1210.4814-molecular-internal-dynamics-studied-by-quantum-path-interfer",
+      "title": "Molecular internal dynamics studied by quantum path interferences in high order harmonic generation",
+      "summary": "本文证明高次谐波产生（HHG）中短程与长程电子量子路径间的干涉能够编码分子内超快电子动力学（如电荷迁移），且该干涉依赖于电离通道与轨迹持续时间——长轨迹对阳离子核动力学（数百阿秒至数飞秒尺度）的敏感性显著强于短轨迹。这一机制提供了一种自参考时间分辨的阿秒光谱方法，可对非对准分子中的分子内电荷迁移进行直接探测。",
+      "path": "",
+      "added_via": "cluster:cl_20260816_77e7d6",
+      "added_at": "2026-08-16T03:49:25Z"
+    },
+    {
+      "source_id": "paper:2015-1502.07422-spectrally-resolved-spatiotemporal-features-of-quantum-paths",
+      "title": "Spectrally resolved spatiotemporal features of quantum paths in high-order harmonic generation",
+      "summary": "该工作通过实验结合模拟，利用谐波谱的谱分裂、双重频移及强度依赖调制，首次在光谱上分辨并分离了高次谐波产生（HHG）中短、长量子路径的时空特性，证明干涉条纹源于量子路径干涉（QPI）而非宏观瞬态相位匹配效应。进一步表明各量子路径的原子偶极相位与时间啁啾编码于频移之中，从而可直接从测量谱中提取这些相位信息。",
+      "path": "",
+      "added_via": "cluster:cl_20260816_77e7d6",
+      "added_at": "2026-08-16T03:49:25Z"
+    }
+  ]
+}

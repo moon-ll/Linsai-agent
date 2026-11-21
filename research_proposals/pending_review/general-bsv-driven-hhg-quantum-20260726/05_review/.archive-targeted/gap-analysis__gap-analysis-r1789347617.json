@@ -1,0 +1,76 @@
+{
+  "gaps": [
+    {
+      "claim": "§3.3 L33 / §3.7 L97 中莫尔超晶格周期 5–10 nm 与 4°–6° 扭转角的几何自洽性，且 [13] 实验口径为 ~2.5°/57.5°→7–8 nm 周期",
+      "missing_evidence": "需要能同时支撑 (a) 4°–6° 扭转角几何对应 ~3.0–4.5 nm 周期、(b) 1.8°–3.6° 扭转角对应 5–10 nm 周期、(c) [13] 真实 ~2.5°/57.5° 窗口→7–8 nm 周期 的实验或理论文献，以便校准扭转角-周期映射",
+      "search_keywords": [
+        "twisted bilayer MoS2 moire period 2.5 degree7 nm",
+        "TBG moire superlattice4-6 degree period nm",
+        "Wu Xu Wang PRL 131 256201 twisted bilayer HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "[13] 文献作者链：Wu/Xu/Wang Q./Chu 等23 人（PRL 131,256201 IOP CAS），现行 Park/Cai/Register/Tutuc/Hennig/Shan 等 14 人虚构",
+      "missing_evidence": "缺少 PRL 131,256201 真实作者链与 DOI 10.1103/PhysRevLett.131.256201 的正式引用条目",
+      "search_keywords": [
+        "PhysRevLett.131.256201 twisted bilayer moire HHG",
+        "PRL 131 256201 Wu Xu Wang Chu moire superlattice HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3.4 L57 引用 [29] Jiang-Dorfman 主张'Liouville 对称性决定谐波选择规则'，但原文主题为相对强度压缩 twin beams 的强度关联",
+      "missing_evidence": "缺少真正主张'Liouville 对称性 / Liouville 路径积分决定谐波选择规则'的文献；或 twin-beam 强度关联口径的替代文献（Jiang-Dorfman CPL 43,050401(2026) 需补正式卷期 DOI 10.1088/0256-307X/43/5/050401）",
+      "search_keywords": [
+        "Liouville path integral high harmonic selection rule",
+        "Liouville master equation HHG selection rule solid",
+        "Jiang-Dorfman relative intensity squeezed twin beams CPL 43 050401"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3.7 L105 创新点三'九类误差源识别与降级路径'作为科学创新，需要 QEF / BSV 参数标定 / 谱学计数统计误差等误差分类的先驱文献支撑，避免误差治理冒充科学增量",
+      "missing_evidence": "缺少：(a) BSV 态参数（g²、压缩度 r、NOPA 光子数）标定误差的权威方法文献；(b) BSV-经典光匹配误差的实验比较文献；(c) 聚焦几何差异对 HHG 产率影响的量化文献；(d) 谱学计数统计误差（泊松/超泊松）对谐波信噪比影响的基准文献",
+      "search_keywords": [
+        "bright squeezed vacuum g2 calibration NOPA",
+        "BSV coherent state intensity matching HHG",
+        "BSV focusing geometry HHG yield",
+        "photon counting statistics HHG shot noise Poisson super-Poissonian"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3.3理论建模以'任意量子光态驱动 HHG 的量子态公式与 winding trail 模型'为起点 [2]，但该理论建立在气体原子三步模型上不能直接用于固体多带多体体系",
+      "missing_evidence": "缺少将气体 winding trail / 三步模型推广到固体多带多体体系（半导体布洛赫方程 + 量子光场算符替换）的关键过渡文献，特别是量子光驱动固体 HHG 的理论框架文献",
+      "search_keywords": [
+        "quantum light semiconductor Bloch equation HHG",
+        "winding trail model solid extension HHG quantum field operator",
+        "Lewenstein Ciappina quantum light HHG solid theory",
+        "quantum optical field HHG multi-band semiconductor"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3.1 总体路线'五环串联+参数依赖链'中 BSV-HHG 作为多体态探针的可行性，需要九类误差阈值（±5%/5 fs/λ/4/150 mrad）的文献基准",
+      "missing_evidence": "缺少上述每个误差阈值的实验或理论基准文献：(a) BSV 强度匹配 ±5% 的实验窗口；(b) 载波包络相位稳定 5 fs 的基准；(c) 聚焦斑 λ/4≈200 nm 的衍射极限文献；(d) 偏振 150 mrad 精度对 BSV 谐波选择规则的影响",
+      "search_keywords": [
+        "BSV intensity matching precision 5 percent HHG",
+        "carrier envelope phase stabilization 5 fs attosecond",
+        "tight focusing diffraction limit HHG λ/4",
+        "polarization precision 150 mrad HHG selection rule"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "[6] 800 nm 基线口径与 [29] Jiang-Dorfman CPL 43,050401(2026) 替代文献的正式卷期引用",
+      "missing_evidence": "缺少 [6]（800 nm 基线 coherent HHG 实验基线）的正式卷期信息；缺少 Jiang-Dorfman CPL 43/5/050401(2026) 的完整书目数据（DOI 10.1088/0256-307X/43/5/050401）",
+      "search_keywords": [
+        "Ghimire 2011 ZnO 800 nm solid HHG Nature Physics baseline",
+        "Jiang Dorfman relative intensity squeezing twin beams Chinese Physics Letters 2026"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

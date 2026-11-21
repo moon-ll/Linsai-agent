@@ -1,0 +1,129 @@
+{
+  "proposal_id": "general-houston-kronig-penney-landau-zener-20261004",
+  "cluster_id": "orphan-route-2026-11-13",
+  "clusters": [
+    "orphan-route-2026-11-13"
+  ],
+  "entries": [
+    {
+      "source_id": "paper:2024-2104.07366-high-harmonic-spectroscopy-of-strongly-bound-excitons-in-sol",
+      "title": "High-harmonic spectroscopy of strongly bound excitons in solids",
+      "summary": "通过含时密度泛函（TDDFT）一维固体从头算模拟，证明有限强束缚激子布居会在固态高次谐波谱中留下明确指纹：位于激子跃迁频率 ω_ex 两侧 ±2ω 处的边带峰。边带强度随激子布居以 N_ex^0.92 的近线性幂律标度，从而将 HHG 谱变成激子布居的全光学定量读出器，为强场下激子形成与瓦解动力学的探测提供了新途径。",
+      "path": "knowledge/raw/papers/2024-2104.07366-high-harmonic-spectroscopy-of-strongly-bound-excitons-in-sol.md",
+      "added_via": "cluster:orphan-route-2026-11-13",
+      "added_at": "2026-11-13T16:47:06Z"
+    },
+    {
+      "source_id": "paper:2016-1612.04100-a-temporal-model-for-quasi-phase-matching-in-high-order-harm",
+      "title": "A temporal model for quasi-phase matching in high-order harmonic generation",
+      "summary": "本文提出了一维时间依赖的准相位匹配（QPM）模型来描述高次谐波产生（HHG），发现最优谐波输出能量并非在固定的空间调制周期处实现，而是在驱动激光脉冲的前沿通过相位匹配获得。周期性结构氩气（如团簇射流）中的超快等离子体动力学引入随时间变化的波矢平衡，使简单周期性QPM假设失效，因此需对轴上谐波输出进行时间分辨分析以确定真实的QPM条件。",
+      "path": "",
+      "added_via": "cluster:orphan-route-2026-11-13",
+      "added_at": "2026-11-13T16:47:06Z"
+    },
+    {
+      "source_id": "briefing:knowledge/wiki/reviews/briefing-2026-06-04.md",
+      "title": "Quantum interference and occupation control in high harmonic generation from monolayer WS₂ (arXiv: 2503.04335)",
+      "summary": "该工作在单层WS₂中首次实验证实量子干涉在强场固体高次谐波产生（HHG）中起主导作用：K/K'谷间量子干涉与Γ、M点的带内电流共同调控谐波辐射，且随激光强度升高，载流子动力学从谷局域态演化为全布里渊区离域态，导致谐波产率出现扭结、峰分裂与合并等光谱特征。实验发现得到第一性原理计算与量子模拟的联合验证，为固体HHG的强场机制提供了高质量理论基准。",
+      "path": "",
+      "added_via": "cluster:orphan-route-2026-11-13",
+      "added_at": "2026-11-13T16:47:06Z"
+    },
+    {
+      "source_id": "paper:2024-2410.09178-high-harmonic-generation-in-altermagnets-role-of-crystal-sym",
+      "title": "High harmonic generation in altermagnets: role of crystal symmetry and spin ordering",
+      "summary": "本文通过第一性原理计算与对称性分析，系统研究了典型交变磁性材料（RuO2、MnTe、CrSb）中的高次谐波产生，量化了不同自旋对称类下谐波的产额、椭圆率依赖性及辐射的自旋极化特性。结果揭示了晶体对称性与自旋排序共同主导HHG响应，为交变磁体的超快全光学表征和自旋序读出提供了新途径。",
+      "path": "",
+      "added_via": "cluster:orphan-route-2026-11-13",
+      "added_at": "2026-11-13T16:47:06Z"
+    },
+    {
+      "source_id": "paper:2016-1607.00747-high-harmonic-generation-in-alpha-quartz-by-the-electron-hol",
+      "title": "High-harmonic generation in alpha-quartz by the electron-hole recombination",
+      "summary": "本文利用含时密度泛函理论（TDDFT）计算发现，α-石英在强激光场下的高次谐波产生（HHG）由电子-空穴复合这一带间过程主导，截止能量受限于第19次谐波（约30 eV），且截止附近的HHG效率随价带空穴密度增加而提升。基于平台截止处的HHG还可产生约200阿秒的阿秒脉冲串，揭示了带间复合过程在介电材料固态高次谐波辐射中的关键作用。",
+      "path": "",
+      "added_via": "cluster:orphan-route-2026-11-13",
+      "added_at": "2026-11-13T16:47:06Z"
+    },
+    {
+      "source_id": "paper:2026-2608.20306-computational-methods-of-wave-propagation-for-semi",
+      "title": "Computational Methods of Wave Propagation for Semiclassical Models of High Harmonic Generation in Bulk Solids",
+      "summary": "本文提出了一套基于麦克斯韦方程组数值求解与半经典电子动力学模型自洽耦合的理论框架，用于描述超快强场条件下固体体材料中非线性光-物质相互作用。该计算方法能够自洽地处理光波传播效应，从而模拟固体高次谐波产生过程中的传播动力学。",
+      "path": "knowledge/raw/papers/2026-2608.20306-computational-methods-of-wave-propagation-for-semi.md",
+      "added_via": "cluster:orphan-route-2026-11-13",
+      "added_at": "2026-11-13T19:22:35Z"
+    },
+    {
+      "source_id": "paper:2026-2601.21273-efficient-high-harmonic-generation-in-van-der-waals-ferroele",
+      "title": "Efficient high-harmonic generation in van der Waals ferroelectric NbOI2 crystals",
+      "summary": "本文报道了范德华铁电体NbOI2中高效的固体高次谐波产生：在4 μm中红外激光、仅0.4 TW/cm²的低峰值强度下即可产生高达16阶的各向异性奇偶次谐波（覆盖带隙至深紫外），转换效率显著超越已知材料；偶次谐波偏振锁定于晶体极轴方向，第一性原理计算揭示Peierls二聚化形成的平价带结构是效率增强的物理机制。",
+      "path": "knowledge/raw/papers/2026-2601.21273-efficient-high-harmonic-generation-in-van-der-waals-ferroele.md",
+      "added_via": "cluster:orphan-route-2026-11-13",
+      "added_at": "2026-11-13T19:22:35Z"
+    },
+    {
+      "source_id": "paper:2025-2503.05073-high-harmonic-generation-from-a-noble-metal",
+      "title": "High Harmonic Generation from a Noble Metal",
+      "summary": "首次在贵金属银中演示高次谐波产生：利用少周期近红外脉冲近正入射，获得延伸至20 eV（极紫外）的非微扰谐波，且银的多发损伤阈值高达30 TW/cm²，与MgO等宽带隙介质相当。取向依赖测量表明谐波源于晶格相干电子动力学而非等离子体机制，从而将固体HHG的材料体系从介质拓展至金属。",
+      "path": "knowledge/raw/papers/2025-2503.05073-high-harmonic-generation-from-a-noble-metal.md",
+      "added_via": "cluster:orphan-route-2026-11-13",
+      "added_at": "2026-11-13T19:22:35Z"
+    },
+    {
+      "source_id": "paper:2026-2604.25483-probing-sliding-ferroelectricity-in-bilayer-t-_-ma",
+      "title": "Probing sliding ferroelectricity in bilayer T$_\\mathrm{d}$-WTe$_2$ with high-harmonic generation",
+      "summary": "本文用第一性原理实时 TDDFT 模拟双层 Td-WTe2 在强场下的高次谐波产生（HHG），证明 HHG 可作为非侵入式全光学手段直接读取滑移铁电极化态与晶格对称性。通过在电子动力学传播中显式引入层间剪切（滑移软模）运动，发现在所考察条件下 0.24 THz 剪切模与电子谐波响应解耦——即 HHG 反映的是时间平均的堆叠对称与静态极化，而非滑移声子的瞬时位移。这为二维滑移铁电体的超快结构动力学与铁电畴的全光学成像提供了新诊断路径。",
+      "path": "knowledge/raw/papers/2026-2604.25483-probing-sliding-ferroelectricity-in-bilayer-t-_-ma.md",
+      "added_via": "cluster:orphan-route-2026-11-13",
+      "added_at": "2026-11-13T19:22:35Z"
+    },
+    {
+      "source_id": "paper:2024-2410.04512-real-space-perspective-on-dephasing-in-solid-state-high-harm",
+      "title": "Real-space perspective on dephasing in solid-state high harmonic generation",
+      "summary": "提出固态高次谐波产生的全实空间图像：强场下晶体瞬时本征态为 Wannier-Stark 局域态，带间谐波发射由电子-空穴波包的实空间交叠决定。场驱动的电子-空穴分离一旦超过 WS 局域长度，交叠与发射即消失，在 k 空间语言中表现为超快退相干——由此为 SBE 拟合实验所需的飞秒级唯象退相干时间 T2 提供了非唯象的、随场强和能带结构变化的起源。",
+      "path": "knowledge/raw/papers/2024-2410.04512-real-space-perspective-on-dephasing-in-solid-state-high-harm.md",
+      "added_via": "cluster:orphan-route-2026-11-13",
+      "added_at": "2026-11-13T19:22:35Z"
+    },
+    {
+      "source_id": "paper:2025-111.184314-theoretical-investigations-of-high-harmonic-generation-in-th",
+      "title": "Theoretical investigations of high harmonic generation in the Weyl semimetal WP2",
+      "summary": "该文建立了基于第一性原理 Wannier 紧束缚、在 Wannier 规范下求解半导体 Bloch 方程（SBE）的方案，系统计算三维 Weyl 半金属 WP2 的固态高次谐波谱。导出由 WP2 晶体对称性决定的 HHG 选择定则（允许/禁戒的谐波阶次与偏振方向），并通过带内/带间电流分解阐明各阶谐波的物理来源。报道并解释了反常的椭圆率依赖——谐波产额不随驱动椭圆率增大而单调衰减——归因于含 Berry 曲率反常速度的带内电流与带间极化电流之间的竞争与相位干涉。",
+      "path": "knowledge/raw/papers/2025-111.184314-theoretical-investigations-of-high-harmonic-generation-in-th.md",
+      "added_via": "cluster:orphan-route-2026-11-13",
+      "added_at": "2026-11-13T23:03:24Z"
+    },
+    {
+      "source_id": "paper:2024-2405.12307-propagation-and-material-interface-effects-in-the-higher-ord",
+      "title": "Propagation and material-interface effects in the higher-order harmonic radiation from solid-state samples",
+      "summary": "本文用完整空间-时间分辨的电磁传播模拟研究固体高次谐波产生中的宏观传播与材料界面效应。结果表明，样品界面的Fresnel反射在表面附近引起谐波场干涉，透射几何下测得的HHG谱实际上是样品不同深度区域发射谐波的相干叠加。核心结论是宏观传播与界面效应会显著修饰表观谐波谱，微观强场响应模型与实验谱对比时必须计入这一层。",
+      "path": "knowledge/raw/papers/2024-2405.12307-propagation-and-material-interface-effects-in-the-higher-ord.md",
+      "added_via": "cluster:orphan-route-2026-11-13",
+      "added_at": "2026-11-13T23:03:24Z"
+    },
+    {
+      "source_id": "paper:2024-s00340-024-08251-8-high-order-harmonic-generation-in-a-doped-semiconductor-by-i",
+      "title": "High-order harmonic generation in a doped semiconductor by inhomogeneous laser field",
+      "summary": "在模型半导体周期势中数值求解含时薛定谔方程（TDSE），研究空间非均匀激光场（模拟金属纳米结构/等离激元近场）驱动下掺杂半导体的固态高次谐波产生。核心发现：第二平台谐波强度较均匀场情形提升1-3个数量级，且增强幅度可由场不均匀参数与载流子掺杂率两个独立参量连续调控。为纳米局域场中固态HHG的强度增强与光谱剪裁提供了理论方案与参数空间。",
+      "path": "knowledge/raw/papers/2024-s00340-024-08251-8-high-order-harmonic-generation-in-a-doped-semiconductor-by-i.md",
+      "added_via": "cluster:orphan-route-2026-11-13",
+      "added_at": "2026-11-13T23:03:24Z"
+    },
+    {
+      "source_id": "paper:2025-2402.16501-beyond-electric-dipole-treatment-of-light-matter-interaction",
+      "title": "Beyond Electric-Dipole Treatment of Light-Matter Interactions in Materials: Nondipole Harmonic Generation in Bulk Si",
+      "summary": "该文首次对体硅的高次谐波产生做了超越电偶极近似的从头算（实时TDDFT）模拟，系统纳入磁偶极与电四极等非偶极光-物质耦合。核心发现是：在谐波阈值附近存在一个横向的非微扰谐波通道——谐波偏振垂直于驱动激光偏振方向，且其产率随强度偏离微扰幂律标度。结果表明固体中非偶极效应可被强场动力学显著放大、呈非微扰特征，而非以往认为的纯微扰小修正。",
+      "path": "knowledge/raw/papers/2025-2402.16501-beyond-electric-dipole-treatment-of-light-matter-interaction.md",
+      "added_via": "cluster:orphan-route-2026-11-13",
+      "added_at": "2026-11-13T23:03:24Z"
+    },
+    {
+      "source_id": "paper:2024-2408.04690-the-attoscience-of-strong-field-driven-solids",
+      "title": "The attoscience of strong-field-driven solids",
+      "summary": "该Nat. Rev. Phys. Perspective系统梳理了固体强场阿秒科学的两大实验主线——固体高次谐波产生（HHG）与阿秒瞬态吸收/反射谱（ATAS/ATRS），指出二者本质上探测的是同一套亚周期载流子动力学（带间极化与带内电流）的不同投影，应纳入统一理论框架解读。文章总结了从谐波振幅与相位定量重构能带色散、贝里联络/曲率及退相干参数的进展与瓶颈，并以petahertz电子学、强场量子材料调控为应用出口。核心主张是以半导体布洛赫方程/TDDFT层面的一致建模打通\"发射端\"与\"吸收端\"信号，推动理论-实验闭环。",
+      "path": "knowledge/raw/papers/2024-2408.04690-the-attoscience-of-strong-field-driven-solids.md",
+      "added_via": "cluster:orphan-route-2026-11-13",
+      "added_at": "2026-11-13T23:03:24Z"
+    }
+  ]
+}

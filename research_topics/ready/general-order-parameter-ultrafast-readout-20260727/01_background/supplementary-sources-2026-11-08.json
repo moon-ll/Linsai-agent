@@ -1,0 +1,92 @@
+{
+  "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
+  "cluster_id": "cl_20261107_06101c",
+  "clusters": [
+    "cl_20261107_06101c",
+    "cl_20261108_7c119e",
+    "cl_20261108_d7f7e3",
+    "orphan-route-2026-11-08"
+  ],
+  "entries": [
+    {
+      "source_id": "paper:2024-2401.17158-chirality-induced-selectivity-of-phonon-angular-momenta-in-c",
+      "title": "Chirality-Induced Selectivity of Phonon Angular Momenta in Chiral Quartz Crystals",
+      "summary": "本文从理论上研究了α石英（手性绝缘体）中声子角动量的产生、传播与界面转移过程，发现热驱动输运的声子携带依赖于晶体手性符号的净角动量。计算表明该声子角动量流可在界面通过与自旋的耦合被抽取为自旋信号，从而提出并证实了手性绝缘体中声子角动量的手性诱导选择性（chirality-induced selectivity）。这为纯电/热学手段在无磁无电流的手性电介质中产生自旋提供了新机制（PRL 132, 056302）。",
+      "path": "knowledge/raw/papers/2024-2401.17158-chirality-induced-selectivity-of-phonon-angular-momenta-in-c.md",
+      "added_via": "cluster:cl_20261107_06101c",
+      "added_at": "2026-11-08T00:40:11Z"
+    },
+    {
+      "source_id": "paper:2026-2610.05714-current-selects-the-helicity-of-a-chiral-phonon",
+      "title": "Current selects the helicity of a chiral phonon",
+      "summary": "在平衡态下，手性材料中波矢为±q的手性声子互为时间反演伙伴、螺旋度相反，各自对自旋选择性的贡献相互抵消，抑制了CISS（手性诱导自旋选择性）效应的可观测信号。本文证明在直流偏压的手性导体中，非平衡电子分布通过电声耦合对声子施加净动量转移（电子风力），使声子动量分布沿电流方向整体偏移，从而在±q两支之间造成占据失衡，等效地选择出具有确定螺旋度的手性声子。该机制将CISS从平衡态相消困境中解放出来，提供了一条用电流增强和电学调控手性声子自旋选择性的途径。",
+      "path": "knowledge/raw/papers/2026-2610.05714-current-selects-the-helicity-of-a-chiral-phonon.md",
+      "added_via": "cluster:cl_20261107_06101c",
+      "added_at": "2026-11-08T00:40:11Z"
+    },
+    {
+      "source_id": "paper:2026-2607.06792-symmetry-enforced-chiral-phonons-in-altermagnets-via-magnon",
+      "title": "Symmetry-Enforced Chiral Phonons in Altermagnets via Magnon-Phonon Coupling",
+      "summary": "本文以交变磁体 CrSb 为原型，证明相对论性自旋-晶格耦合可把交变磁 g 波序的对称性印刻到声子角动量上，产生由对称性强制保护（而非偶然出现）的手性声子。磁振子-声子杂化进一步为声子能带注入 Berry 曲率，由此预言了与磁序锁定、可在零净磁化体系中出现的热输运反常响应，建立了\"交变磁序—晶格角动量—热响应\"的级联物理链条。",
+      "path": "knowledge/raw/papers/2026-2607.06792-symmetry-enforced-chiral-phonons-in-altermagnets-via-magnon.md",
+      "added_via": "cluster:cl_20261107_06101c",
+      "added_at": "2026-11-08T00:40:11Z"
+    },
+    {
+      "source_id": "paper:2026-2606.18731-d-wave-altermagnetism-revealed-by-resonant-inelastic-x-ray-s",
+      "title": "d-wave altermagnetism revealed by resonant inelastic X-ray scattering",
+      "summary": "本文利用圆偏振分辨的共振非弹性X射线散射（RIXS）在层状锰化合物La2O3Mn2Se2中给出了d波交替磁性（altermagnetism）的明确体相实验证据。在磁激发（磁振子）谱中观测到具有d波角对称的圆二色信号，且该信号在顺磁相（奈尔温度以上）完全消失，证明其直接锚定于长程交替磁序。这为区分交替磁体与常规反铁磁体提供了对称性专属的谱学判据。",
+      "path": "knowledge/raw/papers/2026-2606.18731-d-wave-altermagnetism-revealed-by-resonant-inelastic-x-ray-s.md",
+      "added_via": "cluster:cl_20261108_7c119e",
+      "added_at": "2026-11-08T03:46:20Z"
+    },
+    {
+      "source_id": "paper:2025-2503.02533-systematic-mapping-of-altermagnetic-magnons-by-resonant-inel",
+      "title": "Systematic Mapping of Altermagnetic Magnons by Resonant Inelastic X-Ray Circular Dichroism",
+      "summary": "本文利用圆偏振共振非弹性X射线散射（CD-RIXS）对典型交变磁体 CrSb 的磁振子激发进行了系统的方位角扫描测绘，证明磁振子圆二色信号随螺旋度与方位角呈确定性变化。该二色信号直接编码 Néel 矢取向并能区分 180° 反铁磁畴，从而把 CD-RIXS 确立为交变磁/反铁磁序参量的元素特异性读出探针，为后续（泵浦-探测式）超快序参量读出提供了静态基准方案。",
+      "path": "knowledge/raw/papers/2025-2503.02533-systematic-mapping-of-altermagnetic-magnons-by-resonant-inel.md",
+      "added_via": "cluster:cl_20261108_7c119e",
+      "added_at": "2026-11-08T03:46:20Z"
+    },
+    {
+      "source_id": "paper:2025-2508.04388-theory-of-circular-dichroism-in-resonant-inelastic-x-ray-sca",
+      "title": "Theory of circular dichroism in resonant inelastic x-ray scattering",
+      "summary": "本文建立了共振非弹性X射线散射圆二色（RIXS-CD）的理论框架，对若干常见共线反铁磁与交替磁结构进行系统的磁（Shubnikov）群对称性分析。核心结论是 RIXS-CD 对纯时间反演破缺不敏感，在反铁磁体中对 Néel 矢量反转 L→−L 保持不变，其允许/禁戒完全由磁点群中被破缺的空间操作决定。这使 RIXS-CD 成为按对称性甄别共线磁序（区分反铁磁与交替磁及其不同畴）的谱学判据，弥补了 XMCD 类净磁矩探针在补偿型反铁磁中失效的空缺。",
+      "path": "knowledge/raw/papers/2025-2508.04388-theory-of-circular-dichroism-in-resonant-inelastic-x-ray-sca.md",
+      "added_via": "cluster:cl_20261108_7c119e",
+      "added_at": "2026-11-08T03:46:20Z"
+    },
+    {
+      "source_id": "paper:2025-2601.13723-large-magneto-optical-kerr-effect-induced-by-collinear-antif",
+      "title": "Large magneto-optical Kerr effect induced by collinear antiferromagnetic order",
+      "summary": "在共线反铁磁绝缘体α-Fe2O3中实验观测到室温下的巨大磁光Kerr效应。对称性与机制分析表明，该Kerr信号源自时间反演对称性破缺的共线反铁磁序本身（反铁磁矢量L），而非自旋倾斜导致的弱净磁化。这为时间反演破缺的反铁磁体提供了一条无净磁化依赖的全光学读出通道。",
+      "path": "knowledge/raw/papers/2025-2601.13723-large-magneto-optical-kerr-effect-induced-by-collinear-antif.md",
+      "added_via": "cluster:cl_20261108_d7f7e3",
+      "added_at": "2026-11-08T11:00:51Z"
+    },
+    {
+      "source_id": "paper:2026-2604.21021-giant-spontaneous-kerr-effect-and-its-self-doping-dependence",
+      "title": "Giant spontaneous Kerr effect and its self-doping dependence in altermagnetic MnTe",
+      "summary": "在零外磁场的1550 nm通信波段观测到交变磁性MnTe高达±1500 μrad的自发Kerr旋转，比典型反铁磁体的磁光响应高出数个量级。通过系统的自掺杂依赖实验证明：这一宏观时间反演对称破缺并非理想交变磁序本身的性质，而是缺陷诱导的载流子自掺杂打破了理想磁点群下两自旋子格光学响应的相消所致。该工作确立了巨Kerr效应作为交变磁序参量全光学读出的灵敏手段，同时警示交变磁磁光信号的解读必须考虑缺陷与掺杂状态。",
+      "path": "knowledge/raw/papers/2026-2604.21021-giant-spontaneous-kerr-effect-and-its-self-doping-dependence.md",
+      "added_via": "cluster:cl_20261108_d7f7e3",
+      "added_at": "2026-11-08T11:00:51Z"
+    },
+    {
+      "source_id": "paper:2025-2512.07149-experimental-evidence-of-néel-order-driven-magneto-optical-k",
+      "title": "Experimental Evidence of Néel-order-driven Magneto-optical Kerr Effect in an Altermagnetic Insulator",
+      "summary": "在交磁绝缘体赤铁矿（α-Fe₂O₃）上开展宽谱磁光克尔（MOKE）测量并结合第一性原理计算，证明克尔信号由Néel序驱动：该贡献在自旋轨道耦合一阶即出现并在量级上主导克尔谱，而净磁化（DMI倾斜弱铁磁矩）的贡献可忽略。这一结果确立了MOKE可作为反铁磁/交磁序参量的直接光学读出手段，突破了MOKE仅探测净磁化的传统图像。",
+      "path": "knowledge/raw/papers/2025-2512.07149-experimental-evidence-of-néel-order-driven-magneto-optical-k.md",
+      "added_via": "cluster:cl_20261108_d7f7e3",
+      "added_at": "2026-11-08T11:00:51Z"
+    },
+    {
+      "source_id": "paper:2025-2505.04855-a-versatile-setup-for-symmetry-resolved-ultrafast-dynamics-o",
+      "title": "A versatile setup for symmetry-resolved ultrafast dynamics of quantum materials",
+      "summary": "报道了一套桌面型、模块化的时间分辨旋转各向异性（rotational anisotropy）光谱装置，将飞秒泵浦-探测技术与样品方位角扫描和偏振分辨探测相结合，可在宽温区对量子材料进行对称性分辨的超快动力学测量。该装置能把瞬态光学响应按角度谐波分解到不同的对称性通道，从而直接跟踪与序参量相关的对称性变化（如CDW、磁振子、对称性选择相干声子），而非仅测量各向同性的整体响应。其价值在于为光致非平衡态（尤其是瞬态有序与对称性破缺）提供了桌面级的直接读出手段。",
+      "path": "knowledge/raw/papers/2025-2505.04855-a-versatile-setup-for-symmetry-resolved-ultrafast-dynamics-o.md",
+      "added_via": "cluster:orphan-route-2026-11-08",
+      "added_at": "2026-11-08T13:22:51Z"
+    }
+  ]
+}

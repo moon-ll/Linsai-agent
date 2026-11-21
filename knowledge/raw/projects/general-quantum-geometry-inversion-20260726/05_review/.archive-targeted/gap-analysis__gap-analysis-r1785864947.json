@@ -1,0 +1,81 @@
+{
+  "gaps": [
+    {
+      "claim": "将双模压缩真空(BSV)投影闲置模后得到的单模压缩态等同于完整的量子光驱动HHG量子态处理",
+      "missing_evidence": "缺少对双模压缩态正确约化（partial trace vs conditional measurement）的理论文献，以及单模投影态是否等价于BSV全态对HHG的驱动效应的严格推导",
+      "search_keywords": [
+        "two-mode squeezed vacuum partial trace single-mode reduction",
+        "conditional measurement squeezed state HHG",
+        "bright squeezed vacuum mode projection quantum optics",
+        "nonclassical light driven HHG proper quantum state treatment"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Chern数积分条件可以写成f-sum rule，并声称相互作用(U/W)使f-sum rule按比例偏离",
+      "missing_evidence": "缺少f-sum rule在强关联体系中修正的原始理论文献（Kubo、Smith、DMFT框架），以及Chern marker/f-sum rule/拓扑不变量三者区别的判据文献",
+      "search_keywords": [
+        "f-sum rule strongly correlated Hubbard model correction",
+        "Kubo f-sum rule interaction renormalization",
+        "Chern marker versus f-sum rule distinction",
+        "topological invariant sum rule relation Hubbard U"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "按P(n)加权的Volkov相位叠加等于完整的量子光—固体耦合动力学",
+      "missing_evidence": "缺少量子光驱动固体HHG超出Volkov近似的完整理论（如quantum semiconductor Bloch equations、quantum-trajectory Monte Carlo with photon-number-resolved Volkov），无法支撑'加权Volkov=完整耦合'的等价性声明",
+      "search_keywords": [
+        "quantum semiconductor Bloch equations strong field",
+        "quantum trajectory Monte Carlo HHG photon statistics",
+        "nonclassical light solid HHG beyond Volkov approximation",
+        "squeezed light driven HHG theory solid-state"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Wigner函数非负性是BSV驱动HHG的核心物理风险",
+      "missing_evidence": "缺少Wigner函数非负性与高次谐波产生可观测性关系的实验/理论判据文献，以及量子光相位空间分布对HHG光谱影响的标准参考文献",
+      "search_keywords": [
+        "Wigner function negativity HHG observable effect",
+        "phase space distribution high harmonic generation",
+        "nonclassical light signature HHG spectrum Wigner",
+        "quantum coherence HHG photon statistics"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "R2基于sin/cos奇偶性分解实现HHG量子几何反演的直接分离",
+      "missing_evidence": "缺少sin/cos奇偶分量在HHG信号中可分解的数学/数值证据文献，以及正交残差作为可分离判据的理论基础",
+      "search_keywords": [
+        "sin cos parity decomposition HHG signal",
+        "orthogonal residual separability quantum state tomography",
+        "even odd harmonic component decomposition Berry curvature",
+        "parity-based inversion HHG reconstruction"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "用量子Fisher信息(QFI)和Cramér-Rao界作为量子几何反演的可辨识性极限判据",
+      "missing_evidence": "缺少QFI用于HHG光谱反演Berry曲率/量子几何的原始方法论文献，以及Cramér-Rao界在高次谐波层析中的可达性证明",
+      "search_keywords": [
+        "quantum Fisher information high harmonic spectroscopy",
+        "Cramér-Rao bound attosecond metrology Berry curvature",
+        "QFI Berry curvature reconstruction HHG",
+        "statistical identifiability quantum geometry inversion"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "R1把量子光驱动HHG算符化作为反演量子几何的首创方法",
+      "missing_evidence": "缺少量子光驱动固体高次谐波的算符化方法学先驱文献，以及'BSV驱动HHG反演量子几何'是否真正区别于已有squeezed-light spectroscopy的论证文献",
+      "search_keywords": [
+        "operator formalism quantum light HHG solid",
+        "squeezed light spectroscopy electronic structure inversion",
+        "BSV driven HHG quantum geometry reconstruction theory",
+        "quantum optical probe band geometry attosecond"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

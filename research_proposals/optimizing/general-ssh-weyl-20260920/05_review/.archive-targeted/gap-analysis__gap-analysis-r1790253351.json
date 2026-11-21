@@ -1,0 +1,128 @@
+{
+  "gaps": [
+    {
+      "claim": "Weyl 半金属 HHG 在国内的定量分解工作仍属空白",
+      "missing_evidence": "国内课题组（如北大、清华、兰大、中科院物理所等）在 Weyl 半金属 HHG 自旋-动量锁定/拓扑保护贡献分解方面的实验或理论工作，缺乏可锚定的具体论文（含人名+单位+年份+期刊/会议）",
+      "search_keywords": [
+        "Weyl semimetal high harmonic generation China group",
+        "国内 Weyl 半金属 高次谐波 自旋动量锁定",
+        "topological semimetal HHG TaAs NbAs NbP experimental",
+        "Weyl node HHG experimental verification China"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "国内现状段七个单位（北大/清华/兰大/物理所等）已有相关积累的具名工作",
+      "missing_evidence": "缺少每个单位对应的代表性工作（如北大 Yuan Shan Jiang、清华 Du/Yang、兰大 Lu/Pei、HUST Peixiang Lu 等）的具体 HHG/拓扑谱学论文引用",
+      "search_keywords": [
+        "solid-state HHG China Peking University",
+        "solid HHG Tsinghua group",
+        "兰州大学 强场 拓扑 超快",
+        "中科院物理所 高次谐波 固体",
+        "HUST Lu Peixiang strong field solid HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Heide 2022 在 (Bi₁₋ₓInₓ)₂Se₃ 化学掺杂拓扑相变中的 HHG 拓扑表征（与原文实验体系一致性）",
+      "missing_evidence": "需核对 Heide 2022 (Nat. Phys. 18, 754 或类似) 真实实验体系是否为 Bi₂Se₃ → (Bi₁₋ₓInₓ)₂Se₃ 化学掺杂相变（而非异质结），并补充对应的拓扑表面态 HHG 选择律参考文献",
+      "search_keywords": [
+        "Heide 2022 topological insulator high harmonic generation",
+        "Bi2Se3 In doping topological phase transition HHG",
+        "(Bi1-xInx)2Se3 chemical doping high harmonic",
+        "Bi2Se3 topological surface state HHG circular dichroism"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Schmitt 2025 TaP 三次谐量产生 I_f^2.3 标度律的真作者链（修正为 Pilch/Zhu/Kovalev 等）及 Weyl 半金属三次谐量非线性标度",
+      "missing_evidence": "Nano Lett. 25, 16637 (2025) 真实作者为 P. Pilch et al. 而非 D. Schmitt；需补充该工作的 Weyl/TaP 三阶非线性标度律 + 强度依赖原始数据引用",
+      "search_keywords": [
+        "Pilch Zhu Kovalev Nano Lett 25 16637 2025",
+        "TaP Weyl semimetal third harmonic intensity scaling",
+        "Weyl semimetal nonlinear susceptibility scaling law cubic",
+        "third harmonic generation Weyl semimetal intensity exponent"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Schmitt/Pilch 工作的三次谐量标度律 I_f 指数（2.3 vs 3 立方互斥口径统一）",
+      "missing_evidence": "需确认 Weyl 半金属三次谐量产生究竟是 I_f^3（立方/微扰）还是 I_f^2.3（近立方/非微扰），以及偏差的物理解释（拓扑保护/动量空间非线性）",
+      "search_keywords": [
+        "third harmonic generation intensity scaling nonperturbative",
+        "Weyl semimetal cubic nonlinear susceptibility breakdown",
+        "harmonic generation scaling exponent 2.3 vs 3 topological",
+        "nonlinear optical response topological semimetal perturbative regime"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "国内单位在 SSH 模型/拓扑边界态 HHG 表征上的具名工作",
+      "missing_evidence": "国内课题组（北大、华师、兰大、中科大等）在 SSH 模型强场拓扑表征、边界态 HHG 选择律方面的论文（与 Weyl HHG 互补），强化\"已有积累\"的论证密度",
+      "search_keywords": [
+        "SSH model high harmonic generation China group",
+        "Su-Schrieffer-Heeger HHG China",
+        "拓扑边界态 高次谐波 国内",
+        "topological edge state HHG Chinese group",
+        "SSH ultrafast spectroscopy experiment"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "国内单位在 semi-Dirac 点 HHG 增强（AHHG）方面的具名工作",
+      "missing_evidence": "补强半 Dirac 点反常 HHG 工作（Medic 2024、Jiang 2024、Yue&Gaarde 等）的国内引用链或国内平行工作，强化论证密度",
+      "search_keywords": [
+        "semi-Dirac high harmonic generation anomaly China",
+        "AHHG anomalous HHG China group",
+        "国内 semi-Dirac 高次谐波 反常",
+        "double circular high harmonic China experiment"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Luu/Wörner 2018 quartz Berry curvature HHG 实验作为基准引用（与一般\"逆问题\"方法可信性链衔接）",
+      "missing_evidence": "Luu Wörner Nat. Commun. 2018 石英 HHG Berry 曲率重建的全文细节（circular 偏振偶次谐量、Berry 贡献与多体贡献的区分），用于 §4定位段方法可信性论证",
+      "search_keywords": [
+        "Luu Worner 2018 Nat Commun quartz Berry curvature HHG",
+        "circularly polarized HHG Berry curvature quartz measurement",
+        "quartz inversion symmetry broken HHG experimental",
+        "Luu Worner Nat Commun 9 3723"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Yue&Gaarde PRL 130, 166903 (2023) semi-Dirac HHG Jones矩阵分析口径",
+      "missing_evidence": "补充 Yue Gaarde PRL 130, 166903 全文中 Jones 矩阵分解 Berry/几何/动量贡献的具体方程与数据，作为 rationale 方法论可信性引文",
+      "search_keywords": [
+        "Yue Gaarde PRL 130 166903 2023 semi-Dirac",
+        "Jones matrix analysis HHG Berry curvature decomposition",
+        "semi-Dirac HHG Jones matrix formalism",
+        "Yue Gaarde Jones matrix harmonic generation"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Yu/Hansen/Madsen PRA 99, 013435 (2019) 高次谐波 BCS 序参量探测方法",
+      "missing_evidence": "该工作已被标识 [16] 重定向，需补充其方法学（HHG 探测超导序参量瞬态）与文献表完整条目（作者全链、期刊年份）",
+      "search_keywords": [
+        "Yu Hansen Madsen PRA 99 013435 2019",
+        "high harmonic generation superconductor order parameter",
+        "BCS superconductor HHG ultrafast probe",
+        "high harmonic spectroscopy superconducting gap"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Heide 等（被引用为 [22]）在 Bi₂Se₃ 类拓扑绝缘体 HHG 的能带结构分类与拓扑表征",
+      "missing_evidence": "核对 [22] 条目真实作者链与实验体系（避免再次错位），补充 1-2 篇关于拓扑绝缘体 HHG 表面态/体态分辨的近期工作",
+      "search_keywords": [
+        "Heide topological insulator high harmonic spectroscopy 2022 2023",
+        "Bi2Se3 surface state HHG bulk separation",
+        "topological insulator HHG surface bulk contribution",
+        "Bi2Se3 nonlinear optical response topological"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

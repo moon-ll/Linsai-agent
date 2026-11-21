@@ -1,0 +1,60 @@
+{
+  "gaps": [
+    {
+      "claim": "三条2026年预印本引文[58][59][60]在正文中被当作已发表事实引用，其中[59]用'实验证实'描述预印本结果，[60]在误差分析和Q3中承担核心论证角色",
+      "missing_evidence": "需要经同行评议的正式发表论文替代预印本，或至少补充预印本内容的独立验证/复现文献；特别是[60]在误差分析和关键科学问题Q3中承担核心论证，必须有已发表证据支撑",
+      "search_keywords": [
+        "instantaneous Chern number nonadiabatic strong field experiment",
+        "transient topological invariant ultrafast measurement",
+        "subcycle Berry curvature solid state experimental observation",
+        "Floquet topological phase transition time-resolved experiment"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "C子课题（AI代理模型/生成式模型反演）作为核心方法，在研究内容章节中零提及预研数据或文献先例",
+      "missing_evidence": "缺乏VAE/diffusion model/生成式代理模型在物理反演问题中的应用先例文献，以及HHG光谱反演中AI方法的已有工作支撑",
+      "search_keywords": [
+        "VAE diffusion model physics inverse problem",
+        "generative surrogate model spectroscopy inversion",
+        "variational autoencoder optical parameter retrieval",
+        "diffusion model scientific inverse problem surrogate",
+        "neural network HHG spectroscopy reconstruction"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1声明'非把TKNN原样照搬'但未论证瞬时陈数与TKNN的数学差异，缺乏理论基础文献支撑",
+      "missing_evidence": "缺少瞬时陈数（instantaneous Chern number）与TKNN不变量在非平衡态/强场条件下数学定义差异的理论文献，以及非绝热区拓扑不变量推广的理论依据",
+      "search_keywords": [
+        "instantaneous Chern number definition non-equilibrium",
+        "TKNN invariant generalization time-dependent Hamiltonian",
+        "topological invariant nonadiabatic regime definition",
+        "Floquet topological invariant vs static Chern number"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§2.4因果链论证缺乏No-Go反证（'若A失败，B/C为何无法独立成立'），量子参数估计完备性无理论文献支撑",
+      "missing_evidence": "缺少量子参数估计中的No-Go定理或不可简化性证明文献，用以论证测量-控制闭环不可分割性的理论必要性",
+      "search_keywords": [
+        "No-Go theorem quantum parameter estimation completeness",
+        "quantum phase tomography control feedback inseparability",
+        "quantum measurement control loop necessity theorem",
+        "quantum parameter identifiability bounds"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Q2被定性为'工程实现'问题（3处），暗示可行性风险在研究内容章节未阐明，缺乏相关技术实现限度的文献支撑",
+      "missing_evidence": "缺少阿秒脉冲整形、空间光调制器在极紫外/软X射线波段的技术极限文献，以及超快光学闭环反馈时间分辨率的硬件约束文献",
+      "search_keywords": [
+        "spatial light modulator attosecond pulse shaping specification",
+        "XUV pulse shaping technology limit",
+        "ultrafast optical feedback loop time resolution hardware",
+        "attosecond pulse shaping experimental feasibility"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

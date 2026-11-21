@@ -1,0 +1,270 @@
+{
+  "checked": true,
+  "at": "2026-11-07T04:05:56Z",
+  "proposal": "general-berry-mnps3-rashba-20260816",
+  "sections_scanned": [
+    "content",
+    "full_review",
+    "method_manual",
+    "rationale",
+    "scheme"
+  ],
+  "cjk_variant_pairs": [
+    {
+      "a": "自旋劈",
+      "b": "自旋空间",
+      "freq_a": 62,
+      "freq_b": 18,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "自旋劈裂",
+      "b": "自旋空",
+      "freq_a": 52,
+      "freq_b": 18,
+      "sections_a": [
+        "content",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "自旋劈裂",
+      "b": "自旋空间",
+      "freq_a": 52,
+      "freq_b": 18,
+      "sections_a": [
+        "content",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "滑移模",
+      "b": "滑移坐标",
+      "freq_a": 19,
+      "freq_b": 18,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "线性",
+      "b": "对称性",
+      "freq_a": 97,
+      "freq_b": 72,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "旋劈裂",
+      "b": "旋转",
+      "freq_a": 59,
+      "freq_b": 45,
+      "sections_a": [
+        "content",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "指纹量",
+      "b": "测量",
+      "freq_a": 54,
+      "freq_b": 43,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "指纹量",
+      "b": "能量",
+      "freq_a": 54,
+      "freq_b": 42,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "时间",
+      "b": "时域分",
+      "freq_a": 57,
+      "freq_b": 41,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "时标",
+      "b": "时域分",
+      "freq_a": 52,
+      "freq_b": 41,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "交变磁",
+      "b": "与磁",
+      "freq_a": 65,
+      "freq_b": 39,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "指纹量",
+      "b": "定量",
+      "freq_a": 54,
+      "freq_b": 39,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    }
+  ],
+  "token_variant_groups": [
+    {
+      "group_key": "σ_2",
+      "variants": [
+        {
+          "form": "σ²",
+          "count": 2
+        },
+        {
+          "form": "σ₂",
+          "count": 4
+        }
+      ],
+      "sections": [
+        "method_manual",
+        "scheme"
+      ]
+    }
+  ],
+  "summary": {
+    "cjk_pair_candidates": 391,
+    "token_variant_groups": 1,
+    "note": "候选报告不改文：处置归 writer/critic 契约；数值口径归 params_registry"
+  }
+}

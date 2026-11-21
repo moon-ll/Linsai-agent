@@ -1,0 +1,97 @@
+{
+  "gaps": [
+    {
+      "claim": "BSV 单脉冲光子数（每脉冲光子数 N/pulse）作为驱动 HHG 的核心参数，需在方案中给出明确物理估算与实验对标",
+      "missing_evidence": "缺少 BSV 单脉冲绝对光子数定标的实验文献（如 Quantel/Thales 实验组的 NOPA 压缩源参数定标、Tsang/Stobińska 量子光学理论的 N/pulse 与 g^(2)(0) 映射）",
+      "search_keywords": [
+        "BSV photon number per pulse NOPA",
+        "bright squeezed vacuum absolute photon number calibration",
+        "g2 zero-delay BSV characterization NOPA",
+        "Tsang quantum optics HHG photon flux"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "BSV 量子优势因子 Q_F 的自洽性论证——g^(2)(0) 配置基线（即目标 Q_F 区间）与实验可行性边界需要可引用的理论-实验对接",
+      "missing_evidence": "缺少 Q_F 框架下 HHG 量子增强的奠基性理论文献（Even-Tzur/Stobińska/QTS 2023-2026）与最新实验验证（2024-2025 PRL/Nat. Phys. 光子计数 HHG 谱）",
+      "search_keywords": [
+        "quantum enhancement factor HHG Q_F",
+        "Stobinska BSV HHG quantum advantage",
+        "Even Tzur quantum photon HHG enhancement",
+        "photon-counting HHG spectroscopy g2",
+        "squeezed light HHG quantum advantage experimental"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Mott 绝缘体靶材（如 NiO、La2CuO4）超快动力学时间尺度——§3.4 row 1 与 row 6 之间出现的 Mott 时间点内部不一致需要原始文献定标",
+      "missing_evidence": "缺少 Mott 绝缘体 Hubbard U / charge-transfer gap 尺度内 sub-fs 到 fs 量级电荷/自旋动力学时间常数的实验文献（tr-ARPES、HHG 探测 Mott）",
+      "search_keywords": [
+        "Mott insulator ultrafast dynamics timescale fs",
+        "charge-transfer excitation NiO HHG",
+        "Mott insulator tr-ARPES Hubbard sub-cycle",
+        "NiO high harmonic generation time scale",
+        "Mott insulator strongly correlated HHG experiment"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "经典 cutoff 律（q_maxℏω = Ip + 3.17Up）扩展到 BSV/量子光驱动 HHG 的理论依据与适用范围",
+      "missing_evidence": "缺少量子光驱动下 cutoff 律修正的严格理论处理（量子 Lewenstein 三步模型、QTS 多光子路径干涉模型）与首次实验测量",
+      "search_keywords": [
+        "quantum Lewenstein model HHG cutoff",
+        "bright squeezed vacuum HHG cutoff law extension",
+        "quantum three-step model photon number",
+        "multiphoton HHG quantum pathway interference",
+        "BSV HHG spectrum cutoff experiment"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "NOPA/OPA 术语准确性——方案中 BSV 产生装置的参量过程类型（NOPA vs. collinear OPA vs. traveling-wave OPA）需要原始方法论文献支撑",
+      "missing_evidence": "缺少 NOPA 产生 BSV 的标准实验配置文献（Mosman/Tikhonova/Quantel 2019-2024 NOPA-BSV 论文、J. Phys. Photonics/Opt. Express 系列）",
+      "search_keywords": [
+        "NOPA bright squeezed vacuum generation",
+        "traveling-wave OPA squeezing experiment",
+        "femtosecond NOPA squeezing photon number",
+        "Quantel BSV source NOPA design"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§3.5 工程实现时序（BSV 源 → 压缩 → 聚焦 → 靶室 → 探测）的关键技术参数与误差预算需要可引用的工程文献或厂商 spec",
+      "missing_evidence": "缺少 BSV 驱动 HHG 光路对准公差、靶室真空度、探测器量子效率等工程参数的可引用源（实验手册或前驱工作）",
+      "search_keywords": [
+        "BSV HHG experimental setup alignment tolerance",
+        "vacuum chamber high harmonic BSV driver",
+        "photon counting detector quantum efficiency HHG",
+        "focusing geometry BSV high harmonic experiment"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§3.6 降级机制（若 Q_F 未达预期、Mott 时间窗错过、BSV 关联性退化）的可行性替代方案需要预备性文献支撑",
+      "missing_evidence": "缺少弱关联极限（g^(2)(0)→2 经典热光）HHG 的对照实验文献与 PINN 反演算法在光谱稀疏采样下的鲁棒性证据",
+      "search_keywords": [
+        "thermal light HHG comparison classical limit",
+        "chaotic light high harmonic generation",
+        "PINN HHG spectrum reconstruction robustness",
+        "physics-informed neural network sparse HHG inversion",
+        "HHG spectroscopy inverse problem regularization"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "方案中§3.1-§3.4 关键技术（tr-ARPES 互补验证、HHG 光谱反演、BSV g^(2) 时-频关联测量）的具体技术节点需要 2023-2025 最新实验对照文献",
+      "missing_evidence": "缺少 2024-2025 年 BSV/量子光驱动 HHG 实验与理论的关键对照论文（特别是 Stobińska 组 2024-2025 PRA/PRL、Lewenstein 组 QTS 框架更新、Yoshikawa/Hanson 实验量子光非线性综述）",
+      "search_keywords": [
+        "BSV HHG 2024 experiment",
+        "quantum light high harmonic 2025",
+        "Stobinska group 2024 2025 HHG",
+        "Lewenstein QTS framework quantum HHG",
+        "quantum nonlinear optics review 2024 2025"
+      ],
+      "priority": "high"
+    }
+  ]
+}

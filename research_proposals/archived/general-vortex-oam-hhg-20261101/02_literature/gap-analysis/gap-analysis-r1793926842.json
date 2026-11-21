@@ -1,0 +1,60 @@
+{
+  "gaps": [
+    {
+      "claim": "立项依据大背景层：涡旋光（携带轨道角动量 OAM 的光场）在高次谐波产生（HHG）中的研究价值与非线性频率转换意义",
+      "missing_evidence": "OAM 在非线性光学/高次谐波中守恒与传递的奠基性实验与综述文献（具名作者+年份+期刊，可嵌入'某人等人[N]'句式）",
+      "search_keywords": [
+        "orbital angular momentum high harmonic generation",
+        "OAM conservation nonlinear optics",
+        "twisted light frequency conversion",
+        "optical vortex harmonic generation review"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "研究脉络层：OAM-HHG 从气体介质到固体、超表面/纳米结构的发展演进路线",
+      "missing_evidence": "气体喷射 OAM-HHG 开创性实验、固体 HHG 中涡旋相位演化、超表面产生涡旋谐波的系列代表作（需覆盖不同介质代际形成脉络链）",
+      "search_keywords": [
+        "vortex HHG gas jet experiment",
+        "solid high harmonic orbital angular momentum",
+        "metasurface vortex harmonic generation",
+        "HHG twisted attosecond pulses"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "核心挑战层：现有 OAM-HHG 方案的效率、拓扑荷可控范围、模式纯度等局限",
+      "missing_evidence": "量化对比文献——谐波转换效率测量、拓扑荷级联/守恒破缺观测、涡旋模式纯度表征的代表性工作（为'缺口→本项目'论证提供对照靶点）",
+      "search_keywords": [
+        "high harmonic conversion efficiency optical vortex",
+        "topological charge HHG scaling",
+        "OAM mode purity harmonics measurement",
+        "harmonic vortex coherence"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "国内外现状层：国内团队在涡旋光操控与 HHG 方向的研究进展与空白点",
+      "missing_evidence": "国内代表性团队的 OAM 光束产生/操控与 HHG 研究论文（用于'国内现状'层定位对比，呼应课题面上项目的立项语境）",
+      "search_keywords": [
+        "涡旋光 高次谐波 国内",
+        "轨道角动量 非线性光学 中国",
+        "optical vortex HHG Chinese groups",
+        "强场物理 涡旋光"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "整体嵌入式引用论证链：全文需 30-40 篇文献织入论证，references.md 目前 0 字",
+      "missing_evidence": "结构化文献池——覆盖大背景/脉络/挑战/现状/定位五层各若干篇，逐段可嵌入且与 02_literature 检索池（lit-gap、candidates.bib、reading-notes）三源对照的真实文献记录",
+      "search_keywords": [
+        "high-order harmonic generation review",
+        "structured light strong field physics",
+        "OAM light-matter interaction",
+        "attosecond vortex beams applications"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "rationale"
+}

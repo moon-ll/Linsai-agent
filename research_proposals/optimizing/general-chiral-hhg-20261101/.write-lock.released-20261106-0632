@@ -1,0 +1,21 @@
+# .write-lock — 本轮单写者冻结声明
+
+- 持有者：TraeCode 会话（本会话唯一 writer/critic）
+- 冻结时间：2026-11-06T00:57:12（Asia/Shanghai）
+- 用途：round-3 同版本串行复评窗口；本册本轮只允许本会话写入
+- 允许写入范围：`04_proposal/sections/*.md`、`05_review/critic-round-3-*.md`
+- 禁止：任何外部进程/会话写入本册；检测到 mtime 变化或新备份文件即停并报告
+
+## 冻结基线（正文 sha256 与 mtime）
+
+| 文件 | mtime | sha256 |
+|---|---|---|
+| content.md | 2026-11-05T22:33:46 | ab10dc2bf73bc383bd6f854ef23c7acca71f1b9dbf3e925882eecbe7ed8716d1 |
+| full_review.md | 2026-11-06T00:09:30 | 3251d738891f3f370b51db235fa708da1d2930e9eef39acab638b314687c78f1 |
+| rationale.md | 2026-11-06T00:40:11 | c47cf90778c9221eb516b95033a49b01d09fb8ec84ffc5f1e810dcc3a40b1297 |
+| references.md | 2026-11-06T00:24:27 | c3e21dda0c4152fb96a9663aff4155842b27beef213c467b1741de5627a97e6a |
+| scheme.md | 2026-11-06T00:40:21 | ef5ae7a7b8cba23e8b54a6d7093f1fc27298c128deae7eeabff9975bcf799597 |
+
+## 外部写入检测记录
+
+- 2026-11-06T00:57:12 采集基线，此前最后一次正文写入为 00:40:21（rationale/scheme），冻结窗口内无变化。

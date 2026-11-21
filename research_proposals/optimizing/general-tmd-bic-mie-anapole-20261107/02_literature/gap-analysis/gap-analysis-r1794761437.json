@@ -1,0 +1,83 @@
+{
+  "gaps": [
+    {
+      "claim": "§三.7（1）、（3）提出“据检索尚未见于报道”的新颖性或优先权断言，包括包含二阶非线性极化张量的联合设计形式及其在3R-TMD平台上的可复算结果。",
+      "missing_evidence": "需要可复核的系统检索记录，至少说明数据库、检索式、检索字段、时间范围、纳入与排除标准及截止日期；同时需要列出与该断言最接近的原始论文和综述，界定既有工作与本项目拟研究形式的差异。现有参考文献数量和一般性表述不足以证明“尚未见报道”。",
+      "search_keywords": [
+        "3R-TMD second harmonic generation anapole BIC",
+        "3R MoS2 WS2 nonlinear susceptibility tensor joint design",
+        "temporal coupled-mode theory nonlinear harmonic generation energy flow",
+        "Mie multipole anapole second-harmonic generation transition metal dichalcogenide",
+        "3R-TMD 二阶非线性极化张量 联合设计",
+        "BIC anapole 二次谐波 能量流 耦合模理论"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§三.4第3段将Sortino等人报道的45 fs时间尺度作为Rabi分裂的参照，存在将极化激元—未耦合激子库的能级分裂或振荡周期误作完整Rabi分裂标定的风险。",
+      "missing_evidence": "需要Sortino原始论文，以核实45 fs对应的是哪一种可观测量、采用了何种拟合模型以及分裂能级的具体物理归属；还需要耦合模理论或强耦合光学文献说明Rabi分裂、能量分裂和时域拍频周期之间的定义及标定关系，并说明由时间周期换算能量时的公式和倍频约定。相关文献只能支持量级比较，不能直接充当本项目的Δ_R标定值。",
+      "search_keywords": [
+        "Sortino 45 fs exciton polariton energy splitting",
+        "Sortino coupled cavity polariton 45 fs oscillation",
+        "Rabi splitting versus energy splitting cavity polariton",
+        "time-domain beating period Rabi splitting calibration",
+        "generalized coupled-mode theory polariton eigenmode splitting",
+        "极化激元 Rabi分裂 能量分裂 时间振荡周期"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§三.3第6段要求体相项复现Zhang等人观测到的“再吸收饱和行为”，但所引现象实际是强度随层数下降并趋饱和，与本稿所称3R序列“先增后饱和”并不相同。",
+      "missing_evidence": "需要Zhang等人原始论文，明确其样品结构、层数序列、测量通道和“下降—饱和”的具体定义；还需要能够证明该工作属于异质体系或不同样品构型的文献，以及本项目所依据的3R-TMD层数依赖数据。只有完成样品体系和物理机制的对位，才能将该结果作为复现判据或外部对照，而不能直接等同。",
+      "search_keywords": [
+        "Zhang TMD multilayer reabsorption saturation layer dependence",
+        "Zhang 3R MoS2 second harmonic generation layer dependence",
+        "TMD photoluminescence reabsorption saturation multilayer",
+        "van der Waals heterostructure reabsorption saturation",
+        "3R MoS2 SHG intensity increase saturation layer number",
+        "再吸收 饱和 层数依赖 过渡金属二硫属化物"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§三.8的预期成果没有给出间距可判读区间、敏感度比、容差退化幅度和二次谐波转换效率上限等可检验量级。",
+      "missing_evidence": "需要实验或高精度仿真文献提供可作为基准的层间距—光学响应数据、折射率或入射角敏感度、制造与对准容差数据以及二次谐波转换效率范围；同时需要核对各文献的效率定义、样品厚度、泵浦条件、偏振条件和不确定度，才能据文献推导“预期区间，非承诺值”，而非给出无来源的数值。",
+      "search_keywords": [
+        "3R MoS2 second harmonic generation layer spacing dependence",
+        "3R TMD refractive index sensitivity second harmonic generation",
+        "TMD anapole refractive index sensitivity",
+        "second harmonic generation polarization angular tolerance MoS2",
+        "3R TMD SHG conversion efficiency experimental",
+        "层间距 敏感度 容差 二次谐波 转换效率 3R-TMD"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§三.2第4段声称四组数据在参数上相互独立，但前两组实际上来自Yang等人的同一项工作。",
+      "missing_evidence": "需要Yang等人原始论文及逐项数据来源表，明确前两组数据对应的样品、厚度、偏振、激发条件及是否存在共同实验系统或共同拟合参数；还需要为第四组外部锚点补充独立团队的原始文献，并据来源说明其与前三组的参数独立性。单纯增加一个角标不能消除同源数据造成的相关性。",
+      "search_keywords": [
+        "Yang 3R TMD second harmonic generation experimental data",
+        "Yang 3R MoS2 SHG thickness anisotropy",
+        "3R TMD second harmonic generation independent experimental dataset",
+        "3R MoS2 optical anisotropy layer dependence external validation",
+        "Yang 等 3R-TMD 二次谐波 厚度 各向异性"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§三.3第2、4、6段，§三.4第3、4段及§三.6第2—3段中涉及具名工作、先例、观测现象或量级的论述没有与相应原始文献建立直接角标关联。",
+      "missing_evidence": "需要逐段核对具名作者或研究体系的原始论文，并确认被引用内容确实支持该段的样品体系、机制结论和数值范围；应优先挂靠已有参考文献编号，对新增工作则补充完整文献条目。尤其应覆盖Yang等人、Zhang等人、Sortino等人的原始论文，以及3R-TMD、非线性BIC/Mie/anapole和时域耦合模理论的直接先例，以消除无法追溯的“具名先例”陈述。",
+      "search_keywords": [
+        "Yang 3R-TMD second harmonic generation",
+        "Zhang TMD reabsorption saturation",
+        "Sortino exciton polariton 45 fs splitting",
+        "3R MoS2 anapole BIC nonlinear optics",
+        "Mie multipole second harmonic generation TMD",
+        "temporal coupled-mode theory energy flow nonlinear optics",
+        "3R-TMD 二次谐波 具名实验先例"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

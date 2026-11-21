@@ -1,0 +1,27 @@
+{
+  "gaps": [
+    {
+      "claim": "β-Ga₂O₃ 支路的谐波窗口与重叠性表述（content §2.3：7–13 阶/21.7–40.3 eV『独立不重叠』vs scheme §3.3：5–7 阶/15.5–21.7 eV『重叠同带对照』，且 scheme 自身残留 40 eV 探测器上限与 q=4–6 旧窗口虚指）",
+      "missing_evidence": "β-Ga₂O₃ 在项目所述驱动条件（约 2060 nm、TW·cm⁻² 量级）下的实验或理论 HHG 谱——实际可达的谐波阶次范围与截止光子能量。只有依据实测谱才能判定两版窗口哪一版物理成立，并据此统一两章的窗口、重叠性表述与判据；探测器响应能量上限（21.7 eV 还是 40 eV）同样取决于该实测截止能量",
+      "search_keywords": [
+        "beta-Ga2O3 high harmonic generation",
+        "beta-gallium oxide HHG spectrum",
+        "wide bandgap semiconductor high-order harmonics",
+        "mid-infrared driven solid-state HHG cutoff"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "唯象项复核的 T₂ 适用区间（content §2.2 将 T₂∈1–3 fs 样品指派做唯象项复核，scheme §3.3 却声明 T₂<2.7 fs 时该项『失去参照』，且 scheme 同段 L57『取值范围 1–5 fs』与自身 2.7 fs 边界两版并存）",
+      "missing_evidence": "项目拟用具体 TMDC 样品（MoS₂/WS₂ 等）在相应激发条件下的退相干时间 T₂ 的实测值分布。仅有 [1,16] fs、中位约 10 fs 的总体区间不足以判定哪些样品实际落入 [2.7,5] fs 可复核区间、哪些落入 [1,2.7) fs 需增设接管路径，也就无法为『区间上移至 [2.7,5] fs』或『增设接管路径』两种修复路线提供取舍依据",
+      "search_keywords": [
+        "MoS2 dephasing time measurement",
+        "WS2 exciton coherence time",
+        "TMDC dephasing time femtosecond spectroscopy",
+        "transition metal dichalcogenide T2 optical"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "full_review"
+}

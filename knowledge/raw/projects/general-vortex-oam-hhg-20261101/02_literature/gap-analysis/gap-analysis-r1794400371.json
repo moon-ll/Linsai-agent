@@ -1,0 +1,41 @@
+{
+  "gaps": [
+    {
+      "claim": "Rajak[22]的普适标度律验证和Granados[23]的CEP破缺属于固体侧高次谐波工作，不能作为气体侧标度律体系的证据。",
+      "missing_evidence": "需要回查两篇原始论文，确认其研究介质、实验对象、标度关系或CEP效应及主要结论，并分别配置能够直接支持所述结论的原始文献；同时需要用气体侧HHG文献独立支撑“气体侧已建立标度律体系”这一表述。",
+      "search_keywords": [
+        "Rajak solid-state high harmonic generation universal scaling law",
+        "Granados solid high harmonic generation CEP control",
+        "solid target HHG CEP effect",
+        "gas high harmonic generation scaling law",
+        "Rajak Granados high harmonic generation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "相关HHG研究“从未被纳入同一套扫描”。",
+      "missing_evidence": "缺少能够证明该绝对否定命题的系统文献检索证据。应说明检索数据库、检索式、检索截止日期和纳入标准，列出最接近的既有工作及其与本项目拟开展扫描范围的差异；如无法排除相关研究，应将表述改为有明确时间和范围限定的谨慎判断。",
+      "search_keywords": [
+        "vortex high harmonic generation orbital angular momentum parameter scan",
+        "OAM HHG pulse parameter scan",
+        "twisted light high harmonic generation intensity scan",
+        "vortex HHG pulse duration scan",
+        "orbital angular momentum high harmonic generation review"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Rajak等报道的自旋—轨道劈裂数值为513(10) meV。",
+      "missing_evidence": "缺少该精确数值及不确定度的可追溯原始出处。需要核对arXiv:2601.12743原文，确认513(10) meV的测量对象、定义、拟合或提取方法及误差含义，并确保正文表述与原文结论一致；若原文不支持该数值，应删除数值或改为不带虚假精度的概括性表述。",
+      "search_keywords": [
+        "arXiv:2601.12743",
+        "Rajak spin-orbit splitting 513 10 meV",
+        "solid-state high harmonic generation spin-orbit splitting",
+        "spins HHG Rajak",
+        "Rajak 513 meV high harmonic generation"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

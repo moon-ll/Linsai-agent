@@ -1,0 +1,39 @@
+{
+  "gaps": [
+    {
+      "claim": "全稿 147 处 [N] 编号引用（编号 1-40，跨 rationale/content/scheme 统一体系）需在 references.md 中有独立、完整、可核实的文献表支撑",
+      "missing_evidence": "references.md 当前 0 字节（历史 P0 残留）；40 篇文献表仅内嵌于 rationale 文末，缺独立落盘的参考文献模块、跨章统一编号核对，以及逐条元数据（作者/期刊/年份/DOI 或 arXiv ID）真实性核查，防止引用凭记忆杜撰",
+      "search_keywords": [
+        "1T-TiSe2 time-resolved neutron diffraction Dharmasiri superlattice",
+        "EuTe4 moiré charge density wave commensurate",
+        "ultrafast electron diffraction charge order review"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "满足 NSFC 面上评审对参考文献时效性的要求：近 3 年（2023-2026）文献须在 40 篇引用中占一定比例",
+      "missing_evidence": "现有引用以经典文献为主，缺近 3 年关于 TiSe₂ 激子/CDW 超快动力学、EuTe₄ 联合公度莫尔体系、以及四类超快探针（UED/EUV 动量显微/tr-ARPES/tr-XRD/时间分辨中子衍射）最新进展的文献补充与占比核查",
+      "search_keywords": [
+        "TiSe2 ultrafast dynamics 2024 2025",
+        "TiSe2 excitonic insulator charge density wave 2023..2026",
+        "EuTe4 moiré superlattice ultrafast 2024",
+        "time-resolved ARPES charge order 2024",
+        "time-resolved neutron diffraction recent 2024 2025"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "目标一'联合四类探针将序参量测量时窗从飞秒延伸至微秒（约九个数量级）'及各探针时窗上限的表述",
+      "missing_evidence": "各类泵浦-探测探针实际可达时间分辨与时窗上限的文献依据——尤其时间分辨中子衍射是否可达 ns–μs 量级、UED/tr-ARPES/tr-XRD 的时窗范围——用于判定'秒级重建（3 s/11 s）'与'飞秒至微秒'两种互斥口径何者成立，并统一全链时窗上限",
+      "search_keywords": [
+        "time-resolved neutron diffraction time resolution pump probe",
+        "nanosecond time-resolved neutron scattering instrument",
+        "ultrafast electron diffraction TiSe2 charge density wave dynamics",
+        "time-resolved X-ray diffraction time window pump probe",
+        "tr-ARPES femtosecond time resolution charge order"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "content"
+}

@@ -1,0 +1,61 @@
+#!/usr/bin/env python3
+"""LinSai-CoPilot 统一路径常量。
+
+集中定义各脚本中重复的 PROJECT_ROOT / KNOWLEDGE_DIR / MEMORY_DIR 等路径常量，
+消除 30+ 处重复定义。
+
+用法:
+    from paths import PROJECT_ROOT, KNOWLEDGE_DIR, MEMORY_DIR, SCRIPTS_DIR
+"""
+
+from __future__ import annotations
+
+from pathlib import Path
+
+# 脚本目录和项目根目录（统一使用 .resolve() 消除符号链接差异）
+SCRIPTS_DIR = Path(__file__).parent.resolve()
+PROJECT_ROOT = SCRIPTS_DIR.parent
+
+# 核心数据目录
+KNOWLEDGE_DIR = PROJECT_ROOT / "knowledge"
+MEMORY_DIR = PROJECT_ROOT / "memory"
+SESSIONS_DIR = PROJECT_ROOT / "sessions"
+LOGS_DIR = PROJECT_ROOT / "logs"
+TASKS_DIR = PROJECT_ROOT / "tasks"
+
+# 知识库子目录
+WIKI_DIR = KNOWLEDGE_DIR / "wiki"
+RAW_DIR = KNOWLEDGE_DIR / "raw"
+CAPTURES_DIR = KNOWLEDGE_DIR / "captures"
+
+# v6.7.11: 规范知识库三层结构
+RAW_PROJECTS_DIR = RAW_DIR / "projects"      # 课题库（归档课题完整文件）
+RAW_PAPERS_DIR = RAW_DIR / "papers"          # 文献库（论文元数据）
+QA_DIR = KNOWLEDGE_DIR / "qa"                 # 问答模块（用户讨论归档）
+
+# 知识库核心文件
+INDEX_PATH = KNOWLEDGE_DIR / "index.json"
+GRAPH_PATH = KNOWLEDGE_DIR / "graph.json"
+ALIASES_PATH = KNOWLEDGE_DIR / "aliases.json"
+GROWTH_LOG_PATH = KNOWLEDGE_DIR / "growth-log.json"
+CATEGORIES_PATH = KNOWLEDGE_DIR / "categories.json"
+
+# PDF 原文库（v6.3.0，文献 PDF 原文管理）
+PDF_DIR = RAW_DIR / "pdfs"
+PDF_LIBRARY_PATH = MEMORY_DIR / "pdf-library.json"
+
+# Hermes 工作区（文件系统路径）
+HERMES_WORKSPACE = Path.home() / "Desktop" / "hermes_workspace"
+HERMES_WIKI_DIR = HERMES_WORKSPACE / "knowledge_base" / "AI_wiki" / "02-wiki"
+
+# v6.8.1: hermes 简报产出目录（完整知识库简报 + 候选列表 + 深度分析）
+HERMES_BRIEFINGS_DIR = HERMES_WORKSPACE / "knowledge_base" / "AI_wiki" / "briefings"
+HERMES_BRIEFING_PAPERS_DIR = HERMES_BRIEFINGS_DIR / "papers"
+
+# Hermes 配置目录（~/.hermes，hermes-agent 运行目录）
+HERMES_HOME = Path.home() / ".hermes"
+LINSAI_PROFILE = HERMES_HOME / "profiles" / "linsai"
+
+# 研究管线数据目录（v6.2，独立数据域，与 CoPilot 核心隔离）
+RESEARCH_PROPOSALS_DIR = PROJECT_ROOT / "research_proposals"
+PIPELINE_CONFIG_DIR = RESEARCH_PROPOSALS_DIR / ".config"

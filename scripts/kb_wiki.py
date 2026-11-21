@@ -1,0 +1,642 @@
+#!/usr/bin/env python3
+"""kb_wiki.py — Wiki 页面管理。
+
+负责 wiki 页面的构建、读取、列表、保存、删除，以及交互触发生长
+（相似概念检查、stub 创建、丰满 prompt 生成、生长应用）。
+
+依赖：kb_text（frontmatter/安全文件名）、kb_graph（图谱节点/边/双向链接注入）、
+      kb_index（检索/索引重建）、paths（KNOWLEDGE_DIR/WIKI_DIR）、common（now_utc）。
+
+门面 knowledge_base 在加载完成后会向本模块注入以下函数，以解决子模块→门面依赖：
+    _ensure_dirs  — 目录初始化
+    log_growth    — 生长日志记录
+    _log          — 日志对象
+在门面未注入前这些名字为 None 占位，函数体保持与原 knowledge_base.py 完全一致。
+
+用法示例：
+    >>> from kb_wiki import save_wiki_page, get_wiki_page
+    >>> save_wiki_page("wiki/concepts/测试.md", "# 测试", {"title": "测试"})
+    >>> page = get_wiki_page("wiki/concepts/测试.md")
+
+规范：
+    - 仅使用 Python 3 标准库
+    - 不修改任何函数逻辑，自 knowledge_base.py 物理迁移而来
+"""
+
+from typing import Any, Dict, List, Optional, Tuple
+from pathlib import Path
+
+from common import now_utc as _now_utc
+from paths import KNOWLEDGE_DIR, WIKI_DIR
+from kb_text import parse_frontmatter, build_frontmatter, _safe_filename
+from kb_graph import (
+    update_graph_node, add_graph_edge, _remove_graph_node, _inject_wikilinks,
+)
+from kb_index import search, build_index
+
+
+# ─────────────────────────────────────────────
+# 门面注入依赖（占位，由 knowledge_base 加载后覆盖）
+# ─────────────────────────────────────────────
+
+_ensure_dirs = None  # type: ignore
+log_growth = None  # type: ignore
+_log = None
+
+
+# ─────────────────────────────────────────────
+# 常量
+# ─────────────────────────────────────────────
+
+# v6.8.51: 补上 reviews/（简报、链路复盘所在目录）——此前 57 个 review 文件
+# 对 list_wiki_pages 完全不可见，导致 wiki_count 与文件系统口径分裂
+_WIKI_TYPES = {"concepts", "methods", "people", "papers", "projects", "reviews"}
+
+
+# ─────────────────────────────────────────────
+# Wiki 页面管理
+# ─────────────────────────────────────────────
+
+def build_wiki_page(title: str, wiki_type: str, content: str,
+                    meta: Optional[Dict[str, Any]] = None) -> str:
+    """构建标准 wiki 页面文本（含 frontmatter + 林赛视角结构）。"""
+    default_meta = {
+        "title": title,
+        "type": wiki_type,
+        "created": _now_utc(),
+        "updated": _now_utc(),
+        "tags": [],
+        "related": [],
+        "source_raw": "",
+        "growth_stage": "seedling",
+        "confidence": 0.5,
+    }
+    if meta:
+        default_meta.update(meta)
+    fm = build_frontmatter(default_meta)
+    return f"{fm}\n\n{content.strip()}"
+
+
+def get_wiki_page(rel_path: str) -> Optional[Dict[str, Any]]:
+    """读取 wiki 页面，解析 frontmatter 和内容。
+
+    Args:
+        rel_path: 相对 knowledge/ 的路径，如 "wiki/concepts/固体高次谐波产生.md"
+
+    Returns:
+        {"frontmatter": dict, "body": str, "path": str} 或 None
+    """
+    path = KNOWLEDGE_DIR / rel_path
+    if not path.exists():
+        return None
+    try:
+        text = path.read_text(encoding="utf-8")
+        fm, body = parse_frontmatter(text)
+        return {"frontmatter": fm, "body": body, "path": str(rel_path)}
+    except Exception:
+        return None
+
+
+def list_wiki_pages(wiki_type: Optional[str] = None) -> List[Dict[str, Any]]:
+    """列出所有 wiki 页面（只返回 frontmatter，不加载全文）。
+
+    支持子目录（v2.7.0）：projects/ 等类型下可按项目再分子目录，
+    用 rglob 递归扫描，使子库结构可见。
+    """
+    pages = []
+    dirs = [WIKI_DIR / wiki_type] if wiki_type else [WIKI_DIR / t for t in _WIKI_TYPES]
+    for d in dirs:
+        if not d.exists():
+            continue
+        for fpath in sorted(d.rglob("*.md")):
+            try:
+                text = fpath.read_text(encoding="utf-8")
+                fm, _ = parse_frontmatter(text)
+                rel = str(fpath.relative_to(KNOWLEDGE_DIR))
+                pages.append({
+                    "path": rel,
+                    "title": fm.get("title", fpath.stem),
+                    "type": fm.get("type", wiki_type or "unknown"),
+                    "growth_stage": fm.get("growth_stage", "unknown"),
+                    "confidence": fm.get("confidence", 0.0),
+                    "updated": fm.get("updated", ""),
+                    "tags": fm.get("tags", []),
+                    "project": fm.get("project", ""),
+                    "related": fm.get("related", []),
+                    # v6.10.52: 暴露合并态——图谱重建据此跳过重定向 stub 节点
+                    "merged_into": fm.get("merged_into", ""),
+                })
+            except Exception:
+                continue
+    return pages
+
+
+def save_wiki_page(rel_path: str, content: str, meta: Optional[Dict[str, Any]] = None,
+                   append: bool = False,
+                   defer_graph: bool = False,
+                   defer_growth_log: bool = False) -> str:
+    """保存 wiki 页面。
+
+    Args:
+        rel_path: 相对 knowledge/ 的路径
+        content: Markdown 正文（**不含 frontmatter**；若误传整页文本，
+                 门面会自动剥离其 frontmatter 并合并 meta，v6.8.51）
+        meta: frontmatter 数据（如页面已存在则合并更新）
+        append: 为 True 时在现有内容后追加；
+                content 为空且 append=False 时视为"仅更新 meta"，保留现有正文（v6.8.51）
+        defer_graph: v7.2.75 新增。为 True 时**不写图谱**（节点/边），
+                     交由调用方用 `kb_graph.add_graph_edges_batch` /
+                     `update_graph_node` 批量补写。批量补边场景下，
+                     逐页逐边写 5.1MB graph.json 是主要耗时来源。
+        defer_growth_log: v7.2.75 新增。为 True 时**不写 growth-log**，
+                     交由调用方批量追加（10.1MB 全量重写 × 每页一次）。
+
+    Returns:
+        保存的文件路径（相对 knowledge/）
+    """
+    _ensure_dirs()
+    path = KNOWLEDGE_DIR / rel_path
+    path.parent.mkdir(parents=True, exist_ok=True)
+    _existed_before = path.exists()  # v6.8.51: 供末尾 log_growth 判定 create/update
+
+    existing_fm: Dict[str, Any] = {}
+    existing_body = ""
+    if path.exists():
+        text = path.read_text(encoding="utf-8")
+        existing_fm, existing_body = parse_frontmatter(text)
+
+    # v7.1.3 质量门控（用户裁决 2026-09-27）：仅针对"新建页 + 自动产出
+    # wiki_type in {concepts, methods}"加门控，禁止一句话定义 + 缺关联 + 缺
+    # tags 的低质量页污染索引。已有页更新 / append / meta-only / 其他
+    # wiki_type（projects/papers/topics/reviews）放行（projects/papers 有
+    # 各自不同的质量门槛由上游保证）。
+    if (not _existed_before
+            and content and content.strip()
+            and (meta or {}).get("type", existing_fm.get("type", "concepts")) in ("concepts", "methods")
+            and not (meta or {}).get("quality_gate_skip", False)):
+        import re as _re
+        body_chars = len(content.strip())
+        headers = _re.findall(r"^##\s+\S+", content, _re.M)
+        content_headers = [h for h in headers
+                           if "关联概念" not in h and "相关概念" not in h]
+        body_no_links = "_暂无关联概念_" in content
+        # 注意：meta 尚未合并到 existing_fm，需直接读 meta 入参
+        tags_empty = not (meta or {}).get("tags") or len((meta or {}).get("tags", [])) == 0
+        fail_reasons = []
+        if body_chars < 200:
+            fail_reasons.append(f"正文 {body_chars} 字符 < 200")
+        if len(content_headers) < 2:
+            fail_reasons.append(f"实质二级标题 {len(content_headers)} 个 < 2")
+        if body_no_links:
+            fail_reasons.append("无有效关联链接")
+        if tags_empty:
+            fail_reasons.append("tags 为空")
+        if fail_reasons:
+            raise ValueError(
+                f"知识库质量门控失败（{rel_path}）：{'；'.join(fail_reasons)}。"
+                f"  门槛：body ≥ 200 字 + ≥ 2 个实质二级标题 + ≥ 1 个 [[link]] + tags 非空。"
+                f"  若确认豁免，加 meta['quality_gate_skip']=True 重试。"
+            )
+
+    # v6.8.51 防御①：调用方误将"整页文本"（自带 frontmatter）当 content 传入
+    # 历史后果：外层 frontmatter（默认值 title=文件名/type=concepts）+ 内层真实
+    # frontmatter 叠加成双块，消费方只读到外层错误元数据。此处剥离内层并合并。
+    content = content or ""
+    if content.lstrip().startswith("---"):
+        inner_fm, inner_body = parse_frontmatter(content)
+        if inner_fm:
+            merged = dict(existing_fm)
+            merged.update(meta or {})
+            merged.update(inner_fm)
+            meta = merged
+            content = inner_body
+
+    if meta:
+        existing_fm.update(meta)
+    existing_fm["updated"] = _now_utc()
+
+    # v6.8.51 防御②：content 为空且非 append → 仅更新 meta，不再清空正文
+    # （旧逻辑 body=content.strip() 会把现有正文整体抹掉）
+    if append and existing_body:
+        body = existing_body + "\n\n" + content.strip()
+    elif not content.strip():
+        body = existing_body
+    else:
+        body = content.strip()
+
+    page_text = build_wiki_page(
+        title=existing_fm.get("title", path.stem),
+        wiki_type=existing_fm.get("type", "concepts"),
+        content=body,
+        meta=existing_fm,
+    )
+    path.write_text(page_text, encoding="utf-8")
+
+    # 注入 Obsidian 双向链接并同步图谱
+    final_text = _inject_wikilinks(path.read_text(encoding="utf-8"))
+    path.write_text(final_text, encoding="utf-8")
+
+    fm, _ = parse_frontmatter(final_text)
+    title = fm.get("title", "")
+    if title and not defer_graph:
+        wiki_type = fm.get("type", "concepts")
+        growth_stage = fm.get("growth_stage", "growing")
+        update_graph_node(title, wiki_type, str(rel_path), growth_stage)
+        for related in fm.get("related", []):
+            if related:
+                add_graph_edge(title, related, "related")
+        # 子库归属（v2.7.0）：frontmatter 含 project 时，自动连 项目→title 边
+        projects = fm.get("project", [])
+        if isinstance(projects, str):
+            projects = [projects] if projects else []
+        for proj in projects:
+            if proj:
+                # 确保项目节点存在（作为汇聚节点）
+                update_graph_node(proj, "projects", f"wiki/projects/{proj}", "mature")
+                add_graph_edge(title, proj, "belongs_to")
+
+    # v6.8.51: 门面统一写生长日志——此前 log_growth 只在对话成长路径
+    # （apply_growth）调用，活跃的 lit_search/修复脚本等门面写入全部
+    # 不落日志，导致 growth-log 断流两个月、week_new 恒为 0（仪表盘失真）。
+    # v7.2.75: defer_growth_log=True 时交由调用方批量追加。
+    if log_growth and not defer_growth_log:
+        try:
+            log_growth(
+                "create" if not _existed_before else "update",
+                str(rel_path),
+                "facade",
+                f"save_wiki_page: {title or rel_path}",
+            )
+        except Exception:
+            pass  # 日志失败不阻塞保存
+
+    return str(rel_path)
+
+
+def save_qa_page(slug: str, title: str, qa_type: str, body: str,
+                 related_papers: Optional[List[str]] = None,
+                 related_proposals: Optional[List[str]] = None) -> str:
+    """保存讨论记录到 qa/ 层。
+
+    Args:
+        slug: 唯一标识（用于文件名）
+        title: 页面标题
+        qa_type: "paper-discussion" / "proposal-discussion" / "project-discussion"
+        body: Markdown 正文内容
+        related_papers: 关联论文 arxiv_id 列表
+        related_proposals: 关联 proposal_id 列表
+
+    Returns:
+        保存的文件路径（相对 knowledge/）
+    """
+    from paths import QA_DIR
+    # qa_type 到目录名的映射（paper-discussion → paper-discussions）
+    type_to_dir = {
+        "paper-discussion": "paper-discussions",
+        "proposal-discussion": "proposal-discussions",
+        "project-discussion": "project-discussions",
+    }
+    subdir_name = type_to_dir.get(qa_type, f"{qa_type}s")
+    qa_subdir = QA_DIR / subdir_name
+    qa_subdir.mkdir(parents=True, exist_ok=True)
+
+    filename = f"{slug}.md"
+    path = qa_subdir / filename
+
+    # 构建包含双向链接的正文
+    body_with_links = body.strip()
+    if related_papers:
+        for aid in related_papers:
+            body_with_links += f"\n\n[[{aid}]]"
+    if related_proposals:
+        for pid in related_proposals:
+            body_with_links += f"\n\n[[{pid}]]"
+
+    # 构建 frontmatter
+    meta: Dict[str, Any] = {
+        "title": title,
+        "type": qa_type,
+        "slug": slug,
+        "created": _now_utc(),
+        "updated": _now_utc(),
+        "related_papers": related_papers or [],
+        "related_proposals": related_proposals or [],
+        "tags": [qa_type],
+    }
+    page_text = build_wiki_page(title, qa_type, body_with_links, meta)
+    path.write_text(page_text, encoding="utf-8")
+
+    # 更新 graph.json 中的关联边
+    rel_path = str(path.relative_to(KNOWLEDGE_DIR))
+    update_graph_node(title, qa_type, rel_path, "mature")
+    for aid in (related_papers or []):
+        if aid:
+            add_graph_edge(title, aid, "references")
+    for pid in (related_proposals or []):
+        if pid:
+            add_graph_edge(title, pid, "references")
+
+    print(f"✓ QA 讨论已保存: qa/{subdir_name}/{filename}")
+    return rel_path
+
+
+def delete_wiki_page(rel_path: str) -> bool:
+    """删除 wiki 页面，同时清理图谱中的关联。"""
+    path = KNOWLEDGE_DIR / rel_path
+    if not path.exists():
+        return False
+    try:
+        path.unlink()
+        # 清理图谱
+        page = get_wiki_page(rel_path)
+        title = page["frontmatter"].get("title", "") if page else ""
+        if title:
+            _remove_graph_node(title)
+        return True
+    except Exception:
+        return False
+
+
+# ─────────────────────────────────────────────
+# 交互触发生长
+# ─────────────────────────────────────────────
+
+def check_similar_concepts(concept_name: str, threshold: float = 0.9) -> List[Dict[str, Any]]:
+    """检查知识库中是否存在与给定概念高度相似的条目。
+
+    Returns:
+        相似概念列表，每项含 title, doc, score, path
+    """
+    results = search(concept_name, top_k=5)
+    results = results.get("results", []) if isinstance(results, dict) else results
+    similar = []
+    for r in results:
+        score = r.get("score", 0)
+        if score >= threshold:
+            similar.append({
+                "title": r.get("title", ""),
+                "doc": r.get("doc", ""),
+                "score": score,
+                "source": r.get("source", ""),
+                "growth_stage": r.get("growth_stage", ""),
+            })
+    return similar
+
+
+def create_wiki_stub(concept_name: str, context: str = "",
+                     trigger: str = "conversation") -> str:
+    """基于上下文创建 wiki stub（交互触发生长）。
+
+    当对话中遇到知识库中不存在的新概念时，创建 stub，
+    标记为 seedling 阶段，后续交互中逐步丰满。
+
+    Args:
+        concept_name: 概念名称
+        context: 触发创建的上下文（对话片段）
+        trigger: 触发来源
+
+    Returns:
+        创建的 wiki 路径
+    """
+    _ensure_dirs()
+    safe_name = _safe_filename(concept_name)
+    wiki_rel = f"wiki/concepts/{safe_name}.md"
+
+    # 如果已存在，不重复创建
+    if (KNOWLEDGE_DIR / wiki_rel).exists():
+        return wiki_rel
+
+    stub_content = f"""# {concept_name}
+
+## 林赛的理解
+
+（待补充——这个概念是在对话中首次遇到的，林赛正在学习中。）
+
+## 核心要点
+
+（待补充）
+
+## 触发上下文
+
+> {context[:500] if context else "暂无上下文"}
+
+## 开放问题
+
+- 这个概念与林赛现有的知识体系如何关联？
+"""
+
+    meta = {
+        "title": concept_name,
+        "type": "concepts",
+        "tags": [],
+        "related": [],
+        "source_raw": "",
+        "growth_stage": "seedling",
+        "confidence": 0.3,
+    }
+
+    save_wiki_page(wiki_rel, stub_content, meta)
+    update_graph_node(concept_name, "concepts", wiki_rel, "seedling")
+    log_growth("create", wiki_rel, trigger,
+               f"对话中遇到新概念 '{concept_name}'，创建 seedling stub")
+
+    build_index()
+    if _log:
+        _log.info(f"创建 wiki stub (seedling): {wiki_rel} ← 概念 '{concept_name}'")
+    return wiki_rel
+
+
+def grow_wiki_prompt(wiki_rel_path: str, new_context: str,
+                     reason: str = "") -> Tuple[str, str]:
+    """生成 wiki 丰满 prompt，供 LLM 使用。
+
+    Returns:
+        (wiki_path, prompt_text)
+    """
+    page = get_wiki_page(wiki_rel_path)
+    if not page:
+        return wiki_rel_path, ""
+
+    fm = page["frontmatter"]
+    body = page["body"]
+    title = fm.get("title", wiki_rel_path)
+
+    prompt = f"""请帮助林赛（强场超快光学 PI）丰满他的研究笔记。
+
+现有笔记：《{title}》
+当前生长阶段：{fm.get("growth_stage", "unknown")}
+当前确信度：{fm.get("confidence", 0.5)}
+
+现有内容：
+
+---
+{body[:4000]}
+---
+
+新上下文（来自与用户的对话）：
+{new_context[:3000]}
+
+{reason}
+
+请基于新上下文，补充或修正现有笔记。要求：
+1. 保持第一人称"林赛"的视角
+2. 添加"林赛的理解"、"实验经验"或"批判性思考"部分
+3. 更新 related 字段，添加关联概念
+4. 如果内容足够充实，将 growth_stage 提升为 "growing" 或 "mature"
+5. 适当提升 confidence
+
+请输出完整的 wiki 页面（含 frontmatter），可以直接覆盖原有内容。
+"""
+    return wiki_rel_path, prompt
+
+
+def apply_growth(wiki_rel_path: str, llm_output: str,
+                 trigger: str = "conversation") -> str:
+    """应用 LLM 生成的丰满内容，更新 wiki 页面。
+
+    Args:
+        wiki_rel_path: wiki 页面路径
+        llm_output: LLM 生成的完整 wiki 页面
+        trigger: 触发来源
+
+    Returns:
+        更新后的 wiki 路径
+    """
+    path = KNOWLEDGE_DIR / wiki_rel_path
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(llm_output, encoding="utf-8")
+
+    # 注入 Obsidian 双向链接
+    final_text = _inject_wikilinks(path.read_text(encoding="utf-8"))
+    path.write_text(final_text, encoding="utf-8")
+
+    fm, _ = parse_frontmatter(final_text)
+    title = fm.get("title", path.stem)
+    wiki_type = fm.get("type", "concepts")
+    growth_stage = fm.get("growth_stage", "growing")
+
+    update_graph_node(title, wiki_type, wiki_rel_path, growth_stage)
+
+    for related in fm.get("related", []):
+        if related:
+            add_graph_edge(title, related, "related")
+
+    log_growth("update", wiki_rel_path, trigger,
+               f"基于对话上下文丰满 '{title}'，阶段更新为 {growth_stage}")
+
+    build_index()
+    return wiki_rel_path
+
+
+# ─────────────────────────────────────────────
+# 自检
+# ─────────────────────────────────────────────
+
+def _self_check() -> bool:
+    """自检：验证 wiki 页面构建 / 保存 / 读取 / 列表 / 删除。
+
+    使用临时目录隔离，patch 路径常量并注入门面依赖桩。
+    """
+    import tempfile
+    import shutil
+
+    print("=" * 50)
+    print("◐ kb_wiki 自检")
+    print("=" * 50)
+
+    passed = 0
+    total = 0
+    tmp_dir = tempfile.mkdtemp(prefix="kb_wiki_test_")
+    tmp_kb = Path(tmp_dir) / "knowledge"
+    (tmp_kb / "wiki" / "concepts").mkdir(parents=True, exist_ok=True)
+
+    # 保存原始路径常量，测试后恢复
+    global KNOWLEDGE_DIR, WIKI_DIR, _ensure_dirs, log_growth, _log
+    _orig = {"KNOWLEDGE_DIR": KNOWLEDGE_DIR, "WIKI_DIR": WIKI_DIR}
+    KNOWLEDGE_DIR = tmp_kb
+    WIKI_DIR = tmp_kb / "wiki"
+
+    # patch kb_graph 路径（save_wiki_page 调用图谱函数）
+    import kb_graph as _kg
+    _orig_kg = {"GRAPH_PATH": _kg.GRAPH_PATH, "ALIASES_PATH": _kg.ALIASES_PATH}
+    _kg.GRAPH_PATH = tmp_kb / "graph.json"
+    _kg.ALIASES_PATH = tmp_kb / "aliases.json"
+
+    # 保存原始注入依赖，测试后恢复
+    _orig_deps = {"_ensure_dirs": _ensure_dirs, "log_growth": log_growth, "_log": _log}
+
+    try:
+        # 注入门面依赖桩
+        def _stub_ensure_dirs():
+            for t in ["concepts", "methods", "people", "papers", "projects"]:
+                (WIKI_DIR / t).mkdir(parents=True, exist_ok=True)
+        _ensure_dirs = _stub_ensure_dirs
+        log_growth = lambda *a, **kw: None
+        _log = None
+
+        # [1/5] 构建页面文本
+        total += 1
+        page_text = build_wiki_page("测试概念", "concepts", "这是测试内容", {"confidence": 0.7})
+        if "---" in page_text and "测试概念" in page_text and "这是测试内容" in page_text:
+            passed += 1
+            print(f"  [1/{total}] ✓ 页面构建: 含 frontmatter + 正文")
+        else:
+            print(f"  [1/{total}] ✗ 页面构建: text={page_text[:60]}")
+
+        # [2/5] 保存页面
+        total += 1
+        rel = save_wiki_page(
+            "wiki/concepts/测试概念.md", "林赛的研究笔记内容", {"title": "测试概念"})
+        saved_path = tmp_kb / rel
+        if saved_path.exists():
+            passed += 1
+            print(f"  [2/{total}] ✓ 页面保存: {rel}")
+        else:
+            print(f"  [2/{total}] ✗ 页面保存: {saved_path}")
+
+        # [3/5] 读取页面
+        total += 1
+        page = get_wiki_page("wiki/concepts/测试概念.md")
+        if page and page["frontmatter"].get("title") == "测试概念":
+            passed += 1
+            print(f"  [3/{total}] ✓ 页面读取: title={page['frontmatter']['title']}")
+        else:
+            print(f"  [3/{total}] ✗ 页面读取: page={page}")
+
+        # [4/5] 列表页面
+        total += 1
+        pages = list_wiki_pages("concepts")
+        if len(pages) >= 1 and pages[0]["title"] == "测试概念":
+            passed += 1
+            print(f"  [4/{total}] ✓ 页面列表: {len(pages)} 篇")
+        else:
+            print(f"  [4/{total}] ✗ 页面列表: pages={pages}")
+
+        # [5/5] 删除页面
+        total += 1
+        deleted = delete_wiki_page("wiki/concepts/测试概念.md")
+        if deleted and not (tmp_kb / "wiki/concepts/测试概念.md").exists():
+            passed += 1
+            print(f"  [5/{total}] ✓ 页面删除: 文件已清除")
+        else:
+            print(f"  [5/{total}] ✗ 页面删除: deleted={deleted}")
+    finally:
+        # 恢复路径常量
+        KNOWLEDGE_DIR = _orig["KNOWLEDGE_DIR"]
+        WIKI_DIR = _orig["WIKI_DIR"]
+        _kg.GRAPH_PATH = _orig_kg["GRAPH_PATH"]
+        _kg.ALIASES_PATH = _orig_kg["ALIASES_PATH"]
+        # 恢复注入依赖
+        _ensure_dirs = _orig_deps["_ensure_dirs"]
+        log_growth = _orig_deps["log_growth"]
+        _log = _orig_deps["_log"]
+        shutil.rmtree(tmp_dir, ignore_errors=True)
+
+    ok = passed == total
+    print(f"\n{'✓' if ok else '✗'} kb_wiki: {passed}/{total} 通过")
+    return ok
+
+
+if __name__ == "__main__":
+    import sys
+    sys.exit(0 if _self_check() else 1)

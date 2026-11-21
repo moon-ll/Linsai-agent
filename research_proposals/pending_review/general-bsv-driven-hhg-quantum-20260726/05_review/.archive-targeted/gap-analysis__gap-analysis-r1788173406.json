@@ -1,0 +1,61 @@
+{
+  "gaps": [
+    {
+      "claim": "文献[15]所支撑的论点（DOI实际指向他人论文，正文却声称'Crossref已确认'，属critical错误）",
+      "missing_evidence": "该引用论点缺少真正对应的原始文献，需重新检索与论点匹配的正确论文并核验DOI/卷期/作者",
+      "search_keywords": [
+        "quantum enhancement factor high harmonic generation",
+        "bright squeezed vacuum driven HHG theory",
+        "Even Tzur quantum photon harmonic",
+        "Khurelbaatar Rivera-Dean quantum light HHG",
+        "squeezed light strong field nonlinear response"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "文献[18]所支撑的论点（当前DOI返回404，无法访问核验）",
+      "missing_evidence": "缺少有效可访问的文献版本，需检索该工作的正确出处（期刊正式版或arXiv版）或可替代文献",
+      "search_keywords": [
+        "bright squeezed vacuum high harmonic generation experiment",
+        "quantum light solid harmonic generation",
+        "photon counting HHG spectroscopy arXiv",
+        "squeezed light nonlinear optics DOI verification"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "BSV光源技术基线（[4]作为NOPA/BSV产生方案依据，但作者表存在错误）",
+      "missing_evidence": "缺少作者信息准确、可核验的BSV光源产生与表征技术文献",
+      "search_keywords": [
+        "bright squeezed vacuum generation noncollinear optical parametric amplifier",
+        "NOPA squeezed light photon statistics characterization",
+        "BSV g2 parametric gain dependence",
+        "bright squeezed vacuum macroscopic squeezing experimental"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "双光路Mach-Zehnder方案可对同一样品实现BSV与经典相干光的同步对比测量（可行性关键假设，rationale层面无预研证据）",
+      "missing_evidence": "缺少双光路/干涉式方案在量子光与经典光非线性响应对比实验中的先例文献或技术可行性支撑",
+      "search_keywords": [
+        "Mach-Zehnder interferometer quantum classical light nonlinear comparison",
+        "dual arm squeezed coherent light nonlinear optics experiment",
+        "interferometric quantum light nonlinear spectroscopy stability",
+        "BSV coherent light comparison harmonic yield simultaneous measurement"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "SBE-Q（半导体布洛赫方程量子化扩展）可推广至多带多体框架并描述量子光驱动的固体HHG（无预研证据）",
+      "missing_evidence": "缺少半导体布洛赫方程向量子光驱动、多带多体方向拓展的理论先例与方法学文献",
+      "search_keywords": [
+        "semiconductor Bloch equation quantum light drive",
+        "multiband many-body semiconductor Bloch equation high harmonic generation",
+        "squeezed vacuum driven Bloch dynamics theory",
+        "quantum light solid state HHG theoretical framework",
+        "Wigner phase space semiconductor Bloch equation"
+      ],
+      "priority": "high"
+    }
+  ]
+}

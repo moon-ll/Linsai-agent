@@ -1,0 +1,30 @@
+{
+  "gaps": [
+    {
+      "claim": "Peschel[7]涉及的局域电子态效应及其对高次谐波产生的影响，可作为项目待证命题的独立互证。",
+      "missing_evidence": "Peschel[7]同时处于待证命题所依赖的证据链中，不能直接承担互证作用；需要与其模型前提相互独立的实验观测，最好还能从不同靶材或不同制备条件复现该效应。可优先核验Cousin[2]是否提供相应的实验侧警示或旁证。",
+      "search_keywords": [
+        "Cousin attosecond streaking electronic state",
+        "Peschel local electronic state high-order harmonic generation",
+        "local electronic state effect on HHG",
+        "independent experimental evidence localized electron states HHG",
+        "orbital-resolved high-harmonic emission"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "两种靶材的主检验区均可按15%–30%区间设置，并预期该区间能够跨靶材稳定适用。",
+      "missing_evidence": "该区间目前被评审认定为设计估值，缺少来自不同靶材、靶材状态或制备条件的直接实验或高精度模拟文献支持，尤其缺少证明同一判据和效应量可跨两种靶材迁移的证据；预实验标定数据也可作为补充依据。",
+      "search_keywords": [
+        "high-harmonic generation target-dependent yield contrast",
+        "HHG efficiency target material comparison",
+        "target preparation dependence high-order harmonic generation",
+        "site-dependent electron localization HHG",
+        "cross-target validation attosecond streaking",
+        "HHG yield ratio 15% 30% target"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

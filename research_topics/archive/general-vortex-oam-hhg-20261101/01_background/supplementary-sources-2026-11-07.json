@@ -1,0 +1,17 @@
+{
+  "proposal_id": "general-vortex-oam-hhg-20261101",
+  "cluster_id": "orphan-route-2026-11-07",
+  "clusters": [
+    "orphan-route-2026-11-07"
+  ],
+  "entries": [
+    {
+      "source_id": "paper:2025-2512.15370-orientation-dependent-high-harmonic-generation-in-zno",
+      "title": "Orientation-dependent high harmonic generation in ZnO",
+      "summary": "本文系统研究了纤锌矿 ZnO 中高次谐波产生对晶体取向的依赖，比较了激光偏振沿不同晶向（相对 c 轴）驱动时的谐波谱特征。结果表明谐波产率、谱形及各阶强度随取向显著变化，源于各向异性能带色散与取向相关的带内/带间贡献权重。该工作深化了对非中心对称宽带隙半导体中晶体各向异性如何映射到强场非线性响应的理解。",
+      "path": "knowledge/raw/papers/2025-2512.15370-orientation-dependent-high-harmonic-generation-in-zno.md",
+      "added_via": "cluster:orphan-route-2026-11-07",
+      "added_at": "2026-11-07T02:41:04Z"
+    }
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "gaps": [
+    {
+      "claim": "压缩参数r、带隙Eg和有效质量m*可共同决定亮压缩真空驱动固体HHG的截止阶次，并可由四参数截止公式描述",
+      "missing_evidence": "缺少量子光驱动固体HHG截止律的理论推导、数值模拟或实验文献，尤其缺少能够证明r、Eg、m*依赖关系及r→0经典极限的证据；原子HHG的3.17Up截止律不能直接作为固体模型的依据",
+      "search_keywords": [
+        "bright squeezed vacuum driven solid high harmonic generation cutoff law",
+        "quantum light driven solid HHG cutoff energy",
+        "squeezed light solid-state HHG band gap effective mass",
+        "nonclassical light high harmonic generation cutoff scaling"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "亮压缩真空驱动能够提高量子几何参数反演的Fisher信息，从而改善Berry曲率Ω与量子度规g的联合可辨识性",
+      "missing_evidence": "缺少比较经典光场与亮压缩真空驱动下Fisher信息矩阵、Cramér–Rao界、参数相关性或反演误差的理论及实验研究；当前表述更像预设结果",
+      "search_keywords": [
+        "bright squeezed vacuum Fisher information spectroscopy",
+        "quantum light enhanced parameter estimation nonlinear spectroscopy",
+        "squeezed light quantum Fisher information solid-state spectroscopy",
+        "high harmonic spectroscopy Fisher information Berry curvature quantum metric"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "可从固体高次谐波谱中直接且分别反演Berry曲率Ω和量子度规g",
+      "missing_evidence": "缺少证明Ω与g在HHG观测量中具有独立响应通道、参数映射唯一或局部可辨识的理论文献，以及已有量子几何重构实验的精度和适用条件证据",
+      "search_keywords": [
+        "high harmonic spectroscopy Berry curvature reconstruction",
+        "high harmonic generation quantum metric measurement",
+        "quantum geometry inversion from nonlinear optical spectra",
+        "joint reconstruction Berry curvature quantum metric",
+        "identifiability quantum geometry high harmonic spectroscopy"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "采用单模近似可以充分描述亮压缩真空驱动的固体高次谐波产生",
+      "missing_evidence": "缺少关于亮压缩真空的带宽、模结构、光子统计及其与固体HHG相互作用的多模研究，也缺少单模近似适用条件和误差范围的文献支撑",
+      "search_keywords": [
+        "multimode bright squeezed vacuum high harmonic generation",
+        "single-mode approximation squeezed light strong-field physics",
+        "broadband squeezed vacuum solid-state nonlinear optics",
+        "photon statistics quantum light driven high harmonic generation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "以参数相关系数|ρ|和Fisher信息矩阵条件数的特定阈值作为Ω/g可辨识性的判据",
+      "missing_evidence": "报告指出相关阈值没有来源；需要统计反演、实验设计或病态逆问题文献说明阈值定义、数值选择依据及其与反演稳定性和置信区间的关系，或提供项目自身的模拟标定",
+      "search_keywords": [
+        "Fisher information matrix condition number identifiability threshold",
+        "parameter correlation threshold practical identifiability",
+        "Cramer Rao bound inverse problem identifiability",
+        "sloppiness Fisher information condition number parameter estimation"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Fisher信息矩阵比单一信噪比更适合判断Berry曲率Ω与量子度规g能否联合辨识",
+      "missing_evidence": "缺少多参数估计和光谱反演方法学文献，说明Fisher信息、参数协方差及Cramér–Rao界相对于SNR在联合可辨识性判断中的优势和适用前提",
+      "search_keywords": [
+        "Fisher information versus signal-to-noise ratio multiparameter estimation",
+        "Fisher information spectroscopic inverse problems",
+        "Cramer Rao bound joint parameter estimation spectroscopy",
+        "practical identifiability nonlinear spectroscopy"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "PINN能够稳定反演强关联体系中的多体量子几何或序参量，并可与tdDMFT生成的HHG谱结合",
+      "missing_evidence": "缺少PINN用于强关联量子动力学、tdDMFT代理建模及HHG谱逆问题的先例，也缺少在噪声、模型失配和多解条件下稳定性与泛化能力的文献证据",
+      "search_keywords": [
+        "physics-informed neural network time-dependent DMFT",
+        "PINN strongly correlated quantum dynamics inverse problem",
+        "machine learning inversion high harmonic spectra correlated materials",
+        "neural network surrogate tdDMFT high harmonic generation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "tdDMFT适用于检验Mott、CDW及Mott–CDW体系中量子几何反演的关联边界",
+      "missing_evidence": "缺少tdDMFT研究强关联材料HHG、Mott/CDW非平衡动力学及其谱学特征的文献链条，特别是将这些谱学变化与量子几何量可恢复性联系起来的研究",
+      "search_keywords": [
+        "time-dependent DMFT high harmonic generation Mott insulator",
+        "tdDMFT charge density wave high harmonic spectroscopy",
+        "strongly correlated solids HHG spectral shift",
+        "quantum geometry strongly correlated systems nonlinear spectroscopy"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

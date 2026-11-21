@@ -1,0 +1,55 @@
+{
+  "gaps": [
+    {
+      "claim": "GW-BSE修正相对于ALDA在强场HHG中的偏差典型在5-20%区间，未指定具体基准依据",
+      "missing_evidence": "缺少TDDFT-ALDA vs GW-BSE在强场HHG光谱中差异的定量benchmark文献，特别是10%切换阈值所对应的参考基准",
+      "search_keywords": [
+        "TDDFT ALDA GW-BSE HHG benchmark strong field",
+        "many-body correction high harmonic generation accuracy",
+        "excitonic effect solid HHG TDDFT comparison"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "PBE+U与hybrid泛函结果差异超过10%作为切换判据的文献依据",
+      "missing_evidence": "缺少PBE+U vs hybrid泛函在MnPS3/NiPS3类2D磁性材料能带结构计算中差异的定量benchmark",
+      "search_keywords": [
+        "PBE+U hybrid functional benchmark MnPS3",
+        "DFT functional comparison 2D antiferromagnet band structure",
+        "hybrid functional Hubbard U magnetic 2D material accuracy"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "MV/cm场强下电子动力学偏离绝热近似的阈值依据",
+      "missing_evidence": "缺少ALDA近似在MV/cm强场下适用性边界的定量研究，特别是何时需要切换到非绝热TDDFT的判据",
+      "search_keywords": [
+        "ALDA adiabatic approximation breakdown strong field",
+        "nonadiabatic TDDFT high harmonic threshold",
+        "exchange-correlation functional strong field limit HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Yarmohammadi Floquet理论在反铁磁体中的推广是否已实现的文献支撑",
+      "missing_evidence": "缺少Yarmohammadi Floquet方法从铁磁推广到反铁磁/交替磁体的具体文献依据，以及在MnPS3类A-type反铁磁中的适用性证据",
+      "search_keywords": [
+        "Yarmohammadi Floquet antiferromagnet",
+        "Floquet band structure altermagnet MnPS3",
+        "Floquet engineering spin splitting 2D antiferromagnet"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Z*静电耦合判定方法在层间滑移光致相变预测中的可靠性依据",
+      "missing_evidence": "缺少Z* (Born effective charge) 静电耦合方法在2D范德华滑移铁电体光致相变中的实验或计算验证文献",
+      "search_keywords": [
+        "Z star Born effective charge interlayer sliding",
+        "sliding ferroelectric electrostatic coupling criterion",
+        "van der Waals sliding ferroelectric optical switching prediction"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

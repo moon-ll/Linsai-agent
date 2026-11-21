@@ -1,0 +1,654 @@
+{
+  "topics": {
+    "general-attosecond-streaking-20260822": {
+      "title": "阿秒条纹技术：从超短脉冲表征到量子相位测量",
+      "stage": "ready",
+      "source": "v7-migration:optimizing",
+      "problem": "知识簇综合：阿秒条纹技术以红外条纹场为超快快门，将极紫外/软X射线阿秒脉冲的时间与相位信息编码进光电子能谱，经FROGCRAB等检索算法重构孤立阿秒脉冲，是阿秒计量的核心手段。本簇三篇文献共同勾勒了该技术从\"脉冲表征工具\"向\"量子相位探测手段\"的演进：其一，论证条纹测量可直接重构光电离释放电子波包的量子谱相位，将阿秒条纹拓展为电子动力学研究的新探针；其二，在水窗软X射线波段（高达350 eV）首次实现条纹测量并表征出322 as孤立脉冲，同时揭示该能区光电离截面骤降、多电子壳层同时电离及阿秒啁啾会破坏传统FROGCRAB检索的保真度，呼吁发展修正的新方法学；其三，提出基于相干里德堡波包量子拍的替代表征方案，利用角积分探测消除偶极相位依赖，并借助多态波包冗余谱信息实现内在自洽检验。三者共同表明：剥离靶材相关相位、发展跨能区稳健的谱相位重构方法，是阿秒条纹走向精确量子相位测量的关键路径。",
+      "related": [],
+      "migrated_from": "research_proposals/optimizing/general-attosecond-streaking-20260822",
+      "created_at": "2026-11-16T15:43:38Z",
+      "updated_at": "2026-11-19T22:00:46Z",
+      "gap_repair_counts": {
+        "04_references/references.bib 缺失": 1,
+        "存在缺「判据」的步骤": 5,
+        "报告 wikilink 0 < 5": 4,
+        "步骤数 0 < 3": 5,
+        "笔记/知识卡 4 < 8": 1,
+        "background": 2,
+        "笔记/知识卡 5 < 8": 1,
+        "报告引用了 bib 中不存在的键: 1,10,11,12,13": 1
+      },
+      "needs_human": false,
+      "check_gaps": [],
+      "novelty": {
+        "max_score": 0.1389,
+        "competitor": "量子光场驱动固体高次谐波产生：BSV-HHG 作为多体态探针的理论与实验验证 知识簇综合：该主题聚焦高次谐波产生（HHG",
+        "backfilled": true
+      },
+      "deep_dive_gaps": [],
+      "stage_history": [
+        {
+          "stage": "ready",
+          "at": "2026-11-18T15:29:12Z",
+          "note": "验收自检全过，启动包就绪"
+        }
+      ]
+    },
+    "general-berry-berry-20261107": {
+      "title": "拓扑材料中Berry曲率驱动的非线性霍尔效应：非平衡分布、光抽运与场致Berry曲率的扩展图像",
+      "stage": "ready",
+      "source": "v7-migration:optimizing",
+      "problem": "知识簇综合：本主题聚焦时间反演对称但空间反演破缺的拓扑材料中，Berry曲率及其偶极（BCD）经反常速度驱动的横向输运与光学响应如何在非平衡条件下被重构与调控。三篇文献共同突破传统平衡态非线性霍尔图像：其一证明强场下完全非平衡分布使Hall电流标度由二次（BCD主导）转为准线性，非平衡分布本身等效于时间反演破缺源；其二提出在光抽运建立带边粒子数反转时，BCD驱动的反对称光电导可诱导手性（圆偏振）选择性太赫兹增益，实现无磁场手性THz激光；其三建立光伏霍尔效应统一理论，将偏置电场重整跃迁偶极矩与带内速度所致的场致Berry曲率修正，与Floquet光致Berry曲率纳入同一响应函数框架，揭示二者的对称性要求、螺旋度依赖及干涉竞争。三者共同指向量子几何在强场与光场调控下的可调谐性及器件应用潜力（手性THz光源、电场可调横向光电流）。与之配套的实验积累表明，几何量的调控手段已相当丰富：WTe₂中电场连续调控BCD并伴随非线性霍尔信号、轨道极化与三阶反常霍尔测量，WSe₂与石墨烯-黑磷异质结中应变调控，TaIrTe₄中室温本征非线性面内霍尔效应与自旋轨道劈裂驱动的非线性霍尔效应，莫尔双层石墨烯中非线性信号随拓扑相变整体反号，Bi₄I₄中以反常霍尔电导追踪Floquet Weyl节点迁移，拓扑反铁磁异质结中的量子度规非线性霍尔效应，以及碲中太赫兹声子驱动的手性声子模对局域BCD的调制乃至符号翻转。碲平台自身也积累了器件级能力：二维碲烯在太赫兹场驱动下已把非线性霍尔、非线性纵向与非线性对角三种二阶贡献逐项分离并给出可达±20 V的背栅调控，三方碲平台的交叉轴向非线性霍尔测量则给出chirality依赖的BCD直接观测与2.28、2.81的交叉轴向与面内二阶响应比值。这些手段各自配有定量表征，但两两叠加时的相互影响尚无刻画。",
+      "related": [],
+      "migrated_from": "research_proposals/optimizing/general-berry-berry-20261107",
+      "created_at": "2026-11-16T15:43:38Z",
+      "updated_at": "2026-11-19T22:00:46Z",
+      "gap_repair_counts": {
+        "04_references/references.bib 缺失": 1,
+        "存在缺「判据」的步骤": 3,
+        "报告 wikilink 0 < 5": 1,
+        "步骤数 0 < 3": 3,
+        "笔记/知识卡 3 < 8": 3,
+        "近 24 个月文献 2 < 3": 3
+      },
+      "needs_human": false,
+      "check_gaps": [],
+      "novelty": {
+        "max_score": 0.1451,
+        "competitor": "交变磁体高次谐波产生与固态强场非线性光学新前沿 知识簇综合：固态高次谐波产生（HHG）正从传统半导体拓展至新奇量子材料与",
+        "backfilled": true
+      },
+      "deep_dive_gaps": [],
+      "stage_history": [
+        {
+          "stage": "ready",
+          "at": "2026-11-18T19:06:51Z",
+          "note": "验收自检全过，启动包就绪"
+        }
+      ]
+    },
+    "general-berry-mnps3-rashba-20260816": {
+      "title": "二维材料中交变磁性磁态的自旋-能谷耦合与滑移调控",
+      "stage": "ready",
+      "source": "v7-migration:optimizing",
+      "problem": "知识簇综合：该主题聚焦二维方形晶格及范德华异质结中交变磁性及其衍生磁态与自旋-能谷自由度的协同调控。基于第一性原理计算与自旋-Laue对称性分析，研究者在滑移二维方晶格中提出'耦合准交变磁性'新磁态，将其作为交变磁性的独特子类，证明层间滑移可逆调控第四型非相对论性自旋劈裂并诱导能谷极化，建立了基于自旋劈裂特性的完整分类框架；另一工作在反演对称破缺的MnPS3|WS2异质结中同时揭示能谷极化、Rashba自旋劈裂与弱交变磁性（关联Berry曲率与自旋-能谷锁定）。这些成果表明，堆叠/滑移工程与异质结界面设计可在零净磁化的反铁磁体系中实现磁序、自旋与能谷的多重可切换调控，为新型自旋-能谷多功能器件提供了对称性设计原理与材料平台。",
+      "related": [],
+      "migrated_from": "research_proposals/optimizing/general-berry-mnps3-rashba-20260816",
+      "created_at": "2026-11-16T15:43:38Z",
+      "updated_at": "2026-11-19T22:00:46Z",
+      "gap_repair_counts": {
+        "04_references/references.bib 缺失": 1,
+        "存在缺「判据」的步骤": 3,
+        "报告 wikilink 0 < 5": 1,
+        "步骤数 0 < 3": 3,
+        "笔记/知识卡 3 < 8": 3
+      },
+      "needs_human": false,
+      "check_gaps": [],
+      "novelty": {
+        "max_score": 0.1512,
+        "competitor": "基于固体高次谐波产生（HHG）与光 Floquet 工程的莫尔量子态\"读出与改写\"全光闭环研究 知识簇综合：固态高次谐波",
+        "backfilled": true
+      },
+      "stage_history": [
+        {
+          "stage": "ready",
+          "at": "2026-11-18T16:43:44Z",
+          "note": "验收自检全过，启动包就绪"
+        }
+      ],
+      "deep_dive_gaps": []
+    },
+    "general-chiral-hhg-20261101": {
+      "title": "亚周期手性光场工程与手性高次谐波：场手性-材料手性甄别协议及对映体/手性序的全光辨识",
+      "stage": "ready",
+      "source": "v7-migration:optimizing",
+      "problem": "手性探测的传统瓶颈在于：手性光-物相互作用依赖磁偶极与电四极通道，电偶极通道对两种对映体几乎不可分辨，导致吸收谱中的圆二色通常只有 10⁻⁶–10⁻³ 量级的相对信号变化（Baykusheva 等，PNAS 116, 23923 (2019)，arXiv:1906.10818）。合成手性光（synthetic chiral light）改变了这一格局——让电场矢量端点在空间每一点画出不能与其镜像重合的三维手性轨迹，从而在电偶极近似下实现手性相互作用，响应可增强数个量级。",
+      "related": [],
+      "migrated_from": "research_proposals/optimizing/general-chiral-hhg-20261101",
+      "created_at": "2026-11-16T15:43:38Z",
+      "updated_at": "2026-11-19T22:00:46Z",
+      "gap_repair_counts": {
+        "04_references/references.bib 缺失": 1,
+        "存在缺「判据」的步骤": 3,
+        "报告 wikilink 0 < 5": 1,
+        "步骤数 0 < 3": 3,
+        "笔记/知识卡 4 < 8": 3
+      },
+      "needs_human": false,
+      "check_gaps": [],
+      "novelty": {
+        "max_score": 0.1124,
+        "competitor": "基于固体高次谐波产生（HHG）与光 Floquet 工程的莫尔量子态\"读出与改写\"全光闭环研究 知识簇综合：固态高次谐波",
+        "backfilled": true
+      },
+      "deep_dive_gaps": [],
+      "stage_history": [
+        {
+          "stage": "ready",
+          "at": "2026-11-18T18:09:07Z",
+          "note": "验收自检全过，启动包就绪"
+        }
+      ]
+    },
+    "general-floquet-20261107": {
+      "title": "Floquet工程诱导共线磁体中的奇宇称自旋与磁振子劈裂",
+      "stage": "ready",
+      "source": "v7-migration:optimizing",
+      "problem": "在同一驱动参数下，圆偏振光对共线反铁磁体有效时间反演对称性的破缺包含逆法拉第准静态有效场与纯 Floquet 光子缀饰两条通道，这两条通道能否由劈裂幅度对驱动频率的不同幂次标度唯一分解，并据此把观测到的奇宇称劈裂与热霍尔跳变归因到确定机制？\n\n该问题可证伪：若两通道在同一体系同一驱动参数下给出相同或不可分辨的频率幂次，则\"由频率标度唯一分解\"不成立，相应判据随之失效。本设想的全部判据均以该句为被检验对象。",
+      "related": [],
+      "migrated_from": "research_proposals/optimizing/general-floquet-20261107",
+      "created_at": "2026-11-16T15:43:38Z",
+      "updated_at": "2026-11-19T22:00:46Z",
+      "gap_repair_counts": {
+        "04_references/references.bib 缺失": 1,
+        "存在缺「判据」的步骤": 3,
+        "报告 wikilink 0 < 5": 1,
+        "步骤数 0 < 3": 3,
+        "笔记/知识卡 3 < 8": 3
+      },
+      "needs_human": false,
+      "check_gaps": [],
+      "novelty": {
+        "max_score": 0.1388,
+        "competitor": "相干声子调控的固体高次谐波：晶格自由度进入强场非线性与电子-声子耦合的全光反演 在扣除瞬时对称性破缺通道之后，谐波对相干",
+        "backfilled": true
+      },
+      "deep_dive_gaps": [],
+      "stage_history": [
+        {
+          "stage": "ready",
+          "at": "2026-11-18T20:03:17Z",
+          "note": "验收自检全过，启动包就绪"
+        }
+      ]
+    },
+    "general-houston-kronig-penney-landau-zener-20261004": {
+      "title": "固体高次谐波产生：带内/带间/反常电流机制分解与多尺度全光学探测",
+      "stage": "ready",
+      "source": "v7-migration:optimizing",
+      "problem": "知识簇综合：固态高次谐波（HHG）研究围绕三条电流通道展开：带内电流源于能带色散非线性，带间电流源于电子-空穴极化与Landau-Zener隧穿后的复合，反常电流则由Berry曲率驱动。理论上，以Houston基展开求解半导体布洛赫方程可在Kronig-Penney势拟合的MgO能带中分解多带强场动力学，并证明布里渊区精细k积分与k分辨子循环相位干涉决定谐波谱形；TDDFT与麦克斯韦方程自洽耦合的多尺度模拟进一步表明，色散、吸收与脉冲重塑对厚晶体谐波谱有定量影响，缺陷局域态可调制产率并在破缺反演对称时诱导偶次谐波。实验上，偏振、波长与强度三重分辨测量在MoS2中分离出低光子能量下占主导的反常谐波，确立了HHG作为Berry曲率与拓扑性质的全光学探针。",
+      "related": [],
+      "migrated_from": "research_proposals/optimizing/general-houston-kronig-penney-landau-zener-20261004",
+      "created_at": "2026-11-16T15:43:38Z",
+      "updated_at": "2026-11-21T15:01:30Z",
+      "gap_repair_counts": {
+        "04_references/references.bib 缺失": 1,
+        "存在缺「判据」的步骤": 3,
+        "报告 wikilink 0 < 5": 1,
+        "步骤数 0 < 3": 3,
+        "笔记/知识卡 3 < 8": 3
+      },
+      "needs_human": false,
+      "check_gaps": [],
+      "novelty": {
+        "max_score": 0.1919,
+        "competitor": "基于固体高次谐波产生（HHG）与光 Floquet 工程的莫尔量子态\"读出与改写\"全光闭环研究 知识簇综合：固态高次谐波",
+        "backfilled": true
+      },
+      "deep_dive_gaps": [],
+      "stage_history": [
+        {
+          "stage": "ready",
+          "at": "2026-11-18T18:04:47Z",
+          "note": "验收自检全过，启动包就绪"
+        }
+      ]
+    },
+    "general-keldysh-schottky-20261115": {
+      "title": "纳米针尖强场光电子发射的量子干涉谱学与发射机制诊断",
+      "stage": "ready",
+      "source": "v7-migration:optimizing",
+      "problem": "知识簇综合：该主题将气相强场物理核心概念（三步模型、Keldysh参数、内周/周期间干涉、通道闭合）推广至金属纳米针尖体系。局域近场增强使发射进入多光子-隧穿过渡区，通道闭合导致的产额-强度台阶既可判别多光子主导机制，又能原位标定针尖场增强因子与局域场强；同一周期内不同亚周期时刻发射的相干波包在末态能量会合形成内周干涉，表明电子谱可编码亚周期发射时序；相位锁定双色场则构成纳米尺度Ramsey型电子干涉仪，干涉可见度谱学可定量提取发射路径的振幅与发射矩阵元相位。三者共同证明：量子干涉谱学是诊断纳米发射体局域场、发射机制与亚周期动力学的新型计量工具，直接支撑阿秒相干电子源、纳米阴极优化与拍赫兹电子学应用。",
+      "related": [],
+      "migrated_from": "research_proposals/optimizing/general-keldysh-schottky-20261115",
+      "created_at": "2026-11-16T15:43:38Z",
+      "updated_at": "2026-11-21T14:03:10Z",
+      "gap_repair_counts": {
+        "04_references/references.bib 缺失": 4,
+        "存在缺「判据」的步骤": 4,
+        "报告 wikilink 0 < 5": 2,
+        "步骤数 0 < 3": 4,
+        "笔记/知识卡 3 < 8": 4,
+        "近 24 个月文献 2 < 3": 4
+      },
+      "needs_human": false,
+      "check_gaps": [],
+      "novelty": {
+        "max_score": 0.1447,
+        "competitor": "固态高次谐波探测拓扑物态：高阶拓扑绝缘体、SSH边界态与Weyl半金属强场光谱 知识簇综合：该方向以固体高次谐波产生（H",
+        "backfilled": true
+      },
+      "deep_dive_gaps": [],
+      "stage_history": [
+        {
+          "stage": "ready",
+          "at": "2026-11-18T22:04:12Z",
+          "note": "验收自检全过，启动包就绪"
+        }
+      ]
+    },
+    "general-moire-strong-field-probe-20260726": {
+      "title": "基于固体高次谐波产生（HHG）与光 Floquet 工程的莫尔量子态\"读出与改写\"全光闭环研究",
+      "stage": "ready",
+      "source": "v7-migration:optimizing",
+      "problem": "知识簇综合：固态高次谐波产生（HHG）正发展为探测二维及少层材料微观结构的非侵入式超快光谱手段。基于含时密度泛函理论（TDDFT）、半导体布洛赫方程及半经典再碰撞模型等第一性原理框架，研究表明谐波谱对层间滑移与堆叠几何高度敏感：少层六方氮化硼的面外谐波随层数从类原子响应演化为类体相响应；双层Td-WTe2中层间滑移引发的铁电极化与晶格对称性破缺在谐波谱中留下可辨识指纹，可实现滑动铁电性的全光学超快表征。此外，HHG还能探测自旋极化缺陷的自旋分辨动力学、K/K'谷间量子干涉、电子-空穴复合主导的截止行为，而扭转双层中的几何Pancharatnam-Berry相位工程为任意阶谐波相位匹配与高效极紫外光源开辟了新路径。",
+      "related": [],
+      "migrated_from": "research_proposals/optimizing/general-moire-strong-field-probe-20260726",
+      "created_at": "2026-11-16T15:43:38Z",
+      "updated_at": "2026-11-19T22:00:46Z",
+      "gap_repair_counts": {
+        "04_references/references.bib 缺失": 1,
+        "存在缺「判据」的步骤": 1,
+        "报告 wikilink 0 < 5": 1,
+        "步骤数 0 < 3": 1,
+        "笔记/知识卡 5 < 8": 1
+      },
+      "needs_human": false,
+      "check_gaps": [],
+      "novelty": {
+        "max_score": 0.1919,
+        "competitor": "固体高次谐波产生：带内/带间/反常电流机制分解与多尺度全光学探测 知识簇综合：固态高次谐波（HHG）研究围绕三条电流通道",
+        "backfilled": true
+      },
+      "stage_history": [
+        {
+          "stage": "ready",
+          "at": "2026-11-18T16:24:59Z",
+          "note": "验收自检全过，启动包就绪"
+        }
+      ],
+      "deep_dive_gaps": []
+    },
+    "general-order-parameter-ultrafast-readout-20260727": {
+      "title": "altermagnet HHG 序参量可辨识性研究——磁场反转与偏振分辨固体高次谐波产生在 CrSb 主体系上的方法学建立",
+      "stage": "ready",
+      "source": "v7-migration:optimizing",
+      "problem": "能否在排除能带背景等替代解释后，将 HHG 信号唯一归因于交错磁序参量相关的对称性破缺。",
+      "related": [],
+      "migrated_from": "research_proposals/optimizing/general-order-parameter-ultrafast-readout-20260727",
+      "created_at": "2026-11-16T15:43:38Z",
+      "updated_at": "2026-11-21T15:01:30Z",
+      "gap_repair_counts": {
+        "04_references/references.bib 缺失": 1,
+        "存在缺「判据」的步骤": 1,
+        "报告 wikilink 0 < 5": 1,
+        "步骤数 0 < 3": 1,
+        "笔记/知识卡 4 < 8": 1
+      },
+      "needs_human": false,
+      "check_gaps": [],
+      "novelty": {
+        "max_score": 0.1148,
+        "competitor": "二维材料中的固态高次谐波调控：激子共振、扭转堆叠与动力学对称性 高次谐波产生（high harmonic generat",
+        "backfilled": true
+      },
+      "stage_history": [
+        {
+          "stage": "ready",
+          "at": "2026-11-18T16:24:59Z",
+          "note": "验收自检全过，启动包就绪"
+        }
+      ],
+      "deep_dive_gaps": []
+    },
+    "general-phonon-hhg-20261101": {
+      "title": "相干声子调控的固体高次谐波：晶格自由度进入强场非线性与电子-声子耦合的全光反演",
+      "stage": "ready",
+      "source": "v7-migration:optimizing",
+      "problem": "在扣除瞬时对称性破缺通道之后，谐波对相干声子的响应，能否被定量分解为位移电流型与能带几何型两类独立贡献，并由此反演带分辨、声子模式分辨的电子-声子耦合常数？\n\n该表述的可判定性来自三点：主语限定为\"谐波对相干声子的响应\"这一可观测量；谓语是\"分解\"与\"反演\"两项可分别证伪的操作；判据是\"能否\"，即成功与失败都有明确的观测后果。分解环节以通道选择定则与相位关系为判据，反演环节以调制深度与第一性原理形变势的定量一致为判据，两者互为独立检验而非彼此的前提。\n\n本课题的落点为\"定量分解 + 耦合常数反演\"。此口径与标题、以及本文件后续各节的路线、验证方案完全一致。",
+      "related": [],
+      "migrated_from": "research_proposals/optimizing/general-phonon-hhg-20261101",
+      "created_at": "2026-11-16T15:43:38Z",
+      "updated_at": "2026-11-19T22:00:46Z",
+      "gap_repair_counts": {
+        "04_references/references.bib 缺失": 1,
+        "存在缺「判据」的步骤": 3,
+        "报告 wikilink 0 < 5": 1,
+        "步骤数 0 < 3": 3,
+        "笔记/知识卡 5 < 8": 3
+      },
+      "needs_human": false,
+      "check_gaps": [],
+      "novelty": {
+        "max_score": 0.1515,
+        "competitor": "固体高次谐波产生：带内/带间/反常电流机制分解与多尺度全光学探测 知识簇综合：固态高次谐波（HHG）研究围绕三条电流通道",
+        "backfilled": true
+      },
+      "deep_dive_gaps": [],
+      "stage_history": [
+        {
+          "stage": "ready",
+          "at": "2026-11-18T19:03:27Z",
+          "note": "验收自检全过，启动包就绪"
+        }
+      ]
+    },
+    "general-ssh-weyl-20260920": {
+      "title": "固态高次谐波探测拓扑物态：高阶拓扑绝缘体、SSH边界态与Weyl半金属强场光谱",
+      "stage": "ready",
+      "source": "v7-migration:optimizing",
+      "problem": "知识簇综合：该方向以固体高次谐波产生（HHG）为核心，将其拓展为兼具阿秒分辨与量子光物态探测能力的统一平台。多项研究显示：HHG 圆二色性光谱可有效区分低阶与高阶拓扑绝缘体，而高阶拓扑量子数在 HHG 过程中是否留下可观测印记仍属开放问题，紧束缚拓扑相谐波产额增强上限达两个数量级；SSH 模型中边界态导致带隙频率处谐波压缩，且拓扑相与平凡相压缩度不同，可作为拓扑相判据；Weyl 半金属 TaP 中 Weyl 费米子驱动太赫兹三次谐波产生，呈立方功率律并支持偏振调谐与拍赫兹电子学应用；ZnO 中强场 HHG 与激子光致发光存在竞争，呈现各向异性光谱及强度切换机制。理论层面，多带模型、Berry 相位、等离激元-半导体混合纳米结构与量子光场效应正被整合为统一框架，实现阿秒级谐波相位控制与非经典光生成，勾勒出拓扑量子光学 HHG 的前沿图景。",
+      "related": [],
+      "migrated_from": "research_proposals/optimizing/general-ssh-weyl-20260920",
+      "created_at": "2026-11-16T15:43:38Z",
+      "updated_at": "2026-11-19T22:00:46Z",
+      "gap_repair_counts": {
+        "04_references/references.bib 缺失": 1,
+        "存在缺「判据」的步骤": 3,
+        "报告 wikilink 0 < 5": 1,
+        "步骤数 0 < 3": 3,
+        "笔记/知识卡 3 < 8": 3,
+        "近 24 个月文献 2 < 3": 3
+      },
+      "needs_human": false,
+      "check_gaps": [],
+      "novelty": {
+        "max_score": 0.188,
+        "competitor": "量子光场驱动固体高次谐波产生：BSV-HHG 作为多体态探针的理论与实验验证 知识簇综合：该主题聚焦高次谐波产生（HHG",
+        "backfilled": true
+      },
+      "deep_dive_gaps": [],
+      "stage_history": [
+        {
+          "stage": "ready",
+          "at": "2026-11-18T17:04:22Z",
+          "note": "验收自检全过，启动包就绪"
+        }
+      ]
+    },
+    "general-t-tise2-2-2-2-cdw-20261108": {
+      "title": "电荷密度波序参量的非平衡动力学：幅度-相位-关联长度解耦与多模态超快探测",
+      "stage": "ready",
+      "source": "v7-migration:optimizing",
+      "problem": "知识簇综合：本主题聚焦量子材料中电荷密度波（CDW）的非平衡动力学，以1T-TiSe2与EuTe4为平台，联合时间分辨中子衍射、极紫外动量显微/超快ARPES、时间分辨X射线衍射与超快电子衍射等多模态探测，将探测时窗从飞秒拓展至光学手段难以覆盖的长时标。核心发现包括：光致扰动后短程关联快速存留而长程相干序重建缓慢且寿命极长，呈非对称演化；相干幅度模式在T_CDW以上持续存在，表明正常态存在显著的CDW涨落区，且其标度行为支持电声耦合主导而非激子机制，为TiSe2 CDW起源之争提供动力学证据；在联合公度莫尔CDW中，幅度塌缩-恢复、相位漂移与关联长度演化发生在明显不同的时间尺度，实现序参量各自由度的解耦测量。这些工作共同确立了幅度-相位-关联长度解耦作为CDW光致动力学的共性特征。",
+      "related": [],
+      "migrated_from": "research_proposals/optimizing/general-t-tise2-2-2-2-cdw-20261108",
+      "created_at": "2026-11-16T15:43:38Z",
+      "updated_at": "2026-11-19T22:00:46Z",
+      "gap_repair_counts": {
+        "04_references/references.bib 缺失": 1,
+        "存在缺「判据」的步骤": 3,
+        "报告 wikilink 0 < 5": 1,
+        "步骤数 0 < 3": 3,
+        "笔记/知识卡 3 < 8": 3
+      },
+      "needs_human": false,
+      "check_gaps": [],
+      "novelty": {
+        "max_score": 0.1445,
+        "competitor": "基于固体高次谐波产生（HHG）与光 Floquet 工程的莫尔量子态\"读出与改写\"全光闭环研究 知识簇综合：固态高次谐波",
+        "backfilled": true
+      },
+      "deep_dive_gaps": [],
+      "stage_history": [
+        {
+          "stage": "ready",
+          "at": "2026-11-18T21:03:12Z",
+          "note": "验收自检全过，启动包就绪"
+        }
+      ]
+    },
+    "general-tdse-tddft-20261115": {
+      "title": "机器学习赋能强场量子动力学：TDSE/TDDFT代理加速与光电子谱可解释反演",
+      "stage": "ready",
+      "source": "v7-migration:optimizing",
+      "problem": "在强场量子动力学的机器学习代理中，物理约束能否从\"训练后的事后检验\"升级为\"架构层面的内生保证\"，并由此使长时演化稳定性与分布外外推的可信性成为可定量回答的问题？\n\n该问题可判定：代理模型若在百周期尺度演化中满足幺正性与范数守恒的定量阈值，且在分布外参数区间的预测区间达到经验覆盖率要求，则答案为肯定；任一条不满足，则答案为否定并暴露具体失效机制。\n\n以下三条为该主问题的验证层级，不再作为并列的独立问题：\n\n（1）可信性是否足以支撑下游应用——当代理满足上述约束后，它能否作为在线仿真器支撑光电子谱多参数反演，并对不可辨识的参数方向给出判据边界。\n\n（2）跨层级是否可迁移——单活跃电子 TDSE 层级学到的物理约束结构，能否迁移到含多电子关联的 rt-TDDFT 层级。\n\n（3）参数反演是否具备物理前提——强度、脉宽、啁啾、载波包络相位四参数在单张光电子动量谱中是否可辨识，由 Fisher 信息矩阵给出数值证据。",
+      "related": [],
+      "migrated_from": "research_proposals/optimizing/general-tdse-tddft-20261115",
+      "created_at": "2026-11-16T15:43:38Z",
+      "updated_at": "2026-11-21T16:01:36Z",
+      "gap_repair_counts": {
+        "04_references/references.bib 缺失": 1,
+        "存在缺「判据」的步骤": 3,
+        "报告 wikilink 0 < 5": 1,
+        "步骤数 0 < 3": 3,
+        "笔记/知识卡 3 < 8": 3,
+        "近 24 个月文献 2 < 3": 3
+      },
+      "needs_human": false,
+      "check_gaps": [],
+      "novelty": {
+        "max_score": 0.1209,
+        "competitor": "固态高次谐波探测拓扑物态：高阶拓扑绝缘体、SSH边界态与Weyl半金属强场光谱 知识簇综合：该方向以固体高次谐波产生（H",
+        "backfilled": true
+      },
+      "deep_dive_gaps": [],
+      "stage_history": [
+        {
+          "stage": "ready",
+          "at": "2026-11-18T21:06:10Z",
+          "note": "验收自检全过，启动包就绪"
+        }
+      ]
+    },
+    "general-tmd-bic-mie-anapole-20261107": {
+      "title": "TMD共振非线性超表面：准BIC/Mie/Anapole与激子协同的二次谐波增强工程",
+      "stage": "ready",
+      "source": "v7-migration:optimizing",
+      "problem": "知识簇综合：该簇文献确立了\"高χ⁽²⁾ TMD材料+共振纳米光子工程\"的二次谐波增强范式：3R菱方堆垛使多层MoS₂整体反演对称破缺、χ⁽²⁾峰值约800 pm/V（Nat. Photonics 18, 751 (2024)），远超LiNbO₃的50 pm/V；超表面的Mie/准BIC/Mie晶格模式高Q共振提供基频近场增强，anapole态把光场局域于天线内部与界面以最大化激发界面非线性，临界耦合保证泵浦能量高效注入。实验上最强基线已达2000倍增强与约1%转换效率（arXiv:2503.20161），原子级边缘加工的3R-MoS₂相对单层MoS₂达约1.33×10⁵倍、绝对效率0.08%（Commun. Phys. 8, 271 (2025)），WS₂/MoS₂异质双层anapole方案两个数量级增强、η_SH = 3.3×10⁻⁷（Light Sci. Appl. 14, 346 (2025)）；准BIC的10⁶倍增益仅见于理论计算（Nano Lett. 25, 9229 (2025)），尚无实验兑现。图案化WS₂准BIC超表面进一步实现室温激子-极化激元强耦合（116±4 meV，Nat. Mater. 22, 970 (2023)）、约45 fs拉比振荡与约110 fs相干时间（arXiv:2510.03052）。",
+      "related": [],
+      "migrated_from": "research_proposals/optimizing/general-tmd-bic-mie-anapole-20261107",
+      "created_at": "2026-11-16T15:43:38Z",
+      "updated_at": "2026-11-19T22:00:46Z",
+      "gap_repair_counts": {
+        "04_references/references.bib 缺失": 1,
+        "存在缺「判据」的步骤": 3,
+        "报告 wikilink 0 < 5": 1,
+        "步骤数 0 < 3": 3,
+        "笔记/知识卡 3 < 8": 3,
+        "近 24 个月文献 2 < 3": 3
+      },
+      "needs_human": false,
+      "check_gaps": [],
+      "novelty": {
+        "max_score": 0.1412,
+        "competitor": "二维材料中交变磁性磁态的自旋-能谷耦合与滑移调控 知识簇综合：该主题聚焦二维方形晶格及范德华异质结中交变磁性及其衍生磁态",
+        "backfilled": true
+      },
+      "deep_dive_gaps": [],
+      "stage_history": [
+        {
+          "stage": "ready",
+          "at": "2026-11-18T20:06:16Z",
+          "note": "验收自检全过，启动包就绪"
+        }
+      ]
+    },
+    "key-transient-quantum-phase-optical-20260726": {
+      "title": "瞬态量子相的全光读写与时序反演",
+      "stage": "ready",
+      "source": "v7-migration:optimizing",
+      "problem": "凝聚态物质中的量子相（含拓扑序、对称破缺序、关联有序态）建立在平衡态拓扑学之上。Thouless 等的 TKNN 整流量子化与 Haldane 的蜂窝模型均以绝热演化与稳态平均为前提1,2。过去半个世纪，这些量子相主要在温度、压力、掺杂三个平衡态维度下被调控。",
+      "related": [],
+      "migrated_from": "research_proposals/optimizing/key-transient-quantum-phase-optical-20260726",
+      "created_at": "2026-11-16T15:43:38Z",
+      "updated_at": "2026-11-19T22:00:46Z",
+      "gap_repair_counts": {
+        "04_references/references.bib 缺失": 1,
+        "存在缺「判据」的步骤": 1,
+        "报告 wikilink 0 < 5": 1,
+        "步骤数 0 < 3": 1,
+        "笔记/知识卡 4 < 8": 1
+      },
+      "needs_human": false,
+      "check_gaps": [],
+      "novelty": {
+        "max_score": 0.0873,
+        "competitor": "二维材料中交变磁性磁态的自旋-能谷耦合与滑移调控 知识簇综合：该主题聚焦二维方形晶格及范德华异质结中交变磁性及其衍生磁态",
+        "backfilled": true
+      },
+      "stage_history": [
+        {
+          "stage": "ready",
+          "at": "2026-11-18T16:24:59Z",
+          "note": "验收自检全过，启动包就绪"
+        }
+      ],
+      "deep_dive_gaps": []
+    },
+    "general-bsv-driven-hhg-quantum-20260726": {
+      "title": "量子光场驱动固体高次谐波产生：BSV-HHG 作为多体态探针的理论与实验验证",
+      "stage": "ready",
+      "source": "v7-migration:pending_review",
+      "problem": "知识簇综合：该主题聚焦高次谐波产生（HHG）从半经典三步模型向全量子描述的范式转变。理论工作系统刻画了HHG中电子-离子-辐射场纠缠的形成，并证明对电离电子的检测会引发测量诱导退相干与量子反作用；量子光学与光学相干性理论被引入谐波光场研究，揭示其光子关联、统计与量子电动力学特性。基于非厄米Floquet理论的方法表明，可从经典含时计算中提取HHG与阈上电离光谱的光子统计，并可通过红外探测器实验测量。明亮压缩光驱动的HHG进一步展现驱动场与谐波间高斯纠缠的涌现及谐波非高斯量子特性，为非经典光源探测与调控强场非线性光学开辟新途径。同时，B20型手性半金属中手性费米子诱导的光电流与固态HHG理论，将量子非线性光学拓展至拓扑手性材料与圆二色性效应，形成从气相到固态、从经典到量子驱动的统一图景。",
+      "related": [],
+      "migrated_from": "research_proposals/pending_review/general-bsv-driven-hhg-quantum-20260726",
+      "created_at": "2026-11-16T15:43:38Z",
+      "updated_at": "2026-11-21T15:32:39Z",
+      "gap_repair_counts": {
+        "04_references/references.bib 缺失": 1,
+        "存在缺「判据」的步骤": 1,
+        "报告 wikilink 0 < 5": 1,
+        "步骤数 0 < 3": 1,
+        "笔记/知识卡 3 < 8": 1
+      },
+      "needs_human": false,
+      "check_gaps": [],
+      "novelty": {
+        "max_score": 0.188,
+        "competitor": "固态高次谐波探测拓扑物态：高阶拓扑绝缘体、SSH边界态与Weyl半金属强场光谱 知识簇综合：该方向以固体高次谐波产生（H",
+        "backfilled": true
+      },
+      "deep_dive_gaps": []
+    },
+    "2026_NSFG_strongfield_ultrafast": {
+      "title": "2026_NSFG_strongfield_ultrafast",
+      "stage": "archive",
+      "source": "v7-migration:archived",
+      "problem": "（迁移占位：待深研补齐问题陈述）",
+      "related": [],
+      "migrated_from": "research_proposals/archived/2026_NSFG_strongfield_ultrafast",
+      "created_at": "2026-11-16T15:43:38Z",
+      "updated_at": "2026-11-16T15:43:38Z",
+      "novelty": {
+        "max_score": 0.017,
+        "competitor": "机器学习赋能强场量子动力学：TDSE/TDDFT代理加速与光电子谱可解释反演 在强场量子动力学的机器学习代理中，物理约束",
+        "backfilled": true
+      }
+    },
+    "general-mos2-20260905": {
+      "title": "二维材料中的固态高次谐波调控：激子共振、扭转堆叠与动力学对称性",
+      "stage": "archive",
+      "source": "v7-migration:archived",
+      "problem": "高次谐波产生（high harmonic generation, HHG）是强场飞秒激光与物质相互作用的非微扰非线性过程，也是阿秒科学与固体强场物理的主载体。带间跃迁与带内电流共同决定固体 HHG 的发射，谐波偏振、相位与截止结构因而携带能带色散、晶体对称性与 Berry 曲率的信息。2011 年 Ghimire 等人在 ZnO 晶体中以中红外激光观测到非微扰固体 HHG1，此后半导体、绝缘体与二维材料相继成为研究对象，固体 HHG 的重心由光源技术转向亚周期电子动力学测量。",
+      "related": [],
+      "migrated_from": "research_proposals/archived/general-mos2-20260905",
+      "created_at": "2026-11-16T15:43:38Z",
+      "updated_at": "2026-11-16T15:43:38Z",
+      "novelty": {
+        "max_score": 0.1643,
+        "competitor": "固体高次谐波产生：带内/带间/反常电流机制分解与多尺度全光学探测 知识簇综合：固态高次谐波（HHG）研究围绕三条电流通道",
+        "backfilled": true
+      }
+    },
+    "general-new-idea-20260822": {
+      "title": "交变磁体高次谐波产生与固态强场非线性光学新前沿",
+      "stage": "archive",
+      "source": "v7-migration:archived",
+      "problem": "知识簇综合：固态高次谐波产生（HHG）正从传统半导体拓展至新奇量子材料与全新驱动方式。理论研究表明，交变磁体凭借动量依赖的自旋劈裂，在无需自旋轨道耦合的条件下即可由线偏振强场产生超过100阶、振幅可观的内禀高次谐波自旋与电荷泵浦，并呈现自旋依赖的频谱结构，可明确区分交变磁序与铁磁、反铁磁序，为磁有序的超快全光学读出、太赫兹发射与非线性自旋电子器件开辟了新平台。与此同时，Houston基组下带间/带内电流的时频动力学理论为理解固体HHG奠定基础，并五苯等有机分子晶体首次实现凝聚相分子体系HHG，扭转双层固体的扭角工程为克服波矢失配、显著增强转换效率提供了新手段，亮压缩真空等非经典量子光驱动则打通了量子光学与固态强场物理的交叉路径。这些进展共同勾勒出固态强场非线性光学向新材料、新机制、新光源方向发展的前沿图景。",
+      "related": [],
+      "migrated_from": "research_proposals/archived/general-new-idea-20260822",
+      "created_at": "2026-11-16T15:43:38Z",
+      "updated_at": "2026-11-16T15:43:38Z",
+      "novelty": {
+        "max_score": 0.1862,
+        "competitor": "固态高次谐波探测拓扑物态：高阶拓扑绝缘体、SSH边界态与Weyl半金属强场光谱 知识簇综合：该方向以固体高次谐波产生（H",
+        "backfilled": true
+      }
+    },
+    "general-quantum-geometry-inversion-20260726": {
+      "title": "BSV 场统计驱动的固体高次谐波光谱对量子度规与 Berry 曲率反演研究",
+      "stage": "archive",
+      "source": "v7-migration:archived",
+      "problem": "量子几何张量的实部 quantum metric $g_{ab}(\\mathbf{k})$ 与虚部 Berry curvature $\\Omega_{ab}(\\mathbf{k})$ 是固体电子 Bloch 态流形上的两个独立分量。Berry curvature 已在反常霍尔效应、量子霍尔效应等体系中积累大量实验基础，而 quantum metric 的实验观测长期稀缺。2015 年 Sodemann-Fu 在时间反演不变的二阶非线性霍尔响应中预言 Berry curvature dipole（BCD）机制，奠定 Berry 曲率偶极进入非线性输运的物理路径。量子度规作为独立可观测分量进入非线性输运始于 2019 年后 Gao-Vignale 等度规偶极理论发展；首个实验观测由 Gao 等 2023 年 Science 给出（MnBi₂Te₄/black phosphorus 异质结，符号反号跟随 AFM 序翻转、τ⁰ 散射时间标度独立）。Han 等 2024 年 Mn₃Sn/Pt 实测室温扩展、Sala 等 2026 年 Sb₂Te₃ 拓扑表面态非线性磁阻进一步把 quantum metric 路径推广到室温与拓扑体系。Jiang、Holder、Yan 2025 年综述把 quantum metric 在非线性光学、亚阈值响应、非线性输运三类体系中的入口形式统一到同一几何张量语言。",
+      "related": [],
+      "migrated_from": "research_proposals/archived/general-quantum-geometry-inversion-20260726",
+      "created_at": "2026-11-16T15:43:38Z",
+      "updated_at": "2026-11-16T15:43:38Z",
+      "novelty": {
+        "max_score": 0.1464,
+        "competitor": "固体高次谐波产生：带内/带间/反常电流机制分解与多尺度全光学探测 知识簇综合：固态高次谐波（HHG）研究围绕三条电流通道",
+        "backfilled": true
+      }
+    },
+    "general-vortex-oam-hhg-20261101": {
+      "title": "涡旋光束驱动的固体高次谐波：轨道角动量转移标度律的时间破缺与晶体对称性的角动量分辨层析",
+      "stage": "archive",
+      "source": "v7-migration:archived",
+      "problem": "一句话问题：在少周期 CEP 锁定涡旋驱动下，谐波拓扑荷偏离整数守恒律 l_q = q·l₀ 的连续量 l̄_q，其出现条件是由晶体反演对称性破缺决定、由 CEP 敏感的时间不对称决定，还是由非偶极展宽独立决定？\n\n这是一道三择一的互斥归因题，而非开放式提问。判定设计为两条正交扫描线的交叉实验：固定材料、只扫 CEP，得 l̄_q(CEP) 的振幅 A_CEP；固定 CEP、只扫材料点群，得 l̄_q 的选择定则分量 A_sym。两者是否满足\"同一 l̄_q 的可加分解\"即为判据。该分解写作 l̄_q = A_sym + A_CEP + A_nd，其中 A_nd 为非偶极项，由束腰与强度两条杠杆组成的标定系列独立标定。分解成立且残差小于合成不确定度，则三通道份额可判；分解不成立，即三者不可分离，本课题如实报告为\"主导项不可判\"。\n\n破缺量的可观测量定义是判据可测性的前提。拓扑荷 l_q 是整数，其偏离 l_q − q·l₀ 同样离散，无法连续振荡，因此整数表述下的\"破缺随 CEP 呈 π 周期振荡\"不可执行。改用角向强度分布的一阶角谐分量也不可行：理想拉盖尔-高斯涡旋的角向强度分布严格轴对称，一阶角谐分量为零、相位无定义；该分量度量的是谐波环偏离圆对称的椭圆化程度，与整数拓扑荷偏离并非同一物理量。\n\n破缺量的定义还需先划定一处边界。Porras 等人（arXiv:2603.08263）指出，对一般时空光场，拓扑荷随谐波级次的标度并不等同于轨道角动量守恒，真正普适守恒的是换算光子数比例下的角动量（纵向、横向与内禀）。这意味着 l_q 与 l̄_q 的基线值并不必然为 q·l₀，而须由所驱动光场的时空结构确定。本课题把这一限定纳入破缺量的操作定义：基线值取理想基线处的实测 l̄_q，不作预设；破缺量是 l̄_q 与该基线之差。标度律的偏离与角动量守恒的偏离由此在定义层面被区分开。\n\n本课题改以有限谱窗内占优拓扑荷通道的连续期望值 l̄_q 作为破缺量的操作定义。把第 q 阶谐波环的角向强度分布 I_q(φ) 作角谐傅里叶展开，取各拓扑荷通道的角谐权重 P(l)，定义 l̄_q = Σ_l l·P(l) / Σ_l P(l)。该量在理想基线处的取值与 q·l₀ 相符，可连续振荡，且与 arXiv:2607.23652 观测的\"有限谱窗内主导拓扑荷通道\"在物理内涵上直接对应。整数拓扑荷 l_q 仍由 astigmatic 变换后的亮瓣计数给出，作为独立于连续量的第二条通道，二者的一致性即交叉校验。全文以 l̄_q 指连续操作量，以 l_q − q·l₀ 指整数偏离量，二者不混用。\n\n\"时间破缺\"在本课题中专指驱动场在时间维度上偏离严格周期对称，即少周期极限下包络的时间不对称使发射窗的相位不再以半周期为周期，从而让整数拓扑荷约束松动的现象。它不等同于偏振态的时间演化，",
+      "related": [],
+      "migrated_from": "research_proposals/archived/general-vortex-oam-hhg-20261101",
+      "created_at": "2026-11-16T15:43:38Z",
+      "updated_at": "2026-11-16T15:43:38Z",
+      "novelty": {
+        "max_score": 0.1357,
+        "competitor": "相干声子调控的固体高次谐波：晶格自由度进入强场非线性与电子-声子耦合的全光反演 在扣除瞬时对称性破缺通道之后，谐波对相干",
+        "backfilled": true
+      }
+    },
+    "general-solid-nsdr-kev-hhg-20261121": {
+      "title": "固体双电子同步复合（NSDR）扩展高次谐波至 keV/水窗区：双空穴-双电子复合机制的建立与量子几何调制",
+      "stage": "questions",
+      "source": "kb-mining-mobile-20261121",
+      "problem": "单活电子近似下固体 HHG 截止受 3.17U_p 标度约束；原子体系中双电子同步复合（NSDR）已解析证明截断可达 4.7-5.5U_p（约 1.2 keV 软 X 射线）并支持亚阿秒脉冲（arXiv:2606.24765 TAE-SFA；He 体系实验锚点 280 eV 平台）。但固体中双电子同步复合的对应物——价带双空穴与导带双电子的同步复合机制——尚未建立：其存在条件（带间跃迁偶极与双电子关联强度的竞争）、截断标度在能带图像下的对应形式、以及量子几何（贝里曲率/量子度规）对双电子复合路径与释放能量的调制均未知。本题旨在建立固体内 NSDR-HHG 理论框架与可观测指纹（keV 平台形状、双空穴特征、驱动波长/强度窗口），并评估水窗区桌面积亚阿秒源可行性。",
+      "related": [
+        "general-houston-kronig-penney-landau-zener-20261004",
+        "general-tdse-tddft-20261115"
+      ],
+      "created_at": "2026-11-21T14:31:43Z",
+      "updated_at": "2026-11-21T14:31:43Z",
+      "stage_history": [
+        {
+          "stage": "questions",
+          "at": "2026-11-21T14:31:43Z",
+          "note": "注册（kb-mining-mobile-20261121）"
+        }
+      ],
+      "novelty": {
+        "max_score": 0.1366,
+        "competitor": "BSV 场统计驱动的固体高次谐波光谱对量子度规与 Berry 曲率反演研究 量子几何张量的实部 quantum metr"
+      }
+    }
+  },
+  "rejected": {
+    "general-new-idea-20260919": {
+      "title": "基于双束反向传播激光的周期可调少阿秒电子脉冲串产生",
+      "reason": "",
+      "rejected_at": "2026-09-21T12:43:49Z",
+      "migrated_from": "research_proposals/_rejected-ideas"
+    },
+    "general-mc3d-20260919": {
+      "title": "线性偏振脉冲诱导超快磁化在非磁性半导体中的普适性",
+      "reason": "",
+      "rejected_at": "2026-09-21T12:43:49Z",
+      "migrated_from": "research_proposals/_rejected-ideas"
+    },
+    "general-mott-20260919": {
+      "title": "稀土镍酸盐莫特相变中的太赫兹三次谐波响应演化",
+      "reason": "",
+      "rejected_at": "2026-09-21T12:43:49Z",
+      "migrated_from": "research_proposals/_rejected-ideas"
+    },
+    "general-new-idea-20260919-02": {
+      "title": "孤立阿秒时空光学涡旋的产生与频率-拓扑荷耦合",
+      "reason": "",
+      "rejected_at": "2026-09-21T12:43:49Z",
+      "migrated_from": "research_proposals/_rejected-ideas"
+    },
+    "general-lifshitz-td-wte2-20260920": {
+      "title": "层间滑移与堆叠工程调控的二维材料固态高次谐波：结构、铁电与拓扑指纹的全光学探测",
+      "reason": "",
+      "rejected_at": "2026-09-21T12:43:49Z",
+      "migrated_from": "research_proposals/_rejected-ideas"
+    },
+    "general-h-wn6-20260920": {
+      "title": "结构压缩调控固态高次谐波：带隙展宽驱动的截止能量增强",
+      "reason": "",
+      "rejected_at": "2026-09-21T12:43:49Z",
+      "migrated_from": "research_proposals/_rejected-ideas"
+    }
+  },
+  "updated_at": "2026-11-21T16:01:36Z"
+}

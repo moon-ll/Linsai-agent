@@ -1,0 +1,372 @@
+{
+  "checked": true,
+  "at": "2026-11-07T04:05:57Z",
+  "proposal": "general-order-parameter-ultrafast-readout-20260727",
+  "sections_scanned": [
+    "content",
+    "full_review",
+    "method_manual",
+    "rationale",
+    "scheme"
+  ],
+  "cjk_variant_pairs": [
+    {
+      "a": "主体系",
+      "b": "对照体系",
+      "freq_a": 44,
+      "freq_b": 28,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "磁场反转",
+      "b": "磁场依",
+      "freq_a": 33,
+      "freq_b": 19,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "偏振分",
+      "b": "偏振方位",
+      "freq_a": 21,
+      "freq_b": 18,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "method_manual",
+        "scheme"
+      ]
+    },
+    {
+      "a": "序参量",
+      "b": "测量",
+      "freq_a": 120,
+      "freq_b": 72,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "对称性",
+      "b": "对照",
+      "freq_a": 77,
+      "freq_b": 66,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "方向",
+      "b": "方法学",
+      "freq_a": 84,
+      "freq_b": 58,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "对称性",
+      "b": "识性",
+      "freq_a": 77,
+      "freq_b": 57,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "称性",
+      "b": "辨识性",
+      "freq_a": 86,
+      "freq_b": 52,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "方法学",
+      "b": "方位",
+      "freq_a": 58,
+      "freq_b": 51,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "method_manual",
+        "scheme"
+      ]
+    },
+    {
+      "a": "方向",
+      "b": "方位角",
+      "freq_a": 84,
+      "freq_b": 47,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "method_manual",
+        "scheme"
+      ]
+    },
+    {
+      "a": "对称性",
+      "b": "线性",
+      "freq_a": 77,
+      "freq_b": 39,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "辨识性",
+      "b": "线性",
+      "freq_a": 52,
+      "freq_b": 39,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    }
+  ],
+  "token_variant_groups": [
+    {
+      "group_key": "Delta_0",
+      "variants": [
+        {
+          "form": "Delta_0",
+          "count": 28
+        },
+        {
+          "form": "Delta_0^",
+          "count": 3
+        }
+      ],
+      "sections": [
+        "method_manual"
+      ]
+    },
+    {
+      "group_key": "E_g",
+      "variants": [
+        {
+          "form": "E_g",
+          "count": 15
+        },
+        {
+          "form": "E_g^",
+          "count": 6
+        }
+      ],
+      "sections": [
+        "full_review",
+        "method_manual"
+      ]
+    },
+    {
+      "group_key": "E_0",
+      "variants": [
+        {
+          "form": "E_0",
+          "count": 6
+        },
+        {
+          "form": "E₀",
+          "count": 7
+        }
+      ],
+      "sections": [
+        "method_manual"
+      ]
+    },
+    {
+      "group_key": "theta_i",
+      "variants": [
+        {
+          "form": "theta_i",
+          "count": 11
+        },
+        {
+          "form": "theta_i^",
+          "count": 2
+        }
+      ],
+      "sections": [
+        "method_manual"
+      ]
+    },
+    {
+      "group_key": "T_2",
+      "variants": [
+        {
+          "form": "T_2",
+          "count": 3
+        },
+        {
+          "form": "T_2^",
+          "count": 6
+        }
+      ],
+      "sections": [
+        "method_manual"
+      ]
+    },
+    {
+      "group_key": "B_SF",
+      "variants": [
+        {
+          "form": "B_SF",
+          "count": 4
+        },
+        {
+          "form": "B_{SF",
+          "count": 2
+        }
+      ],
+      "sections": [
+        "full_review",
+        "method_manual",
+        "scheme"
+      ]
+    },
+    {
+      "group_key": "S_k",
+      "variants": [
+        {
+          "form": "S_k",
+          "count": 3
+        },
+        {
+          "form": "S_{k",
+          "count": 3
+        }
+      ],
+      "sections": [
+        "method_manual"
+      ]
+    }
+  ],
+  "summary": {
+    "cjk_pair_candidates": 387,
+    "token_variant_groups": 7,
+    "note": "候选报告不改文：处置归 writer/critic 契约；数值口径归 params_registry"
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "gaps": [
+    {
+      "claim": "CrSb 实测为 g 波对称（四 nodal planes，区别于 MnTe 的 d 波），体相自旋分裂 0.6—1.0 eV",
+      "missing_evidence": "缺少 CrSb 三维自旋结构与 g 波对称的直接 ARPES 测量证据，特别是 Ding PRL 133.206401（0.93 eV）、Yang Nat. Commun. 2025（~1.0 eV）、SX-ARPES 薄膜（0.6 eV）的原始数据",
+      "search_keywords": [
+        "CrSb spin splitting ARPES",
+        "CrSb g-wave altermagnet three-dimensional",
+        "CrSb nodal planes four",
+        "CrSb Ding PRL 133.206401",
+        "CrSb Yang Nature Communications 2025 spin splitting",
+        "CrSb spin-resolved ARPES eV"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "MnTe 属 d 波 altermagnet（两 nodal planes），自旋分裂<100 meV，作为已有实验观测对照",
+      "missing_evidence": "缺少 MnTe 的 d 波对称与 spin splitting ARPES 验证原始文献，以及 MnTe 谐波实验作为可行性验证的依据",
+      "search_keywords": [
+        "MnTe d-wave altermagnet ARPES",
+        "MnTe spin splitting magnitude",
+        "MnTe harmonic generation experiment",
+        "Osumi MnTe PRB 109 115102",
+        "MnTe two nodal planes spin texture"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "本项目 CrSb 反演先验 0.4—1.2 eV 区间应基于实测 ARPES 数据确定",
+      "missing_evidence": "缺少 CrSb 自旋分裂能量范围（0.6—1.0 eV）的 ARPES 原始论文作为先验设定依据",
+      "search_keywords": [
+        "CrSb ARPES band splitting experimental value",
+        "CrSb d-wave g-wave spin splitting energy",
+        "CrSb anomalous Hall spin splitting magnitude",
+        "Yang CrSb altermagnet experiment"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "CrSb 节点（nodal）线/面对称性与体相面内取样关系——d/g/i 波分类与 HHG 选律",
+      "missing_evidence": "缺少 d/g/i 波一般分类文献（[17] 实为一般分类）与 CrSb 具体归属 g 波的对称分析文献",
+      "search_keywords": [
+        "altermagnet d-wave g-wave i-wave classification",
+        "Šmejkal altermagnet spin group symmetry",
+        "CrSb spin group theory g-wave",
+        "altermagnet spin splitting nodal planes symmetry",
+        "altermagnet HHG selection rule"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "CrSb 强场损伤阈值与近红外泵浦-探测稳定性（0.4—1.2 eV 反演先验所需实验可行性）",
+      "missing_evidence": "缺少 CrSb 飞秒激光损伤阈值与近红外波段反射率实测数据",
+      "search_keywords": [
+        "CrSb femtosecond laser damage threshold",
+        "CrSb near-infrared pump probe",
+        "CrSb reflectivity intense laser field",
+        "transition metal pnictide ultrafast laser damage",
+        "CrSb strong-field optical excitation stability"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "altermagnet HHG 实验观测最早报道（MnTe 自旋极化谐波首次观测）",
+      "missing_evidence": "缺少 altermagnet HHG首次实验观测（如 MnTe Nature 2024）的引文支撑",
+      "search_keywords": [
+        "altermagnet high harmonic generation first observation",
+        "MnTe spin-polarized high harmonic generation Nature",
+        "Fuchs MnTe HHG 2024 experimental",
+        "altermagnet HHG experimental observation Nature"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "国内固体高次谐波实验组在国内现状论证中的代表性工作",
+      "missing_evidence": "缺少中国实验组在 altermagnet HHG、固体 HHG、阿秒科学方向的代表性论文（评审 L41 单薄问题）",
+      "search_keywords": [
+        "solid-state high harmonic generation China group",
+        "attosecond science Chinese research team",
+        "altermagnet HHG Chinese experimental group",
+        "固体高次谐波 中国 实验组",
+        "莫尔材料 强场 超快 国内"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

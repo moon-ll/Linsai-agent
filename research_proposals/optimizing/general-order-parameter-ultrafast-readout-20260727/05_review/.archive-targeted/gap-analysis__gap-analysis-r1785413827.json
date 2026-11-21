@@ -1,0 +1,46 @@
+{
+  "gaps": [
+    {
+      "claim": "第一年度基线参数（光谱重复性变异系数、信噪比计算窗口、前向模型在保留测试集上的误差）的具体阈值不能凭空填写，需由预研数据或文献支撑",
+      "missing_evidence": "缺少同类 HHG（高次谐波）实验装置/反演算法的可量化基线参数文献，包括：光谱重复性、信噪比、反演误差等的典型量级",
+      "search_keywords": [
+        "high harmonic generation spectrum reproducibility signal-to-noise ratio",
+        "HHG inversion algorithm error benchmark",
+        "high harmonic spectroscopy measurement uncertainty",
+        "ultrafast spectroscopy baseline reproducibility coefficient of variation",
+        "solid HHG experimental noise floor"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "第二年度要证伪的假设对应的'预期 HHG 指纹'（预期反常谐波特征、偏振依赖、对照组设计）需要文献支撑",
+      "missing_evidence": "缺少 altermagnet（交变磁体）、超导涨落、CDW（电荷密度波）等多类序参量在 HHG 中特征指纹的实验/理论文献，无法支撑'第二年将验证何种可观测特征'的判断",
+      "search_keywords": [
+        "altermagnet high harmonic generation",
+        "superconducting order parameter HHG fingerprint",
+        "charge density wave high harmonic generation",
+        "high harmonic spectroscopy order parameter detection",
+        "HHG symmetry breaking superconducting CDW",
+        "even-order harmonic superconductor"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "第二年度提出的'单序 benchmark + 一个 altermagnet 或超导涨落体系'对照方案，以及替代解释排除方法，需文献支撑",
+      "missing_evidence": "缺少不同序参量在 HHG 中产生信号的区分性判据（如何排除表面/体相贡献、热效应、激光诱导瞬态等替代解释）的已有方法学文献",
+      "search_keywords": [
+        "HHG selectivity bulk surface contribution",
+        "high harmonic generation alternative explanation rule out",
+        "HHG control experiment laser-induced artifact",
+        "nonlinear spectroscopy order parameter discrimination"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "[评审报告在'[high] feasibility — 样品'处截断，无法判断该问题是否需要文献支撑]",
+      "missing_evidence": "评审报告原文不完整，无法判断样品可行性问题的内容。建议获取完整评审报告（特别是后续第三、四年度与样品/风险相关段落）后再补充此条目",
+      "search_keywords": [],
+      "priority": "low"
+    }
+  ]
+}

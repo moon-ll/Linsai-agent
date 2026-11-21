@@ -1,0 +1,85 @@
+{
+  "gaps": [
+    {
+      "claim": "§3.1 L107 中归一化有符号内积 ρ_Ωg < 0.3 作为 Go 判据的可辨识性度量，及其 cond(𝓘) < 10 与 Bonferroni 联合校正下假阳性 < 1% 的换算链条需要 [24][40] 文献支撑",
+      "missing_evidence": "缺少可辨识性度量（向量内积、Fisher 信息矩阵条件数、Bonferroni 多重比较校正）在反演问题或高维参数估计中的基准文献",
+      "search_keywords": [
+        "Fisher information matrix condition number inverse problem identifiability",
+        "Bonferroni correction multiple hypothesis testing false positive",
+        "normalized inner product identifiability metric parameter estimation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§4.2 L147 提出'检验单电子紧束缚框架在 U/W ≳ 1 区间的失效点'与 1T-TaS₂ 自报 U/W 1.0–1.2 的 f-sum rule 外推区间（§5.2 L289 vs L291）协调问题——需要 1T-TaS₂ 单电子紧束缚适用范围的实验/理论基准",
+      "missing_evidence": "缺少 1T-TaS₂ 强关联体系 Hubbard U/W 标定实验值（XPS、ARPES、量子振荡、DMFT 等）以及单电子紧束缚在 U/W > 1 时失效阈值的基准文献",
+      "search_keywords": [
+        "1T-TaS2 Hubbard U ratio experimental",
+        "single-band tight-binding breakdown Hubbard U threshold",
+        "f-sum rule Hubbard model strong correlation benchmark"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§7.1/§7.2/§7.3 嵌入式文献支撑（如 Luu 与 Wörner 2018 α-quartz 单色场偏振首次反演 Berry 曲率）的原始论文细节需要核对",
+      "missing_evidence": "需要 Luu Wörner 2018 Nature Communications α-quartz HHG Berry curvature retrieval 的具体方法（偏振依赖、ellipticity、双色场）与首次性的明确陈述",
+      "search_keywords": [
+        "Luu Worner 2018 Nature Communications Berry curvature quartz HHG",
+        "polarization dependent HHG Berry curvature retrieval",
+        "first observation Berry curvature solid HHG alpha quartz"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§5.1 L411 与 §7.3 L415 关于 U/W × T 相图栅格 11×5=55 的计算口径——U/W=0.5–1.0 步长 0.05 = 11 点 + T=180–220 K 步长 10 K = 5 点的设置需要 Mott/CDW 相图的实验/理论参考",
+      "missing_evidence": "缺少 1T-TaS₂ 在 U/W 与温度二维相图（含 CDW 与 Mott 相边界）的标定实验或 QMC/DMFT 基准文献",
+      "search_keywords": [
+        "1T-TaS2 phase diagram temperature Hubbard U",
+        "Mott CDW phase boundary TaS2",
+        "DMFT phase diagram 1T-TaS2 temperature coupling"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§3 中 cond(𝓘) < 10 条件数阈值在 HHG 反演语境下的物理正当性论证（与 [24] 引用嵌入相关）",
+      "missing_evidence": "缺少高次谐波反演中 Fisher 信息矩阵条件数阈值的量化基准文献",
+      "search_keywords": [
+        "Fisher information condition number high harmonic inversion",
+        "well-posed inverse problem condition number threshold",
+        "Tikhonov regularization HHG reconstruction"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§5.2 中 f-sum rule 作为外推档判据（5% × (1 + 0.5·U/W) × 1.5）的物理正当性论证——需要强关联体系中 f-sum rule 修正的基准文献",
+      "missing_evidence": "缺少 f-sum rule 在 Hubbard 修正下的强关联失效判据或高次谐波 sum rule 强场极限的基准文献",
+      "search_keywords": [
+        "f-sum rule Hubbard correction strong correlation",
+        "high harmonic generation sum rule constraint",
+        "sum rule breakdown Hubbard U Mott insulator"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "BSV 量子光驱动 HHG 中量子增强因子 QEF 与相关性（g2）在中等关联体系 TiSe₂/1T-TaS₂ 中可分辨性的文献支撑",
+      "missing_evidence": "缺少 BSV 驱动固体 HHG 中 g2、压缩度与 HHG 信号 QEF 关联（特别是中等关联 Mott/CDW 体系）的理论与实验文献",
+      "search_keywords": [
+        "bright squeezed vacuum HHG correlated insulator",
+        "QEF quantum enhancement factor solid HHG",
+        "g2 BSV high harmonic spectroscopy Mott CDW"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§3 R2 三指标独立来源论证（向量几何 / 矩阵谱 / 后验协方差）需要反问题多指标融合的基准文献",
+      "missing_evidence": "缺少 HHG 或谱学反问题中多指标独立可辨识性融合方法的基准文献",
+      "search_keywords": [
+        "multi-metric identifiability fusion inverse problem",
+        "Fisher information posterior covariance inversion",
+        "parameter identifiability multiple independent criteria"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

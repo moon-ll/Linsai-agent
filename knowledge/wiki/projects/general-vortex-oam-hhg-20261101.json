@@ -1,0 +1,12 @@
+{
+  "proposal_id": "general-vortex-oam-hhg-20261101",
+  "title": "涡旋光束驱动的固体高次谐波：轨道角动量转移标度律的时间破缺与晶体对称性的角动量分辨层析",
+  "project_type": "general",
+  "archived_at": "2026-11-16T00:12:23Z",
+  "final_score": 0.85,
+  "optimization_rounds": 3,
+  "core_questions": "",
+  "innovations": "§三.1 总体技术路线\n§三.2 理论正演：含最小耦合修正的 SBE–传播统一模拟\n§三.3 分方向一：双通道读出与多周期基线的执行\n§三.4 分方向二：相图扫描线的执行与份额仲裁\n§三.5 分方向三：探针库采集与对称性层析反演",
+  "archived_path": "research_proposals/archived/general-vortex-oam-hhg-20261101",
+  "kb_project_path": "knowledge/raw/projects/general-vortex-oam-hhg-20261101"
+}

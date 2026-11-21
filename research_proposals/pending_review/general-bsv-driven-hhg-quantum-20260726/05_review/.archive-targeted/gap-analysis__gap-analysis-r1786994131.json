@@ -1,0 +1,63 @@
+{
+  "gaps": [
+    {
+      "claim": "简并 PDC 高增益下 g⁽²⁾(0)=3+1/N 随增益单调减小趋近 3、非简并恒为 2，故泵浦功率可调的 g⁽²⁾ 动态范围仅 (3,4]（§2.1 与 §2.6 口径矛盾，涉及三维参数图谱中 g⁽²⁾ 维信息量）",
+      "missing_evidence": "缺少 g⁽²⁾(0) 随参量增益/泵浦功率变化的定量实验或权威理论文献，无法支撑'以泵浦功率连续调节 g⁽²⁾(0)'的参数图谱设计，也无法裁定 §2.6'随增益增大'与 §2.1'趋近 3'两处相反表述的正确方向",
+      "search_keywords": [
+        "bright squeezed vacuum g2 parametric gain dependence",
+        "degenerate PDC photon statistics 3+1/N superthermal",
+        "g2 tunable range squeezed light pump power",
+        "thermal photon statistics high gain parametric down conversion experimental"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "本项目是国际同行在 BSV-HHG 方向上第一个具备'光源—实验—理论—反演—指纹'全链条可迁移方法学的项目（§2.8 优先权声明），且将在单层 TMDC 实现 BSV-HHG 首例测量（§2.9）",
+      "missing_evidence": "缺少带检索范围、截止日期与命中数的系统检索证据（arXiv/WoS/CNKI）证明尚无同时覆盖光源、实验、理论、反演与指纹提取的量子光 HHG 全链条工作，也缺少 TMDC 体系 BSV-HHG 首例归属的检索声明挂接正文",
+      "search_keywords": [
+        "bright squeezed vacuum solid high harmonic generation full chain",
+        "quantum light HHG methodology source theory inversion",
+        "BSV driven HHG transition metal dichalcogenide first",
+        "quantum enhanced harmonic spectroscopy systematic study",
+        "squeezed light nonlinear spectroscopy end-to-end framework"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "BSV 光源 10^13 光子/脉冲上限指标经 50 fs、5 μm 聚焦可直接匹配 TMDC HHG 驱动需求（方案→指标路径在光源→样品一环断裂，与实际驱动运行点脱节约 2 个量级）",
+      "missing_evidence": "缺少单层/少层 TMDC 飞秒激光损伤阈值（约 10^12–10^13 W/cm²）的实测文献，以及固体 HHG 实验实际驱动强度（10^11–10^12 W/cm²、对应 10^10–10^11 光子/脉冲）的文献依据，无法支撑衰减比与安全运行点的标定口径",
+      "search_keywords": [
+        "monolayer MoS2 femtosecond laser damage threshold",
+        "2D material ablation threshold W/cm2 ultrashort pulse",
+        "TMDC high harmonic generation driving intensity",
+        "solid state HHG typical laser intensity ZnO MoS2",
+        "2D semiconductor nonlinear optics damage fluence"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "双光路 Mach-Zehnder 干涉提取量子指纹 Q_F 的测量范式可行（方法学锚点为 Li 2022 arXiv:2205.11161 预印本，至 2026-08 检索日 4 年未正式发表）",
+      "missing_evidence": "缺少一篇已正式发表的干涉可见度/强度关联测量文献作为替代或补充锚点，也需核实该预印本是否已有正式发表版本，以降低核心方案层引用风险",
+      "search_keywords": [
+        "two-color quantum interference visibility measurement published",
+        "arXiv 2205.11161 tungsten tip photoemission published version",
+        "harmonic interferometry fringe visibility measurement",
+        "intensity correlation interferometry nonlinear optics",
+        "phase stabilized two-color field quantum interference experiment"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "BSV 压缩相位 θ_sq 与样品对称性匹配时可强化特定阶次谐波产额（§2.6 L73 因果句无引文无机制限定，来源不明）",
+      "missing_evidence": "缺少压缩角/驱动场偏振对称性与晶体对称性匹配影响谐波阶次选择的理论计算或实验观测文献，无法判断该论断是对 [29] 原子体系结论的外推还是本项目假设",
+      "search_keywords": [
+        "squeezing angle harmonic yield dependence",
+        "elliptical polarization driver harmonic selection rules crystal symmetry",
+        "HHG polarization symmetry selection TMDC",
+        "quantum light phase sensitive nonlinear response solid",
+        "subcycle phase control harmonic enhancement"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "gaps": [
+    {
+      "claim": "rationale.md 正文已挂 [1]-[21] 共 21 个引用角标，但 references.md 为 0 字节，全部角标悬空无对应文献条目",
+      "missing_evidence": "完整的参考文献表：以现有 21 个编号为基底扩至 30-40 篇，编号连续不跳号；近 3 年文献占比 ≥30%（约 10-12 篇 2023-2026 年文献），且每条需与正文角标论点一一对应",
+      "search_keywords": [
+        "circular dichroism high harmonic generation",
+        "chiral high harmonic spectroscopy",
+        "ultrafast chiral light matter interaction",
+        "high harmonic generation helicity"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "content 章需逐方向撰写研究内容（亚周期手性场合成与手性谐波定标、本征/人工手性材料矩阵、机理甄别），各方向'做什么'的论断目前滞留上游 draft 且无文献锚定",
+      "missing_evidence": "支撑各分方向技术路线可行性的文献：亚周期手性场合成方法、手性谐波定标方案、α-石英等晶体 HHG 实验先例、量子轨迹/强场近似模型类方法文献",
+      "search_keywords": [
+        "sub-cycle chiral field synthesis",
+        "chiral harmonic calibration HHG",
+        "quartz high harmonic generation",
+        "quantum trajectory model strong field",
+        "Lewenstein model solid HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "rationale L47 量化目标（≥2 阶 × 2 波长、误差 <10%）与 L51 末句'研究内容由此展开'的承接论断，以及'乘积还是可分解叠加'的核心机理问题，进入 content 后需可溯源的先行工作对照",
+      "missing_evidence": "对照性/竞争性文献：手性 HHG 中乘积型与可分解叠加型响应的实验或理论先例、类似误差量级与阶次范围的已发表定标结果，用于界定本课题相对既有工作的增量",
+      "search_keywords": [
+        "chiral HHG mechanism discrimination",
+        "helicity dependent harmonic emission quartz",
+        "chirality ultrafast spectroscopy comparison",
+        "high harmonic polarimetry chiral media"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

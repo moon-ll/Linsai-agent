@@ -1,0 +1,18 @@
+{
+  "gaps": [
+    {
+      "claim": "content §2.3 宣称对 κ-Br（κ-(BEDT-TTF)₂Cu[N(CN)₂]Br，环境压超导 T_c≈11.5 K）可在室温首轮窗口开展测量并判定关联态，用于家族磁输运归属与 U/W 分档参照（与 scheme §3.3 'κ-Br 本项目不单独安排 HHG 谱学' 存在口径互斥，评审指出任一侧改写须同步另一侧）",
+      "missing_evidence": "缺少支撑'室温下可测量并判定 κ-Br 关联态信号'的实验文献：该体系关联态/超导态在低温才出现（T_c≈11.5 K），需要文献支撑室温输运或光学测量能够反映关联强度（U/W），或文献明确关联态特征出现的温度尺度，以论证室温测量窗口的科学合理性",
+      "search_keywords": [
+        "kappa-(BEDT-TTF)2Cu[N(CN)2]Br",
+        "ambient pressure organic superconductor Tc 11.5 K",
+        "Mott transition kappa-(BEDT-TTF)2X",
+        "correlation strength U/W organic superconductor",
+        "temperature dependent transport kappa-Br",
+        "charge order kappa-(BEDT-TTF)2Cu[N(CN)2]Br"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "full_review"
+}

@@ -1,0 +1,17 @@
+{
+  "proposal_id": "key-transient-quantum-phase-optical-20260726",
+  "cluster_id": "orphan-route-2026-11-15",
+  "clusters": [
+    "orphan-route-2026-11-15"
+  ],
+  "entries": [
+    {
+      "source_id": "paper:2026-2602.00569-floquet-quantum-geometry-in-periodically-driven-topological",
+      "title": "Floquet quantum geometry in periodically driven topological insulators",
+      "summary": "提出周期驱动拓扑绝缘体（Floquet 拓扑绝缘体）的量子几何框架：利用动量-时间联合空间中微运动算符在邻近动量点间的迹距离，定义时间分辨的量子度规矩阵，从而将静态能带量子几何张量推广到含微运动的周期驱动体系。对二维 A 类与一维 AIII 类 Floquet 系统建立了量子体积受 Floquet 拓扑不变量（陈数/绕数）约束的一般不等式，并证明时间反演对称性可显著压缩 Floquet 几何张量。",
+      "path": "knowledge/raw/papers/2026-2602.00569-floquet-quantum-geometry-in-periodically-driven-topological.md",
+      "added_via": "cluster:orphan-route-2026-11-15",
+      "added_at": "2026-11-15T06:03:52Z"
+    }
+  ]
+}

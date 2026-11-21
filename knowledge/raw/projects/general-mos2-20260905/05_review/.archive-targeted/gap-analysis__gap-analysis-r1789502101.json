@@ -1,0 +1,98 @@
+{
+  "gaps": [
+    {
+      "claim": "三层MoS₂/WSe₂扭转异质双层在任意扭转角下的点群归属（C₃ vs C₃h vs C₃v vs D₃h），以及R型/H型0°堆叠的点群",
+      "missing_evidence": "缺少关于扭转角破坏σ_h镜面、AB(3R)堆叠为C₃v、AA'(2H)堆叠为D₃d或C₃v的权威双源文献支撑（arXiv:2607.19937、Nat. Mater. 2023）",
+      "search_keywords": [
+        "twisted bilayer MoS2 point group C3",
+        "3R stacking MoS2 C3v symmetry",
+        "twisted homobilayer TMD mirror symmetry breaking",
+        "AA' 2H MoS2 D3d point group",
+        "biaxial strain TMD heterobilayer symmetry"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "国内TMD-HHG实验/理论/扭转样品制备三条研究线的代表性工作",
+      "missing_evidence": "缺少国内课题组在固体高次谐波、二维TMD异质结制备、扭转MoS₂/WSe₂样品方面的代表性文献（§2.5仅1段挂靠§2）",
+      "search_keywords": [
+        "国内过渡金属硫族化合物 高次谐波",
+        "中国 TMD 异质结 扭转角制备",
+        "solid HHG MoS2 Chinese group",
+        "twisted MoS2 WSe2 homostructure fabrication China",
+        "强场 超快 固体HHG 课题组"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "协同物理图像：莫尔势如何同时改写HHG偏振选择定则与高阶谐波截止能量",
+      "missing_evidence": "缺少莫尔势对极化依赖HHG产率与截止能量协同调控的机制论证及代表文献（章末2600字差2400字的关键缺口）",
+      "search_keywords": [
+        "moire potential HHG cutoff polarization",
+        "moire superlattice high harmonic yield anisotropy",
+        "twisted bilayer MoS2 HHG selection rule cutoff",
+        "moire miniband HHG energy scaling",
+        "interlayer coupling HHG harmonic order"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "选择MoS₂/WSe₂作为研究体系的理由：A/B激子能量错开、II型能带对齐、MoS₂ HHG先例",
+      "missing_evidence": "缺少支撑材料选型的关键物性参数文献（A/B激子能量、II型能带、MoS₂ HHG实验先例[20]）",
+      "search_keywords": [
+        "MoS2 A B exciton energy splitting",
+        "WSe2 MoS2 type II band alignment",
+        "MoS2 high harmonic generation Liu",
+        "WSe2 exciton resonance HHG",
+        "MoS2 WSe2 heterobilayer exciton energy"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§2.1三条理论路线（晶体对称性/Berry曲率选择定则 vs 激子共振预激发 vs 莫尔势）的代表性单点引用",
+      "missing_evidence": "当前§2.1三理论路线整体带入[2—7]区间引用，缺少关键论断的单点挂引3-5处",
+      "search_keywords": [
+        "HHG polarization selection rule Berry curvature",
+        "exciton pre-excitation high harmonic generation",
+        "moire band structure HHG theory",
+        "crystal symmetry HHG nonlinear susceptibility",
+        "semiconductor Bloch equation moire superlattice"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Peterka 2025瞬态吸收实验以A激子近共振为主（而非A、B激子同时共振）的实验数据陈述",
+      "missing_evidence": "缺少Peterka arXiv:2504.02567中关于泵浦-谐波失谐量与A/B激子相对共振强度的具体数据",
+      "search_keywords": [
+        "Peterka MoS2 transient absorption HHG 2025",
+        "MoS2 A exciton near resonance pump HHG",
+        "pump harmonic detuning exciton resonance MoS2",
+        "2504.02567 MoS2 exciton HHG"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Nebgen体相2H-MoS₂ HHG实验5—13阶谐波产率数据（[18]应为Sci. Adv.已刊版本替代arXiv号）",
+      "missing_evidence": "缺少Nebgen 2017 Sci. Adv.体相2H-MoS₂谐波产率与阶数对应数据的精确引用（5—13阶为至13阶）",
+      "search_keywords": [
+        "Nebgen bulk2H-MoS2 high harmonic generation Sci Adv",
+        "Nebgen MoS2 harmonic yield 13th order",
+        "bulk MoS2 HHG 5 13 order experiment",
+        "Nebgen 2017 MoS2 nonlinear optical response"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Ma 2025 PRL 135, 166902扭转MoS₂/WSe₂ HHG效率4×10⁻⁵的实验测量",
+      "missing_evidence": "缺少Ma PRL 135, 166902 (2025) HHG效率4×10⁻⁵（替代arXiv v1的1.5×10⁻⁵）的论文原文数据",
+      "search_keywords": [
+        "Ma PRL 135 166902 2025 twisted MoS2 HHG",
+        "twisted WSe2 MoS2 high harmonic efficiency",
+        "Ma twisted bilayer HHG conversion efficiency",
+        "PRL 135 166902 HHG yield moire"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

@@ -1,0 +1,30 @@
+{
+  "gaps": [
+    {
+      "claim": "§1.2.1 中关于“Silva 等随后在固体高次谐波产生方面取得后续实验进展”的具名成果陈述，包括其发表于 Nature Photonics 第12卷第266页（2018年）的相关结果。",
+      "missing_evidence": "缺少与该陈述直接对应的原始实验论文及完整参考文献条目。目前正文虽给出作者、期刊、卷和页码，但没有 [N] 角标，参考文献表中也无对应记录，导致引文编号链和论点—证据映射断裂。需核对该论文确实支持原句中的具体实验对象、HHG 表现和结论，并补齐作者、题名、期刊、卷期页、DOI及正文编号；若无法核定具体论断，则应删除作者具名或改写为不依赖该成果的概括性表述。",
+      "search_keywords": [
+        "Silva Nature Photonics 12 266 2018 high-harmonic generation solids",
+        "Silva Gonoskov high harmonic generation bulk crystal few-cycle laser 2018",
+        "\"Nature Photonics\" \"12\" \"266\" Silva HHG",
+        "Silva solid-state HHG oblique incidence few-cycle pulse",
+        "Silva 固体高次谐波产生 Nature Photonics 2018"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.4 中“参见量子控制领域的通行论述”所指向的项目方法论依据，即相关设计遵循量子控制领域已有原理或通行认识。",
+      "missing_evidence": "缺少具名、可核验且与该方法论命题直接相关的量子控制综述或原始文献，现有表述无法判断究竟支持哪一项具体原则。需补充能够明确支撑相应论点的文献，并在正文中说明所借鉴的具体原理，例如多能级相干控制、参数估计、最优控制、Fisher信息或量子控制边界条件，而不能仅以领域泛称代替证据。",
+      "search_keywords": [
+        "quantum control review coherent control multilevel systems",
+        "quantum optimal control review Fisher information",
+        "multiparameter quantum estimation Fisher information review",
+        "quantum sensing parameter estimation coherent control review",
+        "量子控制 综述 多能级 相干控制",
+        "量子参数估计 Fisher信息 最优控制"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "rationale"
+}

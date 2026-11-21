@@ -1,0 +1,47 @@
+{
+  "gaps": [
+    {
+      "claim": "[20] You 2017 被引为 ZnO 各向异性 HHG 的实验证据，支撑 rationale §2.4 及 scheme 校核一中 ZnO 取向依赖的论述",
+      "missing_evidence": "该工作实为 MgO 单晶实验（Nature 官方摘要与图 1-5 均为 MgO），ZnO 各向异性 HHG 的直接实验文献支撑实际缺失；需找到真正的 ZnO 取向分辨 HHG 文献，或改以 MgO 各向异性数据作为对照维度（后者仅需修正引用归属，无需新文献）",
+      "search_keywords": [
+        "ZnO anisotropic high harmonic generation",
+        "orientation-dependent HHG solid",
+        "high harmonic generation zinc oxide crystal",
+        "nonlinear response anisotropy strong field"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Cd₃As₂ 三数量级谐波增强用于界定散射率 Z 的上界（rationale §5 L103）",
+      "missing_evidence": "该增强含微腔腔场增益成分，直接以总值界定裸材料散射上界依据不足；需剥离腔增益贡献的文献支撑——如 Cd₃As₂ 裸膜/块体 HHG 的幂律标度（2.3）原始数据，或微腔增强倍数的独立定量文献，以区分本征增强与腔场放大",
+      "search_keywords": [
+        "Cd3As2 high harmonic generation",
+        "microcavity enhanced high harmonic generation",
+        "cavity strong coupling harmonic yield",
+        "Dirac semimetal nonlinear optical response scaling"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "R=2 强度比判据移植为跨材料（拓扑体系 vs ZnO）的拓扑判别下界（rationale §4，源自 [19] 同族拓扑/平庸对比）",
+      "missing_evidence": "跨材料对比中非拓扑因素（带隙宽度、跃迁偶极矩、吸收系数）对 HHG 产额的已知影响缺乏文献定量依据，无法证明 R=2 的超额部分可归因于拓扑；需带隙/偶极矩与 HHG 产额标度关系的文献，以论证归一化扣除协议或给出拓扑增量的独立佐证",
+      "search_keywords": [
+        "high harmonic generation band gap scaling",
+        "HHG yield transition dipole moment",
+        "topological insulator high harmonic generation comparison",
+        "nonlinear response trivial versus topological material"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "rationale §2.4 L55 彭-Weizmann MgO 工作的成果归属（与 §2.1 [33] Faeyrman 系同一作者群工作）",
+      "missing_evidence": "非缺新文献，而是缺失引用对位：该处论述未挂 [33] 角标导致同一文献在两处出现却无法溯源对位；需补挂 [33] 角标使引用链闭合（必要时核实 Faeyrman/彭-Weizmann 是否确为同一工作以避免重复计篇）",
+      "search_keywords": [
+        "Weizmann MgO high harmonic generation",
+        "Faeyrman solid HHG"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

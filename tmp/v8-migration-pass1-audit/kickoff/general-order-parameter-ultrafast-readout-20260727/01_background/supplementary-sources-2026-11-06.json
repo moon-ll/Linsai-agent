@@ -1,0 +1,106 @@
+{
+  "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
+  "cluster_id": "orphan-route-2026-11-06",
+  "clusters": [
+    "orphan-route-2026-11-06",
+    "cl_20261106_dc502c"
+  ],
+  "entries": [
+    {
+      "source_id": "paper:2026-2604.06700-magnon-harmonic-generation-in-antiferromagnets-dynamical-sym",
+      "title": "Magnon harmonic generation in antiferromagnets: Dynamical symmetry enriched by symmetry breaking",
+      "summary": "系统推导了反铁磁体在Néel、倾斜和弱铁磁相中磁振子谐波产生的动力学对称性与选择定则，揭示磁有序及相变通过自发对称破缺显著改变谐波谱结构。由此提出谐波产生光谱可作为探测磁有序与磁相变的实验手段，其中偶次谐波信号的出现直接对应磁性对称破缺。",
+      "path": "",
+      "added_via": "cluster:orphan-route-2026-11-06",
+      "added_at": "2026-11-06T16:33:07Z"
+    },
+    {
+      "source_id": "paper:2024-2412.13329-revealing-the-anisotropic-charge-density-wave-order-of-tise2",
+      "title": "Revealing the anisotropic charge-density-wave order of TiSe2 through high harmonic generation",
+      "summary": "本文针对TiSe₂在低温电荷密度波（CDW）相中观测到的高次谐波谱非对称性，构建了包含三个CDW波矢（Q1、Q2、Q3）对应序参量的平均场紧束缚模型，并用含时薛定谔方程（TDSE）模拟强场驱动的固态高次谐波，定量重现了实验谱形。理论分析表明谐波谱的偏振/取向非对称度直接编码三个序参量的相对幅值，最佳拟合给出三个Δ不相等（其中一个占主导）的各向异性CDW图像，而非各向同性的2×2×2重构。该工作确立了用HHG作为全光学、超快手段读出隐藏有序相序参量的可行性。",
+      "path": "knowledge/raw/papers/2024-2412.13329-revealing-the-anisotropic-charge-density-wave-order-of-tise2.md",
+      "added_via": "cluster:orphan-route-2026-11-06",
+      "added_at": "2026-11-06T16:33:07Z"
+    },
+    {
+      "source_id": "paper:2026-2603.24377-fluctuation-induced-symmetry-breaking-in-high-harmonic-gener",
+      "title": "Fluctuation-induced symmetry breaking in high harmonic generation for bicircular quantum light",
+      "summary": "本文证明双圆（bicircular，ω-2ω反向旋转）量子驱动场的内禀涨落会破坏经典HHG所依赖的动力学对称性（三重旋转-时间平移对称），从而使经典选择定则下被禁戒的谐波（如3n阶）获得非零发射强度。这些涨落开启的禁戒谐波同时携带非经典正交压缩特征，成为驱动场量子性在谐波谱中的直接可观测判据。该结果把“对称性破缺”确立为量子光驱动HHG区别于经典驱动的物理标志。",
+      "path": "knowledge/raw/papers/2026-2603.24377-fluctuation-induced-symmetry-breaking-in-high-harmonic-gener.md",
+      "added_via": "cluster:orphan-route-2026-11-06",
+      "added_at": "2026-11-06T16:33:07Z"
+    },
+    {
+      "source_id": "paper:2026-2607.13863-ultrafast-altermagnetophononics",
+      "title": "Ultrafast altermagnetophononics",
+      "summary": "该文提出'超快交错磁-磁振子-声子学'（altermagnetophononics）理论框架，利用超快强场光激发操控交错磁体中磁振子与晶格振动的耦合动力学。以CrSb等交错磁材料为原型，揭示了其强场超快自旋-晶格响应机制，为实现稳定、相干的光学磁调控提供了理论基础。",
+      "path": "",
+      "added_via": "cluster:orphan-route-2026-11-06",
+      "added_at": "2026-11-06T16:33:07Z"
+    },
+    {
+      "source_id": "paper:2026-2601.19105-altermagnetic-spin-split-fermi-surfaces-in-crsb-revealed-by",
+      "title": "Altermagnetic spin-split Fermi surfaces in CrSb revealed by quantum oscillation measurements",
+      "summary": "本文通过极低温强磁场下的量子振荡测量（SdH/dHvA 型），在交变磁体 CrSb 中分辨出对应于四个自旋非简并能带的振荡频率分支，从体态（而非表面）层面直接证实了交变磁性自旋劈裂费米面的存在。这为'零净磁矩但存在自旋劈裂能带'的交变磁性图像提供了关键的实验证据，并确立了 CrSb 作为研究交换型自旋劈裂及超快/强场调控的平台材料。",
+      "path": "knowledge/raw/papers/2026-2601.19105-altermagnetic-spin-split-fermi-surfaces-in-crsb-revealed-by.md",
+      "added_via": "cluster:orphan-route-2026-11-06",
+      "added_at": "2026-11-06T16:33:07Z"
+    },
+    {
+      "source_id": "paper:2024-2411.00924-bayes_spec-a-bayesian-spectral-line-modeling-framework-for-a",
+      "title": "bayes_spec: A Bayesian Spectral Line Modeling Framework for Astrophysics",
+      "summary": "bayes_spec 是一个基于 PyMC 构建的开源 Python 贝叶斯光谱线建模框架，允许用户对天体物理谱线（发射线/吸收线）定义任意参数化模型并进行后验推断。它将物理谱线分量、基线漂移与噪声统计统一纳入单一概率模型，通过 MCMC 采样输出完整的参数后验分布与不确定性，天然支持多跃迁、多速度分量的联合拟合与模型比较。其核心贡献是把天体谱线参数推断从传统的点估计（如最小二乘）提升为严格的贝叶斯框架，并大幅降低了此类分析的实现门槛。",
+      "path": "knowledge/raw/papers/2024-2411.00924-bayes_spec-a-bayesian-spectral-line-modeling-framework-for-a.md",
+      "added_via": "cluster:cl_20261106_dc502c",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2025-2504.15211-position-bayesian-statistics-facilitates-stakeholder-partici",
+      "title": "Position: Bayesian Statistics Facilitates Stakeholder Participation in Evaluation of Generative AI",
+      "summary": "这是一篇立场（Position）论文，主张将贝叶斯统计引入生成式AI（GenAI）的评估流程。核心论点是：贝叶斯框架可通过先验获取将利益相关者的价值判断与信念显式编码进评估，通过贝叶斯更新实现证据的连续学习与累积，并通过后验的不确定性量化给出可解释、可审计的评估结论。据此论证贝叶斯方法为利益相关者参与GenAI评估提供了统计学基础与可操作的工作流改进方案。",
+      "path": "knowledge/raw/papers/2025-2504.15211-position-bayesian-statistics-facilitates-stakeholder-partici.md",
+      "added_via": "cluster:cl_20261106_dc502c",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2024-2407.14666-a-bayesian-workflow-for-securitizing-casualty-insurance-risk",
+      "title": "A Bayesian workflow for securitizing casualty insurance risk",
+      "summary": "本文将 Gelman–Vehtari 贝叶斯工作流（问题构建—先验预测模拟—SBC 校准—拟合—后验预测检验—模型迭代）整体移植到意外险（责任险）风险的 ILS（保险连接证券）证券化问题中。核心贡献是给出一条可审计的贝叶斯建模链路：先用先验预测模拟约束先验的合理性，再用基于模拟的校准（SBC）验证先验—似然—计算的一致性，最终输出可用于证券化设计与风险转移定价的损失分布。其价值主要在方法论示范，而非新的精算模型本身，对长尾、重尾金融风险建模具有普适参考意义。",
+      "path": "knowledge/raw/papers/2024-2407.14666-a-bayesian-workflow-for-securitizing-casualty-insurance-risk.md",
+      "added_via": "cluster:cl_20261106_dc502c",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2026-2409.04332-amortized-bayesian-workflow",
+      "title": "Amortized Bayesian Workflow",
+      "summary": "提出一个融合摊销（仿真式）贝叶斯推理与经典 MCMC 的自适应统计工作流：先用大规模模拟数据离线训练神经后验估计器实现秒级推理，再用 PSIS 的 k-hat 诊断评估摊销后验作为精确后验重要性采样 proposal 的质量。k-hat 低于阈值时接受（必要时经重要性重加权校正的）快速摊销结果，超过阈值则自动回退到 MCMC 精确采样，从而在推断速度与准确性之间按数据逐例动态权衡。",
+      "path": "knowledge/raw/papers/2026-2409.04332-amortized-bayesian-workflow.md",
+      "added_via": "cluster:cl_20261106_dc502c",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2025-2506.18802-trans-dimensional-hamiltonian-model-selection-and-parameter",
+      "title": "Trans-dimensional Hamiltonian model selection and parameter estimation from sparse, noisy data",
+      "summary": "本文提出一个融合可逆跳变马尔可夫链蒙特卡洛（RJMCMC）、并行回火（parallel tempering）与 Metropolis-Hastings 采样的贝叶斯推断框架，从稀疏且含噪的观测数据中同时完成哈密顿量模型的跨维选择（推断模型维数/有效项数）与参数估计。该框架输出模型与参数的联合后验分布，天然提供不确定度量化，并通过贝叶斯证据（边缘似然）自动惩罚冗余项、抑制过拟合，避免人工预设固定形式的哈密顿量。对数据稀缺、噪声显著条件下的量子系统/动力学有效建模具有通用方法论价值。",
+      "path": "knowledge/raw/papers/2025-2506.18802-trans-dimensional-hamiltonian-model-selection-and-parameter.md",
+      "added_via": "cluster:cl_20261106_dc502c",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2024-2407.07447-spin-splitting-in-altermagnetic-ruo2-enables-field-free-spin",
+      "title": "Spin Splitting in Altermagnetic RuO2 Enables Field-free Spin-Orbit Torque Switching via Dominant Out-of-Plane Spin Polarization",
+      "summary": "该工作实验证明RuO2(101)中交错磁自旋劈裂效应（ASSE）主导产生的自旋电流具有显著的面外z分量极化，可产生反阻尼力矩实现无需外加磁场的确定性磁化翻转。研究进一步揭示反铁磁Néel矢量方向对自旋极化的各向异性调控机制，为交错磁体中磁有序的超快高次谐波读出实验配置提供了参考。",
+      "path": "",
+      "added_via": "cluster:orphan-route-2026-11-06",
+      "added_at": "2026-11-06T19:21:07Z"
+    },
+    {
+      "source_id": "paper:2026-2602.13875-nonlinear-optical-probing-of-ferroic-octupolar-order-paramet",
+      "title": "Nonlinear Optical Probing of Ferroic-Octupolar Order Parameter in Collinear Altermagnet CoF2",
+      "summary": "在反演对称的共线交变磁体CoF2中观测到电偶极与磁偶极机制均被禁戒的二次谐波（SHG）信号。结合对称性分析、偏振测量与温度依赖，证实该信号源自磁性八极有序诱导的三阶电四极非线性极化，其强度随TN=38K的奈尔相变消失。这确立了SHG作为铁性八极序参量的高灵敏度光学探针，为探测交变磁体这类零净磁矩体系的隐藏序提供了新手段。",
+      "path": "knowledge/raw/papers/2026-2602.13875-nonlinear-optical-probing-of-ferroic-octupolar-order-paramet.md",
+      "added_via": "cluster:orphan-route-2026-11-06",
+      "added_at": "2026-11-06T19:21:07Z"
+    }
+  ]
+}

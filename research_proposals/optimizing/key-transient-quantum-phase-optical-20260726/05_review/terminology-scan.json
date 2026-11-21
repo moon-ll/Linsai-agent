@@ -1,0 +1,338 @@
+{
+  "checked": true,
+  "at": "2026-11-07T04:05:58Z",
+  "proposal": "key-transient-quantum-phase-optical-20260726",
+  "sections_scanned": [
+    "content",
+    "full_review",
+    "method_manual",
+    "rationale",
+    "scheme"
+  ],
+  "cjk_variant_pairs": [
+    {
+      "a": "瞬态量子",
+      "b": "瞬态拓扑不",
+      "freq_a": 18,
+      "freq_b": 17,
+      "sections_a": [
+        "content",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "代表体系",
+      "b": "跨体系",
+      "freq_a": 31,
+      "freq_b": 28,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "method_manual",
+        "scheme"
+      ]
+    },
+    {
+      "a": "拓扑量",
+      "b": "扑不变量",
+      "freq_a": 26,
+      "freq_b": 26,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "拓扑量",
+      "b": "拓扑不变",
+      "freq_a": 26,
+      "freq_b": 26,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "拓扑不变",
+      "b": "拓扑相",
+      "freq_a": 26,
+      "freq_b": 24,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "低频强耦",
+      "b": "低频区",
+      "freq_a": 21,
+      "freq_b": 20,
+      "sections_a": [
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "瞬态拓扑",
+      "b": "的拓扑",
+      "freq_a": 34,
+      "freq_b": 18,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "瞬态拓扑",
+      "b": "瞬态吸",
+      "freq_a": 34,
+      "freq_b": 18,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "瞬态量子",
+      "b": "瞬态吸",
+      "freq_a": 18,
+      "freq_b": 18,
+      "sections_a": [
+        "content",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "测量",
+      "b": "不变量",
+      "freq_a": 74,
+      "freq_b": 57,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "分区",
+      "b": "高频区",
+      "freq_a": 64,
+      "freq_b": 47,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "子课题",
+      "b": "问题",
+      "freq_a": 62,
+      "freq_b": 44,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    }
+  ],
+  "token_variant_groups": [
+    {
+      "group_key": "E_0",
+      "variants": [
+        {
+          "form": "E_0",
+          "count": 23
+        },
+        {
+          "form": "E₀",
+          "count": 2
+        }
+      ],
+      "sections": [
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "group_key": "Z_2",
+      "variants": [
+        {
+          "form": "Z_2",
+          "count": 10
+        },
+        {
+          "form": "Z₂",
+          "count": 3
+        }
+      ],
+      "sections": [
+        "content",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "group_key": "times10_5",
+      "variants": [
+        {
+          "form": "times10^5",
+          "count": 11
+        },
+        {
+          "form": "times10^{5",
+          "count": 2
+        }
+      ],
+      "sections": [
+        "method_manual",
+        "scheme"
+      ]
+    },
+    {
+      "group_key": "C_n",
+      "variants": [
+        {
+          "form": "C_n",
+          "count": 4
+        },
+        {
+          "form": "C_n^",
+          "count": 2
+        }
+      ],
+      "sections": [
+        "method_manual",
+        "rationale"
+      ]
+    },
+    {
+      "group_key": "T_gap",
+      "variants": [
+        {
+          "form": "T_gap",
+          "count": 3
+        },
+        {
+          "form": "T_{gap",
+          "count": 2
+        }
+      ],
+      "sections": [
+        "content",
+        "rationale"
+      ]
+    }
+  ],
+  "summary": {
+    "cjk_pair_candidates": 410,
+    "token_variant_groups": 5,
+    "note": "候选报告不改文：处置归 writer/critic 契约；数值口径归 params_registry"
+  }
+}

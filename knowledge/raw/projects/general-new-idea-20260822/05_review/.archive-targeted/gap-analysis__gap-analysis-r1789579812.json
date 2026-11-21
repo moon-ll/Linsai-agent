@@ -1,0 +1,106 @@
+{
+  "gaps": [
+    {
+      "claim": "块体 MnTe 第 11 阶附近谐波的预期计数率为 10²–10⁴ counts/s",
+      "missing_evidence": "缺少 MnTe 或类似 altermagnet 在固体高次谐波实验中谐波计数率/产额的实测基线数据；外推跨度 100 倍需 metric 定义与对照文献",
+      "search_keywords": [
+        "MnTe high harmonic generation yield",
+        "altermagnet solid HHG count rate",
+        "MnTe mid-infrared harmonic photon flux",
+        "antiferromagnet high harmonic generation efficiency"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "现有 SBE/Houston 框架处理自旋劈裂能带的局限性",
+      "missing_evidence": "缺少 SBE/Houston 框架在含 SOC 自旋劈裂体系下失效或精度不足的定量对比文献",
+      "search_keywords": [
+        "semiconductor Bloch equation SOC spin splitting",
+        "Houston model spin-orbit coupling limitation",
+        "SBE spin-orbit coupled band high harmonic"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "降维反演触发条件 κ阈值在 §1/§4/§5.3 三处不一致（10¹/10²/10⁴）",
+      "missing_evidence": "缺少 Fisher 信息条件数/条件数 κ 在高次谐波反演问题中的典型取值范围文献基准",
+      "search_keywords": [
+        "Fisher information condition number HHG inversion",
+        "inverse problem condition number high harmonic retrieval",
+        "Tikhonov regularization condition number"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "T_N 反演输出与 SQUID 独立测定值偏差（±2 K vs ±3 K，先验宽度 1.5 倍）",
+      "missing_evidence": "缺少 SQUID 测定 MnTe Neel 温度 T_N 的文献基线值与误差范围",
+      "search_keywords": [
+        "MnTe Neel temperature SQUID",
+        "alpha-MnTe antiferromagnetic transition temperature",
+        "MnTe T_N magnetization measurement"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "g-wave 自旋纹理与节点面结构上的符号变化（紧束缚模型相对于 TDDFT 的优势论证）",
+      "missing_evidence": "缺少紧束缚模型在处理 g-wave/d-wave 自旋纹理反常符号切换方面的已有方法学文献支撑",
+      "search_keywords": [
+        "tight-binding g-wave altermagnet",
+        "spin group theory tight-binding MnTe",
+        "nodal plane spin texture tight-binding model"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "TDDFT 交换-关联泛函在强场极端非平衡条件下的适用性尚未被验证",
+      "missing_evidence": "缺少 TDDFT 在强场/阿秒非平衡极限下 ALDA/LDA/GGA 泛函失效的已有对比文献",
+      "search_keywords": [
+        "TDDFT exchange-correlation strong field HHG",
+        "TDDFT attosecond nonadiabatic failure",
+        "ALDA functional high harmonic generation benchmark"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "自旋/偏振通道分离测量尚未在该体系（altermagnet HHG）上开展",
+      "missing_evidence": "缺少 altermagnet 体系自旋分辨 HHG 实验/偏振通道分离测量的最新文献检索范围证据（截至 2026-08）",
+      "search_keywords": [
+        "altermagnet spin-resolved high harmonic",
+        "polarization channel separation HHG antiferromagnet",
+        "MnTe CrSb high harmonic generation experiment"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "SOC 双口径 0.4-0.6 与 0.3-0.6 区间半迁移",
+      "missing_evidence": "缺少 MnTe/CrSb 实测自旋劈裂能 SOC 比值的统一参考数据（ARPES/DFT 文献基准）",
+      "search_keywords": [
+        "MnTe spin splitting magnitude ARPES",
+        "CrSb altermagnet SOC ratio",
+        "nonrelativistic spin splitting energy ratio MnTe CrSb"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "反铁磁有序相温区 10–290 K 步长 20 K 实验方案",
+      "missing_evidence": "缺少 MnTe 在 10–290 K 跨 T_N 区间的温控 HHG 实验文献先例",
+      "search_keywords": [
+        "MnTe temperature dependent harmonic generation",
+        "antiferromagnet HHG across Neel temperature",
+        "cryogenic HHG measurement10K"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "100 nm 涡旋至 10 μm 图案化单畴态磁化方案",
+      "missing_evidence": "未在 MnTe/CrSb 上演示单畴化的实验先例",
+      "search_keywords": [
+        "MnTe magnetic domain patterning",
+        "altermagnet single domain preparation",
+        "antiferromagnet micro-domain magnetization control"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

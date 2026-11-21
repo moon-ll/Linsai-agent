@@ -1,0 +1,41 @@
+{
+  "gaps": [
+    {
+      "claim": "参考文献中存在 Anonymous 占位符 [62] 未清理",
+      "missing_evidence": "引用 [62] 标注为 Anonymous（占位符），需替换为正式发表文献",
+      "search_keywords": [
+        "transient quantum phase attosecond measurement",
+        "subcycle quantum phase optical control"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "预印本文献 [61] 缺少作者署名核实",
+      "missing_evidence": "引用 [61] 为预印本，需补充作者信息或替换为同行评审文献",
+      "search_keywords": [
+        "attosecond quantum phase tomography preprint",
+        "transient topological phase measurement arXiv"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "references.md 中 [40][41] 与 rationale.md 内联列表不一致",
+      "missing_evidence": "rationale.md 已删除旧版 [40][41] 内联列表，但 references.md 中编号 [40][41] 仍存在，需核实清理",
+      "search_keywords": [
+        "Aversa Sipe interband nonlinear susceptibility 1993",
+        "Golde semiconductor HHG theory"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "D1 跨区物理可行性论证不足（ℏω/E_g≈1 交界区）",
+      "missing_evidence": "D1 子课题在交界区（ℏω/E_g≈1）'明确转换规则'与'数值连续性'的物理可行性论证单薄，缺乏交叉区强场物理的定量依据",
+      "search_keywords": [
+        "Keldysh parameter strong field solid交界区",
+        "semiconductor Bloch equation validity range V/Angstrom",
+        "interband coupling saturation strong field limit"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

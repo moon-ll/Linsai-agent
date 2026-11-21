@@ -1,0 +1,65 @@
+{
+  "gaps": [
+    {
+      "claim": "Cousin 2017 阿秒条纹实验的电离靶气体种类（文本写作'氪'，实际原文为'氖'）",
+      "missing_evidence": "Cousin 等 2017 PRX 7, 041030 (arXiv:1710.02208) 原文关于 HHG 驱动靶与条纹探测气体种类的明确表述（应为氖，3 bar）",
+      "search_keywords": [
+        "Cousin 2017 attosecond streaking neon gas target",
+        "Cousin PRX 7 041030 sub-two-cycle 1850 nm high-harmonic",
+        "attosecond streaking neon 322 as isolated pulse"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Cousin 2017 条纹电离光的能量覆盖范围及对应的光电子末态动能上限（涉及 262–328 eV 与 270–396 eV 两版口径的甄别）",
+      "missing_evidence": "Cousin 2017 原文给出的条纹谱能量窗口、光电子末态动能区间以及 350 eV 谱覆盖的精确数值证据",
+      "search_keywords": [
+        "Cousin 2017 photoelectron kinetic energy 350 eV soft X-ray",
+        "streaking spectrogram energy range 284-350 eV neon",
+        "attosecond pulse water window neon streaking electron"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Inzani 2024 rACE 实验中'氩靶多通道贡献 8%–15%'的原文出处与页码",
+      "missing_evidence": "Inzani 等 2024 J. Phys. Photonics 6, 025007 全文中关于多通道电离相对权重（公开实验段仅见氖 jet，未见氩多通道 8%–15% 表述），需逐页核查 rACE 装置诊断段",
+      "search_keywords": [
+        "Inzani 2024 rACE reconstruction attosecond multichannel",
+        "Inzani J. Phys. Photonics 6 025007 argon neon streaking",
+        "reconstruction of attosecond beating by inference of two-photon transitions multichannel ionization"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Cousin 2017 数据中'光电子动能跨越 100 eV 拐点'以作为二级修正阈值设计动机的依据",
+      "missing_evidence": "Cousin 2017 原文条纹谱中是否存在 100 eV 量级的能段拐点或二次电离开启特征；如无原文支撑，需替换为本项目自设设计动机表述",
+      "search_keywords": [
+        "Cousin 2017 streaking spectrum 100 eV kink secondary ionization",
+        "attosecond streaking secondary electron threshold neon",
+        "photoelectron spectrum feature 100 eV near-threshold"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "氖原子在 284–350 eV 光电离下光电子末态动能约 262–328 eV 的换算依据",
+      "missing_evidence": "氖第一电离势与 284–350 eV 软 X 射线光子扣除电离势后动能区间的标准计算出处（建议补 NIST 原子光谱数据库或相关综述）",
+      "search_keywords": [
+        "neon ionization potential 21.6 eV photoelectron kinetic",
+        "NIST atomic spectra database neon ionization energy",
+        "soft X-ray photoelectron kinetic energy calculation neon"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "XCOM 数据库（NIH/NIST）在阿秒条纹气体电离截面计算中所采用的版本号与单点/区间值差异的口径来源",
+      "missing_evidence": "NIST XCOM 光子截面数据库在 250–400 eV 对氖/氪/氩光电离与吸收截面的取值说明，用于佐证 18%/16% vs 18%–24%/16%–26% 区间差",
+      "search_keywords": [
+        "NIST XCOM photon cross section database neon 300 eV",
+        "photoionization cross section argon krypton 250-400 eV",
+        "XCOM database version 2023 attosecond photon-matter"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "full_review"
+}

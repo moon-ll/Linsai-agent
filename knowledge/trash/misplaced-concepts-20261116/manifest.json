@@ -1,0 +1,64 @@
+{
+  "quarantined_at": "2026-11-15T16:06:08Z",
+  "reason": "v7.3.85 后续巡检：管线工作文件误置为概念页，隔离（sub-cycle-dynamics 为真实概念豁免）",
+  "pages": [
+    {
+      "file": "review-report.md",
+      "bytes": 8157
+    },
+    {
+      "file": "立项依据_v0_1.md",
+      "bytes": 7459
+    },
+    {
+      "file": "candidate1_papers.md",
+      "bytes": 1502
+    },
+    {
+      "file": "idea-review-r1-a1.md",
+      "bytes": 6232
+    },
+    {
+      "file": "nsfc_application_v0_1.md",
+      "bytes": 8896
+    },
+    {
+      "file": "literature-report.md",
+      "bytes": 6326
+    },
+    {
+      "file": "rescore-r0.md",
+      "bytes": 6140
+    },
+    {
+      "file": "立项依据汇总_v0_2_2026-06-14.md",
+      "bytes": 6455
+    },
+    {
+      "file": "idea-review-r1-a2.md",
+      "bytes": 8498
+    },
+    {
+      "file": "立项依据_v0_2.md",
+      "bytes": 2701
+    },
+    {
+      "file": "立项依据汇总_2026-06-14.md",
+      "bytes": 7823
+    },
+    {
+      "file": "README.md/PLAN.md（此前已隔离）",
+      "bytes": 0
+    },
+    {
+      "file": "判据口径表_跨章节共用判据的单一真相源纪律.md",
+      "bytes": 765,
+      "note": "提案/手册工作记录页"
+    },
+    {
+      "file": "双层带隙口径与_13_阶谐波截止判读.md",
+      "bytes": 517,
+      "note": "提案/手册工作记录页"
+    }
+  ]
+}

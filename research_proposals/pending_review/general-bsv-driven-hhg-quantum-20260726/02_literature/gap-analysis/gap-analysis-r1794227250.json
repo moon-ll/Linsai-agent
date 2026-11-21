@@ -1,0 +1,65 @@
+{
+  "gaps": [
+    {
+      "claim": "§1.2.1 L21 Iglesias 具名+量化成果句零角标，需补 [13] 对应文献",
+      "missing_evidence": "Iglesias 团队关于 BSV（bulk spin-valve）驱动/调控强场高次谐波的实验或理论工作，需确认其发表载体（期刊/年份/DOI）并纳入编号链",
+      "search_keywords": [
+        "Iglesias bulk spin-valve high harmonic generation",
+        "Iglesias BSV harmonic emission strong field",
+        "spin-valve effect high harmonic generation solid"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.2.2 L31 Even Tzur 成果句零 [N]，导致 [2] 在 references 表中空挂",
+      "missing_evidence": "Even Tzur（及 Tzur 组）在 BSV/磁性材料强场高次谐波或强场电子动力学方向的原始论文，用于支撑该具名成果句",
+      "search_keywords": [
+        "Even Tzur high harmonic generation solid state",
+        "Tzur magnetic material strong field high harmonic generation",
+        "Even Tzur bulk spin valve harmonic spectroscopy"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.2.2 L43 Lange 成果句零 [N]，导致 [18] 表内空挂",
+      "missing_evidence": "Lange 在固态高次谐波/强场固体光谱（XUV、瞬态吸收或 BSV 体系）方向的原始论文，需给出可核验出处",
+      "search_keywords": [
+        "Lange solid-state high harmonic generation",
+        "Lange XUV solid harmonic emission spectroscopy",
+        "Lange attosecond solid state spectroscopy"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.3 L71 'BSV 原子尺度驱动已实现' 的匿名国内团队成果句零溯源",
+      "missing_evidence": "国内团队关于 BSV 原子尺度/界面尺度驱动的实验报道（国内期刊或预印本），需补 [N] 角标；若无法溯源则须改为限定表述",
+      "search_keywords": [
+        "BSV atomic scale driving high harmonic generation experiment",
+        "bulk spin valve interface ultrafast dynamics China",
+        "BSV 自旋阀 强场 高次谐波 实验"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§1.3 L75 '国内尚无…成体系实验报道' 的新颖性断言缺少检索范围与截止时间限定",
+      "missing_evidence": "针对国内 BSV 固态 HHG 成体系实验的检索证据（检索数据库、关键词、检索截止日期），以及国内代表性团队相关工作是否仅为零散报道的对比依据",
+      "search_keywords": [
+        "BSV high harmonic generation domestic research group China",
+        "bulk spin valve HHG experiment review 2026",
+        "中国 固态 高次谐波 BSV 实验 综述"
+      ],
+      "priority": "low"
+    },
+    {
+      "claim": "BSV 材料本身在强场下的高次谐波产率提升机制缺少独立第三方实验证据",
+      "missing_evidence": "除 Rasputnyi 2024 Nature Physics 外的独立复现/交叉验证文献（如其他材料体系、不同磁层配置下的产率增强数据），以支撑'5–15 倍产率提升'的可推广性",
+      "search_keywords": [
+        "bulk spin valence high harmonic generation enhancement independent replication",
+        "BSV material strong field nonlinear optics harmonic yield",
+        "spin valve layer high harmonic emission enhancement factor"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

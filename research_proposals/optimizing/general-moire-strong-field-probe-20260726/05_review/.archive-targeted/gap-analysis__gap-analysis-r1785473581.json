@@ -1,0 +1,150 @@
+{
+  "gaps": [
+    {
+      "claim": "§3.6 创新点 2 详细声称扭转角分辨率为 ±0.02°，与全文其他 4 处 ±0.05° 数值冲突，且 ±0.02° 缺乏方法学手册交叉引用支撑（评审报告原文：'±0.02° 缺乏方法学手册交叉引用支撑'）",
+      "missing_evidence": "莫尔扭转角 ±0.02° 分辨率的方法学验证文献——即在真实/合成 MoS₂/WSe₂ 莫尔 HHG 谱（含 SNR=50 噪声水平下）反演扭转角达到 ±0.02° 精度的同行工作；同时缺少方法学手册中的合成数据验证章节作为支撑附件",
+      "search_keywords": [
+        "moiré twist angle resolution high harmonic",
+        "twist angle retrieval HHG inversion",
+        "Moiré twist angle metrology harmonic spectroscopy",
+        "twist angle precision optical probe 2D",
+        "深亚度扭转角分辨 高次谐波"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3.6 创新点 3 写'驱动场参数切换（强度 + 椭偏 + CEP）实现探针/调控双模式共用平台（详见 §3A.2）'，但 §3 不含 §3A.2 子节（§3A.2 是方法学手册的子节编号）在 proposal-draft.md 主体中不存在——属于引用指向不存在的引用",
+      "missing_evidence": "对应支撑材料：(1) 在 proposal-draft 正文内补充 80–120 字关于'探针/调控双模式切换协议'的方法学说明（强度窗口 + 椭偏区间 + CEP 同步 + 数据采集同步）；或 (2) 至少补 1–2 篇同行文献证实'同一驱动场在 HHG 探针和 Floquet 调控双模式间切换'的可行性",
+      "search_keywords": [
+        "dual-mode HHG probe and Floquet control",
+        "CEP-controlled switchable strong-field spectroscopy",
+        "ellipticity tunable probe and drive",
+        "同一平台 探针 调控 切换 强场",
+        "switchable ultrafast pump high harmonic probe"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§三 多处承诺'见方法学手册 §3X'（如 §三.3 引子'实验关键参数（回应评审 H4，完整参数表见方法学手册 §3D）'、§3.2 R1 SBE 验证'< 6% 见方法学手册'、§3.4 R3 Floquet 阈值'方法学手册 §3D.2 余量表'、§3.4 R3 风险表'方法学手册 §3G'），但 NSFC 评审专家拿到的只是 proposal-draft.md，无法验证这些承诺——承诺的支撑证据不可访问",
+      "missing_evidence": "方法学手册方法学手册（methodology-manual.md）作为附件的显式提交 / 关键参数表（实验损伤阈值、SBE 验证精度、Floquet 强度余量、反演误差棒、扭转角合成数据验证）至少在正文摘要表中重述，或将这些表格合并入 proposal-draft.md 附录，否则评审专家无法验证'4 年分期目标是否可考核'",
+      "search_keywords": [
+        "NSFC 方法学手册 附件",
+        "国家自然科学基金 附录 支撑材料",
+        "supplementary material methodology verification",
+        "synthetic data validation twist angle",
+        "损伤阈值 余量 强场 TMDC 莫尔"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.2 国内外研究现状三块（1）莫尔超晶格强场响应理论、（2）HHG 作为材料内禀物理量探针、（3）光 Floquet 工程与强场主动调控——每块 4–5 条文献以'A 做了…B 做了…C 做了…'句式罗列（共 12 条文献：Molinero 2024、Mrudul 2024、Zhang Su Wang 2024、Xu Zhou 2024、Bauer-Hansen 2018、Hu Meng 2024、Nikola 2021、Zhou 2023、Tyulnev 2024、Lian 2024、Xu 2024），未形成'读出—改写'主线论证",
+      "missing_evidence": "每块需补充 1–2 篇'近期综述/原子分辨实验/关键理论模型'类文献作为主线论证的支点：(a) 块（1）补 1 篇 GW/BSE/MCTDHF 多体方法在莫尔体系的最新理论（紧束缚极限的局限定量证据）；(b) 块（2）补 1 篇 recent experimental HHG retrieval 在莫尔/均匀体系的对比（含误差棒报告）；(c) 块（3）补 1 篇综述指出'Floquet 调控 + 二维材料 + 莫尔'的最新整合趋势（2024–2025）",
+      "search_keywords": [
+        "moiré beyond tight-binding GW BSE",
+        "many-body moiré electron dynamics review 2024",
+        "high-harmonic retrieval material parameter recent 2024 2025",
+        "Floquet engineering 2D moiré review 2024",
+        "MCTDHF moiré superlattice dynamics",
+        "莫尔 多体 强场 综述 2024"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§三.7 Y2 R3 计划'靶标 A 临界强度 I_c 定量预言（参照 [CITE:amato_prb_2024]）'，但 I_c 在全文未给具体数值（评审报告原文：'I_c 作为可证伪假设的核心阈值，全文未给出具体数值'），且 amato_prb_2024 原文是顺磁体反铁磁长程序的预言，与 TMDC 莫尔关联绝缘态熔化物理类比是否完全成立需要补强",
+      "missing_evidence": "I_c 数值量级（评审建议 10¹¹–10¹² W/cm²）的同行文献支撑：(1) 至少 1 篇给出 TMDC 莫尔关联绝缘态在飞秒强场下熔化的临界强度实验/理论工作；(2) 1 篇综述/对比说明 amato_prb_2024 的反铁磁熔化机制与 TMDC 莫尔关联熔化机制在物理类比上的对应关系（电荷序 vs 自旋序、相干长度、热释放率差异）",
+      "search_keywords": [
+        "critical intensity Floquet melting moiré Mott insulator",
+        "light-induced melting charge order WSe2 WS2",
+        "TMDC moiré insulator ultrafast melting threshold",
+        "antiferromagnetic order Floquet light-induced melting",
+        "WSe2 WS2 Mott insulator pump probe intensity",
+        "靶标 A 临界强度 莫尔 关联 熔化"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3.4 风险表行 90 'C3 样品链'：TN 莫尔样品制备依赖外协（材料组 + hBN 封装），但 §3.7 Y1 仅给出'合作意向签订'软承诺，未给出材料组硬性交付时间表——外协/材料组能力证据缺失",
+      "missing_evidence": "外协材料组能力证据：(1) 1–2 篇近 2 年（2023–2025）合作材料组（或国内 TMDC 莫尔制备 leading 团队，如复旦/中科大/物理所）发表的高质量 tMoS₂/tWSe₂ 莫尔样品表征文献（电阻/光学/STEM 表征数据），证明其样品质量与可重复性；(2) 项目组与材料组已签订合作协议的附件（盖章扫描件）或共用发表证据（共同作者论文）",
+      "search_keywords": [
+        "TMDC moiré heterobilayer sample preparation 2024",
+        "high-quality MoS2 WSe2 moiré stacking angle",
+        "复旦 中科大 物理所 TMDC 莫尔 制备",
+        "hBN encapsulation twisted bilayer",
+        "moiré superlattice twist angle uniformity characterization",
+        "TMDC 莫尔 样品 制备 表征"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§六 §7 参考文献 28 篇中 DOI 89% 完整（约 3 篇仅 arXiv 编号），缺少同行评审版本——评审报告 line 514 明确指出 3 篇为 arXiv 预印本（ikeda_arxiv_2020、2026 路线图、amato arXiv 版本）",
+      "missing_evidence": "3 篇 arXiv 预印本的同行评审版本 DOI（若已发表）：(1) amato_prb_2024 是否已正式发表 PRB（评审报告时点为 2024 年内，需核实 2024–2025 PRB 最终版本）；(2) 2026 谷电子学路线图 arXiv:2603.01427 是否已发表在正式期刊（Valleytronics 社区期刊）；(3) ikeda_arxiv_2020 是否有正式发表版本（涉及 Berry 曲率反演方法学的早期奠基）",
+      "search_keywords": [
+        "Amato Schiro PRB 2024 antiferromagnetic",
+        "ikeda Berry curvature harmonic 2020 published",
+        "Valleytronics Roadmap 2026 Journal version",
+        "arXiv 2603.01427 valleytronics",
+        "arXiv 2308.06758 published PRB"
+      ],
+      "priority": "low"
+    },
+    {
+      "claim": "§3.6 创新点 3 '光控+光读'闭环协议声称'探针/调控双模式共用平台'，但**光 Floquet 调控 + 同一脉冲 HHG 读出的实验可行性**在创新点描述中未引用任何已发表的同平台闭环实验先例（目前引用是分开的两类：Tyulnev 2024 谷极化 + Zhou 2023 黑磷 Floquet + Nikola 2021 非线性调制）",
+      "missing_evidence": "至少 1 篇'同一驱动场 + 同一 HHG 探测 + 闭环调控'的实验先例文献（最好是 2D 半导体体系），或者 1 篇明确论证'HHG 探针与 Floquet 调控在物理上可叠加/切换'的近期理论文章（2023–2025）",
+      "search_keywords": [
+        "same-pulse pump probe HHG Floquet semiconductor",
+        "self-driving HHG Floquet all-optical control",
+        "in-situ HHG probe and Floquet engineering same platform",
+        "同脉冲 泵浦 探测 高次谐波 Floquet",
+        "closed-loop Floquet high harmonic spectroscopy 2D semiconductor"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§2.2 R2 多观测联合反演声称用 'HHG 基准 + 椭偏依赖 + ATAS 三类观测量' 联合反演扭转角 ±0.05°，但**三类观测量同时采集的实验可行性**在文中未引用任何一篇'同一实验装置同时采集 HHG 强度、椭圆度依赖、ATAS 时间分辨'的同行实验先例",
+      "missing_evidence": "至少 1 篇'同时采集 HHG 强度 + 椭偏依赖 + 阿秒瞬态吸收（ATAS）三种观测量'的实验工作（最好在 TMDC 或类 2D 半导体体系），用以证明三类观测量的实验兼容性与同步精度",
+      "search_keywords": [
+        "simultaneous HHG ellipticity ATAS attosecond transient absorption",
+        "multi-observable HHG spectroscopy 2D material",
+        "combined high-harmonic and attosecond transient absorption",
+        "同步 高次谐波 椭偏 阿秒 瞬态吸收",
+        "multi-dimensional HHG probe same setup"
+      ],
+      "priority": "low"
+    },
+    {
+      "claim": "§3.2 R1 SBE 在 ZnO/MgO 体系'偶次谐波偏振旋转角复现偏差 < 6%'作为迁移到莫尔体系的方法学依据，但**SBE + 莫尔（连续莫尔紧束缚 + 周期场求解）的可行性**仅引 Xu Zhou 2024（单层 MoS₂）作为唯一定量可行性证据，缺乏'SBE 已应用于莫尔尺度'的同行实验/理论先例作为更直接的迁移依据",
+      "missing_evidence": "至少 1 篇'半导体布洛赫方程（SBE）已应用于莫尔尺度强场电子动力学'的同行理论/实验工作（2022–2025），用以证明 SBE 从单层（如 MoS₂）到莫尔（tMoS₂/tWSe₂）的迁移不仅是简单的代码扩展",
+      "search_keywords": [
+        "semiconductor Bloch equation moiré superlattice",
+        "SBE twisted bilayer TMDC high harmonic",
+        "continuum moiré Hamiltonian time-dependent dynamics",
+        "moiré k·p model high harmonic generation",
+        "布洛赫方程 莫尔 强场"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "meta": {
+    "source_review": "critic-round-8.md（2026-07-31 综合评审 第 8 轮）",
+    "proposal_topic": "莫尔超晶格的强场量子调控——非线性光学探针与主动调控",
+    "proposal_id": "general-moire-strong-field-probe-20260726",
+    "gaps_count": 10,
+    "priority_breakdown": {
+      "high": 3,
+      "medium": 5,
+      "low": 2
+    },
+    "filtering_principle": "仅保留评审报告中与'文献/引用/支撑不足'直接相关的问题；剔除纯写作风格、逻辑结构、章节归属、格式排版类问题",
+    "review_round_coverage": [
+      "round-8 high consistency — 扭转角 ±0.02° 缺方法学手册交叉引用",
+      "round-8 high consistency — §3.6 创新点 3 引用 §3A.2 不存在",
+      "round-8 high consistency — 方法学手册承诺评审专家无法访问",
+      "round-8 high consistency — I_c 强度阈值未给具体数值（部分文献支撑缺失）",
+      "round-8 medium narrative — §1.2 文献堆砌未形成主线论证",
+      "round-8 medium completeness — 风险表 C3 样品链外协能力证据缺失",
+      "round-8 completeness — §七 28 篇 DOI 89% 完整（3 篇 arXiv 缺正式 DOI）",
+      "round-8 medium consistency — 光控+光读闭环缺同平台实验先例",
+      "round-8 medium consistency — SBE 莫尔迁移缺直接方法学先例"
+    ]
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "gaps": [
+    {
+      "claim": "references.md [17] 标注的 arXiv:2204.10844 实为 Šmejkal 另一篇综述，非 PRX 031042 本尊预印本",
+      "missing_evidence": "需要查证 Šmejkal PRX 031042 (altermagnetism) 对应的正确 arXiv 预印本号以替换错误的 2204.10844，或确认该条文献应仅保留 DOI",
+      "search_keywords": [
+        "Šmejkal altermagnet PRX 031042 arXiv preprint",
+        "altermagnetic spin group theory arXiv number",
+        "Šmejkal PRX 12 031042 2022 preprint"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "scheme.md §三.2 L19 中 'Long 等人 41.5 T dHvA 证认 CrSb g 波序参量' 缺少文献支撑",
+      "missing_evidence": "需要补入 Long 等人在 41.5 T 强磁场下通过 de Haas-van Alphen 振荡证认 CrSb g 波自旋劈裂的原始文献",
+      "search_keywords": [
+        "Long CrSb de Haas-van Alphen g-wave 41.5T",
+        "CrSb Fermi surface quantum oscillation g-wave symmetry",
+        "CrSb dHvA bulk g-wave order parameter"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "scheme.md §三.2 L23/L57/L77 中 'Woodgate DLM 自旋劈裂热抹除' 缺少文献支撑",
+      "missing_evidence": "需要补入 Woodgate 等人关于双局域磁矩 (DLM) 模型下自旋劈裂热抹除效应的原始文献或综述",
+      "search_keywords": [
+        "Woodgate DLM doublon local moment spin splitting thermal",
+        "altermagnet spin splitting thermal erasure doublon holon",
+        "CrSb doublon local moment model high temperature"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "rationale.md L41 国内现状层仅孟胜组 [14] 与综述 [34]，缺少国内 HHG-磁性/超快磁光实验工作",
+      "missing_evidence": "需要补入 1—2 项国内（如中科院物理所、上海光机所、北大、清华等）在固体高次谐波探测磁性序参量、超快磁光或阿秒磁性方向上的代表性实验工作",
+      "search_keywords": [
+        "固体高次谐波 中国 实验组 超快磁光",
+        "attosecond magnetism Chinese research group solid HHG",
+        "国内 阿秒磁性 HHG MnTe CrSb 实验组",
+        "固体HHG 交变磁 国内 代表性工作"
+      ],
+      "priority": "low"
+    },
+    {
+      "claim": "rationale.md §一.2 中 Tyulnev 等人 [6] 在 TiSe₂ 中观测 CDW 相各向异性谐波并归因于电子重排的论断需进一步文献验证",
+      "missing_evidence": "虽然 [6] 已嵌入引用，但 CDW 相内电子重排归因的物理图像（如 doublon-holon 贡献 vs CDW 序参量贡献）需要补充更多原始文献以支撑敏感但非唯一归因的论述",
+      "search_keywords": [
+        "Tyulnev TiSe2 high harmonic generation polarization asymmetry CDW",
+        "TiSe2 charge density wave HHG doublon holon contribution",
+        "TiSe2 even harmonic polarization anisotropic temperature dependence"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "rationale.md 中关于 '序参量对称破缺可同时贡献到同一偏振响应' 与 '多通道耦合源于对称性选择定则' 的瓶颈论断缺少直接综述支撑",
+      "missing_evidence": "需要补入关于固体 HHG 多通道耦合（interband/intraband/CDW/序参量）在同一偏振响应下叠加的综述或方法学论文",
+      "search_keywords": [
+        "solid-state HHG multichannel coupling interband intraband review",
+        "high harmonic generation order parameter symmetry breaking",
+        "HHG non-perturbative nonlinear optics multi-band coupling review"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

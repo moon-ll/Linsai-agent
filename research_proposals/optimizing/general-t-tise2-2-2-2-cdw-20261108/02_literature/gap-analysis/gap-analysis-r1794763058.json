@@ -1,0 +1,45 @@
+{
+  "gaps": [
+    {
+      "claim": "EuTe4 的室温相能够通过明确、可操作的观测量和判别标准，与相关低温相或其他候选结构相区分。",
+      "missing_evidence": "目前仅写“同步执行同型测量”，缺少文献支撑 EuTe4 室温相的晶体结构、对称性及相变特征，也缺少可实际执行的判据，如结构因子、衍射峰位与峰强、谱权重或其他可用于相判别的参量及其阈值。需要引用温度依赖的中子衍射、其他结构表征或相关相变研究。",
+      "search_keywords": [
+        "EuTe4 room-temperature phase crystal structure neutron diffraction",
+        "EuTe4 temperature-dependent structural phase transition",
+        "EuTe4 room temperature phase discrimination criteria",
+        "EuTe4 charge density wave structural markers",
+        "EuTe4 室温相 晶体结构 相变 判据",
+        "EuTe4 温度依赖 中子衍射 结构相变"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "trARPES 数据能够支撑 EuTe4 的瞬态谱研究内容，且方案中的 ARPES 数据来源和采集安排明确。",
+      "missing_evidence": "缺少说明 ARPES/trARPES 数据是自行测量还是来自已发表工作，并缺少样品状态、温度、泵浦与探测条件、时间和能量分辨率、动量映射范围以及与瞬态谱指标对应关系的文献或方法依据。若使用已有数据，需要给出可追溯的原始论文或数据集；若计划自测，需要补充代表性 trARPES 方法文献、采集方案及预期可获得 observables 的依据。",
+      "search_keywords": [
+        "EuTe4 time-resolved ARPES",
+        "EuTe4 trARPES transient spectra",
+        "EuTe4 pump-probe photoemission spectroscopy",
+        "time-resolved ARPES momentum-energy mapping",
+        "trARPES acquisition method pump-probe photoemission",
+        "EuTe4 ARPES band dispersion",
+        "EuTe4 瞬态 ARPES 数据 采集 动量映射"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "T* 作为方案中沿用已有文献的谱重定义量，具有明确来源、定义和适用边界。",
+      "missing_evidence": "“沿用文献的谱重定义”缺少具体角标。需要补齐 Ye 等人的原始文献及完整书目信息，并依据原文说明 T* 的定义、推导或计算方式、它与 ARPES 强度或谱函数的关系，以及用于 EuTe4 方案时的适用条件，避免 T* 的物理含义和可复现性无法核验。",
+      "search_keywords": [
+        "Ye EuTe4 spectral redefinition T*",
+        "Ye et al. EuTe4 ARPES T*",
+        "EuTe4 spectral function transient photoemission",
+        "EuTe4 ARPES spectral weight effective temperature",
+        "EuTe4 T* 谱重定义 Ye",
+        "EuTe4 光谱函数 T* ARPES"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

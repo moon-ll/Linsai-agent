@@ -1,0 +1,49 @@
+{
+  "gaps": [
+    {
+      "claim": "[41] (arXiv:2606.21281) 已指出 Rashba 体系 d-wave 结果可直接推广至 g-/i-wave 配对对称性",
+      "missing_evidence": "[41] 摘要仅证明 d-wave＋Rashba 体系的 Floquet 效应，无任何 g-/i-wave 推广表述；缺少关于奇宇称配对（g-wave、i-wave）在 Rashba 自旋轨道耦合下 Floquet 推广的既有文献支撑；g-/i-wave 推广属本项目独立贡献，不应具名归属文献",
+      "search_keywords": [
+        "arXiv:2606.21281 Floquet Rashba",
+        "Rashba spin-orbit coupling odd-parity pairing g-wave i-wave",
+        "Floquet topological superconductor odd-parity symmetry extension",
+        "MnPS3 Rashba superconductivity pairing symmetry higher angular momentum"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "[13] 对 MnPS3 螺旋度特征的预言，既在 §2.3 L29 被描述为'定量关系'又在 L25/L81 被描述为'定性预言'",
+      "missing_evidence": "需要核实文献[13]原文对手性/螺旋度特征的具体表述（定量子依赖关系 vs 定性符号预期），以统一引用口径并消除自相矛盾；缺失[13]原文的反查记录与定性/定量化结论摘要",
+      "search_keywords": [
+        "MnPS3 circular dichroism helicity selection rule",
+        "MnPS3 superconducting order parameter helicity prediction",
+        "circular polarization Raman MnPS3 pairing symmetry theoretical",
+        "MnPS3 chiral superconducting order parameter spin-resolved"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§2.6 (L67) dP/dE>1.0 作为动量分辨隧穿概率光谱通道渡越判据，依赖'经验判据'而非物理锚定",
+      "missing_evidence": "需要 Landau-Zener 隧穿率公式在 BCS 能隙边缘隧穿判别中应用的经典与近期文献支撑，作为预注册物理锚替代经验判据；缺少 L-Z 公式对 d-wave/Rashba 体系隧穿概率斜率临界的理论预测",
+      "search_keywords": [
+        "Landau-Zener tunneling rate BCS superconductor gap edge",
+        "momentum-resolved Bogoliubov-de Gennes tunneling Landau-Zener",
+        "avoided crossing Landau-Zener formula superconducting gap",
+        "tunneling probability slope gap edge unconventional pairing"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§2.5 (L55) 目标一中 E_thr 阈值的'基线 30%'全稿未定义，且方案 §3.2 指标段零承接",
+      "missing_evidence": "需要 E_thr 阈值协议在非常规配对（特别是 MnPS3 类层状磁性超导体或 Rashba 体系）中的定义惯例、基线取值依据及典型文献支撑；缺失同类系统 E_thr 区间的可比参照与基线确定方法学出处",
+      "search_keywords": [
+        "E_thr threshold energy unconventional superconductor pairing",
+        "threshold field pairing symmetry discriminator layered magnetic superconductor",
+        "alternating helicity transition threshold baseline MnPS3",
+        "Rashba superconductor threshold energy spin-orbit coupling protocol"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "content"
+}

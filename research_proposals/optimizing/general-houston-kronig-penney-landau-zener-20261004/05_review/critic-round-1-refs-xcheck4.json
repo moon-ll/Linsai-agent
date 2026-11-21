@@ -1,0 +1,88 @@
+{
+ "ax_1911.01829": {
+  "id": "1911.01829",
+  "title": "Algebraic approach to Bose-Einstein Condensation in relativistic Quantum Field Theory. Spo",
+  "authors": [
+   "Romeo Brunetti",
+   "Klaus Fredenhagen",
+   "Nicola Pinamonti"
+  ]
+ },
+ "c23_klemke": [
+  {
+   "doi": "10.1103/physreva.56.748",
+   "title": "Floquet-Bloch theory of high-harmonic generation in periodic structures",
+   "first": "Faisal",
+   "container": "Physical Review A",
+   "vol": "56",
+   "page": "748-762",
+   "year": 1997
+  },
+  {
+   "doi": "10.1080/00268976.2019.1601788",
+   "title": "High-order harmonic generation spectrum from two coupled Floquet resonances – a non-Hermit",
+   "first": "Kaprálová-Žďánská",
+   "container": "Molecular Physics",
+   "vol": "117",
+   "page": "2138-2156",
+   "year": 2019
+  },
+  {
+   "doi": "10.1103/physreva.110.l051101",
+   "title": "Photon statistics from non-Hermitian Floquet theory: High-order-harmonic-generation and ab",
+   "first": "Moiseyev",
+   "container": "Physical Review A",
+   "vol": "110",
+   "page": "L051101",
+   "year": 2024
+  }
+ ],
+ "c12_bcd2": [
+  {
+   "doi": "10.1021/acs.jpcc.6c01491.s001",
+   "title": "Substrate- and Growth-Dependent Second Harmonic Generation in Monolayer MoS2",
+   "first": "?",
+   "container": "",
+   "vol": null,
+   "page": null,
+   "year": null
+  },
+  {
+   "doi": "10.1021/acsphotonics.6b00530.s001",
+   "title": "Impact of Selenium Doping on Resonant Second-Harmonic Generation in Monolayer MoS2",
+   "first": "?",
+   "container": "",
+   "vol": null,
+   "page": null,
+   "year": null
+  },
+  {
+   "doi": "10.1021/acsnano.5c11386.s001",
+   "title": "Determining the Dipole Orientation of Second Harmonic Generation in 3R-MoS2 for Enhanced N",
+   "first": "?",
+   "container": "",
+   "vol": null,
+   "page": null,
+   "year": null
+  }
+ ],
+ "s12_ax2": [],
+ "pool_hits": {
+  "2601.21273": 4,
+  "2508.07869": 5,
+  "2403.15337": 5,
+  "2401.12929": 7,
+  "2405.01571": 3,
+  "2503.16547": 0,
+  "5.0145728": 0,
+  "s41586-021-03466-7": 0,
+  "nphys1847": 1,
+  "nature14517": 0,
+  "PhysRevX.13.031011": 0,
+  "Hu": 5,
+  "Hänggi": 0,
+  "Obreshkov": 0,
+  "Tancogne-Dejean": 8
+ },
+ "pool_21273_ctx": []
+}

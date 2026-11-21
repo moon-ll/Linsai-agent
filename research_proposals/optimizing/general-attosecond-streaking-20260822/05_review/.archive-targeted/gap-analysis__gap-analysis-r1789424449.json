@@ -1,0 +1,82 @@
+{
+  "gaps": [
+    {
+      "claim": "Peschel[7]提供了双通道耦合TDSE模拟作为水窗多通道反演的先例支撑",
+      "missing_evidence": "需核实Peschel NatComm 13:5205原文仅处理Ne 2p⁶光电离角动量分波相位，非'双通道耦合TDSE模拟'或'重叠宽度映射'；需补充水窗多通道TDSE模拟的真实文献，或确认本方案设计值尚无先例",
+      "search_keywords": [
+        "Peschel Nature Communications 13 5205 Ne 2p RABBIT",
+        "water window multi-channel TDSE attosecond streaking",
+        "multi-channel TDSE simulation neon 2p ionization",
+        "interchannel coupling attosecond pulse retrieval"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Cousin[2]实验条件落在0.5-2 eV重叠参数区间",
+      "missing_evidence": "需定位Cousin PRX 2017 (7 041030) 原文中水窗多通道电离重叠度的实际测量值或区间",
+      "search_keywords": [
+        "Cousin PRX 7 041030 water window attosecond streaking",
+        "Cousin 2017 attosecond pulse multi-channel ionization overlap",
+        "water window attosecond streaking 322 as spectral overlap",
+        "PRX 7 041030 attosecond streaking neon K-shell"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "量子拍实验已验证角积分对偶极相位的压制效应",
+      "missing_evidence": "需区分Pabst-Dahlström PRA 94.013411 (2016) 理论提案与量子拍实验实测文献；确认是否存在实际量子拍条件下角积分偶极相位抑制的实验验证论文",
+      "search_keywords": [
+        "Pabst Dahlstrom PRA 94 013411 2016 angular integration dipole phase",
+        "quantum beat attosecond streaking dipole phase experimental verification",
+        "Rydberg wave packet angular integration attosecond metrology experiment",
+        "rare gas attosecond streaking dipole phase decoupling measurement"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "水窗HHG通量10³–10⁵ ph/pulse的效率假设",
+      "missing_evidence": "缺少水窗能区高次谐波转换效率与单脉冲光子数的实验测量数据，需要HHG flux/photon yield at water window (284-410 eV)的文献支撑",
+      "search_keywords": [
+        "water window high harmonic generation photon flux yield",
+        "HHG photon yield 284-410 eV measurement",
+        "water window attosecond pulse photon number per pulse",
+        "high harmonic conversion efficiency water window soft X-ray"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Zhu[9]作为多通道触发器与训练集生成方法的双重功能支撑",
+      "missing_evidence": "需核实Zhu 2024/2025 (rACE) 论文关于泊松噪声训练集与多通道触发机制的实际内容，确保两处功能描述与原文一致",
+      "search_keywords": [
+        "Inzani rACE attosecond pulse reconstruction neural network",
+        "Zhu rACE neural network attosecond streaking 2024",
+        "rACE Poisson noise training attosecond retrieval",
+        "Inzani rACE multi-channel correction attosecond"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "2 eV分辨率可分辨0.5–2 eV窄重叠度的拟合可行性",
+      "missing_evidence": "需补充卷积分辨分析或分辨率与重叠度自洽的物理依据，说明光谱分辨率对电离通道重叠的分辨能力",
+      "search_keywords": [
+        "spectral resolution attosecond streaking channel overlap",
+        "convolution broadening attosecond pulse retrieval",
+        "spectral resolution narrow overlap ionization channels",
+        "FROG-CRAB resolution limit multi-channel streaking"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "本方案R1判据（重叠度映射+截面拟合）的理论先例支撑",
+      "missing_evidence": "需补充重叠度映射(channel overlap mapping)作为阿秒脉冲反演中间量的理论或方法论文献，或明确为'本方案设计值'",
+      "search_keywords": [
+        "channel overlap mapping attosecond streaking theory",
+        "ionization channel overlap degree retrieval attosecond",
+        "multi-electron ionization branching ratio streaking methodology",
+        "channel overlap function attosecond pulse characterization"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "scheme"
+}

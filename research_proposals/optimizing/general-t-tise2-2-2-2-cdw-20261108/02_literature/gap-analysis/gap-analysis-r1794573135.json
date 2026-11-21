@@ -1,0 +1,27 @@
+{
+  "gaps": [
+    {
+      "claim": "时间分辨中子衍射对1T-TiSe₂非平衡超晶格的探测能力已经证明[1]，且激光加热下超晶格序约3 s熔化、平均晶格约11 s恢复的秒级定量数据（§2.1/§2.2 锚点论据）均出自该文献",
+      "missing_evidence": "[1]（Dharmasani et al., arXiv:2509.15358）为未刊预印本，'已经证明'措辞过强，缺少同行评审刊出版本的核实；若未刊出，需已正式发表的时间分辨中子衍射观测光致CDW/超晶格熔化-重建动力学的替代文献支撑该论断",
+      "search_keywords": [
+        "Dharmasani Louca time-resolved neutron diffraction TiSe2 published journal",
+        "time-resolved neutron diffraction photoinduced charge density wave melting",
+        "laser pump-probe neutron diffraction superlattice recovery dynamics",
+        "arXiv 2509.15358 journal version DOI"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "正文§2.3激发初期相干声子阶段不纳入粗化拟合窗口、§2.4电声/激子机制分解与CDW起源之争、CDW基态性质（Mott还是电荷转移隙）等相关论断，缺少与参考文献表[17][18][19]（Sayers 1T-TaSe₂ Mott/电荷转移隙之争、Butler 1T-TMD基态综述、Tu声子非简谐驱动TaS₂/TaSe₂ CDW转变与超快动力学）的挂接",
+      "missing_evidence": "references.md中[17][18][19]三条文献在rationale/content/scheme三章正文零角标引用（54/57被引），缺少使用点；需核实这三条文献的具体论断，确定在CDW基态性质、声子非简谐驱动机制、超快声子动力学等论断处补引（或确认不适配后删除）",
+      "search_keywords": [
+        "1T-TaSe2 Mott charge-transfer gap charge density wave phase",
+        "phonon anharmonicity driven charge density wave transition ultrafast dynamics TaS2 TaSe2",
+        "1T transition metal dichalcogenide ground state nature review",
+        "charge density wave origin electron-phonon exciton controversy"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

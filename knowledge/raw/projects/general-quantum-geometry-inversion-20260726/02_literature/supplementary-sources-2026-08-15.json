@@ -1,0 +1,22 @@
+{
+  "proposal_id": "general-quantum-geometry-inversion-20260726",
+  "cluster_id": "cl_20260815_c1f53c",
+  "entries": [
+    {
+      "source_id": "hermes_briefing:research_briefing_20260531.md",
+      "title": "强场超快光学与阿秒科学研究简报（20260531）：基于AI评分的文献筛选与核心论文深度解析",
+      "summary": "本简报采用AI评分（阈值≥3.0）从14篇强场超快光学/阿秒科学方向的arXiv文献中筛选并分析相关研究（多数因PDF解析错误仅作条目收录）。深度解析的核心论文（arXiv:2510.14404）由Twente/Utrecht团队合作，提出在扭曲双层屈曲蜂窝材料（锗烯/硅烯）中可利用电场诱导实现自旋-能谷锁定，为能谷电子学提供了纯电学调控的新机制。",
+      "path": "/Users/ll/Desktop/hermes_workspace/knowledge_base/AI_wiki/briefings/research_briefing_20260531.md",
+      "added_via": "cluster:cl_20260815_c1f53c",
+      "added_at": "2026-08-15T17:49:03Z"
+    },
+    {
+      "source_id": "hermes_briefing:research_briefing_20260524.md",
+      "title": "强场超快光学与阿秒科学研究简报（7篇精选论文）",
+      "summary": "该简报汇总了7篇强场超快光学与阿秒科学领域最新论文，核心亮点是通过阿秒瞬态吸收光谱（ATAS）揭示π-SnS中载流子动力学从界面受限到Auger复合主导的转变（临界密度约1×10²⁰ cm⁻³）。其余工作涵盖拓扑绝缘体、Dirac材料、有机分子晶体及ZnO中的固体高次谐波机制，以及~500阿秒skyrmion光脉冲产生和压缩光量子路径调控等前沿方向。",
+      "path": "/Users/ll/Desktop/hermes_workspace/knowledge_base/AI_wiki/briefings/research_briefing_20260524.md",
+      "added_via": "cluster:cl_20260815_c1f53c",
+      "added_at": "2026-08-15T17:49:03Z"
+    }
+  ]
+}

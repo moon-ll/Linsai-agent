@@ -1,0 +1,14 @@
+{
+  "gaps": [
+    {
+      "claim": "rationale §4 文中\"fs/μm/eV\"指标集与文献报道值的差异声明——需要被引用文献实际参数作为对比基准",
+      "missing_evidence": "缺文献中\"fs/μm/eV\"参数的常用取值范围综述（脉宽 30-100 fs、波长 0.8-3.2 μm、谐波能量 0-30 eV），以支撑\"本项目参数窗\"的合理性声明",
+      "search_keywords": [
+        "solid HHG experimental parameter range review",
+        "mid-infrared driver wavelength pulse duration solid HHG",
+        "cut-off energy range solid HHG survey"
+      ]
+    }
+  ],
+  "section": "full_review"
+}

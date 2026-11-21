@@ -1,0 +1,91 @@
+{
+  "gaps": [
+    {
+      "claim": "CrSb 主体系 HHG 实验中场强阈值 0.3 V/Å 处于样品安全区间",
+      "missing_evidence": "缺少 CrSb 或同类 altermagnet 在800 nm 飞秒强场下损伤阈值的独立测量文献（前置已检索仅得 1 篇 2607.13863，需补充样品损伤阈值的同行实验数据）",
+      "search_keywords": [
+        "CrSb femtosecond laser damage threshold",
+        "altermagnet high harmonic generation field strength",
+        "transition metal pnictide ultrafast optical breakdown",
+        "CrSb strong-field ablation threshold near-infrared"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "方案选用0.3—0.8 V/Å 装置场强与半导体布洛赫方程(SBE)适用区间 0.1—1.0 V/Å 的物理一致性",
+      "missing_evidence": "缺少直接证明 SBE 适用区间上界1.0 V/Å 的同行理论/数值工作引用，未对区段边缘（≥0.8 V/Å）隧穿电离饱和/带间耦合效应做引用支撑",
+      "search_keywords": [
+        "semiconductor Bloch equation validity range V/Å",
+        "SBE high harmonic generation strong field limit",
+        "interband coupling saturation strong field solid HHG",
+        "Kane model HHG field strength range"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "MnTe 备选体系触发切换判据'反射率变化 > 5%'反映 altermagnet 序参量重整",
+      "missing_evidence": "缺少 MnTe 或同类 altermagnet 反射率随磁相变（>5% 量级）变化的独立测量方法学引用，无法验证 5% 阈值的可分辨性",
+      "search_keywords": [
+        "MnTe altermagnet reflectivity magnetic phase transition",
+        "altermagnet optical reflectivity Néel temperature",
+        "MnTe transient reflectivity ultrafast spectroscopy",
+        "MnTe magneto-optical Kerr altermagnet"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "前置门槛 TiSe₂ HHG 复现偏差 ≤ 10% 作为本项目装置校准基准",
+      "missing_evidence": "缺少 TiSe₂ CDW 相 HHG 复现实验的同行偏差统计文献，无法论证 10% 阈值的行业惯例合理性",
+      "search_keywords": [
+        "TiSe2 charge density wave high harmonic generation",
+        "TiSe2 HHG reproducibility benchmark solid state",
+        "CDW high harmonic spectroscopy experimental deviation",
+        "TiSe2 ultrafast HHG community standard"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "正演模型采用 Aversa-Sipe 半导体重碰撞模型用于 altermagnet HHG 序参量反演",
+      "missing_evidence": "rationale.md 已检索到 Aversa-Sipe 1993/1994 原始文献（physics/9906053, cond-mat/9405059），但 scheme.md 中该模型的 altermagnet 序参量反演适用性缺少近期同行验证引用（如 Vampa/Ghimire 等半导体 HHG 正演框架的延伸工作）",
+      "search_keywords": [
+        "Aversa Sipe semiconductor HHG recollision model",
+        "semiconductor HHG forward model order parameter retrieval",
+        "interband-recombination dipole HHG inverse problem",
+        "Vampa Ghimire semiconductor HHG theory altermagnet"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "rationale.md 中 [69] 引用 Schüle 2025 altermagnet 工作作为支撑",
+      "missing_evidence": "references.md 已删除 [69] 条目，但正文仍出现悬空引用——需补回 Schüle 2025 实际文献 DOI/arXiv ID，或删除该悬空引用",
+      "search_keywords": [
+        "Schüle 2025 altermagnet high harmonic generation",
+        "Schuele altermagnet nonlinear optics2025",
+        "altermagnet HHG spin symmetry breaking 2025"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "磁场切换驻留时间 ≥ 1 s 作为 altermagnet 序参量翻转的可分辨时间尺度",
+      "missing_evidence": "缺少 CrSb/MnTe 磁畴翻转动力学时间常数的同行实验测量引用，无法论证 1 s 驻留足以覆盖磁化反转+畴壁弛豫",
+      "search_keywords": [
+        "CrSb magnetic domain reversal dynamics timescale",
+        "altermagnet magnetization switching relaxation time",
+        "MnTe magnetic domain ultrafast switching",
+        "collinear antiferromagnet domain wall dynamics"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "pump-probe 时间抖动 < 50 fs 作为 HHG 阿秒动力学分辨的前提",
+      "missing_evidence": "缺少同类装置（800 nm + 中红外 OPA泵浦）抖动 < 50 fs 的同行标定方法学引用",
+      "search_keywords": [
+        "pump-probe timing jitter 50 fs solid HHG",
+        "attosecond pump probe synchronization interferometric",
+        "active stabilization HHG delay line jitter",
+        "carrier envelope phase stabilization solid HHG"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

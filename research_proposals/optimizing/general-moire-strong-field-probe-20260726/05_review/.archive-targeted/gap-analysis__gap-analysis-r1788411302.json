@@ -1,0 +1,64 @@
+{
+  "gaps": [
+    {
+      "claim": "Molinero 2024 在 Optica 报道的 TBG HHG 理论使用 100×100 Monkhorst–Pack k 网格 + 8轨道 Wannier 模型 + SBE 求解的具体计算资源数据",
+      "missing_evidence": "需要找到 Molinero et al. 2024 Optica TBG HHG 论文，确认其计算规模（k网格数、轨道数）、计算资源消耗、核时数据，作为本项目 10⁸→10⁴ 核时推算的对照基准",
+      "search_keywords": [
+        "Molinero 2024 Optica TBG high harmonic generation",
+        "Molinero twisted bilayer graphene HHG Wannier",
+        "TBG HHG SBE Monkhorst-Pack k-mesh benchmark"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Mrudul 2024 与 Molinero 2024 均仅使用紧束缚而无多体修正的断言",
+      "missing_evidence": "需要找到 Mrudul et al. 2024 关于莫尔 HHG 的论文，确认其方法学仅为紧束缚模型，未包含多体修正（GW/BSE/DMFT等），以支撑本项目'引入张量网络关联修正'的必要性论证",
+      "search_keywords": [
+        "Mrudul 2024 moire high harmonic generation",
+        "Mrudul twisted bilayer HHG tight-binding",
+        "moire superlattice HHG many-body correction"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "本项目降阶框架相对 TBG 全原胞 TDDFT 计算实现4个数量级加速的量化优势",
+      "missing_evidence": "需要找到现有 TBG/MoS2莫尔 HHG 全原胞 TDDFT 计算的核时数据（如10⁴–10⁸ 核时），作为本项目降阶方案 10⁴ 核时的对比基准，验证4个数量级加速声明",
+      "search_keywords": [
+        "TBG TDDFT core-hour benchmark",
+        "twisted bilayer real-time TDDFT computational cost",
+        "moire superlattice first-principles HHG scaling"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "扭转角分辨率达 ±0.02–0.05° 的实验/理论可行性",
+      "missing_evidence": "需要找到扭转角精密测量的实验精度数据（如SHG/拉曼/二次谐波扭转角mapping的精度），确认 ±0.02° 是否为当前实验可达到水平，或仅为合成数据理想情形",
+      "search_keywords": [
+        "twist angle measurement precision moire",
+        "SHG twist angle mapping accuracy degree",
+        "TBG twist angle ±0.02 degree precision"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "R1→R2→R3 闭环中高重频 1–100 kHz、时间分辨率 < 50 fs 的实验参数对应方法",
+      "missing_evidence": "需要找到对应这些参数（kHz重频、<50 fs时间分辨率）的莫尔/二维材料超快光谱方法学参考文献，确认这些指标在莫尔体系实验中的现实可达性",
+      "search_keywords": [
+        "kHz high repetition rate2D material ultrafast",
+        "sub-50 fs time resolution moire spectroscopy",
+        "high repetition rate HHG 2D material pump-probe"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "创新点 §3.5 中'张量网络自能修正 ΔΣ(ω) 纳入莫尔 HHG 正向模型'作为方法学创新点",
+      "missing_evidence": "需要找到张量网络（如DMRG/MPS）已应用于莫尔强关联体系（如TBG/Mott绝缘态）静态电子结构或动力学计算的文献，确认 ΔΣ(ω) 自能项引入莫尔 HHG 是真正的方法学创新（而非已有工作的简单移植）",
+      "search_keywords": [
+        "tensor network DMRG moire superlattice strongly correlated",
+        "matrix product state TBG Mott insulator",
+        "self-energy correction moire HHG many-body"
+      ],
+      "priority": "high"
+    }
+  ]
+}

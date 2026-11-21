@@ -1,0 +1,67 @@
+{
+  "gaps": [
+    {
+      "claim": "§3.3采用气体原子三步模型的多光子共振截止判据 q_cut=Eg/(ℏω)+3.17，并据此讨论固态样品中接受拟合解的截止边界。",
+      "missing_evidence": "缺少对3.17Up气体单带回收能来源及其适用边界的原始文献或权威综述；同时缺少固态半导体中多带耦合、强场多光子电离及上垒离子化截止条件的理论与实验依据。还需结合800 nm、5×10^11 W/cm²参数核算该截止项是否可忽略，否则不宜将其作为本项目的判据。",
+      "search_keywords": [
+        "3.17 Up multiphoton ionization cutoff three-step model",
+        "3.17 ponderomotive energy final kinetic energy ionization",
+        "strong-field ionization 3.17 Up cutoff",
+        "solid-state semiconductor multiband strong-field ionization cutoff criterion",
+        "high-order multiphoton above-barrier ionization semiconductor",
+        "solid-state high harmonic generation ionization cutoff band structure"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3.2称Rasputnyi文献中的峰值强度仅比本项目低约4倍。",
+      "missing_evidence": "缺少Rasputnyi原始文献中脉冲能量、脉宽、聚焦光斑、时空轮廓及峰值强度定义等完整参数，因而无法支持“约4倍”的定量比较。按报告给出的248 nJ、25 fs和10 μm聚焦参数复算，强度差约为25倍；需由原文参数和统一的光强口径重新核算或删除该倍数表述。",
+      "search_keywords": [
+        "Rasputnyi 248 nJ 25 fs 10 μm",
+        "Rasputnyi peak intensity focusing geometry",
+        "Rasputnyi coherent driving 25 fs 10 micrometer",
+        "248 nJ 25 fs focused pulse peak intensity",
+        "Rasputnyi nonlinear optical experiment semiconductor"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3.4与§3.5认为非零可见度条件下的涨落能够携带Δφ相干信息，并据此构成Q_F判据通道。",
+      "missing_evidence": "缺少高增益参量过程或参量放大器中强度起伏、光子数噪声、时域抖动与光场相位起伏之间映射关系的理论文献或严格推导。需要明确所用涨落变量、相位敏感 quadratures、噪声频段及相干性判据，并说明Q_F如何由可观测量闭合判定；否则应将其明确列为待验证假设。",
+      "search_keywords": [
+        "high-gain parametric down-conversion intensity fluctuations phase noise",
+        "photon-number fluctuations phase diffusion parametric amplifier",
+        "parametric amplifier quadrature fluctuations phase diffusion",
+        "squeezed light intensity noise phase fluctuation relation",
+        "timing jitter phase noise parametric down-conversion",
+        "fluctuation-dissipation relation parametric optical phase fluctuations"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3.3将Wang[39]用于支撑“κ-Br磁输运涨落”相关论断。",
+      "missing_evidence": "Wang[39]实际研究对象为κ-Cl磁输运，不能直接作为κ-Br的直接证据。需要核验该文献的完整书目信息及其实际材料、输运机制和涨落类型，并补充κ-(BEDT-TTF)₂X家族中适用于κ-Br或家族共性的磁输运噪声、磁通涨落或 shot noise文献；若无法区分Cl、Br及I等盐，应改用家族层面的表述。",
+      "search_keywords": [
+        "Wang kappa-Cl magnetotransport fluctuations",
+        "κ-(BEDT-TTF)2Cl magnetic transport noise",
+        "κ-(BEDT-TTF)2Br magnetotransport fluctuations",
+        "κ-(BEDT-TTF)2X magnetotransport shot noise",
+        "organic conductor kappa phase magnetotransport fluctuations"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§3.3提出莫尔激子在R_M^M/3R位点具有选择性局域化，并以此支撑中等关联条件下的局域化论述。",
+      "missing_evidence": "缺少直接报道莫尔激子位点选择性局域化及R_M^M、3R等记号的原始文献。需要由原文确认材料体系、激子束缚与局域化机制、空间周期和位点归属，并核实其结论能否外推至申请书所采用的关联强度和样品条件。",
+      "search_keywords": [
+        "moire exciton site-selective localization 3R",
+        "R_M^M 3R moire exciton",
+        "twisted bilayer WSe2 moire exciton localization",
+        "moire exciton spatially selective localization triangular lattice",
+        "3R site selective localization moire exciton"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

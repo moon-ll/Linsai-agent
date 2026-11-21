@@ -1,0 +1,58 @@
+{
+  "gaps": [
+    {
+      "claim": "Goulielmakis[1] Nature 2010 工作被错误引用为'条纹测量记录电子波包完整量子谱相位'，而该文实为阿秒瞬态吸收测量Kr离子价电子密度矩阵",
+      "missing_evidence": "需要Goulielmakis 2010 Nature原文的真实贡献描述，或用[28]综述替代该论断作为条纹方法学谱系锚点",
+      "search_keywords": [
+        "Goulielmakis 2010 Nature attosecond",
+        "attosecond density matrix krypton valence",
+        "attosecond streaking full quantum phase",
+        "attosecond metrology review"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3.1 L53断言'国内已建成覆盖水窗能区（284–409.7 eV）的高次谐波光源'，无引用支撑",
+      "missing_evidence": "需要国内实验组公开发表的覆盖水窗能区（284–409.7 eV）的高次谐波光源报道文献",
+      "search_keywords": [
+        "water window high harmonic generation China",
+        "中国 水窗 高次谐波",
+        "国内 水窗能区 阿秒光源",
+        "water window HHG Chinese group",
+        "284 eV 409 eV high harmonic China"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "reference [20] 新式APS短 DOI（ll25-15dm）格式异常，本轮解析失败",
+      "missing_evidence": "需要确认reference [20]对应论文的标准DOI并完整反查解析",
+      "search_keywords": [
+        "Physical Review Letters DOI format",
+        "APS PhysRevLett short DOI",
+        "verify PhysRevLett.ll25-15dm"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "reference [24] 新式APS短 DOI（csvm-858f）格式异常，本轮解析失败",
+      "missing_evidence": "需要确认reference [24]对应论文的标准DOI并完整反查解析",
+      "search_keywords": [
+        "Physical Review short DOI",
+        "APS PhysRevResearch DOI lookup",
+        "verify csvm-858f DOI"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "reference [21][25] 为preprint无DOI，参考文献29篇低于30-40篇下限",
+      "missing_evidence": "需要1-2篇近三年正式刊出的attosecond streaking相关正式文献（替换preprint或新增）",
+      "search_keywords": [
+        "attosecond streaking 2023 2024 published",
+        "streaking camera published paper recent",
+        "attosecond pulse retrieval Nature Physics2024 2025"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "rationale"
+}

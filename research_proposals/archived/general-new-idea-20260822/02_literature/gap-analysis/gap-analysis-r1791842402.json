@@ -1,0 +1,14 @@
+{
+  "gaps": [
+    {
+      "claim": "§5.3 L89/91 三条 [arXiv:ID] 内联角标绕过 [N] 编号域",
+      "missing_evidence": "缺少该三条 arXiv 预印本的正式发表期刊版或可入参考文献表的完整文献信息",
+      "search_keywords": [
+        "arXiv 1903.08008 Bayesian Analysis 2021",
+        "arXiv 2506.18802 publication",
+        "arXiv 2404.05671 publication journal version"
+      ]
+    }
+  ],
+  "section": "scheme"
+}

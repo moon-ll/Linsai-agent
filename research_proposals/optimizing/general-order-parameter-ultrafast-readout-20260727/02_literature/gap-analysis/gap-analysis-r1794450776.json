@@ -1,0 +1,33 @@
+{
+  "gaps": [
+    {
+      "claim": "文献表 [3][38][39][40][41] 的条目在 rationale/content/scheme 三章零引用，与总注「全部条目均在正文被引用」矛盾，文献支撑链断裂",
+      "missing_evidence": "这 5 条文献与正文论点的对应锚点。需逐条核实其主题，在正文中找到它们可实质支撑的论断并回挂 [N]；若确无对应论点，则应从文献表删除这 5 条并同步修正 44/14/89% 计数",
+      "search_keywords": [
+        "order parameter ultrafast readout",
+        "high harmonic generation symmetry probing",
+        "differential spectroscopy band background",
+        "quantum oscillation spin splitting"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§二.3 L53「d 波分类与之并存」论断无任何引文支撑，而同段 g 波证据挂四引，对称性分类的证据密度失衡",
+      "missing_evidence": "支持 d 波（相应对称性）分类判定的实验或理论文献；优先方案是补挂文献表既有 [9]，或标注「引据见立项依据 §一.4」实现跨节引用回链",
+      "search_keywords": [
+        "d-wave order parameter symmetry",
+        "spin resonance symmetry analysis",
+        "pairing symmetry experimental evidence",
+        "order parameter classification spectroscopy"
+      ],
+      "priority": "low"
+    },
+    {
+      "claim": "全章 [N] 引用 31 次，单章即超范本全文上限（10–20 次）约 1.5 倍，基准链两段（L51/L53）引用堆叠过密",
+      "missing_evidence": "非缺少文献而是引用分配失衡：需合并基准链两段叙述、精简回挂至 ≤20 次，且精简后保留的引用须仍逐条对应实质论据，避免再次制造 orphan 条目",
+      "search_keywords": [],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

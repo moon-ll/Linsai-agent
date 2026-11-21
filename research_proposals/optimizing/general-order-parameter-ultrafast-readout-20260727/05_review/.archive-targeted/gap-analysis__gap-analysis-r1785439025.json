@@ -1,0 +1,276 @@
+{
+  "gaps": [
+    {
+      "claim": "参考文献 #23「Biegert 集团 2024 YBCO HHG 实验（ICMAB 新闻报道，Nature 2024 突破）」是 NSFC 立项最强证据",
+      "missing_evidence": "该条目无 DOI、无 arXiv、无正式期刊接收标识（仅标注「ICMAB 新闻报道」），评审专家若在 PubMed/Web of Science 查不到，会被认定为「虚假立项证据」——这是本申请书在可行性论证中「最强证据」反成最大软肋的根源。需核实 Biegert 集团 2024 年关于 YBCO HHG 的正式发表论文（可能为 *Nature*/*Nature Phys.*/*PNAS*/*PRL* 或 arXiv 预印本）。",
+      "search_keywords": [
+        "Biegert YBCO high harmonic generation 2024",
+        "ICFO YBCO HHG cuprate superconductor",
+        "Biegert group high-Tc superconductor high harmonic 2024 Nature",
+        "ICMAB YBCO high harmonic generation publication",
+        "Alcalá Biegert YBCO HHG Nature 2024"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "参考文献 #1「Iwai, S. et al. Petahertz-scale current in YBCO. Nat. Commun. (2021)」",
+      "missing_evidence": "条目标注「DOI 待核验」，但 Iwai 2021 拍赫兹电流 in YBCO 实验是本申请书超导 HHG 4 篇中的奠基引用——若 DOI 无法核实或论文实际发表年份/期刊不符，评审视为不严谨。需核实 *Nat. Commun.* 2021 年卷号、DOI、文章 ID 是否有「Petahertz current YBCO」对应论文（实际该方向更可能是 *Science* 2021 或 *PRL* 文献，需确认）。",
+      "search_keywords": [
+        "Iwai YBCO petahertz current Nature Communications 2021",
+        "petahertz scale current cuprate superconductor 2021",
+        "Iwai high harmonic YBCO Nat Commun DOI",
+        "cuprate petahertz current ultrafast 2021 publication"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "参考文献 #29「Biegert, J. 综述 HHG in correlated materials」",
+      "missing_evidence": "条目标注「arXiv 待核验」，NSFC 评审眼里任何「待核验」都是失分项。需核实 Biegert 关于「HHG in correlated materials」综述的实际发表期刊与年份（*Rep. Prog. Phys.* / *Phys. Rep.* / *Science* 综述 等）。",
+      "search_keywords": [
+        "Biegert high harmonic generation correlated materials review",
+        "Biegert HHG review article arXiv",
+        "Biegert J ICFO review correlated materials high harmonic",
+        "high harmonic correlated matter review Reports Progress Physics"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "参考文献 #16「Šmejkal, L. et al. altermagnet 实验确认. Nature (2022)」",
+      "missing_evidence": "评审指出 rationale.md 与 references.md 在 Šmejkal 2022 期刊上不一致（Science vs Nature）。Šmejkal 关于 altermagnetism 的关键理论/实验文献 2022 年实际发表于 *Science Advances* 2022 (*Sci. Adv.* 8, eabj0506)，不是 *Nature* 也不是 *Science*——需核实 Šmejkal 2022 altermagnet 综述/实验确认论文的实际期刊、DOI、卷期。",
+      "search_keywords": [
+        "Šmejkal altermagnet experimental confirmation Nature 2022",
+        "Šmejkal altermagnetism Science Advances 2022",
+        "Šmejkal L altermagnetic spin splitting 2022 DOI",
+        "altermagnet RuO2 MnTe experimental evidence 2022 2023"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "正文中 15 处 arXiv 引用（如 #3、#5、#6、#10、#11、#13、#20、#21、#22、#24、#25 等）需在 references.md 中有完整可索引条目",
+      "missing_evidence": "评审明确指出「正文 15 个 arXiv 引用在 references.md 中找不到对应条目」，索引完整性失败。需逐条核实每个 arXiv 编号（如 arXiv:2112.12123、arXiv:2008.07131、arXiv:2310.03080、arXiv:2307.14693、arXiv:2508.09364、arXiv:2404.14411、arXiv:2508.12239 等）对应的实际论文标题、作者、是否已正式期刊接收（部分 arXiv 后续会被接收，DOI 需补全）。",
+      "search_keywords": [
+        "arXiv:2112.12123 Puviani quench-drive 2D HHG",
+        "arXiv:2008.07131 Ahmed Yoo Prasankumar HHG CDW superconductor",
+        "arXiv:2310.03080 Rehn Ahmed Prasankumar CDW HHG theory",
+        "arXiv:2307.14693 Jensen Madsen Rubio TDDFT BSE exciton HHG",
+        "arXiv:2508.09364 Jessen Mero Vrakking ZnO exciton HHG",
+        "arXiv:2404.14411 Dziurawiec Biegert pump-probe Mott CDW HHG",
+        "arXiv:2508.12239 Erhardt Beaulieu MoTe2 strong-field phonon"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "参考文献 5.9 统计自洽——总文献数「33+ 篇」与正文「15 个 arXiv 引用 + 18 个有 DOI/期刊条目」加和对应",
+      "missing_evidence": "评审指出标题「≥40 篇」与实有 33 篇严重不匹配；5.4 标题「5 篇」vs 实有 6 篇；5.6 节「v0.2 新增」未独立编号但混在 33 总数中。需补足到 ≥40 篇的文献覆盖（重点补全 2024-2026 在 4 类序参量 HHG（超导/CDW/激子/磁/altermagnet）+ 反演方法学 + 强场超快光谱装置方向的最新论文），或在终稿统一口径为「33 篇」并删除 v0.1/v0.2 字样。",
+      "search_keywords": [
+        "high harmonic generation correlated materials 2024 2025 2026 latest",
+        "solid HHG altermagnet cuprate experimental 2025",
+        "high harmonic generation review 2025 ultrafast spectroscopy",
+        "HHG order parameter retrieval machine learning 2024 2025",
+        "topological material high harmonic generation 2024 2025"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "rationale.md 中关于 Biegert 2024 YBCO HHG 实验的论文状态（既写「待核验正式期刊」又写「Nature 2024 突破」）需统一",
+      "missing_evidence": "rationale.md 与 references.md 在同一篇文献上自相矛盾（前者「待核验正式期刊」 vs 后者「Nature 2024 突破」），严谨性失败。需统一两处表述：要么核实确为 *Nature* 2024 并标 DOI，要么按 arXiv 预印本状态重写并说明「截至 2026-07 仍未见正式期刊接收」。",
+      "search_keywords": [
+        "Biegert YBCO Nature 2024 high harmonic DOI",
+        "YBCO high harmonic generation peer-reviewed 2024",
+        "ICFO YBCO superconductor HHG journal publication status"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "参考文献 #3「Puviani, M., Haenel, S. & Manske, D. quench-drive 2D HHG spectroscopy. PRB 107, 094501 (2023)」",
+      "missing_evidence": "该条目仅有 arXiv 编号（arXiv:2112.12123），未交叉验证是否已被 *PRB* 正式接收。需核实 Puviani 2023 *PRB* 107 卷 094501 期是否确实为该 arXiv 对应的期刊版本（DOI、卷期、作者顺序）。",
+      "search_keywords": [
+        "Puviani Haenel Manske Physical Review B 107 094501 2023",
+        "quench-drive HHG spectroscopy PRB DOI",
+        "arXiv:2112.12123 PRB publication confirmation"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "参考文献 #15「Leeb, V., Mook, A., Šmejkal, L. & Knolle, J. altermagnetism from orbital ordering. PRL 132, 236701 (2024)」",
+      "missing_evidence": "需核实该 PRL 条目的 DOI、卷期及是否对应正确——PRL 132 期号、236701 文章号是否准确，以及 *PRL* 2024 年是否确有此文（亦可能在 *PRB* / *PRM* / *Nat. Commun.* 期刊上）。",
+      "search_keywords": [
+        "Leeb Mook Šmejkal Knolle altermagnetism orbital ordering PRL 132 236701",
+        "Leeb altermagnet orbital ordering 2024 DOI",
+        "altermagnetism orbital ordering Physical Review Letters 2024"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "参考文献 #8「Zhang, L., Tyulnev, I., Biegert, J., Lewenstein, M. et al. Revealing anisotropic CDW order via HHG. PRB 112, 085147 (2025)」",
+      "missing_evidence": "该条目 DOI 标注为「10.1103/812z-nl4m」——非常规 DOI 格式（PRB DOI 通常为 10.1103/PhysRevB.112.085147 形式），疑似占位符或笔误，需核实实际 DOI。",
+      "search_keywords": [
+        "Zhang Tyulnev Biegert Lewenstein anisotropic CDW HHG PRB 112 085147",
+        "Revealing anisotropic CDW order high harmonic generation PRB 2025",
+        "Zhang L Biegert anisotropic CDW HHG DOI"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "参考文献 #12「Hu, S. et al. (孟胜) MoS₂ 相干声子耦合 HHG. PRL 133, 156901 (2024)」",
+      "missing_evidence": "需核实孟胜组 2024 *PRL* 133 156901 关于 MoS₂ 相干声子耦合 HHG 的真实论文标题、作者列表（孟胜为通讯作者但可能不是第一作者）、DOI 准确性。",
+      "search_keywords": [
+        "Hu S Meng Sheng MoS2 coherent phonon HHG PRL 133 156901",
+        "Meng Sheng MoS2 high harmonic coherent phonon 2024",
+        "孟胜 MoS2 相干声子 高次谐波 PRL 2024"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "参考文献 #19「Hu, Y., Zhao, J. & Meng, S. HHG 多维反演费米面+电声耦合 (H₃S). PNAS 121, e2301234121 (2024)」",
+      "missing_evidence": "该条目无 DOI 标注，但被标为「T5 核心」。需核实孟胜组 H3S 高压超导 HHG 反演论文的实际 PNAS 卷期、DOI、文章 ID 是否为 e2301234121，以及通讯作者归属。",
+      "search_keywords": [
+        "Hu Zhao Meng H3S HHG inverse Fermi surface phonon PNAS 2024",
+        "Meng Sheng H3S hydride high pressure HHG PNAS",
+        "PNAS 121 e2301234121 high harmonic H3S superconducting"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "参考文献 #28「李亮、兰鹏飞、陆培祥. HHG in solids: particle and wave perspectives. Rep. Prog. Phys. (2024)」",
+      "missing_evidence": "需核实该 RPP 综述的实际卷期、DOI、文章 ID，以及作者顺序（李亮为第一还是通讯，陆培祥为通讯还是合著）。",
+      "search_keywords": [
+        "Li Liang Lan Pengfei Lu Peixiang HHG solids RPP 2024",
+        "Li Liang Lan Pengfei Lu Peixiang Reports on Progress in Physics 2024",
+        "HHG solids particle wave perspectives Rep Prog Phys DOI"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "参考文献 #14「Werner, P., Lysne, M. & Murakami, Y. altermagnet HHG 理论先驱. PRB 110, 235101 (2024)」",
+      "missing_evidence": "该条目 DOI 标注为「10.1103/PhysRevB.110.235101」——需核实 Werner 2024 关于 altermagnet HHG 的论文是否实际发表于 *PRB* 110 卷 235101 期，亦可能在 *PRL*、*PRM* 或 arXiv 预印本阶段。",
+      "search_keywords": [
+        "Werner Lysne Murakami altermagnet HHG PRB 110 235101",
+        "Werner P altermagnet high harmonic generation PRB 2024",
+        "altermagnet HHG theory Werner 2024 DOI"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "参考文献 #17「Ryan, S., Grafov, A., Na Li (SLAC + Columbia) XUV HHG 探测 kagome 铁磁重定向. Nat. Commun. (2025)」",
+      "missing_evidence": "该条目仅有 arXiv 编号（arXiv:2407.18894），未交叉验证是否已被 *Nat. Commun.* 正式接收（时间窗口 2025-2026 可能尚未接收）。需核实 Ryan 2025 关于 kagome HHG-XUV 论文的实际发表期刊、DOI、文章 ID。",
+      "search_keywords": [
+        "Ryan Grafov Na Li kagome XUV HHG Nat Commun 2025",
+        "arXiv:2407.18894 SLAC Columbia kagome ferromagnet",
+        "Ryan S SLAC kagome high harmonic publication status"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "参考文献 #10「Jensen, E. T. L., Madsen, L. B., Rubio, A. & Tancogne-Dejean, P. ab initio TDDFT-BSE 激子反演. PRA 109, 063104 (2024)」",
+      "missing_evidence": "该条目仅有 arXiv 编号（arXiv:2307.14693），需核实 Jensen 2024 关于 TDDFT-BSE 激子 HHG 反演是否实际发表于 *PRA* 109 卷 063104 期（亦可能在 *PRB*/*PRL*/*JCP* 期刊）。",
+      "search_keywords": [
+        "Jensen Madsen Rubio Tancogne-Dejean TDDFT BSE exciton HHG PRA 109 063104",
+        "arXiv:2307.14693 journal publication",
+        "ab initio TDDFT-BSE exciton high harmonic Physical Review A 2024"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "参考文献 #11「Jessen, Mero, Vrakking (MBI) 块体 ZnO 激子 HHG. arXiv:2508.09364 (2025)」",
+      "missing_evidence": "该条目仅有 arXiv 编号（arXiv:2508.09364），需核实 Jessen/Mero/Vrakking (MBI Berlin) 块体 ZnO 激子 HHG 论文的实际作者顺序、论文标题、是否已投稿期刊（*PRL*/*PRB*/*Nat. Commun.*）。",
+      "search_keywords": [
+        "Jessen Mero Vrakking ZnO exciton high harmonic MBI Berlin",
+        "arXiv:2508.09364 bulk ZnO exciton HHG",
+        "MBI Berlin ZnO exciton high harmonic 2025 publication"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "参考文献 #24「Dziurawiec, Biegert et al. pump-probe HHG 横跨 Mott-CDW. arXiv:2404.14411 (2024)」",
+      "missing_evidence": "该条目仅有 arXiv 编号（arXiv:2404.14411），需核实 Dziurawiec/Biegert 关于 pump-probe HHG 跨 Mott-CDW 论文的实际作者列表、标题、是否已期刊接收。",
+      "search_keywords": [
+        "Dziurawiec Biegert pump-probe HHG Mott CDW arXiv:2404.14411",
+        "arXiv:2404.14411 publication status journal",
+        "ICFO Biegert pump-probe Mott insulator CDW HHG 2024"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "参考文献 #25「Erhardt, Beaulieu et al. MoTe₂ 强场声子. arXiv:2508.12239 (2025)」",
+      "missing_evidence": "该条目仅有 arXiv 编号（arXiv:2508.12239），需核实 Erhardt/Beaulieu 关于 MoTe₂ 强场声子 HHG 论文的实际作者、标题、是否期刊接收。",
+      "search_keywords": [
+        "Erhardt Beaulieu MoTe2 strong-field phonon arXiv:2508.12239",
+        "MoTe2 high harmonic strong field phonon 2025",
+        "arXiv:2508.12239 publication journal status"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "参考文献 #26「Werner, P. HHG in SCES (Mott insulators). APW 2025 邀请报告」",
+      "missing_evidence": "APW 邀请报告在 NSFC 评审眼中非正式发表文献，不能算参考文献——只能算「学术影响」证据。若作为支撑立项的「立项证据」会被认为不严谨。需将 Werner 2025 关于 Mott insulator HHG 的正式发表论文（若有）替换该条目，或在 rationale.md 中明确「邀请报告作为合作可行性证据，不计入参考文献 33 篇」。",
+      "search_keywords": [
+        "Werner P Mott insulator HHG 2025 publication",
+        "Werner high harmonic strongly correlated electron system",
+        "Werner Fribourg Mott insulator high harmonic arXiv"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "参考文献 #18「Magnetic dynamics driven integer and fractional HHG. J. Phys. CM (2024-2025). DOI: 10.1088/1361-648X/adf930」",
+      "missing_evidence": "该条目无作者列表，且仅标注「Magnetic dynamics driven integer and fractional HHG」一句描述、DOI 简写——需核实具体作者、论文标题、卷期、文章 ID。",
+      "search_keywords": [
+        "Magnetic dynamics integer fractional HHG J Phys CM 2024",
+        "10.1088/1361-648X/adf930 DOI Journal Physics Condensed Matter",
+        "fractional high harmonic generation magnetic dynamics 2024 2025"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "参考文献 #20「Hu, S., Biegert, J. et al. BCS 反演. arXiv:2003.02698」",
+      "missing_evidence": "该条目无期刊信息、无作者完整列表、无 DOI——需核实 BCS 反演论文是否期刊接收以及完整作者列表。",
+      "search_keywords": [
+        "Hu S Biegert BCS inverse problem HHG arXiv:2003.02698",
+        "arXiv:2003.02698 journal publication",
+        "BCS theory high harmonic inverse problem ICFO"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "参考文献 #21「Hansen, K. K. & Madsen, L. B. 1D Hubbard 掺杂依赖. arXiv:2209.04311 (2022)」",
+      "missing_evidence": "该条目无期刊信息——需核实 Hansen/Madsen 2022 关于 1D Hubbard 掺杂依赖 HHG 论文是否期刊接收。",
+      "search_keywords": [
+        "Hansen Madsen 1D Hubbard doping HHG arXiv:2209.04311",
+        "arXiv:2209.04311 journal publication status",
+        "1D Hubbard model high harmonic generation doping dependence 2022"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "参考文献 #22「Klemt, S. et al. NbN 超导量子比特 + HHG 兼容. arXiv:2303.04960 (2023) / NPJ Quantum Mater (2024)」",
+      "missing_evidence": "需核实 Klemt NbN HHG 论文在 NPJ Quantum Materials 上的实际卷期、DOI、文章 ID。",
+      "search_keywords": [
+        "Klemt NbN superconducting qubit HHG NPJ Quantum Materials 2024",
+        "arXiv:2303.04960 NPJ publication",
+        "NbN high harmonic superconducting qubit compatibility"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "参考文献 #27「Ghimire, S. & Reis, D. A. HHG from solids. Nat. Phys. 15, 10 (2019)」",
+      "missing_evidence": "需核实该综述的实际页码（2019 *Nat. Phys.* 15 卷第几页）、DOI、文章标题（Hig HHG from solids 实际可能标题略有差异）。",
+      "search_keywords": [
+        "Ghimire Reis high harmonic generation solids Nature Physics 15 10 2019",
+        "Ghimire Reis solid HHG review 2019 DOI",
+        "Nature Physics 15 2019 high harmonic generation solids review"
+      ],
+      "priority": "low"
+    },
+    {
+      "claim": "参考文献 #30-#33 经典基础文献（Ghimire 2011 *Nat. Phys.*、Vampa 2015 *Nature*、Xiao 2010 *RMP*、Hasan 2010 *RMP*）",
+      "missing_evidence": "四条经典文献均缺少完整卷期、页码、DOI——Ghimire 2011 *Nat. Phys.* 7, 138; Vampa 2015 *Nature* 522, 462; Xiao 2010 *RMP* 82, 1959; Hasan 2010 *RMP* 82, 3045——需核实准确卷期。",
+      "search_keywords": [
+        "Ghimire 2011 Nature Physics 7 138 ZnO high harmonic",
+        "Vampa 2015 Nature 522 462 HHG recollision",
+        "Xiao D 2010 RMP 82 1959 Berry phase effects",
+        "Hasan Kane 2010 RMP 82 3045 topological insulators"
+      ],
+      "priority": "low"
+    }
+  ]
+}

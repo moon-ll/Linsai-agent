@@ -1,0 +1,130 @@
+{
+  "gaps": [
+    {
+      "claim": "Molinero等2024年在11,000原子原胞上的SBE计算表明单角约10^5核时，跨约10^3个扫描角攀升至约10^8核时",
+      "missing_evidence": "缺少Molinero等2024年关于twisted bilayer graphene SBE计算成本基准的具体论文",
+      "search_keywords": [
+        "Molinero twisted bilayer graphene high harmonic generation SBE",
+        "Molinero 2024 Optica TBG HHG Wannier tight-binding",
+        "twisted bilayer graphene semiconductor Bloch equation computational cost"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "magic-angle TBG关联绝缘态能隙典型值5-20 meV（需统一三档口径）",
+      "missing_evidence": "缺少TBG关联绝缘态能隙实验值的系统综述，特别是不同测量方法下的能隙范围",
+      "search_keywords": [
+        "magic angle TBG correlated insulator gap meV experimental",
+        "twisted bilayer graphene correlated gap transport measurement",
+        "TBG insulating state gap 5-20 meV"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "TBG/TMDC莫尔异质结HHG实验首次观测（提供对照基准）",
+      "missing_evidence": "缺少TBG/TMDC莫尔体系HHG实验观测的代表性论文，特别是Molinero 2024 Optica或类似工作",
+      "search_keywords": [
+        "Molinero 2024 Optica TBG HHG",
+        "TBG high harmonic generation experimental observation",
+        "MoS2 WSe2 moire high harmonic generation experimental",
+        "Mrudul 2024 twisted bilayer high harmonic"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "莫尔超晶格中SBE的适用性边界（10^4原子原胞以下是否可用）",
+      "missing_evidence": "缺少SBE在莫尔超晶格大原胞下适用性的理论论证，特别是与TDDFT的对比基准",
+      "search_keywords": [
+        "semiconductor Bloch equation moire superlattice validity",
+        "SBE moire heterostructure applicability strong field",
+        "tight-binding Bloch equation twisted bilayer benchmark TDDFT",
+        "many-body correction SBE moire superlattice"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "约2/3参数压缩比的物理先验依据（C3+平移对称性+θ范围约束）",
+      "missing_evidence": "缺少HHG反演中由对称性约束导致的参数降维量化论证文献",
+      "search_keywords": [
+        "HHG inversion symmetry constraint parameter reduction",
+        "high harmonic generation regularization symmetry prior",
+        "moire potential inversion symmetry C3 parameter reduction"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "SNR=50下反演误差从30%→18%→<12%的方法学验证",
+      "missing_evidence": "缺少HHG反演中蒙特卡洛SNR验证的类似方法学基准文献",
+      "search_keywords": [
+        "high harmonic spectroscopy Monte Carlo SNR inversion benchmark",
+        "HHG inverse problem Fisher information condition number",
+        "attosecond spectroscopy noise level parameter retrieval validation"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "莫尔势与扭转角联合反演唯一性的正则化论证",
+      "missing_evidence": "缺少莫尔势/扭转角HHG联合反演唯一性或正则化方案的文献先例",
+      "search_keywords": [
+        "moire potential reconstruction regularization uniqueness",
+        "twist angle HHG inversion Tikhonov regularization",
+        "L-curve criterion high harmonic inversion",
+        "inverse problem uniqueness regularization HHG"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "莫尔超晶格Femtosecond激光损伤阈值（用于确定调控强度上限）",
+      "missing_evidence": "缺少2D异质结/TBG的飞秒激光损伤阈值实验数据",
+      "search_keywords": [
+        "twisted bilayer graphene femtosecond laser damage threshold",
+        "graphene strong field ablation threshold W/cm2",
+        "2D material ultrafast laser damage threshold moire",
+        "TBG damage threshold 10^12 W/cm2"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "双模式（HHG+瞬态吸收）共用平台的实验先例",
+      "missing_evidence": "缺少HHG+瞬态吸收共用实验平台的代表性实验论文",
+      "search_keywords": [
+        "high harmonic generation transient absorption combined setup",
+        "Policht ATAS attosecond transient absorption solid",
+        "HHG TA combined platform experimental precedent"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "关联绝缘态光致熔化的临界强度公式（Floquet带宽调制定量描述）",
+      "missing_evidence": "缺少TBG/TMDC关联绝缘态光致熔化临界强度与能隙的定量关系文献",
+      "search_keywords": [
+        "correlated insulator photoinduced melting critical intensity",
+        "Floquet bandwidth modulation ac-Stark correlated insulator",
+        "Nikola 2021 Nature Floquet modulation intensity gap scaling",
+        "light-induced insulator metal transition moire"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "国内莫尔强场超快研究代表性实验组",
+      "missing_evidence": "缺少国内莫尔超晶格强场/超快研究的代表性实验组及其近期工作",
+      "search_keywords": [
+        "莫尔材料 强场 超快 国内 实验组",
+        "twisted bilayer high harmonic generation Chinese group",
+        "moire superlattice strong field China domestic",
+        "固体高次谐波 中国 实验组 莫尔"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "SBE与连续紧束缚在莫尔尺度电子动力学中的等价性论证",
+      "missing_evidence": "缺少SBE与TB-TDDFT在莫尔尺度下对比/等价性论证的文献",
+      "search_keywords": [
+        "semiconductor Bloch equation tight-binding comparison moire",
+        "SBE tight-binding benchmark moire superlattice",
+        "many-body correction SBE moire timescale equivalence"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

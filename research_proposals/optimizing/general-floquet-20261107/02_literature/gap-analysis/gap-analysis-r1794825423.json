@@ -1,0 +1,17 @@
+{
+  "gaps": [
+    {
+      "claim": "§2.4 第 5 段（L48）提出拓扑磁振子相变的判据需“与已报道的温度驱动跳变相区分”，即声称已有文献报道过温度驱动的拓扑相变/跳变行为",
+      "missing_evidence": "该关键论断零角标挂靠，content.md 单读无法溯源；缺少支撑“温度驱动跳变”已报道这一事实的文献引用（评审建议补挂与 rationale L97 同集的 [19][21][39]，分别对应：Li 温度致 Chern 绝缘体、Yang 交换收缩热霍尔、Yan MnPS₃ 热输运）",
+      "search_keywords": [
+        "temperature-driven topological phase transition Chern insulator",
+        "thermal Hall effect exchange shrinkage magnetic topological bands",
+        "MnPS3 thermal transport magnon temperature dependence",
+        "temperature-induced Chern number transition magnon",
+        "Floquet topological magnon driven distinction thermal"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

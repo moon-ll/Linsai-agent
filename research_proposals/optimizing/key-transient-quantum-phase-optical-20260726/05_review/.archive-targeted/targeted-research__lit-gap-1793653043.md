@@ -1,0 +1,33 @@
+# 定向文献检索报告
+
+## 课题
+key-transient-quantum-phase-optical-20260726
+
+## 章节
+scheme
+
+## 检索关键词
+- ELI-ALPS attosecond beamline CEP stability、ELI-ALPS GHHG beamline repetition rate pulse duration、Csizmadia CEP jitter 81 attosecond OPCPA、high repetition rate attosecond source carrier-envelope phase stabilization
+
+## 检索结果
+
+- 2504.08448 | Active stabilization for ultralong acquisitions in an attosecond pump-probe beamline | Tamás Csizmadia, Lénárd Gulyás Oldal, Barnabás Gilicze, Dániel Kiss, Tamás Bartyik, Katalin Varjú, Subhendu Kahaly, Balázs Major (ELI-ALPS/Szeged) | 2025 | 0.93 | 即关键词所指 Csizmadia 81 as 论文（APL Photonics 2025）：ELI-ALPS 双干涉仪主动延迟稳定方案实现 ±81 as 亚光周期稳定性，快反馈可持续数天，非共线构型可独立调控两臂 XUV 谱/attochirp 与 IR 色散/CEP，演示角度分辨光电子阿秒拍频 | 来源：本地知识库
+- 2601.09608 | A High Intensity Attosecond Light Source in Compact Geometry at ELI ALPS User Facility | Arjun Nayak, Mathieu Dumergue, Sourin Mukhopadhyay, Debobrata Rajak, Naveed Ahmed, János Csontos, Szabolcs Tóth, Subhendu Kahaly, Zsolt Diveki et al. (ELI-ALPS) | 2026 | 0.9 | ELI-ALPS SYLOS Compact GHHG 束线详细表征：1 kHz 阿秒脉冲串平均 336 as、靶上 7.4 nJ（15-40 eV，准相位匹配双气体喷流），偏振门控产生近孤立阿秒脉冲（配 f-2f CEP tagging 后处理），演示 Ne/Ar 双 XUV 光子双电离（已刊 Ultrafast Science 0171） | 来源：本地知识库
+- 2410.10734 | Multiscale carrier-envelope phase characterization of 2-µm pulses delivered by a 200-kHz optical parametric amplifier | Katrin Meier, Arvid Klösgen, Kerstin Harland, Lina Hansen, Lars Barnekow, Chen Guo, Caroline Juliano, Jin Niu, Cord L. Arnold, Jan Vogelsang (Oldenburg/Lund) | 2024 | 0.88 | 200 kHz、25 µJ、<20 fs 的 2 µm DFG-NOPA 系统：被动 CEP 稳定在 µs-小时全部 10 个时间尺度上 <70 mrad RMS（单发 65.8 mrad、8 小时主动稳定 56.1 mrad），驱动 HHG 截止 160 eV 且 XUV 谱呈强 π 周期 CEP 调制（已刊 Appl. Phys. B 2026） | 来源：联网检索
+- 2604.12602 | High intensity attosecond beamline for XUV pump XUV probe measurements with photon energies up to 150 eV | Sajjad Vardast, Alexander Muschet, N. Smijesh, Mohammad Rezaei-Pandari, Fritz Schnur, Robin Weissenbilder, Elisa Appi, Jan Lahl et al. (Umeå/Umu, Veisz 组) | 2026 | 0.85 | 新建高强阿秒束线：气相 HHG 上升级在 Zr 窗（65-150 eV）输出 55 nJ、发散 0.1 mrad、稳定度 ~5-10%，含 split-and-delay 与双聚焦光学聚焦至 <6 µm，配合空间分辨离子显微，面向 XUV-泵浦-XUV-探测非线性阿秒实验 | 来源：本地知识库
+- 2508.14774 | Bright 25-attosecond light pulses reach the one atomic unit of time | Jingsong Gao, Mahmudul Hasan, Hao Liang, Ming-Shian Tsai, Yiming Yuan, Zach Eisenhutt, C. H. Keitel, Chii-Dong Lin, Yunquan Liu, Ming-Chang Chen, Meng Han (KSU/MPIK) | 2025 | 0.8 | 后压缩工业级 10 kHz mJ 级 Yb 激光驱动 HHG 产生明亮孤立阿秒脉冲：v1 报道 25±2 as（50-320 eV 覆盖碳 K 边、通量 >10^12 ph/s，氦角度分辨条纹相机+介质膜滤片补偿 attochirp），修订发表版（Nat. Commun. 17, 8810, 2026）达 18 as | 来源：本地知识库
+
+## 多源学术检索补充（arxiv+openalex+semantic_scholar）
+
+标准引用格式（可直接用于 references.md 修订）：/Users/ll/Desktop/LinSai-CoPilot/research_proposals/optimizing/key-transient-quantum-phase-optical-20260726/02_literature/targeted-research/candidates-1793653045.bib
+
+- DOI:10.1088/1361-6455/aa6ee8 | The ELI-ALPS facility: the next generation of attosecond sources | S. Kühn, Mathieu Dumergue, Subhendu Kahaly | 2017 | Journal of Physics B Atomic Molecular and Optical Physics | 引用:181 | 来源：openalex | This review presents the technological infrastructure that will be available at the Extreme Light Infrastructure Attosecond Light Pulse Source (ELI-AL
+- DOI:10.1364/josab.35.000a93 | Surface plasma attosource beamlines at ELI-ALPS | Sudipta Mondal, Mojtaba Shirozhan, Naveed Ahmed | 2018 | Journal of the Optical Society of America B | 引用:41 | 来源：openalex | ELI-ALPS, one of the three pillars of the Extreme Light Infrastructure (ELI) project, will be in a unique position to offer dedicated experimental pla
+- arXiv:2008.07892 | A high-repetition rate attosecond light source for time-resolved coincidencespectroscopy | Sara Mikaelsson, Jan Vogelsang, Chen Guo | 0 | Frontiers in Optics and Photonics | 引用:40 | 来源：arxiv | Attosecond pulses, produced through high-order harmonic generation in gases, have been successfully used for observing ultrafast, sub-femtosecond elec
+- arXiv:1712.07327 | 2.6mJ/100Hz CEP stable near-single-cycle 4{\\mu}m laser based on OPCPA and hollow-core-fiber compression | Pengfei Wang, Yanyan Li, Wenkai Li | 0 | Optics Letters | 引用:39 | 来源：arxiv | A carrier envelope phase stable near-single cycle mid-infrared laser based on optical parametric chirped pulse amplification and hollow-core-fiber com
+- DOI:10.1088/1361-6455/ab92bf | Attosecond pulse generation at ELI-ALPS 100 kHz repetition rate beamline | Peng Ye, Tamás Csizmadia, Lénárd Gulyás Oldal | 2020 | Journal of Physics B Atomic Molecular and Optical Physics | 引用:39 | 来源：openalex | Abstract We generate attosecond pulse train (APT) in argon driven by the high repetition rate (HR) laser of the extreme light infrastructure-attosecon
+- arXiv:1902.10074 | Advances in high-order harmonic generation sources for time-resolved investigations | Maurizio Reduzzi, Paolo Carpeggiani, Sergei Kühn | 0 | Journal of Electron Spectroscopy and Related Phenomena | 引用:33 | 来源：arxiv | We review the main research directions ongoing in the development of high-harmonic generation-based extreme ultraviolet sources for the synthesization
+- arXiv:1805.12399 | Continous every-single-shot carrier-envelope phase measurement and control at 100 kHz | Dominik Hoff, Federico J. Furch, Tobias Witting | 0 | Optics Letters | 引用:28 | 来源：arxiv | With the emergence of high-repetition-rate few-cycle laser pulse amplifiers, aimed at investigating ultrafast dynamics in atomic, molecular and solid 
+- arXiv:1908.07744 | Generation and characterization of few-pulse attosecond pulse trains at 100kHz repetition rate | Mikhail Osolodkov, Federico J. Furch, Felix Schell | 0 | Journal of Physics B: Atomic, Molecular and Optical Physics | 引用:19 | 来源：arxiv | Many experiments in attosecond science will benefit from attosecond pulses at high repetition rates with sufficient photon flux for pump-probe experim
+- arXiv:2301.08919 | Ultra-stable and versatile high-energy resolution setup for attosecond photoelectron spectroscopy | Sizuo Luo, Robin Weissenbilder, Hugo Laurell | 0 | Advances in Physics: X | 引用:12 | 来源：arxiv | Attosecond photoelectron spectroscopy is often performed with interferometric experimental setups that require outstanding stability. We demonstrate a
+- arXiv:1906.07059 | Reconstruction of attosecond pulses in the presence of interfering dressing fields using the 100 kHz ELI-ALPS HR-1 laser system | D. Hammerland, P. Zhang, S. Kühn | 0 | Journal of Physics B: Atomic, Molecular and Optical Physics | 引用:9 | 来源：arxiv | Attosecond Pulse Trains (APT) generated by high-harmonic generation (HHG) of high-intensity near-infrared (IR) laser pulses have proven valuable for s

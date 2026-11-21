@@ -1,0 +1,57 @@
+{
+  "gaps": [
+    {
+      "claim": "L25 声称核心构想'至今未被任何理论与实验工作提出或验证'（首次/空白声明）",
+      "missing_evidence": "联网检索已证伪：交变磁体（altermagnet）HHG 先行理论工作已存在（Werner、Weber 等关于自旋劈裂与非相对论自旋劈裂驱动 HHG 的理论预言），立项依据需引用这些先行理论并重新划定创新声明的边界",
+      "search_keywords": [
+        "altermagnet high harmonic generation theory",
+        "Werner altermagnet HHG spin splitting",
+        "Weber nonrelativistic spin splitting altermagnet",
+        "交变磁体 高次谐波 理论预言"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "L25 首次声明被实验先行工作证伪——自旋极化固体 HHG 实验已存在",
+      "missing_evidence": "Fuchs 等人在 α-MnTe 中的自旋极化 HHG 实验（Nature）已经事实核查确认存在，立项依据需引用该实验作为直接先行工作，并说明本项目构想与其差异",
+      "search_keywords": [
+        "Fuchs MnTe spin-polarized high harmonic generation",
+        "MnTe altermagnet HHG experiment Nature",
+        "ultrafast spin symmetry breaking high harmonic MnTe"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "L29 声称'未发现……研究报道'（目标方向无先行研究的空白声明）",
+      "missing_evidence": "该声明被联网检索证伪，需补充检索并引用磁序参量 HHG 读出、自旋分辨固体 HHG、非常规超导/配对对称性谐波探测等已有研究报道，将空白声明改写为有文献支撑的差异化定位",
+      "search_keywords": [
+        "magnetic order parameter high harmonic readout",
+        "spin-resolved high harmonic generation solid state",
+        "CrSb spin-polarized high harmonic experimental",
+        "unconventional superconductor high harmonic generation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "rationale 正文中裸 arXiv 角标 [2604.22751][2603.09074][2606.13395] 未建立正式参考文献条目",
+      "missing_evidence": "这 3 篇 arXiv 论文的完整书目信息（作者/标题/年份/结论）未经核实并纳入 references.md 对应条目 [24][23][25]，正文相应论点缺乏可追溯的文献支撑",
+      "search_keywords": [
+        "arXiv 2604.22751",
+        "arXiv 2603.09074",
+        "arXiv 2606.13395 high harmonic generation"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "零引用僵尸条目 [4][5][7][8][20][27][28] 未在立项依据正文中发挥支撑作用",
+      "missing_evidence": "这 7 条文献与正文论点缺乏嵌入式关联，需逐条确认主题并在立项依据中找到可支撑的具体论点嵌入引用，否则应删除，避免文献表与论证脱节",
+      "search_keywords": [
+        "solid-state high harmonic generation review",
+        "g-wave superconductivity pairing symmetry",
+        "altermagnet spin splitting ARPES evidence",
+        "high harmonic generation spectroscopy review"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

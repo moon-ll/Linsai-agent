@@ -1,0 +1,83 @@
+{
+  "gaps": [
+    {
+      "claim": "R4 中 PINN 三重物理约束方法在量子几何反演中的可推广性",
+      "missing_evidence": "缺少 PINN 在含量子度量/贝里曲率等多重物理约束的反问题中已被验证可推广的先例文献，目前仅说明'本项目拟采用'，但未引证类似约束结构在其他逆问题中的成功案例",
+      "search_keywords": [
+        "physics-informed neural networks inverse spectroscopy",
+        "PINN multiple physics constraints generalization",
+        "physics-informed machine learning quantum geometry",
+        "PINN ultrafast optics inverse problem"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "ZnO 固体 HHG 中 14.2°/9.5° 椭圆/偏振依赖角度的实验复现",
+      "missing_evidence": "复现度量明确指向特定实验角度，但未在 references 中明确标注产生该数据的原始实验文献，无法判断复现基准的可追溯性",
+      "search_keywords": [
+        "ZnO high harmonic generation ellipticity",
+        "ZnO HHG anomalous polarization dependence",
+        "Ghimire ZnO HHG experiment",
+        "solid HHG ZnO bicircular"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "R1 中量子光（光子数态叠加/压缩态）驱动固体 HHG 的截止公式推导",
+      "missing_evidence": "缺少将经典 Lewenstein 截止公式推广至非经典光场（光子数叠加态、压缩真空态）情形的理论先例文献，缺乏与本工作增量贡献区分所需的 baseline 引用",
+      "search_keywords": [
+        "quantum light driven HHG solid",
+        "squeezed light high harmonic generation",
+        "photon number superposition HHG cutoff",
+        "non-classical light HHG theory",
+        "Lewenstein model quantum field"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "R2 中从 HHG 谱提取贝里曲率/量子度量张量的反演可行性",
+      "missing_evidence": "缺少近 3 年关于 HHG 作为带几何/拓扑探针的方法学文献（如 Baykusheva, Neufeld, Plankl 等系列工作），未在 §2.3 明确区分本工作相较于已有'HHG-band-geometry mapping'方法的新颖性边界",
+      "search_keywords": [
+        "Berry curvature HHG extraction",
+        "quantum metric high harmonic generation",
+        "topological band structure HHG probe",
+        "HHG band geometry inversion",
+        "intraband HHG Berry curvature"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "R1 中所依赖的 BSV（Bright Squeezed Vacuum）源在 HHG 中的应用",
+      "missing_evidence": "缺少 BSV 源驱动 HHG 的方法学/可行性文献，目前仅描述合作团队将搭建 BSV 源，但未引证该类光源在前沿非线性光学/阿秒科学中的已发表应用案例",
+      "search_keywords": [
+        "bright squeezed vacuum HHG",
+        "BSV source attosecond",
+        "squeezed vacuum nonlinear optics",
+        "quantum light source ultrafast experiment"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "tdDMFT 用于固体 HHG 动力学模拟的方法学",
+      "missing_evidence": "缺少 tdDMFT（或其衍生方法）模拟强关联体系中 HHG 的代表性文献，需引证以证明该方法在描述多带/关联效应时相较于 tdDFT 的增量优势",
+      "search_keywords": [
+        "time-dependent DMFT high harmonic generation",
+        "tdDMFT strong correlation HHG",
+        "many-body HHG simulation solid",
+        "DMFT ultrafast spectroscopy"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "R1 中基于'光子数态叠加'求和的动力学方程方法的理论先例",
+      "missing_evidence": "缺少在固体 HHG 理论中将电磁场量子化为多光子 Fock 叠加态并求和构建动力学方程的代表性文献，特别是与相干态展开方法（positive P-representation 等）的对比文献",
+      "search_keywords": [
+        "Fock state expansion HHG dynamics",
+        "quantum field HHG semiconductor Bloch equations",
+        "positive P representation HHG",
+        "second quantization HHG theory"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

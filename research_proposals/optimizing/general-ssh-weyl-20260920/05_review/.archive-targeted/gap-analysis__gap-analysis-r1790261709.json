@@ -1,0 +1,60 @@
+{
+  "gaps": [
+    {
+      "claim": "国内(北京大学)团队2025年在β-WP₂上完成SBE/Wannier gauge的高次谐波研究",
+      "missing_evidence": "需要核实'2025彭良友团队β-WP₂ SBE/Wannier gauge'这一引用是否真实存在；β-WP₂ HHG的真正实验来源(南京大学Lv等人Nat. Commun. 12, 6437, 2021)与Wannier gauge SBE工作(Jena Thümmler等2025)需要分别重新核实归属",
+      "search_keywords": [
+        "β-WP2 high harmonic generation Lv 2021 Nat Commun",
+        "Peng Liangyou Peking University high harmonic generation 2025",
+        "Wannier gauge semiconductor Bloch equation Thümmler Jena 2025",
+        "Peng Liangyou Wannier gauge solid HHG β tungsten phosphide"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "北大团队(教师真名'彭亮友')2025年理论计算β-WP₂的HHG及SBE/Wannier gauge方法",
+      "missing_evidence": "需要核实北京大学物理学院教师真名(应为'彭良友')及其在固体HHG与Wannier规范下的工作；同时核实PRL 2025是否为其固体HHG自旋-轨道角动量耦合工作",
+      "search_keywords": [
+        "Peng Liangyou Peking University spin orbital angular momentum HHG 2025 PRL",
+        "北京大学 彭良友 自旋轨道角动量 固体HHG 2025",
+        "Wannier gauge high harmonic generation solid state PRL 2025",
+        "spin-orbit coupling HHG solid state 2025 Peking University"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "arXiv:2508.09364的Jessen et al.工作为'PRB 2025'且'首次量化I_threshold'",
+      "missing_evidence": "需要核实arXiv:2508.09364的真实作者(Jessen/Mero/Vrakking/Turtos/Balling/Jürgens)及其发表期刊属性(预印本/正式发表),以纠正'PRB 2025'和'首次量化'的过度表述",
+      "search_keywords": [
+        "arXiv 2508.09364 Jessen Mero Vrakking Turtos Balling Jurgens",
+        "Jessen attosecond HHG threshold intensity 2025 PRB",
+        "Vrakking Turtos attosecond high harmonic threshold",
+        "Mero Balling Jurgens threshold intensity HHG 2508.09364"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "国内现状中北大团队的代表性HHG工作引用",
+      "missing_evidence": "需要厘清国内研究现状叙事中具体引用的北大+彭良友工作的真伪，并补充北大2025年固体HHG自旋-轨道角动量耦合PRL工作的正确文献信息",
+      "search_keywords": [
+        "Peking University solid HHG 2025 spin-orbit angular momentum coupling",
+        "北大 自旋轨道耦合 高次谐波 2025 PRL",
+        "Peng Liangyou altermagnet HHG Peking",
+        "PKU solid-state HHG PRL 2025 spin orbital"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "rationale\"国内现状\"中提到的南京大学Lv等β-WP₂ HHG实验(Nat. Commun. 12, 6437, 2021)",
+      "missing_evidence": "需要补全Lv et al. Nat. Commun. 12, 6437 (2021) β-WP₂ HHG实验的正确文献条目信息,作为国内固体HHG代表性工作之一",
+      "search_keywords": [
+        "Lv beta-WP2 high harmonic generation Nat Commun 12 6437 2021",
+        "南京大学 β相磷化钨 HHG Lv 2021 固体",
+        "Nanjing University beta-WP2 HHG experiment 6437",
+        "beta tungsten phosphide HHG Nat Commun 2021 Chinese group"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "full_review"
+}
