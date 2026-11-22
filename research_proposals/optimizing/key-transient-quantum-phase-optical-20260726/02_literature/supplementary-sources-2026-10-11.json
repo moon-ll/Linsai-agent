@@ -1,0 +1,134 @@
+{
+  "proposal_id": "key-transient-quantum-phase-optical-20260726",
+  "cluster_id": "cl_20260815_023aee",
+  "entries": [
+    {
+      "source_id": "paper:2026-260722360-magnetic-proximity-induced-non-relativistic-v",
+      "title": "Magnetic proximity-induced non-relativistic valley polarization",
+      "summary": "本文提出由单层材料构成的范德华异质结构，利用磁近邻效应通过非相对论性的自旋交换机制（而非传统依赖自旋轨道耦合的相对论性机制）诱导谷极化。该方案为在二维材料中调控谷自由度提供了一条新途径。",
+      "path": "",
+      "added_via": "cluster:cl_20260815_023aee",
+      "added_at": "2026-10-11T13:21:48Z"
+    },
+    {
+      "source_id": "paper:2024-2410.08910-strong-field-floquet-control-of-valley-polarization-in-trans",
+      "title": "Strong-field Floquet control of valley polarization in transition metal dichalcogenides",
+      "summary": "该工作利用强场Floquet调控手段实现了对过渡金属硫族化合物（TMDs）中谷极化的相干操控，展示了光诱导能带工程对谷自由度的有效控制。这为阿秒时间尺度上的谷电子学量子相位工程提供了实验证据。",
+      "path": "",
+      "added_via": "cluster:cl_20260815_023aee",
+      "added_at": "2026-10-11T13:21:48Z"
+    },
+    {
+      "source_id": "paper:2026-2606.15666-van-der-waals-engineering-of-valley-polarization-i",
+      "title": "Van der waals engineering of valley polarization in WSe2 via kagome V2O3 monolayer heterostructure through magnetic proximity effect",
+      "summary": "本文通过第一性原理计算提出一种氧化物驱动的能谷电子学平台：将WSe2与kagome晶格V2O3单层构建范德华异质结，借助磁近邻效应诱导的交换场在零磁场下实现显著的能谷劈裂与极化。该方案为无外磁场的稳健能谷/自旋电子学器件设计提供了新途径。",
+      "path": "",
+      "added_via": "cluster:cl_20260815_023aee",
+      "added_at": "2026-10-11T13:21:48Z"
+    },
+    {
+      "source_id": "paper:2026-260803242-valley-polarization-driven-by-two-color-circu",
+      "title": "Valley polarization driven by two-color circular fields: a rotating frame and strong-field perspective",
+      "summary": "该文针对由光场波形及其相对晶格取向（而非单纯光场螺旋性）驱动的六角材料谷极化现象，在旋转坐标系中提出了基于强场隧穿的互补性理论解释。该解释补充了Floquet激光缀饰能带图像，将谷控制物理扩展至非共振、亚周期及反演对称材料体系。",
+      "path": "",
+      "added_via": "cluster:cl_20260815_023aee",
+      "added_at": "2026-10-11T13:21:48Z"
+    },
+    {
+      "source_id": "paper:2026-2508.17240-tunable-valley-polarization-and-anomalous-hall-eff",
+      "title": "Tunable Valley Polarization and Anomalous Hall Effect in Ferrovalley NbX2 and TaX2 (X = S, Se, Te): A First-Principles Study",
+      "summary": "本文通过第一性原理密度泛函理论计算，预测1H-NbX₂和1H-TaX₂（X=S, Se, Te）单层是动力学稳定的铁谷材料，其磁交换相互作用与自旋轨道耦合共同导致K/K′谷的本征自发劈裂，无需外场即可实现非易失性、可调的谷极化。其中TaTe₂表现出最大的谷劈裂，且这些材料伴随显著的反常霍尔效应，为无外场谷电子学器件提供了候选材料。",
+      "path": "",
+      "added_via": "cluster:cl_20260815_023aee",
+      "added_at": "2026-10-11T13:21:48Z"
+    },
+    {
+      "source_id": "paper:2026-2605.03663-enhanced-valley-polarization-via-nonlinear-cascade",
+      "title": "Enhanced Valley Polarization via Nonlinear Cascaded Quantum-Geometric Selection Rules",
+      "summary": "该文证明布洛赫电子的量子几何性质不仅决定线性光学选择定则，还可通过非线性级联过程在半导体过渡金属硫族化合物中构建额外的量子几何选择规则，从而在远离能带边的强场激发下显著增强圆偏振光诱导的谷极化。其核心贡献是突破了谷选择性仅限于线性能带边跃迁的传统图像，为谷电子学提供了基于非线性级联量子几何效应的谷极化调控新机制。",
+      "path": "",
+      "added_via": "cluster:cl_20260815_023aee",
+      "added_at": "2026-10-11T13:21:48Z"
+    },
+    {
+      "source_id": "paper:2026-2508.07213-light-wave-engineering-for-selective-polarization-",
+      "title": "Light-Wave Engineering for Selective Polarization of a Single Q Valley in Transition Metal Dichalcogenides",
+      "summary": "本文提出一种光波工程方案，利用圆偏振与线偏振脉冲的相干组合，在单层过渡金属硫族化合物中实现对单个 Q 谷的高保真度、确定性选择性极化，突破了传统谷操控仅限于 K/K' 谷的瓶颈。该方法通过精心设计的量子路径对电子波包进行绝热操控，为谷电子学开辟了访问 Q 谷新自由度的途径。",
+      "path": "",
+      "added_via": "cluster:cl_20260815_023aee",
+      "added_at": "2026-10-11T13:21:48Z"
+    },
+    {
+      "source_id": "paper:2026-2412.19612-attosecond-all-optical-retrieval-of-valley-polariz",
+      "title": "Attosecond All-Optical Retrieval of Valley Polarization via Circular Dichroism in Transient Absorption",
+      "summary": "本文提出了一种基于阿秒瞬态吸收圆二色性的全光学理论方案，利用二维六角材料中第一导带（CB1）到更高未占据能带的谷选择性能带间跃迁，实现了对谷极化动力学的亚飞秒时间分辨定量探测。该方法为谷电子学中的超快谷自由度测量提供了无需电子探测的全光学新手段。",
+      "path": "",
+      "added_via": "cluster:cl_20260815_023aee",
+      "added_at": "2026-10-11T13:21:48Z"
+    },
+    {
+      "source_id": "paper:2508.17240",
+      "title": "Tunable Valley Polarization and Anomalous Hall Effect in Ferrovalley NbX2 and TaX2 (X = S, Se, Te): A First-Principles Study",
+      "summary": "本文基于密度泛函理论的第一性原理计算，系统研究了新型铁谷材料 1H-NbX2 与 1H-TaX2（X = S, Se, Te）的电子结构与磁学性质，发现它们均为动力学稳定的双极磁性半导体，且铁磁态能量上优于反铁磁态，其中 NbSe2 表现出最高的居里温度（176.25 K）。这些材料因反演对称性破缺与本征铁磁共同诱导自发谷极化和反常霍尔效应，且具有可调控性，为谷电子学/自旋电子学器件提供了有前景的候选材料。",
+      "path": "",
+      "added_via": "cluster:cl_20260815_023aee",
+      "added_at": "2026-10-11T13:21:48Z"
+    },
+    {
+      "source_id": "paper:2605.03663",
+      "title": "Enhanced Valley Polarization via Nonlinear Cascaded Quantum-Geometric Selection Rules",
+      "summary": "本文在半导体过渡金属硫族化合物（TMD）中演示了一条双共振级联非线性跃迁路径：电子从价带经由一个真实中间态（而非传统带边非线性过程中的虚中间态）跃迁至高激发态，该真实中间态的参与从根本上重塑了谷光学选择定则。这一机制实现了显著增强的谷极化，为谷电子学提供了超越带边跃迁的新型光学调控手段。",
+      "path": "",
+      "added_via": "cluster:cl_20260815_023aee",
+      "added_at": "2026-10-11T13:21:48Z"
+    },
+    {
+      "source_id": "paper:2607.22360",
+      "title": "Magnetic proximity-induced non-relativistic valley polarization",
+      "summary": "本文提出由单层铁磁体（FM）与交变磁体（AM）构成的范德华异质结，证明FM的磁近邻效应可在AM中普适地诱导非相对论性能谷极化。通过调控FM磁化方向与AM尼尔矢量，可实现四种独立的谷极化态并展现强磁-谷耦合，为基于能谷电子学的信息存储提供了潜在应用平台。",
+      "path": "",
+      "added_via": "cluster:cl_20260815_023aee",
+      "added_at": "2026-10-11T13:21:48Z"
+    },
+    {
+      "source_id": "briefing:knowledge/wiki/reviews/briefing-2026-06-03.md",
+      "title": "Valleytronics in 2D Materials Roadmap（强场超快光学每日简报精选论文）",
+      "summary": "本文是一篇关于二维材料能谷电子学（Valleytronics）的综合性路线图/综述，系统梳理了谷霍尔效应、激子谷物理、自旋-谷量子比特等核心物理现象及其最新进展，并指出在可扩展性、超越TMD/石墨烯的材料平台以及与纳米光子学和非线性光学控制集成方面的关键空白。文章强调贝里曲率、谷极化与量子几何在实现基于谷自由度信息处理中的关键作用，并提出了通向可扩展、量子相干谷电子器件的发展路径。",
+      "path": "",
+      "added_via": "cluster:cl_20260815_023aee",
+      "added_at": "2026-10-11T13:21:48Z"
+    },
+    {
+      "source_id": "hermes_briefing:research_briefing_20260603.md",
+      "title": "Valleytronics in 2D Materials Roadmap",
+      "summary": "本文是一份关于二维材料谷电子学的系统性路线图综述，梳理了谷霍尔效应、激子谷物理、自旋-谷量子比特等核心物理现象及最新进展，强调Berry曲率、谷极化与量子几何在谷基信息处理中的关键作用。文中指出当前在可扩展性、超越TMD/石墨烯的材料平台、以及与纳米光子学和非线性光学调控集成方面存在的关键缺口，并提出通往可扩展、量子相干谷电子器件的发展路径。",
+      "path": "",
+      "added_via": "cluster:cl_20260815_023aee",
+      "added_at": "2026-10-11T13:21:48Z"
+    },
+    {
+      "source_id": "paper:2022-2209.04928-polarization-shaped-strong-field-control-over-valley-polariz",
+      "title": "Polarization-Shaped Strong Field Control over Valley Polarization with Mid-IR Light",
+      "summary": "该工作利用偏振整形（椭圆度可调）的中红外强场，实现了对过渡金属硫族化合物（TMD）中谷极化程度的定量调控，并通过强场诱导的谷间耦合在亚周期（阿秒）时间尺度上展示了对谷动力学的相干操控。研究揭示了场偏振形态与谷极化耗散/保持之间的定量映射关系，为超快谷电子学和波形整形强场调控二维材料量子自由度提供了新范式。",
+      "path": "knowledge/raw/papers/2022-2209.04928-polarization-shaped-strong-field-control-over-valley-polariz.md",
+      "added_via": "cluster:cl_20260815_023aee",
+      "added_at": "2026-10-11T13:21:48Z"
+    },
+    {
+      "source_id": "paper:2026-2610.11293-multifunctionality-in-janus-crmcn4-m-si-ge-monolay",
+      "title": "Multifunctionality in Janus CrMCN4 (M = Si/Ge) Monolayers: Valleytronic Physics, Piezoelectric Response, and Photocatalytic Potential",
+      "summary": "基于第一性原理计算提出Janus型CrSiCN4与CrGeCN4单层作为多功能二维铁磁半导体平台，在同一材料中集成了自旋-谷耦合的谷电子学行为、可观的压电响应以及光催化水分解潜力。Janus不对称引入的垂直内禀偶极与Cr铁磁序、自旋轨道耦合协同工作，使谷劈裂、贝里曲率与压电极化可被组分/应变调控；带边位置跨水分解氧化还原电平且光吸收覆盖可见区，为多功能纳米器件与太阳能转化提供了候选材料。",
+      "path": "knowledge/raw/papers/2026-2610.11293-multifunctionality-in-janus-crmcn4-m-si-ge-monolay.md",
+      "added_via": "cluster:cl_20260815_023aee",
+      "added_at": "2026-10-11T13:21:48Z"
+    },
+    {
+      "source_id": "paper:2024-2408.10806-high-purity-valley-polarized-currents-induced-by-bichromatic",
+      "title": "High-purity valley-polarized currents induced by bichromatic optical fields in two-dimensional materials",
+      "summary": "提出并数值证明用双色（基频与倍频 ω–2ω）强激光场在非中心对称二维材料中诱导高纯度谷极化电流：相对相位与场强可定量调控电流的大小、方向及 K/K' 谷选择性，谷极化纯度可达 90% 以上。基于第一性原理实时模拟给出了强场谷控制的定量标度（强度、相位、频率依赖），提供了无需磁场或静电栅压的全光超快谷电流操控方案。",
+      "path": "knowledge/raw/papers/2024-2408.10806-high-purity-valley-polarized-currents-induced-by-bichromatic.md",
+      "added_via": "cluster:cl_20260815_023aee",
+      "added_at": "2026-10-11T13:21:48Z"
+    }
+  ]
+}

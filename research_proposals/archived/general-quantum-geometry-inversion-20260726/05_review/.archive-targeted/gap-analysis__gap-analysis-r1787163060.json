@@ -1,0 +1,55 @@
+{
+  "gaps": [
+    {
+      "claim": "R4中年 f-sum rule 标度律 (1+0.5·U/W) 缺乏理论推导和文献支撑，该线性标度形式是核心物理约束却推迟到Year 3才验证",
+      "missing_evidence": "缺少f-sum rule在强关联半导体中偏离(1+U/W)^2标度的理论分析、实验测量数据或已发表文献支持该线性修正形式",
+      "search_keywords": [
+        "f-sum rule high harmonic generation Hubbard U correction",
+        "semiconductor HHG sum rule bandwidth renormalization",
+        "f-sum rule ZnO TiSe2 strong correlation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "R1中BSV-HHG耦合效率≥10^-5与g^(2)(0)>1.5的兼容性边界未给出，两个量存在物理约束冲突",
+      "missing_evidence": "缺少bright squeezed vacuum高转换效率与高量子度同时实现的实验先例或理论分析",
+      "search_keywords": [
+        "bright squeezed vacuum high harmonic generation efficiency g2",
+        "BSV HHG photon number coupling efficiency solid state",
+        "quantum light solid HHG experimental coupling"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "R1引用Khurelbaatar等[21]结果针对原子HHG，但课题物理对象为固体HHG，引文与研究对象不匹配",
+      "missing_evidence": "缺少固体体系BSV驱动HHG的理论或实验文献，特别是Wigner相空间方法在固体强场中的适用性",
+      "search_keywords": [
+        "bright squeezed vacuum solid state high harmonic generation theory",
+        "Wigner phase space solid HHG quantum light",
+        "Khurelbaatar BSV HHG solid"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "R2中1.5 μm中红外驱动Bi2Te3 HHG的可行性缺乏文献支撑，驱动波长与材料带隙的适配性未论证",
+      "missing_evidence": "缺少Bi2Te3在中红外1.5 μm驱动下产生HHG的实验数据或理论计算",
+      "search_keywords": [
+        "Bi2Te3 high harmonic generation mid-infrared 1.5 micron",
+        "topological insulator HHG 1.5 micrometer drive",
+        "Bi2Te3 strong field nonlinear optics mid-IR"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "R1/R2/R3/R4涉及的核心概念（Corkum HHG三步模型、Lewenstein模型、Ghimire固体HHG首次观测、Bloch方程理论）未溯源至基础奠基文献",
+      "missing_evidence": "缺少对HHG基础理论的原始引用：Corkum 1993、Lewenstein 1994、Ghimire 2011、散户-Bloch方程等奠基性工作",
+      "search_keywords": [
+        "Corkum high harmonic generation three step model 1993",
+        "Lewenstein HHG theory 1994",
+        "Ghimire solid state high harmonic generation 2011 ZnO",
+        "semiconductor Bloch equation HHG theory original"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

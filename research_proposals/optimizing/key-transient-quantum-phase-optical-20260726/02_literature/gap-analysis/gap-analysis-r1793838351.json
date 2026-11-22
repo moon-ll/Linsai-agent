@@ -1,0 +1,32 @@
+{
+  "gaps": [
+    {
+      "claim": "L45 Di Gaspare 段\"最高约两个数量级场增强\"的数值论断（近场/等离激元场增强的定量结果）零 [N] 回挂",
+      "missing_evidence": "支撑该具体数值（~10² 场增强）的原始实验文献出处，需在第 45 行相关句尾补挂引文（评审建议补挂 [9]）",
+      "search_keywords": [
+        "plasmonic field enhancement two orders of magnitude",
+        "Di Gaspare plasmonic near-field enhancement",
+        "metallic nanostructure field localization quantitative measurement"
+      ],
+      "priority": "low"
+    },
+    {
+      "claim": "可行性评分依据中\"不变量层反演无先例属前沿风险\"的新颖性论断（创新性 0.86 的评分理由之一）",
+      "missing_evidence": "系统性文献检索证据，确认拓扑不变量层的瞬态量子相位光学反演确无先验工作，以支撑\"无先例\"声明并排除隐含相似方案",
+      "search_keywords": [
+        "topological invariant ultrafast optical readout",
+        "transient quantum phase optical detection",
+        "HHG topological invariant retrieval",
+        "chirality invariant time-resolved measurement"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "全章 65 处 [N] 引用超 rationale 上限 47，且 [32][45] 为单见低信息挂点稀释论证浓度（citation_coverage 超标）",
+      "missing_evidence": "非缺新文献，而是 [32][45] 与正文论点缺实质支撑关联——需将这两个挂点合并至同主题的强支撑引文或移除，使引用密度回落至 ≤47 且不损失论据覆盖",
+      "search_keywords": [],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

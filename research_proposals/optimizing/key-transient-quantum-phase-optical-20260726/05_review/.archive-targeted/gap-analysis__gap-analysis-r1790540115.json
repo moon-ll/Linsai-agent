@@ -1,0 +1,112 @@
+{
+  "gaps": [
+    {
+      "claim": "McIver 等 2020 年光致反常霍尔效应实验是固体 Floquet 态输运签名的奠基工作",
+      "missing_evidence": "McIver et al. 2020 关于光致反常霍尔效应 / Floquet 拓扑相变的原始论文及其引用背景文献",
+      "search_keywords": [
+        "McIver 2020 light-induced anomalous Hall effect",
+        "Floquet topological phase transition graphene",
+        "photoinduced Hall effect Floquet engineering experiment"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "中红外瞬态对称破缺、极化超织构、量子费舍信息（QFI）突破标准量子极限三项代表性实验相继报道",
+      "missing_evidence": "三项成果各自对应的实验论文：(1) 中红外瞬态对称破缺 (2) 极化超织构 (3) QFI 突破标准量子极限；QFI 主张物理上高度具体，需有强场/瞬态场景下的实验或理论文献",
+      "search_keywords": [
+        "mid-infrared transient symmetry breaking solid",
+        "polarization superstructure light-induced",
+        "Quantum Fisher Information standard quantum limit ultrafast",
+        "QFI metrology attosecond transient"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "[8]（THz SHG/THG 实验）作为'HHG 编码拓扑信息从理论预言推进到实验可区分'的证据",
+      "missing_evidence": "真正在高次谐波产生（HHG，非微扰强场）频段区分拓扑相的实验或理论论文，特别是关于 (In,Bi)₂Se₃ / Bi₂Se₃ 异质结构在 5×10¹³–10¹⁴ W/cm² 区间的 HHG 拓扑响应",
+      "search_keywords": [
+        "high harmonic generation topological insulator",
+        "HHG topological phase Bi2Se3",
+        "strong-field HHG band topology detection",
+        "nonperturbative HHG topological surface state"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "[20] (arXiv:2511.13114) 同时承担 §2.3 L41 的拓扑相变理论内容与 L51 的 WS₂应变 HHG 数据",
+      "missing_evidence": "需要核实 arXiv:2511.13114 是否真包含 WS₂ 应变下的高次谐波产生实验；若不含，需另立条目专门支撑 WS₂应变-HHG 链路",
+      "search_keywords": [
+        "arXiv 2511.13114 WS2 strain high harmonic generation",
+        "strain-engineered HHG transition metal dichalcogenide",
+        "WS2 strain HHG experiment"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "核心证据链 [9-11, 21-23, 25] 及预印本占比 45%（18/40）的参考文献支撑立项论断",
+      "missing_evidence": "[9-11, 21-23, 25] 等预印本的正式发表期刊版本；同时排查其他 18 篇预印本是否有正式版",
+      "search_keywords": [
+        "arXiv 2407.17917 published version",
+        "arXiv 2511.16165 journal publication",
+        "arXiv 2604.06051 peer-reviewed",
+        "high harmonic generation topological insulator published 2024 2025"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.4 L67 国内现状'多个课题组''多套平台'在瞬态拓扑 / HHG-拓扑 / 强场瞬态量子相方向的研究基础",
+      "missing_evidence": "可核实的国内团队及其代表论文（严禁虚构归属），需覆盖 HHG 凝聚态、瞬态拓扑、强场太赫兹/阿秒科学三个方向",
+      "search_keywords": [
+        "中国 强场高次谐波 凝聚态 课题组",
+        "国内 阿秒科学 拓扑材料 团队",
+        "China attosecond transient topology group",
+        "中科院 固体高次谐波 拓扑 课题组"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "L49 将 Berry 曲率称为'多体拓扑不变量'",
+      "missing_evidence": "明确区分单粒子 Berry 曲率（布洛赫带量）与多体拓扑不变量的文献定义；建议引用经典教材或综述澄清概念层级",
+      "search_keywords": [
+        "Berry curvature single-particle Bloch band",
+        "many-body topological invariant definition",
+        "Berry curvature versus many-body topology review",
+        "single-particle vs many-body Chern number"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "L91 提到'120 as 公开报道'的阿秒时间分辨实验记录",
+      "missing_evidence": "120 阿秒孤立阿秒脉冲或阿秒测量精度的实验原始论文及其精度数据",
+      "search_keywords": [
+        "120 attosecond pulse experiment",
+        "attosecond transient absorption spectroscopy",
+        "isolated attosecond pulse record duration",
+        "sub-130 attosecond measurement"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "L107 提到 ΔC<0.01 量级的陈数精度",
+      "missing_evidence": "该精度数值的一行推导依据或已发表文献支撑（来自 HHG 反演陈数算法的精度评估论文）",
+      "search_keywords": [
+        "Chern number retrieval precision HHG",
+        "topological invariant reconstruction accuracy high harmonic",
+        "Berry curvature sampling error Chern number"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§2.1 沿革中关于'HHG 探测能带结构范式'从 Ghimire 2011 至今的关键节点",
+      "missing_evidence": "Ghimire 2011 之后 HHG-能带结构方向的关键里程碑论文（如 Vampa 2015 的 critical reconstruction、Silva 2019 的乐队轨道分辨 HHG 等），用于补全沿革链",
+      "search_keywords": [
+        "Vampa 2015 critical reconstruction HHG band structure",
+        "HHG band structure reconstruction milestone",
+        "solid HHG orbital tomography review",
+        "Ghimire 2011 ZnO HHG subsequent milestone"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

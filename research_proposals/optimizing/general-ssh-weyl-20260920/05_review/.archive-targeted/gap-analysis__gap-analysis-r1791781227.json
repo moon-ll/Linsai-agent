@@ -1,0 +1,41 @@
+{
+  "gaps": [
+    {
+      "claim": "L9/L13/L41/L65 中'TaP、Kagome 等体系已观察到的上限两个数量级增强'将 Kagome 模型的 ≤100 倍增强扩挂到 TaP 体系",
+      "missing_evidence": "[16] TaP 文献仅报告立方律（cubic law）而非两个数量级增强；需要为 TaP 的 HHG 立方律行为提供独立的一手或综述文献支撑，并与 Kagome 模型的谐波产额增强数据分别引用、分别表述",
+      "search_keywords": [
+        "TaP Weyl semimetal high harmonic generation cubic law",
+        "TaP HHG nonlinear scaling",
+        "Kagome lattice HHG enhancement two orders of magnitude",
+        "Weyl semimetal HHG yield enhancement",
+        "TaAs HHG third-order scaling"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "L17 关于某拓扑相关 HHG 现象'仍未被独立观测'的论断",
+      "missing_evidence": "缺少检索范围、检索截止日期、所用数据库（Web of Science/Scopus/arXiv 等）的说明；缺少可作为反证基线的近三年综述或系统检索结果，以支撑'未被独立观测'这一新颖性主张",
+      "search_keywords": [
+        "high harmonic generation topological edge state observation",
+        "topological HHG independent experimental confirmation review",
+        "HHG topological phase marker experimental",
+        "solid-state HHG topology 2024 2025 review",
+        "topological material HHG observation status"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "rat L75 处罗列的五种拓扑相关 HHG 现象（Duan 三数量级、Lorenzo SSH、Kagome 两数量级、TaP 立方律等）量级各异，需为每一现象分别提供独立、可追溯的原始文献",
+      "missing_evidence": "当前可能存在多现象共享引用或引用错位（rat L75 与 refs 之间可能未做到一一对应）；每个现象的量级声明应追溯至具体一手实验/理论文献，并标注测量条件（激光强度、晶体取向等）",
+      "search_keywords": [
+        "Duan HHG topological enhancement three orders",
+        "Lorenzo SSH HHG 2025",
+        "Kagome HHG 100 times enhancement original paper",
+        "TaP Weyl HHG cubic law original report",
+        "Bi2Se3 HHG topological phase"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "content"
+}

@@ -1,0 +1,60 @@
+{
+  "gaps": [
+    {
+      "claim": "Wang Nature 2023 / de-la-Peña arXiv 2512.03987 同号双身份且 Wang 条目在 content 侧零引用",
+      "missing_evidence": "缺少对 Wang Nature 621 487 2023 (nonlinear Hall / Berry curvature dipole transport) 与 de-la-Peña 2025 (quantum metric inversion) 在量子几何反演方向的最新文献身份确认，确保引用号唯一对应",
+      "search_keywords": [
+        "Wang Nature 2023 nonlinear Hall Berry curvature dipole",
+        "de la Peña 2025 quantum metric inversion HHG",
+        "nonlinear Hall effect quantum geometry transport experimental",
+        "quantum geometry inversion arXiv 2512.03987"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "R2 数值验证在 ZnO 同域、Bi₂Te₃ 承担反演精度判据（载体互斥修正后）需要文献分别支撑两套指标的可行性",
+      "missing_evidence": "缺少 ZnO 同域三独立指标（加性/乘性/相关性）实测验证文献，以及 Bi₂Te₃ 作为拓扑绝缘体反演精度基准的对照实验文献",
+      "search_keywords": [
+        "ZnO high harmonic generation quantum geometry",
+        "Bi2Te3 topological insulator high harmonic spectroscopy",
+        "ZnO Berry curvature HHG experimental verification",
+        "Bi2Te3 topological insulator HHG precision benchmark"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "R4 弱关联同域档 Ω 误差 < 5% 作为独立达标项的合理性",
+      "missing_evidence": "缺少弱关联体系高次谐波量子几何反演误差基准的文献支撑，特别是5% 阈值的实验依据",
+      "search_keywords": [
+        "weakly correlated solid HHG quantum geometry inversion",
+        "high harmonic generation weakly correlated material error benchmark",
+        "Ω error 5% quantum geometry inversion HHG",
+        "weak correlation domain HHG Berry curvature retrieval accuracy"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "BSV 统计→Fisher 信息增益的加性/乘性归属（创新性核心论点）",
+      "missing_evidence": "缺少 BSV（Bures-Shor-Vourdas）统计量与 Fisher 信息增益在高次谐波量子几何反演中应用的文献，以及加性/乘性判据的统计学基础",
+      "search_keywords": [
+        "BSV statistics Fisher information harmonic generation",
+        "Bures Shor Vourdas quantum geometry HHG",
+        "Fisher information gain additive multiplicative discrimination HHG",
+        "quantum metric Berry curvature statistical separability high harmonic"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "NEwwave / HMG-Schema 标准扩展模块与自建格式的取舍（R3-4 残留矛盾）",
+      "missing_evidence": "缺少 NEwwave 6 行数据标准、HMG-Schema 扩展模块的最新规范文档，以及自建 vs 沿用的对照判据文献",
+      "search_keywords": [
+        "NEwwave high harmonic generation data format 2025",
+        "HMG-Schema extension module HHG data standard",
+        "NEwwave HHG data schema specification",
+        "high harmonic generation data exchange format review"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

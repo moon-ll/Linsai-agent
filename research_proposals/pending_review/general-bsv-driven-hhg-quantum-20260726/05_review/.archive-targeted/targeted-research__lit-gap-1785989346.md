@@ -1,0 +1,20 @@
+# 定向文献检索报告
+
+## 课题
+general-bsv-driven-hhg-quantum-20260726
+
+## 检索关键词
+- bright squeezed vacuum source engineering parameters、BSV source squeezed dB repetition rate stability、cavity-enhanced BSV generation experiment、squeezed vacuum HHG driver feasibility、coherent state driven solid HHG benchmark、Plan B attosecond spectroscopy alternative technique、classical light solid-state HHG calibration、weak coherent state high harmonic generation comparison、BSV HHG strongly correlated system probe、quantum light driven HHG Mott insulator experimental
+
+## 检索结果
+
+- 2605.30224 | Heralded ultrafast generation of macroscopic quantum states in matter with bright squeezed vacuum light | Shohei Imai | 2026 | 0.97 | 提出用 BSV 光与单次正交测量在物质中实现宏观量子态的超快制备方案。弱耦合区多光子量子光与物质纠缠导致无条件混合态,但通过正交测量后选择可将物质制备为激光驱动态的高斯加权叠加态(零本征 Dicke 态),并通过反向旋转项驱动到猫态。为强场量子光下宏观物质量子态工程开辟路线,直接对应 BSV 工程参数与可行性问题。 | 来源：联网检索
+- 2606.22714 | Emergence of Gaussian entanglement and non-Gaussianity in high-harmonic generation driven by bright squeezed light | J. Rivera-Dean, M. Even-Tzur, M. F. Ciappina, C. Granados, O. Cohen, P. Stammer | 2026 | 0.95 | 研究 BSV 驱动 HHG 在何种条件下产生非经典高斯态、何时该高斯描述失效。双色驱动(ω 强相干场 + 2ω 微扰 BSV)下,偶次谐波近似为 BSV 正交的线性响应,生成跨整个偶次谐波流形的集体压缩模式,给出协方差矩阵、纠缠结构与量子隐形传态保真度。是 BSV-HHG 多模高斯纠缠平台的关键理论工作。 | 来源：联网检索
+- 2503.15932 | Excitonic Enhancement of Squeezed Light in Quantum-Optical High-Harmonic Generation From a Mott Insulator | Christian Saugbjerg Lange, Thomas Hansen, Lars Bojer Madsen | 2025 | 0.94 | 针对强场量子光学中长期缺失的非经典信号明确频率问题,在扩展 Hubbard 模型的莫特绝缘体中研究激子对 HHG 的响应。发现激子在非经典响应中起关键作用并在激子能量处产生压缩光,可由电流算符时间关联解释。该工作为莫特绝缘体 BSV-HHG 探测提供了具体的频率窗口指引。 | 来源：联网检索
+- 2605.28236 | Symmetry breaking by quantum light in solid-state high-harmonic generation | P. Stammer, J. Rivera-Dean, D. Kim, A. Chacón, W. Gao, C. Granados | 2026 | 0.88 | 研究圆偏振量子光驱动下石墨烯与 MoS₂ 的 HHG,证明光场的量子涨落打破驱动场动力学对称性同时保留晶体对称性,从而解禁经典选择规则所禁戒的谐波,为固体中 HHG 的全光对称工程与阿秒脉冲生成开辟新路径,直接对应量子光驱动固体 HHG 实验对照。 | 来源：联网检索
+- 2509.20876 | Quantum Path Control in High-Order Harmonic Generation via Squeezed Lights | Feng Wang, Chunhui Yang, Xinyi Cui, Lixin He, Tianxin Ou, Rui-Bo Jin, Qing Liao, Pengfei Lan, Peixiang Lu | 2025 | 0.86 | 理论与数值上证明压缩光(非经典光)可选择性地抑制 HHG 中的长/短量子路径:相位(振幅)压缩场分别抑制长(短)路径,源于压缩光量子涨落对相位匹配的调控。可在整个谐波平台实现量子路径选择,有望产生小于 1 a.u. 的孤立阿秒脉冲。 | 来源：联网检索
+- 2512.17797 | Kerr-induced non-Gaussianity of ultrafast bright squeezed vacuum | Andrei Rasputnyi, Ilya Karuseichyk, Gerd Leuchs, Denis Seletskiy, Maria Chekhova | 2025 | 0.82 | 在宏观 BSV 态中引入 Kerr 非线性,确定性产生明亮非高斯态。单发 f-2f 干涉仪直接采样 Husimi 函数,清晰观测到从 2D 高斯到 'S' 形非高斯剖面的转变,为强度依赖非线性相位的统计证据。讨论了在损耗条件下 Wigner 负性的可恢复性,桥接量子光学与超快非线性光学。 | 来源：联网检索
+- 2411.11042 | Structured squeezed light allows for high-harmonic generation in classical forbidden geometries | J. Rivera-Dean, P. Stammer, M. F. Ciappina, M. Lewenstein | 2024 | 0.81 | 证明使用非经典结构光(沿一个偏振方向的压缩)可在经典驱动禁止的圆偏振几何下实现 HHG。谐波谱性质依赖于压缩类型,通过三步模型的电子动力学分析解释差异,为量子光学集成到 HHG 与光物质动力学控制提供新路径。 | 来源：联网检索
+- 2406.10443 | Attosecond pulse synthesis from high-order harmonic generation in intense squeezed light | ShiJun Wang, XuanYang Lai, XiaoJun Liu | 2024 | 0.79 | 理论上研究由强压缩光驱动原子 HHG 的阿秒脉冲合成,发现整个谐波谱可相位锁定,合成的阿秒脉冲宽度大幅减小。建立强场近似理论在压缩光中的推广,揭示与靶体系无关的物理机制,给出脉宽与压缩参数的依赖关系。 | 来源：联网检索
+- 2411.02311 | Observation of a Multimode Displaced Squeezed State in High-Harmonic Generation | David Theidel, Viviane Cotte, Philip Heinzel, Houssna Griguer, Mateusz Weis, René Sondenheimer, Hamed Merdji | 2024 | 0.76 | 在半导体 HHG 中通过有效 Schmidt 分解同步测量 g(2)、g(3),观察到多模位移压缩态。估计每个谐波接近单模结构,适合量子技术。模型拟合给出位移压缩态随驱动激光强度的依赖,并显著违反三方可分 Cauchy-Schwarz 型不等式,确认半导体 HHG 的非经典性。 | 来源：联网检索
+- 2408.07577 | Squeezed states of light after high-harmonic generation in excited atomic systems | J. Rivera-Dean, H. B. Crispin, P. Stammer, Th. Lamprou, E. Pisanty, M. Krüger, P. Tzallas, M. Lewenstein, M. F. Ciappina | 2024 | 0.72 | 理论上研究初态被布居到第一激发态的原子体系 HHG 产生压缩光。在驱动场与低阶谐波模均发现显著单模压缩,在驱动场-谐波模之间、谐波模之间存在双模压缩。利用双模压缩通过光子扣除可预报生成光学薛定谔猫态。 | 来源：联网检索

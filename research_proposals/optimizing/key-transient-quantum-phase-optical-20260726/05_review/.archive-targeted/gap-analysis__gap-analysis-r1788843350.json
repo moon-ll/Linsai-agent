@@ -1,0 +1,65 @@
+{
+  "gaps": [
+    {
+      "claim": "ATA 250 as 卷积失真导致信号畸变及 SNR 上界 8.3/8.6 的新实锤支撑",
+      "missing_evidence": "缺少 attosecond transient absorption 中 250 as 接近变换极限时的卷积畸变定量分析文献，以及 SNR 上界在 attosecond metrology 中的最新实验验证",
+      "search_keywords": [
+        "attosecond transient absorption 250 as convolution distortion",
+        "SNR upper limit attosecond spectroscopy",
+        "ATA time resolution convolution broadening",
+        "attosecond metrology signal to noise bound"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "scheme.md §1.2 三变量扫描约束论证（同一装置、同一组样品、同一套理论代码）缺乏引用支撑",
+      "missing_evidence": "缺少强场/阿秒实验中三变量（带隙、驱动波长、场强）固定扫描方法学的经典文献或近期方法学综述",
+      "search_keywords": [
+        "strong field experiment variable scan methodology",
+        "attosecond spectroscopy multi-parameter scan",
+        "high harmonic generation parameter space constraint",
+        "transient phase experimental design"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "全时空反演与瞬态量子相的反演口径需要厘清",
+      "missing_evidence": "缺少瞬态 Berry 曲率与瞬态拓扑不变量的全时空反演基准文献，以及反演口径在瞬态 vs 稳态下的区分定义",
+      "search_keywords": [
+        "time-dependent Berry curvature reconstruction",
+        "transient topological invariant retrieval",
+        "spatiotemporal inversion attosecond",
+        "instantaneous Chern number measurement"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "content.md 中五处编号错挂及 [38][4] 真 DOI 挂错文",
+      "missing_evidence": "需要核实并补充被错挂文献的正确原始出处与 DOI，例如被错挂为某文内容的实际应为另一文献",
+      "search_keywords": [
+        "DOI verification high harmonic generation",
+        "attosecond transient absorption original reference",
+        "transient phase reconstruction citation verification",
+        "Berry curvature harmonic generation primary source"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "rationale L63、content L21、scheme L45 三处 T_L/T_intro=2π/(ℏω/E_g) 换算式逐字重复",
+      "missing_evidence": "缺少该换算式的原始出处（分区判据 ℏω/E_g≥2 ⇔ T_L≤π·T_intro）的首次推导或方法学文献",
+      "search_keywords": [
+        "Keldysh parameter high frequency regime",
+        "intraband interband transition criterion",
+        "high harmonic generation time scale ratio",
+        "T_L T_intro ratio derivation"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "scheme.md §7 局部冗余（约 10545 字超上限）",
+      "missing_evidence": "缺少如何精炼冗余段的方法学或写作规范文献（属于写作问题，可忽略）",
+      "search_keywords": [],
+      "priority": "low"
+    }
+  ]
+}

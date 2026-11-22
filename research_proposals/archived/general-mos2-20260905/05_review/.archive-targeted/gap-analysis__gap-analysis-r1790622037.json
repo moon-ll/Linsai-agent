@@ -1,0 +1,51 @@
+{
+  "gaps": [
+    {
+      "claim": "MoS₂ 莫尔系统 HHG 中协同/反常/反演三类机制（§2.1/2.2/2.3 三处并联引用 Molinero/Mrudul/Almeida/Avetissian）",
+      "missing_evidence": "现有编号 [30]/[31]/[32] 的人名锚与条目内容系统性错位：[30] 实为 Mrudul 独著 PRB 110, 115415 (2024)（TBG 椭圆度依赖，无 Dixit），[29] Molinero Optica 11, 171 (2024) 才是平带塌缩预言，[31] de Almeida arXiv:2604.11984 为菱方石墨烯手性 Bloch 态 HHG，[32] Avetissian 才是偏置双层石墨烯 Berry 曲率；需逐锚重新核证替代文献而非整体平移",
+      "search_keywords": [
+        "MoS2 moiré high harmonic generation flat band collapse",
+        "Mrudul PRB 110 115415 2024 twisted bilayer graphene ellipticity HHG",
+        "rhombohedral graphene chiral Bloch state high harmonic generation de Almeida",
+        "Avetissian biased bilayer graphene Berry curvature high harmonic",
+        "twisted MoS2 homobilayer high harmonic generation mechanism"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "扭转相位匹配工程 / 几何相位 4×10⁻⁵ 量级效应（§2.1 L27 与立项依据 §2.3.3 共用 [22]）",
+      "missing_evidence": "[22] PRL 135, 166902 的 DOI 在 doi.org 与 Crossref 均无记录（404），属不可实查引用；需核证 PRL 卷期页码、补真实 DOI 或替换为可查证的 PRL/Nature Phys./PRX 同主题文献，并核对原文机制表述以统一\"几何相位\"与\"扭转相位匹配工程\"两种说法",
+      "search_keywords": [
+        "Physical Review Letters 135 166902 high harmonic generation",
+        "geometric phase twist phase matching HHG moiré",
+        "PRL moiré high harmonic generation phase matching",
+        "twist angle phase matching high harmonic generation 2D material"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "R1 产出对应的激子响应量化目标 ΔN_ex / ΔN_tw（§2.4 六条目标中缺失条目）",
+      "missing_evidence": "六条目标已覆盖 R²/α_syn/r/σ_Ω/Δt 等指标，但缺少激子（exciton）层面对 HHG 截止阶数变化的量化目标；需补 1—2 条 MoS₂ 单层及同质/异质结中激子共振增强 HHG 的定量文献以支撑 ΔN 量级预估（典型报道区间 N_ex ≈ 1—5 阶）",
+      "search_keywords": [
+        "MoS2 exciton enhanced high harmonic generation",
+        "excitonic resonance HHG cutoff enhancement 2D semiconductor",
+        "A B exciton MoS2 high harmonic generation yield",
+        "exciton contribution high harmonic generation TMD monolayer",
+        "ΔN exciton HHG amplification factor"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "单层 MoS₂ HHG 中 A/B 激子能量差约 160 meV 及 1.88—2.04 eV 窗口独立测量（§2.1 L19，Liu[19] 与 Lee[20] 并引）",
+      "missing_evidence": "现写法为堆叠式双引，缺年份/期刊/观测动作的\"一体嵌入\"结构，引用嵌入密度低于范本；需核证两篇文献的实际发表年/期刊/方法（HHG/PL/吸收谱），并核实 160 meV 激子分裂与 1.88—2.04 eV 窗口的数值是否准确转引",
+      "search_keywords": [
+        "Liu MoS2 monolayer high harmonic generation exciton",
+        "Lee MoS2 monolayer HHG 1.88 2.04 eV",
+        "monolayer MoS2 A B exciton splitting 160 meV HHG",
+        "MoS2 high harmonic generation exciton resonance measurement"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

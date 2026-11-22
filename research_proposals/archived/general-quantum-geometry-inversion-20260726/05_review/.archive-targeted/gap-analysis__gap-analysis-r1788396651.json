@@ -1,0 +1,34 @@
+{
+  "gaps": [
+    {
+      "claim": "Liu-Fu-Kais论文引用（DOI 10.1103/PhysRevResearch.4.013041）实为Caputa-Magan-Patramanis的Krylov复杂度论文，与量子几何固体HHG主题不符，5处引用均基于错配DOI",
+      "missing_evidence": "需要Liu Fu Kais关于固体HHG中量子几何与贝里曲率的正确文献，DOI 10.1103/PhysRevResearch.4.013041实际对应'Geometry of Krylov complexity'（量子场论中的Krylov复杂度），非目标论文",
+      "search_keywords": [
+        "Liu Fu Kais quantum metric Berry curvature solid high harmonic generation",
+        "Liu Fu quantum geometry HHG solid state",
+        "quantum geometry solid-state high harmonic generation Liu 2022"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Bi2Te3体相带隙数值（0.15 eV/0.83 eV/0.68 eV差值）在rationale段与scheme段需统一论证，当前scheme段三个数值虽自洽但缺少与rationale段的呼应说明",
+      "missing_evidence": "缺少对Bi2Te3带隙实验测量值（体相~0.15 eV vs 表面态~0.68 eV差值）的直接文献支撑，以及为何选取0.83 eV光子能量的物理论证",
+      "search_keywords": [
+        "Bi2Te3 bulk bandgap 0.15 eV experimental ARPES",
+        "Bi2Te3 topological insulator band structure 0.68 eV surface state",
+        "Bi2Te3 pump photon energy 0.83 eV HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "BSV源搭建风险降级后'不可回答的科学问题'段落与§2.8/§3.5/§4.6/§5.6末尾Go/No-Go判据段高度重复，违反'scheme不复述方案细节'原则",
+      "missing_evidence": "§6风险降级段需要删除'不可回答的科学问题'复述块，但降级路径的科学边界（哪些问题降级后仍可回答、哪些不能）缺少具体文献支撑",
+      "search_keywords": [
+        "bright squeezed vacuum high harmonic generation experimental setup risk",
+        "BSV parametric amplifier reliability experimental",
+        "quantum light HHG feasibility alternative approach"
+      ],
+      "priority": "high"
+    }
+  ]
+}

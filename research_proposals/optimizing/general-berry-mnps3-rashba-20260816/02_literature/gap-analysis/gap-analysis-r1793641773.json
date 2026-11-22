@@ -1,0 +1,39 @@
+{
+  "gaps": [
+    {
+      "claim": "反问题指纹反演是'首次标定'（content §2.3 首选量段）——对正问题→反问题指纹标定的新颖性主张",
+      "missing_evidence": "系统检索证明此前无同类指纹标定工作的查新证据：需覆盖非线性光学/声子指纹反演方向的先行文献检索（含检索范围、数据库与截止日期记录），以支撑新颖性主张或将其降格为'拟首次标定'",
+      "search_keywords": [
+        "nonlinear phononics fingerprint spectroscopy",
+        "SHG fingerprint antiferromagnet identification",
+        "inverse problem fingerprint Rashba splitting",
+        "MnPS3 nonlinear optical response",
+        "altermagnet fingerprint first principles"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "切换概率曲线已具备实验可达的支撑（scheme §3.6 指标可达性段）",
+      "missing_evidence": "切换概率（switching probability）随驱动场强变化的实验先例文献：现有引用 [26] 仅实测驱动场强窗口（0.5 MV/cm 落于窗口内），无任何切换概率曲线的实测报道；需检索反铁磁/交变磁材料中超快（太赫兹或飞秒）切换概率定量测量的实验工作，若无先例则论点须改写为仅'低场强子区间的驱动场强已具实测可达支撑'",
+      "search_keywords": [
+        "terahertz switching probability antiferromagnet",
+        "ultrafast spin switching probability measurement",
+        "femtosecond laser induced switching yield",
+        "MnPS3 ultrafast spin dynamics experiment",
+        "THz field driven antiferromagnetic switching"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "CrSb 段（rationale §1.2）中 'Q₄₃' 记法的符号引用",
+      "missing_evidence": "对原文献 [34] 的符号级核实：'Q₄₃' 疑为原文符号笔误（语义未明），需回溯 [34] 原文确认正确记法（如 Q₃/Q₄ 模指标或 (4,3) 分量记法），references 校验轮联动定稿",
+      "search_keywords": [
+        "CrSb altermagnet spin splitting ARPES",
+        "CrSb spin wave notation Q",
+        "altermagnet magnon mode labeling"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "full_review"
+}

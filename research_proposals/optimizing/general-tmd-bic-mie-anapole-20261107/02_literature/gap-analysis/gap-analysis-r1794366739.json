@@ -1,0 +1,40 @@
+{
+  "gaps": [
+    {
+      "claim": "§一.5中关于“Moharam等人的周期阵列耦合模理论”可作为周期结构中耦合模、散射通道及anapole形成机制理论依据的论述。",
+      "missing_evidence": "现有[37]“Moharam等, Opt. Lett. 28, 2301 (2003)”两轮检索均无法溯源，缺少可由期刊页面或DOI核验的原始文献。通行候选出处为Fan与Suh, JOSA A 20, 569 (2003)，但替换后仍需确认该文是否直接支撑本段所述的周期阵列anapole形成及通道干涉机制，而不只是通用耦合模理论。",
+      "search_keywords": [
+        "\"JOSA A\" 20 569 2003 Fan Suh temporal coupled-mode theory",
+        "\"Opt. Lett.\" 28 2301 2003 Moharam coupled-mode",
+        "Fan Suh 10.1364/JOSAA.20.000569",
+        "periodic array anapole coupled-mode theory",
+        "temporal coupled-mode theory anapole formation interference"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§一.2和§一.4所述Gao团队通过TMD扭转角调控获得约150倍增强的现象，以及该成果究竟来自一项还是两项连续研究。",
+      "missing_evidence": "需要核对[21]和[23]所对应的原始论文，明确二者是同一实验的不同表述还是两项独立工作；还需由直接来源确认150倍增强的实验对象、扭转角、测量通道、比较基线和增强定义。当前跨节双挂同一实验且“一项工作/两项工作”的表述与文献条目不能稳定对应。",
+      "search_keywords": [
+        "Gao TMD twist angle 150-fold second harmonic generation",
+        "Gao twisted MoS2 150 times harmonic enhancement",
+        "\"150-fold\" \"twist angle\" TMD second harmonic",
+        "Gao anapole twisted MoS2 nonlinear optics",
+        "Gao 扭转角 二次谐波 150倍 二维材料"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "“材料阶段由2013年的三项工作奠定”这一时间概括，其中包括Kumar[1]、Malard[2]和Trolle[3]的工作。",
+      "missing_evidence": "Trolle[3]的正式发表年份为2014，现有论述与书目元数据不一致。需要核验该文的作者、题名、期刊、卷页或DOI等原始出版信息，并将正文时间表述修正为“2013—2014年的三项工作”，或提供该文确为2013年公开的可靠版本记录。",
+      "search_keywords": [
+        "Trolle 2014 MoS2 second harmonic generation",
+        "\"Trolle\" \"MoS2\" 2014 nonlinear optics",
+        "Trolle 2013 2014 transition metal dichalcogenide second harmonic generation",
+        "Trolle multilayer MoS2 publication record DOI"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

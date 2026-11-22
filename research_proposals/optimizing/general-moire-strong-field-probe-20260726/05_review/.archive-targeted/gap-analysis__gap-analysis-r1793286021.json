@@ -1,0 +1,42 @@
+{
+  "gaps": [
+    {
+      "claim": "研究方案中Tikhonov正则化扫描网格、蒙特卡洛样本规模，以及m*、n_eff、N分档等关键参数具有明确、可复算的数值依据。",
+      "missing_evidence": "缺少实际存在且可定位的“方案参数表”或等效证据源。需给出各参数的数值、单位、适用范围和出处：材料参数及模型假设应有原始文献支撑；数值方法参数应引用方法学依据，或提供本项目的预实验、收敛性测试和参数选择记录。目前仅有“见方案参数表”的悬空指引，不能构成证据链。",
+      "search_keywords": [
+        "Tikhonov regularization parameter selection inverse spectroscopy",
+        "Tikhonov parameter grid convergence spectral inversion",
+        "Monte Carlo sample size convergence error estimation",
+        "effective mass carrier density strong-field semiconductor Bloch equation",
+        "Floquet steady-state convergence optical cycles"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "SBE模型复现ZnO偶次谐波谱的偏差小于6%，而小于5%的指标仅用于合成谱的数值收敛验证。",
+      "missing_evidence": "需明确区分“合成谱数值收敛”和“ZnO实验谱复现”两类基准。为ZnO复现指标补充可核验的实验谱来源、数据或基准文献、SBE计算设置及偏差定义，并提供原始文献或本项目计算记录；不能用合成谱收敛结果替代ZnO实验谱验证。",
+      "search_keywords": [
+        "ZnO high harmonic generation even harmonic spectrum",
+        "ZnO odd-even harmonic emission strong field",
+        "semiconductor Bloch equation ZnO high harmonic spectroscopy",
+        "ZnO high harmonic generation experimental spectrum",
+        "TDDFT ZnO even harmonic generation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "文献[33]所述工作已经“首次直接证实”相关Floquet调控效应。",
+      "missing_evidence": "缺少对文献[33]截至检索日的同行评议发表状态确认，以及支持“首次直接证实”这一优先权判断的系统性文献检索证据。需补充正式期刊论文信息，或将表述限定为“据截至具体日期的检索结果”；同时检索是否存在更早的同类直接实验或理论证实文献，并说明纳入与排除标准。",
+      "search_keywords": [
+        "2507.03791",
+        "\"2507.03791\" Floquet",
+        "\"2507.03791\" journal publication",
+        "Floquet engineering direct experimental demonstration",
+        "Floquet engineering moire strong-field control",
+        "Floquet engineering prior art direct observation"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

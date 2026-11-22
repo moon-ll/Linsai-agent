@@ -1,0 +1,81 @@
+{
+  "gaps": [
+    {
+      "claim": "§2.1(a)「Rudner 与 Lindner 2020 年综述给出…」具名引用缺角标，且同句 [15] 挂在 Rudner 与 Lindner 综述之前的前句上，导致引用归属含混（R2-low 未尽事项，本轮残留）",
+      "missing_evidence": "Rudner & Lindner 2020 年综述（应为 Solid State HHG / Attosecond 光电子谱综述类）的准确出处核对：期刊、卷页、DOI/arXiv 编号，以及该综述中关于晶格对称性破缺导致 HHG 允许选择定则放宽的具体结论定位；同时需确认 [15] 角标当前实际挂靠的文献是否即该综述，若不是则需核对正确的参考文献条目",
+      "search_keywords": [
+        "Rudner Lindner 2020 review high harmonic generation solids",
+        "Rudner Lindner attosecond photoemission review solid state",
+        "solid-state HHG lattice symmetry selection rules review",
+        "Rudner Lindner 2020 Journal of Physics B high harmonic generation solids"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§6 第 2 年 B 里程碑「抖动稳定至 ≤105 as」与 Y1/项目级「≤100 as」双版本且倒挂，105 as 无推导依据（indicator_consistency 红线）",
+      "missing_evidence": "缺少支撑「2 μm 端 117→94 as 应急同步验收」这一替代判据的文献依据：即 2 μm 波段驱动器固有抖动（~117 as 级）与 OPCPA/色散补偿后可达抖动量级的公开报道或技术文献，以及为何在第二年才切换验收标准的工程与文献依据；需引用已有文献中的时域同步抖动实测值（如 XFEL/OPA/OPCPA 系统抖动指标、few-cycle CPA 抖动抑制文献）来替代当前无来源的 105 数字",
+      "search_keywords": [
+        "few-cycle CPA carrier-envelope phase stabilization timing jitter",
+        "OPCPA timing jitter attosecond pulse synchronization",
+        "XFEL few-cycle attosecond pulse timing jitter specification",
+        "carrier-envelope phase stabilization 1 um 2 um jitter comparison"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.3 环节④「|ΔC|>0.50 转入（D1/D2 备份路径）」中模型诊断实际属 D3 而非 D1/D2，挂靠错位",
+      "missing_evidence": "缺少对「反演残差/模型诊断」这一类任务在国内外公开方法学文献中的归属依据：即固态 HHG/阿秒谱反演的残差诊断与模型判据（如残差量级阈值、模型失配判据、诊断性特征选择）的已有方法论文献，用以支撑 D3 作为诊断路径的合法性与阈值合理性；亦需文献支撑三档残差阈值（≤0.20 / 中档 / >0.50）并非任意设定",
+      "search_keywords": [
+        "high harmonic inversion residual diagnosis model validation",
+        "attosecond streaking retrieval model discrepancy diagnostic",
+        "inverse problem ill-posed regularization residual threshold spectroscopy",
+        "solid-state HHG model discrepancy diagnostic criteria"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "canonical 表强度带 0.06–0.18 V/Å ↔ 5×10¹¹–4×10¹² W/cm²，按 I=½cε₀E₀² 复算应为 4.8×10¹⁰–4.3×10¹¹ W/cm²（差约 10×）",
+      "missing_evidence": "缺少可引用的激光强度/场强换算标准参考（含介电常数与单位约定，以及峰值功率 vs 平均功率、聚焦光斑定义对 10^11–10^12 W/cm² 量级固态 HHG 实验条件的普遍引用），用以替换当前错误换算；固态 HHG 实验文献中报道的场强与强度数值区间亦可作为校核来源",
+      "search_keywords": [
+        "peak intensity electric field conversion optical field0.1 V/Angstrom",
+        "solid-state high harmonic generation laser intensity W/cm2 experimental conditions",
+        "laser damage threshold intensity thin crystal high harmonic generation",
+        "peak power average power intensity solid state HHG experiment"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.2(c)「约 40–400 倍」波长比下端虚高：1.5 μm/62 nm≈24、主窗 30 eV 端≈36",
+      "missing_evidence": "缺少支撑「波长比 = 驱动波长 / 探测波长 = 光子能量比 = 谐波阶数」这一换算关系的文献（即 ν_drive/ν_probe = n 即波长比等于谐波阶数的严格关系），以及固态 HHG 光谱学中利用宽波长跨度获取高阶谐波分辨率的文献依据，用于替换当前无引用支撑的倍数区间",
+      "search_keywords": [
+        "solid-state HHG high order harmonic broad wavelength range spectroscopy",
+        "harmonic order equals ratio of drive and probe photon energies",
+        "high harmonic generation solid-state wideband spectroscopy resolution",
+        "attosecond solid state harmonic comb wavelength ratio"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§2.3(a) L0 训练样本仅含 1 组带边驱动强度等级，代理模型对 Ω_R/E_g 1–3 跨档泛化训练不足，自放大 D6 风险",
+      "missing_evidence": "缺少代理模型/机器学习势函数在少样本（少强度档）条件下跨参数区间泛化能力的文献依据与训练样本量-泛化误差关系的方法学文献（如主动学习采样、泛化界、样本复杂度），用以支撑「至少 2 档强度」的训练设计或说明现有设计的充分性；同时缺少固态 HHG 强场计算中驱动强度扫描标准做法的文献支持",
+      "search_keywords": [
+        "machine learning interatomic potential generalization few training configurations",
+        "active learning sampling surrogate model accuracy strong field",
+        "solid-state HHG strong field simulation intensity sweep convergence",
+        "generalization error training dataset coverage potential function"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§7(e) 候选合作组「MIT Reis 组」机构归属存疑（D. Reis 2020 年起任职 SLAC），名实不符",
+      "missing_evidence": "缺少合作方机构归属的公开可核实来源（D. Reis 的任职机构与其在固态 HHG / time-resolved photoemission 方向的代表性工作出处），以修正或删除机构定语；同时缺少所列其他候选合作组（若有）对应的公开合作基础证据",
+      "search_keywords": [
+        "David Reis SLAC attosecond photoemission solid state high harmonic",
+        "Reis group solid state HHG time-resolved photoemission institution",
+        "attosecond solid state high harmonic generation collaboration SLAC"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

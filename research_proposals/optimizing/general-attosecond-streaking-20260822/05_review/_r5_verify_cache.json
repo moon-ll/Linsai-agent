@@ -1,0 +1,1529 @@
+{
+ "1": {
+  "raw": "Goulielmakis E, Loh Z H, Wirth A, et al. Real-time observation of valence electron motion. Nature, 2010, 466: 739-743. DOI: 10.1038/nature09212",
+  "dagger": "",
+  "doi": "10.1038/nature09212",
+  "src": "doi",
+  "id": "10.1038/nature09212",
+  "listed_year": "2010",
+  "first_author": "Goulielmakis E",
+  "title_guess": "Real-time observation of valence electron motion",
+  "vol": "466",
+  "page": "739-743",
+  "truth": {
+   "ok": true,
+   "title": "Real-time observation of valence electron motion",
+   "authors": [
+    "Goulielmakis",
+    "Loh",
+    "Wirth",
+    "Santra",
+    "Rohringer",
+    "Yakovlev",
+    "Zherebtsov",
+    "Pfeifer",
+    "Azzeer",
+    "Kling",
+    "Leone",
+    "Krausz"
+   ],
+   "journal": "Nature",
+   "vol": "466",
+   "page": "739-743",
+   "year": "2010",
+   "doi": "10.1038/nature09212"
+  },
+  "from_cache": true
+ },
+ "2": {
+  "raw": "Cousin S L, Di Palo N, Buades B, et al. Attosecond streaking in the water window: A new regime of attosecond pulse characterization. Physical Review X, 2017, 7: 041030. DOI: 10.1103/PhysRevX.7.041030",
+  "dagger": "",
+  "doi": "10.1103/PhysRevX.7.041030",
+  "src": "doi",
+  "id": "10.1103/PhysRevX.7.041030",
+  "listed_year": "2017",
+  "first_author": "Cousin S L",
+  "title_guess": "Attosecond streaking in the water window: A new regime of attosecond pulse characterization",
+  "vol": "7",
+  "page": "041030",
+  "truth": {
+   "ok": true,
+   "title": "Attosecond Streaking in the Water Window: A New Regime of Attosecond Pulse Characterization",
+   "authors": [
+    "Cousin",
+    "Di Palo",
+    "Buades",
+    "Teichmann",
+    "Reduzzi",
+    "Devetta",
+    "Kheifets",
+    "Sansone",
+    "Biegert"
+   ],
+   "journal": "Physical Review X",
+   "vol": "7",
+   "page": "041030",
+   "year": "2017",
+   "doi": "10.1103/PhysRevX.7.041030"
+  },
+  "from_cache": true
+ },
+ "3": {
+  "raw": "Pabst S, Dahlström J. Eliminating the dipole phase in attosecond pulse characterization using Rydberg wave packets. Physical Review A, 2016, 94: 013411. DOI: 10.1103/PhysRevA.94.013411",
+  "dagger": "",
+  "doi": "10.1103/PhysRevA.94.013411",
+  "src": "doi",
+  "id": "10.1103/PhysRevA.94.013411",
+  "listed_year": "2016",
+  "first_author": "Pabst S",
+  "title_guess": "Eliminating the dipole phase in attosecond pulse characterization using Rydberg wave packets",
+  "vol": "94",
+  "page": "013411",
+  "truth": {
+   "ok": true,
+   "title": "Eliminating the dipole phase in attosecond pulse characterization using Rydberg wave packets",
+   "authors": [
+    "Pabst",
+    "Dahlström"
+   ],
+   "journal": "Physical Review A",
+   "vol": "94",
+   "page": "013411",
+   "year": "2016",
+   "doi": "10.1103/PhysRevA.94.013411"
+  },
+  "from_cache": true
+ },
+ "4": {
+  "raw": "Schultze M, Fieß M, Karpowicz N, et al. Delay in photoemission. Science, 2010, 328: 1658-1662. DOI: 10.1126/science.1189401",
+  "dagger": "",
+  "doi": "10.1126/science.1189401",
+  "src": "doi",
+  "id": "10.1126/science.1189401",
+  "listed_year": "2010",
+  "first_author": "Schultze M",
+  "title_guess": "Delay in photoemission",
+  "vol": "328",
+  "page": "1658-1662",
+  "truth": {
+   "ok": true,
+   "title": "Delay in Photoemission",
+   "authors": [
+    "Schultze",
+    "Fieß",
+    "Karpowicz",
+    "Gagnon",
+    "Korbman",
+    "Hofstetter",
+    "Neppl",
+    "Cavalieri",
+    "Komninos",
+    "Mercouris",
+    "Nicolaides",
+    "Pazourek",
+    "Nagele",
+    "Feist",
+    "Burgdörfer",
+    "Azzeer",
+    "Ernstorfer",
+    "Kienberger",
+    "Kleineberg",
+    "Goulielmakis",
+    "Krausz",
+    "Yakovlev"
+   ],
+   "journal": "Science",
+   "vol": "328",
+   "page": "1658-1662",
+   "year": "2010",
+   "doi": "10.1126/science.1189401"
+  },
+  "from_cache": true
+ },
+ "5": {
+  "raw": "Mairesse Y, Quéré F. Frequency-resolved optical gating for complete reconstruction of attosecond bursts. Physical Review A, 2005, 71: 011401. DOI: 10.1103/PhysRevA.71.011401",
+  "dagger": "",
+  "doi": "10.1103/PhysRevA.71.011401",
+  "src": "doi",
+  "id": "10.1103/PhysRevA.71.011401",
+  "listed_year": "2005",
+  "first_author": "Mairesse Y",
+  "title_guess": "Frequency-resolved optical gating for complete reconstruction of attosecond bursts",
+  "vol": "71",
+  "page": "011401",
+  "truth": {
+   "ok": true,
+   "title": "Frequency-resolved optical gating for complete reconstruction of attosecond bursts",
+   "authors": [
+    "Mairesse",
+    "Quéré"
+   ],
+   "journal": "Physical Review A",
+   "vol": "71",
+   "page": "011401",
+   "year": "2005",
+   "doi": "10.1103/PhysRevA.71.011401"
+  },
+  "from_cache": true
+ },
+ "6": {
+  "raw": "Ren X, Li J, Yin Y, et al. Attosecond light sources in the water window. Journal of Optics, 2018, 20: 023001. DOI: 10.1088/2040-8986/aaa394",
+  "dagger": "",
+  "doi": "10.1088/2040-8986/aaa394",
+  "src": "doi",
+  "id": "10.1088/2040-8986/aaa394",
+  "listed_year": "2018",
+  "first_author": "Ren X",
+  "title_guess": "Attosecond light sources in the water window",
+  "vol": "20",
+  "page": "023001",
+  "truth": {
+   "ok": true,
+   "title": "Attosecond light sources in the water window",
+   "authors": [
+    "Ren",
+    "Li",
+    "Yin",
+    "Zhao",
+    "Chew",
+    "Wang",
+    "Hu",
+    "Cheng",
+    "Cunningham",
+    "Wu",
+    "Chini",
+    "Chang"
+   ],
+   "journal": "Journal of Optics",
+   "vol": "20",
+   "page": "023001",
+   "year": "2018",
+   "doi": "10.1088/2040-8986/aaa394"
+  },
+  "from_cache": true
+ },
+ "7": {
+  "raw": "Peschel J, Busto D, Plach M, et al. Attosecond dynamics of multi-channel single photon ionization. Nature Communications, 2022, 13: 5205. DOI: 10.1038/s41467-022-32780-5",
+  "dagger": "",
+  "doi": "10.1038/s41467-022-32780-5",
+  "src": "doi",
+  "id": "10.1038/s41467-022-32780-5",
+  "listed_year": "2022",
+  "first_author": "Peschel J",
+  "title_guess": "Attosecond dynamics of multi-channel single photon ionization",
+  "vol": "13",
+  "page": "5205",
+  "truth": {
+   "ok": true,
+   "title": "Attosecond dynamics of multi-channel single photon ionization",
+   "authors": [
+    "Peschel",
+    "Busto",
+    "Plach",
+    "Bertolino",
+    "Hoflund",
+    "Maclot",
+    "Vinbladh",
+    "Wikmark",
+    "Zapata",
+    "Lindroth",
+    "Gisselbrecht",
+    "Dahlström",
+    "L’Huillier",
+    "Eng-Johnsson"
+   ],
+   "journal": "Nature Communications",
+   "vol": "13",
+   "page": "5205",
+   "year": "2022",
+   "doi": "10.1038/s41467-022-32780-5"
+  },
+  "from_cache": true
+ },
+ "8": {
+  "raw": "Inzani G, Di Palo N, Dolso G L, et al. Absolute delay calibration by analytical fitting of attosecond streaking measurements. Journal of Physics: Photonics, 2024, 6: 025007. DOI: 10.1088/2515-7647/ad252a",
+  "dagger": "",
+  "doi": "10.1088/2515-7647/ad252a",
+  "src": "doi",
+  "id": "10.1088/2515-7647/ad252a",
+  "listed_year": "2024",
+  "first_author": "Inzani G",
+  "title_guess": "Absolute delay calibration by analytical fitting of attosecond streaking measurements",
+  "vol": "6",
+  "page": "025007",
+  "truth": {
+   "ok": true,
+   "title": "Absolute delay calibration by analytical fitting of attosecond streaking measurements",
+   "authors": [
+    "Inzani",
+    "Di Palo",
+    "Dolso",
+    "Nisoli",
+    "Lucchini"
+   ],
+   "journal": "Journal of Physics: Photonics",
+   "vol": "6",
+   "page": "025007",
+   "year": "2024",
+   "doi": "10.1088/2515-7647/ad252a"
+  },
+  "from_cache": true
+ },
+ "9": {
+  "raw": "Zhu X X, Gao Y T, Wang Y M, et al. Autocorrelation-based convolutional neural network for reconstruction of noisy attosecond streaking traces. Chinese Physics B, 2026, 35: 054204. DOI: 10.1088/1674-1056/ae3474",
+  "dagger": "",
+  "doi": "10.1088/1674-1056/ae3474",
+  "src": "doi",
+  "id": "10.1088/1674-1056/ae3474",
+  "listed_year": "2026",
+  "first_author": "Zhu X X",
+  "title_guess": "Autocorrelation-based convolutional neural network for reconstruction of noisy attosecond streaking traces",
+  "vol": "35",
+  "page": "054204",
+  "truth": {
+   "ok": true,
+   "title": "Autocorrelation-based convolutional neural network for reconstruction of noisy attosecond streaking traces",
+   "authors": [
+    "Zhu 朱",
+    "Gao 高",
+    "Wang 王",
+    "Zhao 赵",
+    "Wei 魏"
+   ],
+   "journal": "Chinese Physics B",
+   "vol": "35",
+   "page": "054204",
+   "year": "2026",
+   "doi": "10.1088/1674-1056/ae3474"
+  },
+  "from_cache": true
+ },
+ "10": {
+  "raw": "Hutcheson L R, Hartmann M, Borisova G D, et al. Phase evolution of strong-field ionization. Physical Review Research, 2025, 7: L022074. DOI: 10.1103/PhysRevResearch.7.L022074",
+  "dagger": "",
+  "doi": "10.1103/PhysRevResearch.7.L022074",
+  "src": "doi",
+  "id": "10.1103/PhysRevResearch.7.L022074",
+  "listed_year": "2025",
+  "first_author": "Hutcheson L R",
+  "title_guess": "Phase evolution of strong-field ionization",
+  "vol": "7",
+  "page": "L022074",
+  "truth": {
+   "ok": true,
+   "title": "Phase evolution of strong-field ionization",
+   "authors": [
+    "Hutcheson",
+    "Hartmann",
+    "Borisova",
+    "Birk",
+    "Hu",
+    "Ott",
+    "Pfeifer",
+    "van der Hart",
+    "Brown"
+   ],
+   "journal": "Physical Review Research",
+   "vol": "7",
+   "page": "L022074",
+   "year": "2025",
+   "doi": "10.1103/PhysRevResearch.7.L022074"
+  },
+  "from_cache": true
+ },
+ "11": {
+  "raw": "White J, Chang Z. Attosecond streaking phase retrieval with neural network. Optics Express, 2019, 27(4): 4799-4807. DOI: 10.1364/OE.27.004799",
+  "dagger": "",
+  "doi": "10.1364/OE.27.004799",
+  "src": "doi",
+  "id": "10.1364/OE.27.004799",
+  "listed_year": "2019",
+  "first_author": "White J",
+  "title_guess": "Attosecond streaking phase retrieval with neural network",
+  "vol": "27",
+  "page": "4799-4807",
+  "truth": {
+   "ok": true,
+   "title": "Attosecond streaking phase retrieval with neural network",
+   "authors": [
+    "White|Jonathon",
+    "Chang|Zenghu"
+   ],
+   "journal": "Optics Express",
+   "vol": "27",
+   "page": "4799",
+   "year": 2019,
+   "online": "2019-02",
+   "doi": "10.1364/oe.27.004799"
+  }
+ },
+ "12": {
+  "raw": "Huppert M, Jordan I, Wörner H J. Attosecond beamline with actively stabilized and spatially separated beam paths. Review of Scientific Instruments, 2015, 86(12): 123106. DOI: 10.1063/1.4937623",
+  "dagger": "",
+  "doi": "10.1063/1.4937623",
+  "src": "doi",
+  "id": "10.1063/1.4937623",
+  "listed_year": "2015",
+  "first_author": "Huppert M",
+  "title_guess": "Attosecond beamline with actively stabilized and spatially separated beam paths",
+  "vol": "86",
+  "page": "123106",
+  "truth": {
+   "ok": true,
+   "title": "Attosecond beamline with actively stabilized and spatially separated beam paths",
+   "authors": [
+    "Huppert|M.",
+    "Jordan|I.",
+    "Wörner|H. J."
+   ],
+   "journal": "Review of Scientific Instruments",
+   "vol": "86",
+   "page": "123106",
+   "year": 2015,
+   "online": "2015-12",
+   "doi": "10.1063/1.4937623"
+  }
+ },
+ "13": {
+  "raw": "Ishii N, Kaneshima K, Kitano K, et al. Carrier-envelope phase-dependent high harmonic generation in the water window using few-cycle infrared pulses. Nature Communications, 2014, 5: 3331. DOI: 10.1038/ncomms4331",
+  "dagger": "",
+  "doi": "10.1038/ncomms4331",
+  "src": "doi",
+  "id": "10.1038/ncomms4331",
+  "listed_year": "2014",
+  "first_author": "Ishii N",
+  "title_guess": "Carrier-envelope phase-dependent high harmonic generation in the water window using few-cycle infrared pulses",
+  "vol": "5",
+  "page": "3331",
+  "truth": {
+   "ok": true,
+   "title": "Carrier-envelope phase-dependent high harmonic generation in the water window using few-cycle infrared pulses",
+   "authors": [
+    "Ishii",
+    "Kaneshima",
+    "Kitano",
+    "Kanai",
+    "Watanabe",
+    "Itatani"
+   ],
+   "journal": "Nature Communications",
+   "vol": "5",
+   "page": "3331",
+   "year": "2014",
+   "doi": "10.1038/ncomms4331"
+  },
+  "from_cache": true
+ },
+ "14": {
+  "raw": "Eckle P, Pfeiffer A N, Cirelli C, et al. Attosecond ionization and tunneling delay time measurements in helium. Science, 2008, 322: 1525-1529. DOI: 10.1126/science.1163439",
+  "dagger": "",
+  "doi": "10.1126/science.1163439",
+  "src": "doi",
+  "id": "10.1126/science.1163439",
+  "listed_year": "2008",
+  "first_author": "Eckle P",
+  "title_guess": "Attosecond ionization and tunneling delay time measurements in helium",
+  "vol": "322",
+  "page": "1525-1529",
+  "truth": {
+   "ok": true,
+   "title": "Attosecond Ionization and Tunneling Delay Time Measurements in Helium",
+   "authors": [
+    "Eckle",
+    "Pfeiffer",
+    "Cirelli",
+    "Staudte",
+    "Dörner",
+    "Muller",
+    "Büttiker",
+    "Keller"
+   ],
+   "journal": "Science",
+   "vol": "322",
+   "page": "1525-1529",
+   "year": "2008",
+   "doi": "10.1126/science.1163439"
+  },
+  "from_cache": true
+ },
+ "15": {
+  "raw": "Villeneuve D M, Hockett P, Vrakking M J J, et al. Coherent imaging of an attosecond electron wave packet. Science, 2017, 356: 1150-1153. DOI: 10.1126/science.aam8393",
+  "dagger": "",
+  "doi": "10.1126/science.aam8393",
+  "src": "doi",
+  "id": "10.1126/science.aam8393",
+  "listed_year": "2017",
+  "first_author": "Villeneuve D M",
+  "title_guess": "Coherent imaging of an attosecond electron wave packet",
+  "vol": "356",
+  "page": "1150-1153",
+  "truth": {
+   "ok": true,
+   "title": "Coherent imaging of an attosecond electron wave packet",
+   "authors": [
+    "Villeneuve",
+    "Hockett",
+    "Vrakking",
+    "Niikura"
+   ],
+   "journal": "Science",
+   "vol": "356",
+   "page": "1150-1153",
+   "year": "2017",
+   "doi": "10.1126/science.aam8393"
+  },
+  "from_cache": true
+ },
+ "16": {
+  "raw": "Klünder K, Dahlström J M, Gisselbrecht M, et al. Probing single-photon ionization on the attosecond time scale. Physical Review Letters, 2011, 106: 143002. DOI: 10.1103/PhysRevLett.106.143002",
+  "dagger": "",
+  "doi": "10.1103/PhysRevLett.106.143002",
+  "src": "doi",
+  "id": "10.1103/PhysRevLett.106.143002",
+  "listed_year": "2011",
+  "first_author": "Klünder K",
+  "title_guess": "Probing single-photon ionization on the attosecond time scale",
+  "vol": "106",
+  "page": "143002",
+  "truth": {
+   "ok": true,
+   "title": "Probing Single-Photon Ionization on the Attosecond Time Scale",
+   "authors": [
+    "Klünder",
+    "Dahlström",
+    "Gisselbrecht",
+    "Fordell",
+    "Swoboda",
+    "Guénot",
+    "Johnsson",
+    "Caillat",
+    "Mauritsson",
+    "Maquet",
+    "Taïeb",
+    "L’Huillier"
+   ],
+   "journal": "Physical Review Letters",
+   "vol": "106",
+   "page": "143002",
+   "year": "2011",
+   "doi": "10.1103/PhysRevLett.106.143002"
+  },
+  "from_cache": true
+ },
+ "17": {
+  "raw": "Li X, Liu X, Wang C, et al. Coulomb focusing in attosecond angular streaking. Light: Science & Applications, 2024, 13: 250. DOI: 10.1038/s41377-024-01600-4",
+  "dagger": "",
+  "doi": "10.1038/s41377-024-01600-4",
+  "src": "doi",
+  "id": "10.1038/s41377-024-01600-4",
+  "listed_year": "2024",
+  "first_author": "Li X",
+  "title_guess": "Coulomb focusing in attosecond angular streaking",
+  "vol": "13",
+  "page": "250",
+  "truth": {
+   "ok": true,
+   "title": "Coulomb focusing in attosecond angular streaking",
+   "authors": [
+    "Li",
+    "Liu",
+    "Wang",
+    "Ben",
+    "Zhou",
+    "Yang",
+    "Song",
+    "Chen",
+    "Yang",
+    "Ding"
+   ],
+   "journal": "Light: Science &amp; Applications",
+   "vol": "13",
+   "page": "250",
+   "year": "2024",
+   "doi": "10.1038/s41377-024-01600-4"
+  },
+  "from_cache": true
+ },
+ "18": {
+  "raw": "Kheifets A, Serov V, Vismarra F, et al. Rainbow retrieval of atomic time delays in attosecond streaking. Physical Review A, 2026, 113: 043103. DOI: 10.1103/9jcm-8gd8",
+  "dagger": "",
+  "doi": "10.1103/9jcm-8gd8",
+  "src": "doi",
+  "id": "10.1103/9jcm-8gd8",
+  "listed_year": "2026",
+  "first_author": "Kheifets A",
+  "title_guess": "Rainbow retrieval of atomic time delays in attosecond streaking",
+  "vol": "113",
+  "page": "043103",
+  "truth": {
+   "ok": true,
+   "title": "Rainbow retrieval of atomic time delays in attosecond streaking",
+   "authors": [
+    "Kheifets",
+    "Serov",
+    "Vismarra",
+    "Wörner"
+   ],
+   "journal": "Physical Review A",
+   "vol": "113",
+   "page": "043103",
+   "year": 2026,
+   "doi": "10.1103/9jcm-8gd8"
+  },
+  "from_cache": true
+ },
+ "19": {
+  "raw": "Shi H, Thumm U. Photoelectron–residual-ion interaction in angle-resolved streaked shake-up ionization of helium. Physical Review A, 2025, 111: 013119. DOI: 10.1103/PhysRevA.111.013119",
+  "dagger": "",
+  "doi": "10.1103/PhysRevA.111.013119",
+  "src": "doi",
+  "id": "10.1103/PhysRevA.111.013119",
+  "listed_year": "2025",
+  "first_author": "Shi H",
+  "title_guess": "Photoelectron–residual-ion interaction in angle-resolved streaked shake-up ionization of helium",
+  "vol": "111",
+  "page": "013119",
+  "truth": {
+   "ok": true,
+   "title": "Photoelectron–residual-ion interaction in angle-resolved streaked shake-up ionization of helium",
+   "authors": [
+    "Shi",
+    "Thumm"
+   ],
+   "journal": "Physical Review A",
+   "vol": "111",
+   "page": "013119",
+   "year": "2025",
+   "doi": "10.1103/PhysRevA.111.013119"
+  },
+  "from_cache": true
+ },
+ "20": {
+  "raw": "Li M, Wang H, Tahouri R, et al. Photoionization time delays probe electron correlations. Physical Review Letters, 2025, 135: 183202. DOI: 10.1103/ll25-15dm",
+  "dagger": "",
+  "doi": "10.1103/ll25-15dm",
+  "src": "doi",
+  "id": "10.1103/ll25-15dm",
+  "listed_year": "2025",
+  "first_author": "Li M",
+  "title_guess": "Photoionization time delays probe electron correlations",
+  "vol": "135",
+  "page": "183202",
+  "truth": {
+   "ok": true,
+   "title": "Photoionization Time Delays Probe Electron Correlations",
+   "authors": [
+    "Li",
+    "Wang",
+    "Tahouri",
+    "Weissenbilder",
+    "Li",
+    "Wang",
+    "Cai",
+    "Hong",
+    "Shi",
+    "Pi",
+    "Busto",
+    "Gisselbrecht",
+    "Ueda",
+    "Demekhin",
+    "L’Huillier",
+    "Dahlström",
+    "Lindroth",
+    "Ding",
+    "Luo"
+   ],
+   "journal": "Physical Review Letters",
+   "vol": "135",
+   "page": "183202",
+   "year": "2025",
+   "doi": "10.1103/ll25-15dm"
+  },
+  "from_cache": true
+ },
+ "21": {
+  "raw": "Tarrant J, Kolorenč P, Khokhlova M, et al. Creating attosecond breathing ions by coherent shake-up. arXiv:2503.21976 [physics.atom-ph], 2025.",
+  "dagger": "†",
+  "src": "arxiv",
+  "id": "2503.21976",
+  "doi": null,
+  "listed_year": "2025",
+  "first_author": "Tarrant J",
+  "title_guess": "Creating attosecond breathing ions by coherent shake-up",
+  "vol": null,
+  "page": null,
+  "truth": {
+   "ok": true,
+   "id": "2503.21976",
+   "title": "Creating attosecond breathing ions by coherent shake-up",
+   "authors": [
+    "Tarrant, James",
+    "Kolorenč, Přemysl",
+    "Khokhlova, Margarita",
+    "Ruberti, Marco",
+    "Averbukh, Vitali"
+   ],
+   "jref": "",
+   "doi_field": "",
+   "via": "abs"
+  },
+  "from_cache": true
+ },
+ "22": {
+  "raw": "Aygun J, Yaacoub D, Harris A L. Spectral phase pulse shaping alters photoionization time. Journal of Physics B: Atomic, Molecular and Optical Physics, 2026, 59(12): 125601. DOI: 10.1088/1361-6455/ae7acf",
+  "dagger": "",
+  "doi": "10.1088/1361-6455/ae7acf",
+  "src": "doi",
+  "id": "10.1088/1361-6455/ae7acf",
+  "listed_year": "2026",
+  "first_author": "Aygun J",
+  "title_guess": "Spectral phase pulse shaping alters photoionization time",
+  "vol": "59",
+  "page": "125601",
+  "truth": {
+   "ok": true,
+   "title": "Spectral phase pulse shaping alters photoionization time",
+   "authors": [
+    "Aygun|J",
+    "Yaacoub|D",
+    "Harris|A L"
+   ],
+   "journal": "Journal of Physics B: Atomic, Molecular and Optical Physics",
+   "vol": "59",
+   "page": "125601",
+   "year": 2026,
+   "online": "2026-06",
+   "doi": "10.1088/1361-6455/ae7acf"
+  }
+ },
+ "23": {
+  "raw": "Meier D, Viefhaus J, Hartmann G, et al. Reconstructing time-of-flight detector values of angular streaking using machine learning. Physical Review Accelerators and Beams, 2025, 28(7): 074601. DOI: 10.1103/csvm-858f",
+  "dagger": "",
+  "doi": "10.1103/csvm-858f",
+  "src": "doi",
+  "id": "10.1103/csvm-858f",
+  "listed_year": "2025",
+  "first_author": "Meier D",
+  "title_guess": "Reconstructing time-of-flight detector values of angular streaking using machine learning",
+  "vol": "28",
+  "page": "074601",
+  "truth": {
+   "ok": true,
+   "title": "Reconstructing time-of-flight detector values of angular streaking using machine learning",
+   "authors": [
+    "Meier|David",
+    "Viefhaus|Jens",
+    "Hartmann|Gregor",
+    "Helml|Wolfram",
+    "Otto|Thorsten",
+    "Sick|Bernhard"
+   ],
+   "journal": "Physical Review Accelerators and Beams",
+   "vol": "28",
+   "page": "074601",
+   "year": 2025,
+   "online": "2025-07",
+   "doi": "10.1103/csvm-858f"
+  }
+ },
+ "24": {
+  "raw": "Zimmermann T, Ortmann L, Hofmann C, et al. Attosecond streaking delays in multi-electron systems. arXiv:1804.09583 [physics.chem-ph], 2018.",
+  "dagger": "†",
+  "src": "arxiv",
+  "id": "1804.09583",
+  "doi": null,
+  "listed_year": "2018",
+  "first_author": "Zimmermann T",
+  "title_guess": "Attosecond streaking delays in multi-electron systems",
+  "vol": null,
+  "page": null,
+  "truth": {
+   "ok": true,
+   "id": "1804.09583",
+   "title": "Attosecond streaking delays in multi-electron systems",
+   "authors": [
+    "Zimmermann, Tomáš",
+    "Ortmann, Lisa",
+    "Hofmann, Cornelia",
+    "Rost, Jan-Michael",
+    "Landsman, Alexandra S."
+   ],
+   "jref": "",
+   "doi_field": "",
+   "via": "abs"
+  },
+  "from_cache": true
+ },
+ "25": {
+  "raw": "Wang K, Fu Y, Li B, et al. Direct reconstruction of isolated XUV or soft x-ray attosecond pulses from high-harmonic generation streaking spectra. New Journal of Physics, 2023, 25(8): 083003. DOI: 10.1088/1367-2630/ace8b3",
+  "dagger": "",
+  "doi": "10.1088/1367-2630/ace8b3",
+  "src": "doi",
+  "id": "10.1088/1367-2630/ace8b3",
+  "listed_year": "2023",
+  "first_author": "Wang K",
+  "title_guess": "Direct reconstruction of isolated XUV or soft x-ray attosecond pulses from high-harmonic generation streaking spectra",
+  "vol": "25",
+  "page": "083003",
+  "truth": {
+   "ok": true,
+   "title": "Direct reconstruction of isolated XUV or soft x-ray attosecond pulses from high-harmonic generation streaking spectra",
+   "authors": [
+    "Wang|Kan",
+    "Fu|Yong",
+    "Li|Baochang",
+    "Tang|Xiangyu",
+    "Wang|Bincheng",
+    "Guan|Zhong",
+    "Lin|C D",
+    "Jin|Cheng"
+   ],
+   "journal": "New Journal of Physics",
+   "vol": "25",
+   "page": "083003",
+   "year": 2023,
+   "online": "2023-08",
+   "doi": "10.1088/1367-2630/ace8b3"
+  }
+ },
+ "26": {
+  "raw": "Zhao X, Li S, Driver T, et al. Characterization of single-shot attosecond pulses with angular streaking photoelectron spectra. Physical Review A, 2022, 105: 013111. DOI: 10.1103/PhysRevA.105.013111",
+  "dagger": "",
+  "doi": "10.1103/PhysRevA.105.013111",
+  "src": "doi",
+  "id": "10.1103/PhysRevA.105.013111",
+  "listed_year": "2022",
+  "first_author": "Zhao X",
+  "title_guess": "Characterization of single-shot attosecond pulses with angular streaking photoelectron spectra",
+  "vol": "105",
+  "page": "013111",
+  "truth": {
+   "ok": true,
+   "title": "Characterization of single-shot attosecond pulses with angular streaking photoelectron spectra",
+   "authors": [
+    "Zhao",
+    "Li",
+    "Driver",
+    "Hoang",
+    "Le",
+    "Cryan",
+    "Marinelli",
+    "Lin"
+   ],
+   "journal": "Physical Review A",
+   "vol": "105",
+   "page": "013111",
+   "year": "2022",
+   "doi": "10.1103/PhysRevA.105.013111"
+  },
+  "from_cache": true
+ },
+ "27": {
+  "raw": "Ortmann L, Landsman A S. Understanding attosecond streaking. Reports on Progress in Physics, 2024, 87(8): 086401. DOI: 10.1088/1361-6633/ad6278",
+  "dagger": "",
+  "doi": "10.1088/1361-6633/ad6278",
+  "src": "doi",
+  "id": "10.1088/1361-6633/ad6278",
+  "listed_year": "2024",
+  "first_author": "Ortmann L",
+  "title_guess": "Understanding attosecond streaking",
+  "vol": "87",
+  "page": "086401",
+  "truth": {
+   "ok": true,
+   "title": "Understanding attosecond streaking",
+   "authors": [
+    "Ortmann|Lisa",
+    "Landsman|Alexandra"
+   ],
+   "journal": "Reports on Progress in Physics",
+   "vol": "87",
+   "page": "086401",
+   "year": 2024,
+   "online": "2024-07",
+   "doi": "10.1088/1361-6633/ad6278"
+  }
+ },
+ "28": {
+  "raw": "Itatani J, Quéré F, Yudin G L, et al. Attosecond streak camera. Physical Review Letters, 2002, 88: 173903. DOI: 10.1103/PhysRevLett.88.173903",
+  "dagger": "",
+  "doi": "10.1103/PhysRevLett.88.173903",
+  "src": "doi",
+  "id": "10.1103/PhysRevLett.88.173903",
+  "listed_year": "2002",
+  "first_author": "Itatani J",
+  "title_guess": "Attosecond streak camera",
+  "vol": "88",
+  "page": "173903",
+  "truth": {
+   "ok": true,
+   "title": "Attosecond Streak Camera",
+   "authors": [
+    "Itatani",
+    "Quéré",
+    "Yudin",
+    "Ivanov",
+    "Krausz",
+    "Corkum"
+   ],
+   "journal": "Physical Review Letters",
+   "vol": "88",
+   "page": "173903",
+   "year": "2002",
+   "doi": "10.1103/PhysRevLett.88.173903"
+  },
+  "from_cache": true
+ },
+ "29": {
+  "raw": "Gao J, Hasan M, Liang H, et al. Bright 25-attosecond light pulses reach the one atomic unit of time. arXiv:2508.14774 [physics.atom-ph], 2025.",
+  "dagger": "†",
+  "src": "arxiv",
+  "id": "2508.14774",
+  "doi": null,
+  "listed_year": "2025",
+  "first_author": "Gao J",
+  "title_guess": "Bright 25-attosecond light pulses reach the one atomic unit of time",
+  "vol": null,
+  "page": null,
+  "truth": {
+   "ok": true,
+   "id": "2508.14774",
+   "title": "Bright 25-attosecond light pulses reach the one atomic unit of time",
+   "authors": [
+    "Gao, Jingsong",
+    "Hasan, Mahmudul",
+    "Liang, Hao",
+    "Tsai, Ming-Shian",
+    "Yuan, Yiming",
+    "Eisenhutt, Zach",
+    "Keitel, Christoph H.",
+    "Lin, Chii-Dong",
+    "Liu, Yunquan",
+    "Chen, Ming-Chang",
+    "Han, Meng"
+   ],
+   "jref": "",
+   "doi_field": "",
+   "via": "abs"
+  },
+  "from_cache": true
+ },
+ "30": {
+  "raw": "Ardana-Lamas F, Cousin S L, Lignieres J, et al. Brilliant source of 19.2-attosecond soft X-ray pulses below the atomic unit of time. Ultrafast Science, 2025, 5: 0128. DOI: 10.34133/ultrafastscience.0128",
+  "dagger": "",
+  "doi": "10.34133/ultrafastscience.0128",
+  "src": "doi",
+  "id": "10.34133/ultrafastscience.0128",
+  "listed_year": "2025",
+  "first_author": "Ardana-Lamas F",
+  "title_guess": "Brilliant source of 19.2-attosecond soft X-ray pulses below the atomic unit of time",
+  "vol": "5",
+  "page": "0128",
+  "truth": {
+   "ok": true,
+   "title": "Brilliant Source of 19.2-Attosecond Soft X-ray Pulses below the Atomic Unit of Time",
+   "authors": [
+    "Ardana-Lamas",
+    "Cousin",
+    "Lignieres",
+    "Biegert"
+   ],
+   "journal": "Ultrafast Science",
+   "vol": "5",
+   "page": "0128",
+   "year": 2025,
+   "doi": "10.34133/ultrafastscience.0128"
+  },
+  "from_cache": true
+ },
+ "31": {
+  "raw": "Han M, Liang H, Liu Y, et al. Comment on \"Brilliant source of 19.2-attosecond soft X-ray pulses below the atomic unit of time\". Ultrafast Science, 2026, 6: 0145. DOI: 10.34133/ultrafastscience.0145",
+  "dagger": "",
+  "doi": "10.34133/ultrafastscience.0145",
+  "src": "doi",
+  "id": "10.34133/ultrafastscience.0145",
+  "listed_year": "2026",
+  "first_author": "Han M",
+  "title_guess": "Comment on \"Brilliant source of 19.2-attosecond soft X-ray pulses below the atomic unit of time\"",
+  "vol": "6",
+  "page": "0145",
+  "truth": {
+   "ok": true,
+   "title": "Comment on “Brilliant Source of 19.2-Attosecond Soft X-ray Pulses below the Atomic Unit of Time”",
+   "authors": [
+    "Han",
+    "Liang",
+    "Liu",
+    "Lin"
+   ],
+   "journal": "Ultrafast Science",
+   "vol": "6",
+   "page": "0145",
+   "year": 2026,
+   "doi": "10.34133/ultrafastscience.0145"
+  },
+  "from_cache": true
+ },
+ "32": {
+  "raw": "Jiang W C, Zhong M C, Fang Y K, et al. Time delays as attosecond probe of interelectronic coherence and entanglement. Physical Review Letters, 2024, 133: 163201. DOI: 10.1103/PhysRevLett.133.163201",
+  "dagger": "",
+  "doi": "10.1103/PhysRevLett.133.163201",
+  "src": "doi",
+  "id": "10.1103/PhysRevLett.133.163201",
+  "listed_year": "2024",
+  "first_author": "Jiang W C",
+  "title_guess": "Time delays as attosecond probe of interelectronic coherence and entanglement",
+  "vol": "133",
+  "page": "163201",
+  "truth": {
+   "ok": true,
+   "title": "Time Delays as Attosecond Probe of Interelectronic Coherence and Entanglement",
+   "authors": [
+    "Jiang",
+    "Zhong",
+    "Fang",
+    "Donsa",
+    "Březinová",
+    "Peng",
+    "Burgdörfer"
+   ],
+   "journal": "Physical Review Letters",
+   "vol": "133",
+   "page": "163201",
+   "year": "2024",
+   "doi": "10.1103/PhysRevLett.133.163201"
+  },
+  "from_cache": true
+ },
+ "33": {
+  "raw": "Xie W H, Li Z C, Li M, et al. Observation of attosecond time delays in above-threshold ionization. Physical Review Letters, 2024, 133: 183201. DOI: 10.1103/PhysRevLett.133.183201",
+  "dagger": "",
+  "doi": "10.1103/PhysRevLett.133.183201",
+  "src": "doi",
+  "id": "10.1103/PhysRevLett.133.183201",
+  "listed_year": "2024",
+  "first_author": "Xie W H",
+  "title_guess": "Observation of attosecond time delays in above-threshold ionization",
+  "vol": "133",
+  "page": "183201",
+  "truth": {
+   "ok": true,
+   "title": "Observation of Attosecond Time Delays in Above-Threshold Ionization",
+   "authors": [
+    "Xie",
+    "Li",
+    "Li",
+    "Liu",
+    "Liu",
+    "Cao",
+    "Guo",
+    "Liu",
+    "Zhou",
+    "Lu"
+   ],
+   "journal": "Physical Review Letters",
+   "vol": "133",
+   "page": "183201",
+   "year": "2024",
+   "doi": "10.1103/PhysRevLett.133.183201"
+  },
+  "from_cache": true
+ },
+ "34": {
+  "raw": "Zhu Y, Zhang Z, Zhang R, et al. SinBasis Networks: Matrix-Equivalent Feature Extraction for Wave-Like Optical Spectrograms. Proceedings of the AAAI Conference on Artificial Intelligence, 2026, 40(16): 14014-14021. DOI: 10.1609/aaai.v40i16.38412",
+  "dagger": "",
+  "doi": "10.1609/aaai.v40i16.38412",
+  "src": "doi",
+  "id": "10.1609/aaai.v40i16.38412",
+  "listed_year": "2026",
+  "first_author": "Zhu Y",
+  "title_guess": "SinBasis Networks: Matrix-Equivalent Feature Extraction for Wave-Like Optical Spectrograms",
+  "vol": "40",
+  "page": "14014-14021",
+  "truth": {
+   "ok": true,
+   "title": "SinBasis Networks: Matrix-Equivalent Feature Extraction for Wave-Like Optical Spectrograms",
+   "authors": [
+    "Zhu|Yuzhou",
+    "Zhang|Zheng",
+    "Zhang|Ruyi",
+    "Zhou|Liang"
+   ],
+   "journal": "Proceedings of the AAAI Conference on Artificial Intelligence",
+   "vol": "40",
+   "page": "14014-14021",
+   "year": 2026,
+   "online": "2026-03",
+   "doi": "10.1609/aaai.v40i16.38412"
+  }
+ },
+ "35": {
+  "raw": "Gao J, Hasan M, Liang H, et al. Bright isolated light pulses reaching 18 attoseconds from high-order harmonic generation by post-compressed Yb lasers. Nature Communications, 2026, 17: 8810. DOI: 10.1038/s41467-026-76827-3",
+  "dagger": "",
+  "doi": "10.1038/s41467-026-76827-3",
+  "src": "doi",
+  "id": "10.1038/s41467-026-76827-3",
+  "listed_year": "2026",
+  "first_author": "Gao J",
+  "title_guess": "Bright isolated light pulses reaching 18 attoseconds from high-order harmonic generation by post-compressed Yb lasers",
+  "vol": "17",
+  "page": "8810",
+  "truth": {
+   "ok": true,
+   "title": "Bright isolated light pulses reaching 18 attoseconds from high-order harmonic generation by post-compressed Yb lasers",
+   "authors": [
+    "Gao",
+    "Hasan",
+    "Liang",
+    "Guo",
+    "Zhang",
+    "Tsai",
+    "Yuan",
+    "Eisenhutt",
+    "Keitel",
+    "Lin",
+    "Jin",
+    "Liu",
+    "Chen",
+    "Han"
+   ],
+   "journal": "Nature Communications",
+   "vol": "17",
+   "page": "8810",
+   "year": 2026,
+   "doi": "10.1038/s41467-026-76827-3"
+  },
+  "from_cache": true
+ },
+ "36": {
+  "raw": "Ma Y, Ni H, Wu J. Attosecond ionization time delays in strong-field physics. Chinese Physics B, 2024, 33: 013201. DOI: 10.1088/1674-1056/ad0e5d",
+  "dagger": "",
+  "doi": "10.1088/1674-1056/ad0e5d",
+  "src": "doi",
+  "id": "10.1088/1674-1056/ad0e5d",
+  "listed_year": "2024",
+  "first_author": "Ma Y",
+  "title_guess": "Attosecond ionization time delays in strong-field physics",
+  "vol": "33",
+  "page": "013201",
+  "truth": {
+   "ok": true,
+   "title": "Attosecond ionization time delays in strong-field physics",
+   "authors": [
+    "Ma 马",
+    "Ni 倪",
+    "Wu 吴"
+   ],
+   "journal": "Chinese Physics B",
+   "vol": "33",
+   "page": "013201",
+   "year": 2024,
+   "doi": "10.1088/1674-1056/ad0e5d"
+  },
+  "from_cache": true
+ },
+ "37": {
+  "raw": "Driver T, Mountney M, Wang J, et al. Attosecond delays in X-ray molecular ionization. Nature, 2024, 632: 762-767. DOI: 10.1038/s41586-024-07771-9",
+  "dagger": "",
+  "doi": "10.1038/s41586-024-07771-9",
+  "src": "doi",
+  "id": "10.1038/s41586-024-07771-9",
+  "listed_year": "2024",
+  "first_author": "Driver T",
+  "title_guess": "Attosecond delays in X-ray molecular ionization",
+  "vol": "632",
+  "page": "762-767",
+  "truth": {
+   "ok": true,
+   "title": "Attosecond delays in X-ray molecular ionization",
+   "authors": [
+    "Driver",
+    "Mountney",
+    "Wang",
+    "Ortmann",
+    "Al-Haddad",
+    "Berrah",
+    "Bostedt",
+    "Champenois",
+    "DiMauro",
+    "Duris",
+    "Garratt",
+    "Glownia",
+    "Guo",
+    "Haxton",
+    "Isele",
+    "Ivanov",
+    "Ji",
+    "Kamalov",
+    "Li",
+    "Lin",
+    "Marangos",
+    "Obaid",
+    "O’Neal",
+    "Rosenberger",
+    "Shivaram",
+    "Wang",
+    "Walter",
+    "Wolf",
+    "Wörner",
+    "Zhang",
+    "Bucksbaum",
+    "Kling",
+    "Landsman",
+    "Lucchese",
+    "Emmanouilidou",
+    "Marinelli",
+    "Cryan"
+   ],
+   "journal": "Nature",
+   "vol": "632",
+   "page": "762-767",
+   "year": 2024,
+   "doi": "10.1038/s41586-024-07771-9"
+  },
+  "from_cache": true
+ },
+ "38": {
+  "raw": "Ardana-Lamas F, Cousin S L, Lignieres J, et al. Reply to \"Comment on 'Brilliant source of 19.2-attosecond soft X-ray pulses below the atomic unit of time'\" by Han. arXiv:2511.08391 [physics.optics], 2025.",
+  "dagger": "†",
+  "src": "arxiv",
+  "id": "2511.08391",
+  "doi": null,
+  "listed_year": "2025",
+  "first_author": "Ardana-Lamas F",
+  "title_guess": "Reply to \"Comment on 'Brilliant source of 19.2-attosecond soft X-ray pulses below the atomic unit of time'\" by Han",
+  "vol": null,
+  "page": null,
+  "truth": {
+   "ok": true,
+   "title": "Reply to \"Comment on Brilliant source of 19.2 attosecond soft X-ray pulses below the atomic unit of time\" by Han (arXiv:2510.17949)",
+   "authors": [
+    "Fernando Ardana-Lamas",
+    "Seth L. Cousin",
+    "Juliette Lignieres",
+    "Jens Biegert"
+   ],
+   "journal_ref": null,
+   "doi": null,
+   "cr_hits": [
+    {
+     "title": "Comment on “Brilliant Source of 19.2-Attosecond Soft X-ray Pulses below the Atomic Unit of Time”",
+     "doi": "10.34133/ultrafastscience.0145",
+     "year": 2026,
+     "journal": "Ultrafast Science"
+    },
+    {
+     "title": "Brilliant Source of 19.2-Attosecond Soft X-ray Pulses below the Atomic Unit of Time",
+     "doi": "10.34133/ultrafastscience.0128",
+     "year": 2025,
+     "journal": "Ultrafast Science"
+    },
+    {
+     "title": "Approaching the Atomic Unit of Time with Isolated Attosecond Pulses",
+     "doi": "10.1364/cleo_qels.2014.ftu1d.1",
+     "year": 2014,
+     "journal": "CLEO: 2014"
+    }
+   ]
+  },
+  "from_cache": true
+ },
+ "39": {
+  "raw": "Hasan M, Gao J, Liang H, et al. Time-domain measurement of Auger electron dynamics in xenon and krypton atoms after giant resonance photoionization. Physical Review Letters, 2026, 136: 163201. DOI: 10.1103/578k-kmw6",
+  "dagger": "",
+  "doi": "10.1103/578k-kmw6",
+  "src": "doi",
+  "id": "10.1103/578k-kmw6",
+  "listed_year": "2026",
+  "first_author": "Hasan M",
+  "title_guess": "Time-domain measurement of Auger electron dynamics in xenon and krypton atoms after giant resonance photoionization",
+  "vol": "136",
+  "page": "163201",
+  "truth": {
+   "ok": true,
+   "title": "Time-domain Measurement of Auger Electron Dynamics in Xenon and Krypton Atoms after Giant Resonance Photoionization",
+   "authors": [
+    "Hasan",
+    "Gao",
+    "Liang",
+    "Yuan",
+    "Eisenhutt",
+    "Tsai",
+    "Chen",
+    "Wörner",
+    "Rudenko",
+    "Han"
+   ],
+   "journal": "Physical Review Letters",
+   "vol": "136",
+   "page": "163201",
+   "year": 2026,
+   "doi": "10.1103/578k-kmw6"
+  },
+  "from_cache": true
+ },
+ "40": {
+  "raw": "Xia M, Nishimiya K, Dong D, et al. Complex-gate all-optical frequency-resolved optical gating for ultrabroadband isolated attosecond pulse characterization. arXiv:2608.30516 [physics.optics], 2026.",
+  "dagger": "†",
+  "src": "arxiv",
+  "id": "2608.30516",
+  "doi": null,
+  "listed_year": "2026",
+  "first_author": "Xia M",
+  "title_guess": "Complex-gate all-optical frequency-resolved optical gating for ultrabroadband isolated attosecond pulse characterization",
+  "vol": null,
+  "page": null,
+  "truth": {
+   "ok": true,
+   "title": "Complex-gate all-optical frequency-resolved optical gating for ultrabroadband isolated attosecond pulse characterization",
+   "authors": [
+    "Minshuang Xia",
+    "Kaito Nishimiya",
+    "Dianhong Dong",
+    "Yuxi Fu",
+    "Eiji J. Takahashi"
+   ],
+   "journal_ref": null,
+   "doi": null,
+   "cr_hits": [
+    {
+     "title": "Complex-gate all-optical frequency-resolved optical gating for ultrabroadband isolated attosecond pulse characterization",
+     "doi": "10.1364/oe.615999",
+     "year": 2026,
+     "journal": "Optics Express"
+    },
+    {
+     "title": "All-optical frequency-resolved optical gating for isolated attosecond pulse reconstruction",
+     "doi": "10.1364/ol.381188",
+     "year": 2020,
+     "journal": "Optics Letters"
+    },
+    {
+     "title": "All-fiber frequency-resolved optical gating pulse characterization from chalcogenide glass",
+     "doi": "10.1364/ol.43.003228",
+     "year": 2018,
+     "journal": "Optics Letters"
+    }
+   ]
+  },
+  "from_cache": true
+ },
+ "41": {
+  "raw": "Pupeikis J, Chevreuil P-A, Bigler N, et al. Water window soft x-ray source enabled by a 25 W few-cycle 2.2 µm OPCPA at 100 kHz. Optica, 2020, 7(2): 168-171. DOI: 10.1364/OPTICA.379846",
+  "dagger": "",
+  "doi": "10.1364/OPTICA.379846",
+  "src": "doi",
+  "id": "10.1364/OPTICA.379846",
+  "listed_year": "2020",
+  "first_author": "Pupeikis J",
+  "title_guess": "Water window soft x-ray source enabled by a 25 W few-cycle 2.2 µm OPCPA at 100 kHz",
+  "vol": "7",
+  "page": "168-171",
+  "truth": {
+   "ok": true,
+   "title": "Water window soft x-ray source enabled by a 25  W few-cycle 2.2 µm OPCPA at 100  kHz",
+   "authors": [
+    "Pupeikis|J.",
+    "Chevreuil|P.-A.",
+    "Bigler|N.",
+    "Gallmann|L.",
+    "Phillips|C. R.",
+    "Keller|U."
+   ],
+   "journal": "Optica",
+   "vol": "7",
+   "page": "168",
+   "year": 2020,
+   "online": "2020-02",
+   "doi": "10.1364/optica.379846"
+  }
+ },
+ "42": {
+  "raw": "Jarecki J, Hennecke M, Sidiropoulos T, et al. Ultrafast energy-dispersive soft-x-ray diffraction in the water window with a laser-driven source. Structural Dynamics, 2024, 11(5): 054303. DOI: 10.1063/4.0000270",
+  "dagger": "",
+  "doi": "10.1063/4.0000270",
+  "src": "doi",
+  "id": "10.1063/4.0000270",
+  "listed_year": "2024",
+  "first_author": "Jarecki J",
+  "title_guess": "Ultrafast energy-dispersive soft-x-ray diffraction in the water window with a laser-driven source",
+  "vol": "11",
+  "page": "054303",
+  "truth": {
+   "ok": true,
+   "title": "Ultrafast energy-dispersive soft-x-ray diffraction in the water window with a laser-driven source",
+   "authors": [
+    "Jarecki|Jasmin",
+    "Hennecke|Martin",
+    "Sidiropoulos|Themistoklis",
+    "Schnuerer|Matthias",
+    "Eisebitt|Stefan",
+    "Schick|Daniel"
+   ],
+   "journal": "Structural Dynamics",
+   "vol": "11",
+   "page": "054303",
+   "year": 2024,
+   "online": "2024-10",
+   "doi": "10.1063/4.0000270"
+  }
+ },
+ "43": {
+  "raw": "Blöchl J, Kuthe M F, Schröder H, et al. Multi-millijoule hollow-core fiber compression of short-wave infrared pulses to a single cycle. Optics Express, 2025, 33(13): 28071-28080. DOI: 10.1364/OE.564364",
+  "dagger": "",
+  "doi": "10.1364/OE.564364",
+  "src": "doi",
+  "id": "10.1364/OE.564364",
+  "listed_year": "2025",
+  "first_author": "Blöchl J",
+  "title_guess": "Multi-millijoule hollow-core fiber compression of short-wave infrared pulses to a single cycle",
+  "vol": "33",
+  "page": "28071-28080",
+  "truth": {
+   "ok": true,
+   "title": "Multi-millijoule hollow-core fiber compression of short-wave infrared pulses to a single cycle",
+   "authors": [
+    "Blöchl|Johannes",
+    "Kuthe|Maximilian F.",
+    "Schröder|Hartmut",
+    "Azzeer|Abdallah M.",
+    "Nubbemeyer|Thomas",
+    "Kling|Matthias F."
+   ],
+   "journal": "Optics Express",
+   "vol": "33",
+   "page": "28071",
+   "year": 2025,
+   "online": "2025-06",
+   "doi": "10.1364/oe.564364"
+  }
+ },
+ "44": {
+  "raw": "Fu Y, Nishimura K, Shao R, et al. High efficiency ultrafast water-window harmonic generation for single-shot soft X-ray spectroscopy. Communications Physics, 2020, 3: 92. DOI: 10.1038/s42005-020-0355-x",
+  "dagger": "",
+  "doi": "10.1038/s42005-020-0355-x",
+  "src": "doi",
+  "id": "10.1038/s42005-020-0355-x",
+  "listed_year": "2020",
+  "first_author": "Fu Y",
+  "title_guess": "High efficiency ultrafast water-window harmonic generation for single-shot soft X-ray spectroscopy",
+  "vol": "3",
+  "page": "92",
+  "truth": {
+   "ok": true,
+   "title": "High efficiency ultrafast water-window harmonic generation for single-shot soft X-ray spectroscopy",
+   "authors": [
+    "Fu|Yuxi",
+    "Nishimura|Kotaro",
+    "Shao|Renzhi",
+    "Suda|Akira",
+    "Midorikawa|Katsumi",
+    "Lan|Pengfei",
+    "Takahashi|Eiji J."
+   ],
+   "journal": "Communications Physics",
+   "vol": "3",
+   "page": "92",
+   "year": 2020,
+   "online": "2020-05",
+   "doi": "10.1038/s42005-020-0355-x"
+  }
+ },
+ "45": {
+  "raw": "Keathley P D, Bhardwaj S, Moses J, et al. Volkov transform generalized projection algorithm for attosecond pulse characterization. New Journal of Physics, 2016, 18(7): 073009. DOI: 10.1088/1367-2630/18/7/073009",
+  "dagger": "",
+  "doi": "10.1088/1367-2630/18/7/073009",
+  "src": "doi",
+  "id": "10.1088/1367-2630/18/7/073009",
+  "listed_year": "2016",
+  "first_author": "Keathley P D",
+  "title_guess": "Volkov transform generalized projection algorithm for attosecond pulse characterization",
+  "vol": "18",
+  "page": "073009",
+  "truth": {
+   "ok": true,
+   "title": "Volkov transform generalized projection algorithm for attosecond pulse characterization",
+   "authors": [
+    "Keathley|P D",
+    "Bhardwaj|S",
+    "Moses|J",
+    "Laurent|G",
+    "Kärtner|F X"
+   ],
+   "journal": "New Journal of Physics",
+   "vol": "18",
+   "page": "073009",
+   "year": 2016,
+   "online": "2016-07",
+   "doi": "10.1088/1367-2630/18/7/073009"
+  }
+ },
+ "46": {
+  "raw": "Keldysh L V. Ionization in the field of a strong electromagnetic wave. Soviet Physics JETP, 1965, 20(5): 1307-1314.（俄文原件 ЖЭТФ 47, 1945, 1964）",
+  "dagger": "",
+  "src": "none",
+  "id": null,
+  "doi": null,
+  "listed_year": "1965",
+  "first_author": "Keldysh L V",
+  "title_guess": "Ionization in the field of a strong electromagnetic wave",
+  "vol": "20",
+  "page": "1307-1314",
+  "truth": {
+   "ok": false,
+   "err": "no id"
+  }
+ },
+ "47": {
+  "raw": "Corkum P B. Plasma perspective on strong field multiphoton ionization. Physical Review Letters, 1993, 71(13): 1994-1997. DOI: 10.1103/PhysRevLett.71.1994",
+  "dagger": "",
+  "doi": "10.1103/PhysRevLett.71.1994",
+  "src": "doi",
+  "id": "10.1103/PhysRevLett.71.1994",
+  "listed_year": "1993",
+  "first_author": "Corkum P B",
+  "title_guess": "Plasma perspective on strong field multiphoton ionization",
+  "vol": "71",
+  "page": "1994-1997",
+  "truth": {
+   "ok": true,
+   "title": "Plasma perspective on strong field multiphoton ionization",
+   "authors": [
+    "Corkum|P. B."
+   ],
+   "journal": "Physical Review Letters",
+   "vol": "71",
+   "page": "1994-1997",
+   "year": 1993,
+   "online": "1993-09",
+   "doi": "10.1103/physrevlett.71.1994"
+  }
+ },
+ "48": {
+  "raw": "Gao J, Hasan M, Eisenhutt Z, et al. Hidden perturbative structure in attosecond streaking. arXiv:2610.24891 [physics.atom-ph], 2026.",
+  "dagger": "†",
+  "src": "arxiv",
+  "id": "2610.24891",
+  "doi": null,
+  "listed_year": "2026",
+  "first_author": "Gao J",
+  "title_guess": "Hidden perturbative structure in attosecond streaking",
+  "vol": null,
+  "page": null,
+  "truth": {
+   "ok": true,
+   "title": "Hidden Perturbative Structure in Attosecond Streaking",
+   "authors": [
+    "Jingsong Gao",
+    "Mahmudul Hasan",
+    "Zach Eisenhutt",
+    "Vladislav Serov",
+    "Hao Liang",
+    "Meng Han",
+    "Anatoli Kheifets"
+   ],
+   "journal_ref": null,
+   "doi": null
+  }
+ }
+}

@@ -1,0 +1,55 @@
+{
+  "gaps": [
+    {
+      "claim": "§2.4 R3 中'通道重叠度'作为独立维度指标的物理定义和换算关系",
+      "missing_evidence": "缺少多通道电离场景下'通道重叠度'与'多通道贡献百分比'之间的定量映射文献基础，缺乏区分两者的理论判据",
+      "search_keywords": [
+        "multichannel ionization overlap degree high harmonic",
+        "channel cross-talk attosecond streaking metric",
+        "FROG-CRAB channel overlap definition"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.5 G3 中'对应光子能量低于 115.6 eV'的换算依据（IR 光电子动能 100 eV + Ar 3s 阈 15.6 eV）",
+      "missing_evidence": "缺少 Ar 3s 电离阈值 15.6 eV 与 IR 光电子动能-光子能量换算关系的明确文献支撑，需要确认 Ar 3s 阈值的实验测量值",
+      "search_keywords": [
+        "Ar 3s ionization threshold 15.6 eV experimental",
+        "argon3s binding energy photoionization",
+        "IR photon energy photoelectron kinetic energy conversion rare gas"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§2.5 G1 中'重构抖动 < 25 as'与 Gao 等孤立脉冲宽度 25±2 as 的区分依据",
+      "missing_evidence": "缺少 attosecond streaking 重构时间抖动（均方根相位误差换算）与孤立脉冲宽度（FWHM 或半高全宽）之间区分的文献定义，缺乏两者换算的标准化方法",
+      "search_keywords": [
+        "attosecond pulse retrieval jitter phase rms",
+        "streaking reconstruction uncertainty FWHM",
+        "Gao 25 attosecond pulse characterization reconstruction error"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§2.4 R3 中跨能区标定的'通道重叠度'边界方程函数形式（等高线族）",
+      "missing_evidence": "缺少多通道电离通道重叠度作为光子能量/电离势/激光强度函数的理论边界研究，缺乏覆盖水窗全段的边界方程文献先例",
+      "search_keywords": [
+        "multichannel ionization boundary water window harmonic",
+        "channel overlap contour high harmonic photon energy",
+        "multichannel TDSE boundary contour function form"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§2.6 K1 中'Shi & Thumm 揭示的方向依赖相干修正是否要求超越当前二阶耦合层级'的量化判据",
+      "missing_evidence": "缺少方向依赖相干修正的二阶耦合层级与高阶修正触发阈值的定量文献，例如 Shi & Thumm 6D-TDSE 中关于多通道耦合层级分类与偏差容忍度的具体数值",
+      "search_keywords": [
+        "Shi Thumm six-dimensional TDSE coupling order",
+        "second-order multichannel coupling threshold deviation",
+        "direction-dependent dipole phase higher-order correction trigger"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

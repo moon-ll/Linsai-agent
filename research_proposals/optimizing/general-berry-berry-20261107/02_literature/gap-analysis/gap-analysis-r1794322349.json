@@ -1,0 +1,83 @@
+{
+  "gaps": [
+    {
+      "claim": "1.1 首段 Floquet 机制句（Floquet 工程与贝里曲率偶极/非线性霍尔调控相关表述）",
+      "missing_evidence": "现有引用 [3] 与论点不符——[3] 题名为 BCD 非线性霍尔，不支撑 Floquet 表述；需改挂 [13] 并核验 [13] 确为 Floquet 调控非线性霍尔/贝里曲率的原始文献（作者、年份、结论逐字段对照）",
+      "search_keywords": [
+        "Floquet engineering nonlinear Hall effect",
+        "Floquet Berry curvature dipole",
+        "light-induced nonlinear Hall effect"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "1.1 第三段高阶矩句（高阶贝里曲率矩/多极矩贡献表述）",
+      "missing_evidence": "现有引用 [3] 与高阶矩论点互斥（Floquet≠高阶矩），需改挂 [6]；需核验 [6] 为高阶矩理论的原始出处并确认其模型、结论与句中表述一致",
+      "search_keywords": [
+        "higher-order Berry curvature multipole",
+        "Berry curvature quadrupole nonlinear Hall",
+        "octupole nonlinear Hall effect"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "1.4 段 TaIrTe₄ 相关工作具名引用（条目 [28]）",
+      "missing_evidence": "署名张冠李戴：句中'Yang 等人'经 arXiv:2506.17730 反查实为一作 Jiang；需核验该文真实作者列表（含共同一作署名顺序）并据原文更新具名与条目",
+      "search_keywords": [
+        "TaIrTe4 nonlinear Hall effect",
+        "arXiv:2506.17730",
+        "TaIrTe4 Berry curvature dipole"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "1.2 段 Fujimoto 光致霍尔效应句（条目 [20]）",
+      "missing_evidence": "效应挪用：条目 [20] 为光致逆自旋霍尔（photoinduced inverse spin Hall），句中写光致反常霍尔（anomalous Hall）；需核 [20] 原文实际观测的效应名称并统一句/表表述；若论点确需反常霍尔效应，则缺少对应的真实文献支撑",
+      "search_keywords": [
+        "photoinduced inverse spin Hall effect Fujimoto",
+        "photoinduced anomalous Hall effect",
+        "ultrafast photoinduced Hall effect"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "1.2 段 Eslami 句中 B_D=−8.99×10⁻³ 数值引用（条目 [17]）",
+      "missing_evidence": "数值无量纲说明与归一化条件，第三方无法复算；需回查 [17] 原文，补 B_D 的量纲定义、归一化约定及对应的实验/计算条件，确保誊写值与原文一致",
+      "search_keywords": [
+        "Berry curvature dipole dimension normalization",
+        "nonlinear Hall effect BCD extraction units",
+        "Eslami nonlinear Hall terahertz"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "1.3 段'构成一个此前未被处理的问题'（新颖性主张）",
+      "missing_evidence": "缺检索范围支撑，新颖性断言无文献空白证据；需进行截至 2026-11 的系统检索（三机制统一框架是否已有系统处理），以检索结论限定表述强度",
+      "search_keywords": [
+        "unified theory nonlinear Hall mechanisms",
+        "Berry curvature dipole multipole interplay",
+        "nonlinear Hall effect review open problems"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "1.4 段 Chen 句[27]'实现了…符号翻转'的文献状态",
+      "missing_evidence": "该结果仅挂 arXiv 预印本且未注明状态；需核实是否已正式发表（期刊、卷号、DOI），已发表则更新条目，未发表则句末注明 preprint 状态",
+      "search_keywords": [
+        "nonlinear Hall sign reversal",
+        "Berry curvature dipole sign tuning"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "全文 40 条具名引用（重点 [17][18][40] 等 2026 年卷号条目）",
+      "missing_evidence": "缺系统性整表反查；本轮已实锤 [3]×2、[28]、[20] 四处错挂，同类风险波及全部具名句，尤其 2026 年卷号条目需专项核验卷期页码与 DOI 真实性",
+      "search_keywords": [
+        "reference verification cross-check",
+        "2026 nonlinear Hall volume issue"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "rationale"
+}

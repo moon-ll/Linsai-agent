@@ -1,0 +1,63 @@
+{
+  "gaps": [
+    {
+      "claim": "1.7 节声称 [27] 为三章共用文献，但 [27] 在依据章与内容章正文均无实质性引用，仅在方案章出现 1 次（孤儿声明）。",
+      "missing_evidence": "需要将 [27] 所涉及的工作内容嵌入到立项依据章的论证链中，例如对应'莫尔体系强场探测的关键判据或方法学起点'等定位论述，或改写区间声明为'[1]–[26,28]'。",
+      "search_keywords": [
+        "moiré strong-field probe",
+        "twistronics high harmonic generation",
+        "moiré superlattice ultrafast spectroscopy",
+        "van der Waals heterostructure HHG"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "1.5 节判据演化段引用的 [12]（arXiv:2508.00296）为预印本，其关键数值锚（1.76 eV 主共振能量 / 260 K 相变温度旁证）在 HTML 版不可溯源，需正式版或替代同行评审文献补强。",
+      "missing_evidence": "需要为 1.76 eV 与 260 K 两个数值锚找到正式发表的、有 DOI 的同行评审工作作为支撑，或在正式版刊出后再行终核并替换。",
+      "search_keywords": [
+        "moiré exciton resonance 1.76 eV",
+        "twisted TMDC phase transition 260 K",
+        "WSe2 MoS2 heterostructure interlayer coupling",
+        "moiré band structure reconstruction cryogenic",
+        "arXiv:2508.00296 published version"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "1.3 节'国内积累'段将 Sun 等 [28]（实为欧洲团队 PRR 7, 043288，慕尼黑大学/PSI 合作）误挂为国内工作，需替换/补强为真正由国内单位主导的莫尔+强场方向工作，以支撑'已形成可直接借力的积累'这一论断。",
+      "missing_evidence": "需要补入中国研究者在莫尔体系超快/强场/高次谐波方向的代表性工作（如中科院物理所、半导体所、北大、清华等团队的相关研究），覆盖能带重建、强场响应、阿秒探测等子方向；Hu[14] 与 Yao 一线工作已有但仍需扩充。",
+      "search_keywords": [
+        "中国 莫尔 超快",
+        "中科院物理所 moiré 高次谐波",
+        "twisted bilayer graphene strong field China",
+        "TMDC 高次谐波 国内",
+        "moiré HHG 北大 清华",
+        "CAS Institute of Physics moiré ultrafast"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "1.5 节判据演化段中 1.76 eV 作为莫尔体系判据主锚时，除 [12] 预印本外，正文未交叉引用其他独立同行评审来源作为互证，论据单点依赖风险。",
+      "missing_evidence": "补充至少 1 篇独立同行评审工作对'莫尔重建能隙 ~1.76 eV 区间'或等价判据量进行互证，以避免单源预印本支撑主锚。",
+      "search_keywords": [
+        "moiré miniband gap",
+        "moiré reciprocal lattice reconstruction 1.7 eV",
+        "twist angle dependent band gap TMDC",
+        "moiré flat band optical signature"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "1.1 节并列 SBE 单角 10⁵ 核时与三层合计 2×10⁴（含标定分摊）时，若项目目标涉及'强场反演收敛/判据稳定性'，需引用反演算法收敛性或张量网络计算复杂度领域的对比性文献支撑数值基准的合理性。",
+      "missing_evidence": "补充张量网络/MPS 在强场反演中的计算开销基准文献，以及'同口径'对比的解释依据（scheme §3.2.3 已注，需在 1.1 章同步）。",
+      "search_keywords": [
+        "tensor network inverse problem computational cost",
+        "MPS strong-field retrieval benchmark",
+        "Schwinger-Dyson equation tensor network",
+        "nonlinear inversion convergence criteria HHG"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "rationale"
+}

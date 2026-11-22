@@ -1,0 +1,17 @@
+{
+  "gaps": [
+    {
+      "claim": "CD（圆二色性）在低阶与高阶拓扑相之间存在定性差异，可作为区分二者的判据（§5.1 L219）",
+      "missing_evidence": "当前[9]号文献仅涉及SSH模型带隙下谐波产额增强，不含CD角度谱或高阶拓扑内容，无法支撑该定性差异主张；[12][20]虽被建议改挂，但需独立核验其是否真正覆盖\"HOTI体系下CD vs 低阶拓扑相的定性差异\"这一具体论断。若[12][20]亦不足，则需新增专门讨论高次谐波CD或椭圆率分辨CD在拓扑相分类中的实验/理论文献作为支撑",
+      "search_keywords": [
+        "circular dichroism high-order topological insulator",
+        "harmonic CD topological phase distinction",
+        "Bi2Se3 HOTI optical circular dichroism",
+        "ellipticity-resolved HHG topological",
+        "higher-order topology circular dichroism angle-resolved"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "scheme"
+}

@@ -1,0 +1,21 @@
+---
+title: "MnTe 自旋劈裂与节点面自旋极化的 SARPES/可调光子能量 ARPES 研究（含分歧解读[13-15]）"
+type: "papers"
+created: "2026-10-31T06:17:33Z"
+updated: "2026-10-31T06:17:33Z"
+tags: []
+related: []
+source_raw: ""
+growth_stage: "seedling"
+confidence: 0.5
+source_reliability: "reliable"
+sources: ["{"title": "general-new-idea-20260822", "source_type": "archived_proposal"}"]
+---
+
+未在文中给出
+
+<!-- linsai-wikilinks -->
+## 关联概念
+
+_暂无关联概念_
+<!-- /linsai-wikilinks -->

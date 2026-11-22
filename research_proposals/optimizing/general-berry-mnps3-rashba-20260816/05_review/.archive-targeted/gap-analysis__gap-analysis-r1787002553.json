@@ -1,0 +1,70 @@
+{
+  "gaps": [
+    {
+      "claim": "交变磁性（altermagnetism）作为兼具自旋劈裂与零净磁矩的新物态，是二维自旋-能谷操控的理想平台",
+      "missing_evidence": "立项依据完全空缺，需从零建立领域背景：缺少交变磁性奠基理论（Šmejkal/Mazin自旋劈裂预测）、实验验证（ARPES/隧穿谱证据）及二维交变磁体材料实现的系统文献",
+      "search_keywords": [
+        "altermagnet spin splitting prediction Šmejkal",
+        "altermagnetism experimental evidence ARPES",
+        "2D altermagnet material realization",
+        "交变磁性 二维材料 进展"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "MnPS3家族可作为承载强场滑移调控与HHG读出的材料载体",
+      "missing_evidence": "缺少MnPS3体相/单层磁序类型、电子结构、光学与非线性光学性质、层数与堆叠依赖的实验与计算文献，以及MnPS3向交磁性转变（掺杂/配体取代/应变）的依据",
+      "search_keywords": [
+        "MnPS3 monolayer antiferromagnetic electronic structure",
+        "MnPS3 altermagnetism doping strain",
+        "MnPSe3 2D magnet optical property",
+        "MnPS3 layer dependent magnetic order"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "高次谐波谱学可对反铁磁/交变磁序实现超快读出（自旋-能谷态的HHG读出可行性）",
+      "missing_evidence": "缺少磁性材料HHG代表性工作：反铁磁体HHG实验、HHG磁圆二色/磁致非线性响应、HHG读出Néel矢量或序参量的理论与实验文献",
+      "search_keywords": [
+        "high harmonic generation antiferromagnet order parameter",
+        "altermagnet high harmonic generation theory",
+        "HHG magnetic circular dichroism readout",
+        "nonlinear magneto-optical harmonic spectroscopy ultrafast"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Rashba自旋轨道耦合与交变磁自旋劈裂/Berry曲率/能谷自由度共存并可被外场调控",
+      "missing_evidence": "缺少二维磁体中Rashba工程、Rashba与反铁磁/交磁序竞争（反铁磁Rashba模型）、Berry曲率-能谷-自旋耦合及可调控性的理论与实验文献",
+      "search_keywords": [
+        "Rashba antiferromagnet spin splitting coexistence",
+        "Rashba altermagnet electric field tuning",
+        "Berry curvature valley spin coupling 2D magnet",
+        "spin valley manipulation electric field"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "强场超快层间滑移/堆叠调控是操控二维层状磁体磁序与能谷态的新兴手段（方法原创性论证）",
+      "missing_evidence": "缺少滑移铁电、层间滑移切换磁序（如双层CrI3滑移磁性翻转）、转角/moiré堆叠工程调控磁性、以及强场/超快驱动晶格-自旋耦合动力学的文献支撑",
+      "search_keywords": [
+        "sliding ferroelectricity interlayer van der Waals",
+        "interlayer sliding magnetic order switching",
+        "twist moiré stacking control magnetism",
+        "strong field ultrafast coherent phonon sliding dynamics"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "立项依据需梳理国内外研究现状并突出国内工作基础（NSFC面上项目惯例）",
+      "missing_evidence": "references.md为0字节，参考文献体系完全未建立；缺少国内固体HHG、超快自旋动力学、二维磁体实验组的代表性工作及最新进展引用",
+      "search_keywords": [
+        "solid-state high harmonic generation China group",
+        "ultrafast spin dynamics 2D magnet Chinese group",
+        "二维磁性材料 高次谐波 国内 实验组",
+        "超快磁光学 反铁磁 中国 团队"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "proposal_id": "general-new-idea-20260919-02",
+  "cluster_id": "cl_20260920_f18e46",
+  "entries": [
+    {
+      "source_id": "paper:2026-s41467-026-70903-4-filamentation-assisted-isolated-attosecond-pulse-generation",
+      "title": "Filamentation-assisted isolated attosecond pulse generation",
+      "summary": "提出并演示了成丝（filamentation）辅助的孤立阿秒脉冲（IAP）产生方案：利用1030 nm Yb激光在半无限气室（SIGC）中的自聚焦丝对长驱动脉冲进行自压缩与时间整形，无需外部少周期压缩器即获得高对比度IAP。通过切换气体介质，在Ar/Ne/He中分别得到203 as、69 as和65 as的孤立阿秒脉冲，证明该路线可移植到高重复频率、高平均功率的Yb激光平台。",
+      "path": "knowledge/raw/papers/2026-s41467-026-70903-4-filamentation-assisted-isolated-attosecond-pulse-generation.md",
+      "added_via": "cluster:cl_20260920_f18e46",
+      "added_at": "2026-09-20T03:30:25Z"
+    },
+    {
+      "source_id": "paper:2026-2412.06339-filamentation-assisted-isolated-attosecond-pulse-g",
+      "title": "Filamentation-Assisted Isolated Attosecond Pulse Generation",
+      "summary": "该论文提出利用半无限长气体池中的光丝成丝效应，通过非线性传输对Yb基少周期激光脉冲进行自压缩与空间整形（在氩气中将脉宽从4.7 fs压缩至3.5 fs），并同步实现高次谐波产生的相位匹配，从而稳健地产生高对比度、明亮的隔离阿秒脉冲。该方法成功获得了位于70 eV处、脉宽约200阿秒的隔离阿秒脉冲。",
+      "path": "",
+      "added_via": "cluster:cl_20260920_f18e46",
+      "added_at": "2026-09-20T03:30:25Z"
+    },
+    {
+      "source_id": "paper:2024-s41377-024-01564-5-isolated-attosecond-pulse-generation-in-a-semi-infinite-gas",
+      "title": "Isolated attosecond pulse generation in a semi-infinite gas cell driven by time-gated phase matching",
+      "summary": "报道在半无限气室（SIGC）中无需偏振门、双光学门等附加光学门控技术，仅依靠时域门控的宏观相位匹配即可从高次谐波辐射中选出单个阿秒暴，产生脉宽约180 as的孤立阿秒脉冲。其关键是在长相互作用介质中让相位匹配条件随电离度的累积而随时间演化，只在驱动脉冲峰值附近的窄时间窗口内得到满足，从而对原本的阿秒脉冲串实现时间单选。该方案兼具SIGC的高通量与稳定性，产生的孤立阿秒脉冲可直接服务于阿秒泵浦-探测实验。",
+      "path": "knowledge/raw/papers/2024-s41377-024-01564-5-isolated-attosecond-pulse-generation-in-a-semi-infinite-gas.md",
+      "added_via": "cluster:cl_20260920_f18e46",
+      "added_at": "2026-09-20T03:30:25Z"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "proposal_id": "key-transient-quantum-phase-optical-20260726",
+  "cluster_id": "orphan-route-2026-10-09",
+  "entries": [
+    {
+      "source_id": "paper:2024-2405.01351-high-harmonic-generation-from-electrons-moving-in-topologica",
+      "title": "High harmonic generation from electrons moving in topological spin textures",
+      "summary": "该文通过数值模拟证明，拓扑自旋纹理（如斯格明子）中运动电子受强场驱动产生的高次谐波（HHG）谱携带能带Berry曲率信息，可用于重建动量空间的几何结构。同时谐波信号对实空间自旋拓扑高度敏感，从而将HHG拓展为可同时探测实空间与动量空间拓扑性质的全光学探针。",
+      "path": "",
+      "added_via": "cluster:orphan-route-2026-10-09",
+      "added_at": "2026-10-09T16:45:01Z"
+    }
+  ]
+}

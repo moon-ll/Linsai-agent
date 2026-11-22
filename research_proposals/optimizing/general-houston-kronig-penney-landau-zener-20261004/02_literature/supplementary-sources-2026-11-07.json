@@ -1,0 +1,89 @@
+{
+  "proposal_id": "general-houston-kronig-penney-landau-zener-20261004",
+  "cluster_id": "orphan-route-2026-11-07",
+  "clusters": [
+    "orphan-route-2026-11-07"
+  ],
+  "entries": [
+    {
+      "source_id": "paper:2026-2610.35991-theoretical-study-of-high-order-harmonic-generation-in-solid",
+      "title": "Theoretical study of high-order harmonic generation in solids based on deep-learning methods",
+      "summary": "提出将分子动力学热构型采样与深度学习构建的紧束缚哈密顿量相结合，以第一性原理精度高效计算固体高次谐波谱。在 h-BN 单层上与已有方法验证一致，并预测体相 Si 谐波产率随温度的阶数依赖热响应（低阶增强、高阶抑制）。为 ZnO 等体相材料温度依赖 HHG 谱与基准谱计算提供了可扩展的第一性原理级替代方法学。",
+      "path": "knowledge/raw/papers/2026-2610.35991-theoretical-study-of-high-order-harmonic-generation-in-solid.md",
+      "added_via": "cluster:orphan-route-2026-11-07",
+      "added_at": "2026-11-07T02:41:04Z"
+    },
+    {
+      "source_id": "paper:2023-2309.00734-observation-of-light-driven-band-structure-via-multiband-hig",
+      "title": "Observation of light-driven band structure via multiband high-harmonic spectroscopy",
+      "summary": "在 MgO 晶体中用双色双圆偏振场（ω 与 2ω 反向旋转）驱动固态高次谐波，测量逐谐波强度与螺旋度随光强的完整演化，直接观测到强激光场驱动的多带结构重整（light-driven band structure）。实验与多带半导体布洛赫方程模拟对照表明，光强升高时多条导带经场致耦合与带间跃迁深度参与，谐波螺旋度通道的重新分布正是光驱动带动力学的光谱指纹。该工作把固态高次谐波光谱学从读出静态能带推进到读出亚周期强场带结构动力学。",
+      "path": "knowledge/raw/papers/2023-2309.00734-observation-of-light-driven-band-structure-via-multiband-hig.md",
+      "added_via": "cluster:orphan-route-2026-11-07",
+      "added_at": "2026-11-07T02:41:04Z"
+    },
+    {
+      "source_id": "paper:2024-2304.11661-laser-field-strength-dependence-of-solid-high-harmonic-gener",
+      "title": "Laser field strength dependence of solid high-harmonic generation from doped systems",
+      "summary": "用含时薛定谔方程（TDSE）在一维周期势模型中系统研究掺杂固体的HHG随激光场强的演化，发现以矢势振幅 A0 ≈ π/a（k空间轨迹恰好触及布里渊区边界）为界存在阈值反转。低场（A0 < π/a）下掺杂载流子的带内非线性电流显著增强谐波产率；高场（A0 > π/a）下未掺杂本征系统的带间通道反而更强，掺杂由增益变为损耗。",
+      "path": "knowledge/raw/papers/2024-2304.11661-laser-field-strength-dependence-of-solid-high-harmonic-gener.md",
+      "added_via": "cluster:orphan-route-2026-11-07",
+      "added_at": "2026-11-07T02:41:04Z"
+    },
+    {
+      "source_id": "paper:2025-2510.22064-semiconductor-wannier-equations-a-real-time-real-space-appro",
+      "title": "Semiconductor Wannier equations: a real-time, real-space approach to the nonlinear optical response in crystals",
+      "summary": "将强场驱动的半导体密度矩阵动力学（传统k空间半导体布洛赫方程）重构到局域万尼尔表象，提出“半导体万尼尔方程”的实时、实空间求解框架。由于哈密顿量跃迁积分与位置算符矩阵元在万尼尔基下均为短程量，方法随体系大小近线性标度，可直接处理k空间全布里渊区采样难以负担的大超胞、无序及莫尔体系的强场非线性光学响应。文中以固态高次谐波等非线性响应为检验，验证了与k空间布洛赫方程结果的一致性，并能规范一致地分离带内/带间电流贡献。",
+      "path": "knowledge/raw/papers/2025-2510.22064-semiconductor-wannier-equations-a-real-time-real-space-appro.md",
+      "added_via": "cluster:orphan-route-2026-11-07",
+      "added_at": "2026-11-07T02:41:04Z"
+    },
+    {
+      "source_id": "paper:2026-2407.20941-generation-of-bright-quantum-high-order-harmonic-driven-by-c",
+      "title": "Generation of bright quantum high-order harmonic driven by combined coherent and bright squeezed vacuum light",
+      "summary": "本文在理论上研究强相干激光叠加少量亮压缩真空（BSV）构成的非经典混合驱动场作用于Kr原子的量子高次谐波产生（HHG），并完整计入气体介质中的宏观传播（相位匹配与吸收）。结果表明，即使BSV能量占比很小，其超泊松强度涨落的稀有强尖峰也会通过HHG的高度非线性强度标度显著增强谐波产额，谐波发射继承驱动场的非经典光子统计（超泊松涨落与谐波阶间关联）。这些量子特征经宏观传播后仍然存活，为量子光驱动HHG实验提供了定量理论支撑与可验证的参数窗口。",
+      "path": "knowledge/raw/papers/2026-2407.20941-generation-of-bright-quantum-high-order-harmonic-driven-by-c.md",
+      "added_via": "cluster:orphan-route-2026-11-07",
+      "added_at": "2026-11-07T02:41:04Z"
+    },
+    {
+      "source_id": "paper:2015-1505.06275-all-optical-reconstruction-of-crystal-band-structure",
+      "title": "All-Optical Reconstruction of Crystal Band Structure",
+      "summary": "首次演示了晶体能带结构的'全光学'重构：用中红外强场驱动 ZnO 产生固体高次谐波，从谐波谱中反演出动量分辨的带隙，结果与从头算能带一致。物理核心是把气体三步模型移植到晶体——电子隧穿后与空穴在 k 空间加速、折返并'再碰撞'，谐波光子能量直接编码再碰撞 k 点的瞬时带隙。分析还识别出 ZnO 劈裂的上两条价带主导隧穿电离过程。",
+      "path": "knowledge/raw/papers/2015-1505.06275-all-optical-reconstruction-of-crystal-band-structure.md",
+      "added_via": "cluster:orphan-route-2026-11-07",
+      "added_at": "2026-11-07T07:20:49Z"
+    },
+    {
+      "source_id": "paper:2026-2601.08830-forbidden-second-harmonics-in-centrosymmetric-bila",
+      "title": "Forbidden second harmonics in centrosymmetric bilayer crystals",
+      "summary": "本文提出一种零差探测技术，在无需外加对称破缺场的条件下实现了对中心对称双层晶体中'被禁戒'二次谐波产生（SHG）的稳健观测，打破了此类材料因对称性约束而SHG可忽略的传统认知。实验在h-BN、2H-WSe₂和Bernal堆叠石墨烯中观测到偏振分辨的SHG信号，揭示了中心对称双层体系中此前未被认识的固有非线性光学响应。",
+      "path": "",
+      "added_via": "cluster:orphan-route-2026-11-07",
+      "added_at": "2026-11-07T07:20:49Z"
+    },
+    {
+      "source_id": "paper:2026-2603.18230-direct-observation-of-ultrafast-defect-bound-and-free-excito",
+      "title": "Direct observation of ultrafast defect-bound and free exciton dynamics in defect-engineered WS2 monolayers",
+      "summary": "在缺陷密度由合成条件系统调控的单层WS2（富单硫空位V_S与W位缺陷复合物S_WV_S）中，首次用超快光谱直接观测缺陷束缚激子的超快形成与衰变动力学。同一实验中同时解析缺陷束缚激子与自由激子的相干相互作用，填补了『缺陷态 vs 自由态』载流子份额分解的实验空白，建立缺陷密度—激子布居分配的定量关联。",
+      "path": "knowledge/raw/papers/2026-2603.18230-direct-observation-of-ultrafast-defect-bound-and-free-excito.md",
+      "added_via": "cluster:orphan-route-2026-11-07",
+      "added_at": "2026-11-07T07:20:49Z"
+    },
+    {
+      "source_id": "paper:2025-2503.16329-real-time-simulations-of-laser-induced-electron-excitations",
+      "title": "Real-time simulations of laser-induced electron excitations in crystalline ZnO",
+      "summary": "本文对同一物理过程——近红外/中红外超短脉冲在宽强度范围内诱导 ZnO 晶体的非平衡电子激发——并行使用 Keldysh 解析模型、半导体布洛赫方程（SBE）与实时 TDDFT 三种方法进行系统对比。结果表明实时 TDDFT 能准确预言导带布居，并清晰刻画了带内隧穿（强场下能带弯曲、电子在动量空间移位）与带间多光子吸收共存的中间激发区，弥合了两种经典极限图像之间的过渡。该工作为 ZnO 高次谐波产生中的载流子注入机制提供了第一性原理（ab initio）定量依据。",
+      "path": "knowledge/raw/papers/2025-2503.16329-real-time-simulations-of-laser-induced-electron-excitations.md",
+      "added_via": "cluster:orphan-route-2026-11-07",
+      "added_at": "2026-11-07T07:20:49Z"
+    },
+    {
+      "source_id": "paper:2024-doi-10-1088-1674-1056-ad5d95-high-order-harmonic-generation-in-zno-crystals-driven-by-one",
+      "title": "High-order harmonic generation in ZnO crystals driven by one-color and two-color intense laser pulses",
+      "summary": "通过数值求解多能带半导体布洛赫方程（SBE），理论研究单色与双色强激光脉冲驱动 ZnO 晶体的高次谐波产生。分析多个导带在不同谐波阶区间的贡献及谐波强度随阶次的幂律衰减行为，并展示双色场合成波形对谐波谱结构与偶次谐波通道的调控。为 ZnO 固态 HHG 标度律提供多能带 SBE 框架下的新定量计算参照。",
+      "path": "knowledge/raw/papers/2024-doi-10-1088-1674-1056-ad5d95-high-order-harmonic-generation-in-zno-crystals-driven-by-one.md",
+      "added_via": "cluster:orphan-route-2026-11-07",
+      "added_at": "2026-11-07T07:20:49Z"
+    }
+  ]
+}

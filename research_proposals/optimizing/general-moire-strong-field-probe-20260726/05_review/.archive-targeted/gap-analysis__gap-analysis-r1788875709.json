@@ -1,0 +1,83 @@
+{
+  "gaps": [
+    {
+      "claim": "MNPS3 SHG on-off实验支持Floquet调控理论/能隙调制标度关系",
+      "missing_evidence": "缺少Shan 2021 Nature关于MnPS3二次谐波开关实验的原始文献数据，特别是>30% Floquet调制、15 meV能隙标度关系的真实出处",
+      "search_keywords": [
+        "Shan 2021 Nature MnPS3 SHG",
+        "MnPS3 second harmonic generation on-off",
+        "Floquet MnPS3 nonlinear optics"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "TDDFT原子尺度/TB-SBE莫尔尺度/张量网络强关联三层降阶框架的可行性",
+      "missing_evidence": "缺乏三层方法各司其职的基准对比文献，特别是TDDFT与SBE计算成本基准、张量网络耦合SBE的可行性证据",
+      "search_keywords": [
+        "TDDFT semiconductor Bloch equation benchmark",
+        "tensor network moire superlattice many-body",
+        "TDDFT vs SBE computational cost"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Moire超晶格高次谐波反演多维参数提取(带隙/激子/SOC)的可实现性",
+      "missing_evidence": "缺少Hu等真DOI2316775121 PNAS论文的多维反演方法原始细节，或需替换为真实的HHG反演多参数提取文献",
+      "search_keywords": [
+        "moire superlattice high harmonic inversion",
+        "HHG bandgap exciton SOC retrieval",
+        "attosecond spectroscopy moire reconstruction"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "time-isolation protocol/损伤阈值余量分析/Go/No-Go criteria的具体设计",
+      "missing_evidence": "缺少时间隔离协议、损伤阈值余量、Go/No-Go判据的具体文献支撑或参考标准",
+      "search_keywords": [
+        "femtosecond laser damage threshold 2D material",
+        "moire superlattice time-resolved isolation protocol",
+        "HHG experimental Go/No-Go criteria"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "References [3] DOI 02540/02640/Nat. Mater. 23(9) Du等1179-1192元数据",
+      "missing_evidence": "Crossref核实Nat. Mater. 23(9) Du, Huang, Zhang, Ye, Dai, Deng, Zhang & Sun 1179-1192论文的正确DOI与题名信息",
+      "search_keywords": [
+        "Nature Materials 23 9 2024 HHG moire",
+        "Du Huang Zhang Sun moire high harmonic",
+        "Nat Mater 10.1038/s41563-024-XXXXX"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "References [10] Cao H./Sun & Meng/npj QM 9 文号90",
+      "missing_evidence": "Crossref核实npj Quantum Materials 9卷Cao, Sun & Meng论文的正确文号90与DOI",
+      "search_keywords": [
+        "npj Quantum Materials 9 Cao Sun Meng",
+        "moire high harmonic npj QM 2024",
+        "Cao Sun Meng twisted bilayer"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "References [21] Richen Xiong s41467-024-48725-z 文号4254",
+      "missing_evidence": "Crossref核实Nat. Commun. s41467-024-48725-z一作Richen Xiong文号4254与正确DOI",
+      "search_keywords": [
+        "Nature Communications 2024 Richen Xiong 4254",
+        "s41467-024-48725-z DOI verification",
+        "Xiong moire high harmonic Nat Commun"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "References [8][12][25] 元数据需按Crossref核实",
+      "missing_evidence": "三篇参考文献的DOI、作者、期刊卷期页码需重新核实",
+      "search_keywords": [
+        "Crossref reference8 12 25 moire HHG",
+        "DOI verification moire high harmonic generation"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

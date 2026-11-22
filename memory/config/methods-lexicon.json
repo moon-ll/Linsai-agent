@@ -1,0 +1,382 @@
+{
+  "entries": [
+    {
+      "slug": "tdse-solver",
+      "page": "TDSE求解器.md",
+      "aliases": [
+        "TDSE",
+        "time-dependent Schrodinger equation",
+        "time-dependent-schrodinger",
+        "split-operator",
+        "Crank-Nicolson",
+        "SAE"
+      ],
+      "zh": [
+        "含时薛定谔",
+        "分裂算符",
+        "单活性电子"
+      ]
+    },
+    {
+      "slug": "unified-hamiltonian-rt-tddft",
+      "page": "统一Hamiltonian框架的rt-TDDFT.md",
+      "aliases": [
+        "rt-TDDFT",
+        "real-time TDDFT",
+        "TDDFT",
+        "time-dependent density functional theory"
+      ],
+      "zh": [
+        "含时密度泛函",
+        "实时含时密度泛函"
+      ]
+    },
+    {
+      "slug": "salmon-williams-lax",
+      "page": "SALMON_rt-TDDFT___Williams-Lax.md",
+      "aliases": [
+        "SALMON",
+        "Williams-Lax",
+        "Williams-Lax method"
+      ],
+      "zh": []
+    },
+    {
+      "slug": "rabbitt",
+      "page": "RABBITT.md",
+      "aliases": [
+        "RABBITT",
+        "reconstruction of attosecond beating",
+        "attosecond beating by interference"
+      ],
+      "zh": [
+        "重建阿秒拍频干涉",
+        "阿秒拍频"
+      ]
+    },
+    {
+      "slug": "frog-crab",
+      "page": "FROG.md",
+      "aliases": [
+        "FROG",
+        "FROG-CRAB",
+        "CRAB",
+        "frequency-resolved optical gating"
+      ],
+      "zh": [
+        "频率分辨光学门",
+        "阿秒脉冲重建"
+      ]
+    },
+    {
+      "slug": "vmi",
+      "page": "VMI.md",
+      "aliases": [
+        "VMI",
+        "velocity map imaging",
+        "velocity-map imaging"
+      ],
+      "zh": [
+        "速度映射成像",
+        "速度影像"
+      ]
+    },
+    {
+      "slug": "coltrims",
+      "page": "COLTRIMS.md",
+      "aliases": [
+        "COLTRIMS",
+        "cold target recoil ion momentum spectroscopy",
+        "reaction microscope"
+      ],
+      "zh": [
+        "冷靶反冲离子动量谱",
+        "反应显微境",
+        "反应显微镜"
+      ]
+    },
+    {
+      "slug": "transient-absorption",
+      "page": "瞬态吸收光谱.md",
+      "aliases": [
+        "transient absorption",
+        "transient absorption spectroscopy",
+        "ATT",
+        "absorption transient"
+      ],
+      "zh": [
+        "瞬态吸收",
+        "瞬态吸收谱"
+      ]
+    },
+    {
+      "slug": "attosecond-streaking",
+      "page": "阿秒条纹相机.md",
+      "aliases": [
+        "attosecond streaking",
+        "streak camera",
+        "streaking trace",
+        "attosecond streak"
+      ],
+      "zh": [
+        "阿秒条纹",
+        "条纹相机"
+      ]
+    },
+    {
+      "slug": "covariance-mapping",
+      "page": "协方差映射.md",
+      "aliases": [
+        "covariance mapping",
+        "covariance map"
+      ],
+      "zh": [
+        "协方差映射",
+        "协方差成像"
+      ]
+    },
+    {
+      "slug": "waveform-control",
+      "page": "波形控制.md",
+      "aliases": [
+        "waveform control",
+        "carrier-envelope phase",
+        "CEP",
+        "CEP stabilization"
+      ],
+      "zh": [
+        "波形控制",
+        "载波包络相位"
+      ]
+    },
+    {
+      "slug": "few-cycle-cep-gating",
+      "page": "少周期脉冲CEP门控实验.md",
+      "aliases": [
+        "few-cycle CEP gating",
+        "CEP gating",
+        "few-cycle pulse"
+      ],
+      "zh": [
+        "少周期",
+        "CEP 门控"
+      ]
+    },
+    {
+      "slug": "sub15-cycle-cep",
+      "page": "CEP门控sub-1_5-cycle激光脉冲技术.md",
+      "aliases": [
+        "sub-1.5-cycle",
+        "sub-1.5 cycle",
+        "sub-cycle pulse"
+      ],
+      "zh": [
+        "亚 1.5 周期",
+        "亚周期脉冲"
+      ]
+    },
+    {
+      "slug": "plasma-mirror",
+      "page": "等离子体镜面实验方案.md",
+      "aliases": [
+        "plasma mirror",
+        "plasma mirrors",
+        "PM gating"
+      ],
+      "zh": [
+        "等离子体镜"
+      ]
+    },
+    {
+      "slug": "sxfel-self-seeding",
+      "page": "SXFEL自同步技术.md",
+      "aliases": [
+        "SXFEL",
+        "self-seeding",
+        "soft x-ray FEL"
+      ],
+      "zh": [
+        "软 X 射线自由电子激光",
+        "自种子"
+      ]
+    },
+    {
+      "slug": "si3n4-compression",
+      "page": "双20_nm_Si-nitride膜压缩电子脉冲.md",
+      "aliases": [
+        "Si-nitride",
+        "Si3N4 membrane",
+        "membrane compression"
+      ],
+      "zh": [
+        "氮化硅膜",
+        "膜压缩"
+      ]
+    },
+    {
+      "slug": "attosecond-electron-train",
+      "page": "高电流阿秒电子脉冲列整形.md",
+      "aliases": [
+        "attosecond electron pulse train",
+        "electron pulse shaping"
+      ],
+      "zh": [
+        "阿秒电子脉冲列",
+        "电子脉冲整形"
+      ]
+    },
+    {
+      "slug": "sbe-bloch-equations",
+      "page": "sbe-bloch-equations.md",
+      "aliases": [
+        "SBE",
+        "semiconductor Bloch equations",
+        "Bloch equation",
+        "optical Bloch"
+      ],
+      "zh": [
+        "布洛赫方程",
+        "半导体布洛赫"
+      ]
+    },
+    {
+      "slug": "tight-binding-model",
+      "page": "tight-binding-model.md",
+      "aliases": [
+        "tight-binding",
+        "tight binding",
+        "TB model",
+        "TBM"
+      ],
+      "zh": [
+        "紧束缚"
+      ]
+    },
+    {
+      "slug": "floquet-engineering",
+      "page": "floquet-engineering.md",
+      "aliases": [
+        "Floquet",
+        "Floquet engineering",
+        "Floquet theorem",
+        "Floquet state",
+        "Floquet band"
+      ],
+      "zh": [
+        "弗洛凯",
+        "Floquet 工程",
+        "周期驱动调控"
+      ]
+    },
+    {
+      "slug": "dmft",
+      "page": "dmft.md",
+      "aliases": [
+        "DMFT",
+        "dynamical mean-field theory",
+        "dynamical mean field theory"
+      ],
+      "zh": [
+        "动力学平均场"
+      ]
+    },
+    {
+      "slug": "rabi-oscillation",
+      "page": "rabi-oscillation.md",
+      "aliases": [
+        "Rabi oscillation",
+        "Rabi frequency",
+        "Rabi"
+      ],
+      "zh": [
+        "拉比振荡",
+        "喇比振荡",
+        "拉比频率"
+      ]
+    },
+    {
+      "slug": "thz-spectroscopy",
+      "page": "thz-spectroscopy.md",
+      "aliases": [
+        "THz spectroscopy",
+        "terahertz spectroscopy",
+        "THz probe",
+        "THz detection",
+        "THz field"
+      ],
+      "zh": [
+        "太赫兹谱",
+        "太赫兹光谱",
+        "太赫兹探测"
+      ]
+    },
+    {
+      "slug": "pump-probe",
+      "page": "pump-probe.md",
+      "aliases": [
+        "pump-probe",
+        "pump probe",
+        "pumped-probe",
+        "transient reflectivity",
+        "time-resolved reflectivity"
+      ],
+      "zh": [
+        "泵浦探测",
+        "抽运探测",
+        "泵浦-探测"
+      ]
+    },
+    {
+      "slug": "circular-dichroism",
+      "page": "circular-dichroism.md",
+      "aliases": [
+        "circular dichroism",
+        "CD spectroscopy"
+      ],
+      "zh": [
+        "圆二色",
+        "圆二色谱",
+        "圆偏振二色"
+      ]
+    },
+    {
+      "slug": "arpes",
+      "page": "arpes.md",
+      "aliases": [
+        "ARPES",
+        "angle-resolved photoemission spectroscopy"
+      ],
+      "zh": [
+        "角分辨光电子能谱"
+      ]
+    },
+    {
+      "slug": "squid-magnetometry",
+      "page": "squid-magnetometry.md",
+      "aliases": [
+        "SQUID",
+        "superconducting quantum interference device",
+        "SQUID magnetometry"
+      ],
+      "zh": [
+        "超导量子干涉"
+      ]
+    },
+    {
+      "slug": "bayesian-inference",
+      "page": "bayesian-inference.md",
+      "aliases": [
+        "Bayesian inference",
+        "Bayesian",
+        "MCMC"
+      ],
+      "zh": [
+        "贝叶斯推断",
+        "贝叶斯"
+      ]
+    }
+  ],
+  "generated_at": "2026-09-06T06:11:33Z",
+  "source": "seed",
+  "note": "方法学词表：method_leads 归组到方法页的映射，可手工增删；page 为方法页文件名（不存在且同类 leads≥2 时按该名新建页）"
+}

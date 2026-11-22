@@ -1,0 +1,38 @@
+{
+  "gaps": [
+    {
+      "claim": "再分析对象为氪靶数据，以单原子轨道假设绕开多通道电离（§2.3 L39）",
+      "missing_evidence": "原文 arXiv:2510.17949 及 Reply arXiv:2511.08391 中关于氪原子 3d 内壳层轨道及 streaking 实验的精确描述需逐项核对；正文 [2][30][38] 三条文献的靶材链需逐一确认是否确为氪靶",
+      "search_keywords": [
+        "krypton attosecond streaking 3d orbital",
+        "arXiv:2510.17949 krypton inner-shell",
+        "kr streaking experiment multi-channel ionization",
+        "Han 2025 krypton streaking reply"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "再分析采用 VPGTA 算法（§2.3 L39）",
+      "missing_evidence": "VPGTA 算法（应为 Volkov-Propagator Generalized Transition Amplitude 或类似全称）尚无正确挂载文献；当前 [45] 错挂且缩写在正文中形式不符，需要追溯 VPGTA 方法的原始论文与最新应用文献",
+      "search_keywords": [
+        "VPGTA attosecond reanalysis algorithm",
+        "Volkov Propagator Generalized Transition Amplitude",
+        "VPGTA photoionization streaking retrieval",
+        "generalized transition amplitude strong-field ionization"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "内壳层通道贡献相对总截面在 5% 量级以下（§2 L19）",
+      "missing_evidence": "该量化估计无 [N] 引用，也无显式核算过程，需补文献出处（理论估算或实验截面比）或注明为第一阶段标定中的典型估计",
+      "search_keywords": [
+        "inner-shell channel contribution HHG cross section ratio",
+        "core-excited state photoionization cross section percentage",
+        "5% inner-shell contribution attosecond HHG",
+        "krypton 3d photoionization branching ratio"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

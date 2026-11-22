@@ -1,0 +1,55 @@
+{
+  "gaps": [
+    {
+      "claim": "VAE+扩散组合用于瞬态量子相反演的技术路线选择",
+      "missing_evidence": "论证使用'通行做法/常见搭配'式辩护，未落到具体先例文献与量化基准（如重建误差、采样效率、收敛步数等同行可比数值）",
+      "search_keywords": [
+        "VAE diffusion hybrid inverse problem quantum dynamics",
+        "variational autoencoder diffusion ultrafast spectroscopy reconstruction",
+        "generative inverse transient absorption reconstruction benchmark"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "驱动源波长选择'被分区判据反向决定'的物理依据",
+      "missing_evidence": "中红外/太赫兹驱动源分区判据（低频强耦合区/转换区/高频弱耦合区）的命名与边界划分缺少同行共识先例文献支撑",
+      "search_keywords": [
+        "mid-infrared driving pulse frequency regimes classification",
+        "strong-field frequency zone criterion ℏω/E_g",
+        "Floquet zone boundary strong-field driving"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "ℏΩ_R/E_g = 1 边界处二阶/一阶占比'约50%'需共振 Bessel 修正",
+      "missing_evidence": "缺少 Floquet 边带 J_n(ℏΩ_R/E_g) 共振修正的文献依据，未给出 (ℏΩ_R/E_g)² 定标律在边界处的具体修正公式与可引用先例",
+      "search_keywords": [
+        "Bessel function Floquet sideband resonance correction",
+        "multiphoton resonance Bessel function strong-field ratio",
+        "J_n Bessel two-photon one-photon transition boundary"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Kiselev[36] 引文事实对应",
+      "missing_evidence": "正文标注'2026 年'与条目对应 arXiv:2510.12990（实际 2025 预印本）不一致，需核实原文确切发表年份并核对其与本课题瞬态量子相主题的可引用性",
+      "search_keywords": [
+        "Kiselev arXiv:2510.12990 transient quantum phase",
+        "Kiselev 2025 attosecond pre-print Floquet",
+        "Kiselev strong-field driving wavelength"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§5(1) Uzan-Narovlansky / Faeyrman 具名论述的文献追溯",
+      "missing_evidence": "正文具名提及两位作者却未挂角标 [35]/[11]，缺少对应文献条目以支撑'瞬态量子相从事后可观测提升为主动可写可读'的论述",
+      "search_keywords": [
+        "Uzan-Narovlansky attosecond transient absorption",
+        "Faeyrman quantum phase retrieval attosecond",
+        "attosecond write-read attosecond transient spectroscopy"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "scheme"
+}

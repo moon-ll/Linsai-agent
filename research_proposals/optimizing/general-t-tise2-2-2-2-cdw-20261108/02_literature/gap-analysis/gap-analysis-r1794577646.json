@@ -1,0 +1,38 @@
+{
+  "gaps": [
+    {
+      "claim": "§三.4 L39 使用谱重定义的特征温度 T* 作为判别指标",
+      "missing_evidence": "T* 的出处悬空，缺正式文献角标；需补 [26]（Ye 等人，content §2.4 同源文献），使该指标定义可溯源",
+      "search_keywords": [
+        "Ye",
+        "T* spectral weight",
+        "EuTe4 charge density wave"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§三.3 L25 与 §三.6 中基于 [41][42] 的分支建模假设（弛豫动力学/序参量建模相关）",
+      "missing_evidence": "[41][42] 为预印本，占全章角标约 28% 逼近 30% 红线；需检索并替换为正式发表版本，或检索同主题已正式发表的平行文献作为替代支撑",
+      "search_keywords": [
+        "TiSe2",
+        "order parameter dynamics",
+        "pump-probe relaxation",
+        "excitonic insulator",
+        "charge density wave dynamics"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§三.7 L59 '第一次具备可检验的粘合标准' 的首创性论断",
+      "missing_evidence": "novelty claim 需既有文献核查支撑——须检索已有 CDW 融化-重建判别/粘合判据相关工作，确认'首次'表述成立或改限定表述",
+      "search_keywords": [
+        "CDW melting recrystallization",
+        "coherence length criterion",
+        "ultrafast CDW recovery",
+        "signature of bond density wave"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "scheme"
+}

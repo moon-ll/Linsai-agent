@@ -1,0 +1,1446 @@
+{
+ "entries": {
+  "1": {
+   "title": "Linking high harmonics from gases and solids",
+   "year": "2015",
+   "doi": "10.1038/nature14517",
+   "arxiv": "",
+   "family": "Vampa",
+   "journal": "Nature",
+   "vol": "522",
+   "page": "462–464"
+  },
+  "2": {
+   "title": "Measurement of the Berry curvature of solids using high-harmonic spectroscopy",
+   "year": "2018",
+   "doi": "10.1038/s41467-018-03397-4",
+   "arxiv": "",
+   "family": "Luu",
+   "journal": "Nat. Commun.",
+   "vol": "9",
+   "page": "916"
+  },
+  "3": {
+   "title": "Theoretical analysis of high-order harmonic generation in solids",
+   "year": "2014",
+   "doi": "10.1103/PhysRevLett.113.073901",
+   "arxiv": "",
+   "family": "Vampa",
+   "journal": "Phys. Rev. Lett.",
+   "vol": "113",
+   "page": "073901"
+  },
+  "4": {
+   "title": "High-harmonic spectroscopy of ultrafast many-body dynamics in strongly correlated systems",
+   "year": "2018",
+   "doi": "10.1038/s41566-018-0129-0",
+   "arxiv": "",
+   "family": "Silva",
+   "journal": "Nat. Photonics",
+   "vol": "12",
+   "page": "266–270"
+  },
+  "5": {
+   "title": "High-harmonic generation driven by quantum light",
+   "year": "2023",
+   "doi": "10.1038/s41567-023-02127-y",
+   "arxiv": "",
+   "family": "Gorlach",
+   "journal": "Nat. Phys.",
+   "vol": "19",
+   "page": "1689–1696"
+  },
+  "6": {
+   "title": "Observation of interband Berry phase in laser-driven crystals",
+   "year": "2024",
+   "doi": "10.1038/s41586-023-06828-5",
+   "arxiv": "",
+   "family": "Uzan-Narovlansky",
+   "journal": "Nature",
+   "vol": "626",
+   "page": "66–71"
+  },
+  "7": {
+   "title": "High-harmonic generation by a bright squeezed vacuum",
+   "year": "2024",
+   "doi": "10.1038/s41567-024-02659-x",
+   "arxiv": "",
+   "family": "Rasputnyi",
+   "journal": "Nat. Phys.",
+   "vol": "20",
+   "page": "1960–1965"
+  },
+  "8": {
+   "title": "High harmonic spectroscopy reveals anisotropy of the charge-density-wave phase transition in TiSe₂",
+   "year": "2025",
+   "doi": "10.1038/s43246-025-00873-5",
+   "arxiv": "",
+   "family": "Tyulnev",
+   "journal": "Commun. Mater.",
+   "vol": "6",
+   "page": "152"
+  },
+  "9": {
+   "title": "Framework to Measure Quantum Metric from Step Response",
+   "year": "2025",
+   "doi": "10.1103/PhysRevLett.134.106403",
+   "arxiv": "",
+   "family": "Verma",
+   "journal": "Phys. Rev. Lett.",
+   "vol": "134",
+   "page": "106403"
+  },
+  "10": {
+   "title": "Room-temperature flexible manipulation of the quantum-metric structure in a topological chiral antiferromagnet",
+   "year": "2024",
+   "doi": "10.1038/s41567-024-02476-2",
+   "arxiv": "",
+   "family": "Han",
+   "journal": "Nat. Phys.",
+   "vol": "20",
+   "page": "1110–1117"
+  },
+  "11": {
+   "title": "Sub-cycle field-driven dynamical Berry phase in solids",
+   "year": "2026",
+   "doi": "",
+   "arxiv": "2606.02238",
+   "family": "Faeyrman",
+   "journal": "",
+   "vol": "",
+   "page": ""
+  },
+  "12": {
+   "title": "Contrasting ultrafast light-driven electron-hole interaction dynamics in monolayer MoS₂ and metallic NbSe₂",
+   "year": "2026",
+   "doi": "",
+   "arxiv": "2604.13901",
+   "family": "Cárdenas",
+   "journal": "",
+   "vol": "",
+   "page": ""
+  },
+  "13": {
+   "title": "High harmonic generation reflecting the sub-cycle evolution of the Mott transition under a mid-infrared electric field",
+   "year": "2026",
+   "doi": "",
+   "arxiv": "2508.00296",
+   "family": "Ikeda",
+   "journal": "",
+   "vol": "",
+   "page": ""
+  },
+  "14": {
+   "title": "Probing the quantum metric of 3D topological insulators",
+   "year": "2026",
+   "doi": "10.1038/s41563-026-02617-3",
+   "arxiv": "",
+   "family": "Sala",
+   "journal": "Nat. Mater.",
+   "vol": "",
+   "page": ""
+  },
+  "15": {
+   "title": "A universal approach to saddle-point methods in attosecond science",
+   "year": "2026",
+   "doi": "10.1103/PhysRevA.113.063111",
+   "arxiv": "2510.12545",
+   "family": "Weber",
+   "journal": "Phys. Rev. A",
+   "vol": "113",
+   "page": "063111"
+  },
+  "16": {
+   "title": "Edge states and quantum optical high-harmonic generation from topological insulators",
+   "year": "2026",
+   "doi": "",
+   "arxiv": "2602.16454",
+   "family": "Lange",
+   "journal": "",
+   "vol": "",
+   "page": ""
+  },
+  "17": {
+   "title": "Symmetry breaking by quantum light in solid-state high-harmonic generation",
+   "year": "2026",
+   "doi": "",
+   "arxiv": "2605.28236",
+   "family": "Stammer",
+   "journal": "",
+   "vol": "",
+   "page": ""
+  },
+  "18": {
+   "title": "Light-tunable quantum metric non-linear Hall response in Berry dipole semimetals",
+   "year": "2026",
+   "doi": "",
+   "arxiv": "2606.06999",
+   "family": "Chowdhury",
+   "journal": "",
+   "vol": "",
+   "page": ""
+  },
+  "19": {
+   "title": "Solid-state high-order harmonic generation: emerging frontiers in ultrafast and quantum light science",
+   "year": "2025",
+   "doi": "",
+   "arxiv": "2510.15207",
+   "family": "Ciappina",
+   "journal": "",
+   "vol": "",
+   "page": ""
+  },
+  "20": {
+   "title": "Excitonic enhancement of squeezed light in quantum-optical high-harmonic generation from a Mott insulator",
+   "year": "2025",
+   "doi": "",
+   "arxiv": "2503.15932",
+   "family": "Lange",
+   "journal": "",
+   "vol": "",
+   "page": ""
+  },
+  "21": {
+   "title": "Nonclassical Cutoff Fluctuations in Squeezed-Light-Driven High-Harmonic Generation",
+   "year": "2026",
+   "doi": "",
+   "arxiv": "2605.21925",
+   "family": "Khurelbaatar",
+   "journal": "",
+   "vol": "",
+   "page": ""
+  },
+  "22": {
+   "title": "Emergence of Gaussian entanglement and non-Gaussianity in high-harmonic generation driven by bright squeezed light",
+   "year": "2026",
+   "doi": "",
+   "arxiv": "2606.22714",
+   "family": "Rivera-Dean",
+   "journal": "",
+   "vol": "",
+   "page": ""
+  },
+  "23": {
+   "title": "From Berry curvature to quantum metric: a new era of quantum geometry metrology for Bloch electrons in solids",
+   "year": "2025",
+   "doi": "",
+   "arxiv": "2512.24553",
+   "family": "Yang",
+   "journal": "",
+   "vol": "",
+   "page": ""
+  },
+  "24": {
+   "title": "Fisher Information as an Operational Metric for Structured Optical Beams",
+   "year": "2025",
+   "doi": "",
+   "arxiv": "2512.23538",
+   "family": "Sumaya-Martinez",
+   "journal": "",
+   "vol": "",
+   "page": ""
+  },
+  "25": {
+   "title": "Nonlinear Spectroscopy via Generalized Quantum Phase Estimation",
+   "year": "2025",
+   "doi": "10.22331/q-2025-08-07-1822",
+   "arxiv": "",
+   "family": "Loaiza",
+   "journal": "Quantum",
+   "vol": "9",
+   "page": "1822"
+  },
+  "26": {
+   "title": "Nonlinear optical susceptibilities of semiconductors: Results with a length-gauge analysis",
+   "year": "1995",
+   "doi": "10.1103/PhysRevB.52.14636",
+   "arxiv": "",
+   "family": "Aversa",
+   "journal": "Phys. Rev. B",
+   "vol": "52",
+   "page": "14636"
+  },
+  "27": {
+   "title": "Electrical, structural and magnetic properties of pure and doped 1T-TaS₂",
+   "year": "1979",
+   "doi": "10.1080/13642817908245359",
+   "arxiv": "",
+   "family": "Fazekas",
+   "journal": "Philos. Mag. B",
+   "vol": "39",
+   "page": "229–244"
+  },
+  "28": {
+   "title": "Physics-informed neural networks: A deep learning framework for solving forward and inverse problems involving nonlinear partial differential equations",
+   "year": "2019",
+   "doi": "10.1016/j.jcp.2018.10.045",
+   "arxiv": "",
+   "family": "Raissi",
+   "journal": "J. Comput. Phys.",
+   "vol": "378",
+   "page": "686–707"
+  },
+  "29": {
+   "title": "The FAIR Guiding Principles for scientific data management and stewardship",
+   "year": "2016",
+   "doi": "10.1038/sdata.2016.18",
+   "arxiv": "",
+   "family": "Wilkinson",
+   "journal": "Sci. Data",
+   "vol": "3",
+   "page": "160018"
+  },
+  "30": {
+   "title": "Quantal phase factors accompanying adiabatic changes",
+   "year": "1984",
+   "doi": "10.1098/rspa.1984.0023",
+   "arxiv": "",
+   "family": "Berry",
+   "journal": "Proc. R. Soc. A",
+   "vol": "392",
+   "page": "45–57"
+  },
+  "31": {
+   "title": "Berry phase effects on electronic properties",
+   "year": "2010",
+   "doi": "10.1103/RevModPhys.82.1959",
+   "arxiv": "",
+   "family": "Xiao",
+   "journal": "Rev. Mod. Phys.",
+   "vol": "82",
+   "page": "1959–2007"
+  },
+  "32": {
+   "title": "Plasma perspective on strong-field multiphoton ionization",
+   "year": "1993",
+   "doi": "10.1103/PhysRevLett.71.1994",
+   "arxiv": "",
+   "family": "Corkum",
+   "journal": "Phys. Rev. Lett.",
+   "vol": "71",
+   "page": "1994–1997"
+  },
+  "33": {
+   "title": "Theory of high-harmonic generation by low-frequency fields",
+   "year": "1994",
+   "doi": "10.1103/PhysRevA.49.2117",
+   "arxiv": "",
+   "family": "Lewenstein",
+   "journal": "Phys. Rev. A",
+   "vol": "49",
+   "page": "2117–2132"
+  },
+  "34": {
+   "title": "Observation of high-order harmonic generation in a bulk crystal",
+   "year": "2011",
+   "doi": "10.1038/nphys1847",
+   "arxiv": "",
+   "family": "Ghimire",
+   "journal": "Nat. Phys.",
+   "vol": "7",
+   "page": "138–141"
+  },
+  "35": {
+   "title": "Density-functional theory for time-dependent systems",
+   "year": "1984",
+   "doi": "10.1103/PhysRevLett.52.997",
+   "arxiv": "",
+   "family": "Runge",
+   "journal": "Phys. Rev. Lett.",
+   "vol": "52",
+   "page": "997–1000"
+  },
+  "36": {
+   "title": "Electronic excitations: density-functional versus many-body Green's-function approaches",
+   "year": "2002",
+   "doi": "10.1103/RevModPhys.74.601",
+   "arxiv": "",
+   "family": "Onida",
+   "journal": "Rev. Mod. Phys.",
+   "vol": "74",
+   "page": "601–659"
+  },
+  "37": {
+   "title": "Continuous-variable optical quantum-state tomography",
+   "year": "2009",
+   "doi": "10.1103/RevModPhys.81.299",
+   "arxiv": "",
+   "family": "Lvovsky",
+   "journal": "Rev. Mod. Phys.",
+   "vol": "81",
+   "page": "299–332"
+  },
+  "38": {
+   "title": "Measurement of the quantum states of squeezed light",
+   "year": "1997",
+   "doi": "10.1038/387471a0",
+   "arxiv": "",
+   "family": "Breitenbach",
+   "journal": "Nature",
+   "vol": "387",
+   "page": "471–475"
+  },
+  "39": {
+   "title": "Quantized Hall conductance in a two-dimensional periodic potential",
+   "year": "1982",
+   "doi": "10.1103/PhysRevLett.49.405",
+   "arxiv": "",
+   "family": "Thouless",
+   "journal": "Phys. Rev. Lett.",
+   "vol": "49",
+   "page": "405–408"
+  },
+  "40": {
+   "title": "Riemannian structure on manifolds of quantum states",
+   "year": "1980",
+   "doi": "10.1007/BF02193559",
+   "arxiv": "",
+   "family": "Provost",
+   "journal": "Commun. Math. Phys.",
+   "vol": "76",
+   "page": "289–301"
+  },
+  "41": {
+   "title": "Physics-informed machine learning",
+   "year": "2021",
+   "doi": "10.1038/s42254-021-00314-5",
+   "arxiv": "",
+   "family": "Karniadakis",
+   "journal": "Nat. Rev. Phys.",
+   "vol": "3",
+   "page": "422–440"
+  },
+  "42": {
+   "title": "High-harmonic generation in gases and solids",
+   "year": "2025",
+   "doi": "10.1103/PhysRevResearch.7.043284",
+   "arxiv": "",
+   "family": "Thorpe",
+   "journal": "Phys. Rev. Research",
+   "vol": "7",
+   "page": "043284"
+  },
+  "43": {
+   "title": "Experimental realization of a three-dimensional topological insulator, Bi₂Te₃",
+   "year": "2009",
+   "doi": "10.1126/science.1173034",
+   "arxiv": "",
+   "family": "Chen",
+   "journal": "Science",
+   "vol": "325",
+   "page": "178–181"
+  },
+  "44": {
+   "title": "Revealing the anisotropic charge-density-wave order of TiSe₂ through high harmonic generation",
+   "year": "2024",
+   "doi": "",
+   "arxiv": "2412.13329",
+   "family": "Zhang",
+   "journal": "",
+   "vol": "",
+   "page": ""
+  },
+  "45": {
+   "title": "Spin transport revealed by the spin quantum geometry",
+   "year": "2024",
+   "doi": "",
+   "arxiv": "2406.02257",
+   "family": "Xiang",
+   "journal": "",
+   "vol": "",
+   "page": ""
+  },
+  "46": {
+   "title": "Control of intervalley scattering in Bi₂Te₃ via temperature-dependent band renormalization",
+   "year": "2026",
+   "doi": "10.1038/s41535-025-00842-8",
+   "arxiv": "2506.03251",
+   "family": "Jabed",
+   "journal": "npj Quantum Mater.",
+   "vol": "11",
+   "page": "12"
+  },
+  "47": {
+   "title": "Limitations of an approximative phase-space description in strong-field quantum optics",
+   "year": "2026",
+   "doi": "10.1103/PhysRevA.113.063107",
+   "arxiv": "2602.04370",
+   "family": "Gothelf",
+   "journal": "Phys. Rev. A",
+   "vol": "113",
+   "page": "063107"
+  },
+  "48": {
+   "title": "Semiconductor Wannier equations: a real-time, real-space approach to the nonlinear optical response in crystals",
+   "year": "2025",
+   "doi": "",
+   "arxiv": "2510.22064",
+   "family": "Molinero",
+   "journal": "",
+   "vol": "",
+   "page": ""
+  },
+  "49": {
+   "title": "Quantum Optical Signatures of Band Topology in Solid-State High Harmonics",
+   "year": "2026",
+   "doi": "",
+   "arxiv": "2604.20388",
+   "family": "Ilin",
+   "journal": "",
+   "vol": "",
+   "page": ""
+  },
+  "50": {
+   "title": "Quantum Nonlinear Hall Effect Induced by Berry Curvature Dipole in Time-Reversal Invariant Materials",
+   "year": "2015",
+   "doi": "10.1103/PhysRevLett.115.216806",
+   "arxiv": "",
+   "family": "Sodemann",
+   "journal": "Phys. Rev. Lett.",
+   "vol": "115",
+   "page": "216806"
+  },
+  "51": {
+   "title": "Dual Quantum Geometric Tensors and Local Topological Invariant",
+   "year": "2026",
+   "doi": "",
+   "arxiv": "2604.09725",
+   "family": "Cui",
+   "journal": "",
+   "vol": "",
+   "page": ""
+  },
+  "52": {
+   "title": "Exact analytical spectrum, eigenstates, and quantum geometry of the quarter-flux Harper-Hofstadter model",
+   "year": "2026",
+   "doi": "",
+   "arxiv": "2608.26099",
+   "family": "Tesfaye",
+   "journal": "",
+   "vol": "",
+   "page": ""
+  },
+  "53": {
+   "title": "Quantum control of Hubbard excitons",
+   "year": "2026",
+   "doi": "10.1038/s41563-026-02517-6",
+   "arxiv": "2601.20695",
+   "family": "Baykusheva",
+   "journal": "Nat. Mater.",
+   "vol": "25",
+   "page": "937–943"
+  },
+  "54": {
+   "title": "Tracking doublon-holon dynamics in high-harmonic generation from Mott insulators",
+   "year": "2026",
+   "doi": "10.1103/PhysRevB.113.245147",
+   "arxiv": "2605.01388",
+   "family": "Du",
+   "journal": "Phys. Rev. B",
+   "vol": "113",
+   "page": "245147"
+  },
+  "55": {
+   "title": "Prominent Dimensional Effects on High-order Harmonic Generation in Strongly Correlated Electron Systems",
+   "year": "2026",
+   "doi": "",
+   "arxiv": "2609.02466",
+   "family": "Uchida",
+   "journal": "",
+   "vol": "",
+   "page": ""
+  }
+ },
+ "arxiv": {
+  "2412.13329": {
+   "title": "Revealing the anisotropic charge-density-wave order of TiSe$_2$ through high harmonic generation",
+   "first_author": "Lin Zhang",
+   "published": "2024-12-17",
+   "n_auth": 9,
+   "id": "2412.13329v2"
+  },
+  "2512.23538": {
+   "title": "Fisher Information as an Operational Metric for Structured Optical Beams",
+   "first_author": "J. Sumaya-Martinez",
+   "published": "2025-12-29",
+   "n_auth": 2,
+   "id": "2512.23538v1"
+  },
+  "2506.03251": {
+   "title": "Control of intervalley scattering in Bi$_2$Te$_3$ via temperature-dependent band renormalization",
+   "first_author": "A. Jabed",
+   "published": "2025-06-03",
+   "n_auth": 14,
+   "id": "2506.03251v1"
+  },
+  "2601.20695": {
+   "title": "Quantum control of Hubbard excitons",
+   "first_author": "D. R. Baykusheva",
+   "published": "2026-01-27",
+   "n_auth": 15,
+   "id": "2601.20695v1"
+  },
+  "2606.22714": {
+   "title": "Emergence of Gaussian entanglement and non-Gaussianity in high-harmonic generation driven by bright squeezed light",
+   "first_author": "J. Rivera-Dean",
+   "published": "2026-06-21",
+   "n_auth": 6,
+   "id": "2606.22714v1"
+  },
+  "2604.09725": {
+   "title": "Dual Quantum Geometric Tensors and Local Topological Invariant",
+   "first_author": "Rongjie Cui",
+   "published": "2026-04-09",
+   "n_auth": 4,
+   "id": "2604.09725v2"
+  },
+  "2609.02466": {
+   "title": "Prominent Dimensional Effects on High-order Harmonic Generation in Strongly Correlated Electron Systems",
+   "first_author": "Kento Uchida",
+   "published": "2026-09-02",
+   "n_auth": 9,
+   "id": "2609.02466v1"
+  },
+  "2510.12545": {
+   "title": "A universal approach to saddle-point methods in attosecond science",
+   "first_author": "Anne Weber",
+   "published": "2025-10-14",
+   "n_auth": 3,
+   "id": "2510.12545v1"
+  },
+  "2508.00296": {
+   "title": "High-harmonic generation during ultrafast melting of a Mott insulating state",
+   "first_author": "Ryohei Ikeda",
+   "published": "2025-08-01",
+   "n_auth": 6,
+   "id": "2508.00296v2"
+  },
+  "2608.26099": {
+   "title": "Exact analytical spectrum, eigenstates, and quantum geometry of the quarter-flux Harper-Hofstadter model",
+   "first_author": "Isaac Tesfaye",
+   "published": "2026-08-26",
+   "n_auth": 2,
+   "id": "2608.26099v1"
+  },
+  "2604.20388": {
+   "title": "Quantum Optical Signatures of Band Topology in Solid-State High Harmonics",
+   "first_author": "Denis Ilin",
+   "published": "2026-04-22",
+   "n_auth": 3,
+   "id": "2604.20388v2"
+  },
+  "2602.04370": {
+   "title": "Limitations of an approximative phase-space description in strong-field quantum optics",
+   "first_author": "Rasmus Vesterager Gothelf",
+   "published": "2026-02-04",
+   "n_auth": 3,
+   "id": "2602.04370v1"
+  },
+  "2606.02238": {
+   "title": "Sub-cycle field-driven dynamical Berry phase in solids",
+   "first_author": "Lior Faeyrman",
+   "published": "2026-06-01",
+   "n_auth": 6,
+   "id": "2606.02238v1"
+  },
+  "2606.06999": {
+   "title": "Light-tunable quantum metric non-linear Hall response in Berry dipole semimetals",
+   "first_author": "Debashree Chowdhury",
+   "published": "2026-06-05",
+   "n_auth": 2,
+   "id": "2606.06999v1"
+  },
+  "2406.02257": {
+   "title": "Spin transport revealed by the spin quantum geometry",
+   "first_author": "Longjun Xiang",
+   "published": "2024-06-04",
+   "n_auth": 3,
+   "id": "2406.02257v3"
+  },
+  "2604.13901": {
+   "title": "Contrasting ultrafast light-driven electron-hole interaction dynamics in monolayer MoS$_2$ and metallic NbSe$_2$",
+   "first_author": "Aday Cárdenas",
+   "published": "2026-04-15",
+   "n_auth": 3,
+   "id": "2604.13901v1"
+  },
+  "2605.28236": {
+   "title": "Symmetry breaking by quantum light in solid-state high-harmonic generation",
+   "first_author": "P. Stammer",
+   "published": "2026-05-27",
+   "n_auth": 6,
+   "id": "2605.28236v1"
+  },
+  "2605.21925": {
+   "title": "Nonclassical Cutoff Fluctuations in Squeezed-Light-Driven High-Harmonic Generation",
+   "first_author": "Tsendsuren Khurelbaatar",
+   "published": "2026-05-21",
+   "n_auth": 3,
+   "id": "2605.21925v1"
+  },
+  "2510.22064": {
+   "title": "Semiconductor Wannier equations: a real-time, real-space approach to the nonlinear optical response in crystals (ATATA)",
+   "first_author": "Eduardo B. Molinero",
+   "published": "2025-10-24",
+   "n_auth": 9,
+   "id": "2510.22064v2"
+  },
+  "2503.15932": {
+   "title": "Excitonic Enhancement of Squeezed Light in Quantum-Optical High-Harmonic Generation From a Mott Insulator",
+   "first_author": "Christian Saugbjerg Lange",
+   "published": "2025-03-20",
+   "n_auth": 3,
+   "id": "2503.15932v1"
+  },
+  "2510.15207": {
+   "title": "Solid-State High-Order Harmonic Generation: Emerging Frontiers in Ultrafast and Quantum Light Science",
+   "first_author": "Marcelo F. Ciappina",
+   "published": "2025-10-17",
+   "n_auth": 1,
+   "id": "2510.15207v1"
+  },
+  "2512.24553": {
+   "title": "From Berry curvature to quantum metric: a new era of quantum geometry metrology for Bloch electrons in solids",
+   "first_author": "Bohm-Jung Yang",
+   "published": "2025-12-31",
+   "n_auth": 1,
+   "id": "2512.24553v1"
+  },
+  "2605.01388": {
+   "title": "Tracking doublon-holon dynamics in high-harmonic generation from Mott insulators",
+   "first_author": "Tao-Yuan Du",
+   "published": "2026-05-02",
+   "n_auth": 4,
+   "id": "2605.01388v1"
+  },
+  "2602.16454": {
+   "title": "Edge states and quantum optical high-harmonic generation from topological insulators",
+   "first_author": "Christian Saugbjerg Lange",
+   "published": "2026-02-18",
+   "n_auth": 2,
+   "id": "2602.16454v1"
+  }
+ },
+ "crossref": {
+  "1": {
+   "title": "Linking high harmonics from gases and solids",
+   "first": "Vampa",
+   "container": "Nature",
+   "vol": "522",
+   "page": "462-464",
+   "year": 2015,
+   "type": "journal-article"
+  },
+  "2": {
+   "title": "Measurement of the Berry curvature of solids using high-harmonic spectroscopy",
+   "first": "Luu",
+   "container": "Nature Communications",
+   "vol": "9",
+   "page": "",
+   "year": 2018,
+   "type": "journal-article"
+  },
+  "3": {
+   "title": "Theoretical Analysis of High-Harmonic Generation in Solids",
+   "first": "Vampa",
+   "container": "Physical Review Letters",
+   "vol": "113",
+   "page": "",
+   "year": 2014,
+   "type": "journal-article"
+  },
+  "4": {
+   "title": "High-harmonic spectroscopy of ultrafast many-body dynamics in strongly correlated systems",
+   "first": "Silva",
+   "container": "Nature Photonics",
+   "vol": "12",
+   "page": "266-270",
+   "year": 2018,
+   "type": "journal-article"
+  },
+  "5": {
+   "title": "High-harmonic generation driven by quantum light",
+   "first": "Gorlach",
+   "container": "Nature Physics",
+   "vol": "19",
+   "page": "1689-1696",
+   "year": 2023,
+   "type": "journal-article"
+  },
+  "6": {
+   "title": "Observation of interband Berry phase in laser-driven crystals",
+   "first": "Uzan-Narovlansky",
+   "container": "Nature",
+   "vol": "626",
+   "page": "66-71",
+   "year": 2024,
+   "type": "journal-article"
+  },
+  "7": {
+   "title": "High-harmonic generation by a bright squeezed vacuum",
+   "first": "Rasputnyi",
+   "container": "Nature Physics",
+   "vol": "20",
+   "page": "1960-1965",
+   "year": 2024,
+   "type": "journal-article"
+  },
+  "8": {
+   "title": "High harmonic spectroscopy reveals anisotropy of the charge-density-wave phase transition in TiSe2",
+   "first": "Tyulnev",
+   "container": "Communications Materials",
+   "vol": "6",
+   "page": "",
+   "year": 2025,
+   "type": "journal-article"
+  },
+  "9": {
+   "title": "Framework to Measure Quantum Metric from Step Response",
+   "first": "Verma",
+   "container": "Physical Review Letters",
+   "vol": "134",
+   "page": "",
+   "year": 2025,
+   "type": "journal-article"
+  },
+  "10": {
+   "title": "Room-temperature flexible manipulation of the quantum-metric structure in a topological chiral antiferromagnet",
+   "first": "Han",
+   "container": "Nature Physics",
+   "vol": "20",
+   "page": "1110-1117",
+   "year": 2024,
+   "type": "journal-article"
+  },
+  "14": {
+   "title": "Probing the quantum metric of 3D topological insulators",
+   "first": "Sala",
+   "container": "Nature Materials",
+   "vol": "",
+   "page": "",
+   "year": 2026,
+   "type": "journal-article"
+  },
+  "15": {
+   "__status__": 404
+  },
+  "25": {
+   "title": "Nonlinear Spectroscopy via Generalized Quantum Phase Estimation",
+   "first": "Loaiza",
+   "container": "Quantum",
+   "vol": "9",
+   "page": "1822",
+   "year": 2025,
+   "type": "journal-article"
+  },
+  "26": {
+   "title": "Nonlinear optical susceptibilities of semiconductors: Results with a length-gauge analysis",
+   "first": "Aversa",
+   "container": "Physical Review B",
+   "vol": "52",
+   "page": "14636-14645",
+   "year": 1995,
+   "type": "journal-article"
+  },
+  "27": {
+   "title": "Electrical, structural and magnetic properties of pure and doped 1T-TaS\n                    <sub>2</sub>",
+   "first": "Fazekas",
+   "container": "Philosophical Magazine B",
+   "vol": "39",
+   "page": "229-244",
+   "year": 1979,
+   "type": "journal-article"
+  },
+  "28": {
+   "title": "Physics-informed neural networks: A deep learning framework for solving forward and inverse problems involving nonlinear partial differential equations",
+   "first": "Raissi",
+   "container": "Journal of Computational Physics",
+   "vol": "378",
+   "page": "686-707",
+   "year": 2019,
+   "type": "journal-article"
+  },
+  "29": {
+   "title": "The FAIR Guiding Principles for scientific data management and stewardship",
+   "first": "Wilkinson",
+   "container": "Scientific Data",
+   "vol": "3",
+   "page": "",
+   "year": 2016,
+   "type": "journal-article"
+  },
+  "30": {
+   "title": "Quantal phase factors accompanying adiabatic changes",
+   "first": "Berry",
+   "container": "Proceedings of the Royal Society of London. A. Mathematical and Physical Sciences",
+   "vol": "392",
+   "page": "45-57",
+   "year": 1984,
+   "type": "journal-article"
+  },
+  "31": {
+   "title": "Berry phase effects on electronic properties",
+   "first": "Xiao",
+   "container": "Reviews of Modern Physics",
+   "vol": "82",
+   "page": "1959-2007",
+   "year": 2010,
+   "type": "journal-article"
+  },
+  "32": {
+   "title": "Plasma perspective on strong field multiphoton ionization",
+   "first": "Corkum",
+   "container": "Physical Review Letters",
+   "vol": "71",
+   "page": "1994-1997",
+   "year": 1993,
+   "type": "journal-article"
+  },
+  "33": {
+   "title": "Theory of high-harmonic generation by low-frequency laser fields",
+   "first": "Lewenstein",
+   "container": "Physical Review A",
+   "vol": "49",
+   "page": "2117-2132",
+   "year": 1994,
+   "type": "journal-article"
+  },
+  "34": {
+   "title": "Observation of high-order harmonic generation in a bulk crystal",
+   "first": "Ghimire",
+   "container": "Nature Physics",
+   "vol": "7",
+   "page": "138-141",
+   "year": 2010,
+   "type": "journal-article"
+  },
+  "35": {
+   "title": "Density-Functional Theory for Time-Dependent Systems",
+   "first": "Runge",
+   "container": "Physical Review Letters",
+   "vol": "52",
+   "page": "997-1000",
+   "year": 1984,
+   "type": "journal-article"
+  },
+  "36": {
+   "title": "Electronic excitations: density-functional versus many-body Green’s-function approaches",
+   "first": "Onida",
+   "container": "Reviews of Modern Physics",
+   "vol": "74",
+   "page": "601-659",
+   "year": 2002,
+   "type": "journal-article"
+  },
+  "37": {
+   "title": "Continuous-variable optical quantum-state tomography",
+   "first": "Lvovsky",
+   "container": "Reviews of Modern Physics",
+   "vol": "81",
+   "page": "299-332",
+   "year": 2009,
+   "type": "journal-article"
+  },
+  "38": {
+   "title": "Measurement of the quantum states of squeezed light",
+   "first": "Breitenbach",
+   "container": "Nature",
+   "vol": "387",
+   "page": "471-475",
+   "year": 1997,
+   "type": "journal-article"
+  },
+  "39": {
+   "title": "Quantized Hall Conductance in a Two-Dimensional Periodic Potential",
+   "first": "Thouless",
+   "container": "Physical Review Letters",
+   "vol": "49",
+   "page": "405-408",
+   "year": 1982,
+   "type": "journal-article"
+  },
+  "40": {
+   "title": "Riemannian structure on manifolds of quantum states",
+   "first": "Provost",
+   "container": "Communications in Mathematical Physics",
+   "vol": "76",
+   "page": "289-301",
+   "year": 1980,
+   "type": "journal-article"
+  },
+  "41": {
+   "title": "Physics-informed machine learning",
+   "first": "Karniadakis",
+   "container": "Nature Reviews Physics",
+   "vol": "3",
+   "page": "422-440",
+   "year": 2021,
+   "type": "journal-article"
+  },
+  "42": {
+   "__status__": 404
+  },
+  "43": {
+   "title": "Experimental Realization of a Three-Dimensional Topological Insulator, Bi\n                    <sub>2</sub>\n                    Te\n                    <sub>3</sub>",
+   "first": "Chen",
+   "container": "Science",
+   "vol": "325",
+   "page": "178-181",
+   "year": 2009,
+   "type": "journal-article"
+  },
+  "46": {
+   "title": "Control of intervalley scattering in Bi2Te3 via temperature-dependent band renormalization",
+   "first": "Jabed",
+   "container": "npj Quantum Materials",
+   "vol": "11",
+   "page": "",
+   "year": 2026,
+   "type": "journal-article"
+  },
+  "47": {
+   "__status__": 404
+  },
+  "50": {
+   "title": "Quantum Nonlinear Hall Effect Induced by Berry Curvature Dipole in Time-Reversal Invariant Materials",
+   "first": "Sodemann",
+   "container": "Physical Review Letters",
+   "vol": "115",
+   "page": "",
+   "year": 2015,
+   "type": "journal-article"
+  },
+  "53": {
+   "title": "Quantum control of Hubbard excitons",
+   "first": "Baykusheva",
+   "container": "Nature Materials",
+   "vol": "25",
+   "page": "937-943",
+   "year": 2026,
+   "type": "journal-article"
+  },
+  "54": {
+   "__status__": 404
+  }
+ },
+ "title_search": {
+  "11": [
+   {
+    "title": "New Phase-Field Models for Phase Transitions in Elastic Solids Driven by Configurational Forces",
+    "first": "Zhu",
+    "container": "Journal of Mechatronics",
+    "vol": "2",
+    "page": "320-328",
+    "year": 2014,
+    "doi": "10.1166/jom.2014.1075",
+    "sim": 0.32
+   },
+   {
+    "title": "Accelerating Multiscale Simulations using Uncertainty-Driven Phase-Field Mixtures of Constitutive Models",
+    "first": "Storm",
+    "container": "Data-driven mechanics and physics of solids",
+    "vol": "",
+    "page": "",
+    "year": 2025,
+    "doi": "10.23967/data-driven.2025.008",
+    "sim": 0.31
+   }
+  ],
+  "12": [
+   {
+    "title": "Ultrafast Dynamics of Defect-Assisted Electron–Hole Recombination in Monolayer MoS\n                    <sub>2</sub>",
+    "first": "Wang",
+    "container": "Nano Letters",
+    "vol": "15",
+    "page": "339-345",
+    "year": 2014,
+    "doi": "10.1021/nl503636c",
+    "sim": 0.54
+   },
+   {
+    "title": "Photoinduced Frohlich Interaction-Driven Distinct Electron- and Hole-Polaron Behaviors in Hybrid OrganicInorganic Perovskites by Ultrafast Terahertz Probes",
+    "first": "",
+    "container": "",
+    "vol": "",
+    "page": "",
+    "year": null,
+    "doi": "10.1021/acsnano.4c12035.s001",
+    "sim": 0.34
+   }
+  ],
+  "13": [
+   {
+    "title": "High harmonic generation reflecting the sub-cycle evolution of the Mott transition under a mid-infrared electric field",
+    "first": "Okamoto",
+    "container": "",
+    "vol": "",
+    "page": "",
+    "year": 2025,
+    "doi": "10.21203/rs.3.rs-7287112/v1",
+    "sim": 1.0
+   },
+   {
+    "title": "High-harmonic generation from crystalline silicon driven by sub-cycle mid-infrared pulses",
+    "first": "Shirai",
+    "container": "Conference on Lasers and Electro-Optics",
+    "vol": "",
+    "page": "FF2P.2",
+    "year": 2018,
+    "doi": "10.1364/cleo_qels.2018.ff2p.2",
+    "sim": 0.52
+   }
+  ],
+  "16": [
+   {
+    "title": "All-Optical Probe of Three-Dimensional Topological Insulators Based on High-Harmonic Generation by Circularly Polarized Laser Fields",
+    "first": "",
+    "container": "",
+    "vol": "",
+    "page": "",
+    "year": null,
+    "doi": "10.1021/acs.nanolett.1c02145.s001",
+    "sim": 0.42
+   },
+   {
+    "title": "Giant Third-Harmonic Optical Generation from Topological Insulator Heterostructures",
+    "first": "",
+    "container": "",
+    "vol": "",
+    "page": "",
+    "year": null,
+    "doi": "10.1021/acs.nanolett.1c03376.s001",
+    "sim": 0.63
+   }
+  ],
+  "17": [
+   {
+    "title": "Solid-State Harmonic Generation Governed by Crystal Symmetry",
+    "first": "Qian",
+    "container": "High-Order Harmonic Generation in Solids",
+    "vol": "",
+    "page": "243-265",
+    "year": 2024,
+    "doi": "10.1142/9789811279560_0010",
+    "sim": 0.46
+   },
+   {
+    "title": "Solid-state high-order harmonic generation: emerging frontiers in ultrafast and quantum light science",
+    "first": "Ciappina",
+    "container": "Advances in Physics",
+    "vol": "74",
+    "page": "1-9",
+    "year": 2025,
+    "doi": "10.1080/00018732.2025.2598130",
+    "sim": 0.4
+   }
+  ],
+  "18": [
+   {
+    "title": "Tunable Quantum Anomalous Layer Hall Effect in Light-Irradiated van der Waals Antiferromagnets",
+    "first": "",
+    "container": "",
+    "vol": "",
+    "page": "",
+    "year": null,
+    "doi": "10.1021/acs.nanolett.5c03136.s001",
+    "sim": 0.48
+   },
+   {
+    "title": "Topological quantum spin Hall semimetals with light",
+    "first": "Le Hur",
+    "container": "Physical Review B",
+    "vol": "112",
+    "page": "",
+    "year": 2025,
+    "doi": "10.1103/d72s-m3rk",
+    "sim": 0.48
+   }
+  ],
+  "19": [
+   {
+    "title": "Solid-state high-order harmonic generation: emerging frontiers in ultrafast and quantum light science",
+    "first": "Ciappina",
+    "container": "Advances in Physics",
+    "vol": "74",
+    "page": "1-9",
+    "year": 2025,
+    "doi": "10.1080/00018732.2025.2598130",
+    "sim": 1.0
+   },
+   {
+    "title": "Role of band structure on solid-state high-order harmonic generation",
+    "first": "Lin",
+    "container": "The 22nd International Conference on Ultrafast Phenomena 2020",
+    "vol": "",
+    "page": "Tu4A.25",
+    "year": 2020,
+    "doi": "10.1364/up.2020.tu4a.25",
+    "sim": 0.49
+   }
+  ],
+  "20": [
+   {
+    "title": "Excitonic Enhancement of Squeezed Light in Quantum-Optical High-Harmonic Generation from a Mott Insulator",
+    "first": "Lange",
+    "container": "Physical Review Letters",
+    "vol": "135",
+    "page": "",
+    "year": 2025,
+    "doi": "10.1103/wyk5-k8tk",
+    "sim": 1.0
+   },
+   {
+    "title": "Giant Third-Harmonic Optical Generation from Topological Insulator Heterostructures",
+    "first": "",
+    "container": "",
+    "vol": "",
+    "page": "",
+    "year": null,
+    "doi": "10.1021/acs.nanolett.1c03376.s001",
+    "sim": 0.48
+   }
+  ],
+  "21": [
+   {
+    "title": "Mechanisms for the Generation of Nonclassical Light",
+    "first": "Agarwal",
+    "container": "NATO ASI Series",
+    "vol": "",
+    "page": "235-252",
+    "year": 1989,
+    "doi": "10.1007/978-1-4757-6574-8_18",
+    "sim": 0.28
+   },
+   {
+    "title": "Squeezed-Light Generation in Optical Waveguides",
+    "first": "Kumar",
+    "container": "NATO ASI Series",
+    "vol": "",
+    "page": "175-183",
+    "year": 1989,
+    "doi": "10.1007/978-1-4757-6574-8_13",
+    "sim": 0.38
+   }
+  ],
+  "22": [
+   {
+    "title": "Generation of bright quantum high-order harmonic driven by combined coherent and bright squeezed vacuum light",
+    "first": "Luo",
+    "container": "",
+    "vol": "",
+    "page": "",
+    "year": 2026,
+    "doi": "10.21203/rs.3.rs-10205760/v1",
+    "sim": 0.38
+   },
+   {
+    "title": "Propagation effects in high harmonic generation media driven by bright squeezed vacuum light",
+    "first": "Rivera-Dean",
+    "container": "Nature Communications",
+    "vol": "17",
+    "page": "",
+    "year": 2026,
+    "doi": "10.1038/s41467-026-75173-8",
+    "sim": 0.68
+   }
+  ],
+  "23": [
+   {
+    "title": "From Berry Curvature to Quantum Metric: a New Era of Quantum Geometry Metrology for Bloch Electrons in Solids",
+    "first": "Yang",
+    "container": "Chinese Physics Letters",
+    "vol": "43",
+    "page": "020712",
+    "year": 2026,
+    "doi": "10.1088/0256-307x/43/2/020712",
+    "sim": 1.0
+   },
+   {
+    "title": "Quantum geometry in energy materials: From Berry curvature to quantum batteries",
+    "first": "Boretti",
+    "container": "Chemical Physics",
+    "vol": "609",
+    "page": "113255",
+    "year": 2026,
+    "doi": "10.1016/j.chemphys.2026.113255",
+    "sim": 0.4
+   }
+  ],
+  "24": [
+   {
+    "title": "Bound information metric Fisher",
+    "first": "Vit",
+    "container": "",
+    "vol": "",
+    "page": "",
+    "year": 2021,
+    "doi": "10.31219/osf.io/h927y",
+    "sim": 0.43
+   },
+   {
+    "title": "Stability Of Laser Beams In A Structured Environment",
+    "first": "Keskinen",
+    "container": "SPIE Proceedings",
+    "vol": "0874",
+    "page": "296",
+    "year": 1988,
+    "doi": "10.1117/12.943869",
+    "sim": 0.37
+   }
+  ],
+  "44": [
+   {
+    "title": "Revealing the anisotropic charge-density-wave order of\n                    <mml:math xmlns:mml=\"http://www.w3.org/1998/Math/MathML\">\n                      <mml:msub>\n                        <mml:mi>TiSe</mml:mi>\n                        <mml:mn>2</mml:mn>\n                      </mml:msub>\n                    </mml:math>\n                    through high harmonic generation",
+    "first": "Zhang",
+    "container": "Physical Review B",
+    "vol": "112",
+    "page": "",
+    "year": 2025,
+    "doi": "10.1103/812z-nl4m",
+    "sim": 0.39
+   },
+   {
+    "title": "",
+    "first": "",
+    "container": "",
+    "vol": "",
+    "page": "",
+    "year": 2026,
+    "doi": "10.46936/aps-193439/60016447",
+    "sim": 0.0
+   }
+  ],
+  "45": [
+   {
+    "title": "Spin Transport Revealed by Spin Quantum Geometry",
+    "first": "Xiang",
+    "container": "Physical Review Letters",
+    "vol": "135",
+    "page": "",
+    "year": 2025,
+    "doi": "10.1103/14mp-263q",
+    "sim": 0.96
+   },
+   {
+    "title": "Ultrafast Helicity-Controlled Spin Dynamics in Curved Time: A Photonic Pathway to Geometry-Driven Spin Transport",
+    "first": "Mohammadiaria",
+    "container": "Quantum Reports",
+    "vol": "8",
+    "page": "40",
+    "year": 2026,
+    "doi": "10.3390/quantum8020040",
+    "sim": 0.17
+   }
+  ],
+  "48": [
+   {
+    "title": "Semiconductor Wannier equations: A real-time, real-space approach to the nonlinear optical response in crystals",
+    "first": "Anonymous",
+    "container": "Physical Review Research",
+    "vol": "",
+    "page": "",
+    "year": 2026,
+    "doi": "10.1103/sxcl-yqs7",
+    "sim": 1.0
+   },
+   {
+    "title": "Real-Space Quantification of Exciton Localization in Acene Crystals Using Wannier Function Decomposition",
+    "first": "",
+    "container": "",
+    "vol": "",
+    "page": "",
+    "year": null,
+    "doi": "10.1021/acs.jctc.5c01686.s001",
+    "sim": 0.3
+   }
+  ],
+  "49": [
+   {
+    "title": "Band topology and the quantum spin Hall effect in bilayer graphene",
+    "first": "Prada",
+    "container": "Solid State Communications",
+    "vol": "151",
+    "page": "1075-1083",
+    "year": 2011,
+    "doi": "10.1016/j.ssc.2011.05.016",
+    "sim": 0.3
+   },
+   {
+    "title": "Quantum-optical signatures of solid-state high-harmonic generation driven by squeezed coherent states",
+    "first": "Li",
+    "container": "Physical Review A",
+    "vol": "112",
+    "page": "",
+    "year": 2025,
+    "doi": "10.1103/vmk1-qjpj",
+    "sim": 0.62
+   }
+  ],
+  "51": [
+   {
+    "title": "Geometric and topological phases",
+    "first": "",
+    "container": "Introduction to Topological Quantum Computation",
+    "vol": "",
+    "page": "13-37",
+    "year": 2012,
+    "doi": "10.1017/cbo9780511792908.002",
+    "sim": 0.57
+   },
+   {
+    "title": "Painlevé VI equation from invariant instantons",
+    "first": "Muñiz Manasliski",
+    "container": "Contemporary Mathematics",
+    "vol": "",
+    "page": "215-222",
+    "year": 2007,
+    "doi": "10.1090/conm/434/08350",
+    "sim": 0.37
+   }
+  ],
+  "52": [
+   {
+    "title": "Completeness of Bethe ansatz for 1D Hubbard model with AB-flux through combinatorial formulas and exact enumeration of eigenstates",
+    "first": "Nishino",
+    "container": "Nuclear Physics B",
+    "vol": "688",
+    "page": "266-290",
+    "year": 2004,
+    "doi": "10.1016/j.nuclphysb.2004.04.004",
+    "sim": 0.19
+   },
+   {
+    "title": "Quantum geometry and stability of the fractional quantum Hall effect in the Hofstadter model",
+    "first": "Bauer",
+    "container": "Physical Review B",
+    "vol": "93",
+    "page": "",
+    "year": 2016,
+    "doi": "10.1103/physrevb.93.235133",
+    "sim": 0.51
+   }
+  ],
+  "55": [
+   {
+    "title": "Floquet DMFT Analysis of High Harmonic Generation in Mott Insulators",
+    "first": "Murakami",
+    "container": "Proceedings of the International Conference on Strongly Correlated Electron Systems (SCES2019)",
+    "vol": "",
+    "page": "",
+    "year": 2020,
+    "doi": "10.7566/jpscp.30.011183",
+    "sim": 0.55
+   },
+   {
+    "title": "STRONGLY CORRELATED ELECTRON SYSTEMS &amp; HIGH-T<sub>c</sub> SUPERCONDUCTIVITY",
+    "first": "Zipper",
+    "container": "Strongly Correlated Electron Systems and High-Tc Superconductivity",
+    "vol": "",
+    "page": "1-300",
+    "year": 1991,
+    "doi": "10.1142/9789814538466",
+    "sim": 0.42
+   }
+  ]
+ }
+}

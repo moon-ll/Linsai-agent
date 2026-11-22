@@ -1,0 +1,30 @@
+{
+  "gaps": [
+    {
+      "claim": "以 SSH 类文献报道的 10¹–10¹⁴ 次谐波产额增强跨度，支撑 R_HOTI ≥ 10 这一“CD 角度谱峰值强度比”阈值。",
+      "missing_evidence": "现有产额比与 CD 角度谱峰值比并非同一观测量，不能直接作为阈值依据。需要补充与 R_HOTI 同维度的直接文献证据，例如 SSH 链模型中拓扑态与体相态的偏振分辨高次谐波角谱、CD 峰值强度比及其对照实验；也可引用体相 Berry 响应背景涨落的实验或计算文献，据此给出背景上界和自定标方法，证明 R_HOTI=10 明显高于非拓扑涨落。若无法获得直接文献，应明确说明 R_HOTI 是由本项目预实验和体相扣除流程确定的量，并给出推导或预实验依据。",
+      "search_keywords": [
+        "SSH model high harmonic generation circular dichroism angle-resolved spectra",
+        "topological edge states high-order harmonic generation polarization spectrum",
+        "SSH chain HHG peak intensity ratio",
+        "bulk Berry curvature contribution circular dichroism harmonic emission",
+        "topological harmonic signature bulk background calibration"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "以 S_edge ≥ 0.2 表征“对称破缺诱导边带相对强度”，并将其作为方向一的高阶拓扑探针指标。",
+      "missing_evidence": "需要补充边带识别、背景扣除和相对强度归一化的方法学文献，明确边带的频率或能量范围、提取窗口、参考强度、镜像对称操作如何抑制体相赝矢量背景，以及信号与噪声的判别方式。还需提供 SSH 拓扑边界态产生偏振选择或边带结构的直接实验或计算依据，以及能够支持 0.2 阈值高于体相背景和噪声底线的对照数据或误差分析。",
+      "search_keywords": [
+        "SSH edge state high harmonic generation sideband polarization",
+        "polarization-resolved HHG sideband extraction",
+        "circular dichroism sideband relative intensity harmonic spectroscopy",
+        "mirror symmetry bulk pseudovector background subtraction HHG",
+        "symmetry breaking induced sidebands high-order harmonic generation",
+        "topological edge-state harmonic emission sideband"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "content"
+}

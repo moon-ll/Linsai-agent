@@ -1,0 +1,58 @@
+{
+  "gaps": [
+    {
+      "claim": "电子结构墙判据：30% Berry/度规反演误差估算基于灵敏度系数 𝒮_Ω ≈ 0.5 与 5–15% 谐波红移",
+      "missing_evidence": "灵敏度系数 𝒮_Ω ≈ 0.5 既无原始文献出处，也未注明对应谐波阶次、驱动场强区间与材料体系；5–15% 谐波红移未注明阶次范围（违反数字四要素：metric / 误差 / 阈值 / 数据示例）",
+      "search_keywords": [
+        "Berry curvature high harmonic sensitivity coefficient",
+        "quantum metric HHG inversion sensitivity",
+        "nonlinear susceptibility Berry phase derivative",
+        "harmonic redshift percentage bandgap renormalization"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "U/W ≳ 0.5 作为强关联修正阈值用于'电子结构墙'判据",
+      "missing_evidence": "未注明所用 DFT 泛函（LDA/GGA/HSE/DFT+U/SCAN），缺少 Hubbard U 与带宽 W 比值 0.5 阈值的原始判据文献与典型材料示例",
+      "search_keywords": [
+        "Hubbard U bandwidth ratio threshold",
+        "DFT+U strongly correlated criterion",
+        "U over W boundary strongly correlated material",
+        "DFT functional electronic structure accuracy"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "光场统计墙：BSV 与相干态光 RIN 100–400 倍差距",
+      "missing_evidence": "100–400 倍 RIN 比值的具体实验测量数据来源不明确，可能缺少 NOPA/OPO 泵浦 BSV 源的最新噪声表征文献与直接对比测量",
+      "search_keywords": [
+        "bright squeezed vacuum RIN measurement",
+        "BSV relative intensity noise NOPA characterization",
+        "quantum light intensity noise comparison coherent state",
+        "squeezed light noise floor experimental"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "1.2 节 Q1/Q2 嵌入'已有进展所说'与'本项目要回答'两条证据线",
+      "missing_evidence": "[17][18] 处仍残留 reviewer-8 占位符'作者待联网核实'，references.md 已补全为 Stammer et al. / Chowdhury & Narayan 但 rationale.md 未同步，需补充/核对 BSV 驱动固体 HHG 与量子光非线性增强的最新实验文献",
+      "search_keywords": [
+        "Stammer quantum light high harmonic generation",
+        "Chowdhury Narayan squeezed light HHG solid",
+        "bright squeezed vacuum driven HHG solid state experiment"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "与 Faeyrman / Liu-Fu-Kais 已有反演工作的差异性论述",
+      "missing_evidence": "缺少将本项目方案与 Faeyrman（量子光 Berry 反演）与 Liu-Fu-Kais（量子度量 HHG 反演）方法进行系统差异比较的支撑文献，本项目'BSV × 固体能带 × Berry/度规'三维交叉点的相对优势需更锐利的文献对照",
+      "search_keywords": [
+        "Faeyrman quantum geometry inversion HHG",
+        "Liu Fu Kais quantum metric high harmonic",
+        "Berry curvature retrieval HHG comparison",
+        "quantum geometry tensor reconstruction attosecond"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "gaps": [
+    {
+      "claim": "Peterka[15] 机制链：共振路由与非共振路由的散射机理（§2.1）",
+      "missing_evidence": "原文区分了共振路由(e-e 散射退相)与近共振路由(双光子载流动量散射)两条独立路径，申请书将其合并为单一机制链导致失真；需逐路径对照原文章节重写",
+      "search_keywords": [
+        "Peterka MoS2 high harmonic generation dephasing",
+        "resonant near-resonant HHG two-photon carrier momentum scattering",
+        "MoS2 monolayer HHG e-e scattering mechanism",
+        "Peterka 2023 resonant HHG order dependence"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.1 中'非单调阶次依赖'表述（Peterka[15] 段）",
+      "missing_evidence": "该表述是否忠实于 Peterka 原文需逐图/表核查，原文若为单调依赖则属曲解；若原文确为非单调则需补图号与具体阶次范围引用",
+      "search_keywords": [
+        "Peterka MoS2 harmonic order dependence",
+        "non-monotonic harmonic spectrum MoS2",
+        "HHG plateau cutoff MoS2 Peterka"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "8 条零引用文献 [4][5][6][11][12][18][23][36] 需补引支撑论点或删条",
+      "missing_evidence": "参考文献表存在校准残留，三章均未引用上述 8 条文献；需逐条核对文献主题，定位至具体段落（如 §2.0 总述、§2.1 基线方向、§2.2 协同方向、§2.3 反演方向）补引或移除",
+      "search_keywords": [
+        "twisted MoS2 WSe2 moiré superlattice exciton",
+        "high harmonic generation transition metal dichalcogenide polarization selection rule",
+        "twist angle HHG cutoff energy mapping",
+        "orbital magnetization Berry curvature moiré band",
+        "attosecond probe inversion moiré HHG",
+        "TDDFT MoS2 WSe2 HHG simulation",
+        "tr-ARPES MoS2 WSe2 moiré band structure"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.6 探针能力门控 r、σ_Ω、Δt 三阈值声明（与立项依据 §3 第四问对照）",
+      "missing_evidence": "Δt ≤ 100 as 门控阈值需引用阿秒分辨能力/时间分辨精度的实测或理论基准文献，以支撑 Δt 判据的物理合理性与数值量级",
+      "search_keywords": [
+        "attosecond time resolution HHG probe",
+        "time resolution limit HHG measurement",
+        "attosecond chronoscopy solid state"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§2.0 总述段莫尔动力学对称性改写 HHG 偏振选择定则与截止能量",
+      "missing_evidence": "总述段 11 处跨章指针将关键支撑外推至立项依据章，章内论证密度低；需在总述段补引直接支撑'莫尔对称性→HHG 偏振选择定则'与'激子共振预激发→截止能量'两条核心主张的原始文献",
+      "search_keywords": [
+        "moiré symmetry breaking selection rule optical",
+        "exciton resonance enhanced HHG cutoff",
+        "pre-excitation HHG enhancement 2D material",
+        "twist angle polarization dependent HHG"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§2.3 反演方向 M_z(t) 轨道磁化定义式",
+      "missing_evidence": "(1/2π)∫Ω d²k 表达式涉及 Berry 曲率积分公式，需引用标准 Berry 曲率/轨道磁化推导文献（如 King-Smith 等 TDDFT 框架下的现代极化理论）以支撑公式物理来源与单位标注合理性",
+      "search_keywords": [
+        "King-Smith orbital magnetization Berry curvature formula",
+        "modern theory polarization orbital magnetization",
+        "Berry curvature integration BZ orbital magnetization"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

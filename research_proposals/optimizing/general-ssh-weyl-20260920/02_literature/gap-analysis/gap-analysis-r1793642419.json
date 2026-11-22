@@ -1,0 +1,27 @@
+{
+  "gaps": [
+    {
+      "claim": "rationale §2.4 总起句所称的『国内/国际联合工作』——该句下挂 Jessen[29] 与 You[20] 两具名工作",
+      "missing_evidence": "需要核实文献 [29][20] 的实际作者构成：是否包含中国机构/研究者的实质参与。若核实结果为纯国外团队工作，则『国内/国际联合』这一定性缺乏文献支撑，属名实不符的引用问题；需补充真实的国内联合工作文献（如国内团队在 Weyl/拓扑半金属 HHG 或固体 HHG 方向的实验/理论工作）替换或支撑该递进论断。",
+      "search_keywords": [
+        "Jessen Weyl semimetal high harmonic generation",
+        "You 2017 Nature Physics solid high harmonic generation MgO",
+        "中国 固体高次谐波 Weyl 半金属",
+        "topological semimetal HHG Chinese collaboration",
+        "固体高次谐波 国内 实验进展"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "content §2.2 G1 样本协议的统计有效性论证（N=100 样本下 δ_FP<5% 的统计功效问题）",
+      "missing_evidence": "评审指出每类百样本时误判率 1σ 涨落约 ±2.2%，统计功效不足以支撑 95% 判据。整改需归一 N≥200，若申请书保留统计功效相关表述，应有方法学文献支撑样本量/误判率估计的依据（如 Monte Carlo 分类阈值估计、有限样本误报率置信区间方法），否则统计判据属于无据断言。",
+      "search_keywords": [
+        "Monte Carlo sample size false positive rate confidence interval",
+        "finite-sample statistical power classification threshold",
+        "误判率 置信区间 样本量 估计"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "full_review"
+}

@@ -1,0 +1,118 @@
+{
+  "items": [
+    {
+      "source": "harness_metrics-self-check",
+      "action": "monitor 告警退出码与 hermes cron incident 语义解耦",
+      "detail": "workbench_monitor.py 发现告警时按设计 return 1（workbench_monitor.py:157），lc_workbench_monitor.sh 直接透传退出码 → hermes cron 把『设计内告警』记为『Script exited with code 1』incident（11-18/11-19 已发生 1 条，incident 流被设计内告警污染，真实故障会被淹没）。候选方案：① cron sh 吞退出码（简单但真崩溃也静默）② monitor 告警改 exit 0 + 结果落 state 文件供 incident 对账（推荐，与 workbench-monitor.json 已有落盘一致）③ hermes 侧 ack。注意：monitor 的 sh 在 hermes 侧（~/.hermes/profiles/linsai/cron/scripts/），仓内源头应在 scripts/lifecycle/cron_manifest.py 附近，改安装入口保持幂等。",
+      "raised_at": "2026-11-20T15:46:00Z",
+      "status": "done",
+      "closed_at": "2026-11-20T17:45:00Z",
+      "resolution": "v8.0.46：workbench_monitor.main 退出语义改为恒 0（告警≠失败，可见性走 stdout 日志 + workbench-monitor.json 状态文件），harness_metrics 新增 monitor_state 采集与告警推导（可见性不降级）；incident 流只留真实崩溃。验证：monitor-exit=0 实测、20 用例、--module 3635/3635。06:00 下次 cron 运行后应不再新增该类 incident。"
+    },
+    {
+      "source": "call_health",
+      "action": "排查 llm_router 降级链",
+      "detail": "失败率 2430.0% 超阈值 15%；TOP 失败 [{'step': 'llm_router:glm', 'error': 'API 空响应', 'count': 218}, {'step': 'llm_router:glm', 'error': '超时', 'count': 16}, {'step': 'hermes_agent:researcher', 'error': '超时', 'count': 15}]",
+      "raised_at": "2026-10-30T15:46:12Z",
+      "status": "done",
+      "closed_at": "2026-10-31T08:42:43Z",
+      "resolution": "v7.2.66 空 content 专用通道已部署；10-31 实证空响应 0/127（10-24 峰值 30.8%→归零）；本会话补修工单详情显示单位 bug（2430%→24.3%）"
+    },
+    {
+      "source": "bug_velocity",
+      "action": "复杂度预算复核",
+      "detail": "BUG 速率 2.57/天 超阈值 0.5；近 7 天 18 个",
+      "raised_at": "2026-10-31T08:40:34Z",
+      "status": "done",
+      "closed_at": "2026-10-31T08:42:43Z",
+      "resolution": "爆发归因：10-26~27 死锁链时代 29 提及 + 10-26~31 升级九连发与 healthcheck 修复轮；指标按编号去重口径无误；7 天静默窗后复测，若仍 >0.5/天再立工单"
+    },
+    {
+      "source": "anchor_compare",
+      "action": "修复 pairwise 返回 None",
+      "detail": "锚集已入库（3 范本）+ gateway 通、BUG-32 元组修复在盘，但 compare_proposal 仍返回 None——疑似 verdict JSON 解析被 glm reasoning 包裹或 ok 判定分支；定位 llm_complete 返回的 ok/text 实值后修复，并以 ssh-weyl 重生成决策包验证锚集小节出现",
+      "raised_at": "2026-10-31T17:24:52Z",
+      "status": "done",
+      "closed_at": "2026-10-31T17:39:38Z",
+      "resolution": "v7.2.75 现修：pending_review 课题显式逐阶段定位（find_proposal_dir 解析到 optimizing 残留路径致静默 None）；首次真实对比跑通 ssh-weyl rationale vs 面上范本=ours_stronger"
+    },
+    {
+      "source": "call_health",
+      "action": "排查 llm_router 降级链",
+      "detail": "失败率 19.9% 超阈值 15%；TOP 失败 [{'step': 'llm_router:glm', 'error': 'API 空响应', 'count': 101}, {'step': 'llm_router:minimax', 'error': 'think-only: 响应剥离 think 标签后为空（疑…', 'count': 53}, {'step': 'llm_router:minimax', 'error': 'HTTP 429 限流', 'count': 52}]",
+      "raised_at": "2026-11-01T08:40:41Z",
+      "status": "done",
+      "closed_at": "2026-11-01T08:41:51Z",
+      "resolution": "7 天回溯窗含 10-24~26 爆发期（10-30/31 空响应 0）；v7.2.76 加 7 天关闭抑制防重提"
+    },
+    {
+      "source": "bug_velocity",
+      "action": "复杂度预算复核",
+      "detail": "BUG 速率 2.43/天 超阈值 0.5；近 7 天 17 个",
+      "raised_at": "2026-11-01T08:40:41Z",
+      "status": "done",
+      "closed_at": "2026-11-01T08:41:51Z",
+      "resolution": "7 天回溯窗含 10-24~26 爆发期（10-30/31 空响应 0）；v7.2.76 加 7 天关闭抑制防重提"
+    },
+    {
+      "source": "calibration_gap",
+      "action": "引擎通道补校准采样",
+      "detail": "引擎亲审/批量退回（如 11-02 16:02 八课题 major_revision）不经 web review-verdict，record_criteria_calibration 未触发——在引擎裁决落地点（proposal_lifecycle 引擎通道/批量处理入口）补调用，reject_lean/退回记 reject 类样本",
+      "raised_at": "2026-11-04T08:42:27Z",
+      "status": "done",
+      "closed_at": "2026-11-06T08:41:07Z",
+      "resolution": "v7.3.54 submit_feedback 引擎入口补 record_criteria_calibration（verdict→user_decision 映射），fail-open；auto_acceptance 回归绿"
+    },
+    {
+      "source": "call_health",
+      "action": "排查 llm_router 降级链",
+      "detail": "失败率 38.6% 超阈值 15%；TOP 失败 [{'step': 'llm_router:minimax', 'error': 'HTTP 429 限流', 'count': 266}, {'step': 'llm_router:glm', 'error': 'HTTP 429 限流', 'count': 106}, {'step': 'llm_router:glm', 'error': '超时', 'count': 90}]",
+      "raised_at": "2026-11-08T08:40:32Z",
+      "status": "done",
+      "closed_at": "2026-11-09T08:40:51Z",
+      "resolution": "定性：双 provider 配额限流（minimax 429×156+glm 429×106），容量议题待人工扩容决策，非代码缺陷——重提抑制由本关闭触发"
+    },
+    {
+      "source": "bug_velocity",
+      "action": "复杂度预算复核",
+      "detail": "BUG 速率 0.71/天 超阈值 0.5；近 7 天 5 个",
+      "raised_at": "2026-11-08T08:40:32Z",
+      "status": "done",
+      "closed_at": "2026-11-09T08:40:51Z",
+      "resolution": "0.71/天较爆发周 2.57 大幅回落；按静默窗协议 11-15 周日复测，持续>0.5 再深挖"
+    },
+    {
+      "source": "call_health",
+      "action": "排查 llm_router 降级链",
+      "detail": "失败率 45.5% 超阈值 15%；TOP 失败 [{'step': 'llm_router:minimax', 'error': 'HTTP 429 限流', 'count': 247}, {'step': 'llm_router:glm', 'error': 'HTTP 429 限流', 'count': 82}, {'step': 'llm_router:glm-fallback', 'error': 'HTTP 429 限流', 'count': 82}]",
+      "raised_at": "2026-11-16T08:40:45Z",
+      "status": "done",
+      "closed_at": "2026-11-16T08:41:20Z",
+      "resolution": "持续定性：配额限流（双 provider 429），非缺陷；扩容决策在用户侧待决，系统熔断自保正常"
+    },
+    {
+      "source": "call_health",
+      "action": "排查调用失败链",
+      "detail": "失败率 44.2% 超阈值 15%；TOP [('llm_router:minimax｜API HTTP 429: {\"type\":\"error\",\"error', 242), ('llm_router:glm｜API HTTP 429: {\"error\":{\"code\":\"1310', 82), ('llm_router:glm-fallback｜API HTTP 429: {\"error\":{\"code\":\"1310', 82)]",
+      "raised_at": "2026-11-17T08:42:39Z",
+      "status": "done",
+      "closed_at": "2026-11-19T00:40:00Z",
+      "resolution": "持续定性：双 provider HTTP 429 配额限流（11-18 日报 failure_rate 44.5%，TOP 全为 429：minimax×242/glm×82/glm-fallback×82），非代码缺陷；与 11-08/11-16 两次同源关闭一致，扩容决策仍在用户侧"
+    },
+    {
+      "source": "hourly-round-0000",
+      "action": "main 历史推送解阻断方案裁决（需用户）",
+      "detail": "未推送范围（2026-06-17 起 881 commits）含 v7.0.2 裁决前入库的 1809 个 knowledge/raw/pdfs blob（4.2GB，251 个 >5MB），GitHub 端 main 更新被拒/挂起（远端 rejected (failed) / 大包处理挂死）；分块推进 400 commits 后卡 PDF 重区间。已建无损桥接：origin/snapshot-20261121（HEAD 树 196MB orphan 快照，恢复点已恢复）。候选方案：① filter-repo 对未推范围去 PDF 重写后推送（改 SHA，需确认审计影响）② 4.2GB PDF 迁 LFS（配额另计）③ 仅保留 snapshot 快照、main 历史放弃远程同步④ GitHub 仓库清空重建 + 首次以当前干净树推送。均需用户裁决，自动化不代做。\n【轮间保鲜协议】每次本地 commit 后运行 python3 scripts/snapshot_bridge.py 刷新 snapshot-latest（工具化 v8.0.44）。\n【恢复点实测 2026-11-21 03:05】浅克隆 snapshot-latest 成功：树 SHA 与本地 HEAD 完全一致（048cd020 位级无损），16 ready 包俱在（316MB）——方案③（仅快照）的恢复能力已验证。\n【重写范围增补 2026-11-21】v8.0.81 误扫入 165MB tmp blob（knowledge/tmpii4emtwa.tmp，文件已不存在）；filter-repo 时一并 --invert-paths 'knowledge/tmp*.tmp' 剔除。",
+      "raised_at": "2026-11-20T16:50:00Z",
+      "status": "pending"
+    },
+    {
+      "source": "user-feedback-2026-11-21",
+      "action": "机动队员使命：每轮选一件直接推进课题/项目的工作（长期待办队列）",
+      "detail": "用户反馈（2026-11-21）：整点/半点轮应作为机动队员参与项目与课题方方面面，凡能促进优化与进展的都主动推进，不得退化为看门狗节奏。每轮从以下菜单取一件（优先于巡检/观察）：①ready 包内容补强（KB 检索→逐页核实→带源补录 bib/背景/方案证据层，如 keldysh-schottky 模式）；②KB 挖掘范式内（强场/超快光学）问题候选 → topic_pipeline --register 供周一深研（收件箱当前空）；③启动包可执行性打磨（首月路线具体化：数据集/工具/实验节点）；④文献链新产出与 16 包的桥接检查（新 deep-read 是否影响既有判据）；⑤跨包 related/wikilink 关联加深（G2）。红线不变：activate/reject/archive 用户专属；改前 --check 过、改后 --check 必须复跑全过；新条目全部带 KB 溯源；commit 前大文件扫描。",
+      "raised_at": "2026-11-21T13:55:00Z",
+      "status": "pending"
+    }
+  ],
+  "updated_at": "2026-11-22T08:40:42Z"
+}

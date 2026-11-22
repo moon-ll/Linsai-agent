@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="auto">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>林赛研究工作台</title>
+<link rel="stylesheet" href="/web/css/style.css?v=6.9.58">
+</head>
+<body>
+
+<!-- 顶部栏 -->
+<header class="topbar">
+  <div class="topbar-left">
+    <button id="sidebar-toggle" class="icon-btn" title="切换侧边栏" data-tooltip="切换侧边栏" aria-label="切换侧边栏">☰</button>
+    <h1 class="logo">林赛研究工作台</h1>
+    <span class="version" id="version-label" aria-label="版本号">v</span>
+  </div>
+  <div class="topbar-center">
+    <span class="mode-badge" id="mode-badge" title="当前交互模式" aria-label="当前交互模式">并肩工作</span>
+    <span class="provider-badge" id="provider-badge" title="当前 LLM Provider" aria-label="当前 LLM 提供商">auto</span>
+    <span class="skill-badge" id="skill-badge" style="display:none;" title="当前激活的技能" aria-label="当前激活的技能"></span>
+  </div>
+  <div class="topbar-right">
+    <button id="view-history-btn" class="icon-btn" title="查看当前会话历史记录" data-tooltip="聊天记录搜索" aria-label="查看聊天记录搜索">📜</button>
+    <button id="theme-toggle" class="icon-btn" title="切换主题" data-tooltip="切换主题" aria-label="切换深色或浅色主题">🔆</button>
+    <button id="settings-toggle" class="icon-btn" title="设置" data-tooltip="设置" aria-label="打开设置面板">⚙️</button>
+  </div>
+</header>
+
+<!-- 主体布局 -->
+<div class="main-layout">
+
+  <!-- 左侧栏：会话 + 历史搜索 -->
+  <aside class="sidebar left" id="left-sidebar">
+    <div class="sidebar-header">
+      <input type="text" id="session-search" placeholder="🔍 搜索会话…" autocomplete="off" aria-label="搜索会话">
+    </div>
+    <div class="session-list" id="session-list">
+      <!-- 动态填充 -->
+    </div>
+    <div class="sidebar-footer">
+      <button id="new-session-btn" class="btn-primary">+ 新建会话</button>
+      <button id="archived-btn" class="btn-text">📜 搜索记录</button>
+    </div>
+    <!-- v6.8.0: 精简导航（仪表盘 / 控制台 / 全链路 / 知识库 / 设置） -->
+    <div class="toolbar nav-toolbar">
+      <button class="nav-btn" data-view="workbench" title="课题工作台（v8 主入口）" aria-label="课题工作台">
+        <span aria-hidden="true">🧪</span>
+      </button>
+    <button class="nav-btn nav-btn-active" data-view="dashboard" title="仪表盘" aria-label="仪表盘首页">
+        <span aria-hidden="true">🏠</span>
+      </button>
+      <button class="nav-btn" data-view="console" title="控制台" aria-label="控制台">
+        <span aria-hidden="true">🎛️</span>
+      </button>
+      <button class="nav-btn" data-view="lifecycle" title="全链路" aria-label="全链路">
+        <span aria-hidden="true">🔬</span>
+      </button>
+      <button class="nav-btn" data-view="kb" title="知识库" aria-label="知识库">
+        <span aria-hidden="true">📚</span>
+      </button>
+      <button class="nav-btn" data-view="settings" title="设置" aria-label="设置">
+        <span aria-hidden="true">⚙️</span>
+      </button>
+      <!-- v6.9.58: 恢复 v6.8.0 移除的入口（工作台 48 端点/中枢 7 端点曾不可达） -->
+      <button class="nav-btn" id="toolbar-pipeline" title="申请书工作台" aria-label="申请书工作台">
+        <span aria-hidden="true">⚗️</span>
+      </button>
+      <button class="nav-btn" id="toolbar-hermes" title="Hermes 中枢" aria-label="Hermes 中枢">
+        <span aria-hidden="true">🤖</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- 历史搜索侧边栏（可折叠） -->
+  <aside class="sidebar history" id="history-sidebar" style="display:none;">
+    <div class="sidebar-header">
+      <h3>📚 聊天记录</h3>
+      <button id="close-history" class="icon-btn" aria-label="关闭历史" title="关闭历史">✕</button>
+    </div>
+    <div class="history-search-box">
+      <input type="text" id="history-search-input" placeholder="🔍 搜索所有历史消息…" autocomplete="off" aria-label="搜索历史消息">
+      <button id="history-search-btn">搜索</button>
+    </div>
+    <div class="history-results" id="history-results">
+      <p class="empty">输入关键词搜索历史记录</p>
+    </div>
+  </aside>
+
+  <!-- v6.0: 仪表盘页面（首页） -->
+  <!-- v8.0.0: 课题工作台（主入口） -->
+  <main class="kb-main" id="workbench-page" style="display:none;flex-direction:column;overflow-y:auto;padding:20px;">
+    <div id="workbench-body"></div>
+  </main>
+
+  <main class="kb-main" id="dashboard-page" style="display:flex;flex-direction:column;overflow-y:auto;padding:20px;">
+    <!-- dashboard.js 动态填充 -->
+  </main>
+
+  <!-- v6.7.7: 控制台页面 -->
+  <main class="kb-main" id="console-page" style="display:none;flex-direction:column;overflow:hidden;padding:20px;">
+    <!-- console.js 动态填充 -->
+  </main>
+
+  <!-- v6.7.7: 课题生命周期页面 -->
+  <main class="kb-main" id="lifecycle-page" style="display:none;flex-direction:column;overflow-y:auto;padding:20px;">
+    <div id="lifecycle-body" style="flex:0 0 auto;padding:12px 16px;border-bottom:1px solid var(--border-color);"></div>
+    <div id="lifecycle-list" style="flex:1;overflow-y:auto;padding:12px 16px;"></div>
+  </main>
+
+  <!-- v6.8.0: 对话式审核页面（左侧申请书 / 右侧讨论 / 底部审核操作） -->
+  <main class="kb-main" id="review-page" style="display:none;flex-direction:column;overflow:hidden;">
+    <div class="review-page-header" id="review-page-header">
+      <div class="review-page-title">🔍 对话式审核</div>
+      <div class="review-page-actions">
+        <button class="btn-text fs-072" id="review-page-back-btn" title="返回生命周期">← 返回</button>
+      </div>
+    </div>
+    <div class="review-page-body">
+      <div class="review-content-panel" id="review-content-panel">
+        <div class="review-content-tabs" id="review-content-tabs"></div>
+        <div class="review-content-body" id="review-content-body">
+          <div class="ta-center pad-40 text-tertiary">加载申请书内容...</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-action-bar" id="review-action-bar">
+      <div class="review-action-left">
+        <span class="text-secondary fs-082">审核结论：</span>
+      </div>
+      <div class="review-action-right">
+        <button class="btn btn-success" id="review-approve-btn" onclick="lcReviewVerdict(_reviewCurrentProposalId, 'approve')">✓ 通过</button>
+        <button class="btn btn-warning" id="review-reject-btn" onclick="lcReviewVerdict(_reviewCurrentProposalId, 'reject')">↩ 退回修改</button>
+        <button class="btn btn-secondary" id="review-pause-btn" onclick="lcReviewVerdict(_reviewCurrentProposalId, 'pause')">⏸ 暂停</button>
+        <button class="btn btn-info" id="review-finalize-btn" onclick="lcReviewFinalize(_reviewCurrentProposalId)">📝 整理意见</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- 中间：知识库主区（导航切换显示） -->
+  <main class="kb-main" id="kb-page" style="display:none;">
+    <!-- 左半：文件树 -->
+    <div class="kb-tree-panel">
+      <div class="kb-tree-header">
+        <input type="text" id="kb-tree-search" placeholder="🔍 搜索知识库…" autocomplete="off" style="width:100%;padding:5px 10px;border-radius:6px;border:1px solid var(--border-color);background:var(--surface);color:var(--text-primary);font-size:0.82rem;box-sizing:border-box;">
+        <!-- 分区快捷选择器 -->
+        <div class="kb-partition-bar">
+          <select id="kb-partition-select" class="kb-partition-select" title="知识库分区" aria-label="选择知识库分区">
+            <option value="all">🗂️ 全部知识库</option>
+            <option value="source:raw">📚 源模块（raw）</option>
+            <option value="source:wiki">📝 智能整理（wiki）</option>
+            <option value="source:qa">💬 问答归档（qa）</option>
+            <option value="project:NSFC-强场超快">🔬 课题知识库</option>
+            <option value="project:deepxiv-论文库">📄 论文库</option>
+            <option value="type:concepts">📐 概念库</option>
+            <option value="type:methods">🛠️ 方法库</option>
+            <option value="type:people">👤 学者库</option>
+          </select>
+        </div>
+        <div class="kb-toolbar" id="kb-toolbar">
+          <button class="kb-toolbar-btn" id="kb-sync-btn" title="一键同步 hermes 产出 + 重建索引和图谱" aria-label="同步知识库">🔄 同步</button>
+          <button class="kb-toolbar-btn" id="kb-health-btn" title="知识库健康检查" aria-label="知识库健康检查">📊 健康</button>
+          <button class="kb-toolbar-btn" id="kb-category-btn" title="分类管理" aria-label="分类管理">🏷️ 分类</button>
+          <button class="kb-toolbar-btn" id="kb-pdf-btn" title="PDF 原文管理" aria-label="PDF原文管理">📄 PDF</button>
+          <span class="kb-sync-indicator" id="kb-sync-indicator" title="自动同步状态"></span>
+        </div>
+        <div class="kb-filter-bar" id="kb-filter-bar" style="display:none;">
+          <select id="kb-filter-type" class="kb-filter-select" title="按类型筛选"><option value="">全部类型</option></select>
+          <select id="kb-filter-stage" class="kb-filter-select" title="按阶段筛选"><option value="">全部阶段</option></select>
+          <select id="kb-filter-project" class="kb-filter-select" title="按子库筛选"><option value="">全部子库</option></select>
+          <select id="kb-filter-tag" class="kb-filter-select" title="按标签筛选"><option value="">全部标签</option></select>
+          <button class="kb-toolbar-btn" id="kb-filter-clear" title="清除筛选" aria-label="清除筛选">✕</button>
+        </div>
+      </div>
+      <div class="kb-tree-content" id="kb-tree-content">
+        <!-- 动态填充：折叠文件树 -->
+      </div>
+    </div>
+    <!-- 右半：内容预览 -->
+    <div class="kb-preview-panel" id="kb-preview-panel">
+      <div class="kb-preview-default" id="kb-preview-default">
+        <div style="text-align:center;padding:60px 20px;color:var(--text-tertiary);">
+          <div style="font-size:2.5rem;margin-bottom:12px;">📚</div>
+          <p>从左侧选择一篇笔记，或点击 🗺️ 知识地图开始浏览</p>
+          <p style="font-size:0.8rem;margin-top:8px;">[[]] 双链 · related 关联 · 🔍 搜索 · 全部可点击跳转</p>
+        </div>
+      </div>
+      <div class="kb-preview-detail" id="kb-preview-detail" style="display:none;">
+        <div id="kb-preview-title" class="kb-preview-title"></div>
+        <div id="kb-preview-body" class="kb-preview-body"></div>
+      </div>
+    </div>
+  </main>
+
+  <!-- v6.7.7: hermes 工作台页面（新风格） -->
+  <main class="kb-main" id="hermes-page" style="display:none;flex-direction:column;overflow-y:auto;padding:20px;">
+    <div id="hermes-workspace-content">
+      <!-- hermes_console.js 填充状态栏、cron 列表、手动派活 -->
+      <p style="color:var(--text-tertiary);text-align:center;padding:40px;">◐ 加载中…</p>
+    </div>
+  </main>
+
+  <!-- v6.0: 设置页面 -->
+  <main class="kb-main" id="settings-page" style="display:none;flex-direction:column;">
+    <div style="padding:16px 20px;overflow-y:auto;flex:1;" id="settings-page-content">
+      <!-- settings 内容从设置抽屉迁移 -->
+      <p style="color:var(--text-tertiary);text-align:center;padding:40px;">⚙️ 设置加载中…</p>
+    </div>
+  </main>
+
+  <!-- 右侧：聊天侧栏（可折叠） -->
+  <aside class="chat-sidebar" id="chat-sidebar">
+    <div class="chat-sidebar-toggle" id="chat-sidebar-toggle" title="收起/展开聊天">💬</div>
+    <div class="chat-sidebar-inner" id="chat-sidebar-inner">
+      <div class="chat-sidebar-header">
+        <span style="font-size:0.85rem;color:var(--text-secondary);">💬 讨论</span>
+        <button class="icon-btn" id="chat-collapse-btn" title="收起聊天" aria-label="收起聊天侧栏">▶</button>
+      </div>
+      <div class="welcome-screen" id="welcome-screen" style="display:none;">
+        <h2>👋 欢迎回来</h2>
+        <p>林赛不是你的搜索引擎，他是你的合作者。</p>
+        <!-- P2-4: 3步引导卡 -->
+        <div class="welcome-guide">
+          <div class="guide-card">
+            <div class="guide-icon">1️⃣</div>
+            <div class="guide-text">
+              <strong>新建会话</strong>
+              <p>点击左下角"+ 新建会话"，选择模式开始协作</p>
+            </div>
+          </div>
+          <div class="guide-card">
+            <div class="guide-icon">2️⃣</div>
+            <div class="guide-text">
+              <strong>浏览知识库</strong>
+              <p>中间区域是知识库，点击文件树浏览笔记，双链可跳转</p>
+            </div>
+          </div>
+          <div class="guide-card">
+            <div class="guide-icon">3️⃣</div>
+            <div class="guide-text">
+              <strong>发送消息</strong>
+              <p>在右侧聊天区输入消息，🗂️ 可注入知识库文件作为上下文</p>
+            </div>
+          </div>
+        </div>
+        <!-- P2-18: 术语词典 -->
+        <details class="welcome-glossary" style="margin-top:20px;max-width:360px;width:100%;text-align:left;">
+          <summary style="cursor:pointer;font-size:0.85rem;color:var(--accent-color);">📖 术语词典（点击展开）</summary>
+          <div style="font-size:0.8rem;line-height:1.8;color:var(--text-secondary);padding:8px 0;">
+            <p><strong>林赛</strong> — 你的 AI 协作助手，不是搜索引擎，而是合作者</p>
+            <p><strong>hermes</strong> — 后台自动化中枢，负责定时任务和知识库维护</p>
+            <p><strong>Agora</strong> — 多角色讨论模式，邀请历史科学家"参与"讨论</p>
+            <p><strong>知识库</strong> — 沉淀后的结构化笔记，支持双链和关联</p>
+            <p><strong>项目面板</strong> — 管理待决策的文献候选池</p>
+            <p><strong>技能</strong> — 林赛的预设能力模块，如文献分析、代码生成等</p>
+            <p><strong>模式</strong> — 协作方式：并肩工作/深度对话/快速验证/自主</p>
+          </div>
+        </details>
+      </div>
+      <div class="chat-archive-header" id="chat-archive-header" style="display:none;">
+        <div class="archive-info">
+          <span id="archive-topic"></span>
+          <span id="archive-meta" style="color:var(--text-tertiary);margin-left:8px;"></span>
+        </div>
+        <button class="btn-text" id="close-archive-view">✕ 关闭浏览</button>
+      </div>
+      <div class="history-hint" id="history-hint" style="display:none;">
+        <span>↑ 向上滚动查看历史消息</span>
+        <button class="btn-text" id="history-hint-close">✕</button>
+      </div>
+      <div class="messages" id="messages" role="log" aria-live="polite" aria-label="聊天消息"></div>
+      <div class="typing-indicator" id="typing-indicator" style="display:none;">
+        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+        <span class="typing-text">林赛正在思考…</span>
+      </div>
+      <!-- 输入区 -->
+      <div class="input-area">
+        <div class="command-bar">
+          <button class="cmd-btn" data-cmd="/mode" title="切换模式" aria-label="切换模式">/mode</button>
+          <button class="cmd-btn" data-cmd="/read" title="读取文档" aria-label="读取文档">/read</button>
+          <button class="cmd-btn" data-cmd="/agora" title="Agora群聊" aria-label="Agora群聊">/agora</button>
+          <button class="cmd-btn" data-cmd="/summary" title="会话摘要" aria-label="会话摘要">/summary</button>
+          <button class="cmd-btn" id="upload-btn" title="上传文件" data-tooltip="上传文件" aria-label="上传文件">📎</button>
+          <button class="cmd-btn" id="kb-context-btn" title="选择知识库文件注入讨论" data-tooltip="@知识库文件" aria-label="选择知识库文件注入讨论">🗂️</button>
+        </div>
+        <div class="upload-zone" id="upload-zone" style="display:none;">
+          <p>📎 拖拽文件到此处，或 <span class="upload-link">点击选择</span></p>
+          <input type="file" id="file-input" multiple style="display:none">
+        </div>
+        <div class="upload-progress" id="upload-progress" style="display:none;">
+          <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+          <span class="progress-text" id="progress-text">0%</span>
+        </div>
+        <!-- P2-3: @知识库注入透明化 chip 列表 -->
+        <div class="kb-context-chips" id="kb-context-chips" style="display:none;"></div>
+        <div class="input-row">
+          <textarea id="message-input" placeholder="输入消息… Shift+Enter 换行" rows="2" aria-label="输入消息"></textarea>
+          <button id="send-btn" class="btn-send" title="发送" data-tooltip="发送" aria-label="发送消息">🚀</button>
+        </div>
+        <div class="input-hints">
+          <span>Enter 发送 · Shift+Enter 换行 · 🗂️ 选择知识库文件注入讨论</span>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- 右侧栏：协同 -->
+  <!-- v6.0: 右侧栏已删除，任务移到 hermes 工作台 -->
+
+  <!-- P1-3: 移动端底部 tab 切换栏 -->
+  <nav class="mobile-tab-bar" id="mobile-tab-bar">
+    <button class="mobile-tab active" data-target="kb-page">📚 知识库</button>
+    <button class="mobile-tab" data-target="chat-sidebar">💬 聊天</button>
+  </nav>
+
+</div>
+
+<!-- 底部状态栏 -->
+<footer class="statusbar">
+  <span id="status-text">就绪</span>
+  <div class="status-actions">
+    <button id="backup-btn" title="立即备份" aria-label="立即备份数据">💾 备份</button>
+    <button id="export-btn" title="导出当前会话" aria-label="导出当前会话为 Markdown">📤 导出</button>
+  </div>
+</footer>
+
+<!-- 新建会话弹窗 -->
+<div class="modal-overlay" id="new-session-modal" style="display:none;">
+  <div class="modal">
+    <h3>新建会话</h3>
+    <label>
+      主题
+      <input type="text" id="new-session-topic" placeholder="例如：固体HHG实验方案设计" value="">
+    </label>
+    <label>
+      模式
+      <select id="new-session-mode">
+        <option value="co-working">并肩工作 — 一起推进具体任务</option>
+        <option value="deep-talk">深度对话 — 学术/人生困惑</option>
+        <option value="quick-check">快速验证 — 具体问题快速反馈</option>
+      </select>
+    </label>
+    <div class="modal-actions">
+      <button class="btn-text" id="cancel-new-session">取消</button>
+      <button class="btn-primary" id="confirm-new-session">创建</button>
+    </div>
+  </div>
+</div>
+
+<!-- Agora 人物选择弹窗 -->
+<div class="modal-overlay" id="agora-modal" style="display:none;">
+  <div class="modal">
+    <h3>📤 导出到 Agora 群聊</h3>
+    <p style="font-size:0.85rem;color:var(--text-secondary);margin-bottom:12px;">
+      选择你想邀请的历史人物参与讨论
+    </p>
+    <div class="persona-grid" id="persona-grid">
+      <!-- 动态填充 -->
+    </div>
+    <div class="modal-actions">
+      <button class="btn-text" id="cancel-agora">取消</button>
+      <button class="btn-primary" id="confirm-agora">导出</button>
+    </div>
+  </div>
+</div>
+
+<!-- 消息编辑弹窗 -->
+<div class="modal-overlay" id="edit-message-modal" style="display:none;">
+  <div class="modal">
+    <h3>✏️ 编辑消息</h3>
+    <textarea id="edit-message-content" rows="6" style="width:100%;margin-top:8px;"></textarea>
+    <div class="modal-actions">
+      <button class="btn-text" id="cancel-edit-message">取消</button>
+      <button class="btn-primary" id="confirm-edit-message">保存</button>
+    </div>
+  </div>
+</div>
+
+<!-- 设置面板 -->
+<div class="drawer-overlay" id="settings-drawer" style="display:none;">
+  <div class="drawer">
+    <h3>⚙️ 设置</h3>
+    <div class="setting-item">
+      <label>主题</label>
+      <select id="theme-select">
+        <option value="auto">自动（跟随系统）</option>
+        <option value="light">浅色</option>
+        <option value="dark">深色</option>
+      </select>
+    </div>
+    <div class="setting-item">
+      <label>林赛自主级别</label>
+      <select id="autonomy-select">
+        <option value="observe">观察 — 只记录，不主动打扰</option>
+        <option value="suggest" selected>建议 — 适时提醒（推荐）</option>
+        <option value="act">主动 — 积极推进任务</option>
+      </select>
+    </div>
+    <div class="setting-item">
+      <label>LLM Provider <small style="color:var(--text-tertiary)">（点击切换）</small></label>
+      <div id="llm-status" style="font-size:0.85rem;color:var(--text-secondary);margin-top:4px;">
+        ◐ 加载中…
+      </div>
+    </div>
+    <div class="setting-item">
+      <label>Token 用量 <small style="color:var(--text-tertiary)">（今日）</small></label>
+      <div id="usage-status" style="font-size:0.85rem;color:var(--text-secondary);margin-top:4px;">
+        ◐ 加载中…
+      </div>
+    </div>
+    <div class="setting-item">
+      <label>🌱 自主学习策略</label>
+      <div style="font-size:0.85rem;color:var(--text-secondary);margin-top:4px;">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+          <input type="checkbox" id="learning-auto-enabled" style="width:auto;">
+          <span>启用自动学习</span>
+        </div>
+        <div style="margin-bottom:6px;">
+          <span>策略:</span>
+          <select id="learning-strategy" style="margin-left:4px;padding:2px 6px;border-radius:4px;border:1px solid var(--border-color);background:var(--surface);color:var(--text-primary);font-size:0.8rem;">
+            <option value="conservative">保守（高阈值）</option>
+            <option value="balanced" selected>平衡（推荐）</option>
+            <option value="aggressive">激进（低阈值）</option>
+          </select>
+        </div>
+        <div style="margin-bottom:6px;">
+          <span>来源:</span>
+          <label style="margin-left:6px;font-size:0.75rem;"><input type="checkbox" id="learning-source-arxiv" checked style="width:auto;"> arXiv</label>
+          <label style="margin-left:6px;font-size:0.75rem;"><input type="checkbox" id="learning-source-web" checked style="width:auto;"> 联网检索</label>
+          <label style="margin-left:6px;font-size:0.75rem;"><input type="checkbox" id="learning-source-raw" checked style="width:auto;"> Raw</label>
+        </div>
+        <div style="margin-bottom:6px;">
+          <span>日配额:</span>
+          <input type="number" id="learning-daily-quota" value="1" min="0" max="10" style="width:40px;margin-left:4px;padding:2px 4px;border-radius:4px;border:1px solid var(--border-color);background:var(--surface);color:var(--text-primary);font-size:0.8rem;">
+          <span style="margin-left:8px;">成本上限 $</span>
+          <input type="number" id="learning-cost-limit" value="0.5" min="0" max="10" step="0.1" style="width:50px;margin-left:2px;padding:2px 4px;border-radius:4px;border:1px solid var(--border-color);background:var(--surface);color:var(--text-primary);font-size:0.8rem;">
+          <span style="margin-left:4px;font-size:0.75rem;color:var(--text-tertiary);">/天</span>
+        </div>
+        <button class="btn-text" id="save-learning-config" style="font-size:0.8rem;padding:4px 8px;">💾 保存学习配置</button>
+        <span id="learning-config-status" style="font-size:0.75rem;color:var(--text-tertiary);margin-left:8px;"></span>
+      </div>
+    </div>
+    <div class="setting-item">
+      <button class="btn-primary" id="drawer-backup-btn">💾 立即备份数据</button>
+    </div>
+    <div class="drawer-footer">
+      <button class="btn-text" id="close-settings">关闭</button>
+    </div>
+  </div>
+</div>
+
+<!-- 技能管理模态框 -->
+<div class="modal-overlay" id="skill-manager-overlay" style="display:none;">
+  <div class="modal-content" style="max-width:560px;max-height:85vh;display:flex;flex-direction:column;">
+    <div class="modal-header">
+      <h3>🎯 技能管理</h3>
+      <button class="btn-icon" id="skill-manager-close">✕</button>
+    </div>
+    <div style="padding:12px 16px;border-bottom:1px solid var(--border-color);">
+      <!-- 模式切换 -->
+      <div style="display:flex;gap:16px;margin-bottom:12px;align-items:center;">
+        <label style="font-size:0.85rem;color:var(--text-secondary);">模式:</label>
+        <label style="display:flex;align-items:center;gap:4px;font-size:0.85rem;cursor:pointer;">
+          <input type="radio" name="skill-mode" value="auto" id="skill-mode-auto" checked>
+          <span>自动（关键词匹配）</span>
+        </label>
+        <label style="display:flex;align-items:center;gap:4px;font-size:0.85rem;cursor:pointer;">
+          <input type="radio" name="skill-mode" value="manual" id="skill-mode-manual">
+          <span>手动（只激活选中的）</span>
+        </label>
+      </div>
+      <!-- 搜索框 -->
+      <input type="text" id="skill-search-input" placeholder="🔍 搜索技能名称或描述…" autocomplete="off"
+        style="width:100%;padding:8px 12px;border-radius:8px;border:1px solid var(--border-color);background:var(--surface);color:var(--text-primary);font-size:0.9rem;outline:none;">
+    </div>
+    <div id="skill-list-container" style="flex:1;overflow-y:auto;padding:12px 16px;">
+      <div id="skill-list-content">◐ 加载中…</div>
+    </div>
+    <div style="padding:12px 16px;border-top:1px solid var(--border-color);display:flex;justify-content:space-between;align-items:center;">
+      <span id="skill-active-count" style="font-size:0.8rem;color:var(--text-secondary);">已激活 0/0</span>
+      <div style="display:flex;gap:8px;">
+        <button class="btn-text" id="skill-reset-btn">重置</button>
+        <button class="btn-primary" id="skill-save-btn">💾 保存</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 主动提醒弹窗 -->
+<div class="toast-container" id="toast-container"></div>
+
+<!-- v2.7.0: hermes 控制台 -->
+<!-- 文献讨论大弹窗 -->
+<div class="modal-overlay" id="paper-discussion-overlay" style="display:none;">
+  <div class="modal-content" style="max-width:1100px;width:95vw;max-height:92vh;display:flex;flex-direction:column;">
+    <div class="modal-header">
+      <h3 id="pd-title">📄 文献讨论</h3>
+      <div style="display:flex;gap:8px;align-items:center;">
+        <button id="pd-archive-auto" class="btn-text" style="font-size:0.8rem;padding:4px 10px;border:1px solid var(--accent-color);border-radius:5px;color:var(--accent-color);cursor:pointer;">📚 一键归档</button>
+        <button id="pd-archive-step" class="btn-text" style="font-size:0.8rem;padding:4px 10px;border:1px solid var(--border-color);border-radius:5px;cursor:pointer;">📝 分步归档</button>
+        <button class="btn-icon" id="pd-close">✕</button>
+      </div>
+    </div>
+    <!-- 论文信息条 -->
+    <div id="pd-paper-info" style="padding:8px 16px;background:var(--bg-tertiary);border-bottom:1px solid var(--border-color);font-size:0.82rem;"></div>
+    <!-- 双栏：讨论区 + 检索面板 -->
+    <div style="flex:1;display:flex;overflow:hidden;">
+      <!-- 左：讨论区 -->
+      <div style="flex:1;display:flex;flex-direction:column;border-right:1px solid var(--border-color);">
+        <div id="pd-messages" style="flex:1;overflow-y:auto;padding:12px 16px;"></div>
+        <div style="padding:8px 12px;border-top:1px solid var(--border-color);display:flex;gap:8px;">
+          <input type="text" id="pd-input" placeholder="围绕这篇论文提问/讨论…" style="flex:1;padding:8px 10px;border:1px solid var(--border-color);border-radius:6px;background:var(--surface);color:var(--text-primary);font-size:0.85rem;">
+          <button id="pd-send" style="padding:8px 16px;background:var(--accent-color);color:#fff;border:none;border-radius:6px;cursor:pointer;">发送</button>
+        </div>
+      </div>
+      <!-- 右：检索面板 -->
+      <div style="width:300px;display:flex;flex-direction:column;background:var(--bg-sidebar);">
+        <div style="padding:8px 10px;border-bottom:1px solid var(--border-color);">
+          <input type="text" id="pd-search-input" placeholder="🔍 检索补充文献/信息…" style="width:100%;padding:5px 8px;border:1px solid var(--border-color);border-radius:5px;background:var(--surface);color:var(--text-primary);font-size:0.8rem;box-sizing:border-box;">
+          <div style="display:flex;gap:4px;margin-top:4px;">
+            <button id="pd-search-local" class="btn-text" style="flex:1;padding:3px;font-size:0.75rem;border:1px solid var(--border-color);border-radius:4px;cursor:pointer;">本地知识库</button>
+            <button id="pd-search-web" class="btn-text" style="flex:1;padding:3px;font-size:0.75rem;border:1px solid var(--border-color);border-radius:4px;cursor:pointer;">deepxiv检索</button>
+          </div>
+        </div>
+        <div id="pd-search-results" style="flex:1;overflow-y:auto;padding:8px;font-size:0.8rem;">
+          <p style="color:var(--text-tertiary);text-align:center;padding:20px 0;">检索结果将显示在这里</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="hermes-overlay" style="display:none;">
+  <div class="modal-content" style="max-width:680px;max-height:88vh;display:flex;flex-direction:column;">
+    <div class="modal-header">
+      <h3>⚡ hermes 控制台</h3>
+      <button class="btn-icon" id="hermes-close">✕</button>
+    </div>
+    <div style="padding:8px 16px;border-bottom:1px solid var(--border-color);display:flex;justify-content:space-between;align-items:center;">
+      <span id="hermes-status" style="font-size:0.8rem;color:var(--text-secondary);">检查中...</span>
+      <button id="hermes-refresh" style="padding:4px 10px;font-size:0.8rem;cursor:pointer;">🔄</button>
+    </div>
+    <div style="flex:1;overflow-y:auto;padding:12px 16px;">
+      <h4 style="font-size:0.85rem;color:var(--text-secondary);margin-bottom:8px;">定时任务（cron）</h4>
+      <div id="hermes-cron-list" style="margin-bottom:16px;">
+        <p style="color:var(--text-tertiary);font-size:0.85rem;">加载中...</p>
+      </div>
+      <h4 style="font-size:0.85rem;color:var(--text-secondary);margin-bottom:8px;">手动派活（hermes agent loop）</h4>
+      <div style="display:flex;gap:8px;margin-bottom:8px;">
+        <input type="text" id="hermes-prompt" placeholder="输入任务，如：深分析 arXiv 2403.15337" style="flex:1;padding:8px;border:1px solid var(--border-color);border-radius:6px;background:var(--bg-primary);color:var(--text-primary);font-size:0.85rem;">
+        <button id="hermes-run" style="padding:8px 16px;background:var(--accent-color);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.85rem;">执行</button>
+      </div>
+      <div id="hermes-output" style="background:var(--bg-secondary);border-radius:6px;padding:12px;min-height:80px;max-height:300px;overflow-y:auto;font-size:0.85rem;white-space:pre-wrap;display:none;"></div>
+    </div>
+  </div>
+</div>
+
+<script src="/web/js/core.js?v=8.0.3"></script>
+<script src="/web/js/session.js?v=6.9.58"></script>
+<script src="/web/js/slash_commands.js?v=6.9.58"></script>
+<script src="/web/js/chat.js?v=6.9.58"></script>
+<script src="/web/js/task.js?v=6.9.58"></script>
+<script src="/web/js/settings.js?v=6.9.58"></script>
+<script src="/web/js/skill.js?v=6.9.58"></script>
+<script src="/web/js/kb.js?v=6.9.58"></script>
+<script src="/web/js/app.js?v=8.0.0"></script>
+<script src="/web/js/workbench.js?v=8.0.0"></script>
+<script src="/web/js/hermes_console.js?v=6.9.58"></script>
+<script src="/web/js/paper_discussion.js?v=6.9.58"></script>
+<script src="/web/js/orchestrator.js?v=6.9.58"></script>
+<script src="/web/js/pipeline.js?v=6.9.58"></script>
+<script src="/web/js/lifecycle.js?v=6.9.58"></script>
+<script src="/web/js/console.js?v=6.9.58"></script>
+<script src="/web/js/settings_center.js?v=6.9.58"></script>
+<script src="/web/js/dashboard.js?v=8.0.3"></script>
+</body>
+</html>

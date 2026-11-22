@@ -1,0 +1,129 @@
+{
+  "proposal_id": "key-transient-quantum-phase-optical-20260726",
+  "cluster_id": "orphan-route-2026-10-30",
+  "clusters": [
+    "orphan-route-2026-10-30"
+  ],
+  "entries": [
+    {
+      "source_id": "paper:3-2304.14704-high-harmonic-interferometer-for-probing-sub-laser-cycle-ele",
+      "title": "High harmonic interferometer: For probing sub-laser-cycle electron dynamics in solids",
+      "summary": "本文提出一种基于固体高次谐波的干涉仪方案，利用谐波产生路径间的干涉来探测固体中亚激光周期（阿秒尺度）的电子动力学。该干涉方法为强激光场下固体中的量子相位测量与超快载流子动力学研究提供了相位分辨的新手段。",
+      "path": "",
+      "added_via": "cluster:orphan-route-2026-10-30",
+      "added_at": "2026-10-30T16:42:10Z"
+    },
+    {
+      "source_id": "paper:2025-2501.14238-all-optical-reconstruction-of-crystal-momentum-resolved-subc",
+      "title": "All-optical reconstruction of crystal momentum-resolved subcycle dynamics in solids",
+      "summary": "本文发展了一种全光学重建技术，从固体高次谐波产生信号中提取晶体动量分辨的亚周期电子动力学，实现了强场驱动下固体中电子波包运动的时间-动量域联合表征。该工作为强场超快光学中的量子相位检索提供了新范式，有望深化对固体能带内超快载流子动力学的理解。",
+      "path": "",
+      "added_via": "cluster:orphan-route-2026-10-30",
+      "added_at": "2026-10-30T16:42:10Z"
+    },
+    {
+      "source_id": "paper:2024-2412.16745-attosecond-metrology-in-a-continuous-high-harmonic-spectrum",
+      "title": "Attosecond metrology in a continuous high-harmonic spectrum",
+      "summary": "提出了一种在连续高次谐波谱中实现阿秒计量的新方法，突破了传统离散谐波阿秒条纹技术的限制；利用载波相位稳定光源，对固体中瞬态量子相位演化实现了亚周期时间分辨测量，为固态超快动力学研究提供了新的计量手段。",
+      "path": "",
+      "added_via": "cluster:orphan-route-2026-10-30",
+      "added_at": "2026-10-30T16:42:10Z"
+    },
+    {
+      "source_id": "paper:2026-2604.21121-double-circular-dichroism-high-harmonic-spectrosco",
+      "title": "Double circular dichroism high harmonic spectroscopy: An ultrafast probe for topological photocurrents",
+      "summary": "本文提出了一种“双圆二色性高次谐波光谱”（double circular dichroism HHS）新方法，通过分析双圆偏振驱动场下高次谐波的双重圆二色性信号，实现对拓扑材料中拓扑光电流的超快（阿秒尺度）非接触探测。该工作为拓扑光电子学应用中的光电流控制与超快光谱表征提供了新的强场光谱学工具。",
+      "path": "",
+      "added_via": "cluster:orphan-route-2026-10-30",
+      "added_at": "2026-10-30T16:42:10Z"
+    },
+    {
+      "source_id": "paper:2025-2510.16651-strong-field-driven-sub-cycle-band-structure-modulation-and",
+      "title": "Strong-field Driven Sub-cycle Band Structure Modulation and Dephasing Control",
+      "summary": "该工作利用强激光场在MgO中实现对能带结构的子周期尺度动态调制，并证明可通过场可观测（field observables）直接提取电子退相干时间。由此实现了对固体中载流子退相干过程的亚周期分辨率测量与主动控制。",
+      "path": "",
+      "added_via": "cluster:orphan-route-2026-10-30",
+      "added_at": "2026-10-30T16:42:10Z"
+    },
+    {
+      "source_id": "paper:2020-2012.10328-deep-learning-and-high-harmonic-generation",
+      "title": "Deep learning and high harmonic generation",
+      "summary": "将深度神经网络引入分子高次谐波（HHG）研究：正向网络直接从分子与激光参数映射到HHG偶极矩阵元和谐波光谱，以近第一性原理的精度、极低的单次计算代价替代逐参数求解SFA/TDSE。同时构建逆向网络，从HHG光谱直接回归分子参数（如取向、核间距等结构信息），把传统上病态、需强先验的分子层析逆问题转化为数据驱动的回归问题。整体展示了'物理引擎生成数据 + 学习型正逆映射'作为HHG光谱学加速器与反演器的可行性。",
+      "path": "knowledge/raw/papers/2020-2012.10328-deep-learning-and-high-harmonic-generation.md",
+      "added_via": "cluster:orphan-route-2026-10-30",
+      "added_at": "2026-10-30T19:01:51Z"
+    },
+    {
+      "source_id": "paper:2604.12838",
+      "title": "2D quantum-path interference in high-harmonic generation driven by highly-bichromatic fields",
+      "summary": "该文献在正交偏振的高强度双色场（两色分量强度可比）驱动的高次谐波产生（HHG）中，首次实验观测到一种新型二维量子路径干涉（2D-QPI），其特征编码于谐波强度随两色场相对相位的调制中：奇次谐波呈单峰调制，偶次谐波呈双峰结构。结合强场近似与鞍点方法的计算进一步解析了该体系中多重量子轨道的贡献。",
+      "path": "",
+      "added_via": "cluster:orphan-route-2026-10-30",
+      "added_at": "2026-10-30T19:01:51Z"
+    },
+    {
+      "source_id": "paper:2026-2509.19113-attosecond-light-skyrmion-pulses-via-high-harmonic",
+      "title": "Attosecond Light Skyrmion Pulses via High Harmonic Generation",
+      "summary": "该工作提出通过高次谐波产生（HHG）生成阿秒光学斯格明子（skyrmion）脉冲，驱动场为携带分数轨道角动量、由两个反向旋转圆偏振分量组成的线偏振矢量光束。模拟表明各次谐波近乎保持相同的斯格明子偏振织构，从而在阿秒时间尺度上实现拓扑光场的相干产生与调控。",
+      "path": "",
+      "added_via": "cluster:orphan-route-2026-10-30",
+      "added_at": "2026-10-30T19:01:51Z"
+    },
+    {
+      "source_id": "paper:2509.19113",
+      "title": "Attosecond Light Skyrmion Pulses via High Harmonic Generation",
+      "summary": "该工作通过结合单原子强场理论与宏观传播的先进模拟，首次证明利用具有分数轨道角动量的红外线偏振矢量光束驱动高次谐波产生，可在极紫外波段产生具有拓扑偏振结构的阿秒光斯基米子脉冲。在1.2 μm驱动场和实验可行的光谱滤波条件下，连续谐波的相干叠加可在宽光谱范围内保持几乎一致的斯基米子偏振分布。",
+      "path": "",
+      "added_via": "cluster:orphan-route-2026-10-30",
+      "added_at": "2026-10-30T19:01:51Z"
+    },
+    {
+      "source_id": "paper:2026-2603.29641-pulse-duration-sensitive-high-harmonics-in-chiral-topologica",
+      "title": "Pulse-duration-sensitive high harmonics in chiral topological Weyl semimetal RhSi",
+      "summary": "本文（基于简报卡，无全文摘要）报道手性拓扑Weyl半金属RhSi中的高次谐波产生（HHG）研究：TDDFT计算表明，RhSi凭借Weyl节点附近密集能带在强场下的多带耦合参与，将HHG截止能量扩展至43–59 eV，远超Si、MgO等常规半导体。谐波响应对驱动脉冲时长敏感，揭示多带相干动力学的非绝热特征，为用HHG光谱探测拓扑半金属能带与载流子动力学提供了第一性原理基准。",
+      "path": "knowledge/raw/papers/2026-2603.29641-pulse-duration-sensitive-high-harmonics-in-chiral-topologica.md",
+      "added_via": "cluster:orphan-route-2026-10-30",
+      "added_at": "2026-10-30T19:01:51Z"
+    },
+    {
+      "source_id": "paper:2025-2310.04692-extension-of-high-harmonic-generation-cutoff-in-solids-to-50",
+      "title": "Extension of high-harmonic generation cutoff in solids to 50 eV using MgO",
+      "summary": "在100微米厚MgO单晶中用780 nm、30 fs强场驱动激光将固体高次谐波截止能量拓展到50 eV（第31次谐波），刷新了固体HHG最高光子能量纪录。该结果表明宽带隙、高损伤阈值晶体中的深导带多带动力学可支撑远超带隙的电子-空穴复合动能，为固体HHG向更高光子能区（XUV）拓展提供了明确的材料与驱动参数组合参照。",
+      "path": "knowledge/raw/papers/2025-2310.04692-extension-of-high-harmonic-generation-cutoff-in-solids-to-50.md",
+      "added_via": "cluster:orphan-route-2026-10-30",
+      "added_at": "2026-10-30T22:41:43Z"
+    },
+    {
+      "source_id": "paper:2024-2402.15596-an-experimental-scheme-for-determining-the-berry-phase-in-tw",
+      "title": "An experimental scheme for determining the Berry phase in two-dimensional quantum materials with a few-cycle laser",
+      "summary": "本文提出一种利用少周期激光脉冲在二维量子材料中实验测定Berry相位的可行方案，借助超快强场探测手段将Berry相位信息编码到可测量的光学响应中。该方案为在时间分辨尺度上直接测量二维量子材料的几何/拓扑相位提供了明确的实验路径。",
+      "path": "knowledge/raw/papers/2024-2402.15596-an-experimental-scheme-for-determining-the-berry-phase-in-tw.md",
+      "added_via": "cluster:orphan-route-2026-10-30",
+      "added_at": "2026-10-30T22:41:43Z"
+    },
+    {
+      "source_id": "paper:2026-2608.09378-parameter-dimension-aware-reconstruction-of-hhg-spectra-via",
+      "title": "Parameter-Dimension-Aware Reconstruction of HHG Spectra via Bayesian Inference",
+      "summary": "该文将贝叶斯不确定性量化引入高次谐波(HHG)产生的逆问题，通过分析后验分布的相关性结构识别体系的有效参数维度。研究表明，当谐波数目超过偶极响应矩阵的秩时，仍可实现稳健的谐波谱重构，为欠定条件下的HHG波形反演提供了理论与方法支撑。",
+      "path": "",
+      "added_via": "cluster:orphan-route-2026-10-30",
+      "added_at": "2026-10-30T22:41:43Z"
+    },
+    {
+      "source_id": "paper:2025-2512.09585-table-top-all-attosecond-transient-absorption-spectroscopy",
+      "title": "Table-top all-attosecond transient absorption spectroscopy",
+      "summary": "本文在桌面化系统中演示了'全阿秒'瞬态吸收光谱技术，突破传统方案中阿秒XUV脉冲与近红外（NIR）脉冲组合的局限，使泵浦与探测均为阿秒XUV脉冲。这一方案消除了NIR强场对样品的干扰，在保持高光谱分辨率的同时实现了对电子动力学的纯阿秒时间尺度泵浦-探测测量。",
+      "path": "",
+      "added_via": "cluster:orphan-route-2026-10-30",
+      "added_at": "2026-10-30T22:41:43Z"
+    },
+    {
+      "source_id": "paper:2512.09585",
+      "title": "Table-top all-attosecond transient absorption spectroscopy",
+      "summary": "本文首次在桌面系统中演示了全阿秒瞬态吸收光谱（AATAS），突破传统ATAS中泵浦或探测依赖飞秒近红外脉冲、阿秒时间分辨率受限于近红外亚周期动力学的局限，实现泵浦与探测均为阿秒XUV脉冲的测量。该技术兼具极高时间分辨与优异光谱分辨，为研究原子、分子和固体中的超快电子动力学及其在物理、化学和生物学中的应用提供了新工具。",
+      "path": "",
+      "added_via": "cluster:orphan-route-2026-10-30",
+      "added_at": "2026-10-30T22:41:43Z"
+    }
+  ]
+}

@@ -1,0 +1,163 @@
+{
+  "gaps": [
+    {
+      "claim": "§1.1 段 1：压缩真空态、纠缠光子对等量子光场是 HHG 量子调控的代表性输入态（BSV-driven HHG 概念的物理起点）",
+      "missing_evidence": "缺少对'量子光场驱动 HHG'这一核心命题的代表性文献综述（实验+理论）；当前仅停留在概念罗列，未引用任何具体已发表工作区分 BSV/纠缠光子对在 HHG 中的实验进展、适用性边界与差异化优势",
+      "search_keywords": [
+        "squeezed vacuum high harmonic generation",
+        "entangled photon high harmonic generation",
+        "nonclassical light driven HHG",
+        "bright squeezed vacuum HHG",
+        "quantum light HHG review"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.2.1 与 §1.2.3 对'经典光 HHG 多体探测能力'的判断自相矛盾——前者倾向不足，后者暗示足够",
+      "missing_evidence": "缺少支撑任一立场的同类对比文献：经典光（相干态）驱动 HHG 中多体关联/多电子动力学是否可分辨的代表性实验/理论综述；缺少相干态 vs 量子光在多体探测能力上的基准对比文献",
+      "search_keywords": [
+        "coherent state HHG multi-electron correlation",
+        "classical light HHG many-body detection limit",
+        "quantum vs classical HHG multi-body benchmark",
+        "nonclassical light advantage HHG correlation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.2.2 段 5：'winding trail 模型'作为固体 HHG 物理图像的简化描述",
+      "missing_evidence": "缺少 winding trail 模型在固体 HHG 中的原始文献（Schubert/Vampa 等）及其后续修订/争议综述；当前简化可能丢失 Berry 相位、拓扑贡献等关键物理，需要原始与批判性文献双侧支撑",
+      "search_keywords": [
+        "winding trail model solid HHG",
+        "intraband HHG real space trajectory",
+        "solid state HHG semiclassical model",
+        "band structure trajectory high harmonic generation",
+        "Schubert Vampa solid HHG"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§1.3 问题 3：Q_F 自洽性检验条件（声称 Q_F → 0 为自洽判据，但物理上应为 Q_F → V_classical ≈ 1）— critical 物理错误",
+      "missing_evidence": "缺少 Q_F（保真度类指标）在经典光 vs 量子光驱动 HHG 中的理论基准与实验验证文献；缺少定义 Q_F 经典极限、量子优势边界，以及自洽性检验正确表述的同行评审工作",
+      "search_keywords": [
+        "quantum fidelity HHG classical limit",
+        "Q factor quantum nonclassical HHG",
+        "nonclassicality witness high harmonic",
+        "fidelity benchmark quantum light HHG",
+        "quantum-to-classical transition HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.3 → §1.4：QEF 双指标定义在创新点中提出，但 §1.3 4 个科学问题未显式对应 QEF 量化路径",
+      "missing_evidence": "缺少 QEF（Quantum Enhancement Factor 或类似）作为 HHG 量子性量化指标的原始定义文献与同行评审背书；缺少将 QEF 与具体科学问题（问题 1-4）建立量化对应关系的方法论文献",
+      "search_keywords": [
+        "quantum enhancement factor HHG",
+        "QEF metric high harmonic generation",
+        "quantum signature quantification HHG",
+        "HHG quantum witness metric",
+        "quantum advantage metric ultrafast"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.4 创新点 3：'QSHHG' 缩写首次出现无定义，且与 §2.5 双光路干涉方案的对应关系未引用任何文献",
+      "missing_evidence": "缺少 QSHHG（Quantum Spectroscopy via HHG 或类似）术语的原始定义文献或首倡者；缺少双光路干涉探测 HHG 量子特性的代表性方法论文献（无论是否同名）",
+      "search_keywords": [
+        "quantum spectroscopy HHG",
+        "QSHHG abbreviation definition",
+        "dual beam interferometry HHG quantum",
+        "two-path interference HHG quantum",
+        "interferometric HHG quantum tomography"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§1.4 创新点 1：'首次系统化'主张 BSV 驱动 HHG 量子调控研究，但未与既有局部/相关工作做差异化对比",
+      "missing_evidence": "缺少与本项目'系统化'声称直接对比的代表性竞争/前驱工作清单（2020-2026）；缺少近年 BSV 驱动 HHG / 量子光 HHG 的综述或边界判读文献，以验证'首次'主张的边界",
+      "search_keywords": [
+        "bright squeezed vacuum HHG review",
+        "BSV HHG review",
+        "quantum driven HHG systematic review",
+        "nonclassical HHG comprehensive review 2024",
+        "quantum light HHG comparison"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.4 创新点：'国内空白'主张无检索证据",
+      "missing_evidence": "缺少国内（中文）研究组在 BSV 驱动 HHG / 量子光 HHG 方向的工作调研与文献清单；缺少支撑'国内空白'判定的检索证据（baseline search log）— 含中科院、北大、清华、上交、兰大、华师、中科大等主要 HHG 组的近 5 年工作",
+      "search_keywords": [
+        "中国 BSV 高次谐波",
+        "量子光 高次谐波 国内",
+        "bright squeezed vacuum HHG China",
+        "国内 高次谐波 量子光场",
+        "中国 阿秒科学 量子光",
+        "中国 强场光学 量子调控"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "关键引文 Rasputnyi 2024 仅以 arXiv 编号引用，且'首例'主张边界不清",
+      "missing_evidence": "缺少 Rasputnyi 2024 工作的正式发表期刊版本（含 DOI、卷期、页码）；若尚未发表，需明确标注 pre-print 状态与'首例'主张的边界（限定条件、最新进展对比）",
+      "search_keywords": [
+        "Rasputnyi 2024 HHG",
+        "BSV HHG arXiv 2024",
+        "Rasputnyi Optica HHG",
+        "bright squeezed vacuum driven HHG 2024 published",
+        "Rasputnyi quantum light HHG journal"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "BSV 涨落与样品损伤/加热阈值（可行性维度）：量子光驱动 HHG 在样品负载与可控性上的物理边界",
+      "missing_evidence": "缺少 BSV 强涨落特性对样品损伤阈值、局部加热、多光子背景等影响的实验/理论文献；缺少与相干光驱动 HHG 的对比剂量-效应文献",
+      "search_keywords": [
+        "squeezed vacuum light matter damage threshold",
+        "BSV intensity fluctuation sample heating",
+        "nonclassical light ablation threshold",
+        "squeezed light multiphoton background",
+        "quantum light intensity fluctuation sample"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "CLEO 2024 会议作为关键证据被引用，但会议证据等级不足（可行性维度）",
+      "missing_evidence": "缺少将 CLEO 2024 会议证据升级为同行评审期刊文献的替代来源；缺少 CLEO 2024 摘要的可访问性确认（DOI/会议论文集）",
+      "search_keywords": [
+        "CLEO 2024 BSV HHG",
+        "CLEO 2024 quantum HHG",
+        "nonlinear optics quantum light 2024 peer-reviewed",
+        "squeezed light HHG Optica 2024",
+        "quantum squeezed light HHG journal paper"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§1.4'理论框架建立' vs §3.2 段 3'属增量开发'口径冲突未消解",
+      "missing_evidence": "缺少判定'理论框架' vs '增量开发'区分标准的文献综述；缺少国内外同行对本方向'框架性'工作的既有评价文献（commentary/perspective）",
+      "search_keywords": [
+        "theoretical framework HHG quantum",
+        "quantum HHG framework vs incremental",
+        "first-principles quantum HHG theory",
+        "HHG quantum theory framework review",
+        "perspective quantum HHG field"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "整体：参考文献独立章节为空（0 字），整份立项依据缺乏完整文献支撑",
+      "missing_evidence": "缺少 references.md 中具体引文清单，包括：本领域经典与最新文献（固体 HHG、量子光 HHG、BSV 应用、阿秒科学、固体强场物理、能谷电子学）、支撑 4 个核心科学问题与 3 个创新点的关键参考文献（建议 50-80 篇核心引用，覆盖 2018-2026 年）",
+      "search_keywords": [
+        "solid high harmonic generation review",
+        "quantum light HHG review 2024",
+        "bright squeezed vacuum applications review",
+        "attosecond science review 2025",
+        "strong-field quantum optics review",
+        "solid HHG review 2023",
+        "valley HHG strong field",
+        "nonperturbative HHG solid review"
+      ],
+      "priority": "high"
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "gaps": [
+    {
+      "claim": "文献[5]在 rationale L15/L33 + content L5/L57 + scheme L77/L353 共6处出现作者-体系归属混乱（Ghalgaoui原子体系 vs Gorlach固体Si互相窜位）",
+      "missing_evidence": "缺少对 Gorlach 2023 Nat. Phys. 19/1689-1696（固体Si-BSV体系）与 Ghalgaoui 等原子体系工作的明确区分引用；整篇多处将固体Si体系成果错误关联至原子体系",
+      "search_keywords": [
+        "Gorlach bright squeezed vacuum solid-state Nat. Phys. 2023",
+        "Ghalgaoui high harmonic generation atomic system",
+        "bright squeezed vacuum silicon high harmonic generation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "文献[3]（Liu-Fu-Kais）的DOI引用错误（标为PhysRevResearch.4.013041实为Caputa Krylov complexity无关论文），三章共7处继续以错误[3]为核心论据",
+      "missing_evidence": "缺少对 Liu-Fu-Kais 原始论文的正确DOI和文献信息；当前引用的 Caputa DOI 10.1103/PhysRevResearch.4.013041 被证实为不相关论文，需替换为正确文献",
+      "search_keywords": [
+        "Liu Fu Kais quantum dynamics",
+        "Liu Kais quantum measurement",
+        "Caputa Krylov complexity"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Bi₂Te₃光子能量0.83 eV高于体相带隙约0.15 eV的物理表述存在矛盾（实际差值应为0.68 eV而非0.15 eV），该数值在content L99和scheme L141两处重复出现",
+      "missing_evidence": "缺少Bi₂Te₃体相带隙和0.83 eV泵浦光子能量之间物理关系的正确文献支撑；当前0.15 eV数值与物理事实不符，需要实验或理论文献确认实际带隙值和共振条件",
+      "search_keywords": [
+        "Bi2Te3 bulk bandgap",
+        "Bi2Te3 topological insulator bandgap eV",
+        "Bi2Te3 near infrared optical absorption edge"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "整篇将原子体系高次谐波理论与固体Si体系BSV驱动HHG的工作混合引用，缺乏清晰的体系边界划分",
+      "missing_evidence": "缺少对原子气体HHG与固体BSV驱动HHG两种体系在理论框架、适用条件、实验方法上差异的系统性文献对比",
+      "search_keywords": [
+        "atomic gas HHG vs solid-state HHG theoretical framework",
+        "bright squeezed vacuum high harmonic generation solid vs gas phase",
+        "quantum light driven harmonic generation comparison atom solid"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

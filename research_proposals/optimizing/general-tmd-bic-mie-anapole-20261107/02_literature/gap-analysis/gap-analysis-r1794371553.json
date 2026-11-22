@@ -1,0 +1,46 @@
+{
+  "gaps": [
+    {
+      "claim": "正文明言课题理论框架\"自 Moharam 等人 [37] 的周期阵列耦合模理论发展而来\"，content.md §二.2 亦挂同一编号构建方法基础",
+      "missing_evidence": "条目 [37] Moharam \"Opt. Lett. 28, 2301 (2003)\" 经三轮检索不可溯源——Moharam & Gaylord 体系为 RCWA 光栅系列（JOSA A 12, 1068/1077 (1995)），无此卷期，属虚构级引文。需替换为时域耦合模理论通行出处：Fan, Suh & Joannopoulos, \"Temporal coupled-mode theory for the Fano resonance in optical resonators\", JOSA A 20, 569 (2003)",
+      "search_keywords": [
+        "temporal coupled-mode theory",
+        "Fano resonance optical resonators",
+        "Fan Suh Joannopoulos JOSA A 2003",
+        "coupled-mode theory periodic structures"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "rationale 中以 [12] 支撑\"2000 倍非线性增强 / 1% 损耗 / 30° 调谐\"类超常光学非线性观测论断",
+      "missing_evidence": "Tang 条目（arXiv:2503.20161）经核验真实但仍为预印本，无同行评审期刊版本。预印本作为关键量化论断的唯一出处削弱严谨性，需检索是否已有正式发表版本（期刊名/卷期/DOI）",
+      "search_keywords": [
+        "arXiv 2503.20161",
+        "giant nonlinear optical enhancement TMDC anapole",
+        "2000-fold nonlinear enhancement bound states continuum"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "rationale 中以 [17] 支撑超快时间尺度论断（Sortino 110 fs/45 fs 等），并被用于修正 T/π 量纲错误（T·f_R≈2.4 个周期）",
+      "missing_evidence": "Sortino 条目（arXiv:2510.03052）经核验真实但仍为预印本，无同行评审期刊版本。该条目承担 quantitative 论证功能（相干时间/周期数值直接入正文计算），需检索正式发表版本以替换",
+      "search_keywords": [
+        "arXiv 2510.03052",
+        "Sortino ultrafast exciton dynamics TMDC",
+        "coherence time 110 fs transition metal dichalcogenide"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "条目 [38] Gu & Zhou 作为综述类引用支撑研究背景",
+      "missing_evidence": "条目真实存在（Appl. Phys. Rev. 12(1), 010201, doi:10.1063/5.0242014 (2025)），但参考文献条目缺卷期页码，需补全完整书目信息以满足 references 标准\"作者、期刊、年份、卷期页码一致\"",
+      "search_keywords": [
+        "Gu Zhou Applied Physics Reviews 2025",
+        "doi 10.1063/5.0242014",
+        "nonlinear optics review Applied Physics Reviews 12 010201"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "rationale"
+}

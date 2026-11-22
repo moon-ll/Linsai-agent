@@ -1,0 +1,22 @@
+{
+  "proposal_id": "general-attosecond-streaking-20260822",
+  "cluster_id": "cl_20260815_feedc8",
+  "entries": [
+    {
+      "source_id": "paper:2026-2504.13121-fieldoscopy-at-the-quantum-limit",
+      "title": "Fieldoscopy at the Quantum Limit",
+      "summary": "本文提出一种新的“场测量”概念，可对皮赫兹尺度光子的时变电场瞬态进行测量，并将探测能力推进至单光子区间；实验观测到光场从经典到量子特性的清晰转变并与蒙特卡洛模型吻合，同时实现了前所未有的幺焦量级探测灵敏度。",
+      "path": "",
+      "added_via": "cluster:cl_20260815_feedc8",
+      "added_at": "2026-08-29T01:11:11Z"
+    },
+    {
+      "source_id": "paper:2504.13121",
+      "title": "Fieldoscopy at the Quantum Limit",
+      "summary": "本文提出一种全新的‘场谱学’概念，首次实现对拍赫兹尺度光子时变电场瞬态在单光子水平下的直接测量，并清晰观测到与蒙特卡洛模型相符的光的经典-量子过渡。该技术达到前所未有的幺焦耳（yoctojoule, 10^-24 J）级灵敏度和超过90 dB的动态范围，可用于测量常规时间平均光谱无法触及的脉冲内光相干性时间演化，为亚周期、阿秒精度下的量子信息、量子密码及量子光-物质相互作用研究开辟新途径。",
+      "path": "",
+      "added_via": "cluster:cl_20260815_feedc8",
+      "added_at": "2026-08-29T01:11:11Z"
+    }
+  ]
+}

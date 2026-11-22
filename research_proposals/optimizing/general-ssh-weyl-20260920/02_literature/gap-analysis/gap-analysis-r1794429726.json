@@ -1,0 +1,39 @@
+{
+  "gaps": [
+    {
+      "claim": "十二项量化指标均可第三方复算（L144/L328 宣称），其中 η_SF、σ_dec、ΔI_rev 三项被判无操作性协议（评审问题2）",
+      "missing_evidence": "缺少支撑指标可复算性的方法论与协议类文献：η_SF 需逐样本翻转点判定式的已有测量/数值先例；σ_dec 需标准差统计公式与样本数 N 取值的误差分析规范文献；ΔI_rev 需容差 ε 取值依据与插值方法的数值方法文献。仅补公式而无协议出处，无法支撑第三方复算这一宣称。",
+      "search_keywords": [
+        "hysteresis switching field flip point determination protocol",
+        "circular dichroism signal error bar standard deviation sample size",
+        "numerical tolerance and convergence test topological invariant",
+        "interpolation error threshold numerical benchmark method",
+        "measurement reproducibility protocol ultrafast spectroscopy"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "代理模型与 MCMC 采样可支撑本项目的参数空间扫描与不确定性量化（可行性论证的组成部分）",
+      "missing_evidence": "评审在可行性维度明确指出代理模型/MCMC 仅一句带过，缺少该方法组合在同类强场或拓扑电子动力学模拟中用于参数扫描/采样的有效性先例文献，使该可行性支点缺乏文献级支撑。",
+      "search_keywords": [
+        "surrogate-assisted parameter scan quantum dynamics",
+        "Gaussian process emulator strong-field simulation",
+        "MCMC uncertainty quantification ultrafast electron dynamics",
+        "machine learning surrogate model high harmonic generation parameter search"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "宇称（选择）规则可桥接到 ε* 差 ≥ 0.3 的量级估计，作为 T=0.3 预标定的依据（§2.2 L132，评审问题5）",
+      "missing_evidence": "现有引用 [13][17] 属方向三 Y 指纹依据，与 0.3 推导无涉且自注不作为阈值来源；缺少选择规则/椭圆率依赖响应定量化方面的文献，用以支撑从宇称规则到 ε* 差 ≥ 0.3 的量级估计这一桥接论证（rubric 指出该档差异需更充分论证）。",
+      "search_keywords": [
+        "parity selection rule circular dichroism ellipticity dependence",
+        "ellipticity threshold topological phase transition fingerprint quantitative",
+        "dipole transition selection rule magnitude estimate",
+        "circular dichroism angle spectrum ellipticity scaling topological insulator"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "scheme"
+}

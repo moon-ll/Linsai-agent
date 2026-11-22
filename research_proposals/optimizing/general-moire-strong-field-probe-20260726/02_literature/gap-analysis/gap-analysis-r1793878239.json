@@ -1,0 +1,17 @@
+{
+  "gaps": [
+    {
+      "claim": "§3.5 将“Ikeda 2025”作为强场电子动力学领域的近期先例，并据此说明本项目以耦合界面为被测对象、采用逐层误差传递方案的差异。",
+      "missing_evidence": "缺少该具名先例与正文论断之间的直接、可核验引用连接。应核实参考文献[13]确为所指“Ikeda 2025”，补齐或确认其作者、题名、期刊、年份及DOI等书目信息，并在§3.5 L291句末挂接[13]；若[13]并非该文献，则需补充正确来源，以支持对其研究对象、技术路线和本项目差异点的比较。",
+      "search_keywords": [
+        "\"Ikeda\" 2025 strong-field semiconductor",
+        "\"Ikeda\" 2025 moiré strong-field physics",
+        "\"Ikeda et al.\" 2025 coherent electron dynamics",
+        "\"Ikeda 2025\" semiconductor Bloch oscillator",
+        "\"Ikeda 2025\" high-harmonic generation"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "scheme"
+}

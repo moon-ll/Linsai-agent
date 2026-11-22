@@ -1,0 +1,58 @@
+{
+  "gaps": [
+    {
+      "claim": "Hasan 等（arXiv:2512.19965）首次实验测得 Xe Auger 1.32 fs 与 0.75 fs 上限，需要完整作者链与归属核实",
+      "missing_evidence": "缺少对 arXiv:2512.19965 全文的核验，确认 Hasan 为首作（同等贡献）以及 1.32 fs 和 0.75 fs 时间尺度的实验测量细节",
+      "search_keywords": [
+        "arXiv:2512.19965 Hasan Xe Auger attosecond streaking",
+        "attosecond soft X-ray Xe Auger time shift 1.32 fs",
+        "Hasan Wörner atto-SXR streaking 130 eV giant resonance"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Reply 官方算法名为 VPGTA，需核实 [29] 原文与原始方法学描述",
+      "missing_evidence": "缺少 VPGTA（VTGNA/VTQNA 均为虚构）算法原始论文与 Han 等 Comment 的正式引用核实",
+      "search_keywords": [
+        "VPGTA attosecond pulse reconstruction algorithm",
+        "Han Comment VTGNA Cousin 2017 krypton19.2 as reanalysis",
+        "Ultrafast Science 6:0145 VTGNA VPGTA Cousin reply"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "三层口径定义（EUV/水窗低段/水窗高段，30%↔40% 通道重叠阈值）的多通道误差依赖图谱尚无公开报道",
+      "missing_evidence": "缺乏跨能区多通道误差依赖的系统性定量表征文献，特别是双变量（能区×通道重叠度）图谱的已有工作",
+      "search_keywords": [
+        "multichannel ionization error benchmark water window extreme ultraviolet",
+        "attosecond streaking cross-energy-range error dependence",
+        "FROG-CRAB breakdown percentage interchannel coupling rare gas",
+        "Cousin 2017 PRX 041030 Peschel multichannel error mapping"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Hasan 实验 atto-SXR 中心 130 eV 处于巨共振区，与水窗能区表征的关联性需限定",
+      "missing_evidence": "缺少 130 eV 巨共振区与水窗低段/高段能区之间多通道贡献差异的对比文献，以支持或限定外推论断",
+      "search_keywords": [
+        "Xe giant resonance 130 eV attosecond streaking core-level",
+        "water window attosecond streaking multichannel contribution ratio",
+        "soft X-ray 130 eV attosecond pulse characterization interchannel",
+        "Hasan 2512.19965 130 eV core-level stripe multichannel"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "IR 场强 10⁹–10¹¹ V/m 量级口径需与历史规范 10⁹⁻¹⁰ 调和，并核对低场强下 Up（ponderomotive potential）的物理自洽性",
+      "missing_evidence": "缺少 attosecond streaking 实验中 IR 场强标准量级的最新综述与低场强边界（Up≪1 eV）的文献依据",
+      "search_keywords": [
+        "attosecond streaking IR field strength standard V/m typical value",
+        "ponderomotive potential Up attosecond streaking low field limit",
+        "Goulielmakis Itatani streaking IR field strength 10^9 10^10",
+        "streaking trace IR intensity calibration recent review"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

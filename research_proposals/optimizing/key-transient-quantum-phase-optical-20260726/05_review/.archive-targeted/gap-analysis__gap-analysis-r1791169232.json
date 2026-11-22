@@ -1,0 +1,58 @@
+{
+  "gaps": [
+    {
+      "claim": "引用 [19] 用以支持 Floquet 工程化高次谐波探测的相关论述（L39 MgO 体系、非绝热耦合、弧形特征）",
+      "missing_evidence": "条目 [19] 题名 \"Floquet-engineering unveiled by HHG\" 与 arXiv:2507.03791 官方题名不符；需按 \"High-harmonic spectroscopy of the nonadiabatic coupling via Floquet-Bloch states\" 重写条目，并核对该题名与正文 L39 论述的一致性",
+      "search_keywords": [
+        "arXiv 2507.03791",
+        "High-harmonic spectroscopy nonadiabatic coupling Floquet-Bloch",
+        "Floquet-Bloch states HHG MgO"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.2 L41 Jacobsen 等通过 THz-STM 探测 Floquet 态的具名论述",
+      "missing_evidence": "条目 [42]（Jacobsen THz-STM Floquet 态）已在参考文献列表中，但正文该具名论述后缺挂 [42]，需在句末补挂引用",
+      "search_keywords": [
+        "Jacobsen THz-STM Floquet states",
+        "terahertz scanning tunneling microscopy Floquet engineering",
+        "THz-STM Floquet Bloch states imaging"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.3 L55→§3 L109 低温压制相变判据 ΔC<0.01 量级（作为瞬态检测判据的可行性依据）",
+      "missing_evidence": "现有支撑仅 †[27] 预印本一维链模型外推（15–30 倍系外推非实测），缺已刊（非预印本）低温高次谐波实验佐证；需补充已在期刊发表的低温/相变温度以下 HHG 实测工作",
+      "search_keywords": [
+        "low-temperature high-harmonic generation solid",
+        "cryogenic HHG charge density wave suppression",
+        "HHG below phase transition temperature",
+        "high harmonic spectroscopy CDW TaS2 NbSe2",
+        "temperature-dependent HHG solid state"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.2 L37 K/K' 谷间布居差异形成时间为阿秒量级",
+      "missing_evidence": "现有支撑 [18] 摘要仅 \"sub-cycle phase-sensitivity\"，\"阿秒量级\" 超出口径；需核对 [18] 正式发表版正文是否实际支撑阿秒时间尺度声明，或将该表述降级为\"亚周期相位敏感\"",
+      "search_keywords": [
+        "Bi2Se3 HHG valley polarization sub-cycle",
+        "attosecond valley population dynamics HHG",
+        "K K' valley contrast high harmonic transition metal dichalcogenide",
+        "sub-cycle phase sensitivity HHG topological"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§2.3 L53 18.24→26.86 Å⁻² 跃迁偶极矩数值",
+      "missing_evidence": "正文标注引自 arXiv:2511.13114 v3 摘要，但条目 [24] 已改投 J. Phys. D 正式版，需以期刊正式发表版复核该数值是否一致，正文标注应改为\"按其正式发表版\"",
+      "search_keywords": [
+        "J. Phys. D HHG transition dipole moment solid state",
+        "arXiv 2511.13114 J Phys D published version",
+        "high harmonic generation transition dipole moment calculation Å^-2"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

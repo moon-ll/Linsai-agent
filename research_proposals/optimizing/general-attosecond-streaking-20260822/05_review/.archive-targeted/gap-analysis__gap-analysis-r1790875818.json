@@ -1,0 +1,58 @@
+{
+  "gaps": [
+    {
+      "claim": "氖（Ne）多通道贡献的能区归属与贡献档位存在跨章矛盾：rationale（XUV≤5%）vs content（XUV 8%-15%）vs scheme（水窗段 8%-15%），需外部文献坐实氖在 XUV 与水窗段的典型多通道贡献范围",
+      "missing_evidence": "缺少关于氖原子在 XUV（约 50-100 eV）与水窗段（280-530 eV）多通道电离贡献比例的实验/理论基准数据，以及 Helium/Neon/Argon 在不同能区的多通道贡献对比数据",
+      "search_keywords": [
+        "neon multichannel contribution attosecond streaking",
+        "rare gas multielectron ionization XUV water window",
+        "attosecond streaking multichannel correction neon argon",
+        "Helium Neon Argon multi-channel attosecond delay"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Hasan[39] 引用时间'2025年12月'为预印本时间，正文年份与 PRL 2026-04-20 刊出日期错位，需修正引用格式",
+      "missing_evidence": "缺少对 Hasan 等 PRL 136, 163201 (2026) 论文实际刊出日期与 Gao 等 2025 系列论文格式的对照核查",
+      "search_keywords": [
+        "Hasan attosecond streaking neon PRL 136 163201 2026",
+        "Gao attosecond pulse characterization 2025 citation format",
+        "isolated attosecond pulse PRL publication date"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Ar 150 eV 光子能量下光电子动能约 134 eV，已越 100 eV 触发线，需文献坐实氩气光电子动能阈值与极紫外段多通道修正区间划分",
+      "missing_evidence": "缺少 Ar（氩气）在 150 eV 附近光子能量对应光电子动能、极紫外触发线（~100 eV）阈值依据，以及二级修正区间的实验或理论定量划分",
+      "search_keywords": [
+        "argon attosecond streaking 100 eV photoelectron kinetic energy threshold",
+        "XUV trigger boundary multichannel correction",
+        "argon 150 eV photoelectron momentum streaking"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "最短脉冲之争（19.2 as/243 eV/390 eV/165 as）跨章双现，需文献支撑各孤立阿秒脉冲最短记录及其光子能量归属",
+      "missing_evidence": "缺少 Ardana-Lamas 19.2 as、Gao 165 as 等孤立阿秒脉冲最短记录的原始论文及其光子能量、对应驱动激光参数的对照数据",
+      "search_keywords": [
+        "shortest isolated attosecond pulse record 19.2 as 165 as",
+        "isolated attosecond pulse photon energy cutoff comparison",
+        "Ardana-Lamas attosecond streaking VPGTA 2025",
+        "Gao post-compression isolated attosecond pulse 165 as"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "氖、氩等多通道贡献升至 8%-15% 的定量区间缺少原始文献依据",
+      "missing_evidence": "缺少 Cousin 等关于氖/氩多通道贡献 8%-15% 区间的原始 attosecond streaking 多通道修正论文，以及 Schoun 等关于 attosecond streaking 多通道耦合的理论框架",
+      "search_keywords": [
+        "Cousin attosecond streaking multichannel neon correction",
+        "Schoun attosecond streaking multielectron effect",
+        "attosecond streaking channel coupling 8-15 percent",
+        "neon argon multichannel contribution percentage"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

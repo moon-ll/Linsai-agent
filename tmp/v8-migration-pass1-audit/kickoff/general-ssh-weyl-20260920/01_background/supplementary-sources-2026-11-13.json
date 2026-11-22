@@ -1,0 +1,17 @@
+{
+  "proposal_id": "general-ssh-weyl-20260920",
+  "cluster_id": "orphan-route-2026-11-13",
+  "clusters": [
+    "orphan-route-2026-11-13"
+  ],
+  "entries": [
+    {
+      "source_id": "paper:2024-2411.13954-light-induced-renormalization-of-the-band-structure-of-chira",
+      "title": "Light-induced renormalization of the band structure of chiral tellurium",
+      "summary": "本文用含自旋轨道耦合的第一性原理含时密度泛函理论（TDDFT，速度规范含时矢势）模拟手性碲在强激光场下的能带重整化，展示螺旋链晶格中自旋-轨道劈裂能带被光场驱动为准能带结构的完整演化。结果显示重整化的幅度与符号由场强、频率及偏振（尤其圆偏光的螺旋度）控制，光的手性与晶格手性耦合提供了不对称的带隙/自旋劈裂调控通道。这为在非中心对称手性晶体中实现超快、可逆的电子结构与潜在拓扑性质调控提供了第一性原理依据。",
+      "path": "knowledge/raw/papers/2024-2411.13954-light-induced-renormalization-of-the-band-structure-of-chira.md",
+      "added_via": "cluster:orphan-route-2026-11-13",
+      "added_at": "2026-11-13T16:47:06Z"
+    }
+  ]
+}

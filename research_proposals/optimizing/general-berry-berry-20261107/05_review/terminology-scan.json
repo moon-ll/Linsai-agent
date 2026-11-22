@@ -1,0 +1,244 @@
+{
+  "checked": true,
+  "at": "2026-11-10T22:11:06Z",
+  "proposal": "general-berry-berry-20261107",
+  "sections_scanned": [
+    "content",
+    "full_review",
+    "method_manual",
+    "rationale",
+    "scheme"
+  ],
+  "cjk_variant_pairs": [
+    {
+      "a": "几何量",
+      "b": "几何机制",
+      "freq_a": 40,
+      "freq_b": 33,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "交叉场",
+      "b": "交叉轴向",
+      "freq_a": 48,
+      "freq_b": 29,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "method_manual",
+        "scheme"
+      ]
+    },
+    {
+      "a": "交叉场强",
+      "b": "交叉轴",
+      "freq_a": 44,
+      "freq_b": 29,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "method_manual",
+        "scheme"
+      ]
+    },
+    {
+      "a": "交叉场强",
+      "b": "交叉轴向",
+      "freq_a": 44,
+      "freq_b": 29,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "method_manual",
+        "scheme"
+      ]
+    },
+    {
+      "a": "本单元",
+      "b": "方法单元",
+      "freq_a": 40,
+      "freq_b": 29,
+      "sections_a": [
+        "method_manual"
+      ],
+      "sections_b": [
+        "method_manual"
+      ]
+    },
+    {
+      "a": "光电流",
+      "b": "横向电流",
+      "freq_a": 34,
+      "freq_b": 28,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "横向光",
+      "b": "横向电流",
+      "freq_a": 31,
+      "freq_b": 28,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "横向电",
+      "b": "横向光电",
+      "freq_a": 44,
+      "freq_b": 24,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "横向电流",
+      "b": "横向光电",
+      "freq_a": 28,
+      "freq_b": 24,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "标度指数",
+      "b": "标度判",
+      "freq_a": 51,
+      "freq_b": 22,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "标度指",
+      "b": "标度判据",
+      "freq_a": 53,
+      "freq_b": 19,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "method_manual",
+        "scheme"
+      ]
+    },
+    {
+      "a": "标度指数",
+      "b": "标度判据",
+      "freq_a": 51,
+      "freq_b": 19,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "method_manual",
+        "scheme"
+      ]
+    }
+  ],
+  "token_variant_groups": [],
+  "summary": {
+    "cjk_pair_candidates": 495,
+    "token_variant_groups": 0,
+    "note": "候选报告不改文：处置归 writer/critic 契约；数值口径归 params_registry"
+  }
+}

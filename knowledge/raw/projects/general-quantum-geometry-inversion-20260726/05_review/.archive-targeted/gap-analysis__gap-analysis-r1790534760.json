@@ -1,0 +1,127 @@
+{
+  "gaps": [
+    {
+      "claim": "固体材料中HHG由Ghimire等2011年在ZnO晶体上的实验观测开辟出独立于气体HHG的研究范式（需补[N]编号与驱动参数）",
+      "missing_evidence": "缺少Ghimire 2011 ZnO晶体HHG首次观测实验的具名文献编号与中红外驱动参数（波长、场强、谐波阶数）的原文支撑",
+      "search_keywords": [
+        "Ghimire 2011 ZnO high harmonic generation mid-infrared",
+        "Ghimire Rev. Lett. 2011 solid HHG first observation",
+        "solid-state HHG ZnO 2011 PRL"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Sodemann-Fu 2015实为Berry曲率偶极NHE机制，并非Berry偶极与量子度规联系（归属错）",
+      "missing_evidence": "缺少明确区分Berry曲率偶极（BCD）NHE与量子度规偶极（quantum metric dipole）两个不同机制的理论综述或后续引用文献",
+      "search_keywords": [
+        "Berry curvature dipole nonlinear Hall effect Sodemann Fu",
+        "quantum metric dipole nonlinear optical response",
+        "Culcer Sinova quantum metric Berry dipole 2021",
+        "nonlinear Hall effect BCD vs metric dipole review"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "MnBi2Te4/BP与Mn3Sn/Pt等反常霍尔材料中量子度规/贝里曲率贡献的实测链（需补Culcer-Sinova 2021与Han2024 Nat. Phys. 20:1110引用）",
+      "missing_evidence": "缺少Culcer-Sinova 2021量子度规偶极理论文献，以及Han 2024 Mn3Sn/Pt Nat. Phys. 20:1110实测文献的[N]编号",
+      "search_keywords": [
+        "Culcer Sinova quantum metric nonlinear response 2021",
+        "Han Mn3Sn Pt quantum geometry nonlinear Hall Nat Phys 2024",
+        "MnBi2Te4 antiferromagnet topological magneto-optical Berry curvature"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Tyulnev 2024 TiSe2 CDW高次谐波实验中提出的量子几何提取方法（需补[N]编号与具名句式）",
+      "missing_evidence": "缺少Tyulnev et al. Nature 2024 TiSe2电荷密度波HHG论文的[N]编号引用与具体方法描述",
+      "search_keywords": [
+        "Tyulnev TiSe2 high harmonic generation Nature 2024",
+        "charge density wave HHG quantum geometry TiSe2",
+        "Tyulnev Nature 2024 CDW second harmonic extraction"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Vampa等固体HHG三步模型与半导体布洛赫方程框架（需补[N]编号并前移至§1.0末尾脉络段）",
+      "missing_evidence": "缺少Vampa 2015 PRL三步模型和半导体布洛赫方程HHG理论的[N]编号引用，§1.0末2014-2022十年机制主干需补2-3句脉络并挂[18][24]",
+      "search_keywords": [
+        "Vampa three-step model solid HHG 2015 PRL",
+        "semiconductor Bloch equation high harmonic generation Vampa",
+        "solid HHG review 2014-2022 mechanism development",
+        "Vampa band-gap rescattering solid HHG theory"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Ciappina综述固体HHG与量子几何（需补[N]编号与Adv. Phys.卷期）",
+      "missing_evidence": "缺少Ciappina et al.固体HHG综述论文（Adv. Phys. 2024/2025）的[N]编号、卷期与页码信息",
+      "search_keywords": [
+        "Ciappina Advances in Physics solid high harmonic generation review",
+        "Ciappina solid HHG Berry curvature review 2024",
+        "high harmonic generation condensed matter review Advances in Physics"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Rasputnyi 2024 BSV驱动固体HHG实验（Nat. Phys. 20:1960，2×10¹³光子对应2.49µJ的能量换算）",
+      "missing_evidence": "缺少Rasputnyi Lu Peixiang 2024亮压缩真空驱动固体HHG Nature Physics论文的[N]编号与BSV脉冲能量具体数值引用",
+      "search_keywords": [
+        "Rasputnyi bright squeezed vacuum HHG solid Nature Physics 2024",
+        "BSV driven high harmonic generation ZnO solid",
+        "Lu Peixiang squeezed vacuum HHG Nature Physics 201960"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Chekhova BSV综述中RIN高出100-400倍于相干态的论断（需补Chekhova BSV综述出处）",
+      "missing_evidence": "缺少Chekhova et al.亮压缩真空综述论文中相对强度噪声（RIN）高于相干态100-400倍的具名文献出处",
+      "search_keywords": [
+        "Chekhova bright squeezed vacuum review RIN",
+        "relative intensity noise squeezed vacuum vs coherent",
+        "BSV photon number fluctuation review Chekhova"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "2.5µJ BSV单脉冲能量换算的依据（需挂[8]编号）",
+      "missing_evidence": "2.5µJ BSV脉冲能量对应的光子数或功率换算缺少具名文献[8]编号引用",
+      "search_keywords": [
+        "bright squeezed vacuum pulse energy microjoule",
+        "BSV photon number per pulse 2e13 energy conversion",
+        "squeezed vacuum pulse energy Joule photon number"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Luu-Wörner 2018石英HHG贝里曲率测量实验（需补[N]编号）",
+      "missing_evidence": "缺少Luu Wörner 2018 Nature Communications石英高次谐波贝里曲率首次测量实验文献的[N]编号",
+      "search_keywords": [
+        "Luu Worner 2018 quartz Berry curvature high harmonic generation",
+        "Luu Worner Nat Commun 2018 solid HHG Berry curvature measurement",
+        "first experimental Berry curvature HHG quartz 2018"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "固体HHG理论到实验验证的十年脉络2014-2022（§1.0末需补2-3句并挂[18][24]）",
+      "missing_evidence": "缺少2014-2022年间固体HHG从半导体布洛赫方程到量子几何反演代表性进展的脉络文献支撑",
+      "search_keywords": [
+        "solid-state HHG development 2014-2022 review",
+        "high harmonic generation condensed matter decade progress",
+        "semiconductor Bloch equation to quantum geometry HHG"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "BSV量子增强因子（QEF）在固体HHG反演Berry曲率中的优势（需补[29]编号）",
+      "missing_evidence": "缺少BSV驱动HHG反演量子几何（Berry曲率/度规）相对经典光场量子增强因子的具名文献[29]出处",
+      "search_keywords": [
+        "quantum enhancement factor BSV high harmonic generation",
+        "squeezed vacuum HHG Fisher information Berry curvature inversion",
+        "BSV HHG posterior variance quantum advantage"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

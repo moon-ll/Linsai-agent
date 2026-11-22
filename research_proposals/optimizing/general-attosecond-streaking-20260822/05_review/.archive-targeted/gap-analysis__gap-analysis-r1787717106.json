@@ -1,0 +1,58 @@
+{
+  "gaps": [
+    {
+      "claim": "N K边电离阈值409.7 eV的上阈值表述缺乏文献锚点",
+      "missing_evidence": "rationale L97提及N K边电离阈值但未给出具体文献引用支撑该数值",
+      "search_keywords": [
+        "N K-edge ionization threshold 409.7 eV",
+        "nitrogen 1s ionization energy 409.7 eV",
+        "soft X-ray photoionization cross section nitrogen K-edge",
+        "N 1s binding energy 409.7 eV reference value"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "角积分方法在软X射线能区（284-543 eV）抑制偶极相位的物理有效性缺乏文献支撑",
+      "missing_evidence": "rationale L81描述角积分作为偶极相位抑制手段，但该方法在284-543 eV高能量端软X射线能区的有效性边界和适用条件缺乏已发表文献的系统论证",
+      "search_keywords": [
+        "angular integration dipole phase suppression soft X-ray",
+        "Pabst Dahlstrom angular averaging EUV attosecond",
+        "dipole phase angular integration high kinetic energy",
+        "attosecond streaking dipole phase suppression energy dependence"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "100 eV → 114.5 eV物理换算后软X射线归属存在逻辑矛盾",
+      "missing_evidence": "content §2.6 L49处K2的100 eV经换算得到114.5 eV后，其软X射线归属与水窗定义（284-410 eV）存在矛盾，该矛盾缺乏文献澄清",
+      "search_keywords": [
+        "water window definition 284-410 eV soft X-ray",
+        "soft X-ray boundary definition 100 eV 114.5 eV",
+        "carbon K-edge nitrogen K-edge water window boundary",
+        "attosecond streaking soft X-ray energy range validation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "full_review自报timing jitter ≠ 100 as与实际sections描述不一致",
+      "missing_evidence": "申请书中部分章节描述timing jitter为100 as但full_review自报数值不同，该矛盾需要通过实际实验数据或仪器规格文献来验证真实jitter水平",
+      "search_keywords": [
+        "attosecond streaking timing jitter 100 as specification",
+        "attosecond pulse characterization timing jitter measurement",
+        "electron spectrometer timing resolution attosecond spectroscopy",
+        "FROG-CRAB timing jitter experimental validation"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "DOI [22]/[33]历史文献未在本地完成全量复核验证",
+      "missing_evidence": "部分参考文献的DOI指向历史文献但尚未通过实际检索验证其与申请书论断的对应关系",
+      "search_keywords": [
+        "Cousin attosecond streaking water window PRX 2017 DOI",
+        "Mauritsson attosecond streaking Nature Physics 2010 DOI",
+        "attosecond streaking historical references verification"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

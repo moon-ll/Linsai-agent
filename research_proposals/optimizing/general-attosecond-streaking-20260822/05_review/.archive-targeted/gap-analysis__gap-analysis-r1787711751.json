@@ -1,0 +1,64 @@
+{
+  "gaps": [
+    {
+      "claim": "R2 提出角积分法与常规阿秒脉冲表征存在兼容性问题，需要 Pabst/Dahlström 角积分方案的具体局限性数据支撑",
+      "missing_evidence": "缺乏角积分法在不同靶材（Ar/Kr）上的偶极相位抑制效率的量化对比实验数据",
+      "search_keywords": [
+        "Pabst Dahlstrom angular integration dipole phase suppression efficiency",
+        "attosecond streaking dipole phase argon krypton",
+        "angular averaged streaking rare gas target validation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "R3 双变量误差图谱的'边界方程'可行性论证偏弱，缺乏具体参数依赖关系的理论或实验依据",
+      "missing_evidence": "缺少双变量图谱中边界方程可量化边界公式的具体推导或验证",
+      "search_keywords": [
+        "bivariate error map photon energy channel overlap attosecond",
+        "dual variable error map spectroscopy calibration attosecond",
+        "attosecond pulse characterization validation boundary condition"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "CNN 作为备选路径仅被引用但未展开，需要该方法在阿秒条纹多通道校正中的可行性证据",
+      "missing_evidence": "缺少 CNN 神经网络在多通道阿秒脉冲重构中的准确率/误差 benchmark 数据",
+      "search_keywords": [
+        "CNN attosecond pulse reconstruction multi-channel",
+        "neural network attosecond streaking correction",
+        "inzani rACE attosecond pulse retrieval neural network"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "K3 提'统一误差界估计'但缺乏可量化边界公式，需要误差界估计的具体数学框架",
+      "missing_evidence": "缺少软X射线能区多通道电离重建误差的量化边界公式或统计模型",
+      "search_keywords": [
+        "soft X-ray attosecond streaking error quantification",
+        "FROG-CRAB multi-channel reconstruction error bound",
+        "attosecond pulse reconstruction uncertainty bound"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "R3 中 'Cousin PRX 2017 多通道失效阈值 15%/30%' 的具体适用范围和触发条件需要文献验证",
+      "missing_evidence": "缺少 15% 和 30% 误差阈值对应的物理条件（光子能量、靶材、通道重叠度）的具体实验或理论依据",
+      "search_keywords": [
+        "Cousin PRX 2017 multi-channel ionization failure threshold",
+        "FROG-CRAB multi-channel failure 15 percent 30 percent",
+        "water window attosecond streaking multi-electron error threshold"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "K2 软X射线能区光电子动能与光子能量混用问题修复不彻底，缺乏光电子散射相位能量依赖行为的系统研究",
+      "missing_evidence": "缺少软X射线能区（284-543 eV）光电子散射相位随动能变化的行为数据或理论计算",
+      "search_keywords": [
+        "soft X-ray photoelectron scattering phase energy dependence",
+        "EUV attosecond streaking scattering phase high energy",
+        "photoelectron kinetic energy dipole phase attosecond"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

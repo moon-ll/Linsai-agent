@@ -1,0 +1,56 @@
+{
+  "gaps": [
+    {
+      "claim": "d′ 阈值判据的统计口径（pooled SDT 一致性）需统一佐证，特别是 d′=1.05 对应 77% vs 70% 的差异来源——即 Φ(d′/√2) 与 Φ(d′/2) 两种约定在 HHG 通道分离判据中的适用边界",
+      "missing_evidence": "缺少 signal detection theory (SDT) 中 d′ 阈值与分离概率的统计口径差异（pooled σ vs 单通道 σ）在高次谐波通道分离文献中的明确对照表或方法学说明",
+      "search_keywords": [
+        "d-prime signal detection theory HHG channel separation",
+        "d prime threshold separability metric harmonic generation",
+        "signal detection theory pooled standard deviation classification"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Sahu[33] 论文中 τ₁/τ₂ 比值方向写反（110-4000 应为 τ₂/τ₁ ≈ 111-4000），需核实原文准确数值及 3D Heisenberg 磁体在 THz 驱动下的去磁化动力学参数",
+      "missing_evidence": "缺少 Sahu 论文（NiPS3/反铁磁体 THz 驱动去磁化动力学）中 τ₁ 与 τ₂ 的实验测量值、3D Heisenberg 模型幂律 m=0.44 的拟合依据、以及比值方向的原文表述",
+      "search_keywords": [
+        "Sahu NiPS3 THz demagnetization tau1 tau2",
+        "Sahu antiferromagnet ultrafast magnetization dynamics 3D Heisenberg",
+        "THz driven demagnetization two-exponential recovery antiferromagnet"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Li 等 arXiv:2605.20067 论文中 FePS3 三波混频（magnon-phonon mixing）方法的实验细节，用于支撑滑移坐标独立动力学变量化的物理可行性",
+      "missing_evidence": "缺少 FePS3 magnon-phonon sum-frequency / three-wave mixing 实验的具体驱动场强、混频效率、及与本研究拟用体系的对应关系",
+      "search_keywords": [
+        "FePS3 magnon phonon mixing THz",
+        "2605.20067 FePS3 three wave mixing",
+        "antiferromagnon phonon coupling nonlinear THz spectroscopy"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Werner/Yang-Liang/Ghorashi/Ezawa/Ogawa-Hayami/Luu-Wörner 等六篇交变磁与 HHG 理论的并列引用需收敛为论点句+关键支撑例，需明确每篇工作对本研究核心创新点（i-wave 指纹反演、滑移坐标动力学）的具体贡献区分",
+      "missing_evidence": "缺少对每篇理论工作（特别是 i-wave altermagnet 预言、spin group selection rule、HHG 选择规则）的差异化定位与本研究区隔点",
+      "search_keywords": [
+        "Werner altermagnet high harmonic generation theory",
+        "Yang Liang spin group altermagnet prediction",
+        "Ogawa Hayami i-wave altermagnet",
+        "Ezawa altermagnet spin group selection rule HHG"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "[32] 论文中驱动场强数值未被摘要记载，需核实原文场强后写入 §1.5，并删去其他两章的免责句",
+      "missing_evidence": "缺少 [32] 引用论文中驱动场强的原文实测值（TW/cm² 或 MV/cm）",
+      "search_keywords": [
+        "MnPS3 THz field strength magnetization switching experiment",
+        "MnPS3 coherent phonon driving field amplitude TW/cm2",
+        "2D antiferromagnet THz pump field strength reference32"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "full_review"
+}

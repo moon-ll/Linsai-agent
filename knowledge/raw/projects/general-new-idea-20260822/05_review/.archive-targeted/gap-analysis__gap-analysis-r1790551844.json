@@ -1,0 +1,78 @@
+{
+  "gaps": [
+    {
+      "claim": "MnTe 的 g 波交变磁波型归属（§2 段 5）",
+      "missing_evidence": "当前误引 [27]（实为 CrSb Weyl 交变磁 ARPES 工作，体系错挂），需替换为直接支撑 MnTe g 波节点面对称性 / 自旋劈裂各向异性的实验或理论文献，如自旋分辨 ARPES、中子散射或对称性分析工作",
+      "search_keywords": [
+        "MnTe altermagnet g-wave node",
+        "MnTe spin-resolved ARPES anisotropic",
+        "MnTe magnetic symmetry g-wave",
+        "MnTe neutron diffraction alternagnetic",
+        "MnTe spin splitting k-dependent"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "9 处具名论述首现处缺 [N] 锚（Vampa、Luu、Liu-MoS₂、Haag、Mizuno、Ly、Usanov、Osumi 等，涉及固体 HHG、attosecond 探测、MoS₂ 各向异性谐波等论断）",
+      "missing_evidence": "每位研究者首次出现时其具体论断缺少嵌入式引用锚点；需为 Vampa 固体高次谐波、Luu 阿秒固体探测、Liu MoS₂ 谐波各向异性、Haag/Mizuno 交变磁、Ly 偏振谐波、Usanov/Osumi MnTe 相关工作匹配具体文献",
+      "search_keywords": [
+        "Vampa solid high harmonic generation",
+        "Luu attosecond solid HHG",
+        "MoS2 high harmonic Liu anisotropic",
+        "Haag altermagnet THz",
+        "Mizuno altermagnet spin",
+        "Ly polarization high harmonic crystal",
+        "Usanov MnTe altermagnet",
+        "Osumi MnTe spin structure"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "3 μm 中红外驱动块体 MnTe 高次谐波产生产额可行性论证（方案章 §5）",
+      "missing_evidence": "块体 MnTe 在 3 μm 驱动下的 HHG 产额缺乏直接文献支撑；现有文献多为 MnTe 薄膜、不同波长（800 nm/1.5 μm）或不同体系（CrSb、RuO₂）的 HHG 工作，需补充块体 MnTe 在中红外波段的产额基准或理论估算",
+      "search_keywords": [
+        "MnTe bulk high harmonic generation",
+        "MnTe mid-infrared HHG yield",
+        "altermagnet HHG efficiency mid-IR",
+        "3 micron MnTe nonlinear optics",
+        "MnTe crystal high harmonic mid-infrared"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "g 波交变磁→谐波偏振各向异性图样定量映射、偏振-自旋通道分离测量、可证伪反演判据三项创新点的逐项文献区隔（创新性未达 0.90+ 档）",
+      "missing_evidence": "创新性三项增量虽与 Werner[16]/Mizuno[18]/Liu-RuO₂[21] 区隔具名交代，但未完成四项逐项不低于范本的举证；需补充：(1) 各向异性图样定量映射的同类方法文献对比；(2) 偏振-自旋通道分离的近期基准工作；(3) 反演判据在强场超快中的可证伪范式",
+      "search_keywords": [
+        "high harmonic polarization anisotropy mapping",
+        "spin-polarized HHG channel separation",
+        "falsifiable inversion criterion ultrafast",
+        "solid HHG anisotropic pattern quantitative",
+        "alternagnetic HHG spin channel"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Lee 等人 370 meV 自旋劈裂能 + Weyl 半交变磁论点（§4 段 6）",
+      "missing_evidence": "Lee 等关于 MnTe 370 meV 自旋劈裂的工作需精确锚定；后半句 Weyl 半金属论点在 g 波→谐波主线中脱锚，需补充 Weyl 半交变磁（如 CrSb）的实验/理论文献以支撑节点面与 Weyl 拓扑共存论述",
+      "search_keywords": [
+        "MnTe 370 meV spin splitting Lee",
+        "Weyl altermagnet CrSb",
+        "Weyl node altermagnetic",
+        "topological altermagnet spin splitting"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "国产平台/物理所/北大相关 §4 段 9 论据（[30] 平台句、物理所/北大句）",
+      "missing_evidence": "[30] 等国产平台工作与 g 波→谐波主线弱关联，需补充国产 MnTe 生长、ARPES 测量或谐波探测平台的具体文献锚点以强化国内研究脉络的承接关系",
+      "search_keywords": [
+        "MnTe crystal growth China ARPES",
+        "MnTe thin film molecular beam epitaxy",
+        "alternagnet MnTe domestic experimental platform",
+        "MnTe HHG platform China"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "rationale"
+}

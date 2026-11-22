@@ -1,0 +1,38 @@
+{
+  "gaps": [
+    {
+      "claim": "扭转同质结0°构型(H型堆垛)的点群归属：rationale声称接近D₃h需按C₃v重写，而scheme已改D₃d/D₃h不成立回退C₃，两章互斥",
+      "missing_evidence": "缺乏扭转同质双层TMD(MoS₂)在0°附近H型堆垛的群论分析文献，特别是D₃d/D₃h/C₃v/C₃点群的严格判据与实验/计算验证",
+      "search_keywords": [
+        "twisted homobilayer MoS2 point group symmetry",
+        "H-type stacking TMD D3d D3h",
+        "moire superlattice TMD group theory 0 degree",
+        "homobilayer transition metal dichalcogenide stacking symmetry"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "rationale §2.1 L17、§2.2 L21/23处引用Peterka等人关于MoS₂高次谐波的工作缺少具体证据支撑",
+      "missing_evidence": "缺少Peterka关于MoS₂高次谐波产生中谐波抑制、共振激发或高次谐波特性的原始文献细节（实验条件、谐波阶次范围、抑制机制等）",
+      "search_keywords": [
+        "Peterka MoS2 high harmonic generation",
+        "MoS2 resonant excitation harmonic suppression",
+        "MoS2 HHG monolayer few-layer experiment",
+        "Peterka high harmonic spectroscopy TMD"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "失谐扫描参数范围content用±200 meV、scheme用±100 meV，且两章论证展开未补厚",
+      "missing_evidence": "缺少A/B激子失谐范围在MoS₂高次谐波实验中的文献支撑（典型扫描区间、共振增强峰位、激发能精确值1.88/2.04 eV附近的实验依据）",
+      "search_keywords": [
+        "MoS2 A B exciton detuning high harmonic",
+        "resonant excitation MoS2 HHG photon energy",
+        "MoS2 exciton resonance harmonic enhancement",
+        "twisted bilayer MoS2 exciton energy alignment"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "full_review"
+}

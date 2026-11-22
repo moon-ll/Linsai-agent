@@ -1,0 +1,103 @@
+{
+  "gaps": [
+    {
+      "claim": "CrSb 中 Sb 5p 原子 SOC 约 0.3—0.4 eV，经晶体场与 Cr 3d 杂化后的有效值落在 Werner [16] 双极限之间",
+      "missing_evidence": "缺少 Sb 5p 原子 SOC 精确值（0.3—0.4 eV 区间）的权威实验或 NIST 数据来源，以及 Werner 双极限模型的原文出处",
+      "search_keywords": [
+        "Sb 5p spin-orbit coupling atomic value NIST",
+        "antimony 5p SOC 0.3 0.4 eV",
+        "Werner CrSb anomalous Hall spin splitting limit",
+        "CrSb altermagnet SOC effective value Cr 3d hybridization"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "α-MnTe 中 B₁g 相干声子在皮秒级时间尺度破缺对称性可作为序参量超快读出探针，原型体系 α-MnTe、CrSb 为拓展验证",
+      "missing_evidence": "缺少 arXiv:2607.13863 (Wang-Wang-Meng 2026-07-15) 关于 α-MnTe B₁g 相干声子破缺对称性的原文细节，以及 MnTe/CrSb 相干声子驱动磁对称破缺的实验观测文献",
+      "search_keywords": [
+        "Wang Wang Meng MnTe coherent phonon altermagnet 2026",
+        "alpha-MnTe B1g coherent phonon symmetry breaking",
+        "MnTe B1g phonon magnetic order ultrafast",
+        "2607.13863 MnTe coherent phonon"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Zhang 等人 [7] 对 α-MnTe 高次谐波幅度的理论预测作为复现参照锚点",
+      "missing_evidence": "缺少 Zhang 等人对 α-MnTe d-wave altermagnet HHG 幅度预测的具体数值与文献 [7] 的全文细节",
+      "search_keywords": [
+        "Zhang MnTe d-wave altermagnet high harmonic amplitude prediction",
+        "MnTe harmonic generation theory Zhang",
+        "Zhang alpha-MnTe HHG amplitude theoretical"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Tyulnev [6] 实测 TiSe2 CDW 各向异性谐波幅度作为正演验证基准",
+      "missing_evidence": "缺少 Tyulnev 2024 Nature 关于 TiSe2 各向异性谐波幅度的具体数值（与 Zhang [7] 预测的 10% 偏差比对基准）",
+      "search_keywords": [
+        "Tyulnev TiSe2 anisotropic harmonic amplitude 2024 Nature",
+        "TiSe2 CDW high harmonic polarization dependence amplitude",
+        "Tyulnev Nature 2024 TiSe2 second harmonic magnitude"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "CrSb g-wave altermagnet 自旋分裂在 Γ—K 与 Γ—M 方向存在显著各向异性可作为偏振配置选择依据",
+      "missing_evidence": "缺少 CrSb g-wave 自旋分裂 ARPES/STS 实验观测数据（Krempaský、Ding、Reimers、Yang 等 2024—2025），以及 d/g 波争议对 R2 偏振配置选择的具体约束论述",
+      "search_keywords": [
+        "CrSb g-wave spin splitting ARPES Ding 2024",
+        "CrSb thin film STS spin splitting Reimers 2024",
+        "CrSb three-dimensional Brillouin zone mapping Yang 2025",
+        "CrSb spin splitting d-wave g-wave controversy",
+        "Long CrSb de Haas-van Alphen 2026"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "磁场切换驻留不稳定导致的系统项超过差分信号作为备选触发判据",
+      "missing_evidence": "缺少磁场切换驻留时间（dwell time）不稳定对差分信号产生系统误差的量化基准文献（如 SQUID/磁光测量中磁场驻留稳定性的实验报道）",
+      "search_keywords": [
+        "magnetic field dwell time instability measurement error",
+        "SQUID magnetic field switching stability systematic error",
+        "ultrafast magnetometry field switching transient artifact",
+        "differential magnetic signal field switching baseline drift"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "HHG 反演中 FIM 7×7 参数维数对应的辨识阈值与后验协方差基准",
+      "missing_evidence": "缺少 FIM 7×7 参数维数（CrSb/MnTe 体系的 7 个独立参数）反演辨识性与后验宽度基准的同类报告（据 2026-07 检索截止）",
+      "search_keywords": [
+        "Fisher information matrix high harmonic retrieval 7 parameters",
+        "FIM condition number altermagnet HHG inversion",
+        "posterior covariance HHG band structure Bayesian inversion",
+        "HHG inverse problem identifiability 7 parameters benchmark"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "FLOPS 计算预算从经验上限（10⁵—10⁶ 节点小时）收紧至方法学极限所需的同类基准报告",
+      "missing_evidence": "缺少固体 HHG 多体计算（FLOPS、节点小时、wall-time）在同类反演问题上的公开 benchmark 数据",
+      "search_keywords": [
+        "solid HHG many-body computation FLOPS benchmark",
+        "TDDFT high harmonic generation computational cost benchmark",
+        "Bayesian inversion high harmonic retrieval wall time",
+        "many-body HHG inversion compute resource benchmark"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "固体 HHG 反演方向未见同类报告（据 2026-07 检索截止）",
+      "missing_evidence": "需要补全 2026-07 截止日期的同类反演报告检索结果（包括 Heide 2024 Nat Phys、Ciappina review 等综述对 HHG 反演方向的最新定位）",
+      "search_keywords": [
+        "Heide 2024 Nature Physics solid HHG spectroscopy review",
+        "Ciappina review high harmonic generation Advances in Physics 2024 2025",
+        "HHG inverse problem solid state review 2026",
+        "solid-state HHG retrieval benchmark 2024 2025 2026"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "content"
+}

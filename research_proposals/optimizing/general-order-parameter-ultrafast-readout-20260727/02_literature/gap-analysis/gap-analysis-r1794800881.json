@@ -1,0 +1,18 @@
+{
+  "gaps": [
+    {
+      "claim": "通过中子衍射磁振子证据、磁群分析和圆二色响应，判定交错磁序的序参量及其对称性破缺。",
+      "missing_evidence": "现有合并引用[17,27]不能同时支撑“中子衍射、磁群分析/判定、圆二色”三个不同论点，相关位置缺少独立的磁群分析文献挂接。需将[17]限定为中子手性磁振子证据，将[29]用于磁群或磁对称性分析，将[27]用于圆二色证据；重点是补齐论点与原始证据的一一对应，而非单纯增加引用数量。",
+      "search_keywords": [
+        "中子衍射 手性磁振子 交错磁",
+        "磁群分析 磁对称性 交错磁序",
+        "neutron diffraction chiral magnons collinear altermagnet",
+        "magnetic group analysis collinear antiferromagnet",
+        "magnetic space group determination neutron diffraction",
+        "circular dichroism magneto-optical response altermagnet"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "rationale"
+}

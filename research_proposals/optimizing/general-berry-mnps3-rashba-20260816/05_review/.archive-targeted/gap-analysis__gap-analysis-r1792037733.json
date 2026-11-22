@@ -1,0 +1,79 @@
+{
+  "gaps": [
+    {
+      "claim": "在探测场强压低10⁻⁶量级以避免多电子激发干扰的条件下，光子计数/采集时间量级及SNR可行性",
+      "missing_evidence": "缺少同类低压驱动HHG实验先例或低产额高次谐波探测的定量SNR估算文献支撑；当前论证外包于方法学手册，缺乏就地锚点",
+      "search_keywords": [
+        "low-flux high harmonic generation detection",
+        "weak-field HHG photon counting SNR",
+        "rare event HHG experimental feasibility",
+        "single-shot HHG low yield signal-to-noise"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "TDDFT在环状有机分子高次谐波谱中的定量可靠性——能复现谐波谱整体结构但产额绝对值存在数量级高估，需轨道分辨标度因子修正",
+      "missing_evidence": "Ghorashi-Rappe的TDDFT高次谐波基准研究在scheme章被误标为[15]，实际应为[13]；引用编号混乱导致溯源失败，论证链断裂；此外需要确认该论文是否确实给出了轨道分辨产额标定的具体方法",
+      "search_keywords": [
+        "Ghorashi Rappe TDDFT high harmonic generation organic molecule",
+        "TDDFT HHG yield orbital-resolved scaling factor benchmark",
+        "TDDFT organic molecule harmonic spectroscopy quantitative"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "对称性根基判据——Rashba对称破缺对选择定则的影响",
+      "missing_evidence": "rationale章L35指向Ogawa-Hayami压磁文献[15]作为对称性论据，但scheme章L52同一Ghorashi判据编号不一致；需要有专门讨论Rashba型SOC与高次谐波选择定则的原始文献作为对称性根基的正解支撑",
+      "search_keywords": [
+        "Rashba spin-orbit coupling high harmonic generation selection rules",
+        "symmetry breaking HHG dipole selection rule SOC",
+        "Rashba SOC nonlinear optical response selection rule"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "方案章§3.1口径交叉引用表中d′、30-70%、≥5×、E_thr四项实体在rationale/content章的具体定义与定量来源",
+      "missing_evidence": "四项关键定量判据（指纹量d′、Rashba容差阈值30-70%、偏离倍数≥5×、电场阈值E_thr）在scheme章交叉引用表中出现，但rationale全文grep零命中对应实体；E_thr行指向§3.2末/§3.4在scheme章亦零命中；缺少将这些判据量化定义或实验验证的原始文献来源",
+      "search_keywords": [
+        "magnetic topological material HHG fingerprint quantity",
+        "Rashba SOC characteristic threshold harmonic yield",
+        "high harmonic generation electric field threshold experimental",
+        "MnPS3 harmonic order deviation criteria"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "方案章孤儿文献[20]与[39]对应的正文论据——需在scheme章建立挂靠点",
+      "missing_evidence": "references.md中[20]与[39]三章全文grep均零挂靠；正文中无任何[N]形式引用条目与这两条文献对应；需要识别方案章中可以由这两条文献支撑的具体论断（如Floquet理论、TDDFT紧束缚备份方法、Floquet-Magnus展开等）并补入正文引用，或核实这两条文献是否应纳入本课题",
+      "search_keywords": [
+        "reference [20] specific topic",
+        "reference [39] specific topic",
+        "Floquet Magnus expansion high harmonic generation",
+        "tight-binding TDDFT benchmark MnPS3"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "方案章文献[11]与[38]需建立scheme章挂靠点",
+      "missing_evidence": "[11]与[38]在scheme章grep零命中，[25]在content章零挂靠；references.md声称'43条每条至少挂靠一处'与实测不符；需要为scheme章中可由[11]/[38]支撑的具体方法学论断补入引用，如Rashba紧束缚参数化、反铁磁材料光学响应理论等",
+      "search_keywords": [
+        "Rashba tight-binding parameterization antiferromagnet",
+        "MnPS3 electronic band structure experimental",
+        "Floquet theory antiferromagnetic insulator review",
+        "volkov vs lenard-balescu comparison HHG"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "TDDFT主备分工的可行性论证——TDDFT与紧束缚方法在HHG模拟中的分工依据",
+      "missing_evidence": "scheme章§3.2 L36已引用Hamer等[32]，但缺少同类方法在反铁磁/磁性材料体系HHG中TDDFT与紧束缚方法分工的对比基准文献，以强化备份方案选择的论证密度",
+      "search_keywords": [
+        "TDDFT vs tight-binding HHG magnetic material comparison",
+        "time-dependent density functional theory tight-binding benchmark nonlinear optics",
+        "many-body vs mean-field HHG simulation comparison"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

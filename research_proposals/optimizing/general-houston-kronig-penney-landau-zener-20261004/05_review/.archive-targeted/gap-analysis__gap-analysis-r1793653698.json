@@ -1,0 +1,22 @@
+{
+  "gaps": [
+    {
+      "claim": "“k 分辨门控”可作为区分或选择性调控不同动量通道、强场响应模式及对称性类别的关键技术，是研究方案可行性的重要支撑。",
+      "missing_evidence": "目前缺少直接证明该技术路线可实现的同行评议文献依据。需要补充采用动量分辨探测、选择性门控或动量过滤，并将其用于固态强场光谱、宽带高次谐波产生或量子输运动力学控制的研究；同时应给出实验或理论先例，说明时间分辨率、动量分辨率、门控选择性、信噪比及强场条件下的可操作性。若现有文献仅能分别支持高次谐波探测、动量分辨和门控中的部分环节，还需补充证明这些环节可以集成的依据。",
+      "search_keywords": [
+        "momentum-resolved gating solid-state high-harmonic spectroscopy",
+        "k-resolved detection few-cycle strong-field spectroscopy",
+        "momentum-selective control solid-state high-harmonic generation",
+        "angle-resolved photoemission ultrafast strong-field control",
+        "momentum-resolved coherent control condensed matter",
+        "k-space gating nonlinear optical spectroscopy",
+        "solid-state high-harmonic generation momentum conservation symmetry selection rule",
+        "动量分辨门控 固态高次谐波 强场光谱",
+        "动量选择控制 宽带高次谐波 产生",
+        "角度分辨 光电子 强场 动力学 选择性激发"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "rationale"
+}

@@ -1,0 +1,316 @@
+% references.bib——课题: general-general-solid-nsdr-kev-hhg-20261121
+% 任务: B1 背景调研（01_background/literature-map.md 配套）→ B2 问题定位增补 → B3 方案设计增补
+% 生成: 2026-11-22（林赛研究工作台 B1；2026-11-22 由 B2 增补 ref17/ref18 并回写勘误；
+%        2026-11-22 由 B3 方案设计增补 ref19–ref23）
+% 条目集合 = literature-map.md 核心文献组（正文 [ref:N] 引用基准），键名内嵌编号 ref<N>；
+% 元数据经 arXiv API (export.arxiv.org/api/query) 与期刊页核对；身份字段以编号行为准；
+% note 保留关键数值原样（含单位与出处）；每条末行 source: 溯源（A4 硬门）。
+% needs_review = 元数据无法可靠核实，保持原样并标注，绝不填充。
+%
+% ===== B2 增补与勘误（2026-11-22）=====
+% [增补] ref17 = Hansen & Madsen, PRA 96, 013401 (2017)：NSDR HHG 分子体系前作（截止依赖核间距）
+% [增补] ref18 = Buczolich et al., arXiv:2509.04869：约化密度矩阵 HHG，亚周期关联量化
+% [勘误] ref:9 的 arXiv ID：2310.04692 实为一篇 math.AP 数学论文，与光学无关。
+%        该条仅保留 DOI 10.1364/OL.547945 溯源，不设 eprint（见该条 note_勘误_20261122 字段）。
+% [勘误] ref:16 的内容描述：实际为"含完整位置算符的协变导数给出的与约定无关的物理 QGT，
+%        由 Peierls 替换导出的微观电流唯一强制"，而非 B1 所写的"轨道嵌入"（见该条勘误字段）。
+% [核验] 全部 16 条 B1 条目已用 arXiv API（标题/作者/日期/类别）+ Crossref（DOI/卷页/年份）
+%        独立核实，14 条 arXiv 条目与 B1 记录一致；ref:3/ref:9/ref:14 及 ref:5/ref:13 的
+%        期刊卷页经 Crossref 核实一致。ref:14 的 arXiv:2403.19535 为 2024 年补投的期刊版预印本。
+
+@article{McSweeney2026ref1,
+  title = {Two-Electron Effects Extend High-Harmonic Generation into the keV Regime},
+  author = {Isobel McSweeney and Andr\'es Marchisio and Javier Rivera-Dean and Philipp Stammer and Paraskevas Tzallas and Marcelo F. Ciappina and Maciej Lewenstein},
+  year = {2026},
+  eprint = {2606.24765},
+  archivePrefix = {arXiv},
+  primaryClass = {physics.atom-ph},
+  note = {18 pages, 8 figures; 提交 2026-06-23. 截止标度 4.7U_p 与 5.5U_p（鞍点极大值 4.646U_p / 5.498U_p），对比单电子 3.17U_p；800 nm 少周期脉冲（sin^2 包络，5 光周期，CEP=pi/2，峰值强度 9x10^14 与 3x10^15 W/cm^2）下谱延伸到约 1.2 keV（约 800 次谐波）；平谱相位假设下 600 eV--1116 eV 窗合成脉冲 FWHM 0.62 as},
+  source: KB页 wiki/concepts/keV能区双电子效应扩展HHG.md + wiki/papers/2606.24765.md + raw/papers/2026-2606.24765-two-electron-effects-extend-high-harmonic-generati.md; 检索池 arXiv:2606.24765
+}
+
+@article{Marchisio2026ref2,
+  title = {Electron Correlation Enables Phase-Coherent One-Attosecond Pulse Trains},
+  author = {Andr\'es Marchisio and Isobel McSweeney and Paraskevas Tzallas and Maciej Lewenstein and Marcelo F. Ciappina},
+  year = {2026},
+  eprint = {2608.18773},
+  archivePrefix = {arXiv},
+  primaryClass = {physics.atom-ph},
+  note = {5 pages, 3 figures, submitted to PRA (Letter); 提交 2026-08-19. 截止律 E_cut^(pi)=I_p^(1)+I_p^(2)+4.7U_p，E_cut^(2pi)=I_p^(1)+I_p^(2)+5.5U_p；He 中 I_p^(1)=24.6 eV、I_p^(2)=54.4 eV，合计约 79.0 eV；相位斜率 alpha_2e 短/长轨迹 132 as/eV 与 243 as/eV (q=401)、183 与 302 as/eV (q=601)；约 1000 eV 处 attochirp 长/短轨迹 0.85 / 0.88 as/eV；930--1100 eV 二次平台做轨迹选择性合成，单脉冲 FWHM 接近 1 as，半周期间隔脉冲列},
+  source: KB页 wiki/papers/2608.18773.md + raw/papers/2026-2608.18773-electron-correlation-enables-phase-coherent-one-at.md; 检索池 arXiv:2608.18773
+}
+
+@article{Wang2026ref3,
+  title = {Correlated electrons extend X-ray high-harmonic generation beyond the single-electron limit},
+  author = {Siyang Wang and Jieyu Yan and Alba de las Heras and Sirius Song and Aleksander Prodanov and Zhihan Wu and Luis Plaja and Dimitar Popmintchev and Tenio Popmintchev},
+  journal = {Nature Photonics},
+  volume = {20},
+  pages = {1092--1098},
+  year = {2026},
+  doi = {10.1038/s41566-026-01976-2},
+  note = {Published 07 August 2026 (issue Sept 2026); received 27 Aug 2025, accepted 01 July 2026. 实验锚点：弱次级平台把常规截止外推 120 eV 以上直至水窗 280 eV；DER 截止标度最高 5.5U_p（4.7U_p 对应二阶再散射、5.5U_p 对应三阶再散射），常规单电子为 3.2U_p；UV 驱动光子能量 3.1 eV；仅在过驱动高强度下才出现扩展截止，低强度下谐波通量可增加两个数量级以上却无截止扩展；Argon 在同等条件下无此特征},
+  source: KB页 wiki/concepts/keV能区双电子效应扩展HHG.md; 检索池 Nature Photonics 20, 1092--1098 (2026) doi 10.1038/s41566-026-01976-2 + Optica/CLEO-Europe 2023 pd_1_5 会议摘要
+}
+
+@article{Hatch2026ref4,
+  title = {Sub-cycle doublon-holon dynamics in one-dimensional Mott insulators revealed by two-color high-harmonic spectroscopy},
+  author = {Lance Hatch and Aditya Verma and Eric Schultz and Hanjun Yang and Priscila Rosa and Genda Gu and Igor Zaliznyak and Giulio Vampa and Laimei Nie and Hanzhe Liu},
+  year = {2026},
+  eprint = {2609.11858},
+  archivePrefix = {arXiv},
+  primaryClass = {cond-mat.str-el},
+  note = {提交 2026-09-10. 材料 Ca0.4Sr0.6CuO2 电荷转移隙 2.1 eV；基频 3.5 um（0.35 eV）0.6 TW/cm2，二倍频 1.75 um 仅 20 MW/cm2；反射几何收集 4--12 阶谐波；隙上谐波正 attochirp 实验 0.19 fs/eV，半经典 doublon-holon 模型 0.206 fs/eV；退相干：12 阶比 4 阶早约 22 fs 达峰，skewness 从 H4 的 0.0045 升到 H12 的 0.2613；退相干特征长度约 0.5 晶格位点量级估计；模型 t_h=0.3 eV, U=2.1 eV},
+  source: KB页 wiki/papers/2609.11858.md + wiki/papers/2026-2609_11858-sub-cycle-doublon-holon-dynamics-in-one-dimensiona.md + raw/papers/2026-2609.11858-sub-cycle-doublon-holon-dynamics-in-one-dimensiona.md; 检索池 arXiv:2609.11858
+}
+
+@article{Du2026ref5,
+  title = {Tracking doublon-holon dynamics in high-harmonic generation from Mott insulators},
+  author = {Tao-Yuan Du and Hui-Ru Li and Bo Li and Ruifeng Lu},
+  journal = {Physical Review B},
+  volume = {113},
+  pages = {245147},
+  year = {2026},
+  doi = {10.1103/n4gk-jxpc},
+  eprint = {2605.01388},
+  archivePrefix = {arXiv},
+  primaryClass = {physics.optics},
+  note = {提交 2026-05-02. 一维 Hubbard 链精确对角化 + 含时密度矩阵传播；t0=0.52 eV，晶格常数 a0=7.56 a.u.，驱动 9.11 um（10 光学周期，峰值场强 10 与 50 MV/cm）；填充 5%/25%/50% 对应 L=20/8/10；退相干项以 T2 指数衰减非对角元；U 从 5t0 提至 10t0 系统性抑制带间贡献；J_intra 与 J_inter 在低于 Mott 隙区域流向相反},
+  source: KB页 wiki/papers/2605.01388.md + wiki/papers/2026-2605_01388-tracking-doublon-holon-dynamics-in-high-harmonic-generation.md + raw/papers/2026-2605.01388-tracking-doublon-holon-dynamics-in-high-harmonic-generation.md; 检索池 arXiv:2605.01388
+}
+
+@article{Guo2026ref6,
+  title = {Dynamical many-body control of high harmonic generation in a Mott insulator},
+  author = {Mingyao Guo and Ryo Noguchi and Mohammad Muntasir Hassan and Steven J. Gomez Alvarado and Reina M. Gomez and Yao-Jui Chan and Yu-Chieh Wen and Stephen D. Wilson and Yao Wang and David Hsieh},
+  year = {2026},
+  eprint = {2610.12136},
+  archivePrefix = {arXiv},
+  primaryClass = {cond-mat.str-el},
+  note = {提交 2026-10-08; 13 pages main text, 4 figures + 32 pages SI. La2CuO4 中观测到最高 23 阶谐波；截止被钉在约 4 eV 且与驱动场强无关，低于约 18 MV/cm 时截止阶次随场强线性标度；光掺杂在临界激发密度以上触发多体流形重组、带曲率重整化并抑制非线性带内电流},
+  source: KB页 wiki/papers/2610.12136.md + wiki/papers/2026-2610_12136-dynamical-many-body-control-of-high-harmonic-gener.md + raw/papers/2026-2610.12136-dynamical-many-body-control-of-high-harmonic-gener.md; 检索池 arXiv:2610.12136
+}
+
+@article{Uchida2026ref7,
+  title = {Prominent Dimensional Effects on High-order Harmonic Generation in Strongly Correlated Electron Systems},
+  author = {Kento Uchida and Shintaro Takayoshi and Yuta Murakami and Dongjoon Song and Alannah M. Hallas and Masayuki Watanabe and Takashi Konishi and Aiko Nakano and Koichiro Tanaka},
+  year = {2026},
+  eprint = {2609.02466},
+  archivePrefix = {arXiv},
+  primaryClass = {cond-mat.str-el},
+  note = {提交 2026-09-02; 7 pages, 3 figures (+ 6 pages, 9 figures). 实验：准一维 SrCuO2 呈现稳健平台型高次谐波谱且弱温度依赖，准二维 Pr2CuO4 谐波产额单调下降且高阶谐波热抑制显著；Hubbard 模型模拟定性复现，识别出由自旋--电荷耦合支配的维度依赖 doublon-holon 退相干为微观起源},
+  source: KB页 wiki/papers/2609.02466.md + raw/papers/2026-2609.02466-prominent-dimensional-effects-on-high-order-harmon.md; 检索池 arXiv:2609.02466
+}
+
+@article{Fan2025ref8,
+  title = {Enhancing Cutoff Energy of Solid High-Harmonic Generation from Bonding Length Perspective},
+  author = {Qing-Guo Fan and Kang Lai and Wen-hao Liu and Lin-Wang Wang and Jun-Wei Luo and Zhi Wang},
+  year = {2025},
+  eprint = {2508.12563},
+  archivePrefix = {arXiv},
+  primaryClass = {physics.optics},
+  note = {17 pages, 5 figures; 提交 2025-08-18. rt-TDDFT (PWMAT, 50 Ry 截断, k 网格 12^3 能带 / 28^3 电流)；Si a=5.470 Å、AlAs a=5.657 Å；激光 3000 nm (0.60 eV)、20 fs FWHM、1.0 TW/cm2、[111] 偏振；截止能：平衡 10.2 eV，键长压缩 -7.5% 时 13.8 eV（提升近三分之一），键长拉伸 +7.5% 时约 9 eV；截止能与场强呈线性标度（区别于气体二次标度）},
+  source: KB页 wiki/papers/2508.12563.md + wiki/papers/2025-2508_12563-enhancing-cutoff-energy-of-solid-high-harmonic-generation-fr.md + raw/papers/2025-2508.12563-enhancing-cutoff-energy-of-solid-high-harmonic-generation-fr.md; 检索池 arXiv:2508.12563
+}
+
+@article{Allegre2025ref9,
+  title = {Extension of high-harmonic generation cutoff in solids to 50 eV using MgO},
+  author = {Hortense Allegre and Joseph J. Broughton and Tim Klee and Yan Li and Katarzyna M. Kowalczyk and Nikolas Thatte and Daniel Lim and Jon P. Marangos and Mary M. Matthews and John W. G. Tisch},
+  journal = {Optics Letters},
+  volume = {50},
+  number = {5},
+  pages = {1492--1495},
+  year = {2025},
+  doi = {10.1364/OL.547945},
+  note = {1 March 2025; received 13 Nov 2024, accepted 8 Jan 2025, posted 23 Jan 2025. 固体样品中最高纪录光子能量 50 eV（第 31 阶谐波），100 um 厚 MgO (001)，780 nm / 30 fs 驱动，峰值强度 0.8--10 TW/cm2；此前固体最高为低于 40 eV；MgO 带隙 7.8 eV、损伤阈值高于 50 TW/cm2；谐波截止随场强呈非平凡行为（偏离预期平方根依赖），提示需修正生成过程理解；先前报道 MgO 截止约 25 eV；实验中排除波混频等替代解释尚未完全排除},
+  source: KB页 wiki/papers/2025-2310_04692-extension-of-high-harmonic-generation-cutoff-in-solids-to-50.md + wiki/papers/2025-50-5-1492-extension-of-high-harmonic-generation-cutoff-in-solids-to-50.md + raw/papers/2025-2310.04692-extension-of-high-harmonic-generation-cutoff-in-solids-to-50.md; 检索池 Optics Letters 50(5) 1492--1495 (2025) doi 10.1364/OL.547945,
+  note_勘误_20261122 = {B2 溯源勘误：B1 文献地图把本条标为 arXiv:2310.04692。arXiv API 实测 2310.04692 为 "Lipschitz regularity for a priori bounded minimizers of integral functionals with nonstandard growth" (math.AP, Eleuteri et al.)，与光学无关；2310.04692v2 不存在；2410.04692 为图神经网络论文。按标题/主题检索未定位本刊论文的 arXiv 预印本 ID，故本条不设 eprint 字段，仅以 DOI 10.1364/OL.547945 溯源。标题/作者/卷/页/年份已由 Crossref 独立核实一致}
+}
+
+@article{Ilin2026ref10,
+  title = {Quantum Optical Signatures of Band Geometry in Solid-State High Harmonics},
+  author = {Denis Ilin and Alexander S. Solntsev and Ivan Iorsh},
+  year = {2026},
+  eprint = {2604.20388},
+  archivePrefix = {arXiv},
+  primaryClass = {cond-mat.mes-hall},
+  note = {28 pages, 6 figures; v1 2026-04-22, v3 2026-11-09. 弱关联展开密度矩阵 HHG 普适理论（Lindblad 型方程）；证明辐射场量子统计由电流--电流涨落关联函数 D_mu nu(t,t') 决定（编码量子几何与拓扑）；SSH 对偶体系（J2/J1 = J 与 1/J）比较分离拓扑效应与色散效应，拓扑相的 HHG 响应与量子光特征均强于平庸相；腔--物质相互作用产生压缩 HHG 量子光，其压缩由复 susceptibility 的电流--电流涨落主导而非独立四阶 Kerr 机制；参数 Delta=1.5 eV, F0 约 0.4--1.0x10^9 W/cm2, N=10^6},
+  source: KB页 wiki/papers/2604.20388.md + wiki/papers/2026-2604_20388-quantum-optical-signatures-of-band-topology-in-solid-state-h.md + raw/papers/2026-2604.20388-quantum-optical-signatures-of-band-topology-in-solid-state-h.md; 检索池 arXiv:2604.20388
+}
+
+@article{Zhao2025ref11,
+  title = {Orthogonal Attosecond Control of Solid-State Harmonics by Optical Waveforms and Quantum Geometry Engineering},
+  author = {Zhenjiang Zhao and Zhihua Zheng and Zhiyi Xu and Xing Ran and Xiaolong Yao and Fangping Ouyang},
+  year = {2025},
+  eprint = {2511.13114},
+  archivePrefix = {arXiv},
+  primaryClass = {physics.comp-ph},
+  note = {v1 2025-11-17, v3 2026-05-18. 单层 WS2 第一性原理计算；双色调制相对相位提供电子--空穴对量子相干性的亚飞秒开关；拉伸应变使垂直偏振谐波分量放大近一倍，机制为应变改变带色散增强带内电流 + 显著重塑贝里曲率增大带间响应的反常速度贡献},
+  source: KB页 wiki/papers/2511.13114.md + raw/papers/2025-2511.13114-orthogonal-attosecond-control-of-solid-state-harmonics-by-op.md; 检索池 arXiv:2511.13114
+}
+
+@article{Faeyrman2026ref12,
+  title = {Sub-cycle field-driven dynamical Berry phase in solids},
+  author = {Lior Faeyrman and Jianing Zhang and Misha Ivanov and Liang-You Peng and Nirit Dudovich and Riccardo Piccoli},
+  year = {2026},
+  eprint = {2606.02238},
+  archivePrefix = {arXiv},
+  primaryClass = {cond-mat.mtrl-sci},
+  note = {提交 2026-06-01. 强 THz 场瞬时破缺 MgO 反演对称性诱导动力学复贝里相位，用 HHG 谱学直接分辨贝里相位的实部与虚部（实部对应相干带内动力学，虚部对应隧穿）；实现周期内贝里相位时间演化的重建；单带近似由多带数值模拟证实有效性},
+  source: KB页 raw/papers/2026-2606.02238-sub-cycle-field-driven-dynamical-berry-phase-in-solids.md; 检索池 arXiv:2606.02238
+}
+
+@article{Gabriele2025ref13,
+  title = {Hallmarks of spin textures for high-harmonic generation in two-dimensional materials},
+  author = {Francesco Gabriele and Carmine Ortix and Mario Cuoco and Filomena Forte},
+  journal = {Physical Review B},
+  volume = {112},
+  pages = {155421},
+  year = {2025},
+  doi = {10.1103/m4x3-fb5d},
+  eprint = {2501.04545},
+  archivePrefix = {arXiv},
+  primaryClass = {cond-mat.str-el},
+  note = {v1 2025-01-08, v3 2025-10-09; 6 pages, 2 figures. 有限偶次谐波的产生必然要求自旋纹理破坏二重旋转对称性；在保持时间反演对称的体系中还需非平凡贝里曲率；时间反演对称破缺时即使完全没有贝里曲率偶次谐波仍可存在；忽略散射效应并假定无限弛豫时间},
+  source: KB页 wiki/papers/2501.04545.md + raw/papers/2025-2501.04545-hallmarks-of-spin-textures-for-high-harmonic-generation-in-t.md; 检索池 arXiv:2501.04545
+}
+
+@article{Popmintchev2012ref14,
+  title = {Bright Coherent Ultrahigh Harmonics in the keV X-Ray Regime from Mid-Infrared Femtosecond Lasers},
+  author = {Tenio Popmintchev and Ming-Chang Chen and Dimitar Popmintchev and Paul Arpin and Susannah Brown and Skirmantas Ali\v{s}auskas and Giedrius Andriukaitis and Tadas Bal\v{c}iunas and Oliver M. M\"ucke and Audrius Pugzlys and Andrius Baltu\v{s}ka and Bonggu Shim and Samuel E. Schrauth and Alexander Gaeta and Carlos Hern\'andez-Garc\'ia and Luis Plaja and Andreas Becker and Agnieszka Jaron-Becker and Margaret M. Murnane and Henry C. Kapteyn},
+  journal = {Science},
+  volume = {336},
+  number = {6086},
+  pages = {1287--1291},
+  year = {2012},
+  doi = {10.1126/science.1218497},
+  eprint = {2403.19535},
+  archivePrefix = {arXiv},
+  primaryClass = {physics.optics},
+  note = {arXiv 提交 2024-03-28（期刊版 2012）. 3.9 um 中红外驱动，10 mJ、80 fs (6-cycle)、20 Hz，OPCPA (Yb:CaF2+KTA)，200 um 直径 5 cm 长空心波导，He 最佳气压约 35 atm（最高 80 atm）；谱从 EUV 延伸到大于 1.6 keV；通量随气压平方关系，在 1 keV 处 1% 带宽内约 10^5 photons/shot；相位匹配截止标度 h nu_PM cutoff 正比于 lambda_L^{1.5--1.7}；非微扰阶数从 VUV 的约 11 阶增至 keV 的大于 5000 阶；Ar 在 26 atm 时 X 射线产额比 3 atm 提升约 10 倍且光束直径收缩至小于 1/3；Young 双缝验证高空间相干性；压缩后理论上支持 2.5 as 脉冲（Fourier 极限）},
+  source: KB页 wiki/papers/2024-2403_19535-bright-coherent-ultrahigh-harmonics-in-the-kev-x-ray-regime-.md + wiki/papers/2403.19535__Bright_coherent_ultrahigh_harmonics_in_the_keV_X-ray_regime.md + raw/papers/2024-2403.19535-bright-coherent-ultrahigh-harmonics-in-the-kev-x-ray-regime-.md; 检索池 arXiv:2403.19535
+}
+
+@article{vanEssen2026ref15,
+  title = {Transient High-Harmonic Generation from Solids: From Spectroscopy and Control to Programmable Emission},
+  author = {Pieter J. van Essen and Torben Ham and Zhonghui Nie and Peter M. Kraus},
+  year = {2026},
+  eprint = {2609.20085},
+  archivePrefix = {arXiv},
+  primaryClass = {physics.optics},
+  note = {64 pages, 11 figures; 提交 2026-09-17. 综述：固体内瞬态高次谐波从谱学与控制到可编程发射；给出 Mott 绝缘体强场 HHG 的 Hubbard 哈密顿量与强关联/带内-带间通道分解；指出现场波形整形与波混频是控制谐波谱的主要手段；讨论波混频导致谐波抑制的机制},
+  source: KB页 wiki/papers/2609.20085.md + raw/papers/2026-2609.20085-transient-high-harmonic-generation-from-solids-fro.md; 检索池 arXiv:2609.20085
+}
+
+@misc{Oh2026ref16,
+  title = {Orbital Embedding and the Physical Definition of Quantum Geometry},
+  author = {Chang-geun Oh and Shuichi Murakami},
+  year = {2026},
+  eprint = {2607.21882},
+  archivePrefix = {arXiv},
+  primaryClass = {cond-mat.str-el},
+  note = {3 Figures; 提交 2026-07-24. 量子几何物理定义的轨道嵌入（orbital embedding）表述——为贝里曲率/量子度规在双电子复合路径调制中的角色提供统一几何语言。细节待全文核实，本课题引用其概念框架而非具体数值},
+  source: KB页 raw/papers/2026-2607.21882-orbital-embedding-and-the-physical-definition-of-quantum-geo.md + wiki/papers/2026-2607_21882-orbital-embedding-and-the-physical-definition-of-quantum-geo.md; 检索池 arXiv:2607.21882,
+  note_勘误_20261122 = {B2 溯源勘误：B1 对本条的"轨道嵌入"表述与论文摘要不符。实际内容：用含完整位置算符的协变导数给出与胞元约定无关的物理量子几何张量（QGT），论证该形式由 Peierls 替换导出的微观电流唯一强制，并指出标准 k-导数计算隐含胞内轨道位置约定的根本歧义，以及标准 k·p 有效理论在键序隙体系的领头阶失效。本课题据此把"双电子复合相位的量子度规"计算约定固定为 Peierls 一致的协变导数形式}
+}
+
+@article{Hansen2017ref17,
+  title = {Non-Sequential Double Recombination High Harmonic Generation in Molecular-like Systems},
+  author = {Kenneth K. Hansen and Lars Bojer Madsen},
+  journal = {Physical Review A},
+  volume = {96},
+  pages = {013401},
+  year = {2017},
+  doi = {10.1103/PhysRevA.96.013401},
+  eprint = {1612.02180},
+  archivePrefix = {arXiv},
+  note = {arXiv 提交 2016-12-07. B2 补检索增补（文献地图遗漏）。NSDR HHG 的分子体系前作：用库仑修正的三步模型精确描述所有核间距下的 NSDR 截止；截止对核内原子核位置存在内禀依赖（部分源于 NSDR 过程中的强电子关联），该依赖改变经典允许的回归能量进而改变截止；核间距 R 大于约 8--9 a.u. 时 NSDR 信号性质改变（源于分子内电荷转移动力学变化）；R 大于约 13 a.u. 时出现第一电子发射点的清晰特征与分子交换路径迹象。固体版对应物：能带几何对双电子同步复合截止的调制},
+  source: 检索池 arXiv:1612.02180 + Crossref doi 10.1103/PhysRevA.96.013401; B2 arXiv 检索式 abs:"double recombination" AND abs:"high-harmonic" 命中
+}
+
+@misc{Buczolich2025ref18,
+  title = {Reduced Density Matrix Description of High-Harmonic Generation in Multi-Electron Atoms: Exploring Sub-cycle Correlation Effects},
+  author = {Katharina Buczolich and Takeshi Sato and Kenichi L. Ishikawa and Fabian Lackner and Joachim Burgdörfer and Iva Březinová},
+  year = {2025},
+  eprint = {2509.04869},
+  archivePrefix = {arXiv},
+  primaryClass = {physics.atom-ph},
+  note = {arXiv 提交 2025-09-05. B2 补检索增补（文献地图遗漏）。引入约化密度矩阵描述以量化亚周期时间尺度上的关联效应并应用于多电子原子原型；比较相同 Keldysh 参数下的稀有气体（He, Ne）与碱土金属（Be, Mg），显示亚周期关联参数的时变行为在两类原子间显著不同，并基于自然轨道动力学给出解释，讨论超快关联动力学对 HHG 谱的影响。对固体版的价值：为"带间跃迁偶极 vs 双电子关联强度竞争"提供关联量的可计算定义范式},
+  source: 检索池 arXiv:2509.04869; B2 arXiv 检索式 abs:"high-harmonic generation" AND abs:"electron correlation" AND abs:solid 命中
+}
+
+% ===== B3 方案设计增补（2026-11-22）=====
+% [增补] ref19 = Murakami, Takayoshi, Koga, Werner, PRB 103, 035110 (2021)：一维 Hubbard HHG，
+%        doublon-holon 复合起源、截止频率对场的线性标度——S2/S4 的固体标度锚与理论母体
+% [增补] ref20 = Murakami et al., PRL 129, 157401 (2022)：Mott 绝缘体 HHG 的异常温度依赖
+% [增补] ref21 = Murakami, Golez, Eckstein, Werner, RMP 97, 035001 (2025)：Mott 绝缘体光致非平衡态综述
+% [增补] ref22 = Luu & Woerner, PRA 98, 041802 (2018)：双色 HHG 反演对称性破缺测量——S6-a 方法基础
+% [增补] ref23 = Xiao, Chang, Niu, RMP 82, 1959 (2010)：半经典贝里曲率动力学标准形式——S5 解析框架
+% [溯源] 五条均经 Crossref API 实测核实标题/作者/卷页/年份/DOI；ref19/ref20 另经 arXiv API
+%        核实 arXiv ID（2010.13255 / 2203.01029）与摘要正文。
+% [溯源缺口] ref22 的 arXiv 预印本 ID 未能经 arXiv API 定位（多组检索式零命中），
+%        故仅以 DOI 10.1103/PhysRevA.98.041802 溯源，不设 eprint（同 ref:9 的处理方式）。
+
+@article{Murakami2021ref19,
+  title = {High-harmonic generation in one-dimensional Mott insulators},
+  author = {Yuta Murakami and Shintaro Takayoshi and Akihisa Koga and Philipp Werner},
+  journal = {Physical Review B},
+  volume = {103},
+  pages = {035110},
+  year = {2021},
+  doi = {10.1103/PhysRevB.103.035110},
+  eprint = {2010.13255},
+  archivePrefix = {arXiv},
+  primaryClass = {cond-mat.str-el},
+  note = {arXiv v1 2020-10-26, v2 2020-12-29; 15 pages, 9 figures (accepted to PRB). B3 增补（方案设计增补）。一维 Hubbard 模型 HHG，iTEBD + 精确对角化；结论：HHG 起源于 doublon-holon 复合；截止频率的标度与对外部场的线性依赖一致；HHG 的亚周期特征可用 doublon-holon 对的现象学三步模型合理描述；引入 Schrieffer-Wolff 强耦合展开把 Hubbard 模型分解为 doublon/holon 带内动力学、带间偶极激发与自旋交换三过程，揭示 Mott 体系与半导体模型在偶极规范下的形式相似性；长程带内偶极矩分量对 HHG 强度有显著影响，doublon/holon 的关联跳跃项基本决定 HHG 谱形。方案落点：S2 的半经典 doublon-holon 轨迹与 S4 的"截止随场强线性标度"候选锚点},
+  source: 检索池 arXiv:2010.13255（arXiv API 实测：标题/作者/日期/期刊卷页/journal_ref 一致，摘要含"cutoff frequency ... consistent with a linear dependence on the external field"原句）+ Crossref doi 10.1103/PhysRevB.103.035110（实测卷 103、刊名 Physical Review B、日期 2021-01-08、作者四人一致）; KB页 wiki/papers/2026-2609_11858-sub-cycle-doublon-holon-dynamics-in-one-dimensiona.md 方法卡"代表作"条
+}
+
+@article{Murakami2022ref20,
+  title = {Anomalous Temperature Dependence of High-Harmonic Generation in Mott Insulators},
+  author = {Yuta Murakami and Kento Uchida and Akihisa Koga and Koichiro Tanaka and Philipp Werner},
+  journal = {Physical Review Letters},
+  volume = {129},
+  pages = {157401},
+  year = {2022},
+  doi = {10.1103/PhysRevLett.129.157401},
+  eprint = {2203.01029},
+  archivePrefix = {arXiv},
+  primaryClass = {cond-mat.str-el},
+  note = {arXiv v1 2022-03-02, v3. B3 增补（方案设计增补）。揭示强自旋-电荷耦合对 Mott 绝缘体 HHG 的关键作用：在反铁磁关联体系中，HHG 信号随温度下降显著增强，尽管此时能隙反而增大。方案落点：S3 的退相干与自旋背景变量、S6-b 的温度作为关联强度代理变量、J6 的维度依赖讨论},
+  source: 检索池 arXiv:2203.01029（arXiv API 实测：标题/作者/日期与期刊记录一致，摘要正文核对）+ Crossref api /works/10.1103/PhysRevLett.129.157401（实测刊名 Physical Review Letters、卷 129、日期 2022-10-03；作者实测为 Murakami / Uchida / Koga / Tanaka / Werner 五人，与本条 author 字段一致）
+}
+
+@article{Murakami2025ref21,
+  title = {Photoinduced nonequilibrium states in Mott insulators},
+  author = {Yuta Murakami and Denis Gole\v{z} and Martin Eckstein and Philipp Werner},
+  journal = {Reviews of Modern Physics},
+  volume = {97},
+  pages = {035001},
+  year = {2025},
+  doi = {10.1103/tkjh-lr83},
+  note = {issue 3; article number 035001. B3 增补（方案设计增补）。Mott 绝缘体光致非平衡态的综述。方案落点：S3 的非平衡多体方法学背景与 S7 的宏观相干累加模型（光致非平衡相的寿命与相干性是相干累加长度的约束来源）},
+  source: 检索池 Crossref api /works/10.1103/tkjh-lr83（实测标题 Photoinduced nonequilibrium states in Mott insulators、刊名 Reviews of Modern Physics、卷 97、issue 3、article-number 035001、作者 Murakami/Golez/Eckstein/Werner 一致）; KB页 wiki/papers/2026-2605_01388-tracking-doublon-holon-dynamics-in-high-harmonic-generation.md 深度解析"补充：文中提及的关键参照文献"条（记为 Murakami et al., Rev. Mod. Phys. 97, 035001 (2025)，本轮 Crossref 实测补全 DOI 与 article number）
+}
+
+@article{Luu2018ref22,
+  title = {Observing broken inversion symmetry in solids using two-color high-order harmonic spectroscopy},
+  author = {Tran Trung Luu and Hans Jakob W\"{o}rner},
+  journal = {Physical Review A},
+  volume = {98},
+  pages = {041802},
+  year = {2018},
+  doi = {10.1103/PhysRevA.98.041802},
+  note = {issue 4. B3 增补（方案设计增补）。以双色高次谐波谱学观测固体中的反演对称性破缺，建立双色 HHG 的反演对称性破缺测量范式，以偶次谐波的约四分之一周期调制作为核心判据。方案落点：S6-a 标定实验的方法基础（[ref:4] 的双色 attochirp 计量方案所引用的直接方法前作）},
+  source: 检索池 Crossref api /works/10.1103/PhysRevA.98.041802（实测标题 Observing broken inversion symmetry in solids using two-color high-order harmonic spectroscopy、刊名 Physical Review A、卷 98、issue 4、首作者 Tran Trung Luu 一致）+ KB页 wiki/papers/2026-2609_11858-sub-cycle-doublon-holon-dynamics-in-one-dimensiona.md 方法卡"代表作"条（记为 T. Luu and H. Wörner, 2018, Phys. Rev. A 98, 041802）; arXiv 预印本 ID 未定位，故不设 eprint
+}
+
+@article{Xiao2010ref23,
+  title = {Berry phase effects on electronic properties},
+  author = {Di Xiao and Ming-Che Chang and Qian Niu},
+  journal = {Reviews of Modern Physics},
+  volume = {82},
+  pages = {1959--2007},
+  year = {2010},
+  doi = {10.1103/RevModPhys.82.1959},
+  note = {B3 增补（方案设计增补）。半经典波包动力学方程组的权威形式：群速度加反常速度项 $\dot{r} = (1/\hbar)\partial\varepsilon_n/\partial k - \dot{k}\times\Omega_n(k)$，加速度定理 $\hbar\dot{k} = -eE - e\dot{r}\times B$；贝里曲率以反常速度进入输运与光学响应。适用条件：波包尺寸远大于晶格、远小于场变化尺度且带间跃迁弱。方案落点：S5 的反常速度解析框架（量子几何调制双电子复合振幅的进动式来源）},
+  source: 检索池 Crossref api /works/10.1103/RevModPhys.82.1959（实测标题 Berry phase effects on electronic properties、刊名 Reviews of Modern Physics、卷 82、页码 1959-2007、作者 Xiao/Chang/Niu 一致）; KB页 wiki/methods/半经典动力学方程贝里曲率反常速度.md 参数表（该 KB 页已以本文献为 [1] 出处，登记方程组与适用边界）
+}

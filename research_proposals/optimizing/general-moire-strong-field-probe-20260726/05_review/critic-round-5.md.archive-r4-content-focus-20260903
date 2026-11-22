@@ -1,0 +1,52 @@
+## 执行清单对照
+清单0. 通过——当前申请书含立项依据、研究内容、研究方案、参考文献四类标准模块，聚焦章节非空。
+清单1. 通过——已读取申请书、/Users/ll/Desktop/LinSai-CoPilot/memory/nsfc-standards.json及历史报告；programmatic_checks、overall_review_requirements确实缺失，未虚构规则。
+清单2. 不通过——§2含研究方案参数，且存在先验/分辨率、作者/引文、核时总量等口径冲突。
+清单3. 通过——已选content_anchor、content_example两个最相关范本锚点作结构化对比。
+清单4. 通过——已引用程序化检测的10处超长句、35处冗余修饰及自引用结果。
+清单5. 通过——已逐段审查§2.1—§2.5，并简查rationale.md、scheme.md、references.md一致性。
+清单6. 不通过——主线R1→R2→R3清楚，但“闭环/递进”自我标注和流程箭头过多，部分段落仍是文献与参数拼接。
+清单7. 通过——问题行均标注issue_type、严重度、位置及违反的rubric/标准条款。
+清单8. 通过——已按critical/high/medium/low及P1/P2/P3分级；本轮未发现需单列的medium/low主缺陷。
+清单9. 通过——§2含总述、3个分方向、研究目标和关键问题。
+清单10. 通过——年度及分内容目标含<5%、<15%、±0.05°、>20%等量化指标。
+清单11. 不通过——R1—R3与两个科学问题有对应，但假设1—3的适用边界和部分证据链未闭合。
+清单12. 不通过——研究内容夹带0—360°、<2°、<50 fs及计算规模等方案细节，违反边界条款。
+清单13. 通过——R1正向模型→R2反演→R3调控存在数据流，非完全平行堆砌。
+清单14. 通过——聚焦文件约1.2万字符，处于参考量级；体量本身不作为扣分依据。
+
+## 锚点对比
+申请书原文：R2的目标是建立莫尔势与扭转角的联合反演。
+锚点原文：本项目拟采用理论与实验相结合的研究方法，建立包含局域电子态效应的量子轨迹模型，揭示局域电子态对高次谐波产生过程的影响机理。
+差距：申请书量化指标更密，但“目标—方法—可证伪机制”链被“反演/闭环”流程句切割；语体、论证密度、数据驱动、引用嵌入均未达到范本的连续性问题链。
+
+申请书原文：R3选定光Floquet工程作为主调控机制，并设定靶标A与靶标B。
+锚点原文：拟采用泵浦-探测的方案厘清掺杂半导体高次谐波产生的量子通道，并基于此探索固体高次谐波光谱在探测掺杂半导体局域电子态结构及相关电子动力学信息等方面的应用。
+差距：申请书有阈值和No-Go意识，但靶标A/B的物理输出、测量量与失败后的机制转向写得不足；参数化成果清单强于范本以机制组织研究内容。
+
+锚点对比结论：差距明显
+
+## 写作风格评估
+主线清楚且有反演—调控的逻辑递进，但段落长度偏长、流程箭头和“闭环/递进”元话语过密，局部呈文献+参数拼接。程序化检测：全文字符29736，>120字10处（扣0.08），冗余修饰35次，自引用10处；本地复测聚焦文件L23仍有超长句。表达质量评分为0.66，低于0.92天花板且不超程序化限制。
+
+## 问题清单
+[critical] red_line(P1)｜§2.1 Y3、§2.2 R2、§2.4 Y1｜±0.05°既作先验又作分辨率，指标无效。｜统一为先验宽、分辨率窄。违反consistency_check、indicator_measurable；action：rewrite。
+[critical] red_line(P1)｜§2.1假设2/3、§3.3｜I_c与探针窗口重叠，3×10¹¹亦不等于10 meV对应值。｜按同一判据重算并分层设窗。违反theory_applicability、consistency_check；action：recalculate/rewrite。
+[critical] red_line(P1)｜§2.1 L23/L27/L29/L81｜CITE未定义；Yao标为[31]；Nikola与参考条目Shan分裂。｜统一作者、标签、条目。违反section_standards.references；action：verify/rewrite。
+[critical] red_line(P1)｜§2.2 R1 L45、方法学手册§1A｜降阶总核时2×10⁴与2.4×10⁵冲突。｜重算全分项并统一总量。违反consistency_check；action：recalculate/rewrite。
+[high] red_line(P1)｜§2.1 L5、L115｜“唯一可行”“尚未见报道”缺检索范围和替代方案。｜改为有条件判断并列降级路径。违反novelty_claim_cautious、no_exaggeration；action：rewrite。
+[high] narrative(P2)｜§2.1 L5/L7、§2.2 R1/R2/R3｜参数与文献夹带方案细节，“闭环/递进”元话语密集。｜删参数和流程口号，按“问题—机制—判据”推进。违反section_standards.content、anti_ai_patterns；action：rewrite。
+[high] anti_ai(P1)｜§2.1 L7/L23/L25/L27｜检测>120字10处；L23复核仍超限。｜拆长句，删“闭环/递进”元话语。违反anti_ai_patterns；action：rewrite。
+[high] rigor(P1)｜§2.2 R1 L45、§2.3创新点1｜DMRG自能回灌SBE的接口量与双计数边界缺失。｜写哈密顿量、适用条件和退化路径。违反theory_applicability、implementation_path；action：add/research。
+
+## 评分
+创新性：0.78——对应scoring_rubric.innovation 0.70—0.79档：有一定新意，但“读出—改写”差异与阈值依据仍需充分论证。
+可行性：0.66——对应scoring_rubric.feasibility 0.60—0.69档：先例存在，但探针/I_c重叠、接口未定义及实测条件不足使核心路线存疑。
+严谨性：0.62——对应scoring_rubric.rigor 0.60—0.69档：存在事实错误、指标矛盾和关键论证环节缺失，按red_line压至该档。
+表达质量：0.66——对应scoring_rubric.expression 0.60—0.69档：模板化、流程元话语及超长句显著；受anti_ai规则及0.92天花板限制，取0.66。
+## 评分
+创新性：0.78
+可行性：0.66
+严谨性：0.62
+表达质量：0.66
+综合评分：0.68

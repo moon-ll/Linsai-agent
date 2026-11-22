@@ -1,0 +1,17 @@
+{
+  "proposal_id": "general-berry-berry-20261107",
+  "cluster_id": "orphan-route-2026-11-14",
+  "clusters": [
+    "orphan-route-2026-11-14"
+  ],
+  "entries": [
+    {
+      "source_id": "paper:2026-2611.10905-2d-coherent-spectroscopy-of-topological-insulators",
+      "title": "2D coherent spectroscopy of topological insulators",
+      "summary": "本文为拓扑绝缘体的二维相干光谱（2DCS）建立了量子几何表述，将三阶非线性四波混频信号与能带的量子几何张量（贝里曲率、量子度规）直接联系起来。在该表述下，不同自由度（如带内与带间电流、不同跃迁通道）对信号的贡献可以在二维频率谱上分离解耦。结果使 2DCS 成为定量读取拓扑能带量子几何信息的相干光谱工具。",
+      "path": "knowledge/raw/papers/2026-2611.10905-2d-coherent-spectroscopy-of-topological-insulators.md",
+      "added_via": "cluster:orphan-route-2026-11-14",
+      "added_at": "2026-11-14T21:03:35Z"
+    }
+  ]
+}

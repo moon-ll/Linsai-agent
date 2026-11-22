@@ -1,0 +1,62 @@
+{
+  "gaps": [
+    {
+      "claim": "§3.1 第43行关于 Pupeikis 系统的描述：原句将 10 kHz、2.1 μm 衍射覆盖 284–531 eV 错误挂到 Pupeikis 名下；实际应为 Pupeikis 2020 Optica 7,168（25W、2.2 μm、100 kHz OPCPA 驱动 He 靶 HHG 覆盖水窗至 620 eV）",
+      "missing_evidence": "需要 Pupeikis et al., Optica 7, 168(2020) 的完整书目信息（DOI、卷期页码），并新增对应 [N] 条目入文献表；还需补挂 Jarecki 2024 衍射实验先例的正式引用条目",
+      "search_keywords": [
+        "Pupeikis Optica 2020 water window HHG OPCPA",
+        "Jarecki 2024 attosecond diffraction 10 kHz 2.1 micron",
+        "water window high harmonic generation 100 kHz He OPCPA"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3.3 第96行'重新分析 Cousin 2017 年氪条纹数据集'以及算法名（刊版应称 VPGTA per Reply）",
+      "missing_evidence": "需要 Cousin 2017 ICFO 水窗条纹测量的原始文献条目及 [N] 编号；需要 Cousin 后续 Reply/正式发表版中关于 VPGTA（或同等算法名）的明确表述作为算法名依据",
+      "search_keywords": [
+        "Cousin 2017 attosecond streaking water window ICFO krypton",
+        "VPGTA Voltg streaking trace reconstruction Reply Cousin",
+        "ICFO water window attosecond pulse characterization"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3.1 第45/47行 ETH 2025 空芯光纤与 Fu-Takahashi 2020（Commun. Phys. 3, 92）作为具名先例的引用",
+      "missing_evidence": "Fu & Takahashi 2020 Commun. Phys. 3, 92 已有事实核实但缺 [N] 文献表条目；ETH 2025 空芯光纤先例需要正式出处（疑似 arXiv:2508.14774），须补 [N] 编号并确认是会议/期刊正式发表版",
+      "search_keywords": [
+        "ETH hollow-core fiber 2025 attosecond pulse delivery",
+        "Fu Takahashi Commun Phys 2020 attosecond water window",
+        "arXiv 2508.14774 hollow core fiber attosecond"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3.1 平台先例与束线论证中提及 arXiv:2511.08391（评审报告事实核实节列出）",
+      "missing_evidence": "arXiv:2511.08391 在评审报告事实核实节被反查，但尚未在方案文本中找到明确挂接位置；需确认该预印本是否对应某一具名平台/算法先例，若对应则需补 [N] 条目",
+      "search_keywords": [
+        "arXiv 2511.08391 attosecond streaking",
+        "arXiv 2511.08393 attosecond pulse characterization"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§3.2/§4 中引用 Pabst 与 Dahlström[3]关于角积分压制原理在相干里德堡态波包条件下的纯理论论证",
+      "missing_evidence": "[3] 条目需确认为 Pabst & Dahlström 关于 angular integration / angle-resolved photoelectron streaking 的原始理论文献，并补全卷期页码信息以便核对",
+      "search_keywords": [
+        "Pabst Dahlström angular streaking Rydberg wave packet",
+        "angle-integrated photoelectron streaking theory Rydberg"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§3.1 第45/47行及 §4.1 中 BIBO 备选晶体、磁瓶谱仪否决等节点上的具名仪器先例与标定方法",
+      "missing_evidence": "BIBO 高次谐波转换效率先例及磁瓶谱仪能量分辨/采集立体角先例需要可挂 [N] 的原始文献支撑，以兑现清单2 关于'为什么选'的论证密度",
+      "search_keywords": [
+        "BIBO crystal high harmonic generation conversion efficiency",
+        "magnetic bottle spectrometer electron energy resolution collection angle"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

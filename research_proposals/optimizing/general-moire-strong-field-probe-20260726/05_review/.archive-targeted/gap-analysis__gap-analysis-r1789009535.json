@@ -1,0 +1,160 @@
+{
+  "gaps": [
+    {
+      "claim": "三段式降阶框架中，张量网络/DMRG 可用于莫尔超晶格强场动力学或高次谐波响应的关联修正",
+      "missing_evidence": "缺少将张量网络、DMRG/MPS 或其他多体方法应用于莫尔超晶格实时演化、强场响应或 HHG 的直接方法学文献；现有支撑若仅证明其可处理超大体系或静态激发谱，尚不足以支撑强场动力学迁移",
+      "search_keywords": [
+        "tensor network real-time dynamics moiré superlattice strong field",
+        "MPS DMRG high-harmonic generation correlated systems",
+        "tensor network time-dependent tight-binding moiré",
+        "matrix product state nonlinear optical response moiré",
+        "tensor network high harmonic generation Hubbard model"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "张量网络方法能够突破莫尔/超莫尔体系的尺度瓶颈，并作为第三层关联修正方法实现相对全原胞 TDDFT 的数量级降阶",
+      "missing_evidence": "缺少定量比较张量网络、TDDFT、紧束缚或连续模型计算成本的基准研究，尤其缺少在相同物理观测量、体系规模和误差容限下的内存、时间或核时缩放数据；不能仅用超大体系静态求解案例支撑 HHG 动力学中的 3–4 个数量级降阶",
+      "search_keywords": [
+        "moiré superlattice tensor network computational scaling benchmark",
+        "TDDFT tight-binding tensor network computational cost comparison",
+        "real-time tensor network large-scale moiré dynamics",
+        "tensor network bond dimension scaling moiré systems",
+        "high-harmonic generation computational cost tensor network"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "张量网络关联修正能够与连续莫尔紧束缚加 SBE 层进行耦合，并控制层间误差传播",
+      "missing_evidence": "缺少多尺度/多层模型接口的具体方法文献，证明如何将张量网络得到的自能、关联修正、响应函数或有效参数传递给 SBE/紧束缚正演模型，以及耦合后误差、守恒律和规范一致性的验证",
+      "search_keywords": [
+        "tensor network semiconductor Bloch equations coupling",
+        "DMRG self-energy semiconductor Bloch equation",
+        "multiscale coupling tight-binding tensor network dynamics",
+        "many-body correction semiconductor Bloch equations moiré",
+        "error propagation coupled tensor network optical response"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "由 TDDFT 标定参数迁移至连续莫尔紧束缚模型和 SBE，在均匀极限到莫尔体系之间保持可控精度",
+      "missing_evidence": "缺少 TDDFT/实时 TDDFT 与紧束缚或 SBE 之间的系统交叉验证文献，特别是同时比较能带、跃迁偶极矩、Berry 连接、非线性电流和 HHG 谱的跨模型 benchmark；单层或小原胞标定案例不足以支撑参数迁移误差小于 5%",
+      "search_keywords": [
+        "TDDFT tight-binding semiconductor Bloch equation benchmark high harmonic generation",
+        "real-time TDDFT versus SBE solid-state HHG",
+        "ab initio to tight-binding parameter transfer nonlinear optics",
+        "TDDFT tight-binding cross validation moiré materials",
+        "multiscale electronic structure model transfer error HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "连续莫尔紧束缚模型与 SBE 能够描述扭转双层石墨烯/莫尔体系的强场 HHG，并保留扭转角、平带和晶格弛豫效应",
+      "missing_evidence": "缺少针对具体莫尔材料的强场驱动 SBE/紧束缚 HHG 文献，尤其是包含扭转角扫描、平带、晶格弛豫、层间耦合及场致带间/带内动力学的研究；仅有一般性莫尔 TB 综述或 TBG HHG 观测不能充分支撑所采用模型的适用范围",
+      "search_keywords": [
+        "semiconductor Bloch equation twisted bilayer graphene high harmonic generation",
+        "tight-binding HHG moiré superlattice strong field",
+        "twist-angle-dependent high harmonic generation TBG",
+        "flat-band moiré strong-field nonlinear optics",
+        "lattice relaxation moiré high-harmonic generation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "在强场条件下使用 SBE/紧束缚模型仍能可靠处理莫尔体系中的多体关联、场致带重整化和非绝热动力学",
+      "missing_evidence": "缺少明确讨论 SBE 或单粒子紧束缚近似在莫尔强场、平带和关联绝缘态中的适用边界、失效判据及与 DMFT/张量网络/多体实时计算对照的文献",
+      "search_keywords": [
+        "validity limit semiconductor Bloch equations strong field moiré",
+        "SBE breakdown correlated moiré materials",
+        "strong-field dynamics flat-band moiré beyond single-particle",
+        "DMFT versus semiconductor Bloch equation high harmonic generation",
+        "nonadiabatic correlated moiré strong-field response"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "莫尔体系中的关联修正可以通过张量网络或有效多体模型在有限体系上获得，并外推至实验尺度而不改变 HHG 的关键谱特征",
+      "missing_evidence": "缺少有限尺寸、边界条件、键维截断和外推误差对 HHG 光谱影响的验证；需要文献支持张量网络在受驱动多体体系中保持长时间相干演化、频域谱线和高次谐波截止结构的可靠性",
+      "search_keywords": [
+        "finite-size scaling tensor network driven Hubbard high harmonic generation",
+        "bond-dimension convergence HHG tensor network",
+        "time-dependent DMRG high-harmonic generation",
+        "tensor network Floquet dynamics nonlinear response",
+        "finite-size effects moiré superlattice HHG"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "强场驱动可以在不破坏莫尔材料样品的窗口内同时实现 HHG 探测和 Floquet/关联态调控",
+      "missing_evidence": "缺少莫尔材料，尤其是扭转双层石墨烯或 TMD 的飞秒激光损伤阈值、HHG 起始/饱和强度、光致加热和关联态熔化阈值的实验数据，用于支撑探测强度与控制强度窗口可分离",
+      "search_keywords": [
+        "twisted bilayer graphene femtosecond laser damage threshold",
+        "moiré material high harmonic generation intensity window",
+        "strong-field optical breakdown twisted bilayer graphene",
+        "moiré correlated insulator laser-induced melting threshold",
+        "TMDC moiré ultrafast laser damage threshold"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Floquet 工程、关联绝缘态光致熔化与 HHG 信号变化之间存在可定量对应关系，可用于方案中的强场调控与反演",
+      "missing_evidence": "缺少同时测量或理论连接 Floquet 带重整化、关联绝缘态能隙变化/熔化和 HHG 强度、偏振或截止变化的文献；单独的 Floquet 光学非线性或单独的 HHG 研究不足以支撑该联合判据",
+      "search_keywords": [
+        "Floquet engineering moiré correlated insulator high harmonic generation",
+        "light-induced melting correlated insulator HHG moiré",
+        "ac-Stark gap modulation high harmonic generation twisted bilayer",
+        "Floquet bandwidth renormalization HHG moiré",
+        "correlated insulator ultrafast HHG spectroscopy"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "莫尔 HHG 反演可通过正则化稳定恢复扭转角、莫尔势和关联参数，并由 L-curve 选择正则化参数",
+      "missing_evidence": "缺少将 L-curve/Tikhonov 或贝叶斯正则化明确应用于莫尔材料 HHG/非线性光谱反演的文献，以及噪声、参数相关性、模型失配和非唯一解的定量误差分析；一般逆问题文献不能单独证明该具体反演流程有效",
+      "search_keywords": [
+        "Tikhonov regularization high-harmonic spectroscopy inversion",
+        "L-curve method HHG inverse problem",
+        "moiré high harmonic generation parameter retrieval",
+        "uncertainty quantification HHG inversion 2D materials",
+        "Bayesian inversion twisted bilayer nonlinear optical spectra"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "单一或有限维 HHG 光谱包含足够信息区分莫尔扭转角、莫尔势、带隙、关联强度等多个参数",
+      "missing_evidence": "缺少该具体莫尔 HHG 正演模型的参数可辨识性、Jacobian/Fisher 信息矩阵秩、条件数和后验不确定度分析；需要证明所用偏振、强度、温度或角度扫描能够解除参数退化",
+      "search_keywords": [
+        "parameter identifiability moiré high harmonic generation",
+        "Fisher information HHG spectroscopy twisted bilayer",
+        "Jacobian condition number high-harmonic inversion",
+        "multi-parameter retrieval moiré nonlinear optics",
+        "Bayesian parameter estimation moiré HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "扭转角测量和莫尔势反演能够达到方案所需的定量精度，例如扭转角 ±0.05° 或莫尔势 RMS 误差目标",
+      "missing_evidence": "缺少实验或模拟 benchmark，明确给出 HHG 对扭转角、平带结构和莫尔势扰动的灵敏度、测量分辨率、噪声下的角度误差和模型系统误差",
+      "search_keywords": [
+        "twist angle precision high harmonic generation twisted bilayer graphene",
+        "HHG twist-angle sensitivity moiré materials",
+        "moiré potential reconstruction from nonlinear optical spectra",
+        "twisted bilayer graphene all-optical twist angle resolution",
+        "error budget twist angle HHG spectroscopy"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "莫尔体系 HHG 的椭圆率、偏振和谐波选择定则能够区分不同对称性、层间耦合或关联相",
+      "missing_evidence": "缺少针对莫尔超晶格的偏振分辨/椭圆偏振 HHG 理论与实验研究，特别是将 C3/C6 对称性、扭转角、平带和关联态对谐波偏振响应的影响分离的文献",
+      "search_keywords": [
+        "polarization-resolved high harmonic generation moiré superlattice",
+        "ellipticity-dependent HHG twisted bilayer graphene",
+        "harmonic selection rules moiré materials",
+        "C3 symmetry high harmonic generation twisted bilayer",
+        "correlated moiré phase polarization HHG"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

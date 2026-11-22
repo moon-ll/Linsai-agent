@@ -1,0 +1,85 @@
+{
+  "gaps": [
+    {
+      "claim": "TDDFT+紧束缚分工的互补论证需要量化基准（如纯TDDFT覆盖势垒参数区间不足、纯紧束缚处理光场自洽反馈的定量局限）",
+      "missing_evidence": "缺少TDDFT与紧束缚方法在强场扫描/光场自洽反馈方面的性能对比文献，特别是处理滑移势垒参数区间和Berry曲率反演收敛性的基准",
+      "search_keywords": [
+        "TDDFT tight-binding comparison strong field",
+        "TDDFT vs tight-binding barrier parameter scan",
+        "tight-binding self-consistent light field HHG limitation"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Volkov近似限用理由（针对自旋极化态在强场下的近似合理性需要量化论证）",
+      "missing_evidence": "缺少Volkov近似在自旋极化电子/磁性体系强场演化中的有效性边界文献，特别是与TDDFT/Rashba自旋劈裂相关的对比",
+      "search_keywords": [
+        "Volkov approximation spin polarized electron",
+        "Volkov approximation validity Rashba",
+        "strong field approximation magnetic material limit"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "80-100 Ry截断能的基准引用[23]（npj 2D Mater Appl 2025）参数位置溯源",
+      "missing_evidence": "[23]文献全文无截断能参数，出处空挂；需要找到实际报告TDDFT截断能80-120 Ry的MnPS3/NiPS3类2D磁性材料计算文献",
+      "search_keywords": [
+        "TDDFT cutoff energy 2D magnetic material",
+        "MnPS3 NiPS3 DFT calculation cutoff",
+        "plane wave cutoff 80 Ry 2D antiferromagnet"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "MnPS3反演位点(a/b/c/d)与60°/120°畴域与HHG读出角度依赖的实验/理论关联",
+      "missing_evidence": "缺少HHG偏振方向与P-3反演畴夹角对应关系的直接证据，目前仅基于对称性推断，需要光谱学验证",
+      "search_keywords": [
+        "MnPS3 inversion domain HHG",
+        "antiferromagnetic domain high harmonic spectroscopy",
+        "P-3 symmetry domain wall HHG polarization"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "滑移铁电（h-BN类）势垒meV量级与THz场驱动可行性",
+      "missing_evidence": "缺少THz场(~1 MV/cm)克服2D层间滑动势垒(meV级)的实验定量证据，特别是THz-STM或THz-pump探测时间尺度",
+      "search_keywords": [
+        "THz driven interlayer sliding 2D ferroelectric",
+        "terahertz field overcome sliding barrier",
+        "h-BN sliding ferroelectric THz pump"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "MnPS3磁有序恢复时间常数τ1≈1-9 ps、τ2≈1-4 ns的双指数弛豫文献依据",
+      "missing_evidence": "缺少MnPS3或类似反铁磁体自旋动力学双指数恢复时间常数的实验测量，特别是时间分辨磁光Kerr或X射线散射数据",
+      "search_keywords": [
+        "MnPS3 spin dynamics picosecond nanosecond",
+        "antiferromagnetic recovery time constant two-exponential",
+        "time-resolved MOKE NiPS3 MnPS3"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "紧束缚模型参数化滑移坐标u与自旋劈裂Δ(k)依赖关系的方法学文献",
+      "missing_evidence": "缺少将2D磁性材料层间滑移参数化并建立紧束缚参数依赖的标准方法文献，特别是从第一层原理提取紧束缚参数的工作流",
+      "search_keywords": [
+        "tight-binding parameterization interlayer sliding",
+        "TB model extraction sliding ferroelectric 2D",
+        "Wannier function sliding antiferromagnet"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "磁性材料HHG中非相对论自旋劈裂(NRSS)的可观测性证据",
+      "missing_evidence": "缺少在HHG光谱中区分NRSS与Rashba/Dresselhaus自旋劈裂的实验或理论判据文献",
+      "search_keywords": [
+        "non-relativistic spin splitting HHG",
+        "Rashba vs altermagnet HHG signature",
+        "spin splitting high harmonic spectroscopy"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

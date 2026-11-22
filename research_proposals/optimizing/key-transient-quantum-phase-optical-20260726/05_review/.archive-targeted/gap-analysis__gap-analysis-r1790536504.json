@@ -1,0 +1,96 @@
+{
+  "gaps": [
+    {
+      "claim": "McIver 等 2020 年光致反常霍尔效应实验是固体 Floquet 态输运签名的奠基工作，承重'Floquet 工程转入实验验证'论证链",
+      "missing_evidence": "该具名成果未挂任何 [N] 编号，评审无法溯源原始实验数据与判据",
+      "search_keywords": [
+        "McIver 2020 photo-induced anomalous Hall effect Floquet",
+        "light-induced anomalous Hall Bi2Se3",
+        "Floquet engineering topological insulator experimental"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "L35 三连主张：中红外瞬态对称破缺、极化超织构、QFI 突破标准量子极限相继报道",
+      "missing_evidence": "三项具体主张均为零引用，其中 QFI 突破 SQL 系高度具体物理声明，按新颖性声明审慎原则须有同行评议文献支撑",
+      "search_keywords": [
+        "mid-infrared transient symmetry breaking solid HHG",
+        "polarization supertexture high harmonic generation crystal",
+        "quantum Fisher information high harmonic spectroscopy standard quantum limit",
+        "QFI attosecond metrology HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "[8] 被表述为'HHG 编码拓扑信息从理论预言推进到实验可区分'",
+      "missing_evidence": "[8] 实为 PMC12454650 的 THz 频段（6.42/9.63 THz）SHG/THG 微扰/热电子区间工作，与项目 5×10¹³–10¹⁴ W/cm² 非微扰 HHG 物理区间存在适用条件跨越；需补强场 HHG 实验编码拓扑信息的独立文献",
+      "search_keywords": [
+        "high harmonic generation topological insulator experimental encoding band structure",
+        "nonperturbative HHG topological surface state Bi2Se3 solid",
+        "strong-field HHG Dirac material band topology experiment"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "参考文献表预印本占比 45%（18/40），其中核心证据链 [9-11,21-23,25] 均为预印本",
+      "missing_evidence": "核心论断依赖的均为 arXiv 预印本而无正式发表版本，缺乏同行评议锁定",
+      "search_keywords": [
+        "Ghimire Reis 2011 ZnO high harmonic published version",
+        "solid HHG Bi2Se3 Nature Physical Review Letters 2024 2025",
+        "topological HHG crystal published peer-reviewed"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "L51 将 WS₂ 应变 HHG 数据挂于 [20]（疑为 arXiv:2511.13114）",
+      "missing_evidence": "未核实 arXiv:2511.13114 是否真含 WS₂ 应变 HHG 数据；若不含则 [20] 在 L41 与 L51 同号双功能，需另立条目",
+      "search_keywords": [
+        "WS2 strain high harmonic generation",
+        "tungsten disulfide strain HHG modulation",
+        "arXiv 2511.13114 WS2 transition metal dichalcogenide HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "国内现状层（§2.4 L67）'国内多个课题组''多套平台'等表述",
+      "missing_evidence": "零具名团队、零引用文献；需可核实的国内凝聚态 HHG/瞬态拓扑团队（建议如中科院物理所、上海交大、清华、北大、国防科大等已发表组）及其对应文献",
+      "search_keywords": [
+        "中国 高次谐波 凝聚态 拓扑 Bi2Se3 实验组",
+        "solid HHG China research group attosecond topological",
+        "中科院物理所 高次谐波 固体 上海交大 瞬态拓扑"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "L91 称'120 as 公开报道'作为时间分辨对照基准",
+      "missing_evidence": "该 120 as 数值未给出具体出处文献，需追原始公开报道文献",
+      "search_keywords": [
+        "120 attosecond pulse solid HHG isolated",
+        "sub-130 attosecond high harmonic generation crystal",
+        "attosecond pulse train solid-state HHG shortest"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "L107 提到'ΔC<0.01 量级'作为 Chern 数重构精度判据",
+      "missing_evidence": "该精度量级未注明推导来源或参考文献，需补充理论或实验来源",
+      "search_keywords": [
+        "Chern number reconstruction precision Berry curvature resolution",
+        "topological invariant measurement accuracy HHG tomography",
+        "Berry curvature sampling error ΔC 0.01"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "项目核心 ≤100 as 端到端写读协同机制",
+      "missing_evidence": "评审指出该指标无预研演示且证据链预印本化，需补预研或已发表对照实验支撑",
+      "search_keywords": [
+        "end-to-end write-read attosecond solid HHG",
+        "coherent control read-out sub-100 attosecond topological",
+        "petahertz write attosecond read topological phase"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

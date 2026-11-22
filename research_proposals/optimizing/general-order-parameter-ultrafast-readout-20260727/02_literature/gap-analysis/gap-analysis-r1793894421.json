@@ -1,0 +1,66 @@
+{
+  "gaps": [
+    {
+      "claim": "文献[15]能够证明固态高次谐波辐射的哑铃形或三叶草形各向异性可直接作为交错磁序参量的判别指纹。",
+      "missing_evidence": "Liu等人在Phys. Rev. B 112, 081105中的摘要仅支持哑铃形谐波辐射及利用HHG反推Hubbard U，未直接支持三叶草形，也未证明该图形可作为普适的序参量判别指纹。需要补充直接展示三叶草形辐射并验证其与磁对称性或序参量一一对应关系的原始实验文献；若不存在此类证据，应将表述收窄为该文献实际证明的哑铃形取向依赖及其在Hubbard U反演中的作用。",
+      "search_keywords": [
+        "\"Phys. Rev. B\" 112 081105 HHG Hubbard U",
+        "\"Liu\" high harmonic generation dumbbell-like shape solid",
+        "solid-state high harmonic generation trefoil pattern",
+        "high harmonic emission three-lobed angular dependence antiferromagnet",
+        "magnetic order parameter fingerprint high harmonic generation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "截至2026年8月，交错磁序参量的高阶非线性光学实验读出并非首次，本项目的创新性需要相对于CoF2偏振分辨SHG工作进行正面比较。",
+      "missing_evidence": "缺少对arXiv:2606.17848、后刊PRL 137, 126902的引用和内容比较。需要核实并说明该工作采用的SHG阶数、偏振与对称性选择规则、实际读取的序参量或磁有序参数、时间分辨率及其归因边界，据此论证本项目所称的“高阶响应、可辨识性定量判据和唯一归因协议”所带来的实质增量，而非仅比较光学阶数。",
+      "search_keywords": [
+        "arXiv:2606.17848",
+        "\"PRL 137\" 126902 CoF2",
+        "CoF2 polarization-resolved second harmonic generation",
+        "CoF2 altermagnet SHG magnetic order parameter",
+        "交错磁 CoF2 偏振分辨 二次谐波 顺序参量",
+        "magnetically induced second harmonic generation CoF2"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "本项目在磁序参量非线性光学读出及多通道HHG反演方面的文献定位具有明确新颖性。",
+      "missing_evidence": "除补引CoF2工作外，还缺少能够界定最近研究边界的原始文献或系统检索结果，尤其是固态HHG用于CDW及其他有序体系、磁对称性选择规则、磁序参量反演，以及多参数可辨识性和唯一归因方法的代表性研究。只有将这些先例与本项目的定量可辨识性判据逐项比较，才能支撑“高阶加定量判据加唯一归因”的创新性结论，不能仅依靠“尚未见报道”的措辞。",
+      "search_keywords": [
+        "solid-state high harmonic generation CDW order parameter",
+        "high harmonic generation magnetic symmetry selection rules",
+        "magnetically induced second harmonic generation antiferromagnet order parameter",
+        "multi-parameter identifiability spectroscopy Fisher information matrix",
+        "unique attribution protocol nonlinear optical spectroscopy inverse problem",
+        "HHG inverse problem parameter identifiability"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "正文中15处带引文的陈述可由现有参考文献支撑，例如“偏振分辨的固体HHG已在CDW体系中实现”等。",
+      "missing_evidence": "虽然部分陈述已有角标，但缺少作者名，导致句子与原始来源之间不能形成直接、可追溯的作者—结果对应关系。需要逐条核对相关原文、作者、发表年份、具体结果和结论限定，并将现有编号规范为“作者等人[编号]”形式；不能仅依据二手综述转述或仅凭当前角标推定原始证据。",
+      "search_keywords": [
+        "TiSe2 high harmonic generation CDW polarization resolved",
+        "Tyulnev TiSe2 high harmonic generation charge density wave",
+        "solid-state HHG polarization dependence ordered matter",
+        "偏振分辨 固体 高次谐波 CDW TiSe2"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Cr2O3和NiO中的磁致二次谐波_generation已有实验先例，可用于说明磁有序体系可通过非线性光学响应被识别。",
+      "missing_evidence": "该陈述目前完全没有参考文献。需要分别补充Cr2O3和NiO中磁致二次谐波生成的原始实验文献，核实其磁对称性来源、偏振依赖、序参量或磁各向异性的提取方式及适用边界；若两篇文献的实验对象或结论并不相同，应拆分陈述并分别引用。",
+      "search_keywords": [
+        "Cr2O3 magnetically induced second harmonic generation",
+        "NiO magnetically induced second harmonic generation",
+        "MSHG Cr2O3 NiO antiferromagnet",
+        "magnetic second harmonic generation antiferromagnetic oxide polarization",
+        "磁性二次谐波 Cr2O3 NiO 磁各向异性"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

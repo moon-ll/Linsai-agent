@@ -1,0 +1,31 @@
+{
+  "gaps": [
+    {
+      "claim": "rationale §2.3–§4 中关于 Hu、Notter、Yue–Gaarde、Li/Parks 等工作的具名归属与参考文献编号必须准确对应；目前至少13处存在张冠李戴，包括“Hu 2023年理论工作[29]”“Notter[31]”及“Li[32]”等表述。",
+      "missing_evidence": "需要按 references 表重新核验并统一绑定相关文献的作者、题名、年份、期刊、DOI或arXiv编号，包括 Hu 2023 arXiv:2304.09459、Hu 2024 PRL、Notter 的 Nano Letters 工作、Yue–Gaarde 的 PRA 工作及 Parks 等人的对应工作；需逐处检查 rationale 第41、47、53、55、57、59、75、77、81行，并消除 rationale 与 content、scheme 之间同一文献的双编号。",
+      "search_keywords": [
+        "arXiv 2304.09459 high harmonic generation phonon",
+        "Hu Physical Review Letters 2024 phonon high harmonic generation",
+        "Notter Nano Letters phonon high harmonic generation",
+        "Yue Gaarde Physical Review A high harmonic generation phonon",
+        "Parks et al high harmonic generation phonon nonlinear",
+        "site:doi.org phonon-mediated high harmonic generation Hu Notter Yue Gaarde Parks"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "关于“极性模与非极性模分别导致不同点群改变，进而具有不同允许谐波阶次集合”的表述需要修正并提供对称性依据；在纤锌矿结构中，A₁(LO)沿c轴位移仍保持C₆ᵥ对称性，不能仅因该模式具有极性就断言允许阶次集合发生变化，而实际降低点群的模式才可能产生相应阶次选择定则。",
+      "missing_evidence": "需要补充能够同时证明纤锌矿晶体及A₁、E₂等声子模式的位移对称性、c轴极化A₁(LO)保持C₆ᵥ、非线性响应或高次谐波阶次的点群选择定则的权威文献；最好结合目标材料的HHG实验或理论文献，明确区分晶体点群、模式表象与诱导对称性，并据此形成A₁(LO)零阶次预期与E₂降对称性非零预期的对照。",
+      "search_keywords": [
+        "wurtzite A1 LO phonon C6v symmetry",
+        "wurtzite E2 phonon symmetry high harmonic generation",
+        "ZnO high harmonic generation phonon polarization selection rules",
+        "nonlinear phononics point group selection rules high harmonic generation",
+        "polar mode c-axis displacement preserves C6v wurtzite",
+        "纤锌矿 A1 E2 声子 对称性 高次谐波 选择定则"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "content"
+}

@@ -1,0 +1,105 @@
+{
+  "gaps": [
+    {
+      "claim": "国内研究现状仅1段100字且无具体课题组/期刊支撑",
+      "missing_evidence": "需要国内HHG理论组（如TDDFT-HHG）、体相半导体HHG实验组、薄膜HHG实验组的具体单位/代表论文/年份，厚度对齐国外段（530字）",
+      "search_keywords": [
+        "TDDFT 高次谐波 中国",
+        "国内 固体 高次谐波 实验组",
+        "中国 高次谐波 飞秒 课题组",
+        "中国 强场 阿秒 实验组",
+        "BSV 高次谐波 中国",
+        "量子几何 反演 高次谐波"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "立项依据全章[N]引用密度5.42/千字远超范本10-20次全文",
+      "missing_evidence": "需删除非关键论断的编号引用，改为整体研读表述，仅留15-20处核心论断挂编号；需识别哪些是核心论断（每千字应保留约1-2篇核心文献）",
+      "search_keywords": [
+        "solid-state HHG review",
+        "Berry curvature high harmonic generation",
+        "bright squeezed vacuum HHG",
+        "quantum geometry tensor HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Ghimire等2011年在ZnO晶体上的实验观测开辟固体HHG研究范式",
+      "missing_evidence": "需验证Ghimire 2011 ZnO HHG原始实验论文及后续固体HHG综述，特别是中红外驱动ZnO晶体的非微扰谐波产生",
+      "search_keywords": [
+        "Ghimire 2011 ZnO high harmonic generation Nature Physics",
+        "solid-state HHG mid-infrared ZnO first observation",
+        "nonperturbative HHG bulk crystal 2011"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "BSV光场统计性质对Berry曲率与量子度规反演精度的影响（Q1）",
+      "missing_evidence": "需补充Rasputnyi等BSV驱动固体HHG最新实验数据、QEF（quantum enhancement factor）参数依赖、压缩度vs谐波阶次映射等具体定量结果",
+      "search_keywords": [
+        "bright squeezed vacuum solid HHG Rasputnyi 2024",
+        "QEF quantum enhancement factor harmonic",
+        "squeezed light HHG Mg:LiNbO3 a-Si",
+        "BSV HHG compression degree harmonic order"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "电子结构侧（强关联、U/W、量子几何）反演边界（Q2）",
+      "missing_evidence": "需补充1T-TaS2、TiSe2等强关联体系的HHG实验与DMFT/GW计算基准，以及量子度规张量在HHG中的反演精度（Berry curvature retrieval via HHG）",
+      "search_keywords": [
+        "1T-TaS2 high harmonic generation correlated insulator",
+        "TiSe2 CDW HHG polarization",
+        "Berry curvature HHG Luu Worner 2018",
+        "quantum metric tensor HHG inversion",
+        "U/W Hubbard high harmonic spectroscopy"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "BSV驱动的HHG量子增强与压缩度依赖",
+      "missing_evidence": "需补充BSV HHG的g(2)光子统计测量、NOPA相干态强度匹配、压缩度vs谐波产额定量关系",
+      "search_keywords": [
+        "BSV g2 measurement NOPA HHG",
+        "coherent state intensity matching HHG",
+        "bright squeezed vacuum compression HHG yield"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "TDDFT在强场极限下的精度与多体校正",
+      "missing_evidence": "需补充TDDFT与tight-binding在强场HHG中的基准对比、ALDA/LDA/GGA泛函依赖性、attosecond非绝热失效阈值",
+      "search_keywords": [
+        "TDDFT solid HHG benchmark",
+        "TDDFT attosecond nonadiabatic failure",
+        "ALDA LDA GGA HHG functional comparison",
+        "many-body correction high harmonic generation"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "量子度规张量（QGT）通过HHG反演的精度边界（Fisher信息、条件数）",
+      "missing_evidence": "需补充量子度规反演的不确定度量化、Tikhonov正则化参数可识别性、Fisher信息条件数",
+      "search_keywords": [
+        "Fisher information quantum geometry inversion",
+        "Tikhonov regularization condition number",
+        "quantum metric tensor reconstruction uncertainty",
+        "high harmonic spectroscopy retrieval accuracy"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "首创性声明需限定具体材料体系（'三维交叉点'）",
+      "missing_evidence": "需检索国内外BSV+强关联+量子几何三重交叉的具体体系是否已有报道（如1T-TaS2 + BSV、莫尔超晶格 + BSV），限定检索范围",
+      "search_keywords": [
+        "bright squeezed vacuum correlated insulator HHG",
+        "moire superlattice squeezed light HHG",
+        "quantum geometry BSV driven HHG",
+        "BSV 强关联 高次谐波"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

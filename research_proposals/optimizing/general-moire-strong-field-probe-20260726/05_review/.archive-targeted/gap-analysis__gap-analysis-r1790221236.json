@@ -1,0 +1,14 @@
+{
+  "gaps": [
+    {
+      "claim": "[27] 仅方案章引用、立项依据章缺位",
+      "missing_evidence": "需要确认 [27] 的具体文献并决定是否并入立项依据或删除",
+      "search_keywords": [
+        "moire superlattice potential high harmonic inversion reference27",
+        "twisted bilayer high harmonic generation probe literature",
+        "inverse problem moire potential reconstruction reference"
+      ]
+    }
+  ],
+  "section": "rationale"
+}

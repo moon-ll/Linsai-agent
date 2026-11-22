@@ -1,0 +1,55 @@
+{
+  "gaps": [
+    {
+      "claim": "Jacobsen THz-STM 实空间观测 Floquet-Bloch 态的直接实验证据",
+      "missing_evidence": "rat L41 引[42]（实为 Csizmadia 主动稳定）支撑 Jacobsen THz-STM Floquet 态探测，错挂后无有效条目；需 Jacobsen THz-STM Floquet Bloch 态实空间成像原始论文",
+      "search_keywords": [
+        "Jacobsen THz-STM Floquet Bloch states imaging",
+        "terahertz scanning tunneling microscopy Floquet states",
+        "THz-STM Floquet-Bloch real-space observation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "rat L39 †[19] Zhao '实验观测到' 拓扑表面态 Floquet 工程",
+      "missing_evidence": "[19] 为 arXiv 预印本，与已刊[20][21]并列无状态区分；缺已刊版本引用或预印本状态限定",
+      "search_keywords": [
+        "Zhao Floquet topological surface state ARPES published",
+        "Floquet engineering topological insulator experimental",
+        "Zhao topological Floquet band hybridization Physical Review"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "rat L87 †[32] Tan '实验佐证' 异质结太赫兹发射与拓扑磁化关联",
+      "missing_evidence": "[32] 为 arXiv 预印本，无已刊版本；需补已刊论文或预印本限定",
+      "search_keywords": [
+        "Tan heterostructure THz emission topological magnetization published",
+        "magnetic topological insulator THz emission Physical Review Letters",
+        "Tan Cr/Vd intentional superlattice THz PRL"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "α-T₃ (α-T3) 晶格作为相对论性 Dirac 准粒子测试床的解析模型",
+      "missing_evidence": "[45] Illes α-T₃ 条目三章正文零引用，'α-T₃ 解析模型'与文献溯源隔断；需 Illes α-T₃ 原始理论论文挂点",
+      "search_keywords": [
+        "Illes alpha-T3 dice lattice tight-binding",
+        "alpha-T3 lattice Dirac Harper mass",
+        "Illes Rhxs α-T3 zhousdua Lewis Research"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "MnBi₂Te₄ 拓扑磁体 Floquet 工程或瞬态相变中的可类比体系",
+      "missing_evidence": "[44] Otrokov MnBi₂Te₄ 条目三章正文零引用，rat L119 候选挂点缺失；需 Otrokov MnBi₂Te₄ 磁性拓扑绝缘体原始论文支撑类比",
+      "search_keywords": [
+        "Otrokov MnBi2Te4 magnetic topological insulator",
+        "MnBi2Te4 antiferromagnetic topological surface state",
+        "Otrokov Nature2019 MnBi2Te6Te intrinsic magnetic TI"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "rationale"
+}

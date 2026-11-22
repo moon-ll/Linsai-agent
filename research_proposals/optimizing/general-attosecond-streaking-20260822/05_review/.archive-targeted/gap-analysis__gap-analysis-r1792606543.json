@@ -1,0 +1,51 @@
+{
+  "gaps": [
+    {
+      "claim": "Peschel[7]（Nature Communications 13, 5205）被用于支撑角分辨 RABBIT、TDSE 计算及失效机理先例，但原文实际是采用 VMI 测量光电子动量分布的角分辨 RABBIT 实验，理论部分为多体微扰论对照，并非 TDSE 计算。",
+      "missing_evidence": "需要引用并核验 Peschel 原文以明确其实验方法和理论性质；若要证明 TDSE 或计算方法已有同类先例，还需补充一篇确实采用 TDSE、且研究对象与本项目测量链相近的原始文献，不能继续由该文承担计算先例的论证。",
+      "search_keywords": [
+        "Peschel Nature Communications 13 5205 2022",
+        "Peschel angle-resolved RABBIT VMI many-body perturbation theory",
+        "attosecond RABBIT velocity map imaging measurement",
+        "TDSE attosecond streaking calculation precedent"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "“Peschel[7] 配套理论已经示范 TDSE 双通道耦合分析”这一论断缺少直接依据。",
+      "missing_evidence": "需要补充明确包含至少两个电离通道、求解或耦合 TDSE 通道振幅，并分析通道间干涉或耦合对重构结果影响的原始论文。仅有 RABBIT 实验或多体微扰论对照不能证明 TDSE 双通道分析已经完成。",
+      "search_keywords": [
+        "multichannel TDSE attosecond streaking",
+        "two-channel TDSE ionization phase attosecond",
+        "coupled-channel TDSE high-order harmonic generation",
+        "multichannel attosecond reconstruction channel coupling",
+        "TDSE two ionization channels streaking spectroscopy"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "将 Peschel[7] 中同壳层 εs/εd 分波干涉导致 RABBIT 反演失效的机制外推为本项目中阈通道干涉破坏单通道反演，缺少对两类机制可分性和适用范围差异的文献支撑。",
+      "missing_evidence": "需要同时补充两类证据：一类说明 RABBIT 中同壳层分波干涉及其重构影响，另一类说明阈附近不同电离通道的相干耦合、谱峰重叠或通道串扰如何影响单通道假设。还需有文献依据或明确限定该外推仅适用于“通道干涉破坏单通道反演”这一抽象层面。",
+      "search_keywords": [
+        "RABBIT epsilon s epsilon d partial wave interference",
+        "RABBIT reconstruction partial wave interference inversion",
+        "multichannel attosecond ionization phase retrieval",
+        "threshold channel interference attosecond streaking",
+        "channel crosstalk single-channel inversion attosecond"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "研究方案中 γ 参数估算所采用的理论关系及其适用区间需要明确文献挂接。",
+      "missing_evidence": "需要在估算公式出现处挂接 Keldysh 参数的权威原始文献或权威综述，并说明该参数在当前场强、驱动频率和目标截止能区下用于判断多光子与隧穿区间的适用边界；不能只在参考文献表中列出而未形成正文证据链。",
+      "search_keywords": [
+        "Keldysh parameter original paper strong-field ionization",
+        "Keldysh parameter high harmonic generation tunneling multiphoton regime",
+        "Keldysh gamma estimate XUV water-window high harmonic generation",
+        "Keldysh parameter validity attosecond strong-field ionization"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "scheme"
+}

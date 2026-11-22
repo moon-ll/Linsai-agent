@@ -1,0 +1,22 @@
+{
+  "proposal_id": "general-bsv-driven-hhg-quantum-20260726",
+  "cluster_id": "cl_20260815_da696e",
+  "entries": [
+    {
+      "source_id": "paper:2025-2503.15932-excitonic-enhancement-of-squeezed-light-in-quantum-optical-h",
+      "title": "Excitonic Enhancement of Squeezed Light in Quantum-Optical High-Harmonic Generation From a Mott Insulator",
+      "summary": "该文研究了Mott绝缘体在强场驱动下的量子光学高次谐波产生（HHG）过程，发现激子效应能显著放大所产生谐波光的量子压缩（非经典特性）。基于此，作者提出应在激子能区附近的谐波频段探测压缩光等非经典信号，为固态体系中量子光学效应的实验观测提供了新方案。",
+      "path": "",
+      "added_via": "cluster:cl_20260815_da696e",
+      "added_at": "2026-08-29T01:11:11Z"
+    },
+    {
+      "source_id": "paper:2019-1910.13791-on-the-quantum-optical-nature-of-high-harmonic-generation",
+      "title": "On the Quantum-Optical Nature of High Harmonic Generation",
+      "summary": "该文提出了将驱动场与发射场同时量子化的全量子电动力学（QED）高次谐波产生理论，预言了微扰原子态跃迁导致的频率梳偏移和偶极近似破缺产生的偶次谐波等新量子光学效应；尤为关键的是证明每个发射的HHG光子都是所有频率的叠加态，即单个光子即携带完整梳状谱结构，表明阿秒光子并非频率分辨实体而是量子叠加态，并蕴含非经典光统计的可观测潜力。",
+      "path": "",
+      "added_via": "cluster:cl_20260815_da696e",
+      "added_at": "2026-08-29T01:11:11Z"
+    }
+  ]
+}

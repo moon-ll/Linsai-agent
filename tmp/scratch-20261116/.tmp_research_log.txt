@@ -1,0 +1,16 @@
+⚠ Semantic Scholar 限流（429），跳过该源: first-principles analytical model high harmonic generation comparison
+⚠ Semantic Scholar 限流（429），跳过该源: tellurium nonlinear refractive index strong field
+⚠ Semantic Scholar 限流（429），跳过该源: strong field calculation uncertainty cross-validation high harmonic generation
+⚠ Semantic Scholar 限流（429），跳过该源: tellurium high harmonic generation nonlinear response
+[done] tellurium high harmonic generation nonlinear response: 3 条
+[done] tellurium nonlinear refractive index strong field: 5 条
+[done] first-principles analytical model high harmonic generation comparison: 1 条
+[done] strong field calculation uncertainty cross-validation high harmonic generation: 1 条
+⚠ Semantic Scholar 限流（429），跳过该源: high harmonic generation field strength prediction benchmark accuracy
+⚠ Semantic Scholar 限流（429），跳过该源: unified theory high harmonic generation mechanisms interference
+⚠ Semantic Scholar 限流（429），跳过该源: geometric Berry mechanism photocurrent coupling high harmonic generation
+⚠ Semantic Scholar 限流（429），跳过该源: Floquet-Bloch nonlinear mechanisms coexistence high harmonic
+[done] high harmonic generation field strength prediction benchmark accuracy: 2 条
+[done] unified theory high harmonic generation mechanisms interference: 0 条
+[done] geometric Berry mechanism photocurrent coupling high harmonic generation: 6 条
+[done] Floquet-Bloch nonlinear mechanisms coexistence high harmonic: 7 条

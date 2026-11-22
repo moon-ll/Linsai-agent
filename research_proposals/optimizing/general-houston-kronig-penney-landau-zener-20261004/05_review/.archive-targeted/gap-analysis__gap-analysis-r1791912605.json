@@ -1,0 +1,58 @@
+{
+  "gaps": [
+    {
+      "claim": "Floquet 拓扑态实时探针尚未从理论走向实现（content L62，引用 [18,21]）",
+      "missing_evidence": "正文引用 [21] 在 references.md 中无对应条目（ref 实体集 {1-15,17-20,22-34} 缺失 16 与 21）；该核心新颖性论断的文献支撑无法解析，评审已建议挂 Zhao[32] 但未做实证",
+      "search_keywords": [
+        "Floquet topological state real-time probe",
+        "Floquet engineering high harmonic generation",
+        "Zhao Floquet sideband topological insulator",
+        "Floquet topological phase HHG detection"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "参考文献 [16] 在引用顺序中跳号缺失（content 引用集含 16，refs 实体集不含）",
+      "missing_evidence": "[16] 在 content 中被引用但未出现在 references.md；与 [21] 并列为同一引用完整性缺陷，需补全真实条目并按引用顺序重排",
+      "search_keywords": [
+        "Kronig-Penney potential band fitting MgO",
+        "first principles band structure MgO tunnel",
+        "Kronig-Penney model high harmonic"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.6 三组关键子问题中第二组缺失：缺陷诱导偶次谐波与 Berry 曲率偶次谐波如何甄别（content L94）",
+      "missing_evidence": "将缺陷贡献与 Berry 曲率贡献解耦的甄别机制缺乏文献支撑；当前缺少区分两类偶次谐波起源（PT 对称性破缺 vs Berry 偶极）的实验或第一性原理方法引用",
+      "search_keywords": [
+        "Berry curvature dipole even harmonic",
+        "defect-induced second harmonic generation topological insulator",
+        "time-reversal symmetry breaking odd harmonic topological",
+        "PT-symmetric defect harmonic selection rule"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "双色场波形门控直接用于读取 k 分辨相位干涉与 Landau-Zener 隧穿时序的研究尚未见报道（content L62/L76/L98 三现）",
+      "missing_evidence": "该新颖性论断在全稿三处复现，但未提供现有相关工作的对照引用以佐证'尚未见报道'的合理性；需要列出已有双色场门控 HHG、k 分辨谐波测量、Landau-Zener 隧穿谐波计时的相邻工作并与之对比",
+      "search_keywords": [
+        "bichromatic field waveform gating high harmonic generation",
+        "k-resolved phase interference HHG Bloch",
+        "Landau-Zener tunneling harmonic timing sub-cycle",
+        "two-color sub-cycle control high harmonic"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "研究范围覆盖拓扑材料 Bi2Se3/Bi2Te3（content L90），但实验矩阵（L46/L82）仅含 Bi2Se3",
+      "missing_evidence": "Bi2Te3 作为对照或主测材料的实验定位不清；需要明确 Bi2Te3 是作为'文献对照'——并补其 HHG 行为文献——还是纳入实验矩阵，缺少对应支撑文献",
+      "search_keywords": [
+        "Bi2Te3 high harmonic generation",
+        "Bi2Se3 Bi2Te3 topological insulator harmonic comparison",
+        "Bi2Te3 strong topological surface state HHG"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "content"
+}

@@ -1,0 +1,16 @@
+{
+  "gaps": [
+    {
+      "claim": "PINN 在 Ω/g 反演任务中相对端到端 CNN 的精度优势",
+      "missing_evidence": "缺少 PINN vs CNN 在 Berry 曲率/量子度规反演任务上的已发表基线精度对比锚点（如 Silva 等 SWE [48] 框架下的反演精度基准）",
+      "search_keywords": [
+        "PINN Berry curvature inversion",
+        "physics-informed neural network quantum geometry high harmonic",
+        "CNN baseline Berry curvature retrieval",
+        "Silva semiconductor Wannier equations inversion accuracy"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "content"
+}

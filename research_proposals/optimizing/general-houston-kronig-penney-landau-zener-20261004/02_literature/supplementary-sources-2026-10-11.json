@@ -1,0 +1,30 @@
+{
+  "proposal_id": "general-houston-kronig-penney-landau-zener-20261004",
+  "cluster_id": "cl_20261011_bb9c1c",
+  "entries": [
+    {
+      "source_id": "paper:2014-1409.2725-theoretical-analysis-of-high-harmonic-generation-in-solids",
+      "title": "Theoretical analysis of high-harmonic generation in solids",
+      "summary": "对中红外驱动固体高次谐波建立了双带半导体布洛赫方程理论框架，将辐射电流明确分解为带内与带间两部分，证明此前被普遍忽略的带间电流（价带-导带相干极化的时间导数）实际上是 plateau 区谐波的主导通道。在 Keldysh 隧穿极限下提出固体版三步模型：电子-空穴对在峰值场产生、在 k 空间沿能带加速、当晶体动量回到产生点时再碰撞并发射能量等于该 k 处瞬时带隙的光子。该图像自然解释了 ZnO 实验中谐波 plateau、截止能量随场幅线性增长以及对椭圆偏振弱敏感等特征（PRL 113, 073901）。",
+      "path": "knowledge/raw/papers/2014-1409.2725-theoretical-analysis-of-high-harmonic-generation-in-solids.md",
+      "added_via": "cluster:cl_20261011_bb9c1c",
+      "added_at": "2026-10-11T14:40:16Z"
+    },
+    {
+      "source_id": "paper:2022-2208.10032-transition-from-multiphoton-to-tunneling-ionization-in-the-p",
+      "title": "Transition from multiphoton to tunneling ionization in the process of high harmonic generation in solids",
+      "summary": "本文通过实验与理论相结合，证明固体高次谐波产生（HHG）中电离机制随场强增强从多光子电离向隧穿电离转变，谐波产率呈现从F0^6到F0^1.3的功率标度演化。半导体布洛赫方程（SBE）建模证实强场下带隙演化主导该标度行为，结合Keldysh理论确定了转变交叉点，为SBE适用区域和Keldysh参数区间提供了实验界定。",
+      "path": "",
+      "added_via": "cluster:cl_20261011_bb9c1c",
+      "added_at": "2026-10-11T14:40:16Z"
+    },
+    {
+      "source_id": "paper:2019-1907.11134-high-harmonic-generation-in-solids",
+      "title": "High-harmonic generation in solids",
+      "summary": "建立了以Houston基展开为核心、配以可解析调参的Kronig-Penney模型势的多带固态HHG理论框架，模拟MgO晶体在强激光场下的谐波发射。系统分解了带内电流与带间电流各自的谱贡献，揭示低阶谐波以带内机制为主、高阶谐波以带间机制为主的归属。强调谐波谱必须对整个第一布里渊区积分并检验所含带数的收敛性，否则谱形与截止位置会产生系统偏差。",
+      "path": "knowledge/raw/papers/2019-1907.11134-high-harmonic-generation-in-solids.md",
+      "added_via": "cluster:cl_20261011_bb9c1c",
+      "added_at": "2026-10-11T14:40:16Z"
+    }
+  ]
+}

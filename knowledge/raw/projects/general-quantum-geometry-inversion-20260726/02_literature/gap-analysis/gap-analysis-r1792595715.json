@@ -1,0 +1,28 @@
+{
+  "gaps": [
+    {
+      "claim": "§6中关于Marques 2021 PRM工作可为相关计算提供400–600 eV动能截断和20–40 Å截断半径参数的定量支撑。",
+      "missing_evidence": "缺少正文中的对应引文标识及references中的完整条目；还需由该文献正文确认两个数值确为Marques 2021所采用或明确建议的参数，并核实其适用体系、计算类型和参数定义，避免张冠李戴。",
+      "search_keywords": [
+        "Marques 2021 Physical Review Materials 400–600 eV 20–40 Å",
+        "Marques PRM 2021 kinetic energy cutoff 400 600 eV",
+        "Marques 2021 screening cutoff radius 20 40 angstrom",
+        "site:aps.org Physical Review Materials Marques 2021 DFT cutoff"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "文献[12]能够支撑公式“ΔH²/ΔH²_SQL = exp(−2r)”，或该公式是在[12]方法框架下推导得到的。",
+      "missing_evidence": "现有信息只能核验到[12]的摘要，摘要中没有出现该公式，因此缺少全文中的原始公式、定义、推导过程或明确页码与公式编号。需要核查[12]全文；若公式确在正文，应补充“据其正文”并尽量标注公式位置，若不在正文则应更换原始来源或明确说明该公式为本项目推导。",
+      "search_keywords": [
+        "“ΔH²/ΔH²_SQL = exp(−2r)”",
+        "\"delta H squared\" SQL \"exp(-2r)\"",
+        "\"ΔH_SQL²\" quantum",
+        "[12]作者 公式 SQL r 全文",
+        "noise sensitivity exp(-2r) SQL"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

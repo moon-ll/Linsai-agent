@@ -1,0 +1,137 @@
+{
+  "gaps": [
+    {
+      "claim": "现有XRD、ARPES、THz及常规光学方法在体相探测、亚周期时间分辨和序参量归因方面存在共同局限。",
+      "missing_evidence": "缺少针对不同技术的近期综述和代表性实验文献，系统比较其体相敏感性、时间分辨率、动量或空间分辨率、对序参量的选择性以及从观测信号反推出序参量时的归因限制。需要用具体研究结果而非概括性判断支撑“共同局限”。",
+      "search_keywords": [
+        "ultrafast order parameter readout XRD ARPES THz spectroscopy review",
+        "time-resolved X-ray diffraction order parameter dynamics limitations",
+        "time-resolved ARPES order parameter sub-cycle dynamics",
+        "terahertz spectroscopy order parameter readout limitations",
+        "bulk-sensitive ultrafast order parameter measurement"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "固体HHG具有五重优势，适合用于序参量的超快探测或读出。",
+      "missing_evidence": "缺少逐项对应的理论或实验文献，以及与XRD、ARPES、THz和光学方法的定量或至少明确的性能比较。每项优势都需要说明适用条件和局限，不能仅以“体相、亚周期、对称性敏感、多自由度探测”等标签代替证据。",
+      "search_keywords": [
+        "solid-state high harmonic generation advantages bulk sensitivity sub-cycle",
+        "high harmonic spectroscopy order parameter probe review",
+        "solid-state HHG symmetry sensitivity ultrafast dynamics",
+        "high harmonic generation comparison XRD ARPES THz spectroscopy",
+        "attosecond high harmonic spectroscopy condensed matter review"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "序参量相关的对称性敏感信号可以实现序参量的“直接读出”。",
+      "missing_evidence": "缺少证明观测量与序参量之间存在可校准、可重复且近似一一对应关系的理论和实验文献。需要区分“对序参量敏感”“观察到序参量指纹”和“能够唯一反演或直接测量序参量”这几个不同强度的表述，并给出已有工作的适用边界。",
+      "search_keywords": [
+        "high harmonic generation direct readout order parameter",
+        "solid-state HHG order parameter measurement",
+        "high harmonic spectroscopy symmetry breaking order parameter retrieval",
+        "calibrated order parameter extraction from high harmonic spectra",
+        "ultrafast order parameter direct measurement high harmonics"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "HHG中的谐波各向异性、偏振响应或圆二色性能够作为特定序参量的唯一指纹。",
+      "missing_evidence": "缺少讨论信号非唯一性的理论和实验研究，以及能够排除替代机制的对照文献。需要证明相同或相似的HHG信号不会由能带结构、跃迁矩阵元、Berry曲率、载流子激发分布、晶体取向或驱动场参数变化产生。",
+      "search_keywords": [
+        "high harmonic generation non-unique order parameter fingerprint",
+        "HHG anisotropy band structure matrix element Berry curvature population dynamics",
+        "inverse problem high harmonic spectroscopy degeneracy",
+        "solid-state HHG disentangling band structure and Berry curvature",
+        "high harmonic polarization response alternative mechanisms"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "正文中关于HHG探测能力、时间尺度、信号变化、增强倍数或其他性能的关键数字具有普适代表性。",
+      "missing_evidence": "缺少每个数字对应的原始论文、测量条件、材料体系、驱动场强、温度、信噪比和统计不确定度。还需要说明这些数字是单一实验结果、理论估计还是跨文献比较，避免脱离条件地使用“优势倍数”或数量级表述。",
+      "search_keywords": [
+        "quantitative solid-state HHG signal strength order parameter",
+        "high harmonic generation enhancement factor quantitative experiment",
+        "high harmonic spectroscopy signal-to-noise order parameter",
+        "attosecond solid-state HHG temporal resolution experimental conditions",
+        "strong-field HHG field intensity material dependence"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "H1-H6所列方向均属于尚未解决的研究机会，部分方向具有“蓝海”或国际空白性质。",
+      "missing_evidence": "缺少针对每个机会的近期系统检索、领域综述和代表性论文，特别是需要明确已有工作已经做到什么、尚未做到什么，以及“空白”是完全没有研究、缺乏实验验证、缺乏统一理论还是缺乏多参数反演。不能仅凭少量论文或主观评级认定国际空白。",
+      "search_keywords": [
+        "high harmonic generation order parameter systematic review",
+        "high harmonic spectroscopy magnetic order excitonic order superconducting order CDW",
+        "ultrafast order parameter retrieval high harmonic generation literature",
+        "recent review HHG quantum materials order parameters",
+        "bibliometric analysis high harmonic spectroscopy order parameter"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "国际和国内代表性课题组已经形成了与本项目相关的研究格局，并可据此判断各方向的研究成熟度和竞争状态。",
+      "missing_evidence": "缺少各课题组对应的原始论文、发表年份、具体贡献及其与本项目问题的直接关联。需要避免把课题组名称、论文数量或热点程度直接等同于技术成熟度；“蓝海度”评分还需要公开、可复核的评价标准和检索范围。",
+      "search_keywords": [
+        "leading groups solid-state high harmonic spectroscopy order parameter",
+        "international research groups ultrafast quantum materials HHG",
+        "domestic research groups high harmonic generation quantum materials",
+        "high harmonic spectroscopy research landscape review",
+        "research gap assessment high harmonic order parameter measurement"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "激子、超导、铁磁、反铁磁、altermagnet、CDW、PDW和hidden order等序参量，以及MoS2、WS2、ZnO、Cu2O、NbN、YBCO、CrI3、NiO、CrSb、MnTe、TiSe2等材料，是本项目所列研究对象或具有相应序参量。",
+      "missing_evidence": "缺少权威综述或原始论文证明各材料中相应序参量的存在、定义、对称性特征、相变条件和实验判据；同时需要补充哪些材料已经开展过HHG或相关非线性光谱研究，哪些只是候选体系，避免将材料背景文献误作HHG可行性证据。",
+      "search_keywords": [
+        "excitonic order parameter high harmonic generation MoS2 WS2 Cu2O",
+        "superconducting order parameter high harmonic generation NbN YBCO",
+        "ferromagnetic antiferromagnetic order high harmonic generation CrI3 NiO",
+        "altermagnet order parameter CrSb MnTe nonlinear optics",
+        "charge density wave high harmonic generation TiSe2 NbSe2",
+        "pair density wave hidden order ultrafast spectroscopy review"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "altermagnet中的HHG圆二色性和偏振各向异性可以辨识磁序方向或磁对称性，并可用CrSb或MnTe开展验证。",
+      "missing_evidence": "缺少关于altermagnet光学响应、非线性光学、HHG及磁场反转响应的直接理论和实验文献；还需要证明圆二色性或偏振各向异性对磁序方向的敏感性能够与晶体各向异性、能带效应和样品取向效应区分，并给出CrSb或MnTe的材料参数和实验可行性依据。",
+      "search_keywords": [
+        "altermagnet high harmonic generation",
+        "altermagnet nonlinear optics circular dichroism",
+        "CrSb MnTe high harmonic spectroscopy",
+        "altermagnet magnetic order direction polarization anisotropy",
+        "field reversal circular dichroism altermagnetic materials"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "HHG能够实现多序参量解耦、联合反演或多序共存状态的唯一重构。",
+      "missing_evidence": "缺少已有多序共存体系的HHG研究、单序参量反演方法和多参数可辨识性分析。需要文献说明不同序参量对哪些独立观测量产生可区分响应，以及现有工作为何不能完成联合反演，而不是仅以“多自由度”和“多信号通道”推断可解耦。",
+      "search_keywords": [
+        "multi-order parameter high harmonic spectroscopy",
+        "coexisting orders high harmonic generation",
+        "joint inversion order parameters high harmonic spectra",
+        "identifiability inverse problem high harmonic spectroscopy",
+        "decoupling competing orders ultrafast nonlinear spectroscopy"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "正文引用能够充分支撑所述研究现状、国际空白、技术优势和科学机会。",
+      "missing_evidence": "需要逐条建立“正文论点—具体参考文献—文献中实际支持内容”的对应关系，并核查论文题目、发表状态、年份、DOI或arXiv编号。对于只支持一般背景而不支持具体结论的引用，应更换为直接的原始研究或综述；对于正文出现但references.md未收录的文献，需要补齐或删除相关论断。",
+      "search_keywords": [
+        "claim citation matching high harmonic spectroscopy",
+        "primary literature order parameter high harmonic generation",
+        "recent HHG quantum materials review DOI",
+        "citation audit research proposal literature support",
+        "high harmonic generation order parameter experimental evidence"
+      ],
+      "priority": "high"
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "gaps": [
+    {
+      "claim": "Cochran量子相干断层成像方法在HHG序参量提取中的唯一性条件",
+      "missing_evidence": "Cochran [62] 在 content.md §2.3 中同时出现在 [62] 和 [63] 两个位置，表明存在作者-编号映射错误；需准确引用 Cochran 关于 HHG quantum coherence tomography 的具体论文及其唯一性条件结论",
+      "search_keywords": [
+        "Cochran quantum coherence tomography high harmonic",
+        "Cochran HHG order parameter reconstruction",
+        "coherence tomography attosecond spectroscopy order parameter"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Sørensen阿秒HHG序参量重建方法的非唯一性警示",
+      "missing_evidence": "Sørensen [63] 在 content.md §2.3 中与 [62] Cochran 产生编号混淆；需准确引用 Sørensen 关于 attosecond HHG order parameter reconstruction 的具体论文及其非唯一性分析结论",
+      "search_keywords": [
+        "Sørensen attosecond order parameter reconstruction HHG",
+        "Sørensen HHG quantum coherence tomography",
+        "attosecond HHG order parameter non-uniqueness"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "CrSb自旋极化高次谐波的实验观测",
+      "missing_evidence": "Rost 条目为孤儿引用（orphan entry），在 content.md 中找不到对应论证位置；需在研究内容中为 CrSb HHG 实验观测找到合适的支撑位置并正确关联",
+      "search_keywords": [
+        "Rost CrSb high harmonic generation spin-resolved 2025",
+        "CrSb spin-polarized high harmonic experimental",
+        "altermagnet HHG experimental observation CrSb material fingerprint"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Werner交替磁体高次谐波理论预测",
+      "missing_evidence": "[24] Werner 在跨文档中年份不一致；需在研究内容相关位置准确引用 Werner-Šmejkal altermagnet HHG 理论预测论文的正確年份",
+      "search_keywords": [
+        "Werner altermagnet high harmonic generation theory",
+        "Werner Šmejkal altermagnet HHG 2024",
+        "alternating magnet HHG theory prediction"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "content.md L23 处 [65][66] 两条引用的正确归位",
+      "missing_evidence": "L23 处 [65][66] 存在反向错位，即引用编号与实际论证内容不匹配；需找出 L23 附近论证所依据的两篇实际论文并修正编号",
+      "search_keywords": [
+        "Cochran quantum coherence tomography high harmonic",
+        "Sørensen attosecond order parameter reconstruction HHG",
+        "HHG quantum coherence tomography multi-band",
+        "attosecond HHG orbital order inversion"
+      ],
+      "priority": "high"
+    }
+  ]
+}

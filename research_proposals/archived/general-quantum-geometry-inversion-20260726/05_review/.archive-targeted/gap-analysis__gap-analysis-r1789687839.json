@@ -1,0 +1,36 @@
+{
+  "gaps": [
+    {
+      "claim": "BSV驱动固体HHG的反演误差如何随光子统计g⁽²⁾(0)、反演张量秩、量子增强因子QEF等参数变化的定量关系",
+      "missing_evidence": "缺少BSV驱动固体HHG反演误差对g⁽²⁾(0)、Fisher信息、后验方差的定量依赖关系的实验或理论文献",
+      "search_keywords": [
+        "bright squeezed vacuum HHG inversion error",
+        "Fisher information quantum light HHG",
+        "BSV g2 HHG posterior variance",
+        "quantum enhancement factor HHG retrieval"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "BSV场的非经典光子统计g⁽²⁾(0)>1能否提升Berry曲率Ω/度规g的Fisher信息并降低后验方差",
+      "missing_evidence": "缺少量子光场（BSV/squeezed light）驱动下Berry曲率与度规张量反演中Fisher信息与后验方差变化的文献",
+      "search_keywords": [
+        "squeezed light Berry curvature retrieval",
+        "non-classical light Fisher information",
+        "quantum light HHG posterior uncertainty"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "f-sum rule标度律作为硬约束<5%的物理基础与实验验证状态",
+      "missing_evidence": "缺少f-sum rule标度律在强场HHG反演中作为定量硬约束的实验测量或理论严格证明文献",
+      "search_keywords": [
+        "f-sum rule high harmonic generation",
+        "sum rule HHG cutoff constraint",
+        "f-sum rule strong field solid"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

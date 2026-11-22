@@ -1,0 +1,75 @@
+{
+  "gaps": [
+    {
+      "claim": "创新点(一)(二)(三)均落在'可辨识性优先'框架下，创新点彼此差异化不锐利",
+      "missing_evidence": "缺乏对现有HHG序参量重建方法的系统分类对比，以支撑本项目三个创新点的独特性论述",
+      "search_keywords": [
+        "high harmonic generation order parameter reconstruction methods comparison",
+        "HHG quantum coherence tomography vs attosecond retrieval",
+        "Cochran Sørensen HHG order parameter methods differentiation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "scheme.md §6创新点(二)'尚未见同类联动方案的实验报道'，属'首次'声明",
+      "missing_evidence": "缺少对'HHG序参量重建+反演验证联动'这一组合方案的国际查新/检索结果",
+      "search_keywords": [
+        "high harmonic order parameter reconstruction inversion combined experimental",
+        "HHG attosecond order parameter retrieval + validation integrated approach",
+        "Cochran HHG quantum coherence tomography experimental implementation",
+        "Sørensen attosecond order parameter reconstruction experiment"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "TDDFT计算效率比SBE高'100—1000倍'，scheme.md §4",
+      "missing_evidence": "缺少具体基准数据：何种体系、何种计算参数、谁的benchmark结果支撑100-1000倍这一数值",
+      "search_keywords": [
+        "TDDFT vs semiconductor Bloch equation computational cost benchmark",
+        "real-time TDDFT CPU hours solid-state HHG",
+        "TDDFT tight-binding efficiency comparison high harmonic generation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "[67]在正文至少7处指向Rost，但references.md中[67]为Horstmann",
+      "missing_evidence": "参考文献列表与正文引用不闭合，需确认Rost (CrSb HHG) 和Horstmann (altermagnet HHG) 的实际文献编号，并补充Rost 2507.02673的引用支撑",
+      "search_keywords": [
+        "Rost CrSb high harmonic generation spin-resolved 2025",
+        "Rost arXiv 2507.02673 altermagnet HHG",
+        "Horstmann altermagnet high harmonic generation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "content.md §2.3 L23的[65][66]引用错位（McCarter/Horstmann）",
+      "missing_evidence": "正文引用的McCarter和Horstmann研究与实际参考文献编号不匹配，需核查并修正",
+      "search_keywords": [
+        "McCarter altermagnet theory high harmonic generation",
+        "Horstmann altermagnet HHG",
+        "Fuchs MnTe spin-polarized high harmonic generation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "CrSb Néel温度在rationale.md L77、L81重复出现",
+      "missing_evidence": "需补充CrSb Néel温度的实验测定文献（文献值约380K），以支撑'室温上实现磁场反转'的可行性论述",
+      "search_keywords": [
+        "CrSb Néel temperature experimental",
+        "CrSb magnetic phase transition temperature measurement",
+        "MnPS3 antiferromagnet Néel temperature experimental"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "SBE适用窗口有Wang [60]/Zhang [61]标定支撑，但scheme.md §4复述方案细节",
+      "missing_evidence": "Wang[60]和Zhang[61]的具体标定内容需在正文中明确对应，而非仅在参考文献中存在",
+      "search_keywords": [
+        "Wang high harmonic generation semiconductor Bloch equation validation",
+        "Zhang semiconductor Bloch equation strong field validity",
+        "SBE validity range V/Angstrom solid HHG calibration"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

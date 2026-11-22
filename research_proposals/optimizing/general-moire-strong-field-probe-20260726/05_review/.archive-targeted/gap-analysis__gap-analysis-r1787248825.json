@@ -1,0 +1,74 @@
+{
+  "gaps": [
+    {
+      "claim": "探针模式 I < 10¹¹ W/cm² 与调控模式 I ~ 10¹¹–10¹² W/cm² 两窗口严格分离，但 §3.3 L37 探针强度上限 I = 10¹¹–5×10¹¹ W/cm² 落在调控窗口下沿，构成同项目同一参数两种界定并存",
+      "missing_evidence": "缺乏扭转双层石墨烯在亚周期强场下的损伤阈值实验数据来支撑探针/调控强度窗口的物理隔离边界",
+      "search_keywords": [
+        "twisted bilayer graphene femtosecond laser damage threshold",
+        "graphene strong field ablation threshold intensity W/cm2",
+        "2D material ultrafast laser damage threshold moire"
+      ],
+      "priority": "critical"
+    },
+    {
+      "claim": "§3.4 L53 No-Go 条件\"若 I_c 超过样品损伤阈值则强场调控路径不可行\"需要实验支撑 I_c 与损伤阈值的关系",
+      "missing_evidence": "缺乏 I_c 临界电流密度与莫尔材料损伤阈值的对比数据，需要石墨烯/莫尔超晶格在中红外强场下的多脉冲损伤阈值文献",
+      "search_keywords": [
+        "graphene femtosecond laser damage threshold 10^12 W/cm2",
+        "twisted bilayer moire superlattice damage threshold strong field",
+        "moire heterostructure laser ablation threshold experimental"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3.4 假设 1：扭转角每变化 0.1° 椭偏依赖变化 > 5%，以及 §3.5 L75 再次引用该假设但无新增论证",
+      "missing_evidence": "缺乏实验测量扭转角变化 0.1° 时 HHG 椭偏依赖变化的系统性数据，5% 变化量缺乏文献支撑",
+      "search_keywords": [
+        "twisted bilayer graphene HHG ellipticity twist angle dependence",
+        "high harmonic generation polarization sensitivity twist angle experimental",
+        "moire HHG polarization measurement angle resolution"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3.4 L43 + §3.4.1 L63 声称\"I_c 上限 3.2×10¹¹ W/cm² < 损伤阈值 10¹² W/cm² 的 3 倍余量\"，但 10¹² W/cm² 这一损伤阈值缺乏原始文献",
+      "missing_evidence": "需要石墨烯/莫尔材料在 10¹² W/cm² 强场下的损伤阈值原始实验数据，50 fs 脉宽下的单脉冲损伤阈值",
+      "search_keywords": [
+        "Roberts 2011 graphene damage threshold 3x10^12 W/cm2",
+        "graphene femtosecond high intensity laser irradiation Appl Phys Lett 99 051912",
+        "CVD graphene single shot damage threshold 50 fs"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3.2 / §3.3 / §3.4 / §3.5 大量将定量细节推至\"方法学手册\"，正文缺少可独立验证的指标",
+      "missing_evidence": "缺乏反演维度需求（10-18 vs 60-100 数据点）与有效秩（1 vs 10）的实验验证文献",
+      "search_keywords": [
+        "high harmonic generation parameter retrieval dimensionality requirement",
+        "HHG spectroscopy effective rank data points experimental",
+        "solid state HHG inversion data sufficiency"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§3.5 L75 创新点\"可推广至其他莫尔量子态（超导涨落、拓扑边界态）\"缺理论/数值支撑",
+      "missing_evidence": "缺乏所提降阶框架对其他莫尔量子态适用性的理论分析或数值模拟文献",
+      "search_keywords": [
+        "TDDFT tensor network moire reduced order scalability",
+        "moire superlattice Floquet control generalization other quantum states",
+        "tight-binding SBE moire extension superconductor topological"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "L-curve Tikhonov 正则化参数选择方法在 HHG 反演中的适用性缺乏文献依据",
+      "missing_evidence": "缺乏 L-curve 正则化在固体 HHG 光谱反演中的具体应用案例与参数选择准则",
+      "search_keywords": [
+        "L-curve Tikhonov regularization high harmonic inversion",
+        "ill-posed inverse problem HHG spectroscopy regularization",
+        "Tikhonov parameter selection nonlinear optics attosecond"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

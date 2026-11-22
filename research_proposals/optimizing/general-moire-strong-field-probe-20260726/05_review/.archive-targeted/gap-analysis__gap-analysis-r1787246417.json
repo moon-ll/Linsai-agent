@@ -1,0 +1,80 @@
+{
+  "gaps": [
+    {
+      "claim": "§2.3 创新点提出「弱关联误差 2%、中-强关联 10–20%」误差传递方案，但 §2.2 R1 仅给出数值而无独立验证案例",
+      "missing_evidence": "缺乏误差传递方案在莫尔超晶格强场 HHG 反演中的独立验证研究",
+      "search_keywords": [
+        "HHG inversion error propagation moire superlattice",
+        "high harmonic spectroscopy uncertainty quantification 2D material",
+        "twisted bilayer graphene HHG parameter retrieval error bound",
+        "altermagnet HHG error analysis experimental validation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "content.md L57「10-18 数据点」与 scheme.md L23「60-100 数据点 × 10 有效秩」、L53「10–20 个 Fourier 分量」跨章口径矛盾，反演维度论证缺乏文献锚定",
+      "missing_evidence": "缺乏 HHG 光谱学反演中数据维度与可辨识参数数量关系的具体实验/理论依据",
+      "search_keywords": [
+        "high harmonic spectroscopy parameter identifiability data dimension",
+        "HHG inversion ill-posed dimensionality effective rank",
+        "attosecond spectroscopy Fisher information parameter retrieval",
+        "solid-state HHG parameter space dimensionality reduction experimental"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "content.md L119「尚未见报道」论断缺检索证据锚定",
+      "missing_evidence": "缺乏莫尔超晶格 HHG 反演结合 Floquet 调控闭环联合方法的未见报道检索证明",
+      "search_keywords": [
+        "moire superlattice high harmonic inversion Floquet closed loop",
+        "twisted bilayer HHG quantum geometry inversion unpublished",
+        "moire heterostructure HHG spectroscopy combined Floquet control first"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "反演多观测联合数据维度论证（240-300）尚未说明为何椭偏偏振扫描 0-360° 产生约 180 数据点（每 2° 一档 180 档，每档含 HHG 谱 10-18 点，故该层应贡献 1800-3240 而非 180）—— 数学上有口径不一致",
+      "missing_evidence": "缺乏椭偏偏振 HHG 联合数据维度计算的明确论证，以及为何 240-300 维度足以支撑反演的文献依据",
+      "search_keywords": [
+        "elliptical polarization HHG data dimension calculation",
+        "high harmonic generation polarization resolved data points inversion",
+        "HHG spectroscopy joint measurement dimensionality requirement",
+        "circular dichroism HHG data reduction 240 parameters"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "HHG 反演多解性论证沿用 §1.4/§3.2 既有结论但未给出独立可证伪预期",
+      "missing_evidence": "缺乏莫尔超晶格 HHG 反演多解性问题的独立可证伪预期或实验验证方案",
+      "search_keywords": [
+        "HHG inversion non-uniqueness moire superlattice",
+        "high harmonic spectroscopy ill-posed inversion uniqueness",
+        "solid-state HHG multi-solution regularized retrieval",
+        "attosecond spectroscopy inverse problem identifiability altermagnet"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "扭转角 ±0.02° vs ±0.05° 跨章阈值不一致，content.md 中出现两套阈值但缺乏论证依据",
+      "missing_evidence": "缺乏莫尔超晶格扭转角容差与 HHG 反演精度关系的量化研究",
+      "search_keywords": [
+        "twisted bilayer graphene twist angle tolerance HHG",
+        "moire superlattice angle sensitivity high harmonic generation",
+        "magic angle deviation HHG efficiency experimental",
+        "TBG correlated insulator gap twist angle control threshold"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "「三段式降阶框架」「三层正则化反演框架」「探针/调控双模式共用平台」在创新点 1/2/3 与 R1/R2/R3 近乎复制粘贴，论证独立性不足",
+      "missing_evidence": "缺乏三段式降阶框架在莫尔体系 HHG 反演中的具体实现案例或验证研究",
+      "search_keywords": [
+        "dimensionality reduction framework high harmonic inversion",
+        "multi-layer regularization moire superlattice HHG",
+        "hierarchical reduced-order model solid-state HHG",
+        "probe-control dual-mode HHG spectroscopy platform"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

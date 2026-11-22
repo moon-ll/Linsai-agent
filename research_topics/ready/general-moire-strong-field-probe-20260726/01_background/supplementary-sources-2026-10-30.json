@@ -1,0 +1,75 @@
+{
+  "proposal_id": "general-moire-strong-field-probe-20260726",
+  "cluster_id": "orphan-route-2026-10-30",
+  "clusters": [
+    "orphan-route-2026-10-30",
+    "cl_20261029_895409",
+    "cl_20261029_cd757d"
+  ],
+  "entries": [
+    {
+      "source_id": "paper:2026-2607.00898-real-time-simulation-of-charge-migration-within-the-time-dep",
+      "title": "Real-time simulation of charge migration within the time-dependent Kohn-Sham DFT",
+      "summary": "本文发展了基于含时Kohn-Sham密度泛函理论（TDDFT）的实时模拟方法，用于追踪电荷迁移的阿秒尺度超快动力学过程。该方法为电荷迁移的精确计时提供了可靠的从头算理论工具。",
+      "path": "knowledge/raw/papers/2026-2607.00898-real-time-simulation-of-charge-migration-within-the-time-dep.md",
+      "added_via": "cluster:orphan-route-2026-10-30",
+      "added_at": "2026-10-30T16:42:10Z"
+    },
+    {
+      "source_id": "paper:2026-2609.02340-room-temperature-local-strain-control-of-moiré-excitons-in-m",
+      "title": "Room-temperature local strain control of moiré excitons in MoS2/WSe2 heterobilayers",
+      "summary": "本文报道在近0°/60°扭转的MoS2/WSe2异质双层中，利用AFM针尖诱导的局域应变在室温下激活并主动调控moiré俘获的层间激子（IXs）。~8 nm周期的moiré超晶格形成势阱将IXs空间局域化，抑制室温热退局域，而针尖应变通过形变势连续调谐IX跃迁能量，将其发射波长推至第二通信窗口（~1.3 μm）中心。该工作实现了纳米尺度的可逆激子调控，为室温可调谐量子激子器件（如单光子源/通信波段量子光源）奠定基础。",
+      "path": "knowledge/raw/papers/2026-2609.02340-room-temperature-local-strain-control-of-moiré-excitons-in-m.md",
+      "added_via": "cluster:cl_20261029_895409",
+      "added_at": "2026-10-30T16:49:42Z"
+    },
+    {
+      "source_id": "paper:2025-2511.03301-contactless-modulation-of-intralayer-and-interlayer-excitons",
+      "title": "Contactless Modulation of Intralayer and Interlayer Excitons in MoS2/WSe2 heterostructures with Acoustoelectric Fields",
+      "summary": "本文在MoS2/WSe2范德华异质结上利用声表面波（SAW）伴随的声电场，实现了层内激子与层间激子的非接触、动态调制。关键在于两种动量间接层间激子IX_K-Γ与IX_K-K（约120 meV动量谷间劈裂）对声电场呈现差异化响应，从而实现对电信波段O带与S带发射的独立调控。该方案无需栅极或金属电极接触即可驱动激子能量与强度的周期性调制，为可编程电信波段量子光源与vdW异质结激子调控提供了新途径。",
+      "path": "knowledge/raw/papers/2025-2511.03301-contactless-modulation-of-intralayer-and-interlayer-excitons.md",
+      "added_via": "cluster:cl_20261029_895409",
+      "added_at": "2026-10-30T16:49:42Z"
+    },
+    {
+      "source_id": "paper:2025-2504.03267-on-chip-integrated-light-sources-with-mos2wse2-moiré-superla",
+      "title": "On-chip integrated light sources with MoS2/WSe2 moiré superlattices at telecom wavelengths",
+      "summary": "实验演示MoS2/WSe2莫尔超晶格在电信O波段（1260–1360 nm）实现发光，强度超过该波段的代表性二维发光体MoTe2单层，突破了二维材料本征发光难以覆盖电信波段的瓶颈。作者进一步将莫尔发光体与片上波导集成，制成波导耦合的芯片级电信波段光源。该工作的意义在于把莫尔超晶格的能带/激子调控能力转化为片上光增益材料与集成光源的新技术路线。",
+      "path": "knowledge/raw/papers/2025-2504.03267-on-chip-integrated-light-sources-with-mos2wse2-moiré-superla.md",
+      "added_via": "cluster:cl_20261029_895409",
+      "added_at": "2026-10-30T16:49:42Z"
+    },
+    {
+      "source_id": "paper:2022-2205.15574-quantum-optimal-control-practical-aspects-and-diverse-method",
+      "title": "Quantum Optimal Control: Practical Aspects and Diverse Methods",
+      "summary": "本文是量子最优控制（QOC）的方法学综述：以“目标泛函 = 物理目标 − 惩罚项”为统一框架，系统梳理渐近/解析法、直接搜索法、梯度法、变分法（CRAB 类）与机器学习法五类控制策略的算法细节、收敛性质与适用边界。文章把重点放在工程实践上——目标函数与惩罚权重设计、控制场维数与离散化、局部陷阱与鲁棒性、封闭与开放（Lindblad）系统的差异——并给出按“模型可得性 × 控制维数 × 精度/鲁棒性需求”选择方法的路线图。对强场场景，它提供了把经验式脉冲扫描升级为带梯度保证、可注入鲁棒性约束的系统化波形优化工具箱。",
+      "path": "knowledge/raw/papers/2022-2205.15574-quantum-optimal-control-practical-aspects-and-diverse-method.md",
+      "added_via": "cluster:cl_20261029_cd757d",
+      "added_at": "2026-10-30T20:20:35Z"
+    },
+    {
+      "source_id": "paper:2021-2104.07687-one-decade-of-quantum-optimal-control-in-the-chopped-random",
+      "title": "One decade of quantum optimal control in the chopped random basis",
+      "summary": "系统综述CRAB（Chopped Random Basis）量子最优控制算法提出十年来的理论、算法与工具箱发展：通过将控制场参数化为截断的随机傅里叶基函数叠加，把高维控制问题压缩到低维参数空间，使无梯度优化器可直接用于复杂量子系统和实验闭环优化。文章梳理了从基础算法到Group-CRAB协同优化、噪声鲁棒控制的演进，以及RedCRAB远程工具箱的建立，并总结了冷原子、超导比特、离子阱、NV色心等量子技术平台上的广泛应用成果。",
+      "path": "knowledge/raw/papers/2021-2104.07687-one-decade-of-quantum-optimal-control-in-the-chopped-random.md",
+      "added_via": "cluster:cl_20261029_cd757d",
+      "added_at": "2026-10-30T20:20:35Z"
+    },
+    {
+      "source_id": "paper:2022-2205.12110-quantum-optimal-control-in-quantum-technologies-strategic-re",
+      "title": "Quantum optimal control in quantum technologies. Strategic report on current status, visions and goals for research in Europe",
+      "summary": "欧洲量子最优控制（QOC）社区的战略报告（arXiv:2205.12110），系统梳理了量子最优控制理论在量子计算、模拟、通信与传感等量子技术平台（离子阱、超导量子比特、NV色心、超冷原子、分子体系等）中的研究现状与代表性进展。报告指出关键挑战集中在开放量子系统与噪声下的鲁棒可扩展控制、控制理论与实验闭环的整合，以及与机器学习/强化学习的融合，并给出欧洲未来数年至十年的研究路线图与目标。核心主张是：最优控制已从单纯的脉冲设计工具演变为贯穿量子技术全栈的使能技术。",
+      "path": "knowledge/raw/papers/2022-2205.12110-quantum-optimal-control-in-quantum-technologies-strategic-re.md",
+      "added_via": "cluster:cl_20261029_cd757d",
+      "added_at": "2026-10-30T20:20:35Z"
+    },
+    {
+      "source_id": "paper:2023-2307.16724-revisiting-quantum-optimal-control-theory-new-insights-for-t",
+      "title": "Revisiting Quantum Optimal Control Theory: New Insights for the Canonical Solutions",
+      "summary": "本文重新审视量子最优控制理论（QOCT）中久被沿用的经典（canonical）解，严格证明其极值函数本质上是不连续的——在临界参数点（如初末态正交、控制幅值触界等退化条件）处出现跳变，呈bang-bang型切换结构。在此基础上构造并发现了新的连续解族，使解可在原奇点处参数连续延拓，从而修正并扩充了QOCT的基础解空间，为物理可实现的最优波形/脉冲设计提供了更正则的理论依据。",
+      "path": "knowledge/raw/papers/2023-2307.16724-revisiting-quantum-optimal-control-theory-new-insights-for-t.md",
+      "added_via": "cluster:cl_20261029_cd757d",
+      "added_at": "2026-10-30T20:20:35Z"
+    }
+  ]
+}

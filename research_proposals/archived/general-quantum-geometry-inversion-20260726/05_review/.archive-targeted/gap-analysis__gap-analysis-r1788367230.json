@@ -1,0 +1,51 @@
+{
+  "gaps": [
+    {
+      "claim": "BSV驱动固体HHG的量子增强效应尚缺乏系统性实验验证链",
+      "missing_evidence": "缺少从BSV光源制备到固体HHG发射再到阿秒脉冲探测的完整实验演示文献",
+      "search_keywords": [
+        "bright squeezed vacuum solid high harmonic generation experimental",
+        "quantum light driven attosecond spectroscopy complete chain"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "量子几何张量反演的参数估计精度边界缺乏实验基准",
+      "missing_evidence": "缺少量子几何张量（Berry曲率、量子度规）反演误差与实验精度关系的系统性研究",
+      "search_keywords": [
+        "quantum geometry tensor reconstruction accuracy experimental",
+        "Berry curvature HHG inversion uncertainty experimental",
+        "Fisher information quantum geometry parameter estimation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Mn3Sn系列作为非共线反铁磁体候选材料的论证与references.md [14]主语错配",
+      "missing_evidence": "缺少Mn3Sn系列非线性光学响应或高次谐波产生的直接实验/理论文献支撑，references.md [14]实际关于3D拓扑绝缘体量子度规",
+      "search_keywords": [
+        "Mn3Sn high harmonic generation",
+        "non-collinear antiferromagnet nonlinear optics",
+        "Mn3Sn ultrafast spectroscopy"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "scheme.md与content.md跨章科学问题口径不一致",
+      "missing_evidence": "scheme.md列出'三个科学问题'但content.md仅有Q1/Q2，缺少独立论证第三个科学问题（Berry曲率阿秒跟踪）的文献支撑",
+      "search_keywords": [
+        "Berry curvature attosecond tracking high harmonic generation",
+        "ultrafast Berry phase measurement solid state"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "量子光场驱动强场非线性光学的完整理论框架缺乏实验验证",
+      "missing_evidence": "现有文献多为理论预言或单一环节实验，缺少将量子光场特性映射到HHG谱并反演材料量子几何的端到端验证",
+      "search_keywords": [
+        "quantum light solid HHG full chain experiment",
+        "end-to-end quantum HHG spectroscopy pipeline validation"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

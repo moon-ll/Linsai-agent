@@ -1,0 +1,76 @@
+{
+  "gaps": [
+    {
+      "claim": "§3.3 中关于 attosecond streaking 五段学术争议叙事（Gao/Ardana-Lamas/Han/Biegert/Hasan 对 neon 2p/krypton 价带 streaking 精度与饱和阈值的不同观点）",
+      "missing_evidence": "全章 20 余位具名学者仅 4 处 [N] 编号嵌入，§3.3 五段争议叙事无溯源编号：Gao[29,36]、Ardana-Lamas[30,39]、Han[31]、Biegert、Hasan[40] 等具名论述均无对应引用锚定；属 references.md 已有 41 条但未在正文嵌入的\"具名论述无 [N]\"红线",
+      "search_keywords": [
+        "attosecond streaking neon 2p precision",
+        "streaking trace retrieval saturation",
+        "Han attosecond streaking neon",
+        "Gao attosecond pulse characterization",
+        "Ardana-Lamas attosecond streaking krypton",
+        "Biegert attosecond metrology",
+        "Hasan attosecond streaking pressure"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Cousin 关于 streak camera 校准 / Ishii 关于 TDSE 数值方法 / Peschel 关于矩阵元 / White 关于相位提取 等具名论述",
+      "missing_evidence": "具名论述但无 [N] 编号嵌入：Cousin[2]、Ishii[13]、Peschel[7]、White[11]；评审无法溯源核验具体技术细节",
+      "search_keywords": [
+        "Cousin attosecond streaking calibration",
+        "Ishii TDSE attosecond simulation",
+        "Peschel dipole matrix element attosecond",
+        "White streaking phase retrieval"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Zhu 与 Pabst 关于少带模型 vs TDSE 的方法选择论证 / 少周期门控论证",
+      "missing_evidence": "Zhu[9,34]、Pabst[3] 论述无 [N] 编号嵌入，TDSE vs 解析少带模型的方法选择物理理由缺少文献锚点",
+      "search_keywords": [
+        "Zhu few-cycle attosecond streaking",
+        "Pabst Dahlström TDSE streaking",
+        "few-band model attosecond",
+        "minimum-cycle gating streaking"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Hasan 关于\"0.75 fs 饱和上限\"\"3.5 bar 与 3 mm 体制\"（气靶压强–长度乘积）的定量描述",
+      "missing_evidence": "arXiv 2508.14774 / 2512.19965 / 2511.08391 三篇实查摘要中均未见 0.75 fs 饱和上限、3.5 bar 与 3 mm 体制等定量表述（已确认存在 1.32 fs / 130 eV / Xe 4d / 三条质疑点），具体页码级出处缺失，属引用事实纪律违规",
+      "search_keywords": [
+        "Hasan attosecond streaking Xe 4d",
+        "0.75 fs saturation streaking pulse",
+        "gas cell 3.5 bar 3 mm attosecond",
+        "attosecond pulse duration saturation limit",
+        "streaking trace high pressure regime"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§7 创新点二：\"角积分压制原理迄今只在相干里德堡态量子拍条件下得到验证\"",
+      "missing_evidence": "同句自述\"推广缺乏实验证据\"与\"得到验证\"互斥；content §2.1 称 [3] Pabst 与 Dahlström 为纯理论方案，需检索是否存在里德堡态量子拍条件下角积分压制的实验验证文献以判定该论断降级措辞",
+      "search_keywords": [
+        "Rydberg quantum beat attosecond streaking",
+        "angular integration suppression streaking",
+        "Pabst Dahlström angular streaking theory",
+        "coherent Rydberg state attosecond experiment",
+        "angular distribution suppression ionization"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§3.3 Reply 段关于 streaking 精度质疑点的具体定量回应（与 Hasan 三条质疑点对应）",
+      "missing_evidence": "实查确认 arXiv 2508.14774 含三条质疑点，但方案章中对质疑点的逐条定量回应缺文献级支撑；需明确每条质疑对应的实验或理论文献出处",
+      "search_keywords": [
+        "attosecond streaking accuracy controversy",
+        "streaking retrieval systematic error",
+        "neon 2p streaking precision benchmark",
+        "attosecond pulse characterization reliability"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

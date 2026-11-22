@@ -1,0 +1,109 @@
+{
+  "gaps": [
+    {
+      "claim": "立项依据开篇需论证「量子材料中电荷密度波（CDW）的非平衡动力学是超快科学前沿方向」（五层递进结构的大背景→领域脉络层；清单1/2：两层全缺，全文 0 处嵌入式引用）",
+      "missing_evidence": "领域层综述与近三年代表性实验文献：CDW 超快泵浦-探测、光致非热相变、隐藏/亚稳态形成，用于开篇定性论证及「某人等人[N]报道了X」式引用嵌入推进；当前 0 篇",
+      "search_keywords": [
+        "charge density wave ultrafast dynamics",
+        "photoinduced phase transition quantum materials",
+        "hidden state charge density wave",
+        "nonequilibrium phase transition pump probe",
+        "ultrafast dynamics quantum materials review"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "「1T-TiSe2 的 CDW 起源存在激子机制与电声机制之争，动力学标度行为可为电声主导提供证据」（dossier 背景节选，rationale 核心挑战层的中心科学问题）",
+      "missing_evidence": "机制之争两派的平衡态与动力学证据文献：激子凝聚图像（ARPES/RIXS/激子绝缘体）、电声耦合图像（声子软化、DFT/DFPT 计算电声耦合常数）、以及 T_CDW 以上 CDW 涨落与相干幅度模式持续存在的实验文献；当前正文无任何引用可挂",
+      "search_keywords": [
+        "1T-TiSe2 charge density wave mechanism",
+        "TiSe2 excitonic insulator",
+        "TiSe2 phonon softening",
+        "CDW fluctuations above transition temperature",
+        "coherent amplitude mode TiSe2"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "「在联合公度（莫尔）CDW 材料 EuTe4 中，幅度塌缩-恢复、相位漂移与关联长度演化发生在明显不同的时间尺度，实现序参量各自由度的解耦测量」——这是「幅度-相位-关联长度解耦是 CDW 光致动力学共性特征」这一立项核心的直接前驱证据（dossier 背景节选）",
+      "missing_evidence": "EuTe4/稀土四碲化物族 CDW 的结构与超快动力学文献：联合公度长周期超晶格、幅度/相位模式分离测量、关联长度（峰宽/漫散射）演化；缺此则「共性特征」论断无据",
+      "search_keywords": [
+        "EuTe4 charge density wave",
+        "rare earth tetratelluride ultrafast dynamics",
+        "rare earth tetratelluride CDW structure",
+        "amplitude mode phase mode CDW",
+        "CDW correlation length dynamics"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "「四模联合探测（超快电子衍射 + XUV 动量显微/超快 ARPES + 时间分辨 X 射线衍射 + 时间分辨中子衍射）可将 CDW 序参量动力学探测时窗从飞秒拓展至微秒，覆盖光学手段难以到达的长时标」（dossier 步骤一；rationale 项目定位层需以此论证多模态必要性）",
+      "missing_evidence": "各探针在 CDW/量子材料上的代表性应用文献：UED 测超晶格峰与相干声子、时间分辨 X 射线衍射测 ps-ns CDW 恢复、时间分辨/准弹性中子散射测长时标涨落与结构序、trARPES/XUV 动量显微测电子结构动力学；用于支撑「单一探针时窗不足→多模态互补」的立项逻辑",
+      "search_keywords": [
+        "ultrafast electron diffraction charge density wave",
+        "time-resolved X-ray diffraction CDW",
+        "neutron scattering charge density wave fluctuations",
+        "trARPES charge density wave",
+        "momentum microscopy XUV ultrafast"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "「光致扰动后 CDW 短程关联快速存留，而长程相干序重建缓慢且寿命极长，呈非对称演化」（dossier 背景节选，rationale 核心挑战层的直接论据）",
+      "missing_evidence": "展示 CDW 熔化-恢复多时标非对称动力学的实验文献：超晶格布拉格峰强度与峰宽双参量跟踪、ns-μs 长时标恢复、隐藏/亚稳态寿命测量；当前 0 引用",
+      "search_keywords": [
+        "photoinduced CDW melting",
+        "CDW order recovery nanosecond",
+        "superlattice peak intensity dynamics",
+        "long-lived transient charge density wave"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "「幅度、相位、关联长度三通道弛豫可用含时金兹堡-朗道（TDGL）模型叠加畴粗化标度（L~t^n）全局描述」（dossier 步骤二；rationale 定位层需理论方法文献锚点）",
+      "missing_evidence": "CDW/相变体系的 TDGL 建模与相序动力学（phase-ordering kinetics）文献：粗化幂律、畴壁动力学、序参量多自由度分离弛豫的理论与数值工作",
+      "search_keywords": [
+        "time-dependent Ginzburg-Landau charge density wave",
+        "phase ordering kinetics domain growth",
+        "domain coarsening power law",
+        "Ginzburg-Landau CDW relaxation"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "「通过离子辐照/退火系统改变缺陷密度（以残余电阻率标定），可判别长程序重建的钉扎瓶颈与畴粗化瓶颈」（dossier 步骤三、验证判据3；rationale 定位层的可行性论据）",
+      "missing_evidence": "缺陷/无序对 CDW 动力学影响的文献：离子辐照/电子辐照调控量子材料序、缺陷钉扎 CDW、退火恢复的定量研究先例",
+      "search_keywords": [
+        "ion irradiation charge density wave",
+        "defect pinning charge density wave",
+        "disorder CDW phase transition",
+        "CDW depinning defects"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "五层递进结构中「国内现状」层完全缺失，需国内团队在 TiSe2/CDW/超快衍射方向的代表性工作以体现研究基础与互补定位（清单1）",
+      "missing_evidence": "国内课题组（中科院物理所、复旦大学、清华大学、上海光源/综合极端条件装置相关团队等）在 CDW 超快动力学、超快 ARPES/衍射、稀土四碲化物方向的文献 3-5 篇",
+      "search_keywords": [
+        "1T-TiSe2 ultrafast ARPES",
+        "1T-TiSe2 ultrafast dynamics",
+        "rare earth tetratelluride electronic structure",
+        "charge density wave review materials"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "正文 [N] 引用 0 次、参考文献 0 篇，references.md 为 0 字节（清单4 + 问题4：v6.9.9 校准口径 10-20 次正文引用 / 30-40 篇文献）",
+      "missing_evidence": "30-40 篇连续编号且与正文嵌入式具名引用一一对应的文献池。建议配额：领域综述 3-5 篇、TiSe2 机制与涨落 8-10 篇、EuTe4/稀土四碲化物 5-8 篇、多模态探针方法学 8-10 篇、TDGL/相序动力学理论 3-5 篇、国内现状 3-5 篇；检索前先与本地去重基线（dedup_ids.json）比对，预印本占比控制在 30% 参考线以下",
+      "search_keywords": [
+        "charge density wave ultrafast dynamics",
+        "1T-TiSe2 exciton phonon mechanism",
+        "EuTe4 rare earth tetratelluride CDW",
+        "ultrafast diffraction time-resolved spectroscopy CDW",
+        "Ginzburg-Landau phase ordering CDW"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "rationale"
+}

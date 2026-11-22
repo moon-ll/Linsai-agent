@@ -1,0 +1,71 @@
+{
+  "gaps": [
+    {
+      "claim": "L27 读出端判据段：Ezawa 关于交错磁体中椭圆二色性与 p-wave 电导读出的理论预测作为本项目判据基础",
+      "missing_evidence": "Ezawa 关于 altermagnet 中自旋读出（p-wave conductivity、elliptical dichroism）的原始论文与正式编号核对——现 refs 表中 Ezawa 的正确编号是 [12]（椭圆二色性）与 [16]（p-wave 电导读出），而 L27 错挂为 [14,19]（实为 Basnet/González 化学取代文献），需核实并补正 Ezawa 关键文献条目",
+      "search_keywords": [
+        "Ezawa altermagnet p-wave conductivity",
+        "Ezawa elliptical dichroism altermagnet spin splitting",
+        "Ezawa spin current readout collinear antiferromagnet",
+        "altermagnet symmetry spin-resolved detection theory"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "L57、L65 国内现状段：Basnet 关于 MnPS₃ 家族 S/Se/Cr 取代调控自旋-电子结构的实验工作",
+      "missing_evidence": "Basnet 关于 MnPS₃/MPS₃ 系列化学取代（[14]=S/Se 取代、[17]=Basnet-Hu 综述、[43]=Cr 取代 PRB 2024）的正式编号核对；同时需清除幽灵编号 [48]（重排至 43 条后未平移）并确认 [20] Mavani 是否与该论点相关",
+      "search_keywords": [
+        "Basnet MnPS3 Se substitution",
+        "Basnet MPS3 chalcogen substitution band structure",
+        "Basnet Cr doped MnPS3 PRB",
+        "MnPS3 chemical substitution altermagnet engineering"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "L9：\"体相自旋沿面外排列\"作为 MnPS₃ 体系基态磁性前提",
+      "missing_evidence": "缺少 MnPS₃ 体相自旋取向的中子衍射实验支撑——共识结论为自旋沿 b 轴近面内排列，与\"面外\"叙述相悖；[6] Raman 无取向信息，需补中子衍射/磁结构精修文献",
+      "search_keywords": [
+        "MnPS3 neutron diffraction magnetic structure",
+        "MnPS3 bulk spin orientation b-axis",
+        "MnPS3 antiferromagnetic structure refinement",
+        "MnPS3 magnetic anisotropy in-plane"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "L89：\"可行性边界由 [32,29] 的实测共同支撑\"",
+      "missing_evidence": "[32] Hamer PRA 2025 为 TDDFT 计算（方法学基准），非实测数据；需补充真正测量 MnPS₃ 交错磁体或 Rashba 体系自旋-能带响应的实验文献（ARPES/自旋极化 STM/输运），用以支撑可行性边界声明",
+      "search_keywords": [
+        "MnPS3 ARPES spin-resolved measurement",
+        "Rashba altermagnet experimental realization",
+        "MnPS3 spin-resolved photoemission",
+        "altermagnet experimental spin splitting observation"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "L7/L19/L57 等密集段：单段并列 5–6 条文献的同源成果堆砌",
+      "missing_evidence": "缺少能将 MnPS₃ 家族化学取代—电子结构—磁性调控关联起来的综述性文献以合并同类引用；当前依赖分散的实验单篇，导致单段引用密度约为范本 4 倍",
+      "search_keywords": [
+        "MnPS3 review chemical substitution magnetism",
+        "MPS3 family 2D magnet review",
+        "MnPS3 transition metal substitution review",
+        "antiferromagnetic MPS3 engineering review"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "L47/L49/L51/L81/L89/L91 立项依据段预置\"研究内容一/二/三\"级的定量判据（势垒高度、光子数、读出强度等）",
+      "missing_evidence": "虽具体数值（如 NiCl₂ 16.4 meV、CrSe₂ 25.5 meV、VSe₂ 39.9 meV）已挂 [18]，但缺乏将这些势垒数据与 THz 光子数对应到具体实验可观测量的方法学文献（如高次谐波/THz 驱动交错磁体动力学理论），以支撑跨平台定性判据",
+      "search_keywords": [
+        "THz driven altermagnet dynamics theory",
+        "high harmonic generation antiferromagnet 2D material",
+        "MPS3 THz multiphoton barrier excitation",
+        "altermagnet Floquet THz theory"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

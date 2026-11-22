@@ -1,0 +1,74 @@
+{
+  "gaps": [
+    {
+      "claim": "Cochran量子相干断层成像方法（Cochran quantum coherence tomography）可应用于高次谐波产生用于序参量反演",
+      "missing_evidence": "Cochran量子相干断层成像技术在高次谐波产生场景中的具体实现方法尚未被正式发表；缺乏将量子相干断层成像扩展至固体高次谐波的理论或实验验证",
+      "search_keywords": [
+        "Cochran quantum coherence tomography high harmonic generation",
+        "coherence tomography attosecond spectroscopy order parameter",
+        "quantum coherence tomography solid-state HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Sørensen阿秒高次谐波序参量重建方法（Sørensen attosecond order parameter reconstruction）可实现对反铁磁/交变磁性序参量的实时提取",
+      "missing_evidence": "Sørensen等人提出的阿秒高次谐波序参量重建方法的具体理论框架尚未被正式发表；缺乏将该方法应用于CrSb等交变磁性材料序参量提取的验证",
+      "search_keywords": [
+        "Sørensen attosecond order parameter reconstruction high harmonic",
+        "attosecond HHG order parameter non-uniqueness",
+        "quantum coherence tomography combined attosecond retrieval"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "CrSb在近红外飞秒激光作用下的损伤阈值约为0.8 V/Å",
+      "missing_evidence": "CrSb材料在强场飞秒激光作用下的光学损伤阈值缺乏实验标定数据；0.8 V/Å的估算值尚未经过项目启动后的正式测量验证",
+      "search_keywords": [
+        "CrSb ultrafast laser damage threshold",
+        "CrSb femtosecond laser ablation threshold V/Angstrom",
+        "CrSb strong field optical excitation stability near-infrared"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "半导体布洛赫方程（SBE）在强场极限下（>0.5 V/Å）仍然适用",
+      "missing_evidence": "SBE在强场区的适用边界缺乏实验验证；Keldysh参数在固体高次谐波产生中的有效性边界尚未被系统研究",
+      "search_keywords": [
+        "semiconductor Bloch equation strong field validity limit",
+        "SBE breakdown strong field V/Angstrom",
+        "Keldysh parameter solid HHG experimental verification"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "费舍尔信息矩阵+贝叶斯反演+No-Go判据三件套可作为高次谐波光谱反演的统一框架",
+      "missing_evidence": "No-Go定理在非线性光学参数估计问题中的适用性缺乏形式化证明；费舍尔信息矩阵条件数与参数可辨识性的定量关系尚未被建立",
+      "search_keywords": [
+        "No-Go theorem quantum parameter estimation completeness",
+        "Fisher information matrix nonlinear optics inverse problem",
+        "condition number parameter identifiability high harmonic generation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "实时光场TDDFT计算成本可在合理CPU小时内完成交变磁性材料超快动力学模拟",
+      "missing_evidence": "TDDFT与SBE方法在计算成本与精度方面的系统对比基准测试数据缺失；大规模超晶格模型的实时光场TDDFT计算可行性缺乏量化论证",
+      "search_keywords": [
+        "real-time TDDFT CPU hours solid-state HHG",
+        "TDDFT semiconductor Bloch equation efficiency comparison",
+        "TDDFT attosecond dynamics large-scale computation benchmark"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "条件数κ可定量刻画高次谐波反演问题的病态程度",
+      "missing_evidence": "κ作为λ_max/λ_min的单一数量与反演稳定性之间的定量关系尚未被建立；缺乏针对CrSb等具体材料体系的κ值实际测量或计算数据",
+      "search_keywords": [
+        "condition number optical parameter inversion HHG",
+        "Fisher information attosecond spectroscopy reconstruction",
+        "ill-posed inversion regularization HHG"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

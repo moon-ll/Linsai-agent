@@ -1,0 +1,37 @@
+{
+  "gaps": [
+    {
+      "claim": "Cousin[2]关于多通道贡献的定性结论：定性指出多通道上升、未给定量阈值",
+      "missing_evidence": "缺少Cousin原始文献中关于多通道贡献随光子能量变化的具体定性表述，需要核实其原文判断（特别是为何content给出≤5%判据、scheme给出8-15%判据，是否两个判据源自同一文献不同段落）",
+      "search_keywords": [
+        "Cousin attosecond streaking multi-channel neon",
+        "Cousin 2017 attosecond pulse reconstruction multi-channel contribution",
+        "multi-channel contribution attosecond streaking photon energy"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Tarrant'呼吸离子'机制与Shi-Thumm六维TDSE计算的残离子关联证据",
+      "missing_evidence": "两项工作均涉及残离子对阿秒脉冲重构的影响，但content与scheme两处引用未明确各自承担何种职能证据；需确认Shi-Thumm六维TDSE是否专门处理残离子自由度、Tarrant呼吸离子机制是否首次提出残离子关联证据",
+      "search_keywords": [
+        "Tarrant attosecond streaking residual ion",
+        "Shi Thumm 6D TDSE attosecond streaking",
+        "residual ion correlation attosecond pulse retrieval",
+        "ionic coupling attosecond streaking neon"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Gao[29] 25±2→18 as孤立阿秒脉冲与Ardana[30] 19.2 as/VPGTA数据在三章节的引用一致性",
+      "missing_evidence": "缺少Gao 2025论文中25±2 as压缩至18 as的具体压缩方法与Ardana VPGTA 19.2 as的技术细节核实，以及50万 eV光通量、谱覆盖50-320 eV的原始数据，以便在rationale/content/scheme三章各取唯一职能引用",
+      "search_keywords": [
+        "Gao 2025 isolated attosecond pulse 25 as 18 as post-compression",
+        "Ardana-Lamas attosecond streaking VPGTA 19.2 as",
+        "Yb laser post-compression attosecond carbon K edge",
+        "isolated attosecond pulse photon flux 10^12 carbon edge"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "full_review"
+}

@@ -1,0 +1,65 @@
+{
+  "gaps": [
+    {
+      "claim": "固体 HHG 理论提出后，「实验验证在后续两年内完成」（§2.1 L37）",
+      "missing_evidence": "支撑该时间断言的可溯源实验文献；评审建议改为「后经圆二色实验支持[8]」式表述，即需补充圆二色（circular dichroism）类实验文献并挂角标",
+      "search_keywords": [
+        "solid-state high-harmonic generation experimental verification",
+        "high harmonic generation circular dichroism",
+        "ZnO mid-infrared HHG experiment"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "合成维度中绕数（winding number）的快拍测量具名断言（L97）",
+      "missing_evidence": "合成维度拓扑不变量（绕数）测量的原始实验/理论文献，需补条目并挂 [N] 角标",
+      "search_keywords": [
+        "synthetic dimension winding number measurement",
+        "topological invariant snapshot",
+        "synthetic lattice topological charge pumping"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Csizmadia 稳定性具名断言（L131）",
+      "missing_evidence": "Csizmadia 相关工作（稳定性分析）的文献条目，具名断言缺 [N] 角标",
+      "search_keywords": [
+        "Csizmadia stability",
+        "high harmonic generation stability analysis",
+        "transient quantum phase stability"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "量子度规（quantum metric）相关论述（§3 L149 度规段，参考文献 [27] 悬空）",
+      "missing_evidence": "[27] 已列入参考文献但正文零引用；需将 [27] 挂接至 §3 度规讨论段，或补充可溯源的量子度规原始文献替换",
+      "search_keywords": [
+        "quantum metric",
+        "quantum geometric tensor",
+        "quantum metric topological materials spectroscopy"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "de las Heras 三章相关工作（[38] 悬空，应对应 Co₃Sn₂S₂ 段）",
+      "missing_evidence": "[38] 文献条目正文零引用；需挂接至 Co₃Sn₂S₂（磁性外尔半金属）相关段落，或从参考文献中删除该条目",
+      "search_keywords": [
+        "de las Heras Weyl semimetal",
+        "Co3Sn2S2 magnetic Weyl semimetal",
+        "Co3Sn2S2 high harmonic generation"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "委员会模型泛化误差机制论述（content L75 与 scheme L133 两处）",
+      "missing_evidence": "Schran 类委员会机器学习势（committee MLIP）及泛化误差/不确定性量化机制的原始文献，两处挂靠均需补 [N] 角标",
+      "search_keywords": [
+        "Schran committee machine learning interatomic potential",
+        "committee model uncertainty quantification",
+        "committee neural network potential generalization error"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

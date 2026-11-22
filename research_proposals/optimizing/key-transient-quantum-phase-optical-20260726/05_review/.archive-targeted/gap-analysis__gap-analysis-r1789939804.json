@@ -1,0 +1,75 @@
+{
+  "gaps": [
+    {
+      "claim": "ATA信号有效时间分辨率由200 as XUV脉宽与50 as抖动按方和根合成（√(200²+50²)≈206 as），本项目按≤250 as保守口径申报",
+      "missing_evidence": "缺少ATA时间分辨率各分量（XUV脉宽、激光抖动、探测器响应）的实测数据来源和合成方式依据",
+      "search_keywords": [
+        "attosecond transient absorption time resolution XUV pulse duration",
+        "ATA temporal jitter streaking convolution",
+        "attosecond pump probe time resolution budget"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "圆偏振HHG对Berry曲率的敏感性测量（参考文献[8]）",
+      "missing_evidence": "缺少圆偏振HHG对Berry曲率敏感性的标志性实验文献支撑（应核实[8]对应具体工作）",
+      "search_keywords": [
+        "circularly polarized HHG Berry curvature sensitivity",
+        "Luu Worner 2018 Berry curvature quartz HHG",
+        "circular high harmonic Berry curvature reconstruction"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Floquet工程在固体中的实验验证（参考文献[19, 41]）",
+      "missing_evidence": "缺少[Floquet工程在固体中实验验证]的具体引用文献，[19]在references列表中无对应条目（悬挂引用），[41]需核实是否为Lindner Refael Galitski 2011 Nat Phys或后续实验验证",
+      "search_keywords": [
+        "Floquet topological insulator solid state experimental verification",
+        "Floquet band structure Bi2Se3 time-resolved ARPES",
+        "light-induced Floquet topological state observation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "二阶项振幅≤10⁻²量级（小量参数ΩR/Eg≈0.1时(ΩR/Eg)²≈10⁻²）",
+      "missing_evidence": "缺少α-T₃或类似Dirac材料中二阶非线性响应小量参数（ΩR/Eg）标定数值的引用",
+      "search_keywords": [
+        "alpha-T3 lattice second-order nonlinear response magnitude",
+        "Dirac material nonlinear susceptibility perturbation expansion coefficient",
+        "ΩR Eg scaling second harmonic generation"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Bi₂Se₃的ℏω/Eg≈0.5–1.03靠近转换区（Eg=0.30 eV）",
+      "missing_evidence": "缺少Bi₂Se₃体相带隙Eg=0.30 eV的实验测量值出处及驱动光子能量对应的ℏω/Eg值计算依据",
+      "search_keywords": [
+        "Bi2Se3 bulk band gap experimental ARPES 0.3 eV",
+        "Bi2Se3 topological insulator direct gap measurement",
+        "topological insulator Bi2Se3 mid-infrared driver photon energy ratio"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "MnBi₂Te₄体系内ΔC=1跃变的写-读-反演演示（第4年里程碑）",
+      "missing_evidence": "缺少磁性拓扑绝缘体MnBi₂Te₄中Chern数变化（ΔC=1）的实验观测或理论预测文献支撑",
+      "search_keywords": [
+        "MnBi2Te4 Chern number switching experimental",
+        "magnetic topological insulator Chern number change",
+        "MnBi2Te4 AXI Chern insulator transition"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "当前领域已有的Berry曲率测量与瞬态拓扑相变诊断纳入统一框架的创新性",
+      "missing_evidence": "缺少将Berry曲率光学测量与Floquet瞬态拓扑相变诊断统一框架的近期综述或标志性理论/实验工作",
+      "search_keywords": [
+        "Berry curvature transient topology unified framework",
+        "HHG topology Floquet engineering review",
+        "high harmonic spectroscopy quantum geometry 2024 2025"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

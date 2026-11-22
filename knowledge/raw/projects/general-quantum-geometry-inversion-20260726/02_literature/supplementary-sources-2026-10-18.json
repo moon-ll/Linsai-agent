@@ -1,0 +1,126 @@
+{
+  "proposal_id": "general-quantum-geometry-inversion-20260726",
+  "cluster_id": "cl_20260815_48c66e",
+  "entries": [
+    {
+      "source_id": "paper:2024-2404.06086-probing-berry-phase-effect-in-topological-surface-states",
+      "title": "Probing Berry phase effect in topological surface states",
+      "summary": "该工作通过强场驱动拓扑绝缘体表面态的非线性光学响应（高次谐波）实验探测了Dirac型拓扑表面态电子所积累的Berry相位，证明这一量子几何相位可被编码并读取于光学谐波谱中。由此为全光、无接触地读取固体中的瞬态量子相位提供了直接实验方法。",
+      "path": "",
+      "added_via": "cluster:cl_20260815_48c66e",
+      "added_at": "2026-10-18T13:20:21Z"
+    },
+    {
+      "source_id": "paper:2026-2604.06051-disentangling-high-harmonic-generation-from-surfac",
+      "title": "Disentangling High Harmonic Generation from Surface and Bulk States of a Topological Insulator",
+      "summary": "该研究证明通过调控Bi₂Se₃拓扑绝缘体薄膜厚度可选择性分离高次谐波产生（HHG）中表面态与体态的贡献：超薄（6 nm）薄膜能增强源自拓扑表面态的HHG信号，从而实现两类态贡献的有效解耦。该方法为利用固态HHG作为探针研究拓扑表面态的超快动力学提供了新途径。",
+      "path": "",
+      "added_via": "cluster:cl_20260815_48c66e",
+      "added_at": "2026-10-18T13:20:21Z"
+    },
+    {
+      "source_id": "paper:2604.06051",
+      "title": "Disentangling High Harmonic Generation from Surface and Bulk States of a Topological Insulator",
+      "summary": "该工作在原型三维拓扑绝缘体 Bi2Se3 中实验研究高次谐波产生（HHG），证明体态与拓扑表面态对谐波发射的贡献可以被区分与调控。这为利用强场超快光谱选择性探测拓扑表面态独特电荷自旋动力学、实现表面/体态电子结构解耦测量提供了新途径。",
+      "path": "",
+      "added_via": "cluster:cl_20260815_48c66e",
+      "added_at": "2026-10-18T13:20:21Z"
+    },
+    {
+      "source_id": "briefing:knowledge/wiki/reviews/briefing-2026-05-24.md",
+      "title": "每日简报 2026-05-24：强场超快光学与阿秒科学研究简报",
+      "summary": "本简报汇总了7篇固体高次谐波（HHG）与强场超快光学领域最新论文，核心进展包括：ATAS揭示载流子动力学从界面受限向Auger主导转变（临界密度约1×10²⁰ cm⁻³）、Bi₂Se₃厚度可调控表面态/体态HHG贡献、Berry曲率与量子几何主导Dirac材料HHG，并拓展至有机分子晶体、ZnO取向依赖HHG及阿秒光斯格明子脉冲等新体系与新现象。",
+      "path": "",
+      "added_via": "cluster:cl_20260815_48c66e",
+      "added_at": "2026-10-18T13:20:21Z"
+    },
+    {
+      "source_id": "paper:2018-1807.01616-circular-dichroism-in-high-order-harmonic-generation-heraldi",
+      "title": "Circular dichroism in high-order harmonic generation: Heralding topological phases and transitions in Chern insulators",
+      "summary": "该文以Haldane模型为原型，理论上研究圆偏振中红外强场驱动下Chern绝缘体的高次谐波产生（HHG），提出HHG圆二色性（co-rotating与counter-rotating谐波强度的不对称）可作为拓扑相变的全光学指纹。核心发现：在拓扑平庸相中，CD随谐波阶数在正负间振荡；而在拓扑非平庸（Chern数非零）相中，CD在co-rotating平台谐波处呈现明显的平台结构，跨越拓扑相变时CD特征发生定性改变，从而以全光学方式指认拓扑相及其转变。",
+      "path": "knowledge/raw/papers/2018-1807.01616-circular-dichroism-in-high-order-harmonic-generation-heraldi.md",
+      "added_via": "cluster:cl_20260815_48c66e",
+      "added_at": "2026-10-18T13:20:21Z"
+    },
+    {
+      "source_id": "paper:2023-2303.17300-are-there-universal-signatures-of-topological-phases-in-high",
+      "title": "Are there universal signatures of topological phases in high harmonic generation? Probably not",
+      "summary": "对Kane-Mele拓扑绝缘体原型体系开展全从头算实时TDDFT强场模拟，在保持带隙完全一致的受控条件下对比平庸相与拓扑相的高次谐波产生（HHG）。系统检验了此前文献提出的四类拓扑签名——圆二色性、谐波螺旋度/椭圆度（含反常谐波选择定则）、带间-带内时间延迟——发现没有任何一个能在不同驱动与体系参数下唯一区分拓扑与平庸相。结论：HHG对能带结构与局域对称性的微观细节极为敏感，但不存在普适的'免校准'拓扑光学签名，相关实验解释需高度谨慎。",
+      "path": "knowledge/raw/papers/2023-2303.17300-are-there-universal-signatures-of-topological-phases-in-high.md",
+      "added_via": "cluster:cl_20260815_48c66e",
+      "added_at": "2026-10-18T13:20:21Z"
+    },
+    {
+      "source_id": "paper:2024-2401.01100-topological-high-harmonic-spectroscopy",
+      "title": "Topological high-harmonic spectroscopy",
+      "summary": "提出并系统论证'拓扑高次谐波光谱学'：在相对论性（狄拉克/Haldane 型蜂窝晶格）固体中，通过强场下能带动力学的数值求解，展示高次谐波谱如何编码能带的非平庸拓扑。论文给出了区分平庸相与拓扑相（不同陈数）的可观测判据，包括谐波产率、发射偏振以及垂直于激光场的反常（霍尔型）谐波分量，并检验这些指纹对激光参数的稳健性，为拓扑材料的全光学超快表征奠定基础。",
+      "path": "knowledge/raw/papers/2024-2401.01100-topological-high-harmonic-spectroscopy.md",
+      "added_via": "cluster:cl_20260815_48c66e",
+      "added_at": "2026-10-18T13:20:21Z"
+    },
+    {
+      "source_id": "paper:2018-1711.05783-high-harmonic-generation-in-solids-with-and-without-topologi",
+      "title": "High-harmonic generation in solids with and without topological edge states",
+      "summary": "利用一维含时密度泛函理论（TDDFT）对比研究了含与不含拓扑边界态的绝缘链中的高次谐波产生，发现拓扑相在次带隙区域的谐波产率比平庸相高出至多约14个数量级。机制上，体带间跃迁对次带隙谐波的贡献在布里渊区积分中几乎完全相消，而涉及中隙拓扑边态的跃迁不受此相消约束，从而产生极强的次带隙发射。该结果确立了次带隙谐波谱作为拓扑边界态全光学（超快）指纹的诊断方案。",
+      "path": "knowledge/raw/papers/2018-1711.05783-high-harmonic-generation-in-solids-with-and-without-topologi.md",
+      "added_via": "cluster:cl_20260815_48c66e",
+      "added_at": "2026-10-18T13:20:21Z"
+    },
+    {
+      "source_id": "paper:2024-2503.18092-probing-berry-phase-effect-in-topological-surface-states",
+      "title": "Probing Berry Phase Effect in Topological Surface States",
+      "summary": "该工作用双色场（ω+2ω）高次谐波光谱学在拓扑绝缘体表面态中直接探测Berry相位：强场驱动的电子-空穴准粒子沿k空间演化路径积累几何相位，表现为偶次谐波随双色相对相位振荡曲线的显著相移。这一相移与狄拉克锥固有的π Berry相位对应，为全光学、全光学域读取拓扑不变量提供了实验范式。",
+      "path": "knowledge/raw/papers/2024-2503.18092-probing-berry-phase-effect-in-topological-surface-states.md",
+      "added_via": "cluster:cl_20260815_48c66e",
+      "added_at": "2026-10-18T13:20:21Z"
+    },
+    {
+      "source_id": "paper:2026-aea1b4-high-harmonic-generation-in-topological-materials-a-comprehe",
+      "title": "High-harmonic generation in topological materials: a comprehensive review",
+      "summary": "本文系统综述了拓扑材料（拓扑绝缘体、外尔/Chern半金属、SSH型晶格等）中高次谐波产生的研究进展，梳理了表面Dirac态、Weyl节点及非平庸贝里结构对谐波产率、偏振与螺旋性依赖的调控。综述的核心批判性结论是：圆二色性（CD）与椭圆率依赖等常被称为'拓扑特征'的观测量大多属于拓扑敏感（topology-sensitive）而非拓扑特异（topology-specific），可由对称性破缺、多带干涉等平凡机制产生。文章进而给出通过表面/体相分离、拓扑相变跟踪及与同对称性拓扑平凡对照体系的严格比较来甄别真实拓扑印记的判据与路线图。",
+      "path": "knowledge/raw/papers/2026-aea1b4-high-harmonic-generation-in-topological-materials-a-comprehe.md",
+      "added_via": "cluster:cl_20260815_48c66e",
+      "added_at": "2026-10-18T13:20:21Z"
+    },
+    {
+      "source_id": "paper:2025-1nbk-9khj-topological-surface-states-dominated-second-harmonic-generat",
+      "title": "Topological surface states dominated second harmonic generation in the bulk insulating topological insulator BiSbTe1.25Se1.75",
+      "summary": "在体绝缘拓扑绝缘体 BiSbTe1.25Se1.75 中证明二次谐波产生（SHG）由拓扑表面态（TSS）主导：体相中心对称且体自由载流子被压制，表面破缺反演对称的二阶响应成为主通道。发现圆偏振激发可显著增强 SHG，该增强源自圆偏振光在 TSS 上诱导的时间反演对称性破缺贡献 Δχ(2)。借助螺旋度分辨与时间分辨测量提取 Δχ(2) 及其时间演化，将 SHG 发展为无接触探测拓扑表面态超快动力学的光学工具。",
+      "path": "knowledge/raw/papers/2025-1nbk-9khj-topological-surface-states-dominated-second-harmonic-generat.md",
+      "added_via": "cluster:cl_20260815_48c66e",
+      "added_at": "2026-10-18T13:20:21Z"
+    },
+    {
+      "source_id": "paper:2025-111.085107-circular-dichroism-of-the-dipole-transition-in-nanosized-top",
+      "title": "Circular dichroism of the dipole transition in nanosized topological insulators",
+      "summary": "在纳米尺寸（有限尺度）拓扑绝缘体中，理论上证明分立能级间偶极跃迁的圆二色性（CD）直接编码能带陈数的符号。在线偏振强场驱动下，该CD进一步映射为发射高次谐波的椭圆率，其旋向随陈数反号而翻转，构成拓扑不变量的全光学读出方案。作者并提出该物理可在磁约束陷阱（冷原子人工规范场小体系）中实验实现。",
+      "path": "knowledge/raw/papers/2025-111.085107-circular-dichroism-of-the-dipole-transition-in-nanosized-top.md",
+      "added_via": "cluster:cl_20260815_48c66e",
+      "added_at": "2026-10-18T13:20:21Z"
+    },
+    {
+      "source_id": "paper:2024-109.043102-angle-dependent-high-order-harmonic-generation-in-a-topologi",
+      "title": "Angle-dependent high-order harmonic generation in a topological insulator",
+      "summary": "本文系统研究拓扑绝缘体中高次谐波产率随强场线偏振角的变化，发现先前文献提出、并被建议用作拓扑不变量光学探针的角度依赖谐波差分信号实际上严格消失。该负结果表明此差分信号并非可靠的拓扑读出量，提示任何'固态HHG读拓扑'方案都必须先通过与晶体对称性解耦的非零性检验。",
+      "path": "knowledge/raw/papers/2024-109.043102-angle-dependent-high-order-harmonic-generation-in-a-topologi.md",
+      "added_via": "cluster:cl_20260815_48c66e",
+      "added_at": "2026-10-18T13:20:21Z"
+    },
+    {
+      "source_id": "paper:2020-2009.10378-high-harmonic-generation-from-topological-surface-states",
+      "title": "High-harmonic generation from topological surface states",
+      "summary": "在拓扑绝缘体 BiSbTeSe2（BSTS）中首次观测到主要由拓扑表面态（TSS）贡献的高次谐波：体相中心对称只给出奇次谐波，而自旋-动量锁定的表面狄拉克锥产生显著的偶次谐波。通过与拓扑平庸对照样品的对比，偶次谐波仅在拓扑相中出现，从而建立了以偶次谐波为指纹的全光探测拓扑相变的方法。理论含时模拟（基于 massive Dirac 表面哈密顿量的半导体布洛赫方程）确认偶次谐波由带内自旋织构非线性电流主导。",
+      "path": "knowledge/raw/papers/2020-2009.10378-high-harmonic-generation-from-topological-surface-states.md",
+      "added_via": "cluster:cl_20260815_48c66e",
+      "added_at": "2026-10-18T13:20:21Z"
+    },
+    {
+      "source_id": "paper:2021-2109.10858-tunable-non-integer-high-harmonic-generation-in-a-topologica",
+      "title": "Tunable non-integer high-harmonic generation in a topological insulator",
+      "summary": "实验首次在三维拓扑绝缘体 Bi2Te3 中实现了随载波包络相位（CEP）连续可调的非整数倍高次谐波发射（Nature 593, 385, 2021）。谐波谱、CEP 依赖与圆偏振螺旋度依赖共同表明，拓扑表面态 Dirac 费米子的亚周期弹道加速是主导机制，而六角翘曲导致的 Berry 曲率通过反常速度贡献横向电流。结合含从头算 Berry 曲率的半经典模拟，实验定量区分了表面态与体相贡献，建立了'波形可控强场驱动 + 拓扑带面几何'的谐波产生新范式。",
+      "path": "knowledge/raw/papers/2021-2109.10858-tunable-non-integer-high-harmonic-generation-in-a-topologica.md",
+      "added_via": "cluster:cl_20260815_48c66e",
+      "added_at": "2026-10-18T13:20:21Z"
+    }
+  ]
+}

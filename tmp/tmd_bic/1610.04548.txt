@@ -1,0 +1,1694 @@
+Polaritons in layered 2D materials
+Tony Low,1, ∗Andrey Chaves,2, 3 Joshua D. Caldwell,4 Anshuman Kumar,1, 5 Nicholas X. Fang,5 Phaedon
+Avouris,6 Tony F. Heinz,7 Francisco Guinea,8, 9 Luis Martin-Moreno,10 and Frank Koppens11, 12
+1Department of Electrical & Computer Engineering,
+University of Minnesota, Minneapolis, MN 55455, USA
+2Universidade Federal do Cear´a, Departamento de F´ısica,
+Caixa Postal 6030, 60455-760 Fortaleza, Cear´a, Brazil
+3Department of Chemistry, Columbia University, New York, New York 10027, USA
+4US Naval Research Laboratory, 4555 Overlook Avenue SW, Washington DC 20375, USA
+5Mechanical Engineering Department, Massachusetts Institute of Technology, Cambridge, MA 02139, USA
+6IBM T.J. Watson Research Center, 1101 Kitchawan Rd, Yorktown Heights, NY 10598, USA
+7Department of Applied Physics, Stanford University, Stanford, CA 94305, USA
+8IMDEA Nanociencia, Calle de Faraday 9, E-28049 Madrid, Spain
+9Department of Physics and Astronomy, University of Manchester,
+Oxford Road, Manchester M13 9PL, United Kingdom
+10Instituto de Ciencia de Materiales de Aragon and Departamento de Fisica de la Materia Condensada,
+CSIC-Universidad de Zaragoza, E-50012 Zaragoza, Spain
+11ICFO-Institut de Ciencies Fotoniques, The Barcelona Institute of
+Science and Technology, 08860 Castelldefels (Barcelona), Spain
+12ICREA
+Instituci´o Catalana de Recer¸ca i Estudis Avancats, 08010 Barcelona, Spain.
+In recent years, enhanced light-matter interactions through a plethora of dipole-type
+polaritonic excitations have been observed in two-dimensional (2D) layered materi-
+als.
+In graphene, electrically tunable and highly conﬁned plasmon-polaritons were
+predicted[1, 2] and observed[3–6], opening up opportunities for optoelectronics[7],
+bio-sensing[8] and other mid-infrared applications[9].
+In hexagonal boron nitride
+(hBN), low-loss infrared-active phonon-polaritons exhibit hyperbolic behavior for some
+frequencies[10–12], allowing for ray-like propagation exhibiting high quality factors
+and hyperlensing eﬀects[13, 14]. In transition metal dichalcogenides (TMDs), reduced
+screening in the 2D limit leads to optically prominent excitons with large binding
+energy[15, 16], with these polaritonic modes having been recently observed with scan-
+ning near ﬁeld optical microscopy (SNOM)[17].
+Here, we review recent progress in
+state-of-the-art experiments, survey the vast library of polaritonic modes in 2D ma-
+terials, their optical spectral properties, ﬁgures-of-merit and application space. Taken
+together, the emerging ﬁeld of 2D material polaritonics and their hybrids[12] provide
+enticing avenues for manipulating light-matter interactions across the visible, infrared
+to terahertz spectral ranges, with new optical control beyond what can be achieved
+using traditional bulk materials.
+In many materials, electric dipoles (e.g.
+infrared-
+active optical phonons, excitons in semiconductors and
+plasmons in doped materials) can be excited when
+illuminated[18, 19], producing hybrid quasiparticles with
+photons called polaritons. These polaritons can be sus-
+tained as electromagnetic modes at the interface between
+a positive (e.g. normal dielectric) and negative permit-
+tivity material, leading to propagating polaritons. In the
+case of the plasmon-polaritons (PP), the negative permit-
+tivity is provided by the coherent oscillations of the free
+carriers, and can be described by the Drude model. For
+exciton-polaritons (EP) and phonon-polaritons (PhP), it
+is associated with their resonant optical absorption, re-
+sulting from a highly dispersive permittivity. These opti-
+cal resonances can also result in a negative permittivity,
+albeit over a narrow spectral window. In order to provide
+a simple, yet comprehensive overview of these diﬀerent
+optical modes, we have provided a summary in Box 1.
+These polariton modes are characterized by two re-
+lated length scales: the polariton wavelength along the
+interface and the extension of the evanescent ﬁeld in
+the perpendicular direction, both of which are smaller
+than the free-space wavelength. The associated reduced
+modal volume presents an extremely large local density of
+electromagnetic states at the interface, leading to strong
+light-matter interactions. Hence, polaritonics provide a
+way to conﬁne, harness and manipulate light at dimen-
+sions smaller than the diﬀraction limit[20]. The emer-
+gence of so-called 2D or van der Waals materials as hosts
+for these polaritonic modes, has enabled the ﬁrst real-
+ization and imaging of polaritons within atomically thin
+materials. Due to the inherent material anisotropy and
+the exceptional variation of material types (e.g. metal-
+lic, dielectric, semiconductor) available within the known
+library of 2D materials, a large breadth of diﬀerent ﬂa-
+vors of polaritonic modes have been realized. This in-
+cludes tunable chiral[21, 22], anisotropic and hyperbolic
+PPs[23, 24]; long-lived hyperbolic PhPs[10, 11, 25] with
+arXiv:1610.04548v3  [cond-mat.mes-hall]  7 Jul 2017
+
+2
+slow light[26, 27] and hyperlensing behavior[13, 14]; EP
+with strong binding energies[28–32], their complexes[31,
+33–35], and anisotropic excitons[36–39]. This review is
+devoted to the emerging but rapidly developing ﬁeld of
+polaritonics and nanophotonics in the family of 2D ma-
+terials, with an emphasis on the materials and the po-
+laritons physics.
+From metal to graphene plasmon-polaritons. The most
+well-known physical realization of polaritons consists of
+electromagnetic modes bound to a ﬂat interface be-
+tween a metal and a dielectric, called surface plasmon-
+polaritons (SPPs)[20]. The ﬁeld of metal plasmonics has
+developed tremendously over the last few decades, with a
+number of interesting eﬀects such as extraordinary trans-
+mission through nanoholes in metals[40], single molecule
+detection[41], compact nanophotonic components[42],
+and novel optical phenomena with metamaterials[43] and
+metasurfaces[44].
+However, metal plasmonics suﬀers
+from the problem of absorption losses[45], which tradi-
+tionally has limited the range of possible materials to
+metals like silver and gold, and constrains the operating
+frequencies to the near-infrared, visible and ultraviolet.
+State-of-the-art
+graphene
+plasmonics.
+Graphene
+plasmonics[1, 2, 9, 46, 47] presents several advantages
+as compared to metal plasmonics. First, the carrier den-
+sity, which determines its plasmonic Drude weight (as
+deﬁned in Box 2), can be electrically[3], chemically[6], or
+optically[48] tuned. This is due to the fact that graphene
+is a semimetal with a small density-of-states, where typ-
+ical carrier concentrations are less than ∼0.01 free con-
+duction electrons per atom, in contrast to the case of
+∼1 in gold. The consequence of this lower carrier con-
+centration is that graphene PPs can be stimulated in the
+terahertz to mid-infrared frequencies[3–6, 9], and in some
+cases even into the short-wave infrared[49], while metal
+SPPs are found in the UV, visible to the near-infrared.
+Second, the low electronic density-of-states and rela-
+tively weak electron-phonon coupling endows graphene
+with very high intrinsic carrier mobilities, attainable via
+graphene encapsulated within hexagonal boron nitride
+(hBN) multilayers made with van der Waals assembly
+technique[50].
+First experiments[4, 5] on propagating PPs in graphene
+were observed using scattering-type scanning near ﬁeld
+optical microscopy (SNOM). Recently, similar measure-
+ments have been performed on high mobility encapsu-
+lated graphene[51], with a schematic of the setup pre-
+sented in Fig. 1a. In this experiment, the metal-coated
+AFM tip scatters incident free-space light into graphene
+PPs, where the sharpness of the tip provides the needed
+momentum to overcome the momentum mismatch be-
+tween free-space photons and the conﬁned PPs. The PP
+propagates away from the tip as circular waves with com-
+plex wavevector q. The PP propagates towards the edge
+of the graphene ﬂake, and provided this edge is within the
+polariton propagation length, it will be reﬂected back to-
+wards the tip and is detected as out-scattered light. Spa-
+tial scanning of the tip near the graphene edge shows
+characteristic fringes due to interference between the re-
+ﬂected and incident PPs (see Fig. 1b) from which the
+complex q can be extracted. In such experiments, spacing
+between fringes is the PP half-wavelength i.e. π/Re[q],
+while the fringes decay exponentially as exp(−Im[q]x).
+In order to directly compare and quantify the behav-
+ior of various polaritonic materials, a series of ﬁgures of
+merit have been established. Commonly used ﬁgures-of-
+merit for PPs are; γ ≡Im[q]/Re[q], where γ−1/2π gives
+the number of cycles the PP can propagate before its am-
+plitude decays by 1/e, and the light conﬁnement factor
+β, which is obtained by normalizing Re[q] to the free-
+space wavevector. Experiments with hBN encapsulated
+graphene have achieved β ∼150 and γ−1 > 25[51], see
+Fig. 1c. Hence, the current state-of-the-art in graphene
+PP has already surpassed performance of SPPs along
+air-silver interfaces (γ−1 ≈10 across the visible spec-
+tral range, where β > 10[2]). In these graphene-based
+devices, the inverse damping γ−1 was found to be domi-
+nated by phonons in graphene and hBN[52], rather than
+that of extrinsic ionized impurities as in earlier experi-
+ments on SiO2 substrates[4, 5] where γ−1 ∼5.
+Steps
+have also been undertaken to develop resonant optical
+gold rod antennas and 2D spatial conductivity patterns
+for direct launching and control of propagating PPs[53]
+as illustrated in Fig. 1d and e respectively.
+Plasmon-polaritons beyond graphene.
+Graphene has
+paved the way for the discovery and exploration of other
+atomic 2D materials with new physical properties[54],
+among them new types of PPs.
+For example, Bernal-
+stacked bilayer graphene has recently received attention
+as a new plasmonic material, both theoretically[55] and
+experimentally[56, 57]. It allows for eﬃcient switching
+of the plasmonic Drude weight with the application of
+a vertical electric ﬁeld[56], due to the opening of an
+electronic band gap[58].
+It also accommodates a mid-
+infrared-active optical phonon mode[59], which can hy-
+bridize with the PPs to feature novel eﬀects such as elec-
+tromagnetically induced transparency and slow light[57].
+This, in addition to other new emerging 2D materials
+such as TMDs[15, 16] and black phosphorus (BP)[60],
+presents exciting opportunities for exploring new plas-
+monic eﬀects[21–24] (Box 2).
+As gold has perhaps been the most utilized plas-
+monic material, it is instructive to compare the asso-
+ciated ﬁgures-of-merit for the corresponding SPPs with
+those of 2D materials. In the mid-infrared, due to the
+large negative values associated with the real part of
+the dielectric function, SPPs in gold exhibit very poor
+β.
+However, β can be increased by considering metal
+ﬁlms, and utilizing the “short-range SPP” mode (Box
+1).
+To facilitate comparison, we consider the extreme
+case (most optimal in terms of β) assuming a 0.235 nm
+thick gold ﬁlm (equal to the separation between (111)
+
+3
+atomic planes).
+Bulk dielectric constants for gold are
+used[61].
+Optical constants for graphene and its bi-
+layer, MoS2, and BP have been obtained from the well-
+known Kubo formula in conjunction with their low-
+energy Hamiltonians[22, 23, 55].
+In all cases, we have
+assumed a temperature of 300 K and a n-doped mate-
+rial with a typical doping of 5 × 1012 cm−2 which can
+be obtained with standard electrical gating[54]. We ob-
+tained the free carrier scattering time τ from current
+state-of-the-art experiments[51, 62, 63].
+For graphene,
+its bilayer, and MoS2, τ is approaching the intrinsic limit
+determined by their thermal and optical phonons, i.e.
+τ ∼1 ps[52] and ∼0.1 ps[64] respectively. For BP, τ can
+approach ∼1 ps[65], however, the best experiments to-
+date achieved only ∼0.1 ps[62], so for our purposes the
+latter value was used. All calculations are for a conﬁgura-
+tion where the 2D material is placed on a substrate with
+dielectric constant of 2.25, which corresponds to that of
+SiO2 in the mid-infrared.
+Fig. 1f and g show the calculated ﬁeld conﬁnement β
+and damping ratio γ−1 across the far- and mid-infrared
+frequencies for 2D plasmonic materials and the ﬁctional
+atomic gold ﬁlm. In all cases, β is observed to increase
+with increasing frequency, however, it is only of order
+1 for the gold ﬁlm even upon approaching the near-
+infrared. On the other hand, 2D materials present much
+larger β ∼100 −1000. This implies 2D materials are
+clearly better than metals for ﬁeld enhancement and lo-
+calization in the mid-infrared.
+From these plots, it is
+clear that no one material provides the optimal behav-
+ior at all frequencies.
+For instance, while the highest
+β values are observed in BP, these are observed along
+a single crystallographic axis (x) and only over a rel-
+atively narrow spectral window.
+While this inherent
+in-plane anisotropy gives rise to the potential for hy-
+perbolic PPs (Box 2), this may not be ideal for many
+applications, especially when identifying the crystallo-
+graphic facets within micron-sized ﬂakes can be highly
+problematic. In contrast, graphene and MoS2 both pro-
+vide high β over a broad spectral range extending from
+the terahertz out into the mid- and near-infrared, respec-
+tively, with MoS2 oﬀering higher β values overall. In the
+case of graphene, the operational range is limited on the
+high-frequency end to about 3500 cm−1 due to interband
+losses. These occur when the plasmon energy is roughly
+twice the Fermi energy[66].
+A very interesting behav-
+ior is observed in bilayer graphene. Within the mid-IR,
+β is found to degrade rapidly with increasing frequency.
+However, after an extended spectral gap between roughly
+1450 −3250 cm−1, the β recovers. This behavior is re-
+lated to the two nested conduction bands in the bilayer,
+which due to interlayer coupling can transfer the energy
+to another higher energy plasmonic mode[55]. Thus, bi-
+layer graphene can be used to extend polaritonics into
+the near-infrared.
+Semiconducting TMDs, especially monolayer MoS2,
+have attracted signiﬁcant attention due to their novel
+optical dichroic and coupled spin-valley physics [16].
+Despite the considerable bandgap of ∼2 eV, a metal-
+lic state can still be induced with a vertical elec-
+tric ﬁeld if gap trap-states[67] can be suﬃciently sup-
+pressed.
+The development of van der Waals het-
+erostructure device platforms where MoS2 layers are
+fully encapsulated within hBN represents an important
+progress in this direction, with a record-high Hall mo-
+bility reaching 34, 000 cm2V−1s−1 for six-layer MoS2 at
+low temperature[63]. Fig. 1f shows that TMDs can have
+a very large conﬁnement of β ∼103, an order larger
+than graphene, albeit its γ−1 is smaller over most of
+the spectral range where graphene plasmons can be sup-
+ported due to it smaller carrier lifetime.
+A new class
+of anisotropic 2D materials[60, 68, 69] has also received
+considerable attention recently, particularly BP, which
+has a bulk gap of 0.3 eV and decent carrier mobility of
+∼1000 cm2V−1s−1 for BP thin ﬁlm[60]. In BP, the in-
+plane electronic mass anisotropy can be as large as 10,
+which as discussed above oﬀers the promise of anisotropic
+PPs[23] as reﬂected in their β and γ−1 presented in Fig. 1f
+and g.
+Hyperbolic phonon-polaritons in hBN. While the in-
+plane anisotropy of BP provides the potential to realize
+hyperbolic PPs behavior within the plane of a 2D ma-
+terial (e.g. Box 2), the structural anisotropy in all van
+der Waals crystals results in a strong optical birefrin-
+gence.
+Hyperbolicity is deﬁned as an extreme type of
+birefringence, whereby the permittivities along orthogo-
+nal crystal axes are not just diﬀerent, but opposite in
+sign[70]. In 2D materials, the Cartesian axes exhibiting
+the sign inversion of the permittivity tensors tend to be
+between the in- and out-of-plane directions, with hBN
+oﬀering a prime example. Bulk hBN features two sets
+of infrared active optical phonon modes, which results in
+two spectrally distinct Reststrahlen bands where nega-
+tive permittivity can be observed. These two bands are
+now referred to as the lower (“LR”; ∼760−825cm−1) and
+upper (“UR”; ∼1360 −1620cm−1) Reststrahlen bands.
+As shown in Fig. 2a, its in-plane permittivity is positive
+(negative) within the LR (UR), while opposite in sign
+along the out-of-plane c-axis.
+The inversion of signs of the permittivity components
+between these two bands gives rise to a type I and II hy-
+perbolic behavior within the LR and UR respectively[70],
+which impacts the resultant dispersion relationships of
+the in-plane transverse (kt) and out-of-plane (kz) hyper-
+bolic modes. These hyperbolic PhPs in hBN were ﬁrst
+explored within the UR using SNOM[10] through a simi-
+lar interferometric study to that previously described for
+PP in graphene. This initial experiment recorded β ∼25
+and γ−1 ∼20, which further improved to γ−1 ∼35 in
+a subsequent experiment[14]. Such high γ−1 is not sur-
+prising since PhPs do not suﬀer from electronic losses,
+instead being dictated by the optic phonon scattering
+
+4
+lifetimes, which are intricately tied to the crystal struc-
+tural quality and should improve with better growth.
+Unlike traditional polaritonic materials, hyperbolic
+PhP modes exhibit multiple branches within the dis-
+persion relationship as shown in Fig. 2b.
+Later work
+demonstrated that these multiple branches are directly
+tied to the thickness of the hyperbolic material layer
+thickness[14]. While the initial work[10] observed only
+the fundamental, lowest order hyperbolic modes, work
+using conical-shaped hBN nanostructures experimen-
+tally observed up to 7 and 4 branches within the UR
+and LR, respectively, by varying the aspect ratio of
+the structures[11] (Fig. 2c). Unlike the case of SNOM,
+where the higher order branches exhibit higher in-plane
+wavevector, kt, in the resonators, the modes increased in
+kz. As the aspect ratio for these nanostructures is di-
+rectly proportional to the out-of-plane kz, this gives rise
+to the apparent inversion of the dispersion relationships
+between Fig. 2b (SNOM) and 2c (nanostructures). Sub-
+sequent work using SNOM was able to further map out
+the ﬁrst few orders of the kt dispersion as well[14].
+Slowing light and imaging within hBN. The PhP dis-
+persions reported in Ref. [14] and [11] suggest negative
+(positive) group velocity for the kz (kt) modes within
+the UR, and the opposite sign for the LR. Interestingly,
+recent time-resolved SNOM measurements provided un-
+ambiguous evidence that it is instead the phase velocity
+which exhibits negative values[26, 27]. Fig. 2d depicts the
+launching of PhP from the edge of a gold pad, and visu-
+alizing its propagation in the time-domain for PhP in the
+UR (Fig. 2e) and LR bands (Fig. 2f). By tracing its wave
+envelope, one can discern that the PhP moves with a pos-
+itive group velocity regardless of the Reststrahlen band.
+However, by monitoring the fringe velocity, the sign of
+the phase velocity can be identiﬁed as being negative in
+the LR, while positive in the UR. Such a negative phase
+velocity necessarily implies that kt is negative. Presum-
+ably, for modes where kz is changing (e.g. 3D conﬁned
+resonators), the opposite behavior would be anticipated.
+These experiments also allowed for direct measurement
+of the hyperbolic PhP modal lifetimes, recorded to be 1.8
+and 0.8 ps in the LR and UR, respectively, demonstrat-
+ing that these values are on the order of the lifetimes of
+the optic phonons themselves. With lifetimes for PPs in
+metals being on the order of 10s fs, such long lifetimes
+would naturally be anticipated to result in correspond-
+ingly long polariton propagation lengths.
+However, as
+previously discussed[25], the group velocity at which the
+polariton propagates can be exceptionally slow, there-
+fore limiting the ultimate propagation length. For hBN,
+this was certainly the case with the group velocity be-
+ing demonstrated to be on the order of 0.027 and 0.002
+times the speed of light in vacuum for the UR and LR,
+respectively.
+Another promising application for hyperbolic media
+that has received a lot of attention is the direct imag-
+ing of deeply sub-diﬀractional sized objects via the so-
+called “hyperlens”[71].
+Originally demonstrated using
+hyperbolic metamaterials[72] in the visible, the high op-
+tical losses associated with the metal plasmonic con-
+stituents and the fabrication complexities have limited
+its imaging capabilities and resolution to the smallest
+meta-atom. On the contrary, hyperbolic materials based
+on hBN are homogeneous, ideally inﬁnite, and low-loss
+by nature of PhP. Proof-of-principle hyperlens experi-
+ments were recently demonstrated[13, 14], as illustrated
+in Fig. 2g-i. In both works, sub-diﬀractional metal ob-
+jects were fabricated on a substrate surface using elec-
+tron beam lithography (Fig. 2h) and covered with a ﬂat
+slab of hBN (on the order of 100 nm thick) and im-
+aged using a SNOM (Fig. 2g).
+Multiple rings result
+from the PhP modes launched from the edges of the
+metal nanoparticles at angles dictated by the hyper-
+bolic nature of the PhPs(Fig. 2i). This propagation angle
+(with respect to the surface normal) results from the fact
+that while hyperbolic materials can support very high
+k modes, they can only propagate at an angle given by
+tan(θ) =
+p
+Re[ϵt]/Re[ϵz]/i.
+For both the UR and LR
+of hBN, either ϵt or ϵz will be negative and dispersive
+while the other is positive and nominally constant, this
+angle of propagation is therefore a function of frequency.
+Because of this, the image that results from the corre-
+sponding hyperlens can vary from a direct replica (90o
+propagation) to a highly magniﬁed object, which can be
+user-controlled. It is important to note that the propa-
+gation angle θ is ﬁxed with respect to the crystal axes of
+hBN. As a result, in a non-planar geometry of a truncated
+cone geometry (as illustrated in the inset of Fig. 2c), non-
+specular reﬂections can occur oﬀthe sidewall surfaces as
+recently conﬁrmed with SNOM[73].
+Natural hyperbolic layered 2D materials beyond hBN.
+To this point, research in this area has focused on the
+natural hyperbolic properties of hBN. However, the nat-
+ural optical anisotropy associated with van der Waals
+crystals, and the polar nature of many should in princi-
+ple oﬀer a broad range of naturally occurring hyperbolic
+materials covering a very broad spectral range[74–76].
+Strong anisotropy in electron motion along the in-plane
+(metallic) and out-of-plane (insulating) layered materials
+can lead to hyperbolicity for speciﬁc frequency bands, e.g.
+in graphite and magnesium diboride[74, 77]. Ruthenates
+have diﬀerent Drude weights[74] along the in- and out-of-
+plane axes, and are hyperbolic between the two plasma
+frequencies.
+High quality semiconducting TMDs, such
+as MoS2, also accommodate far-infrared anisotropic po-
+lar optical phonons, should result in hyperbolic bands as
+in hBN in the Reststrahlen frequencies[78]. Furthermore,
+the tetradymites, such as Bi2Se3 and Bi2Te3, should also
+host such hyperbolic polaritons, albeit in the terahertz
+regime[79] , while they were also observed to support
+hyperbolic modes in the near-infrared to visible due to
+diﬀerent highly resonant interband transition energies
+
+5
+along the in-plane and out-of-plane axes[80]. Lastly, the
+high Tc superconducting cuprates are highly metallic in-
+plane, but with an out-of-plane dielectric response typical
+of an insulator characterized by several Lorentzian type
+resonances[74]. As such, one would naturally infer that
+hyperbolic behavior would also be readily observed.
+Fig. 2j presents representative materials from the
+above-mentioned layered 2D systems.
+Their hyperbol-
+icity spectral range, type, and inverse damping ratio γ−1
+are plotted. Here, we have used the quasistatic approxi-
+mation and considered only the lowest order mode. This
+allows us to characterize a broad class of materials on
+equal footing. Among the listed materials, only hBN and
+Bi2Se3 whose hyperbolicity are phonon in origin, show
+γ−1 > 10, indicating that while a wealth of hyperbolic
+2D materials await further study, optical losses may still
+limit advancements in the near-term.
+Strong excitons in 2D semiconductors.
+Over the
+past few years, a plethora of photoluminescence (PL),
+absorption, and reﬂectance experiments have been re-
+ported in the literature for several 2D materials, such
+as TMD monolayers[28–32] (including the distorted 1T
+phase ReS2[81]), BP mono and multilayers[36–39], and,
+more recently, monolayer organic-inorganic perovskite
+(OIP) crystals[82], namely (C4H9NH3)2PbI4. By prob-
+ing the formation (absorption and reﬂectance) and re-
+combination (PL) of electron-hole pairs, these experi-
+ments have provided us information not only about their
+optical gaps, which are found to be signiﬁcantly far from
+the theoretical quasi-particle bandgaps, but also about
+their excitonic Rydberg series.
+Figure 3a summarizes
+the experimentally observed optical gaps (full symbols),
+which cover a wide range of wavelengths from blue, for
+monolayer OIPs, all the way to the near-infrared, for BP
+multilayers.
+Recent calculations also suggests possible
+extension into the mid-infrared using arsenene, a stable
+analogue of BP but with arsenic atoms[83].
+Binding energies of excitonic states can be obtained
+by En = EXn −EQP , where EXn and EQP are the
+n-th exciton state energy and quasi-particle band gap,
+respectively, and are shown in Fig. 3b. Unlike bulk semi-
+conductors, excitons in 2D materials are strongly con-
+ﬁned to a plane and experience a reduced screening from
+their surrounding dielectric enviroment[84], which mod-
+iﬁes the character of the Coulomb interaction poten-
+tial, leading to non-hydrogenic Rydberg series of exci-
+ton states[85].
+Excited exciton states within the Ryd-
+berg series (i.e. 2s, 3s, 4s... states) have been observed
+in OIPs[82] and TMDs[85–88], using diﬀerent methods
+such as reﬂectance and absorption spectroscopy, as sum-
+marized by circles in Fig. 3b.
+Triangles in Fig. 3b are
+excited states with p symmetry, observed by two-photon
+luminescence experiments in WS2 and WSe2[86–88]. As
+a consequence of the non-Coulombic electron-hole inter-
+action potential, the degeneracy between s and p states
+is lifted, so that two-photon experiments exhibit peaks in
+the PL spectra that do not match those of the Rydberg
+series states[87]. In general, binding energies in 2D mate-
+rials are about an order of magnitude higher than those
+of bulk semiconductors,[89] such as Si, Ge and III-V or
+II-VI alloys, being comparable only to exciton binding en-
+ergies observed in carbon nanotubes[90] and conjugated
+polymer chains [91].
+Such strong electron-hole interaction makes these ma-
+terials a playground for investigating excitons and their
+complexes (trions and biexcitons), which are usually
+harder to observe in conventional bulk semiconductors.
+In Fig. 3b, we summarize the recently experimentally ob-
+served trions and biexcitons binding energies in 2D ma-
+terials, which ranges from tens to a hundred meV[31, 33–
+35, 92–95].
+All these high binding energies for exci-
+tons and their complexes as observed are consistent with
+theory within the generalized Wannier-Mott model de-
+scribed elsewhere[96].
+In tightly bound excitons in layered 2D materials, there
+is a large spatial overlap of the respective electron- and
+hole-wavefunctions, with the corresponding Bohr radius
+being on the order of only 1 nm[85, 87]. This leads to a
+particularly strong coupling of excitons to photons[97],
+resulting in both large absorption coeﬃcients and eﬃ-
+cient emission of the radiation in this class of materials.
+The absolute absorption values at the excitonic transi-
+tion peak are as high as 10 −20% [29] for single layers
+with sub-nanometer thickness, as shown in Fig. 3c. The
+corresponding area under the resonance (shaded), pro-
+portional to the strength of the light-matter coupling[98],
+is orders of magnitude larger than the respective values
+in more conventional inorganic semiconductors, such as
+GaAs[99].
+Exciton-polaritons. The EP was ﬁrst observed in 2D
+materials within optical microcavities with TMDs[100,
+101].
+Experimentally observed EP branches[101] in
+monolayer MoS2 follow anti-crossing paths over the exci-
+ton and cavity mode energy lines, with a Rabi splitting as
+large as ∼46 meV. The strong coupling regime, typically
+deﬁned by the rate of the exciton-phonon scattering be-
+ing larger than the competing dephasing processes of the
+two particles, was already shown to be attainable even at
+room temperature[101]. However, real-space observation
+of EP with SNOM was observed only very recently[17] in
+an exfoliated 260 nm WSe2 thin ﬂake. The ﬁeld of EPs in
+2D materials is still at the nascent stage, and we expect
+exciting future developments.
+Hybrid polaritons.
+Looking forward, perhaps one of
+the most intriguing prospects associated with 2D van der
+Waals crystals is the ability to cleave and combine lay-
+ers of diﬀerent 2D materials to realize heterostructures of
+diﬀerent constituents and thicknesses[102], and engineer
+new hybrid polaritons with novel physics[12, 103–105].
+Two recent examples are depicted in Fig. 4. By combin-
+ing graphene with hBN, one can marry the advantage
+of tunable PP in graphene with high quality, low-loss,
+
+6
+PhP in hyperbolic hBN[106]. Recent SNOM measure-
+ment performed on a graphene-hBN heterostructure[106]
+(Fig. 4a) revealed a coupled PP and PhP (Fig. 4b). This
+hybrid polariton mode, termed a ’plasmon-phonon po-
+lariton’, exhibited a broad-band dispersion, extending
+beyond the Reststrahlen band of hBN, and oﬀered elec-
+trostatic gate tuning of the hyperbolic mode primarily
+conﬁned within the hBN. In addition to these so-called
+electromagnetic hybrids where combinations of PPs and
+PhPs are induced, another new type of atomic-scale het-
+erostructure consisting of polar dielectric 2D materials
+can also lead to the creation of a new material result-
+ing from the hybridization of optic phonons at the het-
+erostructure interfaces, which can provide direct control
+of the dielectric function within the spectral regime of
+the Reststrahlen bands[12].
+On the EP front, heterostructures of TMDs where
+electrons and holes are conﬁned to diﬀerent layers, as
+illustrated in Fig. 4c, would allow for the formation of
+“indirect excitons” at an energy lower than that of its
+single layer constituents.
+Many pairs of 2D materi-
+als are known to be compatible with the type-II band
+alignment[107] required for such situations.
+Having a
+low oscillator strength, but also lower energy, this charge
+transfer exciton manifests itself as a clear low energy
+peak in PL experiments that is absent in absorption
+experiments[105], as shown in Fig. 4d for a WSe2/MoS2
+hybrid heterostructure[103].
+Outlook. As indicated by the breadth of work high-
+lighted above, there is a great deal of promise for
+nanophotonics based on 2D materials and their het-
+erostructures. While still in the earliest stages of work,
+here we oﬀer our perspective on how we anticipate the
+development of the ﬁeld, highlighting the key physics
+and the potential application space. The latter is sum-
+marized in Box 1.
+Graphene plasmonics has led the
+way in terms of demonstrating proof-of-principle de-
+vice concepts such as mid-infrared optoelectronics[7],
+bio-sensing[8] and ﬁngerprinting[108].
+We anticipate
+that these applications should continue to develop over
+the next few years, and also envision ventures into
+free-space beam shaping and steering with graphene
+metasurfaces[109].
+Going forward, these high quality
+graphene PPs can also provide an excellent platform for
+realizing tunable 2D mid-infrared nanophotonics circuits
+with novel functionalities not previously attainable[110].
+The discovery of new plasmonic materials beyond
+graphene might potentially oﬀer new means of light-
+matter interactions, such as hyperbolic[24] and chiral[21,
+22] plasmons in anisotropic and gapped Dirac materials
+respectively. Plasmonic loss remains a fundamental issue
+that should be addressed, and non-equilibrium processes
+or gain media[111] could oﬀer enticing routes, particu-
+larly in gapped materials e.g. bilayer graphene. However,
+while there is a strong desire to extending the operating
+spectral range into the visible, this would also necessar-
+ily require the realization of new materials, for instance
+intercalated graphene[112] or the recently observed hy-
+perbolic polaritons in tetradymites[80].
+Because of the optical phonon origin of PhPs, these
+modes are observed in the THz to mid-infrared spectral
+ranges[25], as summarized in Fig. 2j.
+In 2D materials,
+the natural hyperbolic character of these phononic modes
+are preferred candidates for sub-diﬀraction imaging (such
+as hyperlensing discussed earlier), and super-Planckian
+thermal emission[113]. However, while the slow moving
+PhP modes are not ideal for most waveguide applications,
+the long residence times associated with these long modal
+lifetimes and slow velocities can be extremely beneﬁcial
+for enhancements of local emitters, molecular vibrational
+modes and applications where strong-light matter inter-
+actions are desired.
+Indeed, these slow-light modes in
+natural hyperbolic materials would also manifest a van
+Hove singularity in the near-ﬁeld local density of optical
+states[114], oﬀering control of spontaneous emission.
+Long-lived excitons are of great importance e.g.
+for
+possibly allowing future observation of their super-
+ﬂuidity and exciton condensation at relatively high
+temperatures[104]. Such unprecendented tightly bound
+exciton complexes also brings the exciting perspective
+of realizing eﬃcient energy transfer by driving charged
+excitons through applied electric ﬁelds.
+This could
+be interesting for future applications in solar cells and
+photodetectors[115], where suppression of electron-hole
+recombination is also desireable. The coupling of excitons
+with plasmons to achieve sustained propagating EPs[17]
+is also interesting. Last but not least, the emergence of
+topological materials with nontrivial “twisted” electronic
+wavefunctions has also motivated studies on imbuing
+topological property to excitons[116], plasmons[21, 22]
+and phonons[117] in solids. This could potentially open
+up new avenues for the observation of topological polari-
+ton physics.
+In summary, the use of 2D polaritons has enabled
+the engineering of light-matter interactions beyond the
+diﬀraction limit across the terahertz to visible spectrum.
+The ability to manipulate polaritons within the vast li-
+brary of van der Waals 2D materials, in addition to nano-
+and heterostructuring, promises the on-demand design of
+new optical properties which are not possible with tradi-
+tional plasmonic materials.
+
+7
+Figure 1. State-of-the-art graphene plasmonics.
+(a) Schematic of the SNOM measurement, where the
+probe tip is excited with a laser source, launching plas-
+mons radially from the tip, with the scattered plasmon
+also collected by the tip.
+(b) Measured optical signal
+from a 2D scan of the SNOM tip near the graphene
+edge (dashed line) at room temperature.
+Plasmons
+are reﬂected oﬀthe graphene edge, and appear as
+interference fringes.
+(c) Calculated graphene plasmon
+inverse damping ratios, γ−1, due to graphene acoustic
+phonons (blue dashed line), substrate phonons of hBN
+(yellow dashed line), and the combination of these
+mechanisms.
+γ−1 due to charge impurities at concen-
+tration 1.9 × 1011 cm−2 (green dashed-dotted line) are
+also displayed. Experimentally measured γ−1 are shown
+in solid symbols with error bars representing the 95 %
+conﬁdence intervals. (d) Experimental SNOM image of
+a convex Au antenna extremity due to laser excitation
+at 11.06 µm, demonstrating the possibility of plasmon
+launching and wavefront engineering in graphene.
+(e)
+Similar SNOM image of refraction of graphene plasmon
+launched from Au antenna due to a graphene bilayer
+prism as indicated.
+Calculated conﬁnement factor, β,
+and inverse damping ratio, γ−1, for various 2D materials
+such as graphene, bilayer graphene, black phosphorus
+(BP), and MoS2, displayed in (f) and (g) respectively.
+BP exhibits highly anisotropic in-plane electronic dis-
+persion, with eﬀective masses along the two crystal axes
+diﬀering by a factor of ∼10. We displayed results for
+both the high (x) and low (y) mass directions.
+(a-c)
+adapted with permission from Ref. [51].
+(d-e) adapted
+with permission from Ref. [53].
+Figure 2.
+Hyperbolic phonon-polaritons in
+hBN. (a) Real parts of the in-plane (ϵt) and out-of-
+plane (ϵz) permittivity tensor components of hBN.
+Type I lower and II upper Reststrahlen bands are
+shaded.
+A schematic of the hBN crystal structure is
+presented in the inset. (b) Phonon-polariton dispersion
+within
+Reststrahlen
+bands
+experimentally
+obtained
+from the SNOM images near edges of a 105 nm thick
+hBN, versus the in-plane momenta kt (solid symbols).
+Solid lines are theory results.
+(c) Hyperbolic phonon
+polariton
+dispersion
+of
+the
+out-of-plane
+wavevector
+kz as determined by the aspect ratio dependence of
+the resonance frequencies for diﬀerence conical shaped
+nanostructures. This is plotted for both the upper (top)
+and lower (lower) Reststrahlen band. The solid lines are
+analytical calculations for ellipsoidal particles, while the
+various symbols indicate the resonant frequencies for
+experimental conical nanostructures.
+(d) Schematic of
+time-domain SNOM measurement of phonon-polariton
+in hBN. Mid-infrared light incident on the Au antenna
+launches hyperbolic polaritons in hBN, which propagate
+away from the Au edge and decay exponentially in
+amplitude and are ﬁnally collected by the nanotip. (e-f)
+Line scans of the SNOM amplitude taken as a function
+of the delay time between the incident (on Au) and
+detected ﬁelds (by tip). The polaritons group velocity
+(measured for frequency within the type II and I Rest-
+strahlen bands respectively) can be extracted from the
+rate at which the ‘envelope’ of the ﬁelds propagate away
+from the Au edge, while both sign and magnitude of
+the phase velocity can be determined from the direction
+and speed of the red/blue fringes with respect to the
+envelope. (g) Schematic showing the launching of hBN
+hyperbolic phonon polaritons from edges of Au disc,
+when it is illuminated with mid-infrared light. (h) AFM
+image of Au disks deﬁned lithographically on SiO2/Si
+substrate before the hBN transfer. (i) SNOM image of
+a 395 nm thick hBN at laser frequency ω = 1515 cm−1,
+where the observed “rings” produced by the hyperbolic
+polaritons are concentric with the Au disks. (j) Chart
+showing the type I and II hyperbolic frequency ranges for
+various naturally occuring hyperbolic layered materials,
+i.e.
+cuprates[74] (BSCCO (Bi2Sr2Can−1CunO2n+4+x),
+GBCO (GdBa2Cu3O7−x), LASCO (La1.92Sr0.08CuO4)),
+ruthenates[74] (SRU (Sr2RuO4), SR3U (Sr3Ru2O7)),
+hBN[10, 11], TMDs[78], tetradymites (Bi2Se3)[79], and
+graphite[74, 77]. Color map depicts the calculated ﬁgure
+of merit ℜ{q}/ℑ{q} for the lowest polaritonic mode
+in the quasi-static limit.
+Dielectric functions of these
+materials are obtained from references as cited.
+(a,c)
+adapted with permission from Ref. [11]. (b,g-i) adapted
+with permission from Ref. [14].
+(d-f) adapted with
+permission from Ref. [26].
+Figure 3.
+Excitons in TMDs and beyond. (a)
+Survey of experimentally observed optical band-gaps
+(full symbols) in diﬀerent 2D materials:
+OI in both
+phases (I and II) [82], WS2 , WSe2 [85–88], MoS2,[28–
+30], MoSe2 [31, 32], ReS2 [68, 81], ReSe2 [118]; and
+n-layers black phosphorus (n-BP). [36–39]. We note that
+for anisotropic materials like ReS2, ReSe2 and n-BP,
+the optical spectra are polarization sensitive, and the
+optical gap is deﬁned by the lowest energy resonance.
+Open symbols are theoretical calculations based on
+the Wannier Mott model.
+Theoretical predictions of
+quasi-particle (open circles) [119] and optical (blue
+stars) gaps for n-As are shown, extending the frequency
+window into the mid-infrared.
+(b) Binding energies
+of exciton states in upper panel, in their Rydberg
+sequence for s-states (solid circle) and p-states (solid
+triangle), as well as trions and biexcitons in lower panel.
+Sketches of the electron-hole structure of these excitonic
+complexes are illustrated on the right.
+The binding
+energies can be obtained from the observed optical
+bandgap and the quasiparticle gaps, and the results for
+excitonic complexes in black phosphorus[95], WS2[93],
+MoS2[33, 92, 94], MoSe2[31], WSe2[34, 35] are presented.
+(c) Measured absorption spectrum of a single WS2 layer,
+as sketched in the inset. Adapted with permission from
+
+8
+Ref. [120].
+Figure 4.
+Hybrid polaritonics.
+(a) Schematic
+of the SNOM experiment performed on graphene-hBN
+heterostructure.
+(b) Experimental dispersions of hy-
+brid plasmon-phonon-polaritons (blue circles) obtained
+from graphene-hBN heterostructure, compared against
+phonon-polariton (red triangle) from hBN. Theoretical
+results are shown as white lines and color map.
+(c)
+Sketch of a charge-transfer (indirect) exciton in a van
+der Waals heterostructure with type-II band alignment.
+(d) Photoluminescence and absorption spectra of WSe2
+and MoS2 monolayers and their hybrid heterostructure.
+(a-b) adapted with permission from Ref. [106], and (d) is
+reproduced from Ref. [103].
+∗Electronic address: tlow@umn.edu
+[1] L. Falkovsky and S. Pershoguba, “Optical far-infrared
+properties of a graphene monolayer and multilayer,”
+Physical Review B, vol. 76, no. 15, p. 153410, 2007.
+[2] M. Jablan, H. Buljan, and M. Soljaˇci´c, “Plasmonics in
+graphene at infrared frequencies,” Physical Review B,
+vol. 80, no. 24, p. 245435, 2009.
+[3] L. Ju, B. Geng, J. Horng, C. Girit, M. Martin, Z. Hao,
+H. A. Bechtel, X. Liang, A. Zettl, Y. R. Shen et al.,
+“Graphene plasmonics for tunable terahertz metamate-
+rials,” Nature Nanotechnology, vol. 6, no. 10, pp. 630–
+634, 2011.
+[4] Z. Fei, A. Rodin, G. Andreev, W. Bao, A. McLeod,
+M.
+Wagner,
+L.
+Zhang,
+Z.
+Zhao,
+M.
+Thiemens,
+G. Dominguez et al., “Gate-tuning of graphene plas-
+mons revealed by infrared nano-imaging,” Nature, vol.
+487, no. 7405, pp. 82–85, 2012.
+[5] J. Chen, M. Badioli, P. Alonso-Gonz´alez, S. Thongrat-
+tanasiri, F. Huth, J. Osmond, M. Spasenovi´c, A. Cen-
+teno, A. Pesquera, P. Godignon et al., “Optical nano-
+imaging of gate-tunable graphene plasmons,” Nature,
+vol. 487, no. 7405, pp. 77–81, 2012.
+[6] H. Yan, T. Low, W. Zhu, Y. Wu, M. Freitag, X. Li,
+F. Guinea, P. Avouris, and F. Xia, “Damping pathways
+of mid-infrared plasmons in graphene nanostructures,”
+Nature Photonics, vol. 7, no. 5, pp. 394–399, 2013.
+[7] M. Freitag, T. Low, W. Zhu, H. Yan, F. Xia, and
+P. Avouris, “Photocurrent in graphene harnessed by
+tunable intrinsic plasmons,” Nature Communications,
+vol. 4, p. 1951, 2013.
+[8] D. Rodrigo, O. Limaj, D. Janner, D. Etezadi, F. J. G.
+de Abajo, V. Pruneri, and H. Altug, “Mid-infrared plas-
+monic biosensing with graphene,” Science, vol. 349, no.
+6244, pp. 165–168, 2015.
+[9] T. Low and P. Avouris, “Graphene plasmonics for tera-
+hertz to mid-infrared applications,” ACS Nano, vol. 8,
+no. 2, pp. 1086–1101, 2014.
+[10] S. Dai, Z. Fei, Q. Ma, A. Rodin, M. Wagner, A. McLeod,
+M. Liu, W. Gannett, W. Regan, K. Watanabe et al.,
+“Tunable phonon polaritons in atomically thin van der
+waals crystals of boron nitride,” Science, vol. 343, no.
+6175, pp. 1125–1129, 2014.
+[11] J. D. Caldwell, A. V. Kretinin, Y. Chen, V. Giannini,
+M. M. Fogler, Y. Francescato, C. T. Ellis, J. G. Tis-
+chler, C. R. Woods, A. J. Giles et al., “Sub-diﬀractional
+volume-conﬁned polaritons in the natural hyperbolic
+material hexagonal boron nitride,” Nature Communi-
+cations, vol. 5, p. 5221, 2014.
+[12] J.
+D.
+Caldwell,
+I.
+Vurgaftman,
+J.
+G.
+Tischler,
+O. J. Glembocki, J. C. Owrutsky, and T. L. Rei-
+necke, “Atomic-scale photonic hybrids for mid-infrared
+and terahertz nanophotonics,” Nature Nanotechnology,
+vol. 11, no. 1, pp. 9–15, 2016.
+[13] P. Li, M. Lewin, A. V. Kretinin, J. D. Caldwell,
+K. S. Novoselov, T. Taniguchi, K. Watanabe, F. Gauss-
+mann, and T. Taubner, “Hyperbolic phonon-polaritons
+in boron nitride for near-ﬁeld optical imaging and fo-
+cusing,” Nature Communications, vol. 6, p. 7507, 2015.
+[14] S. Dai, Q. Ma, T. Andersen, A. Mcleod, Z. Fei, M. Liu,
+M. Wagner, K. Watanabe, T. Taniguchi, M. Thiemens
+et al., “Subdiﬀractional focusing and guiding of polari-
+tonic rays in a natural hyperbolic material,” Nature
+Communications, vol. 6, p. 6963, 2015.
+[15] K. F. Mak, K. He, J. Shan, and T. F. Heinz, “Control of
+valley polarization in monolayer mos2 by optical helic-
+ity,” Nature Nanotechnology, vol. 7, no. 8, pp. 494–498,
+2012.
+[16] X. Xu, W. Yao, D. Xiao, and T. F. Heinz, “Spin
+and pseudospins in layered transition metal dichalco-
+genides,” Nature Physics, vol. 10, no. 5, pp. 343–350,
+2014.
+[17] Z. Fei, M. Scott, D. Gosztola, J. Foley, J. Yan, D. Man-
+drus, H. Wen, P. Zhou, D. Zhang, Y. Sun et al., “Nano-
+optical imaging of ws e 2 waveguide modes revealing
+light-exciton interactions,” Physical Review B, vol. 94,
+p. 081402(R), 2016.
+[18] R. Ritchie, “Plasma losses by fast electrons in thin
+ﬁlms,” Physical Review, vol. 106, no. 5, p. 874, 1957.
+[19] S. Pekar, “The theory of electromagnetic waves in a
+crystal in which excitons are produced,” Sov. Phys.
+JETP, vol. 6, no. 4, p. 785, 1958.
+[20] S. A. Maier, Plasmonics:
+fundamentals and applica-
+tions.
+Springer Science & Business Media, 2007.
+[21] J. C. Song and M. S. Rudner, “Chiral plasmons without
+magnetic ﬁeld,” Proceedings of the National Academy of
+Sciences, vol. 113, no. 17, pp. 4658–4663, 2016.
+[22] A. Kumar, A. Nemilentsau, K. H. Fung, G. Hanson,
+N. X. Fang, and T. Low, “Chiral plasmon in gapped
+dirac systems,” Physical Review B, vol. 93, no. 4, p.
+041413, 2016.
+[23] T. Low, R. Rold´an, H. Wang, F. Xia, P. Avouris, L. M.
+Moreno, and F. Guinea, “Plasmons and screening in
+monolayer and multilayer black phosphorus,” Physical
+Review Letters, vol. 113, no. 10, p. 106802, 2014.
+[24] A. Nemilentsau, T. Low, and G. Hanson, “Anisotropic
+2d materials for tunable hyperbolic plasmonics,” Phys-
+ical Review Letters, vol. 116, no. 6, p. 066804, 2016.
+[25] J. D. Caldwell, L. Lindsay, V. Giannini, I. Vurgaftman,
+T. L. Reinecke, S. A. Maier, and O. J. Glembocki, “Low-
+loss, infrared and terahertz nanophotonics using surface
+phonon polaritons,” Nanophotonics, vol. 4, no. 1, pp.
+44–68, 2015.
+[26] E. Yoxall, M. Schnell, A. Y. Nikitin, O. Txoperena,
+A. Woessner, M. B. Lundeberg, F. Casanova, L. E.
+Hueso, F. H. Koppens, and R. Hillenbrand, “Direct ob-
+servation of ultraslow hyperbolic polariton propagation
+
+9
+with negative phase velocity,” Nature Photonics, vol. 9,
+pp. 674–678, 2015.
+[27] J. D. Caldwell, I. Vurgaftman, and J. G. Tischler,
+“Mid-infrared nanophotonics: Probing hyperbolic po-
+laritons,” Nature Photonics, vol. 9, no. 10, pp. 638–640,
+2015.
+[28] A. Splendiani, L. Sun, Y. Zhang, T. Li, J. Kim, C.-Y.
+Chim, G. Galli, and F. Wang, “Emerging photolumines-
+cence in monolayer mos2,” Nano Letters, vol. 10, no. 4,
+pp. 1271–1275, 2010.
+[29] K. F. Mak, C. Lee, J. Hone, J. Shan, and T. F. Heinz,
+“Atomically thin mos 2:
+a new direct-gap semicon-
+ductor,” Physical Review Letters, vol. 105, no. 13, p.
+136805, 2010.
+[30] H. J. Conley, B. Wang, J. I. Ziegler, R. F. Haglund Jr,
+S. T. Pantelides, and K. I. Bolotin, “Bandgap engineer-
+ing of strained monolayer and bilayer mos2,” Nano Let-
+ters, vol. 13, no. 8, pp. 3626–3630, 2013.
+[31] J. S. Ross, S. Wu, H. Yu, N. J. Ghimire, A. M. Jones,
+G. Aivazian, J. Yan, D. G. Mandrus, D. Xiao, W. Yao
+et al., “Electrical control of neutral and charged exci-
+tons in a monolayer semiconductor,” Nature Communi-
+cations, vol. 4, p. 1474, 2013.
+[32] M. M. Ugeda, A. J. Bradley, S.-F. Shi, H. Felipe,
+Y. Zhang, D. Y. Qiu, W. Ruan, S.-K. Mo, Z. Hus-
+sain, Z.-X. Shen et al., “Giant bandgap renormaliza-
+tion and excitonic eﬀects in a monolayer transition
+metal dichalcogenide semiconductor,” Nature Materials,
+vol. 13, no. 12, pp. 1091–1095, 2014.
+[33] K. F. Mak, K. He, C. Lee, G. H. Lee, J. Hone, T. F.
+Heinz, and J. Shan, “Tightly bound trions in monolayer
+mos2,” Nature Materials, vol. 12, no. 3, pp. 207–211,
+2013.
+[34] A. M. Jones, H. Yu, N. J. Ghimire, S. Wu, G. Aivazian,
+J. S. Ross, B. Zhao, J. Yan, D. G. Mandrus, D. Xiao
+et al., “Optical generation of excitonic valley coher-
+ence in monolayer wse2,” Nature Nanotechnology, vol. 8,
+no. 9, pp. 634–638, 2013.
+[35] Y. You, X.-X. Zhang, T. C. Berkelbach, M. S. Hybert-
+sen, D. R. Reichman, and T. F. Heinz, “Observation of
+biexcitons in monolayer wse2,” Nature Physics, vol. 11,
+no. 6, pp. 477–481, 2015.
+[36] S.
+Zhang,
+J.
+Yang,
+R.
+Xu,
+F.
+Wang,
+W.
+Li,
+M. Ghufran, Y.-W. Zhang, Z. Yu, G. Zhang, Q. Qin
+et al., “Extraordinary photoluminescence and strong
+temperature/angle-dependent raman responses in few-
+layer phosphorene,” ACS Nano, vol. 8, no. 9, pp. 9590–
+9596, 2014.
+[37] A. Castellanos-Gomez, L. Vicarelli, E. Prada, J. O. Is-
+land, K. Narasimha-Acharya, S. I. Blanter, D. J. Groe-
+nendijk, M. Buscema, G. A. Steele, J. Alvarez et al.,
+“Isolation and characterization of few-layer black phos-
+phorus,” 2D Materials, vol. 1, no. 2, p. 025001, 2014.
+[38] J. Yang, R. Xu, J. Pei, Y. W. Myint, F. Wang, Z. Wang,
+S. Zhang, Z. Yu, and Y. Lu, “Optical tuning of exciton
+and trion emissions in monolayer phosphorene,” Light:
+Science & Applications, vol. 4, no. 7, p. e312, 2015.
+[39] X. Wang, A. M. Jones, K. L. Seyler, V. Tran, Y. Jia,
+H. Zhao, H. Wang, L. Yang, X. Xu, and F. Xia, “Highly
+anisotropic and robust excitons in monolayer black
+phosphorus,” Nature Nanotechnology, vol. 10, no. 6, pp.
+517–521, 2015.
+[40] T. W. Ebbesen, H. J. Lezec, H. Ghaemi, T. Thio, and
+P. Wolﬀ, “Extraordinary optical transmission through
+sub-wavelength hole arrays,” Nature, vol. 391, no. 6668,
+pp. 667–669, 1998.
+[41] S. Nie and S. R. Emory, “Probing single molecules and
+single nanoparticles by surface-enhanced raman scatter-
+ing,” Science, vol. 275, no. 5303, pp. 1102–1106, 1997.
+[42] E. Ozbay, “Plasmonics: merging photonics and elec-
+tronics at nanoscale dimensions,” Science, vol. 311, no.
+5758, pp. 189–193, 2006.
+[43] V. M. Shalaev, “Optical negative-index metamaterials,”
+Nature Photonics, vol. 1, no. 1, pp. 41–48, 2007.
+[44] N. Yu and F. Capasso, “Flat optics with designer meta-
+surfaces,” Nature Materials, vol. 13, no. 2, pp. 139–150,
+2014.
+[45] J. B. Khurgin, “How to deal with the loss in plasmon-
+ics and metamaterials,” Nature Nanotechnology, vol. 10,
+no. 1, pp. 2–6, 2015.
+[46] F. H. Koppens, D. E. Chang, and F. J. Garcia de
+Abajo, “Graphene plasmonics: a platform for strong
+light–matter interactions,” Nano Letters, vol. 11, no. 8,
+pp. 3370–3377, 2011.
+[47] A.
+Y.
+Nikitin,
+F.
+Guinea,
+F.
+Garcia-Vidal,
+and
+L. Martin-Moreno, “Fields radiated by a nanoemitter in
+a graphene sheet,” Physical Review B, vol. 84, no. 19,
+p. 195446, 2011.
+[48] G. Ni, L. Wang, M. Goldﬂam, M. Wagner, Z. Fei,
+A. McLeod, M. Liu, F. Keilmann, B. ¨Ozyilmaz, A. C.
+Neto et al., “Ultrafast optical switching of infrared plas-
+mon polaritons in high-mobility graphene,” Nature Pho-
+tonics, vol. 10, pp. 244–247, 2016.
+[49] K. Tielrooij, L. Orona, A. Ferrier, M. Badioli, G. Nav-
+ickaite, S. Coop, S. Nanot, B. Kalinic, T. Cesca, L. Gau-
+dreau et al., “Electrical control of optical emitter relax-
+ation pathways enabled by graphene,” Nature Physics,
+vol. 11, no. 3, pp. 281–287, 2015.
+[50] L. Wang, I. Meric, P. Huang, Q. Gao, Y. Gao, H. Tran,
+T. Taniguchi, K. Watanabe, L. Campos, D. Muller
+et al., “One-dimensional electrical contact to a two-
+dimensional material,” Science, vol. 342, no. 6158, pp.
+614–617, 2013.
+[51] A. Woessner, M. B. Lundeberg, Y. Gao, A. Prin-
+cipi, P. Alonso-Gonz´alez, M. Carrega, K. Watanabe,
+T. Taniguchi, G. Vignale, M. Polini et al., “Highly con-
+ﬁned low-loss plasmons in graphene–boron nitride het-
+erostructures,” Nature Materials, vol. 14, no. 4, pp. 421–
+425, 2015.
+[52] A. Principi, M. Carrega, M. B. Lundeberg, A. Woess-
+ner, F. H. Koppens, G. Vignale, and M. Polini, “Plas-
+mon losses due to electron-phonon scattering: The case
+of graphene encapsulated in hexagonal boron nitride,”
+Physical Review B, vol. 90, no. 16, p. 165408, 2014.
+[53] P. Alonso-Gonz´alez, A. Y. Nikitin, F. Golmar, A. Cen-
+teno, A. Pesquera, S. V´elez, J. Chen, G. Navickaite,
+F. Koppens, A. Zurutuza et al., “Controlling graphene
+plasmons with resonant metal antennas and spatial con-
+ductivity patterns,” Science, vol. 344, no. 6190, pp.
+1369–1373, 2014.
+[54] K. Novoselov, A. K. Geim, S. Morozov, D. Jiang,
+M.
+Katsnelson,
+I.
+Grigorieva,
+S.
+Dubonos,
+and
+A. Firsov, “Two-dimensional gas of massless dirac
+fermions in graphene,” Nature, vol. 438, no. 7065, pp.
+197–200, 2005.
+[55] T. Low, F. Guinea, H. Yan, F. Xia, and P. Avouris,
+“Novel midinfrared plasmonic properties of bilayer
+
+10
+graphene,” Physical Review Letters, vol. 112, no. 11,
+p. 116801, 2014.
+[56] Z. Fei, E. Iwinski, G. Ni, L. Zhang, W. Bao, A. Rodin,
+Y. Lee, M. Wagner, M. Liu, S. Dai et al., “Tunneling
+plasmonics in bilayer graphene,” Nano Letters, vol. 15,
+no. 8, pp. 4973–4978, 2015.
+[57] H. Yan, T. Low, F. Guinea, F. Xia, and P. Avouris,
+“Tunable
+phonon-induced
+transparency
+in
+bilayer
+graphene nanoribbons,” Nano Letters, vol. 14, no. 8,
+pp. 4581–4586, 2014.
+[58] J. B. Oostinga, H. B. Heersche, X. Liu, A. F. Morpurgo,
+and L. M. Vandersypen, “Gate-induced insulating state
+in bilayer graphene devices,” Nature Materials, vol. 7,
+no. 2, pp. 151–157, 2008.
+[59] A. Kuzmenko, L. Benfatto, E. Cappelluti, I. Crassee,
+D. Van Der Marel, P. Blake, K. Novoselov, and A. Geim,
+“Gate tunable infrared phonon anomalies in bilayer
+graphene,” Physical Review Letters, vol. 103, no. 11,
+p. 116804, 2009.
+[60] L. Li, Y. Yu, G. J. Ye, Q. Ge, X. Ou, H. Wu, D. Feng,
+X. H. Chen, and Y. Zhang, “Black phosphorus ﬁeld-
+eﬀect transistors,” Nature Nanotechnology, vol. 9, no. 5,
+pp. 372–377, 2014.
+[61] P. B. Johnson and R.-W. Christy, “Optical constants of
+the noble metals,” Physical Review B, vol. 6, no. 12, p.
+4370, 1972.
+[62] L. Li, G. J. Ye, V. Tran, R. Fei, G. Chen, H. Wang,
+J. Wang, K. Watanabe, T. Taniguchi, L. Yang et al.,
+“Quantum oscillations in a two-dimensional electron gas
+in black phosphorus thin ﬁlms,” Nature Nanotechnology,
+vol. 10, no. 7, pp. 608–613, 2015.
+[63] X. Cui, G.-H. Lee, Y. D. Kim, G. Arefe, P. Y. Huang,
+C.-H. Lee, D. A. Chenet, X. Zhang, L. Wang, F. Ye
+et al., “Multi-terminal transport measurements of mos2
+using a van der waals heterostructure device platform,”
+Nature Nanotechnology, vol. 10, no. 6, pp. 534–540,
+2015.
+[64] K. Kaasbjerg, K. S. Thygesen, and K. W. Jacobsen,
+“Phonon-limited mobility in n-type single-layer mos 2
+from ﬁrst principles,” Physical Review B, vol. 85, no. 11,
+p. 115317, 2012.
+[65] J. Qiao, X. Kong, Z.-X. Hu, F. Yang, and W. Ji, “High-
+mobility transport anisotropy and linear dichroism in
+few-layer black phosphorus,” Nature Communications,
+vol. 5, p. 4475, 2014.
+[66] B. Wunsch, T. Stauber, F. Sols, and F. Guinea, “Dy-
+namical polarization of graphene at ﬁnite doping,” New
+Journal of Physics, vol. 8, no. 12, p. 318, 2006.
+[67] W. Zhu, T. Low, Y.-H. Lee, H. Wang, D. B. Farmer,
+J. Kong, F. Xia, and P. Avouris, “Electronic transport
+and device prospects of monolayer molybdenum disul-
+phide grown by chemical vapour deposition,” Nature
+Communications, vol. 5, p. 3087, 2014.
+[68] S. Tongay, H. Sahin, C. Ko, A. Luce, W. Fan, K. Liu,
+J. Zhou, Y.-S. Huang, C.-H. Ho, J. Yan et al., “Mono-
+layer behaviour in bulk res2 due to electronic and vi-
+brational decoupling,” Nature Communications, vol. 5,
+p. 3252, 2014.
+[69] J. O. Island, M. Buscema, M. Barawi, J. M. Clamagi-
+rand, J. R. Ares, C. S´anchez, I. J. Ferrer, G. A. Steele,
+H. S. van der Zant, and A. Castellanos-Gomez, “Ultra-
+high photoresponse of few-layer tis3 nanoribbon tran-
+sistors,” Advanced Optical Materials, vol. 2, no. 7, pp.
+641–645, 2014.
+[70] A. Poddubny, I. Iorsh, P. Belov, and Y. Kivshar,
+“Hyperbolic metamaterials,” Nature Photonics, vol. 7,
+no. 12, pp. 948–957, 2013.
+[71] Z. Jacob, L. V. Alekseyev, and E. Narimanov, “Opti-
+cal hyperlens: far-ﬁeld imaging beyond the diﬀraction
+limit,” Optics Express, vol. 14, no. 18, pp. 8247–8256,
+2006.
+[72] Z. Liu, H. Lee, Y. Xiong, C. Sun, and X. Zhang,
+“Far-ﬁeld optical hyperlens magnifying sub-diﬀraction-
+limited objects,” Science, vol. 315, no. 5819, pp. 1686–
+1686, 2007.
+[73] A. J. Giles, S. Dai, O. J. Glembocki, A. V. Kre-
+tinin, Z. Sun, C. T. Ellis, J. G. Tischler, T. Taniguchi,
+K. Watanabe, M. M. Fogler et al., “Imaging of anoma-
+lous internal reﬂections of hyperbolic phonon-polaritons
+in hexagonal boron nitride,” Nano Letters, vol. 16, no. 6,
+pp. 3858–3865, 2016.
+[74] J. Sun, N. M. Litchinitser, and J. Zhou, “Indeﬁnite by
+nature: from ultraviolet to terahertz,” ACS Photonics,
+vol. 1, no. 4, pp. 293–303, 2014.
+[75] K. Korzeb,
+M. Gajc,
+and D. A. Pawlak,
+“Com-
+pendium of natural hyperbolic materials,” Optics Ex-
+press, vol. 23, no. 20, pp. 25 406–25 424, 2015.
+[76] E. E. Narimanov and A. V. Kildishev, “Metamaterials:
+naturally hyperbolic,” Nature Photonics, vol. 9, no. 4,
+pp. 214–216, 2015.
+[77] J. Sun, J. Zhou, B. Li, and F. Kang, “Indeﬁnite per-
+mittivity and negative refraction in natural material:
+graphite,” Applied Physics Letters, vol. 98, no. 10, p.
+101901, 2011.
+[78] T. Wieting and J. Verble, “Infrared and raman studies
+of long-wavelength optical phonons in hexagonal mo s
+2,” Physical Review B, vol. 3, no. 12, p. 4286, 1971.
+[79] J.-S. Wu, D. Basov, M. Fogler et al., “Topological in-
+sulators are tunable waveguides for hyperbolic polari-
+tons,” Physical Review B, vol. 92, no. 20, p. 205430,
+2015.
+[80] M. Esslinger, R. Vogelgesang, N. Talebi, W. Khunsin,
+P. Gehring, S. De Zuani, B. Gompf, and K. Kern,
+“Tetradymites as natural hyperbolic materials for the
+near-infrared to visible,” ACS Photonics, vol. 1, no. 12,
+pp. 1285–1289, 2014.
+[81] O. B. Aslan, D. A. Chenet, A. M. van der Zande, J. C.
+Hone, and T. F. Heinz, “Linearly polarized excitons
+in single-and few-layer res2 crystals,” ACS Photonics,
+vol. 3, no. 1, pp. 96–101, 2015.
+[82] O. Yaﬀe, A. Chernikov, Z. M. Norman, Y. Zhong,
+A. Velauthapillai, A. van der Zande, J. S. Owen, and
+T. F. Heinz, “Excitons in ultrathin organic-inorganic
+perovskite crystals,” Physical Review B, vol. 92, no. 4,
+p. 045414, 2015.
+[83] A. Chaves, M. Mayers, F. Peeters, and D. Reichman,
+“Theoretical investigation of electron-hole complexes
+in anisotropic two-dimensional materials,” Physical Re-
+view B, vol. 93, no. 11, p. 115314, 2016.
+[84] T. C. Berkelbach, M. S. Hybertsen, and D. R. Reich-
+man, “Theory of neutral and charged excitons in mono-
+layer transition metal dichalcogenides,” Physical Review
+B, vol. 88, no. 4, p. 045318, 2013.
+[85] A. Chernikov, T. C. Berkelbach, H. M. Hill, A. Rigosi,
+Y. Li, O. B. Aslan, D. R. Reichman, M. S. Hybertsen,
+and T. F. Heinz, “Exciton binding energy and nonhy-
+drogenic rydberg series in monolayer ws 2,” Physical
+Review Letters, vol. 113, no. 7, p. 076802, 2014.
+
+11
+[86] K. He, N. Kumar, L. Zhao, Z. Wang, K. F. Mak,
+H. Zhao, and J. Shan, “Tightly bound excitons in mono-
+layer wse 2,” Physical Review Letters, vol. 113, no. 2, p.
+026803, 2014.
+[87] Z. Ye, T. Cao, K. OBrien, H. Zhu, X. Yin, Y. Wang,
+S. G. Louie, and X. Zhang, “Probing excitonic dark
+states in single-layer tungsten disulphide,” Nature, vol.
+513, no. 7517, pp. 214–218, 2014.
+[88] B. Zhu, X. Chen, and X. Cui, “Exciton binding energy
+of monolayer ws2,” Scientiﬁc Reports, vol. 5, 2015.
+[89] S. W. Koch, M. Kira, G. Khitrova, and H. Gibbs,
+“Semiconductor excitons in new light,” Nature Mate-
+rials, vol. 5, no. 7, pp. 523–531, 2006.
+[90] F. Wang, G. Dukovic, L. E. Brus, and T. F. Heinz,
+“The optical resonances in carbon nanotubes arise from
+excitons,” Science, vol. 308, no. 5723, pp. 838–841, 2005.
+[91] L. Sebastian and G. Weiser, “One-dimensional wide en-
+ergy bands in a polydiacetylene revealed by electrore-
+ﬂectance,” Physical Review Letters, vol. 46, no. 17, p.
+1156, 1981.
+[92] C. Mai, A. Barrette, Y. Yu, Y. G. Semenov, K. W.
+Kim, L. Cao, and K. Gundogdu, “Many-body eﬀects
+in valleytronics: Direct measurement of valley lifetimes
+in single-layer mos2,” Nano Letters, vol. 14, no. 1, pp.
+202–206, 2013.
+[93] G. Plechinger,
+P. Nagler,
+J. Kraus,
+N. Paradiso,
+C. Strunk, C. Sch¨uller, and T. Korn, “Identiﬁcation
+of excitons, trions and biexcitons in single-layer ws2,”
+Physica Status Solidi (RRL)-Rapid Research Letters,
+vol. 9, no. 8, pp. 457–461, 2015.
+[94] Y. Zhang, H. Li, H. Wang, R. Liu, S.-L. Zhang, and
+Z.-J. Qiu, “On valence-band splitting in layered mos2,”
+ACS Nano, vol. 9, no. 8, pp. 8514–8519, 2015.
+[95] R. Xu, S. Zhang, F. Wang, J. Yang, Z. Wang, J. Pei,
+Y. W. Myint, B. Xing, Z. Yu, L. Fu et al., “Extraor-
+dinarily bound quasi-one-dimensional trions in two-
+dimensional phosphorene atomic semiconductors,” ACS
+Nano, vol. 10, no. 2, pp. 2046–2053, 2016.
+[96] A. Chaves, T. Low, P. Avouris, D. C¸akır, and F. Peeters,
+“Anisotropic exciton stark shift in black phosphorus,”
+Physical Review B, vol. 91, no. 15, p. 155311, 2015.
+[97] H. Haug and S. W. Koch, Quantum theory of the opti-
+cal and electronic properties of semiconductors, Vol. V.
+World Scientiﬁc, 1990.
+[98] C. F. Klingshirn, Semiconductor Optics.
+Springer Sci-
+ence & Business Media, 2012.
+[99] W. Masselink, P. Pearah, J. Klem, C. Peng, H. Morkoc,
+G. Sanders, and Y.-C. Chang, “Absorption coeﬃcients
+and exciton oscillator strengths in algaas-gaas superlat-
+tices,” Physical Review B, vol. 32, no. 12, p. 8027, 1985.
+[100] X. Gan, Y. Gao, K. F. Mak, X. Yao, R.-J. Shiue,
+A. van der Zande, M. E. Trusheim, F. Hatami, T. F.
+Heinz, J. Hone et al., “Controlling the spontaneous
+emission rate of monolayer mos2 in a photonic crystal
+nanocavity,” Applied Physics Letters, vol. 103, no. 18,
+p. 181119, 2013.
+[101] X. Liu, T. Galfsky, Z. Sun, F. Xia, E.-c. Lin, Y.-H. Lee,
+S. K´ena-Cohen, and V. M. Menon, “Strong light–matter
+coupling in two-dimensional atomic crystals,” Nature
+Photonics, vol. 9, no. 1, pp. 30–34, 2015.
+[102] A. K. Geim and I. V. Grigorieva, “Van der waals het-
+erostructures,” Nature, vol. 499, no. 7459, pp. 419–425,
+2013.
+[103] H. Fang, C. Battaglia, C. Carraro, S. Nemsak, B. Ozdol,
+J. S. Kang, H. A. Bechtel, S. B. Desai, F. Kronast, A. A.
+Unal et al., “Strong interlayer coupling in van der waals
+heterostructures built from single-layer chalcogenides,”
+Proceedings of the National Academy of Sciences, vol.
+111, no. 17, pp. 6198–6202, 2014.
+[104] M. M. Fogler, L. V. Butov, and K. S. Novoselov, “High-
+temperature superﬂuidity with indirect excitons in van
+der waals heterostructures,” Nature Communications,
+vol. 5, p. 4555, 2014.
+[105] P. Rivera, J. R. Schaibley, A. M. Jones, J. S. Ross,
+S. Wu, G. Aivazian, P. Klement, K. Seyler, G. Clark,
+N. J. Ghimire, J. Yan, D. G. Mandrus, W. Yao, and
+X. Xu, “Observation of long-lived interlayer excitons in
+monolayer mose2-wse2 heterostructures,” Nature Com-
+munications, vol. 6, p. 6242, 2015.
+[106] S.
+Dai,
+Q.
+Ma,
+M.
+Liu,
+T.
+Andersen,
+Z.
+Fei,
+M. Goldﬂam, M. Wagner, K. Watanabe, T. Taniguchi,
+M. Thiemens et al., “Graphene on hexagonal boron
+nitride as a tunable hyperbolic metamaterial,” Nature
+Nanotechnology, vol. 10, no. 8, pp. 682–686, 2015.
+[107] V. O. ¨Oz¸celik, J. G. Azadani, C. Yang, S. J. Koester,
+and T. Low, “Band alignment of 2d semiconductors
+for designing heterostructures with momentum space
+matching,” Physical Review B, vol. 94, p. 035125, 2006.
+[108] H. Hu, X. Yang, F. Zhai, D. Hu, R. Liu, K. Liu, Z. Sun,
+and Q. Dai, “Far-ﬁeld nanoscale infrared spectroscopy
+of vibrational ﬁngerprints of molecules with graphene
+plasmons,” Nature Communications, vol. 7, p. 12334,
+2016.
+[109] E. Carrasco, M. Tamagnone, J. R. Mosig, T. Low, and
+J. Perruisseau-Carrier, “Gate-controlled mid-infrared
+light bending with aperiodic graphene nanoribbons ar-
+ray,” Nanotechnology, vol. 26, no. 13, p. 134002, 2015.
+[110] A. Vakil and N. Engheta, “Transformation optics using
+graphene,” Science, vol. 332, no. 6035, pp. 1291–1294,
+2011.
+[111] A. F. Page, F. Ballout, O. Hess, and J. M. Hamm,
+“Nonequilibrium plasmons with gain in graphene,”
+Physical Review B, vol. 91, no. 7, p. 075404, 2015.
+[112] I. Khrapach,
+F. Withers,
+T. H. Bointon,
+D. K.
+Polyushkin, W. L. Barnes, S. Russo, and M. F. Craciun,
+“Novel highly conductive and transparent graphene-
+based conductors,” Advanced Materials, vol. 24, no. 21,
+pp. 2844–2849, 2012.
+[113] Y. Guo, C. L. Cortes, S. Molesky, and Z. Jacob, “Broad-
+band super-planckian thermal emission from hyper-
+bolic metamaterials,” Applied Physics Letters, vol. 101,
+no. 13, p. 131106, 2012.
+[114] C. L. Cortes and Z. Jacob, “Photonic analog of a van
+hove singularity in metamaterials,” Physical Review B,
+vol. 88, no. 4, p. 045407, 2013.
+[115] C.-H. Lee, G.-H. Lee, A. M. Van Der Zande, W. Chen,
+Y. Li, M. Han, X. Cui, G. Arefe, C. Nuckolls, T. F.
+Heinz et al., “Atomically thin p–n junctions with van
+der waals heterointerfaces,” Nature Nanotechnology,
+vol. 9, no. 9, pp. 676–681, 2014.
+[116] A. Srivastava and A. Imamo˘glu, “Signatures of bloch-
+band geometry on excitons: nonhydrogenic spectra in
+transition-metal dichalcogenides,” Physical review let-
+ters, vol. 115, no. 16, p. 166802, 2015.
+[117] L. Zhang and Q. Niu,
+“Chiral phonons at high-
+symmetry points in monolayer hexagonal lattices,”
+Physical Review Letters, vol. 115, no. 11, p. 115502,
+2015.
+
+12
+[118] S. Yang, C. Wang, H. Sahin, H. Chen, Y. Li, S.-S. Li,
+A. Suslu, F. M. Peeters, Q. Liu, J. Li et al., “Tuning
+the optical, magnetic, and electrical properties of rese2
+by nanoscale strain engineering,” Nano Letters, vol. 15,
+no. 3, pp. 1660–1666, 2015.
+[119] Z. Zhang, J. Xie, D. Yang, Y. Wang, M. Si, and
+D. Xue, “Manifestation of unexpected semiconducting
+properties in few-layer orthorhombic arsenene,” Applied
+Physics Express, vol. 8, no. 5, p. 055201, 2015.
+[120] Y. Li, A. Chernikov, X. Zhang, A. Rigosi, H. M. Hill,
+A. M. van der Zande, D. A. Chenet, E.-M. Shih, J. Hone,
+and T. F. Heinz, “Measurement of the optical dielec-
+tric function of monolayer transition-metal dichalco-
+genides: Mos2, mose2, ws2, and wse2,” Physical Review
+B, vol. 90, no. 20, p. 205422, 2014.
+
+Box 1. Surface plasmons in metal to polaritons in 2D
+Plasmon‐polariton (PP)
+Phonon‐polariton (PhP)
+Exciton‐polariton (EP)
+
+2
+1
+
+1
+2
+
+2
+1
+Graphene plasmons‐polaritons (PP) can be understood as the extreme case of ``short‐range
+SPPs'' as the thickness approaches the atomic level, and light is being confined to dimensions
+2‐3 orders smaller than that of the free space wavelength. In order to allow for bound
+electromagnetic modes, the real part of the permittivity has to be negative. In the case of PP,
+this is provided by the intraband motion of the free carriers, commonly described by the Drude
+response. However, polar dielectrics (e.g. silicon carbide, but not silicon) and semiconductors
+supporting excitons, might also exhibit negative permittivity, enabling phonon‐polaritons
+(PhPs) and exciton‐polaritons (EPs). See illustration of the dielectric function Kramers‐Kronig
+pairs (Ɛ1+iƐ2) and the electric field line distributions for these polaritons in 2D material systems.
+Metal 
+Dielectric
+Surface plasmon‐polariton (SPP)
+Metal thin 
+film, < SPP 
+wavelength
+Coupled short‐ranged SPP
+The most well‐known physical realization of polaritons consists of electromagnetic modes
+bound to a flat interface between a metal and a dielectric, called surface plasmon polaritons
+(SPPs). The physical characteristics of SPPs in metals are fixed by the material properties but
+can be changed by changing geometry. For instance, let's consider a thin metal film, where the
+SPPs at both interfaces couple in symmetric and antisymmetric combinations. The symmetric
+mode, also often called the ``short‐range SPP'', has the electric field |E| concentrated in the
+metal film as illustrated for the case where the metal film thickness is smaller than its skin
+depth. This mode is more strongly confined and propagates a smaller distance than the
+isolated SPP.
+z
+|E|
+Electron cloud
+Polarizable atom
+Exciton
+
+Box 1. cont.
+Plasmon‐polaritons
+Exciton‐polaritons
+Phonon‐polaritons
+Visible 
+Infrared
+Terahertz 
+Hyperbolic metamaterials: sub‐diffraction imaging and hyperlensing
+Super planckian thermal emission, spontaneous emission control
+Bio and gas sensing/fingerprinting
+Exciton condensate, thresholdless lasing
+Optoelectronics: electro‐optic modulator, photodetectors
+Metasurfaces: beam steering, negative index refraction
+Waveguiding, transformational optics, optical memory
+Optical components such as filters, phase shifters
+10cm‐1
+13,000cm‐1
+200cm‐1
+3333cm‐1
+Far‐
+Mid‐
+Near‐
+Solar cells
+1000um
+50um
+3um
+0.78um
+Microwave 
+100cm‐1
+100um
+Proof‐of‐principle 
+experiment demonstrated
+No experiment yet
+
+Box 2. 2D plasmonic materials and optical conductivity 
+Chiral plasmon
+(gapped Dirac materials)
+Hyperbolic plasmon
+(anisotropic materials)
+Isotropic plasmon
+(graphene)
+Graphene plasmons‐polaritons (PP) can be launched with a nano‐antennas and its propagating PP
+wavefronts can be spatially mapped with the SNOM as illustrated. Graphene PPs have a circular
+wavefront, since its optical conductivity tensor is isotropic, i.e. ߪ௫௫ൌߪ௬௬≡ߪ଴, with ߪ଴ൌ݅
+ܦ/ߨሺ߱
+൅݅߬⁄ ሻ, where ܦൌ݁
+ଶߤ/԰ଶis known as the Drude weight, ߤis the chemical potential in
+graphene and߬
+is the electron’s lifetime. Anisotropic 2D materials (e.g. black phosphorus[60])
+implies ߪ௫௫്
+ߪ௬௬, and could potentially host hyperbolic PPs. In hyperbolic media, the permittivities
+along the Cartesian axes are opposite in signs (i.e. Imሾߪ௫௫. ߪ௬௬ሿ൏0), which can fundamentally
+change how light interacts with matter. The mechanism relies on the interplay between anisotropic
+intraband and interband motions[24], which can render capacitive and inductive optical responses
+along the two axes. In SNOM experiments, these effects could be observed as PP rays launched with
+an optical antenna. Gapped Dirac materials (e.g. transition metal dichalcogenides[15,16]) are a
+unique class of materials where the two electronic valleys at the Fermi energy exhibits circular
+dichroism. The electronic wavefunctions in the two valleys “twist” differently (i.e. Berry phase),
+hence imparting a sense of chirality, and result in their different response to circular polarized
+light[15,16]. Pumping with circularly polarized light effectively leads to population imbalance in the
+two valleys, which are related to each other by time reversal symmetry. This results in a finite
+transverse conductivity (i.e. ߪ௫௬്
+0) and the appearance of nonreciprocal chiral edge modes[21,22]
+as illustrated. It should be possible to detect these effects with ultrafast pump‐probe SNOM with a
+small radius of curvature tip of̴ 10nm.
+ߪൌ
+ߪ௫௫
+ߪ௫௬
+ߪ௬௫
+ߪ௬௬: 
+Graphene: ߪ௫௫ൌߪ௬௬, ߪ௫௬ൌߪ௫௬ൌ0
+Anisotropic: ߪ௫௫്
+ߪ௬௬, Imሾߪ௫௫. ߪ௬௬ሿ൐0, ߪ௫௬ൌߪ௫௬ൌ0
+Hyperbolic: ߪ௫௫്
+ߪ௬௬, Imሾߪ௫௫. ߪ௬௬ሿ൏0, ߪ௫௬ൌߪ௫௬ൌ0
+Gapped Dirac: ߪ௫௫ൌߪ௬௬, ߪ௫௬ൌെߪ௫௬്
+0
+
+Figure 1. Graphene plasmon-polaritons and beyond
+(a)
+(b)
+(d)(e)
+(c)
+bilayer
+monolayer
+Gold
+Gold
+graphene
+x
+y
+Far-IR
+Mid-IR
+Near-IR
+(f)
+(g)
+
+‐1
+10
+0
+10
+1
+10
+2
+10
+3
+1.25m
+2.5m
+5m
+10m
+0
+1000
+2000
+3000
+4000
+10
+0
+10
+1
+10
+2
+Bilayer
+Graphene
+MoS2
+BP(y)
+BP(x)
+Wavenumber (cm
+-1)
+Au(1nm)
+Wavelength
+
+Figure 2. Hyperbolic phonon-polaritons in hBN and beyond
+(a)
+(d)
+(e)
+(g)
+(f)
+(h)
+(i)
+(b)
+Aspect ratio (d/h)
+(c)
+
+(j)
+
+0.4
+0.8
+1.2
+1.6
+1.8
+2.0
+2.2
+2.4
+2.6
+4
+3
+2
+1
+0.7
+0.6
+0.5
+4-As
+3-As
+2-As
+OIP(II)
+OIP(I)
+ 
+ReSe2
+ReS2
+4-bP
+3-bP
+2-bP
+1-bP
+MoSe2
+MoS2
+WSe2
+Optical band-gap (eV)
+WS2
+ Wavelength (m)
+Figure 3. Excitons in TMDs and beyond
+Organic-
+inorganic
+Transition metal 
+dichalcogenides
+Group V 
+puckered layers
+(a)
+(b)
+(c)
+-600
+-400
+-200
+0
+-100
+-80
+-60
+-40
+-20
+0
+   Exciton
+,
+WS2
+OIPCs
+ 
+1-bP
+MoSe2
+MoS2
+WSe2
+Binding Energies (meV)
+      Trion
+     
+Biexciton
+   
+ 
+ 
+ 
+
+Figure 4. Hybrid polaritonics
+(d)
+(a)
+(c)
+(b)
+(b)
+Plasmon‐phonon‐
+polariton
+Phonon‐polariton

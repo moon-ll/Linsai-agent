@@ -1,0 +1,72 @@
+{
+  "gaps": [
+    {
+      "claim": "Peschel 等的工作内容——申请书误写为针对 Ne 2s2p 壳层的'计算'，实际是角分辨 RABBIT 实验测量 Ne 2p⁶→εs/εd 分波相位与振幅",
+      "missing_evidence": "需要直接查阅 Peschel et al., Nat Commun 13, 5205 (2022) 原文以确认实验对象（Ne 2p 分波）、方法（角分辨 RABBIT）、观测量（相位+振幅），并补充必要的同领域角分辨 RABBIT 文献以支撑'分波相位可测'这一论断",
+      "search_keywords": [
+        "Peschel 2022 Nat Commun 13 5205 angular RABBIT",
+        "angle-resolved RABBIT neon 2p partial wave phase",
+        "photoionization partial wave phase amplitude measurement",
+        "Ne 2p ionization channel RABBIT delay"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§4 R1 段所述'未修正误差大于 20%'——该基准数值缺乏文献支撑且未标明设计预期",
+      "missing_evidence": "需要阿秒条纹/阿秒条纹计量学的误差预算文献，给出典型未修正条件下相对时延测量的误差量级（>20% 的来源：群延迟色散、探测器响应、空间电荷、探测器角度积分等），以可引用文献形式锚定该 20% 阈值",
+      "search_keywords": [
+        "attosecond streaking error budget",
+        "streaking measurement systematic uncertainty",
+        "relative timing jitter attosecond metrology",
+        "group delay dispersion correction streaking accuracy"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.5 第2段、§3.1 第1/3段中'量子拍角积分方案'二次出现但缺 [N] 锚点",
+      "missing_evidence": "需要追溯'量子拍角积分方案'的原始方法文献（首次提出及关键应用），以规范引用方式在每次实质性出现处补充 [N]",
+      "search_keywords": [
+        "quantum beat angle integration photoionization",
+        "phase retrieval quantum beat spectroscopy",
+        "angle-integrated photoionization phase method",
+        "attosecond quantum beat angle integral"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§3.1 中'Zhu 等 2026'二次出现不带 [N] 锚点",
+      "missing_evidence": "需要确认 Zhu 等 2026 工作的完整书目信息（期刊、年份、卷期、页码、预印本编号），并核实是否为已正式发表/已接收/预印本状态，确保引用可追溯",
+      "search_keywords": [
+        "Zhu 2026 attosecond streaking",
+        "Zhu 2026 photoionization delay",
+        "Zhu 2026 arXiv attosecond",
+        "Zhu attosecond water window China"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§3.1 中'国内已建成覆盖水窗低段光源'零锚点",
+      "missing_evidence": "需要具名国内水窗波段阿秒/软X射线光源文献，括设施名称（参数）、团队、运行状态、覆盖能区（需明确'水窗低段'约 284–409.7 eV 中的哪一段），并给出对应 [N]",
+      "search_keywords": [
+        "中国 水窗 阿秒光源",
+        "China water window attosecond facility",
+        "domestic soft X-ray attosecond source China",
+        "国内 软X射线 阿秒 实验装置",
+        "Shanghai water window attosecond beamline"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§3.1 第4段'已接近或在该量级基础上有量级提升'——无对标数值、方向含糊",
+      "missing_evidence": "需要文献支撑的对标基线数据：当前水窗低段阿秒光源的典型通量（photons/s）、截止能量（eV）、脉宽（as）、重复频率等关键指标，以便给出可比较的量级改进方向与数值",
+      "search_keywords": [
+        "water window attosecond pulse flux benchmark",
+        "soft X-ray attosecond pulse duration record",
+        "high harmonic generation water window photon flux",
+        "attosecond beamline water window performance comparison"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "rationale"
+}

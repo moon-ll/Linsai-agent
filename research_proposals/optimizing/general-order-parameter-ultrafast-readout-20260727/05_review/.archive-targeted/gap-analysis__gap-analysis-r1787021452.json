@@ -1,0 +1,54 @@
+{
+  "gaps": [
+    {
+      "claim": "CrSb在近红外飞秒激光激发下的光损伤阈值足够支撑HHG实验",
+      "missing_evidence": "缺乏CrSb材料在强场飞秒激光作用下的损伤阈值直接实验数据",
+      "search_keywords": [
+        "CrSb ultrafast laser damage threshold",
+        "CrSb femtosecond laser damage",
+        "CrSb strong-field optical excitation stability",
+        "CrSb near-infrared pump probe damage threshold"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Fisher信息矩阵/贝叶斯方法可应用于非线性光学反演问题的可辨识性分析",
+      "missing_evidence": "缺乏Fisher信息矩阵在固体高次谐波光谱学参数检索中的适用性论证或先例",
+      "search_keywords": [
+        "Fisher information matrix nonlinear optics inverse problem",
+        "parameter identifiability high harmonic generation",
+        "Bayesian inversion HHG spectroscopy"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "三层判据体系（复现/信号探测/可辨识性）作为本课题核心判据的科学依据",
+      "missing_evidence": "缺乏Fisher信息和贝叶斯方法用于固体高次谐波光谱学序参量反演的可辨识性边界论证",
+      "search_keywords": [
+        "Fisher information attosecond spectroscopy reconstruction",
+        "condition number optical parameter inversion HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "CrSb在外加磁场下可通过HHG信号实现序参量检测",
+      "missing_evidence": "缺乏CrSb磁性材料HHG磁响应或磁有序超快检测的直接文献支撑",
+      "search_keywords": [
+        "CrSb magnetization anomalous Hall",
+        "HHG magnetic field differential signal amplitude",
+        "altermagnet nonlinear optics magnetic order"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "本课题提出的≥1%偶次谐波差分信号和SNR>5探测要求具有物理可行性",
+      "missing_evidence": "缺乏固体HHG信号探测灵敏度的具体实验数据支撑上述阈值设定的合理性",
+      "search_keywords": [
+        "solid-state HHG signal-to-noise ratio definition",
+        "high harmonic generation noise source shot noise",
+        "circular dichroism HHG detection sensitivity limit"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

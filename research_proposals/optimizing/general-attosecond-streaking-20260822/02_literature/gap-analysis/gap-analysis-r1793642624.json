@@ -1,0 +1,17 @@
+{
+  "gaps": [
+    {
+      "claim": "§2.1 验证级的外部检验依据——Tarrant[20]（arXiv:2503.21976）被当作既成文献支撑条纹延迟测量方案的验证级论证",
+      "missing_evidence": "Tarrant 一文为未见刊预印本（abs 页无 doi/jref），不能作为正式验证依据。需要：①确认该预印本是否已正式发表（检索期刊版本或 DOI）；②若仍未见刊，补充一篇已发表的、基于同步辐射/阿秒条纹对同类验证级指标（如条纹延迟定标或 XUV 脉冲表征）给出实验基准的同行评议文献作为替代支撑，或在行文上限定为'2025 年预印本，结论待刊确认'",
+      "search_keywords": [
+        "attosecond streaking",
+        "XUV pulse characterization",
+        "streaking delay calibration",
+        "arXiv 2503.21976 published",
+        "photoionization time delay experiment"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "scheme"
+}

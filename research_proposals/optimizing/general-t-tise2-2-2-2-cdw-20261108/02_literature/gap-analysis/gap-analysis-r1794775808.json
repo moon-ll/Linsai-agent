@@ -1,0 +1,35 @@
+{
+  "gaps": [
+    {
+      "claim": "rationale §一.2 L15：1T-TiSe₂ 中存在赝隙相（pseudogap phase）的论述",
+      "missing_evidence": "该句角标错挂 [7]（Grüner 1988 CDW 动力学输运综述），原应支撑该论点的 ARPES 实测文献已在 62→40 条目重排中被裁撤，现缺一篇直接报道 1T-TiSe₂ 赝隙相的角分辨光电子能谱（或等价实验）文献作为真身支撑；表 [10] Novko（激子光学响应）亦不能直接承担该论断",
+      "search_keywords": [
+        "1T-TiSe2 pseudogap ARPES",
+        "TiSe2 pseudogap phase angle-resolved photoemission",
+        "titanium diselenide pseudogap charge density wave photoemission spectroscopy"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "rationale §一.2 L17：1T′-TaTe₂ 兆赫循环淬灭（MHz-rate cycling/quench of CDW）的论述",
+      "missing_evidence": "该句角标滞旧挂 [4]（Erasmus 2012，实为 4Hb-TaSe₂ 工作），真正的 1T′-TaTe₂ 循环淬灭研究条目已被裁撤出参考文献表，现缺一篇直接报道 TaTe₂ CDW 可逆/循环淬灭动力学的实验文献，否则该分句无有效支撑应删除",
+      "search_keywords": [
+        "1T'-TaTe2 charge density wave ultrafast quenching",
+        "TaTe2 CDW megahertz cycling reversible switching",
+        "tantalum ditelluride photoinduced CDW dynamics time-resolved"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "全稿引用-文献表一致性：62→40 条目重排后，正文其余角标是否仍存在裁撤簇残留错挂（除上述两处已确认外）",
+      "missing_evidence": "需对全部 40 条现行实表角标逐位复核，确认无其他正文论断仍指向已裁撤文献的旧编号；缺少一次系统性的引用-论断-文献三者内容匹配核查，以排除同类“重排事故”型错挂残留",
+      "search_keywords": [
+        "citation-reference cross-check",
+        "TiSe2 charge density wave time-resolved literature",
+        "citation mapping verification reordered reference list"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "full_review"
+}

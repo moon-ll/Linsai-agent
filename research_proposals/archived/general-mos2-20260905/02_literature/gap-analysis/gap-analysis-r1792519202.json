@@ -1,0 +1,41 @@
+{
+  "gaps": [
+    {
+      "claim": "§2.0 总述段以领域意义+前人工作嵌入的方式由远及近收窄到核心问题（即扭转 MoS₂/WSe₂ 异质结中莫尔动力学对称性与激子共振预激发改写 HHG 偏振选择定则与截止能量这一具体命题）",
+      "missing_evidence": "缺少嵌入式的奠基性/综述性引用（如 Ghimire 等人关于固态 HHG 开创性工作、固态 HHG 或二维材料 HHG 领域综述）以建立领域脉络，再过渡到本课题的莫尔+激子协同机制问题；当前总述段以抽象主谓宾长句直接陈述物理命题，属'答案式'开头而非'问题收束'开头，与范本叙事性弱（problem-C，对2 锚点差距）",
+      "search_keywords": [
+        "high harmonic generation in solids review",
+        "solid-state HHG Ghimire 2011",
+        "HHG two-dimensional materials review",
+        "高次谐波产生 固态 综述",
+        "nonperturbative HHG solids"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "目标一§2.4 L61 的可测量判据：'相邻失谐扫描点 ΔN_ex 差分不得低于单点不确定度的 3 倍'——单点不确定度的数值/公式定义缺位",
+      "missing_evidence": "缺少对'单点不确定度'在 HHG 产额/阶次依赖测量中的方法学定义与统计置信度判据（3 倍）的来源支撑；§2.2 L33 仅给出'基线相对不确定度 5%/10%'，未在 rationale/scheme/content 三章任意一处给出'单点不确定度'的具体公式（如重复测量标准差除以 √N）或数值，且 3× 阈值本身未引用统计显著度/谱学最小可区分信号判据的方法学文献，导致该阈值实际不可复算（rubric 严谨①数值链一致 + ⑤模块自洽 + indicator_red_lines.indicator_measurable）",
+      "search_keywords": [
+        "HHG yield uncertainty quantification",
+        "minimum detectable signal spectroscopy",
+        "3 sigma statistical significance threshold",
+        "standard deviation high-order harmonic measurement",
+        "谐波产额 不确定度 重复测量"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.0 三方向以'基线—协同—反演'数据链衔接中，Berry 曲率反演作为可分离实验指纹的物理可行性",
+      "missing_evidence": "虽然 R4 已修复张冠李戴，但内容章 §2.0 总述段直接断言'两条机制在 Berry 曲率反演链中产生可分离的实验指纹'时，未在该句附近嵌入支撑'Berry 曲率作为 HHG 偏振/截止能量指纹'这一可分性的代表性引用（如能带拓扑/几何相位与高次谐波偏振态/椭圆度依赖的实验或理论工作），存在以论断代替引证之嫌",
+      "search_keywords": [
+        "Berry curvature high harmonic generation",
+        "topological fingerprint HHG polarization",
+        "geometric phase moiré superlattice harmonic",
+        "anharmonic current Berry curvature HHG",
+        "偏振选择定则 Berry 曲率"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

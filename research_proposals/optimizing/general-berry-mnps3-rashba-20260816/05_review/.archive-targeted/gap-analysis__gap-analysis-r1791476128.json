@@ -1,0 +1,31 @@
+{
+  "gaps": [
+    {
+      "claim": "TMD 谷圆二色高次谐波产生（CD-HHG）被预言为 d-wave、g=0 节点线系统低阶谐波特征（§3.4 L55，[13] 当前错挂）",
+      "missing_evidence": "需要一篇真实文献明确建立 TMD/谷电子学体系 CD-HHG 与 d-wave 或 g=0 节点线拓扑/对称性类别的对应关系（选择定则、节点结构、低阶谐波特征）；当前 [13]=Ghorashi-Rappe 仅涉及平面交变磁体的 d/g/i-wave 多光子吸收选择定则，无 TMD、谷 CD-HHG、g=0 节点线内容。评审建议改挂 [22]（Gabriele 自旋织构 HHG 判据），需核实 [22] 是否实际覆盖此话题，否则降级为'本方案推断'并补独立物理论证。",
+      "search_keywords": [
+        "transition metal dichalcogenide valley circular dichroism high harmonic generation",
+        "TMD valley-selective HHG d-wave",
+        "g=0 nodal line high harmonic generation",
+        "topological nodal line HHG selection rules",
+        "valley circular dichroism HHG MoS2 WSe2",
+        "spin texture HHG criterion",
+        "nodal line symmetry harmonic order"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "三重旋转对称破缺（C₃ 对称性降低）下谐波选择定则与节点结构的对应（§3.4 L55 括注）",
+      "missing_evidence": "括注'对应三重旋转对称破缺后'无出处，需补一篇讨论 C₃ 或三重旋转对称破缺对 TMD/谷体系谐波谱选择定则与节点线结构影响的工作，作为节点线指纹判据的对称性论据；可与 #1 合并检索或独立引用对称性分析文献。",
+      "search_keywords": [
+        "C3 symmetry breaking TMD harmonic",
+        "three-fold rotation symmetry high harmonic selection rule",
+        "C3 symmetry reduction MoS2 WSe2",
+        "rotational symmetry breaking nodal line harmonic",
+        "trigonal symmetry high harmonic generation"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

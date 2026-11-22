@@ -1,0 +1,21 @@
+{
+  "gaps": [
+    {
+      "claim": "rationale 全文论证（尤其 §2.1 连续'一文一句一引'段落）",
+      "missing_evidence": "该问题性质为引用过量而非支撑不足：角标实测 58 次，超 35–47 上限近 1 倍，部分引用疑似装饰性堆砌。需要的是对堆砌段落引用做逐条相关性核查并精简删除，而非补充新文献；若核查中发现某些论断仅有堆砌引用而无实质支撑页，再针对性补 1-2 篇高相关原始文献",
+      "search_keywords": [],
+      "priority": "medium"
+    },
+    {
+      "claim": "§3.2 取向扫描的三项独立判据先例支撑（评审确认为已解决，列为遗留观察）",
+      "missing_evidence": "评审认定链路闭合，无实质缺口；仅提示三项判据共享 [50][51] 两篇先例，若后续扩写方案细节可考虑为第三项判据补充一篇独立方法学文献作为冗余背书",
+      "search_keywords": [
+        "high-order harmonic spectroscopy",
+        "laser orientation molecular",
+        "tunneling delay time retrieval"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "full_review"
+}

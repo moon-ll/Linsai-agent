@@ -1,0 +1,39 @@
+{
+  "gaps": [
+    {
+      "claim": "§2.2 R2/R3 中包含方案级细节（中红外平台、OPA/OPCPA、载波包络相位CEP），表明研究内容与研究方案的边界模糊",
+      "missing_evidence": "该段内容缺乏独立的文献调研支撑，仅在研究方案章节（scheme §3.1/§3.3）中出现强度窗口参数，未在研究内容中给出支撑性文献",
+      "search_keywords": [
+        "moire superlattice high harmonic probe intensity threshold",
+        "twisted bilayer strong field intensity window separation",
+        "solid-state HHG probe vs control intensity regime",
+        "magic angle twisted bilayer graphene correlated insulator gap meV",
+        "TBG symmetry breaking HHG sensitivity threshold"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "创新点1与R1内容70%以上文字重叠，违反content_boundaries不应重复原则",
+      "missing_evidence": "创新点1声称的量化优势缺乏独立文献支撑，现有论述与R1研究内容高度重复",
+      "search_keywords": [
+        "moire HHG Floquet调控 vs HHG反演 整合",
+        "twisted bilayer real-time TDDFT scaling",
+        "TBG TDDFT computational cost benchmark",
+        "moire superlattice multiscale electronic structure cost"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "占位符引用 §3A.2/§3F.2 跨章引用未消解",
+      "missing_evidence": "研究内容章节存在未解析的占位符引用，缺乏对应的实际文献支撑",
+      "search_keywords": [
+        "moire superlattice strong field China",
+        "twisted bilayer ultrafast optics Chinese group",
+        "solid-state high harmonic generation China group",
+        "莫尔材料 强场 超快 中国",
+        "moire heterostructure nonlinear optics domestic"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

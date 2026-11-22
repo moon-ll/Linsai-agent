@@ -1,0 +1,830 @@
+{
+  "generated_at": "2026-11-21T18:30:49Z",
+  "stage": "ready",
+  "n_topics": 17,
+  "n_pairs": 136,
+  "hard_count": 0,
+  "high_count": 0,
+  "thresholds": {
+    "hard": 0.5,
+    "high": 0.3
+  },
+  "pairs": [
+    {
+      "a": "general-houston-kronig-penney-landau-zener-20261004",
+      "b": "general-moire-strong-field-probe-20260726",
+      "score": 0.1919,
+      "level": "normal"
+    },
+    {
+      "a": "general-bsv-driven-hhg-quantum-20260726",
+      "b": "general-ssh-weyl-20260920",
+      "score": 0.188,
+      "level": "normal"
+    },
+    {
+      "a": "general-bsv-driven-hhg-quantum-20260726",
+      "b": "general-houston-kronig-penney-landau-zener-20261004",
+      "score": 0.1753,
+      "level": "normal"
+    },
+    {
+      "a": "general-bsv-driven-hhg-quantum-20260726",
+      "b": "general-moire-strong-field-probe-20260726",
+      "score": 0.1603,
+      "level": "normal"
+    },
+    {
+      "a": "general-houston-kronig-penney-landau-zener-20261004",
+      "b": "general-ssh-weyl-20260920",
+      "score": 0.1543,
+      "level": "normal"
+    },
+    {
+      "a": "general-houston-kronig-penney-landau-zener-20261004",
+      "b": "general-phonon-hhg-20261101",
+      "score": 0.1515,
+      "level": "normal"
+    },
+    {
+      "a": "general-berry-mnps3-rashba-20260816",
+      "b": "general-moire-strong-field-probe-20260726",
+      "score": 0.1512,
+      "level": "normal"
+    },
+    {
+      "a": "general-moire-strong-field-probe-20260726",
+      "b": "general-ssh-weyl-20260920",
+      "score": 0.1502,
+      "level": "normal"
+    },
+    {
+      "a": "general-keldysh-schottky-20261115",
+      "b": "general-ssh-weyl-20260920",
+      "score": 0.1447,
+      "level": "normal"
+    },
+    {
+      "a": "general-moire-strong-field-probe-20260726",
+      "b": "general-t-tise2-2-2-2-cdw-20261108",
+      "score": 0.1445,
+      "level": "normal"
+    },
+    {
+      "a": "general-berry-berry-20261107",
+      "b": "general-berry-mnps3-rashba-20260816",
+      "score": 0.1439,
+      "level": "normal"
+    },
+    {
+      "a": "general-berry-berry-20261107",
+      "b": "general-houston-kronig-penney-landau-zener-20261004",
+      "score": 0.1424,
+      "level": "normal"
+    },
+    {
+      "a": "general-berry-mnps3-rashba-20260816",
+      "b": "general-tmd-bic-mie-anapole-20261107",
+      "score": 0.1412,
+      "level": "normal"
+    },
+    {
+      "a": "general-attosecond-streaking-20260822",
+      "b": "general-bsv-driven-hhg-quantum-20260726",
+      "score": 0.1389,
+      "level": "normal"
+    },
+    {
+      "a": "general-floquet-20261107",
+      "b": "general-phonon-hhg-20261101",
+      "score": 0.1388,
+      "level": "normal"
+    },
+    {
+      "a": "general-berry-mnps3-rashba-20260816",
+      "b": "general-bsv-driven-hhg-quantum-20260726",
+      "score": 0.1386,
+      "level": "normal"
+    },
+    {
+      "a": "general-houston-kronig-penney-landau-zener-20261004",
+      "b": "general-tmd-bic-mie-anapole-20261107",
+      "score": 0.1354,
+      "level": "normal"
+    },
+    {
+      "a": "general-houston-kronig-penney-landau-zener-20261004",
+      "b": "general-t-tise2-2-2-2-cdw-20261108",
+      "score": 0.1351,
+      "level": "normal"
+    },
+    {
+      "a": "general-bsv-driven-hhg-quantum-20260726",
+      "b": "general-keldysh-schottky-20261115",
+      "score": 0.135,
+      "level": "normal"
+    },
+    {
+      "a": "general-houston-kronig-penney-landau-zener-20261004",
+      "b": "general-solid-nsdr-kev-hhg-20261121",
+      "score": 0.135,
+      "level": "normal"
+    },
+    {
+      "a": "general-attosecond-streaking-20260822",
+      "b": "general-t-tise2-2-2-2-cdw-20261108",
+      "score": 0.1327,
+      "level": "normal"
+    },
+    {
+      "a": "general-berry-mnps3-rashba-20260816",
+      "b": "general-houston-kronig-penney-landau-zener-20261004",
+      "score": 0.1311,
+      "level": "normal"
+    },
+    {
+      "a": "general-houston-kronig-penney-landau-zener-20261004",
+      "b": "general-keldysh-schottky-20261115",
+      "score": 0.1308,
+      "level": "normal"
+    },
+    {
+      "a": "general-berry-berry-20261107",
+      "b": "general-ssh-weyl-20260920",
+      "score": 0.1305,
+      "level": "normal"
+    },
+    {
+      "a": "general-berry-mnps3-rashba-20260816",
+      "b": "general-t-tise2-2-2-2-cdw-20261108",
+      "score": 0.1301,
+      "level": "normal"
+    },
+    {
+      "a": "general-attosecond-streaking-20260822",
+      "b": "general-keldysh-schottky-20261115",
+      "score": 0.1287,
+      "level": "normal"
+    },
+    {
+      "a": "general-berry-berry-20261107",
+      "b": "general-moire-strong-field-probe-20260726",
+      "score": 0.1286,
+      "level": "normal"
+    },
+    {
+      "a": "general-berry-berry-20261107",
+      "b": "general-bsv-driven-hhg-quantum-20260726",
+      "score": 0.1282,
+      "level": "normal"
+    },
+    {
+      "a": "general-attosecond-streaking-20260822",
+      "b": "general-moire-strong-field-probe-20260726",
+      "score": 0.1273,
+      "level": "normal"
+    },
+    {
+      "a": "general-ssh-weyl-20260920",
+      "b": "general-t-tise2-2-2-2-cdw-20261108",
+      "score": 0.1265,
+      "level": "normal"
+    },
+    {
+      "a": "general-bsv-driven-hhg-quantum-20260726",
+      "b": "general-t-tise2-2-2-2-cdw-20261108",
+      "score": 0.1246,
+      "level": "normal"
+    },
+    {
+      "a": "general-attosecond-streaking-20260822",
+      "b": "general-houston-kronig-penney-landau-zener-20261004",
+      "score": 0.1243,
+      "level": "normal"
+    },
+    {
+      "a": "general-solid-nsdr-kev-hhg-20261121",
+      "b": "general-ssh-weyl-20260920",
+      "score": 0.1222,
+      "level": "normal"
+    },
+    {
+      "a": "general-ssh-weyl-20260920",
+      "b": "general-tdse-tddft-20261115",
+      "score": 0.1209,
+      "level": "normal"
+    },
+    {
+      "a": "general-berry-berry-20261107",
+      "b": "general-tmd-bic-mie-anapole-20261107",
+      "score": 0.1208,
+      "level": "normal"
+    },
+    {
+      "a": "general-moire-strong-field-probe-20260726",
+      "b": "general-phonon-hhg-20261101",
+      "score": 0.1205,
+      "level": "normal"
+    },
+    {
+      "a": "general-keldysh-schottky-20261115",
+      "b": "general-tdse-tddft-20261115",
+      "score": 0.1189,
+      "level": "normal"
+    },
+    {
+      "a": "general-attosecond-streaking-20260822",
+      "b": "general-berry-berry-20261107",
+      "score": 0.1187,
+      "level": "normal"
+    },
+    {
+      "a": "general-bsv-driven-hhg-quantum-20260726",
+      "b": "general-tmd-bic-mie-anapole-20261107",
+      "score": 0.1176,
+      "level": "normal"
+    },
+    {
+      "a": "general-phonon-hhg-20261101",
+      "b": "general-tdse-tddft-20261115",
+      "score": 0.1169,
+      "level": "normal"
+    },
+    {
+      "a": "general-berry-berry-20261107",
+      "b": "general-t-tise2-2-2-2-cdw-20261108",
+      "score": 0.1168,
+      "level": "normal"
+    },
+    {
+      "a": "general-berry-berry-20261107",
+      "b": "general-solid-nsdr-kev-hhg-20261121",
+      "score": 0.1166,
+      "level": "normal"
+    },
+    {
+      "a": "general-floquet-20261107",
+      "b": "general-houston-kronig-penney-landau-zener-20261004",
+      "score": 0.1165,
+      "level": "normal"
+    },
+    {
+      "a": "general-berry-mnps3-rashba-20260816",
+      "b": "general-floquet-20261107",
+      "score": 0.1159,
+      "level": "normal"
+    },
+    {
+      "a": "general-berry-berry-20261107",
+      "b": "general-phonon-hhg-20261101",
+      "score": 0.1156,
+      "level": "normal"
+    },
+    {
+      "a": "general-ssh-weyl-20260920",
+      "b": "general-tmd-bic-mie-anapole-20261107",
+      "score": 0.1149,
+      "level": "normal"
+    },
+    {
+      "a": "general-moire-strong-field-probe-20260726",
+      "b": "general-tmd-bic-mie-anapole-20261107",
+      "score": 0.1148,
+      "level": "normal"
+    },
+    {
+      "a": "general-berry-mnps3-rashba-20260816",
+      "b": "general-phonon-hhg-20261101",
+      "score": 0.1147,
+      "level": "normal"
+    },
+    {
+      "a": "general-attosecond-streaking-20260822",
+      "b": "general-ssh-weyl-20260920",
+      "score": 0.1142,
+      "level": "normal"
+    },
+    {
+      "a": "general-houston-kronig-penney-landau-zener-20261004",
+      "b": "general-order-parameter-ultrafast-readout-20260727",
+      "score": 0.1142,
+      "level": "normal"
+    },
+    {
+      "a": "general-keldysh-schottky-20261115",
+      "b": "general-t-tise2-2-2-2-cdw-20261108",
+      "score": 0.1132,
+      "level": "normal"
+    },
+    {
+      "a": "general-chiral-hhg-20261101",
+      "b": "general-moire-strong-field-probe-20260726",
+      "score": 0.1124,
+      "level": "normal"
+    },
+    {
+      "a": "general-bsv-driven-hhg-quantum-20260726",
+      "b": "general-phonon-hhg-20261101",
+      "score": 0.1119,
+      "level": "normal"
+    },
+    {
+      "a": "general-floquet-20261107",
+      "b": "general-tdse-tddft-20261115",
+      "score": 0.1098,
+      "level": "normal"
+    },
+    {
+      "a": "general-berry-berry-20261107",
+      "b": "general-floquet-20261107",
+      "score": 0.1092,
+      "level": "normal"
+    },
+    {
+      "a": "general-houston-kronig-penney-landau-zener-20261004",
+      "b": "general-tdse-tddft-20261115",
+      "score": 0.1074,
+      "level": "normal"
+    },
+    {
+      "a": "general-moire-strong-field-probe-20260726",
+      "b": "general-solid-nsdr-kev-hhg-20261121",
+      "score": 0.1069,
+      "level": "normal"
+    },
+    {
+      "a": "general-chiral-hhg-20261101",
+      "b": "general-houston-kronig-penney-landau-zener-20261004",
+      "score": 0.1062,
+      "level": "normal"
+    },
+    {
+      "a": "general-chiral-hhg-20261101",
+      "b": "general-ssh-weyl-20260920",
+      "score": 0.1057,
+      "level": "normal"
+    },
+    {
+      "a": "general-phonon-hhg-20261101",
+      "b": "general-solid-nsdr-kev-hhg-20261121",
+      "score": 0.1047,
+      "level": "normal"
+    },
+    {
+      "a": "general-berry-mnps3-rashba-20260816",
+      "b": "general-ssh-weyl-20260920",
+      "score": 0.1039,
+      "level": "normal"
+    },
+    {
+      "a": "general-solid-nsdr-kev-hhg-20261121",
+      "b": "general-t-tise2-2-2-2-cdw-20261108",
+      "score": 0.1036,
+      "level": "normal"
+    },
+    {
+      "a": "general-phonon-hhg-20261101",
+      "b": "general-ssh-weyl-20260920",
+      "score": 0.1034,
+      "level": "normal"
+    },
+    {
+      "a": "general-floquet-20261107",
+      "b": "general-order-parameter-ultrafast-readout-20260727",
+      "score": 0.1024,
+      "level": "normal"
+    },
+    {
+      "a": "general-attosecond-streaking-20260822",
+      "b": "general-tdse-tddft-20261115",
+      "score": 0.1015,
+      "level": "normal"
+    },
+    {
+      "a": "general-t-tise2-2-2-2-cdw-20261108",
+      "b": "general-tdse-tddft-20261115",
+      "score": 0.1009,
+      "level": "normal"
+    },
+    {
+      "a": "general-chiral-hhg-20261101",
+      "b": "general-phonon-hhg-20261101",
+      "score": 0.1007,
+      "level": "normal"
+    },
+    {
+      "a": "general-order-parameter-ultrafast-readout-20260727",
+      "b": "general-phonon-hhg-20261101",
+      "score": 0.1002,
+      "level": "normal"
+    },
+    {
+      "a": "general-keldysh-schottky-20261115",
+      "b": "general-tmd-bic-mie-anapole-20261107",
+      "score": 0.0998,
+      "level": "normal"
+    },
+    {
+      "a": "general-attosecond-streaking-20260822",
+      "b": "general-solid-nsdr-kev-hhg-20261121",
+      "score": 0.0993,
+      "level": "normal"
+    },
+    {
+      "a": "general-keldysh-schottky-20261115",
+      "b": "general-moire-strong-field-probe-20260726",
+      "score": 0.0987,
+      "level": "normal"
+    },
+    {
+      "a": "general-phonon-hhg-20261101",
+      "b": "general-t-tise2-2-2-2-cdw-20261108",
+      "score": 0.0981,
+      "level": "normal"
+    },
+    {
+      "a": "general-bsv-driven-hhg-quantum-20260726",
+      "b": "general-solid-nsdr-kev-hhg-20261121",
+      "score": 0.098,
+      "level": "normal"
+    },
+    {
+      "a": "general-attosecond-streaking-20260822",
+      "b": "general-berry-mnps3-rashba-20260816",
+      "score": 0.0978,
+      "level": "normal"
+    },
+    {
+      "a": "general-berry-berry-20261107",
+      "b": "general-chiral-hhg-20261101",
+      "score": 0.0976,
+      "level": "normal"
+    },
+    {
+      "a": "general-phonon-hhg-20261101",
+      "b": "general-tmd-bic-mie-anapole-20261107",
+      "score": 0.0975,
+      "level": "normal"
+    },
+    {
+      "a": "general-bsv-driven-hhg-quantum-20260726",
+      "b": "general-chiral-hhg-20261101",
+      "score": 0.0974,
+      "level": "normal"
+    },
+    {
+      "a": "general-berry-berry-20261107",
+      "b": "general-keldysh-schottky-20261115",
+      "score": 0.0971,
+      "level": "normal"
+    },
+    {
+      "a": "general-moire-strong-field-probe-20260726",
+      "b": "general-order-parameter-ultrafast-readout-20260727",
+      "score": 0.0968,
+      "level": "normal"
+    },
+    {
+      "a": "general-t-tise2-2-2-2-cdw-20261108",
+      "b": "general-tmd-bic-mie-anapole-20261107",
+      "score": 0.0967,
+      "level": "normal"
+    },
+    {
+      "a": "general-attosecond-streaking-20260822",
+      "b": "general-tmd-bic-mie-anapole-20261107",
+      "score": 0.096,
+      "level": "normal"
+    },
+    {
+      "a": "general-floquet-20261107",
+      "b": "general-ssh-weyl-20260920",
+      "score": 0.0934,
+      "level": "normal"
+    },
+    {
+      "a": "general-bsv-driven-hhg-quantum-20260726",
+      "b": "general-tdse-tddft-20261115",
+      "score": 0.0922,
+      "level": "normal"
+    },
+    {
+      "a": "general-chiral-hhg-20261101",
+      "b": "general-tmd-bic-mie-anapole-20261107",
+      "score": 0.0911,
+      "level": "normal"
+    },
+    {
+      "a": "general-keldysh-schottky-20261115",
+      "b": "general-phonon-hhg-20261101",
+      "score": 0.0897,
+      "level": "normal"
+    },
+    {
+      "a": "general-keldysh-schottky-20261115",
+      "b": "general-solid-nsdr-kev-hhg-20261121",
+      "score": 0.0895,
+      "level": "normal"
+    },
+    {
+      "a": "general-moire-strong-field-probe-20260726",
+      "b": "general-tdse-tddft-20261115",
+      "score": 0.0884,
+      "level": "normal"
+    },
+    {
+      "a": "general-berry-berry-20261107",
+      "b": "general-tdse-tddft-20261115",
+      "score": 0.0878,
+      "level": "normal"
+    },
+    {
+      "a": "general-berry-mnps3-rashba-20260816",
+      "b": "key-transient-quantum-phase-optical-20260726",
+      "score": 0.0873,
+      "level": "normal"
+    },
+    {
+      "a": "general-berry-mnps3-rashba-20260816",
+      "b": "general-solid-nsdr-kev-hhg-20261121",
+      "score": 0.0856,
+      "level": "normal"
+    },
+    {
+      "a": "general-floquet-20261107",
+      "b": "general-moire-strong-field-probe-20260726",
+      "score": 0.0855,
+      "level": "normal"
+    },
+    {
+      "a": "general-order-parameter-ultrafast-readout-20260727",
+      "b": "general-ssh-weyl-20260920",
+      "score": 0.0854,
+      "level": "normal"
+    },
+    {
+      "a": "general-bsv-driven-hhg-quantum-20260726",
+      "b": "general-order-parameter-ultrafast-readout-20260727",
+      "score": 0.0853,
+      "level": "normal"
+    },
+    {
+      "a": "general-chiral-hhg-20261101",
+      "b": "general-order-parameter-ultrafast-readout-20260727",
+      "score": 0.0852,
+      "level": "normal"
+    },
+    {
+      "a": "general-floquet-20261107",
+      "b": "general-t-tise2-2-2-2-cdw-20261108",
+      "score": 0.0851,
+      "level": "normal"
+    },
+    {
+      "a": "general-chiral-hhg-20261101",
+      "b": "general-floquet-20261107",
+      "score": 0.085,
+      "level": "normal"
+    },
+    {
+      "a": "general-houston-kronig-penney-landau-zener-20261004",
+      "b": "key-transient-quantum-phase-optical-20260726",
+      "score": 0.085,
+      "level": "normal"
+    },
+    {
+      "a": "general-phonon-hhg-20261101",
+      "b": "key-transient-quantum-phase-optical-20260726",
+      "score": 0.0845,
+      "level": "normal"
+    },
+    {
+      "a": "general-berry-mnps3-rashba-20260816",
+      "b": "general-keldysh-schottky-20261115",
+      "score": 0.0836,
+      "level": "normal"
+    },
+    {
+      "a": "general-solid-nsdr-kev-hhg-20261121",
+      "b": "general-tdse-tddft-20261115",
+      "score": 0.0836,
+      "level": "normal"
+    },
+    {
+      "a": "general-floquet-20261107",
+      "b": "general-tmd-bic-mie-anapole-20261107",
+      "score": 0.0833,
+      "level": "normal"
+    },
+    {
+      "a": "general-chiral-hhg-20261101",
+      "b": "general-solid-nsdr-kev-hhg-20261121",
+      "score": 0.0827,
+      "level": "normal"
+    },
+    {
+      "a": "general-t-tise2-2-2-2-cdw-20261108",
+      "b": "key-transient-quantum-phase-optical-20260726",
+      "score": 0.082,
+      "level": "normal"
+    },
+    {
+      "a": "general-berry-mnps3-rashba-20260816",
+      "b": "general-order-parameter-ultrafast-readout-20260727",
+      "score": 0.0815,
+      "level": "normal"
+    },
+    {
+      "a": "general-floquet-20261107",
+      "b": "key-transient-quantum-phase-optical-20260726",
+      "score": 0.0813,
+      "level": "normal"
+    },
+    {
+      "a": "general-chiral-hhg-20261101",
+      "b": "general-keldysh-schottky-20261115",
+      "score": 0.0806,
+      "level": "normal"
+    },
+    {
+      "a": "general-berry-mnps3-rashba-20260816",
+      "b": "general-chiral-hhg-20261101",
+      "score": 0.0801,
+      "level": "normal"
+    },
+    {
+      "a": "general-attosecond-streaking-20260822",
+      "b": "general-phonon-hhg-20261101",
+      "score": 0.0796,
+      "level": "normal"
+    },
+    {
+      "a": "general-floquet-20261107",
+      "b": "general-keldysh-schottky-20261115",
+      "score": 0.0791,
+      "level": "normal"
+    },
+    {
+      "a": "general-solid-nsdr-kev-hhg-20261121",
+      "b": "general-tmd-bic-mie-anapole-20261107",
+      "score": 0.0778,
+      "level": "normal"
+    },
+    {
+      "a": "general-floquet-20261107",
+      "b": "general-solid-nsdr-kev-hhg-20261121",
+      "score": 0.0771,
+      "level": "normal"
+    },
+    {
+      "a": "general-order-parameter-ultrafast-readout-20260727",
+      "b": "key-transient-quantum-phase-optical-20260726",
+      "score": 0.0758,
+      "level": "normal"
+    },
+    {
+      "a": "general-attosecond-streaking-20260822",
+      "b": "general-chiral-hhg-20261101",
+      "score": 0.0752,
+      "level": "normal"
+    },
+    {
+      "a": "general-bsv-driven-hhg-quantum-20260726",
+      "b": "general-floquet-20261107",
+      "score": 0.0752,
+      "level": "normal"
+    },
+    {
+      "a": "general-berry-berry-20261107",
+      "b": "key-transient-quantum-phase-optical-20260726",
+      "score": 0.0749,
+      "level": "normal"
+    },
+    {
+      "a": "general-moire-strong-field-probe-20260726",
+      "b": "key-transient-quantum-phase-optical-20260726",
+      "score": 0.0746,
+      "level": "normal"
+    },
+    {
+      "a": "general-berry-mnps3-rashba-20260816",
+      "b": "general-tdse-tddft-20261115",
+      "score": 0.0744,
+      "level": "normal"
+    },
+    {
+      "a": "general-chiral-hhg-20261101",
+      "b": "general-t-tise2-2-2-2-cdw-20261108",
+      "score": 0.0725,
+      "level": "normal"
+    },
+    {
+      "a": "general-bsv-driven-hhg-quantum-20260726",
+      "b": "key-transient-quantum-phase-optical-20260726",
+      "score": 0.0722,
+      "level": "normal"
+    },
+    {
+      "a": "general-tdse-tddft-20261115",
+      "b": "general-tmd-bic-mie-anapole-20261107",
+      "score": 0.0721,
+      "level": "normal"
+    },
+    {
+      "a": "general-order-parameter-ultrafast-readout-20260727",
+      "b": "general-solid-nsdr-kev-hhg-20261121",
+      "score": 0.0719,
+      "level": "normal"
+    },
+    {
+      "a": "general-ssh-weyl-20260920",
+      "b": "key-transient-quantum-phase-optical-20260726",
+      "score": 0.069,
+      "level": "normal"
+    },
+    {
+      "a": "general-tdse-tddft-20261115",
+      "b": "key-transient-quantum-phase-optical-20260726",
+      "score": 0.0676,
+      "level": "normal"
+    },
+    {
+      "a": "general-attosecond-streaking-20260822",
+      "b": "general-order-parameter-ultrafast-readout-20260727",
+      "score": 0.0672,
+      "level": "normal"
+    },
+    {
+      "a": "general-chiral-hhg-20261101",
+      "b": "general-tdse-tddft-20261115",
+      "score": 0.0658,
+      "level": "normal"
+    },
+    {
+      "a": "general-order-parameter-ultrafast-readout-20260727",
+      "b": "general-tmd-bic-mie-anapole-20261107",
+      "score": 0.0658,
+      "level": "normal"
+    },
+    {
+      "a": "general-order-parameter-ultrafast-readout-20260727",
+      "b": "general-tdse-tddft-20261115",
+      "score": 0.0638,
+      "level": "normal"
+    },
+    {
+      "a": "general-attosecond-streaking-20260822",
+      "b": "general-floquet-20261107",
+      "score": 0.0614,
+      "level": "normal"
+    },
+    {
+      "a": "general-tmd-bic-mie-anapole-20261107",
+      "b": "key-transient-quantum-phase-optical-20260726",
+      "score": 0.0613,
+      "level": "normal"
+    },
+    {
+      "a": "general-order-parameter-ultrafast-readout-20260727",
+      "b": "general-t-tise2-2-2-2-cdw-20261108",
+      "score": 0.061,
+      "level": "normal"
+    },
+    {
+      "a": "general-berry-berry-20261107",
+      "b": "general-order-parameter-ultrafast-readout-20260727",
+      "score": 0.0557,
+      "level": "normal"
+    },
+    {
+      "a": "general-chiral-hhg-20261101",
+      "b": "key-transient-quantum-phase-optical-20260726",
+      "score": 0.0543,
+      "level": "normal"
+    },
+    {
+      "a": "general-keldysh-schottky-20261115",
+      "b": "key-transient-quantum-phase-optical-20260726",
+      "score": 0.0513,
+      "level": "normal"
+    },
+    {
+      "a": "general-keldysh-schottky-20261115",
+      "b": "general-order-parameter-ultrafast-readout-20260727",
+      "score": 0.0459,
+      "level": "normal"
+    },
+    {
+      "a": "general-solid-nsdr-kev-hhg-20261121",
+      "b": "key-transient-quantum-phase-optical-20260726",
+      "score": 0.0459,
+      "level": "normal"
+    },
+    {
+      "a": "general-attosecond-streaking-20260822",
+      "b": "key-transient-quantum-phase-optical-20260726",
+      "score": 0.045,
+      "level": "normal"
+    }
+  ]
+}

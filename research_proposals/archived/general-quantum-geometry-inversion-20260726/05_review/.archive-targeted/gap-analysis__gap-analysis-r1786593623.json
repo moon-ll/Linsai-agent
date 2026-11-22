@@ -1,0 +1,55 @@
+{
+  "gaps": [
+    {
+      "claim": "R1 主动放弃 3.17 KFR 系数外推到固体的假设、改用相对增强因子 α(r, E_g, m*) 作为对照基线，区别于既有量子光 HHG 预印本工作",
+      "missing_evidence": "缺乏与 [21] Khurelbaatar / [22] Rivera-Dean 等预印本工作的具体方法学差异对比文献；现有差异性论述仅泛泛提及技术路线不同，未引用具体的方法学差异点（如外推假设、判据构造、相对增强因子框架）",
+      "search_keywords": [
+        "Khurelbaatar HHG quantum light preprint",
+        "Rivera-Dean quantum HHG preprint",
+        "BSV driven HHG solid state enhancement factor",
+        "quantum enhancement factor HHG QEF framework",
+        "squeezed light high harmonic generation classical comparison",
+        "bright squeezed vacuum solid HHG differential enhancement"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "拓扑绝缘体作为 R2/R4 关键材料体系的具体选择（Bi₂Te₃ 与 Sb₂Te₃）",
+      "missing_evidence": "跨章节命名不一致：rationale.md §1.4 用'Bi₂Se₃ 类'，但本章与 scheme.md 全文改用 Bi₂Te₃/Sb₂Te₃；需文献明确三类材料（Bi₂Se₃、Bi₂Te₃、Sb₂Te₃）在强场 HHG / 量子几何反演中的相对优势与适用性差异，支撑 rationale.md 跟进更新",
+      "search_keywords": [
+        "Bi2Te3 Bi2Se3 Sb2Te3 topological insulator high harmonic generation",
+        "topological insulator HHG surface state quantum geometry",
+        "Bi2Te3 strong field nonlinear response",
+        "Bi2Se3 vs Bi2Te3 band structure optical property",
+        "Bi2Te3 high harmonic generation experiment",
+        "topological insulator Berry curvature nonlinear optics"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Aversa-Sipe 半解析模型是固体 HHG 理论框架基础",
+      "missing_evidence": "Aversa-Sipe 1993 vs 1994 仍有个别残留表述差异，未明确原始引用的年份/期刊对应，跨章节一致性欠缺",
+      "search_keywords": [
+        "Aversa Sipe 1993 HHG recollision model",
+        "Aversa Sipe 1994 semiconductor harmonic generation",
+        "Aversa Sipe Physical Review Letters citation year",
+        "Aversa Sipe 1992 electromagnetic model",
+        "Aversa Sipe Phys Rev B 1993 recollision"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "R1 末段'BSV 相对经典光增强 α(r, E_g, m*)'与 §1.5 ZnO 经典 SBE 复现 14.2°/9.5° 的 metric 是同一指标还是新指标",
+      "missing_evidence": "缺乏文献明确该相对增强因子 α(r, E_g, m*) 与 ZnO 经典 SBE 复现 metric 的对应关系，或新 metric 正式定义文献；致使 rationale.md 与本章间 metric 口径模糊",
+      "search_keywords": [
+        "quantum enhancement factor HHG definition framework",
+        "relative enhancement factor HHG classical comparison",
+        "ZnO high harmonic generation metric SBE reproduction",
+        "BSV HHG enhancement factor alpha bandgap effective mass",
+        "attosecond solid HHG enhancement quantification metric",
+        "quantum vs classical HHG yield ratio definition"
+      ],
+      "priority": "high"
+    }
+  ]
+}

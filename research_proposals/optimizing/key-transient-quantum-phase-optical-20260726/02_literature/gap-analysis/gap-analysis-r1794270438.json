@@ -1,0 +1,18 @@
+{
+  "gaps": [
+    {
+      "claim": "§2.2(b) 关于从阿秒条纹光谱中提取协方差，并利用协方差变化表征或识别瞬态量子相位的论断",
+      "missing_evidence": "现有[37]已撤挂，该方法论论断目前没有有效文献支撑。需要补充能够说明阿秒条纹光谱中协方差或跨延迟点协方差的定义、计算方式、物理含义及适用条件的原始方法论文或权威综述，最好包含与本项目相近的泵浦—探测或阿秒条纹实验；若协方差指标经过本项目改造，还需给出改造公式与所引方法之间的对应关系。",
+      "search_keywords": [
+        "attosecond streak spectroscopy covariance analysis",
+        "attosecond light streak covariance extraction",
+        "delay-dependent covariance attosecond spectroscopy",
+        "covariance map ultrafast spectroscopy phase identification",
+        "attosecond photoelectron interferometry covariance",
+        "阿秒条纹光谱 协方差 分析"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "scheme"
+}

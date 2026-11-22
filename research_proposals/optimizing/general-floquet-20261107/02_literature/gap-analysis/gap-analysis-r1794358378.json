@@ -1,0 +1,38 @@
+{
+  "gaps": [
+    {
+      "claim": "§1.4 P7：MnPS₃ 中存在温度驱动的磁振子热霍尔行为（温度依赖的热霍尔输运现象）",
+      "missing_evidence": "MnPS₃ 热霍尔效应的直接实验/理论文献。现有角标 [28]（Floquet/NMR 方法论）与 [27]（MnPSe₃ 吸附相变）均与论断不符，需改挂 MnPS₃ 热霍尔实测或机制文献（如交换收缩机制、大热霍尔角的报道或综述）",
+      "search_keywords": [
+        "MnPS3 thermal Hall effect",
+        "magnon thermal Hall antiferromagnet",
+        "exchange striction thermal Hall",
+        "thermal Hall angle van der Waals magnet"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.2 P6/P8/P9：围绕 [14][17][11] 的三处引用论断（领域脉络中的关键实验/理论结果）",
+      "missing_evidence": "被引文献 [14][17][11] 本身的量化数据锚点——每引需补一个可写入正文的具体数值（候选材料体系数量、陈数、自旋劈裂量级或发表年份），以达范本'每引带体系+数值'密度。需核实原文并提取可量化证据，而非补充新文献",
+      "search_keywords": [
+        "altermagnetic spin splitting magnitude ARPES",
+        "RuO2 spin splitting meV",
+        "altermagnet candidate materials list",
+        "Chern number topological antiferromagnet"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§1.5 P3：'清华大学周树云组建立了亚周期时间分辨能力'（国内时间分辨 ARPES 实验能力的具名断言）",
+      "missing_evidence": "国内（周树云组或同等水平团队）trARPES 亚周期时间分辨能力的实测文献支撑。当前为具名断言无角标，且紧随的 [34] 系他人综述无法佐证，需补挂国内 trARPES 实测论文或改写为非具名能力陈述",
+      "search_keywords": [
+        "trARPES sub-cycle time resolution",
+        "Shuyun Zhou time-resolved ARPES",
+        "ultrafast ARPES femtosecond time resolution",
+        "time resolved photoemission antiferromagnet"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

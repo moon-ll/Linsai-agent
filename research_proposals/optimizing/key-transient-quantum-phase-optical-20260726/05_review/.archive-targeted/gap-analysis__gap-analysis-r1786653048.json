@@ -1,0 +1,69 @@
+{
+  "gaps": [
+    {
+      "claim": "瞬态量子相'定义→实现→测量'三轴因果链构成必然闭环（§2 line 25 断言），但缺乏 No-Go 条件或理论证明佐证其不可分性",
+      "missing_evidence": "缺少量子相测量与控制闭环不可分性的理论证明或 No-Go 定理文献；当前仅作断言，无理论依据支撑三轴必然构成闭环而非三件并列之事",
+      "search_keywords": [
+        "No-Go theorem quantum parameter estimation completeness",
+        "quantum phase tomography control feedback inseparability",
+        "quantum measurement control loop necessity theorem",
+        "瞬态量子相 定义 测量 闭环 理论证明"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1 国家战略需求中'国内现状'极薄弱，仅有国际竞争分析，缺乏中国研究团队在固体HHG/阿秒科学/瞬态量子相方向的工作引用",
+      "missing_evidence": "缺少中国国内研究团队在固体高次谐波、阿秒科学、超快光学等方向的代表性工作文献，无法支撑国内研究现状的论述",
+      "search_keywords": [
+        "solid-state high harmonic generation China group",
+        "attosecond science Chinese research team experimental",
+        "固体高次谐波 中国 实验组",
+        "超快光学 强场 国内 代表性工作",
+        "ultrafast Berry phase measurement China experimental"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "幽灵引用 [1][2][4][43]：引用编号存在但所附文献实际不支持其所在论点，论点缺乏真实文献支撑",
+      "missing_evidence": "需要为这4处论点找到真正支持其科学内容的参考文献，替换当前的幽灵引用；具体需核查 [1][2][4][43] 各自对应的论点并匹配正确文献",
+      "search_keywords": [
+        "solid-state high harmonic generation foundational theory",
+        "quantum geometry Berry curvature foundational",
+        "semiconductor Bloch equation original derivation",
+        "transient quantum phase ultrafast optics definition"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Ma 等[39]引文归属错误（round-1 critical 级问题未修复），引用编号指向的论文与论点不符",
+      "missing_evidence": "需要找到 Ma 等人在相关方向（固体HHG/非线性光学/量子相）的正确论文替换当前[39]引用，修正归属错误",
+      "search_keywords": [
+        "Ma solid-state high harmonic generation",
+        "Ma nonlinear optics quantum phase ultrafast",
+        "Ma attosecond strong field solid"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "'W%'精度占位符未清除，预研测量精度数据不可核实，该论点缺乏文献或实测数据支撑",
+      "missing_evidence": "需要提供团队实测精度数据或引用类似实验中已发表的精度指标文献来替换占位符'W%'，使预研基础可核实",
+      "search_keywords": [
+        "attosecond jitter stability measurement precision",
+        "ultrafast laser timing jitter sub-100 attosecond",
+        "solid-state HHG signal-to-noise ratio experimental precision",
+        "HHG measurement precision photon counting sensitivity"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "[43]=[44] 重复条目未合并，同一文献被重复引用，占用参考文献名额但未提供额外信息",
+      "missing_evidence": "需要合并重复引用条目，并用该空出的位置补充一条真正有价值的支撑文献（54条已超标准上限30-40条，需精简并确保每条引用有效）",
+      "search_keywords": [
+        "transient quantum phase attosecond measurement",
+        "solid-state high harmonic generation spectroscopy",
+        "quantum geometry nonlinear optics experimental"
+      ],
+      "priority": "low"
+    }
+  ]
+}

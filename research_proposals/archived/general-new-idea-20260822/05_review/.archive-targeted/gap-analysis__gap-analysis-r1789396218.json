@@ -1,0 +1,41 @@
+{
+  "gaps": [
+    {
+      "claim": "0.3–0.8 eV g波自旋劈裂幅度区间需[2,15]合并口径支撑（单挂[2]证据不足）",
+      "missing_evidence": "缺少g波自旋劈裂幅度的多源实验/理论合并证据，特别是[15]对g波劈裂的独立测量/计算",
+      "search_keywords": [
+        "g-wave spin splitting magnitude",
+        "CrSb g-wave altermagnet spin splitting ARPES",
+        "MnTe d-wave spin splitting experimental value eV"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "TDDFT在强场极端非平衡条件下的交换-关联泛函适用性尚未被验证（文献[8]为唯一支撑）",
+      "missing_evidence": "缺少TDDFT泛函在强场强激光非平衡极限下失效/适用的系统性基准对比文献，仅[8]单源不足以论证替代为紧束缚的理由",
+      "search_keywords": [
+        "TDDFT exchange-correlation strong field limit",
+        "TDDFT attosecond nonadiabatic failure",
+        "TDDFT vs tight-binding strong field HHG benchmark"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "T_N判据载体的统计口径（±3 K偏差 vs 后验标准差≤1.5倍先验）需统一门控层级证据",
+      "missing_evidence": "缺少反演输出偏差阈值与先验门控宽度在贝叶斯/正则化反问题中的层级关系文献支撑",
+      "search_keywords": [
+        "Bayesian inversion posterior standard deviation prior width",
+        "Tikhonov regularization parameter identifiability threshold",
+        "Fisher information inversion posterior uncertainty"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "R1/R2/R3三层创新点首现定义缺失（content与scheme均同患）",
+      "missing_evidence": "scheme §1总体路线需明确三个研究内容的边界与命名约定，但属内部结构问题，与外部文献无直接缺口",
+      "search_keywords": [],
+      "priority": "low"
+    }
+  ],
+  "section": "scheme"
+}

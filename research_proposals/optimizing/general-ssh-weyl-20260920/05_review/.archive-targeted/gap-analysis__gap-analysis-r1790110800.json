@@ -1,0 +1,60 @@
+{
+  "gaps": [
+    {
+      "claim": "「2-3 个数量级增强」可分解为 Weyl 节点贡献 X%、Berry 曲率贡献 Y%、非平衡载流子散射贡献 Z% 三通道贡献",
+      "missing_evidence": "缺少定量分解这三通道相对贡献百分比的实验或理论基准文献，特别是 Weyl节点/Berry 曲率/非平衡载流子在 HHG 量子效率中的相对权重测量",
+      "search_keywords": [
+        "Weyl node HHG quantum efficiency",
+        "Berry curvature contribution high harmonic generation",
+        "non-equilibrium carrier scattering HHG yield",
+        "quantum geometry tensor HHG decomposition"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "研究内容需建立 HOTI/SSH/Weyl 统一标尺并以 ZnO 作为对照基准",
+      "missing_evidence": "缺少 ZnO 作为非拓扑半导体 HHG 基准的实验测量数据（阈值、产额、偏振依赖），以及 ZnO 与拓扑材料 HHG 对比的横向文献",
+      "search_keywords": [
+        "ZnO high harmonic generation benchmark",
+        "ZnO solid HHG reference baseline",
+        "non-topological semiconductor HHG comparison",
+        "topological vs trivial insulator HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "rationale 中 11/40 条参考文献为 arXiv 预印本，且 [31]-[39] 承载方向三（Weyl/量子几何/对照）核心论断，未加限定语",
+      "missing_evidence": "预印本缺乏同行评审验证，承载核心论断的 [31]-[39] 条需核实刊本状态，未刊者需加「据目前检索/预印本」限定",
+      "search_keywords": [
+        "Weyl semimetal HHG peer-reviewed",
+        "quantum geometry HHG publication",
+        "topological HHG arXiv published version",
+        "Berry curvature HHG journal"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "四个关键科学问题（SSH 模型→拓扑相变→Weyl 节点→ZnO 对照）的子问题挂接需有支撑文献",
+      "missing_evidence": "四个关键问题收敛为 1-2 个核心问题时，子问题挂接分方向需要文献论证每个子问题的科学价值与可行性（拓扑边缘态 HHG、Weyl 节点非线性响应等）",
+      "search_keywords": [
+        "SSH model high harmonic generation",
+        "topological edge state HHG ultrafast",
+        "Weyl node nonlinear optical response",
+        "topological phase HHG selection rule"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "阈值 R/T 的定标方法与 ZnO 对照基准需要文献支撑",
+      "missing_evidence": "缺少 HHG 量子效率阈值定标的标准化方法文献，以及 ZnO 作为参照样品时阈值定义的实验规范",
+      "search_keywords": [
+        "HHG quantum efficiency threshold calibration",
+        "ZnO HHG threshold reference",
+        "HHG yield benchmark standard",
+        "high harmonic generation threshold definition"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

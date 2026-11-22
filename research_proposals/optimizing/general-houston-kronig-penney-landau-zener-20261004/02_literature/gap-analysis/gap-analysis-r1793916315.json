@@ -1,0 +1,18 @@
+{
+  "gaps": [
+    {
+      "claim": "§5(3)提出“把缺陷密度当作可调参数、以多判据组合完成份额分解的路径尚无公开报道”，属于创新性空白声明。",
+      "missing_evidence": "现有[6,15]及相关先例文献只能证明相邻方法或单项技术已有研究，不能直接证明该完整组合路径“尚无公开报道”。需要补充可复核的系统检索记录，包括数据库、检索时间范围、核心检索式、纳入与排除标准、筛查结果及代表性对比文献；或者将该表述改为边界明确的新颖性判断，并回指§2.3中的文献综述和方法对比。",
+      "search_keywords": [
+        "缺陷密度 可调参数 多判据 份额分解 文献综述",
+        "载流子份额分解 缺陷密度 泵浦探测",
+        "defect density tunable parameter multicriteria contribution decomposition",
+        "transition-region carrier contribution decomposition",
+        "Houston Kronig-Penney defect density carrier fraction",
+        "Landau-Zener transition-region population decomposition"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

@@ -1,0 +1,70 @@
+{
+  "gaps": [
+    {
+      "claim": "f-sum rule软约束的修正幅度可按(1+U/W)^2标度，且该平方律可作为一阶修正使用",
+      "missing_evidence": "缺少直接推导或同行评议文献支持该特定标度律及其适用条件，尤其缺少强关联固体、有限带宽和U/W约为1时的f-sum rule修正研究。现有报告还指出该表述与scheme.md中的线性标度律矛盾，因此需要文献明确支持正确的函数形式、展开阶数和误差范围。",
+      "search_keywords": [
+        "f-sum rule interaction correction Hubbard U bandwidth",
+        "optical sum rule strongly correlated materials U/W",
+        "kinetic energy optical spectral weight Hubbard model",
+        "nonperturbative optical sum rule correlated solids"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "BSV驱动的半导体Bloch方程或BSV-SBE框架能够描述量子光驱动固体高次谐波，并支持量子态统计对HHG的调控",
+      "missing_evidence": "缺少将明亮压缩真空或非经典光场、半导体Bloch方程与固体HHG统一起来的理论或实验文献，特别是关于光场高阶关联函数如何进入载流子动力学、极化响应和谐波谱的证据。",
+      "search_keywords": [
+        "bright squeezed vacuum driven high harmonic generation",
+        "nonclassical light semiconductor Bloch equations",
+        "quantum light driven solid-state HHG",
+        "squeezed light high harmonic generation theory"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "通过HHG观测量可以直接反演并分离Berry曲率、量子度规或其他量子几何量与普通跃迁矩阵元/偶极矩g的贡献",
+      "missing_evidence": "缺少证明量子几何量与跃迁矩阵元在HHG信号中具有可辨识、可分离关系的理论反演方法、唯一性分析或实验验证；还需要文献说明所需的偏振、晶体取向、驱动参数和谐波阶次等观测条件。",
+      "search_keywords": [
+        "high harmonic generation quantum geometry inversion",
+        "Berry curvature reconstruction from HHG",
+        "quantum metric high harmonic spectroscopy",
+        "identifiability inverse problem HHG Berry curvature dipole matrix element"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "CDW体系可以作为量子几何反演方法的边界验证或基准体系，用于检验反演结果在有序态和重构能带中的可靠性",
+      "missing_evidence": "缺少CDW材料中HHG对能带重构、序参量、Berry曲率或关联效应敏感性的实验和理论研究，也缺少将已知CDW序参量与HHG反演结果进行定量对照的先例。",
+      "search_keywords": [
+        "charge density wave high harmonic generation",
+        "HHG CDW order parameter reconstruction",
+        "high harmonic spectroscopy charge density wave materials",
+        "Berry curvature HHG charge density wave"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "PINN能够将固体HHG动力学方程与实验谐波谱结合，实现量子几何参数的稳定反演并推广到不同材料和驱动条件",
+      "missing_evidence": "缺少PINN用于固体HHG正演/逆问题、Berry曲率或量子几何参数识别的先例，以及关于噪声鲁棒性、参数可辨识性、训练数据需求和跨材料泛化能力的定量评估。",
+      "search_keywords": [
+        "physics-informed neural network solid-state high harmonic generation",
+        "PINN inverse problem ultrafast spectroscopy",
+        "physics-informed neural networks quantum geometry reconstruction",
+        "neural network inverse modeling HHG noisy experimental data"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "申请书所提出的BSV驱动HHG、量子几何直接反演及其与CDW验证和PINN推广的组合属于“首次建立”或“首次提供”的方法",
+      "missing_evidence": "缺少系统综述、数据库检索或代表性先行工作对比，用于证明相关方法组合确实尚无先例；需要补充近年非经典光驱动HHG、量子几何HHG反演、CDW-HHG和机器学习反演方向的文献边界。",
+      "search_keywords": [
+        "review quantum light high harmonic generation",
+        "review quantum geometry high harmonic spectroscopy",
+        "machine learning inverse high harmonic generation",
+        "charge density wave high harmonic spectroscopy review"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "gaps": [
+    {
+      "claim": "tMoS₂ 在 √3/2×L_M² 约 141.9 nm² 单层实际原子数约 5.4×10³、双层约 1.08×10⁴（canonical 旧值 11,000 原子被禁用，正确取代位为文献锚 [6] 的 12,400 口径）",
+      "missing_evidence": "缺紧束缚/TDDFT 文献中关于 moiré 超晶格实际原子数随扭转角和层数的标定值，特别是小扭转角（≈1°）下 12,400 原子单层/双层体系规模与计算可行性边界",
+      "search_keywords": [
+        "twisted bilayer MoS2 lattice relaxation atomic number",
+        "tMoS2 moiré supercell atom count scaling",
+        "moiré superlattice tight-binding supercell size cutoff",
+        "truncated MoS2 moiré continuum model real-space grid atoms"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "TDDFT 单次核时 10⁶ × 100 个参数点 = 总账 10⁸；单参数点比 TDDFT 高 50 倍（被误写为「单角 ≥10⁸」与「4 个量级」）",
+      "missing_evidence": "缺当前标准 SBE/TDDFT 基准实测的核时对照（CPU/GPU 小时、单点 vs 单参数、单参数点加速比），用以支撑 50× 加速比口径",
+      "search_keywords": [
+        "TDDFT SBE solid HHG benchmark wall-time",
+        "tight-binding semiconductor Bloch equation TDDFT speedup factor",
+        "GPU SBE MoS2 high harmonic generation compute cost",
+        "TDDFT HHG MoS2 compute hours benchmark"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "四波长档「2ħω<E_g」频率判据与 λ<2 μm 不满足判据的实际处理：1.3/1.7 μm 档仅承担读出、≥2 μm 档承担调控",
+      "missing_evidence": "缺 tMoS₂ 1.3–1.7 μm（~0.72–0.95 eV）与 ≥2 μm（~0.62 eV）双光子能量、对应带隙 1–2 eV 的实验/理论划分依据，以及「读出/调控」分级的方法学文献支撑",
+      "search_keywords": [
+        "tMoS2 bandgap photon energy two-photon criterion",
+        "mid-infrared driving field MoS2 bandgap HHG threshold",
+        "1.3 micron 1.7 micron MoS2 high harmonic generation regime",
+        "HHG driving wavelength selection rule TMDC bandgap"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "单层/双层 tMoS₂ 紧束缚拟合参数 t、onsite ε、d_nm(k) 标定来源于均匀极限单层原胞（约 10² 原子）TDDFT 计算",
+      "missing_evidence": "缺 MoS₂/WSe₂ 单层均匀极限下 DFT/TDDFT 输出能带、跃迁偶极矩、有效质量，并据此拟合 t/ε/d_nm 的标准流程与文献基准值",
+      "search_keywords": [
+        "MoS2 monolayer tight-binding hopping parameter DFT fit",
+        "transition metal dichalcogenide tight-binding hopping onsite energy",
+        "MoS2 WSe2 transition dipole moment DFT calculation",
+        "MoS2 tight-binding bandstructure fitting DFT TDDFT"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "12–24→6–10→240–300→24–50× 指标链：多体修正强度 σ_corr/t₀、横向尺寸比、含时网格密度倍率、ε-截断灵敏度倍率全链量化依据",
+      "missing_evidence": "缺多体 (GW/BSE) 修正对面内介电常数与跃迁矩阵元百分比修定量、横向网格收敛倍率、平面波截断收敛倍率的同类体系参考基准值",
+      "search_keywords": [
+        "many-body correction MoS2 GW BSE exciton binding",
+        "moiré superlattice grid convergence ratio",
+        "MoS2 2D plane wave cutoff convergence",
+        "GW BSE MoS2 transition dipole renormalization factor"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "full_review"
+}

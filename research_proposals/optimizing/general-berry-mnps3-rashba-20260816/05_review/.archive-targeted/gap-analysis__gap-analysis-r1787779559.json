@@ -1,0 +1,114 @@
+{
+  "gaps": [
+    {
+      "claim": "HHG光谱能够编码量子度规（quantum metric）和Berry曲率信息，可作为自旋劈裂指纹理论的方法论基础（scheme §3.3 L29，原引arXiv:2504.18845经反查实为神经网络论文，属虚构文献）",
+      "missing_evidence": "缺少量子几何张量（量子度规、Berry曲率）与高次谐波/非线性光学响应之间定量关系的真实理论文献，需给出可反查的arXiv ID/DOI以替换虚构的Morimoto条目",
+      "search_keywords": [
+        "quantum metric high harmonic generation",
+        "Berry curvature HHG spectroscopy",
+        "quantum geometry nonlinear optical response",
+        "circular dichroism high harmonic generation Berry curvature"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Floquet缀饰结合Rashba耦合可在THz参数空间选择性放大弱交变磁HHG信号（scheme §3.4 L47，原引Yarmohammadi文献[21]/[22]/[23]经Crossref反查均为虚构或主题错配）",
+      "missing_evidence": "缺少Floquet工程调控Rashba自旋劈裂/交变磁能带的真实理论文献，Floquet缀饰理论框架的源头文献不存在",
+      "search_keywords": [
+        "Floquet engineering altermagnet spin splitting",
+        "Floquet Rashba coupling light-induced",
+        "Floquet band engineering 2D magnet THz",
+        "valley polarization Floquet theory altermagnet"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "NiO反铁磁绝缘体中已观测到THz-HHG辐射与磁序参量动力学的时间同步，证明HHG可读出磁序（scheme §3.4 L49、§3.6 L63，原引García-Gaitán Nat Photonics 18:876经Crossref未命中，卷页待核）",
+      "missing_evidence": "缺少反铁磁序驱动或读出THz高次谐波的已发表实验文献（NiO或类似反铁磁体），需提供DOI经doi.org反查200 OK的验证记录",
+      "search_keywords": [
+        "NiO terahertz high harmonic generation antiferromagnetic",
+        "THz harmonic generation magnetic order NiO experiment",
+        "antiferromagnetic resonance nonlinear terahertz response",
+        "magnetic order high harmonic readout ultrafast"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "THz脉冲（0.4 V/Å≈40 MV/cm、1 THz共振）可在3–4 ps内驱动h-BN层间滑移极化翻转（scheme §3.2 L19、§3.6 L63引arXiv:2403.06531，但该文摘要无THz、无场强数值、无ps时标）",
+      "missing_evidence": "缺少h-BN/双层滑移铁电THz或光驱动翻转的场强、频率、翻转时间参数的正文级文献依据（图/表定位），现有参数组无法溯源且该文方法为机器学习力场MD而非TDDFT，方法学错位待补",
+      "search_keywords": [
+        "sliding ferroelectricity THz switching bilayer h-BN",
+        "light-induced interlayer sliding ferroelectric switching time",
+        "ultrafast sliding ferroelectric reversal first principles dynamics",
+        "shear phonon driven polarization switching terahertz field"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "本方案R1驱动场强（0.1–1.0 MV/cm）比h-BN先例（40 MV/cm）低1.5–2个量级仍能驱动层间滑移切换，切换概率判据（≥10%）有物理依据",
+      "missing_evidence": "缺少h-BN与NiCl₂/VS₂/CrSe₂滑移势垒高度对比、材料差异或THz共振增强因子的文献论证，低场驱动可行性的物理论证链条断裂",
+      "search_keywords": [
+        "sliding ferroelectric barrier height comparison van der Waals",
+        "interlayer sliding potential energy barrier DFT meV",
+        "resonant THz driving shear phonon enhancement factor",
+        "electric field threshold stacking switching 2D material"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "NiCl₂/VS₂/CrSe₂层间滑移势垒为16–40 meV/unitcell，对应剪切声子频率处于THz频段（scheme §3.2 L17无角标溯源，原引[11] Sheng npj Comput Mater 10:215经Crossref书目检索未命中）",
+      "missing_evidence": "缺少这些材料滑移势垒与层间剪切声子频率的第一性原理计算文献（含具体数值、表格定位），势垒区间作为R1共振驱动逻辑的物理地基无法溯源；若文献不实须转为课题组自行计算的预研数据",
+      "search_keywords": [
+        "NiCl2 interlayer sliding barrier first principles",
+        "transition metal dichalcogenide bilayer sliding energy barrier DFT",
+        "interlayer shear phonon frequency THz 2D material calculation",
+        "stacking dependent spin splitting DFT 2D multilayers"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "滑移二维方晶格中滑移自由度与准交变磁性存在耦合（平台一的核心物理前提，原引[30] arXiv:2408.11234经arXiv API反查实为遥感生物量论文，虚构）",
+      "missing_evidence": "缺少滑移/堆叠自由度调控自旋劈裂或准交变磁性耦合的真实理论或计算文献，平台一的文献地基坍塌",
+      "search_keywords": [
+        "sliding controlled altermagnetism two-dimensional lattice",
+        "stacking controlled spin splitting altermagnet",
+        "sliding ferroelectric antiferromagnetic coupling 2D multiferroic",
+        "quasi altermagnetism sliding square lattice theory"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "磁点群选择定则可给出交变磁自旋劈裂类型与HHG允许阶次的解析判据，作为R2指纹理论骨架（scheme §3.3 L27，原引[18] Ghorashi-Rappe PRL 133.116801经DOI反查404不存在）",
+      "missing_evidence": "缺少交变磁体/反铁磁体HHG对称性选择定则的真实理论文献，作为R2方法论基础（评审建议其可承担虚构的量子度规文献的部分替代职能）",
+      "search_keywords": [
+        "altermagnet high harmonic generation selection rules",
+        "magnetic point group nonlinear optics selection rules",
+        "symmetry selection rules high harmonic antiferromagnet",
+        "spin symmetry high harmonic generation solid state theory"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "THz泵浦脉冲（0.1–1.0 MV/cm）可激发MnPS₃磁序动力学并与Floquet缀饰场（0.5–3.0 THz）实现频段隔离/时序分步（scheme §3.4 L37，泵浦中心频率与带宽未指定）",
+      "missing_evidence": "缺少MnPS₃（体材/单层/异质结）反铁磁共振频率或磁振子谱的实验/理论文献，泵浦频率设计无依据，磁序激发指标路径断链",
+      "search_keywords": [
+        "MnPS3 antiferromagnetic resonance frequency",
+        "MnPS3 magnon Raman spectroscopy terahertz",
+        "monolayer MnPS3 spin wave gap Néel",
+        "antiferromagnetic magnon THz pump excitation 2D magnet"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "层间滑移自由度从未被作为独立动力学变量引入强场超快物理研究框架（scheme §3.7创新点一绝对化全称宣称，无检索范围/截止日期声明，且与自引的2403.06531光驱动滑移工作存在反例张力）",
+      "missing_evidence": "缺少带检索边界（数据库+截止日期）的系统文献调研，证明晶格/滑移自由度在强场HHG与超快动力学中的已有参与方式（热声子背景、准静态调制、光驱动滑移），以将novelty宣称收窄到真实增量",
+      "search_keywords": [
+        "sliding ferroelectricity ultrafast dynamics strong field",
+        "phonon assisted high harmonic generation lattice dynamics",
+        "interlayer mode coherent excitation electronic response",
+        "lattice degree of freedom strong field HHG"
+      ],
+      "priority": "high"
+    }
+  ]
+}

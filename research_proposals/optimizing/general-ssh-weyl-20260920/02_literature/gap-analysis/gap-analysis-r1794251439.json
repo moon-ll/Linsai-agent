@@ -1,0 +1,29 @@
+{
+  "gaps": [
+    {
+      "claim": "参考文献表共 15 篇预印本，占比 34.9%，超出 30% 参考线（清单8 不通过）",
+      "missing_evidence": "逐篇核验 15 篇预印本是否已有同行评议正式发表版本（期刊名、卷期、DOI），已发表的以期刊版本替换；对确无发表版本的预印本，补充足量已发表的同行评议代表性文献，将预印本占比压至 30% 参考线以下",
+      "search_keywords": [
+        "extended SSH model high harmonic generation",
+        "Weyl semimetal high harmonic generation",
+        "semiconductor Bloch equations Berry curvature multiband",
+        "Boltzmann transport high harmonic generation",
+        "topological edge states HHG spectroscopy"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "正文引用 [9][10][36][37][40] 五篇预印本的发表状态标注（问题 2 citation_integrity，high）",
+      "missing_evidence": "五篇预印本的最新发表状态核验结果：已发表的需改为期刊版本并补全卷期页码，未发表的需在正文五处补'（预印本）'标注",
+      "search_keywords": [
+        "arXiv preprint peer reviewed journal version",
+        "HHG extended SSH chain filling control",
+        "moiré superlattice high harmonic generation",
+        "Weyl semimetal harmonic spectrum",
+        "ZnO high harmonic generation reference"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "content"
+}

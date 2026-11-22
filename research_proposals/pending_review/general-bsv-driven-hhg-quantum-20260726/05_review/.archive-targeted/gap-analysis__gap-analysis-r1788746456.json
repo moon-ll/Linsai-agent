@@ -1,0 +1,64 @@
+{
+  "gaps": [
+    {
+      "claim": "9T磁场改变Mott相变及对QEF判读的必要性",
+      "missing_evidence": "缺乏磁场诱导Mott相变的材料相图、临界磁场数据、HHG观测量随磁场变化的实验或理论证据",
+      "search_keywords": [
+        "Mott insulator magnetic field phase diagram HHG",
+        "磁场调控 Mott相变 高次谐波",
+        "magnetic field driven metal-insulator transition high harmonic"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "QEF阈值的预先独立定义（避免循环论证）",
+      "missing_evidence": "缺少量子增强因子（QEF）的独立统计判据、效应量、置信区间的已有实验或理论基准",
+      "search_keywords": [
+        "quantum enhancement factor HHG statistical significance",
+        "QEF threshold confidence interval strong field",
+        "BSV driven HHG enhancement factor baseline"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "SBE-Q同时纳入多带、激子、Berry相位、强关联及量子场的参数可辨识性",
+      "missing_evidence": "缺少半导体Bloch方程在强场+量子光下的最小模型、参数可辨识性分析、消融顺序的已有基准",
+      "search_keywords": [
+        "semiconductor Bloch equation identifiability",
+        "SBE exciton Berry phase strong field benchmark",
+        "minimal model ab initio HHG parameter space"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "U/W作为强/弱关联统一标尺的跨材料可比性",
+      "missing_evidence": "缺乏U、W统一提取方法、温度与填充条件标定、三类标定样品独立关联尺度的对比文献",
+      "search_keywords": [
+        "Hubbard U bandwidth ratio calculation method",
+        "U/W scaling strongly correlated material calibration",
+        "correlation strength experimental benchmark solid-state HHG"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "BSV光源在800 nm附近驱动固体HHG产生7-13阶谐波的可观测性",
+      "missing_evidence": "缺少BSV驱动固体HHG特定波段（1.5 eV附近）的实验可行性证据，包括MoS₂等TMDC的损伤阈值与谐波产率",
+      "search_keywords": [
+        "bright squeezed vacuum HHG solid state 800 nm",
+        "BSV driven TMDC MoS2 high harmonic",
+        "quantum light HHG photon energy near-infrared experimental"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "1 μm驱动档光子能量0.83-1.24 eV与MoS₂带隙1.5-2.0 eV的耦合非线性窗口物理依据",
+      "missing_evidence": "缺少多光子驱动窗口在1.5-2.0 eV带隙附近的已有实验扫描与机制解释",
+      "search_keywords": [
+        "multiphoton HHG near bandgap TMDC",
+        "MoS2 high harmonic generation1.5 eV bandgap",
+        "solid-state HHG multi-photon driving regime"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "gaps": [
+    {
+      "claim": "[3] Neufeld et al., PRX 13, 031011 (2023) 被用于支撑\"固态HHG可提炼普适拓扑指纹（螺旋度、反常椭圆度、椭圆二色、时延）并可建立标度律\"，rationale L23/L55/L57、content L15/87/91、scheme L121/L129 共9处引用",
+      "missing_evidence": "[3] 实际研究对象为 Kane-Mele 量子自旋霍尔/反常霍尔相，且结论为\"四类拓扑签名均不可靠\"，与申请书\"指纹可提炼、可普适标度律\"立论方向相反；且scheme L121 称该指纹\"在 MoS₂ 实验中确认\"属虚构实验属性。需查明 MoS₂ 指纹（螺旋度/反常椭圆度/椭圆二色/时延）的真实出处文献（是否为 PRX 2023 之外的Neufeld/Kane-Mele后续工作、MoS₂ 拓扑相实测工作），或改写为 [3] 真实结论并同步修正全部9处引用链",
+      "search_keywords": [
+        "Neufeld universal signatures topological phases high harmonic generation",
+        "high harmonic generation MoS2 Berry curvature circular dichroism signature",
+        "topological insulator high harmonic helicity elliptical dichroism time delay experiment",
+        "solid-state HHG topological invariant spectroscopy MoS2",
+        "Kane-Mele model high harmonic generation anisotropy"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "rationale L5 中 2011 年 Ghimire 等以 3.25 μm 少周期激光驱动 ZnO 单晶观测到高至25阶非微扰谐波一节，ZnO 组引用挂 [7]、MoS₂ 组挂 [11]",
+      "missing_evidence": "[7] 实为 GaSe  THz 研究、[11] 实为 WSe₂ 研究，与 canonical T₂（ZnO 固体HHG基准工作）口径不符。需为 ZnO 固态HHG 基准（对应 [1] Ghimire 2011、[22]）和 MoS₂ 固态HHG（[12]）补齐正确条目，并核对 [7][11] 是否应删除或替换为其真实主题文献",
+      "search_keywords": [
+        "Ghimire 2011 solid-state high harmonic generation ZnO 3.25 micron",
+        "solid-state high harmonic generation MoS2 Wu 2015",
+        "GaSe terahertz high harmonic generation",
+        "WSe2 high harmonic generation monolayer experiment"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "[13] 与 [33] 为纯 arXiv 预印本，被用于以\"观测到/识别出\"的定论口吻支撑动机链（rationale L19/L25 对应 [13]，L41 对应 [33]）",
+      "missing_evidence": "缺少同行评审版本的支撑来源，或需确认预印本状态并补充限定语；[33] 挂载已达四年，需复查是否已正式见刊及其最终结论是否与申请书引用表述一致",
+      "search_keywords": [
+        "[13] arXiv solid-state high harmonic generation published journal version",
+        "attosecond photoemission solid state arXiv 2022 published",
+        "[33] arXiv high harmonic generation 2021 journal publication",
+        "solid-state HHG review 2021 arXiv journal version status"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "solid-state HHG 中\"不可替代性\"的独家断言（L7、L47）：主张高次谐波谱相对 TrARPES/ARPES 等手段在子带隙能区与偏振-通道关联上具有唯一价值",
+      "missing_evidence": "缺少与 TrARPES/ARPES/二阶光电子谱在能力边界上的对照基线文献，无法支撑\"不可替代\"这一断言；需补入跨手段对比文献（HHG 与 TrARPES 能量-动量分辨率、偏振分辨能力对比），或改写为\"互补性\"并给出边界对照依据",
+      "search_keywords": [
+        "high harmonic generation versus time-resolved ARPES comparison capability",
+        "solid-state photoemission attosecond HHG complementary TrARPES",
+        "polarization-resolved photoemission solid state comparison",
+        "attosecond solid-state spectroscopy technique comparison review"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "全文 [N] 角标 60 组展开 76 次，超过 section_standards 上限 47；L5 材料列表句连挂6组引用",
+      "missing_evidence": "非关键论断缺少来源支撑依据不足时无法直接删角标——需先确认每处角标对应的是哪一条具体实证文献；对合并/区间化的引用需保证被合并的论断仍有可追溯的原始出处（尤其列表句中的MoS₂/WSe₂/ZnO/Si 等材料条目各自的实验 HHG 报道）",
+      "search_keywords": [
+        "solid-state high harmonic generation experimental review 2023 2024 materials",
+        "high harmonic generation in solids review Rudner Lindner",
+        "experimental solid-state HHG MoS2 WSe2 ZnO Si comparison",
+        "solid-state high harmonic generation spectroscopy measurements review"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "rationale L27 \"实验锚定\"一词，声称固态 HHG 实验为 T₂ 理论计算提供量级参照",
+      "missing_evidence": "缺少明确区分\"量级参照（非实测标定）\"与\"实验精确标定\"的文献依据；需补入固态HHG绝对产额/绝对强度与理论定量对比的文献，说明实验与理论量级一致但并非精确锚定量",
+      "search_keywords": [
+        "solid-state high harmonic absolute yield experiment theory comparison",
+        "TDDFT high harmonic generation absolute intensity overestimate solid",
+        "high harmonic generation solid experimental calibration yield uncertainty",
+        "attosecond solid-state photoemission quantitative agreement theory"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "评审报告末尾 \"[low] citation_gap｜rati...\" 处被截断，存在未展开的引用缺口条目",
+      "missing_evidence": "因报告截断，该条低优先级 citation_gap 的具体论点、缺失文献类型与涉及位置均不可见，无法判断对应的支撑需求；需重新获取完整评审报告末段以确认是否还存在未识别的文献支撑缺口",
+      "search_keywords": [
+        "rationale.md 立项依据 引用缺口 检查",
+        "citation gap rationale review item",
+        "solid-state HHG literature gap rationale justification"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

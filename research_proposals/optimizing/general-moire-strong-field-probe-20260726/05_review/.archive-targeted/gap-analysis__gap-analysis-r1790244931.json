@@ -1,0 +1,15 @@
+{
+  "gaps": [
+    {
+      "claim": "scheme L99/L127 写'75–360倍'与content/rationale已统一'88–352倍'口径冲突，且360对应1.8 eV 而[12]仅有1.76 eV/1.5 eV两锚",
+      "missing_evidence": "缺乏支撑360倍（对应1.8 eV Mott gap）的实验/理论依据；需核查[12]中CT峰1.76 eV与tdDMFT 1.5 eV的具体语境，以及是否存在第三锚点支持1.8 eV",
+      "search_keywords": [
+        "1T-TaS2 CT peak 1.76 eV experimental",
+        "1T-TaS2 tdDMFT gap 1.5 eV",
+        "TaS2 Mott gap 1.8 eV",
+        "Ikeda TaS2 Nature Physics 2024 charge gap"
+      ]
+    }
+  ],
+  "section": "scheme"
+}

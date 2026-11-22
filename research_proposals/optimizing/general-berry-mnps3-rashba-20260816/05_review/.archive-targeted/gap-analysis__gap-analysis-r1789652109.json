@@ -1,0 +1,45 @@
+{
+  "gaps": [
+    {
+      "claim": "§2.5 L49 d′≥3 对应 10% 高斯噪声下最优 93%准确率",
+      "missing_evidence": "缺少在 10% 高斯噪声水平下实现 d′≥3（对应 ~93% 分类准确率）的实验或理论基准文献支撑，特别是 i-wave 劈裂的圆偏振 HHG 磁点群指纹分类任务",
+      "search_keywords": [
+        "d-prime separability metric HHG classification",
+        "magnetic point group fingerprint high harmonic",
+        "i-wave altermagnet circularly polarized HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.4 L35 D_sep ≥ 0.80 在 10% 高斯噪声下的可实现性",
+      "missing_evidence": "缺少 HHG 信号在 10% 高斯噪声水平下分离度 D_sep 的定义基准与可实现阈值的文献支撑",
+      "search_keywords": [
+        "separability metric D_sep high harmonic spectroscopy",
+        "signal-to-noise threshold HHG channel separation",
+        "Berry curvature retrieval noise level benchmark"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.3 L29 NiCl₂/VSe₂/CrSe₂ 滑移坐标×堆叠构型全集的可证伪采样",
+      "missing_evidence": "缺少 2D 反铁磁/滑动铁电材料滑移坐标与堆叠构型空间的第一性原理计算基准，特别是采样率 N×M 与能量面可证伪条件",
+      "search_keywords": [
+        "2D sliding ferroelectric stacking energy landscape",
+        "NiCl2 VSe2 CrSe2 interlayer sliding first-principles",
+        "van der Waals antiferromagnet stacking configuration sampling"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.5 L51 弱场 Floquet 缀饰窗口 0.01–0.3 MV/cm × 0.5–3.0 THz 下增强因子 ≥5× 的物理基础",
+      "missing_evidence": "缺少 MnPS3 等反铁磁体在 THz 弱场 Floquet 缀饰下非相对论自旋劈裂增强倍数（≥5×）的现有理论或实验证据",
+      "search_keywords": [
+        "Floquet engineering altermagnet spin splitting enhancement",
+        "THz weak field Floquet magnetic order amplification",
+        "nonrelativistic spin splitting Floquet modulation MnPS3"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "content"
+}

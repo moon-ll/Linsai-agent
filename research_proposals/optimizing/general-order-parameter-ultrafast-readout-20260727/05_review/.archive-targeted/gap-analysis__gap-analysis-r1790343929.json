@@ -1,0 +1,41 @@
+{
+  "gaps": [
+    {
+      "claim": "CrSb g波交换分裂的面内角分布形态及由此决定的HHG偏振指纹方位角依赖（原文误写为cos(6φ)主导，与[36]节点位置矛盾，按Y₄₋₃=zy(3x²−y²)节点应在φ=0°/60°/120°）",
+      "missing_evidence": "CrSb交换分裂∝Y₄₋₃实球谐（面内节点φ=0°/60°/120°）而非cos(6φ)（节点15°+30°k）的实验与理论文献证据（如arXiv:2601.14526），以及g波/d波角分布映射到HHG偏振方位角扫描指纹形态、dHvA校准角分布实测的文献支撑",
+      "search_keywords": [
+        "CrSb exchange splitting Y4-3 spherical harmonic angular dependence",
+        "CrSb g-wave d-wave altermagnet spin splitting node ARPES dHvA",
+        "altermagnet high harmonic generation polarization azimuthal selection rule",
+        "Werner altermagnet HHG spin group PRB 110 235101",
+        "CrSb dHvA angular spin splitting node position"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "CrSb磁振子观测（Singh工作）可作为高阶交换相互作用的实验锚点，并与SOC—磁场交叉项约束互补",
+      "missing_evidence": "Singh磁振子观测的具体文献出处与引用编号（拟补[27]），以及磁振子谱约束高阶交换相互作用、其与SOC—磁场交叉项约束互补性的文献依据",
+      "search_keywords": [
+        "Singh CrSb magnon inelastic neutron scattering",
+        "CrSb spin wave dispersion neutron experiment",
+        "high-order exchange interaction antiferromagnet magnon fitting",
+        "biquadratic exchange CrSb spin wave",
+        "CrSb magnon Raman THz spectroscopy antiferromagnet"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "G1幅度判据（≤10%）为自建正演模型↔自建装置的自参照闭环，[7]理论值又明确排除出口径，需独立旁证避免过拟合即通过",
+      "missing_evidence": "独立文献报道的可观测量幅度变化区间（如TiSe₂/CDW体系谐波幅度、偏振各向异性幅度的定量实验值），用作非自参照的独立子判据，或[7]形貌定性对齐的外部锚点",
+      "search_keywords": [
+        "TiSe2 charge density wave high harmonic amplitude quantitative",
+        "TiSe2 second harmonic generation CDW order parameter polarization",
+        "solid HHG polarization anisotropy amplitude experimental value",
+        "CDW transition harmonic yield change percent measurement",
+        "HHG forward model inversion validation benchmark solid state"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

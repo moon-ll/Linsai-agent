@@ -1,0 +1,41 @@
+{
+  "proposal_id": "general-berry-mnps3-rashba-20260816",
+  "cluster_id": "cl_20261106_6d9868",
+  "clusters": [
+    "cl_20261106_6d9868"
+  ],
+  "entries": [
+    {
+      "source_id": "paper:2024-2403.05051-unconventional-rashba-bands-and-superconductivity-d-vector-o",
+      "title": "Unconventional Rashba bands and superconductivity: d-vector orientation parallel or perpendicular to g-vector",
+      "summary": "提出非常规Rashba能带模型并研究其中的自旋三重态超导配对，证明三重态d矢量的取向不再被标准图像锁定在垂直于Rashba g矢量的方向，而是可依配对相互作用的性质取平行或垂直于g矢量两种组态。在此基础上预言竞争中出现次级手性p波配对通道，对应拓扑超导相。结果为非中心对称超导体中d矢量取向的判定与手性拓扑超导的设计提供了新判据。",
+      "path": "knowledge/raw/papers/2024-2403.05051-unconventional-rashba-bands-and-superconductivity-d-vector-o.md",
+      "added_via": "cluster:cl_20261106_6d9868",
+      "added_at": "2026-11-07T07:52:27Z"
+    },
+    {
+      "source_id": "paper:2026-2602.20838-unconventional-spin-valve-effect-in-altermagnets-induced-by",
+      "title": "Unconventional spin valve effect in altermagnets induced by Rashba spin–orbit coupling and triplet superconductivity",
+      "summary": "该文在交错磁体/三重态超导体/交错磁体（AM/TSC/AM）三明治结中提出一种非常规自旋阀方案：界面 Rashba 自旋轨道耦合将交错磁体中动量依赖的自旋劈裂转化为强自旋选择透射，从而无需任何铁磁电极即可实现自旋阀效应。电导随两交错磁体磁序（Néel 矢量）相对取向、Rashba 强度（门电压可调）以及三重态配对对称性显著变化，使该结成为一个电学可调的配对对称性探测器。",
+      "path": "knowledge/raw/papers/2026-2602.20838-unconventional-spin-valve-effect-in-altermagnets-induced-by.md",
+      "added_via": "cluster:cl_20261106_6d9868",
+      "added_at": "2026-11-07T07:52:27Z"
+    },
+    {
+      "source_id": "paper:2026-2605.18429-direction-selective-triplet-pairing-and-spin-edge-locking-in",
+      "title": "Direction-selective triplet pairing and spin-edge locking in altermagnetic metals",
+      "summary": "本文在二维d波交错磁（altermagnetic）金属中证明：动量依赖的自旋劈裂会破坏常规自旋单重态配对所需的简并性，从而压制单重态通道，转而稳定高度各向异性、具有方向选择性的等自旋（equal-spin）三重态配对。进一步引入Rashba自旋轨道耦合后，体系进入单重-三重混合的混合宇称超导态，并在边界涌现自旋分辨的Majorana边缘态，实现自旋-边缘锁定。该结果为'交错磁+超导'这一零净磁矩自旋劈裂平台上的拓扑超导与Majorana物理提供了明确的理论方案。",
+      "path": "knowledge/raw/papers/2026-2605.18429-direction-selective-triplet-pairing-and-spin-edge-locking-in.md",
+      "added_via": "cluster:cl_20261106_6d9868",
+      "added_at": "2026-11-07T07:52:27Z"
+    },
+    {
+      "source_id": "paper:2026-2610.19017-topological-superconductivity-in-layered-d-wave-altermagneti",
+      "title": "Topological superconductivity in layered d-wave altermagnetic metals",
+      "summary": "在层状d波交错磁金属中证明：奇宇称螺旋p波配对天然实现一阶拓扑超导，携带螺旋Majorana边模。进一步揭示层状结构破缺反演引入的Rashba自旋轨道耦合在边缘诱导符号交变的质量项、填隙这些边模，将体系驱动为具有Majorana角模的二阶拓扑超导。由此建立由Rashba强度与交错磁d波劈裂共同调控的一阶/二阶/混合阶拓扑超导相图，把交错磁体确立为阶数可设计的Majorana平台。",
+      "path": "knowledge/raw/papers/2026-2610.19017-topological-superconductivity-in-layered-d-wave-altermagneti.md",
+      "added_via": "cluster:cl_20261106_6d9868",
+      "added_at": "2026-11-07T07:52:27Z"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "gaps": [
+    {
+      "claim": "选择 PDC 而非低光子数压缩腔（OPO/连续波腔）需说明后者的具体缺陷",
+      "missing_evidence": "缺少单模连续波压缩腔/OPO 谐振腔在 BSV 单脉冲涨落、时间模式、增益可调性上的对比文献",
+      "search_keywords": [
+        "single-mode continuous-wave squeezing cavity pulsed BSV",
+        "OPO squeezed light temporal mode pulsed HHG",
+        "cavity squeezing bandwidth pulsed driving limitation",
+        "PDC vs OPO squeezed vacuum pulsed comparison"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3.5 可行性分析中互引 §2.2/§3.3/§3.2 需替换为原理层论据（如含时密度泛函已建立的密度矩阵主方程方法）",
+      "missing_evidence": "缺少含时密度泛函 + 密度矩阵主方程方法在 BSV/量子光驱动 HHG 中的原理层参考文献",
+      "search_keywords": [
+        "time-dependent density functional theory density matrix master equation HHG",
+        "TDDFT quantum light driven HHG theory",
+        "master equation formalism squeezed light high harmonic"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "[30] 引用为 ZnO 单带模型预言，需明确为晶体单带简化模型预言，避免与多带多体语境并列误读",
+      "missing_evidence": "缺少 ZnO 单带模型在晶体 HHG 中的原始理论预言文献作为对照参考",
+      "search_keywords": [
+        "ZnO single-band model crystal HHG theory prediction",
+        "one-band tight-binding ZnO high harmonic generation",
+        "simplified band model HHG many-body comparison"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

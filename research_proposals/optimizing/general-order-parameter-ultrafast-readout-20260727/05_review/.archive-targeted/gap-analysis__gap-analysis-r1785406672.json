@@ -1,0 +1,70 @@
+{
+  "gaps": [
+    {
+      "claim": "第一年度选择的单序参量 benchmark 体系能够以温度、偏振等多维 HHG 测量形成可复现的最小闭环，并为序参量读出提供已知参照。",
+      "missing_evidence": "缺少证明候选 benchmark 材料具有明确单序参量、已知相变或序参量依赖的 HHG 响应、适合中红外驱动及温度/偏振扫描的实验与理论文献；还需以文献或预研数据说明样品选择依据，避免 benchmark 仅凭经验指定。",
+      "search_keywords": [
+        "single order parameter benchmark high harmonic generation temperature dependence",
+        "solid-state HHG order parameter readout polarization resolved",
+        "phase transition high harmonic spectroscopy benchmark material",
+        "mid-infrared HHG temperature dependent correlated materials"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "拟定的 HHG 光谱重复性、装置稳定度和重复测量变异阈值足以证明实验平台达到后续序参量反演所需的基线性能。",
+      "missing_evidence": "缺少同类固体 HHG 或超快光谱实验关于长期稳定性、独立重复次数、强度波动和变异系数的公开基准；计划中的具体阈值必须由预研统计结果或可比装置文献支撑，而不能直接设定。",
+      "search_keywords": [
+        "solid high harmonic generation reproducibility stability coefficient of variation",
+        "ultrafast spectroscopy repeatability long-term stability benchmark",
+        "HHG intensity fluctuation shot-to-shot stability solids",
+        "multidimensional high harmonic spectroscopy experimental uncertainty"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "计划采用的谱线信噪比定义及验收阈值能够可靠区分序参量相关 HHG 指纹与背景噪声。",
+      "missing_evidence": "缺少 HHG 光谱中信号窗口、背景窗口、噪声统计方式、探测极限和置信区间定义的测量学或同类实验文献；也缺少文献或预研数据证明拟用信噪比门槛与目标微弱谱线/偏振变化相匹配。",
+      "search_keywords": [
+        "high harmonic spectroscopy signal-to-noise ratio definition spectral window",
+        "HHG detection limit noise floor uncertainty quantification",
+        "weak harmonic signal statistical confidence spectroscopy",
+        "polarization-resolved HHG signal-to-noise"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "前向模型在保留测试集上的误差和序参量反演误差可作为可信的年度验收指标。",
+      "missing_evidence": "缺少支持误差指标选择的序参量反演、HHG 逆问题和模型验证文献，包括参数定义、数据域、训练/保留测试集划分、噪声鲁棒性、置信区间及可辨识性分析；任何“反演误差低于某百分比”的数值均需由相关基准研究或预研结果校准。",
+      "search_keywords": [
+        "high harmonic spectroscopy inverse problem order parameter reconstruction",
+        "HHG inversion identifiability uncertainty quantification",
+        "physics-informed inverse model held-out test set spectroscopy",
+        "synthetic data validation parameter retrieval confidence interval"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "第二年度选择的两个互补体系能够对核心假设形成强对照，其预期 HHG 指纹可与替代机制明确区分。",
+      "missing_evidence": "缺少针对候选单序 benchmark、altermagnet 或超导涨落体系的理论预测和实验文献，用以说明各自预期的谐波强度、偏振、选择定则或温度依赖特征；同时缺少讨论热效应、能带结构变化、散射、畴结构及其他共存序等替代解释及其排除方法的文献。",
+      "search_keywords": [
+        "altermagnet high harmonic generation order parameter signature",
+        "superconducting fluctuations high harmonic spectroscopy",
+        "HHG selection rules magnetic order polarization dependence",
+        "solid-state HHG thermal effects scattering domains competing order"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "中红外 HHG、多维扫描以及低温/磁场联用平台能够在第一年度按计划完成并支撑后续跨体系测量。",
+      "missing_evidence": "现有材料仅宣称具备相关能力，缺少同类低温、外磁场、偏振和温度多维固体 HHG 平台的已发表技术依据，以及本项目已有装置和样品条件的预研引用；需要文献说明关键参数范围、兼容性和主要技术瓶颈，以支撑年度进度的可行性。",
+      "search_keywords": [
+        "cryogenic solid-state high harmonic generation experimental setup",
+        "magnetic-field-dependent high harmonic spectroscopy solids",
+        "mid-infrared HHG multidimensional polarization temperature scan",
+        "low-temperature high harmonic generation correlated materials"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

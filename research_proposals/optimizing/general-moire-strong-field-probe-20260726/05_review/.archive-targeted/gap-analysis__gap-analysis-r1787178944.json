@@ -1,0 +1,54 @@
+{
+  "gaps": [
+    {
+      "claim": "SBE框架从均匀体系迁移到莫尔体系的适用性尚未被直接文献证明",
+      "missing_evidence": "scheme.md §3.2提到SBE框架可从ZnO/MoS₂单层迁移到莫尔体系，但引用Zhang/Su/Wang 2024 Nat. Mater.是综述而非直接验证，缺乏SBE在莫尔超晶格强场条件下有效性的直接理论/实验证据",
+      "search_keywords": [
+        "semiconductor Bloch equation moire superlattice validity",
+        "SBE moire heterostructure strong field applicability",
+        "tight-binding Bloch equation twisted bilayer"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Tikhonov正则化L-curve法在HHG反演问题中的适用性缺乏直接文献支撑",
+      "missing_evidence": "scheme.md §3.2在反演正则化论证中提到L-curve法选正则化参数，但仅泛泛引用该方法在反演问题中的通用做法，缺乏L-curve专门针对HHG非线性反演问题的有效性验证文献",
+      "search_keywords": [
+        "L-curve Tikhonov regularization high harmonic inversion",
+        "regularization parameter selection nonlinear optics inversion HHG",
+        "ill-posed inversion regularization solid-state HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "SBE与张量网络耦合界面的误差传递与可行性在莫尔体系中尚无直接文献背书",
+      "missing_evidence": "scheme.md §3.2描述了将DMRG/MPS多体修正以自能修正项形式反馈回SBE的耦合界面设计，声称这是相对Mrudul 2024和Molinero 2024的核心差异，但该耦合界面的误差传递量化与可行性验证在莫尔体系中尚无直接文献支撑",
+      "search_keywords": [
+        "DMRG MPS coupled to semiconductor Bloch equation",
+        "tensor network SBE coupling interface error propagation",
+        "many-body correction SBE moire superlattice"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "TMDC莫尔样品制备由多个团队实现的具体文献支撑缺失",
+      "missing_evidence": "scheme.md §3.4.1可行性分析提到'TMDC莫尔样品制备已由多个团队实现'并引用Lian 2024和Xu 2024，但这两篇分别对应WS₂/WSe₂莫尔超晶格和WSe₂/WS₂体系，缺少tMoS₂/tWSe₂体系制备的直接文献",
+      "search_keywords": [
+        "tMoS2 tWSe2 moire superlattice fabrication preparation",
+        "TMDC moire heterostructure sample preparation twisted angle",
+        "MoS2 WSe2 moire sample growth available"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "R3为何选Floquet工程而非电场/磁场调控的论证仅1句，缺乏更充分的方法学对比文献",
+      "missing_evidence": "scheme.md §3.4提到选择Floquet是因为'亚周期时间尺度与HHG探针时间窗口天然匹配，共用平台可切换'，但缺乏将Floquet调控与其他调控方式（电场栅压调控、磁场调控）在时间尺度、可集成性等方面对比的文献依据",
+      "search_keywords": [
+        "Floquet engineering vs electric field control moire",
+        "optical control vs magnetic field调控 time scale",
+        "subcycle control moire quantum state comparison"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

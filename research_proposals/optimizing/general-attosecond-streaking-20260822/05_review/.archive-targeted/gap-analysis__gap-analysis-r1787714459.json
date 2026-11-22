@@ -1,0 +1,34 @@
+{
+  "gaps": [
+    {
+      "claim": "R3双变量图谱「边界方程」可行性论证偏弱，缺乏可量化边界公式支撑",
+      "missing_evidence": "双变量图谱方法中边界方程的定义、适用范围及误差传递的定量描述目前无公开文献系统论证",
+      "search_keywords": [
+        "bivariate error map boundary condition attosecond",
+        "dual variable error map spectroscopy calibration",
+        "attosecond streaking boundary equation quantification"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "CNN备选路径仅引用未展开，方法学可行性缺乏支撑",
+      "missing_evidence": "rACE等神经网络阿秒脉冲重构方法的理论基础、适用范围及与双变量图谱的互补性分析尚无充分展开的文献支撑",
+      "search_keywords": [
+        "rACE attosecond pulse retrieval neural network",
+        "inzani attosecond streaking neural network reconstruction",
+        "CNN attosecond pulse reconstruction multi-channel"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "K3「统一误差界估计」缺乏可量化边界公式",
+      "missing_evidence": "软X射线能区多通道电离场景下统一误差界的解析表达式或数值边界无公开文献支撑",
+      "search_keywords": [
+        "soft X-ray attosecond streaking error bound",
+        "FROG-CRAB validity range multi-channel",
+        "photoelectron kinetic energy dipole phase error estimation"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

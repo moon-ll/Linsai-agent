@@ -1,0 +1,17 @@
+{
+  "gaps": [
+    {
+      "claim": "“TDDFT 产额绝对值常有数倍至一个量级的高估”这一关于非线性光学产额计算偏差的定量概括。",
+      "missing_evidence": "缺少能够直接证明该偏差范围的 TDDFT—实验对照文献；应补充至少一篇包含绝对产额或响应强度、计算与实验偏差倍数的基准研究，或确认现有文献[30]明确综述并量化了“数倍至一个量级”的系统性高估。仅引用一般性 TDDFT 方法综述不足以支撑具体误差范围。",
+      "search_keywords": [
+        "real-time TDDFT nonlinear optical yield experimental comparison overestimate",
+        "TDDFT harmonic generation absolute yield experiment benchmark solid",
+        "nonlinear optical response TDDFT experiment factor of magnitude discrepancy",
+        "TDDFT nonlinear susceptibility experimental validation absolute intensity",
+        "solid-state high harmonic generation TDDFT experimental yield comparison"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "scheme"
+}

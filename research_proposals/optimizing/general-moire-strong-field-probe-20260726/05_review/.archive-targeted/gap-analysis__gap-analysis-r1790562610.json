@@ -1,0 +1,50 @@
+{
+  "gaps": [
+    {
+      "claim": "1.2 调控段：MoPSe3 SHG 在太赫兹场下被巨调制（>30%）的论断",
+      "missing_evidence": "缺乏 Shan et al. Nature 600, 235 关于 SHG 开关比 >10 倍/抑制约 90% 的原始实验数据核实依据（需提供该原文的开关比具体数值与抑制比例的实测报告）",
+      "search_keywords": [
+        "Shan Nature 600 235 MnPS3 THz SHG switching on-off ratio",
+        "MnPS3 terahertz second harmonic generation modulation magnitude",
+        "van der Waals antiferromagnet THz SHG switch ratio",
+        "layered antiferromagnet light-induced second harmonic enhancement factor"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "1.3 TMDC 段+1.3 理论段：'直接实验背书/证明多体修正被放大'",
+      "missing_evidence": "缺少 Chang Lee et al. Nat. Commun. 15, 6228 (TD-aGW) 工作中\"理论 vs 实验\"对照方法学的明确说明，需明确该工作为 TD-aGW 多体理论而非实验观测，需要补充同类 TMDC 强场 HHG 的实测多体修正证据以支撑\"多体放大\"陈述",
+      "search_keywords": [
+        "Chang Lee Nat Commun 15 6228 TMDC TD-aGW high harmonic",
+        "many-body correction high harmonic generation TMDC experimental",
+        "GW approximation HHG TMDC MoS2 WSe2 multiorbital experimental verification",
+        "TD-aGW exciton correlation solid state HHG amplification"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "1.3 张量网络段：'Hu/Meng [14] 属于张量网络方法学'",
+      "missing_evidence": "Hu/Meng PRL 133, 156901 实际为 TDDFT 相干声子工作，与张量网络无关；需要区分 PRL 133, 156901 (TDDFT phonon) 与 Sun 等 QTCI 矩阵乘积态张量网络方法两类工作的原文及其方法学差异证据",
+      "search_keywords": [
+        "Hu Meng PRL 133 156901 TDDFT coherent phonon",
+        "Sun matrix product state tensor network quantum chemistry many-body",
+        "QTCI correlated electron light-induced Floquet state calculation",
+        "TDDFT coherent phonon vs tensor network comparison method HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "1.4 反演空白段+1.5 No-Go 段：Peterka [22] 实测谐波'7-11 阶'与'~10^12 W/cm² 损伤阈值'",
+      "missing_evidence": "Peterka APL Photonics 8, 086103 中实测谐波阶数应为 H5–H10（UV 2.7–6.2 eV/0.62 eV 驱动）而非 7-11；该文未给出 ~10^12 W/cm² 损伤阈值数据；需要核实 Peterka 原文的谐波阶实测范围与驱动参数，以及寻找 ~10^12 W/cm² 损伤阈值的独立实测文献来源",
+      "search_keywords": [
+        "Peterka APL Photonics 8 086103 harmonic order MoS2 measurement",
+        "twisted bilayer MoS2 high harmonic damage threshold intensity 10^12",
+        "Peterka high harmonic spectroscopy transition metal dichalcogenide fifth to tenth order",
+        "solid state HHG damage threshold mid-infrared TMDC experimental",
+        "Peterka Wannier semiconductor Bloch equation HHG energy range"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "rationale"
+}

@@ -1,0 +1,72 @@
+[
+  {
+    "at": "2026-11-21T17:30:56Z",
+    "topic_id": "general-solid-nsdr-kev-hhg-20261121",
+    "steps": [
+      {
+        "step": "background",
+        "profile": "researcher",
+        "success": true,
+        "elapsed_s": 643.48,
+        "error": "",
+        "verify": {
+          "step": "background",
+          "ok": true,
+          "artifacts": [
+            {
+              "path": "01_background/literature-map.md",
+              "exists": true,
+              "size": 72457,
+              "ok": true
+            }
+          ]
+        }
+      },
+      {
+        "step": "problem",
+        "profile": "analyst",
+        "success": true,
+        "elapsed_s": 654.32,
+        "error": "",
+        "verify": {
+          "step": "problem",
+          "ok": true,
+          "artifacts": [
+            {
+              "path": "02_problem/problem.md",
+              "exists": true,
+              "size": 34976,
+              "ok": true
+            }
+          ]
+        }
+      },
+      {
+        "step": "scheme",
+        "profile": "writer",
+        "success": true,
+        "elapsed_s": 532.59,
+        "error": "",
+        "verify": {
+          "step": "scheme",
+          "ok": true,
+          "artifacts": [
+            {
+              "path": "03_scheme/scheme.md",
+              "exists": true,
+              "size": 54304,
+              "ok": true
+            },
+            {
+              "path": "04_references/references.bib",
+              "exists": true,
+              "size": 29359,
+              "ok": true
+            }
+          ]
+        }
+      }
+    ],
+    "gaps": []
+  }
+]

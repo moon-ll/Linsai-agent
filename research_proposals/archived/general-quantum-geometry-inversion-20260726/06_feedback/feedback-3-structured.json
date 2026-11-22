@@ -1,0 +1,78 @@
+{
+  "verdict": "major_revision",
+  "overall_comment": "评审团四维评审：科学内核有价值但因果链未建立+引用失实红线+预印本占比过高+篇幅超标，需重写 rationale 因果链而非语言修补。",
+  "issues": [
+    {
+      "section": "references",
+      "severity": "critical",
+      "issue_type": "citation_integrity",
+      "description": "参考文献[9]题名失实：原写'Quantum metric tensor in high-harmonic generation theory'，真实文献为 Verma & Queiroz 'Quantum metric in step response'（PRL 134, 106403, 2025）",
+      "instruction": "评审团已修正该条及 scheme 两处引用语境（改为'阶跃响应测量方案'）。writer 严禁回退为'HHG 理论'表述；所有引用元数据必须检索核实，禁止凭记忆生成",
+      "action": "verify_and_keep",
+      "target_passage": "references.md [9]; scheme.md 创新点 7.1/7.2"
+    },
+    {
+      "section": "rationale",
+      "severity": "critical",
+      "issue_type": "logic_chain",
+      "description": "BSV 光场统计→HHG 谱可观测项→Ω/g Fisher 信息的'解析传递关系'表述过强，该链条属本项目待证明内容而非已建立事实",
+      "instruction": "重写立项依据因果链：明确区分'文献已证'与'本项目待证'，把传递关系改写为本项目的科学假设与验证路径",
+      "action": "rewrite",
+      "target_passage": "rationale §1.2"
+    },
+    {
+      "section": "content",
+      "severity": "high",
+      "issue_type": "experimental_design",
+      "description": "1T-TaS₂ Mott-CDW 竞争相的谐波红移信号来源混叠，无法区分 Mott 分量与 CDW 分量",
+      "instruction": "R3 研究内容补充可区分信号设计：变温对照（跨 Mott 与 CDW 相变点）或偏振通道分离，给出信号归属判据",
+      "action": "revise",
+      "target_passage": "content §2.3 R2 / §2.4 R3"
+    },
+    {
+      "section": "content",
+      "severity": "high",
+      "issue_type": "criterion_rigor",
+      "description": "加性/乘性判定阈值（R<1.2/1.2≤R<2/R≥2）缺统计依据",
+      "instruction": "给出阈值标定来源（噪声模型+统计检验）或与贝叶斯模型比较的论证；无法支撑时改为开放性判据并注明由 R4 实测标定",
+      "action": "revise",
+      "target_passage": "content §2.4 R3"
+    },
+    {
+      "section": "scheme",
+      "severity": "high",
+      "issue_type": "physics_error",
+      "description": "CDW 陈数约束表述错误（'Berry 曲率无闭合可定义陈数'不准确）",
+      "instruction": "改为'CDW 失去平移对称性，传统布里渊区陈数不直接适用'；同时区分单色场偶次谐波来源与多色场分离前提",
+      "action": "revise",
+      "target_passage": "scheme §5.2 约束 / §3.2 R2"
+    },
+    {
+      "section": "scheme",
+      "severity": "high",
+      "issue_type": "experimental_design",
+      "description": "TiSe₂ 相变点偏振各向异性突变（≥2°）未排除普通温度响应",
+      "instruction": "补充变温对照设计（相变点上下缓变扫描），说明突变专属性判据",
+      "action": "revise",
+      "target_passage": "scheme §4.1 实验"
+    },
+    {
+      "section": "references",
+      "severity": "high",
+      "issue_type": "citation_quality",
+      "description": "预印本占比过高（约 18/47 条，10+ 条为 2026 年未经同行评议稿），核心创新点论据链脆弱；大量'正式发表状态待核实'过程性残留注记",
+      "instruction": "优先检索替换为已正式发表版本（如 [9] 已见刊 PRL）；清除全部过程性注记与条目内中文阅读注释；无法核实的预印本条目降权或去引用化",
+      "action": "revise",
+      "target_passage": "references.md 全表"
+    },
+    {
+      "section": "全模块",
+      "severity": "medium",
+      "issue_type": "style_norm",
+      "description": "'Year 1-4'英文年度标记 20 处；错字'产额增增强''任意任次式'；'content.md §2.1'类文件名自指密集；立项依据约 2.37 万字超范本 3 倍；正文编号引用 125 次超范本（基准 10-20 次）",
+      "instruction": "年度标记统一'第N年'；修正错字；文件名/节号自指改自然语言；立项依据压缩至 8000 字内聚焦因果链；引用密度收敛（保留关键论断处引用，去除罗列式）",
+      "action": "revise",
+      "target_passage": "rationale/scheme/content/full_review"
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "gaps": [
+    {
+      "claim": "TDDFT方法适用于MnPS₃光致滑移坐标计算的论证（80-100 Ry能量截断基准）",
+      "missing_evidence": "[23]现表为González层移工程文献，非声子收敛计算文献，80-100 Ry基准失锚",
+      "search_keywords": [
+        "MnPS3 phonon first-principles calculation",
+        "MnPS3 plane wave cutoff convergence",
+        "antiferromagnetic monolayer DFT energy cutoff benchmark",
+        "MnPS3 phonon spectrum DFT convergence"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Floquet增强因子≥5的物理可行性与先验量级",
+      "missing_evidence": "无文献支撑Floquet工程可将HHG增强因子提升至≥5量级，先验即目标违反no_exaggeration",
+      "search_keywords": [
+        "Floquet enhancement factor HHG",
+        "light-induced spin splitting enhancement",
+        "Floquet engineering magnetic order amplification",
+        "Yarmohammadi Rashba Floquet enhancement"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "MnPS₃磁序在光激发后ps-ns时间尺度的恢复动力学",
+      "missing_evidence": "L39/L55磁序层ps-ns恢复时间引文指向错误，缺乏MnPS₃族自旋弛豫/进动恢复实测或理论文献",
+      "search_keywords": [
+        "MnPS3 spin relaxation time",
+        "antiferromagnet magnetization recovery dynamics ps-ns",
+        "MnPS3 ultrafast demagnetization recovery",
+        "2D antiferromagnet spin precession recovery"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "滑移驱动类方案在HHG读出量子几何张量方面的创新性（首次声称）",
+      "missing_evidence": "L81'首次'声称缺检索声明，需限定为'在所考察的滑移驱动类方案中'，需检索类似方案已有工作",
+      "search_keywords": [
+        "sliding ferroelectric HHG quantum geometry",
+        "interlayer sliding driven nonlinear optics",
+        "stacking controlled HHG quantum metric",
+        "sliding ferroelectric Berry curvature readout"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

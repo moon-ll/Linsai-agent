@@ -1,0 +1,85 @@
+{
+  "gaps": [
+    {
+      "claim": "Cousin 2017 (PRX) 在水窗能区首次实现阿秒条纹测量，覆盖碳 K 边和氮 K 边的软 X 射线阿秒脉冲及该能区的条纹测量",
+      "missing_evidence": "缺少对 Cousin 等人 PRX 2017 水窗条纹首次实验的精确表述与原始数据的引用支撑，特别是水窗能区条纹测量的定量特征（脉冲宽度322 as、能区覆盖等）的原始文献确认",
+      "search_keywords": [
+        "Cousin attosecond streaking water window Phys Rev X 7041030",
+        "water window attosecond pulse soft X-ray Cousin 2017",
+        "carbon K-edge nitrogen K-edge attosecond streaking first observation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "水窗能区多通道电离导致 FROG-CRAB 反演在 15%/30% 阈值处失效（与 [2] 观测、[7] 定量复现相关的映射表2）",
+      "missing_evidence": "缺少 Cousin 2017 PRX 中多通道电离对 FROG-CRAB 反演失效阈值的原始定量数据；缺少 [7]（Peschel 2022 或同类）所声称的 15%/30% 映射关系的原始文献，因为前两轮已实证该映射是失真挂靠",
+      "search_keywords": [
+        "FROG-CRAB multi-channel ionization failure threshold water window",
+        "Cousin PRX 2017 multichannel error attosecond reconstruction",
+        "attosecond streaking 15% 30% interchannel coupling"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Peschel PRA 94.013411 ([3]) 是量子拍实验验证 /间接证实",
+      "missing_evidence": "缺少对 Peschel 2016 PRA 论文性质的精确引用——该论文是纯理论方案（多通道 TDSE 计算），不是实验验证文献；需要原始论文确认其纯理论性质以支撑跨章一致性",
+      "search_keywords": [
+        "Pabst Dahlstrom 2016 PRA 94 013411 angular integration",
+        "multi-channel TDSE attosecond streaking theoretical",
+        "PANDA attosecond streaking dipole phase theory"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "rACE 神经网络的精度锚点（声称8%-15% 或 8%-10%）",
+      "missing_evidence": "缺少 rACE 神经网络方法在阿秒脉冲反演中的精度基准原始文献，以确认 rACE 在 10% 误差处失效的具体阈值与适用条件",
+      "search_keywords": [
+        "rACE attosecond pulse retrieval neural network accuracy",
+        "Inzani rACE multi-channel limitation threshold",
+        "CNN attosecond streaking reconstruction error baseline"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "L93 处\"典型 0.5%-3%\"误差的具体出处",
+      "missing_evidence": "缺少阿秒瞬态吸收（ATA）或条纹扫描中多通道贡献比例的实验/综述定量范围数据，作为 0.5%-3% 这类典型多通道贡献率的文献支撑",
+      "search_keywords": [
+        "attosecond transient absorption multi-channel contribution percent",
+        "streaking scan multi-electron contribution ratio",
+        "RABBITT two-photon sideband multichannel fraction"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "水窗阿秒脉冲约八倍差距（不同方法学反演之间）的存在",
+      "missing_evidence": "缺少不同阿秒脉冲反演方法在水窗能区产生显著差异（约八倍）的对比研究原始文献，特别是 rACE、PROBP、FROG-CRAB 等方法在同一实验数据下的反演结果对比",
+      "search_keywords": [
+        "attosecond pulse retrieval methods comparison water window",
+        "PROBP rACE FROG-CRAB retrieval difference",
+        "water window attosecond pulse 322 as method dependence"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "跨能区可比性误差<5%（跨靶材包络 RMS 范围）",
+      "missing_evidence": "缺少阿秒脉冲反演在不同能区（EUV vs 水窗 vs 软 X 射线）之间可比性误差的统计基准文献，或不同靶材（Ar/Kr/Ne/N）包络下 RMS 误差范围定义",
+      "search_keywords": [
+        "attosecond pulse retrieval energy region cross-comparison error",
+        "rare gas target envelope RMS retrieval error",
+        "attosecond metrology multi-target systematic error benchmark"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "MoS2 作为阿秒强场基准材料的 bandgap 1.6-1.7 eV",
+      "missing_evidence": "缺少 MoS2 单层直接带隙精确实验值的原始 PL/ARPES 文献，以确认 1.6-1.7 eV 的具体来源",
+      "search_keywords": [
+        "MoS2 monolayer direct bandgap photoluminescence 1.6 1.7 eV",
+        "MoS2 A B exciton energy experimental value",
+        "monolayer MoS2 bandgap ARPES measurement"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "full_review"
+}

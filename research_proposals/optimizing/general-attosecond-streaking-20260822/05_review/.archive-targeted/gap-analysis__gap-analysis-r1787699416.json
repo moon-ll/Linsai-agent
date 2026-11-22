@@ -1,0 +1,44 @@
+{
+  "gaps": [
+    {
+      "claim": "16通道TOF阵列探测器已在多个实验室实现角分辨能力",
+      "missing_evidence": "ghost citation：scheme L71引用'Laurent等, Rev Sci Instrum 2012'但references.md中无此条目；无法独立验证该文献是否真实存在及其具体内容",
+      "search_keywords": [
+        "16 channel TOF angular resolution attosecond streak camera",
+        "TOF array detector angular streaking Rev Sci Instrum",
+        "Laurent attosecond TOF detector Rev Sci Instrum 2012"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "R2角积分方案向常规靶材（氩气、氪气）推广具有可行性",
+      "missing_evidence": "R2角积分方案基于Pabst & Dahlström在量子拍实验中的验证，但向无特定波包制备条件的常规靶材推广缺乏已有实验先例；需独立文献证明角积分在氩气/氪气上的偶极相位压制效率",
+      "search_keywords": [
+        "angular integration dipole phase suppression argon krypton attosecond",
+        "Pabst Dahlstrom angular integration routine target verification",
+        "dipole phase angular average rare gas attosecond streaking experimental"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "软X射线能区（大于409.7 eV）角积分近似失效的物理机制",
+      "missing_evidence": "scheme L59指出'光电子动能超过500 eV时散射相位的非微扰效应主导，角积分近似失效'，但缺乏文献支撑散射相位非微扰效应与角积分失效的直接关联",
+      "search_keywords": [
+        "scattering phase non-perturbative effect high energy photoelectron",
+        "angular integration failure high kinetic energy attosecond streaking",
+        "soft X-ray attosecond streaking scattering phase breakdown"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "双通道TDSE模拟的通道混合度衡量标准（投影算子法）",
+      "missing_evidence": "备选路径A以'通道投影算子衡量通道混合度大于30%'为触发条件，但缺乏文献引用支撑该投影算子的定义与实验测量可行性",
+      "search_keywords": [
+        "channel projection operator multi-channel TDSE ionization",
+        "wavefunction mixing measure multi-channel ionization attosecond",
+        "ionization channel couplingTDSE measurement experimental"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

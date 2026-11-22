@@ -1,0 +1,30 @@
+{
+  "proposal_id": "general-berry-mnps3-rashba-20260816",
+  "cluster_id": "cl_20260815_3994ea",
+  "entries": [
+    {
+      "source_id": "paper:2026-2607.14461-multistate-ferroelectricity-and-switchable-layer-l",
+      "title": "Multistate ferroelectricity and switchable layer-locked anomalous valley Hall effects in bilayer ReIrGe2Se6",
+      "summary": "该文提出双层ReIrGe2Se6作为一种二维多铁性材料，突破了常规铁电的本征双稳态限制，实现了多态铁电性，并展现出可与铁电态耦合切换的层锁定反常谷霍尔效应。这一磁电强耦合与电场可切换的多态谷输运特性为高密度信息存储和低功耗多态谷电子器件提供了理想平台。",
+      "path": "",
+      "added_via": "cluster:cl_20260815_3994ea",
+      "added_at": "2026-08-22T05:40:16Z"
+    },
+    {
+      "source_id": "paper:2026-2505.22392-weak-valley-layer-coupling-and-valley-polarization",
+      "title": "Weak valley-layer coupling and valley polarization in centrosymmetric FeCl₂ monolayer",
+      "summary": "该文通过第一性原理计算揭示了中心对称FeCl₂单层中弱的能谷-层间耦合：能谷极化仅由面外磁化分量诱导且需较强电场才能调控，这与强耦合体系不同。由于两个能谷均主要来源于中央Fe层的贡献，该材料仍可实现电场对能谷性质的调控，为能谷电子学提供了新的材料平台。",
+      "path": "",
+      "added_via": "cluster:cl_20260815_3994ea",
+      "added_at": "2026-08-22T05:40:16Z"
+    },
+    {
+      "source_id": "paper:2607.14461",
+      "title": "Multistate ferroelectricity and switchable layer-locked anomalous valley Hall effects in bilayer ReIrGe2Se6",
+      "summary": "该工作通过第一性原理计算预测了AA'堆叠双层ReIrGe2Se6中存在四种稳定铁电极化构型的多态铁电性（其中三种可通过可逆路径切换），并实现了可电场调控的层锁定反常谷霍尔效应，突破了传统铁电双稳态的限制，为单一材料中实现多态非易失性存储和可编程贝里曲率驱动输运提供了平台。",
+      "path": "",
+      "added_via": "cluster:cl_20260815_3994ea",
+      "added_at": "2026-08-22T05:40:16Z"
+    }
+  ]
+}

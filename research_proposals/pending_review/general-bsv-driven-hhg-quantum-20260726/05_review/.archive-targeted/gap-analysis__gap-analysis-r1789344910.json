@@ -1,0 +1,105 @@
+{
+  "gaps": [
+    {
+      "claim": "Q_F 全景图（QEF 三指标首例交付）由 §2.4 节参数依赖性研究交付，但 §2.4实际不存在该子节",
+      "missing_evidence": "缺乏 BSV 驱动固体 HHG 的 QEF 参数依赖性（压缩度 r、谐波阶次、晶体取向等）系统性扫描实验或理论数据，用以支撑 Q_F 全景图的科学可行性",
+      "search_keywords": [
+        "bright squeezed vacuum HHG parameter dependence",
+        "QEF quantum enhancement factor parameter scan solid HHG",
+        "BSV HHG compression degree harmonic order mapping"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "量子光（BSV）驱动固体高次谐波产生（HHG）中量子增强因子 QEF 的物理定义与可观测量化",
+      "missing_evidence": "缺少 QEF=⟨N²⟩/⟨N⟩²（或等效比率）在固态 HHG 中的实验测量与理论预测文献，特别是与经典光场的对比基准",
+      "search_keywords": [
+        "quantum enhancement factor HHG solid state",
+        "QEF bright squeezed vacuum harmonic generation",
+        "photon statistics enhancement high harmonic yield"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "κ-Br 类有机 Mott 绝缘体的磁场调控相变与高次谐波响应（QEF 在 Mott 边界的行为）",
+      "missing_evidence": "需澄清磁场在 κ-(BEDT-TTF)₂Cu[N(CN)₂]Br 中驱动的是 AF 自旋重取向（约 1 T）而非 Mott 相变（T_MI≈13.6 K 在 10 T 内不随场移）；缺少磁场诱导磁相变对 HHG/QEF 影响的实验/理论工作",
+      "search_keywords": [
+        "kappa-(BEDT-TTF)2Cu[N(CN)2]Br magnetic field spin reorientation",
+        "kappa-Br antiferromagnetic transition high harmonic",
+        "Mott insulator magnetic field HHG response"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "BSV 光源在固体 HHG 实验中的 g(2) 零延迟光子统计可调范围与典型压缩度 r 值（r∈[0.5,1.5]）",
+      "missing_evidence": "缺少 BSV 源在 r∈[0.5,1.5] 区间的 g(2) 与 photon number ⟨N⟩ 实测标定文献，以及 NOPA/OPCPA 级 BSV 源参数窗口数据",
+      "search_keywords": [
+        "bright squeezed vacuum g2 measurement NOPA",
+        "BSV squeezing parameter r range photon number",
+        "noncollinear parametric amplifier BSV calibration"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "固体高次谐波产生中带内（intraband）与带间（interband）电流贡献对压缩光场统计响应的差异化机制",
+      "missing_evidence": "缺少理论文献明确 BSV 量子光场下带内/带间 HHG 电流贡献与 QEF 的耦合关系，特别是 Thorpe/Lewenstein 量子光学 HHG 框架对固体体系的适用性",
+      "search_keywords": [
+        "intraband interband quantum optical HHG current",
+        "Thorpe Lewenstein quantum optics high harmonic solid",
+        "semiconductor Bloch equation squeezed light HHG framework"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "SnS₂ 作为典型多谷/中等关联半导体的带隙与 Hubbard U/W 参数范围，以及对应 HHG 谐波红移量级",
+      "missing_evidence": "缺少 SnS₂ 在 BSV 驱动 HHG 实验条件下的谐波红移、f-sum rule 偏离与 Hubbard U 带宽比标定的文献数据",
+      "search_keywords": [
+        "SnS2 bandgap Hubbard U bandwidth ratio",
+        "SnS2 high harmonic generation redshift",
+        "SnS2 moderate correlation semiconductor HHG"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "BSV 驱动固体 HHG 首例实验观测（特别是 Mg:LiNbO₃、a-Si、ZnO 等体系的量子增强证据）",
+      "missing_evidence": "缺少2024-2026 年 BSV 驱动固体 HHG 实验的首例/Rasputnyi 类工作引用，以及 Even-Tzur/Khurelbaatar/Rivera-Dean 量子光 HHG 理论预测的对照数据",
+      "search_keywords": [
+        "Rasputnyi BSV solid HHG Mg:LiNbO3 a-Si",
+        "Even Tzur quantum enhancement factor HHG theory",
+        "Khurelbaatar Rivera-Dean quantum light HHG prediction"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "BSV 的光子数校准方法（heralding protocol、单模近似与混合态修正）",
+      "missing_evidence": "缺少实验端 BSV 光子数 P(n) 分布测量、idler heralding 与探测器效率修正的标准协议文献",
+      "search_keywords": [
+        "BSV photon number calibration heralding",
+        "bright squeezed vacuum P(n) distribution measurement",
+        "single-mode approximation BSV detection efficiency"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Lange 等关于压缩光驱动 Mott 绝缘体高次谐波红移的理论预测",
+      "missing_evidence": "缺少强关联体系（Mott 绝缘体、cuprate Sr₂CuO₃ 等）在压缩光下的 HHG 谐波红移与 doublon-holon 激发的理论/预印本文献",
+      "search_keywords": [
+        "Lange Mott insulator compressed light HHG redshift",
+        "Sr2CuO3 squeezed light high harmonic",
+        "doublon holon quantum light HHG"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "QEF 95% 置信区间的统计推断方法在 HHG 实验中的可行性与先例",
+      "missing_evidence": "缺少 HHG 量子光实验中统计置信区间、效应量（Cohen's d/Fisher 信息）报告的统计学方法论先例文献",
+      "search_keywords": [
+        "HHG quantum enhancement confidence interval statistics",
+        "Fisher information effect size harmonic generation",
+        "photon statistics significance testing HHG"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

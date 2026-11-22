@@ -1,0 +1,17 @@
+{
+  "gaps": [
+    {
+      "claim": "§3.5 L81 中参考文献 [45] 在 references.md 条目内含 DOI（PRB 112, 075306, 2025），正文仍标注为\"预印本\"，属于发表状态标注错误；更关键的是全章预印本引用 14/44≈31.8%，已超过预设的 30% 红线（属 evidence 不足）",
+      "missing_evidence": "[15][25][28][29][32] 等核心引用的发表状态未逐一核实；缺少将预印本替换为同主题已刊版本（带 DOI、卷期页码）的检索与替换操作；最终须使预印本数 ≤13 条（即 44 条总量下 ≤30%）",
+      "search_keywords": [
+        "MnPS3 high harmonic generation Physical Review B published",
+        "Rashba spin splitting Floquet antiferromagnetic published version",
+        "transition metal thiophosphate THz spin resonance 2024 2025 DOI",
+        "two-color laser spin orbit coupling semiconductor peer-reviewed",
+        "nonlinear optics antiferromagnet spintronics published 2024"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "scheme"
+}

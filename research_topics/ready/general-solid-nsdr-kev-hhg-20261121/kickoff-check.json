@@ -1,0 +1,78 @@
+{
+  "topic_id": "general-solid-nsdr-kev-hhg-20261121",
+  "stage": "ready",
+  "passed": true,
+  "results": [
+    {
+      "code": "A1",
+      "name": "背景调研充分",
+      "passed": true,
+      "evidence": {
+        "note_files": 9,
+        "recent_count": 9,
+        "recent_year_floor": 2024,
+        "kb_wikilinks": 65
+      },
+      "gaps": []
+    },
+    {
+      "code": "A2",
+      "name": "问题定位清晰",
+      "passed": true,
+      "evidence": {
+        "problem_md": true,
+        "statement": true,
+        "novelty_section": true,
+        "novelty_score": 0.1366
+      },
+      "gaps": []
+    },
+    {
+      "code": "A3",
+      "name": "方案分解明确",
+      "passed": true,
+      "evidence": {
+        "scheme_md": true,
+        "steps": 7,
+        "all_steps_criteria": true,
+        "first_month": true,
+        "methods_pack": true
+      },
+      "gaps": []
+    },
+    {
+      "code": "A4",
+      "name": "参考文献真实",
+      "passed": true,
+      "evidence": {
+        "bib": true,
+        "entries": 23,
+        "with_source": 23,
+        "cited": 10,
+        "dangling": []
+      },
+      "gaps": []
+    },
+    {
+      "code": "G1",
+      "name": "篇幅约束",
+      "passed": true,
+      "evidence": {
+        "report_chars": 6843,
+        "limit": 8000
+      },
+      "gaps": []
+    },
+    {
+      "code": "G2",
+      "name": "关联明确",
+      "passed": true,
+      "evidence": {
+        "related_field": true,
+        "wikilinks": 5
+      },
+      "gaps": []
+    }
+  ],
+  "gaps": []
+}

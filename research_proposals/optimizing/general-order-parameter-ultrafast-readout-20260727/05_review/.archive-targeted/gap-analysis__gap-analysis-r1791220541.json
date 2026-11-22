@@ -1,0 +1,50 @@
+{
+  "gaps": [
+    {
+      "claim": "scheme §三.3 L85 引用 Yu 等人关于 order parameter 超快读出的核心方法/结论，作为高重频档与低重频档衔接的关键支撑",
+      "missing_evidence": "评审已确认 Yu 等人已正式发表于 npj Quantum Materials（[45] CrossRef 标题探测命中正式版），但 scheme 中 [45] 仍可能为预印本/arXiv 形式，需补全正式出版信息（卷期页码、DOI、年份），并将引用版本切换为正式发表版",
+      "search_keywords": [
+        "Yu et al npj Quantum Materials order parameter",
+        "Yu npj Quantum Materials high harmonic readout",
+        "Yu ultrafast symmetry breaking Quantum Materials doi"
+      ]
+    },
+    {
+      "claim": "温度趋势旁证第三子判据——200 K 上下各 ≥3 温度点扫描、跨相变谱偏移方向作为外部锚点（第三子判据）",
+      "missing_evidence": "L77 缺少 [6] 引用作为外部锚点支撑跨相变谱偏移方向；当前 [6] 仅存在于 content G1（L7/L27），scheme 实施层未引用，导致方案与立项第一判据口径脱节（content §一.3 L47 注\"口径见 §一.3\"指向无此内容处）",
+      "search_keywords": [
+        "phase transition spectral shift 200 K temperature dependence",
+        "order parameter temperature sweep symmetry breaking",
+        "相变 温度扫描 谱偏移 阶参量 200 K 跨相变"
+      ]
+    },
+    {
+      "claim": "scheme §三.3 L63 低重频档场强参数 0.3—0.8 V/Å（横跨 γ 端点 0.205/0.948、光子能量 0.248—0.413 eV、SBE 窗口与损伤预案的枢纽参数）",
+      "missing_evidence": "评审反推表明 1—2 mJ × 100 µm 焦斑与 0.3—0.8 V/Å 在 50—200 fs 全脉宽下不闭合（超限 3—8 倍）。该参数区间为整个方案挂靠枢纽，缺少对该场强区间物理合理性/常规工作区间（如典型固体 HHG 实验场强标定）的同行文献基准作为支撑，需补充场强区间选取的实验先例文献",
+      "search_keywords": [
+        "solid high harmonic generation driving field strength V/Angstrom",
+        "crystal HHG low repetition mJ focal spot field calibration",
+        "固体高次谐波 驱动场强 标定 V/Å 焦斑"
+      ]
+    },
+    {
+      "claim": "scheme §三.3 L63 高重频档\"低场强端\"描述（10—30 μJ × 30—50 µm 焦斑反推得 14—57 V/Å）",
+      "missing_evidence": "高重频档描述为\"低场强端\"与反推数值（14—57 V/Å）严重不符，缺少对该档位实际场强区间及与低重频档比例关系的对比文献支撑；需补充高重频/低能量 HHG 实验中场强标定的同行先例，以建立两档场强衔接的物理合理性",
+      "search_keywords": [
+        "high repetition rate low fluence HHG experiment V/Angstrom",
+        "high repetition kHz HHG driving field weak",
+        "高重频 弱场 高次谐波 驱动场强 实验"
+      ]
+    },
+    {
+      "claim": "scheme §三.4 L111\"量级在合理区间内交叉核对\"判据（与 content §二.6 G2 互不替代、第 4 年独立出口、量级偏差 ≤ 10 倍）",
+      "missing_evidence": "L111 量化边界（≤ 10 倍偏差、第 4 年档、与 G2 互不替代）需明确引用支撑判据合理性的方法学文献或前序工作，缺少对\"量级一致性\"判定标准的出处引用（即该阈值来自何处）",
+      "search_keywords": [
+        "order of magnitude cross check high harmonic theory experiment",
+        "scale consistency criterion ultrafast spectroscopy validation",
+        "量级 一致性 判据 高次谐波 理论 实验 对比"
+      ]
+    }
+  ],
+  "section": "scheme"
+}

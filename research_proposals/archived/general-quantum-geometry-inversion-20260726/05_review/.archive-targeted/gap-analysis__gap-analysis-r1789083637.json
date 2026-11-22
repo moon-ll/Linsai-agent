@@ -1,0 +1,74 @@
+{
+  "gaps": [
+    {
+      "claim": "跨章节冗余：'失败时仍可交付'句在rationale/content/scheme三章复述（§问题清单 P0）",
+      "missing_evidence": "缺少对'失败时仍可交付'这一退守路径的唯一规范化表述来源，例如 NSFC 评审指南中关于 plan B 失败出口的范式或已有成功申请范本中的同类条款",
+      "search_keywords": [
+        "NSFC general proposal failure exit strategy",
+        "plan B fallback research proposal",
+        "失败出口 退守路径 申请书"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.1 嵌入式引用密集（9 处文献集中于一段：Berry 1984 [30]、Provost-Vallee 1980 [40]、Sodemann-Fu [50]、Han [10]、Xiang-Jin-Wang [45]、Cui-Xiang-Xu-Wang [51] 等）",
+      "missing_evidence": "缺少将'Berry 联络→量子度规→非线性响应'链条上的关键实验/数值验证落地的具体文献（即'谁在哪本期刊上测得了什么量'），现有引用多为理论奠基，缺乏近 5 年标志性实验工作锚定",
+      "search_keywords": [
+        "quantum metric nonlinear optical response experiment 2023 2024",
+        "Berry curvature high harmonic measurement Luu Wörner",
+        "Sodemann Fu quantum geometry nonlinear response review"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "R3' 与 a-Si 耦合阈值 10⁻⁵ 缺独立预研（可行性维度扣分点）",
+      "missing_evidence": "缺少 BSV 与非晶硅（a-Si）耦合产生高次谐波的独立预研数据，特别是阈值量级 10⁻⁵ 的实验来源或理论估算",
+      "search_keywords": [
+        "amorphous silicon high harmonic generation threshold",
+        "a-Si BSV squeezed light HHG",
+        "Rasputnyi BSV Mg:LiNbO3 a-Si HHG 2024"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "content.md §2.6 年度计划内容与 scheme.md §1.2 重复近 90%（跨章冗余）",
+      "missing_evidence": "缺少对年度计划阶段化产出的 NSFC 官方/范本参考，导致两章表述相互复述而非互补",
+      "search_keywords": [
+        "NSFC research plan annual milestones",
+        "面上基金 年度计划 阶段产出 范本"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "总体方案（§1）过简仅 2 段，可行性分析缺失（仅 §6 风险清单代替）",
+      "missing_evidence": "缺少对研究方案整体可行性论证的范本支撑文献（如同类强场+量子光+反问题的成功 NSFC 案例的方法学总论）",
+      "search_keywords": [
+        "NSFC feasibility analysis ultrafast optics",
+        "attosecond spectroscopy inverse problem proposal",
+        "强场 阿秒 反问题 可行性论证"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§2.1 四方向平行陈述后未即时收束于'本项目因此能在 X 处提供 Y'的核心机制断言",
+      "missing_evidence": "缺少强场反演领域'工具建立→谱学验证→边界检验→方法推广'四阶段递进范式的代表性综述作为收束依据",
+      "search_keywords": [
+        "attosecond spectroscopy inverse problem review 2024 2025",
+        "high harmonic generation retrieval methodology review",
+        "强场反演 阿秒光谱学 方法学综述"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "references.md 52 条超 30-40 标杆 12 条仍存在（严谨性扣分）",
+      "missing_evidence": "缺少 NSFC 面上基金参考文献数量的最新指南或评审专家共识（30-40 条 vs 50+ 条的可接受性边界）",
+      "search_keywords": [
+        "NSFC reference number limit general program",
+        "面上基金 参考文献数量 评审标准",
+        "NSFC proposal references guideline 2024 2025"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "full_review"
+}

@@ -1,0 +1,18 @@
+{
+  "gaps": [
+    {
+      "claim": "高次谐波圆二色信号主要来自磁偶极和电四极通道与电偶极通道的干涉，且这些通道的相对幅值远低于电偶极吸收。",
+      "missing_evidence": "需要补充可核查的定量文献依据，说明磁偶极、尤其电四极跃迁或辐射通道相对于电偶极通道的典型幅值或跃迁矩比值，并给出约10^-3量级的适用体系、计算或实验条件及出处；同时应由原始研究或权威理论文献支撑“CD主要源于两类非电偶极通道干涉”的机制判断。",
+      "search_keywords": [
+        "molecular high harmonic generation circular dichroism magnetic dipole electric quadrupole ratio",
+        "HHG chiral molecule magnetic dipole electric quadrupole transition strength",
+        "orientation-averaged molecular HHG circular dichroism multipole contribution",
+        "electric quadrupole magnetic dipole contribution relative to electric dipole high harmonic generation",
+        "分子高次谐波 圆二色 磁偶极 电四极 电偶极 幅值比",
+        "气相取向平均 高次谐波手性 多极矩 贡献"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "rationale"
+}

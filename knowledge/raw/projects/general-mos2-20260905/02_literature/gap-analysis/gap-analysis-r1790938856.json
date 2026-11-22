@@ -1,0 +1,60 @@
+{
+  "gaps": [
+    {
+      "claim": "近共振窗口下 HHG 抑制的物理机制归属（双光子载流动量散射 vs 激子布居）——Peterka[15] 原文区分两种情形，但申请书未引证区分依据",
+      "missing_evidence": "需要 Peterka[15] 原文对两种机制（共振激子布居主导 vs 近共振双光子载流子散射主导）的实验或理论区分证据，以及后续工作中关于判据可分离性的方法学支撑",
+      "search_keywords": [
+        "Peterka two-color HHG MoS2 exciton dichroism",
+        "two-photon carrier momentum scattering near-resonance suppression",
+        "exciton population versus two-photon absorption HHG",
+        "dichroism mechanism separability criterion high harmonic"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "[31] arXiv:2604.11984 预印本中缠绕数—谐波阶数关系可类比映射到本项目 Ω(k) 反演（缺少论证桥接）",
+      "missing_evidence": "需要同行评审文献支持缠绕数—谐波阶数与 Berry 曲率 Ω(k) 反演之间的类比合法性；目前仅引一篇预印本，未标注预印本身份，缺乏方法学先例或理论框架支撑",
+      "search_keywords": [
+        "winding number harmonic order topological characterization",
+        "Berry curvature reconstruction from HHG spectrum",
+        "topological invariants high harmonic generation twisted",
+        "Ω(k) inversion harmonic spectrum Berry phase"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "参考文献清单中 [2][5][6][7][18][36] 六条文献未在正文挂引，需明确其在 §2.1—§2.6 哪一处支撑何种论断",
+      "missing_evidence": "需核对这六条文献的主题与正文论点的对应关系；若保留则须补引；若为冗余则须从参考文献列表删除；references 年份字段出现 '2054'×2 疑为笔误亦需核查",
+      "search_keywords": [
+        "twisted MoS2 WSe2 heterostructure HHG",
+        "momentum scattering carrier high harmonic",
+        "exciton resonance second harmonic MoS2",
+        "Berry curvature twisted bilayer transition metal dichalcogenide"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "失谐 Δℏω=±50/±100 meV 与 A 激子共振能量 E_A 的参照关系（§2.1 末段、§2.2），需要可操作定义及双光子合频失谐分界的文献依据",
+      "missing_evidence": "需要文献给出 E_A 精确值、激子共振展宽（典型几 meV—几十 meV）以及双色场下双光子合频失谐的常规取值范围，作为 ±50/±100 meV 选点的物理合理性支撑",
+      "search_keywords": [
+        "A exciton energy MoS2 monolayer",
+        "exciton resonance linewidth broadening twisted heterostructure",
+        "two-photon sum frequency detuning HHG dichroism",
+        "two-color HHG detuning near exciton resonance"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§2.3 中 M_z(t) 作为反演输出的物理定义、精度阈值与基准——评审指出三基准与目标一至七均无其指标",
+      "missing_evidence": "需要文献给出磁化动力学 M_z(t) 在亚飞秒—百阿秒时间尺度的实验测量精度或理论反演分辨率，作为设定 Δt≤100 as 时间步长下指标可达性的依据",
+      "search_keywords": [
+        "magnetization dynamics attosecond resolution",
+        "M_z sub-femtosecond demagnetization HHG",
+        "all-optical magnetization probe high harmonic",
+        "spin dynamics twisted transition metal dichalcogenide"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "content"
+}

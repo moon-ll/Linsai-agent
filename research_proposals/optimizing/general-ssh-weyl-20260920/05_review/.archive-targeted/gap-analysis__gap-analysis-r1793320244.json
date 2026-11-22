@@ -1,0 +1,16 @@
+{
+  "gaps": [
+    {
+      "claim": "S:L11 关于 Li 等人预印本工作的论述需要通过统一的“[8]”角标关联至参考文献表；当前直接内联“arXiv:2604.06051”，绕过了现有编号体系。",
+      "missing_evidence": "该预印本可核验的完整书目信息，包括作者、题名、arXiv 编号、提交或修订日期及预印本状态，并需建立正文论断与参考文献[8]之间明确的对应关系。",
+      "search_keywords": [
+        "arXiv:2604.06051",
+        "\"2604.06051\" Li",
+        "Li general SSH Weyl 2026 preprint",
+        "SSH Weyl Li arXiv 2026"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "full_review"
+}

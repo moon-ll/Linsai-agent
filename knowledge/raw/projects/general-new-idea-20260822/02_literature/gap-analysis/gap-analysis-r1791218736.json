@@ -1,0 +1,62 @@
+{
+  "gaps": [
+    {
+      "claim": "§2.5 目标 1：以 Krempaský 等人[7]的 MnTe ARPES 数据作为\"Γ–M 方向价带色散 E(k) 逐点相对偏差 ≤10%\"的外部对照基准",
+      "missing_evidence": "现有引用 [7]（Krempaský Nature 2024）实为 SARPES 自旋劈裂测量，并非 ARPES 价带色散数据，无法支撑\"逐点 E(k) 偏差对照\"这一论点；缺少可作为价带色散逐点对照基准的 ARPES 色散实验文献，需替换为 Osumi[13] 的 ARPES 色散数据或在 [7] 框架下明确改为\"劈裂峰值\"对照口径",
+      "search_keywords": [
+        "MnTe ARPES valence band dispersion",
+        "antiferromagnetic semiconductor band structure",
+        "Osumi MnTe ARPES",
+        "MnTe Γ-M direction dispersion",
+        "spin-splitting peak ARPES"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.5 目标 3：奈尔矢量取向精度 ±10° 与 TN 标定精度 ±3 K 两项可检验量化指标",
+      "missing_evidence": "方案 §5.3 中\"±10°\"、\"δ\"、\"±3 K\"均零命中，未给出判据依据；缺少磁各向异性 / 奈尔矢量方向测量精度的实验文献支撑，以及 SQUID/VSM 测 TN 温控精度 ±3 K 的方法学文献支撑",
+      "search_keywords": [
+        "Néel vector orientation accuracy antiferromagnet",
+        "SQUID magnetometer Neel temperature precision",
+        "MnTe Neel temperature measurement",
+        "antiferromagnetic domain orientation accuracy",
+        "TN determination accuracy magnetometry"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.6 科学问题 1 第 2 段：具名论述 Krempaský 关于动量依赖自旋劈裂的物理图像",
+      "missing_evidence": "句中以 Krempaský 具名引用但无 [N] 角标挂载，全章其余具名引用均挂 [N]（如 Osumi[13]、Usanov[14]），体例不一致；需补充 [7] 角标以提供文献溯源",
+      "search_keywords": [
+        "Krempaský Nature 2024 MnTe",
+        "momentum-dependent spin splitting MnTe",
+        "SARPES MnTe antiferromagnet"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§2.5 目标 2：顺磁相偶次谐波阈值\"< 1%（或\"低于 1%\"）作为可检验量化指标",
+      "missing_evidence": "阈值被标注为\"暂定不低于 1% 待预计算更新\"，未给出文献先验依据；缺少高次谐波偶次谐波抑制率/对称性破缺残余分量的定量文献（如反演对称体系中偶次谐波本底水平、HHG 选择规则残留强度），无法支撑 1% 量级的合理性",
+      "search_keywords": [
+        "even-order harmonic suppression centrosymmetric",
+        "HHG inversion symmetry breaking threshold",
+        "偶次谐波 反演对称 抑制比",
+        "second harmonic generation centrosymmetric background",
+        "even harmonic residual ratio HHG"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§2.5 目标 4：HHG 信号 SNR≥3:1 与\"不少于 3 个温度点\"的信号采集质量与温度分辨率指标",
+      "missing_evidence": "目标 4 整段复述 §2.3，无独立量化指标；缺少高次谐波实验 SNR 行业惯例/标准的文献支撑，以及磁性体系 HHG 温度依赖测量中温度采样间隔（3 点以上）的物理依据文献",
+      "search_keywords": [
+        "high harmonic generation SNR standard",
+        "HHG signal-to-noise ratio experimental",
+        "magnetic HHG temperature dependence sampling",
+        "temperature-dependent HHG measurement protocol"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

@@ -1,0 +1,52 @@
+{
+  "gaps": [
+    {
+      "claim": "[22] 文献在正文 L19 仍标为预印本，但其已以 Adv. Phys. 74, 1 (2025) 正式发表（DOI 10.1080/00018732.2025.2598130），需引用其作为 HHG 反演能带几何的 2025 年综述而非预印本",
+      "missing_evidence": "Ciappina 等关于 HHG 反演能带几何（含 Berry 曲率、拓扑不变量）方法学地位的正式综述版本，需以 published review 形式引用并据此综述凝聚方法学共识与已发表基线结果",
+      "search_keywords": [
+        "Ciappina HHG Berry curvature review",
+        "high harmonic spectroscopy topological band geometry review",
+        "Advances in Physics HHG topological materials 2025",
+        "Luu Wörner alpha-quartz Berry curvature circular dichroism"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "闭合条件 σ₀/σ_full<0.05（L43/L65/L81）作为分方向成功判定阈值，但 σ₀ 全文未定义，计算式留白，第三方无法复算",
+      "missing_evidence": "σ₀ 作为因素分解残差截面占比的统一定义式，需引用 HHG 多因素分解（multi-factor decomposition）或 HHG 通道解耦方法学文献以确立 σ₀ 的物理含义与已发表的数值基准",
+      "search_keywords": [
+        "HHG factor decomposition residual cross section",
+        "multi-channel HHG spectral decomposition method",
+        "HHG signal separation orthogonal basis",
+        "high harmonic generation channel decoupling"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "方向一至四的阈值定标（L21/33/53）涉及统计涨落上界自检、30 fs 选为周期三分之一、100 倍对数标尺换算、L69 降级路径——这些具体数值选择需要已发表方法学依据",
+      "missing_evidence": "中红外驱动 HHG 实验中关于（1）统计涨落上界的常规界定方法；（2）30 fs 脉宽作为亚周期/多周期分界的已发表依据；（3）HHG 谐波阶强度跨越 100 倍量级的动态范围标定惯例——三项均需引文献支撑以排除自设阈值嫌疑",
+      "search_keywords": [
+        "mid-infrared HHG statistical fluctuation bound",
+        "HHG sub-cycle multi-cycle 30 fs pulse criterion",
+        "high harmonic dynamic range intensity log scale",
+        "HHG signal-to-noise ratio threshold convention",
+        "few-cycle mid-IR driver HHG pulse duration criterion"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "方向一/二阈值链挂三条预印本——[20] Kagome、[13] Lange、[12] Liu，正文预印本引用占 10/21=47.6% 超 30% 红线",
+      "missing_evidence": "三条阈值链各自需配已刊基线作锚定：（a）Kagome 体系高阶拓扑绝缘体 HHG 已发表的阈值/阶数特征；（b）Lange 等关于拓扑/SSH 类边界态 HHG 的已刊结果；（c）Liu 等关于 Weyl 半金属 HHG 阈值链的正式发表版本——任一缺则该阈值链缺乏已刊锚点，结论可重复性受质疑",
+      "search_keywords": [
+        "Kagome high-order topological insulator HHG",
+        "SSH edge state high harmonic generation published",
+        "Weyl semimetal HHG threshold published",
+        "topological material HHG order-dependence",
+        "Lange topological HHG Weyl semimetal",
+        "Liu Weyl HHG high harmonic"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "content"
+}

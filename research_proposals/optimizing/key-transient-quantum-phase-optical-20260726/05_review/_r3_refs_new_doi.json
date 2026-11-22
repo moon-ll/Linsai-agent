@@ -1,0 +1,79 @@
+{
+ "stats": {
+  "total": 45,
+  "dagger_ids": [
+   4,
+   11,
+   12,
+   19,
+   25,
+   27,
+   29,
+   32,
+   34,
+   36,
+   40,
+   41
+  ],
+  "recent": "33/45"
+ },
+ "checks": {
+  "44": {
+   "doi": "10.1038/s41586-019-1840-9",
+   "cr": {
+    "title": "Prediction and observation of an antiferromagnetic topological insulator",
+    "journal": "Nature",
+    "first3": [
+     "Otrokov",
+     "Klimovskikh",
+     "Bentmann"
+    ],
+    "year": 2019,
+    "vol": "576",
+    "page": "416-422"
+   }
+  },
+  "45": {
+   "doi": "10.1103/PhysRevB.92.245410",
+   "cr": {
+    "title": "Hall quantization and optical conductivity evolution with variable Berry phase in the<mml:math xmlns:mml=\"http://www.w3.org/1998/Math/MathML\"><mml:mrow><mml:mi>α</mml:mi><mml:mtext>−</mml:mtext><mml:msub><mml:mi>T</mml:mi><mml:mn>3</mml:mn></mml:msub></mml:mrow></mml:math>model",
+    "journal": "Physical Review B",
+    "first3": [
+     "Illes",
+     "Carbotte",
+     "Nicol"
+    ],
+    "year": 2015,
+    "vol": "92",
+    "page": "245410"
+   }
+  },
+  "35": {
+   "doi": "10.1103/vcxm-dr2g",
+   "cr": {
+    "title": "Wilson loop invariants and bulk-boundary correspondence in higher-order topological insulators with anticommuting mirror symmetries",
+    "journal": "Physical Review B",
+    "first3": [
+     "Aich",
+     "Seradjeh"
+    ],
+    "year": 2026,
+    "vol": "114",
+    "page": "065133"
+   }
+  },
+  "38": {
+   "doi": "10.1103/lwpl-brrr",
+   "cr": {
+    "title": "Dynamical Breaking of Inversion Symmetry, Strong Second Harmonic Generation, and Nonequilibrium Ferroelectricity with Nonlinear Phonons",
+    "journal": "Physical Review Letters",
+    "first3": [
+     "Kiselev"
+    ],
+    "year": 2026,
+    "vol": "137",
+    "page": "106903"
+   }
+  }
+ }
+}

@@ -1,0 +1,67 @@
+{
+  "gaps": [
+    {
+      "claim": "反演精度指标 ±0.05 eV、±10°、δ_TN ≤ ±3 K 的来源依据与文献支撑缺失",
+      "missing_evidence": "缺少对应反演精度阈值（能量 0.05 eV、角度 10°、温度 3 K）在量子几何反演或 HHG 光谱反演领域的实验/理论先例文献",
+      "search_keywords": [
+        "inverse problem precision Berry curvature",
+        "HHG inversion accuracy threshold",
+        "quantum geometry retrieval error bound",
+        "high harmonic spectroscopy reconstruction precision"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "通道分离测量在文中存在5种名目变体（术语不一致）",
+      "missing_evidence": "缺少对通道分离测量方法的标准术语统一文献（channel decomposition / orthogonal basis / multi-channel decoupling / signal separation / sub-cycle multi-cycle）",
+      "search_keywords": [
+        "HHG channel separation method",
+        "high harmonic multi-channel decoupling",
+        "HHG orthogonal basis decomposition",
+        "interband intraband channel separation HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "自引密度 63 处 vs 范本 10-17 处，反弹超标（约 3 倍）",
+      "missing_evidence": "缺少最新第三方文献对磁序三分类（d-wave/g-wave/i-wave altermagnet）、SOC 判据、椭圆率/螺旋度区分机制的支持",
+      "search_keywords": [
+        "d-wave g-wave i-wave altermagnet 2024 2025",
+        "altermagnet HHG fingerprint experimental",
+        "SOC spin splitting altermagnet classification",
+        "ellipticity helicity high harmonic generation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "骨架表'文献编号 1–32'与实文 [N]=31 矛盾",
+      "missing_evidence": "缺少对参考文献数量与正文引用编号一致性的核对",
+      "search_keywords": [
+        "references consistency check",
+        "citation numbering cross-reference"
+      ],
+      "priority": "low"
+    },
+    {
+      "claim": "MoS₂ 判据句五现→§1 定义点 1 处+指针 6 处，数值残留",
+      "missing_evidence": "缺少 MoS₂ 判据在 §1 唯一定义后其余6 处指针的支撑文献",
+      "search_keywords": [
+        "MoS2 high harmonic generation selection rule",
+        "MoS2 monolayer HHG criterion",
+        "transition metal dichalcogenide HHG"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "μJ 端点换算句一句内二现",
+      "missing_evidence": "缺少驱动激光能量换算（0.15-2.4 μJ）对应场强/焦斑参数的独立文献支撑",
+      "search_keywords": [
+        "solid HHG driving pulse energy muJ",
+        "mid-infrared driver energy fluence HHG",
+        "solid high harmonic generation pulse energy range"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "full_review"
+}

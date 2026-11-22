@@ -1,0 +1,39 @@
+{
+  "gaps": [
+    {
+      "claim": "TMDC莫尔体系HHG椭圆度依赖的理论（§2.1 L5引用[8]声称Mrudul等2024年TMDC莫尔HHG椭偏依赖理论）",
+      "missing_evidence": "[8]条目实际是TBG（石墨烯）体系，作者串疑似虚构；缺少TMDC莫尔HHG椭圆度依赖的真正理论文献",
+      "search_keywords": [
+        "TMDC moire high harmonic generation ellipticity",
+        "transition metal dichalcogenide moire HHG circular polarization",
+        "TBG moire high harmonic elliptical dependence Mrudul 2024",
+        "Mrudul moire high harmonic 2024",
+        "MoS2 WSe2 moire HHG ellipticity theory"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Mrudul等2024年TMDC莫尔HHG椭圆度依赖理论",
+      "missing_evidence": "作者串可能虚构，且TBG（石墨烯）与TMDC是两类不同体系，文献张冠李戴；需要核实Mrudul 2024真实作者及内容",
+      "search_keywords": [
+        "Mrudul 2024 moire high harmonic",
+        "Mrudul 2024 twisted bilayer high harmonic",
+        "TBG HHG ellipticity theory 2024",
+        "moire superlattice high harmonic elliptical dependence"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "关联能隙口径分裂问题（§2.1 L19 5–10 meV vs L60 5–20 meV）相关文献支撑",
+      "missing_evidence": "需要核实莫尔超晶格关联能隙典型实验值的真实范围，特别是5–20 meV这一说法的原始实验来源",
+      "search_keywords": [
+        "moire superlattice correlated insulator gap meV",
+        "magic angle twisted bilayer graphene correlated gap experimental",
+        "TBG correlated insulator gap measurement",
+        "tWSe2 tMoS2 Mott insulator gap meV",
+        "moire superlattice interaction energy scale experimental"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

@@ -1,0 +1,95 @@
+{
+  "gaps": [
+    {
+      "claim": "BSV场与固体能带耦合在Mg:LiNbO₃与非晶硅a-Si中已由Rasputnyi等以10²–10³倍产额提升确证",
+      "missing_evidence": "缺少Rasputnyi等关于BSV驱动固体HHG产额提升10²–10³倍的原始实验文献细节,以及Mg:LiNbO₃与a-Si两种体系的对比数据",
+      "search_keywords": [
+        "Rasputnyi bright squeezed vacuum solid HHG",
+        "BSV driven high harmonic generation Mg:LiNbO3 a-Si",
+        "squeezed light HHG 10^2 10^3 enhancement solid state"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "1T-TaS₂谐波红移中Mott与CDW序参量分量混叠问题需要可区分信号设计",
+      "missing_evidence": "缺少1T-TaS₂中Mott绝缘体相与CDW相序参量对HHG红移贡献分离的实验或理论文献,以及偏振依赖测量区分各向同性与各向异性分量的方法学参考",
+      "search_keywords": [
+        "1T-TaS2 Mott CDW high harmonic generation",
+        "harmonic redshift order parameter separation TaS2",
+        "polarization dependent HHG CDW symmetry breaking"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "TiSe₂相变点偏振各向异性突变≥2°作为CDW序参量探针",
+      "missing_evidence": "缺少TiSe₂相变点HHG偏振各向异性突变的原始实验文献,以及2H-TaS₂等同结构非CDW材料的对照实验数据用于排除普通温度响应",
+      "search_keywords": [
+        "TiSe2 high harmonic generation polarization anisotropy",
+        "2H-TaS2 high harmonic polarization reference",
+        "TiSe2 CDW phase transition HHG experimental"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "R1中BSV→CDW迁移性由对照实验检验的框架设计",
+      "missing_evidence": "缺少BSV驱动HHG方法从a-Si/Mg:LiNbO₃等宽带隙体系向CDW材料(如1T-TaS₂、TiSe₂)迁移的可行性论证文献,特别是BSV-序参量耦合的已有理论研究",
+      "search_keywords": [
+        "bright squeezed vacuum CDW material high harmonic",
+        "BSV driven HHG charge density wave order parameter",
+        "quantum light CDW ultrafast spectroscopy"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "R3'中Fisher信息比R_{Ω,g}^{Si/ZnO}≥2作为反演可识别性判据",
+      "missing_evidence": "缺少Fisher信息矩阵在HHG反演问题中作为参数可识别性判据的方法学文献,特别是R≥2阈值的统计意义依据",
+      "search_keywords": [
+        "Fisher information high harmonic inversion",
+        "Fisher information condition number attosecond spectroscopy",
+        "parameter identifiability HHG retrieval Fisher"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "R3'中后验协方差收缩比R_{Ω,g}^{CDW}≥2作为贝叶斯反演精度指标",
+      "missing_evidence": "缺少贝叶斯反演框架在HHG谱学中应用的后验协方差收缩比量化文献,以及CDW序参量反演的先验-后验误差传播基准",
+      "search_keywords": [
+        "Bayesian inversion high harmonic spectroscopy posterior",
+        "posterior covariance shrinkage HHG reconstruction",
+        "Bayesian parameter estimation attosecond spectroscopy"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "HMG-Schema-1.0数据标准化字段相对于现有NEwwave schema的差异点和增益",
+      "missing_evidence": "缺少NEwwave等现有HHG数据schema的字段定义文献,以及跨课题组HHG数据复现对标准化字段需求的论证文献",
+      "search_keywords": [
+        "NEwwave high harmonic data schema",
+        "HHG data standardization FAIR",
+        "open data format attosecond spectroscopy metadata"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "ZnO 5/7阶谐波偏差5%作为SBE模型基线精度基准",
+      "missing_evidence": "缺少ZnO高次谐波5阶、7阶产额与半导体布洛赫方程(SBE)预测偏差的实验定量数据文献",
+      "search_keywords": [
+        "ZnO high harmonic generation 5th 7th order SBE comparison",
+        "ZnO HHG semiconductor Bloch equation benchmark",
+        "solid-state HHG odd harmonic order experimental ZnO"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "BSV场g(2)光子统计与SBE interband coupling饱和条件的参数域边界",
+      "missing_evidence": "缺少BSV压缩参数r与g(2)值在SBE框架下导致interband coupling饱和的定量边界文献",
+      "search_keywords": [
+        "BSV squeezing parameter interband coupling saturation",
+        "squeezed light SBE breakdown threshold solid HHG",
+        "g2 photon statistics semiconductor Bloch equation strong field"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

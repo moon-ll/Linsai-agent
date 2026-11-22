@@ -1,0 +1,125 @@
+{
+  "gaps": [
+    {
+      "claim": "rationale §1.4 国内研究现状的代表性工作缺乏独立 PI 单位明示（Sheng/Werner/Rajpurohit团队归属模糊）",
+      "missing_evidence": "缺少国内独立完成的代表性工作的可核实单位标注（中科院半导体所 hh-BN 滑移铁电、太赫兹泵浦-探测、上海交大二维磁性等）",
+      "search_keywords": [
+        "sliding ferroelectricity h-BN Chinese group",
+        "terahertz pump probe two-dimensional magnet China",
+        "Shanghai Jiao Tong University 2D magnetism",
+        "中科院半导体所 滑移铁电",
+        "MnPS3 HHG Chinese team affiliation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "d-wave/g-wave/i-wave 交变磁自旋劈裂选择定则的判据体系",
+      "missing_evidence": "references.md [18] Ogawa g-wave 压磁效应、[14] Ezawa 椭圆二色性、[19] Ezawa p-wave 电学 缺少在 rationale d-wave/g-wave 区分中的旁证引用",
+      "search_keywords": [
+        "g-wave piezomagnetism Ogawa",
+        "p-wave Ezawa altermagnet electrical",
+        "elliptical dichroism altermagnet Ezawa",
+        "d-wave g-wave i-wave selection rule harmonic",
+        "g-wave piezomagnetic effect altermagnet"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "i-wave 与 d/g-wave 在反演可证伪性上的本质区别",
+      "missing_evidence": "缺少 i-wave 与 d-wave/g-wave 在椭圆度/电学类反演渠道上的对照论证文献",
+      "search_keywords": [
+        "i-wave vs d-wave altermagnet symmetry",
+        "i-wave harmonic generation circular polarization",
+        "d-wave altermagnet inversion channel",
+        "i-wave spin splitting optical readout",
+        "altermagnet odd-even harmonic selection rule"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Rajpurohit [25] 与 Wang [9] 关于 i-wave HHG 选择定则的证据级别（理论预言 vs 数值证明）",
+      "missing_evidence": "缺少 Rajpurohit 2026 arXiv:2609.01844 预印本的发表状态及与 Wang 已发表工作的对比说明",
+      "search_keywords": [
+        "Rajpurohit altermagnet HHG circular polarization",
+        "i-wave HHG helicity selection rule arXiv",
+        "Rajpurohit 2609.01844 altermagnet preprint",
+        "Wang altermagnet HHG spin splitting published",
+        "altermagnet helicity alternating fingerprint theory experiment"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "CrSb g-wave altermagnet 三维体材料的自旋劈裂 ARPES 量化（§1.2 L21 弱/强交变劈裂机制100 meV vs 0.5 eV）",
+      "missing_evidence": "缺少 CrSb 三维 bulk g-wave 自旋劈裂的 ARPES 量化数据与节点面对称分类的细化引文",
+      "search_keywords": [
+        "CrSb g-wave ARPES spin splitting magnitude",
+        "CrSb altermagnet nodal plane symmetry",
+        "CrSb de Haas-van Alphen g-wave",
+        "CrSb three-dimensional bulk g-wave order parameter",
+        "Long CrSb dHvA 41.5T g-wave"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "MnTe 体系 Krempaský ARPES 弱交变劈裂 100 meV 与强交变劈裂 0.5 eV 的机制分离",
+      "missing_evidence": "缺少 Krempaský 软 X 射线自旋分辨 ARPES 关于弱/强交变劈裂机制分离的原文与数据图支撑",
+      "search_keywords": [
+        "Krempasky MnTe soft X-ray spin-resolved ARPES",
+        "MnTe weak strong altermagnetic splitting",
+        "Krempasky Phys Rev X MnTe 100 meV 0.5 eV",
+        "MnTe Kramers degeneracy lifting ARPES",
+        "MnTe spin splitting nodal plane SOC mechanism"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "二维交变磁自旋劈裂调控时间尺度（MHz 机械/热 vs THz 自旋动力学窗口失配）",
+      "missing_evidence": "缺少二维交变磁自旋劈裂调控（机械滑移/热退火/静电压缩）的响应时间标定实验数据",
+      "search_keywords": [
+        "mechanical sliding MnPS3 response time",
+        "thermal annealing altermagnet switching speed",
+        "strain altermagnet spin MHz rate",
+        "terahertz spin dynamics altermagnet 2D",
+        "2D altermagnet ultrafast switching timescale"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "h-BN 滑移铁电的国内独立代表性工作（已知中科院半导体所 hh-BN 工作未在 references.md 中体现）",
+      "missing_evidence": "缺少中科院半导体所 h-BN 滑移铁电代表性工作的引用与作者归属确认",
+      "search_keywords": [
+        "h-BN sliding ferroelectricity Chinese group",
+        "hexagonal boron nitride sliding ferroelectric CAS",
+        "Wang PRL 133 126801 h-BN bilayer",
+        "中科院半导体所 h-BN 滑移铁电",
+        "h-BN interlayer sliding Chinese experimental"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "MnPS3 作为滑移铁电 + 反铁磁耦合体系的双序参量耦合机制",
+      "missing_evidence": "缺少 MnPS3 中滑移铁电极化与反铁磁序耦合的实验/理论直接文献",
+      "search_keywords": [
+        "MnPS3 sliding ferroelectric antiferromagnetic coupling",
+        "Sheng MnPS3 Rashba sliding ferroelectric",
+        "MnPS3 layer-dependent antiferromagnetic polarization",
+        "MnPS3 multiferroic coupling",
+        "Yarmohammadi MnPS3 Rashba spin-orbit DFT"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Werner [13] 国际团队主导的交变磁自旋劈裂 PRB 110 235101 全文细节（弱/强交变劈裂定义、节点面分类）",
+      "missing_evidence": "缺少 Werner PRB 110 235101 关于 d-wave/i-wave/g-wave 自旋劈裂分类完整框架与弱/强机制分离的引文细节",
+      "search_keywords": [
+        "Werner PRB 110 235101 altermagnet spin splitting",
+        "Werner altermagnet HHG i-wave d-wave classification",
+        "Werner Smejkal altermagnet weak strong splitting",
+        "altermagnet spin splitting magnitude hierarchy review",
+        "Werner altermagnet high harmonic Physical Review B"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

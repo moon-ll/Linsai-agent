@@ -1,0 +1,146 @@
+{
+  "gaps": [
+    {
+      "claim": "参考文献模块整体缺失：sections/references.md 仍为占位符（'待 writer 补齐'，0 字），未提供规范引文列表，违反 NSFC 面上项目正文体例与评审可核查性要求",
+      "missing_evidence": "完整的、格式统一的引文列表（至少含作者全名、期刊名缩写、卷(vol)、期(issue)、起始页—终止页、年份、DOI；arXiv 预印本须明确标注 'preprint' 并附最后出版状态）",
+      "search_keywords": [
+        "NSFC general proposal reference format guideline",
+        "NSF/Elsevier reference style author year",
+        "参考文献著录规则 GB/T 7714",
+        "DOI lookup by title"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "本项目相对于 Rasputnyi 2024 (arXiv:2403.15337) 的'首例'边界声明缺乏系统性文献对比支撑，特别是 BSV 驱动 HHG 量子光探针范式与已有工作的差异未被独立文献证据兜底",
+      "missing_evidence": "所有已发表的 BSV/纠缠光 HHG 实验与理论文献的对照表（实验条件、压缩参数、HHG 截止能量、量子探针指标）；尤其需要 Rasputnyi 2024 之外的同方向独立工作（如早期 Turchetti 等、Spasibko 系列、Goh 2015 等）的并列对比文献",
+      "search_keywords": [
+        "bright squeezed vacuum high harmonic generation",
+        "entangled photon HHG quantum optics",
+        "squeezed light strong field nonlinear optics",
+        "BSV high harmonic generation review"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.2/§2.3/§3.2 中嵌入的作者—年份片段（Rasputnyi 2024 / Even Tzur 2024 / Iskhakov 2012 / Spasibko 2012 / Szilard 2012 / Silva 2018 / Murakami 2018 / Wu/Schafer/Gaarde 2016 / Raab 2024 / Li 2022 / Rivera-Dean 2023 / Peschel 2022 / Wu 2024 等约 12 处）缺乏完整书目信息，评审人无法在 20 分钟内核查主张的来源",
+      "missing_evidence": "上述每一处引证对应的完整出版元数据：期刊全名、卷期页码、DOI，以及必要时的同行评审状态标识",
+      "search_keywords": [
+        "Iskhakov 2012 squeezed light",
+        "Spasibko 2012 bright squeezed vacuum",
+        "Szilard 2012 HHG",
+        "Murakami 2018 high harmonic squeezed light",
+        "Wu Schafer Gaarde 2016",
+        "Silva 2018 HHG entanglement"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "关键方法学引文（Raab 2024、Li 2022、Rivera-Dean 2023、Peschel 2022）仅有 arXiv 编号而无正式出版信息，可行性论证的成熟度无法被评审人独立核查",
+      "missing_evidence": "上述四篇方法学文献的正式同行评审版本是否已发表于 Phys. Rev. Lett. / Phys. Rev. A / Optica / Nature Photonics 等期刊；若仅 arXiv 预印本，需明确标注并改用已发表的奠基文献替代核心理论支撑（如 Pisanty、Stammer、Lewenstein 等团队的早期同行评审论文）",
+      "search_keywords": [
+        "Raab 2024 HHG quantum",
+        "Peschel 2022 squeezed light HHG",
+        "Rivera-Dean 2023 strong field quantum optics",
+        "Li 2022 HHG entanglement",
+        "stammer lewenstein HHG quantum trajectory review"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "outcome §6.6 的 8 条局部编号引文 [1]–[8] 全部为 arXiv 编号，其中 [3][4][5][7][8] 为 2026 年最新预印本（arXiv:2607.06395 / 2607.16477 / 2604.12838 / 2602.16454 / 2604.15085），形式上属'未经同行评审引用'，违反 NSFC 对引文权威性的隐含要求",
+      "missing_evidence": "对每一条 2026 年 arXiv 预印本：① 说明仅作'最新工作动态'定位而非核心支撑证据；② 提供相同论点的已发表同行评审文献作为替代支撑；③ 标注每条的最终出版状态/审稿进度",
+      "search_keywords": [
+        "Stammer Rivera-Dean attosecond quantum light published version",
+        "Lange Madsen topological insulator HHG published",
+        "Borrego Varillas roadmap attosecond science published",
+        "Zou bichromatic HHG quantum path interference published",
+        "Awad Bloch trajectory harmonics interferometer published"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.2 立项依据中的'前人局限性'论证（前人仅对 Scully–Drühl 类型纠缠方案或对相干态 BSV-HHG 给出演示，本项目首次将 BSV 作为量子相干性探针）缺乏系统性的文献支持矩阵——评审标准要求'立项依据是否充分（前人局限性是否讲清楚）'",
+      "missing_evidence": "一份'前人 HHG-量子光交叉研究'的编年综述：按 时间 / 量子光源类别（Huang-Rhys、纠缠双光子、压缩真空、相干态） / 实现方案 / 量子探针指标 三个维度分类的对比表，对应覆盖 2010–2024 年间至少 20–30 篇代表性工作",
+      "search_keywords": [
+        "high harmonic generation quantum light review",
+        "entangled photon pair attosecond spectroscopy review",
+        "nonclassical light strong field review",
+        "squeezed light attosecond strong-field review",
+        "BCQ photon HHG Fahr Wood"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "项目声明'量子光 HHG 探针'作为系统性范式，但当前只有约 13 条外部引证作为支撑，引文密度对'系统性范式承诺'而言明显不足——领域内重要里程碑（如 Lewenstein/Caliomagescu/Cohen/Rosenthal/Fabre 等小组、Hamamatsu/Helsinki/Max Planck 相关工作）未被完整覆盖",
+      "missing_evidence": "系统性范式要求至少 40–60 条参考文献，覆盖：① 强场 HHG 基础理论 ② 量子光与强光场相互作用 ③ BSV/纠缠光源制备 ④ 阿秒光谱学探针方法 ⑤ 拓扑/能谷/二维材料 HHG 等扩展主题",
+      "search_keywords": [
+        "Lewenstein HHG review",
+        "Caliomagescu strong field approximation",
+        "Fabre HHG non-classical",
+        "Cohen-Tannoudji strong field review",
+        "Hamamatsu Bristol HHG review",
+        "Plaja Marder strong field"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "创新点 2 引用 Boroumand 2025 (Roadmap on Attosecond Science) 与 Li 2019 作为支撑，但 Boroumand 2025 在 §1.4、§2.8、outcome §6.3 三处重复出现且无完整出版信息，Li 2019 亦未给出卷期页码，创新论点的支撑强度无法独立核实",
+      "missing_evidence": "Borrego Varillas 'Roadmap on Attosecond Science' 在 Journal of Physics B / Journal of Physics Photonics 等期刊的正式版本（出版年、卷期、DOI）；Li 2019 应明确作者全名、期刊全名、卷期页码，确认是否即 'Li et al., Phys. Rev. Lett. 123, xxx (2019)' 或类似工作",
+      "search_keywords": [
+        "Roadmap on Attosecond Science published",
+        "Borrego Varillas Larroche attosecond",
+        "Li 2019 HHG squeezed light",
+        "attosecond roadmap 2025 journal",
+        "smart pointer journal physics photonics roadmap"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "整套提案存在'作者—年份片段 + 局部编号 + arXiv 孤号'三种引文格式并存，导致跨章节引文一致性无法保证（如 Iskhakov 2012、Raab 2024 在多章节出现但格式不一），违反引用规范",
+      "missing_evidence": "统一的引文格式规范声明（建议 GB/T 7714-2015 或 Elsevier/Nature 编号制二选一）；在 references.md 中给出所有内嵌引证与 §6.6 局部编号的对应表，消除重复与歧义",
+      "search_keywords": [
+        "reference format consistency NSFC proposal",
+        "GB/T 7714-2015 example",
+        "Elsevier numbering vs author-date citation",
+        "NSFC proposal reference style handbook"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Peschel 2022 / Raab 2024 等关键方法学引文若仅有 arXiv 版本，评审人会质疑其能否作为方法学的'成熟度证据'；建议改用已发表的同类方法学文献作为核心可行性论据",
+      "missing_evidence": "替代性的、已发表的方法学支撑文献，例如：① Pisanty 等关于 HHG-量子光相位恢复的 PRL 系列论文；② Stammer/Rivera-Dean 已发表 Nature Photonics / PRL 工作；③ 强场量子电动力学（QED strong-field）领域奠基性 PRL 论文",
+      "search_keywords": [
+        "Pisanty HHG phase",
+        "Stammer photoelectron HHG",
+        "Max Born strong field approximation foundation",
+        "Reiss HHG strong field perturbation"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "BSV 制备与表征部分若引用 Szilard 2012、Iskhakov 2012、Spasibko 2012 等作为'BSV 实验技术基础'，但这些工作的现代改进版本（如近几年关于亚 10 fs BSV 制备、表征灵敏度极限、量子层析新方法）未被覆盖，技术现状论述可能滞后",
+      "missing_evidence": "BSV 表征/制备领域的近五年（2020–2026）代表性同行评审文献，至少 5–8 篇，覆盖：① 量子层析新方法 ② sub-shot-noise 灵敏度极限 ③ BSV-photon HHG 接口的最新实验设计",
+      "search_keywords": [
+        "squeezed light generation review 2022..2026",
+        "BSV quantum tomography modern",
+        "sub shot noise spectroscopy HHG",
+        "Agafonov Schori Iskhakov modern BSV",
+        "spontaneous parametric down conversion squeezed review"
+      ],
+      "priority": "low"
+    },
+    {
+      "claim": "对于'BSV 驱动 HHG'这一全新范式，目前缺少一篇独立的高水平综述作为'范式合理性'的二级支撑文献，影响评审专家对该方向的接受度",
+      "missing_evidence": "综述与评论性文献作为'背景定位'支撑：如 Nature Photonics / Physics Reports / J. Phys. B 等近 3 年关于'非经典光与强场物理交叉领域'的综述文章（review/perspective/roadmap），至少 2–3 篇",
+      "search_keywords": [
+        "non-classical light strong field perspective review",
+        "quantum optics meets attosecond science review",
+        "squeezed light in ultrafast science review",
+        "Physics Reports HHG quantum light",
+        "Nature Photonics strong field review"
+      ],
+      "priority": "low"
+    }
+  ]
+}

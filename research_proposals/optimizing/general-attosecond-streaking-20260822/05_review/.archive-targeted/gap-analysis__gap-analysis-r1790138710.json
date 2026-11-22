@@ -1,0 +1,35 @@
+{
+  "gaps": [
+    {
+      "claim": "Rainbow RABBIT 方法在多通道时延提取中的处理",
+      "missing_evidence": "缺少区分 Rainbow RABBIT 多通道时延检索与 He 1s/Ar 3p/Xe 4d 宽谱单通道时延检索的明确文献支撑",
+      "search_keywords": [
+        "Rainbow RABBIT multichannel time delay",
+        "Kheifets photoionization time delay single channel",
+        "Rainbow RABBIT wide spectrum retrieval"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "arXiv:2511.08391 Reply 与 arXiv:2512.19965 Hasan 文献著录",
+      "missing_evidence": "缺少对 Cousin 2017 PRX 多通道重分析的 Reply 评论（2511.08391）与 Hasan/Wörner 软 X-ray 阿秒条纹 Xe Auger 1.32 fs 时移（2512.19965）的正式出版物文献著录条目",
+      "search_keywords": [
+        "2511.08391 Cousin reply VTGNA krypton",
+        "2512.19965 Hasan Xe Auger attosecond streaking 130 eV",
+        "Han Ultrafast Science 6:0145 Comment VTGNA"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "软 X 射线水窗能区阿秒脉冲首次跨越 1 atomic unit 时间门槛的最新预印本/正式发表进展",
+      "missing_evidence": "缺少区分 25 as 预印本（arXiv:2508.14774）与已见刊 18 as（[36]）的最新水窗阿秒脉冲表征实验文献验证",
+      "search_keywords": [
+        "water window attosecond pulse 18 as published",
+        "soft X-ray attosecond pulse duration record 2025 2026",
+        "2508.14774 arXiv attosecond pulse characterization"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

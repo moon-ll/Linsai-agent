@@ -1,0 +1,66 @@
+{
+  "gaps": [
+    {
+      "claim": "对 tMoS₂ 平带拟合 a ≈ 0.85、b ≈ 0.42 两位小数常数",
+      "missing_evidence": "该紧束缚拟合参数缺乏原始文献出处，且按报告时序属于 Y2 才应通过 DMRG 标定给出，属数值虚构嫌疑，需引用 tMoS₂ 莫尔平带的代表性紧束缚模型/连续模型拟合文献以提供常数来源",
+      "search_keywords": [
+        "twisted MoS2 flat band tight-binding fitting parameters",
+        "tMoS2 Bistritzer-MacDonald continuum model parameters",
+        "莫尔 二硫化钼 平带 紧束缚 拟合常数"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "R1 据目前检索（截止 2026-09）拟建立的首个含多体修正的莫尔 HHG 正向模型（相对现有莫尔 HHG 理论 [6][8] 均无多体项）",
+      "missing_evidence": "新颖性划界仅以 [6][8] 两篇为对照，证据链不充分，需系统检索 2020-2026 年莫尔 HHG 理论工作（含含多体修正的半导体 HHG、关联电子 HHG 等）以排除遗漏，并提供完整对照清单",
+      "search_keywords": [
+        "moire high harmonic generation theory many-body",
+        "twisted bilayer HHG forward model",
+        "correlated electron high harmonic generation semiconductor",
+        "莫尔 高次谐波 理论 多体修正"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "强场作用下局域电子态对高次谐波产生过程的影响机理（§2.2.1 R1 主线，含 Lian 等 2024 Nat. Phys. 引用 [19]）",
+      "missing_evidence": "除 [19] 外，对'局域电子态调控 HHG'机理缺乏更多独立实验与理论文献支撑（特别是 tMoS₂、tWSe₂ 等莫尔体系的对比实验），需补充近年该方向的关键文献",
+      "search_keywords": [
+        "local electronic states high harmonic generation moire",
+        "excitonic effect HHG twisted bilayer",
+        "局域电子态 高次谐波 莫尔 实验"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "样品制备精度 ±0.05°，经电子衍射标定（§2.2.2 三条正交路径段 L63）",
+      "missing_evidence": "扭转角 ±0.05° 制备/衍射标定能力的具体文献出处缺失，应引用代表性二维材料扭转角标定实验论文以佐证该精度可达性",
+      "search_keywords": [
+        "twist angle calibration precision ±0.05 degree electron diffraction",
+        "2D heterostructure stacking angle characterization",
+        "扭转角 制备精度 电子衍射 标定"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "TA 抑制 >50%、莫尔势 RMS <15%、Δα>0.2 等定量判据",
+      "missing_evidence": "三项关键定量阈值（TA 抑制比、莫尔势幅值上限、扭转角偏差阈值）的物理来源/文献依据未在文中交代，应补充引用或推导出处（特别是莫尔势 RMS 与 HHG 谱畸变关联、扭转角公差与可观测效应阈值的代表性文献）",
+      "search_keywords": [
+        "moire potential amplitude HHG spectral distortion",
+        "twist angle disorder tolerance high harmonic",
+        "莫尔势 高次谐波 阈值 判据"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "全文嵌入式引用合规（自引用 12 次超阈）",
+      "missing_evidence": "自引用 12 次（阈 10/15）被罚 0.05，提示部分论点过度依赖本课题组前期工作而缺乏外部同行文献佐证，应在 R1/R2/R3 三方向关键创新点上补充同领域其他团队的独立验证或竞争性工作引用",
+      "search_keywords": [
+        "moire high harmonic generation competing groups 2023 2024 2025",
+        "twisted 2D material strong field independent replication",
+        "莫尔 高次谐波 同领域 工作 综述"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "content"
+}

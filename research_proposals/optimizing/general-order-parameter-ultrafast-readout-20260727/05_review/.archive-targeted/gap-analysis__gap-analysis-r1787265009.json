@@ -1,0 +1,72 @@
+{
+  "gaps": [
+    {
+      "claim": "CrSb HHG 实验信号产额满足可辨识性要求（差分信号须大于背景漂移的典型标准差）",
+      "missing_evidence": "缺少 CrSb 高次谐波实验信号产额的具体数值和背景噪声水平的实证数据；1% 信号阈值缺乏文献支撑",
+      "search_keywords": [
+        "CrSb high harmonic generation photon flux",
+        "altermagnet HHG signal yield experimental",
+        "CrSb spin-polarized high harmonic experimental observation",
+        "altermagnet HHG shot noise floor measurement"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "R3 路径：费舍尔信息矩阵条件数 κ < 10² 作为可辨识性判据的理论依据",
+      "missing_evidence": "缺少费舍尔信息矩阵条件数在高次谐波光谱学参数提取中的具体阈值标准和先验验证",
+      "search_keywords": [
+        "Fisher information matrix condition number nonlinear optics",
+        "HHG spectroscopy parameter identifiability condition number",
+        "Fisher information attosecond spectroscopy reconstruction",
+        "ill-posed inversion regularization HHG condition number threshold"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "R3 路径：贝叶斯后验概率作为双判据之一的理论框架和实验验证",
+      "missing_evidence": "缺少贝叶斯后验概率在高次谐波反演问题中的具体应用先例和收敛性验证",
+      "search_keywords": [
+        "Bayesian inversion HHG spectroscopy",
+        "posterior probability nonlinear optics inverse problem",
+        "attosecond spectroscopy Bayesian parameter estimation",
+        "HHG parameter retrieval Bayesian framework experimental"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "MnTe 作为备选对照体系的切换判据和实验可行性",
+      "missing_evidence": "缺少 MnTe 高次谐波产生实验验证和信号强度对比数据",
+      "search_keywords": [
+        "MnTe high harmonic generation experimental",
+        "MnTe altermagnet HHG signal yield",
+        "Fuchs MnTe spin-polarized high harmonic generation",
+        "MnTe femtosecond laser damage threshold"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.4 L33 与 L41 同一论证重复出现（'三类参数物理独立性'两次）",
+      "missing_evidence": "该问题属于逻辑重复问题，不属于文献支撑问题",
+      "search_keywords": [],
+      "priority": "low"
+    },
+    {
+      "claim": "跨章 [N] 编号错配（content.md L21/L55 用 [68] 标 Rost，但 references.md [68] = Weber；content.md L55 用 [65] 标 Fuchs 但 references.md [64] = Fuchs）",
+      "missing_evidence": "该问题属于引用编号错误，不属于文献缺失问题——Rost 2507.02673 和 Fuchs MnTe HHG 论文本身存在于 references.md 中，只是编号引用错误",
+      "search_keywords": [],
+      "priority": "low"
+    },
+    {
+      "claim": "κ 表达形式跨章不一致（content.md LaTeX \\kappa < 10^2 vs rationale.md / scheme.md Unicode κ < 10²）",
+      "missing_evidence": "该问题属于符号格式一致性问题，不属于文献缺失",
+      "search_keywords": [],
+      "priority": "low"
+    },
+    {
+      "claim": "R3 论证密度偏高（2525 字 / 40 句，avg 62.7 字/句），单章负担过重",
+      "missing_evidence": "该问题属于写作风格问题，不属于文献缺失",
+      "search_keywords": [],
+      "priority": "low"
+    }
+  ]
+}

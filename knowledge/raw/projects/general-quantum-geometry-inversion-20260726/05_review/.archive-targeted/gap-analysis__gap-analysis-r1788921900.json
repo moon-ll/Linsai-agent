@@ -1,0 +1,54 @@
+{
+  "gaps": [
+    {
+      "claim": "Xiang 等 2024 年提出的自旋量子几何张量（rationale L5）",
+      "missing_evidence": "需要 arXiv:2406.02257 的一作核实（实际一作为 Longjun Xiang），并核查正文所有引用 [45] 处的对应文献身份",
+      "search_keywords": [
+        "arXiv 2406.02257 spin quantum geometry tensor",
+        "Longjun Xiang spin quantum geometry",
+        "Xiang Hao Jin Jian Wang spin QGT"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Lange 等 [20] 报道激子效应可与压缩光 HHG 耦合（L31，quantum-optical 路径 vs Mott 路径的证据区分）",
+      "missing_evidence": "需明确 Lange 等 [16]（量子光路径）与 Lange 等 [20]（Mott 路径）的区分；当前 [20] 的具体 Mott 绝缘体激子+压缩光 HHG 耦合实验/理论文献尚需核实",
+      "search_keywords": [
+        "Lange exciton compressed light high harmonic generation",
+        "Mott insulator exciton squeezed HHG coupling",
+        "Lange 2025 compressed light HHG solid state"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Ω(k) 反演误差 5–15% 来自 Sr₂CuO₃ 5–15% 谐波红移（L17 引 Ikeda [13]）",
+      "missing_evidence": "Ikeda 预印本 Sr₂CuO₃ 的 5–15% 谐波红移原始数据来源需补充：作者、年份、DOI/arXiv ID、具体测量条件",
+      "search_keywords": [
+        "Ikeda Sr2CuO3 harmonic redshift preprint",
+        "Ikeda attosecond Sr2CuO3 strong field",
+        "cuprate Sr2CuO3 HHG red shift many-body"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Ω 估计偏差与 Fisher 信息条件数的定性对应（偏差 ↑ ⇔ 信息 ↓，L17↔L19 衔接段）",
+      "missing_evidence": "缺乏将反演偏差（Ω 误差 5–15%）与 Fisher 信息条件数（$R<1.2$）在数学/数值上关联的引文或参考文献（如 Cramer-Rao 界、条件数-误差传播公式）",
+      "search_keywords": [
+        "Fisher information condition number inverse problem error propagation",
+        "Cramer-Rao bound parameter estimation HHG",
+        "ill-posed inversion condition number error bound"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "压缩光驱动 HHG 效率相对同平均强度经典光提升 10²–10³ 倍（L13）",
+      "missing_evidence": "缺乏给出 10²–10³ 倍提升定量的实验/理论文献（g²、压缩参数、谐波阶数等具体条件）",
+      "search_keywords": [
+        "squeezed light HHG enhancement factor 10^2 10^3",
+        "bright squeezed vacuum HHG yield enhancement",
+        "quantum enhancement factor HHG g2 parametric gain"
+      ],
+      "priority": "high"
+    }
+  ]
+}

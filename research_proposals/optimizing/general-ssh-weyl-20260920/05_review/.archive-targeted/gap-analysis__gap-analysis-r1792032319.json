@@ -1,0 +1,29 @@
+{
+  "gaps": [
+    {
+      "claim": "HHG 增强阈值 R=2 与谱边压缩度阈值 S_edge ≥ 0.2 的定量依据（content L17/L49，scheme L59/L233）",
+      "missing_evidence": "[20] Lorenzo et al. arXiv:2508.15631v2 摘要结语原文为 'the significant enhancement, exceeding two orders of magnitude, in the high harmonics emitted from the topological Kagome lattice in the semimetallic phase'（即 >100 倍增强下界），正文多处进一步写 'typically by two to three orders of magnitude'（100–1000 倍）。申请书将其改写为'上限两个数量级（≤100 倍）'，方向相反。该文献被声称为这两个阈值的'唯一定量依据'，需要：(1) 重新精确摘录原文并按'增强下界 / 典型增强区间'重建阈值链；(2) 若 S_edge ≥ 0.2 数值无法从 [20] 直接导出，还需补充其他拓扑体系 HHG 谱边特征量化指标（plateau structure、spectral sharpness、cutoff compression）相关文献作为单独支撑。",
+      "search_keywords": [
+        "topological semimetal HHG enhancement ratio orders of magnitude",
+        "Kagome lattice high harmonic generation intensity enhancement",
+        "Lorenzo arXiv 2508.15631 HHG semimetallic phase",
+        "HHG spectral edge sharpness plateau cutoff topological",
+        "HHG intensity ratio topological trivial nontrivial threshold"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "五处引用点 [12][13][15][17][18] 的预印本状态标注（content L15/L25/L35 等处的 120 字窗口）",
+      "missing_evidence": "references 头注声明'预印本结论在正文各引用处均已标明'，但经全文 grep 核对，仅 [8][20] 在引用点附有'（预印本）'限定语，[12][13][15][17][18] 五处 120 字窗口内均无该标注。需要逐一核验这五条文献当前的实际发表状态：若仍为预印本，则须在正文引用处补加'（预印本）'以兑现头注声明；若已正式刊出，则需修正头注措辞并删除对应位置的限定语。同时应核验相关拓扑体系（HOTI/SSH/Weyl）HHG 工作的最新期刊版本是否需替换 arXiv 编号。",
+      "search_keywords": [
+        "Bi2Se3 family HOTI high harmonic generation published journal",
+        "SSH boundary state HHG circular dichroism published",
+        "Weyl semimetal high harmonic generation peer reviewed",
+        "topological insulator HHG CD arxiv publication status",
+        "high-order topological insulator HHG preprint 2024 2025"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "content"
+}

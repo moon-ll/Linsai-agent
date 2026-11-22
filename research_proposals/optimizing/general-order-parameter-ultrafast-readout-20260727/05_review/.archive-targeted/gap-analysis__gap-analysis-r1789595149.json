@@ -1,0 +1,27 @@
+{
+  "gaps": [
+    {
+      "claim": "奇次谐波在 altermagnet 零净磁矩下其本身是否含序参量指纹未论证；若奇次谐波信号亦耦合 SOC，则以奇次通道作为 σ 代理会系统性低估真实背景漂移量级",
+      "missing_evidence": "缺少 altermagnet 奇次谐波通道中 SOC 耦合贡献的实验或理论解耦论证，以及非磁性参考样品 HHG 谐波强度漂移标准差的实测数据",
+      "search_keywords": [
+        "altermagnet odd harmonic SOC coupling",
+        "spin-orbit coupling odd harmonic generation antiferromagnet",
+        "nonmagnetic reference sample HHG background drift",
+        "CrSb high harmonic odd channel spin-orbit"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Murakami、Dziurawiec、Granados 三源文献分别支持多通道混合、激发可区分、CEP-OAM 耦合三项可辨识性结论，但被合并为'两项结论'导致读者无法将 CEP-OAM 耦合归类",
+      "missing_evidence": "缺少明确区分三类多体 HHG 可辨识性机制（多通道 vs 激发可区分 vs CEP-OAM耦合）的综述或对照实验文献，以支持三源文献各归其位的论证结构",
+      "search_keywords": [
+        "many-body HHG multichannel distinguishability",
+        "CEP-OAM coupling high harmonic generation",
+        "HHG excitation channel resolution multielectron",
+        "solid HHG orbital angular momentum coupling CEP"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

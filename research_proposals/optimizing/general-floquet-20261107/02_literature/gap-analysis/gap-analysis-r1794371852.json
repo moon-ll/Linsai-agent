@@ -1,0 +1,31 @@
+{
+  "gaps": [
+    {
+      "claim": "rationale §1.4 L79 关于“MnPS₃中温度驱动的磁振子热霍尔行为”的事实性论断。",
+      "missing_evidence": "缺少直接报告MnPS₃温度依赖磁振子热霍尔行为的原始实验文献。现有[24]讨论金属体系中的逆法拉第效应，[23]讨论Floquet–Magnus等价性，二者均不能证明MnPS₃中的温度驱动热霍尔行为。应核对并引用[19]的MnPS₃温度相图证据和[21]的交换收缩—热霍尔实验结果，必要时补充其他直接测量MnPS₃热霍尔系数、磁序演化和磁振子贡献的论文。",
+      "search_keywords": [
+        "MnPS3 magnon thermal Hall effect temperature dependence",
+        "MnPS3 exchange contraction thermal Hall",
+        "MnPS3 temperature-dependent magnetic phase diagram",
+        "Li MnPS3 phase diagram temperature",
+        "Yang MnPS3 exchange contraction thermal Hall",
+        "MnPS3 磁振子 热霍尔 温度依赖"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "rationale §1.6 L113 将“已报道的温度致跳变”作为本课题光致跳变的信号层面对照。",
+      "missing_evidence": "缺少能够证明相关材料中存在温度诱导跃迁或跳变的原始实验文献，并需明确给出所观测信号、跃迁温区或阈值、实验条件及其与磁序变化的关系。[23]和[24]的主题分别为Floquet–Magnus理论与金属逆法拉第效应，不能承担这一对照证据；应删除该处[23,24]，改由MnPS₃温度相图及热霍尔实验文献支撑，并说明温度致跳变与光致跳变之间可用于区分的机制变量和观测量。",
+      "search_keywords": [
+        "MnPS3 temperature-driven signal jump",
+        "MnPS3 temperature-induced magnetic phase transition experiment",
+        "MnPS3 thermal Hall temperature anomaly",
+        "MnPS3 optical Hall temperature dependence",
+        "Li MnPS3 magnetic phase diagram",
+        "Yang MnPS3 thermal Hall exchange contraction"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "full_review"
+}

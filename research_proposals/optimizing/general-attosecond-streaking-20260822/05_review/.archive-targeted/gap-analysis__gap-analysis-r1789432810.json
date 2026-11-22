@@ -1,0 +1,70 @@
+{
+  "gaps": [
+    {
+      "claim": "Cousin PRX'17 [2] 给出 15%/30%/20% 多通道电离阈值作为 FROG-CRAB 失效判据",
+      "missing_evidence": "Cousin PRX'17 官方摘要仅定性 caution，未出现 15%/30%/20% 量化阈值；缓存全文检索亦无命中。需找替代文献明确给出 water-window 多通道电离贡献比例阈值及其对阿秒脉冲重建的影响",
+      "search_keywords": [
+        "Cousin attosecond streaking water window multichannel threshold",
+        "FROG-CRAB multichannel ionization breakdown percentage",
+        "attosecond streaking multi-electron error bound",
+        "water window attosecond pulse retrieval error quantification"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Peschel Nat Commun'22 [7] 定量复现 Cousin PRX'17 的多通道电离失效阈值",
+      "missing_evidence": "Peschel'22 实际为 Ne 外壳层两光子干涉测角动量通道 RABBITT 类工作，无 FROG-CRAB、水窗、多通道阈值内容。需找真正涉及水窗能区多通道 TDSE 数值验证或实验复现的文献",
+      "search_keywords": [
+        "Peschel multichannel TDSE attosecond streaking",
+        "Ne 2p RABBITT angular streaking",
+        "water window multichannel TDSE simulation attosecond",
+        "two-channel attosecond retrieval coupling"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Villeneuve Science'17 [15] 提供 '角分布平均保证宽带重建稳健' 的方法论支撑",
+      "missing_evidence": "原文为脉冲链+IR 全息选择 m=0 f 波，非角分布平均。需找角动量分量相干成像与选择、或阿秒脉冲反演中角分辨方法学文献",
+      "search_keywords": [
+        "angular integration dipole phase attosecond streaking",
+        "Pabst Dahlstrom PANDA angular averaging",
+        "attosecond pulse retrieval angular momentum selection",
+        "dipole phase suppression angular integration"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "[31] 谱中心 243 eV 属于水窗软 X 射线能区",
+      "missing_evidence": "水窗定义为 284-543 eV，243 eV 低于水窗下界。需核实 [31] 实际光谱范围，并找到触及碳 K 边（284 eV）且谱中心处于 284-409.7 eV 区间的孤立阿秒脉冲实验文献",
+      "search_keywords": [
+        "isolated attosecond pulse carbon K-edge",
+        "water window isolated attosecond pulse 284 eV",
+        "ultrafast science 2025 attosecond pulse DOI 10.34133",
+        "attosecond pulse spectrum carbon K-edge photon flux"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "国内快速相位反演实验实现 [9] 与 CNN 抗噪重构 [9] 一文两用",
+      "missing_evidence": "[9] 引用条目内容与两处上下文功能不符，需核实 [9] 实际工作内容（中国团队阿秒相位反演 vs CNN 阿秒脉冲反演），并为两处分别找合适文献",
+      "search_keywords": [
+        "attosecond phase retrieval China experiment",
+        "CNN attosecond pulse retrieval noise robust",
+        "Ghimire 2011 ZnO solid-state high harmonic",
+        "中国 阿秒 神经网络 反演"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "高次谐波产生机制在阿秒脉冲反演中的应用价值",
+      "missing_evidence": "需核实 [6] 实际作者链（Makabe K/Wang L 错位残留），并找替代性高次谐波与阿秒脉冲反演关联文献",
+      "search_keywords": [
+        "high harmonic generation attosecond pulse retrieval",
+        "HHG isolated attosecond pulse reconstruction",
+        "Ren Li Yin attosecond China"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

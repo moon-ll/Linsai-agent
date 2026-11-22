@@ -1,0 +1,41 @@
+{
+  "proposal_id": "general-berry-berry-20261107",
+  "cluster_id": "orphan-route-2026-11-13",
+  "clusters": [
+    "orphan-route-2026-11-13"
+  ],
+  "entries": [
+    {
+      "source_id": "paper:2025-2506.27548-band-geometry-induced-third-harmonic-generation",
+      "title": "Band Geometry Induced Third-Harmonic Generation",
+      "summary": "本文提出能带几何（量子几何张量）可直接诱导三次谐波产生（THG），为三阶非线性光学响应提供了超越常规带间跃迁图像的几何机制。在此基础上，通过122个磁点群对三阶非线性光学张量χ^(3)的全部元素进行完备分类，建立了THG对称性允许元素的完整目录。该目录将偏振选择定则系统化，可作为判定晶体/磁性对称性、追踪相变以及读出带几何量的查表工具。",
+      "path": "knowledge/raw/papers/2025-2506.27548-band-geometry-induced-third-harmonic-generation.md",
+      "added_via": "cluster:orphan-route-2026-11-13",
+      "added_at": "2026-11-13T16:47:06Z"
+    },
+    {
+      "source_id": "paper:2024-2409.02016-quantum-state-engineering-of-light-using-intensity-measureme",
+      "title": "Quantum state engineering of light using intensity measurements and post-selection",
+      "summary": "该文提出并证明在强激光-原子相互作用中，利用强度测量与后选择协议可实现对光场的量子态工程，从而制备光学薛定谔猫态。这一方案将量子测量手段引入强场物理，扩展了量子光在强场体系中的调控工具箱。",
+      "path": "knowledge/raw/papers/2024-2409.02016-quantum-state-engineering-of-light-using-intensity-measureme.md",
+      "added_via": "cluster:orphan-route-2026-11-13",
+      "added_at": "2026-11-13T16:47:06Z"
+    },
+    {
+      "source_id": "paper:2025-2501.16741-quantum-geometric-origin-of-strain-tunable-giant-second-harm",
+      "title": "Quantum Geometric Origin of Strain-Tunable Giant Second-Harmonic Generation in Bi2O2X (X=S, Se, Te)",
+      "summary": "本文基于第一性原理预测 Bi2O2X（X=S, Se, Te）家族中存在巨型且应变可连续调控的二次谐波产生（SHG），其 χ^(2) 分量幅度可比肩乃至显著超越 MoS2、GaAs 等常规非线性材料基准。关键贡献在于作者将 χ^(2) 的频率色散与张量结构逐项归因于布洛赫能带中贝里曲率与量子度规的 k 空间分布：能带边附近强自旋轨道耦合产生的量子几何'热斑'主导了巨型二阶响应，由此建立起'量子几何量 → 非线性光学响应'的定量因果链，并示范应变作为量级调控乃至张量分量开关的外场旋钮。",
+      "path": "knowledge/raw/papers/2025-2501.16741-quantum-geometric-origin-of-strain-tunable-giant-second-harm.md",
+      "added_via": "cluster:orphan-route-2026-11-13",
+      "added_at": "2026-11-13T16:47:06Z"
+    },
+    {
+      "source_id": "paper:2024-2410.05170-magnetic-and-electric-field-induced-anomalous-hall-currents",
+      "title": "Magnetic- and electric-field-induced anomalous Hall currents from optical excitation of layered magnetic materials",
+      "summary": "该文研究了层状磁性材料在光学激发下产生反常霍尔电流的机制，揭示了外加磁场与电场对该电流的有效调控作用。工作进一步将反常霍尔响应与材料能带的Berry曲率及超快光学动力学相联系，为超快调控拓扑磁输运提供了新途径。",
+      "path": "",
+      "added_via": "cluster:orphan-route-2026-11-13",
+      "added_at": "2026-11-13T16:47:06Z"
+    }
+  ]
+}

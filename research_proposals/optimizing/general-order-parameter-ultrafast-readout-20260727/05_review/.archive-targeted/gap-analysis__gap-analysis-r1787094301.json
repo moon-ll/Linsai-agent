@@ -1,0 +1,44 @@
+{
+  "gaps": [
+    {
+      "claim": "HHG序参量反演的两种方法（Cochran量子相干断层成像 vs Sørensen阿秒时域重建）缺乏系统性比较研究",
+      "missing_evidence": "缺少专门比较Cochran方法和Sørensen方法在HHG序参量重建中的准确性、适用范围和互补性的研究",
+      "search_keywords": [
+        "Cochran Sørensen HHG order parameter comparison",
+        "quantum coherence tomography vs attosecond retrieval HHG",
+        "HHG order parameter reconstruction methods comparison"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Cochran量子相干断层成像与Sørensen阿秒重建的组合方案缺乏实验验证",
+      "missing_evidence": "缺少将Cochran量子相干断层成像与Sørensen阿秒时域重建相结合的实验报道",
+      "search_keywords": [
+        "Cochran quantum coherence tomography HHG experimental",
+        "Sørensen attosecond order parameter reconstruction experiment",
+        "combined HHG order parameter retrieval validation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "7-9维参数空间通过偏振-温度-磁场三重约束降维的可行性缺乏论证",
+      "missing_evidence": "缺少实验数据或理论计算证明73个偏振配置×多档椭圆度×温度采样能充分约束参数空间并实现序参量唯一反演",
+      "search_keywords": [
+        "HHG parameter space dimensionality reduction polarization temperature magnetic field",
+        "high harmonic spectroscopy parameter identifiability",
+        "altermagnet order parameter HHG multi-parameter constraint"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "量子相干断层成像与阿秒重建的组合反演框架缺乏先导实验支撑",
+      "missing_evidence": "缺少组合Cochran量子相干断层与Sørensen阿秒重建的端到端HHG序参量反演实验验证",
+      "search_keywords": [
+        "end-to-end HHG order parameter inversion experimental demonstration",
+        "quantum coherence tomography combined attosecond retrieval",
+        "HHG order parameter reconstruction integrated approach validation"
+      ],
+      "priority": "high"
+    }
+  ]
+}

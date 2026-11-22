@@ -1,0 +1,6 @@
+{
+  "enabled": true,
+  "max_pages": 3,
+  "max_chars": 400,
+  "_说明": "v6.10.0（T3）方法页反哺 injecting 课题的注入开关：writer scheme 聚焦轮按课题关键词匹配方法页注入【方法学专题参考】块。enabled=false 关闭；max_pages 每课题最多注入页数（2-3）；max_chars 每页摘要字数上限。"
+}

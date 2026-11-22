@@ -1,0 +1,11 @@
+{
+  "entries": [
+    {
+      "source_id": "paper:2026-2611.16721-chiral-high-harmonic-generation-via-coherent-super",
+      "title": "Chiral high harmonic generation via coherent superposition of multi-channel interband transitions",
+      "summary": "本文提出并展示了一种通过多通道带间跃迁相干叠加实现手性高次谐波产生（chiral HHG）的机制。在圆偏振强场驱动下，固体中多条带间跃迁通道的相干叠加导致谐波发射具有明确的手性特征，可用于甄别材料的手性。该工作揭示了多通道干涉相位是手性谐波响应的关键自由度。",
+      "path": "knowledge/raw/papers/2026-2611.16721-chiral-high-harmonic-generation-via-coherent-super.md"
+    }
+  ],
+  "updated_at": "2026-11-20T21:34:24Z"
+}

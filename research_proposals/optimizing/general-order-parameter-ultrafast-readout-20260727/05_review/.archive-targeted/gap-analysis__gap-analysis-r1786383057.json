@@ -1,0 +1,92 @@
+{
+  "gaps": [
+    {
+      "claim": "研究内容三的No-Go判据作为方法学核心但未给出具体的判据阈值（条件数 > 多少、参数不确定度 > 多少 dB 触发 No-Go），可证伪性停留在文字而非可操作指标",
+      "missing_evidence": "缺乏Fisher信息矩阵在HHG反问题/量子几何重构中可辨识性判据的量化标准文献（条件数阈值、Cramér-Rao下界、贝叶斯后验不确定度阈值）",
+      "search_keywords": [
+        "Fisher information HHG reconstruction identifiability criterion",
+        "Cramer-Rao bound high harmonic spectroscopy quantum geometry",
+        "Bayesian inversion No-Go criterion condition number",
+        "quantum geometry reconstruction Fisher matrix singular"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "变量设计段把载波包络相位（CEPH）与轨道角动量（OAM）排除出核心反演模型，但理由仅依赖Granados 2026单源预印本（参考 [35]），且未给出耦合定量公式或耦合强度量化值",
+      "missing_evidence": "Granados 2026作为唯一排除依据是单源预印本，缺少关于CEPH和OAM对固体HHG反演结果影响的多源、已发表同行评审文献支撑",
+      "search_keywords": [
+        "carrier-envelope phase high harmonic generation solid state",
+        "orbital angular momentum OAM HHG reconstruction",
+        "CEP high harmonic spectroscopy systematic error",
+        "OAM driving HHG quantum geometry artifact"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "CrSb Néel温度720 K、TiSe₂ CDW温度205 K、MnTe Néel温度310 K作为研究目标中跨越磁相变点的温度指标",
+      "missing_evidence": "CrSb、TiSe₂、MnTe三种材料的关键相变温度（CrSb Néel 720 K、TiSe₂ CDW 205 K、MnTe Néel 310 K）的精确实验测量原始文献未被引用，仅有跨章指标口径一致性，缺直接原始测量引用",
+      "search_keywords": [
+        "CrSb Neel temperature 720 K experimental determination",
+        "TiSe2 charge density wave transition 205 K measurement",
+        "MnTe altermagnet Neel temperature 307 K neutron diffraction",
+        "CrSb antiferromagnetic ordering temperature original reference"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Altermagnet HHG偶次谐波与圆二色性候选信号作为可观测探针信号",
+      "missing_evidence": "除Werner 2024理论+Šmejkal 2022实验+Cheng 2026超快调控之外，缺少altermagnet HHG偶次谐波出现与圆二色性产生的具体理论预测或实验观测的同行评审文献（特别是区别于反铁磁HHG的特征信号）",
+      "search_keywords": [
+        "altermagnet even-order harmonic generation prediction",
+        "altermagnet HHG circular dichroism theory",
+        "spin symmetry breaking high harmonic generation MnTe",
+        "odd even harmonic altermagnet theoretical prediction Werner"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "费舍尔信息矩阵+贝叶斯反演的可辨识性框架引入是content.md章节亮点，但未给出HHG领域的方法学先例文献",
+      "missing_evidence": "Fisher信息矩阵+贝叶斯反演应用于HHG光谱反演量子几何（Berry曲率、量子度规）参数的可辨识性框架在HHG领域是否已有先驱工作缺乏引用",
+      "search_keywords": [
+        "Fisher information high harmonic spectroscopy precedent",
+        "Bayesian inversion Berry curvature quantum metric HHG",
+        "identifiability framework strong-field spectroscopy quantum geometry",
+        "quantum geometry HHG reconstruction Fisher information prior work"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "磁场范围0-7 T（scheme.md给出但content.md未呼应）下HHG作为altermagnetic order parameter探测手段",
+      "missing_evidence": "强磁场（特斯拉级）下固体高次谐波产生、磁场对HHG偏振态/对称性影响、磁场下磁有序探测的实验或理论文献未在content.md引用",
+      "search_keywords": [
+        "high magnetic field high harmonic generation solid",
+        "7 Tesla HHG antiferromagnet spectroscopy",
+        "magnetic field dependent high harmonic generation",
+        "strong magnetic field HHG symmetry breaking"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "驱动波长中红外3-5 μm（scheme.md给出但content.md未呼应）作为altermagnet HHG研究的工作波长",
+      "missing_evidence": "中红外长波长（3-5 μm）驱动下altermagnet HHG的实验可行性、能带结构匹配、谐波阶数范围的同行评审文献支撑",
+      "search_keywords": [
+        "mid-infrared 3-5 micron high harmonic generation antiferromagnet",
+        "long wavelength HHG altermagnet MnTe CrSb",
+        "mid-IR driving HHG magnetic order parameter",
+        "3 micron wavelength high harmonic generation transition metal"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "第一阶段HHG装置偏振分辨能力标定作为研究目标",
+      "missing_evidence": "HHG装置偏振分辨能力的现有标定方法学、典型偏振纯度指标（如Stokes参数测量、消光比）、固体HHG偏振分辨的实验基准文献缺乏引用",
+      "search_keywords": [
+        "HHG polarization resolution calibration method",
+        "high harmonic generation polarization purity Stokes parameter",
+        "solid-state HHG polarization resolved measurement benchmark",
+        "circular polarization HHG extinction ratio calibration"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

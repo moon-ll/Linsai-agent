@@ -1,0 +1,65 @@
+{
+  "gaps": [
+    {
+      "claim": "Han Ultrafast Science 2026 6:0145 Comment 文章发表年份与月份——需确认是否2026 年正式发表及投稿月份",
+      "missing_evidence": "缺少 Han Comment 文章的正式出版年份、卷期号、DOI 与 arXiv 预印本时间的完整对账证据",
+      "search_keywords": [
+        "Han Comment Ultrafast Science 2026 6:0145",
+        "VTGNA krypton streaking reanalysis Cousin reply",
+        "arXiv 2510.17949 Han Cousin"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Zhu 等的 CNN 网络用于阿秒脉冲反演——缺少参考文献编号",
+      "missing_evidence": "缺少 Zhu团队 CNN 反演阿秒脉冲的具体文献引用（期刊、年份、卷期）",
+      "search_keywords": [
+        "Zhu CNN attosecond pulse retrieval",
+        "convolutional neural network attosecond pulse characterization",
+        "deep learning attosecond retrieval"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Hasan arXiv:2512.19965 Xe Auger 阿秒条纹实验——中心光子能量约 130 eV 是否对水窗表征有贡献需限定",
+      "missing_evidence": "缺少 130 eV 能区与水窗（284–543 eV）能区跨越的实验验证对比，以及 Hasan 实验的具体光子能量、条纹能区归属",
+      "search_keywords": [
+        "Hasan 2512.19965 attosecond soft X-ray streaking",
+        "Xe Auger attosecond streaking 130 eV",
+        "giant resonance attosecond streaking water window"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Reply主张四项质疑均不成立——需引用同行评议裁决状态",
+      "missing_evidence": "缺少 Cousin 2017 PRX 7:041030 文章被 Comment 质疑后的最新 Reply 或同行评议公开结论",
+      "search_keywords": [
+        "Cousin Reply Comment water window streaking",
+        "Cousin PRX 7 041030 krypton reanalysis reply",
+        "attosecond streaking multichannel peer review response"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "30%↔40% 通道混合度映射触发备选路径的物理依据——R8 仍散布五处且未给出原始量化来源",
+      "missing_evidence": "缺少 30% 二级混合度阈值与 40% 一级贡献阈值的实验/理论原始依据（特别是基于 Cousin 2017 或 Peschel Ne 2p 数据）",
+      "search_keywords": [
+        "Cousin 2017 30 percent channel mixing threshold",
+        "Peschel Ne 2p RABBIT 40 percent interchannel contribution",
+        "FROG-CRAB multichannel breakdown percentage benchmark"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "甲烷 C 1s 电离阈 290.8 eV 与 C K 边 284 eV 双口径并存——需统一锚定实验值",
+      "missing_evidence": "缺少 C 1s 电离阈的 NIST 实验值引用（应为 290.7 eV）以及 C K 边 XAS 吸收边的标准实验参考",
+      "search_keywords": [
+        "NIST methane C 1s ionization threshold 290.7 eV",
+        "carbon K-edge XAS 284 eV methane reference",
+        "C 1s binding energy methane experimental value"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "scheme"
+}

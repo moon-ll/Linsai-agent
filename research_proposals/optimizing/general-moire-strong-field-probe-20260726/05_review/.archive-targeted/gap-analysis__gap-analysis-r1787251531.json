@@ -1,0 +1,44 @@
+{
+  "gaps": [
+    {
+      "claim": "莫尔超晶格HHG实验产额与ZnO、TMDC等成熟材料体系的效率对比缺乏定量数据支撑",
+      "missing_evidence": "缺少 magic angle TBG HHG 实际产额测量值与 ZnO、MoS2 等材料的对标实验数据",
+      "search_keywords": [
+        "magic angle twisted bilayer graphene HHG experimental yield",
+        "TBG HHG vs ZnO efficiency comparison",
+        "twisted bilayer graphene high harmonic photon flux measurement"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "L-curve 准则选择 Tikhonov 正则化参数在高次谐波光谱反演问题中的应用缺乏方法论论文献",
+      "missing_evidence": "缺少 L-curve 方法用于 HHG 光谱反演正则化参数选取的直接参考文献",
+      "search_keywords": [
+        "L-curve Tikhonov regularization high harmonic spectroscopy",
+        "regularization parameter selection attosecond spectroscopy inversion",
+        "ill-posed inverse problem HHG L-curve"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "TDDFT 与半导体布洛赫方程 (SBE) 在强场固体 HHG 计算中的效率对比缺乏基准数据",
+      "missing_evidence": "缺少 TDDFT vs SBE 计算成本（CPU hours、内存 scaling）的直接对比 benchmark 研究",
+      "search_keywords": [
+        "TDDFT vs semiconductor Bloch equation computational cost benchmark",
+        "real-time TDDFT high harmonic CPU hours scaling",
+        "SBE TDDFT efficiency comparison strong field solid"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "莫尔超晶格 HHG 关联绝缘体态探测的实验验证缺乏对比基准",
+      "missing_evidence": "缺少 magic angle TBG HHG correlated insulator gap 探测的实验-理论对标研究",
+      "search_keywords": [
+        "twisted bilayer graphene HHG correlated insulator experimental",
+        "TBG symmetry breaking HHG sensitivity threshold",
+        "moire HHG gap dependence experimental verification"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

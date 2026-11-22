@@ -1,0 +1,37 @@
+{
+  "gaps": [
+    {
+      "claim": "rationale 末段以“可证伪科学命题、正负结果均具科学价值”收束 altermagnet–HHG 序参量可辨识性定位，但未以嵌入式文献支撑该领域在 3–5 μm、0.3–0.8 V/Å 中红外强场条件下的实验基础与适用边界",
+      "missing_evidence": "缺少与本项目工作频段、场强范围及差分偶次谐波测量口径相符的固体高次谐波实验文献，尤其应引用中红外驱动 altermagnet 产生非微扰 HHG、并利用其检测反演演或磁对称性的最新工作；范本式 Ghimire–ZnO 文献只能作为更宽泛的领域起点，不能单独支撑当前具体边界判断。",
+      "search_keywords": [
+        "altermagnet high harmonic generation 3-5 μm 0.3-0.8 V/Å",
+        "altermagnet nonlinear high harmonic spectroscopy differential even harmonics",
+        "CrSb high harmonic generation experiment",
+        "MnTe high harmonic generation experiment"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "“Tyulnev 等人 2025 年 [6] 的 3/5/7 阶谐波偏振不对称实验观测与 Zhang 等人 2025 年 [7] 的 SBE 和平均场理论复现，构成 TiSe₂ 实验—理论双源证据链”",
+      "missing_evidence": "缺少对两篇原始文献的准确书目信息、DOI/arXiv 链接及逐项证据核验；应确认 [6] 确实是 TiSe₂/CDW 的偏振分辨 HHG 实验，[7] 确实使用半导体布洛赫方程或等效多带微观模型复现相同谐波指纹，并核对其谐波阶次、驱动条件、物种和理论结论。当前引文编号错误不能作为文献证据。",
+      "search_keywords": [
+        "Tyulnev 2025 TiSe2 3rd 5th 7th harmonic polarization asymmetry",
+        "TiSe2 high harmonic generation polarization asymmetry SBE mean field",
+        "Zhang 2025 TiSe2 high harmonic generation semiconductor Bloch equation",
+        "Tyulnev TiSe2 HHG experiment DOI"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "创新点声称“在 TiSe₂ 上先验证已知、再检验未知，能够用复现偏差 ≤10% 作为可重复的方法学标定尺”",
+      "missing_evidence": "缺少直接证据证明 Tyulnev 实验与 Zhang 理论之间采用相同或可定量对齐的谐波阶次、偏振分量、归一化方式、坐标轴和误差定义；也缺少说明为何 10% 是经过实验误差传播、理论模型差异或独立重复测量验证的判据，而不是项目自行设定的工程阈值。",
+      "search_keywords": [
+        "TiSe2 HHG experimental theory quantitative agreement 10 percent error",
+        "polarization-resolved HHG TiSe2 theory experiment comparison",
+        "semiconductor Bloch equation TiSe2 HHG validation uncertainty",
+        "TiSe2 charge density wave high harmonic fingerprint quantitative reproduction"
+      ],
+      "priority": "high"
+    }
+  ]
+}

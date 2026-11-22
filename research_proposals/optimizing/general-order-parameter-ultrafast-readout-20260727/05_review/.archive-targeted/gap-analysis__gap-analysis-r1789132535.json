@@ -1,0 +1,65 @@
+{
+  "gaps": [
+    {
+      "claim": "Woodgate DLM (doublon local moment) 定量论断",
+      "missing_evidence": "Woodgate 等人关于 doublon local moment 模型的定量论断缺少 [N] 引用与文献条目",
+      "search_keywords": [
+        "Woodgate doublon local moment model",
+        "DLM doublon local moment Mott insulator",
+        "Woodgate doublon moment Hubbard model"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Long 等人 41.5 T de Haas-van Alphen 测量 CrSb 的 g-wave 对称性论断",
+      "missing_evidence": "Long 等人 41.5 T 强磁场 dHvA 测量 CrSb g-wave 对称性论断缺 [N] 引用",
+      "search_keywords": [
+        "Long CrSb de Haas-van Alphen 41.5T",
+        "CrSb dHvA g-wave symmetry",
+        "CrSb quantum oscillation bulk altermagnet"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "arXiv:2204.10844 是 Šmejkal 关于 altermagnet PRX 031042 的本尊预印本",
+      "missing_evidence": "arXiv:2204.10844 实际是 Šmejkal 另一篇综述，不是 PRX 12 031042 预印本，需要用正确预印本号替换",
+      "search_keywords": [
+        "Smejkal PRX 12 031042 preprint arXiv",
+        "altermagnet spin group theory arXiv number",
+        "Smejkal altermagnet prediction 2022 arXiv"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "1T-TiSe₂ 的 2×2×2 CDW 保持三重旋转对称性并产生各向异性偏振指纹",
+      "missing_evidence": "现有表述'破缺三重相关对称性'与文献不符，缺少关于 TiSe₂ CDW 保持三重对称与各向异性 HHG 偏振指纹的明确引用支撑（[7] Tyulnev 等）",
+      "search_keywords": [
+        "1T-TiSe2 CDW 2x2x2 threefold symmetry",
+        "Tyulnev TiSe2 high harmonic polarization anisotropy",
+        "TiSe2 charge density wave HHG polarization fingerprint"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "CrSb Néel 温度约 720 K",
+      "missing_evidence": "文献 [27] 实测 CrSb Néel 温度为 733(4) K，需核对该数值与正确引用",
+      "search_keywords": [
+        "CrSb Neel temperature 733 K",
+        "CrSb altermagnet Neel temperature experimental",
+        "CrSb magnetic ordering temperature 733"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "CrSb 自旋劈裂能量 27(2) meV 与带宽比 12%",
+      "missing_evidence": "Singh 等人 [27] 关于 CrSb 27(2) meV 自旋劈裂与 12% 带宽比的论断在摘要可核内容中未确认（v1→v2 J1=23(4) meV 已修改），需要原始文献核实定量值",
+      "search_keywords": [
+        "CrSb spin splitting 27 meV Singh",
+        "CrSb d-wave spin splitting ARPES magnitude",
+        "CrSb altermagnet band splitting 12 percent"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

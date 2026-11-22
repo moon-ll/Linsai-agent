@@ -1,0 +1,162 @@
+{
+  "proposal_id": "general-bsv-driven-hhg-quantum-20260726",
+  "cluster_id": "orphan-route-2026-11-06",
+  "clusters": [
+    "orphan-route-2026-11-06",
+    "cl_20261106_bc2354"
+  ],
+  "entries": [
+    {
+      "source_id": "paper:2025-2503.07256-ultrafast-phase-retrieval-in-strongly-driven-solids-from-hhg",
+      "title": "Ultrafast phase retrieval in strongly driven solids: from HHG spectroscopy to quantum tomography",
+      "summary": "该文系统综述了强场驱动固体中超快相位检索方法的发展脉络，梳理了从高次谐波（HHG）光谱学到量子层析技术的演进路径。综述重点讨论了亚周期时间尺度上量子相位动力学测量的最新技术进展，为固态强场体系中的波函数与相位重构提供了方法学全景。",
+      "path": "",
+      "added_via": "cluster:orphan-route-2026-11-06",
+      "added_at": "2026-11-06T16:33:07Z"
+    },
+    {
+      "source_id": "paper:2026-2605.28236-symmetry-breaking-by-quantum-light-in-solid-state-high-harmo",
+      "title": "Symmetry breaking by quantum light in solid-state high-harmonic generation",
+      "summary": "该文证明圆偏振量子（非经典）光驱动石墨烯与MoS₂的固态高次谐波产生时，量子光场本身可打破晶体的选择定则，从而辐射出经典驱动光下被禁戒的谐波分量。这一结果将对称性调控从经典偏振工程拓展至量子光学领域，表明光子统计特性是控制固体谐波发射对称性的全新自由度。",
+      "path": "",
+      "added_via": "cluster:orphan-route-2026-11-06",
+      "added_at": "2026-11-06T16:33:07Z"
+    },
+    {
+      "source_id": "paper:2023-2304.12547-high-harmonic-generation-in-solids-particle-and-wave-perspec",
+      "title": "High Harmonic Generation in Solids: Particle and Wave Perspectives",
+      "summary": "该综述系统对比了固体高次谐波产生（HHG）中基于粒子的“三步再碰撞”模型与基于波的惠更斯-菲涅耳图像两种理论视角，指出粒子模型难以刻画固体中的相干波动力学（如干涉、相干性及时空演化）。文章论证波动图像是描述强场驱动下固体超快电子动力学更为物理准确的框架，为固体HHG理论提供了超越传统强场粒子图像的新视角。",
+      "path": "",
+      "added_via": "cluster:orphan-route-2026-11-06",
+      "added_at": "2026-11-06T16:33:07Z"
+    },
+    {
+      "source_id": "paper:1999-physics-9906053-quantum-theory-of-a-high-harmonic-generation-as-a-three-step",
+      "title": "Quantum theory of a high harmonic generation as a three-step process",
+      "summary": "提出了一个全量子力学的三步模型描述高次谐波产生（HHG），将阈上电离（ATI）、电子在激光缀饰连续态中的传播与激光辅助复合（LAR）三个阶段统一为相干振幅贡献，并给出各阶段的解析表达式。该模型避免了离能壳态以保持物理一致性，在H⁻离子HHG基准计算中获得定量符合，且长度规范与速度规范结果精确一致，验证了模型的稳健性。",
+      "path": "",
+      "added_via": "cluster:orphan-route-2026-11-06",
+      "added_at": "2026-11-06T16:33:07Z"
+    },
+    {
+      "source_id": "paper:2024-2309.14435-nonclassical-states-of-light-after-high-harmonic-generation",
+      "title": "Nonclassical states of light after high-harmonic generation in semiconductors: a Bloch-based perspective",
+      "summary": "本文首次将半导体Bloch方程与全量子化电磁场耦合，在两带ZnO模型中研究固体高次谐波产生（HHG）的量子光学层面。结果表明，HHG过程使各谐波模自然携带量子关联（压缩、模间纠缠），且对某一谐波模做条件测量（heralding）可远程制备具有Wigner函数负性的非经典光态。该工作把此前仅限于原子的'HHG量子光学'拓展到固态体系，确立固体强场动力学作为非经典光源的可行性。",
+      "path": "knowledge/raw/papers/2024-2309.14435-nonclassical-states-of-light-after-high-harmonic-generation.md",
+      "added_via": "cluster:orphan-route-2026-11-06",
+      "added_at": "2026-11-06T16:33:07Z"
+    },
+    {
+      "source_id": "paper:2025-2512.17031-comparing-homodyne-and-heterodyne-tomography-of-quantum-stat",
+      "title": "Comparing Homodyne and Heterodyne Tomography of Quantum States of Light",
+      "summary": "该文对零差（homodyne）与外差（heterodyne）层析在重构非高斯连续变量（CV）光场量子态时的相对效率做了系统的理论与数值比较。核心发现是：在压缩态示例中，外差层析的均方误差（MSE）可比 Cramér–Rao 下界（CRLB）的预测值低达五个数量级，表明 CRLB 在该场景下极不紧致、外差并非必然劣于零差。结果为 CV 量子态表征中测量方案的定量选择提供了新的判据。",
+      "path": "knowledge/raw/papers/2025-2512.17031-comparing-homodyne-and-heterodyne-tomography-of-quantum-stat.md",
+      "added_via": "cluster:cl_20261106_bc2354",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2025-2506.10483-time-domain-field-correlation-measurements-enable-tomography",
+      "title": "Time-domain field correlation measurements enable tomography of highly multimode quantum states of light",
+      "summary": "本文提出基于时域电场关联测量的高多模量子光态层析方案：利用电光采样（EOS）的亚周期时间分辨能力直接测量场正交分量的时间-时间关联/协方差矩阵，从而完整重构高斯量子态。该方案无需窄带平衡零差探测所依赖的同波段强本振光，天然适配宽带多模量子光场，将量子态层析拓展到中红外至THz等传统方法难以覆盖的波段与模式数，并演示了亚周期分辨的压缩态重构。",
+      "path": "knowledge/raw/papers/2025-2506.10483-time-domain-field-correlation-measurements-enable-tomography.md",
+      "added_via": "cluster:cl_20261106_bc2354",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2020-1907.06589-experimental-quantum-homodyne-tomography-via-machine-learnin",
+      "title": "Experimental quantum homodyne tomography via machine learning",
+      "summary": "本文将受限玻尔兹曼机（RBM）神经网络应用于实验光学零差层析数据，实现了连续变量光场量子态的重构。以相位角为条件参数训练的生成式RBM学习正交分量分布对相位的连续依赖，从而以更少的测量数据量和更稀疏的相位采样完成态重构。相比传统逆Radon/最大似然方法，该方法显著抑制了Wigner函数重构中的过拟合伪影。",
+      "path": "knowledge/raw/papers/2020-1907.06589-experimental-quantum-homodyne-tomography-via-machine-learnin.md",
+      "added_via": "cluster:cl_20261106_bc2354",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2025-2501.09424-from-tomography-of-conditional-states-to-tomography-of-state",
+      "title": "From tomography of conditional states to tomography of states that never existed",
+      "summary": "提出并演示对'从未物理存在的量子态'做完整层析：利用Q函数零差探测（分束后同步测量两个正交分量）采集实验中真实存在的薛定谔猫态数据，再通过双拷贝后处理在软件中合成从未实际制备的介观猫态的层析结果（密度矩阵）。该工作把'态的物理制备'与'态的表征'解耦，目标态仅在数据后处理中诞生，为介观非高斯量子态的性质探索提供了零额外实验成本的途径。",
+      "path": "knowledge/raw/papers/2025-2501.09424-from-tomography-of-conditional-states-to-tomography-of-state.md",
+      "added_via": "cluster:cl_20261106_bc2354",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2025-2512.08540-tunable-passive-squeezing-of-squeezed-light-through-unbalanc",
+      "title": "Tunable passive squeezing of squeezed light through unbalanced double homodyne detection",
+      "summary": "实验演示利用不平衡双零差检测（dual homodyne detection 中输入分束器偏离 50:50），通过对反射率 R 的连续调谐，对压缩光的 Husimi Q 函数施加可调的等效压缩变换——即用纯被动线性光学在测量层面模拟主动压缩操作。由此可直接采样并测量压缩态的 Q 函数，且其表观压缩度可在压缩、圆化（类相干）与反压缩之间连续调控，为非经典光场相空间表征提供无非线性、免相位扫描的新手段。",
+      "path": "knowledge/raw/papers/2025-2512.08540-tunable-passive-squeezing-of-squeezed-light-through-unbalanc.md",
+      "added_via": "cluster:cl_20261106_bc2354",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2025-2508.14212-a-unified-perspective-of-high-harmonic-generation-in-gases-a",
+      "title": "A unified perspective of high-harmonic generation in gases and solids",
+      "summary": "本文在量子光学框架下建立了气体与固体高次谐波产生（HHG）的统一理论视角，将两者表述为激光光子缀饰态之间的同一类光子跃迁过程。核心发现是原子体系中存在与固体带内/带间电流对应的机制：电子-离子复合对应带间辐射，连续态电子在离子势场中被加速的极化对应带内辐射。由此预言了一个由体系内禀能标（带隙/电离能）决定、几乎不依赖驱动强度与波长的常数光子能量交叉点，在其两侧不同机制交替主导谐波发射。",
+      "path": "knowledge/raw/papers/2025-2508.14212-a-unified-perspective-of-high-harmonic-generation-in-gases-a.md",
+      "added_via": "cluster:orphan-route-2026-11-06",
+      "added_at": "2026-11-06T19:21:07Z"
+    },
+    {
+      "source_id": "paper:2024-2211.06177-nonclassical-light-generation-and-control-from-laser-driven",
+      "title": "Nonclassical light generation and control from laser-driven semiconductor intraband excitations",
+      "summary": "本文针对强场驱动的半导体建立了以非线性Bloch（带内）电流与量子化光场自洽耦合为核心的固体高次谐波量子光学描述，突破了将固体谐波仅视为经典电流源的传统处理。证明强场带内非线性本身即可把经典相干驱动转化为非经典光，产生场模压缩以及不同光场模式之间的纠缠。结果展示了通过驱动强度与能带结构对非经典性进行调控的途径，为基于固体强场非线性的量子光源提供了新机制。",
+      "path": "knowledge/raw/papers/2024-2211.06177-nonclassical-light-generation-and-control-from-laser-driven.md",
+      "added_via": "cluster:orphan-route-2026-11-06",
+      "added_at": "2026-11-06T19:21:07Z"
+    },
+    {
+      "source_id": "paper:2026-2604.06707-attosecond-quantum-spectroscopy-with-entangled-pho",
+      "title": "Attosecond quantum spectroscopy with entangled photon pairs",
+      "summary": "本文提出利用参量下转换产生的红外亮压缩光中的纠缠光子对实现阿秒尺度量子光谱学，将光子纠缠的量子关联特性引入超快时间分辨测量。该工作开辟了量子光学与强场物理交叉的阿秒量子光学新方向，为阿秒动力学探测提供了超越经典光谱方案的量子增强手段。",
+      "path": "",
+      "added_via": "cluster:orphan-route-2026-11-06",
+      "added_at": "2026-11-06T19:21:07Z"
+    },
+    {
+      "source_id": "paper:2024-2407.05594-the-quantum-optical-nature-of-high-harmonic-generation",
+      "title": "The quantum-optical nature of high harmonic generation",
+      "summary": "本文建立了HHG的全量子光学理论：将驱动红外场、电子体系和各次谐波辐射全部量子化，证明HHG输出本质上是覆盖所有阶次的多模量子频率梳，而非经典相干光的叠加。理论预言并定量刻画了各谐波模的非经典特征——亚泊松光子统计、正交分量压缩以及谐波间及谐波与驱动场之间的纠缠。工作确立了量子HHG作为非经典极紫外/阿秒光源的物理基础，并指出靠近截止区的谐波携带最强量子特征。",
+      "path": "knowledge/raw/papers/2024-2407.05594-the-quantum-optical-nature-of-high-harmonic-generation.md",
+      "added_via": "cluster:orphan-route-2026-11-06",
+      "added_at": "2026-11-06T19:21:07Z"
+    },
+    {
+      "source_id": "paper:2026-2602.10882-sub-poissonian-statistics-and-quantum-non-gaussianity-from-h",
+      "title": "Sub-Poissonian Statistics and Quantum Non-Gaussianity from High-Harmonic Generation",
+      "summary": "在半导体高次谐波产生（固态HHG）中实验观测到高阶谐波模式的非经典量子光学性质：谐波光场呈现次泊松光子统计（Mandel Q<0）并满足量子非高斯性判据。通过阈值探测器的点击统计构建对损耗鲁棒的非经典性见证，证明固态HHG的输出不能用任何高斯态（相干/热/压缩态及其混合）加损耗解释。这为量子光学框架下的HHG研究提供了固态体系的首批实验证据之一。",
+      "path": "knowledge/raw/papers/2026-2602.10882-sub-poissonian-statistics-and-quantum-non-gaussianity-from-h.md",
+      "added_via": "cluster:orphan-route-2026-11-06",
+      "added_at": "2026-11-06T19:21:07Z"
+    },
+    {
+      "source_id": "paper:2024-2409.05419-super-bunching-light-with-giant-high-order-correlations-and",
+      "title": "Super-bunching light with giant high-order correlations and extreme multi-photon events",
+      "summary": "本文利用光子晶体光纤中泵浦亮压缩光产生了具有巨超高阶关联的超强聚束光源，测得g2(0)达5.86×10⁴、g5(0)达2.72×10⁸，并通过光子数分布测量证实了极端多光子事件（单脉冲31个光子，其概率相对泊松统计增强10¹³⁹倍）。该光源的光子统计可从泊松分布连续调控至超聚束态，为高阶关联成像和极端非线性光学提供了新的量子光源平台。",
+      "path": "knowledge/raw/papers/2024-2409.05419-super-bunching-light-with-giant-high-order-correlations-and.md",
+      "added_via": "cluster:orphan-route-2026-11-06",
+      "added_at": "2026-11-06T23:00:32Z"
+    },
+    {
+      "source_id": "paper:2026-2603.01315-intermodal-entanglement-in-a-quantum-optical-model-of-hhg-du",
+      "title": "Intermodal entanglement in a quantum optical model of HHG due to the back-action on the driving field",
+      "summary": "本文在将驱动激光场量子化的HHG量子光学模型中，系统纳入高次谐波产生过程对驱动场的反作用（光子耗尽与噪声注入），证明该反作用足以在基频模与各谐波模之间产生模间纠缠。模型定性再现了实验中观测到的谐波间非经典关联。据此提出模间纠缠可能是HHG的普遍内禀特征，而非特定材料或实验构型的产物。",
+      "path": "knowledge/raw/papers/2026-2603.01315-intermodal-entanglement-in-a-quantum-optical-model-of-hhg-du.md",
+      "added_via": "cluster:orphan-route-2026-11-06",
+      "added_at": "2026-11-06T23:00:32Z"
+    },
+    {
+      "source_id": "paper:2026-2607.06395-attosecond-metrology-of-bright-quantum-light",
+      "title": "Attosecond metrology of bright quantum light",
+      "summary": "该论文将传统上局限于经典光场的阿秒计量学拓展至量子光场，首次系统研究量子场涨落对阿秒尺度超快光波振荡测量的影响，填补了量子涨落与阿秒测量相互作用这一长期空白。工作为利用阿秒技术表征亮量子光源（如高次谐波产生的非经典光）提供了理论基础与计量方案。",
+      "path": "",
+      "added_via": "cluster:orphan-route-2026-11-06",
+      "added_at": "2026-11-06T23:00:32Z"
+    },
+    {
+      "source_id": "paper:2026-2609.06480-quantum-optics-of-harmonic-generation-in-the-strongly-driven",
+      "title": "Quantum Optics of harmonic generation in the strongly driven Jaynes-Cummings-type system",
+      "summary": "将Jaynes-Cummings腔QED模型推广到强场极限：用强低频经典场驱动单个二能级体系，经N光子共振向量子化的腔谐波模式发射光子，首次对高次谐波产生给出系统的全量子（量子光学）描述。结果表明这些谐波模式具有强非经典性，并在不同谐波阶次间建立量子关联，把强场阿秒物理与腔QED/量子光学两条传统上分离的研究线（恰为Eberly的双重学术遗产）融合起来。",
+      "path": "knowledge/raw/papers/2026-2609.06480-quantum-optics-of-harmonic-generation-in-the-strongly-driven.md",
+      "added_via": "cluster:orphan-route-2026-11-06",
+      "added_at": "2026-11-06T23:00:32Z"
+    }
+  ]
+}

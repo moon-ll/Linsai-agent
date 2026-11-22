@@ -1,0 +1,350 @@
+{
+  "checked": true,
+  "at": "2026-11-08T00:05:16Z",
+  "proposal": "general-phonon-hhg-20261101",
+  "sections_scanned": [
+    "content",
+    "full_review",
+    "method_manual",
+    "rationale",
+    "scheme"
+  ],
+  "cjk_variant_pairs": [
+    {
+      "a": "几何通道",
+      "b": "几何型",
+      "freq_a": 33,
+      "freq_b": 23,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "度判据",
+      "b": "度标度判",
+      "freq_a": 21,
+      "freq_b": 19,
+      "sections_a": [
+        "content",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "通道份额",
+      "b": "通道的",
+      "freq_a": 39,
+      "freq_b": 18,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "调制深度",
+      "b": "调制量",
+      "freq_a": 44,
+      "freq_b": 16,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "method_manual",
+        "scheme"
+      ]
+    },
+    {
+      "a": "声子模",
+      "b": "声子耦合",
+      "freq_a": 32,
+      "freq_b": 15,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "位移电流",
+      "b": "位移定",
+      "freq_a": 17,
+      "freq_b": 15,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "method_manual",
+        "scheme"
+      ]
+    },
+    {
+      "a": "几何通道",
+      "b": "条通道",
+      "freq_a": 33,
+      "freq_b": 14,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "相位判据",
+      "b": "相位分",
+      "freq_a": 19,
+      "freq_b": 14,
+      "sections_a": [
+        "content",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "的调制",
+      "b": "关联调制",
+      "freq_a": 17,
+      "freq_b": 14,
+      "sections_a": [
+        "content",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "关联体",
+      "b": "关联调制",
+      "freq_a": 16,
+      "freq_b": 14,
+      "sections_a": [
+        "content",
+        "full_review",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "关联体系",
+      "b": "关联调",
+      "freq_a": 15,
+      "freq_b": 14,
+      "sections_a": [
+        "content",
+        "full_review",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "关联体系",
+      "b": "关联调制",
+      "freq_a": 15,
+      "freq_b": 14,
+      "sections_a": [
+        "content",
+        "full_review",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    }
+  ],
+  "token_variant_groups": [
+    {
+      "group_key": "w_q",
+      "variants": [
+        {
+          "form": "w_q",
+          "count": 23
+        },
+        {
+          "form": "w_q^",
+          "count": 4
+        }
+      ],
+      "sections": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "group_key": "δI_q",
+      "variants": [
+        {
+          "form": "δI_q",
+          "count": 12
+        },
+        {
+          "form": "δI_q^",
+          "count": 11
+        }
+      ],
+      "sections": [
+        "content",
+        "method_manual",
+        "scheme"
+      ]
+    },
+    {
+      "group_key": "n_d",
+      "variants": [
+        {
+          "form": "n_d",
+          "count": 2
+        },
+        {
+          "form": "n_d^",
+          "count": 6
+        }
+      ],
+      "sections": [
+        "scheme"
+      ]
+    },
+    {
+      "group_key": "n_g",
+      "variants": [
+        {
+          "form": "n_g",
+          "count": 2
+        },
+        {
+          "form": "n_g^",
+          "count": 5
+        }
+      ],
+      "sections": [
+        "scheme"
+      ]
+    },
+    {
+      "group_key": "I_0",
+      "variants": [
+        {
+          "form": "I_0",
+          "count": 3
+        },
+        {
+          "form": "I₀",
+          "count": 2
+        }
+      ],
+      "sections": [
+        "scheme"
+      ]
+    },
+    {
+      "group_key": "I_q",
+      "variants": [
+        {
+          "form": "I_q",
+          "count": 2
+        },
+        {
+          "form": "I_q^",
+          "count": 2
+        }
+      ],
+      "sections": [
+        "scheme"
+      ]
+    }
+  ],
+  "summary": {
+    "cjk_pair_candidates": 503,
+    "token_variant_groups": 6,
+    "note": "候选报告不改文：处置归 writer/critic 契约；数值口径归 params_registry"
+  }
+}

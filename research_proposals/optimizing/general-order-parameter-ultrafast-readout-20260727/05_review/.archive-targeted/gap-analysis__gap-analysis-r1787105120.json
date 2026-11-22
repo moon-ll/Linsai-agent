@@ -1,0 +1,74 @@
+{
+  "gaps": [
+    {
+      "claim": "Cochran quantum coherence tomography 高次谐波方法需要文献支撑",
+      "missing_evidence": "Cochran [62] 与 [63] 在 references.md 中同条文献编两号，导致 L55 引用 [62]/[63] 时实际引用同一篇 Cochran 文献而非不同来源；content.md 中提及该方法但缺乏独立原始文献支撑",
+      "search_keywords": [
+        "Cochran quantum coherence tomography high harmonic generation",
+        "Cochran HHG quantum coherence 2025 2026"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Sørensen 阿秒序参量重建方法需要文献支撑",
+      "missing_evidence": "content.md L55 引用 [63]（原应为 Sørensen attosecond 方法），但 references.md §6 中 [63] 已非 Sørensen 而是 Cochran 重复条目；需独立 Sørensen 文献",
+      "search_keywords": [
+        "Sørensen attosecond order parameter reconstruction high harmonic",
+        "Sørensen HHG order parameter 2025 2026"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Fuchs MnTe 自旋极化高次谐波实验需要文献支撑",
+      "missing_evidence": "content.md 提及 Fuchs MnTe spin-polarized HHG 实验，但缺乏 Fuchs 2024 MnTe 超快磁光实验的原始文献",
+      "search_keywords": [
+        "Fuchs MnTe spin-polarized high harmonic generation",
+        "MnTe ultrafast magneto-optics HHG",
+        "Fuchs 2024 MnTe altermagnet"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "CrSb 超快激光损伤阈值需要文献支撑",
+      "missing_evidence": "content.md 中 CrSb 强场光激发稳定性论证缺乏实验测量数据；需 CrSb 近红外飞秒激光损伤阈值的实测或文献数据",
+      "search_keywords": [
+        "CrSb ultrafast laser damage threshold",
+        "CrSb femtosecond laser damage",
+        "CrSb strong-field optical excitation stability",
+        "CrSb near-infrared pump probe damage threshold"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Rost CrSb 自旋分辨 HHG 2025 需要文献支撑",
+      "missing_evidence": "content.md 提及 Rost CrSb HHG spin-resolved 2025 (arXiv 2507.02673)，但引用为 arXiv 预印本旁路；需正式发表文献或补充预印本支撑",
+      "search_keywords": [
+        "Rost CrSb high harmonic generation spin-resolved 2025",
+        "CrSb spin-polarized high harmonic experimental",
+        "arXiv 2507.02673 altermagnet HHG"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "altermagnet HHG 可辨识性 FIM 条件数方法需要文献支撑",
+      "missing_evidence": "R3 研究内容中 Fisher 信息矩阵条件数 κ<10² 的可行性依据缺乏文献；需 HHG 谱学参数辨识性分析的已有工作支撑",
+      "search_keywords": [
+        "Fisher information matrix nonlinear optics inverse problem",
+        "condition number optical parameter inversion HHG",
+        "HHG parameter identifiability",
+        "Bayesian inversion HHG spectroscopy"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "TiSe₂ 对照实验方法学需要文献支撑",
+      "missing_evidence": "R1 研究内容中 TiSe₂ 作为方法学标定的可行性缺乏文献；需 TiSe₂ 超快动力学 HHG 对照实验的已有数据支撑 ≤10% 误差指标",
+      "search_keywords": [
+        "TiSe2 ultrafast laser damage threshold",
+        "TiSe2 high harmonic generation control",
+        "TiSe2 femtosecond nonlinear optics"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

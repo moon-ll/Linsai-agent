@@ -1,0 +1,30 @@
+[
+  {
+    "at": "2026-11-18T02:00:52Z",
+    "topic_id": "general-attosecond-streaking-20260822",
+    "steps": [
+      {
+        "step": "background",
+        "profile": "researcher",
+        "success": false,
+        "elapsed_s": 1800.32,
+        "error": "hermes agent 超时（1800s）",
+        "verify": {
+          "step": "background",
+          "ok": true,
+          "artifacts": [
+            {
+              "path": "01_background/literature-map.md",
+              "exists": true,
+              "size": 49917,
+              "ok": true
+            }
+          ]
+        }
+      }
+    ],
+    "gaps": [
+      "background"
+    ]
+  }
+]

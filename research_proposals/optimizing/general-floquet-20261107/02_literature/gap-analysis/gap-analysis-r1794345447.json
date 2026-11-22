@@ -1,0 +1,54 @@
+{
+  "gaps": [
+    {
+      "claim": "逆法拉第通道轨道磁化高频尾按 ω⁻³ 衰减（§3.2 第四步，双幂次拟合通道分离判据的根基数值）",
+      "missing_evidence": "所引文献 [33] 原文的高频渐近形式核实：按申请书自引公式 M_orb,z∝ω(Γ²+ω²)⁻¹，高频极限应为 ω⁻¹，与宣称的 ω⁻³ 尾矛盾。需回原文确认正确幂次；若原文支持 ω⁻¹，则通道分离判据、§3.5 幂次拟合及 content §2.2 同步数值均需重建",
+      "search_keywords": [
+        "inverse Faraday effect orbital magnetization frequency scaling",
+        "high-frequency asymptotic light-induced orbital magnetization",
+        "Floquet orbital magnetization power law tail"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "磁振子拓扑平台两版表述（目标三 MnPS₃ vs 筛选段首选 AB′-CrI₃）的筛选依据（§3.4 磁振子线）",
+      "missing_evidence": "AB′-CrI₃ 磁振子拓扑参数的文献来源（单层 CrI₃ 自旋波谱、Dzyaloshinskii-Moriya 相互作用强度、拓扑能隙量级），或单层 MnPS₃ 破缺镜面对称条件的文献依据，以支撑平台筛选的取舍论证",
+      "search_keywords": [
+        "AB'-CrI3 topological magnon",
+        "monolayer CrI3 spin wave spectrum Dzyaloshinskii-Moriya",
+        "MnPS3 monolayer mirror symmetry",
+        "topological magnon gap honeycomb ferromagnet"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "测量四要素（能量分辨率/动量分辨率/光强取值）目前'计算完成后填入'，目标四承诺数值零落点（§3.4 第八步）",
+      "missing_evidence": "同类实验的文献基准量级以先给上界：先进自旋-角分辨光电子能谱（SARPES）与时间分辨 ARPES 的典型能量分辨率（meV–百 meV 量级）、动量分辨率（10⁻³–10⁻² Å⁻¹ 量级）、泵浦光强/通量典型取值",
+      "search_keywords": [
+        "spin- and angle-resolved photoemission energy resolution",
+        "time-resolved ARPES momentum resolution state of the art",
+        "pump fluence typical Floquet experiment"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§3.4'已被报道'句（某现象已有报道的表述）无任何引用挂靠",
+      "missing_evidence": "支撑该'已被报道'论断的原始实验或理论报道文献（评审建议补 [27,28]），需检索对应现象（如 Floquet 磁振子/光驱动自旋拓扑现象）的已有报道并纳入参考文献池与编号体系",
+      "search_keywords": [
+        "Floquet magnon experimental observation",
+        "light-driven magnon topology reported",
+        "photoemission Floquet sidebands observation"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "三处 arXiv ID 直引（对应 [13][33][20]）绕开 [N] 编号体系，与全稿 66 处 [N] 风格脱节",
+      "missing_evidence": "三篇被引文献条目在参考文献池中的正式登记与编号化确认（references 校验步骤需核验 arXiv ID 对应条目真实存在且已编号），消除游离引用",
+      "search_keywords": [
+        "arXiv numbered citation registration references validation"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "scheme"
+}

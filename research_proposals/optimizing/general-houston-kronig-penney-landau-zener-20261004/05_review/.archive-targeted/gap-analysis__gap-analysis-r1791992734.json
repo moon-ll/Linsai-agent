@@ -1,0 +1,49 @@
+{
+  "gaps": [
+    {
+      "claim": "scheme.md L45/L111/L163 处引用的 [7] 标注为 'Schmidt 等'，但评审核实首作为 Schubert，Schmidt 仅为第二作者，存在作者归属错误，影响引用真实性与可溯源性",
+      "missing_evidence": "[7] 的真实首作者信息及原始文献完整元数据（题名、期刊、卷期、年份、DOI），以及该文献与申请书所述论点（如缺陷态调制产率、Cr 掺杂诱导子带隙谐波）的具体对应关系",
+      "search_keywords": [
+        "Schubert high harmonic generation solid",
+        "Schubert Schmidt interband HHG",
+        "defect-induced even-order harmonic solid",
+        "transition metal doping second harmonic generation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "L111 处具名引用 'Srivastava 等' 但未给文献编号，且 refs 全表无该条目，属悬空具名引用，无法溯源",
+      "missing_evidence": "Srivastava 等关于所述论点（推测涉及过渡金属掺杂、子带隙谐波或缺陷态相关）的真实可溯源同行评审文献完整著录信息",
+      "search_keywords": [
+        "Srivastava transition metal doped semiconductor harmonic",
+        "Srivastava subbandgap HHG",
+        "Srivastava defect states dielectric",
+        "Srivastava Cr doped oxide HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "参考文献表中 refs[16] 为空号，对应正文相关论点的引用缺乏实际文献支撑",
+      "missing_evidence": "正文引用 [16] 处所对应论点的可溯源原始文献完整著录（作者、题目、期刊、年份、DOI）",
+      "search_keywords": [
+        "Kronig-Penney model impurity semiconductor",
+        "defect state subbandgap dielectric",
+        "Landau-Zener interband coupling solid HHG",
+        "tight-binding TDDFT band gap comparison"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "创新点 L141 声称'三角甄别的可执行协议与反向利用缺陷增强子带隙谐波的工程化路径据 2026 年 10 月公开文献检索尚未见报道'，该新颖性判断缺乏可审计的检索证据支撑",
+      "missing_evidence": "支撑该新颖性判断的系统性文献检索证据——包括检索式、覆盖数据库（如 Web of Science/Scopus/arXiv）、检索截止日期、命中数、剔除标准等可审计检索记录，以证实三角甄别协议及缺陷增强子带隙谐波工程化路径确属首创",
+      "search_keywords": [
+        "triangular discrimination protocol high harmonic generation",
+        "defect-enhanced subbandgap harmonic generation",
+        "engineering defect even harmonic solid",
+        "novelty prior art search evidence"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

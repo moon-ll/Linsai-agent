@@ -1,0 +1,61 @@
+{
+  "gaps": [
+    {
+      "claim": "rationale.md §1.2.1 中 BSV 驱动固体 HHG 截止能量表述（'3-5 倍带隙→30-40 eV / EUV 20-80 eV'）与 content §2.2 / scheme §3.1 / plan.md §Y2 的正确表述（'7-13 阶 / 8-20 eV'）跨 round 8 轮未修，形成'一对三错'跨章不一致",
+      "missing_evidence": "缺少 BSV 驱动固体 HHG 截止阶/截止能量的标度律文献，特别是压缩参数 g(2)(0)、驱动场强、带隙三者耦合下 cutoff 标度的同行评审实验/理论依据",
+      "search_keywords": [
+        "BSV driven solid high harmonic generation cutoff scaling law",
+        "bright squeezed vacuum HHG solid-state cutoff order band gap",
+        "nonclassical light HHG semiconductor cutoff energy scaling",
+        "squeezed light solid HHG photon energy scaling rule",
+        "quantum light driven HHG cutoff extension"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "references.md 中预印本（arXiv）占比偏高，27 条文献中同行评审期刊文献不足",
+      "missing_evidence": "缺少 BSV 驱动固体高次谐波、量子光场非线性光谱学的同行评审期刊文献（Nature/Science 及其子刊、Phys. Rev. Lett./Phys. Rev. X/Phys. Rev. B、Optica/Nat. Photon./Light Sci. Appl. 等）作为骨架支撑",
+      "search_keywords": [
+        "bright squeezed vacuum high harmonic generation solid peer-reviewed journal",
+        "nonclassical light solid-state HHG Nature Physics Optica",
+        "quantum light nonlinear spectroscopy semiconductor published",
+        "squeezed light driven HHG Physical Review Letters",
+        "BSV spectroscopy condensed matter journal article"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "QEF（量子估计框架）维度数跨章三种表述并存（rationale §1.4 '双指标'、content §2.4 '三维度'、content §2.8 '双核心指标体系'），需统一物理图像",
+      "missing_evidence": "缺少高次谐波光谱学中量子几何量（Berry 曲率、量子度规、Fisher 信息）独立维度数的标准分类文献，以及在 HHG 反演问题中应取多少独立可观测量的方法学参考",
+      "search_keywords": [
+        "quantum Fisher information high harmonic generation Berry curvature quantum metric dimensionality",
+        "quantum estimation framework HHG spectroscopy observable dimension",
+        "quantum geometry HHG spectral inversion dimension count",
+        "Berry curvature quantum metric independent observable HHG"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "BSV g(2)(0) 双配置（高压缩 vs 低压缩）单调对照体系的预期结论需要直接实验/理论文献支撑",
+      "missing_evidence": "缺少在固体 HHG 中直接对比 g(2)(0) 双配置下效率、截止阶与光谱权重差异的同行评审工作，以及关于'压缩度越高 HHG 越强/截止越宽'单调性的标度律证据",
+      "search_keywords": [
+        "g2 zero-delay squeezing parameter HHG efficiency scaling solid",
+        "BSV compression parameter HHG semiconductor monotonic relationship",
+        "second-order coherence function high harmonic generation experiment",
+        "squeezed light g2 HHG efficiency enhancement experimental verification"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Even-Tzur Q_F→V_classical ≈ 1 判定准则跨材料体系移植性需要更多体系验证文献",
+      "missing_evidence": "缺少 Even-Tzur 经典场对应准则在 TMDC、拓扑材料、Mott 绝缘体等不同固体体系中适用性的同行评审对比验证文献",
+      "search_keywords": [
+        "Even Tzur classical field correspondence solid HHG verification TMDC",
+        "quantum-to-classical correspondence HHG semiconductor different materials",
+        "BSV Q-factor classical limit verification diverse materials",
+        "squeezed vacuum classical correspondence HHG review"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

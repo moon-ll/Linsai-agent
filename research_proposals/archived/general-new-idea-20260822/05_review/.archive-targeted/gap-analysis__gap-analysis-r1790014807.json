@@ -1,0 +1,40 @@
+{
+  "gaps": [
+    {
+      "claim": "§5.4 L83 三档判据「<0.3 零阶、>0.7/1.0 相对论性紧束缚」关于 SOC 修正阶次物理边界的数值依据",
+      "missing_evidence": "Werner 等 PRB 110, 235101 (arXiv:2407.07752) 全文无 SOC/劈裂比 0.3 或 1.0 分界判据，需替换为真实给出紧束缚模型 SOC 修正阶次适用范围的文献（哈密顿量按 SOC/U 比值分阶的理论判据或基准计算）",
+      "search_keywords": [
+        "spin-orbit coupling perturbation regime tight-binding threshold",
+        "nonrelativistic spin splitting perturbative expansion altermagnet",
+        "tight-binding SOC order criterion d-wave g-wave altermagnet",
+        "Werner PRB 110 235101 Rashba Zeeman altermagnet HHG",
+        "SOC perturbation theory transition metal pnictide band structure"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§6.1 L95 R3/R5/R6 双向支撑：MnTe g 波 altermagnet 在 g 波自旋纹理动量依赖特征与 HHG 频谱之间的定量映射",
+      "missing_evidence": "缺少 d-wave/g-wave altermagnet HHG 频谱中节点面结构（nodal plane / nodal line）特征信号的理论预言或实验观测文献作为定量映射依据",
+      "search_keywords": [
+        "altermagnet g-wave high harmonic generation selection rule",
+        "nodal plane altermagnet HHG signature",
+        "MnTe d-wave spin splitting HHG polarization anisotropy",
+        "altermagnet node line harmonic generation symmetry",
+        "spin group theory HHG altermagnet Werner 2026"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§5.4 三档判据中「>0.7 相对论性紧束缚适用」与「>1.0 相对论性」两个阈值在 0.7–1.0 区间归属悬空",
+      "missing_evidence": "缺少在 SOC/U 比值 0.7–1.0 过渡区分别做一阶微扰紧束缚与全相对论性紧束缚交叉验证的基准文献",
+      "search_keywords": [
+        "SOC strength ratio perturbative versus full relativistic tight-binding benchmark",
+        "first-order SOC correction relativistic regime transition metal",
+        "tight-binding perturbation theory applicability SOC strength",
+        "DFT+U versus fully relativistic TB altermagnet benchmark"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

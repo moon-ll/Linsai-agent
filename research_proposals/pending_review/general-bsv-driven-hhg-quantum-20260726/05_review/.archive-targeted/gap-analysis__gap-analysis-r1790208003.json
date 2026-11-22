@@ -1,0 +1,75 @@
+{
+  "gaps": [
+    {
+      "claim": "Liu等[6]已在单层MoS₂中首次观测到经典光驱动的HHG，证明TMDC是可靠的HHG介质",
+      "missing_evidence": "缺少Liu等关于单层MoS₂经典光HHG首次观测的原始文献支撑（作者/期刊/年份/实验条件细节）",
+      "search_keywords": [
+        "Liu monolayer MoS2 high harmonic generation first observation",
+        "monolayer MoS2 HHG classical light Liu 2017 2018",
+        "transition metal dichalcogenide HHG first TMDC"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "在等带隙非关联对照体系中，SnS₂ 2.1–2.3 eV与莫尔扭转MoS₂带隙匹配度高",
+      "missing_evidence": "缺少SnS₂实验带隙值（光学/ARPES测量，2.1–2.3 eV）与莫尔扭转MoS₂/双层MoS₂带隙（1.1–1.5 eV）文献基准",
+      "search_keywords": [
+        "SnS2 bandgap experimental optical ARPES",
+        "SnS2 bulk bandgap 2.1 2.3 eV",
+        "twisted bilayer MoS2 moire bandgap value",
+        "MoS2 bilayer bandgap twist angle dependence"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "QEF 定义中 q∈{7,9} 与 QEFyield 推广至 q=7,9,11,13 阶的口径一致性",
+      "missing_evidence": "缺少BSV驱动HHG中QEF（量子增强因子）对不同谐波阶次的系统测量文献，特别是7/9/11/13阶响应差异",
+      "search_keywords": [
+        "QEF quantum enhancement factor harmonic order dependence",
+        "bright squeezed vacuum HHG harmonic order scaling",
+        "BSV HHG per-order yield enhancement measurement"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "κ-Br类莫尔材料中'9 T磁场即可调节Mott相变'的物理可行性",
+      "missing_evidence": "缺少9 T量级下Mott绝缘体相变或反铁磁序抑制的实验文献依据（典型场致Mott转变需数十T）",
+      "search_keywords": [
+        "kappa-(BEDT-TTF)2Cu[N(CN)2]Br 9 T field induced Mott",
+        "molecular Mott insulator field-driven phase transition low field",
+        "organic antiferromagnet magnetic field phase diagram 9 Tesla"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "莫尔扭转双层体系作为BSV-HHG关联绝缘体探针的可行性",
+      "missing_evidence": "缺少莫尔扭转MoS₂/MoSe₂等体系中相关绝缘态/平带相变的直接实验或理论文献支撑",
+      "search_keywords": [
+        "twisted bilayer MoS2 correlated insulator flat band",
+        "moire Mott insulator high harmonic generation",
+        "twisted homobilayer TMD correlated state HHG probe"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "BSV驱动HHG在固体中的量子光场增强效应高于经典光场同平均强度条件",
+      "missing_evidence": "缺少BSV HHG（Rasputnyi/Liang等2024实验）与同强度经典光HHG的对照测量文献，包括量子增强因子数值",
+      "search_keywords": [
+        "bright squeezed vacuum HHG solid state experiment 2024",
+        "Rasputnyi BSV solid HHG quantum enhancement",
+        "QEF squeezed vacuum high harmonic generation experimental value"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "BSV-HHG复现度70%可作为量子光场驱动有效性标志",
+      "missing_evidence": "缺少BSV HHG中复现度（fidelity）作为光场量子性有效性的公认判据文献",
+      "search_keywords": [
+        "g2 squeezed light fidelity quantum benchmark",
+        "BSV photon statistics fidelity threshold harmonic"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "content"
+}

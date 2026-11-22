@@ -1,0 +1,44 @@
+{
+  "gaps": [
+    {
+      "claim": "f-sum rule阈值 (1+0.5·U/W) 标度律的数值 5%/6.25%/7.5% 缺乏推导过程",
+      "missing_evidence": "该标度律的数值推导未给出；强关联材料中 f-sum rule 破坏程度的定量标度关系缺乏直接文献支撑",
+      "search_keywords": [
+        "f-sum rule strongly correlated Hubbard U",
+        "high harmonic generation sum rule bandwidth renormalization",
+        "solid-state HHG sum rule violation U/W scaling"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Chern约束仅适用于拓扑材料，TiSe₂ SBE档的f-sum rule阈值与Chern约束的关系叙述不清晰",
+      "missing_evidence": "中等关联材料中f-sum rule阈值与拓扑不变量约束的兼容性与边界条件缺乏文献支撑",
+      "search_keywords": [
+        "f-sum rule topological invariant constraint",
+        "Chern number high harmonic generation",
+        "sum rule bandwidth renormalization solid state HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Raissi与Karniadakis两篇PINN综述的角色分工重叠，应区分奠基性工作与适用边界综述",
+      "missing_evidence": "缺少对PINN方法学奠基工作(Raissi)与适用边界综述(Karniadakis)各自定位的系统梳理",
+      "search_keywords": [
+        "Raissi physics-informed neural network PINN",
+        "Karniadakis PINN review applicability boundaries",
+        "PINN nonlinear optics inverse problem"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Loaiza GQPE展望性叙述与本节方法学定位脱节",
+      "missing_evidence": "量子路径积分+生成模型在NISQ硬件上的高次谐波光谱学应用前景缺乏系统性文献综述",
+      "search_keywords": [
+        "quantum path integral high harmonic generation",
+        "generative model spectroscopy inverse problem",
+        "NISQ attosecond spectroscopy"
+      ],
+      "priority": "low"
+    }
+  ]
+}

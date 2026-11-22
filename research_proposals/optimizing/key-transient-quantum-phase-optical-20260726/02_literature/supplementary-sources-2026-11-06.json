@@ -1,0 +1,234 @@
+{
+  "proposal_id": "key-transient-quantum-phase-optical-20260726",
+  "cluster_id": "cl_20261106_f2b6d1",
+  "clusters": [
+    "cl_20261106_f2b6d1",
+    "cl_20261106_9fbfe5"
+  ],
+  "entries": [
+    {
+      "source_id": "paper:2025-2506.10379-hamiltonian-learning-via-inverse-physics-informed-neural-net",
+      "title": "Hamiltonian learning via inverse physics-informed neural networks",
+      "summary": "提出逆物理信息神经网络框架 iPINN-HL，将（含时）薛定谔方程残差作为软约束嵌入损失函数，从少量动力学测量中反演哈密顿量参数。在少样本条件下显著优于纯数据驱动的 DNN-HL 基线，同时保留 PINN 作为方程求解器的能力。发表于 Phys. Rev. Research 7, 043137 (2025)。",
+      "path": "knowledge/raw/papers/2025-2506.10379-hamiltonian-learning-via-inverse-physics-informed-neural-net.md",
+      "added_via": "cluster:cl_20261106_f2b6d1",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2026-2603.15786-physics-informed-neural-networks-for-solving-saddl",
+      "title": "Physics-informed neural networks for solving saddle-point equations in strong-field physics with tailored fields",
+      "summary": "本文提出一种无监督物理信息神经网络（PINN）方法，用于求解强场近似框架下描述直接阈上电离（ATI）过程的鞍点方程（SPEs）。该方法以理论背景清晰、物理机制明确的 ATI 体系作为基准，为利用机器学习求解强场物理中的复杂超越方程提供了新范式。",
+      "path": "",
+      "added_via": "cluster:cl_20261106_f2b6d1",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2025-S0021999125001433-vs-pinn-a-fast-and-efficient-training-of-physics-informed-ne",
+      "title": "VS-PINN: A fast and efficient training of physics-informed neural networks",
+      "summary": "提出 VS-PINN，在物理信息神经网络（PINN）框架中引入变尺度（variable scaling）技术，对输入变量做尺度变换后再送入网络，从而显著提升训练效率与求解精度。该方法特别针对解随时空快速变化（陡梯度、高频振荡）的偏微分方程问题，缓解了标准 PINN 难以拟合快变解的瓶颈。对需要用 PINN 做正演/反演的强场体系（如含时薛定谔方程类刚性快变动力学）具有直接的方法学参考价值。",
+      "path": "knowledge/raw/papers/2025-S0021999125001433-vs-pinn-a-fast-and-efficient-training-of-physics-informed-ne.md",
+      "added_via": "cluster:cl_20261106_f2b6d1",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2026-2602.14663-pseudo-differential-enhanced-physics-informed-neural-network",
+      "title": "Pseudo-differential-enhanced physics-informed neural networks",
+      "summary": "该文将梯度增强PINN（gPINN）的正则化思想推广到傅里叶空间，以伪微分算子的频域符号 σ(k) 作为损失中的算子约束，使PINN可统一施加任意阶（含非整数阶、非局部）算子的物理约束。通过符号对残差做频域加权，训练损失对高频模的敏感度被系统性上调，从而缓解神经网络的谱偏差（先学低频）问题，改善高频结构与陡峭特征的求解精度。属于通用科学机器学习训练框架层面的改进，不绑定特定物理体系。",
+      "path": "knowledge/raw/papers/2026-2602.14663-pseudo-differential-enhanced-physics-informed-neural-network.md",
+      "added_via": "cluster:cl_20261106_f2b6d1",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2024-2408.16806-physics-informed-neural-networks-and-extensions",
+      "title": "Physics-Informed Neural Networks and Extensions",
+      "summary": "本文是PINN创始团队（Raissi/Perdikaris/Karniadakis）对其方法体系的综述性文章，系统梳理了物理信息神经网络以PDE残差软约束嵌入训练的基本范式，以及正问题求解、反问题（隐物理/参数辨识）与数据驱动发现PDE三大应用主线。文章同时总结了面向刚性、多尺度与非光滑解等失效模式的扩展路线，包括域分解（cPINN/XPINN）、变分弱形式（VPINN）、自适应采样与残差加权等，给出了'数据+物理'双驱动的科学机器学习统一图景。",
+      "path": "knowledge/raw/papers/2024-2408.16806-physics-informed-neural-networks-and-extensions.md",
+      "added_via": "cluster:cl_20261106_f2b6d1",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2025-2411.02177-physics-informed-neural-networks-viewpoint-for-solving-the-d",
+      "title": "Physics-informed neural networks viewpoint for solving the Dyson-Schwinger equations of quantum electrodynamics",
+      "summary": "本文首次将物理信息神经网络（PINN）用于求解量子电动力学的Dyson-Schwinger积分方程：把方程残差嵌入损失函数，用神经网络直接表示夸克传播子的自能结构，在Landau规范下学习动力学质量函数M(p²)。该方法免去了传统离散化网格与不动点迭代，复现了动力学质量生成与手征对称性破缺的已知物理结果，并将PINN定位为量子场论正/反问题（参数反演）的统一可微分求解框架。",
+      "path": "knowledge/raw/papers/2025-2411.02177-physics-informed-neural-networks-viewpoint-for-solving-the-d.md",
+      "added_via": "cluster:cl_20261106_f2b6d1",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2024-2409.19895-fourier-domain-physics-informed-neural-network",
+      "title": "Fourier Domain Physics Informed Neural Network",
+      "summary": "该论文提出在傅里叶（频率）域构建物理信息神经网络（Fourier-domain PINN），将超快光学中含色散与非局域卷积项的非线性偏积分微分方程（如广义非线性薛定谔方程）的微分/积分算子转化为频域乘法运算，从而高效且高精度地模拟超短脉冲在非线性介质中的传播。该方法为利用 PINN 求解光学正问题与反演（参数重构）提供了新框架，相比时域 PINN 在处理此类方程上具有天然优势。",
+      "path": "",
+      "added_via": "cluster:cl_20261106_f2b6d1",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2025-2504.05367-physics-informed-neural-networks-for-one-dimensional-quantum",
+      "title": "Physics-Informed Neural Networks for One-Dimensional Quantum Well Problems",
+      "summary": "本文将物理信息神经网络（PINN）应用于一维量子阱（无限深与有限深方势阱）的定态薛定谔本征值问题，用神经网络表示基态波函数并将能量作为可训练参数，实现本征函数与本征值的联合求解。通过在损失函数中引入Dirichlet边界条件与波函数归一化约束，消除了本征函数的尺度自由度并抑制零解收敛。以存在解析解的模型体系验证了PINN作为量子本征值问题可微求解器的可行性，属于方法验证性质的工作。",
+      "path": "knowledge/raw/papers/2025-2504.05367-physics-informed-neural-networks-for-one-dimensional-quantum.md",
+      "added_via": "cluster:cl_20261106_f2b6d1",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2026-2604.15645-pinnacle-an-open-source-computational-framework-for-classica",
+      "title": "PINNACLE: An Open-Source Computational Framework for Classical and Quantum PINNs",
+      "summary": "PINNACLE 是一个统一支持经典与量子物理信息神经网络（PINN）的开源计算框架，将多 GPU 并行训练、自适应损失均衡与量子-经典混合架构整合为模块化工作流。其核心价值在于降低 PINN 方法在物理正/逆问题（含薛定谔方程类量子问题）中的工程与复现门槛，为科研社区提供可扩展的基准平台。",
+      "path": "knowledge/raw/papers/2026-2604.15645-pinnacle-an-open-source-computational-framework-for-classica.md",
+      "added_via": "cluster:cl_20261106_f2b6d1",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2026-2604.03346-learning-pdes-for-portfolio-optimization-with-quantum-physic",
+      "title": "Learning PDEs for Portfolio Optimization with Quantum Physics-Informed Neural Networks",
+      "summary": "提出基于张量秩分解（tensor rank decomposition）的量子物理信息神经网络（QPINN），用于求解投资组合优化中随机最优控制导出的PDE（HJB类方程）。通过将权重/系数张量按低秩格式因子化，在保持解精度的前提下将可训练参数较经典PINN减少约80倍。该工作展示了PINN范式向金融PDE的迁移以及参数高效变分量子模型在NISQ约束下的可行性。",
+      "path": "knowledge/raw/papers/2026-2604.03346-learning-pdes-for-portfolio-optimization-with-quantum-physic.md",
+      "added_via": "cluster:cl_20261106_f2b6d1",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2017-1711.10566-physics-informed-deep-learning-part-ii-data-driven-discovery",
+      "title": "Physics Informed Deep Learning (Part II): Data-driven Discovery of Nonlinear Partial Differential Equations",
+      "summary": "PINN 系列第二部分，处理'从数据中发现非线性偏微分方程'的逆问题：将深度神经网络作为时空场的连续可微逼近器，把 PDE 残差（含未知参数 λ）嵌入损失函数并与网络权重联合优化，从而同时学到方程的解与未知系数。对完全未知的方程结构，进一步用候选项库加稀疏回归按 parsimony 原则恢复解析形式。在 KdV、Burgers、Schrödinger 及 Navier-Stokes（仅凭被动标量观测同时重构速度场与隐变量压力场）等基准上验证了方法对含噪、稀疏、间接数据的鲁棒性。",
+      "path": "knowledge/raw/papers/2017-1711.10566-physics-informed-deep-learning-part-ii-data-driven-discovery.md",
+      "added_via": "cluster:cl_20261106_f2b6d1",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2017-1711.10561-physics-informed-deep-learning-part-i-data-driven-solutions",
+      "title": "Physics Informed Deep Learning (Part I): Data-driven Solutions of Nonlinear Partial Differential Equations",
+      "summary": "提出物理信息神经网络（PINN）奠基性框架的 Part I：将非线性PDE的方程残差与初边值条件直接编码进损失函数，用单个神经网络从稀疏、含噪的散点数据学习连续时空解析解。给出连续时间与离散时间（Runge-Kutta格式）两种算法，并在非线性薛定谔方程、Burgers方程和Navier-Stokes方程上验证了精度与数据效率，为Part II的参数辨识与数据驱动PDE发现奠定框架。",
+      "path": "knowledge/raw/papers/2017-1711.10561-physics-informed-deep-learning-part-i-data-driven-solutions.md",
+      "added_via": "cluster:cl_20261106_f2b6d1",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2025-2510.14656-inverse-problems-for-partial-differential-equations-with-jum",
+      "title": "Inverse Problems for Partial Differential Equations with Jump Discontinuities in Coefficients via Two-Stage Physics-Informed Deep Learning and Statistical Mixture Models",
+      "summary": "提出两阶段物理信息深度学习框架，反演系数含跳变间断（分片光滑）的PDE逆问题：第一阶段用双网络（状态网络+系数网络）解耦联合优化，给出逐点系数估计与跳变指示场；第二阶段用统计混合模型（GMM及其贝叶斯变体BDMC）对带噪逐点估计做聚类，统计定位间断界面并重构分片系数。方法无网格、可扩展到高维非线性PDE（如以化学势为系数、含过渡区域的相场类方程），在稀疏含噪数据下仍能较准确定位界面。",
+      "path": "knowledge/raw/papers/2025-2510.14656-inverse-problems-for-partial-differential-equations-with-jum.md",
+      "added_via": "cluster:cl_20261106_f2b6d1",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2026-doi-10-1103-84vm-tvzm-physics-informed-time-series-analysis-with-kolmogorov-arnold",
+      "title": "Physics-informed time series analysis with Kolmogorov-Arnold networks under Ehrenfest constraints",
+      "summary": "该文将 Kolmogorov-Arnold 网络（KAN）与基于 Ehrenfest 定理的物理信息损失函数结合，对量子系统的可观测量时间序列做物理约束建模。在自旋链高次谐波（HHG）系统上验证，仅需约 200 个训练样本即可准确刻画系统动力学，展示了显著优于常规数据驱动方法的小样本效率与物理自洽性。",
+      "path": "knowledge/raw/papers/2026-doi-10-1103-84vm-tvzm-physics-informed-time-series-analysis-with-kolmogorov-arnold.md",
+      "added_via": "cluster:cl_20261106_f2b6d1",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2026-2603.27684-solving-the-inverse-problem-of-x-ray-absorption-spectroscopy",
+      "title": "Solving the inverse problem of X-ray absorption spectroscopy via physics-informed deep learning",
+      "summary": "提出一种物理信息深度学习框架，通过频域正则化将X射线吸收谱（XAS）直接反演为原子结构描述符，绕开传统基于正向模型的迭代拟合。训练后的网络推理速度达毫秒量级，并在电池阴极材料与非晶材料两类难例上验证了反演精度。为'谱→结构'这类病态逆问题提供了兼顾物理一致性与实时性的通用求解范式。",
+      "path": "knowledge/raw/papers/2026-2603.27684-solving-the-inverse-problem-of-x-ray-absorption-spectroscopy.md",
+      "added_via": "cluster:cl_20261106_f2b6d1",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2025-2505.22761-a-comprehensive-analysis-of-pinns-variants-applications-and",
+      "title": "A comprehensive analysis of PINNs: Variants, Applications, and Challenges",
+      "summary": "这是一篇关于物理信息神经网络（PINNs）的系统性综述，梳理了主流变体（如变分形式 VPINN、域分解 XPINN/cPINN、课程式训练等）及其在非线性 ODE/PDE 求解与反问题中的应用图景。文章的核心结论是：PINN 将物理方程残差嵌入损失函数从而实现数据与物理双约束，但对强非线性问题（如混沌、多尺度、陡峭梯度解）原生 PINN 普遍收敛困难，需要先验知识引导（合理初值、参数延拓、已知渐近解）或专门变体才能可靠工作。对强场超快方向而言，这是评估'用 PINN 求解/反演强场动力学方程'这一技术路线可用边界的重要参考。",
+      "path": "knowledge/raw/papers/2025-2505.22761-a-comprehensive-analysis-of-pinns-variants-applications-and.md",
+      "added_via": "cluster:cl_20261106_f2b6d1",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2025-2405.24194-energy-embedded-neural-solvers-for-one-dimensional-quantum-s",
+      "title": "Energy-Embedded Neural Solvers for One-Dimensional Quantum Systems",
+      "summary": "提出将能量本征值作为可学习参数嵌入物理信息神经网络（PINN），实现对一维定态薛定谔方程本征值问题的无网格求解。在无限深势阱、谐振子、Woods-Saxon 与双势阱等标准基准势上同时收敛出基态与激发态的波函数及能级，验证了该方案从解析可解到数值难例的普适性。该工作为量子本征值问题提供了区别于打靶法与矩阵对角化的可微、端到端求解范式。",
+      "path": "knowledge/raw/papers/2025-2405.24194-energy-embedded-neural-solvers-for-one-dimensional-quantum-s.md",
+      "added_via": "cluster:cl_20261106_f2b6d1",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2025-2508.16940-phonon-anharmonicity-driven-charge-density-wave-transition-a",
+      "title": "Phonon anharmonicity-driven charge density wave transition and ultrafast dynamics in 1T-TaS2/TaSe2",
+      "summary": "该工作用第一性原理非简谐声子计算结合机器学习力场加速的从头算分子动力学（MLFF-AIMD），证明1T-TaS2/TaSe2的电荷密度波（CDW）相变由声子非简谐性驱动，而非仅由传统图像中的电声耦合决定。模拟直接捕捉了CDW（David星集群）的成核与锁定过程，给出约3 ps的超快成核时间尺度，与超快泵浦-探测实验观察相符。这为CDW相变的热力学与动力学提供了统一的原子尺度微观图像。",
+      "path": "knowledge/raw/papers/2025-2508.16940-phonon-anharmonicity-driven-charge-density-wave-transition-a.md",
+      "added_via": "cluster:cl_20261106_9fbfe5",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2026-2607.22316-charge-density-wave-phase-transitions-in-monolayer-1t-tas2-f",
+      "title": "Charge-Density-Wave Phase Transitions in Monolayer 1T-TaS2 from Universal Machine Learning Molecular Dynamics",
+      "summary": "本文用通用机器学习原子间势（universal MLIP）驱动大规模分子动力学，模拟单层1T-TaS2中电荷密度波（CDW）相变的完整结构演化。核心发现是单层极限下α/β两种手性CDW以多畴混合态的形式持续存在直至最低温度，而非弛豫为单一手性的长程序基态，表明手性自由度与畴动力学主导单层CDW相变。该工作为强关联二维TMD的结构相变提供了兼具DFT精度与大时空尺度的模拟范式。",
+      "path": "knowledge/raw/papers/2026-2607.22316-charge-density-wave-phase-transitions-in-monolayer-1t-tas2-f.md",
+      "added_via": "cluster:cl_20261106_9fbfe5",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2024-1908.04455-renormalization-of-the-mott-gap-by-lattice-entropy-the-case",
+      "title": "Renormalization of the Mott gap by lattice entropy: The case of 1T-TaS2",
+      "summary": "该工作用从头算分子动力学研究1T-TaS2的电荷密度波（CDW）相，发现有限温度下晶格熵（热位移无序）会显著重整化CDW触发的Mott能隙：升温过程中CDW振幅（序参量）几乎保持不变，而能隙减半。这证明Mott能隙的坍缩与CDW长程序可以脱钩，'Mott失稳'可由晶格无序单独驱动，为解读超快泵浦-探测实验中能隙先于CDW序消失、以及光致隐藏相的物理提供了机制图像。",
+      "path": "knowledge/raw/papers/2024-1908.04455-renormalization-of-the-mott-gap-by-lattice-entropy-the-case.md",
+      "added_via": "cluster:cl_20261106_9fbfe5",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2026-2608.02456-real-time-dynamics-of-the-two-step-charge-density-wave-trans",
+      "title": "Real-time dynamics of the two-step charge-density-wave transition in bulk 1T-TaS2",
+      "summary": "本文用机器学习力场驱动的大尺度分子动力学，在实时原子轨迹层面解析了体相 1T-TaS2 电荷密度波（CDW）融化的两步机制：约 200 K 的 C→NC 转变中 David 星（SoD）簇并未消失，而是通过“形变-生成”过程重排为畴结构；直至约 350 K 的 NC→IC 转变，局域 SoD 畸变幅度才坍塌。核心贡献是把 CDW 序参量解耦为簇排列/取向序与畸变幅度序两个先后失稳的自由度，为理解 CDW 相变路径与中间亚稳态提供了明确的结构图像。",
+      "path": "knowledge/raw/papers/2026-2608.02456-real-time-dynamics-of-the-two-step-charge-density-wave-trans.md",
+      "added_via": "cluster:cl_20261106_9fbfe5",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2026-2609.07923-hysteretic-coherence-collapse-across-the-first-order-cdw-tra",
+      "title": "Hysteretic Coherence Collapse Across the First Order CDW Transition in 1T-TaS2",
+      "summary": "利用ARPES系统追踪1T-TaS2在NC-CDW向C-CDW一级相变温区内间隙态的演化，发现间隙态（及其准粒子相干性）在加热至约220 K时坍塌、冷却至约160 K时重现，形成约60 K宽的热滞窗口。这表明Mott/CDW间隙态作为有序参量在一级相变处经历非连续、路径依赖的相干性坍塌，为相共存与亚稳态图像提供了动量分辨的谱学证据。",
+      "path": "knowledge/raw/papers/2026-2609.07923-hysteretic-coherence-collapse-across-the-first-order-cdw-tra.md",
+      "added_via": "cluster:cl_20261106_9fbfe5",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2026-2604.02001-moiré-mott-correlated-mosaics-in-twisted-bilayer-1t-tas2",
+      "title": "Moiré Mott correlated mosaics in twisted bilayer 1T-TaS2",
+      "summary": "本文提出在扭转双层1T-TaS2中，莫尔超晶格使层间堆叠方式随空间位置周期变化，导致莫特能隙与单粒子（层间杂化）能隙逐点竞争，形成局域磁矩的莫特绝缘区与非磁带绝缘区空间共存的'莫尔镶嵌'相关绝缘态。该镶嵌组态可通过层间偏压（位移场）在莫特相与单粒子相之间电学切换，为空间图案化的莫特关联与磁性调控提供了新平台。",
+      "path": "knowledge/raw/papers/2026-2604.02001-moiré-mott-correlated-mosaics-in-twisted-bilayer-1t-tas2.md",
+      "added_via": "cluster:cl_20261106_9fbfe5",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2026-2603.11405-electronic-coherence-evolution-at-the-nearly-commensurate-in",
+      "title": "Electronic Coherence Evolution at the Nearly Commensurate-Incommensurate CDW Boundary of 1T-TaS2",
+      "summary": "该工作利用温度依赖的动量分辨ARPES，在约350 K的近commensurate（NC）到非commensurate（IC）CDW相变附近系统追踪1T-TaS2电子结构的逐温演化。通过CDW折叠带强度、色散与谱线线宽的变化，刻画电子相干性（空间相干长度/畴序程度）在NC-IC边界附近的行为，给出CDW畴序与电子态耦合的平衡态动量空间基准。该数据为理解1T-TaS2相图中这一被光激发隐藏态物理频繁跨越的关键边界提供了静态参照。",
+      "path": "knowledge/raw/papers/2026-2603.11405-electronic-coherence-evolution-at-the-nearly-commensurate-in.md",
+      "added_via": "cluster:cl_20261106_9fbfe5",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2026-2605.22292-spontaneous-stabilization-of-a-hidden-phase-like-metallic-st",
+      "title": "Spontaneous Stabilization of a Hidden-Phase-Like Metallic State in 1T-TaS2",
+      "summary": "利用高分辨ARPES发现1T-TaS2薄片中无需任何光脉冲激发，即可在50–300 K宽温区自发稳定出隐藏相类金属态——该态在体相中通常只能靠飞秒激光在低温下写入并捕获。电子结构演化呈两步跨越：约270 K处CDW相干性弱化、约370 K处准粒子相干性坍塌，表明晶格CDW序与电子相干性可以解耦演化。这为在平衡条件下直接研究隐藏态电子结构（而非其超快瞬态）提供了稳定平台。",
+      "path": "knowledge/raw/papers/2026-2605.22292-spontaneous-stabilization-of-a-hidden-phase-like-metallic-st.md",
+      "added_via": "cluster:cl_20261106_9fbfe5",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2026-2605.20030-electronic-coherence-evolution-at-the-nearly-commensurate-in",
+      "title": "Electronic Coherence Evolution at the Nearly Commensurate-Incommensurate CDW Boundary of 1T-TaS2 (PRM 10, 034007)",
+      "summary": "利用变温动量空间ARPES系统研究1T-TaS2在近-commensurate（NC）与非commensurate（IC）电荷密度波相界处的电子结构演化，以CDW超晶格背折叠能带的锐度与谱重分布作为电子相干性的直接量度。工作刻画了NC-IC转变前后背折叠带相干性的变化行为，从而区分晶格CDW序（畴壁网络的有序度）与电子相干性之间是同步演化还是解耦。该结果为1T-TaS2中CDW序、畴壁金属性与光致瞬态相（如隐藏态）研究提供了平衡态动量空间基准。",
+      "path": "knowledge/raw/papers/2026-2605.20030-electronic-coherence-evolution-at-the-nearly-commensurate-in.md",
+      "added_via": "cluster:cl_20261106_9fbfe5",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2025-2501.17140-interlayer-hopping-between-surface-mott-insulator-and-bulk-b",
+      "title": "Interlayer Hopping between Surface Mott Insulator and Bulk Band Insulator in layered 1T-TaS2",
+      "summary": "本文通过HREELS（表面敏感）与FTIR（体响应）光谱结合理论计算证明：1T-TaS2薄层存在奇偶层二分性——奇数层样品表面保持Mott绝缘体表面态，而偶数层表现为带绝缘体。层间跃迁t⊥与Hubbard在位排斥U的竞争决定绝缘态本质，并据此绘制出U-t⊥相图，明确给出Mott-带绝缘体转变边界。",
+      "path": "knowledge/raw/papers/2025-2501.17140-interlayer-hopping-between-surface-mott-insulator-and-bulk-b.md",
+      "added_via": "cluster:cl_20261106_9fbfe5",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2024-2411.18205-nature-of-metallic-and-insulating-domains-in-the-cdw-system",
+      "title": "Nature of metallic and insulating domains in the CDW system 1T-TaSe2",
+      "summary": "本文用低温ARPES结合多种层间堆叠构型的DFT超胞计算，证明1T-TaSe2公度CDW相中并存的金属畴与绝缘畴分别对应不同的堆叠方式：三斜堆叠畸变通过层间杂化劈裂半满窄带并打开能隙（能带绝缘起源），而高对称/近孤立层堆叠的畴中窄带保持色散并穿越费米能级（金属）。该结果把畴的金属-绝缘二分性归因于堆叠结构效应，而非纯Mott关联局域化。",
+      "path": "knowledge/raw/papers/2024-2411.18205-nature-of-metallic-and-insulating-domains-in-the-cdw-system.md",
+      "added_via": "cluster:cl_20261106_9fbfe5",
+      "added_at": "2026-11-06T16:55:48Z"
+    }
+  ]
+}
