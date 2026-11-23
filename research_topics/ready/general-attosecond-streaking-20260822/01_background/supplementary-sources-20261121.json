@@ -1,0 +1,23 @@
+{
+  "entries": [
+    {
+      "source_id": "paper:2025-2402.14431-universal-behavior-of-tunneling-time-and-barrier-time-delay",
+      "title": "Universal Behavior of Tunneling Time and Barrier Time-Delay Decoupling in Attoclock Measurements",
+      "summary": "本文论证：attoclock（阿秒时钟）测得的光电子动量偏角所携带的时间信息，可分解为两个近独立成分——势垒时间延迟（barrier time-delay，隧穿波包穿越势垒的群延迟，即透射相位对能量的导数）与隧穿时间（从入垒到出垒的渡越时间），二者呈普适性解耦。文章表明势垒延迟随 Keldysh 参数、电离势与场强遵循跨原子、跨参数的普适标度，而隧穿时间的实部近零且基本不进入可观测量；因此 attoclock 偏角读出的阿秒量级延迟源自势垒群延迟（加库仑修正项）而非有限的隧穿时间，为长期争论提供了统一解释框架。",
+      "path": "knowledge/raw/papers/2025-2402.14431-universal-behavior-of-tunneling-time-and-barrier-time-delay.md"
+    },
+    {
+      "source_id": "paper:2025-PhysRevLett.134.203201-phase-resolved-attoclock",
+      "title": "Phase-Resolved Attoclock",
+      "summary": "提出'相位分辨阿秒时钟'（phase-resolved attoclock）方案：利用少周期椭圆偏振脉冲角条纹对载波包络相位（CEP）的依赖性，为电离时刻提供相对于光场绝对相位的内禀时间基准。由此可规避传统椭圆阿秒时钟中因隧穿出口、库仑偏转和角度-时间映射模型假设带来的模糊性，使电离/隧穿延迟的抽取不再依赖单一模型标定。",
+      "path": "knowledge/raw/papers/2025-PhysRevLett.134.203201-phase-resolved-attoclock.md"
+    },
+    {
+      "source_id": "paper:2026-2610.08609-time-delay-in-nonadiabatic-tunneling-ionization",
+      "title": "Time delay in nonadiabatic tunneling ionization",
+      "summary": "本文研究原子非绝热隧穿电离中的时间延迟问题，指出尽管势垒下再碰撞通道的振幅极小，其干涉印记仍出现在可观测的光电子动量分布中，从而可用于提取隧穿时间延迟。通过分析该通道与直接隧穿通道的量子干涉，作者建立了从动量分布反演势垒下动力学时间信息的途径。",
+      "path": "knowledge/raw/papers/2026-2610.08609-time-delay-in-nonadiabatic-tunneling-ionization.md"
+    }
+  ],
+  "updated_at": "2026-11-21T16:33:36Z"
+}

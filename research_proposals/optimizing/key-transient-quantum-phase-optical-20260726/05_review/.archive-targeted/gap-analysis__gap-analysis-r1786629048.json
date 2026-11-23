@@ -1,0 +1,144 @@
+{
+  "gaps": [
+    {
+      "claim": "RT-TDDFT可作为正演工具，实时跟踪给出瞬态陈数整数跃变（ΔC=±1）和Floquet拓扑相变窗口（§2.1研究内容(2)）",
+      "missing_evidence": "缺乏RT-TDDFT计算含时瞬态拓扑不变量（瞬时陈数C_n(t)）的前期可行性文献——即已有工作证明RT-TDDFT能在强场驱动下给出良定义的瞬时陈数跃变",
+      "search_keywords": [
+        "RT-TDDFT transient Chern number time-dependent",
+        "real-time TDDFT topological invariant strong field",
+        "instantaneous Chern number nonequilibrium time-dependent",
+        "Floquet topological phase transition TDDFT simulation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "以绝热参数ℏω/E_g为坐标轴，将参数空间划分为准绝热区（ℏω/E_g ≥ 2）与强非绝热区（ℏω/E_g ≲ 1），且两区分别有完好的瞬态拓扑不变量定义（§2.1研究的问题）",
+      "missing_evidence": "缺少该分区判据ℏω/E_g ≥ 2/≲ 1的理论依据文献，以及准绝热极限下瞬时陈数良定义与强非绝热极限下Floquet/Wilson圈良定义的原始推导来源",
+      "search_keywords": [
+        "adiabatic parameter ratio photon energy bandgap strong field solid",
+        "instantaneous Chern number adiabatic limit definition",
+        "Floquet-Bloch Wilson loop nonadiabatic regime definition",
+        "semiconductor strong field Keldysh parameter topological invariant"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "以α-T₃模型为理论benchmark，建立解析Berry曲率+1D-TDSE ground truth作为分层反演校验底层（§2.3研究内容(1)）",
+      "missing_evidence": "缺少α-T₃模型的Berry曲率解析解文献以及将其作为强场拓扑基准体系的先例引用",
+      "search_keywords": [
+        "alpha-T3 model Berry curvature analytical solution",
+        "alpha-T3 lattice model topological properties",
+        "1D TDSE benchmark Berry curvature ground truth",
+        "alpha-T3 model strong field nonlinear response"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "AI代理模型（VAE + 扩散模型）由L0的~10⁵条1D-TDSE样本预训练，再在L1的RT-TDDFT高保真样本上微调，可用于瞬态拓扑量反演（§2.3研究内容(3)）",
+      "missing_evidence": "缺少变分自编码器/扩散模型在强场物理或含时反问题中的先例文献，证明生成式深度学习可有效代理TDDFT正演",
+      "search_keywords": [
+        "VAE diffusion model surrogate TDDFT",
+        "variational autoencoder physics inverse problem",
+        "deep generative model attosecond spectroscopy reconstruction",
+        "diffusion model neural network surrogate strong field simulation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "反演采用贝叶斯优化（典型10³–10⁴次调用），可完成Bi₂Se₃ + MoS₂全时空反演（§2.3研究内容(2)）",
+      "missing_evidence": "缺少贝叶斯优化在高维非线性光学反演/阿秒光谱重建中的可行性文献，包括收敛性与维度灾难的讨论",
+      "search_keywords": [
+        "Bayesian optimization nonlinear optics inverse problem",
+        "Bayesian optimization high harmonic spectroscopy reconstruction",
+        "Bayesian inference attosecond transient absorption inversion",
+        "Gaussian process optimization ultrafast spectroscopy parameter retrieval"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "1T-TaS₂ CDW熔化体系可作为关联材料瞬态相变的代表靶材，且其瞬态拓扑不变量可定义（§1, §2.1）",
+      "missing_evidence": "缺少1T-TaS₂在强场驱动下CDW瞬态熔化的HHG/阿秒探测文献，以及关联体系中瞬态拓扑不变量定义的特殊困难讨论",
+      "search_keywords": [
+        "1T-TaS2 CDW ultrafast melting strong field",
+        "charge density wave transient topological invariant",
+        "1T-TaS2 femtosecond Mott transition HHG",
+        "correlated material transient topological phase attosecond"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Co₃Sn₂S₂磁性Weyl半金属可作为强场驱动瞬态拓扑相变的靶材（§1, §2.1）",
+      "missing_evidence": "缺少Co₃Sn₂S₂在强场/超快光学领域的已有实验或理论工作支撑其作为瞬态拓扑探测靶材的可行性",
+      "search_keywords": [
+        "Co3Sn2S2 magnetic Weyl semimetal ultrafast optics",
+        "Co3Sn2S2 strong field high harmonic generation",
+        "magnetic Weyl semimetal femtosecond pump probe",
+        "Co3Sn2S2 Berry curvature nonlinear optical response"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "总体反演误差按吸收谱噪声0.05、时间抖动0.02、温度漂移0.01、密度泛函误差0.1四项独立量化，合成后≈0.113，SNR≈44足以分辨ΔC=1（§2.3研究内容(4)）",
+      "missing_evidence": "缺少反演误差各来源的经验估计文献来源——特别是密度泛函误差对瞬态Berry曲率/陈数的定量影响（0.1量级）是否有文献支撑",
+      "search_keywords": [
+        "DFT functional error Berry curvature quantitative",
+        "density functional theory topological invariant accuracy",
+        "HHG inversion error budget noise sources decomposition",
+        "signal-to-noise ratio topological phase transition detection"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "≤100 as RMS驱动-探测时间抖动可通过f-2f CEP锁定+主动反馈延迟线+双光梳互参考[34]三重稳定持续达成（§2.2研究的问题, §3 Q2）",
+      "missing_evidence": "现有引用[34]仅涉及微环腔光频梳锁定，缺少三重稳定方案在阿秒泵浦-探测实验中达到≤100 as抖动的直接文献先例",
+      "search_keywords": [
+        "attosecond pump probe timing jitter 100 as stabilization",
+        "f-2f CEP lock active feedback delay line attosecond",
+        "dual optical frequency comb cross-reference attosecond timing",
+        "sub-100 attosecond jitter pump probe experiment"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "ATA单信号时间分辨率由XUV探测脉宽~200 as与探测器响应~50 as卷积给出，典型可达≤250 as（§2.2研究内容(3)）",
+      "missing_evidence": "缺少XUV瞬态吸收时间分辨率~200-250 as的具体实验文献支撑",
+      "search_keywords": [
+        "XUV transient absorption time resolution attosecond",
+        "attosecond transient absorption spectroscopy temporal resolution 200 as",
+        "ATA streaking camera detector response time attosecond"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "阿秒条纹由streaking光电子动量偏移给出RABBITT/attoclock类型时间基准，典型可达≤100 as（§2.2研究内容(3)）",
+      "missing_evidence": "正文提到RABBITT和attoclock方法但未给出原始方法论文献引用",
+      "search_keywords": [
+        "RABBITT attosecond streaking time resolution method",
+        "attoclock angular streaking sub-100 attosecond",
+        "attosecond streak camera temporal resolution benchmark"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "SHG偏振旋转[21]可作为瞬态对称破缺的实时标志信号，标定写脉冲实际触发时间（§2.1研究内容(3)）",
+      "missing_evidence": "引用[21]标注'待DOI核实'，SHG偏振旋转作为超快相变实时标志信号的方法学有效性缺少已验证的文献支撑",
+      "search_keywords": [
+        "SHG polarization rotation transient symmetry breaking marker",
+        "second harmonic generation ultrafast phase transition probe",
+        "SHG anisotropy real-time symmetry diagnostic femtosecond"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "三个探测通道（XUV瞬态吸收、阿秒条纹、圆偏振HHG[5]）可在统一时钟下空间共线、时间分时复用同步采集（§2.2研究的问题）",
+      "missing_evidence": "缺少多通道阿秒探测信号同步采集的工程先例文献——特别是圆偏振HHG与XUV瞬态吸收/阿秒条纹在同一装置上同时测量的报道",
+      "search_keywords": [
+        "multi-channel attosecond detection simultaneous measurement",
+        "XUV transient absorption circular HHG synchronized acquisition",
+        "attosecond streaking HHG co-linear pump probe multi-channel",
+        "unified clock attosecond multi-probe spectroscopy"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

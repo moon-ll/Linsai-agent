@@ -1,0 +1,38 @@
+{
+  "proposal_id": "general-quantum-geometry-inversion-20260726",
+  "cluster_id": "cl_20260829_4dd761",
+  "entries": [
+    {
+      "source_id": "paper:2024-2404.14411-high-harmonic-tracking-of-ultrafast-electron-dynamics-across",
+      "title": "High Harmonic Tracking of Ultrafast Electron Dynamics across the Mott to Charge Density Wave Transition",
+      "summary": "该工作利用高次谐波产生（HHG）作为超快探针，实时追踪强关联电子体系中 Mott 绝缘体到电荷密度波（CDW）相变过程中的超快电子动力学。通过谐波谱特征随相变的演化，展示了 HHG 作为量子相态非破坏性读取与诊断工具的能力。",
+      "path": "",
+      "added_via": "cluster:cl_20260829_4dd761",
+      "added_at": "2026-10-09T16:44:23Z"
+    },
+    {
+      "source_id": "paper:2026-2409.04216-high-harmonic-spectroscopy-reveals-anisotropy-of-t",
+      "title": "High harmonic spectroscopy reveals anisotropy of the Mott to Charge-Density-Wave phase transition in TiSe₂",
+      "summary": "该工作利用偏振分辨的高次谐波产生（HHG）光谱技术，探测到TiSe₂在205 K以下Mott-电荷密度波（CDW）相变的各向异性特征，并通过温度依赖的非线性光学响应提取了价带与导带间的CDW能隙演变。研究表明HHG光谱可作为探测强关联电子体系中量子相变的高灵敏度工具。",
+      "path": "",
+      "added_via": "cluster:cl_20260829_4dd761",
+      "added_at": "2026-10-09T16:44:23Z"
+    },
+    {
+      "source_id": "paper:2026-2605.01388-tracking-doublon-holon-dynamics-in-high-harmonic-generation",
+      "title": "Tracking doublon-holon dynamics in high-harmonic generation from Mott insulators",
+      "summary": "通过精确对角化与时间依赖密度矩阵传播方法，证明Mott绝缘体高次谐波产生中的双空穴-孤子动力学可清晰分辨带内自旋波与带间激发两种机制，为强关联体系超快动力学提供了分辨性的理论探测手段。",
+      "path": "knowledge/raw/papers/2026-2605.01388-tracking-doublon-holon-dynamics-in-high-harmonic-generation.md",
+      "added_via": "cluster:cl_20260829_4dd761",
+      "added_at": "2026-10-09T16:44:23Z"
+    },
+    {
+      "source_id": "paper:2026-2610.12136-dynamical-many-body-control-of-high-harmonic-gener",
+      "title": "Dynamical many-body control of high harmonic generation in a Mott insulator",
+      "summary": "本文提出并演示了对 Mott 绝缘体中高次谐波产生（HHG）的“动力学多体控制”：利用泵浦预先产生的多体激发（doublon-holon 对等）通过泵浦-探测延迟和脉冲整形，对随后强场驱动的谐波发射实现增强或抑制的门控。基于半满 Hubbard 模型的含时多体方法证明，谐波响应由场致双粒子（doublon-holon）产生—输运—复合动力学主导，而非单粒子带间图像，从而确立了以光场主动操控关联体系中 HHG 的机制与手段。",
+      "path": "knowledge/raw/papers/2026-2610.12136-dynamical-many-body-control-of-high-harmonic-gener.md",
+      "added_via": "cluster:cl_20260829_4dd761",
+      "added_at": "2026-10-09T16:44:23Z"
+    }
+  ]
+}

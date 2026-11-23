@@ -1,0 +1,89 @@
+{
+  "gaps": [
+    {
+      "claim": "申请 L39 声明 'BSV × Ω/g 反演联合检验仍付诸阙如'，但 Lange [20] 在 Mott 绝缘体上的工作已被审查方视为部分 BSV × 强关联联合尝试",
+      "missing_evidence": "需要核查 Lange 等人在 Mott 绝缘体（Sr2CuO3 或 cuprate）中 BSV 驱动 HHG 实验是否同时实现了 Berry 曲率/量子度规反演，或仅是 HHG 谱学本身",
+      "search_keywords": [
+        "Lange Mott insulator squeezed light high harmonic generation",
+        "Sr2CuO3 quantum light HHG",
+        "BSV Mott insulator Berry curvature retrieval",
+        "Lange 2025 strongly correlated compressed light HHG",
+        "cuprate high harmonic quantum light"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "申请 L25 提出加性/乘性判定阈值 R<1.2 / 1.2≤R<2 / R≥2，但缺乏统计依据与标定来源",
+      "missing_evidence": "缺少该阈值的先验依据：贝叶斯模型对比证据、工程约定出处，或 HHG 反演文献中使用的标准阈值",
+      "search_keywords": [
+        "additive multiplicative decomposition threshold HHG inversion",
+        "Bayes factor threshold spectroscopy",
+        "likelihood ratio cutoff HHG retrieval",
+        "evidence ratio harmonic generation",
+        "posterior odds threshold attosecond"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "申请 L19 'APP' 句及 L17、L35 三处超长句需拆分，但拆分需要保留的核心论点之一是 BSV 光场宽光子数分布与亚周期电场涨落对 HHG 产额的 10²–10³ 倍增强机制",
+      "missing_evidence": "需要补充 BSV 宽光子数分布导致亚周期电场涨落的定量机制文献，以及 10²–10³ 倍增强的实验对照数据",
+      "search_keywords": [
+        "bright squeezed vacuum photon number distribution subcycle field fluctuation",
+        "BSV 10^2 10^3 enhancement factor HHG",
+        "super-Poissonian photon statistics strong field HHG",
+        "squeezed vacuum g2 enhancement nonlinear optics",
+        "BSV field fluctuation attosecond"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "申请 L57 'Runge-Gross 定理 [35] 确立的严格时间依赖势能映射保障了 SBE 框架半经典扩展的理论正当性' 缺失效边界",
+      "missing_evidence": "需要补充 SBE 在强关联区间（Hubbard-U/W ≳ 1.0）的失效判据，以及何时须退回 TDDFT 完整含时势的边界条件",
+      "search_keywords": [
+        "semiconductor Bloch equation validity strong correlation",
+        "SBE breakdown Hubbard U bandwidth ratio",
+        "TDDFT vs SBE strongly correlated regime",
+        "Runge-Goss theorem SBE applicability",
+        "SBE interband coupling saturation strong field"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "申请 1.5 节 L55–86 Year 1–4 详细时序与 Go/No-Go 判据落入立项依据，但 Year 2 Q3 BSV 源上线时间点假设过强（审查指出）",
+      "missing_evidence": "需要核实 BSV 实验源（NOPA/OPCPA）从设计到稳定运行的典型时间基线，以及 g2>1.5 标定的实验可重复性证据",
+      "search_keywords": [
+        "BSV NOPA OPCPA design commissioning timeline",
+        "bright squeezed vacuum stabilization duration",
+        "g2 calibration NOPA squeezed light",
+        "OPCPA squeezed vacuum source development",
+        "BSV source reproducibility attosecond"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "申请 1.3/1.4 节标题重复（'1.3 国内外研究现状'与'1.4 国内外研究现状（综述层面）'），需合并并补 '综述层面' 三条证据线",
+      "missing_evidence": "缺少 BSV × 强关联 × Ω/g 反演交叉领域的综述文献，以支撑立项依据中 '综述层面' 现状判断",
+      "search_keywords": [
+        "squeezed light high harmonic generation review",
+        "quantum light strong field spectroscopy review",
+        "Berry curvature HHG inversion review",
+        "quantum geometry nonlinear optics survey",
+        "compressed light nonlinear optics review 2024 2025"
+      ],
+      "priority": "low"
+    },
+    {
+      "claim": "申请 L37–40 中 '3.17 系数' 对比与 α(r,Eg,m*) 公式属研究内容技术细节，但 '本项目不以 3.17 为固体系数基线' 一句结论需文献支撑",
+      "missing_evidence": "需要补充固体 HHG cutoff 偏离 3.17 定律的实验与理论综述证据",
+      "search_keywords": [
+        "solid state HHG cutoff 3.17 deviation",
+        "high harmonic generation cutoff law solid not atomic",
+        "band structure HHG cutoff correction",
+        "semiconductor Bloch equation cutoff law",
+        "HHG cutoff solid vs gas phase scaling"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "rationale"
+}

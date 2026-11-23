@@ -1,0 +1,89 @@
+{
+  "action": "v8_framework_cron_teardown",
+  "date": "2026-11-16",
+  "reason": "v8.0.0 架构迁移：v7 全流程优化环（微调度器/多轮评审/评审团/prompt 自优化/周末输出链）停用，产出目标改为课题启动包；文献/KB/备份链保留",
+  "removed": [
+    {
+      "name": "lc-daily-orchestrate",
+      "id": "856bef700fa2"
+    },
+    {
+      "name": "lc-repair",
+      "id": "88cd34a8f37e"
+    },
+    {
+      "name": "lc-panel-review",
+      "id": "deb6bd379943"
+    },
+    {
+      "name": "lc-prompt-optimize",
+      "id": "1638da29c54b"
+    },
+    {
+      "name": "lc-self-optimize",
+      "id": "3cff06c9ff48"
+    },
+    {
+      "name": "lc-retrospective",
+      "id": "67bafa25e970"
+    },
+    {
+      "name": "lc-micro-scheduler",
+      "id": "3222c1e94b44"
+    },
+    {
+      "name": "lc-side-worker",
+      "id": "692ae035f2bd"
+    },
+    {
+      "name": "lc-hourly-monitor",
+      "id": "9d3177df68f0"
+    },
+    {
+      "name": "lc-daily-sync",
+      "id": "08a89e0bbc74"
+    },
+    {
+      "name": "lc-weekend-weekend-output",
+      "id": "5537e680f051"
+    },
+    {
+      "name": "lc-weekend-weekend-reflection",
+      "id": "03d49feae931"
+    },
+    {
+      "name": "lc-weekend-summary",
+      "id": "80564c76fd1a"
+    },
+    {
+      "name": "lc-weekend-worker",
+      "id": "fccb70c89d87"
+    }
+  ],
+  "failed": [],
+  "kept": [
+    "lc-daily-backup",
+    "lc-kb-distill",
+    "lc-kb-distill-night",
+    "lc-kb-distill-pm",
+    "lc-kb-distill-sunday",
+    "lc-kb-sync",
+    "lc-weekend-input",
+    "lc-weekend-input-n1",
+    "lc-weekend-input-n2",
+    "lc-weekend-input-n3",
+    "lc-weekend-input-n4",
+    "lc-weekend-input-r2",
+    "lc-weekend-input-r3",
+    "lc-weekend-input-r4",
+    "lc-weekend-input-r5",
+    "lc-weekend-input-r6",
+    "lc-zcode-worker",
+    "林赛每日简报-每日汇总（20:00）",
+    "林赛简报·候选判定与推送（08:28）",
+    "林赛简报·健康检查+汇总（23:30）",
+    "林赛简报·检索入池+知识库简报（00/06/12/18:23，4次/天）",
+    "林赛简报·经典文献通道（每日14:23）",
+    "林赛简报·高分自动深读（16:23）"
+  ]
+}

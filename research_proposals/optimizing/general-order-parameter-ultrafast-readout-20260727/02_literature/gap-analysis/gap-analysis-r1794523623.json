@@ -1,0 +1,27 @@
+{
+  "gaps": [
+    {
+      "claim": "创新点（一）：采用 MSHG（磁致二次谐波产生）'单通道强度比对'方案读出反铁磁序参量，其对比基线论断无引文支撑（scheme §三 L167）",
+      "missing_evidence": "MSHG 用于反铁磁序参量/磁畴读出的先例文献（如 NiO 等反铁磁体的磁致二次谐波探测、非线性光学读出反铁磁序的代表工作），用以锚定'单通道强度比对'的对比基线，证明该读出方案有文献先例、界定与已有工作的差异",
+      "search_keywords": [
+        "magnetic second harmonic generation antiferromagnet",
+        "MSHG antiferromagnetic domain imaging",
+        "nonlinear optical readout of antiferromagnetic order",
+        "NiO magnetic second harmonic generation",
+        "antiferromagnetic order parameter optical detection"
+      ],
+      "priority": "low"
+    },
+    {
+      "claim": "§三.1 L13 处引用'Zhang 的理论预测值'这一具名数值论断",
+      "missing_evidence": "该论断对应的参考文献 [2] 的引用角标缺失，需补挂 [2] 使具名预测值可溯源至原始文献（属引用挂靠缺口而非新增检索需求，若现有 44 条文献实表中无对应 Zhang 文献则需检索其原始预测工作）",
+      "search_keywords": [
+        "Zhang theoretical prediction antiferromagnet",
+        "CrSb first-principles prediction",
+        "spin splitting theoretical prediction"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "scheme"
+}

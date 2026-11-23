@@ -1,0 +1,75 @@
+{
+  "gaps": [
+    {
+      "claim": "MnTe 等 altermagnet 在 3 μm 驱动下第 3/5/7 阶 HHG 谱标定判据",
+      "missing_evidence": "缺少3 μm 中红外驱动下 MoS₂/altermagnet 已发表 HHG 谱数据作为对标基准；Liu 2017 [6] 实测为 0.30 eV（≈4.1 μm）第 6-13 阶，无法直接支持 3/5/7 阶标定",
+      "search_keywords": [
+        "MoS2 high harmonic generation3 micron mid-infrared",
+        "MnTe HHG spectrum 3 micrometer",
+        "solid-state HHG odd harmonic order 3 5 7 mid-infrared",
+        "altermagnet high harmonic generation mid-infrared spectrum",
+        "transition metal dichalcogenide HHG few-cycle3 micron"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "块体 MnTe 第 11 阶谐波预期计数率 10²-10⁴ counts/s 外推",
+      "missing_evidence": "缺少 ZnO 与 MoS₂ 在 3 μm、~1 TW/cm² 条件下已发表 HHG 产额数据作为外推依据；锚点 Ghimire 2011 [9] ZnO 数据无法直接对应此驱动条件",
+      "search_keywords": [
+        "ZnO high harmonic generation photon flux yield",
+        "MoS2 HHG yield counts per second 3 micron",
+        "Ghimire 2011 ZnO HHG photon counts",
+        "solid-state HHG photon flux mid-infrared benchmark",
+        "bulk semiconductor HHG yield comparison ZnO MoS2"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "references L33-39 [16][17][18][19]引用真实性核实",
+      "missing_evidence": "四条 arXiv 引用 (2410.08910 Alfaro Vigo 移动边界数学、2503.21549 Pan k-gap、2508.04935 Moiré 陈结、2506.14215 Nebgen MoS₂ 结构相变) 与 scheme 上下文主题不匹配，需要查找真正讨论 altermagnet HHG/spin-polarized HHG 的文献",
+      "search_keywords": [
+        "altermagnet high harmonic generation theory",
+        "MnTe spin-polarized HHG experiment",
+        "Werner altermagnet HHG spin splitting",
+        "Fuchs MnTe HHG Nature",
+        "spin-resolved high harmonic generation antiferromagnet",
+        "nonrelativistic spin splitting HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "references [3] Werner et al. 合作者名单与 Crossref 不符",
+      "missing_evidence": "缺少 Werner et al. 关于 altermagnet HHG 理论的准确作者列表（应为 Werner-Lysne-Murakami 而非当前版本）",
+      "search_keywords": [
+        "Werner altermagnet high harmonic generation authors",
+        "Werner Lysne Murakami altermagnet HHG",
+        "2408.08955 Werner altermagnet HHG authors",
+        "altermagnet HHG theory original paper author list"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "references [15] Liu et al. (物理学报 66, 134207) 合作者列表与 Crossref 不符",
+      "missing_evidence": "缺少 Liu-Zhao-He-Jiang2017物理学报 66 卷 134207 论文的准确作者列表",
+      "search_keywords": [
+        "物理学报 66 134207 2017",
+        "Liu Zhao He Jiang 高次谐波",
+        "Acta Physica Sinica 66 134207 high harmonic generation",
+        "Liu2017 HHG solid-state 物理学报 author"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§5三个难点的深度论证（难点1：altermagnet 信号弱；难点 2：多参数反演病态；难点 3：多带正演效率）",
+      "missing_evidence": "缺少 altermagnet HHG 信号-噪声比实验数据、Fisher 信息矩阵/条件数在 HHG 反演中的具体数值基准、多带 SBE vs TDDFT 计算成本对比 benchmark",
+      "search_keywords": [
+        "altermagnet HHG signal-to-noise ratio experimental",
+        "Fisher information matrix condition number HHG inversion",
+        "TDDFT vs semiconductor Bloch equation computational cost benchmark",
+        "CrSb MnTe HHG yield experimental photon flux",
+        "many-body correction HHG computational scaling"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

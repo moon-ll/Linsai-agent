@@ -1,0 +1,60 @@
+{
+  "gaps": [
+    {
+      "claim": "[10] DOI 实际指向 Wang 'bandit optimization' 论文，但条目署名 Goswami Mn₃Sn——需找到 Goswami 关于 Mn₃Sn 非线性霍尔效应/量子几何量的真正 DOI 文献",
+      "missing_evidence": "缺少 Goswami Mn₃Sn 实验性量子几何量/非线性霍尔效应论文的正确 DOI 与完整书目信息",
+      "search_keywords": [
+        "Goswami Mn3Sn nonlinear Hall",
+        "Goswami Mn3Sn quantum geometry",
+        "Mn3Sn anomalous Hall Berry curvature experiment",
+        "Goswami kagome spin chirality"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "[13] arXiv 真题为 Ikeda 'photoinduced melting of a Mott insulating state'，条目标题与实际内容不符——需验证 Ikeda Mott 绝缘体光致熔化的正确引用信息",
+      "missing_evidence": "缺少 Ikeda 光致熔化 Mott 绝缘体论文的完整作者列表、年份、期刊版本与正确标题",
+      "search_keywords": [
+        "Ikeda Mott insulator photoinduced melting",
+        "Ikeda attosecond Mott transition",
+        "photoinduced melting Mott insulator arXiv",
+        "Ikeda time-resolved Mott insulator"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "scheme L93 0.83−0.15=0.68 eV 算术修正（高于体相带隙 0.68 eV vs 表面态带隙 0.15 eV）——需 Bi₂Te₃ 体相带隙与表面态带隙的精确实验 ARPES 数据",
+      "missing_evidence": "缺少 Bi₂Te₃ 体相带隙（约 0.15 eV）与表面态带隙（约 0.83 eV）的精确 ARPES 实验测量值与参考文献",
+      "search_keywords": [
+        "Bi2Te3 bulk bandgap ARPES",
+        "Bi2Te3 surface state bandgap experimental",
+        "Bi2Te3 topological insulator gap measurement",
+        "Bi2Te3 0.15 eV 0.83 eV bandgap"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "scheme L149/L151 网格点数 16×11×101=17776≠约15000；粗档 0.15 eV 步长得 12221 点≠约5000——需确认高次谐波反演参数空间网格划分与 GPU·h 预算对应的标准基准",
+      "missing_evidence": "缺少高次谐波反演参数空间维度（能量×椭偏率×CEP）的标准网格基准与GPU·h/点的计算成本参考",
+      "search_keywords": [
+        "high harmonic inversion parameter grid benchmark",
+        "HHG spectroscopy computational cost GPU hours",
+        "attosecond spectroscopy inversion sampling density",
+        "CEP ellipticity energy grid resolution HHG"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "rationale L5 单段连嵌 5 条奠基文献——需补充固体高次谐波开创性理论与实验文献的分类与最新进展",
+      "missing_evidence": "缺少固体高次谐波 2011–2026 关键里程碑论文（Ghimire 2011 ZnO、Vampa、Schubert、Luu、Golde 等）的最新综述与归类",
+      "search_keywords": [
+        "solid-state high harmonic generation review 2024 2025",
+        "Ghimire ZnO 2011 high harmonic",
+        "Vampa semiconductor Bloch equation HHG",
+        "Golde semiconductor HHG theory",
+        "solid HHG milestone review"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

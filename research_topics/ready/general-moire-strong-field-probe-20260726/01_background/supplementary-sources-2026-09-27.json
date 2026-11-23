@@ -1,0 +1,38 @@
+{
+  "proposal_id": "general-moire-strong-field-probe-20260726",
+  "cluster_id": "cl_20260816_32f5bb",
+  "entries": [
+    {
+      "source_id": "paper:2014-1411.1964-spatio-temporal-isolation-of-attosecond-soft-x-ray-pulses-in",
+      "title": "Spatio-temporal isolation of attosecond soft X-ray pulses in the water window",
+      "summary": "该文献实验演示了利用波前旋转（WFR）技术在氖气高次谐波产生中实现水窗软X射线波段（284 eV，碳K边）单阿秒脉冲的时空隔离：通过熔融石英楔片旋转驱动激光波前，使阿秒脉冲串在空间角度上分离为不同方向的波束，从而筛选出持续时间小于400阿秒、带宽约30阿秒的孤立脉冲。该方案突破了在150 eV以上光子能量产生孤立高能阿秒脉冲的长期瓶颈。",
+      "path": "",
+      "added_via": "cluster:cl_20260816_32f5bb",
+      "added_at": "2026-09-27T02:22:15Z"
+    },
+    {
+      "source_id": "paper:2510.04086",
+      "title": "Brilliant source of 19.2 attosecond soft X-ray pulses below the atomic unit of time",
+      "summary": "本文报道了持续时间为19.2阿秒的孤立软X射线阿秒脉冲，其短于原子单位时间（24.2 as）并首次延伸至水窗波段，为在水窗内（覆盖碳、氮、氧吸收边）实时观测阿秒时间尺度的电子关联与多体动力学提供了高亮度光源。",
+      "path": "",
+      "added_via": "cluster:cl_20260816_32f5bb",
+      "added_at": "2026-09-27T02:22:15Z"
+    },
+    {
+      "source_id": "paper:2010-1006.3942-bright-coherent-ultrafast-soft-x-ray-harmonics-spanning-the-",
+      "title": "Bright, Coherent, Ultrafast Soft X-Ray Harmonics Spanning the Water Window from a Tabletop Light Source",
+      "summary": "该工作利用中红外驱动激光首次实现覆盖水窗（284–540 eV）并延伸至0.5 keV以上的完全相位匹配、明亮且空间相干的软X射线高次谐波产生，光子通量较此前工作提升约1000倍。通过延长驱动波长克服了气体电离对相位匹配的传统截止限制，获得超过300 eV带宽的相干超快发射，并验证了相位匹配物理在EUV与软X射线波段的普适性，为台式光源在生物成像与元素分辨光谱等应用奠定基础。",
+      "path": "",
+      "added_via": "cluster:cl_20260816_32f5bb",
+      "added_at": "2026-09-27T02:22:15Z"
+    },
+    {
+      "source_id": "paper:2025-2511.12372-generation-of-bright-and-controllable-isolated-attosecond-x",
+      "title": "Generation of Bright and Controllable Isolated Attosecond X-Ray Pulses from Synchronized Mid-Infrared and Ultra-short Ultraviolet Laser Fields",
+      "summary": "本文提出一种将中红外（MIR）驱动场与超短紫外（UV）脉冲同步合成的双色场高次谐波方案，并通过TDSE数值模拟证明其可产生明亮且可调控的孤立阿秒X射线脉冲。紫外脉冲在特定时间窗口内增强电离，实现有效门控，克服了单色长波驱动下转换效率随波长急剧下降的瓶颈，同时通过双色场时延调节实现谐波截止、阿秒脉冲时长与发射特性的主动控制。",
+      "path": "knowledge/raw/papers/2025-2511.12372-generation-of-bright-and-controllable-isolated-attosecond-x.md",
+      "added_via": "cluster:cl_20260816_32f5bb",
+      "added_at": "2026-09-27T02:22:15Z"
+    }
+  ]
+}

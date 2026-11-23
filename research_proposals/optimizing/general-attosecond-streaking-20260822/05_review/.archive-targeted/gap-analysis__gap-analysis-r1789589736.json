@@ -1,0 +1,16 @@
+{
+  "gaps": [
+    {
+      "claim": "Han[31] Ultrafast Sci 6:0145(2026) Comment与Ardana-Lamas[30] Ultrafast Sci 5:0128(2025) 19.2 as报告的归属关系，及二者针对Cousin 2017 氪气水窗条纹数据集的反演分歧",
+      "missing_evidence": "缺少对Han (2026) Ultrafast Science 6:0145与Ardana-Lamas (2025) Ultrafast Science 5:0128原始论文/Comment/Reanalysis的方法学对比文献，以及VTGNA算法对Cousin 2017 19.2 as脉冲反演的复核细节",
+      "search_keywords": [
+        "Ardana-Lamas 2025 Ultrafast Science 5:0128 krypton streaking 19.2 as",
+        "Han 2026 Ultrafast Science 6:0145 Comment VTGNA krypton",
+        "VTGNA attosecond pulse reanalysis Cousin 2017 krypton streaking",
+        "Cousin 2017 Phys Rev X 7 041030 krypton 19.2 as reanalysis"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "scheme"
+}

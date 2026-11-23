@@ -1,0 +1,68 @@
+{
+  "gaps": [
+    {
+      "claim": "Peschel 等的研究被误写为'计算'，实为角分辨 RABBIT 实验测定 Ne 2p⁶→εs/εd 分波相位与振幅",
+      "missing_evidence": "Peschel 2022 (Nat Commun 13, 5205) 角分辨 RABBIT 实验原文细节，特别是 Ne 2p→εs/εd 分波相位振幅测量方法与结论",
+      "search_keywords": [
+        "Peschel 2022 Nature Communications 13 5205 angle-resolved RABBIT",
+        "Ne 2p epsilon s epsilon d partial wave phase",
+        "angular streaking neon partial wave ionization"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "'国内已建成覆盖水窗低段光源'缺具名团队/参数锚点",
+      "missing_evidence": "国内阿秒光源设施在水窗低段 (284–409.7 eV) 的实际建设情况、团队与参数（如光子通量、脉宽、重频）",
+      "search_keywords": [
+        "China water window attosecond beamline",
+        "国内 水窗 阿秒光源",
+        "中科院 阿秒 水窗",
+        "Shanghai SIOM water window attosecond",
+        "中国 水窗 软X射线 阿秒 装置"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "'量子拍角积分方案'在§2.5/§3.1 多次出现但缺 [N] 锚点",
+      "missing_evidence": "量子拍角（quantum beating angle）积分方案在阿秒条纹/RABBIT 数据分析中的原始文献与推导",
+      "search_keywords": [
+        "quantum beating angle integration RABBIT",
+        "photoionization time delay extraction Bayesian",
+        "Pabst Dahlstrom 2016 PRA 94 013411"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "'Zhu 等 2026' 二次出现但缺 [N] 锚点",
+      "missing_evidence": "Zhu 等 2026 关于阿秒条纹/脉冲反演/深度学习的具体论文出处与方法",
+      "search_keywords": [
+        "Zhu 2026 attosecond pulse retrieval",
+        "Zhu CNN attosecond streaking reconstruction",
+        "Zhu deep learning attosecond metrology 2026"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§4 R1 段'未修正大于 20%'基准无文献支撑且与§1'该标定尚未见公开报道'自相张力",
+      "missing_evidence": "已发表的关于多通道耦合/未修正误差量级的实验或综述基准（如 Cousin 系列、Han 2026 Ultrafast Science 6:0145 关于 krypton streaking reanalysis 的误差分析）",
+      "search_keywords": [
+        "multichannel streaking error budget benchmark",
+        "Cousin krypton streaking reanalysis error",
+        "Han Ultrafast Science 2026 VTGNA error percentage",
+        "Rainbow RABBIT single channel error threshold"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3.1 '已接近或在该量级基础上有量级提升'缺对标数值与方向",
+      "missing_evidence": "当前国内/国际上同类阿秒光源在通量、截止能量、脉宽上的具体对标数值（mJ/cm²、eV、as）",
+      "search_keywords": [
+        "water window attosecond pulse duration record2026",
+        "attosecond flux water window photons per pulse",
+        "soft X-ray attosecond beamline parameters benchmark"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

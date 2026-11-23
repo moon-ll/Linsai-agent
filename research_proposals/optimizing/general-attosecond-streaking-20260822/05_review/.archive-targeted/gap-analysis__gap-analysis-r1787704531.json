@@ -1,0 +1,84 @@
+{
+  "gaps": [
+    {
+      "claim": "软X射线能区（409.7–543 eV）光电子散射相位行为与低能区存在本质差异的理论断言",
+      "missing_evidence": "缺乏软X射线能区（>410 eV）散射相位能量依赖关系的实验或理论文献支撑，现有散射相位数据主要集中在极紫外-水窗能区（<410 eV）",
+      "search_keywords": [
+        "soft X-ray photoelectron scattering phase energy dependence",
+        "high energy photoelectron scattering phase attosecond",
+        "scattering phase behavior 400 eV 500 eV attosecond streaking"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "16通道TOF阵列探测器各通道均匀性归一化后维持2%量级偶极相位残余贡献的实验依据",
+      "missing_evidence": "缺乏16通道以上TOF阵列角积分均匀性标定和2%残余贡献的实验验证文献，现有TOF阵列文献多为技术实现而非相位测量精度论证",
+      "search_keywords": [
+        "16 channel TOF array detector uniformity calibration attosecond",
+        "time-of-flight array angular integration dipole phase",
+        "TOF detector channel efficiency normalization attosecond spectroscopy"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "软X射线能区修正算法与传统FROG-CRAB的偏差大于10%触发失效边界的量化阈值",
+      "missing_evidence": "缺乏软X射线能区（>409.7 eV）修正算法失效边界10%的直接实验数据，该能区修正算法的失效机制尚未被系统性实验验证",
+      "search_keywords": [
+        "soft X-ray attosecond streaking FROG-CRAB failure",
+        "N K-edge above threshold multi-channel ionization reconstruction error",
+        "high energy FROG-CRAB validity boundary 410 eV 500 eV"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "角积分方案在光电子动能大于100 eV时偶极相位压制效率下降的物理解释（库仑势vs偶极势）",
+      "missing_evidence": "缺乏光电子动能依赖的角动量相位行为实验数据，库仑势长程分量与偶极势方向性分量在高能区的相对贡献变化缺乏定量表征",
+      "search_keywords": [
+        "photoelectron kinetic energy dipole phase angular dependence",
+        "high energy photoelectron scattering phase angular momentum",
+        "dipole phase suppression efficiency vs electron kinetic energy attosecond"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "双通道TDSE模拟中通道混合度大于30%作为备选路径A触发条件的30%阈值的合理性",
+      "missing_evidence": "缺乏通道混合度30%作为解析修正失效边界的理论与实验依据，现有Peschel等人数值模拟未给出通道混合度的量化失效边界",
+      "search_keywords": [
+        "TDSE multi-channel coupling channel mixing threshold",
+        "two-channel ionization TDSE breakdown criterion strong field",
+        "multi-channel reconstruction error channel mixing degree"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "R3双变量误差图谱中合格阈值<5%在双变量空间内各修正模块适用边界方程的可预测性",
+      "missing_evidence": "缺乏跨能区（EUV-water window-soft X-ray）误差依赖图谱的先例文献，修正算法在50–543 eV全范围适用性的可量化预测框架尚未被建立",
+      "search_keywords": [
+        "cross-energy attosecond streaking calibration map",
+        "multi-energy FROG-CRAB error dependence",
+        "attosecond pulse characterization energy range generalization"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "极紫外平台（100 eV中心能量、小于300 as脉冲宽度）配置的实验实现依据",
+      "missing_evidence": "缺乏国内实验室实现100 eV、<300 as极紫外阿秒脉冲的实验报道，该参数配置的可行性尚未在国内平台上得到验证",
+      "search_keywords": [
+        "EUV attosecond pulse 100 eV 300 as generation",
+        "soft X-ray attosecond 300 as 100 eV source China",
+        "high harmonic generation 100 eV sub-300 as pulse width"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "CNN备选路径B中高偶极相位残余作为噪声模型分量的训练策略的可行性",
+      "missing_evidence": "Zhu等人CNN方法虽被引用，但其具体训练策略中高偶极相位残差的注入方式与本项目角积分方案的衔接尚未被论证",
+      "search_keywords": [
+        "CNN attosecond pulse reconstruction dipole phase training",
+        "neural network high dipole phase noise model attosecond FROG",
+        "Zhu CNN rACE attosecond pulse reconstruction training strategy"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

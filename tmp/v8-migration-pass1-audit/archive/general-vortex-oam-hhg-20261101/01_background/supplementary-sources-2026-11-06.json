@@ -1,0 +1,98 @@
+{
+  "proposal_id": "general-vortex-oam-hhg-20261101",
+  "cluster_id": "orphan-route-2026-11-06",
+  "clusters": [
+    "orphan-route-2026-11-06",
+    "cl_20261106_aa975a"
+  ],
+  "entries": [
+    {
+      "source_id": "paper:2026-2512.19412-sculpting-ultrafast-mid-infrared-light-for-solid-s",
+      "title": "Sculpting ultrafast mid-infrared light for solid-state high harmonic generation",
+      "summary": "本文提出一种基于螺旋相位板、轴棱锥和透镜组合的被动静态光束整形方法，在无需动态空间光调制器的条件下产生了飞秒少周期中红外完美光学涡旋（POV）与贝塞尔-高斯涡旋（BGV）光束。这些结构化中红外光束被用于驱动固体中的高次谐波产生，为固态强场物理研究提供了简单可靠的涡旋驱动光源方案。",
+      "path": "",
+      "added_via": "cluster:orphan-route-2026-11-06",
+      "added_at": "2026-11-06T16:33:07Z"
+    },
+    {
+      "source_id": "paper:2026-2602.09625-macroscopic-spin-orbit-interaction-through-strong-field-pump",
+      "title": "Macroscopic Spin-Orbit Interaction through Strong-Field Pumping of Inhomogeneously Aligned Molecular Ensemble",
+      "summary": "本文提出通过对径向（空间非均匀）对齐的分子系综进行强场泵浦，在宏观尺度上实现光的自旋-轨道相互作用：泵浦场的自旋角动量（螺旋度）被转换为高次谐波的轨道角动量。由此产生的HHG辐射成为携带拓扑荷的涡旋相干短波光束，且拓扑荷符号由泵浦螺旋度直接切换。该方案本质上是把分子对齐气体用作强场非线性版的q-plate，为XUV/UV波段结构化光与光子自旋-轨道耦合研究提供了新平台。",
+      "path": "knowledge/raw/papers/2026-2602.09625-macroscopic-spin-orbit-interaction-through-strong-field-pump.md",
+      "added_via": "cluster:orphan-route-2026-11-06",
+      "added_at": "2026-11-06T16:33:07Z"
+    },
+    {
+      "source_id": "paper:2025-2509.08681-anomalous-vortex-beam-driven-harmonic-generation",
+      "title": "Anomalous vortex beam driven harmonic generation",
+      "summary": "提出以反常涡旋光束（AVB）及修正反常涡旋光束（mAVB）替代常规涡旋光束驱动气体高次谐波产生，用于主动调控谐波涡旋光束的几何特性。通过联合控制驱动场阶数与拓扑荷，可突破常规涡旋驱动HHG中谐波光斑随阶数急剧膨胀的限制。最终在保持紧凑光斑与近均匀远场发散的同时获得拓扑荷高达约100的高次谐波涡旋，显著改善高TC谐波光束的可用性。",
+      "path": "knowledge/raw/papers/2025-2509.08681-anomalous-vortex-beam-driven-harmonic-generation.md",
+      "added_via": "cluster:orphan-route-2026-11-06",
+      "added_at": "2026-11-06T16:33:07Z"
+    },
+    {
+      "source_id": "paper:2026-2608.00233-controlled-generation-of-high-harmonic-spatiotemporal-optica",
+      "title": "Controlled generation of high-harmonic spatiotemporal optical vortices",
+      "summary": "提出通过同时调控驱动场的时空涡旋（STOV）拓扑荷与聚焦几何，实现对XUV高次谐波时空涡旋的可控产生。证实谐波时空涡旋电荷满足 l≈q×l_0 的放大定标，将纵向OAM涡旋HHG中的电荷倍增规律推广到时空（横向OAM）维度。进一步发现谐波涡旋模式对驱动场焦点相对介质的位置敏感，据此给出以聚焦位置作为谐波时空涡旋模式选择开关的控制方案。",
+      "path": "knowledge/raw/papers/2026-2608.00233-controlled-generation-of-high-harmonic-spatiotemporal-optica.md",
+      "added_via": "cluster:orphan-route-2026-11-06",
+      "added_at": "2026-11-06T16:33:07Z"
+    },
+    {
+      "source_id": "paper:2026-2601.12743-twisting-harmonics-transfer-of-orbital-angular-mom",
+      "title": "Twisting harmonics: Transfer of orbital angular momentum in solid-state high-harmonic generation",
+      "summary": "本文实验证明强场中红外涡旋光束的轨道角动量（OAM）可以相干地转移到固态晶体（ZnO、GaSe）的高次谐波辐射中，实现“扭曲谐波”。关键发现是谐波拓扑荷随谐波阶数线性标度（ℓq = q·ℓ驱动），即OAM守恒，且该守恒在不同晶体对称性、电子相互作用乃至自旋-轨道耦合条件下均成立。这确立了OAM分辨固态HHG作为一个稳健的、可与材料微观机制解耦的结构光-物质相互作用平台。",
+      "path": "knowledge/raw/papers/2026-2601.12743-twisting-harmonics-transfer-of-orbital-angular-mom.md",
+      "added_via": "cluster:cl_20261106_aa975a",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2025-2503.14982-high-harmonic-generation-with-orbital-angular-momentum-beams",
+      "title": "High Harmonic Generation with Orbital Angular Momentum Beams: Beyond-dipole Corrections",
+      "summary": "本文采用保留矢势全空间依赖的完整最小耦合哈密顿，系统研究了轨道角动量（OAM）涡旋光束驱动高次谐波产生中的偶极近似之外修正。结果表明OAM与物质的耦合本质上同时包含磁偶极与电四极两类非偶极贡献：涡旋驱动下非线性偶极动力学不再局限于偏振或传播方向，而在正交横向方向也被激发，从而使偶极外修正显著增强。这确立了OAM/拓扑荷作为调控和放大非偶极效应的新自由度。",
+      "path": "knowledge/raw/papers/2025-2503.14982-high-harmonic-generation-with-orbital-angular-momentum-beams.md",
+      "added_via": "cluster:cl_20261106_aa975a",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2026-2607.23652-carrier-envelope-phase-control-of-orbital-angular-",
+      "title": "Carrier-Envelope Phase Control of Orbital Angular Momentum in Solid-State High-Harmonic Generation",
+      "summary": "本文报道在固态高次谐波产生（HHG）中，通过载波包络相位（CEP）调控涡旋驱动场，实现对谐波轨道角动量（OAM）结构的主动控制。不同于微扰图像下拓扑荷随谐波阶次简单缩放的常规认知，CEP 作为波形级自由度可改变各谐波阶的 OAM 组分与模式纯度，为固态结构化相干光源提供了超快、全光学的调控旋钮。",
+      "path": "knowledge/raw/papers/2026-2607.23652-carrier-envelope-phase-control-of-orbital-angular-.md",
+      "added_via": "cluster:cl_20261106_aa975a",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2026-2603.08263-scaling-law-from-orbital-angular-momentum-conservation-in-ha",
+      "title": "Scaling law from orbital angular momentum conservation in harmonic and high-order harmonic generation driven by spatiotemporal light fields",
+      "summary": "本文指出在一般时空光场驱动的谐波与高次谐波产生中，被广泛使用的拓扑荷随谐波级数线性标度的规律（ℓ_q = qℓ₁，即LG标度律）并不等价于轨道角动量（OAM）守恒，仅在LG光束等特殊场中成立。作者论证真正普适的守恒量是在光子数转换比例换算下的OAM（含纵向、横向、内禀分量），即每光子OAM按谐波级数q标度而非拓扑荷本身。基于该守恒形式，可统一解释文献中大量看似违反LG标度律的HHG实验现象。",
+      "path": "knowledge/raw/papers/2026-2603.08263-scaling-law-from-orbital-angular-momentum-conservation-in-ha.md",
+      "added_via": "cluster:cl_20261106_aa975a",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2025-2511.08148-carrier-envelope-phase-control-of-ultrafast-photocurrents-in",
+      "title": "Carrier-envelope phase control of ultrafast photocurrents in layered MoS2",
+      "summary": "在单层、双层、三层MoS2中实现了载波包络相位（CEP）对超快光电流的调控：用5.9 fs、826 nm的CEP稳定少周期脉冲驱动，光电流的极性与大小随CEP周期性变化。光电流幅值随电场幅值呈二次方标度（J∝E²∝I），即强度型二阶光电流响应，但其流向由载波波形直接决定，区别于传统奇数阶CEP电流图像。层数依赖对比进一步区分了体相/表面对称性破缺的贡献，确立了层状TMD中波形级光电调控，面向二维光场敏感电子学。",
+      "path": "knowledge/raw/papers/2025-2511.08148-carrier-envelope-phase-control-of-ultrafast-photocurrents-in.md",
+      "added_via": "cluster:cl_20261106_aa975a",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2024-2606.07921-high-harmonic-spin-orbit-angular-momentum-generation-in-crys",
+      "title": "High-harmonic spin-orbit angular momentum generation in crystalline solids preserving multiscale dynamical symmetry",
+      "summary": "在晶体固体高次谐波产生（HHG）中实现了光子自旋-轨道角动量向谐波的传递，用携带自旋-轨道耦合的结构光场驱动晶体，生成多个可分辨/可切换的谐波OAM态。核心理论贡献是提出“多尺度动力学对称性”守恒框架：把光束尺度的场结构（自旋+轨道角动量）与埃尺度晶格旋转对称性（Cn准角动量）纳入同一条角动量选择定则，统一预言各OAM谐波通道的开启与关闭。这为用固体谐波源产生结构化深紫外/极紫外涡旋光提供了对称性设计原理。",
+      "path": "knowledge/raw/papers/2024-2606.07921-high-harmonic-spin-orbit-angular-momentum-generation-in-crys.md",
+      "added_via": "cluster:cl_20261106_aa975a",
+      "added_at": "2026-11-06T16:55:48Z"
+    },
+    {
+      "source_id": "paper:2024-2407.20707-circularly-polarized-high-harmonic-beams-carrying-self-torqu",
+      "title": "Circularly polarized high harmonic beams carrying self-torque or time-dependent orbital angular momentum",
+      "summary": "从角动量守恒出发推导了包含自旋（偏振）与轨道（拓扑荷）自由度的普适高次谐波选择定则，并据此提出两种驱动构型，将携带自扭矩（时变轨道角动量）的极紫外谐波光束的偏振从此前仅限的线偏振拓展到椭圆乃至圆偏振的可调谐调控。圆偏振与时变OAM的首次结合，为磁性材料与手性分子的二色性/手性超快探测提供了具有角动量时间结构的新型EUV光子态光源。",
+      "path": "knowledge/raw/papers/2024-2407.20707-circularly-polarized-high-harmonic-beams-carrying-self-torqu.md",
+      "added_via": "cluster:cl_20261106_aa975a",
+      "added_at": "2026-11-06T16:55:48Z"
+    }
+  ]
+}

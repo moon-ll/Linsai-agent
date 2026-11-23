@@ -1,0 +1,49 @@
+{
+  "gaps": [
+    {
+      "claim": "scheme L99 与 content L167 中 Δ_Mott 锚点数值冲突（260 K vs 200 K；1.76 eV 实为 σ谱 CT 峰而非 Mott gap；scheme 中 260 K 实验拟合的 1.76 eV 无明确出处）",
+      "missing_evidence": "缺少 Ikeda 1T-TaS2 实验拟合 Δ_Mott≈1.5 eV（tdDMFT，260 K）的原始引用以及 σ 谱 CT 峰 1.76 eV 的明确出处",
+      "search_keywords": [
+        "Ikeda 1T-TaS2 DMFT Mott gap 260 K",
+        "1T-TaS2 optical conductivity CT peak 1.76 eV",
+        "tdDMFT TaS2 Mott insulator gap",
+        "TaS2 charge gap tdDMFT fitting",
+        "Ikeda TaS2 Nature Physics 2024 Mott gap"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "scheme L33/L47 与 content §2.2.1 中 <2%/<6% 双口径不一致——content L51 把 <6% 直接挂到 Σ-SBE 耦合界面基准名下，与 scheme 自身消歧口径矛盾",
+      "missing_evidence": "缺少 Σ-SBE 跨方法耦合界面误差传递基准的实验/计算论文支撑（用以确立 <2% 而非 <6%）",
+      "search_keywords": [
+        "semiconductor Bloch equation multiband accuracy benchmark",
+        "SBE coupled tight-binding error propagation",
+        "ZnO high harmonic generation SBE benchmark",
+        "many-body coupling interface accuracy solid HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "scheme L67 角涨落类比引用 [26]（[27] 五处调用未收敛）需补 [26] 关于二维磁体/反铁磁体角涨落或自旋涨落的实验/理论论文",
+      "missing_evidence": "缺少角涨落类比的支撑文献（[26] 出处与上下文）",
+      "search_keywords": [
+        "angular fluctuation2D antiferromagnet",
+        "spin fluctuation NiPS3 MnPS3",
+        "order parameter angular fluctuation ultrafast",
+        "2D magnet spin fluctuation HHG"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "scheme L45/L69/L99/L125 中 [27] 的额外保留引用需要确认文献内容确实支撑各处表述",
+      "missing_evidence": "需核查 [27] 文献（疑为 Ikeda 1T-TaS2 Mott gap 相关）是否同时支撑 Σ-SBE 耦合、Mott gap 拟合与 HHG 反演三处不同论述",
+      "search_keywords": [
+        "1T-TaS2 correlated insulator high harmonic generation",
+        "TaS2 charge density wave gap SBE",
+        "Ikeda TaS2 correlated insulator HHG benchmark"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

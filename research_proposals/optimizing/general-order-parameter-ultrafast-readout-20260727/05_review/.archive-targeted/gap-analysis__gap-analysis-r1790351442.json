@@ -1,0 +1,27 @@
+{
+  "gaps": [
+    {
+      "claim": "CrSb 奈尔温度 733(4) K 数值及其\"敏感度+极化中子副产量\"的表征归属挂靠文献 [27]（rat L57、con L33）",
+      "missing_evidence": "该归属未经原文献核实：[27] 是否确实包含 733(4) K 的测定与极化中子衍射表征无确认证据；需要能同时支撑该温度数值与测量方法的原始出处（早期中子衍射/比热/磁化率测量文献），若 [27] 不实则须改挂真实出处",
+      "search_keywords": [
+        "CrSb Néel temperature 733 K neutron diffraction",
+        "CrSb polarized neutron diffraction magnetic structure",
+        "Snow CrSb antiferromagnetic neutron diffraction 1952",
+        "CrSb antiferromagnetic transition temperature specific heat magnetization"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "优先权/新颖性声明（如 Ma [23] 方案尚无实验报道等）所依据的检索在三处使用不同截止日期（2026-07/08/09）",
+      "missing_evidence": "缺少以统一最新截止日期（2026-09）完成的优先权复核检索证据，无法确认\"尚无实验报道\"类声明在最新时间点仍然成立，截止日期不一致削弱优先权声明的可证伪性",
+      "search_keywords": [
+        "altermagnet high harmonic generation experimental observation 2026",
+        "antiferromagnet order parameter ultrafast optical readout experiment",
+        "time-resolved high harmonic generation CrSb MnTe experiment",
+        "magnetic order parameter harmonic probe experiment altermagnet"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "full_review"
+}

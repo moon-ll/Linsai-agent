@@ -1,0 +1,36 @@
+{
+  "gaps": [
+    {
+      "claim": "固体HHG作为Berry曲率与关联相干的精密探测平台（需以Heide等2024 Nat. Phys. 20, 1546–1557为嵌入式引用锚点，纠正张冠李戴）",
+      "missing_evidence": "当前[3]被错误署名为Ciappina 2025 Adv. Phys.，实际应为Heide C.等2024 Nat. Phys.综述；需要该综述的完整引文信息（作者全名、卷期页码、发表内容摘要）作为嵌入式引用支撑",
+      "search_keywords": [
+        "Heide 2024 Nature Physics high harmonic spectroscopy review",
+        "Heide solid HHG Berry curvature coherence review Nat Phys 20 1546",
+        "high harmonic generation band structure Berry curvature review 2024"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "1T-TaS₂作为中-强关联基准（误差10–20%）用于标定耦合界面的多体修正误差传递",
+      "missing_evidence": "缺少1T-TaS₂固体HHG或多体计算的具体基准文献来源（实测关联强度、计算误差区间、复现条件），该基准未在references.md列条目、未在scheme §3.2给出复现协议",
+      "search_keywords": [
+        "1T-TaS2 high harmonic generation correlated insulator",
+        "1T-TaS2 many-body calculation benchmark TDDFT Hubbard",
+        "TaS2 CDW HHG strong correlation error benchmark",
+        "1T-TaS2 GW DMFT band structure benchmark"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "固体HHG自Ghimire等2011 Nat. Phys. ZnO报道以来成为全光探测平台",
+      "missing_evidence": "嵌入式引用骨架需要核实[23]是否为Ghimire S.等2011 Nat. Phys. 7, 138–141的原始ZnO体相HHG文献，确认作者署名、卷期页与发表内容一致",
+      "search_keywords": [
+        "Ghimire 2011 Nature Physics ZnO high harmonic generation",
+        "Ghimire observation high-order harmonic generation ZnO mid-infrared",
+        "solid-state HHG ZnO original observation Ghimire Nat Phys 7 138"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

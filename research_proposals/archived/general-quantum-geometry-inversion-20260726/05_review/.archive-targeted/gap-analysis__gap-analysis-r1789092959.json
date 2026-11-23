@@ -1,0 +1,41 @@
+{
+  "gaps": [
+    {
+      "claim": "Ikeda Sr₂CuO₃ MIR 驱动亚周期 Mott 熔化谐波红移（doublon-holon 复合激发）与 Ω 反演误差源自反演链路噪声，二者无解析等价关系",
+      "missing_evidence": "需要 Ikeda 关于 Sr₂CuO₃ 高次谐波多体红移原始数据（红移量级、doublon-holon 激发机制、U/W 依赖），用以明确区分多体红移与反演误差的物理来源",
+      "search_keywords": [
+        "Ikeda Sr2CuO3 high harmonic generation redshift",
+        "doublon holon high harmonic generation Mott insulator",
+        "Mott insulator ultrafast melting HHG Ikeda",
+        "Sr2CuO3 mid-infrared HHG strong field many-body",
+        "Mott insulator high harmonic generation cuprate"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "BSV 失败→经典光双色场独立推进，未给经典光方案在拓扑绝缘体上的 Fisher 信息预期",
+      "missing_evidence": "缺少经典光双色场在拓扑绝缘体（如 Bi₂Te₃）HHG 上 Berry 曲率反演的 Fisher 信息/可辨识性预期数据，作为 BSV 路径失效时的独立证据链",
+      "search_keywords": [
+        "Bi2Te3 two-color field high harmonic generation Berry curvature",
+        "Fisher information Berry curvature HHG topological insulator",
+        "classical light two-color HHG inversion topological insulator",
+        "Bi2Se3 Sb2Te3 high harmonic generation classical driving",
+        "circular dichroism HHG topological insulator Berry curvature retrieval"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "f-sum rule 三档阈值标度律 5% × (1+0.5·U/W) × 1.5 缺物理来源",
+      "missing_evidence": "缺少 f-sum rule 在强关联体系中偏差随 U/W 比值的标度律文献支撑（中等关联 6.25%、强关联 7.5%、外推档 1.5 放大系数的物理依据）",
+      "search_keywords": [
+        "f-sum rule violation strongly correlated Hubbard U bandwidth",
+        "f-sum rule bandwidth renormalization solid-state HHG scaling",
+        "f-sum rule U/W ratio high harmonic generation",
+        "sum rule strongly correlated electron gas deviation",
+        "f-sum rule Hubbard model deviation scaling"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "scheme"
+}

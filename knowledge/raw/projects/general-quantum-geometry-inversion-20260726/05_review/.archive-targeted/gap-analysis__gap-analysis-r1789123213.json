@@ -1,0 +1,114 @@
+{
+  "gaps": [
+    {
+      "claim": "Aversa-Sipe半导体布洛赫方程与非线性极化率理论在固体HHG中的奠基性贡献",
+      "missing_evidence": "scheme中四处'1994'与content中'1995'并存，缺少准确的PRB 52,14636 (1995)原文核对，以及对应的Phys Rev Lett 1993/1994系列论文的卷期页码确认",
+      "search_keywords": [
+        "Aversa Sipe 1995 PRB 52 14636 semiconductor harmonic",
+        "Aversa Sipe interband nonlinear susceptibility Phys Rev Lett",
+        "Aversa Sipe 1993 1994 semiconductor Bloch equation HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Berry联络/曲率与量子度规的数学定义及TKNN量子化霍尔电导框架",
+      "missing_evidence": "rationale L3起手连引Thouless 1982/Berry 1984/Provost-Vallee 1980三篇1980s定义文献，缺少2015-2026可观测性实验进展的实验锚定文献（Luu-Wörner 2018, Ghimire 2011, Baykusheva 2018等）",
+      "search_keywords": [
+        "Luu Wörner 2018 Berry curvature quartz HHG experiment",
+        "Ghimire 2011 ZnO solid-state HHG observation",
+        "Baykusheva Worner 2018 HHG Berry curvature circular dichroism",
+        "Thouless TKNN 1982 quantized Hall conductance",
+        "Berry 1984 quantum phase adiabatic",
+        "Provost Vallee 1980 quantum metric Riemannian"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "PINN与CNN在HHG反演问题中的对比基准",
+      "missing_evidence": "scheme中提及PINN vs CNN对比但缺少二者计算精度/泛化性的同行对比文献（清单8仅泛泛提及，未给具体benchmark）",
+      "search_keywords": [
+        "PINN vs CNN HHG inversion benchmark",
+        "physics-informed neural network high harmonic spectroscopy comparison",
+        "deep learning inverse problem nonlinear optics comparison"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "固体HHG截止频率3.17定律（3.17Up）的传统基线",
+      "missing_evidence": "rationale/content提及'固体截止基线'但未给Lewenstein强场近似或Corkum三步模型在固体中的具体适用条件文献",
+      "search_keywords": [
+        "Lewenstein strong field approximation HHG cutoff3.17 Up",
+        "Corkum three-step model high harmonic cutoff solid",
+        "Ghimire 2011 solid HHG cutoff law deviation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Landau-Zener跃迁在高次谐波产生带间跃迁中的作用",
+      "missing_evidence": "全文出现三处'Landé-Zéner'错误拼写（应为Landau-Zener），需引用Landau 1932/Zener 1932原始文献及Stueckelberg等现代综述",
+      "search_keywords": [
+        "Landau Zener 1932 transition probability",
+        "Landau-Zener interband transition high harmonic generation",
+        "Stueckelberg Landau Zener nonadiabatic transition"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "f-sum rule在强关联电子体系高次谐波产生中的违反程度与Hubbard U/W比例阈值",
+      "missing_evidence": "content提及f-sum rule但缺少U/W比例对应的谐波红移/带宽重整化的量化文献支撑",
+      "search_keywords": [
+        "f-sum rule violation Hubbard U bandwidth renormalization",
+        "f-sum rule strongly correlated electron system",
+        "Hubbard U bandwidth ratio threshold strongly correlated HHG",
+        "Ikeda Sr2CuO3 high harmonic redshift Hubbard U"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "BSV（明亮压缩真空态）驱动的固体高次谐波产生量子增强因子（QEF）的实验验证",
+      "missing_evidence": "整篇多处引用BSV增强但缺少近两年Rasputnyi 2024或Even-Tzur等的首次固体QEF实验文献，以及量子光-经典光在固体HHG产率比的定量基准",
+      "search_keywords": [
+        "Rasputnyi 2024 bright squeezed vacuum solid HHG",
+        "BSV driven solid state high harmonic first observation",
+        "quantum enhancement factor HHG solid experiment",
+        "Even Tzur quantum photon harmonic enhancement",
+        "Gorlach quantum light solid HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "拓扑绝缘体Bi2Te3高次谐波产生中Berry曲率与量子度规的实验反演精度",
+      "missing_evidence": "scheme中以Bi2Te3为典型体系但缺少近2-3年（2024-2026）的Berry曲率/量子度规反演精度文献，特别是中红外（1.5 μm）驱动的实验数据",
+      "search_keywords": [
+        "Bi2Te3 high harmonic generation Berry curvature inversion accuracy",
+        "Bi2Te3 mid-infrared HHG quantum geometry experimental",
+        "topological insulator Berry curvature HHG 2024 2025 2026",
+        "Bi2Te3 quantum metric high harmonic reconstruction"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "贝里曲率/量子度规对非线性光学响应的理论预测与首次实验观测",
+      "missing_evidence": "缺少Sodemann-Fu 2015 PRL quantum metric nonlinear response综述，以及Ghimire 2011/Luu-Wörner 2018之后的实验推进文献",
+      "search_keywords": [
+        "Sodemann Fu 2015 quantum metric nonlinear response",
+        "nonlinear Hall effect Berry curvature theory prediction",
+        "circular dichroism HHG quantum geometry experimental",
+        "quantum geometry tensor nonlinear optics review"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "极化率量子化条件与拓扑不变量的HHG反演极限（不确定性传播）",
+      "missing_evidence": "缺少Fisher信息矩阵在非线性反问题中的条件数/参数可识别性文献，以及HHG反演误差传播的统计文献",
+      "search_keywords": [
+        "Fisher information matrix nonlinear optics inverse problem identifiability",
+        "condition number high harmonic spectroscopy parameter retrieval",
+        "Bayesian inversion HHG posterior uncertainty",
+        "error propagation Berry curvature inversion HHG"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "full_review"
+}

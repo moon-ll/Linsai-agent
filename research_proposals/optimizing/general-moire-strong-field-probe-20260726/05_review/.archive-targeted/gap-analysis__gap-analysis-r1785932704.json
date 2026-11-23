@@ -1,0 +1,17 @@
+{
+  "gaps": [
+    {
+      "claim": "全原胞TDDFT在莫尔超晶格（>10,000原子原胞）上计算不可承受（需>10⁸核时），因此采用多尺度降阶策略",
+      "missing_evidence": "目前以Molinero 2024的SBE（半导体Bloch方程）基准（11,000原子原胞、10⁵核时/角）为依据外推至>10⁸核时，但Molinero用SBE而非TDDFT，两种方法的计算复杂度标度律不同，属间接外推；缺少直接TDDFT在莫尔超晶格上的核时benchmark同行评审文献，或缺少从SBE到TDDFT标度律外推的严格论证链",
+      "search_keywords": [
+        "real-time TDDFT moiré supercell computational cost",
+        "TDDFT twisted bilayer graphene benchmark",
+        "first-principles TDDFT moiré heterostructure scalability",
+        "ab initio moiré TBG core hours publication",
+        "TDDFT versus SBE scalability benchmark",
+        "magic-angle TDDFT supercell calculation cost"
+      ],
+      "priority": "high"
+    }
+  ]
+}

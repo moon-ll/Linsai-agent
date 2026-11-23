@@ -1,0 +1,93 @@
+{
+  "gaps": [
+    {
+      "claim": "驱动场不低于 HHG 通道阈值约 10¹⁰ W/cm²（§3.4.2 靶标 A 段）",
+      "missing_evidence": "缺少对 MoS₂ 等 TMD 材料 HHG 通道阈值的具体实验或理论文献支撑，该数值直接决定可行性论证的物理前提",
+      "search_keywords": [
+        "high harmonic generation threshold MoS2",
+        "HHG cutoff intensity transition metal dichalcogenide",
+        "TMDC HHG channel opening driving field",
+        "MoS2 monolayer high harmonic generation intensity dependence"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "TDDFT 标定偏差 <5% 控制目标（§3.2.1）",
+      "missing_evidence": "仅提'文献基准'但未指明具体对照来源，缺少公开的 TDDFT vs 实验谱合成基准文献，无法第三方复算",
+      "search_keywords": [
+        "TDDFT benchmark accuracy 2D material band structure",
+        "TDDFT vs experimental absorption spectrum error benchmark",
+        "many-body perturbation GW vs TDDFT MoS2",
+        "TDDFT synthetic spectrum validation transition metal dichalcogenide"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "波长档 1.3/1.7/3.0/4.0/4.5 μm 对应能窗下端 0.27–0.28 eV（§3.3.2/§3.2.4）",
+      "missing_evidence": "波长档选择依据与中红外波段 MoS₂ HHG 实验/理论文献缺失，缺乏波长-能量联算的实验先例支撑",
+      "search_keywords": [
+        "mid-infrared HHG MoS2 wavelength",
+        "MoS2 high harmonic generation 1.3 1.7 micron",
+        "few-cycle mid-IR HHG TMDC",
+        "carrier-envelope phase mid-infrared strong field 2D material"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Peterka 等 2023 APL Photonics 实测 MoS₂ HHG H5–H11（§3.3.1，[22]）",
+      "missing_evidence": "[22] 之外的同类 MoS₂/TMDC HHG 实测文献单源依赖，缺少多实验组交叉验证（独立实验复现、扩展谐波阶范围、椭圆依赖等）",
+      "search_keywords": [
+        "MoS2 monolayer high harmonic generation experimental",
+        "TMDC HHG harmonic order measurement",
+        "two-dimensional material high harmonic generation experiment review",
+        "transition metal dichalcogenide HHG ellipticity"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Zhou/Tyulnev 等先例工作无闭环读出（§3.4）",
+      "missing_evidence": "对 Zhou、Tyulnev 等强场读出先例的引用为指代式提及，缺少具体文献条目和'无闭环'的技术判据来源",
+      "search_keywords": [
+        "Zhou strong field readout 2D material",
+        "Tyulnev attoclock strong-field TMDC",
+        "strong-field ionization recollision 2D material",
+        "strong-field probe transition metal dichalcogenide closed-loop"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "TDDFT 全原胞计算成本 10⁶ 核时/单参数点×100=10⁸ 总账（§3.2/§3.2.1）",
+      "missing_evidence": "成本估算缺乏可比规模的 TDDFT 文献基准（千原子级含时计算、MoS₂ 双层 12400 原子体系），缺少 HPC 实际机时文献背书",
+      "search_keywords": [
+        "TDDFT thousand atom time-dependent supercell computational cost",
+        "real-time TDDFT MoS2 bilayer benchmark",
+        "TDDFT HPC core-hour large supercell 2D material",
+        "TDDFT thousands of atoms scaling benchmark"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "MoS₂ 单层 HHG 谐波 H5–H10 阶的探测可行性（§3.3.1，[22]）",
+      "missing_evidence": "[22] 仅给单一实验组的谐波阶范围，缺少对其探测灵敏度/信噪比的定量评估文献，以及与同类体系（WSe₂/WS₂）HHG 产额对比的文献依据",
+      "search_keywords": [
+        "MoS2 HHG yield harmonic order comparison WSe2",
+        "2D material high harmonic generation yield sensitivity",
+        "TMDC monolayer HHG signal to noise ratio",
+        "transition metal dichalcogenide HHG harmonic yield scaling"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "强场反演（light-induced Berry connection /瞬态能带反演）方法的物理基础（§3.4 与可行性章）",
+      "missing_evidence": "该方法核心物理文献（瞬态 Berry 连接反演、time-resolved band structure reconstruction）在方案/可行性章未充分引用，'原理→指标'链缺乏原始文献锚定",
+      "search_keywords": [
+        "light-induced Berry connection transient band structure",
+        "time-resolved band reconstruction strong field",
+        "transient Berry curvature attosecond",
+        "strong-field reconstruction electronic structure 2D material"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "scheme"
+}

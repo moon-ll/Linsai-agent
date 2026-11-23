@@ -1,0 +1,25 @@
+{
+  "proposal_id": "general-floquet-20261107",
+  "cluster_id": "orphan-route-2026-11-13",
+  "clusters": [
+    "orphan-route-2026-11-13"
+  ],
+  "entries": [
+    {
+      "source_id": "paper:2026-2606.31573-high-harmonic-spin-current-signatures-of-altermagn",
+      "title": "High-harmonic spin-current signatures of altermagnetic spin-group symmetry",
+      "summary": "该文在弱自旋轨道耦合区推导了基于交变磁自旋点群对称性的电荷流与自旋流高次谐波产生选择定则，揭示了自旋群对称性此前未被探索的动力学后果。该工作表明高次谐波自旋流光谱可作为实验探测和表征交变磁相自旋群对称性的手段。",
+      "path": "",
+      "added_via": "cluster:orphan-route-2026-11-13",
+      "added_at": "2026-11-13T16:47:06Z"
+    },
+    {
+      "source_id": "paper:2026-2607.19483-optical-magnetic-switching-in-odd-parity-magnets-with-spin-o",
+      "title": "Optical Magnetic Switching in Odd-Parity Magnets with Spin-Orbit Coupling",
+      "summary": "提出在含自旋轨道耦合的p/f波odd-parity磁体中，利用圆偏振光的Floquet调控实现零净磁化态与有限自旋极化态之间的光学切换。切换方向由光螺旋度决定，并同时可控地翻转陈数的符号，从而将光驱动拓扑工程与odd-parity磁性的超快调控联系起来。结果是纯光学手段（无需磁场）实现磁化与拓扑相（反常霍尔响应）的双重开关。",
+      "path": "knowledge/raw/papers/2026-2607.19483-optical-magnetic-switching-in-odd-parity-magnets-with-spin-o.md",
+      "added_via": "cluster:orphan-route-2026-11-13",
+      "added_at": "2026-11-13T16:47:06Z"
+    }
+  ]
+}

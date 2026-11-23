@@ -1,0 +1,27 @@
+{
+  "gaps": [
+    {
+      "claim": "MnTe 薄膜 MBE 生长与反常霍尔测量已有可参照的国内工作（立项依据 §一.2 L35 国内现状段）",
+      "missing_evidence": "该句为『文献编号待补入』占位符，缺少真实的国内 MnTe 薄膜分子束外延（MBE）生长与反常霍尔（AHE）测量的实体文献条目 [N]；检索不到则需降级为『据调研』表述，禁止交付态占位",
+      "search_keywords": [
+        "MnTe molecular beam epitaxy thin film growth",
+        "MnTe 薄膜 分子束外延 国内",
+        "MnTe film anomalous Hall effect measurement",
+        "altermagnet MnTe thin film China group MBE"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "CrSb 单晶的国内生长与磁输运研究已有报道（同段 CrSb 单晶国内报道句）",
+      "missing_evidence": "CrSb 单晶生长/磁输运句子无编号引证支撑（该段编号引证仅 [14][34] 两处），需补 CrSb 单晶生长或磁输运性质测量的国内文献编号锚点",
+      "search_keywords": [
+        "CrSb single crystal growth magnetotransport",
+        "CrSb 单晶 生长 磁输运 国内",
+        "CrSb altermagnet single crystal China group",
+        "CrSb de Haas-van Alphen single crystal growth"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

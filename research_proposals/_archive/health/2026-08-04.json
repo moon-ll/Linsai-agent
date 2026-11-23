@@ -1,0 +1,165 @@
+{
+  "environment": {
+    "status": "✓",
+    "python": "3.9.6",
+    "disk_free_gb": 309.2,
+    "missing_dirs": []
+  },
+  "credentials": {
+    "status": "✓",
+    "providers": {
+      "MINIMAX_API_KEY": {
+        "present": true,
+        "masked": "sk-c...mGDU"
+      },
+      "GLM_API_KEY": {
+        "present": true,
+        "masked": "1883...H7Qm"
+      }
+    }
+  },
+  "lifecycle": {
+    "status": "✓",
+    "state_counts": {
+      "drafts": 0,
+      "optimizing": 5,
+      "pending_review": 0,
+      "archived": 0
+    },
+    "alerts": [],
+    "artifacts": [
+      {
+        "proposal_id": "general-bsv-driven-hhg-quantum-20260726",
+        "missing_stages": [],
+        "complete": true
+      },
+      {
+        "proposal_id": "general-moire-strong-field-probe-20260726",
+        "missing_stages": [],
+        "complete": true
+      },
+      {
+        "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
+        "missing_stages": [],
+        "complete": true
+      },
+      {
+        "proposal_id": "general-quantum-geometry-inversion-20260726",
+        "missing_stages": [],
+        "complete": true
+      },
+      {
+        "proposal_id": "key-transient-quantum-phase-optical-20260726",
+        "missing_stages": [],
+        "complete": true
+      }
+    ],
+    "incomplete_count": 0
+  },
+  "profiles": {
+    "status": "⚠",
+    "profiles": {
+      "linsai": {
+        "status": "working",
+        "success_rate_24h": null,
+        "dispatch_count_24h": 0,
+        "avg_duration_s": 0,
+        "recent_error": "",
+        "suggestion": ""
+      },
+      "pipeline-runner": {
+        "status": "working",
+        "success_rate_24h": null,
+        "dispatch_count_24h": 0,
+        "avg_duration_s": 0,
+        "recent_error": "",
+        "suggestion": ""
+      },
+      "researcher": {
+        "status": "idle",
+        "success_rate_24h": null,
+        "dispatch_count_24h": 0,
+        "avg_duration_s": 0,
+        "recent_error": "",
+        "suggestion": ""
+      },
+      "analyst": {
+        "status": "idle",
+        "success_rate_24h": null,
+        "dispatch_count_24h": 0,
+        "avg_duration_s": 0,
+        "recent_error": "",
+        "suggestion": ""
+      },
+      "writer": {
+        "status": "blocked",
+        "success_rate_24h": 0.833,
+        "dispatch_count_24h": 6,
+        "avg_duration_s": 294.7,
+        "recent_error": "",
+        "suggestion": ""
+      },
+      "critic": {
+        "status": "blocked",
+        "success_rate_24h": 0.625,
+        "dispatch_count_24h": 8,
+        "avg_duration_s": 579.2,
+        "recent_error": "",
+        "suggestion": ""
+      },
+      "reviewer": {
+        "status": "idle",
+        "success_rate_24h": null,
+        "dispatch_count_24h": 0,
+        "avg_duration_s": 0,
+        "recent_error": "",
+        "suggestion": ""
+      }
+    },
+    "blocked": [
+      "writer",
+      "critic"
+    ],
+    "offline": [],
+    "computed_at": "2026-08-04T15:56:26Z"
+  },
+  "kb": {
+    "status": "⚠",
+    "composite_health": 0.662,
+    "components": {
+      "connectivity": 0.7266666666666667,
+      "category_coverage": 0.42,
+      "alias_hit_rate": 0.59,
+      "orphan_rate": 0.0
+    },
+    "summary": {
+      "raw_count": 233,
+      "wiki_count": 155,
+      "graph_nodes": 105,
+      "graph_edges": 291,
+      "graph_orphans": 0,
+      "week_new": 0,
+      "pending_distill": 233
+    }
+  },
+  "failures": {
+    "status": "✓",
+    "total_errors": 0,
+    "total_warnings": 95,
+    "top_pattern": "env-pollution",
+    "patterns": []
+  },
+  "cron": {
+    "status": "✓",
+    "found": [
+      "lc-micro-scheduler",
+      "lc-weekend-weekend-input",
+      "lc-weekend-weekend-output",
+      "lc-weekend-weekend-reflection",
+      "lc-weekend-worker"
+    ],
+    "missing": [],
+    "count": 12,
+    "setup_command": "python3 scripts/proposal_lifecycle.py --setup-cron-v2"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "proposal_id": "general-attosecond-streaking-20260822",
+  "cluster_id": "cl_20261029_f7b6a8",
+  "clusters": [
+    "cl_20261029_f7b6a8"
+  ],
+  "entries": [
+    {
+      "source_id": "paper:2025-2508.01975-diffusion-models-for-inverse-problems",
+      "title": "Diffusion models for inverse problems",
+      "summary": "本文是对“扩散模型作为先验求解逆问题”方向的系统性综述（Daras et al., arXiv:2508.01975）：建立了把已知前向模型嵌入反向扩散采样的方法分类学，涵盖似然梯度引导、高斯近似后验、伪逆/分裂采样、变分式条件化等主流路线，并比较其实现细节、理论与计算特性。核心信息是：学习到的扩散先验可作为通用、免任务再训练的数据先验，在去噪、超分辨、图像填充、盲去模糊等不适定成像任务上给出可带不确定性量化的后验解；主要挑战集中在似然引导的近似误差、采样成本、先验偏置（幻觉）与评估协议的缺失。",
+      "path": "knowledge/raw/papers/2025-2508.01975-diffusion-models-for-inverse-problems.md",
+      "added_via": "cluster:cl_20261029_f7b6a8",
+      "added_at": "2026-11-13T20:40:27Z"
+    },
+    {
+      "source_id": "paper:2024-2407.11288-zero-shot-adaptation-for-approximate-posterior-sampling-of-d",
+      "title": "Zero-Shot Adaptation for Approximate Posterior Sampling of Diffusion Models in Inverse Problems",
+      "summary": "提出 ZAPS（Zero-shot Adaptation for approximate Posterior Sampling）：把扩散后验采样（DPS）中原本需按任务用真值网格搜索的引导步长超参视为带先验的随机隐变量，通过变分推断（证据下界）在反向扩散每一步仅用量测数据在线估计其近似后验，实现零样本、无真值依赖的超参自适应。在去噪、超分辨率与 MRI 重建等含噪逆问题上，未知噪声水平下达到与充分调参 DPS 相当或更优的重建质量，去除了扩散先验部署到真实实验逆问题时对标注调参的依赖。",
+      "path": "knowledge/raw/papers/2024-2407.11288-zero-shot-adaptation-for-approximate-posterior-sampling-of-d.md",
+      "added_via": "cluster:cl_20261029_f7b6a8",
+      "added_at": "2026-11-13T20:40:27Z"
+    },
+    {
+      "source_id": "paper:2025-2503.03007-benchmarking-diffusion-annealing-based-bayesian-inverse-prob",
+      "title": "Benchmarking Diffusion Annealing-Based Bayesian Inverse Problem Solvers",
+      "summary": "本文构建了三类贝叶斯逆问题基准测试——图像修复、X射线断层重建与相位恢复，分别覆盖线性良态、线性病态欠采样和非线性非凸正向模型。以这些基准系统评测了以预训练扩散模型为先验的 BIPSDA（扩散退火）算法，考察其在不同欠采样率、噪声水平与先验-真值失配下的重建质量与计算代价，并与其他扩散先验后验采样方法进行横向对比。结果为『何时该用扩散退火式贝叶斯反演』给出了可复现的适用边界。",
+      "path": "knowledge/raw/papers/2025-2503.03007-benchmarking-diffusion-annealing-based-bayesian-inverse-prob.md",
+      "added_via": "cluster:cl_20261029_f7b6a8",
+      "added_at": "2026-11-13T20:40:27Z"
+    }
+  ]
+}

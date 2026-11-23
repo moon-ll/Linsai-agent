@@ -1,0 +1,77 @@
+{
+  "gaps": [
+    {
+      "claim": "altermagnet HHG 信号量级达到可辨识阈值（1% 信号对比度、SNR > 5）",
+      "missing_evidence": "缺乏公开文献证明 CrSb 等交变磁材料在强场下的 HHG 信号强度足以支撑序参量可辨识性分析，申请人自述依赖预研未公开数据",
+      "search_keywords": [
+        "CrSb high harmonic generation signal yield",
+        "altermagnet HHG experimental observation",
+        "CrSb spin-polarized harmonic experimental",
+        "MnTe altermagnet HHG yield"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "CrSb 在近红外飞秒激光作用下的损伤阈值",
+      "missing_evidence": "缺少 CrSb 强场光学激发稳定性的实验数据，申请人预研数据未发表，无法被评审验证",
+      "search_keywords": [
+        "CrSb ultrafast laser damage threshold",
+        "CrSb femtosecond laser damage",
+        "CrSb strong-field optical excitation stability",
+        "CrSb near-infrared pump probe damage threshold"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Cochran 量子相干断层成像方法可用于 HHG 序参量重建",
+      "missing_evidence": "Cochran HHG 量子相干断层成像方法于 2025—2026 年刚发表（arXiv），实验可行性尚未经同行验证",
+      "search_keywords": [
+        "Cochran quantum coherence tomography high harmonic generation",
+        "Cochran HHG quantum coherence arXiv 2025",
+        "HHG quantum coherence tomography experimental"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Sørensen 阿秒重建方法与 Cochran 量子相干方法的组合可实现交变磁序参量联合反演",
+      "missing_evidence": "两种 HHG 序参量反演方法的组合方案无先例，联合反演的有效性缺乏实验验证",
+      "search_keywords": [
+        "Sørensen attosecond order parameter reconstruction HHG",
+        "Cochran Sørensen HHG order parameter combined",
+        "quantum coherence tomography attosecond retrieval integration"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Fuchs MnTe 自旋极化高次谐波实验观测交变磁序",
+      "missing_evidence": "MnTe 交变磁 HHG 实验观测（spin symmetry breaking 信号）需更多材料体系重复验证",
+      "search_keywords": [
+        "Fuchs MnTe spin-polarized high harmonic generation",
+        "MnTe ultrafast magneto-optics HHG",
+        "MnTe altermagnet HHG experimental observation"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "半导体布洛赫方程在强场极限下对交变磁 HHG 的适用性",
+      "missing_evidence": "SBE 在 V/Å 量级强场下的有效性边界缺乏系统 Benchmark 对比（vs TDDFT），强场极限下 interband coupling saturation 效应未得到充分文献支撑",
+      "search_keywords": [
+        "semiconductor Bloch equation strong field validity V/Angstrom",
+        "SBE breakdown criterion strong field solid",
+        "interband coupling saturation strong field HHG",
+        "TDDFT vs SBE benchmark high harmonic generation"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Fisher 信息矩阵条件数 κ < 10² 作为可辨识性判据的合理性",
+      "missing_evidence": "HHG 光谱学反演问题的病态程度（condition number）与 Fisher 信息矩阵的关联缺乏专门文献，阈值 10² 的选取依据需进一步验证",
+      "search_keywords": [
+        "Fisher information matrix nonlinear optics inverse problem",
+        "condition number HHG parameter retrieval",
+        "HHG spectroscopy ill-posed inversion dimensionality"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

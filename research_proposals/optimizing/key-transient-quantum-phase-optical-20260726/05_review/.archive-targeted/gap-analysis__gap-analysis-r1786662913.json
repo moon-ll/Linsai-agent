@@ -1,0 +1,47 @@
+{
+  "gaps": [
+    {
+      "claim": "申请团队（中科院物理所）已发表 Bi₂Se₃ 高次谐波（HHG）代表性工作，最近一次实验已观测到相关现象",
+      "missing_evidence": "正文中引用的 [9]（Baykusheva & Wörner, PRL 121, 246401, 2018）实际为 ETH Zürich Wörner 组工作，并非申请人团队成果。需检索申请人团队本人是否确有 Bi₂Se₃ HHG 实验发表的预研基础文献，否则 §2.3、问题一、问题三中所有团队预研基础论证失去支撑",
+      "search_keywords": [
+        "Bi₂Se₃ high harmonic generation experiment",
+        "topological insulator HHG solid state",
+        "bismuth selenide strong field nonlinear optics",
+        "中科院物理所 高次谐波 拓扑绝缘体",
+        "Bi₂Se₃ attosecond spectroscopy strong field"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "MIT Reis 组已有 Berry 曲率圆偏振选择性报道",
+      "missing_evidence": "该论点目前与 [9]（ETH Wörner 组文献）混淆引用，缺少 MIT Reis 组关于 Berry 曲率与圆偏振高次谐波选择性关系的独立正确引用文献",
+      "search_keywords": [
+        "Reis Berry curvature circular polarization high harmonic",
+        "MIT Reis group solid-state HHG Berry",
+        "circular dichroism high harmonic generation topological",
+        "Berry curvature selectivity circular HHG semiconductor"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "参考文献 [9]（PRL 121, 246401, 2018）的作者归属与团队关系",
+      "missing_evidence": "需核实该文献实际作者、通讯单位（ETH Zürich），确认是否与申请人团队有任何关联，以消除三重归属矛盾",
+      "search_keywords": [
+        "Baykusheva Wörner PRL 121 246401 2018",
+        "Phys Rev Lett 121 246401 2018 Bi₂Se₃ HHG",
+        "Baykusheva ETH Zürich topological insulator harmonic"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "参考文献 [47]（arXiv:2403.08896）的第一作者",
+      "missing_evidence": "同一编号 [47] 在 §2.2 被引为'Yu 等'，在 §2.3/§2.4 被引为'Feng 等'，需核实 arXiv:2403.08896 的实际第一作者是 Yu 还是 Feng",
+      "search_keywords": [
+        "arXiv 2403.08896 first author",
+        "arXiv 2403.08896 high harmonic generation",
+        "2403.08896 Yu Feng authorship"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

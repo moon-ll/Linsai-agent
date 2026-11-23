@@ -1,0 +1,14 @@
+{
+  "proposal_id": "general-moire-strong-field-probe-20260726",
+  "cluster_id": "orphan-route-2026-10-02",
+  "entries": [
+    {
+      "source_id": "paper:2024-2410.22593-highly-tunable-moiré-superlattice-potentials-in-twisted-hexa",
+      "title": "Highly tunable moiré superlattice potentials in twisted hexagonal boron nitrides",
+      "summary": "该工作利用扭转六方氮化硼（hBN）中的铁电莫尔畴，为相邻二维材料构建了高度可调的远程库仑超晶格势，为莫尔工程提供了新型调控手段。",
+      "path": "knowledge/raw/papers/2024-2410.22593-highly-tunable-moiré-superlattice-potentials-in-twisted-hexa.md",
+      "added_via": "cluster:orphan-route-2026-10-02",
+      "added_at": "2026-10-02T16:43:15Z"
+    }
+  ]
+}

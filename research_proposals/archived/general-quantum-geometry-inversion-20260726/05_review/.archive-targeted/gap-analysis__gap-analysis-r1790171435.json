@@ -1,0 +1,37 @@
+{
+  "gaps": [
+    {
+      "claim": "1T-TaS₂ U/W 比值具体范围需要文献支撑",
+      "missing_evidence": "需要 1T-TaS₂ U/W 比例的实验/理论计算数据，特别是 Mott-CDW 相区的 U/W 数值范围（评审指出 scheme §7.3 标 1.0–1.2，但 rationale 限定 ≤1.0，需文献厘清真实区间）",
+      "search_keywords": [
+        "1T-TaS2 U/W ratio",
+        "TaS2 Hubbard U bandwidth",
+        "1T-TaS2 Mott CDW phase diagram",
+        "TaS2 DMFT U/W"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "ZnO/MgO 谐波阶次上限（n≤11 vs 7–19 阶）的实验依据",
+      "missing_evidence": "需要 ZnO 固体 HHG 实验观测的最高谐波阶次范围文献，以支撑方案 §6 中 7–19 阶的可重复性指标（超出立项依据声明的 n≤11 边界）",
+      "search_keywords": [
+        "ZnO high harmonic generation cutoff",
+        "solid HHG harmonic order ZnO mid-infrared",
+        "Ghimire ZnO HHG harmonic order",
+        "ZnO MgO high harmonic spectrum range"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Sala 2026 引用跨章重复（rationale L9 / scheme L293）",
+      "missing_evidence": "需要确认 Sala 2026 文献的完整书目信息（期刊、DOI、arXiv ID），消除跨章重复引用并定位其核心论点对应的章节位置",
+      "search_keywords": [
+        "Sala 2026 high harmonic generation",
+        "Sala 2026 altermagnet HHG",
+        "Sala 2026 solid-state HHG review"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "full_review"
+}

@@ -1,0 +1,53 @@
+{
+  "gaps": [
+    {
+      "claim": "以 α-T₃ 体系的解析 Berry 曲率建立瞬态量子相与拓扑量的基准真值。",
+      "missing_evidence": "缺少直接支撑 α-T₃ 中 Berry 曲率解析描述及其与非线性光学响应、量子度规或拓扑判据关联的原始文献。参考文献 [42] 已列入文献表但未在正文挂接；应在首次出现处补引，并明确其支撑的具体方法或论断。",
+      "search_keywords": [
+        "α-T3 Berry curvature analytical solution",
+        "alpha-T3 Berry curvature quantum metric",
+        "α-T3 nonlinear optical response topology",
+        "α-T3 high harmonic generation",
+        "aluminum tritungstide topological quantum geometry"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "MnBi₂Te₄ 的带隙约为 0.2 eV。",
+      "missing_evidence": "缺少直接报告该带隙数值的实验或第一性原理文献，并且应说明测量或计算条件，如体材料、薄膜厚度、温度及衬底效应。评审报告已指明可补挂 Otrokov 文献 [41]。",
+      "search_keywords": [
+        "MnBi2Te4 band gap 0.2 eV",
+        "MnBi2Te4 electronic structure band gap ARPES",
+        "MnBi2Te4 thin film band gap substrate dependence",
+        "MnBi2Te4 first-principles band structure 0.2 eV",
+        "Otrokov MnBi2Te4 band gap"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "MnBi₂Te₄ 体系中的 E_W 能量尺度为数十 meV。",
+      "missing_evidence": "缺少 E_W 的明确物理定义、数值依据及适用条件。若 E_W 为项目自行标定的参数，应提供第一年标定方案、预实验数据或相关测量方法依据；若采用文献参数，应引用在相同定义和材料条件下给出该数量级的原始来源。",
+      "search_keywords": [
+        "MnBi2Te4 E_W meV",
+        "MnBi2Te4 tens of meV energy scale",
+        "MnBi2Te4 exchange energy meV",
+        "MnBi2Te4 work function meV",
+        "MnBi2Te4 energy calibration"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "MnBi₂Te₄ 存在约 0.1 eV 的赝能隙。",
+      "missing_evidence": "缺少直接报告该赝能隙数值及其形成机制的文献，需区分表面态能隙、体能隙、磁致能隙和薄膜量子限制导致的能隙，并说明温度、磁场、厚度及衬底条件。评审报告指出可在相应论断处补挂参考文献 [43]。",
+      "search_keywords": [
+        "MnBi2Te4 0.1 eV pseudogap",
+        "MnBi2Te4 gap closing 0.1 eV",
+        "MnBi2Te4 surface state gap ARPES",
+        "MnBi2Te4 magnetic gap meV thin film",
+        "MnBi2Te4 substrate-induced gap 0.1 eV"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

@@ -1,0 +1,30 @@
+{
+  "proposal_id": "general-bsv-driven-hhg-quantum-20260726",
+  "cluster_id": "cl_20260920_39775d",
+  "entries": [
+    {
+      "source_id": "paper:2026-s41586-026-10485-9-nonlinear-atomic-tunnelling-boosted-by-bright-squeezed-vacuu",
+      "title": "Nonlinear atomic tunnelling boosted by bright squeezed vacuum",
+      "summary": "本文实验演示了亮压缩真空（bright squeezed vacuum, BSV）这类宏观非经典量子光能够显著增强孤立原子的非线性隧穿电离——即驱动高次谐波产生（HHG）、支撑阿秒科学的核心强场非线性过程。与同等平均光子通量的经典光相比，BSV凭借其剧烈的光子数/瞬时场强涨落放大了高度非线性的隧穿响应，表明光场的量子统计本身可以成为调控强场电离的物理自由度。这为量子光驱动的HHG与量子增强阿秒非线性光谱提供了直接的实验依据。（注：全文未入库，以下基于标题、简报与领域共识推断。）",
+      "path": "knowledge/raw/papers/2026-s41586-026-10485-9-nonlinear-atomic-tunnelling-boosted-by-bright-squeezed-vacuu.md",
+      "added_via": "cluster:cl_20260920_39775d",
+      "added_at": "2026-09-20T07:00:56Z"
+    },
+    {
+      "source_id": "paper:2026-2604.05783-nonlinear-atomic-tunnelling-boosted-by-bright-squeezed-vacuu",
+      "title": "Nonlinear atomic tunnelling boosted by bright squeezed vacuum",
+      "summary": "本文报道Nature实验，证明亮压缩真空（BSV）驱动可使单原子非线性隧穿电离获得超过20倍的量子增强，相当于将等效驱动光强提升一个数量级。该工作展示了量子光场强度涨落在强场电离中的巨大调控潜力，为量子增强强场物理提供了实验范式。",
+      "path": "",
+      "added_via": "cluster:cl_20260920_39775d",
+      "added_at": "2026-09-20T07:00:56Z"
+    },
+    {
+      "source_id": "paper:2026-PhysRevResearch.8.023326-theory-of-high-harmonic-generation-with-quantum-light",
+      "title": "Theory of high-harmonic generation with quantum light",
+      "summary": "建立了以量子光（尤其是亮压缩真空 BSV）驱动高次谐波产生的理论框架，预言 BSV 驱动可获得延伸至约 65 阶的超宽谐波谱，且谐波产额比同等条件下的相干态驱动高出数个量级。进一步证明驱动光的非经典特征（超泊松光子统计）会被直接印记到高次谐波的光子统计上，表明 HHG 既是量子光的强非线性放大器，也可作为非经典性的诊断通道。",
+      "path": "knowledge/raw/papers/2026-PhysRevResearch.8.023326-theory-of-high-harmonic-generation-with-quantum-light.md",
+      "added_via": "cluster:cl_20260920_39775d",
+      "added_at": "2026-09-20T07:00:56Z"
+    }
+  ]
+}

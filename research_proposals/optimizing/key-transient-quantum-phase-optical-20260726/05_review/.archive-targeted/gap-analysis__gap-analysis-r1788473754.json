@@ -1,0 +1,117 @@
+{
+  "gaps": [
+    {
+      "claim": "瞬态拓扑不变量 C(t) 的可定义性，物理上取决于驱动光子能量 ℏω 与材料体带隙 Eg 的相对量级，判据基于驱动光场周期 TL=2π/ω 与电子内禀响应时间 T_intro∼ℏ/Eg 的相对关系",
+      "missing_evidence": "缺少 Avron/Seiler/Simon、Kitagawa/Berges/Rubio、Dehghani/Faure 等关于拓扑 adiabatic theorem 与瞬态拓扑不变量定义条件的经典文献锚定，特别是非绝热强场下瞬时 Chern number 的数学可定义性判据",
+      "search_keywords": [
+        "Avron Seiler Simon adiabatic theorem",
+        "Kitagawa transient Chern number definition",
+        "Dehghani Faure nonadiabatic topological invariant",
+        "Floquet adiabatic theorem breakdown criterion",
+        "instantaneous Chern number nonadiabatic regime"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "≤100 as（RMS）作为项目级指标，来自三重稳定技术（f-2f CEP 锁定 + 主动反馈延迟线 + 双光梳互参考）协同上限",
+      "missing_evidence": "缺少这三种 CEP 稳定技术的独立精度基准文献，以及三重组合实现 ≤100 as RMS 的实验验证报道",
+      "search_keywords": [
+        "f-2f carrier-envelope phase stabilization precision",
+        "attosecond double comb stabilization",
+        "CEP stabilization triple feedback 100 attosecond RMS",
+        "active feedback delay line attosecond metrology"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§2.3(b) 提到 OptiDiff（arXiv:2604.06707）作为反演/生成式光学反问题方法",
+      "missing_evidence": "OptiDiff 文献为伪造（实为 Zijian Lyu 等 attosecond entangled photon pairs 论文），需替换为可证伪的生成式扩散模型 + 物理约束光学反演文献",
+      "search_keywords": [
+        "generative diffusion model optical inverse problem",
+        "physics-constrained diffusion model spectroscopy",
+        "physics-informed generative model HHG inversion",
+        "OptiDiff official paper verification",
+        "diffusion model attosecond pulse reconstruction"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§5 创新(3) 物理约束 AI 反演方法引用 PhysInformedDiff（arXiv:2603.24377）",
+      "missing_evidence": "PhysInformedDiff 文献为伪造（实为 Stammer/Granados/Rivera-Dean fluctuation-induced symmetry breaking in HHG 论文），需重建物理约束扩散/PINN 反演框架的方法学引用链",
+      "search_keywords": [
+        "physics-informed neural network spectroscopy inversion",
+        "Karniadakis PINN inverse problem review",
+        "Raissi physics-informed deep learning inverse",
+        "physics-constrained generative model HHG retrieval"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "SHG 偏振旋转瞬态对称破缺关联 [21] DOI 10.1103/PhysRevLett.130.086201",
+      "missing_evidence": "该 DOI 实为 Zhou Ling-Jie 等 QAHI 边缘通道文献，与 SHG 偏振旋转无关；需替换为真实 SHG 偏振旋转 + 瞬态对称破缺 PRL/PRA 论文",
+      "search_keywords": [
+        "SHG polarization rotation transient symmetry breaking PRL",
+        "second harmonic generation broken symmetry PRL",
+        "transient SHG rotational anisotropy PRL",
+        "time-resolved SHG polarization PRL 2023"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.1 强非绝热区时间平均 Berry 曲率论述引用 [32] DOI 10.1103/PhysRevB.109.085128",
+      "missing_evidence": "该 DOI 实为 Getelina 等自旋-1 变分基态论文；需替换为真实 HHG + Berry curvature / quantum metric 综述或 PRL/PRA 原文",
+      "search_keywords": [
+        "Berry curvature high harmonic generation review PRB",
+        "time-averaged Berry curvature HHG strong field",
+        "quantum metric nonlinear optics PRB",
+        "solid-state HHG Berry curvature review"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Floquet-Bloch 含时 Wilson 圈 / Floquet 拓扑综述引用 [33] DOI 10.1103/RevModPhys.95.025001",
+      "missing_evidence": "该 DOI 实为 Junquera 等极性氧化物拓扑相论文；需替换为 Rudner/Lindner/Lindenberg 等真实 Floquet topological insulators + 含时 Wilson 圈综述",
+      "search_keywords": [
+        "Rudner Lindner Floquet topological insulator review",
+        "Floquet-Bloch Wilson loop time-evolving",
+        "Lindner Refael Floquet topological phase review",
+        "time-dependent Wilson loop Floquet band theory",
+        "Rev Mod Phys Floquet topological"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.3(b)+§5 引用 Silva/Jimenez-Galan arXiv:2404.06086（Berry phase in TSS）实际作者为 Ya Bai 等八位作者",
+      "missing_evidence": "条目 [52] 一作错位（应为 Ya Bai 等），需按真实作者表修正；缺少 Berry phase in topological surface state HHG 关联实验/理论原文",
+      "search_keywords": [
+        "Bai Berry phase topological surface state HHG",
+        "Ya Bai arXiv 2404.06086 authors",
+        "Berry phase topological insulator high harmonic",
+        "spin Hall effect HHG topological surface state"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "引用 [53] Lucchini/Nisoli arXiv:2510 实际唯一作者为 Ciappina，条目错位",
+      "missing_evidence": "需修正作者归属并核对 arXiv ID；同时缺少 Ciappina 强场高次谐波 /亚周期电离综述的真实原文以支撑正文中相关物理学论证",
+      "search_keywords": [
+        "Ciappina high harmonic generation review",
+        "Ciappina subcycle ionization attosecond",
+        "Ciappina solid HHG review arXiv",
+        "Lucchini Nisoli attosecond spectroscopy review20242025"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.1 阈值 ≥2判定（ℏω/Eg ≥ 2 等）与 §2.3(b) '15-30 倍'硬数据缺乏 literature 锚定",
+      "missing_evidence": "缺少光子能量/带隙比 ≥2 的非绝热判据的原始论文或经典文献；缺少 HHG 信号增强15-30 倍的定量实验/理论对照文献",
+      "search_keywords": [
+        "Keldysh parameter adiabatic nonadiabatic threshold",
+        "HHG enhancement factor 15 times experimental",
+        "photon energy bandgap ratio nonadiabatic regime",
+        "interband coupling saturation strong field solid HHG"
+      ],
+      "priority": "high"
+    }
+  ]
+}

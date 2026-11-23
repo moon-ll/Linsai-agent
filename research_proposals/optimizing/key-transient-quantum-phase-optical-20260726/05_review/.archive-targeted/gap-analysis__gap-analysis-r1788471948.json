@@ -1,0 +1,73 @@
+{
+  "gaps": [
+    {
+      "claim": "三个定义框架（Floquet-Bloch Wilson 圈、时间平均 Berry 曲率、含时 Berry 相）在强场瞬态拓扑探测中的适用条件和失效边界",
+      "missing_evidence": "缺少三框架失效阈值的对照基准（脉冲周期数 / Ω_R/E_g 比例 / 准能级展宽与带隙比），以及各自边界条件的实验或理论明确表述",
+      "search_keywords": [
+        "Floquet-Bloch Wilson loop breakdown criterion",
+        "time-averaged Berry curvature strong field validity",
+        "instantaneous Berry curvature nonadiabatic regime",
+        "Keldysh parameter strong field topological",
+        "Floquet sideband broadening bandgap ratio"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "国际尚未见报道「瞬态量子相全光读写」——排除 [38] 2026 Attosecond Roadmap 把同方向列旗舰的可能性",
+      "missing_evidence": "缺少对 2026 Attosecond Science Roadmap 等综述中关于瞬态拓扑相变/瞬态量子相全光读写的章节定位、纳入/排除标准、检索式",
+      "search_keywords": [
+        "Attosecond Science Roadmap 2026 transient topological",
+        "subcycle quantum phase readout review 2025 2026",
+        "ultrafast all-optical topology control roadmap",
+        "transient Berry phase measurement review arXiv"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "陈数反演精度目标 ΔC ≤ 0.2 的口径（绝对/相对）与对应 SNR 可行性校验",
+      "missing_evidence": "缺少与 [63] Ono 2024 PRB 实验调制幅度对照的 ΔC 可行性分析、HHG 信号 SNR 估算、对应积分时间/光子数要求",
+      "search_keywords": [
+        "Chern number inversion precision HHG",
+        "Berry curvature reconstruction experimental uncertainty",
+        "Ono 2024 PRB HHG topology reconstruction",
+        "attosecond Berry curvature signal to noise ratio",
+        "high harmonic generation SNR Chern number precision"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "「阿秒瞬态拓扑相变探测」对标'阿秒科学与极端非线性光学'重点专项的方向依据",
+      "missing_evidence": "缺少该国家重点研发计划专项官方指南/基金委公开文件中关于'阿秒瞬态拓扑相变探测'方向的明文表述",
+      "search_keywords": [
+        "阿秒科学与极端非线性光学 重点专项 指南",
+        "attosecond science extreme nonlinear optics key R&D program",
+        "瞬态拓扑相变 阿秒 国家重点研发计划",
+        "阿秒科学 极端非线性光学 2024 2025 申报指南"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "[5]、[9]、[14] 等条目写作时间晚于 references.md 落款时间（疑似 2026-09 arXiv 上线）",
+      "missing_evidence": "缺少对这几条核心引用出版时间的精确核实，包括 DOI、arXiv 上线日期、期刊接收/发表日期",
+      "search_keywords": [
+        "Ghimire 2011 ZnO solid HHG DOI verification",
+        "Ono 2024 PRB high harmonic Berry curvature publication date",
+        "Attosecond Roadmap 2026 arXiv 2603.05346 publication",
+        "high harmonic generation Berry curvature Nature publication date"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "国内现状：本方向国内代表性机构的工作现状与国际差距（§2.3-§2.4 末段 800 字）",
+      "missing_evidence": "缺少国内固体高次谐波/瞬态拓扑/阿秒探测方向代表性课题组（兰大、北大、中科院物理所、上海交大、华东师大、 中科院武汉精密物理与数学研究所等）的近期系统性综述与代表性工作",
+      "search_keywords": [
+        "solid-state high harmonic generation China group",
+        "瞬态拓扑相变 国内 阿秒 实验组",
+        "attosecond science Chinese research team recent",
+        "高次谐波光谱学 中国 代表性工作",
+        "陈数 HHG 复旦 北大 物理所"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

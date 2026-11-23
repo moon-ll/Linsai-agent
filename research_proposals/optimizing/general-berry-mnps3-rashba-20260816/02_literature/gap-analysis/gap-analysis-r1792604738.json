@@ -1,0 +1,74 @@
+{
+  "gaps": [
+    {
+      "claim": "全篇引用密度超标：申请书三章 [N] 引用共 119 处（rationale 47 / content 42 / scheme 30），远超范本 10-20 次/篇",
+      "missing_evidence": "缺少对高密度引用进行压缩筛选的依据，无法判断哪些 [N] 属于非关键论断可降级为叙述式引用（需逐条评估每个引用是否承载核心论证链）",
+      "search_keywords": [
+        "citation density academic writing standard",
+        "when to remove citations narrative reference style",
+        "citation practice grant proposal NSFC"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "编号声明矛盾：full_review L48 声明「全部 43 条均挂靠」，但正文实引 [44]（共 44 条）",
+      "missing_evidence": "缺少对 [44] 这条实际被正文引用但未纳入挂靠声明的文献核查，编号计数与引用挂靠真实性的对账缺失",
+      "search_keywords": [
+        "reference numbering audit grant proposal",
+        "reference list cross-check cited vs listed"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "孤儿定量声明：scheme §3.2 中「截断能 350–800 eV 区间」与「U_eff 3–5 eV」两项具名定量数值无文献挂靠",
+      "missing_evidence": "缺少支持该截断能区间选择的同类计算/实验文献（如固体 HHG 或强场计算的截断能选取依据），以及 U_eff 3–5 eV 数值范围的来源文献（U 模型/W 参数取值出处）",
+      "search_keywords": [
+        "solid-state high harmonic generation cutoff energy 350 800 eV",
+        "TDDFT cutoff energy convergence semiconductor HHG",
+        "Ueff Hubbard U parameter material value 3-5 eV",
+        "Hubbard U choice strong-field simulation 2D material"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "孤儿定量声明：scheme §3.4「约 100 meV 弱交变磁信号」未挂来源（预检裁决中唯一须补出处的数值差异项）",
+      "missing_evidence": "缺少该弱交变磁信号能量尺度（约 100 meV）对应的实验测量或理论预测文献出处（可能涉及 α-MnTe/CrSb 等候选材料的 spin splitting 或 magnon/spin-flip 能量）",
+      "search_keywords": [
+        "altermagnet 100 meV spin splitting MnTe",
+        "CrSb spin splitting energy meV ARPES",
+        "weak altermagnetic signal energy scale",
+        "altermagnetic spin flop energy scale meV"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "检索日期两版并存：rationale §1.4/§1.5 声明「截至 2026 年 9 月初」而 content §2.2 声明「截至 2026 年 10 月」，同类优先权声明口径不一",
+      "missing_evidence": "缺少支撑两版截止日期背后检索覆盖度的证据记录，无法判定哪一版对应实际检索行为，需文献检索日志/时间戳作为出处",
+      "search_keywords": [
+        "literature search cutoff date reproducibility statement",
+        "arxiv search date verification recent progress claim"
+      ],
+      "priority": "low"
+    },
+    {
+      "claim": "canonical 口径表泊松行与 scheme §3.4 不一致：口径表载 N≈10³（约 3%），正文积分后 N≈5×10⁴（约 0.4%）",
+      "missing_evidence": "缺少泊松采样计数 N 与切换概率不确定度之间关系的可引用方法学依据（如泊松统计置信区间公式或光子预算估算文献），两版数值均无出处支撑",
+      "search_keywords": [
+        "Poisson counting statistics confidence interval event rate uncertainty",
+        "shot number requirement photon counting precision",
+        "Poisson fluctuation1/sqrt(N) uncertainty scaling"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "阈值复述冗余致超字数上限：content §2.5–§2.9 中 d′≥2.1 阈值群 6 次复现、D_sep≥0.80 四现，content 净 7111 字超参考上限",
+      "missing_evidence": "缺少冗余段落的裁剪依据，需确认哪些阈值复现承载独立论证（不可删）、哪些为重复表述可压缩为回指",
+      "search_keywords": [
+        "NSFC proposal word limit research content section",
+        "申请书 研究内容 字数上限 规范"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "full_review"
+}

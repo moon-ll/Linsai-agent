@@ -1,0 +1,31 @@
+{
+  "gaps": [
+    {
+      "claim": "循环引用问题中，为何自能函数Σ能通过离线预计算代理库替代而物理精度损失可接受",
+      "missing_evidence": "缺乏论证SBE框架下自能函数预计算可行性及精度对比ALM外循环的理论或数值依据",
+      "search_keywords": [
+        "semiconductor Bloch equation self-energy precomputation surrogate model accuracy",
+        "augmented Lagrangian method vs self-consistent loop convergence solid HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "原子体系squeezed light增强理论（Ghalgaoui 2023）无法直接外推至固体",
+      "missing_evidence": "缺乏从原子KFR机制到固体能带理论桥接的定量论证",
+      "search_keywords": [
+        "squeezed light high harmonic generation atomic to solid extension theory",
+        "quantum light HHG solid state vs gas phase scaling"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "PINN在非线性光学逆问题中替代传统迭代优化的可行性基准",
+      "missing_evidence": "缺乏PINN与Tikhonov正则化/Levenberg-Marquardt在固体HHG光谱反演中的系统性精度对比",
+      "search_keywords": [
+        "physics-informed neural network nonlinear optics inverse problem benchmark",
+        "PINN vs regularization high harmonic spectroscopy inversion"
+      ],
+      "priority": "high"
+    }
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "gaps": [
+    {
+      "claim": "[36] Gao 2026 描述'全光频率分辨光学开关在中红外亚周期驱动'的方法学归属",
+      "missing_evidence": "[36] 实际为 Yb 后压缩驱动 HHG + 氦角分辨条纹迹 + 快速收敛反演算法（Nature Comm 2026），与'中红外亚周期全光 FROG 开关'无关。需要找到真正描述中红外亚周期驱动下全光频率分辨开关/选通表征方法的文献作为该论点的支撑",
+      "search_keywords": [
+        "all-optical FROG mid-infrared sub-cycle",
+        "frequency-resolved optical gating attosecond mid-IR",
+        "sub-cycle pulse characterization 1800 nm",
+        "Cousin 2017 mid-infrared attosecond"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "SinBasis 论文（arXiv:2505.06275）'可绕开中心动量近似'的方法学结论",
+      "missing_evidence": "SinBasis 全文仅讨论光谱图特征提取方法对比，0 次提及'中心动量近似'(CMA)。需要找到真正讨论 FROG-CRAB 反演中 CMA 局限、以及监督学习/神经网络方法可回避该近似的原始文献或方法学论文",
+      "search_keywords": [
+        "central momentum approximation FROG-CRAB",
+        "neural network attosecond pulse retrieval",
+        "machine learning streaking reconstruction",
+        "CMA limitation attosecond metrology"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Peschel 等 2022 年双光子 RABBIT 计算将通道间相位干涉项定位为该假设失效的成因",
+      "missing_evidence": "该具名论述应有正式编号引用支撑（Peschel et al. 2022 关于双光子 RABBIT 中通道间相位干涉的工作），需补 [N] 角标并核对原文是否使用'channel interference phase term'定位假设失效",
+      "search_keywords": [
+        "Peschel 2022 RABBIT two-photon",
+        "channel interference phase RABBIT",
+        "two-photon RABBIT phase delay",
+        "Peschel double ionization RABBIT"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "全章 §2.1–§2.6 中 15+ 处'某人等年份'具名论述（仅 3 处有 [N] 角标）",
+      "missing_evidence": "其余约 12 处具名研究史叙述（如双光子 RABBIT 历史、HHG 多通道贡献、相位提取算法演化等）缺正式编号引用，需逐句补 [N] 并核对每条具名主张的原始出处",
+      "search_keywords": [
+        "attosecond streaking review",
+        "FROG-CRAB methodology history",
+        "multi-channel HHG neon argon contribution",
+        "attosecond pulse retrieval algorithm benchmark"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "19.2 as 脉冲谱上沿 ~390 eV（content 段5）作为研究目标的指标口径",
+      "missing_evidence": "虽然 ICFO 论文已外部核实 390 eV 为正确值，但该指标在 §2.1 中陈述时无 [N] 角标直接引用 ICFO 原始数据来源；rationale 段写'约 350 eV'系事实错误，需以 ICFO 原始测量文献作为统一引用支撑",
+      "search_keywords": [
+        "ICFO 19.2 attosecond pulse spectrum",
+        "390 eV cutoff attosecond",
+        "sub-20 attosecond pulse spectral edge",
+        "ICFO Helium 19.2 as streaking"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "极紫外氖/氩'多通道贡献约 8%–15%'（§2.4 段2）的定量支撑",
+      "missing_evidence": "该数值主张与 rationale 中'内壳层通道贡献相对总截面在 5% 量级以下'存在量级冲突。需检索原始实验或理论文献，给出在何种靶材、能窗、极紫外波长条件下多通道贡献落在 8%–15% 区间（或 ≤5%）的实验依据",
+      "search_keywords": [
+        "multi-channel contribution neon EUV HHG",
+        "argon multi-channel photoionization cross section",
+        "inner-shell channel contribution extreme ultraviolet",
+        "neon argon photoionization partial cross section"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

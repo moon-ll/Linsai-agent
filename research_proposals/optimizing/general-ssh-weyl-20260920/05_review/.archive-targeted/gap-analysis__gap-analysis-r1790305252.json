@@ -1,0 +1,49 @@
+{
+  "gaps": [
+    {
+      "claim": "SSH拓扑相在带隙下方谐波产额比平庸相高数个数量级（rationale L21等处引用）",
+      "missing_evidence": "rationale L21/L49/L59/L67/L79反复用'SSH数个数量级'与'Weyl 2-3个数量级增强'两套口径并存，但未在rationale中明确标注'SSH 2-3个数量级增强'或'数个数量级'的具体口径来自Bauer 2018 [9]还是Lorenzo 2024 Kagome [20]；特别是'Weyl 2-3个数量级增强'在rationale多处出现，缺少指向Lorenzo et al. 2508.15631 Kagome紧束缚模型'拓扑半金属相谐波增强2-3个数量级'原文句的直接引用",
+      "search_keywords": [
+        "Lorenzo Kagome 2508.15631 topological semimetal harmonic enhancement orders of magnitude",
+        "SSH Su-Schrieffer-Heeger high harmonic generation Bauer 2018 orders magnitude enhancement",
+        "topological phase harmonic yield enhancement two-three orders magnitude Kagome",
+        "Bauer 2018 SSH edge state high harmonic orders magnitude"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Weyl半金属在THz频段的HHG增强呈严格立方功率律I_3f∝I_f^3，且THG产率椭圆度依赖（rationale L33/L39/L59三处）",
+      "missing_evidence": "rationale L33/L39/L59引用Pilch[16] TaP THz三次谐波立方功率律与椭圆度单调衰减结论，但problem[3] X+Y+Z=100%分解中'基于Pilch[16] TaP立方功率律作为Weyl节点贡献基线（X_ref≥60%）'未给出Pilch原文中TaP立方律的实测功率指数（理想立方=3，T_c→0散射导致偏离3的具体数值）和椭圆度χ→0时THG归零的实验误差棒，导致X_ref的60%阈值缺乏可检验锚点",
+      "search_keywords": [
+        "Pilch TaP terahertz third harmonic cubic power law exponent experimental 3.0",
+        "TaP THz third harmonic ellipticity dependence circular zero",
+        "Pilch 2025 TaP Weyl nonlinear conductivity perturbative cubic scaling",
+        "Weyl semimetal terahertz harmonic generation ellipticity dependence"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "科学问题(3)'X+Y+Z=100%分解'无具体数值锚定（rationale §3第三空白L59 + problem[3]）",
+      "missing_evidence": "X+Y+Z=100%分解目前仅有方法论目标，需补三组具体数值的实验参考值：X_ref（Weyl节点内禀贡献）需Pilch[16] TaP立方律实验数值、Y_ref（Berry曲率反常贡献）需最近HHG Berry曲率分离的实测比例（如Iwai 2024 / Baykusheva）、Z_ref（非平衡散射贡献）需Duan[26] Cd3As2微腔3数量级增强的实测Haken-Strobl脱相时间对应的散射通道占比",
+      "search_keywords": [
+        "HHG Weyl Berry curvature contribution percent experimental separation",
+        "Cd3As2 microcavity high harmonic enhancement three orders magnitude Duan 2025",
+        "non-equilibrium scattering contribution HHG percent quantification solid",
+        "Weyl semimetal harmonic generation Berry curvature phonon scattering partition"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.2 L21 SSH系列文献'Bauer 2018 / Jürß 2019 / Pooyan 2024'的谐波增强数值口径尚未在rationale中明确归一",
+      "missing_evidence": "rationale L21将SSH拓扑相增强简单描述为'数个数量级'，但Bauer 2018 [9]原文给出的是1-3个数量级（依赖链长n），Pooyan 2024 [11]加入Hubbard后报告拓扑/平庸差异保留的具体dB数与Bauer 2018基线对比未在rationale中列出；缺少SSH系列三篇论文增强数值的方法论对比表",
+      "search_keywords": [
+        "Bauer Hansen 2018 SSH harmonic enhancement 2-3 orders magnitude chain length",
+        "Pooyan Bauer 2024 Hubbard SSH topological trivial harmonic difference dB",
+        "Jürß Bauer 2019 SSH topological edge state high harmonic generation",
+        "SSH high harmonic generation Hubbard U enhancement quantification"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "rationale"
+}

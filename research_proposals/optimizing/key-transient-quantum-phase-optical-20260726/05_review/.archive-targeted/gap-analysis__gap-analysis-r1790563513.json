@@ -1,0 +1,39 @@
+{
+  "gaps": [
+    {
+      "claim": "基金委 2018 年起布局阿秒重大研究计划（§1 L13）",
+      "missing_evidence": "现行可核实出处；联网反查仅检得 2024 年原创探索计划'阿秒电子动力学'，未证实 2018 年起的阿秒重大研究计划存在。需给出计划确切名称与年份，或替换为可核实的资助计划/项目表述。",
+      "search_keywords": [
+        "NSFC 阿秒电子动力学 原创探索计划",
+        "国家自然科学基金 阿秒 重大研究计划",
+        "attosecond NSFC China major program",
+        "基金委 阿秒 2024"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§2.4 国内现状：瞬态拓扑相变与高次谐波反演领域国内代表性工作现状（整段零具名）",
+      "missing_evidence": "国内课题组/机构的具体代表性成果具名引用（如清华、北大、中科院物理所、上海交大、华中科大等在瞬态拓扑、固体 HHG、阿秒电子动力学方向的可引用工作）；同时'至今空白/尚未建立/尚无答案'类论断需附检索截止口径。",
+      "search_keywords": [
+        "中国 瞬态拓扑 高次谐波",
+        "固体高次谐波 国内 课题组",
+        "阿秒电子动力学 中国",
+        "Bi2Se3 高次谐波 实验",
+        "topological phase transition HHG China"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "L103'反演经验标定锚点'：以 [20] 作为定量反演的经验标定依据",
+      "missing_evidence": "[20] 为 arXiv:2511.13114 v3 第一性原理模拟预印本，不构成实验标定；需补充 (InₓBi₁₋ₓ)₂Se₃/Bi₂Se₃ 或同类范德华拓扑异质结高次谐波实验工作作为反演标定的实验佐证，或将该论断降级表述为'理论预测'。",
+      "search_keywords": [
+        "Bi2Se3 high harmonic generation experiment",
+        "(InxBi1-x)2Se3 nonlinear optics experimental",
+        "van der Waals topological heterostructure HHG measurement",
+        "topological surface state nonlinear response experiment"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "rationale"
+}

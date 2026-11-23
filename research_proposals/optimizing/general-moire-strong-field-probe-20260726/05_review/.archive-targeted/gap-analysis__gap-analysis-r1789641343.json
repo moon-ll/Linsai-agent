@@ -1,0 +1,105 @@
+{
+  "gaps": [
+    {
+      "claim": "扭转双层与异质结堆叠莫尔超晶格自2018年Cao等人magic-angle TBG发现关联绝缘态与非常规超导以来成为关联/拓扑/能带工程核心平台",
+      "missing_evidence": "需要Cao等人2018年Nature原文及其后续TBG关联绝缘态/非常规超导关键实验（Yuan Cao 2018 Nature 556 43, Cao 2018 Nature 556 80, Yankowitz2019 Science）的原始引用与定量数据",
+      "search_keywords": [
+        "Cao 2018 Nature magic-angle twisted bilayer graphene correlated insulator",
+        "Yankowitz 2019 Science TBG correlated states",
+        "Cao 2018 Nature unconventional superconductivity twisted bilayer graphene"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "莫尔HHG理论两端不足：magic-angle TBG莫尔原胞>10⁴原子使全原胞TDDFT单角计算与SBE全角度扫描均达>10⁸核时量级",
+      "missing_evidence": "需要具体的TDDFT计算成本benchmark数据、TBG莫尔原胞原子数定量、Molinero与Mrudul 2024相关计算成本文献",
+      "search_keywords": [
+        "twisted bilayer graphene moire supercell TDDFT computational cost",
+        "Molinero Mrudul 2024 moire HHG calculation",
+        "TBG moire unit cell 14000 atoms TDDFT benchmark"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "三段式降阶框架（连续模型+TBG等价+量子轨迹）单参数点计算量约2×10⁴核时，相比>10⁸核时有5×10³倍加速",
+      "missing_evidence": "需要降阶模型HHG计算的核时基准、连续模型/紧束缚等价方法的现有算例、与TDDFT/SBE对比的具体cost数据",
+      "search_keywords": [
+        "reduced model moire HHG computational cost",
+        "tight-binding equivalent twisted bilayer HHG benchmark",
+        "continuum model moire high harmonic generation efficiency"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "HHG反演从原子级结构到Berry曲率与量子度量的检索方法（Luu-Wörner 2018 Nat Commun石英/Hu等反演）",
+      "missing_evidence": "需要Luu-Wörner 2018 Nat Commun Berry curvature quartz HHG 原文，Hu等人HHG反演量子度量的理论/实验文献",
+      "search_keywords": [
+        "Luu Worner 2018 Nature Communications Berry curvature HHG quartz",
+        "Hu quantum metric HHG reconstruction",
+        "HHG inverse problem Berry curvature retrieval"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Shan 2021 Nature关于MnPS3/NiPS3等关联反铁磁体光致调制与Amato等人主动调控Floquet工程",
+      "missing_evidence": "需要Shan 2021 Nature 关联反铁磁光致调制原文，Amato等人Floquet能带工程在莫尔/反铁磁中的实验或理论",
+      "search_keywords": [
+        "Shan 2021 Nature antiferromagnet light-induced modulation",
+        "Amato Floquet engineering correlated insulator HHG",
+        "Floquet band engineering twisted bilayer HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "标度律：Shan外推到本项目I_c范围调制深度∝驱动场/关联能隙（线性），达到同等调制深度所需驱动强度约降至原值2/3（即10/15≈0.667）",
+      "missing_evidence": "需要Shan 2021的原始标度律形式与具体数据点（调制深度 vs 驱动场/关联能隙），以验证线性外推假设",
+      "search_keywords": [
+        "Shan 2021 MnPS3 light-induced scale law modulation depth",
+        "light-induced antiferromagnetic order scaling driving field",
+        "photoinduced magnetization scaling law antiferromagnet"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "莫尔势反演RMS误差<15%（与科学问题1的15%同口径），误差定义为莫尔势Fourier分量幅值的RMS相对误差",
+      "missing_evidence": "需要HHG反演莫尔势误差benchmark文献，定义Fourier RMS相对误差的反演方案在现有工作中是否有先例",
+      "search_keywords": [
+        "HHG moire potential inversion Fourier RMS error",
+        "high harmonic inverse problem potential reconstruction error",
+        "moire superlattice retrieval accuracy benchmark"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Ikeda等对照组在HHG谱峰单点位移的静态读出与本项目R2阶段莫尔势全Fourier反演的对比",
+      "missing_evidence": "需要Ikeda等人的HHG莫尔体系相关文献（动态/静态读出），以及与R2反演方法的对比基准",
+      "search_keywords": [
+        "Ikeda HHG moire superlattice peak shift",
+        "HHG moire moire peak shift readout Ikeda",
+        "twisted bilayer high harmonic spectroscopy Ikeda"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "莫尔超晶格强场非平衡态动力学（Floquet工程+关联态主动调控）在实验上的空白",
+      "missing_evidence": "需要最新（2024-2026）莫尔体系Floquet工程、关联态主动调控的实验综述，指出具体空白靶标",
+      "search_keywords": [
+        "Floquet engineering moire correlated state 2024 2025",
+        "light-induced Floquet topological moire bilayer experiment",
+        "moire superlattice ultrafast control active review 2026"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "国内现状：国内强场超快固体HHG莫尔体系研究的代表性课题组与差距",
+      "missing_evidence": "需要国内课题组（兰大/上交/复旦/中科院物理所等）在莫尔HHG或固体强场HHG方向的代表性工作及其与国际差距的对比数据",
+      "search_keywords": [
+        "China moire high harmonic generation group Lanzhou Shanghai Jiao Tong",
+        "domestic solid HHG ultrafast research group moire",
+        "中国 莫尔超晶格 高次谐波 课题组"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

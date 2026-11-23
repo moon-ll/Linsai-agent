@@ -1,0 +1,125 @@
+{
+  "gaps": [
+    {
+      "claim": "Werner 关于交变磁高次谐波产生的理论预言（行内无 [N]）",
+      "missing_evidence": "缺少 Werner 团队 altermagnet HHG 理论预测文献的具体引用编号与条目",
+      "search_keywords": [
+        "Werner altermagnet high harmonic generation theory",
+        "Werner PRB 110 235101 altermagnet HHG",
+        "Werner spin group HHG selection rule 2024"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Yang-Liang 关于自旋群对称性预言交变磁的工作（行内无 [N]）",
+      "missing_evidence": "缺少 Yang 与 Liang 关于自旋点群预言交变磁体的理论文献条目",
+      "search_keywords": [
+        "Yang Liang spin group symmetry altermagnet prediction",
+        "Yang Liang spin group theory antiferromagnet",
+        "spin group classification nonrelativistic spin splitting"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Ezawa 关于交变磁自旋群理论（行内无 [N]，两处）",
+      "missing_evidence": "缺少 Ezawa 团队关于 altermagnet 与 spin group 分类的理论文献条目",
+      "search_keywords": [
+        "Ezawa altermagnet spin group theory",
+        "Ezawa spin-symmetry antiferromagnet classification",
+        "Ezawa altermagnet 2024 PRB"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Rani-Juraschek 关于非线性声子-磁耦合 altermagnet 工作（行内无 [N]）",
+      "missing_evidence": "缺少 Rani-Juraschek 关于非线性声子在 altermagnet 中作用的具体文献条目",
+      "search_keywords": [
+        "Rani-Juraschek nonlinear phonon altermagnet",
+        "Rani-Juraschek NiPS3 phonon magnon coupling",
+        "nonlinear phononics altermagnet"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Misawa 关于强交变磁 ARPES 实验（行内无 [N]，且 arXiv:2609.01969 在 references 表中无条目）",
+      "missing_evidence": "缺少 Misawa arXiv:2609.01969 关于 d-wave/g-wave altermagnet 自旋分裂 ARPES 测量的完整条目及数据",
+      "search_keywords": [
+        "Misawa altermagnet spin splitting ARPES",
+        "arXiv 2609.01969 Misawa altermagnet",
+        "Misawa d-wave g-wave ARPES altermagnet"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Mizuno 关于弱 SOC 极限下自旋点群动力学选择规则（行内无 [N]）",
+      "missing_evidence": "缺少 Mizuno 关于弱 SOC 极限自旋点群谐波选择规则的完整文献条目（modulo-4 区分机制证据）",
+      "search_keywords": [
+        "Mizuno spin group selection rule HHG",
+        "Mizuno weak SOC altermagnet harmonic",
+        "Mizuno modulo-4 spin group HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Ghorashi-Rappe 关于交变磁自旋分裂比较（行内无 [N]）",
+      "missing_evidence": "缺少 Ghorashi-Rappe 关于对称性分类自旋分裂比较的文献条目",
+      "search_keywords": [
+        "Ghorashi Rappe altermagnet spin splitting",
+        "Ghorashi Rappe symmetry spin splitting classification",
+        "Ghorashi Rappe nonrelativistic splitting DFT"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Mavani 关于 altermagnet 的相关研究（行内无 [N]）",
+      "missing_evidence": "缺少 Mavani 关于交变磁体自旋极化/对称性研究的具体文献条目",
+      "search_keywords": [
+        "Mavani altermagnet spin polarization",
+        "Mavani altermagnet DFT",
+        "Mavani symmetry breaking antiferromagnet"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Basnet 关于交变磁的实验工作（行内无 [N]）",
+      "missing_evidence": "缺少 Basnet 关于交变磁 ARPES 或输运的文献条目（共两处引用 Basnet）",
+      "search_keywords": [
+        "Basnet altermagnet ARPES experiment",
+        "Basnet MnTe CrSb ARPES",
+        "Basnet spin-resolved ARPES altermagnet"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "González 关于 altermagnet 的工作（行内无 [N]）",
+      "missing_evidence": "缺少 González 关于交变磁对称性或非线性响应的文献条目",
+      "search_keywords": [
+        "González altermagnet spin group",
+        "González altermagnet nonlinear response",
+        "González symmetry classification antiferromagnet"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Gabriele 关于 altermagnet 的工作（行内无 [N]）",
+      "missing_evidence": "缺少 Gabriele 关于交变磁或滑动铁电的文献条目",
+      "search_keywords": [
+        "Gabriele altermagnet spin splitting",
+        "Gabriele sliding ferroelectric bilayer",
+        "Gabriele antiferromagnet DFT symmetry"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Luu-Wörner 2018 关于石英/晶体 Berry 曲率 HHG 实验（行内无 [N]，且在 references 表中无对应条目，需新建）",
+      "missing_evidence": "缺少 Luu 与 Wörner 2018 年关于晶体 HHG 中 Berry 曲率实测的完整文献条目",
+      "search_keywords": [
+        "Luu Worner 2018 Berry curvature HHG quartz",
+        "Luu Worner Nat Commun 2018 HHG",
+        "Luu Worner solid-state Berry high harmonic"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "rationale"
+}

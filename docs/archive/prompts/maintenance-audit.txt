@@ -1,0 +1,15 @@
+你是一位知识库管理员，负责维护林赛的研究笔记系统。
+
+请审查 knowledge/ 目录下的以下内容：
+
+1. 孤儿节点：在 graph.json 中有节点但对应 wiki 文件不存在
+2. 重复概念：标题或内容高度相似的 wiki 页面
+3. Broken links：frontmatter 中的 related 字段指向不存在的页面
+4. 未处理 raw：knowledge/raw/ 中未关联到 wiki 的文件
+5. 长期 seedling：growth_stage 为 seedling 超过 30 天的页面
+
+请列出发现的问题，并给出修复建议的优先级（高/中/低）。
+
+输出格式：
+- [高] 问题描述 → 修复建议
+- [中] 问题描述 → 修复建议

@@ -1,0 +1,86 @@
+{
+  "gaps": [
+    {
+      "claim": "CrSb 体系的 g 波劈裂在 ARPES 与 STS 两条独立实验路径上的交叉验证",
+      "missing_evidence": "缺乏 Ding et al. 2024 ARPES、Reimers et al. 2024 薄膜 STM/STS、Yang et al. 2025 三维动量映射的原始实验论文",
+      "search_keywords": [
+        "CrSb g-wave spin splitting ARPES Ding 2024",
+        "CrSb thin film STS spin splitting Reimers 2024",
+        "CrSb three-dimensional Brillouin zone mapping Yang 2025"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Long 等人 2026 年 de Haas-van Alphen 量子振荡三维映射 CrSb 自旋分裂（§2 L23 与 §4 L51 重复点）",
+      "missing_evidence": "缺 Long 等人 2026 年 CrSb dHvA 量子振荡原始文献，需对比文献确认波型判定方法学",
+      "search_keywords": [
+        "Long CrSb de Haas-van Alphen 2026",
+        "CrSb dHvA spin splitting three-dimensional mapping",
+        "CrSb quantum oscillation altermagnet"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Vampa/Luu/Wörner 等奠基石性 Berry 曲率检索 HHG 文献群",
+      "missing_evidence": "§4 L41-L43 一段堆砌 22 个引用，需核实 Vampa 2015 PRL、Luu Wörner 2018 Nat Commun、Liu et al. 等核心 HHG-BC 文献的实验与 TDDFT 拓展",
+      "search_keywords": [
+        "Vampa 2015 PRL Berry curvature HHG",
+        "Luu Worner 2018 Nature Communications HHG Berry curvature quartz",
+        "Liu solid HHG Berry curvature reconstruction",
+        "TDDFT HHG Berry curvature benchmark"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Mizuno 2026 自旋群选择规则 HHG 自旋/电荷流分类框架（D₄ₕ 紧束缚模型验证）",
+      "missing_evidence": "缺 Mizuno 等 2026 自旋群分类+HHG 选择规则原文，特别是 g 波节点面几何谐波定量映射缺失",
+      "search_keywords": [
+        "Mizuno 2026 spin group selection rule HHG",
+        "alternagnet HHG spin charge current classification D4h",
+        "g-wave nodal plane HHG fingerprint spin group"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "MnTe d 波交变磁体自旋分裂 ARPES 体相测量（Krempaský 2024、Osumi PRB 109 115102 等）",
+      "missing_evidence": "缺 MnTe 自旋分辨 ARPES d 波各向异性原始文献，用于 CrSb g 波对比验证",
+      "search_keywords": [
+        "Krempasky MnTe spin-resolved ARPES Nature 2024",
+        "Osumi PRB 109 115102 MnTe anisotropic spin splitting",
+        "alpha-MnTe d-wave spin splitting magnitude eV"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§4 L47-L51 TDDFT/多体 HHG 拓展文献群（[8][10][18] 等）",
+      "missing_evidence": "次要支撑文献堆砌，需核实 TDDFT+many-body HHG 拓展（excitonic、G W、BSE）的代表性论文以决定是否移至文末",
+      "search_keywords": [
+        "TDDFT many-body HHG solid benchmark",
+        "excitonic effect high harmonic generation TDDFT GW BSE",
+        "multiband HHG Berry curvature TDDFT"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "CrSb/MnTe 自旋分裂量级与节点面几何 ARPES 定量数据",
+      "missing_evidence": "§2 L19-L23 涉及劈裂量级 ~0.5-0.8 eV、节点面位置等定量论断，需核实具体 ARPES 实测数值",
+      "search_keywords": [
+        "CrSb spin splitting magnitude ARPES eV",
+        "MnTe spin splitting nodal plane position ARPES",
+        "altermagnet g-wave d-wave band splitting experimental value"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Ding/Reimers/Yang/Long 2024-2026 国内/国际实验组合作网络与样品来源",
+      "missing_evidence": "缺实验组归属、样品（体相 vs 薄膜）来源细节，用于评估独立验证强度",
+      "search_keywords": [
+        "Ding CrSb ARPES group affiliation 2024",
+        "Reimers CrSb STS thin film growth 2024",
+        "Yang CrSb momentum mapping spin group 2025"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "rationale"
+}

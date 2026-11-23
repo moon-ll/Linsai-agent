@@ -1,0 +1,54 @@
+{
+  "gaps": [
+    {
+      "claim": "§2.4.4 L119 声称存在一项名为\"NEwwave\"的 HMG（高次谐波元数据）基标准作为本项目数据交付物规范",
+      "missing_evidence": "该标准具名引用但全树反查与六轮公网检索均不可溯，references 49 条与 Ciappina 2025 综述[19]中均无此实体，需补充可验证的 DOI/出版物出处，或替换为已存在的元数据标准（如FAIR4BSV、FAIR4HHG、Zenodo Schema 等）",
+      "search_keywords": [
+        "HHG metadata standard",
+        "FAIR4HHG schema",
+        "high harmonic generation data standard DOI",
+        "Zenodo HHG metadata schema",
+        "FAIR4BSV quantum light",
+        "NEwwave harmonic standard"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.5 L127 将 Raissi 称为\"综述\"并提出 PINN（物理信息神经网络）方法",
+      "missing_evidence": "Raissi 的 PINN 工作系 2019 年 JCP 原创方法论文（\"Physics-informed neural networks: A deep learning framework for solving forward and inverse problems involving nonlinear partial differential equations\"），非综述；正文未给出对应 [N] 引用编号，属身份错挂且缺标",
+      "search_keywords": [
+        "Raissi 2019 Physics-informed neural networks JCP",
+        "PINN original paper Raissi Karniadakis",
+        "Raissi PINN nonlinear PDE deep learning",
+        "physics-informed neural networks forward inverse"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.4.3 末四段援引 Baykusheva[29]、Lange[22]、Uchida[23] 作为红移判据与外推边界的支撑",
+      "missing_evidence": "三处引用仅以\"提供参照\"句式罗列，未嵌入红移判据（Δω/ω>2%）与外推边界条件（Ω<12%）的论证链；需补足各文献具体实验条件（驱动波长、强度、气压）与本项目外推假设的可比性论证，必要时追加 2022–2025 年间同类实验的补充文献",
+      "search_keywords": [
+        "HHG red-shift driving wavelength scaling",
+        "high harmonic generation cutoff red-shift experiment",
+        "mid-infrared HHG wavelength dependence",
+        "attosecond pulse red-shift driver wavelength",
+        "Baykusheva mid-infrared HHG",
+        "Lange attosecond HHG scaling",
+        "Uchida HHG wavelength"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§2.4.3 提及\"§1.1 提到的三条独立证据线\"支撑 R1 反演精度任务",
+      "missing_evidence": "指针指向 rationale §1.1 中不存在的内容（悬空指针），三条证据线无论述载体；需在 §1.1 补写或在 content 中改指针并为每条证据线补充独立文献支撑（如 BSV 场统计增强 HHG 产额的反演验证类文献）",
+      "search_keywords": [
+        "BSV field statistics HHG yield enhancement inversion",
+        "squeezed light high harmonic generation inversion",
+        "quantum geometry inversion validation experiment",
+        "non-classical light HHG spectroscopy"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

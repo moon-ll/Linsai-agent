@@ -1,0 +1,115 @@
+{
+  "gaps": [
+    {
+      "claim": "LDA/PBE 对 Bi₂Se₃ Berry 曲率约 15% 偏差（content L49 引[31]）",
+      "missing_evidence": "[31] Ilin 实为 SSH 腔量子光学 HHG 论文（arXiv 2604.20388），无 Bi₂Se₃/LDA/PBE 对比数据。需要真实的不同泛函对 Bi₂Se₃ Berry 曲率偏差的 DFT 基准论文",
+      "search_keywords": [
+        "Bi2Se3 Berry curvature DFT functional LDA PBE",
+        "Bi2Se3 first-principles Berry curvature sensitivity exchange correlation",
+        "topological insulator Berry curvature functional dependence",
+        "Bi2Se3 anomalous Hall DFT functional benchmark"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "瞬态 Berry 曲率反演精度直接受密度泛函近似层级限制（content L49 + scheme §2.3(b)）",
+      "missing_evidence": "缺少密度泛函近似层级（LDA/PBE/HSE/SCAN）对固体 Berry 曲率反演精度系统性影响的评估文献",
+      "search_keywords": [
+        "DFT functional Berry curvature accuracy benchmark",
+        "exchange correlation functional Berry curvature error",
+        "HSE SCAN Berry curvature solid state",
+        "density functional approximation Berry phase inversion"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "弱值放大与深度学习（CNN）用于阿秒条纹抖动抑制（content L51）",
+      "missing_evidence": "scheme.md 无此方案，悬空引用。需补真实阿秒抖动抑制方法文献——要么补弱值放大+CNN 抖动抑制论文，要么改为纯经典抖动处理文献",
+      "search_keywords": [
+        "attosecond streaking jitter suppression deep learning CNN",
+        "weak value amplification attosecond metrology",
+        "attosecond pulse retrieval noise reduction neural network",
+        "FROG-CRAB jitter reduction machine learning"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "100 as RMS 抖动叠加 50–100 as 窗口信号时 SNR 不退化（content L51 结论句）",
+      "missing_evidence": "缺少阿秒条纹 100 as RMS 延迟抖动对 HHG 窗口信号 SNR 影响的定量分析文献",
+      "search_keywords": [
+        "attosecond delay jitter SNR degradation",
+        "100 attosecond RMS timing jitter signal noise ratio",
+        "attosecond streaking timing precision signal to noise",
+        "delay scan stability HHG window SNR"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Bi₂Se₃ 体带隙 ≈ 0.3 eV（content L19 判据坐标 ℏω/E_g 取值）",
+      "missing_evidence": "需要权威 Bi₂Se₃ 体带隙实验值（ARPES/光学）来源，确认 0.3 eV 数值依据",
+      "search_keywords": [
+        "Bi2Se3 bulk bandgap experimental ARPES",
+        "Bi2Se3 optical absorption gap",
+        "Bi2Se3 band gap value review",
+        "bismuth selenide bandgap measurement"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "MoS₂ 体带隙 1.6 eV（多层体相口径，content L19）",
+      "missing_evidence": "需要 MoS₂ 多层（>1 层）体相带隙 1.6 eV 实验值来源（与单层 1.7-1.9 eV 区分）",
+      "search_keywords": [
+        "MoS2 multilayer bandgap experimental",
+        "MoS2 bulk bandgap vs monolayer",
+        "molybdenum disulfide indirect bandgap 1.6 eV",
+        "MoS2 thickness dependent bandgap measurement"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "瞬态拓扑不变量（瞬时 Chern 数）的非绝热定义与可测量性（content §2.2 拓扑窗口识别）",
+      "missing_evidence": "缺少瞬态拓扑不变量在强场非绝热条件下定义、判据与阿秒时间尺度可测量性的近期综述或理论文献",
+      "search_keywords": [
+        "transient Chern number nonadiabatic definition",
+        "instantaneous topological invariant strong field",
+        "topological phase measurement ultrafast nonadiabatic",
+        "time-dependent Berry curvature definition"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "全光写入拓扑窗口与传统泵浦-探测量子通道写入的等价性（content L29 拓扑窗口识别判据）",
+      "missing_evidence": "缺少全光（非相干泵浦-探测）写入量子相位的阿秒实验验证文献",
+      "search_keywords": [
+        "all-optical quantum phase writing attosecond",
+        "light-induced topological state solid state",
+        "non-perturbative optical phase imprinting",
+        "ultrafast all-optical band engineering"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "高次谐波读出拓扑序参量与独立信号判据（content §2.3）",
+      "missing_evidence": "缺少 HHG 拓扑窗口被独立信号（如 Berry 曲率圆二色性、Floquet 边带）与误差阈值识别的实验/理论文献",
+      "search_keywords": [
+        "HHG topological order parameter readout",
+        "Berry curvature circular dichroism HHG topological",
+        "Floquet sideband topological detection high harmonic",
+        "HHG topology identification independent signal"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "判据坐标 ℏω/E_g 用于区分弱场/强场驱动（content L19）",
+      "missing_evidence": "缺少 ℏω/E_g 作为强场 HHG 判据的理论依据文献（Keldysh/Floquet 区分）",
+      "search_keywords": [
+        "Keldysh parameter ratio photon energy bandgap HHG",
+        "adiabatic parameter strong field solid HHG",
+        "Floquet adiabatic criterion solid state HHG",
+        "photon energy bandgap ratio HHG regime"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

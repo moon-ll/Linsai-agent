@@ -1,0 +1,18 @@
+{
+  "gaps": [
+    {
+      "claim": "1850 nm 水窗驱动端在约 10^10 W/cm² 场强下仍满足 γ(Kr)>100 的弱场判据，因此可采用相应的弱场或绝热近似。",
+      "missing_evidence": "现有论证仅覆盖 800 nm。需要引用 Keldysh 参数 γ 与有质动力能 Up 的权威公式或原始文献、Kr 电离能约 14 eV 的数据来源，并补做 1850 nm、10^10 W/cm² 条件下的参数代入与误差分析。若采用降低至 2×10^9 W/cm² 的替代方案，也应使用同一参数基准重新计算。还需补充 1.85 μm 驱动水窗高次谐波产生的实验文献，以证明该驱动端及强度范围的实验可行性；已有 Ishii 等关于 1.6 μm 水窗谐波的工作只能支撑方案可行性，不能直接支撑 γ>100 的数值结论。",
+      "search_keywords": [
+        "Keldysh parameter formula ponderomotive energy high harmonic generation",
+        "krypton ionization potential 14 eV NIST",
+        "1850 nm 1.85 μm water-window high harmonic generation krypton",
+        "1.85 μm high harmonic generation water window Ti:sapphire",
+        "adiabatic tunneling regime gamma greater than 100 strong-field ionization",
+        "Ishii 2014 1.6 μm BIBO-OPCPA water window CEP high harmonic generation"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "scheme"
+}

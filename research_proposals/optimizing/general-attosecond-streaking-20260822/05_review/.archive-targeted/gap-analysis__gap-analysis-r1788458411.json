@@ -1,0 +1,65 @@
+{
+  "gaps": [
+    {
+      "claim": "§4.1 通道间相位干涉项对重构误差的定量贡献需 Peschel 等[11]数值模拟作为支撑",
+      "missing_evidence": "缺少 Peschel 等双通道 TDSE 模拟的具体数值结果（误差百分比、阈值条件）及其在实验中的复现验证",
+      "search_keywords": [
+        "Peschel two-channel TDSE attosecond streaking",
+        "multi-channel ionization attosecond retrieval error",
+        "interchannel coupling attosecond streaking simulation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3.2 角积分可将偶极相位贡献压制至小于2%的阈值缺乏物理依据",
+      "missing_evidence": "缺少角积分抑制偶极相位的物理论证文献（库仑长程 vs 偶极方向性的临界比例、动能依赖的散射相角积分收敛条件）",
+      "search_keywords": [
+        "angular integration dipole phase suppression attosecond streaking",
+        "Pabst Dahlström angular averaging rare gas streaking",
+        "photoelectron scattering phase angular dependence",
+        "dipole phase suppression efficiency kinetic energy"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§4.1 rACE失效阈值在scheme中与content/rationale存在多版本并存（8% vs 10%）",
+      "missing_evidence": "缺少rACE神经网络方法失效阈值（通道重叠百分比）的统一权威实验或理论文献",
+      "search_keywords": [
+        "rACE attosecond pulse retrieval neural network failure",
+        "Inzani rACE multi-channel limitation threshold",
+        "neural network attosecond streaking multi-channel correction limit"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3.1 R2任务（多通道修正后的阿秒脉冲表征）的核心地位需引用支撑",
+      "missing_evidence": "缺少多通道修正作为阿秒脉冲表征核心环节的综述性文献或标准方法学文献",
+      "search_keywords": [
+        "attosecond streaking multi-channel correction methodology review",
+        "FROG-CRAB multi-channel TDSE validation",
+        "attosecond pulse characterization standard protocol multi-electron"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§4.2 16通道TOF阵列探测器作为成熟技术的可行性论证需引用支撑",
+      "missing_evidence": "缺少16通道TOF探测器在阿秒条纹相机中的实际性能数据（能量分辨率0.25%、角分辨率、归一化校准方法）",
+      "search_keywords": [
+        "16 channel TOF angular resolution attosecond streak camera",
+        "Laurent TOF detector Rev Sci Instrum attosecond",
+        "TOF array detector energy resolution attosecond metrology"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§4.2 XUV-IR延迟稳定性100 as的干涉仪技术需文献支撑",
+      "missing_evidence": "缺少非共线XUV-IR干涉仪在阿秒条纹测量中实现100 as延迟稳定性的实验证据",
+      "search_keywords": [
+        "non-collinear XUV-IR interferometer delay stability attosecond",
+        "attosecond streaking interferometer 100 attosecond stability",
+        "delay stability XUV interferometer attosecond metrology"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

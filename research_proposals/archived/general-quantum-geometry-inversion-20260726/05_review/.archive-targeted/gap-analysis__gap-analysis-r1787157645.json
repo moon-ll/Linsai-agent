@@ -1,0 +1,72 @@
+{
+  "gaps": [
+    {
+      "claim": "Luu & Wörner 2018 Nat. Commun. 在上一轮评审中已被指出应被引用，但本轮 rationale.md 仍未纳入",
+      "missing_evidence": "Luu & Wörner 2018 Nat. Commun. 是固体高次谐波领域的关键实验方法论文，被上轮专项评审点名，但本轮 rationale 仍未引用",
+      "search_keywords": [
+        "Luu Worner 2018 Nat Commun high harmonic generation",
+        "Luu Worner固体高次谐波实验方法"
+      ],
+      "priority": "critical"
+    },
+    {
+      "claim": "§1.1–§1.2 论证「两堵墙物理判据」时，未对 BSV-SBE 单电子近似本身的失效边界做明示",
+      "missing_evidence": "缺乏 BSV-SBE（半导体布洛赫方程）单电子近似在强场区域失效的定量判据或实验证据，理论框架适用边界不清晰",
+      "search_keywords": [
+        "semiconductor Bloch equation validity strong field limit",
+        "SBE breakdown criterion strong field solid",
+        "interband coupling saturation strong field HHG",
+        "Keldysh parameter SBE validity boundary"
+      ],
+      "priority": "critical"
+    },
+    {
+      "claim": "§1.5 中将直接带隙 ZnO 基线（10⁻⁴）与间接带隙 Si 基线（10⁻⁵）并列后跨材料做绝对产额预测（10⁻⁴–10⁻⁵），存在跨材料直接对比的逻辑跳跃",
+      "missing_evidence": "缺乏不同带隙类型材料（直接带隙 vs 间接带隙）HHG 产额跨材料对比的实验数据或理论计算支撑，直接将 ZnO 与 Si 的 HHG 产额做绝对值对比缺乏文献依据",
+      "search_keywords": [
+        "ZnO high harmonic generation yield direct bandgap",
+        "Si indirect bandgap high harmonic yield",
+        "solid-state HHG material comparison direct indirect bandgap",
+        "HHG efficiency bandgap dependence semiconductor"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "rationale.md 引用了 19 个文献编号，但 foundational 引用 [30]–[41]（Berry 1984 / Provost-Vallee 1980 / TKNN 1982 / Corkum 1993 / Lewenstein 1994 / Ghimire 2011 / Lvovsky 2009 / Karniadakis 2021 等）在 rationale.md 中 0 引用",
+      "missing_evidence": "核心概念（Berry 相位、量子几何张量、HHG 半经典理论、光场量子化、Bloch 方程）的奠基性文献未在立项依据正文中被引用，违反嵌入式论证原则",
+      "search_keywords": [
+        "Berry 1984 geometric phase review",
+        "Provost Vallee 1980 Berry curvature",
+        "TKNN 1982 topological invariant",
+        "Corkum 1993 HHG three step model",
+        "Lewenstein 1994 HHG theory",
+        "Ghimire 2011 solid-state HHG first observation",
+        "Lvovsky 2009 squeezed light review",
+        "Karniadakis 2021 physics informed neural network"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§1.5 提及与合作团队「已合作发表 2 篇（含 PRL 2024、Optica 2025）」，但跨章节未将这些合作产出纳入正式 references",
+      "missing_evidence": "正文提及的具体合作成果（PRL 2024、Optica 2025）在参考文献列表中缺位，无法核实和支撑该合作声明",
+      "search_keywords": [
+        "PRL 2024 high harmonic generation quantum geometry",
+        "Optica 2025 solid-state HHG attosecond",
+        "BSV driven high harmonic generation PRL 2024",
+        "quantum light solid nonlinear optics Optica 2025"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Year 4 三项物理约束的先验来源（DFT/ACBN0 的 Hubbard-U、tdDMFT 自能、CDW 对称性破缺）均已与合作团队对接，但缺乏这些先验约束在 PINN 损失函数中量化的具体文献支撑",
+      "missing_evidence": "缺乏 CDW (charge density wave) 对称性破缺作为 HHG / 量子几何约束的先验来源在机器学习反演中的具体应用文献，Hubbard-U 与 tdDMFT 自能作为先验约束的理论依据不充分",
+      "search_keywords": [
+        "CDW symmetry breaking high harmonic generation constraint",
+        "Hubbard-U DFT PINN prior constraint",
+        "tdDMFT self-energy physics informed neural network",
+        "physics informed neural network condensed matter inverse problem"
+      ],
+      "priority": "low"
+    }
+  ]
+}

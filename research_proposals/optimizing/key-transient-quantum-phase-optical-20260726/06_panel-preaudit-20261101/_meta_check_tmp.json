@@ -1,0 +1,191 @@
+{
+ "5": {
+  "doi": "10.1080/00018732.2025.2598130",
+  "title": "Solid-state high-order harmonic generation: emerging frontiers in ultrafast and quantum light science",
+  "first": "Ciappina",
+  "year": 2025,
+  "vol": "74",
+  "page": "1-9",
+  "journal": "Advances in Physics"
+ },
+ "9": {
+  "doi": "10.1038/s41377-025-01847-5",
+  "title": "Second and third harmonic generation in topological insulator-based van der Waals metamaterials",
+  "first": "Di Gaspare",
+  "year": 2025,
+  "vol": "14",
+  "page": "337",
+  "journal": "Light: Science &amp; Applications"
+ },
+ "10": {
+  "doi": "10.1038/s41467-026-74310-7",
+  "title": "Disentangling high harmonic generation from surface and bulk states of a topological insulator",
+  "first": "Li",
+  "year": 2026,
+  "vol": "17",
+  "page": "7642",
+  "journal": "Nature Communications"
+ },
+ "13": {
+  "doi": "10.1038/s41586-023-06828-5",
+  "title": "Observation of interband Berry phase in laser-driven crystals",
+  "first": "Uzan-Narovlansky",
+  "year": 2024,
+  "vol": "626",
+  "page": "66-71",
+  "journal": "Nature"
+ },
+ "14": {
+  "doi": "10.1088/1361-6633/ae5847",
+  "title": "Attosecond quantum optical interferometry",
+  "first": "Rivera-Dean",
+  "year": 2026,
+  "vol": "89",
+  "page": "047901",
+  "journal": "Reports on Progress in Physics"
+ },
+ "17": {
+  "doi": "10.1038/s41567-026-03429-7",
+  "title": "Optical control of electrons in a Floquet topological insulator",
+  "first": "Lesko",
+  "year": 2026,
+  "vol": "22",
+  "page": "1607-1614",
+  "journal": "Nature Physics"
+ },
+ "19": {
+  "doi": "10.1038/s41567-026-03341-0",
+  "title": "Floquet topological state induced by light-driven band inversion in SnTe",
+  "first": "Chassot",
+  "year": 2026,
+  "vol": "22",
+  "page": "1282-1286",
+  "journal": "Nature Physics"
+ },
+ "20": {
+  "doi": "10.1038/s41567-025-02889-7",
+  "title": "Observation of Floquet states in graphene",
+  "first": "Merboldt",
+  "year": 2025,
+  "vol": "21",
+  "page": "1093-1099",
+  "journal": "Nature Physics"
+ },
+ "21": {
+  "doi": "10.1088/1361-6463/ae6c35",
+  "title": "Orthogonal attosecond control of solid-state harmonics by optical waveforms and quantum geometry engineering",
+  "first": "Zhao",
+  "year": 2026,
+  "vol": "59",
+  "page": "215104",
+  "journal": "Journal of Physics D: Applied Physics"
+ },
+ "23": {
+  "doi": "10.1103/7zjc-4b4r",
+  "title": "High harmonic spectroscopy from lower-order to higher-order topological insulators",
+  "first": "Lorenzo",
+  "year": 2026,
+  "vol": "114",
+  "page": "084307",
+  "journal": "Physical Review B"
+ },
+ "27": {
+  "doi": "10.1088/1361-6633/ad889f",
+  "title": "Topological phase transitions via attosecond x-ray absorption spectroscopy",
+  "first": "Mosquera",
+  "year": 2024,
+  "vol": "87",
+  "page": "117901",
+  "journal": "Reports on Progress in Physics"
+ },
+ "28": {
+  "doi": "10.34133/ultrafastscience.0171",
+  "title": "A High-Intensity Attosecond Light Source in Compact Geometry at the ELI ALPS User Facility",
+  "first": "Nayak",
+  "year": 2026,
+  "vol": "6",
+  "page": "0171",
+  "journal": "Ultrafast Science"
+ },
+ "30": {
+  "doi": "10.1021/acs.jpclett.4c01383",
+  "title": "Benchmarking Functionals for Strong-Field Light-Matter Interactions in Adiabatic Time-Dependent Density Functional Theory",
+  "first": "Neufeld",
+  "year": 2024,
+  "vol": "15",
+  "page": "7254-7264",
+  "journal": "The Journal of Physical Chemistry Letters"
+ },
+ "32": {
+  "doi": "10.1103/vcxm-dr2g",
+  "title": "Wilson loop invariants and bulk-boundary correspondence in higher-order topological insulators with anticommuting mirror symmetries",
+  "first": "Aich",
+  "year": 2026,
+  "vol": "114",
+  "page": "065133",
+  "journal": "Physical Review B"
+ },
+ "33": {
+  "doi": "10.1038/s41567-025-02938-1",
+  "title": "Dynamic phase transition in 1T-TaS2 via a thermal quench",
+  "first": "de la Torre",
+  "year": 2025,
+  "vol": "21",
+  "page": "1267-1274",
+  "journal": "Nature Physics"
+ },
+ "34": {
+  "doi": "10.1103/lwpl-brrr",
+  "title": "Dynamical Breaking of Inversion Symmetry, Strong Second Harmonic Generation, and Nonequilibrium Ferroelectricity with Nonlinear Phonons",
+  "first": "Kiselev",
+  "year": 2026,
+  "vol": "137",
+  "page": "106903",
+  "journal": "Physical Review Letters"
+ },
+ "35": {
+  "doi": "10.1088/2632-2153/ae68d4",
+  "title": "Machine learning time propagators for time-dependent density functional theory simulations",
+  "first": "Shah",
+  "year": 2026,
+  "vol": "7",
+  "page": "035019",
+  "journal": "Machine Learning: Science and Technology"
+ },
+ "38": {
+  "doi": "10.1063/5.0273558",
+  "title": "Active stabilization for ultralong acquisitions in an attosecond pump–probe beamline",
+  "first": "Csizmadia",
+  "year": 2025,
+  "vol": "10",
+  "page": "080803",
+  "journal": "APL Photonics"
+ },
+ "3": {
+  "doi": "10.1103/PhysRevB.110.125111",
+  "title": "High harmonic generation from electrons moving in topological spin textures",
+  "first": "Ono",
+  "year": 2024,
+  "vol": "110",
+  "page": "125111",
+  "journal": "Physical Review B"
+ },
+ "8": {
+  "doi": "10.1021/acs.nanolett.1c02145",
+  "title": "All-Optical Probe of Three-Dimensional Topological Insulators Based on High-Harmonic Generation by Circularly Polarized Laser Fields",
+  "first": "Baykusheva",
+  "year": 2021,
+  "vol": "21",
+  "page": "8970-8978",
+  "journal": "Nano Letters"
+ },
+ "25": {
+  "doi": "10.1103/PhysRevLett.133.156901",
+  "title": "Phonon-Coupled High-Harmonic Generation for Exploring Nonadiabatic Electron-Phonon Interactions",
+  "first": "Hu",
+  "year": 2024,
+  "vol": "133",
+  "page": "156901",
+  "journal": "Physical Review Letters"
+ }
+}

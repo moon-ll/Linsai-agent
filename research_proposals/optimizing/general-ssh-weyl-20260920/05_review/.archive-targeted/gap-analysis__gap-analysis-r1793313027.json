@@ -1,0 +1,16 @@
+{
+  "gaps": [
+    {
+      "claim": "§3.1.2 L91 中 SBE 模拟采用的 T2 退相干时间分档值（3 / 2 / 1.5 / 1 fs）",
+      "missing_evidence": "T2 各分档取值缺少文献出处或方法页支撑，仅标注“存档备查”，违反 rigor 清单①“带单位与出处”要求；第三方无法核验各档数值的依据与适用条件。需为每个分档补充至少一类文献支撑（如不同材料体系/不同散射机制下的退相干时间实验测量或理论估计）或挂接知识库方法页 sbe-bloch-equations.md 的 T2/γ(k) 检验条目作为出处",
+      "search_keywords": [
+        "semiconductor Bloch equation dephasing time T2",
+        "electron-phonon dephasing time ultrafast spectroscopy",
+        "GaAs dephasing time fs four-wave mixing",
+        "coherence time ultrafast semiconductor dynamics"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

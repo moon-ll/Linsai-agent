@@ -1,0 +1,14 @@
+{
+  "proposal_id": "general-mos2-20260905",
+  "cluster_id": "orphan-route-2026-10-02",
+  "entries": [
+    {
+      "source_id": "paper:2025-PhysRevLett.135.166902-phase-matching-of-high-harmonic-generation-in-twisted-van-de",
+      "title": "Phase Matching of High Harmonic Generation in Twisted van der Waals Crystals",
+      "summary": "本文提出利用扭转范德华晶体的层间扭转角作为相位匹配调控新自由度，来克服固态高次谐波产生（HHG）中相位失配对效率的限制。在扭转堆叠的hBN中实现了5次谐波转换效率4×10⁻⁵的固态HHG记录新高。该策略将twistronics几何调控思想引入强场非线性光学，为固态HHG效率提升提供了与传统准相位匹配互补的材料学途径。",
+      "path": "knowledge/raw/papers/2025-PhysRevLett.135.166902-phase-matching-of-high-harmonic-generation-in-twisted-van-de.md",
+      "added_via": "cluster:orphan-route-2026-10-02",
+      "added_at": "2026-10-02T16:43:15Z"
+    }
+  ]
+}

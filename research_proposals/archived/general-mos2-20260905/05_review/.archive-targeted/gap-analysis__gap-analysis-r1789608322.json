@@ -1,0 +1,95 @@
+{
+  "gaps": [
+    {
+      "claim": "TD-HSEX 多带框架下 MoS₂ 谐波产额增强与相位/角分布调制的具体数值（增强倍数、相位移动度数）",
+      "missing_evidence": "缺少 Cárdenas 等人论文中关于 MoS₂ 在 TD-HSEX 框架下谐波产额放大倍数与角分布调制幅度的定量数据（与单粒子 TDSE 对比基线）",
+      "search_keywords": [
+        "Cárdenas TD-HSEX MoS2 high harmonic yield enhancement",
+        "many-body exciton HHG MoS2 phase shift angular distribution"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Lee 等人多体激子作用对平行/垂直方向谐波非单调影响的失谐区间与饱和条件",
+      "missing_evidence": "缺少 Lee 等人关于多体激子对谐波各向异性非单调效应的工作范围（驱动波长、激子束缚能区间）数据",
+      "search_keywords": [
+        "Lee many-body exciton harmonic parallel perpendicular nonmonotonic",
+        "exciton binding energy HHG anisotropy saturation MoS2"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Jensen ab initio 强束缚激子布居作为可反演指纹的信噪比与反演误差阈值",
+      "missing_evidence": "缺少 Jensen 等人 ab initio 模拟中激子指纹可反演性的量化指标（指纹对比度 SNR、频段、拟合残差）",
+      "search_keywords": [
+        "Jensen ab initio strongly bound exciton harmonic inversion fingerprint",
+        "excitonic HHG ab initio MoS2 fingerprint SNR"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Patra & Cocchi SHG 群论框架在 MoS₂ 扭转体系的 χ⁽²⁾ 张量实测值与群论预测偏差",
+      "missing_evidence": "缺少 Patra/Cocchi 关于 3R/MoS₂ SHG 张量 C₃ 群论预测与实验值偏差的数值依据",
+      "search_keywords": [
+        "Patra Cocchi SHG MoS2 twisted homobilayer chi_2 tensor C3",
+        "second harmonic generation tensor MoS2 3R stacking experimental"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "TD-aGW 在莫尔势与 Berry 曲率初值精度上的基准测试值（精度数量级、与 TDDFT 对比）",
+      "missing_evidence": "缺少 TD-aGW 框架在扭转 TMD 莫尔势中相对 TDDFT 的精度提升数据（meV 量级或 % 偏差）",
+      "search_keywords": [
+        "TD-aGW moire superlattice band structure benchmark TDDFT",
+        "TD-aGW Berry curvature MoS2 twisted bilayer accuracy"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Mrdul 等人多体 HHG 协同模型在 MoS₂ 体系的拟合残差阈值（r ≥ 0.8、σ_Ω ≤ 0.15 的物理来源）",
+      "missing_evidence": "缺少 Mrdul 等人协同模型在 MoS₂ 等 2D 体系拟合收敛阈值（r²、σ_Ω）的实测数据来源",
+      "search_keywords": [
+        "Mrdul many-body HHG cooper-channel model MoS2 fit residual",
+        "cooper minimum HHG MoS2 exciton correlation fitting"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Almeida 等人少体激子修正项的相对幅度（相对单粒子基线的 % 或倍数）",
+      "missing_evidence": "缺少 Almeida 等人关于少体激子修正相对单粒子描述的偏差数据",
+      "search_keywords": [
+        "Almeida few-body exciton correction HHG relative magnitude",
+        "excitonic correction factor HHG MoS2 single particle baseline"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Peterka MoS₂ 高次谐波实验的谐波阶次、驱动波长、椭圆依赖实测曲线",
+      "missing_evidence": "缺少 Peterka 等人 MoS₂ HHG 实验的谐波谱、椭圆率依赖数据作为可行性对照",
+      "search_keywords": [
+        "Peterka MoS2 high harmonic generation experiment ellipticity",
+        "MoS2 HHG ARPES mid-infrared photon energy spectrum"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "装置 70–90 as vs 目标 100 as 时间分辨精度的实现路径（分束、DAC 反馈、streaking 校准具体技术指标）",
+      "missing_evidence": "缺少 DAC streaking 标定 70–90 as 精度的具体技术链（电子谱仪能量分辨率、CEP 锁定精度）",
+      "search_keywords": [
+        "DAC streaking attosecond 90 as calibration energy resolution CEP lock",
+        "attosecond streaking 70 as time resolution experimental benchmark"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "RABBITT 重构算法在多通道干涉下 Δt ≤ 100 as 的精度上限（与 Peschel 2022 Ne 2p 对比）",
+      "missing_evidence": "缺少 Peschel 2022 Ne 2p 双光子 RABBITT 在多通道耦合下时间反演精度的实测边界",
+      "search_keywords": [
+        "Peschel Ne 2p two-photon RABBITT multichannel interchannel coupling",
+        "RABBITT reconstruction 100 as accuracy limit argon neon multi-channel"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "scheme"
+}

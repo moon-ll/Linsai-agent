@@ -1,0 +1,58 @@
+{
+  "proposal_id": "general-berry-berry-20261107",
+  "cluster_id": "cl_20261106_6e5c76",
+  "clusters": [
+    "cl_20261106_6e5c76",
+    "orphan-route-2026-11-15"
+  ],
+  "entries": [
+    {
+      "source_id": "paper:2024-2411.16675-fully-nonequilibrium-hall-response-from-berry-curvature",
+      "title": "Fully nonequilibrium Hall response from Berry curvature",
+      "summary": "本文提出完全非平衡（fully nonequilibrium）条件下的Hall响应理论：在保持时间反演但破缺空间反演的体系中，强驱动场下Hall电流的场标度从弱场的二次（受Berry曲率偶极控制）转变为准线性。此时响应不再由平衡态Berry曲率偶极描述，其行为类似于微观破坏时间反演的反常霍尔体系，表明强场导致的非平衡分布本身可充当有效的时间反演破缺源。这为固态器件中强场非线性输运提供了一个超越常规非线性霍尔图像的新机制。",
+      "path": "knowledge/raw/papers/2024-2411.16675-fully-nonequilibrium-hall-response-from-berry-curvature.md",
+      "added_via": "cluster:cl_20261106_6e5c76",
+      "added_at": "2026-11-15T06:01:12Z"
+    },
+    {
+      "source_id": "paper:2025-2508.18677-berry-curvature-dipole-induced-chiral-terahertz-gain-and-las",
+      "title": "Berry Curvature Dipole-Induced Chiral Terahertz Gain and Lasing",
+      "summary": "提出并理论论证：在时间反演对称但空间反演破缺的拓扑材料中，Berry曲率偶极子（BCD）可在太赫兹频段诱导对手性（圆偏振）选择性的光学增益。在光抽运建立带边粒子数反转的条件下，BCD驱动的反对称光电导使左/右旋圆偏振分量分别经历增益与吸收，从而实现无外磁场的圆偏振太赫兹受激辐射与激光。增益大小与螺旋度由BCD的取向和符号决定，可经栅压/应变电学调控并翻转，为紧凑手性THz光源与量子几何的高灵敏光学读出提供了新途径。",
+      "path": "knowledge/raw/papers/2025-2508.18677-berry-curvature-dipole-induced-chiral-terahertz-gain-and-las.md",
+      "added_via": "cluster:cl_20261106_6e5c76",
+      "added_at": "2026-11-15T06:01:12Z"
+    },
+    {
+      "source_id": "paper:2025-2505.07189-unified-theory-of-the-photovoltaic-hall-effect-by-field-and",
+      "title": "Unified theory of the photovoltaic Hall effect by field- and light-induced Berry curvatures",
+      "summary": "本文建立了光伏霍尔效应（横向光电流）的统一理论，将直流偏置电场与光场诱导的两种Berry曲率修正纳入同一响应函数框架。核心发现是场致机制：偏置电场通过重整带间跃迁偶极矩、跃迁能量和带内速度，诱导出Berry曲率修正，其贡献与圆偏振光经Floquet缀饰产生的光致Berry曲率可比拟并可干涉/竞争。理论阐明了两类贡献各自的对称性要求、光子能量与螺旋度依赖及场强标度律，为横向光伏响应的区分与电场调控提供了完整图像。",
+      "path": "knowledge/raw/papers/2025-2505.07189-unified-theory-of-the-photovoltaic-hall-effect-by-field-and.md",
+      "added_via": "cluster:cl_20261106_6e5c76",
+      "added_at": "2026-11-15T06:01:12Z"
+    },
+    {
+      "source_id": "paper:2025-2505.06078-unified-theory-of-the-photovoltaic-hall-effect-by-field-and",
+      "title": "Unified theory of the photovoltaic Hall effect by field- and light-induced Berry curvatures",
+      "summary": "建立了光伏霍尔效应（光照下光生载流子产生直流反常霍尔电流）的统一理论，将静态电场诱导的Berry曲率（Stark型价带-导带混合）与光场自身诱导的Berry曲率（Floquet型动态带混合）置于同一框架内同阶处理。基于长度规范密度矩阵微扰论导出普适的直流霍尔电流表达式，指出在平衡Berry曲率为零的中心对称或自旋轨道耦合可忽略的体系中，外场与光共同'写入'的Berry曲率即可驱动霍尔响应。理论给出对直流场强、光强、光螺旋度、频率与弛豫率的完整依赖关系，为场可调、偏振可开关的光电霍尔器件提供设计准则。",
+      "path": "knowledge/raw/papers/2025-2505.06078-unified-theory-of-the-photovoltaic-hall-effect-by-field-and.md",
+      "added_via": "cluster:cl_20261106_6e5c76",
+      "added_at": "2026-11-15T06:01:12Z"
+    },
+    {
+      "source_id": "paper:2026-2603.06486-linearly-polarized-light-induced-anomalous-hall-effect-and-t",
+      "title": "Linearly Polarized Light-Induced Anomalous Hall Effect and Topological Phase Transitions in an Altermagnetic Topological Insulator",
+      "summary": "本文证明线偏振光即足以在交变磁性拓扑绝缘体中诱导反常霍尔效应并驱动拓扑相变。平衡态下交变磁体虽破缺时间反演对称，但剩余晶体-自旋补偿对称性使霍尔响应为零；线偏振光的 Floquet 修饰破坏这些补偿对称性，产生非零贝里曲率与光致霍尔电导，并通过能隙闭合-重开与陈数翻转实现向非平庸（Floquet 陈绝缘体型）相的跃迁，相边界由光强、偏振方向与频率共同调控。",
+      "path": "knowledge/raw/papers/2026-2603.06486-linearly-polarized-light-induced-anomalous-hall-effect-and-t.md",
+      "added_via": "cluster:orphan-route-2026-11-15",
+      "added_at": "2026-11-15T06:03:52Z"
+    },
+    {
+      "source_id": "paper:2026-2610.26163-bicircular-light-tunable-topological-phases-and-nonlinear-ha",
+      "title": "Bicircular light tunable topological phases and nonlinear Hall responses in odd-parity magnets",
+      "summary": "该文证明双圆偏振光（两束反向旋转的圆偏振光）可在奇宇称磁体中驱动随两束光振幅比变化的级联拓扑相变，且相变点附近量子度规急剧演化。在同时破缺空间反演与时间反演的体系中，作者解锁了贝利曲率与量子度规共同贡献的非线性霍尔响应，并给出由双圆场手性决定的选择定则，从而实现拓扑物态与非线性输运的全光学调控。",
+      "path": "knowledge/raw/papers/2026-2610.26163-bicircular-light-tunable-topological-phases-and-nonlinear-ha.md",
+      "added_via": "cluster:orphan-route-2026-11-15",
+      "added_at": "2026-11-15T06:03:52Z"
+    }
+  ]
+}

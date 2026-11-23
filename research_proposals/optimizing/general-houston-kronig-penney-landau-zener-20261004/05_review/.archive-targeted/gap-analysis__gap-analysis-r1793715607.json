@@ -1,0 +1,40 @@
+{
+  "gaps": [
+    {
+      "claim": "rationale §2.5 L57 将 Ernotte 等[28]作为通道分离方法学的参照工作",
+      "missing_evidence": "该引用的作者归属事实核查——CrossRef 记录显示 10.1103/PhysRevB.98.235202 作者为 Guilmot Ernotte（加拿大 NRC/渥太华大学，资助方仅 AFOSR），原文误标为'国内学界'参照。需以权威数据库（CrossRef/OpenAlex/arXiv）核实作者机构与资助信息，纠正归属表述为'国际参照'，确保引用归属与文献元数据一致。",
+      "search_keywords": [
+        "Ernotte",
+        "10.1103/PhysRevB.98.235202",
+        "PhysRevB 98 235202",
+        "channel-resolved high harmonic generation",
+        "NRC Canada Ottawa attosecond"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "rationale §1 L9 与 §2.4 L51 两处引用的 Chen[27] 同一工作（9 eV / 16.5 eV / 1 MHz 三参数及 730 as 结果）",
+      "missing_evidence": "Chen[27] 原始文献的精确出处与参数核验——同一工作在章内被双写，需回查该文献（固体高次谐波相关实验，含上述能量/重复频率/阿秒时间尺度数据）确认三参数数值与 730 as 归属无误，以便压缩为单点引用并保证数值与原文献一致。",
+      "search_keywords": [
+        "Chen high harmonic generation solid",
+        "9 eV 16.5 eV high-order harmonic",
+        "1 MHz repetition rate HHG solid",
+        "730 as attosecond solid-state HHG",
+        "ZnO MoS2 high harmonic Chen"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "rationale §2.5 L55 引用 [31] 支撑组内工作的 Keldysh 跃迁结论，原文以内部代号'HX-L07 组'指代研究机构",
+      "missing_evidence": "[31] 的正确机构归属与主张边界核实——读者无法从内部光路代号识别作者单位（应为中科院物理研究所极端光场产生团队），且同段两句承载两组主张、重复罗列组内作者。需核实 [31] 的正式作者列表与单位，确认 Keldysh 跃迁相关结论确实出自该文，避免一引多挂。",
+      "search_keywords": [
+        "Keldysh transition high harmonic generation solid",
+        "Institute of Physics Chinese Academy Sciences high harmonic",
+        "extreme light field generation CAS",
+        "Keldysh-like transition regime solids HHG experiment"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

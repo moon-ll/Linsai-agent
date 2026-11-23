@@ -1,0 +1,41 @@
+{
+  "gaps": [
+    {
+      "claim": "中科院半导体所团队的相关工作发生于2025年。",
+      "missing_evidence": "正文与参考文献表存在年份冲突。现有参考文献[27]记录为Comput. Mater. Sci. 268 (2026)，因此原则上不需要新增研究文献，而应依据出版社页面、DOI或Crossref记录核定正式出版年份；如果正文实际指向2025年的预印本、会议论文或在线发表版本，则需补充该版本及其与正式论文的关系。",
+      "search_keywords": [
+        "Comput. Mater. Sci. 268 2026 中科院半导体所",
+        "\"Computational Materials Science\" 268 2026 Weyl",
+        "中科院半导体所 强场 高次谐波 2026",
+        "Crossref DOI Comput. Mater. Sci. 268"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "针对Weyl I型与II型半金属必须分别建立专属模型。",
+      "missing_evidence": "现有Thakur等人的摘要不足以直接证明模型不可统一；需要补充能够比较Weyl I型与II型在节点倾斜、能带色散、费米面几何、晶体取向及HHG选择定则方面存在定性差异的理论或实验文献。优先核查Thakur论文全文及补充材料，并补充跨分型的对比研究、节点倾斜与HHG响应关系的文献，以及支持分别选取响应张量或角动量通道模型的依据；若要使用“必须”这一强断言，还需给出统一模型必然失效的反例或误差证据。",
+      "search_keywords": [
+        "Thakur Weyl type-I type-II high harmonic generation",
+        "Weyl semimetal HHG selection rules type dependent",
+        "Weyl node tilt anisotropic high harmonic response",
+        "Weyl semimetal high harmonic generation crystal orientation",
+        "type-I type-II Weyl fermions nonlinear optical response",
+        "solid-state HHG Weyl semimetal Fermi surface geometry"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Lorenzo等人的相关研究为2026年发表于Physical Review B第114卷的工作。",
+      "missing_evidence": "正文首次引用缺少年份，需要用出版社或DOI书目记录核验作者、题名、卷号、文章号和正式出版年份，并据此补写“于2026年”。这是书目信息完整性缺口，通常无需新增研究文献；若Lorenzo等人的成果另有预印本年份，应明确预印本与正式发表版本的时间关系。",
+      "search_keywords": [
+        "Lorenzo Physical Review B 114 2026",
+        "Lorenzo Weyl semimetal PRB 2026",
+        "Lorenzo high harmonic generation Weyl semimetal",
+        "site:journals.aps.org/prb Lorenzo Weyl 2026",
+        "Crossref Lorenzo Physical Review B 114"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

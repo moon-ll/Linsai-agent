@@ -1,0 +1,74 @@
+{
+  "gaps": [
+    {
+      "claim": "§2.3 line 67 交叉引用失效（指向§一第1.5节）",
+      "missing_evidence": "该交叉引用指向立项依据中的特定论点，需要验证被引章节是否实际存在并查证其原始文献支撑",
+      "search_keywords": [
+        "quantum geometry inversion HHG立项依据 1.5",
+        "high harmonic generation inverse problem foundation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§7.1 line 353-357 量化优势四步闭环（统一性/可控性/可标注性）的方法学论证",
+      "missing_evidence": "缺乏PINN/CNN/物理约束类反演方法的benchmark对比文献，无法支撑量化优势声明",
+      "search_keywords": [
+        "physics-informed neural network HHG inversion benchmark",
+        "CNN baseline high harmonic spectroscopy retrieval",
+        "PINN vs regularization inverse problem comparison"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "R1判据（10%/15%）三现于line 83/367/433",
+      "missing_evidence": "缺乏HHG反演误差阈值（10%/15%）的经验文献支撑，特别是不同强度噪声下的可辨识性数据",
+      "search_keywords": [
+        "HHG inversion error threshold percent",
+        "high harmonic spectroscopy reconstruction accuracy benchmark",
+        "Fisher information condition number attosecond inversion"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "2°阈值四现（line 155/199/411/425）的物理判据",
+      "missing_evidence": "缺少CEP/偏振/角度2°作为HHG反演精度的实验或理论依据",
+      "search_keywords": [
+        "carrier-envelope phase 2 degree attosecond precision",
+        "polarization angle resolution HHG retrieval",
+        "CEP control 2 degree high harmonic generation"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§5.3 R4 第二档 TiSe₂ 2D SBE 模拟 2000 谱的可行性",
+      "missing_evidence": "缺乏TiSe₂的TDDFT/SBE模拟谱数量的benchmark，以及2000谱对参数收敛性的支撑文献",
+      "search_keywords": [
+        "TiSe2 semiconductor Bloch equation simulation benchmark",
+        "TiSe2 HHG TDDFT spectrum convergence",
+        "2D material SBE simulation dataset size"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§7.3 相图主区U 0.6-0.8 / T 180-220K 11×5=55点的U/W参数空间",
+      "missing_evidence": "缺乏TiSe₂/1T-TaS₂的U-W相图11×5网格分辨率下的实验/理论文献支撑",
+      "search_keywords": [
+        "TiSe2 Hubbard U phase diagram 0.6 0.8",
+        "1T-TaS2 U W parameter space",
+        "charge density wave U T phase diagram TiSe2"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§8.3 line 465 vs §4.2 line 171 降级触发线双口径（<2 vs <1.2）",
+      "missing_evidence": "缺少HHG反演收敛比（<1.2档 vs <2档）的可辨识性判据文献",
+      "search_keywords": [
+        "high harmonic inversion convergence ratio threshold",
+        "HHG parameter retrieval identifiability criterion",
+        "Bayesian inversion convergence diagnostic"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

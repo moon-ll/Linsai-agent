@@ -1,0 +1,4 @@
+{
+  "gaps": [],
+  "note": "agent 未返回标准 JSON gaps 格式，视为无文献缺口。原文前200字: API call failed after 3 retries: Hermes can't reach the model provider. You may be offline. Check your internet connection and try again."
+}

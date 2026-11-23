@@ -1,0 +1,296 @@
+{
+ "doi_1": {
+  "doi": "10.1038/nphys1847",
+  "status": "OK",
+  "title": "Observation of high-order harmonic generation in a bulk crystal",
+  "first_family": "Ghimire",
+  "container": "Nature Physics",
+  "volume": "7",
+  "issue": "2",
+  "page": "138-141",
+  "year": 2010,
+  "type": "journal-article",
+  "nauth": 6,
+  "diffs": [
+   "Y 2010!=2011"
+  ]
+ },
+ "doi_2": {
+  "doi": "10.1038/nature14517",
+  "status": "OK",
+  "title": "Linking high harmonics from gases and solids",
+  "first_family": "Vampa",
+  "container": "Nature",
+  "volume": "522",
+  "issue": "7557",
+  "page": "462-464",
+  "year": 2015,
+  "type": "journal-article",
+  "nauth": 8,
+  "diffs": []
+ },
+ "doi_3": {
+  "doi": "10.1103/PhysRevX.13.031011",
+  "status": "OK",
+  "title": "Are There Universal Signatures of Topological Phases in High-Harmonic Generation? Probably Not.",
+  "first_family": "Neufeld",
+  "container": "Physical Review X",
+  "volume": "13",
+  "issue": "3",
+  "page": "031011",
+  "year": 2023,
+  "type": "journal-article",
+  "nauth": 5,
+  "diffs": []
+ },
+ "doi_4": {
+  "doi": "10.1038/s41567-020-01077-9",
+  "status": "NOT_FOUND",
+  "err": "HTTP Error 404: Not Found"
+ },
+ "doi_5": {
+  "doi": "10.1038/s41586-021-03466-7",
+  "status": "OK",
+  "title": "Tunable non-integer high-harmonic generation in a topological insulator",
+  "first_family": "Schmid",
+  "container": "Nature",
+  "volume": "593",
+  "issue": "7859",
+  "page": "385-390",
+  "year": 2021,
+  "type": "journal-article",
+  "nauth": 19,
+  "diffs": []
+ },
+ "doi_6": {
+  "doi": "10.1063/5.0145728",
+  "status": "OK",
+  "title": "The defect-state-assisted enhancement of high harmonic generation in bulk ZnO",
+  "first_family": "Xu",
+  "container": "Applied Physics Letters",
+  "volume": "122",
+  "issue": "18",
+  "page": "182105",
+  "year": 2023,
+  "type": "journal-article",
+  "nauth": 6,
+  "diffs": []
+ },
+ "doi_7": {
+  "doi": "10.1038/nphoton.2013.349",
+  "status": "OK",
+  "title": "Sub-cycle control of terahertz high-harmonic generation by dynamical Bloch oscillations",
+  "first_family": "Schubert",
+  "container": "Nature Photonics",
+  "volume": "8",
+  "issue": "2",
+  "page": "119-123",
+  "year": 2014,
+  "type": "journal-article",
+  "nauth": 11,
+  "diffs": []
+ },
+ "doi_8": {
+  "doi": "10.1103/PhysRevA.100.033405",
+  "status": "OK",
+  "title": "Crystal-momentum-resolved contributions to high-order harmonic generation in solids",
+  "first_family": "Navarrete",
+  "container": "Physical Review A",
+  "volume": "100",
+  "issue": "3",
+  "page": "033405",
+  "year": 2019,
+  "type": "journal-article",
+  "nauth": 3,
+  "diffs": []
+ },
+ "doi_9": {
+  "doi": "10.1038/nphys3955",
+  "status": "OK",
+  "title": "Anisotropic high-harmonic generation in bulk crystals",
+  "first_family": "You",
+  "container": "Nature Physics",
+  "volume": "13",
+  "issue": "4",
+  "page": "345-349",
+  "year": 2016,
+  "type": "journal-article",
+  "nauth": 3,
+  "diffs": [
+   "Y 2016!=2017"
+  ]
+ },
+ "doi_10": {
+  "doi": "10.1038/nphys3946",
+  "status": "OK",
+  "title": "High-harmonic generation from an atomically thin semiconductor",
+  "first_family": "Liu",
+  "container": "Nature Physics",
+  "volume": "13",
+  "issue": "3",
+  "page": "262-265",
+  "year": 2016,
+  "type": "journal-article",
+  "nauth": 6,
+  "diffs": [
+   "Y 2016!=2017"
+  ]
+ },
+ "doi_11": {
+  "doi": "10.1038/nature14652",
+  "status": "OK",
+  "title": "Real-time observation of interfering crystal electrons in high-harmonic generation",
+  "first_family": "Hohenleutner",
+  "container": "Nature",
+  "volume": "523",
+  "issue": "7562",
+  "page": "572-575",
+  "year": 2015,
+  "type": "journal-article",
+  "nauth": 8,
+  "diffs": []
+ },
+ "doi_14": {
+  "doi": "10.1103/PhysRevA.97.011401",
+  "status": "OK",
+  "title": "<i>Ab initio</i>\n multiscale simulation of high-order harmonic generation in solids",
+  "first_family": "Floss",
+  "container": "Physical Review A",
+  "volume": "97",
+  "issue": "1",
+  "page": "011401",
+  "year": 2018,
+  "type": "journal-article",
+  "nauth": 8,
+  "diffs": []
+ },
+ "doi_17": {
+  "doi": "10.1103/PhysRevA.96.053850",
+  "status": "OK",
+  "title": "Effect of transition dipole phase on high-order-harmonic generation in solid materials",
+  "first_family": "Jiang",
+  "container": "Physical Review A",
+  "volume": "96",
+  "issue": "5",
+  "page": "053850",
+  "year": 2017,
+  "type": "journal-article",
+  "nauth": 6,
+  "diffs": []
+ },
+ "doi_18": {
+  "doi": "10.1038/nphys434",
+  "status": "OK",
+  "title": "Measuring and controlling the birth of attosecond XUV pulses",
+  "first_family": "Dudovich",
+  "container": "Nature Physics",
+  "volume": "2",
+  "issue": "11",
+  "page": "781-786",
+  "year": 2006,
+  "type": "journal-article",
+  "nauth": 7,
+  "diffs": []
+ },
+ "doi_19": {
+  "doi": "10.1038/nature11025",
+  "status": "OK",
+  "title": "Resolving the time when an electron exits a tunnelling barrier",
+  "first_family": "Shafir",
+  "container": "Nature",
+  "volume": "485",
+  "issue": "7398",
+  "page": "343-346",
+  "year": 2012,
+  "type": "journal-article",
+  "nauth": 9,
+  "diffs": []
+ },
+ "doi_24": {
+  "doi": "10.1103/PhysRevA.101.063419",
+  "status": "NOT_FOUND",
+  "err": "HTTP Error 404: Not Found"
+ },
+ "doi_25": {
+  "doi": "10.1103/PhysRevLett.124.153204",
+  "status": "OK",
+  "title": "Imperfect Recollisions in High-Harmonic Generation in Solids",
+  "first_family": "Yue",
+  "container": "Physical Review Letters",
+  "volume": "124",
+  "issue": "15",
+  "page": "153204",
+  "year": 2020,
+  "type": "journal-article",
+  "nauth": 2,
+  "diffs": []
+ },
+ "doi_26": {
+  "doi": "10.1103/PhysRevB.91.064302",
+  "status": "OK",
+  "title": "Semiclassical analysis of high harmonic generation in bulk crystals",
+  "first_family": "Vampa",
+  "container": "Physical Review B",
+  "volume": "91",
+  "issue": "6",
+  "page": "064302",
+  "year": 2015,
+  "type": "journal-article",
+  "nauth": 5,
+  "diffs": [
+   "TITLE sim=0.61"
+  ]
+ },
+ "doi_27": {
+  "doi": "10.1021/acs.nanolett.2c02145",
+  "status": "NOT_FOUND",
+  "err": "HTTP Error 404: Not Found"
+ },
+ "doi_29": {
+  "doi": "10.1103/PhysRevB.96.245133",
+  "status": "OK",
+  "title": "Self-consistent \n<mml:math xmlns:mml=\"http://www.w3.org/1998/Math/MathML\"><mml:mi mathvariant=\"normal\">DFT</mml:mi><mml:mo>+</mml:mo><mml:mi>U</mml:mi></mml:math>\n method for real-space time-dependent density functional theory calculations",
+  "first_family": "Tancogne-Dejean",
+  "container": "Physical Review B",
+  "volume": "96",
+  "issue": "24",
+  "page": "245133",
+  "year": 2017,
+  "type": "journal-article",
+  "nauth": 3,
+  "diffs": [
+   "TITLE sim=0.61"
+  ]
+ },
+ "doi_30": {
+  "doi": "10.1103/RevModPhys.84.1419",
+  "status": "OK",
+  "title": "Maximally localized Wannier functions: Theory and applications",
+  "first_family": "Marzari",
+  "container": "Reviews of Modern Physics",
+  "volume": "84",
+  "issue": "4",
+  "page": "1419-1475",
+  "year": 2012,
+  "type": "journal-article",
+  "nauth": 5,
+  "diffs": []
+ },
+ "doi_31": {
+  "doi": "10.1103/PhysRevA.106.043117",
+  "status": "OK",
+  "title": "Two-XUV-photon double ionization of neon",
+  "first_family": "Orfanos",
+  "container": "Physical Review A",
+  "volume": "106",
+  "issue": "4",
+  "page": "043117",
+  "year": 2022,
+  "type": "journal-article",
+  "nauth": 18,
+  "diffs": [
+   "TITLE sim=0.27",
+   "1stAUTH Orfanos!=Yue"
+  ]
+ }
+}

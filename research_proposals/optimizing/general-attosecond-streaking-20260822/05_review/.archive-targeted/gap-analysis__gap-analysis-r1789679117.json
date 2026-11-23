@@ -1,0 +1,26 @@
+{
+  "gaps": [
+    {
+      "claim": "§2.4 L29 两处'据目前检索尚未见独立验证/处理'新颖性声明缺检索范围/截止日期完整性证据（需在2026-08截止的Web of Science/arXiv/IOPscience范围内明确检索证据）",
+      "missing_evidence": "缺少针对水窗能区多通道TDSE阿秒脉冲重构在284-543 eV范围独立验证的检索范围与截止日期声明所需的Web of Science/arXiv/IOPscience系统性综述证据",
+      "search_keywords": [
+        "water window attosecond streaking multichannel TDSE independent verification",
+        "Cousin 2017 PRX 7 041030 multichannel error follow-up",
+        "Peschel Nature Communications Ne 2p RABBIT interchannel coupling",
+        "FROG-CRAB breakdown water window independent replication"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.5 G1 L37末句元叙述删除后需替换为'三层口径定义见§2.2；时间域指标与立项依据原子单位时间语境对齐'（需提供8-15/15-30/30-50三层口径在立项依据中原子单位时间语境的引用依据）",
+      "missing_evidence": "缺少阿秒脉冲重构中光谱相位-时间域换算（中心能量→等效时间抖动<25 as）在原子单位（atomic units）下的换算系数与时间基准来源文献",
+      "search_keywords": [
+        "attosecond pulse retrieval spectral phase temporal jitter atomic units",
+        "central energy equivalent time jitter conversion factor",
+        "FROG-CRAB spectral phase time domain uncertainty quantification"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

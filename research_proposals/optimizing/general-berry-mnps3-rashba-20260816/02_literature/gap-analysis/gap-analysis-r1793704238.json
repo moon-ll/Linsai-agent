@@ -1,0 +1,41 @@
+{
+  "gaps": [
+    {
+      "claim": "参考文献[26]是否属于目标MnPS₃体系的直接实验证据，不能在“MnPS₃实测”与“属于不同体系”之间并存。",
+      "missing_evidence": "需要核对[26]原文的样品组成、制备结构、测量对象和结论，确认其研究对象究竟是块体MnPS₃、MnPS₃|WS₂异质结、其他异质结构，还是理论模型；并据此判断其能否作为目标MnPS₃实验依据。",
+      "search_keywords": [
+        "MnPS3 WS2 heterostructure ultrafast magnetic dynamics",
+        "MnPS3 terahertz magneto-optical spectroscopy experiment",
+        "MnPS3 high harmonic generation magnetic order",
+        "MnPS3 异质结 超快磁动力学",
+        "申请书参考文献[26] 原文 样品结构"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "“γ=1对应约50%”以及“省略常数因子”的判据需要建立在明确的Larmor周期定义和自旋翻转概率公式上。",
+      "missing_evidence": "需要补充能够说明γ的定义、Larmor周期的计数方式及概率公式P=exp(-2πγ)的理论或方法学文献，并据此区分γ=1与50%概率对应的参数；若γ采用不同归一化，必须给出完整约定及换算关系。",
+      "search_keywords": [
+        "Larmor period spin flip probability exp(-2 pi gamma)",
+        "Larmor criterion 50 percent spin flip gamma ln 2 over 2 pi",
+        "circular high harmonic generation spin selectivity Larmor flips",
+        "HHG Larmor spin flip probability convention",
+        "Larmor 周期 自旋翻转 概率 gamma 圆偏振 高次谐波"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "“等效静态场可达数百Tesla”需要由参考文献[36]的原始结果直接支持，并核实“等效”“静态”及“数百Tesla”的具体含义。",
+      "missing_evidence": "需要查验[36]全文及其数据来源，确认其是否报告了数百Tesla量级的等效静态磁场、由何种实验量或模型换算得到、适用材料和条件是什么；如原文仅为数量级判断或模型估算，正文应相应弱化表述。",
+      "search_keywords": [
+        "\"effective static magnetic field\" \"hundreds of tesla\"",
+        "MnPS3 ultrafast effective magnetic field hundreds of tesla",
+        "terahertz magnetic field reconstruction effective static field MnPS3",
+        "MnPS3 超快 等效静态磁场 数百Tesla",
+        "申请书参考文献[36] 原文 磁场量级"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "content"
+}

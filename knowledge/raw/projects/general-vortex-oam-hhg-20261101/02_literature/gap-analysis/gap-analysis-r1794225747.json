@@ -1,0 +1,54 @@
+{
+  "gaps": [
+    {
+      "claim": "§二.5末段关于高次谐波“谱学签名”的结论应由文献[29]直接支撑，当前将其改挂于[40-42]构成了引用错配。",
+      "missing_evidence": "需要核对[29]原文，确认其是否直接给出了可区分相关物理通道的谱学量、判据及实验或理论结果，并恢复该结论与[29]的逐项对应关系；若[29]仅提供背景而非直接证据，还需补充能够给出该谱学签名的原始研究。文献[40-42]只有在直接支撑该具体结论时才能保留，否则应删除或用于支撑更有限的相关论点。",
+      "search_keywords": [
+        "spectroscopic signature high harmonic generation",
+        "orbital angular momentum signature in HHG",
+        "vortex high harmonic emission spectrum",
+        "quantum trajectory spectroscopic signature HHG",
+        "spatially structured light HHG spectrum"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§二.3、§二.4或§二.7中关于“Albar所研究体系存在非偶极贡献”的具名论断需要直接文献依据。",
+      "missing_evidence": "需要补充或明确挂接Albar的原始论文，说明其研究对象、非偶极效应的定义、适用条件及可观测后果，并证明该工作能够支撑本申请书对非偶极通道的论述。现有[28]应与具体句子直接对应，而不能仅作为作者或领域背景性引用。",
+      "search_keywords": [
+        "Albar non-dipole high harmonic generation",
+        "Albar spatially structured light HHG",
+        "non-dipole contribution orbital angular momentum HHG",
+        "non-dipole effects in high-order harmonic generation",
+        "Albar longitudinal electron dynamics high harmonic generation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "关于“Granados工作中的螺旋性能够作为相关通道或效应的判据”的具名论断缺少正文角标支撑。",
+      "missing_evidence": "需要引用Granados原始研究，直接证明螺旋性或偏振相关量的定义、调控方式及其与高次谐波产生结果之间的关系；还应明确本申请书所称“螺旋性”与原文物理量的一致性，避免把器件或传播层面的螺旋性直接等同于原子响应层面的螺旋性。",
+      "search_keywords": [
+        "Granados helicity high harmonic generation",
+        "Granados polarization vortex HHG",
+        "orbital angular momentum helicity high harmonic emission",
+        "vortex beam helicity ZnO GaSe HHG",
+        "spin angular momentum signature in HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "关于“Granados工作中的切换现象”可支持通道切换、机制转换或调控边界的论断缺少明确引用。",
+      "missing_evidence": "需要给出Granados原始文献中“切换”所对应的具体对象、切换条件、被切换的物理量以及判别依据，并说明该结果如何外推或区别于本申请书拟研究的三通道切换。文献应直接支撑机制层面的切换，而不能只支撑相关泵浦方案或现象存在。",
+      "search_keywords": [
+        "Granados switching high harmonic generation",
+        "Granados vortex HHG switching mechanism",
+        "channel switching in high harmonic generation",
+        "Bessel Gauss vortex high harmonic generation control",
+        "spatial light structure induced switching HHG",
+        "Granados ZnO GaSe high harmonic generation"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "content"
+}

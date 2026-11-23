@@ -1,0 +1,49 @@
+{
+  "gaps": [
+    {
+      "claim": "阿秒条纹技术中多通道电离通道时延提取已具备可用量级水平（第 93 行 R2 量级依据，误将 Kheifets 彩虹检索表述为多通道时延提取）",
+      "missing_evidence": "[18] Kheifets 彩虹检索实为宽谱单通道条纹时延提取（Ar/Xe Cooper 极小/巨共振）；缺少真正针对多通道电离时延提取、或多通道贡献对时延与重构精度影响量级标定的文献",
+      "search_keywords": [
+        "Kheifets rainbow retrieval attosecond time delay",
+        "multi-channel time delay extraction attosecond streaking",
+        "Ar Xe Cooper minimum giant resonance photoemission delay",
+        "attosecond streaking multichannel delay accuracy"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "国内水窗阿秒光源与阿秒条纹测量已有实质积累（§3 国内现状段）",
+      "missing_evidence": "全章仅 [9] 一项确凿国内工作，Ishii[13] 为日本东大/Utsunomiya 组误置于国内段；缺少中国国内水窗 HHG/软 X 射线阿秒光源参数、阿秒脉冲产生与条纹测量的代表性实验文献",
+      "search_keywords": [
+        "water window attosecond source China",
+        "水窗 高次谐波 阿秒光源 国内",
+        "attosecond streaking measurement Chinese group",
+        "soft X-ray high harmonic generation attosecond pulse China"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "按 NIST 截面估算水窗能区次要电离通道贡献升至 15%–30% 量级，且该能区 15%–30% 多通道贡献对条纹重构精度影响的公开标定至今未见报道",
+      "missing_evidence": "缺少支撑 15%–30% 估算的 NIST 截面数据出处或已发表估算文献；缺少验证'至今未见公开标定'排他性声明的系统调研（水窗能区多通道电离贡献对阿秒条纹重构误差影响的量化/标定研究）",
+      "search_keywords": [
+        "NIST photoionization cross section water window",
+        "water window multichannel ionization contribution percentage",
+        "multi-channel ionization attosecond streaking reconstruction error",
+        "photoemission channel cross section ratio streaking retrieval"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.3 第 41 行引用 Eckle 文献支撑的论点存在严谨性存疑（评审报告该条目截断，未显示完整问题）",
+      "missing_evidence": "需核实 Eckle 文献（如 Eckle et al. 2008 Nature Physics，Xe 隧穿电离延迟测量/阿秒瞬态吸收）实际研究内容与所支撑论点的匹配性；若论点涉及时延测量精度或方法类别归属，需补充内容匹配的文献",
+      "search_keywords": [
+        "Eckle attosecond tunneling delay time Xe",
+        "attosecond transient absorption ionization delay measurement",
+        "Eckle 2008 attosecond experiment Nature Physics",
+        "tunneling delay 250 as Xe attosecond"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

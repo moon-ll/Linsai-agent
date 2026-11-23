@@ -1,0 +1,38 @@
+{
+  "gaps": [
+    {
+      "claim": "§一.2 波型争议清单中，RIXS（共振非弹性X射线散射）对 g 波的实验证据未列入 rationale 的判据清单（content 章已列 RIXC[27]，立项依据章漏列，跨章不一致）",
+      "missing_evidence": "RIXS 观测 g 波/手性磁振子激发谱的实验文献，用于补齐 rationale 波型判据清单中的 RIXS 判据项",
+      "search_keywords": [
+        "resonant inelastic x-ray scattering g-wave",
+        "RIXS chiral magnon",
+        "g-wave RIXS evidence",
+        "共振非弹性X射线散射 g波"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§一.2 L61'量子振荡与输运基准 [15]'——量子振荡与输运两对象合挂单一文献号 [15]，输运半项失去文献支撑",
+      "missing_evidence": "输运基准实验文献（磁输运/反常霍尔/热输运类测量），需与量子振荡基准 [15] 分拆并各自挂单号",
+      "search_keywords": [
+        "quantum oscillations benchmark",
+        "transport measurement anomalous Hall",
+        "MnTe transport properties",
+        "量子振荡 输运 基准"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§一.2 L41'中子衍射磁群 g-wave 判定 [17]'——[17] 题名为手性磁振子，是否含磁群形式化判定待核原文；磁群对称性分析的支撑文献缺失（另见 [29] 一类）",
+      "missing_evidence": "基于磁群/磁空间群对称性分析对 g 波做形式化判定的文献；需核验 [17] 原文，若无磁群判定表述则须补磁群分析类文献",
+      "search_keywords": [
+        "magnetic group symmetry analysis g-wave",
+        "magnetic space group neutron diffraction",
+        "g-wave determination magnetic structure",
+        "磁群 对称性分析 中子衍射"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

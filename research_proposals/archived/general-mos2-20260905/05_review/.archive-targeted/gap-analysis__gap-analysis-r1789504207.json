@@ -1,0 +1,95 @@
+{
+  "gaps": [
+    {
+      "claim": "§2.1 点群映射（C₃ 对称→HHG 选择规则）",
+      "missing_evidence": "缺少 MoS₂/twisted MoS₂ 同质结 C₃ 点群对称性如何限制高次谐波偏振依赖与奇偶阶的理论或实验文献",
+      "search_keywords": [
+        "MoS2 C3 point group high harmonic selection rule",
+        "twisted homobilayer TMD harmonic generation polarization symmetry",
+        "monolayer MoS2 second harmonic generation C3 rotational anisotropy"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.1 η(N) 累积律 η(N)=η₁(1-exp(-N/N_c))·exp(-N·σ_dis²)",
+      "missing_evidence": "缺少多层 MoS₂/twisted TMD 中谐波产额随层数 N 的标度律实验或理论先例（指数饱和+高斯衰减形式）",
+      "search_keywords": [
+        "high harmonic generation layer number dependence MoS2",
+        "multilayer TMD harmonic yield scaling exponential saturation",
+        "HHG twisted homobilayer harmonic order layer number dependence"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.3 TBG 半金属性作为对照基线",
+      "missing_evidence": "缺少 TBG 在 magic angle 附近半金属态对 HHG 反演 Berry 曲率方法学的对照验证文献",
+      "search_keywords": [
+        "TBG magic angle high harmonic generation",
+        "twisted bilayer graphene HHG Berry curvature reconstruction",
+        "semi-metallic twisted bilayer graphene high harmonic spectroscopy"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.1 Peterka[16] 近共振预激发对单层 MoS₂ HHG 产额抑制及阶次依赖",
+      "missing_evidence": "Peterka 原文是否明确给出产额抑制百分比与谐波阶次依赖曲线（用于限定外推到异质结的边界条件）",
+      "search_keywords": [
+        "Peterka MoS2 high harmonic generation resonant excitation suppression",
+        "near-resonant pre-excitation monolayer MoS2 HHG yield reduction harmonic order",
+        "Peterka 2024 2025 MoS2 HHG exciton resonance"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.1 A/B 激子能量作为异质结带边判据（引[20,21]）",
+      "missing_evidence": "缺少 MoS₂ A/B 激子精确能量、振子强度及其在 HHG 中作为共振增强机制的最新测量文献",
+      "search_keywords": [
+        "MoS2 A exciton B exciton binding energy oscillator strength",
+        "monolayer MoS2 exciton resonance high harmonic generation enhancement",
+        "MoS2 exciton energy 1.8 eV 2.0 eV experimental"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.0 局域电子态效应在 HHG 中的物理图像",
+      "missing_evidence": "缺少局域电子态（缺陷/激子/陷阱态）对固体 HHG 量子轨迹与谐波谱影响的理论模型文献（申请书机制只给符号未给物理图像）",
+      "search_keywords": [
+        "localized electronic states high harmonic generation solid",
+        "excitonic effect HHG quantum trajectory model",
+        "defect state contribution solid high harmonic generation theory"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§2.3 产额/偏振/相位反演为 Berry 曲率 Ω(k) 的方法学",
+      "missing_evidence": "缺少从 HHG 产额/偏振/相位三参量联合反演 Berry 曲率 Ω(k) 的已有方法学文献（与 Ghimire 2011 ZnO 范本对照）",
+      "search_keywords": [
+        "Berry curvature reconstruction high harmonic generation",
+        "harmonic yield polarization phase Berry curvature inversion",
+        "solid HHG quantum geometry reconstruction methodology"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§2.2 谐波阶次 5—15 阶在 MoS₂ HHG 中的实验可行性",
+      "missing_evidence": "缺少单层/扭转 MoS₂ 在中红外驱动下产生 5—15 阶谐波的实验先例与产额数据",
+      "search_keywords": [
+        "monolayer MoS2 mid-infrared high harmonic generation 5th to 15th order",
+        "MoS2 solid HHG low-order harmonic yield experimental",
+        "TMD high harmonic generation order dependence mid-IR"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§2.3 反演判据 r≥0.8、σ_Ω≤0.15 的方法学基准",
+      "missing_evidence": "缺少 HHG 反演 Berry 曲率的精度基准文献（相关系数 r 与 Ω 标准差的典型阈值）",
+      "search_keywords": [
+        "Berry curvature inversion accuracy benchmark HHG",
+        "high harmonic spectroscopy reconstruction error threshold",
+        "solid HHG quantum geometry retrieval precision"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

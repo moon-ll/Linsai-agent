@@ -1,0 +1,27 @@
+{
+  "gaps": [
+    {
+      "claim": "[18] Kheifets 彩虹检索用于多通道时延提取",
+      "missing_evidence": "Kheifets Rainbow RABBIT 在 Ar 3s/3p 与 He 1s/Xe 4d 谱区为宽能区单通道时延检索（Cooper 极小/巨共振），并非多通道贡献提取；多通道贡献在该工作中反而是需要扣除的干扰项（shake-up 通道），需补2021 Alexandridi、Ciriolo 等多通道扣除文献与 Kheifets 2023 综述对单/多通道归属的明确说明",
+      "search_keywords": [
+        "Rainbow RABBIT single-channel delay Cooper minimum",
+        "Alexandridi argon shake-up satellite correction",
+        "Kheifets Wigner delay review 2023 multichannel subtraction",
+        "photoionization time delay wide-spectrum single channel"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "对照 NIST ASD 数据库多通道截面曲线完成标定",
+      "missing_evidence": "NIST ASD 只含能级/跃迁谱线数据，光电离截面位于独立库（XCOM/FFAST/PhotoCross 等），需核对水窗能区 284–543 eV 实际可用截面库（NIST XCOM 1 keV 以下不适用，应改用 PhotoCross 或 VXAD 等元素专属截面库）并提供官方数据库引用",
+      "search_keywords": [
+        "NIST PhotoCross photoionization cross section database water window",
+        "XCOM X-ray cross section 1 keV lower limit rare gas",
+        "FFAST photoionization database neon argon krypton",
+        "elemental photoionization cross section 284 eV 543 eV database"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "rationale"
+}

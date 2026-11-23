@@ -1,0 +1,54 @@
+{
+  "gaps": [
+    {
+      "claim": "§4.2 非共线 XUV-IR 干涉仪的延迟稳定性已达到优于 100 as",
+      "missing_evidence": "缺少对非共线 XUV-IR 干涉仪延迟稳定性优于 100 as 的实验文献支撑",
+      "search_keywords": [
+        "non-collinear XUV-IR interferometer delay stability attosecond",
+        "XUV-IR delay 100 attosecond interferometer",
+        "attosecond streaking interferometer delay stability experimental"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3.1 装置参数：16 通道 TOF 阵列探测器技术指标",
+      "missing_evidence": "缺少 16 通道 TOF 阵列探测器技术规格的文献引用（能量分辨率 ΔE/E≈0.25% 等指标的口径可追溯性）",
+      "search_keywords": [
+        "16 channel TOF array detector attosecond spectrometry",
+        "time-of-flight detector angular resolution attosecond streak",
+        "TOF array detector energy resolution 0.25 percent"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.1 适用条件'0.5–2 eV 重叠宽度'与 §3.1 靶材选取段的多通道贡献映射关系",
+      "missing_evidence": "缺少 CH₄/N₂ 多通道电离贡献百分比（15%–30%）到 0.5–2 eV 重叠宽度的定量换算依据文献",
+      "search_keywords": [
+        "photoionization cross section multi-channel overlap width eV",
+        "CH4 N2 multi-channel ionization contribution percentage K-edge",
+        "water window multi-channel photoionization overlap energy width"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§4.2 技术实现中角积分方法已有装置验证",
+      "missing_evidence": "缺少 TOF 阵列探测器角积分方法用于阿秒条纹表征的已有装置验证文献",
+      "search_keywords": [
+        "TOF array angular integration attosecond streaking validation",
+        "attosecond streaking rare gas target angular average experimental",
+        "Pabst Dahlstrom angular integration attosecond experimental verification"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§4.2 CNN 推理速度满足在线修正需求的实验验证",
+      "missing_evidence": "缺少 CNN 推理速度用于阿秒脉冲实时修正的实验验证文献",
+      "search_keywords": [
+        "CNN neural network attosecond pulse reconstruction real-time",
+        "attosecond pulse retrieval inference speed machine learning",
+        "rACE attosecond streaking neural network speed validation"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

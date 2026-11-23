@@ -1,0 +1,17 @@
+{
+  "gaps": [
+    {
+      "claim": "§2.2 第21行关于“残余离子–光电子关联”的证据性陈述。",
+      "missing_evidence": "该句既无具名作者与年份，也无[N]引文。需要补充至少一篇直接报道残余离子与光电子关联的同行评议实验或理论文献，并按“作者等（年份）[N]”的形式嵌入正文。文献还应说明所观测的关联量、测量或建模方法，以及该关联为何能够支持本项目的论点；仅涉及一般光电子能谱、离子产额或宽泛的原子电离研究不足以直接支撑。",
+      "search_keywords": [
+        "residual ion photoelectron correlation atomic photoionization",
+        "photoelectron ion coincidence spectroscopy",
+        "ion photoelectron correlation attosecond pump probe",
+        "multichannel photoionization ion electron coincidence",
+        "残余离子 光电子 关联 原子光电离"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

@@ -1,0 +1,37 @@
+{
+  "gaps": [
+    {
+      "claim": "Hohenadler 2014/Shinaoka 2015 在 ZnO 单层复现中给出偏差<3%作为方法学基准",
+      "missing_evidence": "缺 Hohenadler 2014 与 Shinaoka 2015 的具体文献条目（30 条表外孤儿），需确认这两篇关于多体关联/determinant Monte Carlo 在 ZnO 单层 SBE 复现中是否给出<3%偏差的原始数据来源",
+      "search_keywords": [
+        "Hohenadler 2014 determinant Monte Carlo",
+        "Shinaoka 2015 multi-mesh algorithm",
+        "ZnO monolayer SBE benchmark",
+        "multiband semiconductor Bloch equation validation"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "预研段称「SBE 流程自身的复现能力偏差<6%已在 ZnO 完成」作为可行性基准",
+      "missing_evidence": "缺 ZnO SBE 流程复现实验的原始文献（含偏差<6%定量数据）及其与莫尔系统迁移时的精度差异论证",
+      "search_keywords": [
+        "ZnO semiconductor Bloch equation reproducibility",
+        "solid-state HHG ZnO SBE benchmark",
+        "semiconductor Bloch equation precision benchmark",
+        "ZnO high harmonic generation reproducibility"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "外推协议中系数 a/b 推导方案前置",
+      "missing_evidence": "若 a/b 系数源自 SBE 外推理论或已知实验拟合，则需文献支撑该外推协议的物理依据",
+      "search_keywords": [
+        "semiconductor Bloch equation extrapolation protocol",
+        "SBE fitting parameter a b coefficient",
+        "HHG inversion extrapolation scheme"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

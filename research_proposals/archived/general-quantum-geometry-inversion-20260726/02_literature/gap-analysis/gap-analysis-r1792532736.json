@@ -1,0 +1,15 @@
+{
+  "gaps": [
+    {
+      "claim": "scheme §6 L215 引用了“Marques 等（2021，PRM）”及其 TDDFT 基线定量结果（400–600 eV、20–40 Å），并据此支撑相关方法或参数选择。",
+      "missing_evidence": "正文缺少与该文献一一对应的 [N] 引用标记，references 表中也缺少可核验的完整书目信息；因此无法确认 400–600 eV 和 20–40 Å 是否确由 Marques 等 2021 年 PRM 论文得到，也削弱了“已发表 TDDFT 同码基线”的证据链。应补充作者、题名、期刊、卷期页码、年份及 DOI 等完整信息，并在正文加入对应编号；同时核对定量参数与原文结论的对应关系。若无法核实，应删除作者具名及具体参数，或改写为不带具体文献归属的概括性表述。",
+      "search_keywords": [
+        "Marques 2021 Physical Review Materials TDDFT high harmonic generation",
+        "\"400–600 eV\" \"20–40 Å\" TDDFT",
+        "Marques 2021 PRM harmonic emission benchmark"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

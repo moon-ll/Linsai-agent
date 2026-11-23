@@ -1,0 +1,42 @@
+{
+  "gaps": [
+    {
+      "claim": "国内在固体高次谐波产生、局域电子态效应及晶格效应等领域的研究现状与代表性进展。",
+      "missing_evidence": "国内现状部分缺少具名、可核查的学术文献支撑；需补充3—5篇由国内机构完成的相关研究论文，并明确作者、机构、发表期刊、年份、DOI及其分别支撑的具体论点。",
+      "search_keywords": [
+        "固体高次谐波 晶体 局域电子态 声子",
+        "固体高次谐波产生 国内研究",
+        "晶格效应 高次谐波 中国",
+        "solid-state high harmonic generation phonon",
+        "crystal high harmonic generation local electronic states",
+        "anisotropic high harmonic generation solids"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "“武汉物理与数学研究所”是相关国内固体高次谐波工作的现行机构名称。",
+      "missing_evidence": "缺少中国科学院官方机构沿革或权威网页作为名称变更依据；还需补充由该机构相关团队发表、能够支撑国内研究现状论断的原始论文，避免仅引用机构新闻或二手介绍。",
+      "search_keywords": [
+        "site:apm.cas.cn 武汉物理与数学研究所 精密测量科学与技术创新研究院 2019",
+        "武汉物理与数学研究所 并入 精密测量科学与技术创新研究院",
+        "Wuhan Institute of Physics and Mathematics Institute of Precision Measurement Science and Technology Innovation 2019",
+        "武汉物理与数学研究所 固体高次谐波"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "参考文献[25]、[26]、[27]和[42]所构成的核心证据线可作为已经同行评议的确立性证据。",
+      "missing_evidence": "缺少这4篇预印本的逐篇发表状态核验，包括期刊版、会议正式发表版本、DOI、出版日期及预印本与正式版本的差异；应优先引用正式发表版本。若仍仅有预印本，须明确标注“预印本”，并降低相应论点的确定性表述。",
+      "search_keywords": [
+        "参考文献[25] 完整题名 作者 期刊版 DOI",
+        "参考文献[26] 完整题名 作者 期刊版 DOI",
+        "参考文献[27] 完整题名 作者 期刊版 DOI",
+        "参考文献[42] 完整题名 作者 期刊版 DOI",
+        "arXiv high harmonic generation phonon published journal",
+        "high-order harmonic generation solids arXiv journal version"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

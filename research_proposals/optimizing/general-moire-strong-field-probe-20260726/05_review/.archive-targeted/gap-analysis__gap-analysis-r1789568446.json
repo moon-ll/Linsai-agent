@@ -1,0 +1,71 @@
+{
+  "gaps": [
+    {
+      "claim": "三段式降阶框架相对已有TDDFT工作[6]的计算成本降低约5倍，单参数点约2×10⁴核时",
+      "missing_evidence": "缺少[6]原始文献的TDDFT高次谐波计算成本基准数据（核时/CPU小时）以及与多体降阶方法的对比基准",
+      "search_keywords": [
+        "TDDFT high harmonic generation computational cost",
+        "many-body reduction HHG benchmark",
+        "MoS2 twisted bilayer TDDFT HHG scaling",
+        "tight-binding HHG vs TDDFT comparison"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "莫尔关联态（CDW/Mott）的周期场主动调控方案尚未见报道",
+      "missing_evidence": "缺少截至2026-09对arXiv/Inspec/Web of Science关于莫尔关联态主动光场调控的系统检索证据",
+      "search_keywords": [
+        "moire correlated insulator light control",
+        "CDW Floquet engineering twisted bilayer",
+        "Mott insulator periodic field manipulation HHG",
+        "moire superlattice Floquet topological"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "反演算法中联合维度240-300的分解依据（三类观测各80维：HHG谱积分、椭偏扫描、瞬态吸收）",
+      "missing_evidence": "缺少支撑'HHG谱积分80维''椭偏扫描80个角度点''瞬态吸收80个时间点'三类观测维度数值来源的文献/方法学参考",
+      "search_keywords": [
+        "high harmonic spectrum dimensionality",
+        "ellipsometry polarization scan HHG",
+        "transient absorption time series moire",
+        "HHG spectroscopy multi-observable inversion"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "创新点3中莫尔关联态能隙Δ_Mott 0.5-2 eV与本项目探测精度Δ_CI 5-20 meV的对比基准",
+      "missing_evidence": "缺少典型莫尔关联绝缘体（1T-TaS2、Tb-石墨烯、WSe2/WS2 moire）能隙量级的实验测量值文献支撑",
+      "search_keywords": [
+        "1T-TaS2 CDW gap",
+        "moire Mott insulator gap energy",
+        "WSe2 WS2 moire correlated insulator",
+        "Mott gap twisted bilayer graphene measurement"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "R1/R2/R3递进闭环中R2'莫尔势反演精度三层递进>30%/~18%/<12%'的逐级提升依据",
+      "missing_evidence": "缺少HHG反演莫尔势精度随正则化强度变化的已有文献基准（无正则化/弱正则化/强正则化的精度对比）",
+      "search_keywords": [
+        "Tikhonov regularization HHG inversion",
+        "Bayesian inversion moire potential",
+        "moire superlattice reconstruction accuracy",
+        "high harmonic spectroscopy regularization prior"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "莫尔势重构精度对扭转角误差±0.02°的灵敏度",
+      "missing_evidence": "缺少HHG谱学方法在扭转角测量精度上与现有AFM/Raman/STEM方法的对比基准文献",
+      "search_keywords": [
+        "twist angle measurement precision HHG",
+        "moire heterostructure angle metrology",
+        "TBG twist angle inhomogeneity",
+        "high harmonic spectroscopy twist angle retrieval"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

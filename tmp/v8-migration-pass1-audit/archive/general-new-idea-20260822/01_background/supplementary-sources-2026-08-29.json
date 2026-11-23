@@ -1,0 +1,22 @@
+{
+  "proposal_id": "general-new-idea-20260822",
+  "cluster_id": "cl_20260815_2e7cbd",
+  "entries": [
+    {
+      "source_id": "paper:2026-2603.20832-orientation-dependent-ion-acceleration-from-laser-",
+      "title": "Orientation-Dependent Ion Acceleration from Laser-Irradiated Rectangular Nanorings",
+      "summary": "本文通过粒子模拟（PIC）证明矩形纳米环靶能够显著增强激光能量吸收并提升加速离子的截止能量，且加速效果对纳米环相对激光的取向高度依赖。该工作为利用纳米结构靶实现紧凑型高能激光驱动离子源提供了新方案。",
+      "path": "",
+      "added_via": "cluster:cl_20260815_2e7cbd",
+      "added_at": "2026-08-29T01:11:11Z"
+    },
+    {
+      "source_id": "paper:2603.20832",
+      "title": "Orientation-Dependent Ion Acceleration from Laser-Irradiated Rectangular Nanorings",
+      "summary": "本文通过粒子模拟（PIC）证明，矩形纳米环靶相对激光偏振取最优取向时可在其中空芯内实现强场约束，产生更热的电子群体和更稳健的鞘层加速，从而显著增强激光能量吸收并提升加速离子的截止能量。该结果表明矩形纳米环可作为操控固体密度激光等离子体相互作用的灵活平台，推动紧凑型高重复频率粒子源的发展。",
+      "path": "",
+      "added_via": "cluster:cl_20260815_2e7cbd",
+      "added_at": "2026-08-29T01:11:11Z"
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "gaps": [
+    {
+      "claim": "Cousin等[2]在水窗波段阿秒脉冲条纹测量中观测到15%/30%/20%多通道电离导致的FROG-CRAB失效阈值",
+      "missing_evidence": "Cousin PRX 7.041030原文仅声明首次水窗条纹测量，未给出15%/30%多通道电离分支比的实验阈值；需找到实际给出该阈值数据的实验文献",
+      "search_keywords": [
+        "Cousin PRX 2017 water window attosecond streaking multichannel threshold",
+        "attosecond streaking multichannel ionization retrieval error percentage",
+        "water window FROG-CRAB breakdown15% 30% Auger branching ratio"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Peschel等[7]在FROG-CRAB/TDSE模拟中验证了多通道干涉项的成因与角积分抑制dipole phase机制",
+      "missing_evidence": "Peschel原文（arXiv:2409.03622等）实际为单电子近似下电离耦合的TDSE模拟，并非FROG-CRAB框架；需找到真正讨论角积分抑制dipole phase、通道干涉修正项R1数值依据的文献",
+      "search_keywords": [
+        "Peschel two-channel TDSE attosecond streaking coupling",
+        "angular integration dipole phase suppression attosecond metrology",
+        "Pabst Dahlstrom angular averaging rare gas streaking",
+        "FROG-CRAB R1 multi-channel correction numerical verification"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "角积分法对dipole phase的抑制效率在软X射线能区（>100 eV）仍有效",
+      "missing_evidence": "Pabst-Dahlström原文针对EUV能区论证角积分方案，未在soft X-ray/water window高动能范围验证；需找到高动能电子散射相位导致角积分方案失效的定量研究",
+      "search_keywords": [
+        "angular integration dipole phase suppression kinetic energy dependence",
+        "high energy photoelectron scattering phase attosecond streaking",
+        "water window soft X-ray attosecond streaking multi-channel breakdown"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "BSV(Bright Squeezed Vacuum)相干态匹配条件下能精确再现相干态驱动的HHG产额",
+      "missing_evidence": "缺量子光驱动HHG产额与相干态基线的定量对比实验",
+      "search_keywords": [
+        "bright squeezed vacuum coherent state HHG yield comparison",
+        "quantum enhancement factor QEF high harmonic generation experimental",
+        "BSV vs coherent state high harmonic photon flux"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Tikhonov正则化对HHG反演ill-posed问题的有效性",
+      "missing_evidence": "缺Tikhonov/L-curve准则在HHG光谱反演中收敛性、参数选取和噪声鲁棒性的系统比较",
+      "search_keywords": [
+        "Tikhonov regularization HHG inversion L-curve",
+        "regularization parameter selection attosecond spectroscopy",
+        "ill-posed inversion HHG condition number threshold"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Ghilenceco等人2025年rACE神经网络方法在水窗能区多通道场景下优于传统FROG-CRAB",
+      "missing_evidence": "rACE/Inzani等论文虽然讨论神经网络反演，但其多通道极限和阈值不明确；需找到水窗能区适用性的明确数据",
+      "search_keywords": [
+        "rACE attosecond pulse retrieval neural network multichannel",
+        "Inzani attosecond streaking neural network reconstruction",
+        "deep learning attosecond streaking water window multi-channel limit"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Mott绝缘体压缩光驱动HHG（Sr2CuO3实验）已在预印本中报道",
+      "missing_evidence": "Ikeda Sr2CuO3预印本是否已正式发表、其harmonic redshift数据可靠性需要核实",
+      "search_keywords": [
+        "Ikeda Sr2CuO3 high harmonic generation Mott insulator",
+        "doublon holon high harmonic redshift",
+        "Mott insulator squeezed light HHG strongly correlated"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Bi2Te3拓扑绝缘体在1.5μm中红外波长HHG效率与体带隙的定量匹配关系",
+      "missing_evidence": "需要Bi2Te3在1.55 eV光泵浦HHG产额与0.15 eV体带隙的理论-实验对比数据",
+      "search_keywords": [
+        "Bi2Te3 high harmonic generation mid-infrared 1.55 eV",
+        "Bi2Te3 topological insulator bandgap HHG efficiency",
+        "topological insulator HHG surface state vs bulk bandgap"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

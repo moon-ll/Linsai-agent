@@ -1,0 +1,54 @@
+{
+  "gaps": [
+    {
+      "claim": "ATAS（阿秒瞬态吸收光谱）可作为莫尔超晶格强场探针的可行实验手段",
+      "missing_evidence": "缺乏 Policht 2023 Nat Commun ATAS 固体高次谐波探针的具体技术描写和参数支撑",
+      "search_keywords": [
+        "Policht ATAS attosecond transient absorption",
+        "policht_natcomm_2023 moire superlattice",
+        "ATAS high harmonic probe solid state"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "莫尔超晶格 HHG 可实现关联绝缘体态的灵敏探测",
+      "missing_evidence": "缺乏 magic angle twisted bilayer graphene HHG 实验产额的具体数据以及与 bulk ZnO、TMDC 单层效率的对比",
+      "search_keywords": [
+        "magic angle twisted bilayer graphene HHG experimental yield",
+        "TBG HHG vs ZnO efficiency comparison",
+        "moire superlattice HHG correlated insulator"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "HHG 光谱学参数反演可通过实验验证闭环",
+      "missing_evidence": "缺乏 HHG 光谱学反演的实验验证benchmark（attosecond spectroscopy inversion error measurement）",
+      "search_keywords": [
+        "HHG spectroscopy inversion benchmark experimental",
+        "high harmonic generation parameter retrieval experimental validation",
+        "attosecond spectroscopy inversion error measurement"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "莫尔超晶格 HHG 探针强度窗口需精确控制以区分关联态响应",
+      "missing_evidence": "缺乏 twisted bilayer strong field intensity window separation、solid-state HHG probe vs control intensity regime 的实验依据",
+      "search_keywords": [
+        "twisted bilayer strong field intensity window separation",
+        "solid-state HHG probe intensity regime",
+        "TBG symmetry breaking HHG sensitivity threshold"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "莫尔超晶格 Floquet 调控 + HHG 反演可形成闭环",
+      "missing_evidence": "缺乏 all-optical control HHG closed loop 实验的完整链条支撑",
+      "search_keywords": [
+        "all-optical control HHG closed loop experiment",
+        "Floquet moire调控 HHG反演 整合",
+        "twisted bilayer Floquet strong field experimental"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

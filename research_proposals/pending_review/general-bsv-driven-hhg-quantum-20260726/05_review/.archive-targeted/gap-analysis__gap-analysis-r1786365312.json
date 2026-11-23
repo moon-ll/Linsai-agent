@@ -1,0 +1,37 @@
+{
+  "gaps": [
+    {
+      "claim": "Even Tzur 2024 squeezed HHG 论文被引用为 [Phys. Rev. Research 6, 023064 (2024)]，但 round-5 标记为 critical 三重错误，content.md §2.3 与 rationale.md 均未同步修复",
+      "missing_evidence": "需要核实 Even Tzur 等关于 squeezed high-order harmonics 的论文真实发表期刊、卷号、页码与年份（区分预印本 arXiv:2311.11257 与正式发表版本），并获取正确 DOI",
+      "search_keywords": [
+        "Even Tzur 2024 squeezed HHG Phys Rev Research",
+        "arXiv 2311.11257 publication status DOI",
+        "winding trail model quantum harmonic Phys Rev Research 2024",
+        "squeezed light HHG Phys Rev Research 6 023064"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Boroumand 等 [arXiv:2505.22536] 提出的 Quantum Sideband HHG (QSHHG) 度量框架在 content.md §2.8 被使用，但 QSHHG 缩写未出现于该论文真实标题，且 rationale.md §1.4 已添加的中文简称 hedge 未在 content.md 同步",
+      "missing_evidence": "需要核实 arXiv:2505.22536 论文实际提出的框架名称、术语定义，以及该论文是否真为 Boroumand 第一作者发表的量子工程化 HHG 框架",
+      "search_keywords": [
+        "Boroumand 2505.22536 quantum sideband HHG framework",
+        "quantum engineering high harmonic generation Boroumand",
+        "arXiv 2505.22536 author title QSHHG definition",
+        "quantum sideband high harmonic generation nomenclature"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Silva #7 高次谐波固体综述文献被张冠李戴引用（content.md 与 references.md 同步错误）",
+      "missing_evidence": "需要核实 Silva 等关于固体高次谐波 (solid-state HHG) 综述的真实作者全名、期刊名、卷期页码与 DOI，以纠正错误的引用条目",
+      "search_keywords": [
+        "Silva high harmonic generation solid state review",
+        "Silva HHG review solid-state CrossRef DOI",
+        "Silva nonlinear optics solid high harmonic generation citation",
+        "Silva solid HHG Nature Reviews journal article"
+      ],
+      "priority": "high"
+    }
+  ]
+}

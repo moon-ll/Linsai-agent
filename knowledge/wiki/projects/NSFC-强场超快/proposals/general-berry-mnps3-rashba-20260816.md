@@ -1,0 +1,59 @@
+---
+title: "二维材料中交变磁性磁态的自旋-能谷耦合与滑移调控"
+type: "proposal"
+created: "2026-08-17T10:44:29Z"
+updated: "2026-11-15T15:09:25Z"
+tags: []
+related: ["MnPS3", "交变磁体", "强场超快"]
+source_raw: ""
+growth_stage: "seedling"
+confidence: 0.5
+proposal_id: "general-berry-mnps3-rashba-20260816"
+status: "optimizing"
+project: ["NSFC-强场超快"]
+project_type: "general"
+optimization_rounds: 0
+last_score: 0.79
+synced_at: "2026-11-14T06:11:34Z"
+updated_at: "2026-09-25T15:57:19Z"
+merged_from: ["wiki/projects/NSFC-强场超快/proposals/general-mos2-20260905.md"]
+---
+
+# 二维材料中交变磁性磁态的自旋-能谷耦合与滑移调控
+
+**课题 ID**：`general-berry-mnps3-rashba-20260816`  
+**项目类型**：general  
+**生命周期状态**：优化中  
+**优化轮次**：0  
+**当前分数**：0.79  
+**同步时间**：2026-11-14
+
+## 核心问题
+
+（待提取）
+
+## 创新点
+
+（待提取）
+
+## 关键产物
+
+- [proposal-brief](research_proposals/optimizing/general-berry-mnps3-rashba-20260816/00_proposal-brief.md)
+- [question-framework](research_proposals/optimizing/general-berry-mnps3-rashba-20260816/03_question/question-framework.md)
+- [method-manual](research_proposals/optimizing/general-berry-mnps3-rashba-20260816/03_method/method-manual.md)
+- [reading-notes](research_proposals/optimizing/general-berry-mnps3-rashba-20260816/02_literature/reading-notes.md)
+- [proposal-draft](research_proposals/optimizing/general-berry-mnps3-rashba-20260816/04_proposal/proposal-draft.md)
+
+## 状态说明
+
+- 处于 **优化中** 阶段
+- 最后得分：0.79
+- 累计对抗轮次：0
+
+<!-- linsai-wikilinks -->
+## 关联概念
+
+- [[MnPS3]]
+- [[交变磁体]]
+- [[强场超快]]
+<!-- /linsai-wikilinks -->

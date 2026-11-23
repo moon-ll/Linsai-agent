@@ -1,0 +1,23 @@
+{
+  "gaps": [
+    {
+      "claim": "“周期场主动调控高次谐波产生尚无报道”的创新性判断。",
+      "missing_evidence": "缺少可核验的系统性文献检索证据。需说明检索数据库、检索范围、检索式、检索截止日期，并基于公开期刊论文与预印本证明现有研究尚未实现相同或等效的“周期场主动调控”方案；同时应列出最接近的既有工作，区分本项目在调控对象、场形貌、调控机制或反演闭环方面的实质差异。仅补充若干相关论文而未界定检索边界，不能充分支撑“尚无报道”的绝对性表述。",
+      "search_keywords": [
+        "periodic field active control high-order harmonic generation",
+        "periodic waveform control HHG",
+        "periodic electric field strong-field control",
+        "field waveform shaping high harmonic generation",
+        "periodic driving laser HHG",
+        "active control harmonic generation spectroscopy",
+        "moiré material strong-field HHG control",
+        "Moiré superlattice high-order harmonic generation",
+        "周期场 主动调控 高次谐波",
+        "周期波形 高次谐波 调控",
+        "莫尔材料 强场 高次谐波"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

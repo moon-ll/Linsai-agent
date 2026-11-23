@@ -1,0 +1,29 @@
+{
+  "gaps": [
+    {
+      "claim": "氖原子在 50–150 eV 光子能区 XUV 通道贡献为\"2s 通道随光子能量由约 5% 升至 8%–15% 量级\"——即低于 5% 的\"基线\"与 8%–15% 的\"上限\"两端物理归属及其随能量的标度律",
+      "missing_evidence": "缺少针对氖 2s/2p 在 50–150 eV 范围内分通道光电离截面占比的实验或理论文献支撑；现有引用未提供可对应\"5% 基线 → 8%–15% 上限\"递变的定量基准，也无法排除该递变是否包含 2p 共振增强或 Cooper 极小效应",
+      "search_keywords": [
+        "neon 2s partial photoionization cross section 50-150 eV",
+        "neon 2p Cooper minimum attosecond",
+        "neon multi-channel streaking spectroscopy",
+        "Ne 2s branching ratio photon energy dependence",
+        "inner-shell contribution attosecond streaking neon"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Inzani 等[8]rACE 方法采用\"单通道假设\"，其边界可与本项目修正框架形成\"交叉验证基准点\"",
+      "missing_evidence": "缺少 Inzani 等[8]原文对 rACE 重建方法关于通道数假设的明确措辞；现有引文未能证实 rACE 是否在原文中被定性为\"单通道\"，亦未提供\"单通道边界\"作为交叉验证基准的定量判据（如阈值、误差上界、对比指标）",
+      "search_keywords": [
+        "Inzani rACE rainbow attosecond cross correlation",
+        "rACE reconstruction photoionization delay channel",
+        "Inzani 2023 attosecond streaking reconstruction",
+        "two-color streaking rACE multi-channel",
+        "attosecond photoionization delay retrieval assumptions"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "content"
+}

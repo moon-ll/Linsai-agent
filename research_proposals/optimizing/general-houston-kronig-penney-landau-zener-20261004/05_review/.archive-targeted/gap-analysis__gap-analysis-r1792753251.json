@@ -1,0 +1,106 @@
+{
+  "gaps": [
+    {
+      "claim": "[24] 文献可用于支撑\"时频域显式分离带内/带间电流通道\"这一方法学论断（content L15/L61/L73 三处挂靠）",
+      "missing_evidence": "需核对 [24] 原文（Wu 等）是否真实包含\"时频域显式分离带内/带间通道\"的表述，还是仅包含\"多平台截止能 + Houston 态等价 + 动量空间三步\"方法；若无该内容，需补充一篇明确在时域/频域分离带内-带间通道的固体 HHG 理论方法论文献（如带间-带内跃迁分离、频率分辨电流分解）作为替代支撑",
+      "search_keywords": [
+        "solid-state HHG intraband interband separation time domain",
+        "frequency-resolved current decomposition interband intraband transition",
+        "semiconductor Bloch equations intraband interband current decomposition",
+        "Houston state equivalence intraband interband currents solids"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "\"Floquet 实时探针尚未见实验演示\"（content L61）与本申请书自引 [32] MgO Floquet-Bloch HHG 实验存在冲突，需限定为\"非平衡拓扑态 + 泵浦-探测构型\"并以 [32] 作为边带先例",
+      "missing_evidence": "需补充支持该限定的实验先例文献：已有固体中 Floquet-Bloch/Floquet 态高次谐波实验工作（用于确立\"非平衡拓扑态探测\"未被演示的证据基础），以及 k 分辨/泵浦-探测构型下 Floquet 边带与拓扑能谱的探测方法学文献",
+      "search_keywords": [
+        "Floquet state high harmonic generation solid experiment",
+        "Floquet-Bloch harmonics MgO crystal",
+        "pump-probe Floquet sideband topology solid state",
+        "time-resolved Floquet spectroscopy k-resolved band structure",
+        "Floquet engineering topological insulator high harmonic"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "目标1（L77）与第一组判据（L87-89）对同一\"相关系数\"指纹重复定义，口径分叉（SBE-TDDFT vs 模拟-实验）需统一并保留增量条件句",
+      "missing_evidence": "需补充文献支撑该相关系数判据的合理性与取值范围：既有固体 HHG 理论-实验对比研究中相关系数/吻合度指标的量化惯例与已报道数值水平，作为阈值设定与可复算性的外部参照",
+      "search_keywords": [
+        "solid-state HHG theory experiment comparison correlation coefficient",
+        "TDDFT high harmonic calculation experimental validation solid",
+        "high harmonic generation simulation experiment agreement metric",
+        "density functional theory nonlinear susceptibility experimental benchmark solid"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "\"变化幅度偏差 < 20%\"（L79）需补逐阶对数产额差的偏差计算式与谐波阶窗",
+      "missing_evidence": "需补充固体 HHG 逐阶产额误差/不确定度分析文献：包括重复测量统计不确定度与最小可探测信号标准（如 3σ 判据）、谐波阶产额误差传递文献，以支撑偏差定义、归一化基准与阶窗选取",
+      "search_keywords": [
+        "high harmonic generation yield uncertainty quantification measurement",
+        "harmonic order log intensity error propagation solid state",
+        "minimum detectable signal 3 sigma high harmonic spectroscopy",
+        "harmonic order window selection error analysis solid-state HHG"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "content L17/L55/L73 三处\"截至检索时\"新颖性声明需统一标注检索截止日期（截至2026年9月公开文献检索）",
+      "missing_evidence": "需以最新公开文献检索记录支撑三项新颖性声明的边界：即确认在指定截止日前不存在 (i) 固体强场中 Floquet 实时 k 分辨拓扑态探测、(ii) 三通道定量分解的统一第一性原理多尺度框架、(iii) 带隙×对称性×拓扑四象限系统横向对比标度律的已有工作",
+      "search_keywords": [
+        "solid-state strong-field Floquet real-time topological state probe",
+        "multiscale first-principles intraband interband anomalous current decomposition",
+        "high harmonic spectroscopy material selection band gap symmetry topological comparison",
+        "ab initio theory experiment solid-state high harmonic 2025 2026"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "四象限材料体系（MoS₂、MgO、ZnO、Bi₂Se₃）中各条电流通道的存在性与相对强弱需文献支撑，特别是 a) MgO/ZnO 带内通道贡献的实验证据、b) Bi₂Se₃ 拓扑表面态贡献的高次谐波特征",
+      "missing_evidence": "缺乏分材料、分通道的实验证据文献：需要 a) MgO 立方晶格中对称性允许的带内/带间电流分离的实验或理论报道（含 [8] 之外的工作）；b) MoS₂/WSe₂ 等 TMD 单层带内-带间混合贡献的定量实验；c) Bi₂Se₃ 拓扑绝缘体高次谐波中表面态/体态区分的实验证据",
+      "search_keywords": [
+        "MgO high harmonic generation intraband contribution cubic symmetry",
+        "Bi2Se3 topological insulator high harmonic generation surface state",
+        "MoS2 high harmonic generation intraband interband mixing experiment",
+        "WSe2 monolayer high harmonic spectrum time-domain",
+        "zinc oxide high harmonic generation experimental band gap 3.25 micron"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Kronig-Penney 势拟合 MgO Γ-X 能带（Γ 点两带拟合有效带隙 4.19 eV，非实验值）的可靠性与适用边界需文献支撑",
+      "missing_evidence": "需补充 Kronig-Penney 势模型用于宽带隙离子晶体能带拟合的原始文献与误差评估文献，包括该模型在 MgO/碱金属卤化物族中的拟合精度、与实验带隙/有效质量的偏离范围，以及对强场动力学参数（有效质量、跃迁偶极矩）可靠性的讨论",
+      "search_keywords": [
+        "Kronig-Penney potential MgO band structure fit",
+        "Kronig-Penney model magnesium oxide electronic band gap effective mass",
+        "tight binding effective mass accuracy ionic crystal wide bandgap",
+        "Navarrete high harmonic MgO Kronig-Penney"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Landau-Zener 判据用于强场固体中两能级间隧穿/拓扑转变的适用性需文献支撑",
+      "missing_evidence": "需补充 Landau-Zener/Floquet 绝热判据在凝聚态与强场固体体系中的适用文献，包括绝热参数定义、隧穿速率公式来源，以及在 2D 晶体/能带接触点的实际应用与已知失效情形",
+      "search_keywords": [
+        "Landau-Zener tunneling two-level solid state strong field adiabaticity parameter",
+        "Floquet adiabaticity criterion band touching condensate matter",
+        "Landau-Zener transition rate formula energy gap derivative",
+        "quantum metric band touching strong field adiabatic transition crystal"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "\"三角形判别协议\"（对带内/带间/反常通道的甄别）在能谷电子学/强场光谱中的可行性需文献支撑",
+      "missing_evidence": "需补充已有的能谷分辨高次谐波/非线性光学判别实验与理论文献（特别是通过偏振、圆二色性、椭圆度、能量-动量联合分辨来区分不同电子源通道的方法），以支撑三角协议各判据的实验可实现性",
+      "search_keywords": [
+        "valley-resolved high harmonic generation polarization dichroism",
+        "circular dichroism high harmonic solid state valley selection",
+        "ellipticity harmonic emission channel discrimination",
+        "angle-resolved high harmonic spectroscopy solid momentum resolved"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

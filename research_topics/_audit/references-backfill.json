@@ -1,0 +1,273 @@
+{
+  "at": "2026-11-18T15:50:18Z",
+  "results": [
+    {
+      "topic_id": "general-berry-berry-20261107",
+      "stage": "kickoff",
+      "mode": "numbered",
+      "n_entries": 39,
+      "n_matched": 2,
+      "n_candidates_raw": 29,
+      "n_review": 0,
+      "written": "/Users/ll/Desktop/LinSai-CoPilot/research_topics/kickoff/general-berry-berry-20261107/04_references/references.bib",
+      "validate": {
+        "n_bib": 39,
+        "n_report_cited": 13,
+        "dangling": [],
+        "dup_keys": [],
+        "source_lines_complete": true,
+        "uncited": [],
+        "ok": true
+      }
+    },
+    {
+      "topic_id": "general-berry-mnps3-rashba-20260816",
+      "stage": "kickoff",
+      "skipped": "references.bib 已存在（幂等跳过；--force 重生成）"
+    },
+    {
+      "topic_id": "general-chiral-hhg-20261101",
+      "stage": "kickoff",
+      "mode": "numbered",
+      "n_entries": 54,
+      "n_matched": 6,
+      "n_candidates_raw": 29,
+      "n_review": 46,
+      "written": "/Users/ll/Desktop/LinSai-CoPilot/research_topics/kickoff/general-chiral-hhg-20261101/04_references/references.bib",
+      "validate": {
+        "n_bib": 54,
+        "n_report_cited": 11,
+        "dangling": [],
+        "dup_keys": [],
+        "source_lines_complete": true,
+        "uncited": [],
+        "ok": true
+      }
+    },
+    {
+      "topic_id": "general-floquet-20261107",
+      "stage": "kickoff",
+      "mode": "numbered",
+      "n_entries": 40,
+      "n_matched": 8,
+      "n_candidates_raw": 26,
+      "n_review": 11,
+      "written": "/Users/ll/Desktop/LinSai-CoPilot/research_topics/kickoff/general-floquet-20261107/04_references/references.bib",
+      "validate": {
+        "n_bib": 40,
+        "n_report_cited": 9,
+        "dangling": [],
+        "dup_keys": [],
+        "source_lines_complete": true,
+        "uncited": [],
+        "ok": true
+      }
+    },
+    {
+      "topic_id": "general-houston-kronig-penney-landau-zener-20261004",
+      "stage": "kickoff",
+      "mode": "numbered",
+      "n_entries": 62,
+      "n_matched": 3,
+      "n_candidates_raw": 28,
+      "n_review": 12,
+      "written": "/Users/ll/Desktop/LinSai-CoPilot/research_topics/kickoff/general-houston-kronig-penney-landau-zener-20261004/04_references/references.bib",
+      "validate": {
+        "n_bib": 62,
+        "n_report_cited": 27,
+        "dangling": [],
+        "dup_keys": [],
+        "source_lines_complete": true,
+        "uncited": [],
+        "ok": true
+      }
+    },
+    {
+      "topic_id": "general-keldysh-schottky-20261115",
+      "stage": "kickoff",
+      "needs_review": "资料覆盖不足：references-source.md 无编号条目且无 bib-candidates——按红线不生成、不编造，待深研链 B1 补齐"
+    },
+    {
+      "topic_id": "general-moire-strong-field-probe-20260726",
+      "stage": "kickoff",
+      "mode": "numbered",
+      "n_entries": 40,
+      "n_matched": 1,
+      "n_candidates_raw": 30,
+      "n_review": 25,
+      "written": "/Users/ll/Desktop/LinSai-CoPilot/research_topics/kickoff/general-moire-strong-field-probe-20260726/04_references/references.bib",
+      "validate": {
+        "n_bib": 40,
+        "n_report_cited": 10,
+        "dangling": [],
+        "dup_keys": [],
+        "source_lines_complete": true,
+        "uncited": [],
+        "ok": true
+      }
+    },
+    {
+      "topic_id": "general-order-parameter-ultrafast-readout-20260727",
+      "stage": "kickoff",
+      "mode": "numbered",
+      "n_entries": 45,
+      "n_matched": 3,
+      "n_candidates_raw": 29,
+      "n_review": 35,
+      "written": "/Users/ll/Desktop/LinSai-CoPilot/research_topics/kickoff/general-order-parameter-ultrafast-readout-20260727/04_references/references.bib",
+      "validate": {
+        "n_bib": 45,
+        "n_report_cited": 7,
+        "dangling": [],
+        "dup_keys": [],
+        "source_lines_complete": true,
+        "uncited": [],
+        "ok": true
+      }
+    },
+    {
+      "topic_id": "general-phonon-hhg-20261101",
+      "stage": "kickoff",
+      "mode": "numbered",
+      "n_entries": 40,
+      "n_matched": 5,
+      "n_candidates_raw": 30,
+      "n_review": 34,
+      "written": "/Users/ll/Desktop/LinSai-CoPilot/research_topics/kickoff/general-phonon-hhg-20261101/04_references/references.bib",
+      "validate": {
+        "n_bib": 40,
+        "n_report_cited": 15,
+        "dangling": [],
+        "dup_keys": [],
+        "source_lines_complete": true,
+        "uncited": [],
+        "ok": true
+      }
+    },
+    {
+      "topic_id": "general-ssh-weyl-20260920",
+      "stage": "kickoff",
+      "mode": "numbered",
+      "n_entries": 40,
+      "n_matched": 8,
+      "n_candidates_raw": 28,
+      "n_review": 0,
+      "written": "/Users/ll/Desktop/LinSai-CoPilot/research_topics/kickoff/general-ssh-weyl-20260920/04_references/references.bib",
+      "validate": {
+        "n_bib": 40,
+        "n_report_cited": 11,
+        "dangling": [],
+        "dup_keys": [],
+        "source_lines_complete": true,
+        "uncited": [],
+        "ok": true
+      }
+    },
+    {
+      "topic_id": "general-t-tise2-2-2-2-cdw-20261108",
+      "stage": "kickoff",
+      "mode": "numbered",
+      "n_entries": 40,
+      "n_matched": 3,
+      "n_candidates_raw": 30,
+      "n_review": 8,
+      "written": "/Users/ll/Desktop/LinSai-CoPilot/research_topics/kickoff/general-t-tise2-2-2-2-cdw-20261108/04_references/references.bib",
+      "validate": {
+        "n_bib": 40,
+        "n_report_cited": 7,
+        "dangling": [],
+        "dup_keys": [],
+        "source_lines_complete": true,
+        "uncited": [],
+        "ok": true
+      }
+    },
+    {
+      "topic_id": "general-tdse-tddft-20261115",
+      "stage": "kickoff",
+      "mode": "candidates-only",
+      "n_entries": 10,
+      "n_matched": 0,
+      "n_candidates_raw": 10,
+      "n_review": 0,
+      "written": "/Users/ll/Desktop/LinSai-CoPilot/research_topics/kickoff/general-tdse-tddft-20261115/04_references/references.bib",
+      "validate": {
+        "n_bib": 10,
+        "n_report_cited": 5,
+        "dangling": [
+          1,
+          2,
+          11,
+          12,
+          13
+        ],
+        "dup_keys": [],
+        "source_lines_complete": true,
+        "uncited": [],
+        "ok": false
+      }
+    },
+    {
+      "topic_id": "general-tmd-bic-mie-anapole-20261107",
+      "stage": "kickoff",
+      "mode": "numbered",
+      "n_entries": 47,
+      "n_matched": 2,
+      "n_candidates_raw": 30,
+      "n_review": 64,
+      "written": "/Users/ll/Desktop/LinSai-CoPilot/research_topics/kickoff/general-tmd-bic-mie-anapole-20261107/04_references/references.bib",
+      "validate": {
+        "n_bib": 47,
+        "n_report_cited": 11,
+        "dangling": [],
+        "dup_keys": [],
+        "source_lines_complete": true,
+        "uncited": [],
+        "ok": true
+      }
+    },
+    {
+      "topic_id": "key-transient-quantum-phase-optical-20260726",
+      "stage": "kickoff",
+      "mode": "numbered",
+      "n_entries": 41,
+      "n_matched": 0,
+      "n_candidates_raw": 29,
+      "n_review": 10,
+      "written": "/Users/ll/Desktop/LinSai-CoPilot/research_topics/kickoff/key-transient-quantum-phase-optical-20260726/04_references/references.bib",
+      "validate": {
+        "n_bib": 41,
+        "n_report_cited": 4,
+        "dangling": [],
+        "dup_keys": [],
+        "source_lines_complete": true,
+        "uncited": [],
+        "ok": true
+      }
+    },
+    {
+      "topic_id": "general-attosecond-streaking-20260822",
+      "stage": "ready",
+      "skipped": "references.bib 已存在（幂等跳过；--force 重生成）"
+    },
+    {
+      "topic_id": "general-bsv-driven-hhg-quantum-20260726",
+      "stage": "ready",
+      "mode": "numbered",
+      "n_entries": 40,
+      "n_matched": 1,
+      "n_candidates_raw": 20,
+      "n_review": 17,
+      "written": "/Users/ll/Desktop/LinSai-CoPilot/research_topics/ready/general-bsv-driven-hhg-quantum-20260726/04_references/references.bib",
+      "validate": {
+        "n_bib": 40,
+        "n_report_cited": 5,
+        "dangling": [],
+        "dup_keys": [],
+        "source_lines_complete": true,
+        "uncited": [],
+        "ok": true
+      }
+    }
+  ]
+}

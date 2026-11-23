@@ -1,0 +1,62 @@
+{
+  "gaps": [
+    {
+      "claim": "rationale全文约37处[N]锚点错位（references.md已重写为29条但正文未同步），包括Ghorashi→[15]、Werner→[13]、Basnet(Cr-NiPS3)→[16]、Sheng→[22]、Yarmohammadi→[17]、Gabriele→[26]、Bae→[27]、Rani→[28]、Wang(DL-MD)→[29]以及Mavani/Reimers/Regmi/Yang&Liang/Gonzalez-Hernandez/Sheikh/Zhou 7个无编号锚点补号（Zhou PRL 2024现表无条目须补）",
+      "missing_evidence": "需核对各文献真实编号与对应主题（altermagnet spin splitting HHG理论、MnPS3滑移铁电实验、Cr-NiPS3综述、Rashba自旋劈裂DFT等），并在Schlingmann/Wang(GH)/Ni/Zhang(SOC)/Zhou PRL 2024缺失条目上补引或删除重排",
+      "search_keywords": [
+        "Ghorashi Rappe altermagnet HHG",
+        "Werner altermagnet spin splitting high harmonic",
+        "Basnet Cr-NiPS3 altermagnet review",
+        "Sheng MnPS3 sliding ferroelectric Rashba",
+        "Yarmohammadi Rashba spin splitting DFT",
+        "Gabriele altermagnet nonlinear optics",
+        "Bae altermagnet HHG experimental",
+        "Rani altermagnet spin splitting",
+        "Zhou PRL 2024 altermagnet MnTe"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "rationale §1.4 L43/L45自称'国内研究现状'但两段主体为国际工作（Krempaský/Reimers称'国际团队'、Stanford THz团队），国内团队机构归属无一明示；Sheng/Liu/Zhou/Wang等国内工作需补机构归属与贡献定位",
+      "missing_evidence": "需补齐国内机构代表性工作：MnPS3滑移铁电国内组（Sheng课题组归属）、二维磁性国内实验组（Zhou/Wang归属）、国内强场超快HHG实验组（Liu归属）、交变磁体国内DFT组",
+      "search_keywords": [
+        "Sheng MnPS3 国内课题组滑移铁电",
+        "MnPS3 二维磁性 国内 实验组",
+        "国内交变磁体 高次谐波 实验",
+        "固体高次谐波 国内实验组 strong field",
+        "二维磁性滑移铁电 中国课题组"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "rationale §1.2 L17与§1.4 L43两处字面级重复论述：Krempaský'首次观测Kramers简并解除'与Reimers'0.6 eV劈裂'跨节冗余",
+      "missing_evidence": "需通过回指表述'谱学读出能区/分辨率基准见§1.2'消除重复，§1.4仅补充国内定位（不重述国际里程碑的实验细节），并核实两节引用编号是否一致",
+      "search_keywords": [
+        "Krempaský MnTe spin-resolved ARPES Kramers degeneracy",
+        "Reimers altermagnet MnTe spin splitting 0.6 eV"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "rationale §1.2 L17：Krempaský等用软X射线自旋分辨ARPES在MnTe体系中首次实验观测到交变磁性导致的Kramers自旋简并解除",
+      "missing_evidence": "Krempaský原文为MnTe自旋分辨ARPES观测交变磁性spin-splitting，但需补充其能区/分辨率/电子动量覆盖基准（与Scheme方案对比用），以及同期或后续Reimers与Krempaský观测的差异",
+      "search_keywords": [
+        "Krempaský MnTe soft X-ray ARPES Kramers",
+        "MnTe altermagnet spin-resolved ARPES energy resolution",
+        "Reimers MnTe spin splitting confirmation"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "rationale §1.3 L29：现有二维交变磁体自旋劈裂调控依赖机械滑移、热退火或静电压缩，响应时间受限于MHz量级，与THz自旋动力学时间窗口失配",
+      "missing_evidence": "需补充滑移铁电/电场调控交变磁体spin-splitting的MHz响应时间基准数据，以及THz激光驱动磁化动力学时间窗口的对比依据",
+      "search_keywords": [
+        "sliding ferroelectric switching speed MHz",
+        "interlayer sliding MnPS3 time response",
+        "THz spin dynamics MnPS3 timescale",
+        "voltage control altermagnet switching time"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

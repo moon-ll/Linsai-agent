@@ -1,0 +1,41 @@
+{
+  "gaps": [
+    {
+      "claim": "§1.3所述“Lu团队”在BSV驱动固体高次谐波产生或相关HHG研究中的具体贡献",
+      "missing_evidence": "缺少可核验的原始论文或预印本。需要明确“Lu团队”对应的作者、论文题名、发表年份、DOI或arXiv编号、所属单位，以及该论文实际支持的论断；当前表述未与已有编号[9]建立对应关系，贡献归属和证据边界均无法核查。",
+      "search_keywords": [
+        "Lu BSV solid-state high-harmonic generation",
+        "Lu team high harmonic generation Mg LiNbO3 amorphous silicon",
+        "Lu quantum high-harmonic generation solid state",
+        "Rasputnyi Lu BSV high-harmonic generation",
+        "BSV HHG Lu experimental demonstration"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§1.1关于BSV驱动固体HHG兼具基础研究价值与应用价值的双重作用机理",
+      "missing_evidence": "缺少能够闭合“BSV光场调控—相干响应或电子动力学改变—HHG产额及量子性能提升—科学或应用价值”因果链的理论计算、数值模拟或实验对照文献。现有表述偏重价值判断，尚缺直接说明BSV为何能够选择性调控HHG，以及这种调控如何对应产额比、可见度比和噪声关联等指标的证据。",
+      "search_keywords": [
+        "BSV-driven solid-state high-harmonic generation mechanism",
+        "BSV solid-state HHG coherent control theory",
+        "solid-state HHG field-control mechanism yield enhancement",
+        "solid-state high harmonic generation visibility quantum correlations",
+        "BSV HHG phase matching nonlinear polarization"
+      ],
+      "priority": "low"
+    },
+    {
+      "claim": "§1.2.3所述HHG量子化、强关联及量子相干形成的物理机制",
+      "missing_evidence": "缺少支撑完整机制链条的原始理论、数值或实验文献，尤其需要阐明Berry反演、SBE框架和强关联效应如何共同影响量子相干、可见度及噪声关联，并给出这些机制能够产生相应可测指标的依据。Lange、Hansen与Madsen相关工作应作为可追溯的原始来源逐项对应具体论断，而不能仅以括注人名替代文献支撑。",
+      "search_keywords": [
+        "Berry inversion SBE framework strong-correlation high-harmonic generation",
+        "solid-state HHG quantum correlations visibility theory",
+        "Lange Hansen Madsen high-harmonic generation",
+        "strong-correlation mechanism quantum high-harmonic generation",
+        "solid-state HHG nonclassical light noise correlation"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "rationale"
+}

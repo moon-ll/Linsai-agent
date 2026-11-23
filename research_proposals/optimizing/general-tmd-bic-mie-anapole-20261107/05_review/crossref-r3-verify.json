@@ -1,0 +1,1548 @@
+{
+ "1": [
+  {
+   "doi": "10.1103/physrevb.87.161403",
+   "title": "Second harmonic microscopy of monolayer MoS\n                    <mml:math xmlns:mml=\"http:",
+   "auth": [
+    "Kumar,N",
+    "Najmaei,S",
+    "Cui,Q",
+    "Ceballos,F",
+    "Ajayan,P",
+    "Lou,J",
+    "Zhao,H"
+   ],
+   "n_auth": 7,
+   "jr": "Physical Review B",
+   "vol": "87",
+   "page": "161403",
+   "yr": 2013
+  },
+  {
+   "doi": "10.1021/acs.jpcc.6c01491.s001",
+   "title": "Substrate- and Growth-Dependent Second Harmonic Generation in Monolayer MoS2",
+   "auth": [],
+   "n_auth": 0,
+   "jr": "",
+   "vol": null,
+   "page": null,
+   "yr": null
+  }
+ ],
+ "2": [
+  {
+   "doi": "10.1103/physrevb.87.201401",
+   "title": "Observation of intense second harmonic generation from MoS<mml:math xmlns:mml=\"http://www.",
+   "auth": [
+    "Malard,L",
+    "Alencar,T",
+    "Barboza,A",
+    "Mak,K",
+    "de Paula,A"
+   ],
+   "n_auth": 5,
+   "jr": "Physical Review B",
+   "vol": "87",
+   "page": "201401",
+   "yr": 2013
+  },
+  {
+   "doi": "10.1364/cleo_at.2013.jw2a.05",
+   "title": "Imaging the crystal structure of few-layer two-dimensional crystals by optical nonlinearit",
+   "auth": [
+    "Malard,L",
+    "Alencar,T",
+    "Barboza,A",
+    "Mak,K",
+    "de Paula,A"
+   ],
+   "n_auth": 5,
+   "jr": "CLEO: 2013",
+   "vol": null,
+   "page": "JW2A.05",
+   "yr": 2013
+  }
+ ],
+ "3": [
+  {
+   "doi": "10.1103/physrevb.89.235410",
+   "title": "Theory of excitonic second-harmonic generation in monolayer<mml:math xmlns:mml=\"http://www",
+   "auth": [
+    "Trolle,M",
+    "Seifert,G",
+    "Pedersen,T"
+   ],
+   "n_auth": 3,
+   "jr": "Physical Review B",
+   "vol": "89",
+   "page": "235410",
+   "yr": 2014
+  },
+  {
+   "doi": "10.1103/physrevb.84.199901",
+   "title": "Publisher's Note: Indirect near-field absorption mediated by localized surface plasmons [P",
+   "auth": [
+    "Jung,J",
+    "Trolle,M",
+    "Pedersen,K",
+    "Pedersen,T"
+   ],
+   "n_auth": 4,
+   "jr": "Physical Review B",
+   "vol": "84",
+   "page": "199901",
+   "yr": 2011
+  }
+ ],
+ "4": [
+  {
+   "doi": "10.1002/adfm.201770172",
+   "title": "Masthead: (Adv. Funct. Mater. 29/2017)",
+   "auth": [],
+   "n_auth": 0,
+   "jr": "Advanced Functional Materials",
+   "vol": "27",
+   "page": "adfm.201770172",
+   "yr": 2017
+  },
+  {
+   "doi": "10.1002/adfm.201770173",
+   "title": "Contents: (Adv. Funct. Mater. 29/2017)",
+   "auth": [],
+   "n_auth": 0,
+   "jr": "Advanced Functional Materials",
+   "vol": "27",
+   "page": "adfm.201770173",
+   "yr": 2017
+  }
+ ],
+ "5": [
+  {
+   "doi": "10.1038/s41566-024-01444-9",
+   "title": "Combining ultrahigh index with exceptional nonlinearity in resonant transition metal dicha",
+   "auth": [
+    "Zograf,G",
+    "Polyakov,A",
+    "Bancerek,M",
+    "Antosiewicz,T",
+    "Küçüköz,B",
+    "Shegai,T"
+   ],
+   "n_auth": 6,
+   "jr": "Nature Photonics",
+   "vol": "18",
+   "page": "751-757",
+   "yr": 2024
+  },
+  {
+   "doi": "10.21203/rs.3.rs-5336145/v1",
+   "title": "Ultrathin 3R-MoS2 metasurfaces with atomically\nprecise edges for efficient nonlinear nanop",
+   "auth": [
+    "Shegai,T",
+    "Zograf,G",
+    "Kücüköz,B",
+    "Polyakov,A",
+    "Bancerek,M",
+    "Agrawal,A",
+    "Wieczorek,W",
+    "Antosiewicz,T"
+   ],
+   "n_auth": 8,
+   "jr": "",
+   "vol": null,
+   "page": null,
+   "yr": 2024
+  }
+ ],
+ "6": [
+  {
+   "doi": "10.1038/s44310-025-00083-4",
+   "title": "Ultrafast all-optical switching in nonlinear 3R-MoS2 van der Waals metasurfaces",
+   "auth": [
+    "Seidt,L",
+    "Weber,T",
+    "Seredin,A",
+    "Possmayer,T",
+    "Savelev,R",
+    "Petrov,M",
+    "Maier,S",
+    "Tittl,A"
+   ],
+   "n_auth": 10,
+   "jr": "npj Nanophotonics",
+   "vol": "2",
+   "page": "37",
+   "yr": 2025
+  },
+  {
+   "doi": "10.1038/s44310-025-00058-5",
+   "title": "Publisher Correction: npj Nanophotonics, volume 1, missing Data Availability statements",
+   "auth": [],
+   "n_auth": 0,
+   "jr": "npj Nanophotonics",
+   "vol": "2",
+   "page": "8",
+   "yr": 2025
+  }
+ ],
+ "7": [
+  {
+   "doi": "10.1126/science.aaz3985",
+   "title": "Subwavelength dielectric resonators for nonlinear nanophotonics",
+   "auth": [
+    "Koshelev,K",
+    "Kruk,S",
+    "Melik-Gaykazyan,E",
+    "Choi,J",
+    "Bogdanov,A",
+    "Park,H",
+    "Kivshar,Y"
+   ],
+   "n_auth": 7,
+   "jr": "Science",
+   "vol": "367",
+   "page": "288-292",
+   "yr": 2020
+  },
+  {
+   "doi": "10.23919/piers.2018.8597745",
+   "title": "Giant Nonlinear Response of Subwavelength Dielectric Resonators Enhanced by Bound States i",
+   "auth": [
+    "Koshelev,K",
+    "Carletti,L",
+    "De Angelis,C",
+    "Kivshar,Y"
+   ],
+   "n_auth": 4,
+   "jr": "2018 Progress in Electromagnetics Resear",
+   "vol": null,
+   "page": "580-584",
+   "yr": 2018
+  }
+ ],
+ "8": [
+  {
+   "doi": "10.1002/smll.73999",
+   "title": "K\n                    <sup>+</sup>\n                    ‐Intercalation Engineering of 1D Ul",
+   "auth": [
+    "Yang,D",
+    "Yue,Y",
+    "Qin,Y",
+    "Zhang,C",
+    "Hua,K",
+    "Liu,Y",
+    "Liu,J"
+   ],
+   "n_auth": 7,
+   "jr": "Small",
+   "vol": "22",
+   "page": "e73999",
+   "yr": 2026
+  },
+  {
+   "doi": "10.1002/smll.73516",
+   "title": "Quasi‐BIC and Reflective Mode Coupling Drives SHG Beyond the Q Factor Limit",
+   "auth": [
+    "Yang,W",
+    "Qin,H",
+    "Liu,B",
+    "Wang,C",
+    "Tang,Y",
+    "Janousek,J",
+    "Sun,X",
+    "Song,A"
+   ],
+   "n_auth": 9,
+   "jr": "Small",
+   "vol": "22",
+   "page": "e73516",
+   "yr": 2026
+  }
+ ],
+ "9": [
+  {
+   "doi": "10.1103/physrevlett.121.193903",
+   "title": "Asymmetric Metasurfaces with High-\n                    <mml:math xmlns:mml=\"http://www.w3.",
+   "auth": [
+    "Koshelev,K",
+    "Lepeshov,S",
+    "Liu,M",
+    "Bogdanov,A",
+    "Kivshar,Y"
+   ],
+   "n_auth": 5,
+   "jr": "Physical Review Letters",
+   "vol": "121",
+   "page": "193903",
+   "yr": 2018
+  },
+  {
+   "doi": "10.1103/physrevlett.121.033903",
+   "title": "Giant Nonlinear Response at the Nanoscale Driven by Bound States in the Continuum",
+   "auth": [
+    "Carletti,L",
+    "Koshelev,K",
+    "De Angelis,C",
+    "Kivshar,Y"
+   ],
+   "n_auth": 4,
+   "jr": "Physical Review Letters",
+   "vol": "121",
+   "page": "033903",
+   "yr": 2018
+  }
+ ],
+ "10": [
+  {
+   "doi": "10.1038/s41586-019-1664-7",
+   "title": "Topologically enabled ultrahigh-Q guided resonances robust to out-of-plane scattering",
+   "auth": [
+    "Jin,J",
+    "Yin,X",
+    "Ni,L",
+    "Soljačić,M",
+    "Zhen,B",
+    "Peng,C"
+   ],
+   "n_auth": 6,
+   "jr": "Nature",
+   "vol": "574",
+   "page": "501-504",
+   "yr": 2019
+  },
+  {
+   "doi": "10.1038/s41586-020-2181-4",
+   "title": "Observation of topologically enabled unidirectional guided resonances",
+   "auth": [
+    "Yin,X",
+    "Jin,J",
+    "Soljačić,M",
+    "Peng,C",
+    "Zhen,B"
+   ],
+   "n_auth": 5,
+   "jr": "Nature",
+   "vol": "580",
+   "page": "467-471",
+   "yr": 2020
+  }
+ ],
+ "11": [
+  {
+   "doi": "10.1002/adom.201801350",
+   "title": "Optical Anapoles: Concepts and Applications",
+   "auth": [
+    "Baryshnikova,K",
+    "Smirnova,D",
+    "Luk'yanchuk,B",
+    "Kivshar,Y"
+   ],
+   "n_auth": 4,
+   "jr": "Advanced Optical Materials",
+   "vol": "7",
+   "page": "1801350",
+   "yr": 2019
+  },
+  {
+   "doi": "10.1364/josab.36.002052",
+   "title": "Modal analysis of anapoles, internal fields, and Fano resonances in dielectric particles",
+   "auth": [
+    "Colom,R",
+    "McPhedran,R",
+    "Stout,B",
+    "Bonod,N"
+   ],
+   "n_auth": 4,
+   "jr": "Journal of the Optical Society of Americ",
+   "vol": "36",
+   "page": "2052",
+   "yr": 2019
+  }
+ ],
+ "12": [
+  {
+   "doi": "10.1021/acs.nanolett.6c01388.s001",
+   "title": "Polarization Engineering of Second-Harmonic Generation in 3R-MoS2 Waveguides",
+   "auth": [],
+   "n_auth": 0,
+   "jr": "",
+   "vol": null,
+   "page": null,
+   "yr": null
+  },
+  {
+   "doi": "10.1021/acs.nanolett.2c03811.s001",
+   "title": "Giant Second Harmonic Generation from Membrane Metasurfaces",
+   "auth": [],
+   "n_auth": 0,
+   "jr": "",
+   "vol": null,
+   "page": null,
+   "yr": null
+  }
+ ],
+ "13": [
+  {
+   "doi": "10.1021/acs.nanolett.5c00952",
+   "title": "Nonlinear van der Waals Metasurfaces with Resonantly Enhanced Light Generation",
+   "auth": [
+    "Ling,H",
+    "Tang,Y",
+    "Tian,X",
+    "Shafirin,P",
+    "Hossain,M",
+    "Vabishchevich,P",
+    "Harutyunyan,H",
+    "Davoyan,A"
+   ],
+   "n_auth": 8,
+   "jr": "Nano Letters",
+   "vol": "25",
+   "page": "9229-9236",
+   "yr": 2025
+  },
+  {
+   "doi": "10.1021/acs.nanolett.5c00781",
+   "title": "Skyrmion Sliding Switch in a 90 nm-Wide Nanostructured Chiral Magnet",
+   "auth": [
+    "Wu,Y",
+    "Jiang,J",
+    "Wang,W",
+    "Kong,L",
+    "Wang,S",
+    "Tian,M",
+    "Du,H",
+    "Tang,J"
+   ],
+   "n_auth": 8,
+   "jr": "Nano Letters",
+   "vol": "25",
+   "page": "7012-7019",
+   "yr": 2025
+  }
+ ],
+ "14": [
+  {
+   "doi": "10.21203/rs.3.rs-4452836/v1",
+   "title": "Defect-assisted reversible phase transition in\nmono- and few-layer ReS2",
+   "auth": [
+    "Shegai,T",
+    "Zograf,G",
+    "Yankovich,A",
+    "Kucukoz,B",
+    "Agrawal,A",
+    "Polyakov,A",
+    "Ciers,J",
+    "Eriksson,F"
+   ],
+   "n_auth": 12,
+   "jr": "",
+   "vol": null,
+   "page": null,
+   "yr": 2024
+  },
+  {
+   "doi": "10.1038/s42005-025-02194-y",
+   "title": "Ultrathin 3R-MoS2 metasurfaces with atomically precise edges for efficient nonlinear nanop",
+   "auth": [
+    "Zograf,G",
+    "Küçüköz,B",
+    "Polyakov,A",
+    "Yankovich,A",
+    "Ranjan,A",
+    "Bancerek,M",
+    "Agrawal,A",
+    "Olsson,E"
+   ],
+   "n_auth": 11,
+   "jr": "Communications Physics",
+   "vol": "8",
+   "page": "271",
+   "yr": 2025
+  }
+ ],
+ "15": [
+  {
+   "doi": "10.1038/s41563-023-01580-7",
+   "title": "Intrinsic strong light-matter coupling with self-hybridized bound states in the continuum ",
+   "auth": [
+    "Weber,T",
+    "Kühner,L",
+    "Sortino,L",
+    "Ben Mhenni,A",
+    "Wilson,N",
+    "Kühne,J",
+    "Finley,J",
+    "Maier,S"
+   ],
+   "n_auth": 9,
+   "jr": "Nature Materials",
+   "vol": "22",
+   "page": "970-976",
+   "yr": 2023
+  },
+  {
+   "doi": "10.1039/c1jm13288a",
+   "title": "Photoactivated nanomaterials for biomedical release applications",
+   "auth": [
+    "Sortino,S"
+   ],
+   "n_auth": 1,
+   "jr": "J. Mater. Chem.",
+   "vol": "22",
+   "page": "301-318",
+   "yr": 2012
+  }
+ ],
+ "16": [
+  {
+   "doi": "10.1364/oe.534452",
+   "title": "Strong coupling between excitons and chiral quasibound states in the continuum of the bulk",
+   "auth": [
+    "Xie,S",
+    "Chen,J",
+    "Sun,M",
+    "Sun,S",
+    "Zeng,Z",
+    "Guan,X",
+    "Yang,S"
+   ],
+   "n_auth": 7,
+   "jr": "Optics Express",
+   "vol": "32",
+   "page": "32523",
+   "yr": 2024
+  },
+  {
+   "doi": "10.1364/oe.518171",
+   "title": "Enhancement of laser ablation via high-frequency electromagnetic induction heating",
+   "auth": [
+    "Xie,C",
+    "Chen,Z",
+    "Hong,M"
+   ],
+   "n_auth": 3,
+   "jr": "Optics Express",
+   "vol": "32",
+   "page": "19034",
+   "yr": 2024
+  }
+ ],
+ "17": [
+  {
+   "doi": "10.1038/s41563-026-02776-3",
+   "title": "Topological control of polaritonic flatbands in anisotropic van der Waals metasurfaces",
+   "auth": [
+    "Heimig,C",
+    "Weber,T",
+    "Cruciano,C",
+    "Genco,A",
+    "Possmayer,T",
+    "Sortino,L",
+    "Valentini,G",
+    "Manzoni,C"
+   ],
+   "n_auth": 12,
+   "jr": "Nature Materials",
+   "vol": null,
+   "page": null,
+   "yr": 2026
+  },
+  {
+   "doi": "10.1007/11398448_5",
+   "title": "Exciton and Polariton Condensation",
+   "auth": [
+    "Porras,D",
+    "Fernandez-Rossier,J",
+    "Tejedor,C"
+   ],
+   "n_auth": 3,
+   "jr": "Lecture Notes in Physics",
+   "vol": null,
+   "page": "153-189",
+   "yr": null
+  }
+ ],
+ "18": [
+  {
+   "doi": "10.1364/ome.456070",
+   "title": "Multifaceted anapole: from physics to applications [Invited]",
+   "auth": [
+    "Masoudian Saadabad,R",
+    "Huang,L",
+    "Evlyukhin,A",
+    "Miroshnichenko,A"
+   ],
+   "n_auth": 4,
+   "jr": "Optical Materials Express",
+   "vol": "12",
+   "page": "1817",
+   "yr": 2022
+  },
+  {
+   "doi": "10.1364/ome.443733",
+   "title": "Plasmonics and Hot Electrons: feature issue introduction",
+   "auth": [
+    "Babicheva,V",
+    "Sivan,Y",
+    "Chen,K",
+    "Evlyukhin,A"
+   ],
+   "n_auth": 4,
+   "jr": "Optical Materials Express",
+   "vol": "11",
+   "page": "3686",
+   "yr": 2021
+  }
+ ],
+ "19": [
+  {
+   "doi": "10.1038/s41377-025-01983-y",
+   "title": "Interface second harmonic generation enhancement in bulk WS2/MoS2 hetero-bilayer van der W",
+   "auth": [
+    "Tognazzi,A",
+    "Franceschini,P",
+    "Biechteler,J",
+    "Baù,E",
+    "Cino,A",
+    "Tittl,A",
+    "De Angelis,C",
+    "Sortino,L"
+   ],
+   "n_auth": 8,
+   "jr": "Light: Science &amp; Applications",
+   "vol": "14",
+   "page": "346",
+   "yr": 2025
+  },
+  {
+   "doi": "10.1038/s41377-025-02004-8",
+   "title": "Light structuring via nonlinear total angular momentum addition with flat optics",
+   "auth": [
+    "Menshikov,E",
+    "Franceschini,P",
+    "Frizyuk,K",
+    "Fernandez-Corbaton,I",
+    "Tognazzi,A",
+    "Cino,A",
+    "Garoli,D",
+    "Petrov,M"
+   ],
+   "n_auth": 10,
+   "jr": "Light: Science &amp; Applications",
+   "vol": "14",
+   "page": "381",
+   "yr": 2025
+  }
+ ],
+ "20": [
+  {
+   "doi": "10.1364/optica.562661",
+   "title": "Manipulating the intrinsic light–matter interaction with high-\n                    <i>Q</i",
+   "auth": [
+    "Shen,F",
+    "Liu,D",
+    "Chen,Z",
+    "Zhu,J",
+    "Jin,S",
+    "Zhao,X",
+    "Ma,Y",
+    "Lei,D"
+   ],
+   "n_auth": 9,
+   "jr": "Optica",
+   "vol": "12",
+   "page": "1702",
+   "yr": 2025
+  },
+  {
+   "doi": "10.1364/optica.546899",
+   "title": "Statistically stationary random light for high-security encryption",
+   "auth": [
+    "Lin,S",
+    "Zhu,X",
+    "Shen,Y",
+    "Wang,F",
+    "Chen,X",
+    "Gbur,G",
+    "Cai,Y",
+    "Yu,J"
+   ],
+   "n_auth": 8,
+   "jr": "Optica",
+   "vol": "12",
+   "page": "1261",
+   "yr": 2025
+  }
+ ],
+ "21": [
+  {
+   "doi": "10.1021/acsphotonics.5c02490",
+   "title": "Tunable Second Harmonic Generation by Degenerate Quasi-BIC Metasurfaces",
+   "auth": [
+    "Gao,M",
+    "Wang,Z",
+    "Yan,J",
+    "Ma,Z",
+    "Peng,L",
+    "Chen,Y",
+    "Zhang,Q",
+    "Yang,Y"
+   ],
+   "n_auth": 8,
+   "jr": "ACS Photonics",
+   "vol": "13",
+   "page": "1047-1054",
+   "yr": 2026
+  },
+  {
+   "doi": "10.1021/acsphotonics.6c00325",
+   "title": "Multibeam Shaping of Laser Diode Arrays via Phase-Functional Decomposition for Monolithic ",
+   "auth": [
+    "Wang,J",
+    "Gao,X",
+    "Wan,R",
+    "Xia,G",
+    "Wang,Z",
+    "Li,Y",
+    "Wang,B"
+   ],
+   "n_auth": 7,
+   "jr": "ACS Photonics",
+   "vol": "13",
+   "page": "3161-3173",
+   "yr": 2026
+  }
+ ],
+ "22": [
+  {
+   "doi": "10.1126/sciadv.adi4462",
+   "title": "Disrupting astrocyte-neuron lactate transport prevents cocaine seeking after prolonged wit",
+   "auth": [
+    "Chen,W",
+    "Zhang,Y",
+    "Liang,J",
+    "Zhang,Z",
+    "Zhang,L",
+    "Huang,E",
+    "Zhang,G",
+    "Lu,L"
+   ],
+   "n_auth": 10,
+   "jr": "Science Advances",
+   "vol": "9",
+   "page": "eadi4462",
+   "yr": 2023
+  },
+  {
+   "doi": "10.1126/sciadv.adf1101",
+   "title": "Surface premelting and melting of colloidal glasses",
+   "auth": [
+    "Zhang,Q",
+    "Li,W",
+    "Qiao,K",
+    "Han,Y"
+   ],
+   "n_auth": 4,
+   "jr": "Science Advances",
+   "vol": "9",
+   "page": "eadf1101",
+   "yr": 2023
+  }
+ ],
+ "23": [
+  {
+   "doi": "10.3390/photonics13050466",
+   "title": "Luminescence Efficiency of Tm3+-Doped Crystals at 2.0 μm Under 793 nm Excitation",
+   "auth": [
+    "Wang,M",
+    "Zhang,L",
+    "Gao,Y",
+    "Zhang,Z"
+   ],
+   "n_auth": 4,
+   "jr": "Photonics",
+   "vol": "13",
+   "page": "466",
+   "yr": 2026
+  },
+  {
+   "doi": "10.3390/photonics13090849",
+   "title": "Correction: Zhang et al. Tunable Triple Plasmonically Induced Transparency in Triangular C",
+   "auth": [
+    "Zhang,J",
+    "Feng,H",
+    "Liu,C",
+    "Fang,D",
+    "Wang,J",
+    "Wang,L",
+    "Zhang,Z",
+    "Ran,L"
+   ],
+   "n_auth": 9,
+   "jr": "Photonics",
+   "vol": "13",
+   "page": "849",
+   "yr": 2026
+  }
+ ],
+ "24": [
+  {
+   "doi": "10.1364/oe.414730",
+   "title": "Multiplexing-oriented plasmon-MoS2 hybrid metasurfaces driven by nonlinear quasi bound sta",
+   "auth": [
+    "Ren,Q",
+    "Feng,F",
+    "Yao,X",
+    "Xu,Q",
+    "Xin,M",
+    "Lan,Z",
+    "You,J",
+    "Xiao,X"
+   ],
+   "n_auth": 9,
+   "jr": "Optics Express",
+   "vol": "29",
+   "page": "5384",
+   "yr": 2021
+  },
+  {
+   "doi": "10.1364/oe.427536",
+   "title": "Distributed transverse-force sensing along a single-mode fiber using polarization-analyzin",
+   "auth": [
+    "Feng,T",
+    "Zhou,J",
+    "Shang,Y",
+    "Chen,X",
+    "Yao,X"
+   ],
+   "n_auth": 5,
+   "jr": "Optics Express",
+   "vol": "29",
+   "page": "14355",
+   "yr": 2021
+  }
+ ],
+ "25": [
+  {
+   "doi": "10.1103/z6s7-xrw8",
+   "title": "Enhancing second-harmonic generation around exceptional points by coupling a quasibound st",
+   "auth": [
+    "Huo,J",
+    "Wu,Q",
+    "Wang,W",
+    "Lin,J",
+    "Jin,P",
+    "Liu,S",
+    "Zhou,K"
+   ],
+   "n_auth": 7,
+   "jr": "Physical Review A",
+   "vol": "113",
+   "page": "053510",
+   "yr": 2026
+  },
+  {
+   "doi": "10.1103/j5hs-wsb7",
+   "title": "Antiferromagnetic skyrmion as a magnonic lens",
+   "auth": [
+    "Wu,H",
+    "Wang,Z",
+    "Lan,J"
+   ],
+   "n_auth": 3,
+   "jr": "Physical Review B",
+   "vol": "113",
+   "page": "174431",
+   "yr": 2026
+  }
+ ],
+ "26": [
+  {
+   "doi": "10.1021/acsnano.5c11386",
+   "title": "Determining the Dipole Orientation of Second Harmonic Generation in 3R-MoS\n               ",
+   "auth": [
+    "Liu,Y",
+    "Zhao,Y",
+    "Ye,F",
+    "Liang,L",
+    "Zhao,T",
+    "Guan,Z",
+    "Fu,J",
+    "Wang,J"
+   ],
+   "n_auth": 17,
+   "jr": "ACS Nano",
+   "vol": "19",
+   "page": "31882-31893",
+   "yr": 2025
+  },
+  {
+   "doi": "10.1021/acsnano.4c14168",
+   "title": "Spintronic Devices upon 2D Magnetic Materials and Heterojunctions",
+   "auth": [
+    "Jia,Z",
+    "Zhao,M",
+    "Chen,Q",
+    "Tian,Y",
+    "Liu,L",
+    "Zhang,F",
+    "Zhang,D",
+    "Ji,Y"
+   ],
+   "n_auth": 13,
+   "jr": "ACS Nano",
+   "vol": "19",
+   "page": "9452-9483",
+   "yr": 2025
+  }
+ ],
+ "27": [
+  {
+   "doi": "10.5270/esa-zwkihpk",
+   "title": "20103",
+   "auth": [
+    ","
+   ],
+   "n_auth": 1,
+   "jr": "20103",
+   "vol": null,
+   "page": null,
+   "yr": null
+  },
+  {
+   "doi": "10.3724/sp.j.1001.2011.04081",
+   "title": "Monitoring Enabled Distributed Software Construction Method",
+   "auth": [
+    "LIU,D",
+    "GUO,C",
+    "WANG,H",
+    "WANG,T"
+   ],
+   "n_auth": 4,
+   "jr": "Journal of Software",
+   "vol": "22",
+   "page": "2610-2624",
+   "yr": 2011
+  }
+ ],
+ "28": [
+  {
+   "doi": "10.1088/1674-1056/ab3f1d",
+   "title": "Theory and method of dual-energy x-ray grating phase-contrast imaging*",
+   "auth": [
+    "Rong,F",
+    "Gao,Y",
+    "Guo,C",
+    "Xu,W",
+    "Xu,W"
+   ],
+   "n_auth": 5,
+   "jr": "Chinese Physics B",
+   "vol": "28",
+   "page": "108702",
+   "yr": 2019
+  },
+  {
+   "doi": "10.1088/1674-1056/27/10/104702",
+   "title": "Numerical study of heat-transfer in two- and quasi-two-dimensional Rayleigh–Bénard convect",
+   "auth": [
+    "Gao,Z",
+    "Luo,J",
+    "Bao,Y"
+   ],
+   "n_auth": 3,
+   "jr": "Chinese Physics B",
+   "vol": "27",
+   "page": "104702",
+   "yr": 2018
+  }
+ ],
+ "29": [
+  {
+   "doi": "10.1038/s41467-023-36912-3",
+   "title": "Exciton polariton interactions in Van der Waals superlattices at room temperature",
+   "auth": [
+    "Zhao,J",
+    "Fieramosca,A",
+    "Dini,K",
+    "Bao,R",
+    "Du,W",
+    "Su,R",
+    "Luo,Y",
+    "Zhao,W"
+   ],
+   "n_auth": 11,
+   "jr": "Nature Communications",
+   "vol": "14",
+   "page": "1512",
+   "yr": 2023
+  },
+  {
+   "doi": "10.1038/s41467-024-51612-2",
+   "title": "Room temperature polariton spin switches based on Van der Waals superlattices",
+   "auth": [
+    "Zhao,J",
+    "Fieramosca,A",
+    "Bao,R",
+    "Dini,K",
+    "Su,R",
+    "Sanvitto,D",
+    "Xiong,Q",
+    "Liew,T"
+   ],
+   "n_auth": 8,
+   "jr": "Nature Communications",
+   "vol": "15",
+   "page": "7601",
+   "yr": 2024
+  }
+ ],
+ "30": [
+  {
+   "doi": "10.1126/sciadv.aeh5101",
+   "title": "Electrically reconfigurable dipolar polaritons with highly tunable nonlinearity in a homob",
+   "auth": [
+    "Xiang,B",
+    "Wang,Y",
+    "Wen,G",
+    "Li,Y",
+    "Wen,H",
+    "She,Z",
+    "Liu,H",
+    "Watanabe,K"
+   ],
+   "n_auth": 12,
+   "jr": "Science Advances",
+   "vol": "12",
+   "page": "eaeh5101",
+   "yr": 2026
+  },
+  {
+   "doi": "10.1126/sciadv.aed6248",
+   "title": "Unconventional superconductivity in UAs\n                    <sub>2</sub>\n                 ",
+   "auth": [
+    "Li,Q",
+    "Xiang,Z",
+    "Zhang,B",
+    "Zhang,Y",
+    "Zhang,C",
+    "Wen,H"
+   ],
+   "n_auth": 6,
+   "jr": "Science Advances",
+   "vol": "12",
+   "page": "eaed6248",
+   "yr": 2026
+  }
+ ],
+ "31": [
+  {
+   "doi": "10.1038/s41467-024-45554-y",
+   "title": "Energy transfer driven brightening of MoS2 by ultrafast polariton relaxation in microcavit",
+   "auth": [
+    "Hu,Z",
+    "Krisnanda,T",
+    "Fieramosca,A",
+    "Zhao,J",
+    "Sun,Q",
+    "Chen,Y",
+    "Liu,H",
+    "Luo,Y"
+   ],
+   "n_auth": 19,
+   "jr": "Nature Communications",
+   "vol": "15",
+   "page": "1747",
+   "yr": 2024
+  },
+  {
+   "doi": "10.1038/s41467-024-51612-2",
+   "title": "Room temperature polariton spin switches based on Van der Waals superlattices",
+   "auth": [
+    "Zhao,J",
+    "Fieramosca,A",
+    "Bao,R",
+    "Dini,K",
+    "Su,R",
+    "Sanvitto,D",
+    "Xiong,Q",
+    "Liew,T"
+   ],
+   "n_auth": 8,
+   "jr": "Nature Communications",
+   "vol": "15",
+   "page": "7601",
+   "yr": 2024
+  }
+ ],
+ "32": [
+  {
+   "doi": "10.1103/physrevlett.124.063902",
+   "title": "Revealing Strong Plasmon-Exciton Coupling between Nanogap Resonators and Two-Dimensional S",
+   "auth": [
+    "Qin,J",
+    "Chen,Y",
+    "Zhang,Z",
+    "Zhang,Y",
+    "Blaikie,R",
+    "Ding,B",
+    "Qiu,M"
+   ],
+   "n_auth": 7,
+   "jr": "Physical Review Letters",
+   "vol": "124",
+   "page": "063902",
+   "yr": 2020
+  },
+  {
+   "doi": "10.1103/physrevlett.124.090601",
+   "title": "Construction of a Pathway Map on a Complicated Energy Landscape",
+   "auth": [
+    "Yin,J",
+    "Wang,Y",
+    "Chen,J",
+    "Zhang,P",
+    "Zhang,L"
+   ],
+   "n_auth": 5,
+   "jr": "Physical Review Letters",
+   "vol": "124",
+   "page": "090601",
+   "yr": 2020
+  }
+ ],
+ "33": [
+  {
+   "doi": "10.1088/1361-6528/ab02b0",
+   "title": "Nonradiating anapole states in nanophotonics: from fundamentals to applications",
+   "auth": [
+    "Yang,Y",
+    "Bozhevolnyi,S"
+   ],
+   "n_auth": 2,
+   "jr": "Nanotechnology",
+   "vol": "30",
+   "page": "204001",
+   "yr": 2019
+  },
+  {
+   "doi": "10.1088/0957-4484/26/30/309501",
+   "title": "Corrigendum: Enhancing the performance of Polymer solar cells using CuPc nanocrystals as a",
+   "auth": [
+    "Zhang,Y",
+    "Wei,Z"
+   ],
+   "n_auth": 2,
+   "jr": "Nanotechnology",
+   "vol": "26",
+   "page": "309501",
+   "yr": 2015
+  }
+ ],
+ "34": [
+  {
+   "doi": "10.1002/adfm.201870144",
+   "title": "Bioassays: Bioinspired Micropatterned Superhydrophilic Au‐Areoles for Surface‐Enhanced Ram",
+   "auth": [
+    "Li,H",
+    "Yang,Q",
+    "Hou,J",
+    "Li,Y",
+    "Li,M",
+    "Song,Y"
+   ],
+   "n_auth": 6,
+   "jr": "Advanced Functional Materials",
+   "vol": "28",
+   "page": "1870144",
+   "yr": 2018
+  },
+  {
+   "doi": "10.1088/1757-899x/382/3/032021",
+   "title": "Comparative Analysis of In-line Inspection Equipments and Technologies",
+   "auth": [
+    "Song,H",
+    "Yang,L",
+    "Liu,G",
+    "Tian,G",
+    "Ona,D",
+    "Song,Y",
+    "Li,S"
+   ],
+   "n_auth": 7,
+   "jr": "IOP Conference Series: Materials Science",
+   "vol": "382",
+   "page": "032021",
+   "yr": 2018
+  }
+ ],
+ "35": [
+  {
+   "doi": "10.1021/acs.nanolett.6b04344",
+   "title": "Electric-Field Switchable Second-Harmonic Generation in Bilayer MoS\n                    <s",
+   "auth": [
+    "Klein,J",
+    "Wierzbowski,J",
+    "Steinhoff,A",
+    "Florian,M",
+    "Rösner,M",
+    "Heimbach,F",
+    "Müller,K",
+    "Jahnke,F"
+   ],
+   "n_auth": 11,
+   "jr": "Nano Letters",
+   "vol": "17",
+   "page": "392-398",
+   "yr": 2016
+  },
+  {
+   "doi": "10.1021/acs.nanolett.7b01304",
+   "title": "Long-Lived Direct and Indirect Interlayer Excitons in van der Waals Heterostructures",
+   "auth": [
+    "Miller,B",
+    "Steinhoff,A",
+    "Pano,B",
+    "Klein,J",
+    "Jahnke,F",
+    "Holleitner,A",
+    "Wurstbauer,U"
+   ],
+   "n_auth": 7,
+   "jr": "Nano Letters",
+   "vol": "17",
+   "page": "5229-5237",
+   "yr": 2017
+  }
+ ],
+ "36": [
+  {
+   "doi": "10.1038/s41377-024-01523-0",
+   "title": "Strong light-matter coupling in van der Waals materials",
+   "auth": [
+    "Luo,Y",
+    "Zhao,J",
+    "Fieramosca,A",
+    "Guo,Q",
+    "Kang,H",
+    "Liu,X",
+    "Liew,T",
+    "Sanvitto,D"
+   ],
+   "n_auth": 13,
+   "jr": "Light: Science &amp; Applications",
+   "vol": "13",
+   "page": "203",
+   "yr": 2024
+  },
+  {
+   "doi": "10.1038/s41377-024-01505-2",
+   "title": "Fast, faster, and the fastest structured illumination microscopy",
+   "auth": [
+    "Zhao,T",
+    "Lei,M"
+   ],
+   "n_auth": 2,
+   "jr": "Light: Science &amp; Applications",
+   "vol": "13",
+   "page": "186",
+   "yr": 2024
+  }
+ ],
+ "37": [
+  {
+   "doi": "10.1364/josaa.20.000569",
+   "title": "Temporal coupled-mode theory for the Fano resonance in optical resonators",
+   "auth": [
+    "Fan,S",
+    "Suh,W",
+    "Joannopoulos,J"
+   ],
+   "n_auth": 3,
+   "jr": "Journal of the Optical Society of Americ",
+   "vol": "20",
+   "page": "569",
+   "yr": 2003
+  },
+  {
+   "doi": "10.1364/josab.27.001947",
+   "title": "Temporal coupled-mode theory for resonant apertures",
+   "auth": [
+    "Verslegers,L",
+    "Yu,Z",
+    "Catrysse,P",
+    "Fan,S"
+   ],
+   "n_auth": 4,
+   "jr": "Journal of the Optical Society of Americ",
+   "vol": "27",
+   "page": "1947",
+   "yr": 2010
+  }
+ ],
+ "38": [
+  {
+   "doi": "10.1063/5.0355591",
+   "title": "Erratum: “Nonlinear optics in 2D materials: From classical to quantum” [Appl. Phys. Rev.\n ",
+   "auth": [
+    "Gu,L",
+    "Zhou,Y"
+   ],
+   "n_auth": 2,
+   "jr": "Applied Physics Reviews",
+   "vol": "13",
+   "page": "039903",
+   "yr": 2026
+  },
+  {
+   "doi": "10.1063/5.0242014",
+   "title": "Nonlinear optics in 2D materials: From classical to quantum",
+   "auth": [
+    "Gu,L",
+    "Zhou,Y"
+   ],
+   "n_auth": 2,
+   "jr": "Applied Physics Reviews",
+   "vol": "12",
+   "page": "011335",
+   "yr": 2025
+  }
+ ],
+ "39": [
+  {
+   "doi": "10.1364/oe.15.007303",
+   "title": "?^(2) and ?^(3) harmonic generation at a critical power in inhomogeneous doubly resonant c",
+   "auth": [
+    "Rodriguez,A",
+    "Soljacic,M",
+    "Joannopoulos,J",
+    "Johnson,S"
+   ],
+   "n_auth": 4,
+   "jr": "Optics Express",
+   "vol": "15",
+   "page": "7303",
+   "yr": 2007
+  },
+  {
+   "doi": "10.1364/oe.15.016161",
+   "title": "Enhanced nonlinear optics in photonic-crystal microcavities",
+   "auth": [
+    "Bravo-Abad,J",
+    "Rodriguez,A",
+    "Bermel,P",
+    "Johnson,S",
+    "Joannopoulos,J",
+    "Soljacic,M"
+   ],
+   "n_auth": 6,
+   "jr": "Optics Express",
+   "vol": "15",
+   "page": "16161",
+   "yr": 2007
+  }
+ ],
+ "40": [
+  {
+   "doi": "10.1364/ol.32.002864",
+   "title": "Standing-wave nonlinear optics in an integrated semiconductor microcavity",
+   "auth": [
+    "Hayat,A",
+    "Orenstein,M"
+   ],
+   "n_auth": 2,
+   "jr": "Optics Letters",
+   "vol": "32",
+   "page": "2864",
+   "yr": 2007
+  },
+  {
+   "doi": "10.1364/ol.32.000674",
+   "title": "Plasmon-soliton",
+   "auth": [
+    "Feigenbaum,E",
+    "Orenstein,M"
+   ],
+   "n_auth": 2,
+   "jr": "Optics Letters",
+   "vol": "32",
+   "page": "674",
+   "yr": 2007
+  }
+ ],
+ "41": [
+  {
+   "doi": "10.1103/rq46-g378",
+   "title": "Temporal coupled mode theory: From bound states in the continuum to uniguided resonances",
+   "auth": [
+    "Maksimov,D",
+    "Pankin,P",
+    "Kim,D",
+    "Song,M",
+    "Peng,C",
+    "Bogdanov,A"
+   ],
+   "n_auth": 6,
+   "jr": "Physical Review B",
+   "vol": "112",
+   "page": "235303",
+   "yr": 2025
+  },
+  {
+   "doi": "10.1103/physrevb.106.245403",
+   "title": "Fabry-Perot bound states in the continuum in an anisotropic photonic crystal",
+   "auth": [
+    "Nabol,S",
+    "Pankin,P",
+    "Maksimov,D",
+    "Timofeev,I"
+   ],
+   "n_auth": 4,
+   "jr": "Physical Review B",
+   "vol": "106",
+   "page": "245403",
+   "yr": 2022
+  }
+ ],
+ "42": [
+  {
+   "doi": "10.1364/ol.570911",
+   "title": "Coupled micro-resonators for second-order integrated nonlinear optics",
+   "auth": [
+    "Dumeige,Y",
+    "Léger,Y"
+   ],
+   "n_auth": 2,
+   "jr": "Optics Letters",
+   "vol": "50",
+   "page": "6766",
+   "yr": 2025
+  },
+  {
+   "doi": "10.1364/ol.32.003438",
+   "title": "Miniaturization of Fresnel phase matching using a side-coupled integrated spaced sequence ",
+   "auth": [
+    "Dumeige,Y"
+   ],
+   "n_auth": 1,
+   "jr": "Optics Letters",
+   "vol": "32",
+   "page": "3438",
+   "yr": 2007
+  }
+ ],
+ "43": [
+  {
+   "doi": "10.1063/1.4751266",
+   "title": "Raman spectroscopy of the interlayer shear mode in few-layer MoS2 flakes",
+   "auth": [
+    "Plechinger,G",
+    "Heydrich,S",
+    "Eroms,J",
+    "Weiss,D",
+    "Schüller,C",
+    "Korn,T"
+   ],
+   "n_auth": 6,
+   "jr": "Applied Physics Letters",
+   "vol": "101",
+   "page": "101906",
+   "yr": 2012
+  },
+  {
+   "doi": "10.1117/12.928067",
+   "title": "Low-temperature photocarrier dynamics in single-layer MoS<sub>2</sub>flakes",
+   "auth": [
+    "Korn,T",
+    "Plechinger,G",
+    "Heydrich,S",
+    "Hirmer,M",
+    "Schrettenbrunner,F",
+    "Weiss,D",
+    "Eroms,J",
+    "Schüller,C"
+   ],
+   "n_auth": 8,
+   "jr": "SPIE Proceedings",
+   "vol": "8456",
+   "page": "84560H",
+   "yr": 2012
+  }
+ ],
+ "44": [
+  {
+   "doi": "10.1103/physrevb.105.115420",
+   "title": "Second harmonic generation control in twisted bilayers of transition metal dichalcogenides",
+   "auth": [
+    "Paradisanos,I",
+    "Raven,A",
+    "Amand,T",
+    "Robert,C",
+    "Renucci,P",
+    "Watanabe,K",
+    "Taniguchi,T",
+    "Gerber,I"
+   ],
+   "n_auth": 10,
+   "jr": "Physical Review B",
+   "vol": "105",
+   "page": "115420",
+   "yr": 2022
+  },
+  {
+   "doi": "10.1103/physreva.105.043319",
+   "title": "Fast long-distance transport of cold cesium atoms",
+   "auth": [
+    "Klostermann,T",
+    "Cabrera,C",
+    "von Raven,H",
+    "Wienand,J",
+    "Schweizer,C",
+    "Bloch,I",
+    "Aidelsburger,M"
+   ],
+   "n_auth": 7,
+   "jr": "Physical Review A",
+   "vol": "105",
+   "page": "043319",
+   "yr": 2022
+  }
+ ],
+ "45": [
+  {
+   "doi": "10.1021/acsnano.4c02807",
+   "title": "Giant Second Harmonic Generation in Supertwisted WS<sub>2</sub> Spirals Grown in Step-Edge",
+   "auth": [
+    "Tong,T",
+    "Chen,R",
+    "Ke,Y",
+    "Wang,Q",
+    "Wang,X",
+    "Sun,Q",
+    "Chen,J",
+    "Gu,Z"
+   ],
+   "n_auth": 13,
+   "jr": "ACS Nano",
+   "vol": "18",
+   "page": "21939-21947",
+   "yr": 2024
+  },
+  {
+   "doi": "10.1021/acsnano.3c10116",
+   "title": "Micro/Nano Perovskite Materials for Advanced X-ray Detection and Imaging",
+   "auth": [
+    "Yao,F",
+    "Dong,K",
+    "Ke,W",
+    "Fang,G"
+   ],
+   "n_auth": 4,
+   "jr": "ACS Nano",
+   "vol": "18",
+   "page": "6095-6110",
+   "yr": 2024
+  }
+ ]
+}

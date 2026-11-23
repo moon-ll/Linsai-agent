@@ -1,0 +1,1734 @@
+Experimental observation of topological exciton-polaritons in transition metal 
+dichalcogenide monolayers 
+Mengyao Li1,2,3*, Ivan Sinev4*, Fedor Benimetskiy4, Tatyana Ivanova4, Ekaterina Khestanova4, Svetlana 
+Kiriushechkina1, Anton Vakulenko1, Sriram Guddala1,2, Maurice Skolnick4,5, Vinod Menon2,3, Dmitry 
+Krizhanovskii4,5, Andrea Alù6,3,1, Anton Samusev4, Alexander B. Khanikaev1,2,3 
+1Department of Electrical Engineering, City College of New York, New York, NY, USA 
+2Physics Department, City College of New York, New York, NY, USA 
+3Physics Program, Graduate Center of the City University of New York, New York, NY, USA 
+4Department of Physics and Engineering, ITMO University, Saint Petersburg, Russia 
+5Department of Physics and Astronomy, University of Sheffield, Sheffield S3 7RH, UK 
+6Photonics Initiative, Advanced Science Research Center, City University of New York, New York, NY, USA 
+*These authors contributed equally to the present work 
+ 
+The rise of quantum science and technologies motivates photonics research to seek new platforms 
+with strong light-matter interactions to facilitate quantum behaviors at moderate light intensities.1–
+3 One promising platform to reach such strong light-matter interacting regimes is offered by 
+polaritonic metasurfaces, which represent ultrathin artificial media structured on nano-scale and 
+designed to support polaritons – half-light half-matter quasiparticles. Topological polaritons, or 
+“topolaritons”, offer an ideal platform in this context, with unique properties stemming from 
+topological phases of light strongly coupled with matter. Here we explore polaritonic metasurfaces 
+based on 2D transition metal dichalcogenides (TMDs) supporting in-plane polarized exciton 
+resonances as a promising platform for topological polaritonics. We enable a spin-Hall4,5 
+topolaritonic phase by strongly coupling valley polarized in-plane excitons in a TMD monolayer 
+with a suitably engineered all-dielectric topological photonic metasurface. We first show that the 
+strong coupling between topological photonic bands supported by the metasurface and excitonic 
+bands in MoSe2 yields an effective phase winding and transition to a topolaritonic spin-Hall state. 
+We then experimentally realize such phenomena and confirm the presence of one-way spin-
+polarized edge topolaritons. Combined with the valley polarization in a MoSe2 monolayer, the 
+proposed system enables a new approach to engage the photonic angular momentum and valley 
+degree of freedom in TMDs, offering a promising platform for photonic/solid-state interfaces for 
+valleytronics and spintronics. 
+Introduction 
+Topological photonics6–8 has seen a tremendous progress in the past years with numerous 
+topological phases implemented in a variety of platforms, from microwave to optical frequencies9–
+20. Enriching topological photonics by mixing light with condensed matter provides even more 
+exciting avenues for controlling exotic states of light and matter. Indeed, integrating topological 
+photonic systems with quantum wells and quantum dots has already led to major breakthroughs, 
+such as topological lasers21–24, topological polaritonic phases25–28, active29,30 and nonlinear31–33 
+
+topological photonic devices. Consistent with their non-topological cousins, topolaritons25,34,35 
+represent “half-light and half-matter” excitations emerging as the result of strong coupling36–40 
+between electromagnetic and solid-state degrees of freedom. In addition, they are enriched by 
+topological features. The combination of photonic topological properties (one-way spin-polarized 
+transport, topological protection against scattering) and strong interactions arising from light-
+matter hybridization, may support phenomena such as topological solitons, modulation instability 
+and generation of squeezed topological light17,31,34,41–47. Moreover, topolaritons pave the way 
+towards the development of active topological nanophotonic devices with giant optical 
+nonlinearity48,49 enabling control of light by light at small intensities, down to the single photon 
+level50–53.  Overall, polaritonic systems serve as an ideal interface between photonics and solid-
+state systems, facilitating control of spin- and valley-degrees of freedom54–63  in future quantum 
+devices. Topological polaritons, enriched with additional degrees of freedom, inherited from 
+nanoscale structured photonic materials, thus offer uniquely versatile control of quantum states 
+with photons. 
+In this context topolaritons, have been an active subject of research with several recent theoretical 
+and experimental findings, in particular in systems based on quantum wells integrated into 
+photonic nanostructures21,25–28,30. However, topolaritonic systems reported so far have been mostly 
+limited to 1D systems, and a 2D system characterized by 1D topological invariants21,28. The only 
+topolaritonic system characterized by a 2D topological invariant, the Chern number, has been 
+demonstrated recently by S. Klembt et al.26 for the case of broken time-reversal symmetry. 
+Specifically, 2D topological polaritons have been realized in Bragg micropillar (MC) lattices based 
+on GaAs quantum wells (QW) under the application of a very strong external magnetic field. The 
+realization of spin-Hall polariton, another 2D topolaritonic phase which does not require magnetic 
+field, in structures based on GaAs QWs is rather difficult, since it requires etching through GaAs 
+QW, leading to strong exciton surface recombination preventing polariton formation and making 
+this platform rather challenging for topolaritonics.   
+In this work we put forward a new path to spin-Hall topolaritonics, which does not require 
+magnetic fields and it is based on a versatile platform of polaritonic metasurfaces containing 
+monolayer transition metal dichalcogenides (TMDs). Our approach leverages the large exciton 
+dipole moment in a monolayer semiconductor and the remarkable compatibility of 2D materials 
+with various photonic structures to realize strong coupling regime between light and matter. We 
+show that topological spin-Hall photonic metasurface integrating a TMD monolayer with a pair of 
+degenerate valley-polarized excitons in the strong coupling regime gives rise to topological 
+transitions and the formation of a topolaritonic phase characterized by nonvanishing spin-Chern 
+number. Introduction of domain walls separating topological and trivial phases is then shown to 
+give rise to the spin-polarized topolaritonic boundary modes. Spin-locking of these boundary 
+modes and their selective coupling to circularly polarized light of opposite handedness enables 
+unique polaritonic spin-Hall phenomena.  
+The broadband spin-Hall topolaritons are experimentally realized by integrating unpatterned 
+MoSe2 monolayer into spin-Hall type photonic structures. Very large exciton dipole moments in 
+MoSe2 monolayers lead to the formation of bulk topolaritons with large Rabi splitting. We 
+
+demonstrate that topological domain walls of such structures support edge polaritons exhibiting 
+spin-polarized one-way propagation, and whose excitonic components are valley polarized due to 
+the valley polarization in MoSe2. Thus, we demonstrate for the first time 2D topolaritonic phase 
+which does not require magnetic field, exhibits large topological gap and broadband one-way 
+topolaritonic boundary modes.  We propose our platform for coupling the angular momentum of 
+photons to the valley degree of freedom of excitons in transition metal dichalcogenides, which can 
+be employed as a resilient topological interface between photonic and electronic components in 
+future valleytronic devices. 
+ 
+Topolaritonic metasurface 
+The structure we consider here is schematically shown in Fig. 1a and represents a Si photonic 
+metasurface supporting photonic topological spin-Hall-like phase64–66 with MoSe2 monolayer 
+placed on top of it. The metasurface represents a honeycomb shrink-expand lattice design is based 
+on the one proposed for a topological quantum optical interface17,67, which we adjusted to hold 
+semi-leaky (trapped by the metasurface, but coupled to the radiative continuum) topological modes 
+near the exciton frequency in MoSe2. The semi-leaky character of the modes allows us to directly 
+excite and probe both photonic and polaritonic modes supported by such a metasurface68,69. The 
+MoSe2 monolayer is placed on top of the metasurface together with a thin hBN layer. Apart from 
+the general purpose of enhancing the quality of the exciton in the monolayer, the hBN layer enables 
+fine tuning of the parameters of our system. Firstly, if placed between the metasurface and the 
+monolayer, it allows the careful control of the coupling strength between photonic and exitonic 
+subsystems by changing its thickness. Secondly, an increase of hBN thickness also gradually red-
+shifts the photonic modes of the metasurface, which allows to arrange the position of the 
+topological gap with respect to the exciton (see Supplement G for experiments with thick hBN 
+layers). In addition, the possibility to change the spectral position of the exciton resonance by 
+adjusting temperature enabled spectral tuning of the crossing between the photonic and excitonic 
+states, which was used to explore different topological regimes.  
+This type of photonic metasurface is known to support a photonic analogue of the spin-Hall phase 
+protected by the lattice symmetry. The topological transition in this system occurs when the lattice 
+is distorted from an unperturbed graphene-like lattice of triangular holes, in which case the system 
+has a characteristic dispersion with two overlapping Dirac cones, shown in Fig. 1b (the black 
+lines). The pairs of upper and lower cones correspond to the clockwise and counterclockwise 𝑠=
+±1 circularly polarized dipolar 𝑝± = 𝑝𝑥± 𝑖𝑝𝑦  (𝑙= ±1 = 1 × 𝑠) and quadrupolar 𝑑± = 𝑑𝑥𝑦±
+𝑖𝑑𝑥2−𝑦2 (𝑙= ±2 = 2 × 𝑠) bands.  
+In order to induce a topological transition in this lattice64,67,68, its symmetry is reduced by shrinking 
+(Fig. 1a, blue unit cells) or expanding the six nearest triangular holes (Fig. 1a, red unit cells), 
+rendering a triangular lattice of hexamers. As seen in Fig. 1b, such symmetry reductions are 
+accompanied by the opening of a photonic band gap in place of the Dirac cones, which, for the 
+expanded lattice scenario, yields the inversion of dipolar and quadrupolar bands leading to a 
+photonic topological spin-Hall phase. Numerous experimental studies of topological photonic 
+
+systems based on this scheme unambiguously confirmed a robust spin-polarized topological 
+boundary transport in microwave and optical domains.17,68,70,71 
+ 
+Fig. 1| Topolaritonic metasurface integrating transition metal dichalcogenide monolayer. a, schematic 
+image of topological metasurface with hBN spacer and MoSe2 monolayer on top. Lattice constant is 
+a0=460nm, Si layer thickness is h=75nm. b, Numerically calculated photonic band structure for the cases 
+of gapless (black lines), topological (red lines) and trivial (blue lines) metasurfaces. The position of the 
+excitonic band is shown by the dashed horizontal line. c, Bulk band structures of topolaritonic system 
+obtained from the analytical model Eq (1) for different values of the mass term 𝑀 and the exciton-photon 
+coupling 𝑞𝑑. The black dashed line shows the case of no coupling (𝑞𝑑(𝑝) = 0) in the gapless case (𝑀= 0) 
+to reveal the Dirac cone and the flat excitonic band (𝜔̃𝑒𝑥= −1.5 eV). The blue lines show the case of a 
+topological photonic system without coupling to polaritonic subsystem (𝑞𝑑(𝑝) = 0) for 𝑀= 1. Red lines 
+show the case of topolaritonic transition via strong coupling with 𝑞𝑝= 2 and 𝑞𝑑= 0. d, e, Topolaritonic 
+spin-up boundary modes for the two scenarios of excitonic band within or at the edge of the lower (dipolar) 
+photonic band. The two, forward and backward solutions, are spatially separated and appear at the two 
+opposite domain walls of the supercell with the periodic boundary condition. The edge states are clearly 
+band-crossing (and anti-crossing) between the excitonic and photonic bands and approach the former at 
+lower frequencies, confirming its polaritonic nature. The degree of excitonic fraction of the bands shown 
+in color is calculated as the ratio of the amplitude in the excitonic component of the eigenstate vector to the 
+norm of the vector. 
+ 
+
+By adding a TMD monolayer on top of this photonic structure we introduce excitonic degrees of 
+freedom. It is important to stress that excitons in MoSe2 are (i) characterized by non-zero orbital 
+momentum of 𝑚= +1 and 𝑚= −1 at K and K’ valleys, respectively, and thus establish time-
+reversal partners essential for the topolaritonic spin-Hall phase engineered here, and (ii) polarized 
+in the plane of the monolayer, which allows to efficiently couple the in-plane electric field of the 
+modes supported by the metasurfaces to the excitons69. We note that the characteristic size of 
+excitons (~ 1 nm) and the scale of field variations of the photonic modes are orders of magnitude 
+apart, which implies that excitons can interact with both dipolar and quadrupolar photonic modes. 
+Nonetheless, while the angular momentum of the two subsystems is not in correspondence, the 
+photon spin (the handedness of both dipolar and quadrupolar modes) still is in one to one 
+correspondence with the orbital momentum and the valley degree of freedom of excitons due to 
+angular momentum conservation (see discussion in Supplement D). This can be explained simply 
+as the result of the selection rule on the interactions of light and excitons, which are defined 
+exclusively through the spin (𝑠= ±1) degree of freedom of photonic modes. At the same time, 
+the non-vanishing orbital momentum (l=1, 2) of photonic modes due to the lattice structure does 
+not play any fundamental role in the interactions, but only defines the strength of coupling due to 
+the nonuniformity of the field profiles (Supplement D). Nonetheless, this orbital momentum of 
+photons is crucial for the formation of the topological photonic phase and, therefore, for the physics 
+of our topolaritonic system. Indeed, in the photonic metasurface, the spin and orbital momentum 
+of light are entangled with each other due to the spin-orbital coupling, leading to the topological 
+behavior emulating quantum spin-Hall effect. This entanglement enables an indirect coupling of 
+the orbital momentum of light and that of excitons, which facilitates the topological polaritonic 
+phase reported here. 
+ 
+ 
+Fig. 2| Experimental samples of topolaritonic metasurfaces. a, SEM images of topological photonic 
+metasurface with unit cells of trivial and topological domains indicated by the hexagon and the domain wall 
+shown by the armchair shaped line. b and c, optical microscope images of the two topolaritonic metasurface 
+(black) samples with MoSe2 monolayers (orange) and 12 nm thick hBN spacers (green). b, MoSe2 
+monolayer transferred directly onto the metasurface and covered with an hBN flake. c, monolayer 
+transferred on top of hBN flake. 
+ 
+ 
+
+Theoretical description 
+The topolaritonic system under study can be described by an effective Hamiltonian of the form 
+ℋ̂ = ℋ̂𝑝ℎ+ ℋ̂𝑒𝑥+ ∑
+(𝑔(𝒌,𝑙,𝑚,𝑠)𝑏̂𝑚
++𝑎̂𝒌,𝑙,𝑠𝛿𝑠,𝑚+ 𝑔(𝒌,𝑙,𝑚,𝑠)
++
+𝑏̂𝑚𝑎̂𝒌,𝑙,𝑠
++
+𝛿𝑠,𝑚)
+𝒌,𝑙,𝑚,𝑠 
+,          (1a) 
+ ℋ̂𝑝ℎ= ∑
+𝐻̂(𝒌,𝑙,𝑙′,𝑠,𝑠′)𝑎̂𝒌,𝑙′,𝑠′
++
+𝑎̂𝒌,𝑙,𝑠
+𝒌,𝑙,𝑙′,𝑠,𝑠′ 
+,                                         (1b) 
+ℋ̂𝑒𝑥= ∑
+𝜔̃𝑒𝑥𝑏̂𝑚′
++ 𝑏̂𝑚
+ 𝑚,𝑚′ 
+,                                                       (1c) 
+where the photonic Hamiltonian ℋ̂𝑝ℎ is obtained from electromagnetic theory (detailed in 
+Supplement B) and it assumes the form of the well-known Bernevig-Hughes-Zhang (BHZ) 
+Hamiltonian5 of the two-dimensional 𝑍2 topological insulator 
+ℋ̂𝑘= 𝐵2|𝐤|2𝐼̂ +
+(
+ 
+ 
+𝑀−𝐵|𝐤|2
+𝐴(−𝑖𝑘𝑥+ 𝑘𝑦)
+0
+0
+𝐴(𝑖𝑘𝑥+ 𝑘𝑦)
+−𝑀+ 𝐵|𝐤|2
+0
+0
+0
+0
+𝑀−𝐵|𝐤|2
+𝐴(−𝑖𝑘𝑥−𝑘𝑦)
+0
+0
+𝐴(𝑖𝑘𝑥−𝑘𝑦)
+−𝑀+ 𝐵|𝐤|2 )
+ 
+ .         (2) 
+ 
+Here, an energy shift 𝜔0, equal to the frequency of the Dirac point for the unperturbed lattice, was 
+introduced so that the Dirac point arises at zero energy. In what follows we express frequency in 
+electron-volt units. In Eqs. (1) 𝑎̂𝒌,𝑙 and 𝑏̂𝒌,𝑙 (𝑎̂𝒌,𝑙
++ and 𝑏̂𝒌,𝑙
++ ) are the annihilation (creation) operators 
+for photons and excitons, respectively, and the label 𝒌 corresponds to the Bloch momentum of 
+photonic modes, 𝜔̃𝑒𝑥= 𝜔𝑒𝑥−𝜔0 is the exciton frequency shifted by 𝜔0, and 𝑔(𝒌,𝑙,𝑚,𝑠) describes 
+the coupling between photonic and excitonic degrees of freedom in our system. We note that the 
+subscript 𝑚= ±1 simultaneously describes the orbital momentum of excitons and their valley 
+degree of freedom (K or K’) due to the valley polarization in the TMD monolayer. As described 
+in Supplements A and B, the 4x4 structure of the photonic Hamiltonian Eq. (2) incorporates both 
+spin 𝑠 and orbital momentum 𝑙 degrees of freedom of photonic modes, while the mass term 𝑀 
+reflects the band inversion. 
+The exciton-photon coupling is crucial for generating topolaritons 4. In our case, this coupling, 
+described by the 2x4 matrix  
+𝑔(𝒌,𝑙,𝑚,𝑠) = (
+𝑞𝑝+
+𝑞𝑑+
+0
+0
+0
+0
+𝑞𝑝−
+𝑞𝑑−),                                           (3) 
+ensures that angular momentum is conserved, which is reflected by the 𝛿𝑠,𝑚 factors in Eq. (1), and 
+𝑞𝑝+ = 𝑞𝑝−, 𝑞𝑑+ = 𝑞𝑑− when the time-reversal  symmetry is preserved. This ensures that the spin-
+orbital coupling in the original photonic system is transferred to the exciton-polaritons once the 
+hybrid system is in the strong coupling regime. As shown below, and detailed in Supplement E, 
+the nonvanishing Berry flux in the topological photonic system introduces the (Berry) phase 
+winding into the interaction of photons and excitons. However, as opposed to the case of the 
+original proposal by Karzig et al.25, our system does not break the time-reversal symmetry, which 
+
+is responsible for the presence of the two time-reversal partners for both  photonic (𝑠= ±1) and 
+excitonic (𝑚= ±1) subsystems. Along with the valley polarized character of the exciton-photon 
+coupling (𝑠= 𝑚), this enables a completely new spin-Hall topolaritonic phase. 
+To show the emergence of winding responsible for the topolaritonic phase, we first focus on the 
+upper left (spin-up 𝑠= 1) block of the photonic Hamiltonian Eq. (2) and note that the respective 
+eigenstates have a (typical for Dirac systems) form |𝜓𝑠=1⟩~[1, 𝑓1(2)exp(±𝑖𝜃𝒌), 0,0]
+𝑇, where the 
+𝑓1(2) are the real-valued factors and the subscript 1(2) and the plus (minus) sign in the exponent, 
+correspond to the lower (upper) spin-up bands, respectively. Since the exciton-photon interactions 
+do not break the spin-degree of freedom, it makes it legitimate to focus only on spin-up 2x2 block 
+of the photonic Hamiltonian (2). Then, the respective Hamiltonian can be diagonalized by the 
+unitary transformation 𝑈̂~[1, 1; 𝑓1exp(𝑖𝜃𝒌) , 𝑓2exp(−𝑖𝜃𝒌)]. For simplicity, we will assume that 
+K-valley (𝑚= 1) exciton interacts only with the dipolar band (𝑞𝑝+ ≠0, 𝑞𝑑+ = 0), which, as seen 
+from the experimental results, is good approximation when the exciton frequency crosses only 
+with that band (also see Supplement E for the theoretical justification). By expanding the 
+transformation 𝑈̂ onto larger 3x3 Hilbert space to span the excitonic degree of freedom, we obtain 
+a new 3x3 unitary operator 𝑈̃̂ = 𝑑𝑖𝑎𝑔[𝑈̂, 1]. This new transformation diagonalizes the spin-up 
+photonic 2x2 block, it does not affect the exciton frequency, but it changes the coupling by adding 
+an extra phase 𝑔̃+ = 𝑈̂[𝑞𝑝+, 0] = [𝑞𝑝+,
+𝑞𝑝+exp(−𝑖𝜃𝒌)], which clearly shows the emergence of 
+winding similar to that in topolaritons with broken TR symmetry25. In our case, however, because 
+TR symmetry is not broken, we have another (spin-down) time-reversal topolaritonic partner 
+which experiences coupling with the opposite phase winding 𝑔̃−= [𝑞𝑝−
+𝑞𝑝−exp(𝑖𝜃𝒌)]. Our 
+calculations indeed confirm that this winding leads to the nonzero value of the spin-Chern numbers 
+of +1 and −1 for the spin-up and spin-down polaritons, respectively.  However, if the band 
+crossing takes place with the upper (quadrupolar) band (𝑞𝑑+ ≠0), it gives rise to the opposite 
+windings for the same spins, implying the reversal of signs of the spin-Chern numbers for spin-up 
+and spin-down bulk topolaritons.  
+In Fig. 1c we show the band structure calculated from the effective Hamiltonian Eq. (1) for the 
+case of the excitons crossing lower (dipolar) photonic bands. For the case of the expanded 
+(topological) photonic lattice, without coupling to excitons, the photonic bands are found to have 
+the spin-Chern numbers 𝐶𝑝ℎ= ±1 for the two lower bands and 𝐶𝑝ℎ= ∓1 for the two upper bands 
+of opposite spins. In agreement with our predictions, turning on the exciton-photon coupling leads 
+to the transition to the topolaritonic state. We observe that the strong coupling gives rise to the 
+avoided crossing of excitonic and photonic bands, while calculations of the spin-Chern numbers 
+for the excitonic bands yield nonzero values identical to those of the crossed photonic bands, i.e. 
+𝐶𝑒𝑥= ±1. 
+Below we focus on the experimental realization of two scenarios, when crossing of the excitons 
+occurs with the lower (dipolar) photonic band (i) inside the band, and (ii) at the edge of the band. 
+While in both cases the strong coupling leads to avoided crossing of excitonic and photonic bands, 
+and to the formation of topolaritonic phase, the degree of excitonic fraction in the resultant edge 
+states is different.  
+
+Band structure calculations for the first scenario (obtained with the tight-binding model (TBM) as 
+described in Supplement A) are shown in Fig. 1d, where the degree of the excitonic component of 
+the modes is encoded in the color of the bands. As expected for this scenario, the flat section of 
+the second band (the remnant of the excitonic flat bands) is close to 100% excitonic, but excitonic 
+fraction fades away as we move into the parabolic portion of the band (the reminiscent of the 
+dipolar photonic band). Since for the original topological photonic system the major contribution 
+to the spin-Chern number stems from the Berry curvature near the tip of this parabolic band in the 
+proximity of Γ point, it is not surprising that it is carried over to the polaritonic band after the 
+interaction with excitons is introduced. Indeed, a direct calculation of the spin-Chern number 
+confirms that the topological charge is transferred from the photonic band to the polaritonic band 
+due to the strong coupling and the avoided crossing. As a consequence, the topolaritonic boundary 
+modes resemble those of the original photonic system; they are crossing the stop band, but also 
+experience an additional bending towards the flat portion of the bulk polaritonic bands. It is near 
+this flat portion where their polaritonic content reaches maximal values, while the modes appear 
+to be almost completely photonic in the middle and at the upper edge of the topological bandgap. 
+For the second scenario, the excitonic bands touch the tip of the edge of the lower (dipolar) 
+topological photonic bands at the Γ point of the photonic Brillouin zone. Exciton-photon 
+interactions for this case again give rise to the avoided crossing and slight upward and downward 
+curving of the bulk bands. This special situation allows for an exact analytical treatment which 
+shows that the both bands appear to be ~50% excitonic. The phase winding in the interaction 
+between excitons and photons in this case renders the polaritonic band topological, while the 
+photonic band loses its topological properties (Supplement E). Remarkably, this scenario also 
+yields topological boundary states with large excitonic components. Indeed, as can be seen from 
+Fig. 1e, the topolaritonic boundary modes appear to be highly excitonic in a wide range of 
+wavenumbers and energies below the mid-gap frequency, and even have a significant excitonic 
+fraction in the mid-gap and at higher frequencies. 
+Experimental results 
+The design of our topological photonic metasurface was optimized to exhibit topological band 
+crossing in the vicinity of the exciton resonance in MoSe2 and to facilitate tuning of the crossing 
+frequency by the temperature. The resultant band structures for optimized shrunken (trivial) and 
+expanded (topological) metasurfaces, calculated in COMSOL Multiphysics finite element method 
+(FEM) solver, are shown in Fig. 1b. The final designs were fabricated by patterning Silicon on 
+Insulator (SOI) substrates with the use of e-beam lithography followed by reactive ion etching. 
+The details of the fabrication techniques used can be found in Methods. The fabricated samples 
+consist of multiple shrunken and expanded regions forming an array armchair-shaped domain 
+walls68. The bulk regions of 10 periods were confirmed to be wide enough to eliminate possible 
+coupling between the edge states confined at the domain walls. The proximity of one of such the 
+domain walls separating topological and trivial regions is shown in an SEM image Fig. 2a.  
+While multiple samples were fabricated, here we describe two samples corresponding to the 
+two scenarios described in the theoretical section. The selected samples were picked making sure 
+that the exciton resonance in MoSe2 (𝜔≈1.65 eV at 7K) would cross the lower-frequency 
+
+photonic bands, either through or near the edge of the band at the Γ-point of the photonic band 
+structure. Optical microscope images of the respective samples are shown in Figs. 2b and c, and 
+correspond respectively to (i) the case of the MoSe2 monolayer on top of the metasurface with 
+subsequent transfer of a 12 nm hBN layer and (ii) the case of a 12 nm hBN spacer placed on the 
+metasurface with subsequent transfer of the MoSe2 monolayer on top of it. The boundaries of both 
+MoSe2 monolayers and hBN flakes on top of the metasurfaces are indicated by color lines in Figs. 
+2b,c. We note that the small thickness of hBN monolayer did not affect the coupling strength in 
+the two scenarios, unlike in other cases with thicker hBN (Supplement G). However, due to 
+relatively high refractive index of hBN, even a 12 nm layer led to a noticeable spectral redshift of 
+the photonic bands, which we employed for high-precision control of the position of topological 
+gap with respect to the exciton.  
+The semi-leaky character of the photonic and polaritonic bands allows their optical 
+characterization by the back focal (Fourier) plane imaging in our custom-built experimental setup, 
+which enables extraction of the band diagrams in frequency-momentum space at cryogenic 
+temperatures (see Methods for details on the experimental techniques used).  
+ 
+Fig. 3| Formation of topolaritonic bands and edge states after the introduction of MoSe2 exciton. a 
+and c, angle-resolved reflectance measured from the vicinity of the domain wall of a metasurface without 
+MoSe2 for TE and TM polarization, respectively, which reveal predominantly bulk and edge spectra, 
+
+respectively. b and d, reflectance maps after the transfer of 12 nm hBN spacer and a MoSe2 monolayer on 
+top of the metasurface demonstrating strong coupling topolaritonic regime and the respective bulk and edge 
+topolaritonic bands. 
+We first studied the sample without the Van der Waals heterostructure. As seen in Fig. 3a, 
+which corresponds to the case of dominating bulk spectrum, the photonic lattice indeed exhibits a 
+photonic band gap (~1.7-1.8 eV), while Fig. 3b reveals two gapless modes inside the bulk bandgap, 
+which correspond to the spin-up and spin-down topological photonic edge states propagating along 
+the domain wall in the opposite directions. The transfer of a 12 nm hBN flake followed by a MoSe2 
+monolayer (Fig. 3c,d) to the structure leads to the appearance of the flat excitonic band crossing 
+the lower photonic band of the topological metasurface approximately 0.07 eV below the band 
+edge. These experimental spectra clearly reveal the anti-crossing behavior between excitonic and 
+photonic bands with Rabi frequency of Ω𝑅= 0.02 (obtained by fitting the data to the theoretical 
+model), manifesting the strong coupling regime and the formation of topological bulk states, and, 
+more importantly, of the formation of the topological edge polaritons. As an important indication 
+of the polaritonic nature of the edge states in Fig. 3d, we notice that the respective bands 
+asymptotically approach the polaritonic bulk band. In agreement with the bulk boundary 
+correspondence4,72, this result confirms that the topological invariants, i.e., the spin-Chern 
+numbers, were transferred to the respective upper polaritonic bands from the former photonic band 
+due to the strong coupling regime. Accordingly, the lack of edge states within the bandgap between 
+upper and lower polaritons (former excitonic and photonic bands) further evidences that the spin-
+Chern number of the lower band is zero due to this transfer. 
+ 
+Fig. 4| One-way propagation of circularly polarized edge topolaritons along the domain walls. Two 
+topolaritonic metasurfaces integrated with MoSe2: with exciton deep inside the photonic bulk mode (top 
+row) and at its edge (bottom row). a-d Experimental images for the case of exciton frequency deep in bulk 
+and at edge with different circular polarizations between a and b, as well as c and d. e-h Corresponding 
+case in TBM/CMT excitation model with fitting parameters emulating experiments. e and g are the photonic 
+part of excited states, while f and h are excitonic components, for the two cases.  
+Perhaps the most valuable property of spin-Hall topological systems is the one-way spin-
+polarized character of their topological boundary states. While this property was observed 
+
+experimentally in photonic structures, a similar property should also emerge in spin-polarized 
+topolaritonic boundary modes. However, in our case the valley-polarization in the TMD 
+monolayer, along with the selective interaction of photons of particular handedness with the 
+excitons at a particular valley, provides an opportunity to entangle the photonic spin and orbital 
+degrees of freedom and valley degree of freedom in MoSe2. Therefore, in addition to the possibility 
+of directional (one-way) excitation of edge topolaritons by circularly polarized light, we ensure 
+that their excitonic component in the TMD monolayer is also valley polarized. Therefore, as a next 
+step we collected the back focal plane reflectance spectra with left and right circularly polarized 
+beams focused on the domain wall. The results depicted in Figs. 4a,b confirm the one-way nature 
+of the edge topolaritons. The numerical model of the supercell with 10 topological and 10 trivial 
+unit cells separated by the domain wall based on TBM/CMT modes was used to fit this structure 
+with the results plotted in Fig. 4e,f which show photonic and excitonic components, respectively, 
+in the vicinity (four unit cells) to the domain wall, excited by circularly polarized incident field. 
+As expected, the one-way edge state has a strong excitonic component (Fig. 4f), which reaches 
+nearly 100% near the exciton resonance and gradually fades away at higher energies where the 
+photonic component (Fig. 4e) starts to dominate. Nonetheless, the excitonic component is retained 
+and can be as high as 7% midgap, near the crossing between forward and backward edge states, 
+for the case in Fig. 4 
+Next, we performed measurements on the second sample, with MoSe2 placed right on top of 
+the metasurface and hBN transferred on top to ensure similar dielectric environment as for the 
+previous sample (the same spectral shift of photonic bands). The metasurface itself, however, was 
+scaled accordingly to ensure that the exciton resonance is aligned with the very edge of the 
+photonic band at the Γ-point of the photonic Brillouin zone. The corresponding measured band 
+diagrams, shown in Figs. 4c,d, reveal that the upper polaritonic band resembles the excitonic flat 
+band curving up due to the interaction between excitonic and photonic bands. The former photonic 
+band, in turn, is pushed down, to yield the lower polariton. A complete polaritonic bandgap with 
+Rabi frequency of Ω𝑅= 0.033 eV separates these upper and lower bulk polaritons. As follows 
+from our theoretical analysis using TBM/CMT model, in this case the avoided crossing should 
+again yield one-way spin-polarized topolaritonic boundary states, but with even higher valley 
+polarized excitonic component. The experimental results in Figs. 4c,d confirm that the bandgap 
+hosts two counterpropagating spin-polarized one-way boundary states, with the forward and 
+backward states that can be excited only with the circularly polarized light of proper helicity. 
+Theoretical TBM/CMT model used to fit this scenario confirms the presence of one-way 
+topolaritonic edge states with high degree of excitonic component, indicating that the edge states 
+also carry a significant valley polarization along with the photonic spin, and polaritonic component 
+can be as high as 20% midgap at the crossing between forward and backward edge states. 
+Finally, we showed tuning of the topolaritonic regime by shifting the frequency of the exciton 
+resonance by changing the ambient temperature. The corresponding results in Fig. 5 show the cases 
+of excitation with linearly polarized source at T=7K, 100K, and 200K, which results in the change 
+of the spectral position of exciton with respect to the topological band edge  affecting the degree 
+of excitonic component of the edge state. Besides the possibility of tuning, it is notable that, even 
+at relatively high temperatures, the excitons and photons exhibit strong coupling leading to the 
+
+emergence of a topolaritonic quantum spin-Hall-like phase, hinting to the possibility of controlling 
+the degree of valley polarization of topological exciton-polaritons by temperature, of great interest 
+for valleytronic applications. 
+ 
+Fig. 5| Tuning topolaritons dispersion through temperature control over the exciton frequency. The 
+dispersion of the bulk and edge states extracted from the back focal plane TM polarized reflectance maps 
+at a T=7K, corresponding to the exciton frequency of ~1.65 eV, b T=100K, corresponding to the exciton 
+frequency of ~1.63 eV, and c T=100K, corresponding to the exciton frequency of ~1.61 eV.  
+ 
+Conclusions 
+To summarize, here we have introduced a new approach to engineer the topological polaritonic 
+phases with preserved time-reversal symmetry by strongly coupling topological photonic systems 
+with exitonic degrees of freedom in 2D materials. The strong in-plane polarizability and, more 
+importantly, the presence of two time-reversal partner excitons at K and K’ valleys in the 2D 
+semiconductors, leads to strong coupling and avoided crossing behavior accompanied by the 
+emergence of effective winding and topological transition to the topolaritonic spin-Hall phase. 
+Time reversal symmetry and conservation of angular momentum in the system ensures that the 
+excitons with opposite orbital momenta couple with photons of respective spins, thus ensuring the 
+formation of two time-reversal partner topolaritonic bulk bands carrying nonzero spin-Chern 
+numbers. This gives rise to the emergence of spin-polarized one-way edge topolaritons, which, at 
+the same time, carry valley-polarized polaritonic component. 
+Our work paves the way to engineering novel topological phases in hybrid photonic-excitonic 
+structures by enriching these systems with additional degrees of freedom inherited from their solid-
+state component, such as valley degree of freedom in TMDs. It has clear advantages over the 
+conventional approach based on semiconductor heterostructures since 2D materials support a 
+broad range of excitations with a variety of internal degrees of freedom and are easy to integrate 
+into topological photonic systems. Thus, this concept can be extended to a wide range of solid-
+state systems hosting different excitation, e.g., phonons, polarons, magnons and spin-waves, which 
+can be devised to interact with various topological photonic systems, e.g. regular and higher-order 
+topological insulators, with and without time-reversal symmetry, yielding unprecedented 
+topological phases and novel ways to control matter with light in a robust and a resilient manner. 
+Strong and resilient light-matter interactions in such systems will facilitate enhanced nonlinear 
+
+effects and novel quantum effects involving half-light and half-mater excitations, which can be of 
+immense value for various classical and emerging quantum applications. 
+ 
+Methods 
+Sample fabrication: 
+A triangular lattice formed by the hexamers of triangular-shaped holes was fabricated on the 
+Silicon-on-Insulator substrates (75 nm of Si, 2 μm of SiO2) with the use of E-beam lithography 
+(Elionix ELS-G100). First, the substrates were spin-coated with e-beam resist ZEP520A of 
+approximately 170 nm thickness and then baked for 4 minutes at 180°C.  Next, gold film 15nm 
+thick was sputtered on top of resist. E-beam lithography exposure was followed by gold etch and 
+the development process in n-Amyl Acetate cooled to 0°C for approximately 35 sec. Then, 
+anisotropic plasma etching of silicon was conducted in The Oxford PlasmaPro System ICP by a 
+recipe based on C4F8/SF6 gases. Triangular shaped holes were etched to the depth of about 75 nm 
+at temperature 5°С etching with rate about 1.5 nm/sec. Finally, the residue of resist was removed 
+by sample immersion into NMP heated to 60 °С. 
+A monolayer of MoSe2 TMD material was exfoliated onto a thick PDMS stamp using standard 
+tape technique and transferred to the substrate by the custom-built transfer stage. The monolayer 
+was annealed at 350oC for 2 hours to remove polymer residue from the transfer process.  Further, 
+some of the monolayers were encapsulated with a 12 nm hBN layer and annealed again at 350oC 
+for another 2 hours.  
+Experimental set up: 
+Angle-resolved reflectance measurements were performed in a back focal plane configuration with 
+a slit spectrometer coupled to a liquid-nitrogen-cooled imaging CCD camera (Princeton 
+Instruments SP2500+PyLoN), using white light from a halogen lamp for illumination. The sample 
+was mounted in an ultra-low-vibration closed-cycle helium cryostat (Advanced Research Systems) 
+and maintained at a controllable temperature down to 7 K. To resolve the topological edge modes, 
+we used a slit-type spatial filter in the image plane of the detection channel that allowed to collect 
+signal only from the vicinity of a single domain wall. The measured angle-resolved reflectivity 
+maps were post-processed to suppress the Fabry-Pérot background originating from the bottom 
+silicon layer of the SOI substrate (see Supplement F).  
+Data availability 
+Data that are not already included in the paper and/or in the Supplementary Information are 
+available on request from the authors. 
+Acknowledgements  
+The work was supported by the National Science Foundation with grants No. DMR-1809915 and 
+NSF QII TAQS OMA-1936351, by the Defense Advanced Research Project Agency Nascent 
+
+Program, and by the Simons Foundation. The work on transferring TMD monolayers and hBN 
+crystals on top of metasurfaces was supported by the Ministry of Science and Higher Education of 
+Russian Federation, goszadanie no. 2019-1246 and megagrant 14.Y26.31.0015. Optical 
+measurements were funded by RFBR, project number 20-32-70185. DNK and MSS acknowledge 
+the support from UK EPSRC grants EP/R04385X/1 and EP/N031776/1.  
+ 
+Author contributions  
+All authors contributed extensively to the work presented in this paper. ML and IS contributed 
+equally to this work. 
+ 
+Author Information  
+The authors declare no competing interests. Correspondence and requests for materials should be 
+addressed to Alexander B. Khanikaev. 
+ 
+References 
+1. 
+Stav, T. et al. Quantum entanglement of the spin and orbital angular momentum of 
+photons using metamaterials. Science (80-. ). 361, 1101–1104 (2018). 
+2. 
+Wang, K. et al. Quantum metasurface for multiphoton interference and state 
+reconstruction. Science (80-. ). 361, 1104–1108 (2018). 
+3. 
+Bekenstein, R. et al. Quantum metasurfaces with atom arrays. Nat. Phys. 16, 676–681 
+(2020). 
+4. 
+Kane, C. L. & Mele, E. J. Quantum Spin hall effect in graphene. Phys. Rev. Lett. 95, 
+226801 (2005). 
+5. 
+Bernevig, B. A., Hughes, T. L. & Zhang, S. C. Quantum spin hall effect and topological 
+phase transition in HgTe quantum wells. Science (80-. ). 314, 1757–1761 (2006). 
+6. 
+Lu, L., Joannopoulos, J. D. & Soljačić, M. Topological photonics. Nature Photonics vol. 8 
+821–829 (2014). 
+7. 
+Ozawa, T. et al. Topological photonics. Rev. Mod. Phys. 91, 015006 (2019). 
+8. 
+Khanikaev, A. B. & Shvets, G. Two-dimensional topological photonics. Nat. Photonics 
+11, 763–773 (2017). 
+9. 
+Rechtsman, M. C. et al. Photonic Floquet topological insulators. Nature 496, 196–200 
+(2013). 
+10. 
+Wang, Z., Chong, Y., Joannopoulos, J. D. & Soljačić, M. Observation of unidirectional 
+backscattering-immune topological electromagnetic states. Nature 461, 772–775 (2009). 
+
+11. 
+Yang, Y. et al. Realization of a three-dimensional photonic topological insulator. Nature 
+565, 622–626 (2019). 
+12. 
+Li, M. et al. Higher-order topological states in photonic kagome crystals with long-range 
+interactions. Nat. Photonics (2020) doi:10.1038/s41566-019-0561-9. 
+13. 
+Hafezi, M., Mittal, S., Fan, J., Migdall, A. & Taylor, J. M. Imaging topological edge states 
+in silicon photonics. Nat. Photonics 7, 1001–1005 (2013). 
+14. 
+Chen, W. J. et al. Experimental realization of photonic topological insulator in a uniaxial 
+metacrystal waveguide. Nat. Commun. 5, 1–7 (2014). 
+15. 
+Bellec, M., Kuhl, U., Montambaux, G. & Mortessagne, F. Manipulation of edge states in 
+microwave artificial graphene. New J. Phys. 16, 113023 (2014). 
+16. 
+Cheng, X. et al. Robust reconfigurable electromagnetic pathways within a photonic 
+topological insulator. Nat. Mater. 15, 542–548 (2016). 
+17. 
+Barik, S. et al. A topological quantum optics interface. Science (80-. ). 359, 666–668 
+(2018). 
+18. 
+Shalaev, M. I., Walasik, W., Tsukernik, A., Xu, Y. & Litchinitser, N. M. Robust 
+topologically protected transport in photonic crystals at telecommunication wavelengths. 
+Nat. Nanotechnol. 14, 31–34 (2019). 
+19. 
+Noh, J. et al. Topological protection of photonic mid-gap defect modes. Nat. Photonics 
+12, 408–415 (2018). 
+20. 
+Mittal, S. et al. Photonic quadrupole topological phases. Nat. Photonics 13, 692–696 
+(2019). 
+21. 
+St-Jean, P. et al. Lasing in topological edge states of a one-dimensional lattice. Nat. 
+Photonics 11, 651–656 (2017). 
+22. 
+Bandres, M. A. et al. Topological insulator laser: Experiments. Science (80-. ). 359, 
+eaar4005 (2018). 
+23. 
+Bahari, B. et al. Nonreciprocal lasing in topological cavities of arbitrary geometries. 
+Science (80-. ). 358, 636–640 (2017). 
+24. 
+Shao, Z. K. et al. A high-performance topological bulk laser based on band-inversion-
+induced reflection. Nat. Nanotechnol. 15, 67–72 (2020). 
+25. 
+Karzig, T., Bardyn, C. E., Lindner, N. H. & Refael, G. Topological polaritons. Phys. Rev. 
+X 5, 031001 (2015). 
+26. 
+Klembt, S. et al. Exciton-polariton topological insulator. Nature 562, 552–556 (2018). 
+27. 
+Sala, V. G. et al. Spin-Orbit coupling for photons and polaritons in microstructures. Phys. 
+Rev. X 5, 011034 (2015). 
+28. 
+Milićević, M. et al. Orbital Edge States in a Photonic Honeycomb Lattice. Phys. Rev. Lett. 
+118, 107403 (2017). 
+
+29. 
+Shalaev, M. I., Walasik, W. & Litchinitser, N. M. Optically tunable topological photonic 
+crystal. Optica 6, 839 (2019). 
+30. 
+Ota, Y. et al. Active topological photonics. Nanophotonics 9, 547–567 (2020). 
+31. 
+Lumer, Y., Plotnik, Y., Rechtsman, M. C. & Segev, M. Self-localized states in photonic 
+topological insulators. Phys. Rev. Lett. 111, 243905 (2013). 
+32. 
+Smirnova, D., Leykam, D., Chong, Y. & Kivshar, Y. Nonlinear topological photonics. 
+Appl. Phys. Rev. 7, 021306 (2020). 
+33. 
+Mukherjee, S. & Rechtsman, M. C. Observation of Floquet solitons in a topological 
+bandgap. Science (80-. ). 368, 856–859 (2020). 
+34. 
+Rechtsman, M. C. et al. Topological protection of photonic path entanglement. Optica 3, 
+925 (2016). 
+35. 
+Mittal, S., Orre, V. V. & Hafezi, M. Topologically robust transport of entangled photons 
+in a 2D photonic system. Opt. Express 24, 15631 (2016). 
+36. 
+Liu, X. et al. Strong light-matter coupling in two-dimensional atomic crystals. Nat. 
+Photonics 9, 30–34 (2014). 
+37. 
+Dufferwiel, S. et al. Exciton–polaritons in van der Waals heterostructures embedded in 
+tunable microcavities. Nat. Commun. 6, 8579 (2015). 
+38. 
+Schneider, C., Glazov, M. M., Korn, T., Höfling, S. & Urbaszek, B. Two-dimensional 
+semiconductors in the regime of strong light-matter coupling. Nature Communications 
+vol. 9 1–9 (2018). 
+39. 
+Chikkaraddy, R. et al. Single-molecule strong coupling at room temperature in plasmonic 
+nanocavities. Nature 535, 127–130 (2016). 
+40. 
+Basov, D. N., Fogler, M. M. & García De Abajo, F. J. Polaritons in van der Waals 
+materials. Science vol. 354 (2016). 
+41. 
+Leykam, D. & Chong, Y. D. Edge Solitons in Nonlinear-Photonic Topological Insulators. 
+Phys. Rev. Lett. 117, 143901 (2016). 
+42. 
+Harari, G. et al. Topological insulator laser: Theory. Science (80-. ). 359, eaar4003 (2018). 
+43. 
+Blanco-Redondo, A., Bell, B., Oren, D., Eggleton, B. J. & Segev, M. Topological 
+protection of biphoton states. Science (80-. ). 362, 568–571 (2018). 
+44. 
+Tambasco, J. L. et al. Quantum interference of topological states of light. Sci. Adv. 4, 
+eaat3187 (2018). 
+45. 
+Kartashov, Y. V. & Skryabin, D. V. Bistable Topological Insulator with Exciton-
+Polaritons. Phys. Rev. Lett. 119, 253904 (2017). 
+46. 
+Kartashov, Y. V. & Skryabin, D. V. Modulational instability and solitary waves in 
+polariton topological insulators. Optica 3, 1228 (2016). 
+
+47. 
+Peano, V., Houde, M., Marquardt, F. & Clerk, A. A. Topological quantum fluctuations 
+and traveling wave amplifiers. Phys. Rev. X 6, 041026 (2016). 
+48. 
+Walker, P. M. et al. Ultra-low-power hybrid light-matter solitons. Nat. Commun. 6, 1–7 
+(2015). 
+49. 
+Emmanuele, R. P. A. et al. Highly nonlinear trion-polaritons in a monolayer 
+semiconductor. (2019). 
+50. 
+Spiller, T. P. et al. Quantum computation by communication. New J. Phys. (2006) 
+doi:10.1088/1367-2630/8/2/030. 
+51. 
+Chudzicki, C., Chuang, I. L. & Shapiro, J. H. Deterministic and cascadable conditional 
+phase gate for photonic qubits. Phys. Rev. A - At. Mol. Opt. Phys. 87, 042325 (2013). 
+52. 
+Minzioni, P. et al. Roadmap on all-optical processing. J. Opt. (United Kingdom) (2019) 
+doi:10.1088/2040-8986/ab0e66. 
+53. 
+Delteil, A. et al. Towards polariton blockade of confined exciton–polaritons. Nature 
+Materials vol. 18 219–222 (2019). 
+54. 
+Cao, T. et al. Valley-selective circular dichroism of monolayer molybdenum disulphide. 
+Nat. Commun. 3, (2012). 
+55. 
+Xiao, D., Liu, G. Bin, Feng, W., Xu, X. & Yao, W. Coupled spin and valley physics in 
+monolayers of MoS 2 and other group-VI dichalcogenides. Phys. Rev. Lett. 108, 1–5 
+(2012). 
+56. 
+Mak, K. F., He, K., Shan, J. & Heinz, T. F. Control of valley polarization in monolayer 
+MoS2by optical helicity. Nat. Nanotechnol. 7, 494–498 (2012). 
+57. 
+Guddala, S., Bushati, R., Li, M., Khanikaev, A. B. & Menon, V. M. Valley selective 
+optical control of excitons in 2D semiconductors using a chiral metasurface [Invited]. Opt. 
+Mater. Express 9, 536 (2019). 
+58. 
+Chervy, T. et al. Room Temperature Chiral Coupling of Valley Excitons with Spin-
+Momentum Locked Surface Plasmons. ACS Photonics 5, 1281–1287 (2018). 
+59. 
+Gong, S. H., Alpeggiani, F., Sciacca, B., Garnett, E. C. & Kuipers, L. Nanoscale chiral 
+valley-photon interface through optical spin-orbit coupling. Science (80-. ). 359, 443–447 
+(2018). 
+60. 
+Sie, E. J. et al. Valley-selective optical Stark effect in monolayer WS2. Nat. Mater. 14, 
+290–294 (2015). 
+61. 
+Onga, M., Zhang, Y., Ideue, T. & Iwasa, Y. Exciton Hall effect in monolayer MoS 2. Nat. 
+Mater. 16, 1193–1197 (2017). 
+62. 
+Sun, Z. et al. Optical control of room-temperature valley polaritons. Nat Phot. 11, 491–
+496 (2017). 
+63. 
+Sun, L. et al. Separation of valley excitons in a MoS2 monolayer using a subwavelength 
+asymmetric groove array. Nat. Photonics 13, 180–184 (2019). 
+
+64. 
+Wu, L. H. & Hu, X. Scheme for achieving a topological photonic crystal by using 
+dielectric material. Phys. Rev. Lett. 114, 223901 (2015). 
+65. 
+Yang, Y. et al. Visualization of a Unidirectional Electromagnetic Waveguide Using 
+Topological Photonic Crystals Made of Dielectric Materials. Phys. Rev. Lett. 120, 217401 
+(2018). 
+66. 
+Barik, S., Karasahin, A., Mittal, S., Waks, E. & Hafezi, M. Chiral quantum optics using a 
+topological resonator. Phys. Rev. B 101, 205303 (2020). 
+67. 
+Barik, S., Miyake, H., DeGottardi, W., Waks, E. & Hafezi, M. Two-dimensionally 
+confined topological edge states in photonic crystals. New J. Phys. 18, 113013 (2016). 
+68. 
+Gorlach, M. A. et al. Far-field probing of leaky topological states in all-dielectric 
+metasurfaces. Nat. Commun. 9, 1–8 (2018). 
+69. 
+Kravtsov, V. et al. Nonlinear polaritons in a monolayer semiconductor coupled to optical 
+bound states in the continuum. Light: Science and Applications vol. 9 (2020). 
+70. 
+Peng, S. et al. Probing the Band Structure of Topological Silicon Photonic Lattices in the 
+Visible Spectrum. Phys. Rev. Lett. 122, 117401 (2019). 
+71. 
+Parappurath, N., Alpeggiani, F., Kuipers, L. & Verhagen, E. Direct observation of 
+topological edge states in silicon photonic crystals: Spin, dispersion, and chiral routing. 
+Sci. Adv. 6, eaaw4137 (2020). 
+72. 
+Hatsugai, Y. Chern number and edge states in the integer quantum Hall effect. Phys. Rev. 
+Lett. 71, 3697–3700 (1993). 
+ 
+ 
+ 
+
+Supplemental materials for Experimental observation of topological exciton-
+polaritons in transition metal dichalcogenide monolayers 
+Mengyao Li1,2,3*, Ivan Sinev4*, Fedor Benimetskiy4, Tatyana Ivanova4, Ekaterina Khestanova4, Svetlana 
+Kiriushechkina1, Anton Vakulenko1, Sriram Guddala1,2, Maurice Skolnick4,5, Vinod Menon2,3, Dmitry 
+Krizhanovskii4,5, Andrea Alù6,3,1, Anton Samusev4, Alexander B. Khanikaev1,2,3 
+1Department of Electrical Engineering, City College of New York, New York, NY, USA 
+2Physics Department, City College of New York, New York, NY, USA 
+3Physics Program, Graduate Center of the City University of New York, New York, NY, USA 
+4Department of Physics and Engineering, ITMO University, Saint Petersburg, Russia 
+5Department of Physics and Astronomy, University of Sheffield, Sheffield S3 7RH, UK 
+6Photonics Initiative, Advanced Science Research Center, City University of New York, New York, NY, USA 
+*These authors contributed equally to the present work 
+A. Tight-binding model calculation 
+The breathing (expanded or shrunken) honeycomb lattice has 6 sites in a single unit cell and is 
+described (in momentum Bloch space) by the following Hamiltonian, which follows directly from 
+the tight binding model 1: 
+𝐻0 =
+(
+ 
+ 
+ 
+ 
+ 
+ 
+𝜔0
+−𝜅
+0
+−𝑗𝑒−𝑖𝑘𝑥
+0
+−𝜅
+−𝜅
+𝜔0
+−𝜅
+0
+−𝑗𝑒𝑖(−1
+2𝑘𝑥+√3
+2 𝑘𝑦)
+0
+0
+−𝜅
+𝜔0
+−𝜅
+0
+−𝑗𝑒𝑖(1
+2𝑘𝑥+√3
+2 𝑘𝑦)
+−𝑗𝑒𝑖𝑘𝑥
+0
+−𝜅
+𝜔0
+−𝜅
+0
+0
+−𝑗𝑒𝑖(1
+2𝑘𝑥−√3
+2 𝑘𝑦)
+0
+−𝜅
+𝜔0
+−𝜅
+−𝜅
+0
+−𝑗𝑒−𝑖(1
+2𝑘𝑥+√3
+2 𝑘𝑦)
+0
+−𝜅
+𝜔0
+)
+ 
+ 
+ 
+ 
+ 
+ 
+,(A1
+) 
+where 𝜔0  is on-site energy (frequency), which is set to be zero in what follows, 𝜅 and 𝑗 are 
+intracell and intercell coupling (hopping) coefficients, respectively, and 𝑘𝑥  and 𝑘𝑦  are the 
+components of the dimensionless (normalized by the lattice constant 𝑎0) Bloch vectors. 
+For simplicity, in what follows we apply k-p approximation near the Γ-point, where we introduce 
+a unitary transformation operator 
+𝑈6×6 =
+1
+√6
+(
+  
+ 
+−1
+1
+−1
+1
+−1
+1
+1
+1
+1
+1
+1
+1
+1
+𝑒𝑖𝜋/3
+𝑒2𝑖𝜋/3
+−1
+𝑒−2𝑖𝜋/3
+𝑒−𝑖𝜋/3
+1
+𝑒2𝑖𝜋/3
+𝑒−2𝑖𝜋/3
+1
+𝑒2𝑖𝜋/3
+𝑒−2𝑖𝜋/3
+1
+𝑒−𝑖𝜋/3
+𝑒−2𝑖𝜋/3
+−1
+𝑒2𝑖𝜋/3
+𝑒𝑖𝜋/3
+1
+𝑒−2𝑖𝜋/3
+𝑒2𝑖𝜋/3
+1
+𝑒−2𝑖𝜋/3
+𝑒2𝑖𝜋/3 )
+  
+ 
+,      (A2)  
+
+This operator transforms the original Haimltonian breathing honeycomb lattice 𝐻𝑐𝑖𝑟=
+𝑈6×6𝐻0𝑈6×6
+−1 , and diagonalizes it at the Γ  point with the left and right circularly polarized 
+eigenstates 𝑝± and 𝑑±, where the p and d letters correspond to the orbital momentum of photon of 
+𝑙= 1 (dipole) and 𝑙= 2 (quadrupole), respectively, and the subscript indicates handedness (spin 
+𝑠= ±1) of the modes.  
+We then expand the Hilbert space to span the excitonic degrees of freedom with the orbital 
+momentum 𝑚= ±1  at K/K’ valleys of the TMD monolayer, respectively. To this aim the 
+Hamiltonian dimensions are increases by 2 (from 6x6 to 8x8) by adding two exciton states with 
+energies 𝜔+ ≡𝜔𝐿, 𝜔−≡𝜔𝑅, whose coupling to photonic degrees of freedom is characterized by 
+the coefficients 𝑞𝑝±, 𝑞𝑑±. Here for simplicity we consider only the case of coupling to the photonic 
+band of interest. We also note that the exciton dispersion can be neglected due the small values of 
+photon wavenumber compared to the exciton wavenumber, and the excitons are always considered 
+as having momentum close to K and K’ point in the TMD. 
+In the case we are discussing below the time-reversal symmetry is preserved, and, therefore, these 
+two excitonic states are always degenerate, 𝜔𝐿= 𝜔𝑅= 𝜔, and 𝑞𝑝(𝑑)+ = 𝑞𝑝(𝑑)−= 𝑞𝑝(𝑑). We thus 
+get an expression of non-dispersive excitonic Hamiltonian (“flat bands”): 
+𝐻𝑒𝑥= (𝜔𝐿
+0
+0
+𝜔𝑅) = 𝜔(1
+0
+0
+1).                   (A3) 
+It is known that these six photonic bands contain six different kind of modes: two singular modes, 
+two dipole modes and two quadrupole modes.  
+𝐻8×8
+𝑐
+= (𝐻𝑐𝑖𝑟
+𝑄
+𝑄†
+𝐻𝑒𝑥
+),                      (A4) 
+𝑄† = (0
+0
+𝑞𝑝
+𝑞𝑑
+0
+0
+0
+0
+0
+0
+𝑞𝑝
+𝑞𝑑),                  (A5) 
+where the form of 𝑄 is dictated by the conservation of the angular momentum 𝑠= 𝑚, that is the 
+photonic of the left 𝑠= 1 (right 𝑠= −1) helicity interact only with the excitons at K valley with 
+𝑚= 1 (K’ valley with 𝑚= −1) due to the valley polarization (also see Section D below). 
+The respective transformation matrix then assumes the following form in the extended Hilbert 
+space: 
+𝑈8×8 = (𝑈6×6
+0
+0
+𝐼2),                       (A6) 
+Then, in order to reveal the structure of excitons-photon interactions in the original basis, we 
+perform a reverse transformation back to original basis 
+𝐻8×8 = 𝑈8×8
+−1 𝐻8×8
+𝑐
+𝑈8×8 = (
+𝐻0
+𝑄𝑐
+𝑄𝑐
+†
+𝐻𝑒𝑥
+),                (A7) 
+and obtain  
+
+𝑄𝑐
+† =
+1
+√6 ∗(
+𝑞𝑝+ 𝑞𝑑
+𝑞1 +
+𝑞22
+𝑞𝑑
+𝑞12
+𝑞𝑝−𝑞2
+−𝑞𝑝+ 𝑞𝑑
+−𝑞1 +
+𝑞22
+𝑞𝑑
+−
+𝑞12
+𝑞𝑝−𝑞2
+𝑞𝑝+ 𝑞𝑑
+−
+𝑞12
+𝑞𝑝−𝑞2
+−𝑞1 +
+𝑞22
+𝑞𝑑
+−𝑞𝑝+ 𝑞𝑑
+𝑞12
+𝑞𝑝−𝑞2
+𝑞1 +
+𝑞22
+𝑞𝑑
+) (A8) 
+where 𝑞1 = (−1)
+1
+3𝑞𝑝  and 𝑞2 = (−1)
+1
+3𝑞𝑑 . This gives us the form of coupling between the 
+polaritonic bands and photonic bands with this 𝑄𝑐 coupling block.  
+By introducing interaction of polaritonic bands with the photonic bands in the Dirac cone (without 
+shrinking or expansion) states 𝑝± and 𝑑±, by placing them both mid-gap and to cross with the 
+upper bands, and we calculate the band structure of the resultant system. The respective results are 
+given in Fig. S1 and Fig. S2. 
+ 
+ 
+Fig. S1: Band structure of infinite lattice with polaritons obtained from TBM model for 
+exciton frequencies exactly at the Dirac point (mid-gap for shrunk expanded lattice). a and 
+b, unperturbed honeycomb lattice interacting with excitonic bands, q=0 (no interaction) and q=0.5 
+(with interaction) cases. c and d, topological (expanded) honeycomb lattice with excitonic states, 
+q=0 (no interaction) and q=0.5 (with interaction) cases. 
+
+ 
+Fig. S2: Band structure of infinite lattice with polaritons obtained from TBM for exciton 
+frequencies crossing the upper photonic bands. a and b, topological (expanded) photonic 
+honeycomb lattice with excitonic states, for q=0 (no interaction) and q=0.5 (with interaction), 
+respectively. 
+ 
+ 
+Fig. S3: Band structure of a supercell with 10 trivial and 10 topological unit cells with the 
+domain wall in the middle obtained from TBM for exciton frequencies crossing the upper 
+photonic bands. a, no coupling between exciton and photonic bands (𝑞= 0), b, a strong coupling 
+between polariton bands and photonic bands 𝑞= 1.5 , which is 60% of the average coupling 
+strength between sites (𝜅+ 𝑗)/2. 
+ 
+To observe the emergence of the edge states, we also preformed calculations for the honeycomb 
+supercell consisting of 10 shrunk (trivial) and 10 expanded (topological) unit cells, with the domain 
+wall in the middle. The results in Fig. S3 clearly show that the edge states are transferred from 
+photonic bandgap to the gap between the lower photonic bands and the new band corresponding 
+to the exciton-polaritons, while there’s no edge state at the upper gap, indicating the transfer of 
+
+topological invariant from the former photonic bulk band to the polaritonic band. This is indeed 
+confirmed by the direct calculation of the spin-Chern numbers for the new polaritonic bands, which 
+yields 𝐶𝑠= ±1 for the two bands. 
+ 
+B. Photonic treatment: plane wave expansion near the 𝚪 point and the Berry curvature and 
+spin-Chern number calculations 
+Without distortion (shrinkage or expansion), the band structure forms two Dirac cones at K and K′. 
+After the distortion is introduced, the Brillouin zone folding occurs, and four-fold degeneracy at 
+the Γ point is lifted and a gap opens. Following Ref. 1, we performed a plane-wave expansion 
+around Γ point and reduced the dimension of resultant matrix to 6x6 by getting rid of the two 
+singlet bands, and then further reduced the dimension of this matric to 3 by 3 matrix by focusing 
+on a particular block corresponding to 𝑠= 1. 
+In our system corresponding to experiment, electric field is in-plane, therefore we chose to work 
+with 𝐻𝑧 component. The Helmholtz equation for the respective photonic crystal then assumes the 
+following form 
+∇× (
+1
+𝜀(𝑥,𝑦) ∇×) 𝐻𝑧+ 𝑘0
+2𝐻𝑧= 0                  (B1) 
+where 𝑘0 =
+𝜔
+𝑐. In the following equations we replaced 𝑘0 with parameter 𝑝. 
+𝐻𝑧(𝐫) = ∑𝐻𝐺 𝑒𝑖(𝐆+𝐤)∙𝐫
+𝐺
+                     (B2) 
+1
+𝜀(𝐫) = ∑𝜅𝐺 𝑒𝑖𝐆∙𝐫
+𝐺
+                       (B3) 
+𝑘0
+2𝐻𝐺−∑
+𝜅𝐺−𝐺′ [(𝐺𝑥+ 𝑘𝑥)(𝐺𝑥
+′ + 𝑘𝑥) + (𝐺𝑦+ 𝑘𝑦)(𝐺𝑦
+′ + 𝑘𝑦)]𝐻𝐺′ = 0
+𝐺′
+  (B4) 
+By the integration 𝜅𝐺=
+1
+𝑆0 ∫
+1
+𝜀(𝑟) 𝑒−𝑖𝐆∙𝐫 𝑑𝒓 , we can obtain all orders of refractive index Fourier 
+components needed, 𝑆0 is the unit cell area. 𝐺=
+4𝜋
+√3𝑎 is the length of reciprocal lattice vectors, and 
+we dropped the subscript z for the magnetic field for simplicity as it is redundant. 
+ [𝜅0 𝑘2 −𝑝2]𝐻0 + 𝜅1[𝑘2 + 𝐺 ky]𝐻1 + 𝜅1 [𝑘2 + 𝐺(√3
+2 kx +
+1
+2 ky)] 𝐻2 + 𝜅1 [𝑘2 + 𝐺(√3
+2 kx −
+1
+2 ky)] 𝐻3 + 𝜅1(𝑘2 −𝐺 ky) 𝐻4 + 𝜅1 [𝑘2 + 𝐺(−√3
+2 kx −
+1
+2 ky)] 𝐻5 + 𝜅1 [𝑘2 + 𝐺(−√3
+2 kx +
+1
+2 ky)] 𝐻6 = 0 (B5.1) 
+ 𝜅1(𝑘2 + 𝐺ky)𝐻0 + [−𝑝2 + 𝜅0(𝑘2 + 2𝐺ky + 𝐺2)]𝐻1 + 𝜅1 [𝑘2 + 𝐺(√3
+2 kx +
+3
+2 ky) +
+1
+2 𝐺2] 𝐻2 +
+𝜅2 (𝑘2 + 𝐺(√3
+2 kx +
+1
+2 ky) −
+1
+2 𝐺2) 𝐻3 + 𝜅3(𝑘2 −𝐺2)𝐻4 + 𝜅2 (𝑘2 + 𝐺(−√3
+2 kx +
+1
+2 ky) −
+1
+2 𝐺2) 𝐻5 + 𝜅1 (𝑘2 + 𝐺(−√3
+2 kx +
+3
+2 ky) +
+1
+2 𝐺2) 𝐻6 = 0 (B5.2) 
+
+ 𝜅1 (𝑘2 + 𝐺(√3
+2 kx +
+1
+2 ky)) 𝐻0 + 𝜅1 (𝑘2 + 𝐺(√3
+2 kx +
+3
+2 ky) +
+1
+2 𝐺2) 𝐻1 + [−𝑝2 + 𝜅0 (𝑘2 +
+2𝐺(√3
+2 kx +
+1
+2 ky) + 𝐺2)] 𝐻2 + 𝜅1 (𝑘2 + √3𝐺kx +
+1
+2 𝐺2) 𝐻3 + 𝜅2 (𝑘2 + 𝐺(√3
+2 kx −
+1
+2 ky) −
+1
+2 𝐺2) 𝐻4 + 𝜅3(𝑘2 −𝐺2)𝐻5 + 𝜅2 (𝑘2 + 𝐺ky −
+1
+2 𝐺2) 𝐻6 = 0 (B5.3) 
+ 𝜅1 (𝑘2 + 𝐺(√3
+2 kx −
+1
+2 ky)) 𝐻0 + 𝜅2 (𝑘2 + 𝐺(√3
+2 kx +
+1
+2 ky) −
+1
+2 𝐺2) 𝐻1 + 𝜅1 (𝑘2 + √3 𝐺 kx +
+1
+2 𝐺2) 𝐻2 + [−𝑝2 + 𝜅0 (𝑘2 + 2𝐺(√3
+2 kx −
+1
+2 ky) + 𝐺2)] 𝐻3 + 𝜅1 (𝑘2 + 𝐺(√3
+2 kx −
+3
+2 ky) +
+1
+2 𝐺2) 𝐻4 + 𝜅2 (𝑘2 −𝐺ky −
+1
+2 𝐺2) 𝐻5 + 𝜅3(𝑘2 −𝐺2)𝐻6 = 0 (B5.4) 
+ 𝜅1(𝑘2 −𝐺ky)𝐻0 + 𝜅3(𝑘2 −𝐺2)𝐻1 + 𝜅2 (𝑘2 + 𝐺(√3
+2 kx −
+1
+2 ky) −
+1
+2 𝐺2) 𝐻2 + 𝜅1 (𝑘2 +
+𝐺(√3
+2 kx −
+3
+2 ky) +
+1
+2 𝐺2) 𝐻3 + [−𝑝2 + 𝜅0(𝑘2 −2𝐺ky + 𝐺2)]𝐻4 + 𝜅1 (𝑘2 + 𝐺(−√3
+2 kx −
+3
+2 ky) +
+1
+2 𝐺2) 𝐻5 + 𝜅2 (𝑘2 + 𝐺(−√3
+2 kx −
+1
+2 ky) −
+1
+2 𝐺2) 𝐻6 = 0 (B5.5) 
+ 𝜅1 (𝑘2 + 𝐺(−√3
+2 kx −
+1
+2 ky)) 𝐻0 + 𝜅2 (𝑘2 + 𝐺(−√3
+2 kx +
+1
+2 ky) −
+1
+2 𝐺2) 𝐻1 + 𝜅3(𝑘2 −
+𝐺2)𝐻2 + 𝜅2 (𝑘2 −𝐺ky −
+1
+2 𝐺2) 𝐻3 + 𝜅1 [𝑘2 + 𝐺(−√3
+2 kx −
+3
+2 ky) +
+1
+2 𝐺2] 𝐻4 + [−𝑝2 +
+𝜅0 (𝑘2 + 2𝐺(−√3
+2 kx −
+1
+2 ky) + 𝐺2)] 𝐻5 + 𝜅1 (𝑘2 −√3𝐺 kx +
+1
+2 𝐺2) 𝐻6 = 0 (B5.6) 
+ 𝜅1 (𝑘2 + 𝐺(−√3
+2 kx +
+1
+2 ky)) 𝐻0 + 𝜅1 (𝑘2 + 𝐺(−√3
+2 kx +
+3
+2 ky) +
+1
+2 𝐺2) 𝐻1 + 𝜅2 (𝑘2 + 𝐺ky −
+1
+2 𝐺2) 𝐻2 + 𝜅3(𝑘2 −𝐺2)𝐻3 + 𝜅2 (𝑘2 + 𝐺(−√3
+2 kx −
+1
+2 ky) −
+1
+2 𝐺2) 𝐻4 + 𝜅1 (𝑘2 −𝐺√3kx +
+1
+2 𝐺2) 𝐻5 + [−𝑝2 + 𝜅0 (𝑘2 + 2𝐺(−√3
+2 kx +
+1
+2 ky) + 𝐺2)] 𝐻6 = 0 (B5.7). 
+These seven equations establish an effective Hamiltonian for our system. 
+We then performed a unitary transformation, 
+𝑈̂𝑃𝑊=
+1
+√3 
+(
+ 
+ 
+ 
+ 
+ 
+√3
+0
+0
+0
+0
+0
+0
+0
+0
+1
+0
+1
+0
+1
+0
+1
+0
+1
+0
+1
+0
+0
+0
+1
+0
+Exp[4𝜋𝑖3
+⁄ ]
+0
+Exp[2𝜋𝑖3
+⁄ ]
+0
+0
+1
+0
+Exp[2𝜋𝑖3
+⁄ ]
+0
+Exp[4𝜋𝑖3
+⁄ ]
+0
+1
+0
+Exp[4𝜋𝑖3
+⁄ ]
+0
+Exp[2𝜋𝑖3
+⁄ ]
+0
+0
+1
+0
+Exp[2𝜋𝑖3
+⁄ ]
+0
+Exp[4𝜋𝑖3
+⁄ ]
+0
+)
+ 
+ 
+ 
+ 
+ 
+ , (B6) 
+which block diagonalized this matrix into 3x3 and 4x4 blocks at Gamma point 
+
+𝐻̂3×3 = (
+−𝑝2
+0
+0
+0
+−𝑝2 + 𝐺2(𝜅0 −𝜅2)
+𝐺2(𝜅1 −𝜅3)
+0
+𝐺2(𝜅1 −𝜅3)
+−𝑝2 + 𝐺2(𝜅0 −𝜅2)
+),      (B7) 
+𝐻̂4×4 = (
+ℎ1𝑎
+0
+ℎ1𝑏
+0
+0
+ℎ1𝑎
+0
+ℎ1𝑏
+∗
+ℎ1𝑏
+∗
+0
+ℎ1𝑎
+0
+0
+ℎ1𝑏
+0
+ℎ1𝑎
+),                 (B8) 
+where ℎ1𝑎= −𝑝2 + 𝐺2(𝜅0 + 𝜅2/2) and ℎ1𝑏= (1 + 𝑖√3)𝐺2(𝜅1/2 + 𝜅3) . The 4x4 block H4×4 
+corresponds to the 4 bands forming the Dirac cone. 
+Addition of k-dependent term obtained from the 𝑘 dot 𝑝 theory yield the effective Hamiltonian 
+near Gamma point of the following form (more detail can be found in Supplement, section 2, of 
+Ref. [1]) 
+𝐻̂𝑘= 𝐵2|𝐤|2𝐼̂ +
+(
+ 
+ 
+𝑢1 −𝐵(𝑘𝑥
+2 + 𝑘𝑦
+2)
+2𝐺(−𝑖𝑘𝑥+ 𝑘𝑦)
+0
+0
+2𝐺(𝑖𝑘𝑥+ 𝑘𝑦)
+𝑢2 + 𝐵(𝑘𝑥
+2 + 𝑘𝑦
+2)
+0
+0
+0
+0
+𝑢1 −𝐵(𝑘𝑥
+2 + 𝑘𝑦
+2)
+2𝐺(−𝑖𝑘𝑥−𝑘𝑦)
+0
+0
+2𝐺(𝑖𝑘𝑥−𝑘𝑦)
+𝑢2 + 𝐵(𝑘𝑥
+2 + 𝑘𝑦
+2))
+ 
+  (B9) 
+𝑢1 = 𝐺2(𝜅1 + 2𝜅3 + 2𝜅0 + 𝜅2) −2𝑝2 
+𝑢2 = 𝐺2(−𝜅1 −2𝜅3 + 2𝜅0 + 𝜅2) −2𝑝2 
+𝐵= 2(𝜅3 −𝜅1) 
+𝐵2 = 2(𝜅0 −𝜅2) 
+This expression is analogous to the Hamiltonian of the BHZ model. We then shift the Dirac cone 
+to zero-energy, rewriting the Hamiltonian in the BHZ form: 
+𝐻̂𝑘= 𝐵2|𝐤|2𝐼̂ +
+(
+ 
+ 
+𝑀−𝐵|𝐤|2
+𝐴(−𝑖𝑘𝑥+ 𝑘𝑦)
+0
+0
+𝐴(𝑖𝑘𝑥+ 𝑘𝑦)
+−𝑀+ 𝐵|𝐤|2
+0
+0
+0
+0
+𝑀−𝐵|𝐤|2
+𝐴(−𝑖𝑘𝑥−𝑘𝑦)
+0
+0
+𝐴(𝑖𝑘𝑥−𝑘𝑦)
+−𝑀+ 𝐵|𝐤|2 )
+ 
+ , (B10) 
+where M = (u1 −u2)/2 , 𝐴= 2𝐺, and |𝐤|2 = 𝑘𝑥
+2 + 𝑘𝑦
+2 . 
+Then, as in Section A above, we expand the Hamiltonian to include excitons and introduce exciton-
+photon interactions 
+
+𝐻̂𝐷
+𝑐
+=
+(
+ 
+ 
+ 
+ 
+ 
+𝑀−𝐵(𝑘𝑥
+2 + 𝑘𝑦
+2)
+𝐴(−𝑖𝑘𝑥+ 𝑘𝑦)
+0
+0
+𝑞𝑝
+0
+𝐴(𝑖𝑘𝑥+ 𝑘𝑦)
+−𝑀+ 𝐵(𝑘𝑥
+2 + 𝑘𝑦
+2)
+0
+0
+𝑞𝑑
+0
+0
+0
+𝑀−𝐵(𝑘𝑥
+2 + 𝑘𝑦
+2)
+𝐴(−𝑖𝑘𝑥−𝑘𝑦)
+0
+𝑞𝑝
+0
+0
+𝐴(𝑖𝑘𝑥−𝑘𝑦)
+−𝑀+ 𝐵(𝑘𝑥
+2 + 𝑘𝑦
+2)
+0
+𝑞𝑑
+𝑞𝑝
+𝑞𝑑
+0
+0
+𝜔𝐿
+0
+0
+0
+𝑞𝑝
+𝑞𝑑
+0
+𝜔𝑅)
+ 
+ 
+ 
+ 
+ 
+ 
+(B11). 
+The bands of 𝐻̂𝐷
+𝑐  are spin-degenerate forming two groups of Dirac cone on top of each other 
+spectrally, therefore we can further focus on the spin-up block establishing the 3x3 Hamiltonian 
+for the respective spin: 
+𝐻̂𝐷
+′ = (
+𝑀−𝐵(𝑘𝑥
+2 + 𝑘𝑦
+2)
+𝐴(−𝑖𝑘𝑥+ 𝑘𝑦)
+𝑞𝑝
+𝐴(𝑖𝑘𝑥+ 𝑘𝑦)
+−𝑀+ 𝐵(𝑘𝑥
+2 + 𝑘𝑦
+2)
+𝑞𝑑
+𝑞𝑝
+𝑞𝑑
+𝜔𝐿
+)          (B12) 
+ 
+We also calculated the Berry curvature and calculated the spin-Chern numbers of each bands of 
+the Hamiltonian. When 𝑢1 > 𝑢2 and 𝐵> 0 , or 𝑢1 < 𝑢2 and 𝐵< 0 , the system is topological, 
+otherwise it is trivial, yielding zero spin-Chern numbers on any band. We again see that the 
+nontrivial spin-Chern number transfers to the polariton bands. Thus, the spin-Chern number for 
+spin-up states without coupling are {1,0,-1} when the polariton frequency is at midgap and not 
+crossing any band, while after applying a strong coupling with the upper photonic bands, the spin-
+Chern number for spin-up states transform into {0,1,-1}, and we can see that the nonzero topology 
+invariant has indeed been transferred from upper photonic band to the polaritonic band. 
+ 
+C. Circular wave excitation in TBM 
+To emulate the experimental conditions, a model of coupled mode theory with excitation source 
+in Tight-Binding Model is introduced. In experiment, a circular polarized source is applied on the 
+whole structure, and measurements of field took place on the boundary of topological and trivial 
+domains, the EM field of a few boundary unit cells are collected. 
+In TBM model introduced in Section A (Eq.A1,A7,A8), the Hamiltonian of a periodic lattice with 
+excitons 𝐻8×8 contains 8 degrees of freedom, 6 of which are photonic and the other 2 are excitonic. 
+We apply excitation source 𝑆𝑖𝑛 on these 6 photonic bands. 
+𝑆𝑖𝑛= (1
+𝑒±𝑖𝜋
+3
+𝑒±2𝑖𝜋
+3
+𝑒±𝑖𝜋
+𝑒±4𝑖𝜋
+3
+𝑒±5𝑖𝜋
+3
+0
+0)
+⊺,        (C1) 
+Where plus and minus indicates different field rotation directions, or directions of circular 
+polarizations of light source. 
+
+The wavefunction of the system ψ have this relation under excitation 
+1
+𝑖
+dψ
+dt = (𝐻̂8×8 + iγ̂)ψ + α𝑆𝑖𝑛,                   (C2) 
+Where α is the coupling coefficient of the excitation source, and γ̂ describes is the total loss of the 
+modes of the system. By solving Eq. C2 we can get energy distribution |ψ|2 and reflectivity 𝑟=
+𝑆𝑜𝑢𝑡= αψ, 𝑅= α2|ψ|2 of the system. Moreover, we can also separate the photonic part and 
+excitonic part in ψ by corresponding index (e.g. in this case, the first 6 elements in ψ is photonic, 
+and the last 2 are excitonic, corresponding to Hamiltonian 𝐻8×8), and the contribution of photonic 
+and excitonic part of the bulk or edge spectrum can thus be shown separately. This method can 
+also be used in supercell Hamiltonian in TBM, where the structure is periodic in one direction, the 
+domain boundaries appeared in the other direction, and by calculating such structure we can get 
+edge state spectrum of the structure. In Fig.4 of the main text, we estimated the coupling coefficient 
+as well as loss parameters γ and α for photonic and excitonic bands by fitting with frequencies, 
+gap widths and linewidths in experimental results, and obtained the photonic and excitonic edge 
+state spectra for both cases with different relative position of excitonic bands corresponding to 
+experiments. 
+D. Exciton modes coupling evaluation  
+It’s known that excitons in monolayer TMDs are doubly degenerate modes with angular 
+momentum 𝑚= ±1 which represent pairs of electrons and holes at K and K’ point, in the atomic 
+Brillion zone, respectively. Consisting of a pair of charged particles, these excitonic states have 
+nonzero dipole moment and can be described as the dipolar modes two dipolar modes of opposite 
+helicity. The photonic metasurface in hands, however, possesses more rich structure, with four 
+photonic bands in the frequency range of interest, corresponding to two dipolar 𝑝± (𝑙= 1) modes 
+and two quadrupolar 𝑑± (𝑙= 2) modes of opposite helicities (𝑠= ±1). It is intuitive to think that 
+the dipolar exitonic modes will couple to the dipolar photonic modes, respectively. However, 
+whether the coupling would happen between exitonic and quadrupolar 𝑑±  modes is not as 
+straightforward because of a completely different spatial scales on which variation of photonic and 
+excitonic wavefunctions occurs, and therefore, it should be carefully analyzed. In this section we 
+aim at finding the coupling between modes various photonic modes and excitonic modes. 
+The response of a TMD monolayer is homogeneous on the scale of variation of photonic field, and, 
+therefore, it can be expressed by dielectric constant, or, equivalently, by the following surface 
+(sheet) conductivities: 
+𝜎̂+ =
+𝜎𝑇𝑀𝐷
+2
+(1
+−𝑖
+𝑖
+1 ), 𝜎̂−=
+𝜎𝑇𝑀𝐷
+2
+( 1
+𝑖
+−𝑖
+1),             (D1) 
+where 𝜎𝑇𝑀𝐷 is the total high-frequency (optical-frequency) surface conductivity of a monolayer, 
+and 𝜎̂+ and 𝜎̂− are contributions to the conductivity from K-valley excitons (𝑚= +1) and K’-
+valley excitons (𝑚= −1), respectively. The structure of these tensors is dictates by the selection 
+rule on exciton-photon interaction due to the angular momentum conservation, which ensures that 
+the spin of photon should equal the angular momentum of excitons (𝑠= 𝑚). It is also clear that 
+the cumulative response of the TMD monolayer 𝜎̂𝑇𝑀𝐷= 𝜎̂+ + 𝜎̂−= 𝜎𝑇𝑀𝐷, i.e. isotropic, unless 
+
+time-reverals symmetry is broken (𝜎̂+ ≠𝜎̂−). 
+Note that, because the conductivity tensors 𝜎̂± do not vary in space, TMD does not mix dipolar 
+and quadrupolar photonic states since they are orthogonal. 
+We start with the dipolar photonic bands 𝑙= 1 , 𝑠= ±1, which have the following form: 
+|𝑬𝑝+⟩=
+𝑓(𝒓)
+√2 (1
+𝑖), |𝑬𝑝−⟩=
+𝑓(𝒓)
+√2 ( 1
+−𝑖),               (D2) 
+where 𝑓(𝒓) describes the field distribution within the photonic unit cell, and 𝑓(𝒓) ≈1 in the weak 
+crystal regime used in the plane wave expansion above. The field vectors are also normalized such 
+that ⟨𝑬𝑝𝑠|𝑬𝑝𝑠⟩= ∫𝑑𝑉𝑓(𝒓) = 1, where integration is over the unit cell volume (𝑑𝑉= 𝑑𝑆𝑑𝑧). 
+The interaction strength between the excitons (𝑚= ±1) and the dipolar photonic states (𝑠= ±1) 
+can be then calculated as 𝑞𝑝(𝑚,𝑠)
+2
+= 𝑁∫𝑑𝑆𝑇𝑀𝐷⟨𝑬𝑝𝑠|𝑱𝑝𝑚⟩= 𝑁∫𝑑𝑆𝑇𝑀𝐷⟨𝑬𝑝𝑠|𝜎̂𝑚|𝑬𝑝𝑚⟩, where we 
+used the expression for the excitonic current modes in the TMD monolayer |𝑱𝑝𝑚⟩= 𝜎̂𝑚|𝑬𝑝𝑚⟩ 
+driven by the electric field |𝑬𝑝𝑚⟩, the integration is over the surface of 2D material in the unit cell, 
+and 𝑁 is the normalization factor. Then, since the conductivity is homogeneous over the surface, 
+we can readily obtain 𝑞𝑑(𝑠,𝑚) = (𝑁⟨𝐸𝑠|𝜎̂𝑚|𝐸𝑚⟩)
+1
+2 = √
+𝑁𝜎𝑇𝑀𝐷
+2
+𝛿𝑠𝑚. This confirms that the form of 
+the TMD response chosen yields interactions with exciton-photon interactions which respects the 
+conservation of the angular momentum 𝑠= 𝑚, and, consequently, the valley polarization. 
+Considering the photonic quadrupolar modes (𝑙= 2), the field profiles have more elaborate form 
+with the spatial distribution (𝑑± = 𝑑𝑥2−𝑦2 ± 𝑖𝑑𝑥𝑦), where, as before, ± indicates the photon spin 
+𝑠= ±1 , and the field profiles for the case of the weak modulation in the crystal assume the 
+following form in the vector representation: 
+𝑬𝑑+~ ( 𝑥+ 𝑖𝑦
+−𝑦+ 𝑖𝑥), 𝑬𝑑−~ ( 𝑥−𝑖𝑦
+−𝑦−𝑖𝑥).               (D3) 
+Then, the coupling of the excitons and quadrupolar photonic states can be found by evaluating the 
+following expressions: 𝑞𝑑(𝑚,𝑠)
+2
+= 𝑁∫𝑑𝑆𝑇𝑀𝐷⟨𝑬𝑑𝑠|𝑱𝑑𝑚⟩= 𝑁∫𝑑𝑆𝑇𝑀𝐷⟨𝑬𝑑𝑠|𝜎̂𝑚|𝑬𝑑𝑚⟩ , which can 
+be readily evaluated to yield 𝑞𝑑(+,+)
+2
+= 𝑞𝑑(−,−)
+2
+~ ∫2(𝑥2 + 𝑦2) 𝑑𝑠≠0, while 𝑞𝑑(+,−) = 𝑞𝑑(−,+) =
+0, which again establishes a section rule on interactions between excitons and quadrupolar photons 
+ensuring condition 𝑠= 𝑚. Therefore, the orbital degree of freedom 𝑙 does not play any significant 
+role in defining selection rules of exciton-photon interactions, which can be interpreted as the result 
+of the orders of magnitude difference in the length scales on which these quantities are defined. 
+Note, however, that the orbital degree of freedom of light 𝑙 is crucial for the topological photonic 
+phase stemming from the spin-orbit interactions of light. 
+As we can see here, the two conclusions we arrive at from considerations of this section: (i) there 
+is the spin selection rules for exciton-photon coupling with both dipolar and quadrupolar photonic 
+modes, and (ii) coupling of excitons with quadrupole modes is not equal to zero since the selection 
+rule with respect to the orbital momentum of light does not apply.  
+
+ 
+E. Effective phase winding in exciton-photon interactions 
+To demonstrate the emergence of phase winding in coupling between photonic and excitonic bands, 
+here we investigate a massive Dirac Hamiltonian interacting with exciton state for one particular 
+spin. The parabolic corrections to the energies (term B in BHZ Hamiltonian) is thus neglected 
+(𝐵= 0), which, however, does not affect the generality of our conclusions, since the parabolic 
+correction is known to only change the Chern number by ½ [1], which, as our numerical 
+calculations show, remains true for the more general cases of BHZ and tight-binding models. Thus, 
+we investigate the spin-up (𝑠= +1) subsystems of photonic system described by the Hamiltonian 
+𝐻̂2×2
++
+= 𝜎̂𝑥𝑘𝑥+ 𝜎̂𝑦𝑘𝑦+ 𝑀𝜎̂𝑧= (
+𝑀
+𝑘𝑥−𝑖𝑘𝑦
+𝑘𝑥+ 𝑖𝑘𝑦
+−𝑀
+),       (E1) 
+where 𝜎̂𝑛 are Pauli matrices, and Dirac velocity was assumed to be 𝑣𝐷= 1 without any loss of 
+generality. The two degrees of freedom in Eq. (E1) are implicitly associated with the angular 
+momentum 𝑙= 1 and 𝑙= 2 for the case of our system 
+We can find the eigenmodes of this Hamiltonian for the eigenvalue problem 𝐻̂+𝜓̅𝑛
++ = 𝜔𝑛𝜓̅𝑛
++ , 
+which have the well-known form 
+𝜓̅1 =
+1
+𝑁1 ( 1
+𝑓1𝑒𝑖𝜃), 𝜓̅2 =
+1
+𝑁2 (
+1
+𝑓2𝑒−𝑖𝜃),               (E2) 
+and the spectrum 𝜔1(2) = ±√𝑘2 + 𝑀2, where 𝑘= |𝒌| and 𝜃= tan−1 (
+𝑘𝑦
+𝑘𝑥), and 𝑓1(2) = −
+𝑘
+𝑚−𝜔1(2), 
+and 𝑁1(2) = |𝜓̅1(2)| is the normalization factor.  
+Thus, the Hamiltonian (E1) can be diagonalized by the unitary transformation 
+𝑈̂2×2 = [𝜓̅1, 𝜓̅2].                      (E3) 
+By expanding the Hamiltonian to include 𝑚= +1  exciton with the energy 𝜔𝑒𝑥= −𝑀  and 
+exciton-photon interactions 𝑞= 𝑞∗ with the lower band, we obtain 
+𝐻̂3×3
++
+= (
+𝑀
+𝑘𝑥−𝑖𝑘𝑦
+0
+𝑘𝑥+ 𝑖𝑘𝑦
+−𝑀
+𝑞
+0
+𝑞
+−𝑀
+ ),               (E4) 
+which can be block diagonalized by applying the expanded unitary transformation 
+𝑈̂3×3 = 𝑑𝑖𝑎𝑔[𝑈̂, 1],                    (E5) 
+yielding  
+𝐻̃̂3×3
++
+= (
+𝜔1(𝑘)
+0
+𝑞/𝑁1
+0
+𝜔2(𝑘)
+𝑞𝑓2/𝑁2𝑒𝑖𝜃
+𝑞/𝑁1
+𝑞𝑓2/𝑁2𝑒−𝑖𝜃
+−𝑀
+ ),           (E6) 
+
+Where one can clearly see the phase to emerge in the coupling between the (diagonalized) photonic 
+eigenstate and the exciton. Then, we consider the fact that the exciton is degenerate at k=0 with 
+the lower (2nd) band and use the degenerate perturbation theory. Therefore, interaction with the 
+upper (1st) band can be neglected giving the effective Hamiltonian  
+𝐻2×2
++(𝑒𝑓𝑓) = (𝜔2(𝑘)
+𝑞̃𝑒𝑖𝜃
+𝑞̃𝑒−𝑖𝜃
+−𝑀),                  (E7) 
+where 𝑞̃(𝑘) = 𝑞𝑓2/𝑁2 is the strength of the effective exciton-photon coupling. 
+We consider the effect of such interactions near 𝑘= 0 , where the degeneracy takes place, to 
+understand the structure of the eigenmode and energy splitting. In this case the energy 𝜔2 can be 
+approximated with 𝜔2 = −𝑀−
+𝑘2
+2𝑀  . Shifting the global energy by +𝑀 , we then obtain the 
+eigenvalue problem: 
+( −
+𝑘2
+2𝑀
+𝑞̃𝑒𝑖𝜃
+𝑞̃𝑒−𝑖𝜃
+0
+) 𝜓̃ = 𝜔̃𝜓̃,                   (E8) 
+which, for 𝑘~0, gives eigenvalues 𝜔̃ ≈−
+𝑘2
+4𝑀± 𝑞̃, indicating avoided crossing with the splitting 
+of 2𝑞̃ near Γ-point, and both eigenstates 𝜓̃~[1, ±𝑒−𝑖𝜃]become 50% excitonic and 50% photonic. 
+ 
+F. Processing of the angle-resolved reflectivity maps 
+Since the samples were fabricated using SOI substrates, all the measured angle-resolved 
+reflectivity maps possessed characteristic Fabry-Pérot background, see Fig. S4a. This feature 
+hinders the observation of the modes of topolaritonic system. In order to get rid of this background 
+without affecting the spectral position of the reflectivity features of interest, we resorted to a post-
+processing procedure. The slowly varying background in the measured map was approximated 
+with a cubic smoothing spline, with a smoothing parameter chosen such that in the resulting 
+differential reflectivity map the Fabry-Pérot pattern fully vanishes. This resulted in images with 
+good visibility of the photonic and polaritonic modes of the structure, see Fig. S4b and reflectivity 
+maps throughout the main manuscript. 
+ 
+
+ 
+Fig. S4: a, raw data and b, post-processed angle-resolved reflectivity map of the sample shown in 
+Fig. 4c of the main text. 
+ 
+G. Experiments with a thicker hBN layer 
+Figure S5 shows the angle-resolved reflectance maps for the sample with 60-nm-thick hBN layer 
+between the metasurface and the MoSe2 monolayer. Red shift of the photonic modes driven by 
+increased thickness of hBN leads to the case when the exciton frequency is inside the topological 
+gap of the metasurface and do not exhibit strong coupling with the photonics modes. 
+ 
+Fig. S5: Angle-resolved reflectivity of sample with thick hBN layer. a, TM polarized excitation 
+b, TE-polarized excitation. 
+ 
+References 
+1. Gorlach, M.A., Ni, X., Smirnova, D.A. et al. Far-field probing of leaky topological states in all-
+dielectric metasurfaces. Nat Commun 9, 909 (2018). 
+ 

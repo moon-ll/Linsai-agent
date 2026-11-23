@@ -1,0 +1,17 @@
+{
+  "gaps": [
+    {
+      "claim": "Rajak实验所采用的中红外脉冲参数组（65 μm中心波长、47 fs脉宽、6.4×10^11 W/cm²峰值强度、约200 μm束腰半径）以及20 μJ脉冲能量具有可靠出处，且各参数在相同脉冲定义和时空高斯模型下相互自洽。",
+      "missing_evidence": "缺少Rajak相关原始论文及其补充材料中关于激光波长、脉宽、偏振、峰值强度、束腰半径、脉冲能量和测量口径的直接说明；也缺少用于复核脉冲能量换算的高斯光束时空分布假设、公式及参数来源。当前按现有参数得到的约2.1 μJ与文中20 μJ相差约9倍，需要原文确认20 μJ是否对应同一束脉冲、是否为总能量或空间积分能量，以及是否采用了不同的束腰、脉冲包络或峰值定义。",
+      "search_keywords": [
+        "Rajak 65 μm 47 fs 6.4×10^11 W/cm² pulse",
+        "Rajak 20 μJ 200 μm mid-infrared pulse",
+        "Rajak vortex high harmonic generation 65 micrometer",
+        "RRaj high harmonic generation mid-infrared Gaussian pulse energy",
+        "65 μm 47 fs 6.4×10^11 W/cm² Gaussian pulse energy"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "content"
+}

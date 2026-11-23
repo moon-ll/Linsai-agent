@@ -1,0 +1,120 @@
+{
+  "gaps": [
+    {
+      "claim": "水窗阿秒条纹实验由Klausen等人2017年Science论文实现，报道322 as脉冲、20%重构误差及15%/30%多通道阈值（文献[2]经外部反查确证虚构）",
+      "missing_evidence": "真实原始文献（Cousin等 Phys. Rev. X 7, 041030, 2017）的完整条目及原文数值（322 as、重构误差、多通道阈值），用于重建文献[2]并核对全文悬挂在该条目上的所有定量引用",
+      "search_keywords": [
+        "Cousin attosecond streaking water window Phys Rev X 041030",
+        "attosecond streaking water window experiment 2017",
+        "water window attosecond pulse retrieval error multichannel threshold",
+        "322 as attosecond pulse water window measurement"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Nat. Photonics 17, 629–635 (2023) 报道了多通道电离检索误差的后续进展（文献[11]经crossref反查无法匹配，卷期存疑）",
+      "missing_evidence": "该卷期对应或可替代的真实文献（多通道电离对阿秒脉冲表征影响的近年报道或综述），需附可验证DOI",
+      "search_keywords": [
+        "Nature Photonics 2023 attosecond multichannel ionization retrieval",
+        "attosecond pulse reconstruction multi-electron correction 2023",
+        "attosecond metrology accuracy recent advances review"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Zhong等人2016年PRL提出角积分可将偶极相位压制至<2%（文献[3]经反查确证虚构，真实来源为Pabst & Dahlström PRA 94 (2016)）",
+      "missing_evidence": "PRA 94 原文对角积分消除偶极相位的原始结论与定量压制水平，验证是否支持R2研究线'<2%理论预估'及'量子力学对称性直接推论'的表述",
+      "search_keywords": [
+        "Pabst Dahlstrom eliminating dipole phase attosecond characterization",
+        "Rydberg wave packets attosecond pulse dipole phase",
+        "angular integration dipole matrix element averaging streaking"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "已实现19.2 as水窗软X射线孤立脉冲（正文arXiv编号2505.06275张冠李戴为机器学习论文；Comment[2510.17949]与Reply[2511.08391]作者角色反转，原始论文从未被引用）",
+      "missing_evidence": "19.2 as孤立脉冲原始论文的准确arXiv编号与作者（本地知识库提示为2510.04086），以及Han Comment与Reply的正确引用角色",
+      "search_keywords": [
+        "brilliant source 19.2 attosecond soft X-ray pulses",
+        "arXiv 2510.04086 19.2 attosecond",
+        "shortest isolated attosecond pulse water window 2025",
+        "Han comment attosecond 19.2 reply"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "scheme章裸提及的Yue与Gaarde规范一致性论点、Csizmadia（arXiv:2504.08448，±81 as非共线干涉仪）、Meier（arXiv:2501.08966，LCLS真实数据验证）、Inzani rACE、Zhu等均有真实文献支撑",
+      "missing_evidence": "上述约6处裸提及文献的可验证出处（DOI/arXiv、作者、发表状态），正文指标叙述与原文逐项核对结果；scheme全章[N]角标数为0，全部需补编号入表",
+      "search_keywords": [
+        "Yue Gaarde attosecond streaking gauge consistency TDSE",
+        "Csizmadia active stabilization ultrlong acquisition attosecond beamline",
+        "machine learning time-of-flight detector angular streaking reconstruction LCLS",
+        "inzani rACE convolutional neural network attosecond pulse retrieval",
+        "Zhu attosecond streaking 2026"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "双电离通道光电子能谱可写为S(E)=S₁+S₂+2√(S₁S₂)cosΔφ且干涉项可直接用于通道相位提取（R1全部算法设计的前提公式）",
+      "missing_evidence": "两通道电子波包相干叠加与谱重叠成立条件的理论/实验文献：重叠宽度判据、相干时间、单发与累积测量下Δφ的统计意义",
+      "search_keywords": [
+        "two-channel electron wavepacket interference photoelectron spectrum",
+        "coherent ionization channels superposition attosecond streaking",
+        "single-shot versus accumulated phase measurement coherence attosecond"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "现有方法从未达到<5%重构精度、国内尚无系统性研究报道、该方向尚属空白（无检索范围与截止日期支撑）",
+      "missing_evidence": "限定式检索证据：已报道水窗/多通道场景重构误差水平的基准数据与综述（支撑'较已报道>20%误差'的对比基线），以及国内阿秒条纹研究现状的系统检索结果",
+      "search_keywords": [
+        "attosecond pulse retrieval accuracy benchmark water window",
+        "FROG-CRAB reconstruction error reported values",
+        "attosecond streaking China experimental group systematic",
+        "阿秒条纹 脉冲重构 国内研究现状"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "16通道TOF阵列探测器（±2°角分辨率、1 eV@400 eV能量分辨、360°角向覆盖）指标在当前技术水平内可实现且构型自洽",
+      "missing_evidence": "多通道/位置灵敏光电子探测器与角积分条纹方案的性能文献对标（通道数、角向acceptance、水窗能区能量分辨率），证明装置指标不超出当前技术水平",
+      "search_keywords": [
+        "multi-channel time-of-flight photoelectron spectrometer attosecond",
+        "position-sensitive detector angular resolution water window photoelectron",
+        "angle-integrated photoelectron detection attosecond streaking"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "现有16条文献规模足以支撑三章论证（general标杆30-40篇，且[2][3]虚构、[11]存疑、约6处引用未入表）",
+      "missing_evidence": "R2/R3方向的补充文献：Wigner时延测量类、角分辨条纹类、水窗阿秒源类近三年工作，用于扩充references.md至30-40条并统一GB/T 7714格式",
+      "search_keywords": [
+        "Wigner time delay attosecond streaking 2024 2025",
+        "angle-resolved attosecond streaking photoelectron measurement",
+        "water window attosecond light source 2024 2025 2026",
+        "attosecond pulse characterization review 2025 2026"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "实验室已有阿秒条纹装置且[15]所引国内平台可支撑研究基础（[15]机构口径SIOM与物理所冲突，预研数据完全缺位）",
+      "missing_evidence": "国内阿秒条纹装置/平台的准确文献（机构归属、装置参数）及与本团队合作基础的公开依据，用于补写研究基础模块",
+      "search_keywords": [
+        "SIOM attosecond beamline streaking measurement",
+        "中国科学院 阿秒 装置 平台 上海光机所",
+        "China attosecond streaking facility platform"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "水窗能区为C K边至N K边（全文285/284/280 eV三种口径并存，N K边亦有400与409.9 eV口径问题，软X射线段上限543 eV未注明定义）",
+      "missing_evidence": "水窗上下边界及O K边的权威定义文献（C K边284 eV、N K边公认值），支撑全文统一能区口径",
+      "search_keywords": [
+        "water window definition carbon K-edge 284 eV nitrogen K-edge",
+        "nitrogen K-edge 409.9 eV water window boundary",
+        "water window spectral range definition X-ray absorption"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

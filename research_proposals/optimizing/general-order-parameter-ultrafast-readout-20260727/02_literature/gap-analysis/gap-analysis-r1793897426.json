@@ -1,0 +1,36 @@
+{
+  "gaps": [
+    {
+      "claim": "利用'近相变参数'（接近磁相变点的温度/参数调控）作为增强序参量可观测性的调控手段（§二.0 L15 提出的优化维度）",
+      "missing_evidence": "缺少证明'趋近相变点可增强 HHG/自旋动力学观测量'的直接文献支撑：CrSb 或补偿磁体中磁子软化（magnon softening）、临界涨落对非线性光学/高次谐波响应的增强效应，以及相变附近序参量读出灵敏度提升的定量证据。报告中该参数全章单点出现且'无载体'，即未挂靠任何已检索文献，属'论点有主张、引文池无对应'型缺口。",
+      "search_keywords": [
+        "CrSb magnon softening Néel temperature",
+        "antiferromagnetic critical fluctuations high harmonic generation",
+        "altermagnetic spin fluctuations near phase transition nonlinear optical response",
+        "compensated magnet magnon renormalization temperature dependent inelastic neutron scattering"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "'现有交错磁 HHG 文献未给出反演可辨识性分析，差分设计与参数反演之间的方法学连接仍属空白'（特色创新节的空白性断言）",
+      "missing_evidence": "该'文献空白'断言本身需要文献负向核验支撑：需检索现有 altermagnetic/antiferromagnetic HHG 理论工作中是否已有费舍尔信息矩阵、参数反演或可辨识性（identifiability）分析，以确认空白主张成立、避免评审被反驳为漏检。当前引用池 [1]-[38] 中未见此类方法学文献。",
+      "search_keywords": [
+        "altermagnetic high harmonic generation theoretical modeling parameter retrieval",
+        "Fisher information matrix terahertz spectroscopy identifiability",
+        "Bayesian parameter estimation antiferromagnetic dynamics ultrafast"
+      ],
+      "priority": "low"
+    },
+    {
+      "claim": "'落点由含 SOC 正演模型对 CrSb 高对称方向简并窗口的预扫描给出'（§二.3 L51，简并窗口规避这一设计动作的依据）",
+      "missing_evidence": "缺少关于 CrSb 高对称方向自旋劈裂/能带简并位置的第一性原理或角分辨能谱文献锚点，使'简并窗口预扫描'缺少可对照的已知简并点参照系（report 确认 scheme 全章无对应落点与动作，检索池亦无简并窗口相关文献记录）。",
+      "search_keywords": [
+        "CrSb electronic structure spin splitting high symmetry directions DFT",
+        "altermagnetic band degeneracy along k paths first principles",
+        "CrSb ARPES spin splitting momentum"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

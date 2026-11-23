@@ -1,0 +1,38 @@
+{
+  "proposal_id": "general-berry-mnps3-rashba-20260816",
+  "cluster_id": "cl_20260816_8daa29",
+  "entries": [
+    {
+      "source_id": "paper:2606.19977",
+      "title": "Interplay of Altermagnetism and Coupled Quasi-Altermagnetic states in Sliding Two-dimensional Square Lattice",
+      "summary": "该文基于第一性原理计算、普适堆叠理论与自旋-Laue对称性分析，提出了一类新型'耦合准交变磁性'态作为交变磁性的独特子类，并证明其第四型非相对论性自旋劈裂可通过层间滑移可逆调控。该工作为滑移二维方形晶格中的滑移诱导能谷极化提供了基于自旋劈裂特性的完整分类框架。",
+      "path": "",
+      "added_via": "cluster:cl_20260816_8daa29",
+      "added_at": "2026-10-02T16:42:46Z"
+    },
+    {
+      "source_id": "paper:2026-2606.19977-interplay-of-altermagnetism-and-coupled-quasi-alte",
+      "title": "Interplay of Altermagnetism and Coupled Quasi-Altermagnetic states in Sliding Two-dimensional Square Lattice",
+      "summary": "该文研究了二维方晶格中层间滑移调控下反交替磁性（altermagnetism）与耦合准反交替磁态的相互作用机制，探讨了滑移如何诱导并调控非相对论性自旋劈裂（NRSS）及能谷极化行为。该工作为在零净磁化的反铁磁体系中通过堆叠/滑移工程设计可切换的自旋-能谷功能器件提供了新思路。",
+      "path": "",
+      "added_via": "cluster:cl_20260816_8daa29",
+      "added_at": "2026-10-02T16:42:46Z"
+    },
+    {
+      "source_id": "paper:2607.16454",
+      "title": "Valley polarization, Rashba interaction, and weak altermagnetism in inversion-asymmetric MnPS3|WS2 van der Waals heterostructures",
+      "summary": "本文通过第一性原理计算研究了反铁磁MnPS3与单层WS2构成的 inversion 对称破缺范德华异质结，揭示了体系中的能谷极化与Rashba自旋劈裂，并发现其诱导出弱交变磁性。该工作表明将反铁磁体与过渡金属硫族化合物组合可在单一异质结中同时实现能谷、自旋与磁序的多重调控。",
+      "path": "",
+      "added_via": "cluster:cl_20260816_8daa29",
+      "added_at": "2026-10-02T16:42:46Z"
+    },
+    {
+      "source_id": "paper:2026-2607.16454-valley-polarization-rashba-interaction-and-weak-al",
+      "title": "Valley polarization, Rashba interaction, and weak altermagnetism in inversion-asymmetric MnPS3|WS2 van der Waals heterostructures",
+      "summary": "该工作通过将反铁磁 MnPS3 与单层 WS2 堆叠构成破缺空间反演对称性的范德华异质结，实现了能谷极化、Rashba 自旋轨道相互作用与弱交错磁性的共存与耦合。研究揭示了此类非中心对称反铁磁体系中 Berry 曲率、自旋-能谷锁定和磁电耦合等效应的涌现，为多功能自旋-能谷电子学器件设计提供了新平台。",
+      "path": "",
+      "added_via": "cluster:cl_20260816_8daa29",
+      "added_at": "2026-10-02T16:42:46Z"
+    }
+  ]
+}

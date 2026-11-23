@@ -1,0 +1,86 @@
+{
+  "gaps": [
+    {
+      "claim": "[35] 引用同一编号在 rationale 同一章节内同时指向 MoS₂/WSe₂ PBE 能带偏移（VBO/CBO）文献与 Luu/Wörner 关于 α-石英 HHG 反演工作",
+      "missing_evidence": "需确认 [35] 实际应挂哪一篇，并补齐被错误覆盖的另一篇的对应文献",
+      "search_keywords": [
+        "MoS2 WSe2 PBE band offset valence band offset",
+        "Luu Worner alpha-quartz HHG inversion",
+        "type-I type-II heterostructure band alignment first-principles"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "[28] 跨章异人：scheme 章 [28]=Cárdenas，rationale 章 [28]=Patra",
+      "missing_evidence": "需全文人名锚与 [N] 编号全量比对，确认 Cárdenas 与 Patra 各自应挂的正确编号，并补全被错号覆盖的原始文献",
+      "search_keywords": [
+        "Cardenas solid HHG selection rules",
+        "Patra moire HHG",
+        "solid-state high harmonic generation symmetry breaking author lookup"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Molinero 引用编号 29↔30 不一致",
+      "missing_evidence": "需确认 Molinero 相关工作的正确编号与全名（疑为 α-石英或非晶 SiO₂ HHG 相关），并核对引用上下文",
+      "search_keywords": [
+        "Molinero alpha-quartz HHG",
+        "Molinero amorphous silica high harmonic generation",
+        "Molinero solid HHG reconstruction"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Mrudul 引用编号 30↔31 不一致",
+      "missing_evidence": "需确认 Mrudul 相关工作（疑为固体 HHG 多带/带间机制）正确编号与全名",
+      "search_keywords": [
+        "Mrudul solid HHG multiband",
+        "Mrudul high harmonic generation semiconductors",
+        "Mrudul TDDFT HHG crystal"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Almeida 引用编号 31↔32 不一致",
+      "missing_evidence": "需确认 Almeida 相关 HHG 工作正确编号与全名",
+      "search_keywords": [
+        "Almeida solid high harmonic generation",
+        "Almeida HHG semiconductor band structure",
+        "Almeida extreme ultraviolet solid HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Zhong 引用编号 24↔26 不一致",
+      "missing_evidence": "需确认 Zhong 相关工作（疑为莫尔超晶格或扭转角相关 HHG）正确编号与全名",
+      "search_keywords": [
+        "Zhong moire superlattice HHG",
+        "Zhong twisted bilayer high harmonic generation",
+        "Zhong solid HHG moire"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "rationale §1 泵浦可调谐窗口 1.25—2 eV 若系引自 Peterka 文献，则需显式标注出处并与 scheme §3.2 NOPA 1.4—2.1 eV 统一",
+      "missing_evidence": "需补查 Peterka 关于 NOPA/OPA 调谐范围的原始文献，确认其声明的光子能量窗口，并复核 scheme 章实际装置参数",
+      "search_keywords": [
+        "Peterka NOPA tunable broadband",
+        "Peterka noncollinear optical parametric amplifier tuning range",
+        "Peterka HHG driver photon energy window"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "scheme §7 特色(1)：'逐阶映射比 SHG 严格约一个数量级'",
+      "missing_evidence": "缺乏量化对比的推导或文献支撑：需给出 11 条曲线 vs 单构型自由度的可比算式，或检索已有方法学对比文献证明 SHG 在莫尔/扭转角定量上的灵敏度比逐阶映射低约一个数量级",
+      "search_keywords": [
+        "SHG vs angle-resolved spectroscopy moire sensitivity",
+        "second harmonic generation twist angle accuracy",
+        "stepwise mapping moire reconstruction precision",
+        "SHG moire quantitative comparison method"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "full_review"
+}

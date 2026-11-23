@@ -1,0 +1,46 @@
+{
+  "gaps": [
+    {
+      "claim": "§3.4（L107）：Klemke 等在 ZnO、MgO 中观测到子带隙谱结构，间接证实子带隙强场响应机制（原引用 [21] 实际为 Si 与石英偏振分辨工作，材料挂错）",
+      "missing_evidence": "在 ZnO、MgO（或 ZnO/MgO 氧化物体系）中观测到低于带隙的强场谐波/谱结构的直接实验文献，用于支撑『氧化物中存在子带隙强场响应』这一论点；需替换 [21] 或改为真实对应材料的工作",
+      "search_keywords": [
+        "ZnO below-gap harmonics strong-field",
+        "MgO sub-bandgap high harmonic generation",
+        "Zener tunneling harmonics ZnO experiment",
+        "Franz-Keldysh optical nonlinearity ZnO strong field"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3.4：若以 Si/石英相关工作替代支撑子带隙机制论点，则需确认 Si 中低于带隙的谐波谱结构能否外推至本项目四类材料体系（间接证实的合理性本身）",
+      "missing_evidence": "间接支撑路径的文献依据——Si 或石英体系中子带隙谐波的产生机制与本项目 Kronig-Penney/渡越区机制的对应关系文献，或氧化物/二维材料中同类观测的综述性证据",
+      "search_keywords": [
+        "below-bandgap harmonics semiconductor mechanism",
+        "Keldysh-Rabi regime solids review",
+        "intraband harmonics solids Zener regime experiment"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§4.2 可行性：Floquet 谐波读出系『读出通道移植扩展』，论证依赖范式移植而非直接先例",
+      "missing_evidence": "Floquet 工程态（周期驱动诱导拓扑/缀饰态）谐波产生或光谱读出的直接实验/理论文献，以支撑该读出通道的可行性居档内下沿的弱项",
+      "search_keywords": [
+        "Floquet state harmonic generation solid",
+        "periodically driven system HHG probe",
+        "light-induced topological state spectroscopy high harmonic"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§4.2 可行性：谐波量子效率 10⁻¹⁰–10⁻⁶ 为工程设定值『待标定』",
+      "missing_evidence": "同类强场固体 HHG 实验的量子效率实测数据文献（用于将工程设定值锚定到文献可支撑的范围），消除『设定值无出处』的严谨性弱项",
+      "search_keywords": [
+        "solid high harmonic generation quantum efficiency measurement",
+        "HHG yield semiconductors experiment 10^-10",
+        "MoS2 ZnO harmonic conversion efficiency strong field"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "scheme"
+}

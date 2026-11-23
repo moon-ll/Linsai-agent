@@ -1,0 +1,19 @@
+{
+  "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
+  "issues": 10,
+  "stages": {
+    "review_researcher": "ok(924s)",
+    "review_critic": "ok(537s)",
+    "review_reviewer": "ok(501s)",
+    "writer": "ok(1361s)",
+    "verify": "需返工"
+  },
+  "params_injected": true,
+  "post_hooks": {
+    "draft_resync": true,
+    "params_conflicts": 6
+  },
+  "success": true,
+  "verdict": "需返工",
+  "elapsed_s": 4391.9
+}

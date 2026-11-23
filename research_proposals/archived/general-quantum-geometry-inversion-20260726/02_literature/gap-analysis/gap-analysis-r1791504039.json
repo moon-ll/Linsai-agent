@@ -1,0 +1,135 @@
+{
+  "gaps": [
+    {
+      "claim": "Vampa 同码复现偏差仅 5%，作为本项目的基线参照",
+      "missing_evidence": "缺少 Vampa 等人在 ZnO 高次谐波实验与同码复现（same-code reproduction）的具体文献，无法核实 5% 偏差数值的原始来源与统计口径",
+      "search_keywords": [
+        "Vampa ZnO high harmonic generation",
+        "Vampa 2015 Nature Physics solid harmonics",
+        "ZnO high harmonic generation same-code benchmark"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "CNN 原型反演 Ω 的误差 12%，作为 Ω 反演可行性的证据",
+      "missing_evidence": "缺少对神经网络/深度学习反演强场电离参数（Ω）的现有文献支撑，无法判定 12% 误差是否处于领域前沿水平",
+      "search_keywords": [
+        "neural network inversion strong-field ionization",
+        "deep learning laser pulse reconstruction",
+        "CNN carrier-envelope phase retrieval"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "BSV→Fisher 调制通道作为创新点之一，三指标判据空间具有区隔性",
+      "missing_evidence": "缺少 Fisher 信息量在强场量子计量与高次谐波反演中的应用文献，无法证明 BSV→Fisher 通道为本项目首创",
+      "search_keywords": [
+        "Fisher information high harmonic generation",
+        "quantum Fisher information strong-field ionization",
+        "BSV beam splitter vacuum modulation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Luu-Wörner 2018 单色场反演与 Verma-Queiroz 阶跃响应作为两类既有经典路径",
+      "missing_evidence": "Luu-Wörner 2018 与 Verma-Queiroz 两篇核心对比文献的完整信息（期刊、卷期、页码、具体方法学定位）缺失，无法支撑'第三类方法学入口'的边界量化声明",
+      "search_keywords": [
+        "Luu Wörner 2018 monochromatic field inversion",
+        "Verma Queiroz step response high harmonic",
+        "single-color field retrieval attosecond"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "ZnO 实验稳定获取的奇次谐波区间 3–7 阶作为判据量选取依据",
+      "missing_evidence": "缺少 ZnO 晶体高次谐波实验中 3–7 阶奇次谐波偏振椭圆率与旋转角的原始实验数据来源文献",
+      "search_keywords": [
+        "ZnO crystal high harmonic generation experiment",
+        "ZnO odd harmonics polarization ellipticity",
+        "solid-state HHG ZnO wavelength dependence"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "CDW 相图作为创新点之一的区隔性",
+      "missing_evidence": "缺少电荷密度波（CDW）与高次谐波/强场电离交叉研究的支撑文献，无法证明 CDW 相图与谐波反演之间的关联为本项目新视角",
+      "search_keywords": [
+        "charge density wave high harmonic generation",
+        "CDW phase diagram strong-field response",
+        "CDW order parameter ultrafast spectroscopy"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "TRIQS 作为 No-Go 触发后的替代计算工具",
+      "missing_evidence": "缺少 TRIQS（Toolbox for Research on Interacting Quantum Systems）在相关强关联电子系统或多体计算中的应用文献，无法评估替代路径的可行性与计算成本",
+      "search_keywords": [
+        "TRIQS toolbox interacting quantum systems",
+        "TRIQS strong correlation solid state",
+        "TRIQS DMFT doped semiconductor"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Bonferroni 多重检验校正作为判据联合查表的统计基础",
+      "missing_evidence": "缺少 Bonferroni 校正或多重比较校正（Holm-Bonferroni 等）在量子物理判据融合中的应用文献，'Bonferroni 长链句'的具体公式与阈值无文献溯源",
+      "search_keywords": [
+        "Bonferroni correction quantum physics",
+        "multiple hypothesis testing high harmonic",
+        "family-wise error rate attosecond"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Σ 代理库（surrogate library）覆盖 12 组 GPU 预算与网格/通量参数",
+      "missing_evidence": "缺少代理模型（surrogate model）在含时薛定谔方程数值求解或高次谐波仿真中的代表性文献，无法证明 12 组参数空间的完备性",
+      "search_keywords": [
+        "surrogate model TDSE simulation",
+        "Gaussian process emulator high harmonic",
+        "polynomial chaos strong-field ionization"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "条件单模态选择（conditional single-mode selection）作为方案设计依据",
+      "missing_evidence": "缺少强场激光场模式选择或条件单模态判据的文献依据，无法证明该选择优于多模态或非条件方案",
+      "search_keywords": [
+        "single mode selection strong-field laser",
+        "conditional sampling attosecond pulse",
+        "mode decomposition HHG driver"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "'至少 5–15 倍'信号增益/精度提升（出现于 4 行），作为关键定量论据",
+      "missing_evidence": "5–15 倍的定量声明缺少原始文献来源：增益是相对何种基线（Vampa 同码？单色场反演？）未明确，且 4 处复述加重可追溯性负担",
+      "search_keywords": [
+        "signal-to-noise ratio improvement high harmonic inversion",
+        "precision gain multifrequency retrieval vs monochromatic",
+        "factor improvement attosecond metrology"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Ω/g 不可分离的定性论证转写为工程化判据表",
+      "missing_evidence": "缺少 Ω 与 g（跃迁偶极矩与能带参数）不可分离性的理论推导或数值证据原始文献，作为判据表设计的理论根基",
+      "search_keywords": [
+        "transition dipole moment band structure inseparability",
+        "Omega g coupling strong-field semiconductor",
+        "nonseparability criterion attosecond retrieval"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "同码 Vampa 基线、同码复现链作为防御密度依据",
+      "missing_evidence": "缺少 Vampa 团队的复现代码、参数与误差报告的可获取文献，无法验证 5% 偏差的具体来源是否被独立复现",
+      "search_keywords": [
+        "Vampa open source code HHG ZnO",
+        "reproducibility strong-field simulation benchmark",
+        "open data attosecond solid harmonics"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

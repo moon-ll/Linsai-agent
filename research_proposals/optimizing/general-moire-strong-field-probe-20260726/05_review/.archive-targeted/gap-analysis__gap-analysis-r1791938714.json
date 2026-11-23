@@ -1,0 +1,105 @@
+{
+  "gaps": [
+    {
+      "claim": "Magic-angle扭曲双层石墨烯中HHG谐波抑制的实验观测（Molinero 2024 Optica H3/H5/H7在θ≈1.12°附近相对1.22°/1.05°出现抑制）",
+      "missing_evidence": "需要Molinero 2024 Optica论文的原始数据，特别是θ_mag附近谐波抑制的具体数值与扭转角-谐波响应曲线",
+      "search_keywords": [
+        "Molinero Optica 2024 magic-angle twisted bilayer graphene HHG",
+        "twisted bilayer graphene high harmonic generation twist angle suppression",
+        "TBG HHG twist angle dependent H3 H5 H7 Molinero"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "扭转MoS2异质结莫尔超晶格HHG研究的国内进展（清华、北大、中科院相关课题组近三年实验）",
+      "missing_evidence": "缺少国内课题组对扭转MoS2/WSe2异质结HHG或强场探测的具体实验论文",
+      "search_keywords": [
+        "twisted MoS2 WSe2 moire HHG China research group",
+        "国内 扭转 二维材料 莫尔 高次谐波 实验",
+        "Tsinghua Peking University twisted TMD high harmonic generation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Shan等人2024年magic-angle TBG开关比超10倍/抑制约90%的HHG实验结果",
+      "missing_evidence": "需要Shan 2024实验原始论文的具体抑制比数值与开关机制（关联能隙/带宽/局域化）",
+      "search_keywords": [
+        "Shan magic-angle TBG HHG switch ratio 10 times suppression",
+        "twisted bilayer graphene high harmonic 90% suppression Shan 2024",
+        "TBG HHG correlated insulator gap harmonic suppression"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Cao等人2018年magic-angle扭曲双层石墨烯关联绝缘态与非常规超导发现",
+      "missing_evidence": "需要Cao 2018 Nature两篇原文的关键参数（Tc、关联能隙、magic angle精确值1.08°）",
+      "search_keywords": [
+        "Cao 2018 Nature magic angle twisted bilayer graphene correlated insulator",
+        "Cao 2018 magic angle unconventional superconductivity TBG 1.08 degree",
+        "Bistritzer MacDonald 2011 continuum model TBG flat band"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Peterka 2023关于MoS2 HHG H5-H10阶依赖关系与e-e散射机制",
+      "missing_evidence": "需要Peterka 2023论文中谐波阶依赖（5-10阶）与近共振e-e散射通道的具体证据",
+      "search_keywords": [
+        "Peterka MoS2 high harmonic generation H5 H10 e-e scattering",
+        "MoS2 monolayer HHG harmonic order dependence resonant two-photon",
+        "Peterka 2023 resonant near-resonant HHG MoS2 dephasing"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "扭转MoS2莫尔超晶格中局域电子态与HHG通道开启的理论模型",
+      "missing_evidence": "缺少局域电子态/平带如何耦合到HHG发射通道的微观理论计算",
+      "search_keywords": [
+        "localized electronic states moire superlattice HHG channel",
+        "flat band high harmonic generation many-body theory twisted bilayer",
+        "moire flat band intraband interband HHG coupling"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Hu等人声子通道在扭转MoS2/WSe2 HHG中的作用",
+      "missing_evidence": "缺少Hu论文中声子辅助谐波产生通道的具体数据与角动量选择定则",
+      "search_keywords": [
+        "Hu phonon-assisted high harmonic generation twisted TMD",
+        "phonon channel HHG MoS2 WSe2 moire superlattice",
+        "lattice vibration strong-field harmonic generation 2D heterostructure"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Chang Lee 2024对magic-angle TBG HHG的理论计算与实验谱复现",
+      "missing_evidence": "需要Chang Lee论文中SBE/TDDFT模型复现θ-谐波强度关系曲线的具体方法与误差",
+      "search_keywords": [
+        "Chang Lee magic-angle TBG high harmonic theoretical calculation",
+        "SBE TDDFT twisted bilayer graphene HHG simulation",
+        "tight-binding semiconductor Bloch equation magic angle HHG"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "扭转双层TMD异质结(WSe2/MoS2)平带紧束缚参数与Bistritzer-MacDonald连续模型拟合",
+      "missing_evidence": "缺少平带宽度、跳跃常数、关联U值等关键TB参数及BM模型在扭转TMD中的适用性证据",
+      "search_keywords": [
+        "twisted MoS2 WSe2 flat band tight-binding parameters BM model",
+        "Bistritzer-MacDonald continuum model moire TMD fitting",
+        "twisted TMD heterostructure moire supercell band structure calculation"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "固体HHG实验参数范围(中红外驱动波长、脉宽、截止能量)的现有综述支撑",
+      "missing_evidence": "缺少2023-2026年固体HHG参数范围综述或大批量实验统计",
+      "search_keywords": [
+        "solid HHG experimental parameter range review mid-infrared",
+        "bulk crystal high harmonic generation cutoff scaling survey",
+        "solid-state HHG driver wavelength pulse duration review"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "rationale"
+}

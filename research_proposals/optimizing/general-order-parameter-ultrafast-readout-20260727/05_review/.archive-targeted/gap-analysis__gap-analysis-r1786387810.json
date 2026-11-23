@@ -1,0 +1,81 @@
+{
+  "gaps": [
+    {
+      "claim": "SBE在固体高次谐波中的适用驱动场强区间约为0.1—1.0 V/Å，Keldysh参数γ约0.5—2",
+      "missing_evidence": "scheme.md §2与§3给出不一致的SBE适用窗口（0.1—1.0 vs 0.3—0.8 V/Å）和γ范围（0.5—2 vs 0.5—1.5），缺乏权威文献依据来确定SBE在中等场强固体HHG中的具体适用边界",
+      "search_keywords": [
+        "semiconductor Bloch equations applicability regime solid HHG",
+        "Keldysh parameter range solid-state high harmonic generation",
+        "SBE validity driving field strength altermagnet HHG",
+        "Keldysh gamma intermediate regime high harmonic spectroscopy"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "高次谐波幅度偏差的可辨识性判据为≤10%",
+      "missing_evidence": "scheme.md四处给出≤10%的硬阈值，但content.md仅模糊表述为'文献允许范围内'，缺少具体阈值来源的实验/理论文献支撑",
+      "search_keywords": [
+        "high harmonic spectroscopy amplitude deviation threshold",
+        "HHG reconstruction error tolerance percent experimental",
+        "high harmonic generation amplitude precision criterion",
+        "harmonic spectroscopy identifiability amplitude noise floor"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "差分偶次谐波相对强度≥ 1%作为磁序参数可读出的核心判据",
+      "missing_evidence": "scheme.md §2的差分信号阈值与§3的备选切换判据（< 1%）逻辑不一致，且阈值来源未引用具体文献（Even Tzur、Cochran、Sørensen等同类工作给出的差分谐波幅度量级）",
+      "search_keywords": [
+        "differential even harmonic signal altermagnet HHG threshold",
+        "magnetic order high harmonic generation signal-to-noise ratio",
+        "even order harmonic altermagnet signal magnitude published",
+        "spin-resolved HHG differential amplitude experimental"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "CrSb作为主研究体系的altermagnet参数（Néel温度≈720 K、d波自旋分裂）",
+      "missing_evidence": "CrSb基本磁性参数虽在scheme.md §3中给出，但缺少关于其在HHG/强场非线性光学中适用性的同行评审文献支撑，特别是与MnTe对比的可加工性、信号量级数据",
+      "search_keywords": [
+        "CrSb altermagnet high harmonic generation published",
+        "CrSb Neel temperature 720K d-wave spin splitting HHG",
+        "CrSb nonlinear optical response strong field",
+        "CrSb altermagnet ultrafast spectroscopy peer-reviewed"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "MnTe作为CrSb备选altermagnet体系，Cheng 2026超快调控与Rost 2025已观测HHG信号",
+      "missing_evidence": "评审提及Cheng 2026和Rost 2025两篇支撑文献，但未在references.md中验证其出版状态与具体DOI；缺少MnTe在altermagnet HHG实验中的同行评审数据",
+      "search_keywords": [
+        "MnTe altermagnet high harmonic generation peer-reviewed",
+        "MnTe spin splitting HHG experimental observation",
+        "Cheng 2026 MnTe ultrafast control altermagnet",
+        "Rost 2025 MnTe HHG signal published journal"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "多带正演模型（SBE+SOC+TDDFT）在限定的altermagnet材料条件下对HHG谱的可计算性",
+      "missing_evidence": "scheme.md §2提到SBE+SOC+TDDFT组合，但rationale.md与content.md未明确'多带正演模型'的具体形式与文献依据，缺少该组合在强关联体系HHG计算中的benchmark文献",
+      "search_keywords": [
+        "TDDFT semiconductor Bloch equations altermagnet HHG benchmark",
+        "many-body SOC HHG calculation altermagnet",
+        "SBE SOC combined strong-field altermagnet calculation",
+        "TDDFT altermagnet high harmonic generation scalability"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "可辨识性判据（No-Go条件）的Fisher信息矩阵条件数阈值在反铁磁HHG反演中的适用性",
+      "missing_evidence": "全篇31次提及'可辨识性'但缺乏No-Go判据在具体altermagnet体系HHG逆问题中的文献benchmark（如Cochran 2025、Sørensen 2025是否给出条件数阈值）",
+      "search_keywords": [
+        "Fisher information matrix condition number HHG inverse problem",
+        "Bayesian inversion identifiability criterion solid HHG",
+        "No-Go theorem harmonic spectroscopy reconstruction",
+        "Cochran Sørensen2025 HHG Bayesian inversion threshold"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "gaps": [
+    {
+      "claim": "rationale、content、scheme 中的综述性过渡句、领域发展脉络及国内外研究现状等背景性论断，目前使用71处逐条[N]角标引证，未区分“关键论断的编号引文”与“背景性内容的整体引述”。",
+      "missing_evidence": "需要补充或明确用于背景性段落集中引述的权威综述、领域评估文献或专著，并建立保留的编号引文与关键论断之间的直接对应关系，核验原始论文是否确实支持相应的技术路线、数值范围和适用条件。该问题主要缺少的是可核验的集中来源及规范的引文—论断映射，并非普遍缺少新的实验数据。",
+      "search_keywords": [
+        "attosecond streaking review",
+        "attosecond photoelectron spectroscopy review",
+        "attosecond metrology review",
+        "high-order harmonic generation attosecond pulse review",
+        "photoelectron spectroscopy ultrafast electron dynamics review",
+        "阿秒条纹技术 综述",
+        "阿秒光电子能谱 研究进展",
+        "高次谐波发生 阿秒脉冲 综述",
+        "国内 阿秒物理 光电子光谱 研究现状"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "full_review"
+}

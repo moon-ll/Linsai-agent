@@ -1,0 +1,99 @@
+{
+  "gaps": [
+    {
+      "claim": "国内团队“最早给出超快滑移动力学数值预言”的优先权主张。",
+      "missing_evidence": "缺少能够证明该优先权的系统检索证据，包括 WoS、arXiv、CNKI 等数据库的明确检索范围、检索式、检索截止日期、国内外相关数值研究的筛选结果及排除依据。若无法形成完整证据链，应将“国内最早”改为“国内较早”等审慎表述。",
+      "search_keywords": [
+        "MnPS3 超快滑移 数值模拟",
+        "MnPS3 ultrafast sliding dynamics numerical simulation",
+        "Rashba-Dresselhaus 滑移动力学研究进展",
+        "altermagnetic MnPS3 sliding dynamics",
+        "国内 MnPS3 超快磁各向异性动力学 数值"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Wrzos 等提出的 S1/S2 分类能够用于描述或区分相关磁序、序参量或动力学模式。",
+      "missing_evidence": "Wrzos 等原始论文或权威综述的直接引用缺失。需核对 S1、S2 分类的原始定义、适用对象、分类判据及该分类与本申请书所述体系之间的对应关系，避免将二手概括作为唯一依据。",
+      "search_keywords": [
+        "Wrzos S1 S2 classification",
+        "Wrzos S1 S2 magnetic order",
+        "S1 S2 symmetry classification magnetism",
+        "Wrzos et al S1 S2 order parameter"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Šmejkal 等依据自旋点群和 i-wave 反对称表示对相关磁结构进行群论分类，并可由该分析识别 PT 破缺自旋点群的 l=6 判据。",
+      "missing_evidence": "缺少 Šmejkal 等原始文献的句末引用，以及对其 i-wave 群论表示、适用晶系和不变量分类的逐项支撑。还需补充能够说明“自旋点群 l=6”具体含义及其与 PT 破缺关系的原始理论文献或权威综述。",
+      "search_keywords": [
+        "Šmejkal i-wave spin point group",
+        "altermagnetism i-wave group theory",
+        "spatiotemporal spin group l=6 PT breaking",
+        "spin point group l=6 magnetic multipole",
+        "Šmejkal magnetic space group spin group review"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Ul Haque 等在 MnPS3 中通过强场 THz 泵浦与时间分辨 SHG 探测观察到 1.7 THz 和 4.5 THz 相干声子振荡，且振荡幅度与平衡 SHG 同量级。",
+      "missing_evidence": "该具名实验陈述的句尾缺少直接引文。需补充 Ul Haque 等人的原始论文，并核实 1.7 THz、4.5 THz 两个峰位、SHG 探测方式、振荡幅度以及“与平衡 SHG 同量级”比较是否均由原文图表直接支持。",
+      "search_keywords": [
+        "Ul Haque MnPS3 THz time-resolved SHG",
+        "MnPS3 1.7 THz 4.5 THz coherent phonon",
+        "MnPS3 terahertz pump second harmonic generation phonon",
+        "MnPS3 time-resolved nonlinear optics coherent phonon oscillation"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Krempaský 等首次发现或报告了所研究的 MnTe 反常自旋相关 ARPES 特征，同时 Lee、Osumi 等开展了同期 MnTe ARPES 工作。",
+      "missing_evidence": "缺少支持“首次”优先权表述的完整时间线和原始文献。需要并列核对 Krempaský、Lee、Osumi 等 MnTe ARPES 论文的投稿、接收、公开和在线发表日期，并依据证据改写为“较早报道”或“同期独立观测”。还需说明各团队是否使用相同材料体系、测量条件和所识别信号，以界定优先权范围。",
+      "search_keywords": [
+        "Krempasky MnTe ARPES",
+        "Lee MnTe ARPES altermagnetism",
+        "Osumi MnTe ARPES spin splitting",
+        "MnTe angle-resolved photoemission altermagnetism first observation",
+        "MnTe spin-split surface states ARPES chronology"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "关于 MnPS3/WS2 中将相关计算扩展到三角格子体系的结论。",
+      "missing_evidence": "该结论句末缺少直接引文。需确认现有计算究竟采用了三角格子模型、莫尔势、堆叠构型还是超胞近似，并引用直接开展 MnPS3/WS2 异质结构或莫尔体系计算的原始论文，避免由一般性 MnPS3 或 WS2 文献间接推导。",
+      "search_keywords": [
+        "MnPS3 WS2 heterostructure theoretical calculation",
+        "MnPS3/WS2 moire triangular lattice",
+        "MnPS3 WS2 Rashba spin orbit coupling calculation",
+        "MnPS3 monolayer WS2 heterostructure first principles",
+        "triangular lattice MnPS3 moire magnetism"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Basnet 等文献给出了所引用饱和场与磁矩的量级依据。",
+      "missing_evidence": "当前“见上述文献正文图表”的集合式回指不能明确支撑饱和场和磁矩的具体论断。需核对 Basnet 等原文对应图表、数据定义、实验条件和单位，并在句末直接引用该文献，说明哪些图表分别支持饱和场和磁矩量级。",
+      "search_keywords": [
+        "Basnet MnPS3 saturation field magnetic moment",
+        "Basnet et al MnPS3 magnetization saturation field",
+        "MnPS3 magnetic moment saturation magnetic field experiment",
+        "MnPS3 magnetic anisotropy saturation magnetization Basnet",
+        "Basnet MnPS3 figures magnetic moment"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "参考文献 [8]、[24]、[43] 均属于 arXiv 预印本，并需在全文首次引用时统一标注其预印本属性。",
+      "missing_evidence": "缺少对三个条目出版状态的逐项核验。应根据参考文献表中的题名和作者检索 arXiv 原始记录、期刊页面及 DOI，确认其是否仍仅为预印本、是否已有正式发表版本以及预印本版本号，并在首次出现时采用一致且可追溯的状态标注。",
+      "search_keywords": [
+        "arXiv reference [8] exact title",
+        "arXiv reference [24] exact title",
+        "arXiv reference [43] exact title",
+        "MnPS3 Rashba arXiv preprint",
+        "MnPS3 altermagnetism arXiv preprint"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

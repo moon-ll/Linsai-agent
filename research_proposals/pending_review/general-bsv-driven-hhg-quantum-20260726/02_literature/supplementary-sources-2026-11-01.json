@@ -1,0 +1,65 @@
+{
+  "proposal_id": "general-bsv-driven-hhg-quantum-20260726",
+  "cluster_id": "cl_20260815_3baa9d",
+  "clusters": [
+    "cl_20260815_3baa9d"
+  ],
+  "entries": [
+    {
+      "source_id": "paper:2026-2606.22714-emergence-of-gaussian-entanglement-and-non-gaussianity-in-hi",
+      "title": "Emergence of Gaussian entanglement and non-Gaussianity in high-harmonic generation driven by bright squeezed light",
+      "summary": "该文研究了明亮压缩真空（BSV）驱动高次谐波产生（HHG）过程中的量子特性，发现驱动场与谐波场之间可涌现多模高斯纠缠态，同时产生非高斯性。这些态可作为XUV波段的量子资源（如量子隐形传态），将非经典光态的制备从红外拓展至高光子能量的极紫外波段。",
+      "path": "",
+      "added_via": "cluster:cl_20260815_3baa9d",
+      "added_at": "2026-11-01T02:40:45Z"
+    },
+    {
+      "source_id": "paper:2026-2605.21925-nonclassical-cutoff-fluctuations-in-squeezed-light-driven-hi",
+      "title": "Nonclassical Cutoff Fluctuations in Squeezed-Light-Driven High-Harmonic Generation",
+      "summary": "本文提出用压缩态量子光驱动高次谐波产生（HHG），证明谐波截止频率的涨落方差可被压缩至标准量子极限（散粒噪声）以下，呈现非经典涨落特性。该效应使HHG截止频率的统计涨落本身构成一种无需外部基准的自校准海森堡不等式见证，为检验量子驱动场在强场电离与阿秒动力学中的非经典性提供了新途径。",
+      "path": "",
+      "added_via": "cluster:cl_20260815_3baa9d",
+      "added_at": "2026-11-01T02:40:45Z"
+    },
+    {
+      "source_id": "paper:2024-2406.10443-attosecond-pulse-synthesis-from-high-order-harmonic-generati",
+      "title": "Attosecond pulse synthesis from high-order harmonic generation in intense squeezed light",
+      "summary": "该文提出用强压缩光（squeezed light）驱动高次谐波产生（HHG），发现整个谐波谱的相位被锁定，据此可合成脉冲宽度远小于传统相干驱动光的阿秒脉冲。这一结果将非经典量子光源引入阿秒脉冲合成，为突破传统阿秒脉冲持续时间极限提供了新途径。",
+      "path": "",
+      "added_via": "cluster:cl_20260815_3baa9d",
+      "added_at": "2026-11-01T02:40:45Z"
+    },
+    {
+      "source_id": "paper:2026-2604.06703-strong-field-ionization-of-atoms-with-bright-squeezed-vacuum",
+      "title": "Strong-field ionization of atoms with bright squeezed vacuum light",
+      "summary": "该工作实验研究了明亮压缩真空（BSV）光驱动氙原子的强场电离过程，观察到显著增强的蜘蛛状光电子全息结构。结果揭示了量子涨落对电离相干性的保护机制，为利用非经典光场调控强场电离动力学开辟了新途径。",
+      "path": "",
+      "added_via": "cluster:cl_20260815_3baa9d",
+      "added_at": "2026-11-01T02:40:45Z"
+    },
+    {
+      "source_id": "paper:2024-2404.05474-photon-bunching-in-high-harmonic-emission-controlled-by-quan",
+      "title": "Photon bunching in high-harmonic emission controlled by quantum light",
+      "summary": "本文实验证明以量子光（明亮压缩真空 BSV）驱动半导体高次谐波产生（HHG）时，谐波发射光子保持并显著放大非经典聚束统计（g²(0) > 1），证明 HHG 过程可将驱动光场的量子涨落/纠缠印记传递到上转换的高能光子，并展示 BSV 辅助场可调控半导体 HHG 边带结构。",
+      "path": "knowledge/raw/papers/2024-2404.05474-photon-bunching-in-high-harmonic-emission-controlled-by-quan.md",
+      "added_via": "cluster:cl_20260815_3baa9d",
+      "added_at": "2026-11-01T02:40:45Z"
+    },
+    {
+      "source_id": "paper:2024-2410.17452-recent-developments-in-the-generation-of-non-classical-and-e",
+      "title": "Recent developments in the generation of non-classical and entangled light states using intense laser-matter interactions",
+      "summary": "本文综述了利用强激光-物质相互作用（含明亮压缩真空/量子光驱动的高次谐波产生等平台）制备非经典与纠缠光态的最新进展，涵盖压缩态、薛定谔猫态及多模纠缠态的产生机制与表征方法。文章进一步讨论了量子光学与强场阿秒物理交叉融合所开辟的新方向，为量子光驱动强场过程的研究提供了系统视角。",
+      "path": "knowledge/raw/papers/2024-2410.17452-recent-developments-in-the-generation-of-non-classical-and-e.md",
+      "added_via": "cluster:cl_20260815_3baa9d",
+      "added_at": "2026-11-01T02:40:45Z"
+    },
+    {
+      "source_id": "paper:2026-2606.07324-anomalous-autler-townes-splitting-in-resonant-multiphoton-io",
+      "title": "Anomalous Autler-Townes Splitting in Resonant Multiphoton Ionization Driven by Bright Squeezed Vacuum",
+      "summary": "该文研究了明亮压缩真空（BSV）驱动的共振多光子电离过程，发现与经典相干光驱动下分裂随ATI阶数减弱的常规规律相反，BSV驱动下ATI阶数越高Autler-Townes分裂反而越大。这一反常行为揭示了量子光场与电离电子态之间的光子-电子纠缠，为通过电离谱结构诊断驱动光场的量子特性提供了新途径。",
+      "path": "",
+      "added_via": "cluster:cl_20260815_3baa9d",
+      "added_at": "2026-11-01T02:40:45Z"
+    }
+  ]
+}

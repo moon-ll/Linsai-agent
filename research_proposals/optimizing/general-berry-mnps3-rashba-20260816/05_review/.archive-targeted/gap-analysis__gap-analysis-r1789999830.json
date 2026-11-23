@@ -1,0 +1,14 @@
+{
+  "gaps": [
+    {
+      "claim": "滑移铁电（h-BN 类比）切换时间尺度 fs-ps 与本项目 ps-ns 切换区间的对应",
+      "missing_evidence": "需要 h-BN 双层滑移铁电切换时间尺度的实验测量（PRL 133, 126801 类比体系）作为 MnPS3 多通道切换时间常数的可行性背书",
+      "search_keywords": [
+        "h-BN sliding ferroelectric switching timescale PRL 133 126801",
+        "interlayer sliding polarization reversal picosecond experiment",
+        "bilayer h-BN ferroelectric domain wall dynamics"
+      ]
+    }
+  ],
+  "section": "scheme"
+}

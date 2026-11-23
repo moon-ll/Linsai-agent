@@ -1,0 +1,38 @@
+{
+  "gaps": [
+    {
+      "claim": "全原胞TDDFT在莫尔超晶格（>10⁴原子）上计算成本>10⁸核时，理性依据为不可承受",
+      "missing_evidence": "现有论据仅来自Molinero 2024的SBE（半导体布洛赫方程，单粒子方法）基准外推——Molinero 2024用100×100 k网格+8轨道Wannier跑SBE的计算规模。但SBE与TDDFT（含交换关联势更新、泊松方程求解）计算量有量级差异（通常TDDFT比SBE慢2-3个数量级），属间接外推，需要真实TDDFT在莫尔原胞上的成本基准文献支撑",
+      "search_keywords": [
+        "real-time TDDFT moiré supercell computational cost",
+        "TDDFT twisted bilayer graphene core hours benchmark",
+        "ab initio TDDFT moiré heterostructure scalability",
+        "first-principles TDDFT magic-angle twisted bilayer benchmark",
+        "TDDFT versus SBE computational scaling moiré"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Molinero 2024 SBE基准参数（100×100 k网格+8轨道Wannier）作为rationale.md §1.3 + content.md §2.2 R1 + scheme.md §3.2三处共同论据来源",
+      "missing_evidence": "Molinero 2024论文需要原文核实具体计算参数（k网格密度100×100、Wannier轨道数8、计算平台、核时数）；该文献作为全文成本论据唯一支撑但未提供DOI/CrossRef验证，且SBE方法本身不足以支撑TDDFT成本估算",
+      "search_keywords": [
+        "Molinero 2024 semiconductor Bloch equations twisted bilayer",
+        "Molinero SBE 8 Wannier orbitals moiré HHG",
+        "Molinero high harmonic generation moiré benchmark publication"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3.5创新点1：本框架首次将多体张量网络修正纳入莫尔HHG正向模型",
+      "missing_evidence": "缺乏张量网络方法在HHG/强场动力学领域的应用历史综述；'首次'声明需系统文献检索证明此前无相关工作（matrix product state、DMRG、tensor network在HHG/强场非平衡态模拟中的应用）",
+      "search_keywords": [
+        "tensor network high harmonic generation simulation",
+        "matrix product state HHG strong field",
+        "DMRG attosecond strong field ionization",
+        "tensor network nonlinear optics moiré superlattice",
+        "many-body tensor network correction HHG forward model"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

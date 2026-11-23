@@ -1,0 +1,77 @@
+{
+  "gaps": [
+    {
+      "claim": "η(N) 作为层数 N（1—4 层）的函数关系需要在 N=2、3、4 三点拟合以验证其标度形式",
+      "missing_evidence": "缺乏关于 TMD（特别是 MoS₂）少层结构中高次谐波产率或非线性效率 η 随层数 N 变化的函数形式（标度律）的文献支撑，特别是用于三点拟合的 N=2、3、4 区间的实验或理论数据",
+      "search_keywords": [
+        "high harmonic generation layer dependence MoS2",
+        "few-layer TMD harmonic yield scaling",
+        "η(N) few-layer transition metal dichalcogenide",
+        "MoS2 multilayer nonlinear optical response N-dependence",
+        "attosecond HHG bilayer trilayer MoS2"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Peterka 等人[15] 报告的单层 MoS₂ 近共振预激发抑制幅度作为可行性链式论证的阈值锚点",
+      "missing_evidence": "除 Peterka 单篇文献外，缺少关于 2D 材料/TMD 中近共振预激发对高次谐波抑制机制的补充文献（如其他实验组独立观测、理论模型推导、或在 WSe₂/WS₂ 等同类体系中的可比数据），以增强阈值论证的鲁棒性",
+      "search_keywords": [
+        "pre-excitation suppression HHG 2D material",
+        "near-resonant dressing attosecond TMD",
+        "Peterka MoS2 attosecond transient absorption",
+        "resonant excitation suppression high harmonic TMD",
+        "dressing field near-resonance MoS2 monolayer"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "AA 与 AB 两种堆叠方式对 MoS₂ 高次谐波产生及协同耦合通道的影响（已引 Mrudul，但需补充堆叠依赖性定量证据）",
+      "missing_evidence": "除 Mrudul 一篇外，缺少关于双层 MoS₂ 不同堆叠构型（AA/AB/2H/3R）对电子结构、跃迁选择定则及谐波产率影响的独立文献支撑",
+      "search_keywords": [
+        "AA AB stacking bilayer MoS2 HHG",
+        "polytype dependence high harmonic TMD",
+        "2H 3R MoS2 stacking electronic structure",
+        "stacking-dependent nonlinear optics transition metal dichalcogenide",
+        "bilayer MoS2 polytype band structure selection rule"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "三阈值整链（§6/§7/§8 三次复述）中涉及的协同通道相对贡献抑制幅度判断",
+      "missing_evidence": "三次复述的可分离性判断均依赖 Peterka 等人单一文献的抑制幅度作为锚点，缺少来自其他体系（如石墨烯、hBN、黑磷）或不同激发条件下的可比阈值数据以形成交叉验证",
+      "search_keywords": [
+        "cooperative channel high harmonic 2D material",
+        "separability threshold HHG dressing field",
+        "graphene hBN black phosphorus HHG suppression",
+        "interband intraband cooperation TMD harmonic",
+        "resonant coupling channel attosecond 2D"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "I₀=2E/(πw²τ) 等激光参数标定公式与 U_p≈0.26 eV、δt=δφ/ω₀（170 as/645 as）等计算",
+      "missing_evidence": "缺少对所用激光脉冲参数标定方法（强度 I₀ 由能量 E、束腰 w、脉宽 τ 推算；CEP 稳定性 δφ 对应时间抖动 δt）的标准参考文献，公式虽自洽但未引用方法学原始来源",
+      "search_keywords": [
+        "laser intensity calibration formula energy waist duration",
+        "CEP carrier-envelope phase stability attosecond",
+        "few-cycle pulse intensity measurement E w tau",
+        "attosecond pulse characterization δt δφ",
+        "CEP tagging few-cycle mid-infrared"
+      ],
+      "priority": "low"
+    },
+    {
+      "claim": "δ/denom 定义与 σ_α 式的数值标定（已自修复，但需文献确认 α_syn 增量模型的理论基础）",
+      "missing_evidence": "α_syn 协同耦合增量模型的物理推导与近似条件（δ/denom 修正项的来源）缺少原始文献支撑，目前为原理层论证但无具体公式出处",
+      "search_keywords": [
+        "cooperative coupling model high harmonic yield",
+        "synergy term α harmonic generation theory",
+        "interband intraband coupling two-band model",
+        "perturbative expansion high harmonic 2D material",
+        "semiconductor Bloch equation cooperative channel"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

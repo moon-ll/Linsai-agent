@@ -1,0 +1,63 @@
+{
+  "gaps": [
+    {
+      "claim": "2ħω<E_g 频率判据适用于莫尔体系的中红外强场驱动，需 2 μm 调控下限可第三方复算",
+      "missing_evidence": "缺少 tMoS₂/tWSe₂ 同质或异质莫尔体系在相关扭转角下的实测或理论带隙数值（约 1–2 eV 档），以及对应 2 μm 光子能量 (0.62 eV) 的双光子裕量复算依据",
+      "search_keywords": [
+        "twisted MoS2 homobilayer band gap",
+        "twisted WSe2 homobilayer band gap",
+        "moiré TMD heterostructure electronic structure",
+        "tMD moiré flat band gap angle dependent",
+        "second harmonic generation band gap twisted TMD"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "SHG 作为莫尔体系弱场探针通道（§3.3.2 强度表与 content §2.2.3 主判据句），与 HHG/椭偏/TA 三类观测协议并列",
+      "missing_evidence": "缺少 SHG 在扭转 TMD/莫尔超晶格中作为结构对称性/层间耦合探针的具体实施方案或前期文献支撑（波长范围、偏振选择定则、信号量级、对魔角附近的对称破缺响应灵敏度）",
+      "search_keywords": [
+        "SHG moiré twisted bilayer TMD",
+        "second harmonic generation twisted MoS2 WSe2 symmetry",
+        "SHG probe interlayer coupling moiré",
+        "SHG magic angle TMD homobilayer",
+        "SHG sensitivity twist angle transition metal dichalcogenide"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3.4 L82 HHG 探测效率'典型值'（未给出处）",
+      "missing_evidence": "缺少 HHG/强场实验中探测效率典型数值的引用出处，应给出具体文献或仪器厂家 spec",
+      "search_keywords": [
+        "high harmonic generation detection efficiency",
+        "HHG photon yield typical value",
+        "XUV spectrometer detection efficiency",
+        "HHG photon count typical solid state"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§3.2.2 中迁移到莫尔体系依赖 Du 等 2024 *Nat. Mater.* 综述的方法学'背书'",
+      "missing_evidence": "引用 [9] 仅为综述类方法学背书而非具体物理事实依据；需补充 Du 2024 综述中所引的、能直接支撑'莫尔体系适用性'判据的一手原始文献（如 mHHG 在莫尔体系的实验首次报道或理论可行性证明）",
+      "search_keywords": [
+        "moiré high harmonic generation experiment",
+        "high harmonic generation moiré superlattice",
+        "solid state HHG twisted bilayer",
+        "mHHG TMD observation",
+        "nonperturbative HHG 2D moiré"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§3.4.2 可行性章'原理→指标'链部分外包至方法学手册/他章指针",
+      "missing_evidence": "可行性论证以指针句外推至方法学手册或他章处，缺独立原理-指标对应链；应补 Floquet 调控相对常规电磁调控优势的具体定量对照文献，以及全原胞 DFT+tdDFT 计算成本基准来源",
+      "search_keywords": [
+        "Floquet engineering vs static electric field control moiré",
+        "tdDFT moiré supercell computational cost benchmark",
+        "first principles HHG solid state feasibility",
+        "real-time TDDFT large supercell cost"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

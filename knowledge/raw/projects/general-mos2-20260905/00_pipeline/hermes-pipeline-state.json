@@ -1,0 +1,64 @@
+{
+  "proposal_id": "general-mos2-20260905",
+  "current_stage": 0,
+  "status": "idle",
+  "stages": {
+    "0": {
+      "name": "方向校准",
+      "profile": "pipeline-runner",
+      "status": "completed",
+      "dispatched_at": "2026-09-05T03:01:26Z",
+      "completed_at": "2026-09-05T03:03:07Z",
+      "output_preview": "方向校准报告已写入并通过校验。已完成的事：\n\n产物路径：`/Users/ll/Desktop/LinSai-CoPilot/research_proposals/drafts/general-mos2-20260905/01_direction/direction-calibration.md`（88 行）\n\n执行概要：\n- 画像文件实际位于 `~/Desktop/LinSai-CoPilot/memory/`，而非 profile-local；已读取并融合\n- 增量模式：原文件仅含 12 行\"周末输入补充\"片段，未覆盖任务要求的 4 章节，做了增量重写，原始输入作为\"增量上下文来源\"保留在文末\n- 报告四个章节齐备：研究方向关键词（5 个，按主线重要性排序）/ 用户画像摘要（含 9 个在跑课题分数、中红外供应链约束、强偏好）/ 方向对齐评估（与主线一致性、与在跑课题差异化、资源约束匹配、风险点）/ 建议聚焦的课题方向（三大主线 + 共享方法底盘）\n- 阶段 0 任务完成，可推进至阶段 1（文献调研，委派 researcher profile）",
+      "error": ""
+    },
+    "1": {
+      "name": "文献调研",
+      "profile": "researcher",
+      "status": "pending",
+      "dispatched_at": null,
+      "completed_at": null,
+      "output_preview": "",
+      "error": ""
+    },
+    "2": {
+      "name": "缺口分析",
+      "profile": "analyst",
+      "status": "pending",
+      "dispatched_at": null,
+      "completed_at": null,
+      "output_preview": "",
+      "error": ""
+    },
+    "3": {
+      "name": "科学问题",
+      "profile": "analyst",
+      "status": "pending",
+      "dispatched_at": null,
+      "completed_at": null,
+      "output_preview": "",
+      "error": ""
+    },
+    "4": {
+      "name": "申请书撰写",
+      "profile": "writer",
+      "status": "pending",
+      "dispatched_at": null,
+      "completed_at": null,
+      "output_preview": "",
+      "error": ""
+    },
+    "5": {
+      "name": "质量自检",
+      "profile": "reviewer",
+      "status": "pending",
+      "dispatched_at": null,
+      "completed_at": null,
+      "output_preview": "",
+      "error": ""
+    }
+  },
+  "history": [],
+  "created_at": "2026-09-05T03:01:26Z",
+  "updated_at": "2026-09-05T03:03:07Z"
+}

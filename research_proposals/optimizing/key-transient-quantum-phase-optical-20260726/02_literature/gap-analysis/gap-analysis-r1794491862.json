@@ -1,0 +1,63 @@
+{
+  "gaps": [
+    {
+      "claim": "电流-电流关联（current-current correlation）可编码 Berry 几何量，并已在一维示意体系中率先验证",
+      "missing_evidence": "承载该理论结论的原始文献：电流-电流关联张量与非线性光学/Berry 几何量关系的理论工作，及其在一维模型体系中的数值或解析验证；现有 40 条 refs 中 [31] 仅为 KS-多体 Berry 相位一致，非电流-电流关联条目，无法承载",
+      "search_keywords": [
+        "current-current correlation",
+        "Berry curvature nonlinear optical response",
+        "nonlinear response tensor theory",
+        "one-dimensional model system verification",
+        "geometric quantity optical encoding"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "2026 阿秒科学路线图将该方向列为旗舰方向；ELI-ALPS 设施议程包含相关束线且束线参数已有完整报道",
+      "missing_evidence": "阿秒科学路线图文件（旗舰方向条目）、ELI-ALPS 官方议程/束线参数报道文献，使战略层面断言可溯源",
+      "search_keywords": [
+        "attosecond science roadmap 2026",
+        "ELI-ALPS beamline",
+        "attosecond roadmap flagship",
+        "ELI-ALPS facility parameters"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "非线性声子机制驱动过程：参量不稳定性 → 反演对称性破缺 → 铁电整流",
+      "missing_evidence": "非线性声子学（nonlinear phononics）原始实验文献，如 Först、von Hoegen 等关于参量声子激发、光致反演破缺与铁电整流的代表作",
+      "search_keywords": [
+        "nonlinear phononics",
+        "Först nonlinear phonon",
+        "von Hoegen",
+        "parametric phonon instability",
+        "photoinduced inversion symmetry breaking",
+        "ferroelectric rectification light-induced"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "「尚无实验报道」「国内尚未见」等新颖性/国内空白断言",
+      "missing_evidence": "检索范围与截止日期限定（如仿 L75 补「截至 2026-11 检索范围内」）；需系统性检索证据支撑「无报道」断言，包括国内固体 HHG/相关方向实验现状的检索记录",
+      "search_keywords": [
+        "systematic literature search scope",
+        "novelty claim evidence",
+        "国内 固体高次谐波 实验 现状",
+        "截止 2026-11 检索"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "2.3 μm 频梳实现 1.5 mrad（与 2 μm 70 mrad 对比）的载波包络相位/稳定性断言",
+      "missing_evidence": "需核实 [27] 原文是否含 2.3 μm 频梳数据（其题名仅覆盖 2 μm OPA）；若不含，需补充 2.3 μm 频率梳高次谐波/CEP 稳定性的对应原始文献并拆分挂载",
+      "search_keywords": [
+        "2.3 μm frequency comb",
+        "frequency comb solid HHG",
+        "carrier-envelope phase stability 1.5 mrad",
+        "mid-infrared frequency comb harmonic generation"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

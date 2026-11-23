@@ -1,0 +1,26 @@
+{
+  "gaps": [
+    {
+      "claim": "rationale §2末段引用Hu et al., Phys. Rev. Lett. 133, 156901, 2024作为HHG国内进展支撑",
+      "missing_evidence": "该PRL在references.md中无独立书目项（round-1至round-5连续5轮标记的引文—正文断裂），且该工作研究MoS₂相干声子耦合HHG探测，与altermagnet主线无直接关联，属非核心论断×检索锚点丢失的双重冗余；需替换或补充altermagnetic序参量HHG探测的代表性同行评审文献",
+      "search_keywords": [
+        "altermagnet high harmonic generation",
+        "altermagnetic order parameter HHG probe",
+        "spin group symmetry HHG altermagnet",
+        "MnTe RuO2 high harmonic generation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "rationale §3引用Jensen Phys. Rev. A 109, 063104 [20]支撑HHG反演可辨识性/序参量辨识论点",
+      "missing_evidence": "该文献与altermagnet主线不强相关（更接近气相HHG理论而非凝聚态磁性序参量反演）；需补充针对altermagnetic/磁性序参量HHG反演唯一性、Fisher信息可辨识性判据或贝叶斯反演的同行评审文献",
+      "search_keywords": [
+        "HHG inverse problem identifiability solid state",
+        "high harmonic spectroscopy Fisher information order parameter",
+        "Bayesian inversion HHG magnetic order reconstruction",
+        "magnetic order parameter reconstruction HHG uniqueness"
+      ],
+      "priority": "high"
+    }
+  ]
+}

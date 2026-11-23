@@ -1,0 +1,73 @@
+{
+  "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
+  "cluster_id": "cl_20261106_dc502c",
+  "clusters": [
+    "cl_20261106_dc502c"
+  ],
+  "entries": [
+    {
+      "source_id": "paper:2024-2411.00924-bayes_spec-a-bayesian-spectral-line-modeling-framework-for-a",
+      "title": "bayes_spec: A Bayesian Spectral Line Modeling Framework for Astrophysics",
+      "summary": "bayes_spec 是一个基于 PyMC 构建的开源 Python 贝叶斯光谱线建模框架，允许用户对天体物理谱线（发射线/吸收线）定义任意参数化模型并进行后验推断。它将物理谱线分量、基线漂移与噪声统计统一纳入单一概率模型，通过 MCMC 采样输出完整的参数后验分布与不确定性，天然支持多跃迁、多速度分量的联合拟合与模型比较。其核心贡献是把天体谱线参数推断从传统的点估计（如最小二乘）提升为严格的贝叶斯框架，并大幅降低了此类分析的实现门槛。",
+      "path": "knowledge/raw/papers/2024-2411.00924-bayes_spec-a-bayesian-spectral-line-modeling-framework-for-a.md",
+      "added_via": "cluster:cl_20261106_dc502c",
+      "added_at": "2026-11-15T09:40:47Z"
+    },
+    {
+      "source_id": "paper:2025-2504.15211-position-bayesian-statistics-facilitates-stakeholder-partici",
+      "title": "Position: Bayesian Statistics Facilitates Stakeholder Participation in Evaluation of Generative AI",
+      "summary": "这是一篇立场（Position）论文，主张将贝叶斯统计引入生成式AI（GenAI）的评估流程。核心论点是：贝叶斯框架可通过先验获取将利益相关者的价值判断与信念显式编码进评估，通过贝叶斯更新实现证据的连续学习与累积，并通过后验的不确定性量化给出可解释、可审计的评估结论。据此论证贝叶斯方法为利益相关者参与GenAI评估提供了统计学基础与可操作的工作流改进方案。",
+      "path": "knowledge/raw/papers/2025-2504.15211-position-bayesian-statistics-facilitates-stakeholder-partici.md",
+      "added_via": "cluster:cl_20261106_dc502c",
+      "added_at": "2026-11-15T09:40:47Z"
+    },
+    {
+      "source_id": "paper:2024-2407.14666-a-bayesian-workflow-for-securitizing-casualty-insurance-risk",
+      "title": "A Bayesian workflow for securitizing casualty insurance risk",
+      "summary": "本文将 Gelman–Vehtari 贝叶斯工作流（问题构建—先验预测模拟—SBC 校准—拟合—后验预测检验—模型迭代）整体移植到意外险（责任险）风险的 ILS（保险连接证券）证券化问题中。核心贡献是给出一条可审计的贝叶斯建模链路：先用先验预测模拟约束先验的合理性，再用基于模拟的校准（SBC）验证先验—似然—计算的一致性，最终输出可用于证券化设计与风险转移定价的损失分布。其价值主要在方法论示范，而非新的精算模型本身，对长尾、重尾金融风险建模具有普适参考意义。",
+      "path": "knowledge/raw/papers/2024-2407.14666-a-bayesian-workflow-for-securitizing-casualty-insurance-risk.md",
+      "added_via": "cluster:cl_20261106_dc502c",
+      "added_at": "2026-11-15T09:40:47Z"
+    },
+    {
+      "source_id": "paper:2026-2409.04332-amortized-bayesian-workflow",
+      "title": "Amortized Bayesian Workflow",
+      "summary": "提出一个融合摊销（仿真式）贝叶斯推理与经典 MCMC 的自适应统计工作流：先用大规模模拟数据离线训练神经后验估计器实现秒级推理，再用 PSIS 的 k-hat 诊断评估摊销后验作为精确后验重要性采样 proposal 的质量。k-hat 低于阈值时接受（必要时经重要性重加权校正的）快速摊销结果，超过阈值则自动回退到 MCMC 精确采样，从而在推断速度与准确性之间按数据逐例动态权衡。",
+      "path": "knowledge/raw/papers/2026-2409.04332-amortized-bayesian-workflow.md",
+      "added_via": "cluster:cl_20261106_dc502c",
+      "added_at": "2026-11-15T09:40:47Z"
+    },
+    {
+      "source_id": "paper:2025-2506.18802-trans-dimensional-hamiltonian-model-selection-and-parameter",
+      "title": "Trans-dimensional Hamiltonian model selection and parameter estimation from sparse, noisy data",
+      "summary": "本文提出一个融合可逆跳变马尔可夫链蒙特卡洛（RJMCMC）、并行回火（parallel tempering）与 Metropolis-Hastings 采样的贝叶斯推断框架，从稀疏且含噪的观测数据中同时完成哈密顿量模型的跨维选择（推断模型维数/有效项数）与参数估计。该框架输出模型与参数的联合后验分布，天然提供不确定度量化，并通过贝叶斯证据（边缘似然）自动惩罚冗余项、抑制过拟合，避免人工预设固定形式的哈密顿量。对数据稀缺、噪声显著条件下的量子系统/动力学有效建模具有通用方法论价值。",
+      "path": "knowledge/raw/papers/2025-2506.18802-trans-dimensional-hamiltonian-model-selection-and-parameter.md",
+      "added_via": "cluster:cl_20261106_dc502c",
+      "added_at": "2026-11-15T09:40:47Z"
+    },
+    {
+      "source_id": "paper:2023-2310.07079-frog-retrieval-via-bayesian-inference",
+      "title": "FROG retrieval via Bayesian inference",
+      "summary": "该文将FROG超短脉冲检索从确定性最优化问题改写为贝叶斯推断问题：把待检索的脉冲场视为随机变量，基于含噪的FROG二维谱图构造似然函数与先验分布，用MCMC采样脉冲场的后验分布，而非给出单一最优拟合解。由此为检索出的谱相位、时间强度等量提供系统的统计不确定度（可信区间），直接回应传统广义投影类迭代算法在噪声下逐次结果漂移、缺乏可重复性度量的痛点。该框架原则上可推广到不同门控几何（SHG/PG/XFROG）及更一般的谱学反演协议。",
+      "path": "knowledge/raw/papers/2023-2310.07079-frog-retrieval-via-bayesian-inference.md",
+      "added_via": "cluster:cl_20261106_dc502c",
+      "added_at": "2026-11-15T09:40:47Z"
+    },
+    {
+      "source_id": "paper:2023-2301.08636-bayeshhg-bayesian-inference-for-high-harmonic-generation-spe",
+      "title": "BayesHHG: Bayesian Inference for High Harmonic Generation Spectroscopy",
+      "summary": "提出开源贝叶斯推断框架 BayesHHG，用高斯过程（GP）模拟器对固体高次谐波的前向模型（如双带半导体布洛赫方程）建立统计代理，从而对谐波谱学中的材料与光场参数做后验估计与不确定性量化。相比传统最小二乘单点拟合，该框架输出带完整误差棒的参数分布与可信区间，并把昂贵的前向模拟参数扫描替换为廉价的代理模型扫描。演示表明该方法能从谐波谱中反演能带间隙、失相时间等关键参数，并显式暴露谱数据无法约束的参数简并方向。",
+      "path": "knowledge/raw/papers/2023-2301.08636-bayeshhg-bayesian-inference-for-high-harmonic-generation-spe.md",
+      "added_via": "cluster:cl_20261106_dc502c",
+      "added_at": "2026-11-15T09:40:47Z"
+    },
+    {
+      "source_id": "paper:2024-2403.17274-bayesian-parameter-estimation-for-quantum-dynamics",
+      "title": "Bayesian parameter estimation for quantum dynamics",
+      "summary": "本文提出并演示了一套基于马尔可夫链蒙特卡洛（MCMC）的贝叶斯参数估计流程，用于约束超快电子动力学模型中的关键经验参数，并给出完整的后验不确定度（置信区间与参数间相关结构），而非仅输出点估计。通过将量子动力学正向模拟的可观测量与时间分辨谱学实验数据对比构造似然函数，该方法能定量评估参数可辨识性与模型-数据吻合程度。其结果为超快实验中模型参数的报告与可重复性协议提供了统计学基础。",
+      "path": "knowledge/raw/papers/2024-2403.17274-bayesian-parameter-estimation-for-quantum-dynamics.md",
+      "added_via": "cluster:cl_20261106_dc502c",
+      "added_at": "2026-11-15T09:40:47Z"
+    }
+  ]
+}

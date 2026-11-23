@@ -1,0 +1,12 @@
+{
+  "proposal_id": "general-quantum-geometry-inversion-20260726",
+  "title": "BSV 场统计驱动的固体高次谐波光谱对量子度规与 Berry 曲率反演研究",
+  "project_type": "general",
+  "archived_at": "2026-10-30T16:12:41Z",
+  "final_score": 0.79,
+  "optimization_rounds": 4,
+  "core_questions": "**主问题**：如何建立量子光（BSV，Squeezed Vacuum）驱动固体高次谐波谱与量子几何量（Berry曲率 Ω(k)、量子度规 g(k)）的解析反演关系？\n**主问题**：强关联拓扑材料（CDW/Mott/altermagnet/莫尔超晶格）能否通过物理约束神经网络实现可解释的HHG量子几何反演？\n**主问题**（同立项依据）：如何建立量子光（BSV）驱动HHG谱与量子几何量（Ω, g）的解析反演关系？\n**主问题**（同立项依据）：多体关联拓扑材料的HHG响应能否通过物理约束神经网络实现可解释反演？",
+  "innovations": "1. 总体研究方案与技术路线\n1.0 判据总纲\n1.1 总体架构与共享层\n1.2 四年时序安排\n2. R1：BSV 驱动固体 HHG 的量子态约化与正向模型",
+  "archived_path": "research_proposals/archived/general-quantum-geometry-inversion-20260726",
+  "kb_project_path": "knowledge/raw/projects/general-quantum-geometry-inversion-20260726"
+}

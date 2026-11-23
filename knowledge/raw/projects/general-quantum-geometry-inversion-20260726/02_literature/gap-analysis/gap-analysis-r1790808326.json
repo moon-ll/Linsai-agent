@@ -1,0 +1,16 @@
+{
+  "gaps": [
+    {
+      "claim": "§2.1 提到'1997 年的实验层析工作'作为 BSV 场统计独立可标定性的实验前提之一，但该具体引用未挂载至参考文献列表",
+      "missing_evidence": "需要补挂参考文献 [38]，即 Breitenbach G, Schiller S, Mlynek J 于 1997 年发表在 Nature 上的实验层析工作（Measurement of quantum states of light, Nature 387, 471–475），该文献是连续变量量子态光学零差层析的奠基性实验工作，为后续 BSV 场统计独立可标定性的实验事实基础",
+      "search_keywords": [
+        "Breitenbach 1997 quantum state tomography Nature",
+        "continuous variable homodyne tomography squeezed light experiment",
+        "Schiller Mlynek quantum state measurement 1997",
+        "optical homodyne detector tomography squeezed vacuum"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

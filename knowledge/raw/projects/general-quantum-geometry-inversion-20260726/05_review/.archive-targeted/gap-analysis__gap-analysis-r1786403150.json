@@ -1,0 +1,14 @@
+{
+  "gaps": [
+    {
+      "claim": "scheme.md L157 同一段内同时出现 'Aversa-Sipe 1993 框架' 与 '1994 张量分解框架 [26]' 的年份口径冲突；references.md 与 rationale.md/content.md 多处统一使用 1994，但 scheme.md L157 在同一段落混用 1993 与 1994，导致评审可直接识别自相矛盾",
+      "missing_evidence": "缺少对 Aversa & Sipe 两篇关键文献的发表年份与具体贡献归属的核实证据：1993 年原子 HHG recollision 模型与 1994 年半导体张量分解扩展需要清晰区分并给出准确的引文归属",
+      "search_keywords": [
+        "Aversa Sipe 1993 HHG recollision model",
+        "Aversa Sipe 1994 semiconductor harmonic generation",
+        "Aversa Sipe Phys Rev Lett citation year verification"
+      ],
+      "priority": "high"
+    }
+  ]
+}

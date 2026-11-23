@@ -1,0 +1,115 @@
+{
+  "action": "v7_to_v8_migration",
+  "executed_at": "2026-11-16T16:44:49Z",
+  "dry_run": false,
+  "count": 21,
+  "rejected_migrated": 0,
+  "results": [
+    {
+      "topic_id": "general-attosecond-streaking-20260822",
+      "stage": "kickoff",
+      "skipped": "目标目录已存在"
+    },
+    {
+      "topic_id": "general-berry-berry-20261107",
+      "stage": "kickoff",
+      "skipped": "目标目录已存在"
+    },
+    {
+      "topic_id": "general-berry-mnps3-rashba-20260816",
+      "stage": "kickoff",
+      "skipped": "目标目录已存在"
+    },
+    {
+      "topic_id": "general-chiral-hhg-20261101",
+      "stage": "kickoff",
+      "skipped": "目标目录已存在"
+    },
+    {
+      "topic_id": "general-floquet-20261107",
+      "stage": "kickoff",
+      "skipped": "目标目录已存在"
+    },
+    {
+      "topic_id": "general-houston-kronig-penney-landau-zener-20261004",
+      "stage": "kickoff",
+      "skipped": "目标目录已存在"
+    },
+    {
+      "topic_id": "general-keldysh-schottky-20261115",
+      "stage": "kickoff",
+      "skipped": "目标目录已存在"
+    },
+    {
+      "topic_id": "general-moire-strong-field-probe-20260726",
+      "stage": "kickoff",
+      "skipped": "目标目录已存在"
+    },
+    {
+      "topic_id": "general-order-parameter-ultrafast-readout-20260727",
+      "stage": "kickoff",
+      "skipped": "目标目录已存在"
+    },
+    {
+      "topic_id": "general-phonon-hhg-20261101",
+      "stage": "kickoff",
+      "skipped": "目标目录已存在"
+    },
+    {
+      "topic_id": "general-ssh-weyl-20260920",
+      "stage": "kickoff",
+      "skipped": "目标目录已存在"
+    },
+    {
+      "topic_id": "general-t-tise2-2-2-2-cdw-20261108",
+      "stage": "kickoff",
+      "skipped": "目标目录已存在"
+    },
+    {
+      "topic_id": "general-tdse-tddft-20261115",
+      "stage": "kickoff",
+      "skipped": "目标目录已存在"
+    },
+    {
+      "topic_id": "general-tmd-bic-mie-anapole-20261107",
+      "stage": "kickoff",
+      "skipped": "目标目录已存在"
+    },
+    {
+      "topic_id": "key-transient-quantum-phase-optical-20260726",
+      "stage": "kickoff",
+      "skipped": "目标目录已存在"
+    },
+    {
+      "topic_id": "general-bsv-driven-hhg-quantum-20260726",
+      "stage": "ready",
+      "skipped": "目标目录已存在"
+    },
+    {
+      "topic_id": "2026_NSFG_strongfield_ultrafast",
+      "stage": "archive",
+      "skipped": "目标目录已存在"
+    },
+    {
+      "topic_id": "general-mos2-20260905",
+      "stage": "archive",
+      "skipped": "目标目录已存在"
+    },
+    {
+      "topic_id": "general-new-idea-20260822",
+      "stage": "archive",
+      "skipped": "目标目录已存在"
+    },
+    {
+      "topic_id": "general-quantum-geometry-inversion-20260726",
+      "stage": "archive",
+      "skipped": "目标目录已存在"
+    },
+    {
+      "topic_id": "general-vortex-oam-hhg-20261101",
+      "stage": "archive",
+      "skipped": "目标目录已存在"
+    }
+  ],
+  "legacy_preserved": "/Users/ll/Desktop/LinSai-CoPilot/research_proposals"
+}

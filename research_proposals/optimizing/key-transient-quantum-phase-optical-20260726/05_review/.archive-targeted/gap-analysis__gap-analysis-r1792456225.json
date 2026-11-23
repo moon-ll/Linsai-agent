@@ -1,0 +1,42 @@
+{
+  "gaps": [
+    {
+      "claim": "rat §2.2 L100 \"极化超织构、量子 Fisher 信息突破标准量子极限\"",
+      "missing_evidence": "Kiselev[34]（10.1103/lwpl-brrr）经 Crossref 实测摘要为声子 Kerr 非线性→参数不稳定性→稳态对称破缺→强 SHG→铁电整流，全为声子/铁电方向，无量子 Fisher 信息与极化超织构内容；Zhao[18] 为 MgO Floquet-Bloch HHG，亦不匹配两项 claim；两引用至少两项错挂，函评对照原文即穿帮。需重挂或删除原 claim，并补充真正支撑\"极化超织构\"与\"QFI 突破标准量子极限\"两类论点的实证文献。",
+      "search_keywords": [
+        "polarization super-texture",
+        "polarization texture topological",
+        "quantum Fisher information standard quantum limit",
+        "quantum Fisher information Heisenberg limit",
+        "QFI enhanced metrology topological insulator",
+        "quantum phase estimation transient optical",
+        "nonlinear polarization pattern ultrafast"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "rat §2.2 L112 \"多点报道\"",
+      "missing_evidence": "泛化\"多点报道\"未挂具体 [N] 引用，需替换为经核查的同主题多组实证文献，以避免出现如 Kiselev[34]/Zhao[18] 这类错挂情形。",
+      "search_keywords": [
+        "polarization texture experimental reports",
+        "quantum Fisher information experimental observation",
+        "nonlinear polarization super-texture multiple observations",
+        "QFI sub-shot-noise topological"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "rat §4 1T-TaS₂ 段落引用",
+      "missing_evidence": "[41] 仅 content 引用，但 rat §4 1T-TaS₂ 段未挂该引用；需确认 [41] 是否支撑 1T-TaS₂ 相关论点，或另补针对 1T-TaS₂ 瞬态相变/非线性响应/QFI 应用的具体文献。",
+      "search_keywords": [
+        "1T-TaS2 transient phase transition",
+        "1T-TaS2 charge density wave optical",
+        "1T-TaS2 nonlinear response ultrafast",
+        "1T-TaS2 quantum phase transition",
+        "1T-TaS2 HHG nonlinear"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

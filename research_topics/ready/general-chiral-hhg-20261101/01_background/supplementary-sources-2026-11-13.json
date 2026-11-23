@@ -1,0 +1,41 @@
+{
+  "proposal_id": "general-chiral-hhg-20261101",
+  "cluster_id": "orphan-route-2026-11-13",
+  "clusters": [
+    "orphan-route-2026-11-13"
+  ],
+  "entries": [
+    {
+      "source_id": "paper:2018-1812.09339-harmonic-generation-by-metal-nanostructures-optically-couple",
+      "title": "Harmonic generation by metal nanostructures optically coupled to 2D transition metal dichalcogenide",
+      "summary": "本文采用基于非线性Drude模型的严格电动力学FDTD模拟，研究了金属周期光栅与少层WS₂（过渡金属硫族化合物）强耦合体系中的高次谐波产生，重点揭示了纯金属体系中本不存在的偶次谐波的出现机制，并用驱动非简谐振子与Lorentz振子耦合的解析模型阐明了物理机理。研究表明WS₂的二阶和三阶非线性极化率显著调控二次与三次谐波响应，且随参数呈现复杂动力学行为。",
+      "path": "",
+      "added_via": "cluster:orphan-route-2026-11-13",
+      "added_at": "2026-11-13T16:47:06Z"
+    },
+    {
+      "source_id": "paper:2020-2011.04973-light-induced-valleytronics-in-pristine-graphene",
+      "title": "Light-Induced Valleytronics in Pristine Graphene",
+      "summary": "该文提出无需衬底、磁场或能带工程，仅通过强激光场（圆偏振/双色光场）即可在原始石墨烯中动态打破反演对称性，诱导出谷选择的Berry曲率与谷极化的反常霍尔电流。这一光致谷电子学方案实现了对能谷自由度的全光学超快相干操控，为无带隙本征石墨烯中的量子相与谷信息器件调控提供了可行途径。",
+      "path": "",
+      "added_via": "cluster:orphan-route-2026-11-13",
+      "added_at": "2026-11-13T16:47:06Z"
+    },
+    {
+      "source_id": "paper:2024-2402.13947-achiral-nanostructures-perturbative-harmonic-generation-and",
+      "title": "Achiral nanostructures: perturbative harmonic generation and dichroism under vortex and vector beams illumination",
+      "summary": "证明非手性（含镜面对称的 C_N 型）纳米结构在携带轨道角动量的涡旋光束和柱矢量光束照射下，可以在微扰谐波产生中表现出圆二色性——二色性来源于光束方位相位结构对镜像对称的破坏，而非材料本征手性。建立了联系结构旋转对称阶数 N、光束拓扑荷 l、偏振组态与谐波阶数 q 的普适对称性公式，可解析判定二色性何时被禁戒、何时激活。结果把'结构光 + 对称性设计'变成在非手性物质中诱导和调控手性光学响应的通用手段。",
+      "path": "knowledge/raw/papers/2024-2402.13947-achiral-nanostructures-perturbative-harmonic-generation-and.md",
+      "added_via": "cluster:orphan-route-2026-11-13",
+      "added_at": "2026-11-13T16:47:06Z"
+    },
+    {
+      "source_id": "paper:2025-2503.03970-chiral-broadband-high-harmonic-generation-source-by-vectoria",
+      "title": "Chiral broadband High Harmonic Generation Source by Vectorial Time Polarization-Gating",
+      "summary": "提出矢量时间偏振门控（vectorial time polarization-gating）方案，通过驱动光场偏振态随时间的受控演化，同时实现宽带谱与螺旋XUV（手性）高次谐波输出，克服了传统圆偏驱动下谐波产额低、带宽受限的矛盾。谐波谱的椭圆度随偏振扫描被快速调制，为手性圆二色谱、超快手性动力学等应用提供螺旋度可控的宽带极紫外光源。",
+      "path": "knowledge/raw/papers/2025-2503.03970-chiral-broadband-high-harmonic-generation-source-by-vectoria.md",
+      "added_via": "cluster:orphan-route-2026-11-13",
+      "added_at": "2026-11-13T16:47:06Z"
+    }
+  ]
+}

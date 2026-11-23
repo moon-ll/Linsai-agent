@@ -1,0 +1,105 @@
+{
+  "gaps": [
+    {
+      "claim": "L17-19 Di Gaspare 段数字密集却零 [N] 挂点",
+      "missing_evidence": "Di Gaspare 等关于 Bi2Se3 表面态/InxBi1-x)2Se3 偶次谐波非线性光学响应的原始论文未挂引；缺少其能带结构、谐波阶数、谐波强度随 In掺杂的实验数据出处",
+      "search_keywords": [
+        "Di Gaspare Bi2Se3 high harmonic topological surface state",
+        "InBiSe3 second harmonic generation even odd",
+        "topological insulator nonlinear optical harmonic van der Waals",
+        "Di Gaspare Bi2Se3 nonlinear optics arXiv"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "清单4 引用次数 52 处超 35-47 上限",
+      "missing_evidence": "rationale 章节引用密度过高，缺少可合并或替换的低密度引用挂点；部分数字论断（如能量比、转换区判据等）需补挂或合并",
+      "search_keywords": [
+        "key-transient-quantum-phase-optical references consolidation",
+        "rationale citation density review ultrafast",
+        "high harmonic generation phase detection references"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "[22] 引用作者链错序——实为 D. Ilin, A. S. Solntsev, I. Iorsh，正文 Ilin 等[22]反向",
+      "missing_evidence": "arXiv:2604.20388 实际作者顺序应为 Ilin/Solntsev/Iorsh，正文与表格作者序记录需重新对齐核验",
+      "search_keywords": [
+        "arXiv 2604.20388 Ilin Solntsev Iorsh current-current correlation",
+        "TDDFT current-current XC functional nonlinear optics",
+        "Ilin high harmonic generation exchange correlation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "novelty_claim L23 '首次把 HHG 从强度层推到相位层' 与两行后 Uzan-Narovlansky 2024 已观测带间 Berry 相位时序矛盾",
+      "missing_evidence": "Uzan-Narovlansky 2024 关于带间 Berry 相位时序测量的论文需精确核验 DOI 与出版信息，用以支撑'最接近已观测工作'而非'首次'",
+      "search_keywords": [
+        "Uzan-Narovlansky 2024 interband Berry phase ultrafast",
+        "attosecond transient absorption Berry phase solid",
+        "sub-cycle interband polarization attosecond crystal 2024",
+        "Uzan Narovlansky Nature Physics Berry phase timing"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "anti_ai 超长句 9 处（最长 256 字），违反 L27/29/45/49/95 等多处",
+      "missing_evidence": "无文献缺口——属写作风格问题；但若长句内含关键数据点需补挂引用以保可追溯性",
+      "search_keywords": [
+        "long sentence rewrite coherent logic transition ultrafast",
+        "rationale narrative high harmonic Berry curvature"
+      ],
+      "priority": "low"
+    },
+    {
+      "claim": "anti_ai 自引用泛滥——本项目13+本研究1 次超阈 10",
+      "missing_evidence": "无文献缺口——属表达质量问题",
+      "search_keywords": [
+        "academic writing template subject usage reduction",
+        "self-reference narrative style scientific proposal"
+      ],
+      "priority": "low"
+    },
+    {
+      "claim": "boundary con §2.3 L47 残留 ATA 206 as 卷积推导与双层不确定度（跨章双份）",
+      "missing_evidence": "无新文献缺口——属章节边界清理问题；仅需章节交叉引用一致化",
+      "search_keywords": [
+        "attosecond transient absorption time resolution 206 as",
+        "ATA temporal jitter convolution budget"
+      ],
+      "priority": "low"
+    },
+    {
+      "claim": "novelty L41 '尚未见报道[17]'挂法抵触——所挂正是最接近的已报道工作",
+      "missing_evidence": "[17] Zhao 等关于 WS2/应变 Berry曲率高次谐波的工作需精确核验其工作内容（Floquet-Bloch 态 vs 相位读出），用以判断'最接近'的表述边界",
+      "search_keywords": [
+        "Zhao WS2 strain Berry curvature high harmonic generation",
+        "tensile strain K valley Berry curvature WS2 harmonic",
+        "Floquet-Bloch state transition metal dichalcogenide HHG",
+        "Zhao strain engineering TMD harmonic 2024 2025"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "consistency L91 rat '≈0.155' vs con L55 / sch L131 '≤0.155' 符号漂移",
+      "missing_evidence": "无需新文献——仅符号统一；可借既有 [9]/[11] 等论文中 MoS2/ZnO 高次谐波效率对比数据统一 ≤0.155 的保守表述",
+      "search_keywords": [
+        "MoS2 high harmonic generation efficiency benchmark",
+        "ZnO solid-state HHG conversion efficiency",
+        "solid HHG efficiency threshold"
+      ],
+      "priority": "low"
+    },
+    {
+      "claim": "R7 P2 arXiv-only 17/38=44.7%——CrossRef 已有2026 期刊 DOI 可升级 [17][20][23] 未升级",
+      "missing_evidence": "[17] Zhao WS2 应力、[20] Di Gaspare Bi2Se3、[23] 相关 2026 期刊 DOI 需检索 CrossRef 升级为正式期刊文献",
+      "search_keywords": [
+        "Zhao WS2 strain Berry curvature journal version2026",
+        "Di Gaspare Bi2Se3 nonlinear optics 2026 journal DOI",
+        "CrossRef 2026 solid HHG Berry curvature DOI"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

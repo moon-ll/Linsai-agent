@@ -1,0 +1,97 @@
+{
+  "gaps": [
+    {
+      "claim": "高次谐波产生是飞秒激光与物质相互作用的高阶非线性、非微扰现象（领域开篇意义）",
+      "missing_evidence": "缺少高次谐波产生（HHG）领域的总体综述性文献支撑（如飞秒激光与物质非线性相互作用的奠基性综述）",
+      "search_keywords": [
+        "high harmonic generation review femtosecond laser nonlinear",
+        "nonperturbative high harmonic generation review",
+        "solid-state HHG overview review"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Ghimire等人2011年使用中红外激光驱动ZnO晶体观测到非微扰高次谐波产生（固体HHG首次实验）",
+      "missing_evidence": "缺少Ghimire 2011 ZnO固体HHG首次观测的原始实验文献支撑",
+      "search_keywords": [
+        "Ghimire 2011 ZnO solid-state high harmonic generation",
+        "Ghimire Nature Physics 2011 ZnO mid-infrared HHG",
+        "first observation solid-state HHG ZnO crystal"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "MoS2单层作为共振增强高次谐波产生的新平台（13阶=5.04 eV对应DUV中段）",
+      "missing_evidence": "缺少MoS2共振增强HHG的实验/理论文献，特别是13阶谐波位于DUV中段的实验观测",
+      "search_keywords": [
+        "MoS2 high harmonic generation resonance",
+        "MoS2 monolayer HHG experiment",
+        "MoS2 DUV harmonic generation",
+        "transition metal dichalcogenide HHG resonant"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "扭转双层石墨烯（TBG）作为HHG调控体系的代表性进展",
+      "missing_evidence": "缺少扭转双层石墨烯高次谐波产生的相关文献，特别是魔角附近的强场响应",
+      "search_keywords": [
+        "twisted bilayer graphene high harmonic generation",
+        "TBG moire HHG strong field",
+        "magic angle twisted bilayer nonlinear optics"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "人工堆叠二维晶体作为新型HHG材料平台",
+      "missing_evidence": "缺少人工堆叠二维晶体（如van der Waals异质结）的高次谐波产生文献",
+      "search_keywords": [
+        "artificial stacked 2D crystal HHG",
+        "van der Waals heterostructure high harmonic generation",
+        "2D material stack high harmonic generation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "国内研究现状——固体HHG与阿秒科学领域的中国研究组代表性工作",
+      "missing_evidence": "缺少国内（中科院/高校）固体高次谐波和阿秒科学实验组的代表性工作文献",
+      "search_keywords": [
+        "solid-state high harmonic generation China group",
+        "attosecond science Chinese research team",
+        "固体高次谐波 中国 实验组",
+        "阿秒科学 国内 代表性工作"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "MoS2能带嵌套（band nesting）共振通道对HHG效率的增强机制",
+      "missing_evidence": "缺少MoS2能带嵌套结构与HHG共振增强关联的理论或实验文献",
+      "search_keywords": [
+        "MoS2 band nesting high harmonic",
+        "band nesting resonance HHG enhancement",
+        "MoS2 electronic structure nesting transition metal dichalcogenide"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "α_syn合成序参量描述多通道相干叠加（ARPES不直接测Ω(k)需补重建链）",
+      "missing_evidence": "缺少多通道高次谐波相干叠加的序参量理论文献，以及ARPES→Ω(k)的间接重建方法",
+      "search_keywords": [
+        "multichannel high harmonic coherent superposition",
+        "Berry curvature reconstruction ARPES indirect",
+        "quantum geometry reconstruction from photoemission",
+        "order parameter HHG multi-channel coherent"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "国内研究现状与本项目定位（国内MoS2/HHG方向尚未充分布局）",
+      "missing_evidence": "缺少国内MoS2高次谐波研究组的具体代表性工作文献",
+      "search_keywords": [
+        "MoS2 high harmonic China",
+        "MoS2 超快光学 国内 实验组",
+        "2D material HHG Chinese group recent"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

@@ -1,0 +1,302 @@
+{
+  "checked": true,
+  "at": "2026-11-07T04:05:57Z",
+  "proposal": "general-houston-kronig-penney-landau-zener-20261004",
+  "sections_scanned": [
+    "content",
+    "full_review",
+    "method_manual",
+    "rationale",
+    "scheme"
+  ],
+  "cjk_variant_pairs": [
+    {
+      "a": "反常谐波",
+      "b": "反常电",
+      "freq_a": 44,
+      "freq_b": 41,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "反常谐",
+      "b": "反常电流",
+      "freq_a": 46,
+      "freq_b": 39,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "反常谐波",
+      "b": "反常电流",
+      "freq_a": 44,
+      "freq_b": 39,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "象限材料",
+      "b": "跨材料",
+      "freq_a": 38,
+      "freq_b": 32,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "通道分解",
+      "b": "通道竞",
+      "freq_a": 28,
+      "freq_b": 24,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "一致性",
+      "b": "一性原理",
+      "freq_a": 27,
+      "freq_b": 22,
+      "sections_a": [
+        "content",
+        "method_manual",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "缺陷密度",
+      "b": "缺陷态",
+      "freq_a": 38,
+      "freq_b": 21,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "方向",
+      "b": "方案侧",
+      "freq_a": 79,
+      "freq_b": 62,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "method_manual"
+      ]
+    },
+    {
+      "a": "四象限",
+      "b": "上限",
+      "freq_a": 57,
+      "freq_b": 54,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "full_review",
+        "method_manual",
+        "scheme"
+      ]
+    },
+    {
+      "a": "方案侧",
+      "b": "方程",
+      "freq_a": 62,
+      "freq_b": 51,
+      "sections_a": [
+        "method_manual"
+      ],
+      "sections_b": [
+        "content",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "第一",
+      "b": "第二层",
+      "freq_a": 63,
+      "freq_b": 50,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "method_manual",
+        "scheme"
+      ]
+    },
+    {
+      "a": "反演",
+      "b": "反常谐",
+      "freq_a": 99,
+      "freq_b": 46,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    }
+  ],
+  "token_variant_groups": [
+    {
+      "group_key": "T_2",
+      "variants": [
+        {
+          "form": "T_2",
+          "count": 58
+        },
+        {
+          "form": "T_{2",
+          "count": 2
+        },
+        {
+          "form": "T₂",
+          "count": 40
+        }
+      ],
+      "sections": [
+        "full_review",
+        "method_manual",
+        "scheme"
+      ]
+    },
+    {
+      "group_key": "cm_2",
+      "variants": [
+        {
+          "form": "cm^2",
+          "count": 3
+        },
+        {
+          "form": "cm²",
+          "count": 77
+        }
+      ],
+      "sections": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "group_key": "n_n",
+      "variants": [
+        {
+          "form": "n_n",
+          "count": 2
+        },
+        {
+          "form": "n_n^",
+          "count": 3
+        }
+      ],
+      "sections": [
+        "method_manual"
+      ]
+    }
+  ],
+  "summary": {
+    "cjk_pair_candidates": 418,
+    "token_variant_groups": 3,
+    "note": "候选报告不改文：处置归 writer/critic 契约；数值口径归 params_registry"
+  }
+}

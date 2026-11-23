@@ -1,0 +1,48 @@
+{
+  "gaps": [
+    {
+      "claim": "[45] 已正式发表于 PRB 112, 075306, 2025，但仍标注为预印本",
+      "missing_evidence": "该引用的正式版书目信息（期号、页码、年份）需与正文标注同步更新；同时参考文献表中预印本标注需统一核查",
+      "search_keywords": [
+        "PRB 112 075306 2025",
+        "[45] MnPS3 Rashba publication",
+        "Physical Review B 2025 MnPS3 spin-orbit"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "参考文献表中约 15/44（≈34%）标注为预印本，超过 30% 红线；[15][32] 等代表性预印本发表状态未定",
+      "missing_evidence": "需对所有标注为预印本的条目逐一核查其正式发表状态（期刊、卷期、年份、DOI），将已正式刊出的条目按出版版重写，未刊出的条目需重新评估是否保留",
+      "search_keywords": [
+        "[15] arXiv publication status",
+        "[32] preprint journal version",
+        "MnPS3 TDDFT HHG published",
+        "antiferromagnetic 2D harmonic generation 2024 2025"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3.2 L15 声称 80–100 Ry 截断（实测 1088–1361 eV）'位于 350–800 eV 典型区间下沿'——数值与定性描述矛盾，且无文献支撑该'典型区间'",
+      "missing_evidence": "缺乏针对 MnPS3 或同类反铁磁二维过渡金属硫代磷酸盐体系 TDDFT/DFT 计算的截断能收敛区间文献基准；无论保留原述还是改写为'略高于同类体系典型截断'，均需文献锚定",
+      "search_keywords": [
+        "MnPS3 plane wave cutoff convergence",
+        "transition metal phosphorus trichalcogenide DFT energy cutoff",
+        "2D antiferromagnet TDDFT cutoff benchmark",
+        "MnPS3 first-principles computational parameters"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§3.6 级联三接口（光场→滑移 / 滑移→自旋劈裂 / 自旋劈裂→HHG）的文献覆盖映射存在自相矛盾：首段称'环节三未被覆盖'又称'前三个环节已有支撑'，次段又称'[25] 已给出'环节二",
+      "missing_evidence": "缺乏对滑移→自旋劈裂这一关键箭头的系统性文献映射——既无 [25] 是否覆盖该链路的核实证据，也无该缺口是否为本项目首创发现的文献综述支撑；需补充关于剪切/滑移诱导 Rashba 自旋劈裂的现有工作调研",
+      "search_keywords": [
+        "sliding-induced spin splitting",
+        "shear-driven Rashba antiferromagnet",
+        "lattice slip spin-orbit coupling MnPS3",
+        "strain-induced Rashba 2D antiferromagnet"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

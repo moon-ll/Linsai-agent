@@ -1,0 +1,41 @@
+{
+  "gaps": [
+    {
+      "claim": "§1.1 L25 Zhang 关于强场/压缩真空-SBE（Strong-Basis Expansion 或强场束缚电子）模型对固体 HHG 产额/相位的预测论断",
+      "missing_evidence": "该论断自 R2 轮起即被点名未挂任何 [N] 引用；reviewer 建议挂靠 [11]（Tyulnev 共著者文献）或补充 Zhang 的独立文献条目进入参考文献表",
+      "search_keywords": [
+        "Zhang strong-field squeezed vacuum HHG solid",
+        "Zhang Tyulnev Mg:LiNbO3 squeezed HHG",
+        "Zhang strong-basis expansion HHG",
+        "压缩真空 固体高次谐波 张",
+        "squeezed light HHG solid state theory 2024"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.6 L91–93 国内现状章节 ≥5 处具名数值论断：MoS₂ 各向异性比 1.5:1、Kr 气体 HHG 截止能量 5.2 keV、3.6 fs/0.75 mJ 少周期驱动参数等",
+      "missing_evidence": "以上具名数值论断零 [N] 挂靠且 references.md 表内无对应条目；reviewer 明确要求补充 2–3 条国内代表团队（中科院/清华/上交/兰大/国防科大等 HHG 方向）代表性文献入表挂靠",
+      "search_keywords": [
+        "MoS2 high harmonic generation polarization anisotropy ratio 1.5",
+        "Krypton HHG cutoff 5.2 keV",
+        "few-cycle 3.6 fs 0.75 mJ HHG driver",
+        "国内 高次谐波 MoS2 各向异性",
+        "中国 Kr 高次谐波 keV 少周期激光",
+        "Chinese group solid HHG MoS2 Kr krypton"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.6 国内现状段落中其他零散具名实验进展论断（除 MoS₂ 1.5:1、Kr 5.2 keV、3.6 fs/0.75 mJ 之外的同段其他数值/事件声明）",
+      "missing_evidence": "同段同性质零挂靠问题，reviewer 要求整体盘点后统一补 2–3 条代表性文献以覆盖该段所有具名数值论断",
+      "search_keywords": [
+        "China solid HHG progress review",
+        "国内 固体高次谐波 研究进展",
+        "HHG quantum metric observable Chinese group",
+        "量子度规 高次谐波 国内"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

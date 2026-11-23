@@ -1,0 +1,93 @@
+{
+  "gaps": [
+    {
+      "claim": "[9] PRL 133,126801 应作为 MnPS₃|WS₂ 异质结电子/磁序分离依据的支撑证据",
+      "missing_evidence": "需补充 h-BN 双层滑移极化切换时标的工作作为跨体系量级参照（确认原文确实为双层 h-BN），而非直接作为 MnPS₃|WS₂ 异质结分离依据",
+      "search_keywords": [
+        "bilayer h-BN sliding ferroelectric switching timescale",
+        "PRL 133 126801 bilayer hexagonal boron nitride",
+        "interlayer sliding polarization reversal picosecond h-BN",
+        "Wang bilayer h-BN ferroelectric domain wall dynamics"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "裸 arXiv 2605.20067 应作为交变磁滑移声子相干驱动的第二条独立支撑",
+      "missing_evidence": "2605.20067 实际为 FePS₃ 磁振子-声子三波混频（和频/差频）实验，需要核实其是否真为 THz 相干驱动可行性证据而非滑移通道证据",
+      "search_keywords": [
+        "arXiv 2605.20067 FePS3 magnon phonon mixing",
+        "FePS3 three-wave mixing sum frequency THz",
+        "antiferromagnet coherent phonon magnon coupling THz",
+        "FePS3 nonlinear phononics magnon phonon coupling"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "裸 arXiv 2606.31573 应作为交变磁自旋群选择规则与 HHG 选择依据",
+      "missing_evidence": "需将 2606.31573 编入 references.md 并确认其内容为 i-wave 交变磁自旋群对称与 HHG 选择规则的对应关系",
+      "search_keywords": [
+        "arXiv 2606.31573 altermagnet spin group selection rule",
+        "i-wave altermagnet harmonic generation symmetry",
+        "spin group symmetry HHG selection rule MnPS3",
+        "Mizuno Koki altermagnet HHG circularly polarized"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "裸 arXiv 2608.02393 应作为 i-wave 交变磁节点线 HHG 偏振响应的支撑",
+      "missing_evidence": "需核实 2608.02393 内容并将其纳入参考文献，确认其关于节点线交变磁 HHG 偏振各向异性的实验/理论支撑",
+      "search_keywords": [
+        "arXiv 2608.02393 nodal line altermagnet HHG",
+        "alternagnet node line high harmonic ellipticity",
+        "nodal line spin splitting HHG polarization anisotropy",
+        "altermagnet HHG circular dichroism polarization dependence"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Basnet [16] 场致自旋极化作为磁序层读出时间尺度分层论证的支撑",
+      "missing_evidence": "需补充 Basnet 关于 Cr-NiPS₃ 场致自旋极化的具体内容及其与时间尺度分层（ps/ns 双时标）论证的衔接关系",
+      "search_keywords": [
+        "Basnet Cr-doped NiPS3 PRB 109 184405 field-induced spin polarization",
+        "NiPS3 magnetic field spin polarization ultrafast timescale",
+        "Cr-doped NiPS3 magnetization time-resolved",
+        "antiferromagnetic order field-induced polarization dynamics"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Ezawa 交变磁自旋群理论与 HHG 指纹反演的衔接",
+      "missing_evidence": "需补充 Ezawa 自旋群对称分类的理论工作如何直接对应 HHG 偏振通道分离的验证渠道说明",
+      "search_keywords": [
+        "Ezawa spin group symmetry altermagnet classification",
+        "spin group theory HHG channel separation",
+        "altermagnet magnetic point group HHG fingerprint",
+        "Ezawa anomalous Hall spin group theory 2024"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Yang/Liang 交变磁自旋群理论预言作为非线性光磁验证渠道支撑",
+      "missing_evidence": "需补充 Yang/Liang 关于交变磁自旋群对称的理论预言如何支持 HHG 非线性光磁读出",
+      "search_keywords": [
+        "Yang Liang altermagnet spin group prediction",
+        "altermagnet theory prediction HHG nonlinear optics",
+        "Yang Liang spin group symmetry magnetic classification",
+        "altermagnet nonlinear optical response prediction theory"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Ogawa/Hayami i-wave 交变磁预测作为张量识别渠道支撑",
+      "missing_evidence": "需补充 Ogawa/Hayami 关于 i-wave 交变磁的具体理论预言内容，及其对张量识别方法的支持",
+      "search_keywords": [
+        "Ogawa Hayami i-wave altermagnet prediction",
+        "i-wave altermagnet spin splitting tensor identification",
+        "Ogawa Hayami g-wave i-wave alternagnet theory",
+        "altermagnet tensor classification prediction"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

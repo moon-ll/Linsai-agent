@@ -1,0 +1,46 @@
+{
+  "gaps": [
+    {
+      "claim": "现有计算 [7]（arXiv:2511.22209）仅区分交变磁型或对称性破缺型，未指认 i-wave 波型",
+      "missing_evidence": "缺少 [7] 摘要中关于其分类体系（d-wave/g-wave/i-wave）的原文佐证，无法核实「未指认 i-wave」这一核心论断",
+      "search_keywords": [
+        "arXiv:2511.22209 i-wave altermagnet",
+        "altermagnet spin splitting classification d-wave g-wave i-wave",
+        "alternagnetic wave classification criteria symmetry"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "[22] 实为 Sci China-Phys 68, 297511 (2025) 已发表非预印本，但 rationale [22] 引用未标注「已发表」易被误判",
+      "missing_evidence": "需要确认 [22] 即 Sci China-Phys 68, 297511 (2025) 论文的最终发表信息（DOI、卷期页码）以及 NiCl2/VSe2/CrSe2 势垒 16-40 meV/unitcell 数据",
+      "search_keywords": [
+        "Sci China Phys 68 297511 2025 sliding ferroelectric",
+        "NiCl2 VSe2 CrSe2 interlayer sliding barrier",
+        "2D sliding ferroelectric barrier height first-principles"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.2 L27 引用 [25] 证明 Γ 点红外活性声子相干激发可解除自旋简并；§1.2 L35 称「切换概率对场强依赖…都还是空白」与 content §2.2「Rajpurohit 已证明」存在割裂",
+      "missing_evidence": "需要核实 [25]（Rajpurohit 等）原文中关于「声子振幅-自旋劈裂线性关系」的具体表述，明确已证与未证范围，避免与 content/scheme 重复但口径冲突",
+      "search_keywords": [
+        "Rajputnyi 2025 NRSS coherent phonon spin splitting",
+        "coherent phonon amplitude spin splitting linear",
+        "Raman THz coherent phonon altermagnet spin",
+        "infrared active phonon coherent excitation spin degeneracy"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.4 L47「Basnet 等 [16] 在轻 Cr 取代 NiPS3 中证实场致自旋极化」无时间分辨数据",
+      "missing_evidence": "需要确认 Basnet 等 PRB 109, 184405 (2024) 是否真为静态测量，并查找时间分辨磁光/泵浦-探测 Cr-NiPS3 场致自旋极化的最新文献",
+      "search_keywords": [
+        "Basnet Cr-doped NiPS3 PRB 109 184405 static magnetization",
+        "time-resolved magneto-optical Cr-NiPS3 field-induced spin",
+        "ultrafast pump-probe NiPS3 magnetic polarization picosecond"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

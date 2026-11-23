@@ -1,0 +1,45 @@
+{
+  "gaps": [
+    {
+      "claim": "[9] h-BN双层光致极化翻转与动态磁场耦合在'数ps内'发生（content原写'亚ps'，无文献支撑）",
+      "missing_evidence": "缺少Wang PRL 133, 126801原文对切换时标（within a few picoseconds）的精确表述以及与磁性衬底动态耦合时标的实验数据",
+      "search_keywords": [
+        "h-BN sliding ferroelectric switching timescale Wang PRL 133 126801",
+        "sliding ferroelectric antiferromagnetic coupling dynamics picosecond",
+        "interlayer sliding ferroelectric time-resolved measurement"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "[16] Basnet 2024 (PRB 109, 184405) Cr-NiPS3 '场诱导自旋极化响应在ps量级'——原文为静态磁化测量，无时标数据",
+      "missing_evidence": "缺少Basnet 2024 PRB原文是否包含任何时间分辨测量数据；缺少Cr-NiPS3或类似体系场诱导自旋极化时标的时间分辨实验",
+      "search_keywords": [
+        "Basnet Cr-NiPS3 PRB 109 184405 magnetic measurement static",
+        "NiPS3 field-induced spin polarization ultrafast timescale",
+        "Cr-doped NiPS3 time-resolved magneto-optical"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "[25] Rajpurohit arXiv:2609.01844 涵盖'THz场诱导巨对称性调制'与'场强区间由[25]界定'，超出摘要可核验范围",
+      "missing_evidence": "缺少Rajpurohit等论文中THz场强区间（具体阈值或扫描范围）的原文图/节定位；缺少相干声子驱动NRSS场强依赖性的数据",
+      "search_keywords": [
+        "Rajpurohit coherent phonon THz field amplitude NRSS 2609.01844",
+        "nonrelativistic spin splitting THz coherent phonon field strength",
+        "coherent phonon driven spin splitting THz amplitude dependence"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "content §2.2 L15 '三通道并存是该参数区间的物理事实'无引文支撑",
+      "missing_evidence": "缺少支撑扭曲双层/TMDC在特定参数区间三通道（电子层/磁层/极化层）并存的理论或实验文献",
+      "search_keywords": [
+        "twisted bilayer three-channel coexistence intraband interband magnetic",
+        "moiré superlattice multichannel polarization magnetic electronic",
+        "[28] nonlinear phonon theory twisted 2D material"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

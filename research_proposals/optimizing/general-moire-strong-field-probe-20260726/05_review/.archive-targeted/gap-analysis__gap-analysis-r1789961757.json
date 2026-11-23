@@ -1,0 +1,93 @@
+{
+  "gaps": [
+    {
+      "claim": "§1.2 第 15 行「Ciappina 等 2025 年 *Adv. Phys.* 邀请综述中将固体 HHG 定位为 Berry 曲率、关联相干与阿秒涡旋的精密探测平台」中 Ciappina 综述的标题、年份、期刊与作者-期刊-编号三元一致性",
+      "missing_evidence": "缺少对 Ciappina 2024/2025 在 Adv. Phys. (Reviews of Modern Physics 类) 发表综述的精确条目确认，以及与 [3] Heide 2024 Nat. Phys. / [4] 的归属映射",
+      "search_keywords": [
+        "Ciappina review high harmonic generation Advances in Physics",
+        "Ciappina solid HHG Berry curvature 2024 2025 review",
+        "Heide 2024 Nature Physics solid high harmonic spectroscopy review",
+        "solid HHG review Berry curvature altermagnet2024"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.4「反演空白」需要文献锚定：莫尔势 Fourier 截断 12–24 实参数 vs HHG 数据 14–22 点、SNR=50 噪声折减、HHG 反演莫尔势属欠定逆问题，已有工作未形式化莫尔势 C₃ 对称性先验",
+      "missing_evidence": "缺少直接论证「莫尔势反演属欠定逆问题」、「HHG 数据点维度与莫尔势参数维度匹配性」、「莫尔势 C₃ 对称性先验未被前人使用」的引用证据",
+      "search_keywords": [
+        "inverse problem moire potential high harmonic generation identifiability",
+        "Fourier truncation moire potential parameter count",
+        "C3 symmetry prior moire superlattice inversion",
+        "ill-posed inverse problem HHG reconstruction"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.5 第 59 行「莫尔关联能隙典型中值约 10 meV（低于该工作中的非莫尔关联能隙约 15 meV）」将 15 meV 数值归给 [15] Shan 2021 *Nature* 但 Shan 体系针对 MoS₂/Hopfield 介电击穿非关联体系",
+      "missing_evidence": "缺少对 Shan 2021 Nature 工作的精确数值核对（是否含 15 meV），以及非莫尔关联能隙典型量级 (~eV) 的另一文献锚定（建议 [11] Silva 等 Sr₂CuO₃ 一维 Mott 体系）",
+      "search_keywords": [
+        "Shan 2021 Nature MoS2 Hopfield dielectric breakdown correlated",
+        "Silva Sr2CuO3 one-dimensional Mott insulator gap",
+        "non-moiré correlated insulator gap typical value meV eV",
+        "Mott insulator gap Sr2CuO3 1D chain"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.5 Q2「20% HHG 强度跳变作为光 Floquet 工程在临界强度 I_c 处触发关联绝缘态光致熔化的判据」",
+      "missing_evidence": "缺少对 20% HHG 跳变阈值的文献支撑，包括：① 跳变幅度阈值的前人报道（Liu/Sun 2022 等），② HHG 跳变作为 CDW/Mott 光致熔化判据的理论/实验依据",
+      "search_keywords": [
+        "high harmonic intensity jump threshold correlated insulator melting",
+        "HHG signal jump CDW photo-induced melting 20 percent",
+        "sideband amplitude jump MoS2 Mott transition threshold",
+        "harmonic spectroscopy phase transition amplitude criterion"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.2 三个方向——正向模拟/多体修正/反演调控——每个方向都缺少代表性文献锚定",
+      "missing_evidence": "缺少对（a）HHG 正向模拟精度（与 TDDFT/紧束缚/DMRG 等不同方法基准对比）、（b）多体修正（GW/BSE/DMFT 对 HHG 的影响）、（c）反演调控（HHG 反演→周期场调控莫尔关联态）三个方向的代表性近期综述或关键工作引用",
+      "search_keywords": [
+        "TDDFT many-body high harmonic generation benchmark 2024 2025",
+        "GW BSE DMFT solid HHG comparison",
+        "HHG inverse problem Berry curvature band structure reconstruction",
+        "Floquet engineering moire correlated insulator HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.5 给出「I_c 区间 5×10⁹–2×10¹¹ W/cm²」与 §1.6「≤ 2×10⁸ W/cm² 量化优势」需文献支撑：① I_c 区间下界与上界的实验/理论依据；② 现有 HHG-莫尔关联态探测灵敏度的典型量级（2×10⁸ W/cm² 作为对照基准）",
+      "missing_evidence": "缺少对莫尔关联态光致熔化临界强度 I_c 区间两端（5×10⁹ 与 2×10¹¹ W/cm²）的具体理论/实验引用，以及现有技术可达探测阈（TW/cm² 级别作为对照基准）的文献",
+      "search_keywords": [
+        "Mott insulator photo-induced melting critical intensity TW/cm2",
+        "CDW threshold intensity Floquet melting 2x10^11",
+        "correlated insulator light-induced phase transition critical field",
+        "twisted bilayer WSe2 moire correlated insulator I-T phase diagram"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§1.4 三个空白（理论空白/反演空白/调控空白）每个空白需独立文献支撑",
+      "missing_evidence": "缺少对「理论空白：莫尔关联态 + 光 Floquet 工程耦合尚无定量理论预言」、「反演空白：HHG 反演莫尔势尚未形式化」、「调控空白：莫尔关联态周期场主动调控尚未见报道」三件事的前人工作边界判定引用",
+      "search_keywords": [
+        "Floquet engineering moire correlated insulator theory2024 2025",
+        "moire correlated insulator periodic drive theory",
+        "HHG moire potential inversion retrieval theory",
+        "active control moire correlated insulator light"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§1.4「SNR=50 的反演噪声折减」属定量技术指标，需要文献给出 HHG 反演 SNR阈值与参数恢复精度的对应关系",
+      "missing_evidence": "缺少对 HHG 反演中 SNR=50 作为合理阈值的理论/数值工作（如基于 Fisher 信息/Cramér-Rao 下界估计噪声折减）",
+      "search_keywords": [
+        "Fisher information HHG retrieval SNR threshold",
+        "Cramér-Rao bound high harmonic inversion noise",
+        "SNR HHG inversion parameter recovery accuracy",
+        "Bayesian inversion posterior variance high harmonic"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

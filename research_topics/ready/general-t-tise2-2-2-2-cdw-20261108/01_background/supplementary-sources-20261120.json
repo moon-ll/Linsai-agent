@@ -1,0 +1,23 @@
+{
+  "entries": [
+    {
+      "source_id": "paper:2026-2606.31298-phonon-induced-pseudogap-phase-in-tise2",
+      "title": "Phonon-induced pseudogap phase in TiSe2",
+      "summary": "本文结合 XUV 时间分辨角分辨光电子谱（trARPES）与第一性原理电声耦合计算，对比 TiSe2、HfTe2、ZrTe2 的正常态电子结构，发现强电声耦合的 TiSe2 中软声子诱导出动量依赖的谱权重压制（赝隙），且该赝隙延伸至费米能级以上约 1 eV。作者据此确立 TiSe2 的正常态是强 CDW 涨落支配的声子诱导赝隙相，补全了其相图中长期缺失的正常态部分。",
+      "path": "knowledge/raw/papers/2026-2606.31298-phonon-induced-pseudogap-phase-in-tise2.md"
+    },
+    {
+      "source_id": "paper:2024-2402.02931-femtosecond-trimer-quench-cycled-at-megahertz-rates-in-the-u",
+      "title": "Femtosecond trimer quench cycled at megahertz rates in the unconventional charge-density wave material 1T'-TaTe2",
+      "summary": "利用兆赫兹重复频率的超快电子衍射泵浦-探测技术，在飞秒时间尺度上实现了对非常规电荷密度波材料1T'-TaTe2中三聚体CDW的瞬态淬灭，并证明该淬灭-恢复过程可在兆赫兹速率下完全可逆地逐脉冲循环。工作刻画了CDW超晶格衍射（序参量）的瞬态抑制、恢复时间尺度及相干振幅模式动力学，为三聚体这类非常规（非简单嵌套驱动）CDW的电子-声子耦合与超快结构响应提供了直接的结构动力学证据。",
+      "path": "knowledge/raw/papers/2024-2402.02931-femtosecond-trimer-quench-cycled-at-megahertz-rates-in-the-u.md"
+    },
+    {
+      "source_id": "paper:2026-2603.24211-excitonic-order-in-quantum-materials-fingerprints-platforms",
+      "title": "Excitonic order in quantum materials: fingerprints, platforms and opportunities",
+      "summary": "本文系统综述了量子材料中激子绝缘体序（excitonic order）的实验指纹、材料平台与超快探测机遇。文章梳理了区分激子凝聚与晶格/声子驱动失稳的关键判据（能隙与平带形成、声子频率异常、对称性破缺的光学响应等），并覆盖1T-TiSe2、Ta2NiSe5、半导体量子阱及莫尔TMD体系等候选平台。综述强调时间分辨ARPES、泵浦-探测、相干声子光谱与非线性光学等超快手段在激子序参量读出、光致熔化/调控及振幅模动力学研究中的机遇。",
+      "path": "knowledge/raw/papers/2026-2603.24211-excitonic-order-in-quantum-materials-fingerprints-platforms.md"
+    }
+  ],
+  "updated_at": "2026-11-20T16:35:32Z"
+}

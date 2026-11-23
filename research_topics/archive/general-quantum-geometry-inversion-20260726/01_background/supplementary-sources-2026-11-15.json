@@ -1,0 +1,57 @@
+{
+  "proposal_id": "general-quantum-geometry-inversion-20260726",
+  "cluster_id": "cl_20261009_f007a9",
+  "clusters": [
+    "cl_20261009_f007a9"
+  ],
+  "entries": [
+    {
+      "source_id": "paper:2026-260929226-valley-berry-curvature-dipole-induced-nonline",
+      "title": "Valley Berry curvature dipole induced nonlinear valley Hall effect",
+      "summary": "提出并系统论证了一类此前未被探索的非线性谷霍尔效应：由谷贝里曲率偶极（valley Berry curvature dipole, vBCD）驱动的二阶谷流响应。通过对称性分析证明该效应在常规时间反演联系的谷体系（如MoS2的K/K'谷）中被严格禁戒，而仅存在于谷心位于时间反演不变动量的'时间反演不变谷'层状体系中，并枚举了候选层群及vBCD张量的对称性约束。以k·p有效模型和应变Nb3SBr7的第一性原理计算加以验证，展示非线性谷霍尔与非线性电荷霍尔可通过驱动场方向调控，并给出非局域输运实验特征。",
+      "path": "knowledge/raw/papers/2026-260929226-valley-berry-curvature-dipole-induced-nonline.md",
+      "added_via": "cluster:cl_20261009_f007a9",
+      "added_at": "2026-11-15T00:20:27Z"
+    },
+    {
+      "source_id": "paper:2026-2609.29226-valley-berry-curvature-dipole-induced-nonlinear-va",
+      "title": "Valley Berry curvature dipole induced nonlinear valley Hall effect",
+      "summary": "本文提出并揭示了一类此前未被探索的非线性谷霍尔效应，其驱动源是各能谷内分布不均的贝里曲率偶极（valley Berry curvature dipole）。与由相反谷中贝里曲率反号导致的线性谷霍尔效应不同，该效应是二阶电场响应：在时间反演对称但空间反演破缺且处于金属态的体系中，谷分辨的贝里曲率偶极通过反常速度产生横向二阶电流并携带谷自由度信息。这为无外加磁场条件下纯电学驱动与调控谷极化电流提供了新的二阶响应通道。",
+      "path": "knowledge/raw/papers/2026-2609.29226-valley-berry-curvature-dipole-induced-nonlinear-va.md",
+      "added_via": "cluster:cl_20261009_f007a9",
+      "added_at": "2026-11-15T00:20:27Z"
+    },
+    {
+      "source_id": "paper:2024-2402.18588-nonlinear-hall-effects-induced-by-berry-curvature-dipole-in",
+      "title": "Nonlinear Hall Effects induced by Berry Curvature Dipole in CuPb9(PO4)6O (LK-99)",
+      "summary": "通过第一性原理计算证明，室温争议材料LK-99 (CuPb9(PO4)6O)在自旋轨道耦合作用下能带中出现多对Weyl点，其贝里曲率的非对称分布产生净的贝里曲率偶极（BCD）。据此预言该材料无需外磁场即可产生非线性霍尔效应（二阶横向电流 j ∝ E²），且霍尔电流的大小与符号可通过外加电场方向相对晶体轴的取向进行调谐。化学势靠近Weyl点能量时BCD被显著增强，为把LK-99作为拓扑量子材料（而非仅超导候选）提供了电输运验证方案。",
+      "path": "knowledge/raw/papers/2024-2402.18588-nonlinear-hall-effects-induced-by-berry-curvature-dipole-in.md",
+      "added_via": "cluster:cl_20261009_f007a9",
+      "added_at": "2026-11-15T00:20:27Z"
+    },
+    {
+      "source_id": "paper:2025-2502.05960-electric-field-control-of-nonlinear-hall-effect-in-weyl-semi",
+      "title": "Electric field control of nonlinear Hall effect in Weyl semimetal TaIrTe4",
+      "summary": "在时间反演对称但空间反演破缺的Weyl半金属TaIrTe4中，实验演示用面内DC驱动电场本身对非线性霍尔效应的大小和符号进行连续、可逆调控，4 K下二阶信号增强达168倍。标度律分析表明该场控行为源于电场诱导的Berry曲率偶极变化与散射（弛豫时间）调制的协同效应，而非单纯焦耳热。该工作把非线性霍尔确立为一个由驱动场直接调控的非微扰量子几何响应量。",
+      "path": "knowledge/raw/papers/2025-2502.05960-electric-field-control-of-nonlinear-hall-effect-in-weyl-semi.md",
+      "added_via": "cluster:cl_20261009_f007a9",
+      "added_at": "2026-11-15T00:20:27Z"
+    },
+    {
+      "source_id": "paper:2026-2611.04335-emergence-of-berry-curvature-dipole-and-nonlinear-hall-effec",
+      "title": "Emergence of Berry curvature dipole and nonlinear Hall effect in a novel hexagonal borophosphene allotrope",
+      "summary": "基于第一性原理计算预测了一种新型六角砷取代硼磷烯（borophosphene）allotrope，在其反演对称破缺而时间反演保持的能带中，无需自旋轨道耦合即出现可观的贝里曲率偶极矩（Berry curvature dipole, BCD）。该偶极矩驱动非线性霍尔效应，其二阶霍尔电导的大小与符号可通过应变连续调控。这为不依赖 SOC 的二维二阶电子学提供了一个可应变设计的新材料平台。",
+      "path": "knowledge/raw/papers/2026-2611.04335-emergence-of-berry-curvature-dipole-and-nonlinear-hall-effec.md",
+      "added_via": "cluster:cl_20261009_f007a9",
+      "added_at": "2026-11-15T00:20:27Z"
+    },
+    {
+      "source_id": "paper:2026-2610.41274-berry-curvature-quadrupole-induced-third-order-anomalous-hal",
+      "title": "Berry curvature quadrupole induced third-order anomalous Hall effect in altermagnetic KV2Se2O",
+      "summary": "本文预言在d波交错磁体KV2Se2O中，磁点群对称性禁戒贝里曲率偶极矩（因而排除二阶非线性霍尔），但允许贝里曲率四极矩存活，从而诱导出三阶反常霍尔效应。通过磁点群对称性分析、第一性原理电子结构与半经典非线性输运计算，作者证明该四极矩驱动的三阶霍尔信号可随奈尔矢量翻转而反号，成为零净磁矩交错磁序的纯电学指纹。该机制突破了“偶极矩禁戒即无非线性霍尔响应”的传统限制，将贝里曲率高阶动量矩与交错磁性的探测联系起来。",
+      "path": "knowledge/raw/papers/2026-2610.41274-berry-curvature-quadrupole-induced-third-order-anomalous-hal.md",
+      "added_via": "cluster:cl_20261009_f007a9",
+      "added_at": "2026-11-15T00:20:27Z"
+    }
+  ]
+}

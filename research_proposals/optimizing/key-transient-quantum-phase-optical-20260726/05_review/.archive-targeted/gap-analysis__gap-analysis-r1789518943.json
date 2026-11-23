@@ -1,0 +1,82 @@
+{
+  "gaps": [
+    {
+      "claim": "scheme L141：Ilin 等[31] 给出 HHG 电流-电流关联对泛函近似层级敏感的机制说明",
+      "missing_evidence": "当前引用 arXiv:2604.20388 实为 SSH 腔量子光子统计/压缩光理论，与 TDDFT 泛函近似层级敏感性无关，缺少关于 HHG 电流-电流关联函数对交换关联泛函层级（LDA/GGA/hybrid）依赖的机制文献",
+      "search_keywords": [
+        "HHG current-current correlation functional approximation",
+        "TDDFT exchange-correlation functional HHG sensitivity",
+        "high harmonic generation exchange-correlation dependence",
+        "solid HHG ALDA LDA GGA functional benchmark"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "scheme §2.3(a) L125：全时空反演在 L1 层级算力等价10⁶–10⁷ CPU·小时，超算级任务",
+      "missing_evidence": "缺少对贝叶斯优化反演在阿秒/固体 HHG 场景下算力估算的具体 benchmark 文献或类比（如地球物理/天体物理反问题算力消耗对比）",
+      "search_keywords": [
+        "Bayesian inversion computational cost ultrafast",
+        "attosecond pulse retrieval supercomputer cost",
+        "high dimensional inverse problem computational scaling",
+        "full time-space reconstruction CPU hours estimate"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "scheme L81：Kiselev[46] 2026 年相关工作（实为 2025 arXiv:2510.12990）",
+      "missing_evidence": "缺少 Kiselev 2025 关于 OPCPA/分区判据/强场泵浦-阿秒探测协同的原文核实，或需要替换为正确的 2026 年文献",
+      "search_keywords": [
+        "Kiselev OPCPA strong field pump attosecond probe 2025",
+        "Kiselev driver pulse partition criterion2026",
+        "2510.12990 OPCPA attosecond",
+        "Kiselev mid-infrared OPCPA few-cycle"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "scheme L183(D1) 分区判据：转换区 1<ℏω/E_g<2 与正文/§1.1/§2.1(a) 阈值口径不一致",
+      "missing_evidence": "缺少明确区分近共振（ℏω/E_g<1）、过渡区（1<ℏω/E_g<2）、多光子主导（ℏω/E_g>2）的原始理论或实验分区文献支撑",
+      "search_keywords": [
+        "Keldysh parameter solid HHG transition regime",
+        "photon energy bandgap ratio HHG regime classification",
+        "multiphoton tunneling solid strong field criterion",
+        "Keldysh-SSH solid HHG partition"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "scheme §2.2(a) 时序预算：94 as 推算与 ≤100 as RMS 协同精度",
+      "missing_evidence": "缺少100 as 量级阿秒-强场双脉冲时序抖动控制的实测 benchmark 文献",
+      "search_keywords": [
+        "attosecond strong field timing jitter 100 as RMS",
+        "active feedback attosecond delay stabilization",
+        "sub-100 as pump-probe synchronization",
+        "attosecond transient absorption timing precision"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "scheme §2.3(b) 误差合成：三通道互补下的误差传播与精度极限",
+      "missing_evidence": "缺少 HHG 三通道（Berry curvature / quantum metric / 跃迁偶极矩）联合反演的误差传播与 Fisher 信息矩阵估计文献",
+      "search_keywords": [
+        "multi-channel HHG inversion error propagation",
+        "Fisher information high harmonic retrieval",
+        "joint Berry curvature metric tensor reconstruction uncertainty",
+        "quantum geometry tensor retrieval error budget"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "scheme L193(D6) VAE+扩散组合依据",
+      "missing_evidence": "缺少 VAE（变分自编码器）+ 扩散模型组合用于 HHG 光谱反演/量子态重建的方法对比 benchmark 文献",
+      "search_keywords": [
+        "VAE diffusion model inverse problem spectroscopy",
+        "generative model HHG retrieval",
+        "diffusion model attosecond pulse reconstruction",
+        "VAE high harmonic spectrum inversion"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "scheme"
+}

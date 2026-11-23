@@ -1,0 +1,53 @@
+{
+  "gaps": [
+    {
+      "claim": "§3.3.2 中 Pockels 调制 δW_flat = αE₀²/2 ≈ 0.6 meV 的推算路径，需要 α 极化率（~10⁻⁹ esu）与 V_Moiré ≈ 10⁴ cm²/V 的取值依据",
+      "missing_evidence": "缺二维材料层极化率与 Moiré 周期势深度的定量文献支撑，包括 α ~10⁻⁹ esu 数量级来源与 V_Moiré ~10⁴ cm²/V 的实验/理论参考",
+      "search_keywords": [
+        "2D material layer polarizability esu",
+        "Moiré superlattice potential depth experiment",
+        "Pockels effect2D semiconductor Stark",
+        "transition metal dichalcogenide polarizability first principles",
+        "moiré potential amplitude twisted bilayer TMDC"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3.3.2 中 λ=1.3 μm 端 I_c 低端值与高端值的标度律自洽性（按 λ⁻² 反推低端应为 ~2.7×10¹⁰ W/cm²）",
+      "missing_evidence": "缺不同波段（3 μm→1.3 μm）HHG 电离阈值 I_c 的 λ⁻² 标度律实验数据，特别是固体/TMDC 在中红外 1.3 μm 处的标定值",
+      "search_keywords": [
+        "mid-infrared ionization threshold TMDC",
+        "solid HHG intensity scaling wavelength",
+        "Keldysh ionization wavelength dependence solid",
+        "Ghimire MoS2 HHG intensity 1.3 um",
+        "lambda^2 scaling HHG threshold semiconductor"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3.4 TBG 臂独立强度窗口协议 a–d 与 TBG 损伤阈值 mid-infrared optical breakdown 的安全窗口论证",
+      "missing_evidence": "缺 TBG 在中红外强场下的损伤/光学击穿阈值与激光诱导损伤实验数据，支撑 TBG 臂协议中强度上限设定",
+      "search_keywords": [
+        "twisted bilayer graphene damage threshold mid-infrared",
+        "graphene moiré optical breakdown laser damage",
+        "TBG strong field intensity saturation",
+        "high harmonic intensity regime damage solid",
+        "graphene optical damage threshold femtosecond mid-IR"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3.5 创新点三中 Ikeda 2025 [12] 单脉冲熔化（single-pulse melting）与本项目相干 Floquet 周期调制的差异化论证",
+      "missing_evidence": "缺 Ikeda 2025 论文全文细节（实验/理论机制、单脉冲 vs 周期驱动对比）；缺 Floquet 工程在莫尔体系中的相干调制 vs 单脉冲熔化对比文献",
+      "search_keywords": [
+        "Ikeda 2025 TaS2 DMFT single pulse",
+        "coherent Floquet modulation moiré correlated insulator",
+        "Floquet engineering periodic drive solid HHG",
+        "Ikeda TaS2 Mott insulator charge gap 2025",
+        "periodic drive vs single pulse coherent control correlated state"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "scheme"
+}

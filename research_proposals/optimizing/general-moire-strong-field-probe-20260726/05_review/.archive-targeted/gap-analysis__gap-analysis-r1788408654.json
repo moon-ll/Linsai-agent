@@ -1,0 +1,78 @@
+{
+  "gaps": [
+    {
+      "claim": "莫尔势与扭转角的联合反演中，±0.05°既作先验又作分辨率，指标无效",
+      "missing_evidence": "缺乏扭转角测量精度与莫尔势反演分辨率之间的独立标定文献，以及扭转角先验不确定度的实验/理论边界",
+      "search_keywords": [
+        "twist angle measurement precision moire superlattice",
+        "moire potential reconstruction resolution twisted bilayer",
+        "torsional angle uncertainty HHG inversion"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "探针窗口（I_c~3×10¹¹ W/cm²）与关联绝缘态能隙（10 meV）的对应关系及阈值判据",
+      "missing_evidence": "缺乏关联绝缘态能隙对应临界光强（ac-Stark熔化阈值）的实验测量与理论推导公式，特别是Nikola 2021 Nature工作中强度-能隙标度律的精确数值",
+      "search_keywords": [
+        "ac-Stark effect correlated insulator melting critical intensity",
+        "Floquet bandwidth modulation critical intensity formula twisted bilayer",
+        "Nikola 2021 Nature Floquet modulation intensity gap scaling",
+        "correlated insulator gap light-induced melting"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "CITE未定义、Yao标为[31]、Nikola与Shan作者分裂的引文统一",
+      "missing_evidence": "缺乏对CITE原始定义、Yao 2021工作的完整期刊信息和作者列表、以及Nikola 2021 Nature论文的完整作者署名（特别是Shan J.-Y.的署名位置）的核实证据",
+      "search_keywords": [
+        "Yao 2021 moire high harmonic generation citation",
+        "Nikola Nature 2021 twisted bilayer correlated insulator author list",
+        "Shan J.Y. Nature 2021 giant modulation optical nonlinearity Floquet"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "降阶总核时2×10⁴与2.4×10⁵的冲突重算依据",
+      "missing_evidence": "缺乏TDDFT/TB混合方法在莫尔超晶格高次谐波计算中的标准基准核时数据，以及DMRG自能回灌SBE接口的计算成本参考",
+      "search_keywords": [
+        "real-time TDDFT twisted bilayer computational cost benchmark core-hour",
+        "TBG TDDFT computational scaling",
+        "DMRG self-energy semiconductor Bloch equation interface cost"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "莫尔强场HHG探针方案的'唯一可行''尚未见报道'缺乏检索支撑和替代方案",
+      "missing_evidence": "缺乏对已有莫尔材料强场/超快光学实验组的系统性调研，特别是国内实验组在莫尔HHG领域的代表性工作，以及Floquet工程替代方案的文献",
+      "search_keywords": [
+        "moire superlattice strong field China experimental group",
+        "twisted bilayer ultrafast optics Chinese group domestic",
+        "solid-state high harmonic generation China research team",
+        "moire heterostructure nonlinear optics experimental alternative"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "靶标A/B（光Floquet工程调控莫尔序）的物理输出、测量量与失败后的机制转向",
+      "missing_evidence": "缺乏Floquet工程调控莫尔关联绝缘态或拓扑序的实验先例，特别是HHG光谱作为探测量的可行性证据，以及失败模式的判据",
+      "search_keywords": [
+        "Floquet engineering moire correlated insulator HHG probe",
+        "light-induced Floquet topological phase transition experimental",
+        "optical control moire band structure HHG readout",
+        "Floquet engineering moire 2D material experimental demonstration"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "DMRG自能回灌SBE的接口量与双计数边界",
+      "missing_evidence": "缺乏DMRG/MPS计算自能并耦合到半导体布洛赫方程的具体实现文献，包括哈密顿量定义、接口误差传播和双计数修正",
+      "search_keywords": [
+        "DMRG MPS coupled to semiconductor Bloch equation",
+        "tensor network self-energy SBE interface error propagation",
+        "many-body correction SBE moire superlattice double counting",
+        "matrix product state density functional embedding"
+      ],
+      "priority": "high"
+    }
+  ]
+}

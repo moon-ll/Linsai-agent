@@ -1,0 +1,28 @@
+{
+  "gaps": [
+    {
+      "claim": "m阶非线性谐波圆二色性与共振k点局域Berry曲率之间存在正比关系。",
+      "missing_evidence": "缺少能够直接建立非线性谐波圆二色性、局域Berry曲率与动量分辨信号之间关系的理论推导或实验验证文献。需要核实文献是否适用于相同的谐波阶数、圆偏振构型和固态体系；同时确认拟引用的[27]是否确实支持“正比于局域Berry曲率”这一表述。",
+      "search_keywords": [
+        "m-thorder nonlinear harmonic circular dichroism local Berry curvature",
+        "k-resolved high harmonic generation Berry curvature circular dichroism",
+        "Berry curvature harmonic spectroscopy Luu Wörmer",
+        "非线性谐波 圆二色性 局域Berry曲率"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "已有弱场圆偏振高次谐波实验实现与本方案同类的探测能力。",
+      "missing_evidence": "缺少可核验的弱场圆偏振高次谐波实验先例文献。引用时需说明实验中的场强范围、圆偏振方式、谐波探测对象及信号物理量，并论证其与本方案所称“同类探测能力”的对应关系，不能仅以概念相近作为支撑。",
+      "search_keywords": [
+        "weak-field circularly polarized high-harmonic generation experiment",
+        "solid-state high harmonic generation circular dichroism experiment",
+        "circular polarization high harmonic generation Berry curvature detection",
+        "弱场 圆偏振 高次谐波 实验",
+        "圆二色性 高次谐波 固态材料 实验"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

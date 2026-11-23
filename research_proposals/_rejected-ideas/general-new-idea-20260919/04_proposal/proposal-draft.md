@@ -1,0 +1,20 @@
+
+## 周末输入补充（2026-09-18 · cl_20260815_82c665）
+
+### 拟开展研究内容
+- paper:2026-2605.14873-few-attosecond-electron-pulse-trains-with-tunable-
+- paper:2605.14873
+- paper:1712.08441
+
+### 创新点
+- 参量共振条件对激光强度、频率、脉宽及电子束初始能量的定量依赖关系如何，实验中如何稳定锁定共振以获得可重复的少阿秒调制？
+- 该方案能否从周期性脉冲串拓展至孤立少阿秒电子脉冲的产生，以满足需要单次时间分辨的泵浦-探测实验？
+- 调制后电子束的能散、发射度与纵向焦距之间如何权衡，束流品质能否满足超快电子衍射与显微成像的实际要求？
+- 双激光场中有质动力与随机加速的传统图像需如何修正，修正后的物理机制在其他强场构型中是否普适？
+- 阿秒尺度自由电子波函数的相干控制在量子电路与电子动力学探测中的具体应用路径与量子极限是什么？
+
+### 来源
+- [weekend_cluster] Few-Attosecond electron pulse trains with tunable periods produced by two counter-propagating lasers
+- [weekend_cluster] Few-Attosecond electron pulse trains with tunable periods produced by two counter-propagating lasers
+- [weekend_cluster] Attosecond coherent control of free-electron wave functions using semi-infinite light fields
+

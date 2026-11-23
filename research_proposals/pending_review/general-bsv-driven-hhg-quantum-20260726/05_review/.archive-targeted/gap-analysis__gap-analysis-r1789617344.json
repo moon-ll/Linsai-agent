@@ -1,0 +1,85 @@
+{
+  "gaps": [
+    {
+      "claim": "BSV驱动HHG的量子光场与经典光场对比基线（QEF三维：yield/spectrum/polarization的实验与理论论证）",
+      "missing_evidence": "缺少BSV-HHG与传统相干态HHG在yield/spectrum/polarization三个维度上量化对比的实验或理论基准文献，特别是Rasputnyi 2024之后的固体体系验证",
+      "search_keywords": [
+        "bright squeezed vacuum high harmonic generation yield enhancement",
+        "QEF quantum enhancement factor solid HHG",
+        "BSV HHG polarization dependence squeezed light",
+        "Rasputnyi squeezed vacuum HHG solid state benchmark"
+      ]
+    },
+    {
+      "claim": "BSV-HHG在固体多体关联灵敏度上超越经典光HHG的论证",
+      "missing_evidence": "缺少BSV光子统计（g(2)、压缩度r、亮度N）与固体HHG多体响应（激子、关联绝缘体、CDW）耦合灵敏度的定量对比文献",
+      "search_keywords": [
+        "BSV HHG correlated insulator many-body sensitivity",
+        "squeezed light photon statistics exciton HHG",
+        "quantum light HHG CDW order parameter detection",
+        "g2 squeezed vacuum solid HHG many-body enhancement"
+      ]
+    },
+    {
+      "claim": "winding trail（绕数轨迹）在固体多带HHG中成立的机制论证",
+      "missing_evidence": "缺少从原子气体多通道HHG winding number理论向固体多带HHG推广的机制文献，以及winding trail在能带交叉/Berry相/拓扑中的作用",
+      "search_keywords": [
+        "winding number high harmonic generation solid",
+        "multiband HHG winding trail Berry phase mechanism",
+        "solid-state HHG topological trajectory reconstruction",
+        "winding number solid HHG band crossing"
+      ]
+    },
+    {
+      "claim": "$Q_F$（量子费舍尔信息）在BSV-HHG探针中的物理来源与提取路径",
+      "missing_evidence": "缺少$Q_F$从BSV光子数分布/压缩度映射到HHG谱特征量（高阶矩、强度关联、g(2)）的可推导文献基础",
+      "search_keywords": [
+        "quantum Fisher information HHG squeezed light",
+        "photon number distribution HHG spectral mapping",
+        "BSV photon statistics high harmonic spectrum moments",
+        "QFisher squeezed vacuum HHG probe retrieval"
+      ]
+    },
+    {
+      "claim": "相位差方差 $\\sigma_\\varphi^2 \\sim e^{2r}/(4N)$ 与相干性判定准则 $V \\le \\exp(-\\sigma_\\varphi^2/2)$ 的实验/理论依据",
+      "missing_evidence": "缺少BSV相位噪声方差随压缩度r与亮度N变化的解析/实验验证文献，以及该相干性上限作为BSV-HHG判据的合理性证据",
+      "search_keywords": [
+        "bright squeezed vacuum phase variance formula",
+        "BSV coherence criterion squeezing parameter r",
+        "phase diffusion squeezed light NOPA experimental",
+        "BSV spectral coherence e^{2r}/N derivation"
+      ]
+    },
+    {
+      "claim": "7-9阶谐波作为BSV-HHG主定量窗口（11/13阶作交叉验证辅助窗口）的选择依据",
+      "missing_evidence": "缺少不同阶次谐波对BSV压缩度/光子统计灵敏度差异的实验或理论系统研究，特别是固体体系下7-9阶信噪比与量子优势对比",
+      "search_keywords": [
+        "high harmonic order dependence squeezed light sensitivity",
+        "BSV HHG harmonic order quantum enhancement spectrum",
+        "low-order vs high-order harmonic squeezed light response",
+        "harmonic order squeezed vacuum yield ratio"
+      ]
+    },
+    {
+      "claim": "BSV-HHG在双光路Mach-Zehnder干涉测量下相位提取的可行性论证",
+      "missing_evidence": "缺少BSV-HHG与参考相干光干涉的实验文献，或BSV自身相干长度/相干时间测量在固体HHG谱学中的实现",
+      "search_keywords": [
+        "Mach-Zehnder interferometer BSV coherent measurement",
+        "BSV coherence length high harmonic spectroscopy",
+        "squeezed vacuum interferometric HHG phase retrieval",
+        "BSV first-order coherence HHG probe"
+      ]
+    },
+    {
+      "claim": "BSV-HHG探针方法学可迁移性的论证（适用于其他量子光场驱动的固体谱学）",
+      "missing_evidence": "缺少BSV-HHG方法学推广到Fock态/猫态/NOON态等其他量子光场驱动固体HHG的理论框架或综述",
+      "search_keywords": [
+        "quantum light HHG probe methodology transferability",
+        "nonclassical light HHG general framework",
+        "photon statistics high harmonic spectroscopy quantum state tomography",
+        "quantum state HHG solid-state spectroscopy review"
+      ]
+    }
+  ],
+  "section": "content"
+}

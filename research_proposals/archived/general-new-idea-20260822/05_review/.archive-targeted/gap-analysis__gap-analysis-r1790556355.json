@@ -1,0 +1,95 @@
+{
+  "gaps": [
+    {
+      "claim": "Vampa 等人关于固体 HHG 偏振依赖与 interband/intraband 机制区分的奠基性工作",
+      "missing_evidence": "缺少 Vampa 等人关于 ZnO/MgO 固体 HHG 偏振依赖实验的引用锚点",
+      "search_keywords": [
+        "Vampa ZnO high harmonic polarization",
+        "Vampa solid HHG interband intraband mechanism",
+        "Vampa PRL 115 193603 polarization cutoff"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Luu 和 Wörner 关于石英 Berry 曲率驱动 HHG 偏振反转的论断",
+      "missing_evidence": "缺少 Luu Wörner 2018 Nat Commun 9 916 Berry 曲率 HHG 偏振反转的引用锚点",
+      "search_keywords": [
+        "Luu Worner quartz Berry curvature HHG",
+        "Luu Worner Nat Commun 2018 HHG polarization reversal",
+        "solid HHG circular polarization Berry curvature"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Liu 等人首次观测单层 MoS2 HHG 的关键实验",
+      "missing_evidence": "缺少 Liu 等 2017/2018 monolayer MoS2 高次谐波首次观测的引用锚点",
+      "search_keywords": [
+        "Liu monolayer MoS2 high harmonic generation",
+        "first observation HHG transition metal dichalcogenide",
+        "MoS2 HHG classical light first observation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Haag 等人对 MnTe g 波 altermagnet 高次谐波偏振各向异性的理论预言",
+      "missing_evidence": "缺少 Haag et al. MnTe HHG 偏振各向异性预言的理论引用锚点",
+      "search_keywords": [
+        "Haag MnTe high harmonic prediction",
+        "altermagnet MnTe HHG polarization anisotropy theory",
+        "g-wave MnTe nonlinear optical prediction"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Mizuno 等人关于自旋群选择规则对谐波对称性约束的论断",
+      "missing_evidence": "缺少 Mizuno et al. spin group HHG selection rule 的引用锚点",
+      "search_keywords": [
+        "Mizuno spin group selection rule HHG",
+        "spin group symmetry altermagnet HHG",
+        "Mizuno high harmonic altermagnet selection rule"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Ly 等人关于磁有序 HHG 框架（包含 altermagnet）的统一理论",
+      "missing_evidence": "缺少 Ly et al. magnetic order HHG framework altermagnet 引用锚点",
+      "search_keywords": [
+        "Ly magnetic order high harmonic framework",
+        "Ly altermagnet HHG theory",
+        "Ly antiferromagnet HHG nonlinear response"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Usanov 等人关于时间分辨瞬态 Berry 曲率/光学读出磁矩的工作",
+      "missing_evidence": "缺少 Usanov et al. transient Berry curvature 或光学磁矩读出引用锚点",
+      "search_keywords": [
+        "Usanov transient Berry curvature measurement",
+        "Usanov attosecond magnetic moment readout",
+        "time-resolved Berry phase HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Osumi 等人关于 α-MnTe 各向异性自旋劈裂 ARPES 的关键实验测量",
+      "missing_evidence": "缺少 Osumi et al. PRB 109 115102 α-MnTe 各向异性自旋劈裂 ARPES 引用锚点",
+      "search_keywords": [
+        "Osumi PRB 109 115102 MnTe ARPES",
+        "Osumi alpha-MnTe anisotropic spin splitting",
+        "MnTe d-wave altermagnet ARPES nodal plane"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "CrSb Weyl 交变磁 ARPES 实测作为 MnTe 对照样本的依据",
+      "missing_evidence": "已有 [27] 但在 §2 段 5 被错挂到 MnTe 体系，须重新对齐 CrSb ARPES 引用语境",
+      "search_keywords": [
+        "CrSb ARPES Weyl altermagnet",
+        "CrSb spin splitting ARPES g-wave",
+        "CrSb spin-resolved ARPES 2024"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "rationale"
+}

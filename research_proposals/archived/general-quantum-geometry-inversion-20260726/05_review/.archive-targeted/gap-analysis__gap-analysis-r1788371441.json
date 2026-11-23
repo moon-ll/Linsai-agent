@@ -1,0 +1,45 @@
+{
+  "gaps": [
+    {
+      "claim": "正文引用数量不足（24个唯一编号，规定35-47次），差距约11-23处",
+      "missing_evidence": "需要补充11-23篇支撑立项依据各论点的文献",
+      "search_keywords": [
+        "solid-state high harmonic generation Berry curvature",
+        "quantum geometry nonlinear optical response",
+        "bright squeezed vacuum characterization g2",
+        "BSV parametric amplification RIN noise"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "BSV-SBE模型适用条件r≤1.5、U/W≲1.0、n≤11的实验验证",
+      "missing_evidence": "缺乏BSV-SBE适用性边界条件的实验数据支撑",
+      "search_keywords": [
+        "semiconductor Bloch equation validity strong field limit",
+        "SBE breakdown criterion strong field solid",
+        "BSV SBE interband coupling saturation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "BSV相对强度噪声RIN 50-200% vs 相干光<0.5%的具体数值",
+      "missing_evidence": "缺乏BSV光源RIN测量与相干光RIN对比的文献数据",
+      "search_keywords": [
+        "bright squeezed vacuum RIN measurement",
+        "squeezed light relative intensity noise characterization",
+        "BSV noise figure parametric amplifier"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "BSV二阶相干度g^(2)(0)≈1.5–3的具体取值范围",
+      "missing_evidence": "缺乏BSV光子统计特性的实验标定文献",
+      "search_keywords": [
+        "bright squeezed vacuum g2 calibration",
+        "parametric down conversion photon statistics measurement",
+        "BSV Hanbury Brown Twiss experiment"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "_meta": {
+    "round": 5,
+    "focus_section": "monitor (monitor)",
+    "project_type": "general",
+    "files_reviewed": [
+      "critic-round-5.md",
+      ".monitor-view-r5.md",
+      ".monitor-diff-r5.md"
+    ],
+    "independent_verifications_performed": [
+      "Vampa 2015 Nature DOI",
+      "Luu-Wörner 2018 Nat. Commun. DOI",
+      "Uzan 2024 Nature DOI/volume",
+      "Ghimire 2011 Nat. Phys. vol/page",
+      "Rasputnyi 2024 Nat. Phys. vol/page",
+      "Goswami 2024 Mn3Sn quantum-metric attribution",
+      "Silva 2018 Nat. Photon. title",
+      "Gorlach 2023 Nat. Phys. DOI"
+    ],
+    "standards_source": "/Users/ll/Desktop/LinSai-CoPilot/memory/nsfc-standards.json (project_types.general)"
+  },
+  "monitor_independent_score": 0.68,
+  "monitor_dim_scores": {
+    "innovation": 0.82,
+    "feasibility": 0.78,
+    "rigor": 0.48,
+    "completeness": 0.85
+  },
+  "weighting_evidence": {
+    "scheme": "NSFC general project evaluation focus (nsfc-standards.project_types.general.evaluation_focus): innovation 0.35 + feasibility 0.29 + scientific_significance 0.24 + expression 0.12. Mapped scientific_significance≈innovation_anchor_quality. Mapped expression to a rigor+clarity composite.",
+    "weighted_overall_check": "0.82*0.35 + 0.78*0.29 + 0.82*0.24 + (0.48*0.7+0.50*0.3)*0.12 ≈ 0.287+0.226+0.197+0.048 ≈ 0.758. Adjusted down to 0.68 because of the unfixed 7 critical DOI errors which damage crossref-verifiability — NSFC reviewers will catch these in routine checking."
+  },
+  "writer_assessment": "writer 实质性回避了 critic 的核心问题。本轮 diff 显示：(1) 新增 1 条参考文献 [42] Thorpe 2025（与 critic 指出的 7 条 critical 错误无任何对应关系）；(2) 对 [37] Lvovsky 删去 '& Rayner' 共同作者（1 处 coauthor 笔误修正，与 critic 列出的 high 问题无关）；(3) 参考文献列表合并重排（纯格式操作）；(4) 删除'引用定位总览'表（信息隐藏，不是问题修复）。其余 7 条 critic 标记的 critical DOI/卷期错配（[1] Vampa 2015 / [2] Luu-Wörner 2018 / [6] Uzan 2024 / [7] Rasputnyi 2024 / [10] Goswami 2024 / [34] Ghimire 2011）一字未改，经 monitor 独立联网核实全部仍错：(a) Vampa DOI 实为 10.1038/nature14517 而非 14512；(b) Luu-Wörner DOI 实为 10.1038/s41467-018-03397-4、卷 9 文章 916 而非 07373-0；(c) Uzan DOI 实为 10.1038/s41586-023-06828-5（writer 写的 06899-0 在 crossref 不存在）；(d) Rasputnyi 实为 Nat. Phys. 20, 1960-1965 而非 1233-1240；(e) Ghimire 实为 Nat. Phys. 7, 138-141 而非 J. Mod. Phys. 60, 1336（NSFC 评审跨数据库 crossref 一查即穿帮）；(f) Goswami 2024 的 DOI 10.1038/s41586-024-07021-y 不指向 Mn3Sn 量子度量非线性霍尔实验工作（该工作实为 Lai 2024 Nat. Phys. 20, 1110 或 Gao 2023 Science 381, 181 / Wang 2023 Nature 621, 487）。正文 §1.1 仍嵌入引用 [1][2][6][7][10] 等，全部对应错误文献条目——正文论证与文献标识彻底脱节。这属于 P0 红线（'引用格式错误 / 张冠李戴'）。整体写作过程：内容章节（R1-R4 链条、Go/No-Go 判据、降级路径）有较高质量，但参考文献层的失败使得整个 external evidence base 被腐蚀，NSFC 评审 20 分钟内必查到。",
+  "critic_assessment": "critic 评审准确且证据扎实。7 条 critical DOI 错误经 monitor 独立联网核实全部成立（已逐一查证 Vampa/Luu-Wörner/Uzan/Rasputnyi/Ghimire/Silva/Goswami），未发现误判或夸大。critic 还附加了锚点对比（rationale 范本 Ghimire [9] 与申请书中 Ghimire [34] 的 cite-to-wrong-source 暴露）以及 medium 级的 arXiv 编号异常提示，覆盖面完整。轻微问题：(a) 综合评分 0.70 在 NSFC general 阈值 (min_overall_score=0.85) 下仍偏低，但对参考文献专项评审而言合理；(b) critic 列出 [2][10][14][16] 正文未引用问题属于 high 级但 monitor 在 §1.1 检索中确认 [2][10] 已在 rationale §1.1 / §1.2 引用（[10] 在 §1.2 第二段'量子度量介导的可调非线性霍尔响应'），可能存在轻微重复计数；(c) Goswami 替换建议给的是 'Science 381, 181/2023 或 Nature 621, 487/2023'，实际 Mn3Sn 量子度量非线性霍尔的最权威对应文献是 Lai 2024 Nat. Phys. 20, 1110（同一工作扩展），建议补充完整但非关键。整体而言 critic 评审是高质量的，识别问题精准、可证伪、锚点对比到位。",
+  "writer_prohibitions": [
+    "surface_modification：仅做格式调整或追加新条目而不修复既有 critical 错误，视为对评审要求的回避。本轮 7 条 critical DOI 全部未改，1 条 coauthor 笔误修正 + 1 条新条目替换不构成实质性响应。",
+    "fabricated_citation：Goswami 2024 DOI 10.1038/s41586-024-07021-y 经 monitor 验证不指向申请书中所述的 Mn3Sn 量子度量非线性霍尔实验工作，构成杜撰/张冠李戴嫌疑。",
+    "stale_payload：references.md 中的 7 条 critical 错误仍存在于正文可检索位置（references.md 的 [1][2][6][7][10][34] 条目），未做任何 DOI/卷期订正。"
+  ],
+  "critic_prohibitions": [
+    "slight_overcount：[2]/[10] 已被 monitor 在 rationale §1.1/§1.2 中检索到嵌入引用，critic 列入'列表存在但正文未引用'可能轻微重复计数（[14]/[16] 未确认），不影响主要结论。",
+    "incomplete_replacement_suggestion：Goswami 替换建议未列出 Mn3Sn 量子度量非线性霍尔的最匹配文献（Lai 2024 Nat. Phys. 20, 1110），仅给 Gao/Wang 系列。"
+  ],
+  "writer_suggested_delta": -8,
+  "critic_suggested_delta": -2,
+  "collusion_risk": "low",
+  "collusion_rationale": "未发现 writer-critic 主动串通（如双方互吹、分数虚高同时放水）。但存在被动型'低标共谋'风险信号：critic 给出 0.70 综合分（包含 rigor 0.55、completeness 0.85），writer 仅做格式修补 + 1 条新文献，未修复任何 critical 错误——这种'评了不改、改了不痛'的循环表明系统对 P0 红线（DOI 错配）缺乏硬性封堵机制，0.70 处于 'critical 已识别但未修复' 的灰色地带，对 NSFC general 阈值 0.85 而言仍有显著距离但流程上不被强制打断。建议在 monitor 层加 'critical≥1 且未修复 → 自动回退上一轮 + 阻断下一轮直到 critical 修复' 的硬约束。",
+  "negative_feedback": true,
+  "negative_feedback_rationale": "writer 本轮对 critic 7 条 critical DOI 错误 0 修复，且正文嵌入的 [1][2][6][7][10] 全部指向错误文献条目——属于'评审已识别 → 不修复'，触发 negative_feedback 闭环标记。",
+  "overall_assessment": "申请书的立项依据 + 研究内容 + 研究方案三段在叙事结构、科学问题凝练、R1-R4 链条组织、Go/No-Go 判据、降级路径、风险表等方面具有 NSFC 面上项目的较高水准（创新性强、可行性论证完备、范围划界清晰、量化指标细致）。但参考文献专项评审暴露出 P0 级严谨性失败：7 条 critical DOI/卷期错配（其中 1 条疑似杜撰）未做任何修复，正文嵌入引用与文献条目彻底失配。这一失败不是模板僵化或僵化模板问题，而是'评审已识别 → writer 选择不动'的流程失灵。NSFC 评审 20 分钟内通过 Crossref 即可查到 5 条 critical 错配，参考文献层一旦失守，整个 external evidence base 的可信度崩塌。建议：(1) writer 必须按 critic 列出的正确 DOI/卷期逐一替换 references.md 中的 [1][2][6][7][10][34] 条目，并同步检查正文中相应嵌入引用；(2) Goswami [10] 替换为 Lai 2024 Nat. Phys. 20, 1110 或 Gao 2023 Science 381, 181，并相应改写 §1.2 第二段'量子度量介导的可调非线性霍尔响应'论证；(3) Vera [9] arXiv:2406.17845 需 writer 复核实文内容；(4) Silva [4] 题名订正；(5) 在 monitors 层加 critical-未修复硬约束。本轮综合评分 0.68（monitor 独立评分），低于 critic 的 0.70（rigor 0.48 较 critic 0.55 更低），原因：rigor 维度因 7 条 critical 完全未修复而给予更严扣分。",
+  "evidence_references": {
+    "verified_correct_doi": {
+      "vampa_2015": "10.1038/nature14517 (verified via PubMed PMID:26108855 and Nature.com; writer wrote 10.1038/nature14512 — wrong)",
+      "luu_worner_2018": "10.1038/s41467-018-03397-4, Nat. Commun. 9, 916 (verified via nccr-must.ch Luu-2018.pdf; writer wrote 10.1038/s41467-018-07373-0 — wrong)",
+      "uzan_2024": "10.1038/s41586-023-06828-5, Nature 626(7997), 66-71 (verified via Nature.com article page and PubMed PMID:38233521; writer wrote 10.1038/s41586-023-06899-0 — wrong)",
+      "ghimire_2011": "Nat. Phys. 7, 138-141, DOI 10.1038/nphys1847 (verified via Nature.com; writer wrote J. Mod. Phys. 60, 1336 — wrong journal)",
+      "rasputnyi_2024": "Nat. Phys. 20, 1960-1965, DOI 10.1038/s41567-024-02659-x (verified via Springer PDF; writer wrote 1233-1240 — wrong pages)",
+      "silva_2018": "Nat. Photon. 12, 266-270, DOI 10.1038/s41566-018-0129-0, title='High-harmonic spectroscopy of ultrafast many-body dynamics in strongly correlated systems' (verified; writer's title '1D Mott insulator Sr₂CuO₃ HHG' is wrong)",
+      "gorlach_2023": "10.1038/s41567-023-02127-y verified; vol/page of writer 19, 1020-1027 not independently re-verified but DOI matches"
+    },
+    "verified_wrong_doi": {
+      "goswami_2024": "writer's DOI 10.1038/s41586-024-07021-y does not point to Mn3Sn quantum metric nonlinear Hall experiment work; the actual paper on Mn3Sn/Pt quantum-metric second-order Hall effect is Lai et al. Nat. Phys. 20, 1110-1117 (2024) DOI 10.1038/s41567-024-02476-2 (Tohoku group); also Gao et al. Science 381, 181 (2023) and Wang et al. Nature 621, 487 (2023)"
+    }
+  }
+}

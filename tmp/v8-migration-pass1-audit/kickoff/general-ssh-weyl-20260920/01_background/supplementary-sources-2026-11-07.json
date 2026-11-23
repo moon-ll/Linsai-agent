@@ -1,0 +1,17 @@
+{
+  "proposal_id": "general-ssh-weyl-20260920",
+  "cluster_id": "orphan-route-2026-11-07",
+  "clusters": [
+    "orphan-route-2026-11-07"
+  ],
+  "entries": [
+    {
+      "source_id": "paper:2025-2507.08635-dynamical-symmetries-in-laser-harmonic-generation-via-a-cubi",
+      "title": "Dynamical symmetries in laser harmonic generation via a cubic nonlinearity",
+      "summary": "建立了一个基于激光-靶体系完整对称性群的统一理论框架，从群论出发系统推导立方（三阶）非线性下激光谐波产生的选择定则。证明拍频波方法、Laue条件、Mathieu方程边带结构以及Noether/Floquet/Bloch定理等看似分散的结果，都是同一对称性结构的不同表现形式。该框架可推广至任意多色驱动场构型，用于系统预测允许产生的谐波与组合频率分量。",
+      "path": "knowledge/raw/papers/2025-2507.08635-dynamical-symmetries-in-laser-harmonic-generation-via-a-cubi.md",
+      "added_via": "cluster:orphan-route-2026-11-07",
+      "added_at": "2026-11-07T19:22:49Z"
+    }
+  ]
+}

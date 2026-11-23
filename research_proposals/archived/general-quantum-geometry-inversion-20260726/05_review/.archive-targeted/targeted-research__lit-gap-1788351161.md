@@ -1,0 +1,18 @@
+# 定向文献检索报告
+
+## 课题
+general-quantum-geometry-inversion-20260726
+
+## 检索关键词
+- bright squeezed vacuum solid high harmonic generation experimental、squeezed light driven HHG solid state Nature Physics 2024、quantum light solid harmonic generation first observation、physics-informed neural network augmented Lagrangian weight calibration、PINN Lagrange multiplier Bayesian optimization attosecond、hybrid Kolmogorov-Arnold network augmented Lagrangian PINN 2025、high harmonic generation surrogate model training cost GPU hours、Fourier neural operator HHG high-fidelity surrogate benchmark、physics-informed neural network HHG computational cost scaling、QC-PINN quantum constrained physics-informed neural network Hubbard U
+
+## 检索结果
+
+- 2509.13518 | Quantum Dial for High-Harmonic Generation | Lu Wang, Andrew M. Parks, Adam Thorpe, Graeme Bart, Giulio Vampa, Thomas Brabec | 2025 | 0.92 | Demonstrates BSV as optical dial for tuning HHG emission in 2D materials with <5% of driving laser energy, enabling low-damage nonlinear spectroscopy | 来源：本地知识库
+- 2607.20941 | Generation of bright quantum high-order harmonic driven by combined coherent and bright squeezed vacuum light | Wentao Wang, Yaoshun Sun, Liyuan Wang, Lingrui Hu, Dajun Ding, Xiangyu Tang, Mingxuan Li, Jianmin Yuan, Sizuo Luo | 2026 | 0.91 | Investigates macroscopic propagation effects of quantum HHG driven by coherent+BSV in Kr gas, revealing pressure-dependent harmonic yield and phase-matching control | 来源：本地知识库
+- 2509.18483 | Physics-informed time series analysis with Kolmogorov-Arnold Networks under Ehrenfest constraints | Abhijit Sen, Illya V. Lukin, Kurt Jacobs, Lev Kaplan, Andrii G. Sotnikov, Denys I. Bondar | 2025 | 0.88 | KANs augmented with Ehrenfest theorem constraints for quantum dynamics prediction, requiring 200 samples vs 3700 for temporal convolution networks | 来源：本地知识库
+- 2604.15645 | PINNACLE: An Open-Source Computational Framework for Classical and Quantum PINNs | Shimon Pisnoy, Hemanth Chandravamsi, Ziv Chen, Aaron Goldgewert, Gal Shaviner, Boris Shragner, Steven H. Frankel | 2026 | 0.85 | Open-source framework for PINNs with multi-GPU acceleration, adaptive loss balancing, and hybrid quantum-classical architectures | 来源：联网检索
+- 2604.03346 | Learning PDEs for Portfolio Optimization with Quantum Physics-Informed Neural Networks | Letao Wang, Abdel Lisser, Sreejith Sreekumar, Zeno Toffano | 2026 | 0.83 | QPINN using tensor rank decomposition for portfolio optimization PDEs, achieving 80x fewer parameters than classical PINN | 来源：联网检索
+- 2308.09612 | Constrained Bayesian Optimization Using a Lagrange Multiplier Applied to Power Transistor Design | Ping-Ju Chuang, Ali Saadat, Sara Ghazvini, Hal Edwards, William G. Vandenberghe | 2023 | 0.78 | Converts constrained BO to conventional BO using Lagrange multiplier for LDMOS transistor optimization | 来源：联网检索
+- s41598-025-92900-1 | Physics-informed neural networks with hybrid Kolmogorov-Arnold network and augmented Lagrangian function for solving partial differential equations | Zhaoyang Zhang, Qingwang Wang, Yinxing Zhang, Tao Shen, Weiyi Zhang | 2025 | 0.82 | AL-PKAN combines KAN with augmented Lagrangian for PDE solving, making penalty factors and Lagrange multipliers learnable | 来源：联网检索
+- oe.595796 | High-fidelity surrogate modeling of high-harmonic generation using Fourier neural operator with high-frequency weighted loss | Wen-Shu Wu, Yong-Kui Zou, Shi-Shun Zhao, Yu-Jun Yang | 2026 | 0.86 | W-PhysFNO combines Fourier neural operators with high-frequency weighted loss for HHG surrogate modeling, achieving ~550,000x speedup over conventional solvers | 来源：联网检索

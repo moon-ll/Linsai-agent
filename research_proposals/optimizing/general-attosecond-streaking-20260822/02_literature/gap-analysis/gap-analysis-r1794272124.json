@@ -1,0 +1,35 @@
+{
+  "gaps": [
+    {
+      "claim": "scheme §1 中 ponderomotive energy 公式 Up[eV] = 常数 × I × λ² 的常数取值（6.63×10⁻¹⁴ 与 9.33×10⁻¹⁴ 跨章互斥，正确物理真值为 9.33×10⁻¹⁴）",
+      "missing_evidence": "缺少权威文献中 ponderomotive energy 标准公式常数的出处引用（如 Brabec & Krausz 2000 RMP 中 Up[eV] ≈ 9.337×10⁻¹⁴·I[W/cm²]·λ²[μm] 的经典定义），导致同一公式在不同章节各执一值、无锚可依；补上标准出处引用可使全链（scheme/rationale/full_review 口径表）统一常数并杜绝此类 P0 复发",
+      "search_keywords": [
+        "ponderomotive energy formula",
+        "Brabec Krausz 2000 review modern physics",
+        "intense few-cycle laser fields Up 9.337e-14"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "三章合计 84 处编号引用（[N]），超出范本 10–20 上限三倍余，编号引用未甄别关键论断与非关键论断",
+      "missing_evidence": "无需新增文献，缺口在于引用甄别缺标准：需识别真正承载关键论断（如 Up/γ 复算链、HHG 截止定律、FROG-CRAB 重构原理、角积分压制机制）的原始文献并保留编号，其余论断降级为整体研读引用；应核查关键论断处的引用是否为该论断的一手出处而非转手引用",
+      "search_keywords": [
+        "attosecond streaking FROG-CRAB original paper",
+        "HHG cutoff law Corkum",
+        "angular streaking phase reconstruction Pabst Dahlstrom"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "scheme §1 条纹位移 0.79/0.50 eV 的幅值定义（未注明是周期平均幅值还是峰值，峰值口径复算为 1.33/0.85 eV）",
+      "missing_evidence": "缺少条纹位移幅值平均约定的文献定义依据——即 streaking trace 位移幅度采用周期平均幅值（cycle-averaged amplitude）还是瞬时峰值（peak displacement）的文献惯例出处，用于支撑“按周期平均幅值估算”这一补充句并使指标可复算、可测量",
+      "search_keywords": [
+        "attosecond streaking amplitude definition",
+        "cycle-averaged streaking displacement",
+        "streaking spectrogram peak shift"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "scheme"
+}

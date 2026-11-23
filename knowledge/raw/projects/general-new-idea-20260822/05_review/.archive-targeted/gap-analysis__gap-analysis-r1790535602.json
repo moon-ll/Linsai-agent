@@ -1,0 +1,145 @@
+{
+  "gaps": [
+    {
+      "claim": "Vampa 等人在固体高次谐波产生领域的奠基性工作（§4 段 1-2 奠基文献段）",
+      "missing_evidence": "Vampa 关于固体 HHG 谱与能带结构的对应关系的标志性论文缺少 [N] 锚定",
+      "search_keywords": [
+        "Vampa solid high harmonic generation",
+        "Vampa HHG band structure ZnO",
+        "solid HHG crystal symmetry Vampa"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Luu 等人对固体高次谐波产生及亚周期动力学的奠基性贡献",
+      "missing_evidence": "Luu 固体 HHG 经典文献具名引用但无编号锚点",
+      "search_keywords": [
+        "Luu solid high harmonic generation",
+        "Luu sub-cycle dynamics HHG",
+        "Luu semiconductor HHG Nature Physics"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Liu 等人在 MoS₂ 等二维材料中高次谐波产生的实验研究",
+      "missing_evidence": "Liu-MoS₂ HHG 文献表有对应条目但聚焦章未加引用锚",
+      "search_keywords": [
+        "Liu MoS2 high harmonic generation",
+        "2D material HHG Liu",
+        "transition metal dichalcogenide harmonic generation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Hohenleutner 等人关于固体高次谐波瞬态电流与能带成像的实验工作",
+      "missing_evidence": "Hohenleutner 奠基文献具名但未嵌入引用编号",
+      "search_keywords": [
+        "Hohenleutner solid HHG transient current",
+        "Hohenleutner band structure imaging HHG",
+        "real-time band structure HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Haag 等人关于反铁磁体或磁性体系中谐波产生的相关研究（§3 段 3）",
+      "missing_evidence": "Haag 文献表有对应条目（[17]）但正文未锚定",
+      "search_keywords": [
+        "Haag antiferromagnet harmonic generation",
+        "Haag magnetic HHG",
+        "Haag nonlinear optics magnetic material"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Mizuno 等人关于偏振分辨谐波产生或反铁磁体系谐波的研究（§3 段 7-8）",
+      "missing_evidence": "Mizuno 文献表有对应条目（[18]）但未在正文锚定",
+      "search_keywords": [
+        "Mizuno polarization HHG antiferromagnet",
+        "Mizuno second harmonic generation magnetic",
+        "Mizuno nonlinear optics collinear antiferromagnet"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Ly 等人关于反铁磁体非线性光学响应的工作（§4 段 3）",
+      "missing_evidence": "Ly 文献具名但无引用锚点（需补 [20]）",
+      "search_keywords": [
+        "Ly antiferromagnet nonlinear optics",
+        "Ly MnTe harmonic generation",
+        "Ly second harmonic magnetic order"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Liu 等人在 RuO₂ 中关于交变磁或反铁磁谐波产生的实验验证（§4 段 5）",
+      "missing_evidence": "Liu-RuO₂ 文献具名但缺少 [N] 锚点（需补 [21]），是交变磁 HHG 可行性的关键实验支撑",
+      "search_keywords": [
+        "Liu RuO2 altermagnet harmonic generation",
+        "RuO2 nonlinear optics altermagnetic",
+        "RuO2 crystal symmetry harmonic Liu"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Usanov 等人关于磁性体谐波产生或自旋-电荷耦合非线性响应的研究",
+      "missing_evidence": "Usanov 文献具名但未锚定（需补 [14]）",
+      "search_keywords": [
+        "Usanov magnetic harmonic generation",
+        "Usanov spin-charge coupling HHG",
+        "Usanov nonlinear optics ferromagnet"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Osumi 等人关于固体 HHG 或能带动力学的工作",
+      "missing_evidence": "Osumi 文献表有对应条目（[13]）但聚焦章未引用（需补 [7]）",
+      "search_keywords": [
+        "Osumi solid high harmonic generation",
+        "Osumi band structure HHG",
+        "Osumi ultrafast dynamics HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Lee 等人观测到的 ~370 meV 能隙与 Weyl 半金属关联的实验证据（§4 段 6）",
+      "missing_evidence": "Lee 370 meV 数据来源未与 Weyl 论点形成明确引用链，同段两主题拼接导致证据归属模糊",
+      "search_keywords": [
+        "Lee 370 meV gap MnTe Weyl",
+        "MnTe Weyl semimagnet",
+        "Lee antiferromagnetic topological MnTe"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "g 波带劈裂随原子序数/自旋轨道耦合强度的演化规律（§4 段 7）",
+      "missing_evidence": "[29] g 波原子序数依赖性论述仅有编号但缺乏趋势性文献链支撑（需补充 SOC 演化系统研究）",
+      "search_keywords": [
+        "g-wave spin splitting atomic number dependence",
+        "spin-orbit coupling band splitting trend",
+        "altermagnet g-wave SOC evolution"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "国内物理所/北大等单位在交变磁或反铁磁非线性光学方向的代表性工作（§4 段 8-9）",
+      "missing_evidence": "国产证词式罗列缺少与 g 波→谐波主线直接对应的文献支撑，需补充机制层或平台层衔接文献",
+      "search_keywords": [
+        "中国科学院物理研究所 altermagnet",
+        "北京大学 反铁磁 谐波",
+        "国内交变磁 nonlinear optics 研究组"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§5 段 2 中科学问题凝练所依赖的前置文献基础",
+      "missing_evidence": "段 2 末尾或收束句中具名作者未对应引用编号，影响科学问题提出的文献基础完整性",
+      "search_keywords": [
+        "altermagnet high harmonic generation review",
+        "g-wave node symmetry HHG",
+        "magnetic order HHG probe"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

@@ -1,0 +1,105 @@
+{
+  "gaps": [
+    {
+      "claim": "MnTe 体系 Kramers 自旋简并解除的节点面内 SOC 主导弱交变劈裂 ~100 meV、面外交换主导强交变劈裂 ~0.5 eV 的实验测量数据",
+      "missing_evidence": "需要 Krempaský 2024 Nature MnTe 自旋分辨 ARPES 的原始数值、Osumi PRB 109 115102 沿 Γ-K/Γ-M 方向的各向异性劈裂数据",
+      "search_keywords": [
+        "Krempaský MnTe spin-resolved ARPES 2024 Nature",
+        "Osumi PRB 109 115102 MnTe anisotropic spin splitting",
+        "MnTe d-wave altermagnet band splitting magnitude eV",
+        "α-MnTe spin splitting nodal plane Γ-K Γ-M"
+      ]
+    },
+    {
+      "claim": "NiCl₂/CrSe₂/VSe₂ 滑动铁电势垒 16.4/25.5/39.9 meV/unitcell 的第一性原理计算来源",
+      "missing_evidence": "缺少 Sci China Phys 68 297511 (2025) 或同源第一性原理文章对三种三元材料 stacking-dependent barrier 的具体计算",
+      "search_keywords": [
+        "NiCl2 VSe2 CrSe2 sliding ferroelectric barrier first-principles",
+        "2D sliding ferroelectric stacking energy DFT meV",
+        "Sci China Phys 68 297511 2025 sliding ferroelectric",
+        "van der Waals antiferromagnet interlayer sliding energy"
+      ]
+    },
+    {
+      "claim": "Coherent phonon 驱动 NRSS 中位移-劈裂线性关系与反号自旋极化的实验依据",
+      "missing_evidence": "需要 Rajpurohit NRSS 2609.01844 与同源 (Shen/Smejkal 类) 关于相干声子振幅 vs 自旋劈裂线性关系、反号自旋极化的实测数据",
+      "search_keywords": [
+        "Rajpurohit NRSS coherent phonon spin splitting",
+        "nonrelativistic spin splitting THz coherent phonon field amplitude",
+        "coherent phonon driven spin polarization altermagnet experiment",
+        "Zhao NiPS3 THz coherent phonon spin splitting"
+      ]
+    },
+    {
+      "claim": "MnPS₃|WS₂ 异质双平台滑移模的 Z* (mode effective charge) 计算与 < 0.1 e/Å 静电耦合不足边界",
+      "missing_evidence": "缺少 DFPT 计算双层滑移模 Z* 的文献支撑，以及「Z* 偏小 → 静电耦合不足」的量化判据",
+      "search_keywords": [
+        "density functional perturbation theory Z* sliding mode MnPS3",
+        "mode effective charge antiferromagnetic bilayer",
+        "DFPT Z* 2D van der Waals sliding phonon",
+        "interlayer sliding mode effective charge first-principles"
+      ]
+    },
+    {
+      "claim": "时域分离 τ₁ ≈ 1–9 ps 与 τ₂ ≈ 1–4 ns 的实验测量出处",
+      "missing_evidence": "需要 Sahu 类时间分辨磁光/自旋测量对双时标 τ₁/τ₂ 的原始数据",
+      "search_keywords": [
+        "Sahu time-resolved magneto-optical antiferromagnet two time scale",
+        "MnPS3 magnetization recovery picosecond nanosecond",
+        "antiferromagnetic dynamics two-exponential picosecond nanosecond",
+        "NiPS3 time-resolved spin polarization bi-exponential decay"
+      ]
+    },
+    {
+      "claim": "Floquet 增强因子 ≥ 5× 设计目标的文献锚点（d-wave 各向异性磁阻 3–10× 折算）",
+      "missing_evidence": "缺少 d-wave 交变磁体 Floquet 工程或各向异性磁阻放大的实验/理论参考",
+      "search_keywords": [
+        "Floquet altermagnet spin splitting enhancement",
+        "d-wave altermagnet anisotropic magnetoresistance amplification",
+        "Rashba Floquet engineering spin splitting",
+        "light-induced altermagnet band structure modulation"
+      ]
+    },
+    {
+      "claim": "i-wave 交变磁自旋劈裂的分类判据与螺旋度交替带间相干",
+      "missing_evidence": "需要 i-wave altermagnet 定义、Smejkal/Haag 分类 (d/g/i-wave) 文献与圆偏振 HHG 中螺旋度交替实验",
+      "search_keywords": [
+        "i-wave altermagnet spin group classification Smejkal",
+        "alternagnetic wave d-wave g-wave i-wave symmetry",
+        "circularly polarized HHG altermagnet helicity alternation",
+        "arXiv 2511.22209 i-wave altermagnet spin splitting"
+      ]
+    },
+    {
+      "claim": "Volkov 近似在带间相干/螺旋度通道失效的理论依据",
+      "missing_evidence": "需要 Volkov 近似对多带/自旋相干贡献忽略的定量或理论说明",
+      "search_keywords": [
+        "Volkov approximation multiband interband coherence breakdown",
+        "strong field approximation spin polarized electron limit",
+        "Volkov approximation validity Rashba band coherence",
+        "nonperturbative Volkov approximation helicity dependent HHG"
+      ]
+    },
+    {
+      "claim": "h-BN 滑动铁电开关时标 (Wang PRL 133 126801) 与 sliding ferroelectric antiferromagnet 耦合动力学",
+      "missing_evidence": "需要 h-BN 类滑动铁电开关时间常数的实验数据，以及反铁磁-滑移耦合的时域证据",
+      "search_keywords": [
+        "h-BN sliding ferroelectric switching timescale Wang PRL 133 126801",
+        "sliding ferroelectric antiferromagnetic coupling dynamics",
+        "interlayer sliding ferroelectric time-resolved measurement",
+        "nonlinear phonon channel stacking switching experiment"
+      ]
+    },
+    {
+      "claim": "Cr-doped NiPS₃ 时间分辨磁光测量的 τ₁/τ₂ 量级与基态磁化数据 (Basnet PRB 109 184405)",
+      "missing_evidence": "需要 Basnet Cr-NiPS₃ 静磁测量与对应时间分辨磁光动力学数据",
+      "search_keywords": [
+        "Basnet Cr-NiPS3 PRB 109 184405 magnetic measurement",
+        "Cr-doped NiPS3 time-resolved magneto-optical",
+        "NiPS3 field-induced spin polarization ultrafast timescale",
+        "Cr-NiPS3 magnetization dynamics two-component"
+      ]
+    }
+  ],
+  "section": "full_review"
+}

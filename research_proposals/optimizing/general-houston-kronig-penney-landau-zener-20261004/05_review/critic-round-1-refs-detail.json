@@ -1,0 +1,53 @@
+{
+ "4": {
+  "doi": "10.1038/s41567-020-01077-9",
+  "status": "NOT_FOUND",
+  "err": "HTTP Error 404: Not Found"
+ },
+ "24": {
+  "doi": "10.1103/PhysRevA.101.063419",
+  "status": "NOT_FOUND",
+  "err": "HTTP Error 404: Not Found"
+ },
+ "27": {
+  "doi": "10.1021/acs.nanolett.2c02145",
+  "status": "NOT_FOUND",
+  "err": "HTTP Error 404: Not Found"
+ },
+ "26": {
+  "doi": "10.1103/PhysRevB.91.064302",
+  "status": "OK",
+  "title": "Semiclassical analysis of high harmonic generation in bulk crystals",
+  "first_family": "Vampa",
+  "container": "Physical Review B",
+  "volume": "91",
+  "issue": "6",
+  "page": "064302",
+  "year": 2015,
+  "type": "journal-article"
+ },
+ "29": {
+  "doi": "10.1103/PhysRevB.96.245133",
+  "status": "OK",
+  "title": "Self-consistent \n<mml:math xmlns:mml=\"http://www.w3.org/1998/Math/MathML\"><mml:mi mathvariant=\"normal\">DFT</mml:mi><mml:mo>+</mml:mo><mml:mi>U</mml:mi></mml:math>\n method for real-space time-dependent density functional theory calculations",
+  "first_family": "Tancogne-Dejean",
+  "container": "Physical Review B",
+  "volume": "96",
+  "issue": "24",
+  "page": "245133",
+  "year": 2017,
+  "type": "journal-article"
+ },
+ "31": {
+  "doi": "10.1103/PhysRevA.106.043117",
+  "status": "OK",
+  "title": "Two-XUV-photon double ionization of neon",
+  "first_family": "Orfanos",
+  "container": "Physical Review A",
+  "volume": "106",
+  "issue": "4",
+  "page": "043117",
+  "year": 2022,
+  "type": "journal-article"
+ }
+}

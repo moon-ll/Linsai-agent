@@ -1,0 +1,84 @@
+{
+  "gaps": [
+    {
+      "claim": "R1 以量子几何张量（Ω/g）为正向模型入口，建立'光场统计→HHG谱可观测项→Ω/g Fisher信息'三层因果链",
+      "missing_evidence": "缺少Fisher信息框架用于HHG谱反演量子几何张量的实证基准文献，缺少量子度规/贝里曲率与HHG谱可观测项之间映射关系的直接理论/实验支撑",
+      "search_keywords": [
+        "Fisher information quantum geometry HHG inversion",
+        "quantum metric Berry curvature HHG spectroscopy",
+        "quantum geometry tensor reconstruction high harmonic"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "三种量子态描述（条件单模态/P(n)加权/混合态）的预测差异约10%是R1保留P(n)近似的判据",
+      "missing_evidence": "缺少BSV/量子光场三种态描述（单模/P(n)分布/混合态）在HHG产出预测差异的定量比较文献，以及10%判据阈值的实验/理论先例",
+      "search_keywords": [
+        "bright squeezed vacuum photon statistics HHG theoretical comparison",
+        "P(n) distribution photon number harmonic generation",
+        "mixed state vs pure state quantum HHG prediction"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "截止提升≥15%是R1重新定位为'BSV对偏振通道修正理论'的判据",
+      "missing_evidence": "缺少BSV驱动HHG相对于相干光经典对照的截止能量扩展（cutoff extension）理论与实验数据，缺少15%提升阈值依据的参考基准",
+      "search_keywords": [
+        "bright squeezed vacuum HHG cutoff extension",
+        "quantum light HHG cutoff enhancement classical comparison",
+        "BSV driven HHG polarization channel correction"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "BSV→CDW迁移为乘性（依赖带间动力学结构）而非加性的判据",
+      "missing_evidence": "缺少强关联电子态（CDW/Mott）HHG响应中带间/带内贡献的乘性叠加机制论证，以及加性/乘性分类的实证依据",
+      "search_keywords": [
+        "interband intraband coupling multiplicative HHG strongly correlated",
+        "CDW high harmonic generation band structure dependence",
+        "Mott insulator HHG interband dynamics"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "R2用Mn₃Sn量子度规非线性霍尔效应验证量子几何张量光学重构的可行性（content L5引[10]）",
+      "missing_evidence": "[10] DOI 10.1038/s41586-024-07021-y 实际为Wang 'bandit optimization'论文，需检索Mn₃Sn量子度规非线性霍尔的正确文献（Goswami等的对应出版物）",
+      "search_keywords": [
+        "Goswami Mn3Sn quantum metric nonlinear Hall",
+        "Mn3Sn quantum geometry nonlinear Hall effect experiment",
+        "Mn3Sn Berry curvature anomalous Hall kagome"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Sr₂CuO₃在BSV→Mott迁移过程中5–15%谐波红移（content L115引[13] Ikeda等）",
+      "missing_evidence": "[13] arXiv:2508.00296 实际为Ikeda 'High-harmonic generation during ultrafast melting of a Mott insulating state'，需复核Sr₂CuO₃红移5–15%是否对应原文数据",
+      "search_keywords": [
+        "Ikeda Sr2CuO3 high harmonic generation Mott melting",
+        "Sr2CuO3 harmonic redshift ultrafast melting",
+        "Mott insulator HHG ultrafast melting red shift"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Ω/g 双参数Fisher信息矩阵等同性丢失是量子几何张量可重构的关键",
+      "missing_evidence": "缺少双参数Fisher信息矩阵等同性（rank deficiency/identifiability）导致量子几何张量不可重构的理论或方法学文献",
+      "search_keywords": [
+        "Fisher information matrix rank deficiency HHG",
+        "identifiability quantum geometry parameter retrieval",
+        "dual parameter Fisher information condition number attosecond"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "CEP扫描区间0–2π（步长π/12）=24点（content L89）与L83/L87 '12采样点/步长≤π/6' 冲突",
+      "missing_evidence": "缺少CEP扫描采样密度与量子几何参数反演精度关系的文献依据，以确定合理步长",
+      "search_keywords": [
+        "carrier-envelope phase scan sampling density parameter retrieval",
+        "CEP scan step size quantum geometry inversion",
+        "phase scan resolution HHG reconstruction"
+      ],
+      "priority": "low"
+    }
+  ]
+}

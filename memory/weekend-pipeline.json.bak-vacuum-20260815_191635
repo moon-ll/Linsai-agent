@@ -1,0 +1,3469 @@
+{
+  "jobs": [
+    {
+      "job_id": "input_collect_sources",
+      "stage": "input",
+      "step": "collect",
+      "status": "done",
+      "depends_on": [],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-14T16:00:52Z",
+      "finished_at": "2026-08-14T16:00:52Z",
+      "last_error": "",
+      "created_at": "2026-07-29T06:02:01Z",
+      "result": {
+        "success": true,
+        "source_counts": {
+          "briefings": 51,
+          "papers": 40,
+          "captures": 1,
+          "reference_notes": 0,
+          "kb": 3
+        }
+      },
+      "artifact": "memory/weekend-input/sources-{date}.json"
+    },
+    {
+      "job_id": "input_summarize_new_papers",
+      "stage": "input",
+      "step": "summarize",
+      "status": "done",
+      "depends_on": [
+        "input_collect_sources"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-15T09:20:42Z",
+      "finished_at": "2026-08-15T09:20:42Z",
+      "last_error": "",
+      "created_at": "2026-07-29T06:02:01Z",
+      "artifact": "memory/weekend-input/summaries-{date}.json",
+      "result": {
+        "success": true,
+        "summarized": 0,
+        "message": "无新增论文/简报"
+      }
+    },
+    {
+      "job_id": "input_gap_analysis",
+      "stage": "input",
+      "step": "analyze",
+      "status": "done",
+      "depends_on": [
+        "input_summarize_new_papers"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-15T09:40:44Z",
+      "finished_at": "2026-08-15T09:46:01Z",
+      "last_error": "",
+      "created_at": "2026-07-29T06:02:01Z",
+      "artifact": "memory/weekend-input/directions-{date}.json",
+      "result": {
+        "success": true,
+        "directions_count": 0
+      }
+    },
+    {
+      "job_id": "input_direction_select",
+      "stage": "input",
+      "step": "select",
+      "status": "done",
+      "depends_on": [
+        "input_gap_analysis"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-15T10:00:49Z",
+      "finished_at": "2026-08-15T10:00:49Z",
+      "last_error": "",
+      "created_at": "2026-07-29T06:02:01Z",
+      "artifact": "memory/weekend-input/decisions-{date}.json",
+      "result": {
+        "success": true,
+        "decisions_count": 0
+      }
+    },
+    {
+      "job_id": "input_retrieve_supplementary",
+      "stage": "input",
+      "step": "retrieve",
+      "status": "done",
+      "depends_on": [
+        "input_direction_select"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-15T10:20:49Z",
+      "finished_at": "2026-08-15T10:20:49Z",
+      "last_error": "",
+      "created_at": "2026-07-29T06:02:01Z",
+      "artifact": "memory/weekend-input/supplementary-{date}.json",
+      "result": {
+        "success": true,
+        "new_directions": 0,
+        "kb_hits": 0
+      }
+    },
+    {
+      "job_id": "input_deep_read",
+      "stage": "input",
+      "step": "deep_read",
+      "status": "done",
+      "depends_on": [
+        "input_retrieve_supplementary"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-15T10:40:52Z",
+      "finished_at": "2026-08-15T10:40:52Z",
+      "last_error": "",
+      "created_at": "2026-07-29T06:02:01Z",
+      "artifact": "memory/weekend-input/deep-read-{date}.json",
+      "result": {
+        "success": true,
+        "deep_read_count": 0
+      }
+    },
+    {
+      "job_id": "input_compose_ideas",
+      "stage": "input",
+      "step": "compose",
+      "status": "done",
+      "depends_on": [
+        "input_deep_read"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-15T11:00:58Z",
+      "finished_at": "2026-08-15T11:00:58Z",
+      "last_error": "",
+      "created_at": "2026-07-29T06:02:01Z",
+      "artifact": "memory/weekend-input/ideas-{date}.json",
+      "result": {
+        "success": true,
+        "ideas_count": 0
+      }
+    },
+    {
+      "job_id": "output_sync_proposals_to_kb",
+      "stage": "output",
+      "step": "sync",
+      "status": "done",
+      "depends_on": [],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-15T06:00:22Z",
+      "finished_at": "2026-08-15T06:00:22Z",
+      "last_error": "",
+      "created_at": "2026-07-29T06:03:33Z",
+      "result": {
+        "success": true,
+        "synced_count": 5,
+        "failed_count": 0,
+        "results": [
+          {
+            "success": true,
+            "proposal_id": "general-bsv-driven-hhg-quantum-20260726",
+            "kb_path": "wiki/projects/NSFC-强场超快/proposals/general-bsv-driven-hhg-quantum-20260726.md",
+            "title": "完整性结论**：正文三段式骨架完整，立项依据四要素齐全，研究内容六子方向逻辑递进，研究方案风险可控。但正文之外仍存在若干结构性缺失（见下文第三节），需在本轮或后续轮次补齐。",
+            "status": "pending_review"
+          },
+          {
+            "success": true,
+            "proposal_id": "general-moire-strong-field-probe-20260726",
+            "kb_path": "wiki/projects/NSFC-强场超快/proposals/general-moire-strong-field-probe-20260726.md",
+            "title": "反演探针：从均匀体系到莫尔自由度的扩展瓶颈。** HHG 反演材料参数的研究已在均匀单层/双层体系中取得重要进展。其发展脉络为莫尔体系的反演迁移了方法学基础，但也暴露了向莫尔自由度扩展的根本困难。",
+            "status": "optimizing"
+          },
+          {
+            "success": true,
+            "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
+            "kb_path": "wiki/projects/NSFC-强场超快/proposals/general-order-parameter-ultrafast-readout-20260727.md",
+            "title": "反演层**。以费舍尔信息矩阵（FIM）评估参数空间的条件数（κ < 10² 可辨识、10²—10⁴ 边缘、> 10⁴ 触发 No-Go）；以贝叶斯框架给出参数后验分布而非点估计（后验标准差 < 先验宽度 50% 方视为有效约束）。该层终止判据：CrSb 数据的 κ 落在可辨识区间且后验有效约束，或落入 No-Go 区间并明确标注不可辨识条件已触发。",
+            "status": "optimizing"
+          },
+          {
+            "success": true,
+            "proposal_id": "general-quantum-geometry-inversion-20260726",
+            "kb_path": "wiki/projects/NSFC-强场超快/proposals/general-quantum-geometry-inversion-20260726.md",
+            "title": "Q2（科学问题）**：以 CDW（TiSe₂、1T-TaS₂）为代表的中等关联材料中，在何种 Hubbard-$U/W$ 与温度区间，HHG 偏振响应仍保留可独立辨识的 $\\Omega(\\mathbf{k})$、$g(\\mathbf{k})$ 信息？超过该边界时，多体效应（CDW 序参量、doublon-holon 复合、带折叠）使 $\\Omega$、$g$ 的辨识不可分离。",
+            "status": "optimizing"
+          },
+          {
+            "success": true,
+            "proposal_id": "key-transient-quantum-phase-optical-20260726",
+            "kb_path": "wiki/projects/NSFC-强场超快/proposals/key-transient-quantum-phase-optical-20260726.md",
+            "title": "瞬态量子相的全光读写",
+            "status": "optimizing"
+          }
+        ],
+        "dry_run": false
+      }
+    },
+    {
+      "job_id": "output_collect_daily_sources",
+      "stage": "output",
+      "step": "collect",
+      "status": "done",
+      "depends_on": [],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-15T06:00:22Z",
+      "finished_at": "2026-08-15T06:00:22Z",
+      "last_error": "",
+      "created_at": "2026-07-29T06:03:33Z",
+      "result": {
+        "success": true,
+        "source_count": 65
+      }
+    },
+    {
+      "job_id": "output_extract_daily_knowledge",
+      "stage": "output",
+      "step": "extract",
+      "status": "done",
+      "depends_on": [
+        "output_collect_daily_sources"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-15T06:00:22Z",
+      "finished_at": "2026-08-15T06:06:04Z",
+      "last_error": "",
+      "created_at": "2026-07-29T06:03:33Z",
+      "result": {
+        "success": true,
+        "results": {
+          "concepts": [
+            {
+              "success": true,
+              "path": "wiki/concepts/CEP门控光波脉冲控制相对论等离子体镜.md",
+              "reliability": "reliable",
+              "via": "facade"
+            },
+            {
+              "success": true,
+              "path": "wiki/concepts/相对论等离子体镜方案产生孤立阿秒脉冲.md",
+              "reliability": "reliable",
+              "via": "facade"
+            },
+            {
+              "success": true,
+              "path": "wiki/concepts/固体高次谐波_固体HHG.md",
+              "reliability": "reliable",
+              "via": "facade"
+            }
+          ],
+          "methods": [
+            {
+              "success": true,
+              "path": "wiki/methods/CEP门控sub-1_5-cycle激光脉冲技术.md",
+              "reliability": "reliable",
+              "via": "facade"
+            },
+            {
+              "success": true,
+              "path": "wiki/methods/等离子体镜面实验方案.md",
+              "reliability": "reliable",
+              "via": "facade"
+            }
+          ],
+          "people": [],
+          "papers": [
+            {
+              "success": true,
+              "path": "wiki/papers/Lightwave-controlled_relativistic_plasma_mirrors__arXiv_2406_06396.md",
+              "reliability": "reliable",
+              "via": "facade"
+            },
+            {
+              "success": true,
+              "path": "wiki/papers/Quantum_interference_and_occupation_con___arXiv_2503_04335_标题在来源中被截断_正文内容缺失.md",
+              "reliability": "reliable",
+              "via": "facade"
+            }
+          ]
+        },
+        "unverified_count": 4
+      }
+    },
+    {
+      "job_id": "output_kb_health_check",
+      "stage": "output",
+      "step": "health",
+      "status": "done",
+      "depends_on": [],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-15T06:06:04Z",
+      "finished_at": "2026-08-15T06:06:04Z",
+      "last_error": "",
+      "created_at": "2026-07-29T06:03:33Z",
+      "result": {
+        "success": true,
+        "report": {
+          "checked_at": "2026-08-15T06:06:04Z",
+          "health": {
+            "indexed": true,
+            "raw_count": 508,
+            "wiki_count": 308,
+            "capture_count": 1,
+            "chunks": 14998,
+            "growth_stages": {
+              "mature": 62,
+              "seedling": 157,
+              "unknown": 3,
+              "growing": 68
+            },
+            "graph_nodes": 290,
+            "graph_edges": 396,
+            "graph_orphans": 0,
+            "graph_connectivity": 0.45,
+            "category_coverage": {
+              "total_categories": 1,
+              "covered_pages": 74,
+              "coverage_rate": 0.23
+            },
+            "alias_hit_rate": {
+              "total_aliases": 68,
+              "used_aliases": 47,
+              "hit_rate": 0.69
+            },
+            "week_new": 185,
+            "pending_distill": 506,
+            "growth_candidates": 157,
+            "built_at": "2026-08-15T05:57:57Z"
+          },
+          "derived_overdue": [],
+          "derived_overdue_count": 0
+        },
+        "dry_run": false
+      }
+    },
+    {
+      "job_id": "output_generate_weekly_report",
+      "stage": "output",
+      "step": "weekly_report",
+      "status": "done",
+      "depends_on": [
+        "output_sync_proposals_to_kb",
+        "output_extract_daily_knowledge",
+        "output_kb_health_check"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-15T06:06:04Z",
+      "finished_at": "2026-08-15T06:06:04Z",
+      "last_error": "",
+      "created_at": "2026-07-29T06:03:33Z",
+      "result": {
+        "success": true,
+        "report_path": "memory/weekend-output/weekend-output-report-2026-08-15.md",
+        "dry_run": false,
+        "summary": {
+          "total": 5,
+          "done": 4,
+          "failed": 0,
+          "pending": 0
+        }
+      }
+    },
+    {
+      "job_id": "reflection_collect_state",
+      "stage": "reflection",
+      "step": "collect",
+      "status": "done",
+      "depends_on": [],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-08T09:00:00Z",
+      "finished_at": "2026-08-08T09:05:00Z",
+      "last_error": "",
+      "result": {
+        "success": true,
+        "source_counts": {
+          "briefings": 23,
+          "papers": 0,
+          "captures": 0,
+          "reference_notes": 0,
+          "kb": 3
+        }
+      },
+      "created_at": "2026-07-29T06:03:33Z"
+    },
+    {
+      "job_id": "reflection_analyze_patterns",
+      "stage": "reflection",
+      "step": "analyze",
+      "status": "done",
+      "depends_on": [
+        "reflection_collect_state"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-08T09:00:00Z",
+      "finished_at": "2026-08-08T09:05:00Z",
+      "last_error": "",
+      "result": {
+        "success": true,
+        "directions_count": 2,
+        "dry_run": true,
+        "message": "dry-run 跳过 LLM 缺口分析"
+      },
+      "created_at": "2026-07-29T06:03:33Z"
+    },
+    {
+      "job_id": "reflection_generate_report",
+      "stage": "reflection",
+      "step": "report",
+      "status": "done",
+      "depends_on": [
+        "reflection_analyze_patterns"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-08T09:00:00Z",
+      "finished_at": "2026-08-08T09:05:00Z",
+      "last_error": "",
+      "result": {
+        "success": true,
+        "report": {
+          "generated_at": "2026-07-30T14:11:00Z",
+          "dashboard": {
+            "profiles": {
+              "profiles": {
+                "linsai": {
+                  "status": "working",
+                  "success_rate_24h": null,
+                  "dispatch_count_24h": 0,
+                  "avg_duration_s": 0,
+                  "recent_error": "",
+                  "suggestion": ""
+                },
+                "pipeline-runner": {
+                  "status": "working",
+                  "success_rate_24h": null,
+                  "dispatch_count_24h": 0,
+                  "avg_duration_s": 0,
+                  "recent_error": "",
+                  "suggestion": ""
+                },
+                "researcher": {
+                  "status": "idle",
+                  "success_rate_24h": null,
+                  "dispatch_count_24h": 0,
+                  "avg_duration_s": 0,
+                  "recent_error": "",
+                  "suggestion": ""
+                },
+                "analyst": {
+                  "status": "idle",
+                  "success_rate_24h": null,
+                  "dispatch_count_24h": 0,
+                  "avg_duration_s": 0,
+                  "recent_error": "",
+                  "suggestion": ""
+                },
+                "writer": {
+                  "status": "idle",
+                  "success_rate_24h": null,
+                  "dispatch_count_24h": 0,
+                  "avg_duration_s": 0,
+                  "recent_error": "",
+                  "suggestion": ""
+                },
+                "critic": {
+                  "status": "idle",
+                  "success_rate_24h": null,
+                  "dispatch_count_24h": 0,
+                  "avg_duration_s": 0,
+                  "recent_error": "",
+                  "suggestion": ""
+                },
+                "reviewer": {
+                  "status": "idle",
+                  "success_rate_24h": null,
+                  "dispatch_count_24h": 0,
+                  "avg_duration_s": 0,
+                  "recent_error": "",
+                  "suggestion": ""
+                }
+              },
+              "alerts": [],
+              "window_hours": 24,
+              "computed_at": "2026-07-30T14:11:00Z"
+            },
+            "failures": {
+              "patterns": [
+                {
+                  "id": "profile-timeout",
+                  "label": "Profile 超时",
+                  "category": "性能",
+                  "occurrences": 5,
+                  "sample_errors": [
+                    "[2026-07-30 09:38:27] [WARNING] [linsai.proposal_lifecycle] [general-bsv-driven-hhg-quantum-20260726] 文献检索失败: 超时(780s)",
+                    "[2026-07-30 11:25:01] [WARNING] [linsai.proposal_lifecycle] [general-bsv-driven-hhg-quantum-20260726] 文献缺口识别失败: 超时(120s)",
+                    "[2026-07-30 17:25:45] [WARNING] [linsai.proposal_lifecycle] [general-bsv-driven-hhg-quantum-20260726] 文献缺口识别失败: 超时(120s)"
+                  ],
+                  "suggested_prompt_change": "若某 profile 连续 3 次超时，strategy_optimizer 建议把该 profile 的 timeout + 50%。",
+                  "expected_impact": "减少超时失败，提升完成率"
+                },
+                {
+                  "id": "env-pollution",
+                  "label": "环境变量污染（PYTHONHOME 等）",
+                  "category": "环境",
+                  "occurrences": 0,
+                  "sample_errors": [],
+                  "suggested_prompt_change": "（v6.6.3 已修复：clean_subprocess_env 自动 pop 22 个 Python 变量）",
+                  "expected_impact": "hermes 子进程不再因 IDE 注入的 PYTHONHOME 崩溃"
+                }
+              ],
+              "summary": {
+                "total_errors": 4,
+                "total_warnings": 13,
+                "top_pattern": "profile-timeout",
+                "top_pattern_label": "Profile 超时",
+                "involved_proposals": {
+                  "general-test-hhg-20260106": 4,
+                  "general-bsv-driven-hhg-quantum-20260726": 5,
+                  "general-order-parameter-ultrafast-readout-20260727": 2,
+                  "general-quantum-geometry-inversion-20260726": 2
+                }
+              },
+              "window_hours": 24,
+              "computed_at": "2026-07-30T14:11:00Z"
+            },
+            "strategies": {
+              "current": {
+                "stagger_seconds": 90,
+                "max_rounds": 10,
+                "score_threshold": 0.8,
+                "no_improvement_limit": 3,
+                "critic_timeout": 300,
+                "writer_timeout": 600
+              },
+              "suggested": {
+                "stagger_seconds": 90,
+                "max_rounds": 10,
+                "score_threshold": 0.8,
+                "no_improvement_limit": 3,
+                "critic_timeout": 300,
+                "writer_timeout": 600
+              },
+              "reasons": [],
+              "risk": "low",
+              "activity": {
+                "days": 1,
+                "avg_dispatch_per_day": 0.0,
+                "avg_duration_s": 0,
+                "total_timeout": 0,
+                "total_success": 0,
+                "total_fail": 0,
+                "success_rate": null
+              },
+              "score_stats": {
+                "avg_score": 0.515,
+                "max_score": 0.82,
+                "min_score": 0.06,
+                "pass_rate": 0.077,
+                "samples": 26
+              },
+              "computed_at": "2026-07-30T14:11:00Z"
+            },
+            "pipeline_quality": {
+              "proposals": [
+                {
+                  "proposal_id": "general-moire-strong-field-probe-20260726",
+                  "stages": [
+                    {
+                      "stage": "01_direction",
+                      "label": "方向校准",
+                      "path": "research_proposals/pending_review/general-moire-strong-field-probe-20260726/01_direction/direction-calibration.md",
+                      "exists": true,
+                      "size": 7248,
+                      "score": 0.4,
+                      "issues": [
+                        "章节不完整（仅 0 个）",
+                        "无引用占位符"
+                      ]
+                    },
+                    {
+                      "stage": "02_literature",
+                      "label": "文献调研",
+                      "path": "research_proposals/pending_review/general-moire-strong-field-probe-20260726/02_literature/literature-report.md",
+                      "exists": true,
+                      "size": 17666,
+                      "score": 0.4,
+                      "issues": [
+                        "章节不完整（仅 0 个）",
+                        "无引用占位符"
+                      ]
+                    },
+                    {
+                      "stage": "02_topic",
+                      "label": "缺口分析",
+                      "path": "research_proposals/pending_review/general-moire-strong-field-probe-20260726/02_topic/gap-report.md",
+                      "exists": true,
+                      "size": 27871,
+                      "score": 0.4,
+                      "issues": [
+                        "章节不完整（仅 0 个）",
+                        "无引用占位符"
+                      ]
+                    },
+                    {
+                      "stage": "03_question",
+                      "label": "科学问题",
+                      "path": "research_proposals/pending_review/general-moire-strong-field-probe-20260726/03_question/question-framework.md",
+                      "exists": true,
+                      "size": 555,
+                      "score": 0.2,
+                      "issues": [
+                        "章节不完整（仅 0 个）",
+                        "无引用占位符"
+                      ]
+                    },
+                    {
+                      "stage": "04_proposal",
+                      "label": "申请书",
+                      "path": "research_proposals/pending_review/general-moire-strong-field-probe-20260726/04_proposal/proposal-draft.md",
+                      "exists": true,
+                      "size": 66725,
+                      "score": 1.0,
+                      "issues": []
+                    },
+                    {
+                      "stage": "05_review",
+                      "label": "自检报告",
+                      "path": "research_proposals/pending_review/general-moire-strong-field-probe-20260726/05_review/review-report.md",
+                      "exists": false,
+                      "size": 0,
+                      "score": 0.0,
+                      "issues": [
+                        "文件不存在"
+                      ]
+                    }
+                  ],
+                  "overall_quality": 0.4,
+                  "growth_actions": [
+                    {
+                      "stage": "01_direction",
+                      "label": "方向校准",
+                      "action": "auto_retry",
+                      "reason": "质量 0.4 < 0.6，issues: 章节不完整（仅 0 个）, 无引用占位符"
+                    },
+                    {
+                      "stage": "02_literature",
+                      "label": "文献调研",
+                      "action": "auto_retry",
+                      "reason": "质量 0.4 < 0.6，issues: 章节不完整（仅 0 个）, 无引用占位符"
+                    },
+                    {
+                      "stage": "02_topic",
+                      "label": "缺口分析",
+                      "action": "auto_retry",
+                      "reason": "质量 0.4 < 0.6，issues: 章节不完整（仅 0 个）, 无引用占位符"
+                    },
+                    {
+                      "stage": "03_question",
+                      "label": "科学问题",
+                      "action": "auto_retry",
+                      "reason": "质量 0.2 < 0.6，issues: 章节不完整（仅 0 个）, 无引用占位符"
+                    }
+                  ]
+                },
+                {
+                  "proposal_id": "general-bsv-driven-hhg-quantum-20260726",
+                  "stages": [
+                    {
+                      "stage": "01_direction",
+                      "label": "方向校准",
+                      "path": "research_proposals/optimizing/general-bsv-driven-hhg-quantum-20260726/01_direction/direction-calibration.md",
+                      "exists": true,
+                      "size": 299,
+                      "score": 0.0,
+                      "issues": [
+                        "文件过小（299 字节）",
+                        "章节不完整（仅 0 个）",
+                        "无引用占位符"
+                      ]
+                    },
+                    {
+                      "stage": "02_literature",
+                      "label": "文献调研",
+                      "path": "research_proposals/optimizing/general-bsv-driven-hhg-quantum-20260726/02_literature/literature-report.md",
+                      "exists": true,
+                      "size": 143,
+                      "score": 0.0,
+                      "issues": [
+                        "文件过小（143 字节）",
+                        "章节不完整（仅 0 个）",
+                        "无引用占位符"
+                      ]
+                    },
+                    {
+                      "stage": "02_topic",
+                      "label": "缺口分析",
+                      "path": "research_proposals/optimizing/general-bsv-driven-hhg-quantum-20260726/02_topic/gap-report.md",
+                      "exists": true,
+                      "size": 272,
+                      "score": 0.0,
+                      "issues": [
+                        "文件过小（272 字节）",
+                        "章节不完整（仅 0 个）",
+                        "无引用占位符"
+                      ]
+                    },
+                    {
+                      "stage": "03_question",
+                      "label": "科学问题",
+                      "path": "research_proposals/optimizing/general-bsv-driven-hhg-quantum-20260726/03_question/question-framework.md",
+                      "exists": true,
+                      "size": 248,
+                      "score": 0.0,
+                      "issues": [
+                        "文件过小（248 字节）",
+                        "章节不完整（仅 0 个）",
+                        "无引用占位符"
+                      ]
+                    },
+                    {
+                      "stage": "04_proposal",
+                      "label": "申请书",
+                      "path": "research_proposals/optimizing/general-bsv-driven-hhg-quantum-20260726/04_proposal/proposal-draft.md",
+                      "exists": true,
+                      "size": 29862,
+                      "score": 0.4,
+                      "issues": [
+                        "章节不完整（仅 0 个）",
+                        "无引用占位符"
+                      ]
+                    },
+                    {
+                      "stage": "05_review",
+                      "label": "自检报告",
+                      "path": "research_proposals/optimizing/general-bsv-driven-hhg-quantum-20260726/05_review/review-report.md",
+                      "exists": false,
+                      "size": 0,
+                      "score": 0.0,
+                      "issues": [
+                        "文件不存在"
+                      ]
+                    }
+                  ],
+                  "overall_quality": 0.067,
+                  "growth_actions": [
+                    {
+                      "stage": "04_proposal",
+                      "label": "申请书",
+                      "action": "auto_retry",
+                      "reason": "质量 0.4 < 0.6，issues: 章节不完整（仅 0 个）, 无引用占位符"
+                    }
+                  ]
+                },
+                {
+                  "proposal_id": "key-transient-quantum-phase-optical-20260726",
+                  "stages": [
+                    {
+                      "stage": "01_direction",
+                      "label": "方向校准",
+                      "path": "research_proposals/optimizing/key-transient-quantum-phase-optical-20260726/01_direction/direction-calibration.md",
+                      "exists": true,
+                      "size": 7615,
+                      "score": 0.4,
+                      "issues": [
+                        "章节不完整（仅 0 个）",
+                        "无引用占位符"
+                      ]
+                    },
+                    {
+                      "stage": "02_literature",
+                      "label": "文献调研",
+                      "path": "research_proposals/optimizing/key-transient-quantum-phase-optical-20260726/02_literature/literature-report.md",
+                      "exists": true,
+                      "size": 26584,
+                      "score": 0.7,
+                      "issues": [
+                        "无引用占位符"
+                      ]
+                    },
+                    {
+                      "stage": "02_topic",
+                      "label": "缺口分析",
+                      "path": "research_proposals/optimizing/key-transient-quantum-phase-optical-20260726/02_topic/gap-report.md",
+                      "exists": true,
+                      "size": 30772,
+                      "score": 0.4,
+                      "issues": [
+                        "章节不完整（仅 0 个）",
+                        "无引用占位符"
+                      ]
+                    },
+                    {
+                      "stage": "03_question",
+                      "label": "科学问题",
+                      "path": "research_proposals/optimizing/key-transient-quantum-phase-optical-20260726/03_question/question-framework.md",
+                      "exists": true,
+                      "size": 564,
+                      "score": 0.2,
+                      "issues": [
+                        "章节不完整（仅 0 个）",
+                        "无引用占位符"
+                      ]
+                    },
+                    {
+                      "stage": "04_proposal",
+                      "label": "申请书",
+                      "path": "research_proposals/optimizing/key-transient-quantum-phase-optical-20260726/04_proposal/proposal-draft.md",
+                      "exists": true,
+                      "size": 40361,
+                      "score": 0.4,
+                      "issues": [
+                        "章节不完整（仅 0 个）",
+                        "无引用占位符"
+                      ]
+                    },
+                    {
+                      "stage": "05_review",
+                      "label": "自检报告",
+                      "path": "research_proposals/optimizing/key-transient-quantum-phase-optical-20260726/05_review/review-report.md",
+                      "exists": false,
+                      "size": 0,
+                      "score": 0.0,
+                      "issues": [
+                        "文件不存在"
+                      ]
+                    }
+                  ],
+                  "overall_quality": 0.35,
+                  "growth_actions": [
+                    {
+                      "stage": "01_direction",
+                      "label": "方向校准",
+                      "action": "auto_retry",
+                      "reason": "质量 0.4 < 0.6，issues: 章节不完整（仅 0 个）, 无引用占位符"
+                    },
+                    {
+                      "stage": "02_topic",
+                      "label": "缺口分析",
+                      "action": "auto_retry",
+                      "reason": "质量 0.4 < 0.6，issues: 章节不完整（仅 0 个）, 无引用占位符"
+                    },
+                    {
+                      "stage": "03_question",
+                      "label": "科学问题",
+                      "action": "auto_retry",
+                      "reason": "质量 0.2 < 0.6，issues: 章节不完整（仅 0 个）, 无引用占位符"
+                    },
+                    {
+                      "stage": "04_proposal",
+                      "label": "申请书",
+                      "action": "auto_retry",
+                      "reason": "质量 0.4 < 0.6，issues: 章节不完整（仅 0 个）, 无引用占位符"
+                    }
+                  ]
+                },
+                {
+                  "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
+                  "stages": [
+                    {
+                      "stage": "01_direction",
+                      "label": "方向校准",
+                      "path": "research_proposals/optimizing/general-order-parameter-ultrafast-readout-20260727/01_direction/direction-calibration.md",
+                      "exists": true,
+                      "size": 8407,
+                      "score": 0.4,
+                      "issues": [
+                        "章节不完整（仅 0 个）",
+                        "无引用占位符"
+                      ]
+                    },
+                    {
+                      "stage": "02_literature",
+                      "label": "文献调研",
+                      "path": "research_proposals/optimizing/general-order-parameter-ultrafast-readout-20260727/02_literature/literature-report.md",
+                      "exists": true,
+                      "size": 15900,
+                      "score": 0.4,
+                      "issues": [
+                        "章节不完整（仅 0 个）",
+                        "无引用占位符"
+                      ]
+                    },
+                    {
+                      "stage": "02_topic",
+                      "label": "缺口分析",
+                      "path": "research_proposals/optimizing/general-order-parameter-ultrafast-readout-20260727/02_topic/gap-report.md",
+                      "exists": true,
+                      "size": 35985,
+                      "score": 0.4,
+                      "issues": [
+                        "章节不完整（仅 0 个）",
+                        "无引用占位符"
+                      ]
+                    },
+                    {
+                      "stage": "03_question",
+                      "label": "科学问题",
+                      "path": "research_proposals/optimizing/general-order-parameter-ultrafast-readout-20260727/03_question/question-framework.md",
+                      "exists": true,
+                      "size": 564,
+                      "score": 0.2,
+                      "issues": [
+                        "章节不完整（仅 0 个）",
+                        "无引用占位符"
+                      ]
+                    },
+                    {
+                      "stage": "04_proposal",
+                      "label": "申请书",
+                      "path": "research_proposals/optimizing/general-order-parameter-ultrafast-readout-20260727/04_proposal/proposal-draft.md",
+                      "exists": true,
+                      "size": 51961,
+                      "score": 0.4,
+                      "issues": [
+                        "章节不完整（仅 0 个）",
+                        "无引用占位符"
+                      ]
+                    },
+                    {
+                      "stage": "05_review",
+                      "label": "自检报告",
+                      "path": "research_proposals/optimizing/general-order-parameter-ultrafast-readout-20260727/05_review/review-report.md",
+                      "exists": false,
+                      "size": 0,
+                      "score": 0.0,
+                      "issues": [
+                        "文件不存在"
+                      ]
+                    }
+                  ],
+                  "overall_quality": 0.3,
+                  "growth_actions": [
+                    {
+                      "stage": "01_direction",
+                      "label": "方向校准",
+                      "action": "auto_retry",
+                      "reason": "质量 0.4 < 0.6，issues: 章节不完整（仅 0 个）, 无引用占位符"
+                    },
+                    {
+                      "stage": "02_literature",
+                      "label": "文献调研",
+                      "action": "auto_retry",
+                      "reason": "质量 0.4 < 0.6，issues: 章节不完整（仅 0 个）, 无引用占位符"
+                    },
+                    {
+                      "stage": "02_topic",
+                      "label": "缺口分析",
+                      "action": "auto_retry",
+                      "reason": "质量 0.4 < 0.6，issues: 章节不完整（仅 0 个）, 无引用占位符"
+                    },
+                    {
+                      "stage": "03_question",
+                      "label": "科学问题",
+                      "action": "auto_retry",
+                      "reason": "质量 0.2 < 0.6，issues: 章节不完整（仅 0 个）, 无引用占位符"
+                    },
+                    {
+                      "stage": "04_proposal",
+                      "label": "申请书",
+                      "action": "auto_retry",
+                      "reason": "质量 0.4 < 0.6，issues: 章节不完整（仅 0 个）, 无引用占位符"
+                    }
+                  ]
+                },
+                {
+                  "proposal_id": "general-quantum-geometry-inversion-20260726",
+                  "stages": [
+                    {
+                      "stage": "01_direction",
+                      "label": "方向校准",
+                      "path": "research_proposals/optimizing/general-quantum-geometry-inversion-20260726/01_direction/direction-calibration.md",
+                      "exists": true,
+                      "size": 7381,
+                      "score": 0.4,
+                      "issues": [
+                        "章节不完整（仅 0 个）",
+                        "无引用占位符"
+                      ]
+                    },
+                    {
+                      "stage": "02_literature",
+                      "label": "文献调研",
+                      "path": "research_proposals/optimizing/general-quantum-geometry-inversion-20260726/02_literature/literature-report.md",
+                      "exists": true,
+                      "size": 13023,
+                      "score": 0.4,
+                      "issues": [
+                        "章节不完整（仅 0 个）",
+                        "无引用占位符"
+                      ]
+                    },
+                    {
+                      "stage": "02_topic",
+                      "label": "缺口分析",
+                      "path": "research_proposals/optimizing/general-quantum-geometry-inversion-20260726/02_topic/gap-report.md",
+                      "exists": true,
+                      "size": 20266,
+                      "score": 0.4,
+                      "issues": [
+                        "章节不完整（仅 0 个）",
+                        "无引用占位符"
+                      ]
+                    },
+                    {
+                      "stage": "03_question",
+                      "label": "科学问题",
+                      "path": "research_proposals/optimizing/general-quantum-geometry-inversion-20260726/03_question/question-framework.md",
+                      "exists": true,
+                      "size": 12628,
+                      "score": 0.4,
+                      "issues": [
+                        "章节不完整（仅 0 个）",
+                        "无引用占位符"
+                      ]
+                    },
+                    {
+                      "stage": "04_proposal",
+                      "label": "申请书",
+                      "path": "research_proposals/optimizing/general-quantum-geometry-inversion-20260726/04_proposal/proposal-draft.md",
+                      "exists": true,
+                      "size": 103197,
+                      "score": 1.0,
+                      "issues": []
+                    },
+                    {
+                      "stage": "05_review",
+                      "label": "自检报告",
+                      "path": "research_proposals/optimizing/general-quantum-geometry-inversion-20260726/05_review/review-report.md",
+                      "exists": true,
+                      "size": 17923,
+                      "score": 0.8,
+                      "issues": [
+                        "引用占位符较少（8 个）"
+                      ]
+                    }
+                  ],
+                  "overall_quality": 0.567,
+                  "growth_actions": [
+                    {
+                      "stage": "01_direction",
+                      "label": "方向校准",
+                      "action": "auto_retry",
+                      "reason": "质量 0.4 < 0.6，issues: 章节不完整（仅 0 个）, 无引用占位符"
+                    },
+                    {
+                      "stage": "02_literature",
+                      "label": "文献调研",
+                      "action": "auto_retry",
+                      "reason": "质量 0.4 < 0.6，issues: 章节不完整（仅 0 个）, 无引用占位符"
+                    },
+                    {
+                      "stage": "02_topic",
+                      "label": "缺口分析",
+                      "action": "auto_retry",
+                      "reason": "质量 0.4 < 0.6，issues: 章节不完整（仅 0 个）, 无引用占位符"
+                    },
+                    {
+                      "stage": "03_question",
+                      "label": "科学问题",
+                      "action": "auto_retry",
+                      "reason": "质量 0.4 < 0.6，issues: 章节不完整（仅 0 个）, 无引用占位符"
+                    }
+                  ]
+                },
+                {
+                  "proposal_id": "2026_NSFG_strongfield_ultrafast",
+                  "stages": [
+                    {
+                      "stage": "01_direction",
+                      "label": "方向校准",
+                      "path": "research_proposals/archived/2026_NSFG_strongfield_ultrafast/01_direction/direction-calibration.md",
+                      "exists": false,
+                      "size": 0,
+                      "score": 0.0,
+                      "issues": [
+                        "文件不存在"
+                      ]
+                    },
+                    {
+                      "stage": "02_literature",
+                      "label": "文献调研",
+                      "path": "research_proposals/archived/2026_NSFG_strongfield_ultrafast/02_literature/literature-report.md",
+                      "exists": false,
+                      "size": 0,
+                      "score": 0.0,
+                      "issues": [
+                        "文件不存在"
+                      ]
+                    },
+                    {
+                      "stage": "02_topic",
+                      "label": "缺口分析",
+                      "path": "research_proposals/archived/2026_NSFG_strongfield_ultrafast/02_topic/gap-report.md",
+                      "exists": false,
+                      "size": 0,
+                      "score": 0.0,
+                      "issues": [
+                        "文件不存在"
+                      ]
+                    },
+                    {
+                      "stage": "03_question",
+                      "label": "科学问题",
+                      "path": "research_proposals/archived/2026_NSFG_strongfield_ultrafast/03_question/question-framework.md",
+                      "exists": false,
+                      "size": 0,
+                      "score": 0.0,
+                      "issues": [
+                        "文件不存在"
+                      ]
+                    },
+                    {
+                      "stage": "04_proposal",
+                      "label": "申请书",
+                      "path": "research_proposals/archived/2026_NSFG_strongfield_ultrafast/04_proposal/proposal-draft.md",
+                      "exists": false,
+                      "size": 0,
+                      "score": 0.0,
+                      "issues": [
+                        "文件不存在"
+                      ]
+                    },
+                    {
+                      "stage": "05_review",
+                      "label": "自检报告",
+                      "path": "research_proposals/archived/2026_NSFG_strongfield_ultrafast/05_review/review-report.md",
+                      "exists": false,
+                      "size": 0,
+                      "score": 0.0,
+                      "issues": [
+                        "文件不存在"
+                      ]
+                    }
+                  ],
+                  "overall_quality": 0.0,
+                  "growth_actions": []
+                }
+              ],
+              "growth_actions_total": 18,
+              "computed_at": "2026-07-30T14:11:00Z"
+            },
+            "lifecycle_consistency": {
+              "checked_at": "2026-07-30T14:11:00Z",
+              "inconsistencies": [
+                {
+                  "proposal_id": "general-quantum-geometry-inversion-20260726",
+                  "type": "round_gap",
+                  "detail": "critic 报告轮次不连续，缺失 [3]",
+                  "round_nums": [
+                    1,
+                    2,
+                    4,
+                    5
+                  ],
+                  "missing": [
+                    3
+                  ]
+                },
+                {
+                  "proposal_id": "general-quantum-geometry-inversion-20260726",
+                  "type": "score_lost",
+                  "detail": "critic 报告 critic-round-1.md 评分 0.58，但 _lifecycle.json 中存在 score=0 的记录",
+                  "file": "critic-round-1.md",
+                  "file_score": 0.58
+                },
+                {
+                  "proposal_id": "key-transient-quantum-phase-optical-20260726",
+                  "type": "round_mismatch",
+                  "detail": "_lifecycle.json 记录 4 轮，实际有 5 份 critic 报告",
+                  "lifecycle_rounds": 4,
+                  "actual_files": [
+                    "critic-round-1.md",
+                    "critic-round-2.md",
+                    "critic-round-3.md",
+                    "critic-round-4.md",
+                    "critic-round-5.md"
+                  ]
+                },
+                {
+                  "proposal_id": "general-moire-strong-field-probe-20260726",
+                  "type": "round_mismatch",
+                  "detail": "_lifecycle.json 记录 7 轮，实际有 6 份 critic 报告",
+                  "lifecycle_rounds": 7,
+                  "actual_files": [
+                    "critic-round-1.md",
+                    "critic-round-2.md",
+                    "critic-round-3.md",
+                    "critic-round-4.md",
+                    "critic-round-5.md",
+                    "critic-round-6.md"
+                  ]
+                },
+                {
+                  "proposal_id": "general-moire-strong-field-probe-20260726",
+                  "type": "score_lost",
+                  "detail": "critic 报告 critic-round-1.md 评分 0.31，但 _lifecycle.json 中存在 score=0 的记录",
+                  "file": "critic-round-1.md",
+                  "file_score": 0.31
+                },
+                {
+                  "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
+                  "type": "round_mismatch",
+                  "detail": "_lifecycle.json 记录 5 轮，实际有 6 份 critic 报告",
+                  "lifecycle_rounds": 5,
+                  "actual_files": [
+                    "critic-round-1.md",
+                    "critic-round-2.md",
+                    "critic-round-3.md",
+                    "critic-round-4.md",
+                    "critic-round-5.md",
+                    "critic-round-6.md"
+                  ]
+                },
+                {
+                  "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
+                  "type": "score_lost",
+                  "detail": "critic 报告 critic-round-1.md 评分 0.72，但 _lifecycle.json 中存在 score=0 的记录",
+                  "file": "critic-round-1.md",
+                  "file_score": 0.72
+                }
+              ],
+              "orphan_dirs": [
+                {
+                  "proposal_id": "2026_NSFG_strongfield_ultrafast",
+                  "path": "research_proposals/archived/2026_NSFG_strongfield_ultrafast",
+                  "detail": "磁盘存在但该 proposal 未在 _lifecycle.json 中注册"
+                }
+              ],
+              "summary": {
+                "total": 5,
+                "inconsistent_count": 7,
+                "orphan_count": 1
+              }
+            },
+            "computed_at": "2026-07-30T14:11:00Z"
+          },
+          "failure_patterns": {
+            "patterns": [
+              {
+                "id": "profile-timeout",
+                "label": "Profile 超时",
+                "category": "性能",
+                "occurrences": 5,
+                "sample_errors": [
+                  "[2026-07-30 09:38:27] [WARNING] [linsai.proposal_lifecycle] [general-bsv-driven-hhg-quantum-20260726] 文献检索失败: 超时(780s)",
+                  "[2026-07-30 11:25:01] [WARNING] [linsai.proposal_lifecycle] [general-bsv-driven-hhg-quantum-20260726] 文献缺口识别失败: 超时(120s)",
+                  "[2026-07-30 17:25:45] [WARNING] [linsai.proposal_lifecycle] [general-bsv-driven-hhg-quantum-20260726] 文献缺口识别失败: 超时(120s)"
+                ],
+                "suggested_prompt_change": "若某 profile 连续 3 次超时，strategy_optimizer 建议把该 profile 的 timeout + 50%。",
+                "expected_impact": "减少超时失败，提升完成率"
+              },
+              {
+                "id": "env-pollution",
+                "label": "环境变量污染（PYTHONHOME 等）",
+                "category": "环境",
+                "occurrences": 0,
+                "sample_errors": [],
+                "suggested_prompt_change": "（v6.6.3 已修复：clean_subprocess_env 自动 pop 22 个 Python 变量）",
+                "expected_impact": "hermes 子进程不再因 IDE 注入的 PYTHONHOME 崩溃"
+              }
+            ],
+            "summary": {
+              "total_errors": 4,
+              "total_warnings": 13,
+              "top_pattern": "profile-timeout",
+              "top_pattern_label": "Profile 超时",
+              "involved_proposals": {
+                "general-test-hhg-20260106": 4,
+                "general-bsv-driven-hhg-quantum-20260726": 5,
+                "general-order-parameter-ultrafast-readout-20260727": 2,
+                "general-quantum-geometry-inversion-20260726": 2
+              }
+            },
+            "window_hours": 168,
+            "computed_at": "2026-07-30T14:11:00Z"
+          },
+          "strategy_suggestions": {
+            "current": {
+              "stagger_seconds": 90,
+              "max_rounds": 10,
+              "score_threshold": 0.8,
+              "no_improvement_limit": 3,
+              "critic_timeout": 300,
+              "writer_timeout": 600
+            },
+            "suggested": {
+              "stagger_seconds": 90,
+              "max_rounds": 10,
+              "score_threshold": 0.8,
+              "no_improvement_limit": 3,
+              "critic_timeout": 300,
+              "writer_timeout": 600
+            },
+            "reasons": [],
+            "risk": "low",
+            "activity": {
+              "days": 1,
+              "avg_dispatch_per_day": 0.0,
+              "avg_duration_s": 0,
+              "total_timeout": 0,
+              "total_success": 0,
+              "total_fail": 0,
+              "success_rate": null
+            },
+            "score_stats": {
+              "avg_score": 0.515,
+              "max_score": 0.82,
+              "min_score": 0.06,
+              "pass_rate": 0.077,
+              "samples": 26
+            },
+            "computed_at": "2026-07-30T14:11:00Z"
+          },
+          "proposal_progress": [
+            {
+              "proposal_id": "general-quantum-geometry-inversion-20260726",
+              "status": "optimizing",
+              "project_type": "general",
+              "optimization_rounds": 4,
+              "last_score": 0.82,
+              "updated_at": "2026-07-30T09:49:17Z"
+            },
+            {
+              "proposal_id": "key-transient-quantum-phase-optical-20260726",
+              "status": "optimizing",
+              "project_type": "key",
+              "optimization_rounds": 4,
+              "last_score": 0.18,
+              "updated_at": "2026-07-30T14:02:18Z"
+            },
+            {
+              "proposal_id": "general-moire-strong-field-probe-20260726",
+              "status": "pending_review",
+              "project_type": "general",
+              "optimization_rounds": 7,
+              "last_score": 0.0,
+              "updated_at": "2026-07-30T13:29:06Z"
+            },
+            {
+              "proposal_id": "general-bsv-driven-hhg-quantum-20260726",
+              "status": "optimizing",
+              "project_type": "general",
+              "optimization_rounds": 6,
+              "last_score": 0.65,
+              "updated_at": "2026-07-30T13:26:03Z"
+            },
+            {
+              "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
+              "status": "optimizing",
+              "project_type": "general",
+              "optimization_rounds": 5,
+              "last_score": 0.24,
+              "updated_at": "2026-07-30T13:22:17Z"
+            }
+          ],
+          "pipeline_state_summary": {
+            "total_jobs": 16,
+            "done": 3,
+            "failed": 0,
+            "pending": 12,
+            "stage_status": {
+              "input": "pending",
+              "output": "pending",
+              "reflection": "done"
+            }
+          },
+          "next_actions": [
+            "查看 dashboard 中的红色告警",
+            "review pending_review 课题",
+            "确认 expansion-candidates.json 中的扩展建议",
+            "检查 weekend-pipeline.json 是否有 failed 任务"
+          ]
+        },
+        "dry_run": true
+      },
+      "created_at": "2026-07-29T06:03:33Z"
+    },
+    {
+      "job_id": "reflection_recommend_actions",
+      "stage": "reflection",
+      "step": "recommend",
+      "status": "done",
+      "depends_on": [
+        "reflection_generate_report"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-08T09:00:00Z",
+      "finished_at": "2026-08-08T09:05:00Z",
+      "last_error": "",
+      "result": {
+        "success": true,
+        "actions_count": 1,
+        "dry_run": true
+      },
+      "created_at": "2026-07-29T06:03:33Z"
+    },
+    {
+      "job_id": "reflection_health_check",
+      "stage": "reflection",
+      "step": "health",
+      "status": "done",
+      "depends_on": [],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-02T01:00:32Z",
+      "finished_at": "2026-08-02T01:00:32Z",
+      "last_error": "",
+      "result": {
+        "success": true,
+        "health": {
+          "checked_at": "2026-08-02T01:00:32Z",
+          "status": "healthy",
+          "alerts": {
+            "error": 0,
+            "warning": 0
+          },
+          "proposals": {
+            "optimizing": 5,
+            "pending_review": 0,
+            "archived": 0
+          },
+          "pipeline_failed_jobs": 0,
+          "dashboard": {
+            "profiles": {
+              "profiles": {
+                "linsai": {
+                  "status": "working",
+                  "success_rate_24h": null,
+                  "dispatch_count_24h": 0,
+                  "avg_duration_s": 0,
+                  "recent_error": "",
+                  "suggestion": ""
+                },
+                "pipeline-runner": {
+                  "status": "working",
+                  "success_rate_24h": null,
+                  "dispatch_count_24h": 0,
+                  "avg_duration_s": 0,
+                  "recent_error": "",
+                  "suggestion": ""
+                },
+                "researcher": {
+                  "status": "idle",
+                  "success_rate_24h": null,
+                  "dispatch_count_24h": 0,
+                  "avg_duration_s": 0,
+                  "recent_error": "",
+                  "suggestion": ""
+                },
+                "analyst": {
+                  "status": "idle",
+                  "success_rate_24h": null,
+                  "dispatch_count_24h": 0,
+                  "avg_duration_s": 0,
+                  "recent_error": "",
+                  "suggestion": ""
+                },
+                "writer": {
+                  "status": "idle",
+                  "success_rate_24h": null,
+                  "dispatch_count_24h": 0,
+                  "avg_duration_s": 0,
+                  "recent_error": "",
+                  "suggestion": ""
+                },
+                "critic": {
+                  "status": "idle",
+                  "success_rate_24h": null,
+                  "dispatch_count_24h": 0,
+                  "avg_duration_s": 0,
+                  "recent_error": "",
+                  "suggestion": ""
+                },
+                "reviewer": {
+                  "status": "idle",
+                  "success_rate_24h": null,
+                  "dispatch_count_24h": 0,
+                  "avg_duration_s": 0,
+                  "recent_error": "",
+                  "suggestion": ""
+                }
+              },
+              "alerts": [],
+              "window_hours": 24,
+              "computed_at": "2026-08-02T01:00:32Z"
+            },
+            "failures": {
+              "patterns": [
+                {
+                  "id": "env-pollution",
+                  "label": "环境变量污染（PYTHONHOME 等）",
+                  "category": "环境",
+                  "occurrences": 0,
+                  "sample_errors": [],
+                  "suggested_prompt_change": "（v6.6.3 已修复：clean_subprocess_env 自动 pop 22 个 Python 变量）",
+                  "expected_impact": "hermes 子进程不再因 IDE 注入的 PYTHONHOME 崩溃"
+                }
+              ],
+              "summary": {
+                "total_errors": 0,
+                "total_warnings": 9,
+                "top_pattern": "env-pollution",
+                "top_pattern_label": "环境变量污染（PYTHONHOME 等）",
+                "involved_proposals": {
+                  "general-test-hhg-20260106": 9
+                }
+              },
+              "window_hours": 24,
+              "computed_at": "2026-08-02T01:00:32Z"
+            },
+            "strategies": {
+              "current": {
+                "stagger_seconds": 90,
+                "max_rounds": 5,
+                "score_threshold": 0.8,
+                "no_improvement_limit": 3,
+                "critic_timeout": 300,
+                "writer_timeout": 600
+              },
+              "suggested": {
+                "stagger_seconds": 90,
+                "max_rounds": 5,
+                "score_threshold": 0.8,
+                "no_improvement_limit": 3,
+                "critic_timeout": 300,
+                "writer_timeout": 600
+              },
+              "reasons": [],
+              "risk": "low",
+              "activity": {
+                "days": 1,
+                "avg_dispatch_per_day": 0.0,
+                "avg_duration_s": 0,
+                "total_timeout": 0,
+                "total_success": 0,
+                "total_fail": 0,
+                "success_rate": null
+              },
+              "score_stats": {
+                "avg_score": 0.488,
+                "max_score": 0.82,
+                "min_score": 0.06,
+                "pass_rate": 0.062,
+                "samples": 32
+              },
+              "computed_at": "2026-08-02T01:00:32Z"
+            },
+            "pipeline_quality": {
+              "proposals": [
+                {
+                  "proposal_id": "general-bsv-driven-hhg-quantum-20260726",
+                  "stages": [
+                    {
+                      "stage": "01_direction",
+                      "label": "方向校准",
+                      "path": "research_proposals/optimizing/general-bsv-driven-hhg-quantum-20260726/01_direction/direction-calibration.md",
+                      "exists": true,
+                      "size": 299,
+                      "score": 0.0,
+                      "issues": [
+                        "文件过小（299 字节）",
+                        "章节不完整（仅 0 个）",
+                        "无引用占位符"
+                      ]
+                    },
+                    {
+                      "stage": "02_literature",
+                      "label": "文献调研",
+                      "path": "research_proposals/optimizing/general-bsv-driven-hhg-quantum-20260726/02_literature/literature-report.md",
+                      "exists": true,
+                      "size": 143,
+                      "score": 0.0,
+                      "issues": [
+                        "文件过小（143 字节）",
+                        "章节不完整（仅 0 个）",
+                        "无引用占位符"
+                      ]
+                    },
+                    {
+                      "stage": "02_topic",
+                      "label": "缺口分析",
+                      "path": "research_proposals/optimizing/general-bsv-driven-hhg-quantum-20260726/02_topic/gap-report.md",
+                      "exists": true,
+                      "size": 272,
+                      "score": 0.0,
+                      "issues": [
+                        "文件过小（272 字节）",
+                        "章节不完整（仅 0 个）",
+                        "无引用占位符"
+                      ]
+                    },
+                    {
+                      "stage": "03_question",
+                      "label": "科学问题",
+                      "path": "research_proposals/optimizing/general-bsv-driven-hhg-quantum-20260726/03_question/question-framework.md",
+                      "exists": true,
+                      "size": 248,
+                      "score": 0.0,
+                      "issues": [
+                        "文件过小（248 字节）",
+                        "章节不完整（仅 0 个）",
+                        "无引用占位符"
+                      ]
+                    },
+                    {
+                      "stage": "04_proposal",
+                      "label": "申请书",
+                      "path": "research_proposals/optimizing/general-bsv-driven-hhg-quantum-20260726/04_proposal/proposal-draft.md",
+                      "exists": true,
+                      "size": 29810,
+                      "score": 0.4,
+                      "issues": [
+                        "章节不完整（仅 0 个）",
+                        "无引用占位符"
+                      ]
+                    },
+                    {
+                      "stage": "05_review",
+                      "label": "自检报告",
+                      "path": "research_proposals/optimizing/general-bsv-driven-hhg-quantum-20260726/05_review/review-report.md",
+                      "exists": false,
+                      "size": 0,
+                      "score": 0.0,
+                      "issues": [
+                        "文件不存在"
+                      ]
+                    }
+                  ],
+                  "overall_quality": 0.067,
+                  "growth_actions": [
+                    {
+                      "stage": "04_proposal",
+                      "label": "申请书",
+                      "action": "auto_retry",
+                      "reason": "质量 0.4 < 0.6，issues: 章节不完整（仅 0 个）, 无引用占位符"
+                    }
+                  ]
+                },
+                {
+                  "proposal_id": "key-transient-quantum-phase-optical-20260726",
+                  "stages": [
+                    {
+                      "stage": "01_direction",
+                      "label": "方向校准",
+                      "path": "research_proposals/optimizing/key-transient-quantum-phase-optical-20260726/01_direction/direction-calibration.md",
+                      "exists": true,
+                      "size": 7615,
+                      "score": 0.4,
+                      "issues": [
+                        "章节不完整（仅 0 个）",
+                        "无引用占位符"
+                      ]
+                    },
+                    {
+                      "stage": "02_literature",
+                      "label": "文献调研",
+                      "path": "research_proposals/optimizing/key-transient-quantum-phase-optical-20260726/02_literature/literature-report.md",
+                      "exists": true,
+                      "size": 26584,
+                      "score": 0.7,
+                      "issues": [
+                        "无引用占位符"
+                      ]
+                    },
+                    {
+                      "stage": "02_topic",
+                      "label": "缺口分析",
+                      "path": "research_proposals/optimizing/key-transient-quantum-phase-optical-20260726/02_topic/gap-report.md",
+                      "exists": true,
+                      "size": 30772,
+                      "score": 0.4,
+                      "issues": [
+                        "章节不完整（仅 0 个）",
+                        "无引用占位符"
+                      ]
+                    },
+                    {
+                      "stage": "03_question",
+                      "label": "科学问题",
+                      "path": "research_proposals/optimizing/key-transient-quantum-phase-optical-20260726/03_question/question-framework.md",
+                      "exists": true,
+                      "size": 564,
+                      "score": 0.2,
+                      "issues": [
+                        "章节不完整（仅 0 个）",
+                        "无引用占位符"
+                      ]
+                    },
+                    {
+                      "stage": "04_proposal",
+                      "label": "申请书",
+                      "path": "research_proposals/optimizing/key-transient-quantum-phase-optical-20260726/04_proposal/proposal-draft.md",
+                      "exists": true,
+                      "size": 40337,
+                      "score": 0.4,
+                      "issues": [
+                        "章节不完整（仅 0 个）",
+                        "无引用占位符"
+                      ]
+                    },
+                    {
+                      "stage": "05_review",
+                      "label": "自检报告",
+                      "path": "research_proposals/optimizing/key-transient-quantum-phase-optical-20260726/05_review/review-report.md",
+                      "exists": false,
+                      "size": 0,
+                      "score": 0.0,
+                      "issues": [
+                        "文件不存在"
+                      ]
+                    }
+                  ],
+                  "overall_quality": 0.35,
+                  "growth_actions": [
+                    {
+                      "stage": "01_direction",
+                      "label": "方向校准",
+                      "action": "auto_retry",
+                      "reason": "质量 0.4 < 0.6，issues: 章节不完整（仅 0 个）, 无引用占位符"
+                    },
+                    {
+                      "stage": "02_topic",
+                      "label": "缺口分析",
+                      "action": "auto_retry",
+                      "reason": "质量 0.4 < 0.6，issues: 章节不完整（仅 0 个）, 无引用占位符"
+                    },
+                    {
+                      "stage": "03_question",
+                      "label": "科学问题",
+                      "action": "auto_retry",
+                      "reason": "质量 0.2 < 0.6，issues: 章节不完整（仅 0 个）, 无引用占位符"
+                    },
+                    {
+                      "stage": "04_proposal",
+                      "label": "申请书",
+                      "action": "auto_retry",
+                      "reason": "质量 0.4 < 0.6，issues: 章节不完整（仅 0 个）, 无引用占位符"
+                    }
+                  ]
+                },
+                {
+                  "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
+                  "stages": [
+                    {
+                      "stage": "01_direction",
+                      "label": "方向校准",
+                      "path": "research_proposals/optimizing/general-order-parameter-ultrafast-readout-20260727/01_direction/direction-calibration.md",
+                      "exists": true,
+                      "size": 8407,
+                      "score": 0.4,
+                      "issues": [
+                        "章节不完整（仅 0 个）",
+                        "无引用占位符"
+                      ]
+                    },
+                    {
+                      "stage": "02_literature",
+                      "label": "文献调研",
+                      "path": "research_proposals/optimizing/general-order-parameter-ultrafast-readout-20260727/02_literature/literature-report.md",
+                      "exists": true,
+                      "size": 15900,
+                      "score": 0.4,
+                      "issues": [
+                        "章节不完整（仅 0 个）",
+                        "无引用占位符"
+                      ]
+                    },
+                    {
+                      "stage": "02_topic",
+                      "label": "缺口分析",
+                      "path": "research_proposals/optimizing/general-order-parameter-ultrafast-readout-20260727/02_topic/gap-report.md",
+                      "exists": true,
+                      "size": 35985,
+                      "score": 0.4,
+                      "issues": [
+                        "章节不完整（仅 0 个）",
+                        "无引用占位符"
+                      ]
+                    },
+                    {
+                      "stage": "03_question",
+                      "label": "科学问题",
+                      "path": "research_proposals/optimizing/general-order-parameter-ultrafast-readout-20260727/03_question/question-framework.md",
+                      "exists": true,
+                      "size": 564,
+                      "score": 0.2,
+                      "issues": [
+                        "章节不完整（仅 0 个）",
+                        "无引用占位符"
+                      ]
+                    },
+                    {
+                      "stage": "04_proposal",
+                      "label": "申请书",
+                      "path": "research_proposals/optimizing/general-order-parameter-ultrafast-readout-20260727/04_proposal/proposal-draft.md",
+                      "exists": true,
+                      "size": 35517,
+                      "score": 0.4,
+                      "issues": [
+                        "章节不完整（仅 0 个）",
+                        "无引用占位符"
+                      ]
+                    },
+                    {
+                      "stage": "05_review",
+                      "label": "自检报告",
+                      "path": "research_proposals/optimizing/general-order-parameter-ultrafast-readout-20260727/05_review/review-report.md",
+                      "exists": false,
+                      "size": 0,
+                      "score": 0.0,
+                      "issues": [
+                        "文件不存在"
+                      ]
+                    }
+                  ],
+                  "overall_quality": 0.3,
+                  "growth_actions": [
+                    {
+                      "stage": "01_direction",
+                      "label": "方向校准",
+                      "action": "auto_retry",
+                      "reason": "质量 0.4 < 0.6，issues: 章节不完整（仅 0 个）, 无引用占位符"
+                    },
+                    {
+                      "stage": "02_literature",
+                      "label": "文献调研",
+                      "action": "auto_retry",
+                      "reason": "质量 0.4 < 0.6，issues: 章节不完整（仅 0 个）, 无引用占位符"
+                    },
+                    {
+                      "stage": "02_topic",
+                      "label": "缺口分析",
+                      "action": "auto_retry",
+                      "reason": "质量 0.4 < 0.6，issues: 章节不完整（仅 0 个）, 无引用占位符"
+                    },
+                    {
+                      "stage": "03_question",
+                      "label": "科学问题",
+                      "action": "auto_retry",
+                      "reason": "质量 0.2 < 0.6，issues: 章节不完整（仅 0 个）, 无引用占位符"
+                    },
+                    {
+                      "stage": "04_proposal",
+                      "label": "申请书",
+                      "action": "auto_retry",
+                      "reason": "质量 0.4 < 0.6，issues: 章节不完整（仅 0 个）, 无引用占位符"
+                    }
+                  ]
+                },
+                {
+                  "proposal_id": "general-moire-strong-field-probe-20260726",
+                  "stages": [
+                    {
+                      "stage": "01_direction",
+                      "label": "方向校准",
+                      "path": "research_proposals/optimizing/general-moire-strong-field-probe-20260726/01_direction/direction-calibration.md",
+                      "exists": true,
+                      "size": 7248,
+                      "score": 0.4,
+                      "issues": [
+                        "章节不完整（仅 0 个）",
+                        "无引用占位符"
+                      ]
+                    },
+                    {
+                      "stage": "02_literature",
+                      "label": "文献调研",
+                      "path": "research_proposals/optimizing/general-moire-strong-field-probe-20260726/02_literature/literature-report.md",
+                      "exists": true,
+                      "size": 17666,
+                      "score": 0.4,
+                      "issues": [
+                        "章节不完整（仅 0 个）",
+                        "无引用占位符"
+                      ]
+                    },
+                    {
+                      "stage": "02_topic",
+                      "label": "缺口分析",
+                      "path": "research_proposals/optimizing/general-moire-strong-field-probe-20260726/02_topic/gap-report.md",
+                      "exists": true,
+                      "size": 27871,
+                      "score": 0.4,
+                      "issues": [
+                        "章节不完整（仅 0 个）",
+                        "无引用占位符"
+                      ]
+                    },
+                    {
+                      "stage": "03_question",
+                      "label": "科学问题",
+                      "path": "research_proposals/optimizing/general-moire-strong-field-probe-20260726/03_question/question-framework.md",
+                      "exists": true,
+                      "size": 555,
+                      "score": 0.2,
+                      "issues": [
+                        "章节不完整（仅 0 个）",
+                        "无引用占位符"
+                      ]
+                    },
+                    {
+                      "stage": "04_proposal",
+                      "label": "申请书",
+                      "path": "research_proposals/optimizing/general-moire-strong-field-probe-20260726/04_proposal/proposal-draft.md",
+                      "exists": true,
+                      "size": 66887,
+                      "score": 0.7,
+                      "issues": [
+                        "章节不完整（仅 2 个）"
+                      ]
+                    },
+                    {
+                      "stage": "05_review",
+                      "label": "自检报告",
+                      "path": "research_proposals/optimizing/general-moire-strong-field-probe-20260726/05_review/review-report.md",
+                      "exists": false,
+                      "size": 0,
+                      "score": 0.0,
+                      "issues": [
+                        "文件不存在"
+                      ]
+                    }
+                  ],
+                  "overall_quality": 0.35,
+                  "growth_actions": [
+                    {
+                      "stage": "01_direction",
+                      "label": "方向校准",
+                      "action": "auto_retry",
+                      "reason": "质量 0.4 < 0.6，issues: 章节不完整（仅 0 个）, 无引用占位符"
+                    },
+                    {
+                      "stage": "02_literature",
+                      "label": "文献调研",
+                      "action": "auto_retry",
+                      "reason": "质量 0.4 < 0.6，issues: 章节不完整（仅 0 个）, 无引用占位符"
+                    },
+                    {
+                      "stage": "02_topic",
+                      "label": "缺口分析",
+                      "action": "auto_retry",
+                      "reason": "质量 0.4 < 0.6，issues: 章节不完整（仅 0 个）, 无引用占位符"
+                    },
+                    {
+                      "stage": "03_question",
+                      "label": "科学问题",
+                      "action": "auto_retry",
+                      "reason": "质量 0.2 < 0.6，issues: 章节不完整（仅 0 个）, 无引用占位符"
+                    }
+                  ]
+                },
+                {
+                  "proposal_id": "general-quantum-geometry-inversion-20260726",
+                  "stages": [
+                    {
+                      "stage": "01_direction",
+                      "label": "方向校准",
+                      "path": "research_proposals/optimizing/general-quantum-geometry-inversion-20260726/01_direction/direction-calibration.md",
+                      "exists": true,
+                      "size": 7381,
+                      "score": 0.4,
+                      "issues": [
+                        "章节不完整（仅 0 个）",
+                        "无引用占位符"
+                      ]
+                    },
+                    {
+                      "stage": "02_literature",
+                      "label": "文献调研",
+                      "path": "research_proposals/optimizing/general-quantum-geometry-inversion-20260726/02_literature/literature-report.md",
+                      "exists": true,
+                      "size": 13023,
+                      "score": 0.4,
+                      "issues": [
+                        "章节不完整（仅 0 个）",
+                        "无引用占位符"
+                      ]
+                    },
+                    {
+                      "stage": "02_topic",
+                      "label": "缺口分析",
+                      "path": "research_proposals/optimizing/general-quantum-geometry-inversion-20260726/02_topic/gap-report.md",
+                      "exists": true,
+                      "size": 20266,
+                      "score": 0.4,
+                      "issues": [
+                        "章节不完整（仅 0 个）",
+                        "无引用占位符"
+                      ]
+                    },
+                    {
+                      "stage": "03_question",
+                      "label": "科学问题",
+                      "path": "research_proposals/optimizing/general-quantum-geometry-inversion-20260726/03_question/question-framework.md",
+                      "exists": true,
+                      "size": 12628,
+                      "score": 0.4,
+                      "issues": [
+                        "章节不完整（仅 0 个）",
+                        "无引用占位符"
+                      ]
+                    },
+                    {
+                      "stage": "04_proposal",
+                      "label": "申请书",
+                      "path": "research_proposals/optimizing/general-quantum-geometry-inversion-20260726/04_proposal/proposal-draft.md",
+                      "exists": true,
+                      "size": 80889,
+                      "score": 0.7,
+                      "issues": [
+                        "章节不完整（仅 2 个）"
+                      ]
+                    },
+                    {
+                      "stage": "05_review",
+                      "label": "自检报告",
+                      "path": "research_proposals/optimizing/general-quantum-geometry-inversion-20260726/05_review/review-report.md",
+                      "exists": true,
+                      "size": 17923,
+                      "score": 0.8,
+                      "issues": [
+                        "引用占位符较少（8 个）"
+                      ]
+                    }
+                  ],
+                  "overall_quality": 0.517,
+                  "growth_actions": [
+                    {
+                      "stage": "01_direction",
+                      "label": "方向校准",
+                      "action": "auto_retry",
+                      "reason": "质量 0.4 < 0.6，issues: 章节不完整（仅 0 个）, 无引用占位符"
+                    },
+                    {
+                      "stage": "02_literature",
+                      "label": "文献调研",
+                      "action": "auto_retry",
+                      "reason": "质量 0.4 < 0.6，issues: 章节不完整（仅 0 个）, 无引用占位符"
+                    },
+                    {
+                      "stage": "02_topic",
+                      "label": "缺口分析",
+                      "action": "auto_retry",
+                      "reason": "质量 0.4 < 0.6，issues: 章节不完整（仅 0 个）, 无引用占位符"
+                    },
+                    {
+                      "stage": "03_question",
+                      "label": "科学问题",
+                      "action": "auto_retry",
+                      "reason": "质量 0.4 < 0.6，issues: 章节不完整（仅 0 个）, 无引用占位符"
+                    }
+                  ]
+                },
+                {
+                  "proposal_id": "2026_NSFG_strongfield_ultrafast",
+                  "stages": [
+                    {
+                      "stage": "01_direction",
+                      "label": "方向校准",
+                      "path": "research_proposals/archived/2026_NSFG_strongfield_ultrafast/01_direction/direction-calibration.md",
+                      "exists": false,
+                      "size": 0,
+                      "score": 0.0,
+                      "issues": [
+                        "文件不存在"
+                      ]
+                    },
+                    {
+                      "stage": "02_literature",
+                      "label": "文献调研",
+                      "path": "research_proposals/archived/2026_NSFG_strongfield_ultrafast/02_literature/literature-report.md",
+                      "exists": false,
+                      "size": 0,
+                      "score": 0.0,
+                      "issues": [
+                        "文件不存在"
+                      ]
+                    },
+                    {
+                      "stage": "02_topic",
+                      "label": "缺口分析",
+                      "path": "research_proposals/archived/2026_NSFG_strongfield_ultrafast/02_topic/gap-report.md",
+                      "exists": false,
+                      "size": 0,
+                      "score": 0.0,
+                      "issues": [
+                        "文件不存在"
+                      ]
+                    },
+                    {
+                      "stage": "03_question",
+                      "label": "科学问题",
+                      "path": "research_proposals/archived/2026_NSFG_strongfield_ultrafast/03_question/question-framework.md",
+                      "exists": false,
+                      "size": 0,
+                      "score": 0.0,
+                      "issues": [
+                        "文件不存在"
+                      ]
+                    },
+                    {
+                      "stage": "04_proposal",
+                      "label": "申请书",
+                      "path": "research_proposals/archived/2026_NSFG_strongfield_ultrafast/04_proposal/proposal-draft.md",
+                      "exists": false,
+                      "size": 0,
+                      "score": 0.0,
+                      "issues": [
+                        "文件不存在"
+                      ]
+                    },
+                    {
+                      "stage": "05_review",
+                      "label": "自检报告",
+                      "path": "research_proposals/archived/2026_NSFG_strongfield_ultrafast/05_review/review-report.md",
+                      "exists": false,
+                      "size": 0,
+                      "score": 0.0,
+                      "issues": [
+                        "文件不存在"
+                      ]
+                    }
+                  ],
+                  "overall_quality": 0.0,
+                  "growth_actions": []
+                }
+              ],
+              "growth_actions_total": 18,
+              "computed_at": "2026-08-02T01:00:32Z"
+            },
+            "lifecycle_consistency": {
+              "checked_at": "2026-08-02T01:00:32Z",
+              "inconsistencies": [
+                {
+                  "proposal_id": "general-quantum-geometry-inversion-20260726",
+                  "type": "round_gap",
+                  "detail": "critic 报告轮次不连续，缺失 [3]",
+                  "round_nums": [
+                    1,
+                    2,
+                    4,
+                    5,
+                    6
+                  ],
+                  "missing": [
+                    3
+                  ]
+                },
+                {
+                  "proposal_id": "general-quantum-geometry-inversion-20260726",
+                  "type": "score_lost",
+                  "detail": "critic 报告 critic-round-1.md 评分 0.58，但 _lifecycle.json 中存在 score=0 的记录",
+                  "file": "critic-round-1.md",
+                  "file_score": 0.58
+                },
+                {
+                  "proposal_id": "general-moire-strong-field-probe-20260726",
+                  "type": "round_gap",
+                  "detail": "critic 报告轮次不连续，缺失 [7]",
+                  "round_nums": [
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    8
+                  ],
+                  "missing": [
+                    7
+                  ]
+                },
+                {
+                  "proposal_id": "general-moire-strong-field-probe-20260726",
+                  "type": "score_lost",
+                  "detail": "critic 报告 critic-round-1.md 评分 0.31，但 _lifecycle.json 中存在 score=0 的记录",
+                  "file": "critic-round-1.md",
+                  "file_score": 0.31
+                },
+                {
+                  "proposal_id": "general-bsv-driven-hhg-quantum-20260726",
+                  "type": "round_mismatch",
+                  "detail": "_lifecycle.json 记录 6 轮，实际有 7 份 critic 报告",
+                  "lifecycle_rounds": 6,
+                  "actual_files": [
+                    "critic-round-1.md",
+                    "critic-round-2.md",
+                    "critic-round-3.md",
+                    "critic-round-4.md",
+                    "critic-round-5.md",
+                    "critic-round-6.md",
+                    "critic-round-7.md"
+                  ]
+                },
+                {
+                  "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
+                  "type": "score_lost",
+                  "detail": "critic 报告 critic-round-1.md 评分 0.72，但 _lifecycle.json 中存在 score=0 的记录",
+                  "file": "critic-round-1.md",
+                  "file_score": 0.72
+                }
+              ],
+              "orphan_dirs": [
+                {
+                  "proposal_id": "2026_NSFG_strongfield_ultrafast",
+                  "path": "research_proposals/archived/2026_NSFG_strongfield_ultrafast",
+                  "detail": "磁盘存在但该 proposal 未在 _lifecycle.json 中注册"
+                }
+              ],
+              "summary": {
+                "total": 5,
+                "inconsistent_count": 6,
+                "orphan_count": 1
+              }
+            },
+            "computed_at": "2026-08-02T01:00:32Z"
+          }
+        },
+        "dry_run": false
+      },
+      "created_at": "2026-08-02T01:00:32Z"
+    }
+  ],
+  "processed_sources": {
+    "briefing:knowledge/wiki/reviews/briefing-research_briefing_2026-06-08.md": {
+      "hash": "0015c92aa1abffa2",
+      "processed_at": "2026-08-15T09:20:42Z"
+    },
+    "briefing:knowledge/wiki/reviews/briefing-2026-06-04.md": {
+      "hash": "2a6bc7f0300835c7",
+      "processed_at": "2026-08-15T09:20:42Z"
+    },
+    "briefing:knowledge/wiki/reviews/briefing-2026-06-03.md": {
+      "hash": "781e592691d45bb4",
+      "processed_at": "2026-08-15T09:20:42Z"
+    },
+    "briefing:knowledge/wiki/reviews/briefing-2026-06-01.md": {
+      "hash": "fd21d0f8066587ff",
+      "processed_at": "2026-08-15T09:20:42Z"
+    },
+    "briefing:knowledge/wiki/reviews/briefing-2026-05-31.md": {
+      "hash": "4a2760cad72d96c0",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "briefing:knowledge/wiki/reviews/briefing-2026-05-30.md": {
+      "hash": "dc6560a8cb6984e1",
+      "processed_at": "2026-08-15T09:20:42Z"
+    },
+    "briefing:knowledge/wiki/reviews/briefing-2026-05-29.md": {
+      "hash": "e74984f014a40652",
+      "processed_at": "2026-08-15T09:20:42Z"
+    },
+    "briefing:knowledge/wiki/reviews/briefing-2026-05-28.md": {
+      "hash": "cda8bb1d17258af4",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "briefing:knowledge/wiki/reviews/briefing-2026-05-27.md": {
+      "hash": "254559837cf6707e",
+      "processed_at": "2026-08-15T09:20:42Z"
+    },
+    "briefing:knowledge/wiki/reviews/briefing-2026-05-26.md": {
+      "hash": "a696e1e6310e5a91",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "briefing:knowledge/wiki/reviews/briefing-2026-05-24.md": {
+      "hash": "0281d4a3466283ac",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "briefing:knowledge/wiki/reviews/briefing-2026-05-23.md": {
+      "hash": "cb3370cce07b5e08",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "briefing:knowledge/wiki/reviews/briefing-2026-05-22.md": {
+      "hash": "cbc70b9c94b06cdd",
+      "processed_at": "2026-08-15T09:20:42Z"
+    },
+    "briefing:knowledge/wiki/reviews/briefing-2026-05-21.md": {
+      "hash": "32ba6861cfcf20f1",
+      "processed_at": "2026-08-15T09:20:42Z"
+    },
+    "briefing:knowledge/wiki/reviews/briefing-2026-05-20.md": {
+      "hash": "91324af67e7d7d0a",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "briefing:knowledge/wiki/reviews/briefing-2026-05-19.md": {
+      "hash": "a4ffe75de5c08582",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "briefing:knowledge/wiki/reviews/briefing-2026-05-18.md": {
+      "hash": "50c3434f31eaa6cc",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "briefing:knowledge/wiki/reviews/briefing-2026-05-17.md": {
+      "hash": "b40c582ad2b4d708",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "briefing:knowledge/wiki/reviews/briefing-2026-05-16.md": {
+      "hash": "a4d9ed8f7ff705f3",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "briefing:knowledge/wiki/reviews/briefing-2026-05-14.md": {
+      "hash": "f0bb7ff1145ce132",
+      "processed_at": "2026-08-15T09:20:42Z"
+    },
+    "briefing:knowledge/wiki/reviews/briefing-2026-05-13.md": {
+      "hash": "81a3e814e1851aab",
+      "processed_at": "2026-08-15T09:20:42Z"
+    },
+    "briefing:knowledge/wiki/reviews/briefing-2026-05-11.md": {
+      "hash": "1cb560f276f937d4",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "briefing:knowledge/wiki/reviews/briefing-2026-05-09.md": {
+      "hash": "de11158e92cdeee8",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:concepts:wiki/papers/1202.1682.md": {
+      "hash": "c2b0bdc878a26dd1",
+      "processed_at": "2026-08-01T05:20:11Z"
+    },
+    "kb:concepts:wiki/papers/1203.1391.md": {
+      "hash": "53f5c972799cd78e",
+      "processed_at": "2026-08-01T05:20:11Z"
+    },
+    "kb:concepts:wiki/papers/1504.04038.md": {
+      "hash": "500071e869b1ed1f",
+      "processed_at": "2026-08-01T05:20:11Z"
+    },
+    "kb:concepts:wiki/papers/2007.10762.md": {
+      "hash": "a15c4b878dd35959",
+      "processed_at": "2026-08-01T05:20:11Z"
+    },
+    "kb:concepts:wiki/papers/2205.00522.md": {
+      "hash": "29fa662eecc68e68",
+      "processed_at": "2026-08-01T05:20:11Z"
+    },
+    "kb:concepts:wiki/papers/2307.14693.md": {
+      "hash": "1a4fba79fc774457",
+      "processed_at": "2026-08-01T05:20:11Z"
+    },
+    "kb:concepts:wiki/papers/2309.14435.md": {
+      "hash": "41b37bb5286fb62d",
+      "processed_at": "2026-08-01T05:20:11Z"
+    },
+    "kb:concepts:wiki/papers/2403.15337.md": {
+      "hash": "15b500d234050f5d",
+      "processed_at": "2026-08-01T05:20:11Z"
+    },
+    "kb:concepts:wiki/papers/2407.07752.md": {
+      "hash": "a4a0787533fbbe53",
+      "processed_at": "2026-08-01T05:20:11Z"
+    },
+    "kb:concepts:wiki/papers/2407.19609.md": {
+      "hash": "a3cc2cea92e67317",
+      "processed_at": "2026-08-01T05:20:11Z"
+    },
+    "kb:concepts:wiki/papers/2408.03105.md": {
+      "hash": "f22f087ccc7d1c38",
+      "processed_at": "2026-08-01T05:20:11Z"
+    },
+    "kb:concepts:wiki/papers/2409.04216.md": {
+      "hash": "866e86e64c5f3ca2",
+      "processed_at": "2026-08-01T05:20:11Z"
+    },
+    "kb:concepts:wiki/papers/2410.01424.md": {
+      "hash": "2e6ce4369453daa3",
+      "processed_at": "2026-08-01T05:20:11Z"
+    },
+    "kb:concepts:wiki/papers/2411.02379.md": {
+      "hash": "9bc448c6e49cf5d2",
+      "processed_at": "2026-08-01T05:20:11Z"
+    },
+    "kb:concepts:wiki/papers/2411.19046.md": {
+      "hash": "284e0a03317c527b",
+      "processed_at": "2026-08-01T05:20:11Z"
+    },
+    "kb:concepts:wiki/papers/2412.14564.md": {
+      "hash": "dd92a22e16d64898",
+      "processed_at": "2026-08-01T05:20:11Z"
+    },
+    "kb:concepts:wiki/papers/2504.02497.md": {
+      "hash": "14b86df7935d3756",
+      "processed_at": "2026-08-01T05:20:11Z"
+    },
+    "kb:concepts:wiki/papers/2504.02567.md": {
+      "hash": "e255feb27420561b",
+      "processed_at": "2026-08-01T05:20:11Z"
+    },
+    "kb:concepts:wiki/papers/2508.07213.md": {
+      "hash": "7a2189beef270506",
+      "processed_at": "2026-08-01T05:20:11Z"
+    },
+    "kb:concepts:wiki/papers/2508.14212.md": {
+      "hash": "51c56284f38a7f1b",
+      "processed_at": "2026-08-01T05:20:11Z"
+    },
+    "kb:concepts:wiki/papers/2508.15631.md": {
+      "hash": "1ddae8e2441f54ad",
+      "processed_at": "2026-08-01T05:20:11Z"
+    },
+    "kb:concepts:wiki/papers/2510.15207.md": {
+      "hash": "6927fcb79afd9328",
+      "processed_at": "2026-08-01T05:20:11Z"
+    },
+    "kb:concepts:wiki/papers/2511.18362.md": {
+      "hash": "eff98966f692038a",
+      "processed_at": "2026-08-01T05:20:11Z"
+    },
+    "kb:concepts:wiki/papers/2512.13311.md": {
+      "hash": "7bd1ec5766545097",
+      "processed_at": "2026-08-01T05:20:11Z"
+    },
+    "kb:concepts:wiki/papers/2602.16454.md": {
+      "hash": "2aa6c332d3e11c5a",
+      "processed_at": "2026-08-01T05:20:11Z"
+    },
+    "kb:concepts:wiki/papers/2603.25521.md": {
+      "hash": "45952b6a4c3d7aaa",
+      "processed_at": "2026-08-01T05:20:11Z"
+    },
+    "kb:concepts:wiki/papers/2604.06707.md": {
+      "hash": "9b93c775bd0f760c",
+      "processed_at": "2026-08-01T05:20:11Z"
+    },
+    "kb:concepts:wiki/papers/2604.07543.md": {
+      "hash": "30116d868db7a7d5",
+      "processed_at": "2026-08-01T05:20:11Z"
+    },
+    "kb:concepts:wiki/papers/2604.15085.md": {
+      "hash": "eea5f830921f0185",
+      "processed_at": "2026-08-01T05:20:11Z"
+    },
+    "kb:concepts:wiki/papers/2604.20388.md": {
+      "hash": "e1376541b07e5e0b",
+      "processed_at": "2026-08-01T05:20:11Z"
+    },
+    "kb:concepts:wiki/papers/2604.21121.md": {
+      "hash": "1420afcb74eab944",
+      "processed_at": "2026-08-01T05:20:11Z"
+    },
+    "kb:concepts:wiki/papers/2607.06395.md": {
+      "hash": "5c62f71c43319215",
+      "processed_at": "2026-08-01T05:20:11Z"
+    },
+    "kb:concepts:wiki/papers/2607.16477.md": {
+      "hash": "9c7dc5c908494f6d",
+      "processed_at": "2026-08-01T05:20:11Z"
+    },
+    "briefing:knowledge/wiki/reviews/briefing-index.md": {
+      "hash": "13c11b10afafcbd7",
+      "processed_at": "2026-08-15T09:20:42Z"
+    },
+    "briefing:knowledge/wiki/reviews/briefing-2026-08-13.md": {
+      "hash": "016dce79b33c971e",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "briefing:knowledge/wiki/reviews/briefing-2026-08-12.md": {
+      "hash": "6b3b50490938cfd5",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "briefing:knowledge/wiki/reviews/briefing-2026-08-11.md": {
+      "hash": "a7248411c98b74b0",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "briefing:knowledge/wiki/reviews/briefing-2026-08-10.md": {
+      "hash": "5b8aff7aadfbdade",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "briefing:knowledge/wiki/reviews/briefing-2026-08-09.md": {
+      "hash": "03e4d532f68fb598",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "briefing:knowledge/wiki/reviews/briefing-2026-08-08.md": {
+      "hash": "42cab62a57d97dc8",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "briefing:knowledge/wiki/reviews/briefing-2026-08-06.md": {
+      "hash": "20c33c0297df97c5",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "briefing:knowledge/wiki/reviews/briefing-2026-08-05.md": {
+      "hash": "1aa699b02548df6e",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "briefing:knowledge/wiki/reviews/briefing-2026-08-04.md": {
+      "hash": "63ae43b8b4c6e836",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "briefing:knowledge/wiki/reviews/briefing-2026-08-03.md": {
+      "hash": "fc9d54b7ea1eccb1",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "briefing:knowledge/wiki/reviews/briefing-2026-08-02.md": {
+      "hash": "3ccb2037d092f4eb",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "briefing:knowledge/wiki/reviews/briefing-2026-08-01.md": {
+      "hash": "31af1f55504f3f95",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "briefing:knowledge/wiki/reviews/briefing-2026-07-31.md": {
+      "hash": "567de8bb6e38eff6",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "briefing:knowledge/wiki/reviews/briefing-2026-07-30.md": {
+      "hash": "a5a04a1d845489b5",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "briefing:knowledge/wiki/reviews/briefing-2026-07-28.md": {
+      "hash": "337cad8bb2083feb",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "briefing:knowledge/wiki/reviews/briefing-2026-07-27.md": {
+      "hash": "309e10c37f86932a",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "briefing:knowledge/wiki/reviews/briefing-2026-07-26.md": {
+      "hash": "8a10c3a2b45020c6",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "briefing:knowledge/wiki/reviews/briefing-2026-07-25.md": {
+      "hash": "8a05ef46b95fc64d",
+      "processed_at": "2026-08-15T09:20:42Z"
+    },
+    "briefing:knowledge/wiki/reviews/briefing-2026-07-24.md": {
+      "hash": "ed271c56aeadfff0",
+      "processed_at": "2026-08-15T09:20:42Z"
+    },
+    "briefing:knowledge/wiki/reviews/briefing-2026-07-23.md": {
+      "hash": "6181f1cb18751cb0",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "briefing:knowledge/wiki/reviews/briefing-2026-07-22.md": {
+      "hash": "1787ad2af21e5513",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "briefing:knowledge/wiki/reviews/briefing-2026-07-21.md": {
+      "hash": "d61e4890630cc253",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "briefing:knowledge/wiki/reviews/briefing-2026-07-20.md": {
+      "hash": "c914e4d597b9f6f8",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "briefing:knowledge/wiki/reviews/briefing-2026-07-19.md": {
+      "hash": "9e5ab36d8cfe0b3d",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "briefing:knowledge/wiki/reviews/briefing-2026-07-18.md": {
+      "hash": "a293ccfb9de89593",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "briefing:knowledge/wiki/reviews/briefing-2026-07-17.md": {
+      "hash": "cfdd811f15719601",
+      "processed_at": "2026-08-15T09:20:42Z"
+    },
+    "briefing:knowledge/wiki/reviews/briefing-2026-06-08.md": {
+      "hash": "7884f5c16ef639bd",
+      "processed_at": "2026-08-15T09:20:42Z"
+    },
+    "paper:2026-2607.27847-even-harmonic-generation-through-nonequilibrium-st": {
+      "hash": "4bd6e5a680ffb5cc",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "paper:2026-2607.22360-magnetic-proximity-induced-non-relativistic-valley": {
+      "hash": "ac392d245072e5e1",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "paper:2026-2607.25212-everything-is-a-spin-the-secret-lives-of-su-2": {
+      "hash": "4da4f6e92e5bd83a",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "paper:2026-2608.00170-shape-of-wigner-crystals-and-hole-self-doping-in-a": {
+      "hash": "d4b86ba06b954ee5",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "paper:2026-2608.02152-time-reversal-symmetry-broken-quantum-spin-hall-ef": {
+      "hash": "772ccd98a8fc3342",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "paper:2026-2608.03853-magnetic-field-control-of-fermi-polaron-fine-struc": {
+      "hash": "51e467f8f0d20e0b",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "paper:2026-2608.04151-valley-polarization-of-moiré-interlayer-exciton-co": {
+      "hash": "82bd2547cd7a368b",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "paper:2026-2608.04269-magnetic-field-reorganization-of-electronic-states": {
+      "hash": "e725f5ee829191fb",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "paper:2026-2608.07374-type-ii-mirror-chern-insulator-in-altermagnets": {
+      "hash": "8817d16272cf8914",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "paper:2026-2608.07443-a-quantum-geometric-mechanism-for-chiral-domain-wa": {
+      "hash": "4ef246fb65b7106d",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "paper:2026-2608.09054-altermagnetism-induced-spin-resolved-electronic-st": {
+      "hash": "5c71ebaa26de30fd",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "paper:2026-2607.29372-near-single-cycle-pulse-generation-using-a-cascade": {
+      "hash": "d86e6df1e281e1ab",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "paper:2026-2608.11393-few-cycle-electro-optic-light-on-thin-film-lithium": {
+      "hash": "2878604e3e721521",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "paper:2026-2510.16546-high-harmonic-generation-light-source-with-polariz": {
+      "hash": "eb0cd3b042b41707",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "paper:2026-2606.22714-emergence-of-gaussian-entanglement-and-non-gaussia": {
+      "hash": "b224f07d424a6287",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "paper:2026-2507.06805-wireless-energy-transfer-beamforming-optimization-": {
+      "hash": "79768b14d0ba8d2d",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "paper:2026-2510.11666-leaky-wave-antennas-for-next-generation-wireless-a": {
+      "hash": "3fe10703cb37ec5f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "paper:2026-2606.04219-breaking-the-width-scaling-limit-in-high-performan": {
+      "hash": "488f69897f45f32a",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "paper:2026-2606.20372-attosecond-path-qubits-in-high-harmonic-generation": {
+      "hash": "9aa21ebfa76e1ca0",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "paper:2024-2405.16125-impact-of-crystal-symmetries-and-weyl-nodes-on-high-harmonic": {
+      "hash": "4abd3cb98e421d80",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "paper:2608.11393": {
+      "hash": "c0455506325f0e3d",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "paper:2510.11666": {
+      "hash": "e3c1963bf3a073ff",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "paper:2510.16546": {
+      "hash": "835268211576a450",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "paper:2606.22714": {
+      "hash": "7be4a650da57b289",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "paper:2507.06805": {
+      "hash": "f884ac9fc1f32b81",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "paper:2606.04219": {
+      "hash": "ed16bf853e58b87a",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "paper:2606.20372": {
+      "hash": "63b7bc72ce270612",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "paper:2608.09054": {
+      "hash": "d7fae4db8bb7b54b",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "paper:2608.07374": {
+      "hash": "71667c09a32cb798",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "paper:2608.07443": {
+      "hash": "69d678b58a23ada1",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "paper:2608.07185": {
+      "hash": "386a6014c2e6ca8f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "paper:2608.07441": {
+      "hash": "402e81256f6acc73",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "paper:2608.04151": {
+      "hash": "67e13ea54c46d160",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "paper:2608.04269": {
+      "hash": "97edab8c6ce6981d",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "paper:2608.04363": {
+      "hash": "5d47e46a34bbf2ac",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "paper:2608.03242": {
+      "hash": "847078d2a1003ace",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "paper:2608.03853": {
+      "hash": "547f3d0cdffceae2",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "paper:2608.03955": {
+      "hash": "8cff6de87003aa7a",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "paper:2608.00170": {
+      "hash": "eba97daf8961d053",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "paper:2608.02152": {
+      "hash": "fff7b8d0fc963062",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "capture:knowledge/captures/2026-08-12_方向.md": {
+      "hash": "b411f93c376b138c",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:concepts:wiki/concepts/Lewenstein模型.md": {
+      "hash": "1aeaacbcdb814768",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:concepts:wiki/concepts/MOC-HHG.md": {
+      "hash": "bf7ac0cae5ee849d",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:concepts:wiki/concepts/三步模型.md": {
+      "hash": "f2012b322eefbd8e",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:concepts:wiki/concepts/固体高次谐波.md": {
+      "hash": "6aa6bc0faa6ab53e",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:concepts:wiki/concepts/德鲁德模型.md": {
+      "hash": "bf5cdec393282e90",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:concepts:wiki/concepts/截止定律.md": {
+      "hash": "9e75245acdf24ad5",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:concepts:wiki/concepts/拓扑绝缘体.md": {
+      "hash": "07c34a7532cde36f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:concepts:wiki/concepts/水窗口.md": {
+      "hash": "959b632bccc91760",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:concepts:wiki/concepts/液体高次谐波.md": {
+      "hash": "fe89cb0eee92924c",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:concepts:wiki/concepts/相位匹配.md": {
+      "hash": "85b6340213342235",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:concepts:wiki/concepts/高次谐波产生.md": {
+      "hash": "c85d361cffacc007",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:methods:wiki/methods/COLTRIMS.md": {
+      "hash": "c7ee7f4082e4b58a",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:methods:wiki/methods/FROG.md": {
+      "hash": "a35836b88ac87f7e",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:methods:wiki/methods/RABBITT.md": {
+      "hash": "be0356409f35af4e",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:methods:wiki/methods/TDSE求解器.md": {
+      "hash": "f63cdb1f0f41f1bf",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:methods:wiki/methods/VMI.md": {
+      "hash": "0054ec37ecf2e18e",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:methods:wiki/methods/协方差映射.md": {
+      "hash": "8521758452670db1",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:methods:wiki/methods/瞬态吸收光谱.md": {
+      "hash": "86fa9f7ac2c784be",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:methods:wiki/methods/阿秒条纹相机.md": {
+      "hash": "264e77a941c7d958",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/1202.1682.md": {
+      "hash": "b8cb1152c0503b84",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/1203.1391.md": {
+      "hash": "c7ba8bee8b77a34c",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/1504.04038.md": {
+      "hash": "35c143ccf41e58de",
+      "processed_at": "2026-08-15T09:20:42Z"
+    },
+    "kb:papers:wiki/papers/2007.10762.md": {
+      "hash": "d7ac99ba18e9aac7",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2205.00522.md": {
+      "hash": "441f2f0bd977c610",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2305.16831.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2307.14693.md": {
+      "hash": "b860baa7e48510bb",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2308.15087.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2309.14435.md": {
+      "hash": "4eaf426fd4c8b49b",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2403.08896.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2403.15337.md": {
+      "hash": "53d56cd42b1f8b25",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2404.05474.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2404.06086.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2405.01351.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2405.16125.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2407.07752.md": {
+      "hash": "1793a94ce9d012cd",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2407.09628.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2407.17917.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2407.19609.md": {
+      "hash": "c96fa4e150ff8701",
+      "processed_at": "2026-08-15T09:20:42Z"
+    },
+    "kb:papers:wiki/papers/2408.03105.md": {
+      "hash": "64eedb2d64a3a6a8",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2408.08955.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2408.16926.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2409.03568.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2409.04216.md": {
+      "hash": "a6152a07c1b0382a",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2409.19895.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2410.01424.md": {
+      "hash": "a058df7dd7bd4f88",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2410.06032.md": {
+      "hash": "a2f40ccc34949262",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2410.09178.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2411.02379.md": {
+      "hash": "2d422a565663acd5",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2411.19046.md": {
+      "hash": "39bb1f75c9c34a8b",
+      "processed_at": "2026-08-15T09:20:42Z"
+    },
+    "kb:papers:wiki/papers/2412.14564.md": {
+      "hash": "40fb946840d3f4c9",
+      "processed_at": "2026-08-15T09:20:42Z"
+    },
+    "kb:papers:wiki/papers/2412.16745.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2501.14238.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2502.02540.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2502.07390.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2502.09427.md": {
+      "hash": "d1e94dc7781feb92",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2503.04335.md": {
+      "hash": "30b0204bd1f894cb",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2503.04431.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2503.08052.md": {
+      "hash": "58ab45bb37e2fe7e",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2503.11432.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2504.02497.md": {
+      "hash": "60ecab859cc70be6",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2504.02567.md": {
+      "hash": "af1a4f93fde69c36",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2504.13287.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2505.01188.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2505.22536.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2506.07465.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2506.15352.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2507.03791.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2507.03996.md": {
+      "hash": "0269161bfb96bd18",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2507.10206.md": {
+      "hash": "7e730afe9e6347cc",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2507.10252.md": {
+      "hash": "c55e76868b7c7412",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2508.00273.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2508.07213.md": {
+      "hash": "9613458aedeb35e8",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2508.07869.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2508.09364.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2508.14212.md": {
+      "hash": "a9b8f1252420c0a3",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2508.15631.md": {
+      "hash": "1617ba257fecb139",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2508.16554.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2509.11722.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2509.13518.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2509.13916.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2509.14991.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2509.19608.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2510.12443.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2510.15207.md": {
+      "hash": "dcef662afacf4551",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2510.22064.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2511.13114.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2511.18362.md": {
+      "hash": "826e5c4abdff7698",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2512.03665.md": {
+      "hash": "acb577718d6c1132",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2512.13311.md": {
+      "hash": "26f015c22c58ea09",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2512.24553.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2601.08671.md": {
+      "hash": "ec0f0478df1d75ac",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2602.16454.md": {
+      "hash": "2282b1fc31581a59",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2603.01427.md": {
+      "hash": "511a9ea43629072b",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2603.05346.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2603.08203.md": {
+      "hash": "41d37c4b57dc48f9",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2603.15786.md": {
+      "hash": "678aa1d537f26028",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2603.24377.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2603.25521.md": {
+      "hash": "c1fe22db2bd01492",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2603.29641.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2604.03983.md": {
+      "hash": "0a63c50312c2d33f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2604.05783.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2604.06707.md": {
+      "hash": "930ec5712fa154e3",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2604.07543.md": {
+      "hash": "01776f2527067812",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2604.10304.md": {
+      "hash": "8d013e0ae27aaeca",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2604.11984.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2604.13429.md": {
+      "hash": "9f8401eb279ba0c9",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2604.13729.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2604.13901.md": {
+      "hash": "6d2710ffada78af8",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2604.15085.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2604.17088.md": {
+      "hash": "72a023d4ca0139eb",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2604.20388.md": {
+      "hash": "51e1e3b9964a27c7",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2604.21121.md": {
+      "hash": "a80d59902b227160",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2604.23294.md": {
+      "hash": "9958cdaa8134de5b",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2604.23506.md": {
+      "hash": "16085cdc9a37f74c",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2604.25093.md": {
+      "hash": "149ca1eb5edd0df8",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2604.25483.md": {
+      "hash": "7eb6adfa60149bf2",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2604.25706.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2604.27750.md": {
+      "hash": "efd0fe89dad4c009",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2604.27864.md": {
+      "hash": "9801ef1a8b2db4ea",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2605.03777.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2605.03794.md": {
+      "hash": "8e4b038fb64b0e39",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2605.20631.md": {
+      "hash": "14c3fc28acbcf199",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2605.21925.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2605.23253.md": {
+      "hash": "294230af58c511c3",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2605.23534.md": {
+      "hash": "429b89506bca9bdd",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2605.27252.md": {
+      "hash": "c158ec246ffbd48b",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2605.28236.md": {
+      "hash": "cdfa90bddec1c176",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2605.29718.md": {
+      "hash": "7ab01accc4f22c07",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2605.31083.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2605.31263.md": {
+      "hash": "c04b3a6caa256609",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2606.01880.md": {
+      "hash": "f3d7cb60a5b146c7",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2606.02238.md": {
+      "hash": "30cf61020f962ec2",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2606.03945.md": {
+      "hash": "3fdf5cbbf93e4ae7",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2606.06289.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2606.12353.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2606.16108.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2606.17848.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2606.19954.md": {
+      "hash": "27c34e47a2434a0e",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2606.22714.md": {
+      "hash": "e7a07186f85567f9",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2606.27891.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2606.27963.md": {
+      "hash": "2baa889a2fdfa3ab",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2606.28809.md": {
+      "hash": "f1675751af041014",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2606.30038.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2606.31573.md": {
+      "hash": "31631e3fd3397327",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2607.06053.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2607.06395.md": {
+      "hash": "5f6c23ad0118ed91",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2607.08715.md": {
+      "hash": "45c3ae8123d8d0f3",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2607.10397.md": {
+      "hash": "b5e0f2b138cf1a3d",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2607.11300.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2607.13675.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2607.13863.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2607.14459.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2607.14465.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2607.16477.md": {
+      "hash": "05385f1fa5b89259",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2607.19937.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2607.20941.md": {
+      "hash": "5efc674ee3bcb341",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2607.21248.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2608.01096.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2608.02384.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2608.08042.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2608.09127.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2608.09145.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2608.09201.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2608.09244.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2608.09312.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "kb:papers:wiki/papers/2608.11189.md": {
+      "hash": "c3fb8fb61ed9881f",
+      "processed_at": "2026-08-14T16:00:52Z"
+    },
+    "briefing:knowledge/wiki/reviews/briefing-2026-08-14.md": {
+      "hash": "7ad4a6005faefd73",
+      "processed_at": "2026-08-15T09:20:42Z"
+    },
+    "kb:concepts:wiki/concepts/CEP门控光波脉冲控制相对论等离子体镜.md": {
+      "hash": "468b2c2ce6b8dde1",
+      "processed_at": "2026-08-15T09:20:42Z"
+    },
+    "kb:concepts:wiki/concepts/solid-HHG-theory-methods-survey.md": {
+      "hash": "1a54b6ce49d41e6b",
+      "processed_at": "2026-08-15T09:20:42Z"
+    },
+    "kb:concepts:wiki/concepts/固体高次谐波_固体HHG.md": {
+      "hash": "2eb2a2fdedf1f834",
+      "processed_at": "2026-08-15T09:20:42Z"
+    },
+    "kb:concepts:wiki/concepts/相对论等离子体镜方案产生孤立阿秒脉冲.md": {
+      "hash": "6a07399cbf685f75",
+      "processed_at": "2026-08-15T09:20:42Z"
+    },
+    "kb:concepts:wiki/projects/deepxiv-论文库/discussions/讨论-20260719-20260509.md": {
+      "hash": "ed000a5bd0b239ed",
+      "processed_at": "2026-08-15T09:20:42Z"
+    },
+    "kb:concepts:wiki/projects/deepxiv-论文库/discussions/讨论-20260719-cron_dd3.md": {
+      "hash": "3dcba097cef1428b",
+      "processed_at": "2026-08-15T09:20:42Z"
+    },
+    "kb:methods:wiki/methods/CEP门控sub-1_5-cycle激光脉冲技术.md": {
+      "hash": "149ffa522b633971",
+      "processed_at": "2026-08-15T09:20:42Z"
+    },
+    "kb:methods:wiki/methods/等离子体镜面实验方案.md": {
+      "hash": "020a0273a65a9d27",
+      "processed_at": "2026-08-15T09:20:42Z"
+    },
+    "kb:papers:wiki/papers/2024-2404_01325-phase-matching-of-high-harmonic-generation-in-the-soft-and-h.md": {
+      "hash": "06be9ebb8c401d06",
+      "processed_at": "2026-08-15T09:20:42Z"
+    },
+    "kb:papers:wiki/papers/2510.16546.md": {
+      "hash": "3a39ed5c6ce25ae8",
+      "processed_at": "2026-08-15T09:20:42Z"
+    },
+    "kb:papers:wiki/papers/2606.20372.md": {
+      "hash": "b283e9440a7116ee",
+      "processed_at": "2026-08-15T09:20:42Z"
+    },
+    "kb:papers:wiki/papers/2608.11393.md": {
+      "hash": "71526655f36f5a7c",
+      "processed_at": "2026-08-15T09:20:42Z"
+    },
+    "kb:papers:wiki/papers/Lightwave-controlled_relativistic_plasma_mirrors__arXiv_2406_06396.md": {
+      "hash": "43bc9b705b01306f",
+      "processed_at": "2026-08-15T09:20:42Z"
+    },
+    "kb:papers:wiki/papers/Quantum_interference_and_occupation_con___arXiv_2503_04335_标题在来源中被截断_正文内容缺失.md": {
+      "hash": "43bc9b705b01306f",
+      "processed_at": "2026-08-15T09:20:42Z"
+    }
+  },
+  "stage_status": {
+    "input": "done",
+    "output": "done",
+    "reflection": "done"
+  },
+  "updated_at": "2026-08-15T11:12:32Z"
+}

@@ -1,0 +1,71 @@
+{
+  "gaps": [
+    {
+      "claim": "BSV驱动固体HHG的反演层外推到其他维度体系（如1T-TaS₂）的适用边界",
+      "missing_evidence": "缺少Uchida (1T-TaS₂ DMFT Mott gap)、Baykusheva、Lange三篇文献的因果链：为何这三条文献决定R3'反演层适用边界的物理依据",
+      "search_keywords": [
+        "1T-TaS2 DMFT Hubbard U high harmonic generalization",
+        "Baykusheva solid HHG multiorbital",
+        "Lange HHG scaling universality",
+        "Uchida TaS2 charge density wave Hubbard"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "三重物理约束边际贡献 < 5%/< 10% 判据阈值",
+      "missing_evidence": "缺少Ω、g、f-sum rule三重约束各自的边际贡献统计误差基准文献，以及5%/10%阈值的来源依据",
+      "search_keywords": [
+        "Fisher information marginal contribution bound",
+        "HHG retrieval confidence interval",
+        "Berry curvature statistical uncertainty bound",
+        "high harmonic inversion regularization error"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "f-sum rule 标度律 (1+0.5·U/W) 与外推档再乘1.5放大系数",
+      "missing_evidence": "缺少f-sum rule在强关联体系中标度律的原始推导文献，以及U/W=0.5→6.25%、U/W=1.0→7.5%端点值的理论依据",
+      "search_keywords": [
+        "f-sum rule Hubbard model Mott insulator",
+        "sum rule strong correlation spectral weight transfer",
+        "U/W ratio optical spectral weight",
+        "1T-TaS2 f-sum rule"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "三档分层判据阈值 Ω<5%/<15%/<20%, g<8%/<25%/<30%",
+      "missing_evidence": "缺少PINN/正则化反演在HHG/量子几何反演任务中三档分层精度的基准文献依据",
+      "search_keywords": [
+        "high harmonic retrieval error threshold",
+        "Berry curvature quantum metric inversion precision",
+        "PINN inverse problem regularization accuracy benchmark",
+        "quantum geometry tensor reconstruction error bound"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "BSV量子光驱动HHG（Mg:LiNbO₃、a-Si）的反演可行性边界依据",
+      "missing_evidence": "缺少BSV驱动HHG中QEF量子增强因子与量子几何反演误差关联的实验/理论文献",
+      "search_keywords": [
+        "bright squeezed vacuum HHG retrieval error",
+        "QEF quantum enhancement factor solid HHG inversion",
+        "Rasputnyi BSV HHG Berry curvature extraction",
+        "quantum light driven HHG quantum geometry"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§2.5 §2.6 工程参数阈值（MBE 10-100 nm, OPCPA ≥100 kHz, CEP π/6, 1 kHz）",
+      "missing_evidence": "缺少上述实验参数对HHG反演精度影响的benchmark文献支撑",
+      "search_keywords": [
+        "mid-infrared OPCPA 100 kHz high harmonic driver",
+        "CEP control attosecond HHG precision",
+        "MBE transition metal dichalcogenide thin film HHG",
+        "HBT interferometer shot noise HHG retrieval"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

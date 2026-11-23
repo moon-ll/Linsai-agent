@@ -1,0 +1,74 @@
+{
+  "proposal_id": "general-moire-strong-field-probe-20260726",
+  "cluster_id": "cl_20261029_fb5c31",
+  "clusters": [
+    "cl_20261029_fb5c31",
+    "cl_20261030_fb7ba8"
+  ],
+  "entries": [
+    {
+      "source_id": "paper:2025-2501.08138-two-dimensional-transition-metal-dichalcogenides-based-bilay",
+      "title": "Two-dimensional transition-metal dichalcogenides-based bilayer heterojunctions for efficient solar cells and photocatalytic applications",
+      "summary": "本文用 DFT 结合 G0W0-BSE 系统计算了系列二维 TMD 双层范德华异质结的准粒子电子结构与光学性质，评估其在太阳能电池与光催化方面的应用潜力。核心发现是 MoSe2/WS2 在 G0W0 准粒子水平下带边对齐由半局域 DFT 预测的 II 型翻转为 I 型，说明 TMD 异质结的带对齐结论对准粒子修正是定性敏感的、DFT 水平的筛选不可靠。工作为 TMD 异质结光电器件候选体系提供了带边对齐与含激子效应光吸收的基准数据。",
+      "path": "knowledge/raw/papers/2025-2501.08138-two-dimensional-transition-metal-dichalcogenides-based-bilay.md",
+      "added_via": "cluster:cl_20261029_fb5c31",
+      "added_at": "2026-10-31T00:00:06Z"
+    },
+    {
+      "source_id": "paper:2025-2505.17261-advancing-excited-state-properties-of-two-dimensional-materi",
+      "title": "Advancing excited-state properties of two-dimensional materials using a dielectric-dependent hybrid functional",
+      "summary": "本文发展并应用TD-SE-DD-RSH方法（实时含时薛定谔方程+介电依赖距离分离杂化泛函）计算二维材料的光学激发态性质。对MoS2第一激子峰给出2.01 eV，与BSE@G0W0的2.03 eV高度一致，激子结合能精度达到多体微扰理论（MBPT）水平。该工作以远低于GW/BSE的计算代价获得激子级精度的光学响应，为大面积及复杂二维体系（如摩尔超晶格）的激发态计算提供了高效方案。",
+      "path": "knowledge/raw/papers/2025-2505.17261-advancing-excited-state-properties-of-two-dimensional-materi.md",
+      "added_via": "cluster:cl_20261029_fb5c31",
+      "added_at": "2026-10-31T00:00:06Z"
+    },
+    {
+      "source_id": "paper:2025-2504.01684-an-anisotropic-functional-for-two-dimensional-material-syste",
+      "title": "An anisotropic functional for two-dimensional material systems",
+      "summary": "该文提出一种面向二维材料体系的各向异性屏蔽交换（anisotropic screened-exchange）泛函，针对面内与面外方向屏蔽性质的根本差异分别处理交换作用，从而克服半局域泛函在二维极限下带隙严重低估的问题。所得到的准粒子带隙显著改善，并满足广义Koopmans定理（能量对分数电荷占据的线性条件），表明自相互作用/离域化误差被系统性消除。该泛函由此为GW准粒子计算和TDDFT光学（含强场非线性）模拟提供了一个一致且可靠的电子结构起点。",
+      "path": "knowledge/raw/papers/2025-2504.01684-an-anisotropic-functional-for-two-dimensional-material-syste.md",
+      "added_via": "cluster:cl_20261029_fb5c31",
+      "added_at": "2026-10-31T00:00:06Z"
+    },
+    {
+      "source_id": "paper:2024-2405.00643-electronic-and-optical-excitations-in-van-der-waals-material",
+      "title": "Electronic and Optical Excitations in van der Waals Materials from a Non-Empirical Wannier-Localized Optimally-Tuned Screened Range-Separated Hybrid Functional",
+      "summary": "提出WOT-SRSH泛函：一种基于Wannier局域化、无经验参数的优化调谐屏蔽程分离杂化（screened range-separated hybrid）泛函，专为范德华材料设计。在MoS2、黑磷（bP）和hBN上验证，其线性响应TDDFT光学谱与GW-BSE参考谱线形基本一致，峰位精度达0.1-0.2 eV。该泛函同时给出准确的准粒子带隙与激子结构，可作为MBPT计算的低成本优良起点。",
+      "path": "knowledge/raw/papers/2024-2405.00643-electronic-and-optical-excitations-in-van-der-waals-material.md",
+      "added_via": "cluster:cl_20261029_fb5c31",
+      "added_at": "2026-10-31T00:00:06Z"
+    },
+    {
+      "source_id": "paper:2024-2409.04904-a-meta-generalized-gradient-approximation-based-time-depende",
+      "title": "A meta-generalized gradient approximation-based time-dependent and dielectric function dependent method for optical properties of solid materials",
+      "summary": "提出 metaGGA-mBSE-f 方法：以 metaGGA 泛函结合介电函数依赖的 DDH 混合泛函提供接近准粒子精度的基态能带起点，再用 mBSE-f 核在 TDDFT 线性响应框架内修正电子-空穴相互作用，计算固体光学性质。在 Si、金刚石、SiC、MgO、hBN、MoS2 等代表性半导体/绝缘体上系统 benchmark，吸收谱的激子峰位与谱形精度接近 GW-BSE，而计算成本显著更低，可用于高通量光学性质预测。",
+      "path": "knowledge/raw/papers/2024-2409.04904-a-meta-generalized-gradient-approximation-based-time-depende.md",
+      "added_via": "cluster:cl_20261029_fb5c31",
+      "added_at": "2026-10-31T00:00:06Z"
+    },
+    {
+      "source_id": "paper:2025-2512.16431-moiré-modulated-γ-valley-in-twisted-bilayer-and-twisted-doub",
+      "title": "Moiré-modulated Γ valley in twisted bilayer and twisted double-bilayer MoTe2",
+      "summary": "利用微区ARPES在临界扭转角附近的扭转双层与扭转双双层MoTe2中直接成像莫尔调制的Γ谷电子结构，观测到pz价带随扭转角系统性的分裂演化，并将其归因于界面层起伏对层间耦合的莫尔调制。该工作确立了Γ谷（而非仅K谷）作为扭转TMD中可被莫尔工程调控的自由度，为空穴型莫尔能带与层间激子相关物理提供了能带基础。",
+      "path": "knowledge/raw/papers/2025-2512.16431-moiré-modulated-γ-valley-in-twisted-bilayer-and-twisted-doub.md",
+      "added_via": "cluster:cl_20261030_fb7ba8",
+      "added_at": "2026-10-31T00:00:06Z"
+    },
+    {
+      "source_id": "paper:2026-2502.06318-disorder-induced-symmetry-breaking-in-moiré-bands-of-margina",
+      "title": "Disorder-Induced Symmetry Breaking in Moiré Bands of Marginally Twisted Bilayer MoS2",
+      "summary": "利用扫描隧道谱（STS）对边际扭转（θ≈0.95°）双层MoS2的moiré超晶格进行原胞尺度分辨的电子结构测量，发现静电无序会破坏moiré带的对称性。无序不仅显著增大moiré带宽，还强烈调制Γ谷（Γv）第二moiré带的空间与能量分布，从微观层面给出无序诱导对称破缺的直接实验证据。结果提示moiré平带物理对残余无序高度敏感，为转角TMD体系中关联与谷物理的实验解读提供了基态基准。",
+      "path": "knowledge/raw/papers/2026-2502.06318-disorder-induced-symmetry-breaking-in-moiré-bands-of-margina.md",
+      "added_via": "cluster:cl_20261030_fb7ba8",
+      "added_at": "2026-10-31T00:00:06Z"
+    },
+    {
+      "source_id": "paper:2026-2610.17984-direct-view-of-exciton-and-carrier-dynamics-in-twisted-bilay",
+      "title": "Direct view of exciton and carrier dynamics in twisted bilayer graphene",
+      "summary": "利用微聚焦、时间与角度分辨光电子能谱（trARPES）直接观测 9°±1° 扭转双层石墨烯中激子与载流子的飞秒动力学，在范霍夫奇点附近的杂化带隙内识别出 'ghost-Fano' 激子谱特征，实现中性激子的动量分辨直接成像。层分辨分析显示泵浦后两层石墨烯的电子峰值温度明显不同、但冷却曲线几乎一致，揭示层间电场驱动的超快层间能量再分配。该工作为莫尔/扭转体系的时间分辨谱学探测提供了能量/动量/时间分辨与层选择性的精度基准。",
+      "path": "knowledge/raw/papers/2026-2610.17984-direct-view-of-exciton-and-carrier-dynamics-in-twisted-bilay.md",
+      "added_via": "cluster:cl_20261030_fb7ba8",
+      "added_at": "2026-10-31T00:00:06Z"
+    }
+  ]
+}

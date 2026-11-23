@@ -1,0 +1,35 @@
+{
+  "gaps": [
+    {
+      "claim": "以碲（Te）为主选载体，依赖核心数值 2.28/2.81 与参照平台定位支撑材料选择",
+      "missing_evidence": "引用 [30] 为 arXiv:2610.14367 预印本，未经同行评审即承载材料主选决策的核心数值，需核实其正式发表状态（是否已被期刊接收/发表），若仍为预印本则须补一篇已发表的碲非线性光学/强场特性文献作为数值的独立来源，并在句内加'预印本'状态限定",
+      "search_keywords": [
+        "tellurium high harmonic generation nonlinear response",
+        "tellurium nonlinear refractive index strong field",
+        "arXiv 2610.14367 published journal version"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "跨场强关系式对至少两类候选材料给出的交叉场强预测，与各自第一性原理扫描结果相对偏差不超过 30%",
+      "missing_evidence": "30% 容差无数源依据——20%/15% 容差均有分辨能力论证，30% 仅称'分属不同性质'；需补充两条计算路径（半解析关系式预测 vs 第一性原理扫描）预期差异幅度的定量依据，例如典型体系下两种方法体系误差/收敛误差的已报道对比数据",
+      "search_keywords": [
+        "first-principles versus analytical model high harmonic prediction comparison",
+        "strong field calculation uncertainty cross-validation",
+        "HHG field strength prediction benchmark accuracy"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "两种机制的耦合从未被写出（§2.6 新颖性强断言）",
+      "missing_evidence": "强断言缺检索范围限定与检索证据；需指向立项依据 §1 的检索证据，覆盖'统一理论/显式干涉项'方向已发表工作的检索记录，支撑'在既有文献中未见显式表达'的谨慎表述，并明确与前人统一理论 [15] 的增量边界",
+      "search_keywords": [
+        "unified theory competing HHG mechanisms interference term",
+        "geometric Berry mechanism photocurrent coupling high harmonic",
+        "Floquet-Bloch multiple nonlinear mechanism coexistence"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

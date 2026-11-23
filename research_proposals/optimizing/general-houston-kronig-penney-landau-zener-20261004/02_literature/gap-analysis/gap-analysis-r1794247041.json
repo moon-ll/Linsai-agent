@@ -1,0 +1,17 @@
+{
+  "gaps": [
+    {
+      "claim": "§2.2关于分离缺陷诱导偶次谐波与Berry反常谐波，并利用椭圆度—波长—强度三重分辨谱建立两类机制区分判据的研究依据。",
+      "missing_evidence": "现有§2.2的11个段落中有6段主要采用单篇文献汇报，L51、L55、L63所述结果缺少跨研究、跨材料的归纳比较。Liu[11]与Korolev[26]可保留为主要证据，但仍需补充独立实验与理论文献，分别支撑缺陷诱导偶次谐波的机制、Berry几何贡献的可观测特征，以及联合分辨谱对两类机制的区分能力，避免以单篇个例外推普遍性。",
+      "search_keywords": [
+        "defect-induced even-order high harmonic generation doped semiconductors",
+        "Berry curvature anomalous high harmonic generation semiconductor",
+        "Bloch Floquet state geometry contribution high harmonic generation",
+        "polarization wavelength intensity resolved high harmonic spectroscopy",
+        "high harmonic generation defect symmetry breaking comparative study"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "content"
+}

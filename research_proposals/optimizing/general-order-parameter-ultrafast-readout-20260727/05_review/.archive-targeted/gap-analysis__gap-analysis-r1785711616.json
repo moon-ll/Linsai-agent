@@ -1,0 +1,304 @@
+{
+  "gaps": [
+    {
+      "claim": "§1.1 第 1 段：开篇把激子、超导、铁磁、反铁磁、altermagnet、CDW 6 类序参量打包入同一可逆反演模型并宣称为「HHG 可直接读出四类序参量」（rationale.md 行 5—14）",
+      "missing_evidence": "缺少能把这 6 类序参量的 HHG 微观响应映射至同一可逆反演模型的关键交叉文献；对每一类序参量都需要给出 HHG 谱对相应微观变量的可分指纹，以及 HHG 谱↔序参量之间的端到端反演工作（不是单纯展示谐波，而是真正可逆）",
+      "search_keywords": [
+        "high-harmonic generation order parameter retrieval",
+        "high-harmonic spectroscopy inverse problem multi-order",
+        "solid HHG exciton superconductor ferromagnet unified retrieval",
+        "high-harmonic generation fingerprints excitonic vs superconducting",
+        "solid-state high harmonic order parameter discrimination"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.1 第 2 段：altermagnet、PDW、URu2Si2 hidden order「共同构成新前沿」，且 altermagnet HHG 实验「完全空白」（rationale.md 行 16）",
+      "missing_evidence": "缺少 altermagnet HHG 的首次实验验证文献（需严格核验是否真的没有实验，而不只是没有报道）；并缺少 altermagnet、PDW、URu2Si2 hidden order 在 HHG 谱中的可比对指纹的对比性综述，导致「共同构成前沿」这一断言变成平行并列而非因果论证",
+      "search_keywords": [
+        "altermagnet high harmonic generation experiment",
+        "altermagnet HHG CrSb MnTe",
+        "pair density wave HHG spectroscopy",
+        "hidden order URu2Si2 nonlinear optical",
+        "altermagnet review 2024 2025 experimental"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.1 第 2 段：Šmejkal 2022 在 rationale.md 正文中标注为 Science，但在 references.md 与 2.1.2 列表中标注为 Nature 2022 / DOI 10.1038/s41586-023-06907-7，且 PRX 12,040006 (2022) 的真实发表记录也不同——存在期刊/卷期/DOI 口径冲突",
+      "missing_evidence": "缺少对 Šmejkal altermagnet 原始文献的单一可核验来源，需要核实其首次发表于 Phys. Rev. X 12, 040006 (2022) 还是实验证实在 Nature、Science、PhysRevX 等何处；目前正文、表格、参考文献三处写法互斥",
+      "search_keywords": [
+        "Smejkal Sinova Jungwirth altermagnet Phys Rev X 2022",
+        "altermagnetism experimental confirmation MnTe CrSb Nature",
+        "Kramers spin degeneracy lifting altermagnet original paper",
+        "DOI 10.1103/PhysRevX.12.040006 Smejkal",
+        "altermagnet Nature experimental confirmation 2024"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.2 比较表（行 22—31）：HHG 在「时间分辨、体相 vs 表面、直接读出、强场、多维光场、任意环境」6 维上「不可替代」于 XRD/STM/ARPES/tr-ARPES；并对 tr-ARPES 时间分辨写为「30-100 fs」",
+      "missing_evidence": "缺少 HHG vs tr-ARPES / 超快 XRD / 4D-STEM 在体相序参量读出上的实证比较（同一材料 / 同一序参量的直接对比文献）；tr-ARPES 时间分辨「30-100 fs」是粗略估值，需要针对平衡态序参量（如 CDW 能隙、超导能隙）的 tr-ARPES 最佳时间分辨综述作支撑；HHG「穿透深度 10-100 nm」也需要按材料给出剂量依赖数据",
+      "search_keywords": [
+        "tr-ARPES time resolution CDW superconductor review",
+        "ultrafast X-ray diffraction order parameter dynamics",
+        "high harmonic vs tr-ARPES bulk sensitivity comparison",
+        "solid HHG penetration depth table materials",
+        "time-resolved ARPES sub-30 fs recent advances"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.2 注解中 Feng et al. 2025 arXiv:2504.11947 被引为「耦合 Higgs 振幅涨落与电荷序集体涨落在三次谐波中可区分」的证据",
+      "missing_evidence": "需要核验 arXiv:2504.11947 是否已被期刊正式接收（DOI 或 journal ref），目前仅是预印本；同时需要一个能把 Higgs 振幅 vs 电荷序涨落 在三阶谐波中唯一分离的判据文献，证明不是局部微扰的巧合区分",
+      "search_keywords": [
+        "arXiv:2504.11947 published journal version",
+        "terahertz Higgs amplitude mode charge order distinction",
+        "cuprate third harmonic Higgs vs charge order",
+        "Feng THz-driven electron-doped cuprate nonlinear",
+        "Higgs mode spectroscopy cuprate review"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.2 第 2 条（行 38）：Tyulnev 2025 Commun. Mater. 6, 152 + Zhang 2025 PRB 112, 085147 在 TiSe2 CDW 中已建立「3/5/7 阶谐波对各向异性 CDW 序」的指纹",
+      "missing_evidence": "对「3/5/7 阶谐波」是否真正对应「各向异性 CDW 序」还需要独立的、来自第三方（非 Biegert 集团）的复现或反驳文献；目前两篇核心文献来自同一研究链（Zhang, Tyulnev, Biegert, Lewenstein），需要交叉验证",
+      "search_keywords": [
+        "TiSe2 high harmonic generation polarization anisotropy independent replication",
+        "CDW high harmonic third fifth seventh order TiSe2 third-party",
+        "TiSe2 HHG review critical tests",
+        "polarization-resolved HHG TiSe2 replication 2025",
+        "Biegert group TiSe2 HHG independent confirmation"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§1.2 §1.4：「HHG 是目前少数能在体相穿透（10–100 nm）、亚周期时间分辨（<1 fs）、强场天然、多维光场调控与全光学可达 5 个维度同时具备的凝聚态实测手段」",
+      "missing_evidence": "缺少「五个维度同时满足」这一同时性论断的方法学综述文献；目前每条独立维度都有文献支撑，但没有一篇正式综述把「全光+体相+亚周期+强场+多维」五维同时归属到 HHG 上——这是把孤立条件拼装成唯一性陈述",
+      "search_keywords": [
+        "solid HHG review attosecond bulk-sensitive multidimensional",
+        "high harmonic spectroscopy concurrent capabilities review",
+        "ultrafast HHG complementary techniques comparison review",
+        "attosecond solid-state spectroscopy capability review 2024 2025",
+        "roadmap attosecond HHG condensed matter"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§1.3 H1：altermagnet HHG 在国内「完全空白」（rationale.md §1.3 H1 末尾自述 + §2.2.4 altermagnet 行标注），并被列为「最大蓝海」和五星优先级",
+      "missing_evidence": "缺少中国 / 国内课题组在 altermagnet 体系上的 HHG / 强场非线性光学文献的系统检索报告，目前仅一句「作者检索未发现」；需要正式系统综述（含中文检索：CNKI / 万方 / 知网）的可核验空白证明，否则「完全空白」的断言在 NSFC 评审环节是失分项",
+      "search_keywords": [
+        "altermagnet 中国 强场 高次谐波",
+        "altermagnet HHG China",
+        "altermagnet CrSb MnTe 国内 实验",
+        "交错磁体 高次谐波 实验",
+        "altermagnet nonlinear optics Chinese group 2024 2025"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.3 H2：1L-NbSe2 CDW+SC 双重序 HHG 解耦在国内「完全空白」（rationale.md §1.3 H2 末尾自述）",
+      "missing_evidence": "缺少国内课题组在 NbSe2 或其他 CDW+SC 双重序体系上的 HHG / tr-ARPES / 超快光学文献的可核验检索报告；同样需要正式系统检索而非「作者检索」一句话",
+      "search_keywords": [
+        "NbSe2 HHG China 国内",
+        "1L-NbSe2 charge density wave high harmonic generation",
+        "NbSe2 CDW superconductivity ultrafast optics Chinese",
+        "二硒化铌 高次谐波 实验",
+        "NbSe2 ultrafast optical CNKI Wanfang"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§1.3 H3：YBCO 序参量涨落 HHG（Biegert 2024）「关键立项证据」（rationale.md §1.3 H3 末尾；同时 §2.1.2 row 8 标注为 Nature 2024 但 references.md 中以 Alcalá 2022 PNAS 替代，且 rationale.md 出现 Biegert 2024 + ICMAB 新闻报道 + 待核验正式期刊 自相矛盾）",
+      "missing_evidence": "缺少可核验的 Biegert 集团 2024 YBCO HHG 实验正式期刊文献（需要 DOI / 期刊名 / 卷期）；目前正文写出 Nature 2024 突破 但同一段又写「待核验正式期刊」+ references.md 中只能查到 Alcalá 2022 PNAS，没有 2024 YBCO 实验正式条目",
+      "search_keywords": [
+        "Biegert YBCO high harmonic generation 2024 published",
+        "YBCO HHG Nature 2024 superconductor phase fluctuation",
+        "ICFO ICMAB YBCO HHG journal article DOI",
+        "YBCO high harmonic spectroscopy Biegert group published version",
+        "Alcala Biegert Bhattacharya YBCO HHG Nature"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.3 H4：Ryan et al. 2025 Nat. Commun. (arXiv:2407.18894) 用于支撑「HHG 产生的 XUV 脉冲在 Mn M 边探测 TbMn6Sn6 自旋重定向 6-18 ps」（rationale.md §1.3 H4）",
+      "missing_evidence": "缺少对该 Nature Communications 文章 (Ryan 2025) 的正式出版版本核验（卷号、文章号、DOI）；同时这一证据实质是 HHG 光源驱动的 XUV 光谱作为探针，但本项目标榜的是 固体 HHG 谱读出序参量，路线完全不同——需要额外文献证明 XUV 吸收谱探针磁动力学 与 固体 HHG 发射谱读出序参量 的等同性或可桥接性",
+      "search_keywords": [
+        "Ryan TbMn6Sn6 Nature Communications 2025 spin reorientation",
+        "kagome HHG-driven XUV absorption magnetic dynamics",
+        "HHG XUV probe vs solid HHG emission distinction",
+        "Mn M-edge XUV magnetic dynamics TbMn6Sn6",
+        "Ryan SLAC Columbia kagome HHG Nat Commun DOI"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.3 H4 注释：Garcia-Gaitan, Feiguin, Nikolic 2025 arXiv:2502.00849 (NiO 反铁磁) 揭示「整数及带隙以上激发下的非整数谐波」作为反铁磁 HHG 依据",
+      "missing_evidence": "需要核验 arXiv:2502.00849 是否已被期刊接收及 DOI；同时缺少独立（非 Nikolic 组）关于「NiO 非整数谐波—反铁磁序」因果关系的实验 / 复现文献",
+      "search_keywords": [
+        "arXiv:2502.00849 published NiO antiferromagnet",
+        "NiO noninteger high harmonic independent replication",
+        "antiferromagnet HHG noninteger harmonic fingerprint NiO",
+        "NiO Neel vector HHG third-party confirmation",
+        "Nikolic NiO high harmonic generation journal version"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§1.3 H4 注释：Gabriele, Ortix, Cuoco, Forte 2025 arXiv:2501.04545（自旋纹理 HHG）：2D 非中心对称材料中有限偶次谐波要求自旋纹理二重旋转对称性破缺及非平庸 Berry 曲率",
+      "missing_evidence": "需要核验 arXiv:2501.04545 是否已发表（DOI/期刊）；同时需要一份能证明「偶次谐波由 Berry 曲率/自旋纹理驱动」这一机制而非由对称破缺效应直接驱动的判据文献，否则与本项目 HHG 直接读出序参量 混淆",
+      "search_keywords": [
+        "arXiv:2501.04545 published journal version",
+        "spin texture HHG Berry curvature even harmonic",
+        "2D non-centrosymmetric HHG even harmonic spin polarization",
+        "Cuoco Forte Ortix spin HHG published",
+        "Berry curvature driven HHG experimental signature"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§1.3 H6：「5 维光场约束（偏振+温度+磁场+pump-probe+涡旋）降低多序共存反演的多解性；唯一性最终需由可辨识性分析 + 与 XRD/STM/ARPES/输运独立交叉验证」（rationale.md §1.3 H6 + §3.2.4 方法学段）",
+      "missing_evidence": "缺少 多维光场约束 + 可辨识性分析 用于序参量反演的方法学原始文献；目前仅在 H6 末尾引用 Dziurawiec 2025、Murakami 2025、Granados 2026 三条，但没有一篇是「唯一性 / 可辨识性」分析本身的方法论文献，需要 inverse problem + identifiability + 5 维 HHG 的可检索原文",
+      "search_keywords": [
+        "identifiability analysis high harmonic multi-dimensional",
+        "inverse problem multi-order HHG uniqueness",
+        "5-dimensional HHG constraints order parameter retrieval",
+        "solid HHG identifiability pol temperature magnetic",
+        "Bayesian inverse problem ultrafast spectroscopy multi-order"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.3 H6：「Dziurawiec 2025（arXiv:2404.14411, PRB DOI:10.1103/bl2s-cv34）」被引为「多体关联激发在 HHG 谱可分 → H6 方法学可行性」",
+      "missing_evidence": "需要核验 PRB DOI 10.1103/bl2s-cv34 是否真实存在且对应 Dziurawiec 2025 论文——该 DOI 长度异常（短于标准 PRB 格式），且 arXiv 与 DOI 的对应关系需要独立核验",
+      "search_keywords": [
+        "Dziurawiec PRB Mott charge-density-wave high harmonic",
+        "extended Fermi-Hubbard HHG exciton doublon",
+        "arXiv:2404.14411 published PRB journal",
+        "Dziurawiec Harper PRB HHG Mott transition",
+        "10.1103/bl2s-cv34 Dziurawiec"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.3 H6：「Murakami, Hansen, Takayoshi, Madsen, Werner 2025（arXiv:2407.01936, PRL 134, 096504）」被引为「自旋背景动力学显著改变 Mott 体系 HHG → 证明 HHG 谱可能混合多种序/激发贡献，解耦必须依赖多体模型与多维数据」",
+      "missing_evidence": "需要核验 PRL 134, 096504 是否真实对应本论文（PRL 卷期格式看起来过早，要核实 2024/2025 年期间 PRL 134 真实卷号）；同时需要一个把 混合贡献 从中真正分离的反演判据文献，而不是继续停留在 读出谱 层面",
+      "search_keywords": [
+        "Murakami Hansen Werner Hubbard ladder HHG spin PRL",
+        "arXiv:2407.01936 published PRL 134 096504",
+        "Mott insulator HHG spin dynamics mixed order",
+        "PRL 134 096504 Hubbard spin high harmonic",
+        "Murakami Werner high harmonic spin dynamics journal"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§1.3 H6：「Granados, Shrestha, Das, Rajak, Cormier et al. 2026 arXiv:2607.23652：少周期涡旋光驱动 ZnO HHG 中谐波拓扑荷可随 CEP 在相邻整数间切换」",
+      "missing_evidence": "需要核验 arXiv:2607.23652 是否真实存在并已被检索（2026 年编号需要核实），同时需要关于 CEP 与 OAM 在固体 HHG 中耦合 的独立复现或对称性分析文献，否则 CEP 与 OAM 不能默认视为完全独立维度 仅基于一篇预印本，无法支撑方法学戒律",
+      "search_keywords": [
+        "arXiv:2607.23652 ZnO vortex HHG CEP",
+        "orbital angular momentum HHG carrier-envelope-phase solid",
+        "vortex HHG topological charge CEP coupling ZnO",
+        "Granados ZnO HHG OAM CEP experimental",
+        "CEP OAM coupling solid high harmonic generation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.3 H1 + §2.1.2：「Ly 2026 arXiv:2602.09738 进一步预言磁序进动驱动下 altermagnet 体系的高阶自旋/电荷泵浦谐波」（理论阶段，未实验验证）",
+      "missing_evidence": "需要核验 arXiv:2602.09738 是否真实存在、作者完整信息、预测的高阶谐波阶数与可观测条件；缺少对类似自旋泵浦机制的理论复现或反驳文献（独立于 Werner/Murakami 理论体系）",
+      "search_keywords": [
+        "arXiv:2602.09738 Ly altermagnet spin charge pumping",
+        "altermagnet magnetic-order dynamics high harmonic theory",
+        "spin pumping high harmonic generation altermagnet",
+        "magnetic precession driven HHG altermagnet",
+        "Ly 2026 altermagnet high harmonic"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§1.4 / §2.1.1 「v0.1 已有，v0.2 深化」逻辑：4 类序参量 HHG 国际进展表中 Iwai 2021 / Alcala 2022 / Puviani 2023-2024 / Ahmed 2020 / Rehn 2023 / Tyulnev 2025 / Schmid 2018 / Jensen 2024 / Takayoshi 2019 等多个条目（rationale.md §2.1.1）",
+      "missing_evidence": "缺少对表中每一条目标注的「期刊 / 卷期 / DOI」独立可核验条目，目前多个条目只有作者+年份+期刊名而无卷号与 DOI；references.md 中虽列有，但与表格中的卷期/年份存在多处需要一致化的对应（如 Puviani 2023 vs 2024 是否同一篇，Ahmed 2020 arXiv 是否已被期刊接收）",
+      "search_keywords": [
+        "Iwai 2021 Nat Commun SHG high-Tc superconductor",
+        "Puviani Manske quench-drive HHG superconducting PRB",
+        "Ahmed Prasankumar HHG NbSe2 published version",
+        "Rehn monolayer NbSe2 HHG JPCC 2025",
+        "Jensen Tancogne-Dejean exciton HHG PRA 2024"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§2.1.2 row 11：「Werner, Lysne, Murakami (Fribourg + Tokyo) PRB 110, 235101 (2024) — altermagnet HHG 理论先驱」",
+      "missing_evidence": "在 references.md 中 Werner 2024 仅以 arXiv:2407.07752 形式给出（行 24，标为预印本），但 §2.1.2 标为 PRB 110, 235101 (2024) — 需验证该 PRB 真实文献，否则 理论先驱 仅基于预印本，无法作为正式立项证据",
+      "search_keywords": [
+        "Werner Lysne Murakami altermagnet PRB 110 235101",
+        "altermagnet harmonic generation Werner published version",
+        "Phys Rev B 110 235101 altermagnet HHG",
+        "Werner PRB altermagnet 2024 journal",
+        "10.1103/PhysRevB.110.235101 altermagnet"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.1.2 row 13：「Smejkal et al. (Mainz) Nature 2022（实验确认 altermagnet）DOI 10.1038/s41586-023-06907-7」",
+      "missing_evidence": "需要核实 Nature 2022 + DOI 10.1038/s41586-023-06907-7 是否真正对应 altermagnet 实验确认原文——2023 DOI 通常对应 2023 年发表，与正文 2022 不一致；references.md 行 25 标为 Phys. Rev. X 12, 040006 (2022) — 三处冲突需要核验",
+      "search_keywords": [
+        "Smejkal Sinova Jungwirth Nature 2022 2023 altermagnet",
+        "experimental confirmation altermagnet Nature paper MnTe",
+        "DOI 10.1038/s41586-023-06907-7 Smejkal",
+        "altermagnet Nature 2022 experimental discovery",
+        "Smejkal Mainz altermagnet experimental paper"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.1.2 row 14：「Ryan et al. (SLAC + Columbia) Nat. Commun. 2025 — XUV HHG 探测 kagome TbMn6Sn6 磁重定向」",
+      "missing_evidence": "缺少 Ryan 2025 Nature Communications 文章的可核验 DOI / 卷号 / 文章号，目前仅以 arXiv:2407.18894（2024）形式给出；时间戳矛盾（arXiv 2024 vs Nat Commun 2025）需要正式发表记录的核验",
+      "search_keywords": [
+        "Ryan TbMn6Sn6 Nat Commun 2025 DOI article number",
+        "SLAC Columbia kagome HHG Nature Communications",
+        "Ryan TbMn6Sn6 spin reorientation XUV HHG journal",
+        "TbMn6Sn6 high harmonic XUV probe Nature Communications",
+        "arXiv:2407.18894 published Nat Commun journal version"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.1.2 row 16-17：「Hu et al. (孟胜组) PRL 133, 156901 (2024) — MoS2 相干声子耦合 HHG」「Hu, Zhao, Meng PNAS 121, e2301234121 (2024) — HHG 反演费米面+电声耦合 H3S」",
+      "missing_evidence": "需要核验 PRL 133, 156901 (2024) 和 PNAS 121, e2301234121 (2024) 的真实可核验记录，且在 references.md 中只能查到 Hu PNAS 2024 (e2316775121)，与正文 e2301234121 不一致；缺少对「孟胜组 altermagnet / HHG 反演方法学」的完整公开文献列表",
+      "search_keywords": [
+        "Meng group MoS2 coherent phonon HHG PRL 2024",
+        "Hu Chen Du Meng solid HHG PNAS 2024",
+        "Meng Sheng HHG electron-phonon coupling H3S",
+        "PNAS 121 e2301234121 high harmonic",
+        "Meng group high harmonic superconductivity publication list"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§3.2.1-3.2.4「基于 Puviani 2024、Tyulnev 2025、Werner 2024、Ryan 2025 等关键论点的科学问题凝练」",
+      "missing_evidence": "缺少针对 HHG 谱能否在 4 类序参量共享同一反演模型 这一核心科学问题的 同一材料同时呈现多类序参量 的实证 / 综述文献；缺少一套适用于 NbSe2 / CrSb / YBCO / TbMn6Sn6 跨体系的通用反演方法学综述（不是每个材料一篇理论）",
+      "search_keywords": [
+        "universal inverse framework HHG multiple order parameters",
+        "NbSe2 CrSb YBCO TbMn6Sn6 unified HHG spectroscopy",
+        "multi-order high harmonic inverse problem review",
+        "cross-material HHG retrieval methodology",
+        "consolidated HHG framework exciton superconducting CDW magnetism"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "整体通篇：21/46 条参考文献标为预印本、3 处期刊口径冲突（Smejkal 期刊）、HHG 与 HHG-XUV 探针混用、「直接读出」/「不可替代」/「完全空白」等强断言缺少限定",
+      "missing_evidence": "缺少一套对全部预印本做 期刊版本已发表 / 尚无期刊版本 的核验清单；缺少把 HHG 发射谱与 HHG-XUV 吸收谱严格区分的综述；缺少 直接读出 / 完全空白 / 不可替代 三组断言的边界条件文献（每条都需要至少一篇边界综述或反例文献）",
+      "search_keywords": [
+        "solid HHG emission vs XUV absorption probe distinction",
+        "preprint versus published version high harmonic 2024 2025",
+        "high harmonic direct readout boundary conditions review",
+        "ultrafast nonlinear optics complementarity critique",
+        "strong claims limitation review ultrafast solid-state HHG"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

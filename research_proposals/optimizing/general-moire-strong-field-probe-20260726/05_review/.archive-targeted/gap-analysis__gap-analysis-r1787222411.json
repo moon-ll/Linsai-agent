@@ -1,0 +1,60 @@
+{
+  "gaps": [
+    {
+      "claim": "莫尔超晶格体系从10⁸维到2×10⁴维的四阶数量级降阶的技术可行性",
+      "missing_evidence": "张量网络方法在莫尔超晶格强场非线性问题中尚无文献先例；降阶技术细节无参考文献支撑",
+      "search_keywords": [
+        "tensor network moiré superlattice strong field",
+        "MPS DMRG high harmonic generation moiré",
+        "dimensionality reduction moiré heterostructure computational",
+        "moiré superlattice tight-binding matrix product state"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "国内在莫尔材料强场超快光学方向的研究现状",
+      "missing_evidence": "立项依据未显式介绍国内同行在莫尔超晶格强场HHG/Floquet调控方向的研究进展，仅在references.md含国内综述文献",
+      "search_keywords": [
+        "moiré superlattice strong field China",
+        "twisted bilayer ultrafast optics Chinese group",
+        "solid-state high harmonic generation China group",
+        "莫尔材料 强场 超快 中国",
+        "moire heterostructure nonlinear optics domestic"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "莫尔HHG反演问题的病态性（ill-posedness）的严重程度与正则化需求",
+      "missing_evidence": "申请书中'尚不充分'类判断未限定适用范围；HHG反演问题的不适定性程度、 condition number、奇异值分布等缺乏文献量化支撑",
+      "search_keywords": [
+        "high harmonic spectroscopy ill-posed inversion",
+        "HHG inverse problem regularization parameter",
+        "attosecond spectroscopy parameter identifiability",
+        "L-curve Tikhonov regularization high harmonic"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "莫尔超晶格在强场下的SBE适用性边界",
+      "missing_evidence": "半导体布洛赫方程（SBE）用于描述莫尔超晶格强场非平凡能带调制的有效性尚未被系统验证；SBE与TDDFT在莫尔体系的对标研究缺失",
+      "search_keywords": [
+        "semiconductor Bloch equation moiré superlattice validity",
+        "SBE moiré heterostructure strong field applicability",
+        "tight-binding Bloch equation twisted bilayer",
+        "TDDFT SBE comparison solid HHG moiré"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "莫尔Floquet调控的实验可行性（强度窗口与损伤阈值）",
+      "missing_evidence": "magic angle twisted bilayer graphene的飞秒激光损伤阈值、probe与control强度窗口分离的实验依据缺失",
+      "search_keywords": [
+        "twisted bilayer graphene laser damage threshold",
+        "TBG femtosecond ablation threshold",
+        "moiré HHG intensity window separation",
+        "magic angle graphene ultrafast damage threshold"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

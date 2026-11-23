@@ -1,0 +1,59 @@
+{
+  "gaps": [
+    {
+      "claim": "§1.1 开篇缺大背景层——HHG 是什么、为何重要的现象界定层（申请书写\"自 Ghimire 2011 以来…\"直接入史，跳过定义与阿秒探测价值）",
+      "missing_evidence": "缺少 HHG 现象定义、阿秒时间分辨/极紫外相干光源价值的标准综述或教科书级支撑文献",
+      "search_keywords": [
+        "high harmonic generation review attosecond coherent light source",
+        "HHG review 2024 attosecond extreme ultraviolet",
+        "solid-state HHG review Nature Physics 2024"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.3 国内研究现状仅 568 字2 篇国内文献，且 [11] Hommelhoff MPI Garching 工作被错计入\"国内研究现状\"",
+      "missing_evidence": "缺少中国强场/固体HHG/量子光源实验组的代表性工作（平台、团队、最近进展），并把 Hommelhoff 工作移出国内叙事",
+      "search_keywords": [
+        "strong field solid HHG China group",
+        "中国 强场超快 高次谐波 实验组 综述",
+        "bright squeezed vacuum HHG China",
+        "中国 阿秒光源 强场 HHG 兰大北大清华 中科院",
+        "squeezed light high harmonic generation Chinese group"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.2.1、§1.2.3 段中以 [8,17] 支撑\"Hubbard/Mott 框架多体基线\"，但 [17]=Iglesias APL TMDC 产额参照，非多体理论",
+      "missing_evidence": "需要补真正支撑 Hubbard/Mott 多体基线叙述的理论或计算文献（如 Silva、Murakami 等）",
+      "search_keywords": [
+        "Hubbard model Mott insulator high harmonic generation theory",
+        "many-body HHG Hubbard U benchmark Silva Murakami",
+        "Mott insulator correlated high harmonic generation theory"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§1.1-§1.5 全章 9 处引用编号系统性错挂（编号 = 文献表 −1，三章按 references 表重排后修后 grep 三章零残留）",
+      "missing_evidence": "需要按 references 表重新核对应编号对应的文献，并交叉核验 Jiang-Dorfman 相对强度压缩孪生光束、Gothelf 强场分子取向、Lange Mott 激子、Tzur 阿秒层析、quantum dial 等关键叙述的引文归属",
+      "search_keywords": [
+        "Jiang Dorfman relative intensity squeezed twin beams CPL",
+        "Gothelf strong field molecular alignment HHG",
+        "Lange Mott exciton HHG spectroscopy",
+        "Tzur attosecond tomography birth of pulses",
+        "Schleich Wheeler quantum noise HHG framework"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "references.md [27] DOI 留空待补（自述 Light Sci Appl 13,41(2024)），[18][28][32] 非标准 DOI 串（ydjj-xxcl 等）",
+      "missing_evidence": "需要联网补正式 DOI 并核格式",
+      "search_keywords": [
+        "Light Science and Applications 13 41 2024 DOI",
+        "Prajapati 2026 THz HHG arXiv DOI",
+        "nonlinear optical HHG review 2024 Light Sci Appl DOI"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "rationale"
+}

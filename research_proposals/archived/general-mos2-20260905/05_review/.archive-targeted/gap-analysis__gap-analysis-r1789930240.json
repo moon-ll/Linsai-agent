@@ -1,0 +1,60 @@
+{
+  "gaps": [
+    {
+      "claim": "[21] 跨章双角色冲突：rationale 引作 II 型能带对齐，content/scheme 引作 Lee 等 A/B 激子能量 1.88/2.04 eV",
+      "missing_evidence": "需要核实 references.md 中 [21] 的真实身份，并找到：(1) 真正支撑 MoS2/WSe2 II 型能带对齐实验的文献（spin-resolved ARPES 或 STS 测量异质结能带偏移）；(2) 真正支撑 A/B 激子能量 1.88/2.04 eV 的 Lee 等人原文（应为 monolayer MoS2 A/B  exciton energy splitting ~160 meV 的实验文献）",
+      "search_keywords": [
+        "MoS2 WSe2 type-II band alignment ARPES",
+        "monolayer MoS2 A exciton B exciton energy splitting",
+        "Lee MoS2 exciton 1.88 eV 2.04 eV",
+        "heterobilayer TMD band offset experimental"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "scheme §3.1 引用 [25,26] 支撑干法转移 ±0.3° 工艺精度实为张冠李戴",
+      "missing_evidence": "需要找到陆培祥团队干法转移 + SHG 标定 twist angle ±0.3° 精度的原始文献（即 [27]），并核实 [25][26][27] 三篇文献的真实内容",
+      "search_keywords": [
+        "Lu Peixiang dry transfer SHG twist angle calibration",
+        "干法转移 SHG 标定 扭转角精度",
+        "twist angle precision SHG moire TMD",
+        "dry transfer method moire heterostructure angle error"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "scheme §5 中 Δφ ≈ 17°（对应 4.41° twist angle）与 [31] 的 χ_xxx+φ₀=θ_tw/2 关系缺页码/出处溯源，且 Δφ 与 φ₀=2.2° 换算关系未说明",
+      "missing_evidence": "需要找到 [31]（即 Patra/Cocchi twisted MoS2 SHG DFT-Wannier 2607.19937）的具体页码/章节，核实 Δφ 与 φ₀=θ_tw/2 的精确数学关系，并找到独立验证 SHG 极化各向异性角度与扭转角换算关系的文献",
+      "search_keywords": [
+        "twisted homobilayer MoS2 SHG polarization angle twist",
+        "Patra Cocchi twisted MoS2 second harmonic",
+        "SHG polarization rotation twist angle C3 symmetry breaking",
+        "two-photon interference SHG homobilayer TMD"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "scheme §7 R² 上限约 0.85 的判据缺文献溯源",
+      "missing_evidence": "需要找到高次谐波反演中 R²/拟合优度阈值设定的统计依据或先例文献，以及 Bayesian 反演 posterior predictive check 中 R² 阈值的常规取值",
+      "search_keywords": [
+        "R squared threshold Bayesian inversion",
+        "HHG inversion goodness of fit criterion",
+        "Bayesian posterior predictive R squared",
+        "high harmonic spectroscopy reconstruction accuracy benchmark"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "rationale §2.1 中截止标度 N_c ∝ E_g/ℏω + U_p/E_g 第二项阶次疑笔误",
+      "missing_evidence": "需要核实 Vampa 等 [9] 原文（PRL 2015 ZnO HHG cutoff）中 cutoff scaling 的精确数学形式：N_c ∝ E_g/ℏω + U_p/(ℏω) 还是 N_c ∝ (E_g + U_p)/ℏω，并找到其他理论框架的截止定律公式作为对照",
+      "search_keywords": [
+        "Vampa 2015 PRL ZnO HHG cutoff scaling",
+        "solid HHG cutoff law U_p photon energy",
+        "high harmonic cutoff semiconductor formula derivation",
+        "three-step model solid HHG cutoff extension"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "full_review"
+}

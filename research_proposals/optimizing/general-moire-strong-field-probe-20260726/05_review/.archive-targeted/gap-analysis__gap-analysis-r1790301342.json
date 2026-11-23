@@ -1,0 +1,82 @@
+{
+  "gaps": [
+    {
+      "claim": "清单9指出content §2.2.3「弱场探针通道工作强度 ≤ 5×10⁸ W/cm²」与scheme §3.3.2表「弱场探针（TA / SHG）≤ 2×10⁸」差2.5倍，需锁定统一口径",
+      "missing_evidence": "缺乏TA/SHG弱场探针通道工作强度的标准阈值文献基准，无法判断≤2×10⁸ vs ≤5×10⁸ W/cm²哪个更符合实验常规",
+      "search_keywords": [
+        "transient absorption intensity threshold MoS2 WSe2",
+        "SHG pump intensity TMDC weak field probe",
+        "attosecond transient absorption intensity nonperturbative threshold",
+        "second harmonic generation TMDC pump fluence mJ/cm2"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "清单9指出content §2.1「I_c 5×10⁹–2×10¹¹ W/cm²」与scheme §3.4.1「H...」出现嵌套矛盾，需引用HHG临界强度实验标度依据",
+      "missing_evidence": "缺乏莫尔超晶格/TMDC体系中HHG临界强度I_c实验范围的标定文献，无法验证5×10⁹–2×10¹¹ W/cm²区间的物理合理性",
+      "search_keywords": [
+        "critical intensity HHG MoS2 WSe2 twisted bilayer",
+        "high harmonic generation damage threshold TMDC mid-infrared",
+        "solid HHG intensity scaling transition metal dichalcogenide",
+        "Ghimire MoS2 HHG intensity 1.3 um threshold"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "清单10指出Lian 2024在rationale出现3次、content 2次、scheme 2次，全章7处重复，需用同一物理事实的不同角度文献替代重复引用",
+      "missing_evidence": "缺乏Lian 2024（莫尔关联能隙）以外的关联绝缘体能隙ARPES/扫描隧穿实验独立佐证文献",
+      "search_keywords": [
+        "moire correlated insulator gap scanning tunneling spectroscopy",
+        "twisted bilayer graphene Mott gap meV ARPES",
+        "moire superlattice charge gap experimental measurement",
+        "Lian correlated insulator twisted bilayer graphene alternative reference"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "清单10指出创新点1–3标题与首句在content/scheme两章几乎逐字对应，需引入差异化文献支撑",
+      "missing_evidence": "缺乏莫尔势反演/贝里曲率反演/载流子动力学反演三方向的代表性独立文献来支撑各创新点的独立价值",
+      "search_keywords": [
+        "inverse problem moire potential reconstruction high harmonic",
+        "Berry curvature reconstruction attosecond HHG solid",
+        "carrier dynamics retrieval HHG inversion moire superlattice",
+        "moire potential identification ultrahigh resolution"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "锚点2指出scheme章出现「罗列技术参数替代论证」倾向——t、onsite ε、d_nm(k)等参数罗列代替物理动机叙述",
+      "missing_evidence": "缺乏TDDFT→紧束缚→SBE多尺度接口在TMDC体系HHG中精度对比基准文献，无法在scheme章给出「为什么选这个方法」的物理动机论证",
+      "search_keywords": [
+        "TDDFT tight-binding interface HHG accuracy benchmark TMDC",
+        "semiconductor Bloch equation parameterization DFT error MoS2",
+        "multiscale approach solid HHG MoS2 WSe2 validation",
+        "tight-binding TDDFT coupling solid HHG accuracy"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "rationale段200+字超长句涉及STM/电学输运两条路径局限对比，需更密集的嵌入式引用分散到子句",
+      "missing_evidence": "缺乏STM探针扰动对莫尔势表面态测量影响的定量文献，以及电学输运时间分辨率极限的标定文献",
+      "search_keywords": [
+        "STM tip perturbation moire surface state measurement",
+        "scanning tunneling spectroscopy moire superlattice artifact",
+        "electrical transport time resolution twisted bilayer limit",
+        "STM moire potential reconstruction tip effect"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "content §2.1假设3中n_eff≈3、m*≈0.3–0.6 mₑ、λ=3 μm等具体参数与scheme §3.3.2重叠，需独立实验文献支撑参数选择",
+      "missing_evidence": "缺乏TMDC/莫尔体系有效折射率n_eff、有效质量m*与3 μm驱动波长选择的实验基准文献",
+      "search_keywords": [
+        "MoS2 WSe2 effective refractive index mid-infrared",
+        "TMDC effective mass experimental ARPES",
+        "high harmonic generation 3 um driver wavelength TMDC",
+        "twisted bilayer MoS2 carrier effective mass 0.3 0.6 me"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "full_review"
+}

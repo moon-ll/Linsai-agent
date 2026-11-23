@@ -1,0 +1,398 @@
+{
+ "1": {
+  "entry": "A. Kato, N. Yokoshi, Description of molecular chirality and its analysis with high harmonic generation, Phys. Rev. B 110, 085308 (2024). DOI: 10.1103/PhysRevB.110.085308",
+  "doi": "10.1103/PhysRevB.110.085308",
+  "arxiv": null,
+  "crossref": {
+   "title": "Description of molecular chirality and its analysis with high harmonic generation",
+   "journal": "Physical Review B",
+   "volume": "110",
+   "page": null,
+   "article": "085308",
+   "year": 2024,
+   "authors": [
+    "Kato",
+    "Yokoshi"
+   ],
+   "nauthors": 2
+  }
+ },
+ "4": {
+  "entry": "M. Han, J.-B. Ji, A. Blech, et al., Attosecond control and measurement of chiral photoionization dynamics, Nature 645, 95–100 (2025). DOI: 10.1038/s41586-025-09455-4",
+  "doi": "10.1038/s41586-025-09455-4",
+  "arxiv": null,
+  "crossref": {
+   "title": "Attosecond control and measurement of chiral photoionization dynamics",
+   "journal": "Nature",
+   "volume": "645",
+   "page": "95-100",
+   "article": null,
+   "year": 2025,
+   "authors": [
+    "Han",
+    "Ji",
+    "Blech",
+    "Goetz",
+    "Allison",
+    "Greenman",
+    "Koch",
+    "Wörner"
+   ],
+   "nauthors": 8
+  }
+ },
+ "9": {
+  "entry": "Y. S. You, Y. Yin, Y. Wu, et al., High-harmonic generation in amorphous solids, Nat. Commun. 8, 724 (2017). DOI: 10.1038/s41467-017-00989-4",
+  "doi": "10.1038/s41467-017-00989-4",
+  "arxiv": null,
+  "crossref": {
+   "title": "High-harmonic generation in amorphous solids",
+   "journal": "Nature Communications",
+   "volume": "8",
+   "page": null,
+   "article": "724",
+   "year": 2017,
+   "authors": [
+    "You",
+    "Yin",
+    "Wu",
+    "Chew",
+    "Ren",
+    "Zhuang",
+    "Gholam-Mirzaei",
+    "Chini",
+    "Chang",
+    "Ghimire"
+   ],
+   "nauthors": 10
+  }
+ },
+ "11": {
+  "entry": "T. Apostolova, B. Kiss, D. Rajak, et al., Orientation-dependent high harmonic generation in ZnO, Appl. Phys. B 132, 84 (2026). DOI: 10.1007/s00340-026-08680-7",
+  "doi": "10.1007/s00340-026-08680-7",
+  "arxiv": null,
+  "crossref": {
+   "title": "Orientation-dependent high harmonic generation in ZnO",
+   "journal": "Applied Physics B",
+   "volume": "132",
+   "page": null,
+   "article": "84",
+   "year": 2026,
+   "authors": [
+    "Apostolova",
+    "Kiss",
+    "Rajak",
+    "Pirisi",
+    "Shrestha",
+    "Abrok",
+    "Obreshkov",
+    "Kieffer",
+    "Velkov",
+    "Thoma"
+   ],
+   "nauthors": 10
+  }
+ },
+ "13": {
+  "entry": "Y. Ominato, M. Mochizuki, Circular dichroism in second- and third-harmonic generation in the chiral topological semimetal CoSi, Phys. Rev. B 114, 214306 (2026). DOI: 10.1103/fytr-8vtm",
+  "doi": "10.1103/fytr-8vtm",
+  "arxiv": null,
+  "crossref": {
+   "title": "Circular dichroism in second- and third-harmonic generation in the chiral topological semimetal CoSi",
+   "journal": "Physical Review B",
+   "volume": "114",
+   "page": null,
+   "article": "214306",
+   "year": 2026,
+   "authors": [
+    "Ominato",
+    "Mochizuki"
+   ],
+   "nauthors": 2
+  }
+ },
+ "14": {
+  "entry": "H. Chen, Q. Wang, X. Feng, et al., Phonon Chirality Manipulation Mechanism in Transition-Metal Dichalcogenide Interlayer-Sliding Ferroelectrics, Nano Lett. 23, 11266-11271 (2023). DOI: 10.1021/acs.nanolett.3c03787",
+  "doi": "10.1021/acs.nanolett.3c03787",
+  "arxiv": null,
+  "crossref": {
+   "title": "Phonon Chirality Manipulation Mechanism in Transition-Metal Dichalcogenide Interlayer-Sliding Ferroelectrics",
+   "journal": "Nano Letters",
+   "volume": "23",
+   "page": "11266-11271",
+   "article": null,
+   "year": 2023,
+   "authors": [
+    "Chen",
+    "Wang",
+    "Feng",
+    "Wu",
+    "Zhang"
+   ],
+   "nauthors": 5
+  }
+ },
+ "15": {
+  "entry": "D. Wu, Y. Xu, M. Ye, et al., Spin-chirality-driven second-harmonic generation in two-dimensional magnet CrSBr, Science Advances 11, eadu6562 (2025). DOI: 10.1126/sciadv.adu6562",
+  "doi": "10.1126/sciadv.adu6562",
+  "arxiv": null,
+  "crossref": {
+   "title": "Spin-chirality-driven second-harmonic generation in two-dimensional magnet CrSBr",
+   "journal": "Science Advances",
+   "volume": "11",
+   "page": null,
+   "article": "eadu6562",
+   "year": 2025,
+   "authors": [
+    "Wu",
+    "Xu",
+    "Ye",
+    "Duan"
+   ],
+   "nauthors": 4
+  }
+ },
+ "16": {
+  "entry": "D. Ayuso, A. F. Ordonez, P. Decleva, M. Ivanov, O. Smirnova, Enantio-sensitive unidirectional light bending, Nat. Commun. 12, 3951 (2021). DOI: 10.1038/s41467-021-24118-4（该文即 arXiv:2004.05191 所载 chirality polarization 概念工作的正式发表版）.",
+  "doi": "10.1038/s41467-021-24118-4",
+  "arxiv": "2004.05191",
+  "crossref": {
+   "title": "Enantio-sensitive unidirectional light bending",
+   "journal": "Nature Communications",
+   "volume": "12",
+   "page": null,
+   "article": "3951",
+   "year": 2021,
+   "authors": [
+    "Ayuso",
+    "Ordonez",
+    "Decleva",
+    "Ivanov",
+    "Smirnova"
+   ],
+   "nauthors": 5
+  }
+ },
+ "17": {
+  "entry": "P. Jangid, M. A. Vincenti, L. Carletti, et al., Chiral high-harmonic generation in metasurfaces, ACS Photonics 12, 4342–4348 (2025). DOI: 10.1021/acsphotonics.5c00648",
+  "doi": "10.1021/acsphotonics.5c00648",
+  "arxiv": null,
+  "crossref": {
+   "title": "Chiral High-Harmonic Generation in Metasurfaces",
+   "journal": "ACS Photonics",
+   "volume": "12",
+   "page": "4342-4348",
+   "article": null,
+   "year": 2025,
+   "authors": [
+    "Jangid",
+    "Vincenti",
+    "Carletti",
+    "Rudenko",
+    "Kivshar",
+    "Kruk"
+   ],
+   "nauthors": 6
+  }
+ },
+ "22": {
+  "entry": "A. F. Ordonez, A. Roos, P. M. Maier, et al., Geometry of chiral temporal structures. I. Physical effects, Phys. Rev. A 113, 013110 (2026). DOI: 10.1103/xcfl-mqpg（预印本 arXiv:2409.02500）",
+  "doi": "10.1103/xcfl-mqpg",
+  "arxiv": "2409.02500",
+  "crossref": {
+   "title": "Geometry of chiral temporal structures. I. Physical effects",
+   "journal": "Physical Review A",
+   "volume": "113",
+   "page": null,
+   "article": "013110",
+   "year": 2026,
+   "authors": [
+    "Ordonez",
+    "Roos",
+    "Maier",
+    "Decleva",
+    "Ayuso",
+    "Smirnova"
+   ],
+   "nauthors": 6
+  }
+ },
+ "24": {
+  "entry": "Y. Bai, H. Xu, Y. Ma, et al., Chiral High-Harmonic Generation via Subcycle Symmetry Engineering, Phys. Rev. Lett. 137, 116905 (2026). DOI: 10.1103/cpfx-c9h9",
+  "doi": "10.1103/cpfx-c9h9",
+  "arxiv": null,
+  "crossref": {
+   "title": "Chiral High-Harmonic Generation via Subcycle Symmetry Engineering",
+   "journal": "Physical Review Letters",
+   "volume": "137",
+   "page": null,
+   "article": "116905",
+   "year": 2026,
+   "authors": [
+    "Bai",
+    "Xu",
+    "Ma",
+    "Wang",
+    "Niu",
+    "Liu",
+    "Liu",
+    "Li"
+   ],
+   "nauthors": 8
+  }
+ },
+ "33": {
+  "entry": "T. Heinrich, M. Taucer, O. Kfir, et al., Chiral high-harmonic generation and spectroscopy on solid surfaces using polarization-tailored strong fields, Nat. Commun. 12, 3723 (2021). DOI: 10.1038/s41467-021-23999-9",
+  "doi": "10.1038/s41467-021-23999-9",
+  "arxiv": null,
+  "crossref": {
+   "title": "Chiral high-harmonic generation and spectroscopy on solid surfaces using polarization-tailored strong fields",
+   "journal": "Nature Communications",
+   "volume": "12",
+   "page": null,
+   "article": "3723",
+   "year": 2021,
+   "authors": [
+    "Heinrich",
+    "Taucer",
+    "Kfir",
+    "Corkum",
+    "Staudte",
+    "Ropers",
+    "Sivis"
+   ],
+   "nauthors": 7
+  }
+ },
+ "35": {
+  "entry": "C. R. McDonald, G. Vampa, P. B. Corkum, et al., Interband Bloch oscillation mechanism for high-harmonic generation in semiconductor crystals, Phys. Rev. A 92, 033845 (2015). DOI: 10.1103/PhysRevA.92.033845",
+  "doi": "10.1103/PhysRevA.92.033845",
+  "arxiv": null,
+  "crossref": {
+   "title": "Interband Bloch oscillation mechanism for high-harmonic generation in semiconductor crystals",
+   "journal": "Physical Review A",
+   "volume": "92",
+   "page": null,
+   "article": "033845",
+   "year": 2015,
+   "authors": [
+    "McDonald",
+    "Vampa",
+    "Corkum",
+    "Brabec"
+   ],
+   "nauthors": 4
+  }
+ },
+ "36": {
+  "entry": "J. Zhang, Z. Wang, F. Lengers, et al., High-harmonic spectroscopy probes lattice dynamics, Nat. Photonics 18, 792-798 (2024). DOI: 10.1038/s41566-024-01457-4",
+  "doi": "10.1038/s41566-024-01457-4",
+  "arxiv": null,
+  "crossref": {
+   "title": "High-harmonic spectroscopy probes lattice dynamics",
+   "journal": "Nature Photonics",
+   "volume": "18",
+   "page": "792-798",
+   "article": null,
+   "year": 2024,
+   "authors": [
+    "Zhang",
+    "Wang",
+    "Lengers",
+    "Wigger",
+    "Reiter",
+    "Kuhn",
+    "Wörner",
+    "Luu"
+   ],
+   "nauthors": 8
+  }
+ },
+ "37": {
+  "entry": "C. Heide, Y. Kobayashi, A. C. Johnson, et al., High-harmonic generation from artificially stacked 2D crystals, Nanophotonics 12, 255-261 (2023). DOI: 10.1515/nanoph-2022-0595",
+  "doi": "10.1515/nanoph-2022-0595",
+  "arxiv": null,
+  "crossref": {
+   "title": "High‐harmonic generation from artificially stacked 2D crystals",
+   "journal": "Nanophotonics",
+   "volume": "12",
+   "page": "255-261",
+   "article": null,
+   "year": 2023,
+   "authors": [
+    "Heide",
+    "Kobayashi",
+    "Johnson",
+    "Heinz",
+    "Reis",
+    "Liu",
+    "Ghimire"
+   ],
+   "nauthors": 7
+  }
+ },
+ "38": {
+  "entry": "D. Spirito, S. Marras, B. Martín-García, Lattice dynamics in chiral tellurium by linear and circularly polarized Raman spectroscopy: crystal orientation and handedness, J. Mater. Chem. C 12, 2544-2551 (2024). DOI: 10.1039/d3tc04333a",
+  "doi": "10.1039/d3tc04333a",
+  "arxiv": null,
+  "crossref": {
+   "title": "Lattice dynamics in chiral tellurium by linear and circularly polarized Raman spectroscopy: crystal orientation and handedness",
+   "journal": "Journal of Materials Chemistry C",
+   "volume": "12",
+   "page": "2544-2551",
+   "article": null,
+   "year": 2024,
+   "authors": [
+    "Spirito",
+    "Marras",
+    "Martín-García"
+   ],
+   "nauthors": 3
+  }
+ },
+ "40": {
+  "entry": "K. Ohe, H. Shishido, M. Kato, et al., Chirality-Induced Selectivity of Phonon Angular Momenta in Chiral Quartz Crystals, Phys. Rev. Lett. 132, 056302 (2024). DOI: 10.1103/PhysRevLett.132.056302",
+  "doi": "10.1103/PhysRevLett.132.056302",
+  "arxiv": null,
+  "crossref": {
+   "title": "Chirality-Induced Selectivity of Phonon Angular Momenta in Chiral Quartz Crystals",
+   "journal": "Physical Review Letters",
+   "volume": "132",
+   "page": null,
+   "article": "056302",
+   "year": 2024,
+   "authors": [
+    "Ohe",
+    "Shishido",
+    "Kato",
+    "Utsumi",
+    "Matsuura",
+    "Togawa"
+   ],
+   "nauthors": 6
+  }
+ },
+ "42": {
+  "entry": "D. Baykusheva, D. Zindel, V. Svoboda, et al., Real-time probing of chirality during a chemical reaction, Proc. Natl. Acad. Sci. 116, 23923-23929 (2019). DOI: 10.1073/pnas.1907189116（预印本 arXiv:1906.10818）",
+  "doi": "10.1073/pnas.1907189116",
+  "arxiv": "1906.10818",
+  "crossref": {
+   "title": "Real-time probing of chirality during a chemical reaction",
+   "journal": "Proceedings of the National Academy of Sciences",
+   "volume": "116",
+   "page": "23923-23929",
+   "article": null,
+   "year": 2019,
+   "authors": [
+    "Baykusheva",
+    "Zindel",
+    "Svoboda",
+    "Bommeli",
+    "Ochsner",
+    "Tehlar",
+    "Wörner"
+   ],
+   "nauthors": 7
+  }
+ }
+}

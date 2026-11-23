@@ -1,0 +1,92 @@
+{
+  "gaps": [
+    {
+      "claim": "scheme.md L27 引用 Uzner & Neufeld arXiv:2604.23506，但该文献未收录于 references.md（幽灵引用）",
+      "missing_evidence": "该引用在 references.md 中无对应条目，无法核实原文是否真实存在及内容相关性",
+      "search_keywords": [
+        "Uzner Neufeld high harmonic generation 2025",
+        " Uzner Neufeld arXiv 2604.23506",
+        "quantum enhanced HHG solid state"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "scheme.md L53/L73 引用 Rost CrSb 实验先例错标为 [68]，实为 [67]",
+      "missing_evidence": "文献编号错配导致评审人无法溯源至正确文献，引用真实性存疑",
+      "search_keywords": [
+        "Rost CrSb high harmonic generation spin-resolved 2025",
+        "arXiv 2507.02673 altermagnet HHG",
+        "CrSb spin-polarized high harmonic experimental"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "scheme.md L27/Wang-Zhang 三处跨章交叉引用 [59]/[60]/[61] 全部错位",
+      "missing_evidence": "跨章节编号错配导致引用链条断裂，评审人无法追踪论据来源",
+      "search_keywords": [
+        "scheme.md L27 cross-citation verification",
+        "Wang Zhang solid state HHG theoretical framework"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "[69] Weber 元数据瑕疵存在扩散风险",
+      "missing_evidence": "Weber 文献的元数据错误可能影响依赖该文献的相关论点，需要核实并修正",
+      "search_keywords": [
+        "Weber altermagnet high harmonic generation theory",
+        "Weber spin-splitting altermagnet nonlinear"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "信号 1% / SNR>5 阈值的预研数据未在 scheme.md 中独立支撑",
+      "missing_evidence": "研究方案中提出的信噪比阈值缺乏独立预研数据支撑，可行性论证不完整",
+      "search_keywords": [
+        "solid-state HHG signal-to-noise ratio measurement",
+        "HHG shot noise floor photon count limit",
+        "CrSb high harmonic generation photon flux"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "CrSb 飞秒激光损伤阈值未提供文献或实验数据支撑",
+      "missing_evidence": "研究方案涉及 CrSb 强场光学激发，但未给出材料损伤阈值的文献依据",
+      "search_keywords": [
+        "CrSb ultrafast laser damage threshold",
+        "CrSb femtosecond laser damage",
+        "CrSb strong-field optical excitation stability"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "半导体布洛赫方程（SBE）在强场下的适用性边界未提供文献支撑",
+      "missing_evidence": "研究方案采用 SBE 理论框架，但未引用其强场极限 validity 的验证文献",
+      "search_keywords": [
+        "semiconductor Bloch equation strong field validity V/Angstrom",
+        "SBE breakdown criterion strong field solid",
+        "interband coupling saturation strong field limit"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Fisher 信息矩阵条件数 κ<10² 作为可辨识性判据缺乏文献依据",
+      "missing_evidence": "研究方案提出 κ<10² 的可辨识性阈值，但未引用非线性光学反演中 condition number 阈值设定的先例",
+      "search_keywords": [
+        "Fisher information matrix condition number nonlinear optics",
+        "condition number optical parameter inversion HHG",
+        "parameter identifiability high harmonic generation"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "altermagnet HHG 场强范围（实验可行性窗口）未提供文献锚点",
+      "missing_evidence": "研究方案讨论 altermagnet HHG 实验场强范围，但未引用已报道的实验场强数据",
+      "search_keywords": [
+        "altermagnet high harmonic generation field strength range",
+        "CrSb HHG yield experimental field",
+        "MnTe altermagnet femtosecond damage threshold"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

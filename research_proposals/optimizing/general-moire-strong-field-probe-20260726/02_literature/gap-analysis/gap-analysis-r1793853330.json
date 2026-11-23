@@ -1,0 +1,38 @@
+{
+  "gaps": [
+    {
+      "claim": "§1.4将Molinero等2024年的magic-angle TBG强场高次谐波结果表述为“实测谱”。",
+      "missing_evidence": "现有引文[6]实际为纯理论数值模拟工作，不能支持“实验实测谱”的文献属性。需要核对原始论文的出版类型、方法和图表，改为“数值模拟谱”；若必须保留“实测谱”论断，则需补充真正基于实验测量的magic-angle TBG高次谐波光谱文献，并核实其是否报告了所述谐波抑制现象及角度依赖。",
+      "search_keywords": [
+        "Molinero 2024 Optica magic-angle twisted bilayer graphene high harmonic generation",
+        "Molinero magic-angle TBG HHG numerical simulation spectrum",
+        "magic-angle twisted bilayer graphene high harmonic generation experiment spectrum",
+        "magic-angle TBG strong-field HHG measured harmonic suppression"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.4关于Velsink工作所给出的“数倍至数十倍增益”可能低估了原论文报告的“数个量级增益”。",
+      "missing_evidence": "需要依据Velsink原始论文及其补充材料核定增益的定义、参考基线、测量或计算条件、脉冲选择条件和适用区间，并为“数个量级”的定量表述配置直接引文。当前弱化表述不能准确呈现原文结果，也不足以支撑后续可实现的强场增益判断。",
+      "search_keywords": [
+        "Velsink several orders of magnitude gain high harmonic generation",
+        "Velsink strong-field high harmonic generation pulse selection",
+        "Velsink solid-state high harmonic spectroscopy enhancement",
+        "Velsink high harmonic generation supplementary information"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.1声称所引综述已将关联态、堆垛结构和超导序参量“统一纳入同一框架”。",
+      "missing_evidence": "现有综述的原始表述仅支持其将三类现象整理为统一的微观结构图像，不足以证明其提出了统一理论框架。需要核对综述原文的论断范围并相应收窄引文归因；若坚持该强论断，应补充明确建立关联、堆垛与超导序参量共同描述框架的理论或综述文献。",
+      "search_keywords": [
+        "moiré correlated states stacking superconducting order parameter unified framework review",
+        "twisted bilayer graphene correlation stacking superconductivity common theoretical framework",
+        "magic-angle moiré superconductivity correlated insulator microscopic picture review",
+        "moiré superlattice correlated insulator superconductivity order parameter theory"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "rationale"
+}

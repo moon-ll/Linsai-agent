@@ -1,0 +1,16 @@
+{
+  "gaps": [
+    {
+      "claim": "立项依据 §3.2 L89 与 §4 L119 三处具名使用 Verner–Yakovlev 分壳层光电离截面拟合数据作为靶材参数与设计阈值的计算数据源",
+      "missing_evidence": "Verner–Yakovlev 原子分壳层光电离截面解析拟合的正式文献条目（应为 Verner et al. 1996, ApJS, analytic fits for partial photoionization cross sections 一类论文）；references 现有 40 条中无对应条目，数据源具名三用却零 [N] 标注，违反严谨性『带出处』要求",
+      "search_keywords": [
+        "Verner Yakovlev 1996 photoionization cross sections",
+        "analytic fits partial photoionization cross sections ApJS",
+        "atomic subshell photoionization cross section data",
+        "Verner Ferland 1996 atomic data opacity"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

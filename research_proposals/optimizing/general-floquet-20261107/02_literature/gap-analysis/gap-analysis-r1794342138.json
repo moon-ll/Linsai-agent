@@ -1,0 +1,26 @@
+{
+  "gaps": [
+    {
+      "claim": "判据表以 arXiv:2605.31411 Table 1 的 23 条自旋点群为基表，并据此展开 23×3=69 行劈裂判据（§2.5 目标二），该核心量化基表唯一依赖单一预印本，无独立文献交叉印证",
+      "missing_evidence": "对该预印本 Table 1 的 23 条自旋点群分类口径的独立二次核验文献（同行评审版本、综述或后续引用该表的研究），确认条目数、对称性分类约定与适用边界，避免核心论断建立在未验证预印本之上",
+      "search_keywords": [
+        "spin point group classification",
+        "altermagnetic spin splitting",
+        "Floquet engineering antiferromagnet",
+        "magnetic point group co-representation",
+        "MnPS3 symmetry"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "参考文献 refs[20] 被实引用于支撑 23 条自旋点群基表，但条目缺题名与年份，无法满足参考文献校验模块的完整性要求",
+      "missing_evidence": "该条目的完整题录元数据（题名、作者、年份、版本号），需经 arXiv 列表页或学术数据库核实后补入 references.md",
+      "search_keywords": [
+        "arXiv:2605.31411",
+        "spin point groups"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

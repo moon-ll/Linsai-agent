@@ -1,0 +1,100 @@
+{
+  "gaps": [
+    {
+      "claim": "Houston 基展开可求解半导体布洛赫方程，并在 Kronig-Penney 势拟合的 MgO 能带中分解多带强场动力学",
+      "missing_evidence": "缺少支撑 Houston 基方法、Kronig-Penney 势与 MgO 能带拟合、以及多带半导体布洛赫方程分解的奠基性与方法学论文（锚点仅 3 篇，需扩至 30-40 篇）",
+      "search_keywords": [
+        "Houston basis semiconductor Bloch equation",
+        "Kronig-Penney potential MgO band structure",
+        "multi-band strong-field dynamics solid HHG",
+        "non-perturbative high harmonic generation ZnO crystal"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "高次谐波产生是飞秒激光与物质相互作用的高阶非线性、非微扰现象（开篇定义句）",
+      "missing_evidence": "缺少对固体高次谐波产生非微扰特性的综述性奠基文献，须给出经典定义与早期实验观测的 [N] 嵌入式引用",
+      "search_keywords": [
+        "high-order harmonic generation review solid-state",
+        "non-perturbative high harmonic generation crystal",
+        "mid-infrared driver ZnO Ghimire 2011",
+        "固体高次谐波产生 综述"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Ghimire 等人 2011 年使用中红外激光驱动 ZnO 晶体观测到非微扰高次谐波产生（锚点末句）",
+      "missing_evidence": "缺少对该实验的正式期刊引用及其后续延伸工作（晶带结构、偏振依赖、截止定律等）的引文链",
+      "search_keywords": [
+        "Ghimire 2011 ZnO high harmonic generation",
+        "non-perturbative HHG ZnO crystal mid-infrared",
+        "solid HHG band structure experiment"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "MoS2 等过渡金属硫族化合物中存在反常高次谐波判据（横向偏振指纹、消融符号一致等）",
+      "missing_evidence": "MoS2 反常谐波判据仅有预印本或会议提及，须补引正式刊版（Nature/Nature Physics/Physical Review Letters 等）的同行评审论文",
+      "search_keywords": [
+        "MoS2 anomalous high harmonic generation",
+        "transition metal dichalcogenide HHG anomalous polarization",
+        "MoS2 Berry curvature harmonic emission",
+        "2D material HHG selection rule"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "本项目拟首次揭示固体高次谐波中 Berry 反常项的贡献（创新点(1)的\"首个\"表述）",
+      "missing_evidence": "Berry 反常项的\"首个\"优先权声明无文献或系统检索范围与截止日期佐证；Floss 等 TDDFT+Maxwell 工作已涉及缺陷局域态与传播，须检索是否存在 Berry 反常项的同类报道",
+      "search_keywords": [
+        "Berry curvature contribution high harmonic generation solid",
+        "Berry phase anomalous HHG crystal",
+        "geometric contribution strong-field response solid",
+        "topological HHG Berry anomaly"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "本项目拟首次实现三通道分解与四象限矩阵选题的跨尺度关联（创新点(3)(4)的\"首次\"表述）",
+      "missing_evidence": "三通道（Floquet/Volkov/Bloch？）分解与四象限矩阵分析框架的\"首次\"表述同样缺乏检索范围与时间截止的支撑，需补充同类方法学先驱论文",
+      "search_keywords": [
+        "Floquet-Bloch decomposition strong-field solid",
+        "multi-channel decomposition HHG",
+        "four-quadrant analysis strong-field dynamics"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "固体高次谐波中存在普适标度律与选择规则（核心科学问题）",
+      "missing_evidence": "标度律（如 λ² 截止、亚带隙阶跃等）与选择规则（晶格对称性/圆偏振选择定则）须挂文献证据；需补 Vampa、Ndabashimiye、Liu 等课题组的关键论文",
+      "search_keywords": [
+        "solid HHG scaling law cutoff",
+        "selection rule solid high harmonic generation",
+        "Vampa 2015 channel closing HHG",
+        "interband intraband current HHG crystal symmetry"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "产额偏差 ≤1 量级、相关系数 >0.8 的跨章复用指标口径（自洽性声明）",
+      "missing_evidence": "该半定量判据需引前期对照实验或同类工作（如 Floss、Yamada、Higuchi 等）以证实指标的合理性区间",
+      "search_keywords": [
+        "TDDFT Maxwell HHG yield comparison experiment",
+        "solid HHG yield deviation benchmark",
+        "first-principles HHG agreement experiment"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "references.md 已列明全部编号与 DOI（自引承诺）",
+      "missing_evidence": "references.md 实测 0 字节，无任何编号、DOI 或条目；须建立完整参考文献表（≥30 条），覆盖方法、应用、判据三大类",
+      "search_keywords": [
+        "seminal references solid HHG",
+        "Bloch equation strong-field review",
+        "nonperturbative nonlinear optics crystal review"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "rationale"
+}

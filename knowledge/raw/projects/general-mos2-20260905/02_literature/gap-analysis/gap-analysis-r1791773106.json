@@ -1,0 +1,49 @@
+{
+  "gaps": [
+    {
+      "claim": "WSe₂导带低—MoS₂价带顶相对位置5—6 eV（§1 L19），被报告指出与[34]实测的VBO 0.83/CBO 0.76 eV复算矛盾，实文无该值，且与L11 CBO 0.76直接互斥",
+      "missing_evidence": "需要一个能支撑'5—6 eV电子对间距'或'高导带联合态密度'的第三方可复算出处；或者该数值应删除并代以[34]可支撑的1.1—2.6 eV区间",
+      "search_keywords": [
+        "WSe2 MoS2 band alignment type II",
+        "VBO CBO heterostructure XPS measurement",
+        "conduction band offset TMD heterostructure",
+        "WSe2 MoS2 joint density of states high energy"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.5 '国内相关研究现状'段落（首线L89）",
+      "missing_evidence": "缺少国内（中国大陆/港澳台）团队在MoS₂莫尔超晶格、扭转异质结或相关激发态动力学方向的代表性工作作为锚定引用；当前仅挂Ikeda[16]（日本）、Patra/Cocchi[28]（德国）",
+      "search_keywords": [
+        "中国 MoS2 莫尔超晶格 实验",
+        "twisted TMD China research group",
+        "国内 二维莫尔 激子 综述",
+        "Chinese institute MoS2 heterostructure spectroscopy"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "'多 petahertz 细节提取'（L29）",
+      "missing_evidence": "该说法需挂[3]（或其他多petahertz光谱/阿秒动力学文献）作为机制出处，目前无引用支撑",
+      "search_keywords": [
+        "multi-petahertz spectroscopy TMD",
+        "attosecond dynamics MoS2",
+        "sub-cycle electron dynamics 2D material",
+        "petahertz high harmonic 2D material"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "'相干长度（百纳米量级）'（L45）",
+      "missing_evidence": "缺少对'相干长度'所指（激子相干长度、场相干长度、还是相位匹配长度）的明确定义，以及支撑'百纳米量级'数值的文献来源",
+      "search_keywords": [
+        "exciton coherence length MoS2",
+        "dephasing length TMD monolayer",
+        "spatial coherence 2D semiconductor",
+        "coherence length heterostructure experimental"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

@@ -1,0 +1,105 @@
+{
+  "gaps": [
+    {
+      "claim": "MoS₂/WSe₂扭转异质结莫尔周期 L = a(1+δ)/√(δ²+θ²) 随扭转角 θ 的标度关系",
+      "missing_evidence": "缺少扭转异质结莫尔周期公式与13.4°/30°对应数值的权威文献或教科书锚点（现8 nm/5 nm 与 1/θ 标度及物理计算均不自洽）",
+      "search_keywords": [
+        "moire superlattice lattice constant formula",
+        "MoS2 WSe2 heterobilayer moire period twist angle",
+        "twisted bilayer TMD moire wavelength scaling"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "H-堆垛 (2H) 同质双层 MoS₂ 在 θ=0° 时的有效点群与 σ_d/i 元素归属",
+      "missing_evidence": "缺少H型AA'堆垛D₃d点群的对称元素枚举（σ_d vs σ_h、i 是否存在）的群论权威表述",
+      "search_keywords": [
+        "D3d point group character table mirror inversion",
+        "2H MoS2 D3d symmetry elements",
+        "AA stacking transition metal dichalcogenide group theory"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "扭转破坏同质双层镜面对称性的具体群论后果（破坏 σ_h 还是 σ_d 与 C₂）",
+      "missing_evidence": "缺少扭转角偏离0°/60°后点群从D₃d到C₃/D₃的群论推导及镜面破坏机制的实验/理论文献",
+      "search_keywords": [
+        "twisted homobilayer TMD symmetry breaking C3",
+        "moire superlattice group theory broken mirror",
+        "Patra twisted MoS2 SHG C3 symmetry"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Peterka 等人 MoS₂ 高次谐波工作中扭转角 0° vs 60° 的实验谐波各向异性数据",
+      "missing_evidence": "缺少 Peterka 2023 MoS₂ HHG 论文（APL Photonics 8, 086103 / arXiv:2504.02567）实测扭转角依赖HHG各向异性的具体数值与对称性归类",
+      "search_keywords": [
+        "Peterka MoS2 high harmonic generation APL Photonics 2023",
+        "MoS2 twisted bilayer HHG anisotropy experimental",
+        "Peterka resonant excitation TMD harmonic"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "扭转双层 MoS₂ 在小角度（魔角附近）莫尔势与层间势差对谐波选择定则的影响",
+      "missing_evidence": "缺少小扭转角下莫尔势对谐波选择定则的实验/第一性原理预测文献",
+      "search_keywords": [
+        "small twist angle MoS2 moire potential HHG selection rule",
+        "magic angle homobilayer TMD harmonic selection rule",
+        "moire potential broken symmetry HHG prediction"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "国内 MoS₂ 扭转异质结强场高次谐波实验课题组的工作及 ±0.3° 扭转角标定精度",
+      "missing_evidence": "缺少陆培祥团队（Liu et al.）扭转MoS₂/WSe₂ HHG实验中扭转角标定精度与方法的具体引用支撑",
+      "search_keywords": [
+        "陆培祥 MoS2 扭转 高次谐波",
+        "Liu Peixiang twisted TMD high harmonic generation",
+        "国内 扭转角 标定 高次谐波"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "驱动激光相干长度 100—300 nm 的定义与典型值范围",
+      "missing_evidence": "缺少数百nm相干长度作为固体HHG驱动场指标的文献锚点",
+      "search_keywords": [
+        "coherence length mid-infrared driver solid HHG",
+        "driver field coherence length crystal HHG typical value",
+        "mid-IR coherence length HHG review"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "应变 ε 0.05—0.15 在扭转 TMD 异质结中的典型区间",
+      "missing_evidence": "缺少扭转 TMD 异质结天然应变典型数值范围的实验或综述锚点",
+      "search_keywords": [
+        "strain twisted bilayer TMD typical value",
+        "heterostrain homobilayer MoS2 experimental",
+        "moire strain engineering TMD review"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "扭转双层MoS₂ 同步辐射α_syn双扫判据的物理先例",
+      "missing_evidence": "缺少α_syn协同诊断判据在HHG/扭转体系中的原始文献支撑（仅自创无外部benchmark）",
+      "search_keywords": [
+        "synchronization metric HHG solid state",
+        "synchronization index ultrafast spectroscopy criterion",
+        "alpha synchronization harmonic generation"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "扭转 TMD 中 DBR 备份测量 13—15 阶弱谐波信号的先例与灵敏度",
+      "missing_evidence": "缺少DBR（distributed Bragg reflector）增强固体HHG弱谐波信号的实验文献",
+      "search_keywords": [
+        "DBR enhanced high harmonic generation solid",
+        "distributed Bragg reflector weak HHG signal enhancement",
+        "cavity enhanced solid HHG TMD"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

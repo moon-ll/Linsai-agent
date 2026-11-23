@@ -1,0 +1,38 @@
+{
+  "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
+  "cluster_id": "cl_20260919_af1842",
+  "entries": [
+    {
+      "source_id": "paper:2025-2505.21293-strain-controlled-g-to-d-wave-transition-in-altermagnetic-cr",
+      "title": "Strain-controlled g- to d-wave transition in altermagnetic CrSb",
+      "summary": "本文通过磁性点群对称性分析结合第一性原理计算证明，CrSb的交变磁自旋劈裂对称性可通过外延应变从g-波连续调控至d-波，即应变可作为操纵非相对论性自旋劈裂k空间节点结构的直接手段。文中确定了发生对称性转换所需的应变方向与幅度，并预言约1%应变下自旋分裂器效应可提升约5%。这为应变工程调控交变磁序的功能响应提供了明确的材料级方案。",
+      "path": "knowledge/raw/papers/2025-2505.21293-strain-controlled-g-to-d-wave-transition-in-altermagnetic-cr.md",
+      "added_via": "cluster:cl_20260919_af1842",
+      "added_at": "2026-09-20T03:30:25Z"
+    },
+    {
+      "source_id": "paper:2025-2506.05454-tailoring-altermagnetic-spin-splitting-via-strain-induced-sy",
+      "title": "Tailoring Altermagnetic Spin Splitting via Strain-Induced Symmetry Lowering in CrSb",
+      "summary": "本文以原型交替磁体 CrSb 为对象，系统研究应变诱导的晶格对称性降低如何调控其 ~1 eV 量级的巨交替磁自旋劈裂。通过施加受控应变去除特定对称元素，改变磁性空间群对能带自旋劈裂的约束，从而在动量空间中重新分配、增强或解除简并的交换型自旋劈裂。该工作确立了'对称性工程'作为调控交替磁自旋劈裂的可行路线。",
+      "path": "knowledge/raw/papers/2025-2506.05454-tailoring-altermagnetic-spin-splitting-via-strain-induced-sy.md",
+      "added_via": "cluster:cl_20260919_af1842",
+      "added_at": "2026-09-20T03:30:25Z"
+    },
+    {
+      "source_id": "paper:2025-2512.07683-extreme-strain-controlled-correlated-metal-insulator-transit",
+      "title": "Extreme Strain Controlled Correlated Metal-Insulator Transition in CrSb",
+      "summary": "该文报道在交错磁体 CrSb 中通过极端应变实现关联驱动的金属-绝缘体转变，将平带物理与交错磁性统一于同一应变调控框架。极端形变下能带大幅变窄乃至平带化，使关联效应增强并打开 Mott 型能隙，同时动量空间的自旋劈裂织构随应变演化出独特形态。这为应变/衬底/压力调控关联量子物态与自旋电子学提供了一个新的材料平台。",
+      "path": "knowledge/raw/papers/2025-2512.07683-extreme-strain-controlled-correlated-metal-insulator-transit.md",
+      "added_via": "cluster:cl_20260919_af1842",
+      "added_at": "2026-09-20T03:30:25Z"
+    },
+    {
+      "source_id": "paper:2026-2609.11346-correlation-enhanced-altermagnetism-mediated-by-spin-lattice",
+      "title": "Correlation enhanced altermagnetism mediated by spin-lattice coupling in CrSb",
+      "summary": "在原型交错磁体 CrSb 中证明电子关联与自旋-晶格耦合的协同作用可显著放大动量依赖的自旋能带劈裂（即'关联增强型交错磁性'），同时保持净磁矩为零的补偿反铁磁序。结果表明常规 DFT 会系统性低估 CrSb 的自旋劈裂幅度，电子关联与晶格自由度是定量预测乃至调控交错磁性的必要要素。",
+      "path": "knowledge/raw/papers/2026-2609.11346-correlation-enhanced-altermagnetism-mediated-by-spin-lattice.md",
+      "added_via": "cluster:cl_20260919_af1842",
+      "added_at": "2026-09-20T03:30:25Z"
+    }
+  ]
+}

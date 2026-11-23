@@ -1,0 +1,22 @@
+# 定向文献检索报告
+
+## 课题
+general-moire-strong-field-probe-20260726
+
+## 检索关键词
+- HHG inversion error propagation moire superlattice、high harmonic spectroscopy uncertainty quantification 2D material、twisted bilayer graphene HHG parameter retrieval error bound、altermagnet HHG error analysis experimental validation、high harmonic spectroscopy parameter identifiability data dimension、HHG inversion ill-posed dimensionality effective rank、attosecond spectroscopy Fisher information parameter retrieval、solid-state HHG parameter space dimensionality reduction experimental、moire superlattice high harmonic inversion Floquet closed loop、twisted bilayer HHG quantum geometry inversion unpublished
+
+## 检索结果
+
+- 2510.15207 | Solid-State High-Order Harmonic Generation: Emerging Frontiers in Ultrafast and Quantum Light Science | Multiple authors | 2025 | 0.92 | Comprehensive review of solid-state HHG covering moiré superlattice HHG, quantum geometry effects, and parameter retrieval approaches | 来源：本地知识库
+- 2511.13114 | Orthogonal Attosecond Control of Solid-State Harmonics by Optical Waveforms and Quantum Geometry Engineering | Zhenjiang Zhao, Zhihua Zheng, Zhiyi Xu, Xing Ran, Xiaolong Yao, Fangping Ouyang | 2025 | 0.88 | Demonstrates quantum geometry effects in WS2 HHG through strain engineering and two-color field control, relevant to quantum geometry inversion from HHG | 来源：本地知识库
+- 2510.12443 | Self-attention enabled quantum path analysis of high-harmonic generation in solids | Cong Zhao, Xiaozhou Zou | 2025 | 0.85 | Transformer-based ML approach to analyze HHG signals and disentangle quantum pathways, addresses parameter identifiability in HHG spectra | 来源：本地知识库
+- 2506.14215 | Isostructural electronic transition in MoS2 probed by solid-state high harmonic generation spectroscopy | Bailey R. Nebgen, Victor Chang Lee, Jacob A. Spies, Randy M. Sterbentz, Craig P. Schwartz, Dean Smith, Diana Y. Qiu, Michael W. Zuerch | 2025 | 0.83 | Demonstrates sHHG sensitivity to electronic structure changes under pressure, showing HHG parameter retrieval from spectral features | 来源：本地知识库
+- 2509.18483 | Physics-informed time series analysis with Kolmogorov-Arnold Networks under Ehrenfest constraints | Multiple authors | 2025 | 0.82 | KAN-Ehrenfest approach for HHG time series analysis enabling parameter retrieval from strongly nonlinear quantum-optical processes | 来源：联网检索
+- 2512.08022 | Provable Diffusion Posterior Sampling for Bayesian Inversion | Jinyuan Chang and 5 others | 2025 | 0.8 | Novel diffusion-based Bayesian inversion method with theoretical error bounds, applicable to ill-posed HHG inverse problems | 来源：联网检索
+- 2501.04545 | Hallmarks of spin textures for high-harmonic generation in two-dimensional materials | Francesco Gabriele, Carmine Ortix, Mario Cuoco, Filomena Forte | 2025 | 0.79 | Reveals HHG sensitivity to spin textures and Berry curvature in 2D materials, relevant to altermagnet HHG fingerprint analysis | 来源：联网检索
+- 2503.08052 | Phase-matching of high harmonic generation in twisted solids | Multiple authors | 2025 | 0.78 | Twist-phase-matching strategy for HHG in twisted hBN achieving record conversion efficiency, relevant to moiré superlattice HHG control | 来源：本地知识库
+- 2502.19365 | Quantum geometric moment encodes stacking order of moiré matter | Surat Layek, Subhajit Sinha, Atasi Chakraborty et al. | 2025 | 0.77 | Shows quantum geometry fingerprints of stacking order in moiré TDBG via nonlinear Hall measurements, relevant to quantum geometry inversion | 来源：联网检索
+- 2507.03675 | Wavefunction textures in twisted bilayer graphene from first principles | Albert Zhu, Daniel Bennett, Daniel T. Larson, Mohammed M. Al Ezzi, Efstratios Manousakis, Efthimios Kaxiras | 2025 | 0.75 | First-principles wavefunction analysis of tBLG revealing moiré-scale patterns and topological phase transitions | 来源：联网检索
+- 2508.05092 | Multiple quantum spin Hall states and topological current divider in Twisted Bilayer WSe2 | Hao He, Zhao Gong, Shuai Li et al. | 2025 | 0.72 | Theoretical study of topological states in twisted bilayer WSe2, relevant to HHG probe of topological phases | 来源：联网检索
+- 2511.10471 | Broadband nonlinear Hall response and multiple wave mixing in a room temperature altermagnet | Soumya Sankar, Xingkai Cheng, Xinyu Chen et al. | 2025 | 0.7 | Third-order nonlinear Hall effect in CrSb altermagnet driven by Berry curvature quadrupole, related to altermagnet nonlinear optics | 来源：本地知识库

@@ -1,0 +1,85 @@
+{
+  "generated_at": "2026-11-23T00:30:29Z",
+  "topics": {
+    "fs_counts": {
+      "questions": 1,
+      "kickoff": 0,
+      "ready": 17,
+      "active": 0,
+      "archive": 5,
+      "rejected-questions": 0
+    },
+    "index_stage_counts": {
+      "ready": 17,
+      "archive": 5,
+      "questions": 1
+    },
+    "needs_human": [],
+    "stage_drift": [],
+    "ready_oldest_days": 3.1,
+    "ready_count": 17
+  },
+  "cron": {
+    "total": 25,
+    "paused": [
+      "lc-kb-distill-sunday",
+      "lc-kb-distill-night",
+      "lc-zcode-worker"
+    ],
+    "incidents_total": 20,
+    "incidents_recent_48h": 0,
+    "incidents_last_seen": "2026-11-19T06:01:00+0800"
+  },
+  "step_usage_24h": {
+    "window_hours": 24.0,
+    "calls": 29,
+    "success": 29,
+    "failed": 0,
+    "success_rate": 1.0,
+    "tokens_total": 54666,
+    "tokens_estimated_lines": 0,
+    "elapsed_s_sum": 256.2,
+    "by_kind": {
+      "llm_router": 29
+    },
+    "top_names": {
+      "glm": 29
+    },
+    "malformed_lines_skipped": 0
+  },
+  "backup": {
+    "latest": "2026-11-22T05-00-54Z-auto.zip",
+    "age_hours": 19.2,
+    "size_mb": 6566.0,
+    "count": 7
+  },
+  "kb": {
+    "distill_remaining": 46,
+    "methods_backfill_pending": 0
+  },
+  "worklist": {
+    "total": 13,
+    "by_status": {
+      "done": 11,
+      "pending": 2
+    }
+  },
+  "monitor_state": {
+    "ok": true,
+    "issues_count": 0,
+    "high_count": 0,
+    "checked_at": "2026-11-22T22:00:21Z"
+  },
+  "disk": {
+    "free_gb": 226.9,
+    "total_gb": 460.4
+  },
+  "git": {
+    "ahead": 605,
+    "behind": 0
+  },
+  "alerts": [
+    "⚠ 远程滞后 605 commits，建议 git push origin main",
+    "○ cron 暂停中: lc-kb-distill-sunday, lc-kb-distill-night, lc-zcode-worker"
+  ]
+}

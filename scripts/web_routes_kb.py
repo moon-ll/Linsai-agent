@@ -1,0 +1,675 @@
+#!/usr/bin/env python3
+"""web_routes_kb.py — 知识库路由 Mixin。
+
+提供 KbRoutesMixin，封装知识库搜索/索引/CRUD/分类/维护/生长等 HTTP 路由：
+    - GET    /api/knowledge                    索引状态
+    - GET    /api/knowledge/search             搜索
+    - GET    /api/knowledge/raw                原始文件列表
+    - GET    /api/knowledge/wiki               wiki 页列表
+    - POST   /api/knowledge/wiki               保存 wiki 页
+    - GET    /api/knowledge/wiki/{path}        读取 wiki 页
+    - DELETE /api/knowledge/wiki/{path}        软删除 wiki 页
+    - GET    /api/knowledge/graph              知识图谱
+    - GET    /api/knowledge/related            关联概念
+    - GET    /api/knowledge/growth-log         生长日志
+    - GET    /api/knowledge/growth-candidates  生长候选
+    - GET    /api/knowledge/enriched           增强上下文
+    - GET    /api/knowledge/aliases            别名映射
+    - POST   /api/knowledge/aliases            更新别名
+    - GET    /api/knowledge/captures           对话捕获
+    - GET    /api/knowledge/health             健康度
+    - GET    /api/knowledge/categories         分类列表
+    - GET    /api/knowledge/filters            过滤器
+    - GET+POST /api/knowledge/files            文件树
+    - GET+POST /api/knowledge/file-content     文件内容
+    - POST   /api/knowledge/reindex            重建索引（后台）
+    - POST   /api/knowledge/ingest             导入原始文件
+    - POST   /api/knowledge/stub               创建 wiki 桩
+    - POST   /api/knowledge/maintenance        批处理维护
+    - POST   /api/knowledge/categories/*       分类 CRUD
+    - POST   /api/knowledge/filter             过滤页面
+    - POST   /api/knowledge/grow               智能生长
+    - POST   /api/knowledge/suggest            wiki 建议
+
+路由表格式：(HTTP方法, re.compile(正则), handler名)
+handler 签名：GET/DELETE → (self, parsed, body=None, **path_params)
+             POST/PUT   → (self, parsed, body, **path_params)
+仅使用 Python 标准库。
+"""
+
+import datetime
+import json
+import re
+import threading
+import time
+from pathlib import Path
+from urllib.parse import parse_qs
+
+import web_base
+from web_base import (
+    _log,
+    _get_file_lock,
+    _try_acquire_kb_busy,
+    _release_kb_busy,
+    _bg_tasks,
+    _bg_tasks_lock,
+    _prune_bg_tasks,
+    _safe_join,
+)
+from common import lazy_load
+import common as _cms
+
+import knowledge_base as kb
+import kb_importer as ki
+import kb_categories as kbc
+import pdf_manager as pdf_lib
+
+
+# ---------------------------------------------------------------------------
+# 路由表
+# ---------------------------------------------------------------------------
+_KB_ROUTES = [
+    # --- GET ---
+    ("GET", re.compile(r"^/api/knowledge$"), "_kb_index_status"),
+    ("GET", re.compile(r"^/api/knowledge/search$"), "_kb_search"),
+    ("GET", re.compile(r"^/api/knowledge/raw$"), "_kb_raw_files"),
+    ("GET", re.compile(r"^/api/knowledge/wiki$"), "_kb_wiki_list"),
+    ("GET", re.compile(r"^/api/knowledge/wiki/(?P<wiki_rel>.+)$"), "_kb_wiki_get"),
+    ("GET", re.compile(r"^/api/knowledge/graph$"), "_kb_graph"),
+    ("GET", re.compile(r"^/api/knowledge/related$"), "_kb_related"),
+    ("GET", re.compile(r"^/api/knowledge/growth-log$"), "_kb_growth_log"),
+    ("GET", re.compile(r"^/api/knowledge/growth-candidates$"), "_kb_growth_candidates"),
+    ("GET", re.compile(r"^/api/knowledge/enriched$"), "_kb_enriched"),
+    ("GET", re.compile(r"^/api/knowledge/aliases$"), "_kb_aliases_get"),
+    ("GET", re.compile(r"^/api/knowledge/captures$"), "_kb_captures"),
+    ("GET", re.compile(r"^/api/knowledge/health$"), "_kb_health"),
+    ("GET", re.compile(r"^/api/knowledge/categories$"), "_kb_categories"),
+    ("GET", re.compile(r"^/api/knowledge/filters$"), "_kb_filters"),
+    ("GET", re.compile(r"^/api/knowledge/files$"), "_kb_files"),
+    ("GET", re.compile(r"^/api/knowledge/file-content$"), "_kb_file_content"),
+    # --- POST ---
+    ("POST", re.compile(r"^/api/knowledge/reindex$"), "_kb_reindex"),
+    ("POST", re.compile(r"^/api/knowledge/ingest$"), "_kb_ingest"),
+    ("POST", re.compile(r"^/api/knowledge/wiki$"), "_kb_wiki_save"),
+    ("POST", re.compile(r"^/api/knowledge/stub$"), "_kb_stub"),
+    ("POST", re.compile(r"^/api/knowledge/aliases$"), "_kb_aliases_set"),
+    ("POST", re.compile(r"^/api/knowledge/maintenance$"), "_kb_maintenance"),
+    ("POST", re.compile(r"^/api/knowledge/categories/create$"), "_kb_cat_create"),
+    ("POST", re.compile(r"^/api/knowledge/categories/update$"), "_kb_cat_update"),
+    ("POST", re.compile(r"^/api/knowledge/categories/delete$"), "_kb_cat_delete"),
+    ("POST", re.compile(r"^/api/knowledge/categories/scan$"), "_kb_cat_scan"),
+    ("POST", re.compile(r"^/api/knowledge/filter$"), "_kb_filter"),
+    ("POST", re.compile(r"^/api/knowledge/files$"), "_kb_files"),
+    ("POST", re.compile(r"^/api/knowledge/file-content$"), "_kb_file_content"),
+    ("POST", re.compile(r"^/api/knowledge/grow$"), "_kb_grow"),
+    ("POST", re.compile(r"^/api/knowledge/suggest$"), "_kb_suggest"),
+    # --- PDF 原文管理 (v6.3.0) ---
+    ("GET", re.compile(r"^/api/knowledge/pdfs$"), "_kb_pdf_list"),
+    ("GET", re.compile(r"^/api/knowledge/pdfs/stats$"), "_kb_pdf_stats"),
+    ("GET", re.compile(r"^/api/knowledge/pdfs/(?P<pdf_id>[^/]+)/info$"), "_kb_pdf_info"),
+    ("GET", re.compile(r"^/api/knowledge/pdfs/(?P<pdf_id>[^/]+)/text$"), "_kb_pdf_text"),
+    ("GET", re.compile(r"^/api/knowledge/pdfs/(?P<pdf_id>[^/]+)/download$"), "_kb_pdf_download"),
+    ("GET", re.compile(r"^/api/knowledge/pdfs/(?P<pdf_id>[^/]+)/summary$"), "_kb_pdf_summary"),
+    ("POST", re.compile(r"^/api/knowledge/pdfs/upload$"), "_kb_pdf_upload"),
+    ("POST", re.compile(r"^/api/knowledge/pdfs/ensure$"), "_kb_pdf_ensure"),
+    ("POST", re.compile(r"^/api/knowledge/pdfs/(?P<pdf_id>[^/]+)/link$"), "_kb_pdf_link"),
+    ("DELETE", re.compile(r"^/api/knowledge/pdfs/(?P<pdf_id>[^/]+)$"), "_kb_pdf_delete"),
+    # --- DELETE ---
+    ("DELETE", re.compile(r"^/api/knowledge/wiki/(?P<wiki_rel>.+)$"), "_kb_wiki_delete"),
+]
+
+
+# ---------------------------------------------------------------------------
+# Mixin
+# ---------------------------------------------------------------------------
+class KbRoutesMixin:
+    """知识库路由 Mixin。"""
+
+    # --- GET ---
+
+    def _kb_index_status(self, parsed, body=None):
+        """索引状态"""
+        self._send_json(kb.get_index_status())
+
+    def _kb_search(self, parsed, body=None):
+        """搜索（支持分区过滤与分页）
+
+        查询参数：
+            q        — 查询文本
+            top_k    — 每页数量（默认5）
+            source   — all|raw|wiki|qa
+            project  — 课题分区过滤
+            type     — 文档类型过滤（concepts/methods/people/papers/projects）
+            tag      — frontmatter tags 过滤
+            stage    — growth_stage 过滤（seedling/growing/mature）
+            offset   — 分页偏移量（默认0）
+        """
+        qs = parse_qs(parsed.query)
+        query = qs.get("q", [""])[0]
+        top_k = int(qs.get("top_k", ["5"])[0])
+        source = qs.get("source", ["all"])[0]
+        project = qs.get("project", [""])[0]
+        doc_type = qs.get("type", [""])[0]
+        tag = qs.get("tag", [""])[0]
+        stage = qs.get("stage", [""])[0]
+        offset = int(qs.get("offset", ["0"])[0])
+        if not query:
+            self._send_json({"results": [], "total": 0, "offset": offset, "limit": top_k})
+            return
+        result = kb.search(query, top_k=top_k, source=source, project=project,
+                           doc_type=doc_type, tag=tag, stage=stage, offset=offset)
+        self._send_json(result)
+
+    def _kb_raw_files(self, parsed, body=None):
+        """原始文件列表"""
+        self._send_json({"files": kb.list_raw_files()})
+
+    def _kb_wiki_list(self, parsed, body=None):
+        """wiki 页列表"""
+        wiki_type = parse_qs(parsed.query).get("type", [None])[0]
+        self._send_json({"pages": kb.list_wiki_pages(wiki_type)})
+
+    def _kb_wiki_get(self, parsed, body=None, wiki_rel=None):
+        """读取 wiki 页"""
+        try:
+            safe_path = _safe_join(kb.KNOWLEDGE_DIR, "wiki", wiki_rel)
+        except ValueError:
+            self._send_json({"error": "非法路径"}, 400)
+            return
+        wiki_rel_safe = str(safe_path.relative_to(kb.KNOWLEDGE_DIR.resolve() / "wiki"))
+        page = kb.get_wiki_page(f"wiki/{wiki_rel_safe}")
+        if page:
+            self._send_json(page)
+        else:
+            self._send_json({"error": "Wiki 页面不存在"}, 404)
+
+    def _kb_graph(self, parsed, body=None):
+        """知识图谱"""
+        self._send_json(kb.get_graph_summary())
+
+    def _kb_related(self, parsed, body=None):
+        """关联概念"""
+        query = parse_qs(parsed.query).get("q", [""])[0]
+        related = kb.get_related_concepts(query, depth=1)
+        self._send_json({"concept": query, "related": related})
+
+    def _kb_growth_log(self, parsed, body=None):
+        """生长日志"""
+        limit = int(parse_qs(parsed.query).get("limit", ["50"])[0])
+        self._send_json({"log": kb.get_growth_log(limit=limit)})
+
+    def _kb_growth_candidates(self, parsed, body=None):
+        """生长候选"""
+        self._send_json({"candidates": kb.get_growth_candidates()})
+
+    def _kb_enriched(self, parsed, body=None):
+        """增强上下文"""
+        query = parse_qs(parsed.query).get("q", [""])[0]
+        self._send_json(kb.get_enriched_context(query, top_k=3))
+
+    def _kb_aliases_get(self, parsed, body=None):
+        """别名映射"""
+        aliases_path = web_base._PROJECT_ROOT / "knowledge" / "aliases.json"
+        if aliases_path.exists():
+            try:
+                with open(aliases_path, "r", encoding="utf-8") as f:
+                    data = json.load(f)
+                self._send_json({"aliases": data})
+            except Exception as e:
+                self._send_json({"aliases": {}, "error": str(e)})
+        else:
+            self._send_json({"aliases": {}})
+
+    def _kb_captures(self, parsed, body=None):
+        """对话捕获"""
+        try:
+            kc = lazy_load("kb_capture")
+            if kc:
+                self._send_json({"captures": kc.list_captures()})
+            else:
+                self._send_json({"captures": []})
+        except Exception as e:
+            self._send_json({"captures": [], "error": str(e)})
+
+    def _kb_health(self, parsed, body=None):
+        """健康度"""
+        try:
+            self._send_json(kb.get_kb_health())
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+
+    # --- PDF 原文管理 (v6.3.0) ---
+
+    def _kb_pdf_list(self, parsed, body=None):
+        """列出所有 PDF 原文（含论文池关联信息）"""
+        qs = parse_qs(parsed.query)
+        source = qs.get("source", [None])[0]
+        with_pool = qs.get("with_pool", ["true"])[0].lower() != "false"
+        lib = pdf_lib.get_library()
+        if with_pool:
+            pdfs = lib.list_with_paper_pool()
+        else:
+            pdfs = lib.list_pdfs(source=source)
+        self._send_json({"pdfs": pdfs, "total": len(pdfs)})
+
+    def _kb_pdf_stats(self, parsed, body=None):
+        """PDF 库统计信息"""
+        lib = pdf_lib.get_library()
+        self._send_json(lib.stats())
+
+    def _kb_pdf_info(self, parsed, body=None, pdf_id=None):
+        """获取单篇 PDF 元数据"""
+        lib = pdf_lib.get_library()
+        info = lib.get_info(pdf_id)
+        if not info:
+            self._send_json({"error": "PDF 不存在"}, 404)
+            return
+        self._send_json(info)
+
+    def _kb_pdf_text(self, parsed, body=None, pdf_id=None):
+        """获取 PDF 提取的全文文本（带缓存）
+
+        查询参数 force=true 强制重新提取
+        """
+        qs = parse_qs(parsed.query)
+        force = qs.get("force", ["false"])[0].lower() == "true"
+        lib = pdf_lib.get_library()
+        text = lib.get_pdf_text(pdf_id, force=force)
+        if text is None:
+            self._send_json({"error": "文本提取失败或 PDF 不存在"}, 404)
+            return
+        self._send_json({"pdf_id": pdf_id, "text": text, "length": len(text)})
+
+    def _kb_pdf_download(self, parsed, body=None, pdf_id=None):
+        """下载 PDF 原文文件"""
+        lib = pdf_lib.get_library()
+        pdf_path = lib.get_pdf_path(pdf_id)
+        if not pdf_path or not pdf_path.exists():
+            self._send_json({"error": "PDF 文件不存在"}, 404)
+            return
+        try:
+            data = pdf_path.read_bytes()
+            self.send_response(200)
+            self.send_header("Content-Type", "application/pdf")
+            self.send_header("Content-Length", str(len(data)))
+            self.send_header("Content-Disposition", f'inline; filename="{pdf_id}.pdf"')
+            self.send_header("Access-Control-Allow-Origin", "*")
+            self.end_headers()
+            self.wfile.write(data)
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+
+    def _kb_pdf_summary(self, parsed, body=None, pdf_id=None):
+        """获取 PDF 关联的知识库摘要（wiki 页面内容）"""
+        lib = pdf_lib.get_library()
+        summary = lib.get_linked_summary(pdf_id)
+        if summary is None:
+            self._send_json({"error": "无关联摘要或 PDF 不存在"}, 404)
+            return
+        self._send_json({"pdf_id": pdf_id, "summary": summary, "length": len(summary)})
+
+    def _kb_pdf_upload(self, parsed, body):
+        """上传 PDF 文件（base64 编码）
+
+        请求体:
+            filename: 文件名
+            content_base64: base64 编码的 PDF 内容
+            title: 论文标题（可选）
+            arxiv_id: 关联 arXiv ID（可选）
+        """
+        import base64
+
+        filename = body.get("filename", "")
+        content_b64 = body.get("content_base64", "")
+        title = body.get("title", "")
+        arxiv_id = body.get("arxiv_id", "").strip() or None
+
+        if not content_b64:
+            self._send_json({"error": "缺少 content_base64"}, 400)
+            return
+
+        try:
+            pdf_bytes = base64.b64decode(content_b64)
+        except Exception:
+            self._send_json({"error": "base64 解码失败"}, 400)
+            return
+
+        if not title:
+            title = filename.rsplit(".", 1)[0] if filename else "用户上传"
+
+        lib = pdf_lib.get_library()
+        try:
+            entry = lib.store_bytes(
+                pdf_bytes,
+                title=title,
+                source=pdf_lib.SOURCE_UPLOAD,
+                arxiv_id=arxiv_id,
+            )
+            self._send_json({"success": True, "entry": entry})
+        except ValueError as e:
+            self._send_json({"error": str(e)}, 400)
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+
+    def _kb_pdf_ensure(self, parsed, body):
+        """确保 arXiv 论文 PDF 已下载到本地
+
+        请求体:
+            arxiv_id: arXiv 论文 ID
+            title: 论文标题（可选）
+            force: 是否强制重新下载（可选，默认 false）
+        """
+        arxiv_id = body.get("arxiv_id", "").strip()
+        title = body.get("title", "")
+        force = body.get("force", False)
+
+        if not arxiv_id:
+            self._send_json({"error": "缺少 arxiv_id"}, 400)
+            return
+
+        lib = pdf_lib.get_library()
+        entry = lib.ensure_pdf(arxiv_id, title=title, force=force)
+        if entry is None:
+            self._send_json({"error": "PDF 下载失败"}, 500)
+            return
+        self._send_json({"success": True, "entry": entry})
+
+    def _kb_pdf_link(self, parsed, body, pdf_id=None):
+        """将 PDF 与 wiki 摘要页面关联
+
+        请求体:
+            wiki_path: wiki 页面相对路径
+        """
+        wiki_path = body.get("wiki_path", "").strip()
+        if not wiki_path:
+            self._send_json({"error": "缺少 wiki_path"}, 400)
+            return
+        lib = pdf_lib.get_library()
+        if lib.link_wiki(pdf_id, wiki_path):
+            self._send_json({"success": True, "pdf_id": pdf_id, "wiki_path": wiki_path})
+        else:
+            self._send_json({"error": "PDF 不存在"}, 404)
+
+    def _kb_pdf_delete(self, parsed, body=None, pdf_id=None):
+        """删除 PDF 原文及其元数据"""
+        lib = pdf_lib.get_library()
+        if lib.delete_pdf(pdf_id):
+            self._send_json({"success": True, "pdf_id": pdf_id})
+        else:
+            self._send_json({"error": "PDF 不存在"}, 404)
+
+    def _kb_categories(self, parsed, body=None):
+        """分类列表"""
+        self._send_json({"categories": kbc.list_categories()})
+
+    def _kb_filters(self, parsed, body=None):
+        """过滤器"""
+        self._send_json(kbc.get_all_filters())
+
+    def _kb_files(self, parsed, body=None):
+        """知识库文件树（GET+POST 重复）"""
+        self._send_json(kb.list_wiki_pages())
+
+    def _kb_file_content(self, parsed, body=None):
+        """读取知识库文件内容（GET+POST 重复）"""
+        fpath = parse_qs(parsed.query).get("path", [""])[0]
+        if not fpath:
+            self._send_json({"error": "缺少 path"}, 400)
+            return
+
+        # v5.0: 支持 hermes-wiki 路径（读取 hermes 工作区文件，只读）
+        if fpath.startswith("hermes-wiki/"):
+            from paths import HERMES_WIKI_DIR
+            rel = fpath[len("hermes-wiki/"):]
+            full = HERMES_WIKI_DIR / rel
+            try:
+                full.resolve().relative_to(HERMES_WIKI_DIR.resolve())
+            except ValueError:
+                self._send_json({"error": "路径越界"}, 403)
+                return
+            if not full.exists():
+                self._send_json({"error": "文件不存在"}, 404)
+                return
+            content = full.read_text(encoding="utf-8")[:8000]
+            self._send_json({"path": fpath, "content": content, "size": len(content), "source": "hermes-wiki"})
+            return
+
+        full = web_base._PROJECT_ROOT / "knowledge" / fpath
+        # 安全检查：防路径穿越
+        try:
+            full.resolve().relative_to((web_base._PROJECT_ROOT / "knowledge").resolve())
+        except ValueError:
+            self._send_json({"error": "路径越界"}, 403)
+            return
+        if not full.exists():
+            self._send_json({"error": "文件不存在"}, 404)
+            return
+        content = full.read_text(encoding="utf-8")[:8000]  # 截断
+        self._send_json({"path": fpath, "content": content, "size": len(content)})
+
+    # --- POST ---
+
+    def _kb_reindex(self, parsed, body):
+        """重建知识库索引（防重入 + 后台线程）"""
+        if not _try_acquire_kb_busy():
+            self._send_json({"error": "知识库正在执行其他操作，请稍后再试"}, 409)
+            return
+        task_id = f"reindex_{int(time.time())}"
+
+        def _reindex_worker():
+            try:
+                idx = kb.build_index(force=True)
+                with _bg_tasks_lock:
+                    _bg_tasks[task_id] = {
+                        "status": "done",
+                        "documents": len(idx.get("documents", {})),
+                        "terms": len(idx.get("inverted", {})),
+                        "finished_at": time.time(),
+                        "finished_at_iso": datetime.datetime.now().isoformat(),
+                    }
+            except Exception as e:
+                with _bg_tasks_lock:
+                    _bg_tasks[task_id] = {"status": "error", "error": str(e), "finished_at": time.time()}
+            finally:
+                _release_kb_busy()
+
+        threading.Thread(target=_reindex_worker, daemon=True).start()
+        self._send_json({"success": True, "message": "索引重建已在后台启动", "task_id": task_id})
+
+    def _kb_ingest(self, parsed, body):
+        """导入原始文件"""
+        raw_path = body.get("path", "")
+        auto_distill = body.get("auto_distill", False)
+        if not raw_path:
+            self._send_json({"error": "缺少 path 参数"}, 400)
+            return
+        result = kb.ingest_raw(raw_path, auto_distill=auto_distill)
+        self._send_json(result, 200 if result.get("success") else 400)
+
+    def _kb_wiki_save(self, parsed, body):
+        """保存 wiki 页"""
+        wiki_rel = body.get("path", "")
+        content = body.get("content", "")
+        meta = body.get("meta", {})
+        if not wiki_rel:
+            self._send_json({"error": "缺少 path 参数"}, 400)
+            return
+        try:
+            # 支持仅更新 meta（标签编辑场景）
+            if not content and meta:
+                existing = kb.get_wiki_page(wiki_rel)
+                if existing:
+                    content = existing.get("body", "")
+                else:
+                    self._send_json({"error": "页面不存在"}, 404)
+                    return
+            saved = kb.save_wiki_page(wiki_rel, content, meta)
+            self._send_json({"success": True, "path": saved})
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+
+    def _kb_stub(self, parsed, body):
+        """创建 wiki 桩"""
+        concept = body.get("concept", "")
+        context = body.get("context", "")
+        if not concept:
+            self._send_json({"error": "缺少 concept 参数"}, 400)
+            return
+        # 相似概念检测
+        similar = []
+        if hasattr(kb, "check_similar_concepts"):
+            similar = kb.check_similar_concepts(concept, threshold=0.9)
+        if similar and not body.get("force", False):
+            self._send_json({
+                "success": False,
+                "action": "suggest_merge",
+                "similar": similar,
+                "message": f"检测到 {len(similar)} 个相似概念，是否仍然创建？"
+            }, 409)
+            return
+        wiki_path = kb.create_wiki_stub(concept, context, trigger="manual")
+        self._send_json({"success": True, "path": wiki_path})
+
+    def _kb_aliases_set(self, parsed, body):
+        """更新别名"""
+        aliases = body.get("aliases", {})
+        aliases_path = web_base._PROJECT_ROOT / "knowledge" / "aliases.json"
+        try:
+            _cms.save_json(aliases_path, aliases)
+            self._send_json({"success": True, "aliases": aliases})
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+
+    def _kb_maintenance(self, parsed, body):
+        """批处理维护"""
+        task = body.get("task", "health")
+        try:
+            km = lazy_load("kb_maintenance")
+            if not km:
+                self._send_json({"error": "维护模块未找到"}, 500)
+                return
+            kb_mod = km._import_kb()
+
+            if task == "reindex":
+                km.cmd_reindex(kb_mod)
+                self._send_json({"success": True, "task": task})
+            elif task == "orphans":
+                km.cmd_orphans(kb_mod)
+                self._send_json({"success": True, "task": task})
+            elif task == "candidates":
+                km.cmd_candidates(kb_mod)
+                self._send_json({"success": True, "task": task})
+            elif task == "health":
+                health = kb_mod.get_kb_health()
+                self._send_json({"success": True, "task": task, "health": health})
+            elif task == "weekly":
+                km.cmd_weekly(kb_mod)
+                health = kb_mod.get_kb_health()
+                self._send_json({"success": True, "task": task, "health": health})
+            else:
+                self._send_json({"error": f"未知任务: {task}"}, 400)
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+
+    def _kb_cat_create(self, parsed, body):
+        """创建分类"""
+        name = body.get("name", "").strip()
+        keywords = body.get("keywords", [])
+        logic = body.get("logic", "any")
+        description = body.get("description", "")
+        if not name:
+            self._send_json({"error": "缺少分类名称"}, 400)
+            return
+        try:
+            cat = kbc.create_category(name, keywords, logic, description)
+            self._send_json({"success": True, "category": cat})
+        except ValueError as e:
+            self._send_json({"error": str(e)}, 400)
+
+    def _kb_cat_update(self, parsed, body):
+        """更新分类"""
+        name = body.get("name", "").strip()
+        if not name:
+            self._send_json({"error": "缺少分类名称"}, 400)
+            return
+        try:
+            cat = kbc.update_category(
+                name,
+                keywords=body.get("keywords"),
+                logic=body.get("logic"),
+                description=body.get("description"),
+            )
+            self._send_json({"success": True, "category": cat})
+        except ValueError as e:
+            self._send_json({"error": str(e)}, 400)
+
+    def _kb_cat_delete(self, parsed, body):
+        """删除分类"""
+        name = body.get("name", "").strip()
+        if not name:
+            self._send_json({"error": "缺少分类名称"}, 400)
+            return
+        deleted = kbc.delete_category(name)
+        self._send_json({"success": deleted})
+
+    def _kb_cat_scan(self, parsed, body):
+        """扫描所有分类"""
+        results = kbc.scan_all_categories()
+        self._send_json({"success": True, "results": results})
+
+    def _kb_filter(self, parsed, body):
+        """过滤页面"""
+        filters = body.get("filters", {})
+        pages = kbc.filter_wiki_pages(filters)
+        self._send_json({"pages": pages})
+
+    def _kb_grow(self, parsed, body):
+        """知识库智能生长"""
+        arxiv_id = body.get("arxiv_id", "").strip()
+        confirmed = body.get("confirmed", {})
+        if not arxiv_id:
+            self._send_json({"error": "缺少 arxiv_id"}, 400)
+            return
+        result = ki.grow_from_suggestion(arxiv_id, confirmed)
+        self._send_json(result)
+
+    def _kb_suggest(self, parsed, body):
+        """查询 wiki 建议"""
+        arxiv_id = body.get("arxiv_id", "").strip()
+        if not arxiv_id:
+            self._send_json({"error": "缺少 arxiv_id"}, 400)
+            return
+        self._send_json(ki.suggest_wiki_notes(arxiv_id))
+
+    # --- DELETE ---
+
+    def _kb_wiki_delete(self, parsed, body=None, wiki_rel=None):
+        """软删除 wiki 页（移到 .trash/）"""
+        try:
+            wiki_full = _safe_join(kb.KNOWLEDGE_DIR, "wiki", wiki_rel)
+        except ValueError:
+            self._send_json({"error": "非法路径"}, 400)
+            return
+        if not wiki_full.exists():
+            self._send_json({"error": "Wiki 页面不存在"}, 404)
+            return
+        trash_dir = kb.KNOWLEDGE_DIR / ".trash"
+        trash_dir.mkdir(exist_ok=True)
+        trash_path = trash_dir / Path(wiki_rel).name
+        # 避免覆盖
+        if trash_path.exists():
+            trash_path = trash_dir / f"{Path(wiki_rel).stem}_{int(time.time())}.md"
+        try:
+            # 先读取标题（rename 移走文件后 get_wiki_page 会找不到文件返回 None，
+            # 导致图谱节点无法清理），必须在 rename 之前完成读取
+            wiki_rel_safe = str(wiki_full.relative_to(kb.KNOWLEDGE_DIR.resolve() / "wiki"))
+            page = kb.get_wiki_page(f"wiki/{wiki_rel_safe}")
+            title = page["frontmatter"].get("title", "") if page else ""
+            # 再移至回收站
+            wiki_full.rename(trash_path)
+            # 清理图谱
+            if title:
+                kb._remove_graph_node(title)
+            self._send_json({"success": True, "message": f"已移至回收站: {trash_path.name}"})
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)

@@ -1,0 +1,54 @@
+{
+  "gaps": [
+    {
+      "claim": "15%/30% 多通道阈值系实验给出的标定值",
+      "missing_evidence": "缺乏 PRX'17 (Cousin 2017) 官方摘要/正文给出 15%/30% 阈值的实证；arXiv 2510.04086 (Peschel 2022) 仅处理 Ne 2s2p 两光子 RABBIT，不含 FROG/条纹/阈值/表 2 映射",
+      "search_keywords": [
+        "Cousin PRX 2017 water window attosecond streaking multichannel threshold",
+        "FROG-CRAB multichannel ionization breakdown percentage",
+        "Peschel 2022 Ne 2s2p two-photon RABBIT multichannel"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "「长波长驱动+多大气压相位匹配演示了水窗 19.2 as」属于 2026 年新实验演示",
+      "missing_evidence": "arXiv 2510.17949 Comment 与作者 Reply 2511.08391 均明示这是对 2017 年氪条纹数据的再分析（VTGPA 算法），非新实验演示；需找原 Cousin 2017 实验数据以区分'演示'与'再分析'",
+      "search_keywords": [
+        "Ardana-Lamas 2025 VTGPA attosecond reanalysis krypton streaking",
+        "Cousin 2017 PRX 041030 water window krypton original experiment",
+        "VTGPA algorithm attosecond pulse retrieval reanalysis"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "「[3] 在量子拍实验中验证了角积分压制效应」",
+      "missing_evidence": "[3] (Pabst Dahlström PRA 94.013411) 系纯理论方案（PANDA 算法），无实验验证；需找实验验证角积分偶极相位压制效应的来源文献",
+      "search_keywords": [
+        "Pabst Dahlstrom PRA 94.013411 PANDA angular integration theory",
+        "angular integration dipole phase suppression experimental verification rare gas streaking",
+        "Peschel Ne 2p angular streaking experiment verification"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "10% 多通道贡献度阈值——rACE 单通道假设在 10% 处失效（外部失效点）",
+      "missing_evidence": "缺乏 Inzani rACE (Sci. Adv. 2023) 或 rACE neural network 论文中关于 10% 多通道贡献阈值的明确定量声明；需核实 rACE 失效边界与单通道假设适用范围",
+      "search_keywords": [
+        "rACE neural network attosecond pulse retrieval single channel limit",
+        "Inzani Sci Adv 2023 rACE multi-channel threshold",
+        "attosecond streaking single channel assumption validity percentage"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "[7] 表 2 / 截面曲线映射出 15%/30% 阈值的实证出处",
+      "missing_evidence": "[7] 文献的表 2 与截面曲线是否真包含 15%/30% 阈值映射尚未在缓存全文中验证；需重读 [7] 原文表 2 与截面数据",
+      "search_keywords": [
+        "reference [7] attosecond streaking table 2 cross section mapping",
+        "Cousin PRX 2017 table 2 photoionization cross section multichannel"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

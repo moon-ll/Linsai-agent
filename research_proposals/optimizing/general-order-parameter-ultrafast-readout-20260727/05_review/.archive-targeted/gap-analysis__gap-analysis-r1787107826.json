@@ -1,0 +1,93 @@
+{
+  "gaps": [
+    {
+      "claim": "SBE（半导体布洛赫方程）对 CrSb/MnTe 等交变磁性材料在强场下的适用性边界未得到文献验证",
+      "missing_evidence": "缺乏 SBE 方程在 V/Å 量级强场下对 altermagnet 材料的有效性实验或计算验证，缺少 SBE 与 TDDFT 在强场区域的基准对比数据",
+      "search_keywords": [
+        "semiconductor Bloch equation strong field validity V/Angstrom",
+        "SBE interband coupling saturation strong field limit",
+        "altermagnet high harmonic generation field strength range",
+        "solid-state HHG semiconductor Bloch equation benchmark"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "7-9 维参数空间与三重测量维度之间的可辨识性（identifiability）论证仅停留在概念层面",
+      "missing_evidence": "缺少 Fisher information matrix 或 condition number 对 HHG 反演问题参数可辨识性的定量分析；缺少多参数耦合时序参量重建的唯一性证明",
+      "search_keywords": [
+        "Fisher information matrix nonlinear optics inverse problem",
+        "high harmonic generation parameter identifiability",
+        "HHG spectroscopy ill-posed inversion dimensionality",
+        "condition number attosecond spectroscopy reconstruction"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Cochran 量子相干断层成像与 Sørensen 阿秒序参量反演两种方法的联合使用框架缺乏文献支撑",
+      "missing_evidence": "缺少 Cochran 量子相干断层成像与 Sørensen 阿秒时域重建两种方法联合用于 HHG 序参量提取的实验验证或理论框架；缺少两种方法差异性与互补性的系统比较",
+      "search_keywords": [
+        "Cochran quantum coherence tomography high harmonic generation",
+        "Sørensen attosecond order parameter reconstruction HHG",
+        "HHG quantum coherence tomography combined attosecond retrieval",
+        "high harmonic order parameter reconstruction methods comparison"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "CrSb 材料在飞秒激光强场作用下的损伤阈值未得到实验文献支撑",
+      "missing_evidence": "缺少 CrSb 在近红外（800nm 附近）、fs 脉冲强场下的损伤阈值数据；缺少 CrSb 强场光学激发稳定性的实验测量；缺少与 TiSe₂/MoS₂ 等已测材料的对比参照",
+      "search_keywords": [
+        "CrSb ultrafast laser damage threshold",
+        "CrSb femtosecond laser ablation threshold",
+        "CrSb strong field optical excitation stability near-infrared",
+        "altermagnet femtosecond laser damage V per Angstrom",
+        "CrSb reflectivity intense laser field experimental"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "交变磁性材料（CrSb/MnTe/TiSe₂）HHG 差分设计的理论依据未充分引用",
+      "missing_evidence": "缺少 altermagnet HHG 与 ferromagnet/antiferromagnet/superconductor 的系统性对比文献；缺少三种材料 HHG 响应差异的理论预测或实验预研",
+      "search_keywords": [
+        "altermagnet high harmonic generation CrSb MnTe comparison",
+        "altermagnet vs ferromagnet HHG differential signal",
+        "CrSb spin-polarized high harmonic experimental",
+        "MnTe altermagnet ultrafast magneto-optics HHG"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "四层技术架构（理论/实验/反演/验证）中反演算法的正则化策略缺乏文献依据",
+      "missing_evidence": "缺少 HHG 光谱学反演问题中正则化参数选择（L-curve、Tikhonov 等）的文献依据；缺少非线性光学反演中ill-posedness 处理的已有方案对比",
+      "search_keywords": [
+        "Tikhonov regularization high harmonic retrieval",
+        "L-curve criterion nonlinear optics inversion",
+        "HHG inverse problem regularization parameter selection",
+        "attosecond spectroscopy ill-posed inversion regularization"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "方案中提到‘三重阈值体系’但缺乏这些阈值具体取值的文献支撑",
+      "missing_evidence": "缺少 CrSb 序参量可被 HHG 差分信号分辨的阈值条件文献；缺少 HHG 测量噪声floor对序参量探测灵敏度的限制分析文献；缺少 circular dichroism HHG 检测灵敏度极限的已有数据",
+      "search_keywords": [
+        "HHG measurement noise floor photon counting limit",
+        "circular dichroism high harmonic detection sensitivity limit",
+        "altermagnet HHG order parameter detection threshold",
+        "solid-state HHG signal-to-noise ratio shot noise limit"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "实时 TDDFT 计算强场动力学的计算成本基准缺乏文献支撑",
+      "missing_evidence": "缺少实时 TDDFT 模拟 altermagnet HHG 动力学所需 CPU/GPU 小时数的基准数据；缺少 TDDFT 与 SBE 在计算效率与精度上的系统对比文献",
+      "search_keywords": [
+        "real-time TDDFT high harmonic generation computational cost benchmark",
+        "TDDFT attosecond dynamics CPU hours scaling",
+        "TDDFT vs semiconductor Bloch equation efficiency comparison",
+        "solid-state HHG large-scale computation feasibility"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

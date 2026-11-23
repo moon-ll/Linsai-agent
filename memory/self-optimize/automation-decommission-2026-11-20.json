@@ -1,0 +1,26 @@
+{
+  "action": "idle_automation_decommission",
+  "date": "2026-11-20",
+  "decidedBy": "用户裁决（48h 主动推进期开启时确认：全部停掉）",
+  "reason": "方法卡回补收官（3929/3929 清零，2026-11-19），两个回补执行体均无活可干，空转浪费",
+  "items": [
+    {
+      "kind": "zcode-automation",
+      "id": "automation-89b6c9f1-4ec0-4f29-80a1-918ac1cb158b",
+      "title": "知识库方法卡回补·每小时 :20 定时批（ZCode 直提 20 页·全库模式）",
+      "action": "deleted",
+      "runCount": 2425,
+      "promptArchive": "memory/self-optimize/archive-automation-89b6c9f1-prompt.md",
+      "restore": "按存档 prompt 用 CronCreate 重建（建议仅在有新回补需求时）"
+    },
+    {
+      "kind": "hermes-cron",
+      "name": "lc-zcode-worker",
+      "schedule": "0 */2 * * *",
+      "action": "paused",
+      "pausedAt": "2026-11-20T23:40+08:00",
+      "restore": "hermes --profile linsai cron resume lc-zcode-worker"
+    }
+  ],
+  "effect": "hermes gateway 活跃 job 25→24；ZCode automation 3→2"
+}

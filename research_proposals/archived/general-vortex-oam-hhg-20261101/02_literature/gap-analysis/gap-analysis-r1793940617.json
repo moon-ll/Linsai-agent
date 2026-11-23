@@ -1,0 +1,18 @@
+{
+  "gaps": [
+    {
+      "claim": "η∝k_⊥·r_peak可作为量化判据，且η≥0.1的门限具有可复算性和经验有效性。",
+      "missing_evidence": "缺少理论或方法学文献支撑：①明确η、k_⊥和r_peak之间的函数关系、比例系数、量纲及适用条件；②说明k_⊥与r_peak的定义、提取或计算方法以及不确定度传播；③给出η≥0.0与η≥0.1门限的数值标定、先例或误差分析依据。现有比例式至多支持定性趋势，无法支撑第三方复算和阈值判定。",
+      "search_keywords": [
+        "\"k_perp\" \"r_peak\" high-order harmonic generation",
+        "\"η\" \"k_⊥\" \"r_peak\" 高次谐波",
+        "HHG efficiency scaling transverse wavevector peak displacement",
+        "high-order harmonic generation yield model transverse momentum excursion",
+        "quantum trajectory HHG efficiency transverse wavevector model",
+        "nonperturbative HHG threshold calibration transverse field"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "full_review"
+}

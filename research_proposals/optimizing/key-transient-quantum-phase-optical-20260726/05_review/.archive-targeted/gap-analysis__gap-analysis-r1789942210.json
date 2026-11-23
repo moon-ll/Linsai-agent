@@ -1,0 +1,27 @@
+{
+  "gaps": [
+    {
+      "claim": "Imperial College Zair 组在 Floquet-HHG/预研布局方向上的工作（scheme §7e L243 引用）",
+      "missing_evidence": "立项依据（rat）章节缺少 Zair 组 Floquet 高次谐波相关工作的一句引用/出处，rat §2.4 未提及 Zair，scheme 出现悬挂指针",
+      "search_keywords": [
+        "Zair Floquet high harmonic generation",
+        "Imperial College attosecond HHG Zair",
+        "Zair Floquet HHG pre-research",
+        "Zair group strong field HHG London"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Lesko 等 2026 年发表（应为 Nature Physics）的实验观测工作 scheme §5(1) L189 引用[21]",
+      "missing_evidence": "需要核实 Lesko 等 2026 年（而非 2024 年）在 Nature Physics 发表的实验观测文献，并核对 arXiv 预印本号 2407.17917 的最终发表期刊与年份",
+      "search_keywords": [
+        "Lesko Nature Physics 2026 high harmonic",
+        "Lesko 2026 attosecond HHG experiment",
+        "arXiv 2407.17917 Lesko",
+        "Lesko et al solid-state HHG observation"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "full_review"
+}

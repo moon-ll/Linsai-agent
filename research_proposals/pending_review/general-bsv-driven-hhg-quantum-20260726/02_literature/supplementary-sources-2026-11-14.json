@@ -1,0 +1,25 @@
+{
+  "proposal_id": "general-bsv-driven-hhg-quantum-20260726",
+  "cluster_id": "orphan-route-2026-11-14",
+  "clusters": [
+    "orphan-route-2026-11-14"
+  ],
+  "entries": [
+    {
+      "source_id": "paper:2025-2502.07691-time-resolved-second-order-autocorrelation-function-of-param",
+      "title": "Time-resolved second-order autocorrelation function of parametric down-conversion",
+      "summary": "本文对参量下转换（PDC）光场实现了时间分辨的二阶自相关 g(2)(τ) 测量：利用时间放大（time magnification / 时间透镜）技术把皮秒量级的光子对关联时间映射到纳秒尺度，使常规单光子探测与时间数字转换设备可以分辨。由此直接测得零延迟群聚峰的宽度（关联时间）与积分对比度，并用 K = (g_int^(2) - 1)^(-1) 提取纠缠光束的横/纵模式数。理论部分还预言 heralded 版本在零延迟处呈现光子群聚峰。",
+      "path": "knowledge/raw/papers/2025-2502.07691-time-resolved-second-order-autocorrelation-function-of-param.md",
+      "added_via": "cluster:orphan-route-2026-11-14",
+      "added_at": "2026-11-14T02:42:44Z"
+    },
+    {
+      "source_id": "paper:2025-2502.05635-data-driven-low-rank-approximation-for-electron-hole-kernel",
+      "title": "Data-driven Low-rank Approximation for Electron-hole Kernel and Acceleration of Time-dependent GW Calculations",
+      "summary": "本文提出对含时自洽GW（TD-aGW）方法中的电子-空穴核矩阵进行数据驱动的SVD低秩压缩，实现约95%的数据压缩与约一个数量级的计算提速，同时保持高次谐波谱的精度。以单层MoS2强场HHG为基准，加速后的TD-aGW首次支持布里渊区密集k网格下的收敛模拟。该工作确立了屏蔽电子-空穴相互作用的低秩可压缩结构，为固体强场非平衡多体动力学的规模化第一性原理模拟开辟了途径。",
+      "path": "knowledge/raw/papers/2025-2502.05635-data-driven-low-rank-approximation-for-electron-hole-kernel.md",
+      "added_via": "cluster:orphan-route-2026-11-14",
+      "added_at": "2026-11-14T10:03:12Z"
+    }
+  ]
+}

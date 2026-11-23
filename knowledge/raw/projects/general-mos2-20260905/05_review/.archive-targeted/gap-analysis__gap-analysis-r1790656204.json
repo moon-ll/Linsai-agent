@@ -1,0 +1,82 @@
+{
+  "gaps": [
+    {
+      "claim": "§3.2 L31 中 RABBITT 微扰阈值需按真实峰值场强 5×10¹² W/cm² 量级重算微扰阈值（约 5×10¹¹ W/cm² 上限），并确定衰减比须 ≥10²—10³",
+      "missing_evidence": "缺少 RABBITT 技术微扰有效性区间（perturbative regime）的基准文献，特别是强场下高次谐波与 RABBITT 信号扰动阈值的实验/理论文献支撑",
+      "search_keywords": [
+        "RABBITT perturbative regime threshold",
+        "reconstruction of attosecond beating by interference of two-photon transitions strong field limit",
+        "attosecond streaking perturbation threshold",
+        "high harmonic generation perturbative intensity limit"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§4 L67 Ω(k) 反演输入'初值取自 TDDFT 的能带和 Berry 曲率'，需要明确 k 网格密度并与莫尔 BZ ≥30 点采样桥接，Ω_max 设计值 13.4°/12 a.u. 量级需 TDDFT 文献支撑",
+      "missing_evidence": "缺少 MoS2（特别是扭转/莫尔 MoS2）TDDFT 计算 Berry 曲率幅值的具体文献，以及 k 网格密度对 Berry 曲率收敛性影响的方法学文献",
+      "search_keywords": [
+        "TDDFT Berry curvature twisted MoS2",
+        "Berry curvature twisted bilayer MoS2 calculation",
+        "moiré superlattice Berry curvature first-principles",
+        "k-point sampling convergence Berry curvature TMD"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3.3 中 CEP 稳定度优于 50 mrad rms 作为'同一量级'范本支撑，但未给出直接文献出处",
+      "missing_evidence": "缺少 CEP 稳定度 ≤50 mrad rms 量级实验结果的直接文献引用，目前仅以'范本'模糊指代",
+      "search_keywords": [
+        "carrier-envelope phase stability 50 mrad rms",
+        "CEP stabilization attosecond laser",
+        "few-cycle laser CEP locking rms stability",
+        "femtosecond laser CEP feedback stabilization"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§3.3 中 CEP 由 380 mrad 推进到 ≤59 mrad rms 的 6.4× 压缩路径缺少从 380→59 中间标定里程碑的预备实验文献",
+      "missing_evidence": "缺少同装置或同类型装置上 CEP 稳定度渐进提升（380→200→100→59 mrad 等级）的分阶段实验/方法学文献",
+      "search_keywords": [
+        "CEP stabilization improvement incremental",
+        "carrier-envelope phase drift compensation two-step",
+        "slow loop fast loop CEP feedback enhancement",
+        "f-to-2f interferometer CEP stability improvement"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "锚点对比对1中'将电子含时波函数投影到不同本征态，分析高次谐波产生过程中电子在不同能态的演化'对应方案需 MoS2 高次谐波产生文献支撑",
+      "missing_evidence": "缺少 MoS2 或 TMD 材料中高次谐波产生（HHG）实验/理论的文献，特别是与态分辨投影分析相关的方法学文献",
+      "search_keywords": [
+        "high harmonic generation MoS2",
+        "HHG transition metal dichalcogenide",
+        "solid-state HHG band structure projection",
+        "intraband interband HHG TMD monolayer"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§4 L73 中 RMS 残差 18% 与 σ_Ω 归一化偏差 15% 的跨量纲映射需 Ω_max 归一化 + 自由度修正 √(N/(N−k))，其中 Ω_max 取值需文献校核",
+      "missing_evidence": "缺少 13.4°/12 a.u. 量级 Berry 曲率幅值作为 Ω_max 归一化上限的文献依据，以及反演自由度修正（DoF correction）在 Berry 曲率反演中的方法学先例",
+      "search_keywords": [
+        "Berry curvature magnitude twisted MoS2 typical value",
+        "Berry curvature units rad/a.u.",
+        "inverse problem degrees of freedom correction geophysical analogy",
+        "BCH inversion regularization parameter"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§3.3 中双干涉仪 XUV-IR 泵浦-探测构型'预备实验路径'仅引用 Csizmadia 等人[41] 一篇 ±81 as 亚光周期稳定性数据，缺少构型独立验证文献",
+      "missing_evidence": "缺少除 Csizmadia [41] 外其他双干涉仪或 XUV-IR 泵浦-探测构型实现亚光周期 CEP 稳定性测量的独立实验文献",
+      "search_keywords": [
+        "two-interferometer XUV-IR pump probe CEP",
+        "sub-cycle timing stability measurement attosecond",
+        "interferometric autocorrelation attosecond pulse CEP",
+        "XUV-IR cross-correlation timing jitter"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "scheme"
+}

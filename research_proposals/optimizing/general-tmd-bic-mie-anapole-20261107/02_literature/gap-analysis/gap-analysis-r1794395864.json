@@ -1,0 +1,54 @@
+{
+  "gaps": [
+    {
+      "claim": "§二.0目标二和§二.3层数指纹段提出“3R相偶数层因反演对称而使χ⁽²⁾接近零”，并以此作为层数判据。",
+      "missing_evidence": "需要直接文献分别证明：3R-TMD的R3m空间群不具备反演对称性；3R块材或少层体系的χ⁽²⁾及二次谐波响应在偶数层条件下仍可非零；偶数层近零响应主要对应2H镜像堆垛的反演对称情形，或有文献明确限定的弱层间耦合极限。还需核实现有Trolle文献[3]的晶体结构、层数和耦合假设，明确其结论不能直接外推至同一3R器件族。应以晶体结构论文和少层3R/2H二次谐波计算或实验论文支撑修订后的判据。",
+      "search_keywords": [
+        "3R MoS2 R3m non-centrosymmetric second harmonic generation",
+        "3R TMD even layer nonzero χ(2)",
+        "2H MoS2 mirror stacking inversion symmetry second harmonic generation odd even layers",
+        "few-layer 3R TMD layer-dependent SHG",
+        "Trolle PRB 89 235440 MoS2 nonlinear susceptibility layer stacking"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§二.2第3—4段和§二.3第4段使用[39] Rodriguez、[40] Hayat、[41] Maksimov、[42] Dumeige作为论述依据。",
+      "missing_evidence": "现行文献表缺少四个编号与正文引用的对应条目。需要补齐作者、题名、期刊或会议、卷期、页码、年份、DOI或arXiv编号等完整书目信息，并核对每篇文献实际支撑的具体论点；[41]和[42]还应依据申请材料所采用的检索截止日期标注其是否仍为预印本以及是否已有正式发表版本。",
+      "search_keywords": [
+        "Rodriguez Optics Express 15 7303 2007",
+        "Hayat arXiv:0706.0719 nonlinear optics",
+        "Maksimov arXiv:2505.00396",
+        "Dumeige arXiv:2506.14959",
+        "arXiv:2505.00396 published journal",
+        "arXiv:2506.14959 published journal"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§二.4提出“极化激元如何调制非线性转换仍属空白”的创新性判断。",
+      "missing_evidence": "缺少可复核的文献检索证据，而非仅凭概括性断言。需补充检索数据库、检索截止日期、检索式、纳入与排除标准，并系统排查与3R-TMD、扭转角、偏振激元、非线性转换、二次谐波和anapole相关的最接近已有工作；若确属空白，应说明检索边界及“同步测量”等判断口径，并列出最相近文献以证明差异。",
+      "search_keywords": [
+        "3R TMD polarization plasmon nonlinear conversion",
+        "few-layer MoS2 twist angle polarization-dependent second harmonic generation",
+        "twisted TMD homojunction anapole nonlinear optics",
+        "polarization plasmon modulation second harmonic generation",
+        "3R MoS2 nonlinear optics review twist angle",
+        "TMD anapole polarization-dependent nonlinear response"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§二.3称扭转角条件对应“150倍增强”。",
+      "missing_evidence": "需要回到Gao等[23]原文核对该倍数的分子、分母、测量条件和对比对象，并补充说明其基准是否为扭转角完全失配时的零信号基线。文献应提供可定位的图、表或页码，以支持“150倍”这一定量表述；同时需确认零信号接近测量噪声时直接采用其作为分母是否具有统计和物理可比性。",
+      "search_keywords": [
+        "Gao 3R TMD twist angle second harmonic generation 150-fold enhancement",
+        "twisted MoS2 homojunction 150 times SHG enhancement",
+        "twist-angle mismatch zero-signal baseline second harmonic generation",
+        "3R MoS2 twisted interface anapole SHG enhancement"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

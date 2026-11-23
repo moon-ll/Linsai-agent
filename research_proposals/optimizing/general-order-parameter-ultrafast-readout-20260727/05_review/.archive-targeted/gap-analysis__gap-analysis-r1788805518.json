@@ -1,0 +1,67 @@
+{
+  "gaps": [
+    {
+      "claim": "rationale L41 国内现状（固体高次谐波 + altermagnet 交叉布局）目前仅孟胜 [14]+综述 [34] 一段带过，国内超快 HHG 与 altermagnet 队伍清单不完整",
+      "missing_evidence": "缺少国内实验组在固体强场高次谐波和交变磁性高次谐波方向的代表性工作与近期布局证据",
+      "search_keywords": [
+        "solid-state high harmonic generation China group",
+        "attosecond science Chinese research team",
+        "altermagnet HHG Chinese experimental group",
+        "固体高次谐波 中国 实验组",
+        "莫尔材料 强场 超快 国内",
+        "固体HHG 交变磁 国内 代表性工作"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "rationale L31「CrSb d 波自旋劈裂约 0.6 eV 量级」与 scheme 先验 100—500 meV 存在跨章矛盾，需统一为文献报道值",
+      "missing_evidence": "缺少 CrSb d 波自旋劈裂幅度的权威实验或理论文献数值（含不确定度）",
+      "search_keywords": [
+        "CrSb d-wave spin splitting experimental value",
+        "CrSb altermagnet spin splitting ARPES eV",
+        "CrSb nonrelativistic spin splitting magnitude",
+        "Šmejkal CrSb spin splitting review",
+        "CrSb d-wave order parameter band structure"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "rationale L33 单段连引 [21][23][25][26][27][24][22] 七篇密度过高，需拆分并补充每篇文献的功能注释（解决什么问题/方法/预期回答什么科学问题）",
+      "missing_evidence": "缺少文献 [21][22][23][24][25][26][27] 各自的简短功能定位与关键结论引文",
+      "search_keywords": [
+        "high harmonic generation altermagnet theory Werner",
+        "Weber altermagnet spin splitting nonlinear",
+        "Schuele altermagnet nonlinear optics",
+        "McCarter altermagnet theory high harmonic",
+        "Ly altermagnet HHG theory",
+        "Terashima altermagnet high harmonic generation",
+        "Horstmann Qiu altermagnet HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "rationale L39 Granados [33] 涡旋光/OAM 警示与 7—9 维参数空间无对接，参数表未含 CEP/OAM",
+      "missing_evidence": "缺少 CEP/OAM 是否纳入反演参数空间或如何处理的判据文献（涡旋光 HHG、OAM 高次谐波、CEP 调谐反演误差传播）",
+      "search_keywords": [
+        "Granados OAM vortex high harmonic generation",
+        "orbital angular momentum HHG spectroscopy",
+        "carrier-envelope phase HHG inversion error",
+        "CEP HHG parameter retrieval identifiability",
+        "涡旋光 高次谐波 拓扑荷 反演"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "rationale L63 G3 判据「先验=3×文献σ 且后验<先验 50%」弱于文献精度，需补充贝叶斯反演合理判据的文献依据",
+      "missing_evidence": "缺少贝叶斯反演中先验宽度（1—1.5 倍 vs 3 倍实验不确定度）的统计依据及后验<实验不确定度作为成功判据的文献先例",
+      "search_keywords": [
+        "Bayesian inversion prior width experimental uncertainty",
+        "Fisher information posterior constraint criterion spectroscopy",
+        "parameter identifiability Bayesian inverse problem",
+        "attosecond spectroscopy Bayesian reconstruction prior",
+        "HHG inversion posterior vs experimental uncertainty benchmark"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

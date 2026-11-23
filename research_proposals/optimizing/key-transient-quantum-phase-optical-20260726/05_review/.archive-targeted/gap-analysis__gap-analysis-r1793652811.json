@@ -1,0 +1,16 @@
+{
+  "gaps": [
+    {
+      "claim": "§7(e) 中装置先例对权重分配的影响（\"权重详见 §5(2)\"所指），即 ELI-ALPS 装置与 Csizmadia 等工作对指标体系/方案设计权重的支撑论述",
+      "missing_evidence": "缺少关于 ELI-ALPS attosecond beamline 装置技术指标（CEP 稳定性、重复频率、脉宽等公开实测数据）以及 Csizmadia 等在同类装置上实现 ±81 as CEP 稳定性的文献支撑，导致 §5(2) 无实质内容可承接 §7(e) 的权重指针",
+      "search_keywords": [
+        "ELI-ALPS attosecond beamline CEP stability",
+        "ELI-ALPS GHHG beamline repetition rate pulse duration",
+        "Csizmadia CEP jitter 81 attosecond OPCPA",
+        "high repetition rate attosecond source carrier-envelope phase stabilization"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

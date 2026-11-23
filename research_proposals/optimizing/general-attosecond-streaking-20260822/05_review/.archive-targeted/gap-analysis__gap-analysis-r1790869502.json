@@ -1,0 +1,37 @@
+{
+  "gaps": [
+    {
+      "claim": "ASD数据库被用作光电离截面标定的基准（scheme §3.3/§4.1及rationale L9/L77三处异名同指）",
+      "missing_evidence": "缺少ASD（NIST Atomic Spectra Database）实际仅含原子能级/谱线波长而非光电离截面的权威说明文献，且缺少可替代完成光电离截面标定的XCOM（光子相互作用截面库）与FFAST（光电离数据库）的原始引证，以支撑三处误称\"光电离数据库 ASD\"的修正",
+      "search_keywords": [
+        "NIST Atomic Spectra Database ASD scope energy levels",
+        "XCOM photon cross sections NIST database",
+        "FFAST photoionization fluo database",
+        "atomic photoionization cross section compilation review"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "项目三点novelty（多通道贡献修正/偶极相位解耦/跨能区标定）经系统文献检索未发现同类工作",
+      "missing_evidence": "novelty声明所依据的检索库范围在rationale L67/L77、references表尾、content/scheme四处出现IOPscience/CNKI vs IEEE/Scopus vs Scopus三套不一致表述，缺少统一的检索策略声明、检索式及对应空白证据链文献，无法充分支撑所述检索范围内无同类工作的结论",
+      "search_keywords": [
+        "attosecond streaking multichannel correction review",
+        "attosecond delay dipole phase decoupling",
+        "attosecond streaking cross-energy calibration",
+        "attoCHED attosecond coincidence review"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "rACE方法提供\"约 24 as 的绝对延迟确定度\"（rationale L47）",
+      "missing_evidence": "申请书表述较Inzani 2024原文\"优于原子单位时间（约 24 as）\"降格为达成值表述，缺少对原文精确措辞的复核引注，以及将rACE精度与其他主流阿秒延迟方法（如RABBIT、streaking）进行横向比较的支撑文献",
+      "search_keywords": [
+        "Inzani 2024 rACE atomic unit of time 24 as precision",
+        "attosecond delay precision comparison RABBIT streaking",
+        "absolute attosecond delay reconstruction benchmark"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "rationale"
+}

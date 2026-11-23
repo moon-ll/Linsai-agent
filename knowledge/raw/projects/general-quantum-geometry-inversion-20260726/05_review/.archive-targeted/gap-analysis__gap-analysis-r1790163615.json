@@ -1,0 +1,106 @@
+{
+  "gaps": [
+    {
+      "claim": "BSV 场非经典光子统计（g^{(2)}(0)>1）能否提升 Ω/g 的 Fisher 信息并降低后验方差尚未被定量回答",
+      "missing_evidence": "缺少 squeezed-light 驱动 HHG 中 Fisher 信息、后验方差、量子增强因子的定量计算论文",
+      "search_keywords": [
+        "squeezed light HHG Fisher information",
+        "bright squeezed vacuum quantum enhancement factor high harmonic",
+        "BSV HHG posterior variance Berry curvature",
+        "squeezed vacuum HHG g2 retrieval"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Khurelbaatar 等 2026 年在原子体系中给出 squeezed-light 驱动 HHG 的截止方差关系 ΔH^2(r)/ΔH^2_SQL=e^{-2r}",
+      "missing_evidence": "缺少支撑该截止方差关系的原始理论推导及原子体系基准实验",
+      "search_keywords": [
+        "Khurelbaatar squeezed light HHG cutoff variance",
+        "atomic squeezed HHG cutoff scaling e^{-2r}",
+        "bright squeezed vacuum harmonic cutoff quantum enhancement"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Gothelf 等 2026 年证明依赖近似正 P 表示（APP）的量子光场描述在 HHG 谱学量上可靠，并存在边界条件",
+      "missing_evidence": "缺少 APP（近似正 P 表示）在 HHG 计算中的可靠性验证文献及其失效边界条件",
+      "search_keywords": [
+        "approximate positive P representation HHG",
+        "Gothelf quantum light HHG simulation",
+        "APP representation quantum optics harmonic generation validity"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Lvovsky 2009 年综述梳理了压缩真空态的连续变量量子态层析路线",
+      "missing_evidence": "缺少 Lvovsky 2009 综述原文及后续压缩真空态层析路线更新的引用",
+      "search_keywords": [
+        "Lvovsky 2009 continuous variable quantum tomography review",
+        "squeezed vacuum tomography reconstruction",
+        "homodyne tomography bright squeezed vacuum"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "BSV 统计→HHG 谱→Ω/g Fisher 信息三层因果链具备可标定的实验输入与可计算的输出载体",
+      "missing_evidence": "缺少从 BSV 光子统计到 HHG 谱再到量子几何反演的全链路验证实验",
+      "search_keywords": [
+        "BSV driven HHG quantum geometry inversion",
+        "squeezed light high harmonic Berry curvature retrieval chain",
+        "quantum light HHG inverse problem end-to-end"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "本项目以 Hubbard-U/W 比率作为多体扰动的可证伪判据",
+      "missing_evidence": "缺少 Hubbard-U 与带宽 W 比率作为多体扰动强度的可证伪指标先例文献",
+      "search_keywords": [
+        "Hubbard U over W ratio order parameter high harmonic",
+        "Mott insulator U/W high harmonic fingerprint",
+        "many-body perturbation criterion Hubbard bandwidth ratio HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "经典光场——相干态描述对 Ω/g 反演误差的可计算性失效",
+      "missing_evidence": "缺少经典相干态驱动 HHG 反演 Ω/g 误差的下限基准文献",
+      "search_keywords": [
+        "coherent state HHG Berry curvature inversion error floor",
+        "classical light HHG inverse problem limit",
+        "coherent state quantum metric tensor retrieval benchmark"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.5 与 §1.7 关于 R4 三档分层指标（弱关联同域 Ω<5%、g<8%；中等关联同域 Ω<15%、g<25%；弱→中关联外推 Ω<20%、g<30%）",
+      "missing_evidence": "缺少不同关联强度下 HHG 反演 Ω/g 误差的多档基准文献支撑三档分层的合理性",
+      "search_keywords": [
+        "weakly correlated HHG Berry curvature retrieval error",
+        "moderately correlated insulator HHG inversion benchmark",
+        "extrapolation error Berry curvature quantum metric correlated regime"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.7 引入的 R1/R2/R3 指标（三层预测差异 <10%、Bonferroni 校正、BSV 收缩比 ≥2）",
+      "missing_evidence": "缺少三层预测一致性<10% 的统计显著度基准、Bonferroni 校正下 HHG 多假设检验文献、BSV 收缩比定义与基准文献",
+      "search_keywords": [
+        "three layer prediction agreement high harmonic benchmark",
+        "Bonferroni correction high harmonic hypothesis testing",
+        "BSV squeezing ratio HHG enhancement factor definition"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§1.2 P1 单段 373 字嵌入 5 个 [N] 引用的论证密度过高",
+      "missing_evidence": "缺少将 BSV→HHG→反演链路分段、单引单论的支撑文献分布",
+      "search_keywords": [
+        "review squeezed light high harmonic generation",
+        "review quantum light driven HHG solid state",
+        "review HHG inverse problem Berry curvature quantum metric"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "rationale"
+}

@@ -1,0 +1,41 @@
+{
+  "proposal_id": "general-houston-kronig-penney-landau-zener-20261004",
+  "cluster_id": "cl_20261029_ea27ca",
+  "clusters": [
+    "cl_20261029_ea27ca"
+  ],
+  "entries": [
+    {
+      "source_id": "paper:2024-2404.08466-a-different-perspective-on-the-landau-zener-dynamics",
+      "title": "A different perspective on the Landau-Zener dynamics",
+      "summary": "本文为Landau-Zener跃迁概率的经典公式提供了两种互补的重新推导路径：一是基于积分方程的Markov近似（快相位极限下的记忆核截断），二是Dykhne型幅度-相位（均匀半经典）分析。两条路线均重现了标准指数结果 P=exp(-2πδ)（δ=Δ²/4ℏ|ε̇|），并系统给出超越标准公式的渐近修正项及其有效范围。这澄清了LZ公式作为严格渐近结果的地位，并提供了在有限扫频时间、非线性扫频等情形下的可操作推广框架。",
+      "path": "knowledge/raw/papers/2024-2404.08466-a-different-perspective-on-the-landau-zener-dynamics.md",
+      "added_via": "cluster:cl_20261029_ea27ca",
+      "added_at": "2026-10-30T16:49:42Z"
+    },
+    {
+      "source_id": "paper:2026-2606.31568-a-logarithmic-phase-singularity-at-the-heart-of-landau-zener",
+      "title": "A logarithmic phase singularity at the heart of Landau-Zener transitions",
+      "summary": "本文追溯Landau-Zener公式中指数抑制因子 exp(-2πΓ) 的几何起源：它并非模型的偶然而是一种对数相位奇点的普适结果——跃迁概率幅在复时间平面上绕能量分支点（分支切割）演化时获得 ln(-1) = iπ 的相位贡献，由此在指数中生成了普适的 π 因子。作者论证该奇点结构对任意线性扫频的二能级避免交叉都是局域普适的，因此LZ公式可作为一切非绝热近似方法（解析近似、数值求解、强场模型）的精确基准校准点。",
+      "path": "knowledge/raw/papers/2026-2606.31568-a-logarithmic-phase-singularity-at-the-heart-of-landau-zener.md",
+      "added_via": "cluster:cl_20261029_ea27ca",
+      "added_at": "2026-10-30T16:49:42Z"
+    },
+    {
+      "source_id": "paper:2026-2603.09352-elementary-asymptotic-approach-to-the-landau-zener-problem",
+      "title": "Elementary asymptotic approach to the Landau-Zener problem",
+      "summary": "本文为经典Landau-Zener二能级穿越问题提供了一个初等渐近解法：用两个线性独立的常幅度、变相位初等波叠加构造通解，完全绕开抛物线柱函数等特殊函数工具。核心结论是，指数小的非绝热跃迁概率幅起源于相位积分在复时间平面上的对数相位奇点（复交叉点处的支点），从而把著名的e^{-2πγ}型指数因子归结为解析且直观的几何/奇点图像。该图像可直接迁移到级联避免交叉、Stückelberg干涉等强场固态非绝热问题中。",
+      "path": "knowledge/raw/papers/2026-2603.09352-elementary-asymptotic-approach-to-the-landau-zener-problem.md",
+      "added_via": "cluster:cl_20261029_ea27ca",
+      "added_at": "2026-10-30T16:49:42Z"
+    },
+    {
+      "source_id": "paper:2025-2502.04033-hidden-facts-in-landau-zener-transitions-revealed-by-the-ric",
+      "title": "Hidden facts in Landau-Zener transitions revealed by the Riccati Equation",
+      "summary": "把普适二能级 Landau-Zener 动力学改写为幅度比满足的一阶非线性 Riccati 方程，用单一复函数的解析结构（实轴上零点/极点、复时间平面内奇点轨迹）完整刻画布居转移。由此揭示马尔可夫（绝热消去）近似成立的微观起源——即舍弃 Riccati 方程中的非线性项——及其在绝热极限下因奇点逼近实轴而失效的机制，并给出跃迁概率的精确渐近表达式（含此前被忽略的指数小项）。",
+      "path": "knowledge/raw/papers/2025-2502.04033-hidden-facts-in-landau-zener-transitions-revealed-by-the-ric.md",
+      "added_via": "cluster:cl_20261029_ea27ca",
+      "added_at": "2026-10-30T16:49:42Z"
+    }
+  ]
+}

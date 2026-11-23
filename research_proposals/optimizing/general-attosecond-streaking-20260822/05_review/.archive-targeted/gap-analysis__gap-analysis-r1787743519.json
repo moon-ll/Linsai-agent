@@ -1,0 +1,4 @@
+{
+  "gaps": [],
+  "note": "agent 未返回标准 JSON gaps 格式，视为无文献缺口。原文前200字: 根据评审报告，我识别出以下文献/支撑缺口：\n\n{\"gaps\": [{\"claim\": \"rationale §2.3 L31 引用了 [33]，但 references.md 中不存在 [33]（孤儿引用）\", \"missing_evidence\": \"正文引用了 [33]，但参考文献列表中缺失该条目，无法核实被引文献的真实性\", \"search_keywords\": [\"Cousin attos"
+}

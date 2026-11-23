@@ -1,0 +1,203 @@
+{
+  "gaps": [
+    {
+      "claim": "首例 altermagnet 固体 HHG 实验可在 4 年内完成并达到 Nature/Science 出版水准",
+      "missing_evidence": "缺少证明 altermagnet HHG 在实验上已具备可行性、以及国际同行（Werner 2024 理论、Ly 2026 预印本）实际进展边界的文献；评审需看到 Werner / Ly 之后是否有任何独立实验突破、CrSb/MnTe 候选材料在固体 HHG 中的可比信号强度证据、以及 4 年周期内达到 Nature/Science 门槛的同类实验案例（Biegert 集团 YBCO HHG 系列从首次观察到顶刊发表的时间线）。",
+      "search_keywords": [
+        "altermagnet high harmonic generation experimental observation",
+        "CrSb MnTe solid high harmonic generation",
+        "Werner 2024 altermagnet HHG theory",
+        "Ly 2026 altermagnet high harmonic preprint",
+        "first experimental HHG correlated insulator Nature",
+        "Biegert YBCO high harmonic generation timeline"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "NbSe₂ 双重序（CDW+SC）HHG 完整反演具备 Nature/Science 级方法学突破潜力",
+      "missing_evidence": "缺少证明 1L-NbSe₂ CDW+SC 双重序在 HHG 中已有可观测解耦指纹的实验文献（Tyulnev 2025、Pu 2025 等），以及类似多序反演工作（Meng 2024 H3S PNAS、Jessen 2025 1L-MoS₂ 等）的级别定位与差距分析；需论证为何 NbSe₂ 完整反演是方法学而非材料体系补充。",
+      "search_keywords": [
+        "NbSe2 charge density wave superconductivity high harmonic generation",
+        "1L-NbSe2 HHG dual order decoupling",
+        "Tyulnev 2025 NbSe2 HHG",
+        "Meng 2024 H3S inverse problem PNAS",
+        "Jessen 2025 1L-MoS2 time-resolved HHG",
+        "multi-order parameter retrieval HHG inverse method"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Y3 末 YBCO 序参量涨落 HHG 指纹具备 PRL 级新颖性",
+      "missing_evidence": "缺少支持超导涨落 HHG 指纹识别可行性的实验与理论文献，包括 Biegert / Puviani 已发表的 YBCO THG/超流响应结果、序参量涨落对谐波选择定则的影响、是否已有同类 PRL 投稿级别的实验证据；并需论证本研究相对已有 YBCO HHG 工作的差异化新颖点。",
+      "search_keywords": [
+        "YBCO superconductor high harmonic generation THG",
+        "superconducting fluctuations HHG fingerprint",
+        "Puviani 2024 YBCO HHG",
+        "Biegert YBCO high harmonic spectroscopy",
+        "order parameter fluctuation third harmonic generation cuprate",
+        "superfluid density HHG signature cuprate"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Y4 末多序共存 HHG 5 维约束反演方法学具备 PRL/NC 级新颖性",
+      "missing_evidence": "缺少证明 5 维约束反演（偏振+温度+磁场+pump-probe+涡旋）相对 3 维 v0.1 的实质性新颖性文献，包括贝叶斯-神经网络联合反演架构的可辨识性证明、多维约束下唯一性收敛的数学/计算证据、对比 Meng 2024 / Jessen 2025 等已有反演工作维度增加的边际贡献；以及类反演示证（如 NbSe₂）准确率 >75% 的可比基准。",
+      "search_keywords": [
+        "Bayesian neural network inverse problem HHG",
+        "5-dimensional constraint order parameter retrieval",
+        "identifiability analysis high harmonic inversion",
+        "multi-dimensional HHG inversion method benchmark",
+        "polarization temperature magnetic field pump-probe HHG inversion",
+        "vortex OAM high harmonic order parameter"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "TiSe₂ CDW 各向异性 HHG 拓展产出的可行性",
+      "missing_evidence": "缺少 TiSe₂ CDW 各向异性 HHG 实验文献（Tyulnev 2025 已发表工作的延伸空间），以及不同偏振/温度下 CDW 序对谐波各向异性的指纹特征；用以判断是否值得作为拓展产出而非重复 H5 已承诺内容。",
+      "search_keywords": [
+        "TiSe2 CDW anisotropy high harmonic generation",
+        "Tyulnev TiSe2 HHG polarization",
+        "CDW order parameter anisotropic HHG fingerprint",
+        "1T-TiSe2 ultrafast high harmonic"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "kagome 磁材料 HHG-XUV 探测作为拓展产出的可行性",
+      "missing_evidence": "缺少 kagome 磁材料（如 AV₃Sb₅）HHG/XUV 探测相关实验或理论文献，Ryan 2025 等已有工作的边界与本项目拓展方向；用以判断是否与基础 H4 重复以及新颖性空间。",
+      "search_keywords": [
+        "kagome magnet high harmonic generation XUV",
+        "AV3Sb5 kagome HHG",
+        "Ryan 2025 kagome HHG",
+        "kagome charge order ultrafast XUV spectroscopy"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "涡旋光 OAM 与超导序参量耦合 HHG 信号足以达到 PRL 阈值",
+      "missing_evidence": "缺少涡旋光（orbital angular momentum）驱动 HHG 在超导序参量探测中的理论与实验文献；包括 OAM HHG 选择定则、超导序参量对涡旋光谐波的响应指纹、以及同领域 PRL 级工作的新颖性边界。",
+      "search_keywords": [
+        "vortex light OAM high harmonic generation",
+        "orbital angular momentum HHG superconductivity",
+        "OAM HHG selection rule",
+        "structured light HHG order parameter"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "altermagnet kagome 异质结 HHG 作为拓展候选的可行性",
+      "missing_evidence": "缺少 altermagnet 与 kagome 异质结 HHG 的实验或理论文献，包括异质结中序参量共存对 HHG 偏振/温度依赖的影响。",
+      "search_keywords": [
+        "altermagnet kagome heterostructure HHG",
+        "altermagnet kagome interface high harmonic",
+        "kagome altermagnet HHG theory"
+      ],
+      "priority": "low"
+    },
+    {
+      "claim": "多维光场 HHG 序参量反演算法专利 1 相对 Meng 2024 H3S 反演、Jessen 2025 1L-MoS₂ 的新颖性",
+      "missing_evidence": "缺少专利 1（5 维约束贝叶斯-神经网络联合反演）与 PNAS 2024 Meng H3S 单变量反演、1L-MoS₂ 时间分辨反演（Jessen 2025）的逐项对比文献，用以清晰刻画本专利核心新颖点（多维联合架构 / 序参量同时反演 / 多序参量解耦）相对于已有公开方案的具体差异。",
+      "search_keywords": [
+        "H3S superconducting inverse problem algorithm",
+        "time-resolved HHG 1L-MoS2 order parameter retrieval",
+        "joint Bayesian neural network order parameter inversion",
+        "patent novelty multidimensional HHG inversion",
+        "machine learning HHG order parameter retrieval"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "强场超快序参量读出装置与方法专利 2 的新颖性",
+      "missing_evidence": "缺少低温强场 + 涡旋光 + pump-probe 三维原位集成 HHG 装置的同类公开技术文献，用以论证与现有仅偏振扫描或仅温度扫描 HHG 装置（Biegert / Hansen / Lu 组）的实质性技术差异与新颖性边界。",
+      "search_keywords": [
+        "cryogenic high magnetic field HHG apparatus",
+        "vortex beam HHG experimental setup",
+        "pump-probe high harmonic generation in situ",
+        "mid-infrared HHG low temperature magnetic field setup",
+        "ultrafast HHG multidimensional scanning apparatus"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "HHG-OPRKit 开源工具包相对现有 HHG 反演/分析软件（如 pStrong、TDCIS、TDDFT 相关工具）的差异化",
+      "missing_evidence": "缺少现有 HHG 序参量反演/分析开源工具的盘点文献，包括 GitHub 主流 HHG 模拟/反演软件的功能、协议、输入输出规范、覆盖率与维护状态；用以判断 HHG-OPRKit 是否具备实质增量而非重复造轮子，并支持其 ≥80% 测试覆盖率 / ReadTheDocs / 持续 2 年维护承诺的可比基准。",
+      "search_keywords": [
+        "high harmonic generation simulation open source software",
+        "HHG open source inverse problem toolkit",
+        "pStrong TDCIS HHG simulation",
+        "open source ultrafast spectroscopy software benchmark",
+        "scientific software sustainability maintenance commitment"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "HHG-MultiOrder-v1 数据集（≥500 万 HHG 谱扫描 / 5 维参数）规模与字段的合理性",
+      "missing_evidence": "缺少同类多维 HHG 数据集的规模与字段规范先例文献，包括 Zenodo / Figshare / 国家科学数据中心上已发布的 HHG 实验数据集的体量、字段定义、元数据规范、DOI 分配实践；用以判断 ≥500 万谱点 / 25 样品 / 5 维字段的承诺是否现实，以及与同期方法学 PRL 一同发表的数据量基准。",
+      "search_keywords": [
+        "high harmonic generation dataset Zenodo",
+        "multidimensional HHG experimental data repository",
+        "open data ultrafast spectroscopy metadata standard",
+        "Figshare HHG dataset",
+        "data management plan NSFC ultrafast"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Y3-Y4 反演误差 <20% / <25%（method.md §4 Y4 验收）的可类比基准",
+      "missing_evidence": "缺少反演误差 <20% / <25% 这一具体阈值的同类基准文献，包括类似逆问题在 HHG / 光谱 / 逆问题领域的可接受误差范围、以及何种误差水平足以支撑 PRL/NC 级别方法学论文。",
+      "search_keywords": [
+        "HHG inverse problem error benchmark percentage",
+        "order parameter retrieval accuracy acceptable threshold",
+        "inverse problem reconstruction error benchmark spectroscopy",
+        "synthetic data validation HHG inversion"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "4 年累计 5-7 篇论文承诺与 NSFC 面上项目常规产出的可比性",
+      "missing_evidence": "缺少 NSFC 面上项目（HHG / 超快光谱 / 凝聚态实验方向）4 年累计论文产出的统计文献或公开数据，用以佐证 5-7 篇基础产出在同类项目中的合理定位（既不太低显敷衍、也不太高显冒进）。",
+      "search_keywords": [
+        "NSFC general project publication output statistics",
+        "面上项目 4 年论文产出 凝聚态物理",
+        "HHG group publication rate ultrafast spectroscopy",
+        "NSFC funding outcome publication benchmark"
+      ],
+      "priority": "low"
+    },
+    {
+      "claim": "Biegert 集团（ICFO+ICMAB+GTIIT 三家）作为 NbSe₂ 反演 Nature/Science 级别合作伙伴的可行性",
+      "missing_evidence": "缺少 Biegert 集团在 NbSe₂ 双重序 HHG、Nature/Science 级合作产出、联合培养博士生等具体形式与历史记录的文献；用以支撑 §6.4 国际合作承诺（联合投稿 + 6-12 月联培 + 第三方盲测）的现实可达性。",
+      "search_keywords": [
+        "Biegert ICFO HHG NbSe2 collaboration",
+        "ICFO ICMAB GTIIT high harmonic collaboration",
+        "Biegert group NbSe2 charge density wave",
+        "ICFO collaboration high harmonic Nature Science",
+        "ICMAB Biegert high harmonic ultrafast"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Werner 组 / Puviani 组作为第三方独立验证合作方的可行性",
+      "missing_evidence": "缺少 Werner 组（altermagnet HHG 理论）与 Puviani 组（YBCO HHG 反演）的近期产出、合作形式、第三方盲测能力等文献，用以支撑 §6.4 中关于第三方验证与学术影响的承诺。",
+      "search_keywords": [
+        "Werner group altermagnet HHG current research",
+        "Puviani YBCO HHG inversion method",
+        "third-party blind test high harmonic spectroscopy",
+        "independent verification HHG order parameter"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Y4 末综述论文候选期刊 Rev. Mod. Phys. / Phys. Rep. 在 HHG 序参量读出方向的可类比先例",
+      "missing_evidence": "缺少近年 Rev. Mod. Phys. / Phys. Rep. 在固体 HHG、序参量超快读出、强场超快光谱方向的综述论文文献，用以判断综述候选期刊的合理性以及综述承诺的可达性。",
+      "search_keywords": [
+        "Reviews of Modern Physics high harmonic generation review",
+        "Physics Reports solid HHG review",
+        "ultrafast order parameter spectroscopy review article",
+        "strong-field ultrafast optics review RMP PhysRep"
+      ],
+      "priority": "low"
+    }
+  ]
+}

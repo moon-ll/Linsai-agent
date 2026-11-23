@@ -1,0 +1,18 @@
+{
+  "gaps": [
+    {
+      "claim": "“低于 2 T”这一关键磁场参数断言。",
+      "missing_evidence": "缺少在 content.md 第9行直接标注的原始文献出处。现有依据仅见于研究方案第75行的[15]，需要核实[15]是否直接报告了“2 T”这一阈值，并确认其磁场方向、样品条件、测量对象及物理机制与本申请书所述实验场景一致；必要时还应补充其他独立原始研究或系统综述交叉验证。",
+      "search_keywords": [
+        "2 T 磁场阈值 高次谐波产生",
+        "低于 2 T 磁场 高次谐波 手性",
+        "high-harmonic generation below 2 T magnetic field",
+        "2 tesla magnetic-field threshold harmonic generation",
+        "磁场诱导 高次谐波 2 T",
+        "CrSBr 2 T high harmonic generation"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "content"
+}

@@ -1,0 +1,327 @@
+{
+ "per_entry": {
+  "1": [
+   "2007.10762"
+  ],
+  "4": [
+   "2402.02120"
+  ],
+  "5": [
+   "2509.08370"
+  ],
+  "6": [
+   "2409.04216"
+  ],
+  "7": [
+   "2412.13329"
+  ],
+  "8": [
+   "2310.03080",
+   "2008.07131"
+  ],
+  "9": [
+   "2404.14411"
+  ],
+  "10": [
+   "2602.11645"
+  ],
+  "11": [
+   "2407.01936"
+  ],
+  "12": [
+   "2307.14693"
+  ],
+  "14": [
+   "1901.07588"
+  ],
+  "15": [
+   "2407.07752"
+  ],
+  "16": [
+   "2105.05820"
+  ],
+  "17": [
+   "2312.10839"
+  ],
+  "18": [
+   "2602.09738"
+  ],
+  "19": [
+   "2607.13863"
+  ],
+  "20": [
+   "2605.24320"
+  ],
+  "23": [
+   "2511.10471"
+  ],
+  "24": [
+   "2601.19105"
+  ],
+  "25": [
+   "2603.02835"
+  ],
+  "26": [
+   "2511.16086"
+  ],
+  "27": [
+   "2512.13311"
+  ],
+  "28": [
+   "2003.02961"
+  ],
+  "29": [
+   "2208.10032",
+   "2407.15253"
+  ],
+  "30": [
+   "2604.23506"
+  ],
+  "31": [
+   "2607.23652",
+   "2601.12743"
+  ],
+  "32": [
+   "2304.12547"
+  ],
+  "33": [
+   "2601.14526"
+  ],
+  "35": [
+   "2308.10117"
+  ],
+  "36": [
+   "2603.15035"
+  ],
+  "37": [
+   "2602.15131"
+  ],
+  "38": [
+   "2603.25317"
+  ],
+  "39": [
+   "2510.03759"
+  ],
+  "40": [
+   "2606.23806"
+  ],
+  "41": [
+   "2409.14855"
+  ],
+  "42": [
+   "2504.05241"
+  ],
+  "43": [
+   "2503.12920"
+  ],
+  "44": [
+   "2606.31573"
+  ],
+  "45": [
+   "2412.12882"
+  ],
+  "46": [
+   "2109.00093"
+  ]
+ },
+ "results": {
+  "1901.07588": {
+   "error": "URLError:<urlopen error timed out>"
+  },
+  "2003.02961": {
+   "error": "URLError:<urlopen error timed out>"
+  },
+  "2007.10762": {
+   "error": "URLError:<urlopen error timed out>"
+  },
+  "2008.07131": {
+   "title": "[2008.07131] A real-time TDDFT study of femtosecond laser driven monolayer NbSe2",
+   "first_author": "Ahmed, Towfiq",
+   "submitter": "Towfiq Ahmed [",
+   "date": "2020/08/17"
+  },
+  "2105.05820": {
+   "error": "URLError:<urlopen error timed out>"
+  },
+  "2109.00093": {
+   "error": "URLError:<urlopen error timed out>"
+  },
+  "2208.10032": {
+   "title": "[2208.10032] Transition from multiphoton to tunneling ionization in the process of high harmonic generation in solids",
+   "first_author": "Wang, Shuai",
+   "submitter": "Shuai Wang [",
+   "date": "2022/08/22"
+  },
+  "2304.12547": {
+   "error": "URLError:<urlopen error timed out>"
+  },
+  "2307.14693": {
+   "title": "[2307.14693] High-harmonic spectroscopy of strongly bound excitons in solids",
+   "first_author": "Jensen, Simon Vendelbo Bylling",
+   "submitter": "Simon Vendelbo Bylling Jensen ["
+  },
+  "2308.10117": {
+   "title": "[2308.10117] Observation of Giant Band Splitting in Altermagnetic MnTe",
+   "first_author": "Osumi, T.",
+   "submitter": "Seigo Souma ["
+  },
+  "2310.03080": {
+   "title": "[2310.03080] Theoretical study of high harmonic generation in monolayer NbSe$_2$",
+   "first_author": "Rehn, Daniel A.",
+   "submitter": "Daniel Rehn ["
+  },
+  "2312.10839": {
+   "error": "URLError:<urlopen error timed out>"
+  },
+  "2402.02120": {
+   "title": "[2402.02120] Theory of symmetry-resolved quench-drive spectroscopy: Nonlinear response of phase-fluctuating superconductors",
+   "first_author": "Puviani, Matteo",
+   "submitter": "Matteo Puviani ["
+  },
+  "2404.14411": {
+   "error": "URLError:<urlopen error timed out>"
+  },
+  "2407.01936": {
+   "error": "URLError:<urlopen error timed out>"
+  },
+  "2407.07752": {
+   "title": "[2407.07752] High harmonic generation in altermagnets",
+   "first_author": "Werner, Philipp",
+   "submitter": "Philipp Werner ["
+  },
+  "2407.15253": {
+   "title": "[2407.15253] Keldysh tuning of photoluminescence in a lead halide perovskite crystal",
+   "first_author": "Zhang, Zhuquan",
+   "submitter": "Zhuquan Zhang ["
+  },
+  "2409.04216": {
+   "title": "[2409.04216] High harmonic spectroscopy reveals anisotropy of the Mott to Charge-Density-Wave phase transition in TiSe$_2$",
+   "first_author": "Tyulnev, Igor",
+   "submitter": "Jens Biegert ["
+  },
+  "2409.14855": {
+   "title": "[2409.14855] Nonlinear field dependence of Hall effect and high-mobility multi-carrier transport in an altermagnet CrSb",
+   "first_author": "Bai, Yuqing",
+   "submitter": "Guizhou Xu ["
+  },
+  "2412.12882": {
+   "title": "[2412.12882] Néel vector-dependent anomalous transport in altermagnetic metal CrSb",
+   "first_author": "Yu, Tianye",
+   "submitter": "Tianye Yu ["
+  },
+  "2412.13329": {
+   "title": "[2412.13329] Revealing the anisotropic charge-density-wave order of TiSe$_2$ through high harmonic generation",
+   "first_author": "Zhang, Lin",
+   "submitter": "Lin Zhang ["
+  },
+  "2503.12920": {
+   "title": "[2503.12920] Chiral magnon splitting in altermagnetic CrSb from first principles",
+   "first_author": "Zhang, Yi-Fan",
+   "submitter": "Kun Cao Dr ["
+  },
+  "2504.05241": {
+   "title": "[2504.05241] Chiral magnetic excitations and domain textures of g-wave altermagnets",
+   "first_author": "Kravchuk, Volodymyr P.",
+   "submitter": "Volodymyr Kravchuk P. ["
+  },
+  "2509.08370": {
+   "error": "timeout:The read operation timed out"
+  },
+  "2510.03759": {
+   "title": "[2510.03759] The magnon spectra of g-type altermagnet bulk CrSb",
+   "first_author": "Tas, Murat",
+   "submitter": "Murat Tas [",
+   "date": "2025/10/04"
+  },
+  "2511.10471": {
+   "title": "[2511.10471] Broadband nonlinear Hall response and multiple wave mixing in a room temperature altermagnet",
+   "first_author": "Sankar, Soumya",
+   "submitter": "Berthold Jäck [",
+   "date": "2025/11/13"
+  },
+  "2511.16086": {
+   "title": "[2511.16086] Coherent high-velocity chiral magnons in the metallic altermagnet CrSb",
+   "first_author": "Singh, Ashutosh K.",
+   "submitter": "Alannah Hallas [",
+   "date": "2025/11/20"
+  },
+  "2512.13311": {
+   "error": "URLError:<urlopen error timed out>"
+  },
+  "2601.12743": {
+   "title": "[2601.12743] Twisting harmonics: Transfer of orbital angular momentum in solid-state high-harmonic generation",
+   "first_author": "Rajak, Debobrata",
+   "submitter": "Camilo Granados Dr. [",
+   "date": "2026/01/19"
+  },
+  "2601.14526": {
+   "error": "URLError:<urlopen error timed out>"
+  },
+  "2601.19105": {
+   "title": "[2601.19105] Altermagnetic spin-split Fermi surfaces in CrSb revealed by quantum oscillation measurements",
+   "first_author": "Terashima, Taichi",
+   "submitter": "Taichi Terashima [",
+   "date": "2026/01/27"
+  },
+  "2602.09738": {
+   "error": "URLError:<urlopen error timed out>"
+  },
+  "2602.11645": {
+   "title": "[2602.11645] Epitaxial Growth and Anomalous Hall Effect in High-Quality Altermagnetic $α$-MnTe Thin Films",
+   "first_author": "Shao, Tian-Hao",
+   "submitter": "Chang Liu [",
+   "date": "2026/02/12"
+  },
+  "2602.15131": {
+   "error": "URLError:<urlopen error timed out>"
+  },
+  "2603.02835": {
+   "error": "URLError:<urlopen error timed out>"
+  },
+  "2603.15035": {
+   "title": "[2603.15035] Loss of altermagnetic order and smooth restoration of Kramers' spin degeneracy with increasing temperature in CrSb and MnTe",
+   "first_author": "Woodgate, Christopher D.",
+   "submitter": "Christopher Woodgate [",
+   "date": "2026/03/16"
+  },
+  "2603.25317": {
+   "title": "[2603.25317] Flat band driven competing charge and spin instabilities in the altermagnet CrSb",
+   "first_author": "Korshunov, A.",
+   "submitter": "Artem Korshunov [",
+   "date": "2026/03/26"
+  },
+  "2604.23506": {
+   "title": "[2604.23506] Ultrafast spectroscopy and role of interlayer coupling in high harmonic generation from layered solids",
+   "first_author": "Uzner, Eyal",
+   "submitter": "Eyal Uzner [",
+   "date": "2026/04/26"
+  },
+  "2605.24320": {
+   "error": "URLError:<urlopen error timed out>"
+  },
+  "2606.23806": {
+   "title": "[2606.23806] Nonrelativistic Spin-Orbit-Coupling Effects in Odd-Parity Coplanar Magnets",
+   "first_author": "Liu, Dongling",
+   "submitter": "Dongling Liu [",
+   "date": "2026/06/22"
+  },
+  "2606.31573": {
+   "title": "[2606.31573] High-harmonic spin-current signatures of altermagnetic spin-group symmetry",
+   "first_author": "Mizuno, Koki",
+   "submitter": "Koki Mizuno [",
+   "date": "2026/06/30"
+  },
+  "2607.13863": {
+   "title": "[2607.13863] Ultrafast altermagnetophononics",
+   "first_author": "Wang, Chenyu",
+   "submitter": "Yaxian Wang [",
+   "date": "2026/07/15"
+  },
+  "2607.23652": {
+   "title": "[2607.23652] Carrier-Envelope Phase Control of Orbital Angular Momentum in Solid-State High-Harmonic Generation",
+   "first_author": "Granados, Camilo",
+   "submitter": "Camilo Granados Dr. [",
+   "date": "2026/07/26"
+  }
+ }
+}

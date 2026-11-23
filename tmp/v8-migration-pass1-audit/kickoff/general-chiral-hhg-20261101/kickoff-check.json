@@ -1,0 +1,93 @@
+{
+  "topic_id": "general-chiral-hhg-20261101",
+  "stage": "kickoff",
+  "passed": false,
+  "results": [
+    {
+      "code": "A1",
+      "name": "背景调研充分",
+      "passed": false,
+      "evidence": {
+        "note_files": 4,
+        "recent_count": 4,
+        "recent_year_floor": 2024,
+        "kb_wikilinks": 7
+      },
+      "gaps": [
+        "笔记/知识卡 4 < 8"
+      ]
+    },
+    {
+      "code": "A2",
+      "name": "问题定位清晰",
+      "passed": true,
+      "evidence": {
+        "problem_md": true,
+        "statement": true,
+        "novelty_section": true,
+        "novelty_score": 0.0
+      },
+      "gaps": []
+    },
+    {
+      "code": "A3",
+      "name": "方案分解明确",
+      "passed": false,
+      "evidence": {
+        "scheme_md": true,
+        "steps": 0,
+        "all_steps_criteria": false,
+        "first_month": true,
+        "methods_pack": true
+      },
+      "gaps": [
+        "步骤数 0 < 3",
+        "存在缺「判据」的步骤"
+      ]
+    },
+    {
+      "code": "A4",
+      "name": "参考文献真实",
+      "passed": false,
+      "evidence": {
+        "bib": false,
+        "entries": 0,
+        "with_source": 0,
+        "cited": 0,
+        "dangling": []
+      },
+      "gaps": [
+        "04_references/references.bib 缺失"
+      ]
+    },
+    {
+      "code": "G1",
+      "name": "篇幅约束",
+      "passed": true,
+      "evidence": {
+        "report_chars": 6040,
+        "limit": 8000
+      },
+      "gaps": []
+    },
+    {
+      "code": "G2",
+      "name": "关联明确",
+      "passed": false,
+      "evidence": {
+        "related_field": true,
+        "wikilinks": 0
+      },
+      "gaps": [
+        "报告 wikilink 0 < 5"
+      ]
+    }
+  ],
+  "gaps": [
+    "04_references/references.bib 缺失",
+    "存在缺「判据」的步骤",
+    "报告 wikilink 0 < 5",
+    "步骤数 0 < 3",
+    "笔记/知识卡 4 < 8"
+  ]
+}

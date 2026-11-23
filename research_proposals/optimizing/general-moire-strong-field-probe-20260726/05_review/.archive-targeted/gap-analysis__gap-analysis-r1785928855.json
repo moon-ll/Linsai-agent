@@ -1,0 +1,48 @@
+{
+  "gaps": [
+    {
+      "claim": "magic-angle TBG 的莫尔原胞含超过 10⁴ 原子使 TDDFT 计算量达到 ~10⁸ 核时量级",
+      "missing_evidence": "缺少明确报告 magic-angle TBG 全原胞 TDDFT 计算规模（核时数、原子数、计算可行性）的文献支撑，特别是 Molinero 2024 论文对 TBG 计算资源的具体报道",
+      "search_keywords": [
+        "magic-angle twisted bilayer graphene TDDFT computational cost",
+        "TBG moire supercell first-principles calculation core hours",
+        "Molinero 2024 twisted bilayer graphene",
+        "large-scale TDDFT moire heterostructure"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "HHG 谱反演莫尔势在数学上是欠定逆问题，解不唯一",
+      "missing_evidence": "缺少专门讨论 HHG 谱反演莫尔势/晶体势的数学不适定性（欠定性、非唯一性）的理论文献，特别是高次谐波光谱反演问题的正则化或不适定性分析",
+      "search_keywords": [
+        "high harmonic generation inverse problem ill-posed",
+        "HHG spectral inversion uniqueness regularization",
+        "harmonic spectroscopy potential reconstruction mathematical",
+        "inverse problem attosecond spectroscopy moire"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "光 Floquet 工程在莫尔体系中的实验验证尚属空白",
+      "missing_evidence": "缺少对当前莫尔体系（TBG、tMDC 异质结）中 Floquet 工程实验进展的系统综述，特别是是否存在部分实验验证或零星报道需要明确界定",
+      "search_keywords": [
+        "Floquet engineering moire superlattice experiment",
+        "twisted bilayer graphene Floquet band engineering experimental",
+        "moire heterostructure light-induced Floquet state",
+        "periodic driving moire band structure experiment"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "magic-angle TBG 在 θ=1.1° 时 L_M≈12.8 nm 对应约 11,000 个原子的等效原胞",
+      "missing_evidence": "缺少对 magic-angle TBG 莫尔周期与原子数对应关系的精确计算/报道，需要验证 12.8 nm 周期和 11,000 原子等效原胞的数值来源",
+      "search_keywords": [
+        "magic angle TBG moire period 12.8 nm",
+        "twisted bilayer graphene moire wavelength 1.1 degree",
+        "TBG moire supercell atom count 11000",
+        "Bistritzer MacDonald magic angle formula verification"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

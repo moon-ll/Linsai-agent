@@ -1,0 +1,115 @@
+{
+  "gaps": [
+    {
+      "claim": "BSV驱动固体HHG实验观测（文献[1]、[9]、[10]及§1.5论证链）需最新实验数据支撑",
+      "missing_evidence": "缺少2025-2026年BSV驱动固体HHG实验观测的正式发表论文，特别是QEF的实验验证",
+      "search_keywords": [
+        "bright squeezed vacuum solid high harmonic generation experimental",
+        "BSV driven HHG solid state first observation 2025",
+        "quantum enhancement factor HHG experimental validation",
+        "squeezed light high harmonic generation solid observation",
+        "Khurelbaatar Rivera-Dean quantum light HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "[11]号引用存在一物两名问题：scheme L33挂'κ-盐DFT+GOU计算'与全文Li钨针尖干涉研究不一致",
+      "missing_evidence": "缺少κ-盐（如κ-Cl、κ-Br）DFT+GOU计算的原始文献以替换当前错挂的[11]",
+      "search_keywords": [
+        "kappa-(BEDT-TTF)2Cu[N(CN)2]Br DFT GOU calculation",
+        "kappa-Cl Mott insulator DFT+ Gutzwiller",
+        "kappa-Br Hubbard U DFT calculation",
+        "organic Mott insulator GOU electronic structure"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "[29]号引用存在归属问题：scheme L55挂'Liouville选择规则'与content L103的Jiang-Dorfman twin-beams不一致",
+      "missing_evidence": "缺少高次谐波产生中Liouville量子路径选择规则的原始理论文献",
+      "search_keywords": [
+        "Liouville path integral high harmonic selection rule",
+        "quantum path selection rule HHG Liouville",
+        "Jiang-Dorfman twin beams BSV",
+        "bright squeezed vacuum twin beam characterization"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3.3方案中'等带隙非关联对照'样品（content L55/L67提及）无对应参考文献",
+      "missing_evidence": "缺少与Mott/莫尔材料带隙相当但电子关联弱的对照样品HHG实验文献",
+      "search_keywords": [
+        "wide bandgap semiconductor HHG reference sample",
+        "non-correlated wide bandgap HHG ZnO",
+        "TiO2 SiO2 high harmonic generation reference",
+        "bandgap matched uncorrelated HHG sample"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Mott/莫尔/TMDC三档样品QEF单调性假设（rationale L79）需文献支撑或反例",
+      "missing_evidence": "缺少关于电子关联强度与HHG量子增强因子单调性关系的理论/实验证据",
+      "search_keywords": [
+        "quantum enhancement factor strongly correlated HHG scaling",
+        "Mott insulator HHG enhancement",
+        "moire superlattice HHG enhancement correlation U/W",
+        "QEF monotonicity Hubbard U bandwidth ratio"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "MCMC/Gelman-Rubin收敛监控用于HHG反演的可行性需文献支撑",
+      "missing_evidence": "缺少HHG反演或阿秒光谱反问题中应用MCMC贝叶斯推断+Gelman-Rubin诊断的先例文献",
+      "search_keywords": [
+        "MCMC Gelman-Rubin attosecond spectroscopy inversion",
+        "Bayesian inference high harmonic generation convergence",
+        "Markov chain Monte Carlo HHG parameter retrieval",
+        "convergence diagnostic ultrafast spectroscopy inverse problem"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "SBE-Q（半导体布洛赫方程-量子光推广）在强场极限的适用条件与失效边界（content L33-45）",
+      "missing_evidence": "缺少SBE-Q模型在强场下失效边界、适用范围的理论推导文献",
+      "search_keywords": [
+        "semiconductor Bloch equation quantum light validity",
+        "SBE quantum light generalization strong field breakdown",
+        "interband coupling saturation quantum light HHG",
+        "quantum light solid-state HHG theoretical framework"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "BSV光子数校准与g⁽²⁾可调范围的实验数据（content L13/15/19）",
+      "missing_evidence": "缺少NOPA产生的BSV在g⁽²⁾ 3-15范围内可调的实验文献",
+      "search_keywords": [
+        "NOPA bright squeezed vacuum g2 tunable range",
+        "BSV photon number per pulse calibration",
+        "degenerate PDC g2 superthermal",
+        "parametric down conversion g2 high gain experimental"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "T₂退相干时长对BSV-HHG二阶关联传递的影响（content L23、scheme §3.5）",
+      "missing_evidence": "缺少BSV光子相干时间T₂与固体HHG相干性匹配关系的实验或理论文献",
+      "search_keywords": [
+        "BSV coherence time T2 solid HHG",
+        "squeezed light decoherence high harmonic",
+        "photon correlation transfer HHG coherence",
+        "T2 dephasing solid-state HHG timescale"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "BSV驱动HHG增强的国内（Chinese group）代表性工作（rationale及scheme交叉引用）",
+      "missing_evidence": "缺少国内实验组在BSV/压缩光驱动固体HHG方向的代表性论文",
+      "search_keywords": [
+        "bright squeezed vacuum HHG China group",
+        "squeezed light solid HHG Chinese experimental",
+        "量子光 高次谐波 国内 实验组",
+        "BSV driven nonlinear optics China"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

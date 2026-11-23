@@ -1,0 +1,56 @@
+{
+  "gaps": [
+    {
+      "claim": "Lindau区判据与Floquet边界的量化衔接",
+      "missing_evidence": "Lindau区与Floquet区的边界条件缺乏明确的量化判据与实验验证，需要提供具体参数范围（ℏω/E_g、场强、脉宽等）来区分两个区域",
+      "search_keywords": [
+        "Lindau zone Floquet boundary criterion",
+        "Floquet topological phase transition field strength",
+        "adiabatic parameter ratio photon energy bandgap",
+        "Floquet solid state strong field boundary condition"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "瞬态量子相定义-测量-闭环理论完备性",
+      "missing_evidence": "「瞬态量子相」的定义、测量可行性、闭环必要性缺乏系统的理论证明，需要No-Go定理或可行性定理支撑",
+      "search_keywords": [
+        "transient quantum phase measurement control loop",
+        "quantum phase tomography feedback inseparability",
+        "No-Go theorem quantum parameter estimation completeness",
+        "瞬态量子相 定义 测量 闭环 理论"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "国际空白自评缺少反方证据",
+      "missing_evidence": "声称「国际空白」但未提供反方证据，即现有研究未能解决TQP读写问题的具体文献支撑",
+      "search_keywords": [
+        "transient quantum phase attosecond measurement international",
+        "subcycle quantum phase optical control state-of-the-art",
+        "ultrafast Berry phase readout solid state gap"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "「检索截止2025年12月」声明的完整性",
+      "missing_evidence": "段19标记「2025年首次」但缺少检索范围和截止日期声明，与段25、29、59的规范声明不一致",
+      "search_keywords": [
+        "attosecond quantum phase tomography preprint 2025",
+        "transient topological phase measurement arXiv 2025",
+        "solid-state HHG quantum phase first observation"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Bi₂Se₃高次谐波实验支撑不足",
+      "missing_evidence": "段19提及「中科院物理所」在Bi₂Se₃上的强场非线性工作，缺乏具体文献引用和实验细节",
+      "search_keywords": [
+        "Bi2Se3 high harmonic generation experiment Chinese",
+        "中科院物理所 高次谐波 拓扑绝缘体",
+        "bismuth selenide strong field nonlinear optics CAS"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

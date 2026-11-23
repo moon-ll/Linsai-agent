@@ -1,0 +1,6 @@
+# .write-lock — round-7 单写者冻结声明（终轮）
+- 持有者：TraeCode 会话（round-7 唯一 writer/critic）
+- 冻结时间：2026-11-06T14:20（Asia/Shanghai）
+- 用途：round-7 六项非文风修复 + critic-round-7 单次复评窗口
+- 允许写入范围：04_proposal/sections/*.md、05_review/critic-round-7-*.md、02_literature/reading-notes.md
+- 释放：复评与复核完成后改名 .write-lock.released-<时间>

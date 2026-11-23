@@ -1,0 +1,59 @@
+{
+  "gaps": [
+    {
+      "claim": "SnS₂等带隙非关联对照体系的实验对照方案（与α-TaS₃、NiPS₃、CrSb四类梯度对照）",
+      "missing_evidence": "缺少SnS₂作为等带隙非关联参考对照体系的实验测量与方案实施细节，包括同批同驱动成对测量协议、Jensen放大隔离流程",
+      "search_keywords": [
+        "SnS2 high harmonic generation",
+        "SnS2 bandgap correlated insulator comparison",
+        "isosgap non-correlated reference HHG solid-state",
+        "SnS2 2D semiconductor nonlinear optical response",
+        "TaS3 NiPS3 CrSb isosband gap reference sample HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "QEF量子增强因子的归因需要四类对照体系（三类梯度+一类等带隙非关联）",
+      "missing_evidence": "缺少QEF在BSV驱动HHG中归因有效性的多对照实验验证文献，特别是等带隙非关联体系排除纯带隙效应的判据",
+      "search_keywords": [
+        "quantum enhancement factor QEF HHG control experiment",
+        "BSV squeezed vacuum HHG attosource isosband reference",
+        "bright squeezed vacuum HHG bandgap dependence disentanglement",
+        "non-classical light driven HHG bandgap reference sample"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "MoS₂高次谐波产生首次观测（经典光驱动）与多体退相干时间T₂的实验测量",
+      "missing_evidence": "缺少Liu等人MoS₂单体高次谐波产生的首次观测实验文献，以及TMDC中HHG相干时间T₂的实验数据",
+      "search_keywords": [
+        "monolayer MoS2 high harmonic generation first observation Liu",
+        "MoS2 HHG classical light experiment",
+        "TMDC high harmonic dephasing time T2 measurement",
+        "transition metal dichalcogenide HHG coherence time experimental"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "同批同驱动成对测量协议的实验先例",
+      "missing_evidence": "缺少solid HHG中关联vs非关联样品同批同驱动成对测量的实验实施文献先例",
+      "search_keywords": [
+        "solid-state HHG paired measurement same batch same drive",
+        "correlated vs non-correlated reference sample HHG paired",
+        "in-situ HHG control experiment isosband reference"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Jensen放大隔离方法在BSV驱动HHG中的应用",
+      "missing_evidence": "缺少Jensen在HHG信号放大隔离与背景抑制方面的方法论文献",
+      "search_keywords": [
+        "Jensen high harmonic signal amplification isolation",
+        "HHG background suppression reference sample method",
+        "Jensen ab initio HHG control experiment"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "full_review"
+}

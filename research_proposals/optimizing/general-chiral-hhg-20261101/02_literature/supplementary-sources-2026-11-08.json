@@ -1,0 +1,33 @@
+{
+  "proposal_id": "general-chiral-hhg-20261101",
+  "cluster_id": "cl_20261107_8537c8",
+  "clusters": [
+    "cl_20261107_8537c8"
+  ],
+  "entries": [
+    {
+      "source_id": "paper:2026-2603.06144-electric-field-switching-of-chiral-phonons",
+      "title": "Electric field switching of chiral phonons",
+      "summary": "在铁电 BaTiO3 中实现了电场驱动的手性声子角动量的非易失、可逆切换。利用氧 K 边圆二色共振非弹性 X 射线散射（CD-RIXS）直接、元素特定地探测声子角动量，结果与第一性原理计算的声子模式手性定量吻合。观测到动量依赖的圆二色对比度以及随铁电极化翻转可逆的回转电效应（稳定 ≥15 小时），确立了声子手性作为可电写、可读的固态自由度。",
+      "path": "knowledge/raw/papers/2026-2603.06144-electric-field-switching-of-chiral-phonons.md",
+      "added_via": "cluster:cl_20261107_8537c8",
+      "added_at": "2026-11-08T07:20:16Z"
+    },
+    {
+      "source_id": "paper:2025-2507.20168-inelastic-neutron-scattering-for-direct-detection-of-chiral",
+      "title": "Inelastic Neutron Scattering for Direct Detection of Chiral Phonons",
+      "summary": "该工作（PRB 114, 034302）提出并论证了以非弹性中子散射作为手性声子的直接、普适探测手段：中子通过与原子核的强相互作用直接耦合晶格振动，可在宽广的动量-能量空间测量声子谱。相比以往依赖光子参与电子-声子耦合的间接探测通道（光学/Raman/共振X射线等，常局限于布里渊区中心或共振条件），该方法能对任意动量处的圆偏振（手性）声子模式进行直接辨识，为声子手性与声子赝角动量研究提供了通用实验通路。",
+      "path": "knowledge/raw/papers/2025-2507.20168-inelastic-neutron-scattering-for-direct-detection-of-chiral.md",
+      "added_via": "cluster:cl_20261107_8537c8",
+      "added_at": "2026-11-08T07:20:16Z"
+    },
+    {
+      "source_id": "paper:2026-2603.15325-coupled-ferroelectricity-and-phonon-chirality",
+      "title": "Coupled Ferroelectricity and Phonon Chirality",
+      "summary": "提出将结构手性与铁电极化相耦合的设计原理，在铁电材料中实现可由外电场可逆切换的声子手性。该方案突破了石英等刚性结构手性材料中手性由晶格固定、左右旋不可切换的固有局限，使声子手性成为可电调控的自由度。由此为电场操控手性声子及其驱动的自旋与角动量输运提供了新的材料平台与调控路径。",
+      "path": "knowledge/raw/papers/2026-2603.15325-coupled-ferroelectricity-and-phonon-chirality.md",
+      "added_via": "cluster:cl_20261107_8537c8",
+      "added_at": "2026-11-08T07:20:16Z"
+    }
+  ]
+}

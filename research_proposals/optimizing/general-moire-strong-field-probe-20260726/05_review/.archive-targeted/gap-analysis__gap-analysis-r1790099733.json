@@ -1,0 +1,75 @@
+{
+  "gaps": [
+    {
+      "claim": "TBG 损伤阈值（≥10¹² W/cm²）目前没有文献先例支撑",
+      "missing_evidence": "缺乏 TBG 莫尔超晶格在强场下的损伤阈值实验或理论数据，作为假设 2 中 5 倍余量的依据",
+      "search_keywords": [
+        "twisted bilayer graphene damage threshold strong field",
+        "TBG optical breakdown mid-infrared",
+        "graphene moiré superlattice laser induced damage"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "莫尔 HHG 饱和拐点 3×10¹¹ W/cm² 的预期来源",
+      "missing_evidence": "缺乏实验或理论预测莫尔关联体系中 HHG 强度饱和拐点的具体数值证据",
+      "search_keywords": [
+        "HHG saturation intensity moiré superlattice",
+        "high harmonic generation intensity dependence TMDC",
+        "solid HHG intensity regime transition"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "莫尔势反演精度从 0.02°（单层）放宽到 0.05–0.1°（扭转角双档）的基准参考",
+      "missing_evidence": "缺乏单层 TMDC 与莫尔超晶格扭转角精度的对照实验基准",
+      "search_keywords": [
+        "twist angle precision moiré superlattice",
+        "TMDC moiré heterostructure angle disorder",
+        "SHG twist angle calibration accuracy"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "首个含多体修正的莫尔 HHG 正向模型的优先权",
+      "missing_evidence": "缺乏对该优先权声明的检索范围与时间截止的限定（据目前检索截止 2026-07）",
+      "search_keywords": [
+        "moiré superlattice HHG forward model",
+        "many-body correction high harmonic generation",
+        "TDDFT moiré HHG benchmark"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "假设 2 在 TBG 臂下的可证伪路径（3×10¹¹ 强度上限的可执行方案）",
+      "missing_evidence": "缺乏 TBG 莫尔关联态在 5×10⁸–2×10¹¹ W/cm² 区间内驱动 HHG 的实验先例或理论可行性",
+      "search_keywords": [
+        "TBG high harmonic generation experiment",
+        "twisted bilayer graphene HHG mid-infrared",
+        "magic angle graphene strong field HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "R2 反演精度的椭偏<2° 与 TA 时间分辨率<50 fs 的技术参数来源",
+      "missing_evidence": "缺乏椭偏仪精度<2° 与瞬态吸收时间分辨率<50 fs 在莫尔 HHG 反演中的文献支撑",
+      "search_keywords": [
+        "ellipsometry precision2 degree HHG",
+        "transient absorption time resolution 50 fs",
+        "HHG retrieval accuracy ellipsometry"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "指标链「30%→18%→12%」在 R1→R2→R3 三方向的定量来源",
+      "missing_evidence": "缺乏莫尔 HHG 误差从 30%（首次反演）到 18%（迭代）到 12%（闭环）的分阶段指标文献依据",
+      "search_keywords": [
+        "moiré HHG inversion error benchmark",
+        "iterative HHG retrieval accuracy improvement",
+        "closed loop HHG calibration precision"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

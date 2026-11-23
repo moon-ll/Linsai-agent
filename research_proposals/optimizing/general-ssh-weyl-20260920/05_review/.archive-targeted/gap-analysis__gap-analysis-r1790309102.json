@@ -1,0 +1,41 @@
+{
+  "gaps": [
+    {
+      "claim": "S_edge ≥ 0.2 阈值（体相遮蔽判据线）的具体体系/模型参照",
+      "missing_evidence": "缺少关于高次谐波体相遮蔽阈值或边通道显著性指标的实验/理论锚定文献；现有引用 [38] Lorenzo Kagome 未被引入 §2.2 用作边通道判据参考",
+      "search_keywords": [
+        "high harmonic generation edge channel signal threshold",
+        "bulk signal suppression edge state HHG criterion",
+        "Lorenzo Kagome high harmonic helicity edge channel",
+        "surface state vs bulk high harmonic spectroscopy threshold",
+        "SSH edge state HHG yield bulk suppression criterion"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Δt ≤ 10 fs（SSH 边界态时域相干判据）的外部文献锚点",
+      "missing_evidence": "缺少 SSH 拓扑边界态相干寿命/退相干时间的实验测量文献作为时域判据依据；现有 [14] Bera 等人压缩度时域拟合未被显式引用",
+      "search_keywords": [
+        "SSH topological edge state coherence time measurement",
+        "Su-Schrieffer-Heeger edge state decoherence lifetime",
+        "Bera SSH edge state time-domain fitting",
+        "topological edge state lifetime pump-probe measurement",
+        "SSH lattice boundary state temporal coherence HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "创新点 3（方案三量化优势 I_f^3 标度律）的独占性论证",
+      "missing_evidence": "需要 I_f^3 vs I_f^{2.3} 标度律的横向比较文献，确立本方案在 Weyl/SSH/HOTI 体系上预测的 I_f^3 幂律相对于 Cd3As2 [26] Duan 等起始指数的差异并论证独占性",
+      "search_keywords": [
+        "high harmonic intensity scaling exponent Weyl semimetal",
+        "I_f cubic power law topological material HHG",
+        "Duan Cd3As2 high harmonic intensity exponent 2.3",
+        "topological phase marker intensity power law HHG",
+        "Weyl semimetal third harmonic cubic scaling Pilch"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "scheme"
+}

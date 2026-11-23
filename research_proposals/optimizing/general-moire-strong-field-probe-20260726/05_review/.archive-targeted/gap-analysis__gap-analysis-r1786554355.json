@@ -1,0 +1,95 @@
+{
+  "gaps": [
+    {
+      "claim": "§1.3 反演问题参数维度 10–20/有效秩 10 声称缺乏出处",
+      "missing_evidence": "缺少高次谐波反演问题参数维度与有效秩的量化论证文献（需说明为何是 10–20 维，有效秩为何是 10）",
+      "search_keywords": [
+        "HHG inverse problem parameter dimension",
+        "high harmonic retrieval rank deficiency",
+        "attosecond spectroscopy ill-posed inversion dimension",
+        "regularization parameter effective rank ultrafast"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "10⁸→2×10⁴ 核时降阶 4 个数量级声称未给出耦合界面误差传递量化协议",
+      "missing_evidence": "缺少 TDDFT/TB-SBE 混合计算的核时基准与误差量化文献",
+      "search_keywords": [
+        "TDDFT tight-binding hybrid benchmark core-hour",
+        "twisted bilayer real-time TDDFT scaling",
+        "TBG TDDFT computational cost benchmark",
+        "moiré superlattice multiscale electronic structure cost"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "I_c 临界场强区间 8×10¹⁰–3.2×10¹¹ W/cm² 缺乏依据",
+      "missing_evidence": "缺少莫尔材料/2D 异质结在近红外波段飞秒激光损伤阈值的实验测量",
+      "search_keywords": [
+        "moiré material femtosecond damage threshold",
+        "2D heterostructure near-infrared ablation threshold",
+        "Kozák high harmonic damage threshold 2D",
+        "twisted bilayer laser-induced damage threshold",
+        "CrSb MnTe altermagnet damage threshold HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "rationale.md 与 references.md 存在 5 个未正文 cite 的标签（liu mrudul ikeda bistritzer soejima）",
+      "missing_evidence": "需要核对这 5 篇文献是否应被正文引用，或从 references.md 中移除；需找到 Liu/Mrudul/Ikeda/Bistritzer/Soejima 在莫尔强场/反演/调控中的具体工作",
+      "search_keywords": [
+        "Bistritzer magic angle twisted bilayer graphene",
+        "Mrudul moiré HHG nonlinear optics 2024",
+        "Ikeda twisted bilayer nonlinear 2020",
+        "Soejima moiré Floquet HHG",
+        "Liu moiré high harmonic generation"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§1.2 国内外现状采用'A 做了 X，B 做了 Y，C 做了 Z'文献堆砌（Mrudul/Ikeda/Nikola/Amato/Zhou/Tyulnev/Lian/Xu 等段）",
+      "missing_evidence": "缺少将这些工作系统整合的综述论文或领域脉络文献；需用综述性引用替代单篇堆砌",
+      "search_keywords": [
+        "moiré superlattice high harmonic generation review",
+        "twisted bilayer nonlinear optics review",
+        "solid-state HHG review 2023 2024",
+        "moiré ultrafast optics review perspective"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "立项依据未单列国内现状段落（被合并到 §1.2 三子方向中）",
+      "missing_evidence": "缺少中国研究组在莫尔超晶格强场/超快/高次谐波方面的工作梳理",
+      "search_keywords": [
+        "莫尔 超晶格 高次谐波 中国",
+        "强场 超快 莫尔材料 国内组",
+        "twisted bilayer ultrafast optics Chinese group",
+        "moiré superlattice strong field HHG China",
+        "莫尔 高次谐波 国内 进展"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "反演探针段的耦合界面/数值误差传递协议未给出量化依据",
+      "missing_evidence": "缺少反演算法（Tikhonov/Lasso/Bayesian）在 HHG/阿秒光谱反演中的误差界、收敛性分析文献",
+      "search_keywords": [
+        "Tikhonov regularization HHG inversion",
+        "Bayesian inversion attosecond spectroscopy",
+        "Fisher information HHG reconstruction",
+        "ill-posed inversion regularization high harmonic"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "主动调控子方向（Floquet/工程化）需'first/pioneering'工作出处",
+      "missing_evidence": "缺少莫尔 Floquet 工程化首次实验/理论的明确引用（如 pioneering work 声明需要的源头文献）",
+      "search_keywords": [
+        "moiré Floquet engineering first observation",
+        "moiré superlattice light Floquet pioneering",
+        "twisted bilayer Floquet topological early work",
+        "moiré angle resolved nonlinear optics first"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

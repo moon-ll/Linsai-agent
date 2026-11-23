@@ -1,0 +1,30 @@
+{
+  "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
+  "cluster_id": "cl_20261004_279790",
+  "entries": [
+    {
+      "source_id": "paper:2026-2609.31534-generation-of-10-tw-attosecond-x-ray-pulses-in-a-f",
+      "title": "Generation of 10-TW Attosecond X-Ray Pulses in a Free Electron Laser",
+      "summary": "该工作在自由电子激光（FEL）中产生峰值功率约 10 TW 的孤立阿秒 X 射线脉冲，将阿秒脉冲的能量/强度从桌面光源的中等水平提升数个量级，弥补了桌面阿秒源通量不足与常规 FEL 脉宽过长之间的空白。核心路线是先对电子束做纵向整形形成阿秒级强电流尖峰，再经超辐射放大与波荡器能量抽取压缩并放大光脉冲。此类光源可直接驱动非线性 X 射线过程与阿秒泵浦-探测，在原子、分子和固体中按电子的本征时间尺度探测其动力学。",
+      "path": "knowledge/raw/papers/2026-2609.31534-generation-of-10-tw-attosecond-x-ray-pulses-in-a-f.md",
+      "added_via": "cluster:cl_20261004_279790",
+      "added_at": "2026-10-17T07:20:17Z"
+    },
+    {
+      "source_id": "paper:2026-2608.20022-mutually-phase-stable-tunable-attosecond-soft-x-ra",
+      "title": "Mutually phase-stable tunable attosecond soft X-ray attosecond pulses from a free-electron laser",
+      "summary": "该研究在级联X射线自由电子激光（XFEL）中演示了产生相互相位稳定、且相对时间延迟与相位均可调谐的阿秒软X射线脉冲对的方法。这一成果为阿秒时间分辨的X射线泵浦-探测实验提供了可控的相干光源，有望推动X射线非线性光学与超快电子动力学研究。",
+      "path": "knowledge/raw/papers/2026-2608.20022-mutually-phase-stable-tunable-attosecond-soft-x-ra.md",
+      "added_via": "cluster:cl_20261004_279790",
+      "added_at": "2026-10-17T07:20:17Z"
+    },
+    {
+      "source_id": "paper:2026-260931534-generation-of-10-tw-attosecond-x-ray-pulses-i",
+      "title": "Generation of 10-TW Attosecond X-Ray Pulses in a Free Electron Laser",
+      "summary": "本文在 European XFEL 上首次报道了脉宽约 100 as、峰值功率达 10 TW 量级的软 X 射线阿秒脉冲，单脉冲能量进入毫焦耳级，同时突破了阿秒时间尺度与 TW 级峰值功率这一长期存在的参数瓶颈。其技术路径是将软 X 射线波荡器运行在高电子能量下，并采用五级电子束压缩获得超高峰值电流。这一'毫焦级+百阿秒'的 X 射线源为高场阿秒科学（非线性 X 射线物理、芯态电子动力学等）开辟了全新参数区间。",
+      "path": "knowledge/raw/papers/2026-260931534-generation-of-10-tw-attosecond-x-ray-pulses-i.md",
+      "added_via": "cluster:cl_20261004_279790",
+      "added_at": "2026-10-17T07:20:17Z"
+    }
+  ]
+}

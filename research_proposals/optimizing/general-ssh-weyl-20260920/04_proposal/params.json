@@ -1,0 +1,77 @@
+{
+  "_doc": "跨章口径表 v7.2.19：key=指标/机制名，canonical=唯一正确值或规范表述，stale_patterns=禁用旧值/旧表述正则，note=说明。2026-10-16 评审团第三轮修改播种（R1-01/02/03/04 + R3-01）；2026-10-29 评审团第四轮追加 3 条（R1-01/R1-02/R1-03 口径）。",
+  "entries": [
+    {
+      "key": "Lorenzo [14] 增强量级口径",
+      "canonical": "拓扑相谐波产额相对平庸相峰值增强达两个数量级（≤100 倍，arXiv v2 摘要口径 reaching up to two orders of magnitude）；首版（v1）的 2–3 个数量级已在第二版收敛，个别高阶谐波是否达 10³ 以正式发表为准；S_edge/R=2 相关阈值均取保守下界 10²",
+      "stale_patterns": [
+        "增强上限为两个数量级（即 ≤100 倍）；其正文计算",
+        "（v1）",
+        "（v2）",
+        "v1 摘要",
+        "v2 的扩展计算中部分高阶谐波可达三数量级",
+        "100 倍（v1）/部分计算可达 1000 倍（v2）",
+        "v2 部分计算可达 10³"
+      ],
+      "note": "R1-01 critical + R3-01 high：v1=2–3 个数量级、v2=收敛上限 2 个数量级，曾在 rationale/content/scheme 三文件互斥且版本归属颠倒；全稿统一 v2 口径，版本标记改写为'预印本首版/第二版'（R2-11），refs [14] 作者链已补 v2 十人链"
+    },
+    {
+      "key": "方向一 HOTI 计算原型表述",
+      "canonical": "四带 BHZ 推广构造的模型级 HOTI（铰链态）为计算原型；Bi₂Se₃ 家族为一阶（强）拓扑绝缘体，仅承担一阶 TI 实验参照",
+      "stale_patterns": [
+        "Bi₂Se₃ 家族 HOTI",
+        "Bi₂Se₃.{0,8}HOTI 的现实材料平台",
+        "三维 HOTI（如 Bi₂Se₃"
+      ],
+      "note": "R1-02 critical：Bi₂Se₃ 标准拓扑为一阶强 TI（Z₂ 表面态）非 HOTI，'Bi₂Se₃ 家族 HOTI'连用属概念错位；保守改法②——保留 Bi₂Se₃ 作一阶参照，计算原型改挂 BHZ 推广模型级 HOTI（真 HOTI 材料为铋/SnTe/Bi₂BrI 类，如后续轮次改挂需结构性改写）"
+    },
+    {
+      "key": "S_edge 阈值依据",
+      "canonical": "S_edge ≥ 0.2 不挂 [14] 数值（其摘要无边带 0.1 数据），与 Δκ 同款由本项目大样本随机参数反演的体相边带涨落上界自定标，判定值高于上界并留安全余量",
+      "stale_patterns": [
+        "体相贡献.{0,16}边带相对强度量级约 0.1",
+        "体相贡献边带量级约 0.1",
+        "取该量级的两倍并预留文献刊本核实"
+      ],
+      "note": "R1-03 high：'边带量级约 0.1' 在 [14] 摘要无源（联网核实），删无源依据改自定标；'文献刊本'生造词一并清除（R2-17）"
+    },
+    {
+      "key": "Δt 阈值换算链",
+      "canonical": "30 fs 为 SSH 边界态寿命的模型量级假设而非 [10] 实测值；Δt 阈值取 30/3 ≈ 10 fs，最终由时间分辨扫描自定标；25 fs 驱动窗仅作拟合时窗裕量说明",
+      "stale_patterns": [
+        "25 fs 驱动窗按三分之一",
+        "25/3",
+        "Bera 等人\\[14\\]报告 SSH 边界态寿命参照值取自 30 fs"
+      ],
+      "note": "R1-04 high + P0 C5 防回退：[10]（arXiv:2305.02025）摘要无边界态寿命数值，删除对 [10] 的数值挂靠；30 fs×1/3≈10 fs 单一口径全稿维持"
+    },
+    {
+      "key": "Pilch/Duan 对散射贡献 Z 的约束方向",
+      "canonical": "Pilch [12] TaP 严格立方律约束弱场微扰区散射贡献 Z 的占比下限；Duan [19] Cd₃As₂ 微腔数据界定近饱和区 Z 的占比上限（微腔近饱和响应由场驱动非平衡动理学主导）。rationale §2.4/§5(3)、content §2.4、scheme §3.2.2 四处同一口径",
+      "stale_patterns": [
+        "立方功率律约束节点贡献上限",
+        "强度上限约束散射贡献下界",
+        "由该强度上限反推散射贡献 Z 的占比下界"
+      ],
+      "note": "R1-01 high + R3-01 high + R2-01 high 三报告同源：两条实验基准的约束方向曾在 rationale L67/L103 与 content L39 三处互斥（TaP→节点上限 vs Z 下限；Duan→Z 下界 vs Z 上限）；按 R1 裁决统一为 content 口径（立方律→Z 下限、Duan→Z 上限）"
+    },
+    {
+      "key": "Cd₃As₂ 近饱和响应与 Boltzmann 输运关系",
+      "canonical": "Cd₃As₂ 微腔非整幂律与 TaP 弱场严格立方律同处 Boltzmann 输运框架：前者对应强场近饱和区的场驱动非平衡动理学，后者对应弱场微扰区；Duan 数据用于识别 Boltzmann 输运框架内弱场微扰区与强场近饱和区的适用边界",
+      "stale_patterns": [
+        "该非整幂律在 Weyl 半金属（TaP 类）体系的 Boltzmann 输运近似下并不出现",
+        "识别 Boltzmann 近似失效边界"
+      ],
+      "note": "R1-02 high：Duan 原文（arXiv:2510.01760v2=刊版）摘要明言 confirm the predictions by Boltzmann transport theory——近饱和响应恰由 Boltzmann 输运描述；'Boltzmann 失效/不出现'旧表述与原文冲突，rationale §2.3 与 content §2.7 K3 两处同步改写"
+    },
+    {
+      "key": "Neufeld [3] 归因口径",
+      "canonical": "Neufeld [3] 2023 PRX 13, 031011 立场：晶体对称性与化学性质的贡献可能压过拓扑贡献；HHG-PL 双通道竞争效应须以耦合模型而非独立通道描述处理",
+      "stale_patterns": [
+        "强场激子-HHG 耦合是非拓扑 HHG.{0,8}拓扑样信号.{0,8}的主要来源之一",
+        "强场多通道耦合理论"
+      ],
+      "note": "R1-03 high：PRX 13, 031011 摘要与 Popular Summary 无 exciton/激子论述，scheme §3.3.1 与 §4 两处'激子耦合主要来源/多通道耦合理论'归因无源，改挂原文真实结论（对称性/化学贡献可压过拓扑贡献）"
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "proposal_id": "general-houston-kronig-penney-landau-zener-20261004",
+  "cluster_id": "cl_20261004_6bb776",
+  "clusters": [
+    "cl_20261004_6bb776"
+  ],
+  "entries": [
+    {
+      "source_id": "paper:2019-1907.11134-high-harmonic-generation-in-solids",
+      "title": "High-harmonic generation in solids",
+      "summary": "在以一维Kronig-Penney势拟合MgO能带的基础上，采用Houston基（加速布洛赫态）展开求解半导体布洛赫方程，模拟强激光场下的多带载流子动力学与高次谐波辐射。论文系统分解了带内电流（能带色散非线性）与带间电流（电子-空穴极化复合）对各次谐波的贡献。重点论证了必须对整个第一布里渊区进行足够精细的k积分：不同初始k的发射携带不同的子循环相位并发生干涉，稀疏k采样或截断BZ会显著歪曲谐波谱形。",
+      "path": "knowledge/raw/papers/2019-1907.11134-high-harmonic-generation-in-solids.md",
+      "added_via": "cluster:cl_20261004_6bb776",
+      "added_at": "2026-10-31T06:01:05Z"
+    },
+    {
+      "source_id": "paper:2017-1705.10707-ab-initio-multi-scale-simulation-of-high-harmonic-generation",
+      "title": "Ab-initio multi-scale simulation of high-harmonic generation in solids",
+      "summary": "首次将TDDFT（含时Kohn-Sham）给出的单胞级强场响应与麦克斯韦方程描述的介观/宏观脉冲传播自洽耦合，实现固体高次谐波产生的第一性原理多尺度模拟。证明传播效应（色散、吸收、自相位调制与驱动脉冲重塑）对厚晶体实测谐波谱形和产率有定量影响，单胞响应不能直接与实验对比。并以含可控缺陷的模型电介质为例，揭示杂质局域态作为额外激发-复合通道显著调制谐波产率，在局部破坏反演对称时还可引入偶次谐波。",
+      "path": "knowledge/raw/papers/2017-1705.10707-ab-initio-multi-scale-simulation-of-high-harmonic-generation.md",
+      "added_via": "cluster:cl_20261004_6bb776",
+      "added_at": "2026-10-31T06:01:05Z"
+    },
+    {
+      "source_id": "paper:2022-2206.11935-characterizing-anomalous-high-harmonic-generation-in-solids",
+      "title": "Characterizing Anomalous High-Harmonic Generation in Solids",
+      "summary": "在 MoS2 中系统表征了区别于带间/带内机制的第三条固态高次谐波通道——由 Berry 曲率驱动的反常（anomalous）谐波。通过偏振、波长与强度三重分辨的测量，证明反常谐波（偏振垂直于驱动场）在亚 1 eV 驱动光子能量下占据主导，且在特定强度处出现特征极小值，由此可与带间谐波实验分离。该工作把反常 HHG 确立为对 Berry 曲率敏感的全光学探针。",
+      "path": "knowledge/raw/papers/2022-2206.11935-characterizing-anomalous-high-harmonic-generation-in-solids.md",
+      "added_via": "cluster:cl_20261004_6bb776",
+      "added_at": "2026-10-31T06:01:05Z"
+    },
+    {
+      "source_id": "paper:2022-2022.01010-observation-of-light-driven-band-structure-via-multi-band-hi",
+      "title": "Observation of light driven band structure via multi-band high harmonic spectroscopy",
+      "summary": "本文以中红外强场驱动MgO晶体，实验测量多阶高次谐波的振幅与相位（多带高次谐波谱学），观测到强驱动场对晶体带结构的瞬时重整。结合DFT+Wannier插值提供的能带与跃迁偶极矩，多带半导体布洛赫方程（SBEs）模拟定量再现了谐波相位随谐波阶数的振荡结构，证明该相位振荡是光驱动带结构（带隙重整与偶极矩阵元变化）的直接编码。工作确立了谐波相位作为带结构动力学探针的可行性。",
+      "path": "knowledge/raw/papers/2022-2022.01010-observation-of-light-driven-band-structure-via-multi-band-hi.md",
+      "added_via": "cluster:cl_20261004_6bb776",
+      "added_at": "2026-10-31T06:01:05Z"
+    }
+  ]
+}

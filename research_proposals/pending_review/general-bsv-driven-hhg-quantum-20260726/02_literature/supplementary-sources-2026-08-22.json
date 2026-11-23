@@ -1,0 +1,22 @@
+{
+  "proposal_id": "general-bsv-driven-hhg-quantum-20260726",
+  "cluster_id": "cl_20260815_77b45e",
+  "entries": [
+    {
+      "source_id": "paper:2026-2601.01611-generation-of-circular-polarized-high-order-harmon",
+      "title": "Generation of circular polarized high-order harmonics from single color quantum light",
+      "summary": "该论文证明利用压缩态的高椭圆偏振单色量子光驱动高次谐波产生（HHG），可以借助量子场涨落突破经典极限，在经典禁戒的圆偏振单色驱动条件下产生高度椭圆偏振的谐波。这一结果为通过光的量子特性调控谐波的偏振与手性提供了新途径。",
+      "path": "",
+      "added_via": "cluster:cl_20260815_77b45e",
+      "added_at": "2026-08-22T05:40:16Z"
+    },
+    {
+      "source_id": "paper:2601.01611",
+      "title": "Generation of circular polarized high-order harmonics from single color quantum light",
+      "summary": "该文献证明采用高椭圆偏振的压缩量子光作为单色驱动场，可在经典圆偏振驱动下高次谐波产生完全消失的禁戒区域实现HHG，并获得具有显著超泊松光子统计的高椭圆度谐波辐射。此外，谐波光谱特征能够编码并反映驱动场的量子特性，为探测强场相互作用中光的量子本质提供了新途径。",
+      "path": "",
+      "added_via": "cluster:cl_20260815_77b45e",
+      "added_at": "2026-08-22T05:40:16Z"
+    }
+  ]
+}

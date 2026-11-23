@@ -1,0 +1,49 @@
+{
+  "gaps": [
+    {
+      "claim": "§3.3 与 §5 中引用 \"Han 等人[40]\" 用于支撑扭转异质结层间杂化与莫尔势的 TDDFT 计算结果",
+      "missing_evidence": "[40] 条目首作署名为 J. Gao，与正文 \"Han 等人\" 不一致；arXiv:2508.14774 提交者为 Meng Han，需要核实 [40] 实际作者列表（是否含 M. Han），并补全该文献在扭转 MoS2 莫尔势/层间杂化/Berry 曲率初值计算方面的方法与结论摘要，以支撑方案中的方法选择论证",
+      "search_keywords": [
+        "arXiv 2508.14774 Meng Han",
+        "J. Gao moiré TDDFT",
+        "twisted MoS2 interlayer hybridization Berry curvature",
+        "twinning MoS2 homobilayer first-principles"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§6 第三段声称 \"Zhong 等人[26] 展示了 HHG-TrARPES 联用\"",
+      "missing_evidence": "[26] 实为 Hu 等人 PNAS 121, e2316775121（高压 sHHG 能带探测），并非 HHG-TrARPES 联用综述；需要更换为正确引用（如 [24] Zhong, Ultrafast Sci.）并补齐该文献对 HHG 与 tr-ARPES 联用实现亚周期能带/贝里曲率分辨的具体描述，以支撑 §6 关于反演方案中 HHG-TrARPES 联用可行性的论证",
+      "search_keywords": [
+        "Zhong HHG TrARPES coupling",
+        "high harmonic generation time-resolved ARPES review",
+        "Ultrafast Science HHG ARPES",
+        "subcycle band structure Berry curvature HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§5 第一段提及 \"立项依据 Fig.4 给出 21.8° 构型在 1.5—3.5 eV 区间的能带特征\"",
+      "missing_evidence": "立项依据全文中无此细节（grep=0），缺少支撑 21.8° 扭转角构型与 1.5—3.5 eV 能量窗口的原始文献；建议直接核实 [28] 原文图号与能量区间，或补引一篇明确报道 21.8°（或其他接近 21.79° 的孪晶界）MoS2 同质结在 1.5—3.5 eV 范围内能带结构与光学跃迁的一次文献",
+      "search_keywords": [
+        "21.8 degree twisted MoS2",
+        "MoS2 homobilayer 21.79 twin",
+        "1.5 eV 3.5 eV MoS2 bandgap optical",
+        "twin boundary MoS2 photoluminescence 1.5 3.5 eV"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§7 创新点（1）（2）中声称 Mrudul[30] 报告 R² 上限约 0.85、Peterka[15] 报告莫尔势抑制 0—10%",
+      "missing_evidence": "两项具体数值（Mrudul 反演 R²≈0.85 上限、Peterka 莫尔势抑制 0—10%）在原文中未见直接报告；需要逐项核对 Mrudul et al.（2024, inverse problem / moiré reconstruction）与 Peterka et al.（moiré potential suppression）原文，确认是否存在相近表述或需改写为定性描述，并补充支撑创新点所宣称优势的同行文献",
+      "search_keywords": [
+        "Mrudul moiré inverse reconstruction R squared",
+        "Mrudul Berry curvature retrieval accuracy",
+        "Peterka moiré potential suppression",
+        "Peterka DFT MoS2 moiré bandgap reduction"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "scheme"
+}

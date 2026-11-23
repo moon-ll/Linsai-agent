@@ -1,0 +1,105 @@
+# 备份目录
+/backups/
+# LinSai-CoPilot — Git 忽略规则
+# 原则：用户数据不提交，只提交代码与文档
+
+# === 用户生成数据（无价，禁止提交）===
+/sessions/*/
+/memory/*.json
+/memory/*.md
+/memory/snippets/*
+/memory/prompt-backups/
+/memory/weekend-input/
+/memory/weekend-output/
+/memory/weekend-reflection/
+/tasks/*/
+/references/papers/*
+/references/notes/*
+# v7.2.72: 锚集（真实中标本子）——用户提供的未公开标书原文 + 抽取文本 + 索引
+# 属用户私有数据，与 papers/notes 同级保护，绝不入库
+/references/anchors/*
+
+
+# LLM API 配置（含敏感凭据）
+.env
+memory/llm-config.json
+
+# === Python ===
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+
+# === 系统文件 ===
+.DS_Store
+Thumbs.db
+
+# === 编辑器 ===
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# === 知识库自动生成文件 ===
+knowledge/index.json
+knowledge/graph.json
+knowledge/growth-log.json
+knowledge/.cache/
+knowledge/.obsidian/
+knowledge/captures/
+knowledge/qa/
+# v6.9.21: 备份文件不入版本库（16h 健康检查发现 .bak 误随批次提交）
+knowledge/**/*.bak
+knowledge/**/*.bak.*
+knowledge/**/.backup/
+
+# === 项目自动生成文件 ===
+/projects/*/kb/graph.json
+/projects/*/kb/index.json
+
+# === 研究管线运行时状态 ===
+research_proposals/_lifecycle.json
+
+# === 运行时数据 ===
+memory/usage/
+knowledge/raw/checkpoint.json
+
+# === 日志文件 ===
+/logs/
+*.log
+
+# === 备份 ===
+knowledge/.backup/
+knowledge/captures/
+
+# === 编辑器/工具 ===
+.zcode/
+.uploads/
+.trae-html-share-packages/
+
+# === 临时校验产物（v7.2.0 清理）===
+.tmp_*.json
+
+# === 健康检查临时产物（v6.8.29: 从根目录移入 logs/healthchecks/）===
+healthcheck-*.md
+healthcheck-*.html
+
+# === HTML 分享产物（不应入库，需时由工具重新生成）===
+/linsai-copilot-manual/
+/literature-reform-plan/
+/literature-restructure-summary/
+/pipeline-deep-design/
+/research-pipeline-architecture/
+
+# === 项目整理临时备份（确认无误后可删除）===
+/_cleanup_backup/
+
+# 知识库治理隔离区（体检清出的 bak/策展区，人工确认后处置）
+knowledge/_quarantine-*/
+knowledge/_trash-*/
+knowledge/raw/pdfs/
+
+# === 数据手术备份（v7.3.10：写状态文件前的快照，不入库）===
+/memory/backups/
+*.tmp

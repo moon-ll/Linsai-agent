@@ -1,0 +1,41 @@
+{
+  "gaps": [
+    {
+      "claim": "委员会模型（committee model）的机器学习势工作已验证该建模路线（§2.3 L75，方案L123/L244同句）",
+      "missing_evidence": "现行[26]实为Mokhtari声子退相干HHG文献，与机器学习势委员会机制无关；参考文献全表无Schran类MLIP委员会条目，需补充机器学习原子间势（MLIP）委员会模型/集成不确定度估计的代表作（如Schran等）并三处同步改挂",
+      "search_keywords": [
+        "machine learning interatomic potential",
+        "committee model",
+        "Schran",
+        "MLIP uncertainty quantification",
+        "committee neural network potential"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "石墨烯光致反常霍尔效应存在'最早实测先例'（content L31，rationale L55同）",
+      "missing_evidence": "该论断零[N]挂靠，现行refs无此条目（[17]系2026后续工作）；需补充光致/太赫兹诱导反常霍尔效应的最早实验实测文献，并加'据目前检索'限定",
+      "search_keywords": [
+        "photoinduced anomalous Hall effect",
+        "light-induced Hall effect graphene",
+        "McIver anomalous Hall effect",
+        "terahertz Hall effect graphene",
+        "nonequilibrium Hall effect"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "文献[N]与参考文献一一对应的可溯源链（[27]打包Ilin/Granados/Zhang三篇，[28][35][37]同病）",
+      "missing_evidence": "复合条目一号多篇导致引用对应断裂；需将打包条目拆分为独立编号并全稿[N]同步改号，补齐各被并入论文的独立条目（含作者、年份、期刊/arXiv号）",
+      "search_keywords": [
+        "Ilin",
+        "Granados",
+        "Zhang",
+        "HHG references split",
+        "one citation one entry"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

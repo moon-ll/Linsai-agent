@@ -1,0 +1,18 @@
+{
+  "gaps": [
+    {
+      "claim": "方案中两个关键量化阈值——S_edge ≥ 0.2（声明为体相贡献约0.1的两倍）与 R ≥ 2（声明为100倍的对数尺度增强）",
+      "missing_evidence": "两个阈值均仅以预印本[20]为唯一文献锚，且两处相互引用对方作为依据，形成循环论证。需要独立的同行评审文献分别支撑：① SSH（或类SSH）模型中边界态谐波产额相对体相态贡献比的基线数值依据（'≈0.1'与'两倍'关系从何而来）；② 边界态贡献使谐波信号在某一对数尺度上达到约两个数量级（100倍）增强的独立实验观测或第一性原理计算先例；③ 边态/体态分辨判据（0.2与2.0两个阈值）的物理合理性与可操作定义",
+      "search_keywords": [
+        "SSH model high harmonic generation",
+        "topological edge state harmonic yield ratio",
+        "edge bulk spectral weight contrast HHG",
+        "boundary state harmonic enhancement two orders",
+        "sublattice polarization harmonic emission topological insulator",
+        "solid state HHG edge vs bulk contribution"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "full_review"
+}

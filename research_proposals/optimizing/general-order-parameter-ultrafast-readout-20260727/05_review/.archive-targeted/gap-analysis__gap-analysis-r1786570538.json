@@ -1,0 +1,92 @@
+{
+  "gaps": [
+    {
+      "claim": "HHG同时具备差分探测/超快时间分辨/对称性分辨三属性，可作为序参量普适读出",
+      "missing_evidence": "缺乏HHG三能力独立验证及同时性论证文献，特别是不同序参量在HHG上的可分辨性边界与差异性证据",
+      "search_keywords": [
+        "HHG orbital magnetic order simultaneous probe",
+        "differential high harmonic symmetry readout",
+        "ultrafast HHG order parameter detection",
+        "altermagnet three order parameters HHG distinguishability"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "半导体布洛赫方程(SBE)在Keldysh参数0.5—2、场强0.1—1.0 V/Å窗口内适用于本项目altermagnet HHG模拟",
+      "missing_evidence": "缺乏SBE在altermagnet/nonmagnetic对比体系下的适用性边界文献、紧束缚布洛赫方程在强场极限下的有效性讨论",
+      "search_keywords": [
+        "semiconductor Bloch equation Keldysh parameter validity range",
+        "tight-binding HHG altermagnet applicability strong field",
+        "SBE interband coupling strong field limit",
+        "Bloch equation validity V/Angstrom HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "本项目与Cochran [62]/Sørensen [63]国际同期HHG序参量理论框架形成清晰差异",
+      "missing_evidence": "缺乏Cochran/Sørensen具体理论框架的原始文献及本项目差分偶次谐波判据与这些框架的具体对比基准",
+      "search_keywords": [
+        "Cochran HHG quantum coherence tomography",
+        "Sørensen attosecond HHG order parameter reconstruction",
+        "HHG theoretical framework orbital magnetic order comparison",
+        "high harmonic order retrieval theory"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "差分偶次谐波相对强度≥1%、SNR>5是altermagnet序参量探测的可行判据",
+      "missing_evidence": "缺乏CrSb/MnTe altermagnet HHG实验中差分偶次谐波幅度基线、信噪比阈值及不同序参量相对贡献的实验/理论文献",
+      "search_keywords": [
+        "differential even harmonic amplitude altermagnet HHG",
+        "HHG signal-to-noise ratio CrSb MnTe experimental",
+        "even harmonic detection sensitivity threshold",
+        "HHG altermagnet amplitude benchmark"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "CrSb在3—5 μm(0.25—0.41 eV)中红外驱动强场下的实验可行性(损伤阈值)",
+      "missing_evidence": "缺乏CrSb及过渡金属锑化物在中红外强场下的损伤阈值、反射率变化及可实验性文献",
+      "search_keywords": [
+        "CrSb femtosecond laser damage threshold mid-infrared",
+        "transition metal pnictide optical breakdown near-infrared",
+        "CrSb reflectivity intense laser field",
+        "CrSb strong field ablation threshold"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "TiSe₂作为对照体系HHG复现偏差≤10%的可行性判据",
+      "missing_evidence": "缺乏TiSe₂ CDW相HHG多组实验复现数据及信号稳定性基准文献",
+      "search_keywords": [
+        "TiSe₂ high harmonic generation reproducibility",
+        "TiSe₂ charge density wave HHG signal stability",
+        "CDW phase ultrafast HHG benchmark",
+        "TiSe2 pump-probe HHG deviation"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "CrSb材料参数(0.13/0.6 eV带隙、205 K Néel温度、720 K相变)的引证支撑",
+      "missing_evidence": "缺乏CrSb第一性原理计算/实验测量带隙、Néel温度及720 K相变的原始实验/理论文献出处",
+      "search_keywords": [
+        "CrSb bandgap experimental DFT calculation",
+        "CrSb Néel temperature magnetic phase transition",
+        "CrSb crystal structure altermagnet parameter",
+        "CrSb 720 K structural transition reference"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "MnTe备选切换基于反射率变化>5%判据的物理可行性",
+      "missing_evidence": "缺乏MnTe相变前后反射率变化幅度的实验文献及与差分HHG判据的物理量级对比",
+      "search_keywords": [
+        "MnTe optical reflectivity Néel temperature phase transition",
+        "altermagnet reflectivity change magnetic order parameter",
+        "MnTe CDW magnetic alternative material HHG",
+        "MnTe transient reflectivity magnetic phase"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

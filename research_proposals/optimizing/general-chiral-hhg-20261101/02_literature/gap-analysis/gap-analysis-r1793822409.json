@@ -1,0 +1,59 @@
+{
+  "gaps": [
+    {
+      "claim": "立项依据整体论证链（开篇领域定性、现状综述、层层收窄）无任何嵌入式引用[N]支撑，references.md 为 0 字节、参考文献 0 篇，清单 4（正文引用密度）无从满足",
+      "missing_evidence": "申请书奠基文献基底：需建 30-40 篇参考文献池（近 3 年占比 ≥30%），覆盖固体 HHG 非微扰现象奠基工作（如 Ghimire 2011 中红外驱动 ZnO）、手性/圆二色性 HHG 机制研究、以及与本课题直接相关的近期同方向论文，正文按\"某人等人[N]在期刊上报道X\"方式挂角标",
+      "search_keywords": [
+        "solid high harmonic generation nonperturbative",
+        "Ghimire ZnO mid-infrared HHG",
+        "chiral high harmonic generation circular dichroism",
+        "enantiomer discrimination HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "创新点主张\"首次建立场-材料并存份额分解甄别协议\"（00_research_idea.md L37 / proposal-draft-merged.md L37），涉嫌违规 priority 主张，无检索范围与截止日期支撑",
+      "missing_evidence": "新颖性主张的检索证据链：需以明确的检索范围（arXiv + Web of Science）与截止日期（2026-11）给出\"未见场-材料并存份额分解系统方案\"的检索式与结果记录；近邻工作 arXiv:2604.27750 必须列入检索证据链并在正文中对照引用，论证本课题与其差异",
+      "search_keywords": [
+        "field vs material contribution separation chiral HHG",
+        "chiral response decomposition harmonic generation",
+        "arXiv 2604.27750",
+        "attosecond chiral spectroscopy protocol"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "核心科学问题句\"谐波手性响应是两者的乘积，还是可分解的叠加？\"（滞留于 00_research_idea.md L19，未进入 rationale）——该问题作为研究缺口陈述，缺前置文献铺垫支撑其未被解决",
+      "missing_evidence": "支撑\"份额分解问题尚未被系统解决\"这一缺口的文献：场致贡献与材料本征贡献在 HHG 手性响应中混合/分离的相关理论与实验研究，及其各自局限性（无系统甄别方案）的综述或对比性论文，用于在引出科学问题前建立\"已有工作做了什么、没做到什么\"的证据梯度",
+      "search_keywords": [
+        "intrinsic vs field-induced chirality harmonics",
+        "dynamical symmetry breaking chiral HHG theory",
+        "chiral HHG mechanism superposition product",
+        "harmonic circular dichroism origin"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "rationale 现状综述层将涉及声子泵浦/手性调制方向（上游 L43 划界句），该方向的国内研究现状陈述缺文献支撑",
+      "missing_evidence": "声子泵浦诱导手性调制 HHG 的代表性国内外文献（用于国内现状综述层），同时须包含支撑\"本课题只读手性调制、耦合常数反演归 phonon 课题\"这一划界声明的边界性文献，避免越界争用",
+      "search_keywords": [
+        "phonon-driven chiral modulation HHG",
+        "phonon pump high harmonic generation",
+        "chiral phonon harmonic emission",
+        "ultrafast phonon chirality spectroscopy"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "方法学手册（methodology-manual.md 占位骨架）与申请书引用体系未同步，方法清单与模块映射缺少出处标注",
+      "missing_evidence": "支撑拟采用方法/协议各步骤的代表性方法学文献（实验方案与甄别协议各环节的方法出处），以便 rationale 定稿后同步填充手册方法清单首列的引用来源",
+      "search_keywords": [
+        "chiral HHG experimental protocol",
+        "polarization-resolved HHG measurement",
+        "enantiomeric excess harmonic detection method"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "rationale"
+}

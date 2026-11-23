@@ -1,0 +1,16 @@
+{
+  "gaps": [
+    {
+      "claim": "双层反铁磁体（特别是 AB′-CrI₃）中由镜面对称性破缺引发的拓扑磁振子相变及热霍尔效应论断",
+      "missing_evidence": "缺少直接支持该双层热霍尔相变论断的原始研究或综述文献；当前仅由邻句中的 Du[26] 间接支撑，引用与具体论断之间缺少明确对应关系。需要补充能够直接论证双层 CrI₃ 的镜面破缺、拓扑磁振子能带或热霍尔响应的文献，并确认其是否与申请书所采用的 AB′ 构型、交换耦合模型及相变判据一致。",
+      "search_keywords": [
+        "bilayer CrI3 thermal Hall effect topological magnon phase transition",
+        "AB' CrI3 mirror symmetry breaking magnon Haldane model",
+        "双层 CrI3 热霍尔效应 拓扑磁振子 相变",
+        "双层反铁磁体 镜面对称性破缺 热霍尔 拓扑磁振子"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "full_review"
+}

@@ -1,0 +1,29 @@
+{
+  "entries": [
+    {
+      "source_id": "paper:2026-2609.01157-a-continuous-mode-quantum-optical-representation-o",
+      "title": "A continuous-mode quantum-optical representation of finite strong-field laser pulses in free space",
+      "summary": "本文构建了自由空间中有限旁轴激光脉冲的能量自洽量子光学表象，采用连续模式（continuous-mode）描述将有限强场脉冲纳入量子化框架。该表述为强场物理中的激光脉冲提供了严格的量子光场基础，是通向更完整强场量子描述的一步。",
+      "path": "knowledge/raw/papers/2026-2609.01157-a-continuous-mode-quantum-optical-representation-o.md"
+    },
+    {
+      "source_id": "paper:2026-2610.31811-photoelectrons-resolve-the-phase-dependent-varianc",
+      "title": "Photoelectrons resolve the phase-dependent variance of bright squeezed vacuum",
+      "summary": "本文报道利用光电子谱技术测量明亮压缩真空（BSV）方差的相位依赖性。BSV 的量子涨落方差不仅幅度巨大，而且依赖于相对于相干驱动场的相对相位，但此前强场实验只记录了其幅度。通过引入同强度相干参考场并以光电子为探测器，作者实现了对 BSV 相位依赖方差的直接分辨，为强场实验中刻画 BSV 量子统计提供了新手段。",
+      "path": "knowledge/raw/papers/2026-2610.31811-photoelectrons-resolve-the-phase-dependent-varianc.md"
+    },
+    {
+      "source_id": "paper:2026-2511.14678-giant-enhancement-of-attosecond-tunnel-ionization-",
+      "title": "Giant enhancement of attosecond tunnel ionization competes with disorder-driven decoherence in amorphized silicon",
+      "summary": "本文研究非晶化硅中强场隧穿电离与阿秒电子-空穴动力学，发现无序导致隧穿电离率出现巨大增强，但同时引入退相干与之竞争。通过对比晶体与非晶硅的实验和理论分析，揭示了无序对固体高次谐波产生中量子相干性的双重作用。结果表明无序修饰的能带结构可显著提升电离响应，但退相干限制了谐波产率。",
+      "path": "knowledge/raw/papers/2026-2511.14678-giant-enhancement-of-attosecond-tunnel-ionization-.md"
+    },
+    {
+      "source_id": "paper:2026-2611.26496-fast-electrons-and-high-energy-photons-produced-in",
+      "title": "Fast electrons and high energy photons produced in strong-field ionization of atoms as diagnostics of multi-petawatt laser beams",
+      "summary": "本文数值计算了氩原子在多拍瓦聚焦激光束隧穿电离中产生的光电子能谱、角分布及X射线光子发射谱，提出利用这些高能电子和光子作为多拍瓦激光束的诊断探针。研究表明隧穿电离产物携带着束流强度、聚焦几何等信息，可用于超强激光的原位表征。",
+      "path": "knowledge/raw/papers/2026-2611.26496-fast-electrons-and-high-energy-photons-produced-in.md"
+    }
+  ],
+  "updated_at": "2026-11-21T07:35:13Z"
+}

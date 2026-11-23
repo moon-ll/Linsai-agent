@@ -1,0 +1,59 @@
+{
+  "gaps": [
+    {
+      "claim": "§1 石墨烯双层超晶格中对称性破缺驱动的奇异电子态",
+      "missing_evidence": "缺少对[2]号文献的具体引用支撑，需找到关于双层石墨烯moiré超晶格对称破缺电子态的最新研究",
+      "search_keywords": [
+        "bilayer graphene moiré superlattice symmetry breaking",
+        "graphene superlattice correlated electronic states",
+        "twisted bilayer graphene electronic structure 2024 2025"
+      ]
+    },
+    {
+      "claim": "§2 自旋分辨ARPES实验测量MnTe等反铁磁拓扑材料的自旋极化能带",
+      "missing_evidence": "缺少对[28]号文献的具体引用支撑，需找到自旋分辨ARPES测量反铁磁拓扑材料g波自旋纹理的实验工作",
+      "search_keywords": [
+        "spin-resolved ARPES antiferromagnetic topological material",
+        "MnTe spin polarized band structure ARPES",
+        "spin-momentum locking antiferromagnet ARPES measurement"
+      ]
+    },
+    {
+      "claim": "§2 Osumi与Zeng等关于MnTe自旋劈裂各向异性的测量分歧（0.3-0.8 eV范围）",
+      "missing_evidence": "缺少对[19]和[24]号文献的具体引用支撑，需找到关于MnTe自旋劈裂测量分歧的多组独立实验数据",
+      "search_keywords": [
+        "MnTe spin splitting anisotropy measurement discrepancy",
+        "MnTe spin orbit coupling experimental values",
+        "antiferromagnetic topological MnTe spin gap measurement"
+      ]
+    },
+    {
+      "claim": "§4 原子尺度自旋分辨谱学方法La₂O₃Mn₂Se₂等材料的测量能力",
+      "missing_evidence": "缺少对[29]号文献的具体引用支撑，需找到原子尺度自旋分辨谱学的最新实验进展",
+      "search_keywords": [
+        "atom-scale spin-resolved spectroscopy",
+        "La2O3Mn2Se2 antiferromagnetic topological material",
+        "nanoscale spin spectroscopy 2D magnetic material"
+      ]
+    },
+    {
+      "claim": "§4 TDDFT理论计算在磁性材料HHG研究中的应用",
+      "missing_evidence": "缺少对[22]号文献的具体引用支撑，需找到TDDFT方法在磁性材料高次谐波产生中的理论计算工作",
+      "search_keywords": [
+        "TDDFT high harmonic generation magnetic material",
+        "time-dependent density functional theory HHG antiferromagnet",
+        "ab initio HHG magnetic topological material"
+      ]
+    },
+    {
+      "claim": "§4 拓展到更复杂磁性体系（如CrSb等）的可行性论证",
+      "missing_evidence": "缺少对[26]号文献的具体引用支撑，需找到CrSb等共线反铁磁拓扑材料的HHG或电子结构研究",
+      "search_keywords": [
+        "CrSb antiferromagnetic topological material electronic structure",
+        "collinear antiferromagnet spin splitting g-wave",
+        "CrSb spin texture measurement ARPES"
+      ]
+    }
+  ],
+  "section": "rationale"
+}

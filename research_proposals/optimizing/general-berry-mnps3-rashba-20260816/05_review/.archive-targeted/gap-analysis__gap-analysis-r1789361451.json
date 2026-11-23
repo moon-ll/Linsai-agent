@@ -1,0 +1,55 @@
+{
+  "gaps": [
+    {
+      "claim": "VS₂滑移势垒应来自1T相多体系（NiCl₂ 16.4 meV / VSe₂ 39.9 meV / CrSe₂ 25.5 meV），需将VS₂修正为VSe₂并补全三体系势垒区间表述",
+      "missing_evidence": "缺乏1T相VSe₂、NiCl₂、CrSe₂二维反平行堆叠势垒的原始数据来源（arXiv:2411.17493原文核对）",
+      "search_keywords": [
+        "NiCl2 VSe2 CrSe2 sliding ferroelectric barrier meV",
+        "1T phase antiferroelectric bilayer stacking energy",
+        "2D sliding ferroelectricity first-principles barrier"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "磁序层动力学时间常数τ₁≈1–9 ps、τ₂≈1–4 ns（[33]实测），需核算τ₁=9 ps时τ₂临界值对D_sep≥0.80的影响并改'2–3个数量级'为'1–3个数量级'",
+      "missing_evidence": "缺乏磁序层τ₁/τ₂实测分布的统计基础与d′≥0.80对应的τ₂临界曲线（[33]原始测量数据）",
+      "search_keywords": [
+        "magnetic order relaxation time ps ns measurement",
+        "antiferromagnetic dynamics time constant two-exponential",
+        "MnPS3 magnetization recovery picosecond nanosecond"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "[28]非线性声子通道实现h-BN堆垛翻转——[28]为计算+唯象演示而非实验证明，需补实验验证文献",
+      "missing_evidence": "缺乏h-BN通过非线性声子通道实现堆垛翻转的实验观测文献",
+      "search_keywords": [
+        "h-BN sliding ferroelectric experimental observation",
+        "nonlinear phonon channel stacking switching experiment",
+        "van der Waals homostructure interlayer sliding experiment"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "1.0 MV/cm场强在THz源可达范围内——[32]仅锚定0.5 MV/cm实测值，上限端零支撑",
+      "missing_evidence": "缺乏THz源在1.0 MV/cm或更高场强的实验/技术指标锚点文献",
+      "search_keywords": [
+        "THz source 1 MV/cm field strength",
+        "single-cycle THz electric field achievable",
+        "strong-field THz spectroscopy 1 MV/cm"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "磁序层'数ps至ns'时间窗口与content章[33]实测τ₂≈1–4 ns口径同步",
+      "missing_evidence": "缺乏磁序层时间常数的具体实验文献支撑（应与[33]保持一致）",
+      "search_keywords": [
+        "MnPS3 magnetic order lifetime measurement",
+        "antiferromagnet magnetization dynamics femtosecond experiment",
+        "two-exponential decay antiferromagnetic insulator"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}
